@@ -15,7 +15,6 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgCariSatuan;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -60,7 +59,7 @@ public final class DlgObatOperasi extends javax.swing.JDialog {
         "Nama",
         "Satuan",
         "Harga"};
-        
+
         tabMode2=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -94,7 +93,7 @@ public final class DlgObatOperasi extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TKd.requestFocus();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -554,13 +553,13 @@ public final class DlgObatOperasi extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode2.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",var.getnamars());
                 param.put("alamatrs",var.getalamatrs());
                 param.put("kotars",var.getkabupatenrs());
                 param.put("propinsirs",var.getpropinsirs());
                 param.put("kontakrs",var.getkontakrs());
-                param.put("emailrs",var.getemailrs());   
+                param.put("emailrs",var.getemailrs());
             if(TCari.getText().trim().equals("")){
                 Valid.MyReport("rptBangsal.jasper","report","::[ Data Kamar ]::","select * from order by kd_bangsal",param);
             }else if(! TCari.getText().trim().equals("")){
@@ -633,19 +632,19 @@ public final class DlgObatOperasi extends javax.swing.JDialog {
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-            
+
         }
 }//GEN-LAST:event_tbObatKeyPressed
 
 private void kdsatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdsatKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?", nmsat,kdsat.getText());        
+            Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?", nmsat,kdsat.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?", nmsat,kdsat.getText());
             THarga.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?", nmsat,kdsat.getText());
-            BtnSimpan.requestFocus();    
+            BtnSimpan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnSatuanActionPerformed(null);
         }
@@ -660,10 +659,10 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(satuan.getTable().getSelectedRow()!= -1){                   
-                    kdsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());                    
+                if(satuan.getTable().getSelectedRow()!= -1){
+                    kdsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());
                     nmsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),1).toString());
-                } 
+                }
                 kdsat.requestFocus();
             }
             @Override
@@ -705,7 +704,7 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -756,7 +755,7 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {        
+    private void tampil() {
         Valid.tabelKosong(tabMode2);
         try{
             ps=koneksi.prepareStatement("select obatbhp_ok.kd_obat, obatbhp_ok.nm_obat, kodesatuan.satuan, "+
@@ -787,7 +786,7 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     ps.close();
                 }
             }
-                
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -814,7 +813,7 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             THarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -848,7 +847,7 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

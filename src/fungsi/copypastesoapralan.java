@@ -14,7 +14,7 @@ public class copypastesoapralan {
         Implementasi=implementasi;
         Evaluasi=evaluasi;
     }
-    
+
     public static String getDataSubjek(){return copypastesoapralan.Subjek;}
     public static String getDataObjek(){return copypastesoapralan.Objek;}
     public static String getDataAsesmen(){return copypastesoapralan.Asesmen;}

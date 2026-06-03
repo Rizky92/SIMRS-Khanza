@@ -3,11 +3,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -24,7 +24,6 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import kepegawaian.DlgCariPetugas;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -60,7 +59,7 @@ public class CoronaPasien extends javax.swing.JDialog {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
-    
+
 
     /** Creates new form DlgPemberianInfus
      * @param parent
@@ -191,11 +190,11 @@ public class CoronaPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         jk.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -203,11 +202,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jk.getTable().getSelectedRow()!= -1){                   
+                if(jk.getTable().getSelectedRow()!= -1){
                     KodeJK.setText(jk.getTable().getValueAt(jk.getTable().getSelectedRow(),0).toString());
                     NamaJK.setText(jk.getTable().getValueAt(jk.getTable().getSelectedRow(),1).toString());
                     BtnJK.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -218,7 +217,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kewarganegaraan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -226,11 +225,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kewarganegaraan.getTable().getSelectedRow()!= -1){                   
+                if(kewarganegaraan.getTable().getSelectedRow()!= -1){
                     KodeKewarganegaraan.setText(kewarganegaraan.getTable().getValueAt(kewarganegaraan.getTable().getSelectedRow(),0).toString());
                     NamaKewarganegaraan.setText(kewarganegaraan.getTable().getValueAt(kewarganegaraan.getTable().getSelectedRow(),1).toString());
                     BtnKewarganegaraan.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -241,7 +240,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penularan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -249,11 +248,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penularan.getTable().getSelectedRow()!= -1){                   
+                if(penularan.getTable().getSelectedRow()!= -1){
                     KodePenularan.setText(penularan.getTable().getValueAt(penularan.getTable().getSelectedRow(),0).toString());
                     NamaPenularan.setText(penularan.getTable().getValueAt(penularan.getTable().getSelectedRow(),1).toString());
                     BtnSumberPenularan.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -264,7 +263,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         statuskeluar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -272,11 +271,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(statuskeluar.getTable().getSelectedRow()!= -1){                   
+                if(statuskeluar.getTable().getSelectedRow()!= -1){
                     KodeStatusKeluar.setText(statuskeluar.getTable().getValueAt(statuskeluar.getTable().getSelectedRow(),0).toString());
                     NamaStatusKeluar.setText(statuskeluar.getTable().getValueAt(statuskeluar.getTable().getSelectedRow(),1).toString());
                     BtnStatusKeluar.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -287,7 +286,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         statusrawat.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -295,11 +294,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(statusrawat.getTable().getSelectedRow()!= -1){                   
+                if(statusrawat.getTable().getSelectedRow()!= -1){
                     KodeStatusRawat.setText(statusrawat.getTable().getValueAt(statusrawat.getTable().getSelectedRow(),0).toString());
                     NamaStatusRawat.setText(statusrawat.getTable().getValueAt(statusrawat.getTable().getSelectedRow(),1).toString());
                     BtnStatusRawat.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -310,7 +309,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         statusisolasi.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -318,11 +317,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(statusisolasi.getTable().getSelectedRow()!= -1){                   
+                if(statusisolasi.getTable().getSelectedRow()!= -1){
                     KodeStatusIsolasi.setText(statusisolasi.getTable().getValueAt(statusisolasi.getTable().getSelectedRow(),0).toString());
                     NamaStatusIsolasi.setText(statusisolasi.getTable().getValueAt(statusisolasi.getTable().getSelectedRow(),1).toString());
                     BtnStatusIsolasi.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -333,7 +332,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         propinsi.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -341,11 +340,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(propinsi.getTable().getSelectedRow()!= -1){                   
+                if(propinsi.getTable().getSelectedRow()!= -1){
                     KodePropinsi.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),0).toString());
                     NamaPropinsi.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),1).toString());
                     BtnPropinsi.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -356,7 +355,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kabupaten.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -364,11 +363,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kabupaten.getTable().getSelectedRow()!= -1){                   
+                if(kabupaten.getTable().getSelectedRow()!= -1){
                     KodeKabupaten.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),0).toString());
                     NamaKabupaten.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),1).toString());
                     BtnKabupaten.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -379,7 +378,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kecamatan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -387,11 +386,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kecamatan.getTable().getSelectedRow()!= -1){                   
+                if(kecamatan.getTable().getSelectedRow()!= -1){
                     KodeKecamatan.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),0).toString());
                     NamaKecamatan.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),1).toString());
                     BtnKecamatan.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -402,7 +401,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kelurahan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -410,11 +409,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kelurahan.getTable().getSelectedRow()!= -1){                   
+                if(kelurahan.getTable().getSelectedRow()!= -1){
                     KodeKelurahan.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),1).toString());
                     NamaKelurahan.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),0).toString());
                     BtnKelurahan.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -425,7 +424,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenispasien.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -433,11 +432,11 @@ public class CoronaPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jenispasien.getTable().getSelectedRow()!= -1){                   
+                if(jenispasien.getTable().getSelectedRow()!= -1){
                     KodeJenisPasien.setText(jenispasien.getTable().getValueAt(jenispasien.getTable().getSelectedRow(),0).toString());
                     NamaJenisPasien.setText(jenispasien.getTable().getValueAt(jenispasien.getTable().getSelectedRow(),1).toString());
                     BtnJenisPasien.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -448,7 +447,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         try {
             link=koneksiDB.URLAPICORONA();
             idrs=koneksiDB.IDCORONA();
@@ -456,7 +455,7 @@ public class CoronaPasien extends javax.swing.JDialog {
             System.out.println("E : "+e);
         }
     }
- 
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1401,8 +1400,8 @@ public class CoronaPasien extends javax.swing.JDialog {
             try {
                 headers = new HttpHeaders();
                 headers.add("X-rs-id",idrs);
-                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                headers.add("X-pass",api.getHmac()); 
+                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                headers.add("X-pass",api.getHmac());
                 body="{"+
                         "\"noc\": \""+NoKTP.getText()+"\"," +
                         "\"nomr\": \""+NoRM.getText()+"\"," +
@@ -1432,11 +1431,11 @@ public class CoronaPasien extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         if(list.path("status").asText().equals("200")){
                             if(Sequel.menyimpantf("pasien_corona","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Pasien",33,new String[]{
-                                NoKTP.getText(),NoRM.getText(),Inisial.getText(),NamaPasien.getText(),Valid.SetTgl(TglMasuk.getSelectedItem()+""),KodeJK.getText(), NamaJK.getText(), 
-                                Valid.SetTgl(TglLahir.getText()+""),KodeKewarganegaraan.getText(),NamaKewarganegaraan.getText(),KodePenularan.getText(),NamaPenularan.getText(), 
-                                KodeKelurahan.getText(),NamaKelurahan.getText(),KodeKecamatan.getText(),NamaKecamatan.getText(),KodeKabupaten.getText(),NamaKabupaten.getText(), 
+                                NoKTP.getText(),NoRM.getText(),Inisial.getText(),NamaPasien.getText(),Valid.SetTgl(TglMasuk.getSelectedItem()+""),KodeJK.getText(), NamaJK.getText(),
+                                Valid.SetTgl(TglLahir.getText()+""),KodeKewarganegaraan.getText(),NamaKewarganegaraan.getText(),KodePenularan.getText(),NamaPenularan.getText(),
+                                KodeKelurahan.getText(),NamaKelurahan.getText(),KodeKecamatan.getText(),NamaKecamatan.getText(),KodeKabupaten.getText(),NamaKabupaten.getText(),
                                 KodePropinsi.getText(),NamaPropinsi.getText(),Valid.SetTgl(TglKeluar.getSelectedItem()+""),KodeStatusKeluar.getText(),NamaStatusKeluar.getText(),
-                                Valid.SetTgl(TglLapor.getSelectedItem()+"")+" "+TglLapor.getSelectedItem().toString().substring(11,19),KodeStatusRawat.getText(),NamaStatusRawat.getText(), 
+                                Valid.SetTgl(TglLapor.getSelectedItem()+"")+" "+TglLapor.getSelectedItem().toString().substring(11,19),KodeStatusRawat.getText(),NamaStatusRawat.getText(),
                                 KodeStatusIsolasi.getText(),NamaStatusIsolasi.getText(),Email.getText(),NoTelp.getText(),SebabKematian.getText(),KodeJenisPasien.getText(),NamaJenisPasien.getText()
                             })==true){
                                 tampil();
@@ -1446,7 +1445,7 @@ public class CoronaPasien extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(rootPane,list.path("message").asText());
                         }
                     }
-                } 
+                }
             } catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -1458,7 +1457,7 @@ public class CoronaPasien extends javax.swing.JDialog {
                 }else if(ex.toString().contains("502")){
                     JOptionPane.showMessageDialog(rootPane,"Server kemenkes lelah broo....!");
                 }
-            }       
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1472,7 +1471,7 @@ public class CoronaPasien extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1483,13 +1482,13 @@ public class CoronaPasien extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tbObat.getSelectedRow()> -1){ 
+        if(tbObat.getSelectedRow()> -1){
             try {
                 headers = new HttpHeaders();
                 headers.add("X-rs-id",idrs);
-                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                headers.add("X-pass",api.getHmac()); 
-                headers.add("nomr",tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()); 
+                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                headers.add("X-pass",api.getHmac());
+                headers.add("nomr",tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
                 requestEntity = new HttpEntity(headers);
                 root = mapper.readTree(api.getRest().exchange(link+"/Pasien", HttpMethod.DELETE,requestEntity, String.class).getBody());
                 response = root.path("pasien");
@@ -1505,8 +1504,8 @@ public class CoronaPasien extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(rootPane,list.path("message").asText());
                         }
                     }
-                } 
-            } catch (Exception ex) {   
+                }
+            } catch (Exception ex) {
                 System.out.println("Notif : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(rootPane,"Koneksi ke server Kemenkes terputus....!");
@@ -1547,14 +1546,14 @@ public class CoronaPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPasienCorona.jasper","report","::[ Data Bridging Pasien Corona Kemenkes ]::",
                     "select no_pengenal,no_rkm_medis,inisial,nama_lengkap,tgl_masuk,kode_jk,nama_jk,tgl_lahir,kode_kewarganegaraan,"+
                     "nama_kewarganegaraan,kode_penularan,sumber_penularan,kd_kelurahan,nm_kelurahan,kd_kecamatan,nm_kecamatan,kd_kabupaten,"+
@@ -1615,7 +1614,7 @@ public class CoronaPasien extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1686,8 +1685,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 try {
                     headers = new HttpHeaders();
                     headers.add("X-rs-id",idrs);
-                    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                    headers.add("X-pass",api.getHmac()); 
+                    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                    headers.add("X-pass",api.getHmac());
                     body="{"+
                             "\"noc\": \""+NoKTP.getText()+"\"," +
                             "\"nomr\": \""+NoRM.getText()+"\"," +
@@ -1726,7 +1725,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 JOptionPane.showMessageDialog(rootPane,list.path("message").asText());
                             }
                         }
-                    } 
+                    }
                 } catch (Exception ex) {
                     System.out.println("Notifikasi : "+ex);
                     if(ex.toString().contains("UnknownHostException")){
@@ -1738,8 +1737,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }else if(ex.toString().contains("502")){
                         JOptionPane.showMessageDialog(rootPane,"Server kemenkes lelah broo....!");
                     }
-                }  
-                    
+                }
+
             }
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -1886,8 +1885,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data pasien...!!!!");
             BtnBatal.requestFocus();
-        } 
-            
+        }
+
     }//GEN-LAST:event_ppDiagnosaPasienBtnPrintActionPerformed
 
     private void BtnJenisPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJenisPasienActionPerformed
@@ -2011,9 +2010,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {     
+    private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select no_pengenal,no_rkm_medis,inisial,nama_lengkap,tgl_masuk,kode_jk,nama_jk,tgl_lahir,kode_kewarganegaraan,"+
                     "nama_kewarganegaraan,kode_penularan,sumber_penularan,kd_kelurahan,nm_kelurahan,kd_kecamatan,nm_kecamatan,kd_kabupaten,"+
@@ -2043,7 +2042,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(15,"%"+TCari.getText().trim()+"%");
                 }
                 rs=ps.executeQuery();
-                while(rs.next()){    
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_pengenal"),rs.getString("no_rkm_medis"),rs.getString("nama_lengkap"),rs.getString("inisial"),rs.getString("kode_jk"),rs.getString("nama_jk"),
                         rs.getString("tgl_lahir"),rs.getString("email"),rs.getString("notelp"),rs.getString("tgl_lapor"),rs.getString("tgl_masuk"),rs.getString("tgl_keluar"),
@@ -2108,7 +2107,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void getData() {
-        if(tbObat.getSelectedRow()!= -1){      
+        if(tbObat.getSelectedRow()!= -1){
             NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NamaPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -2144,31 +2143,31 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.SetTgl(TglKeluar,tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,306));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpasien_corona());
         BtnHapus.setEnabled(akses.getpasien_corona());
         BtnEdit.setEnabled(akses.getpasien_corona());
         ppDiagnosaPasien.setEnabled(akses.getdiagnosa_pasien_corona());
     }
-    
+
     public void setPasien(String nomr){
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         try {
             ps=koneksi.prepareStatement(
                     "select pasien.no_rkm_medis,pasien.nm_pasien,pasien.kd_kel,kelurahan.nm_kel,pasien.no_ktp,pasien.jk, "+
@@ -2177,7 +2176,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                     "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
                     "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where pasien.no_rkm_medis=?");
-            try {            
+            try {
                 ps.setString(1,nomr);
                 rs=ps.executeQuery();
                 if(rs.next()){
@@ -2209,7 +2208,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             System.out.println(e);
         }
     }
-    
+
     public JTable getTable(){
         return tbObat;
     }

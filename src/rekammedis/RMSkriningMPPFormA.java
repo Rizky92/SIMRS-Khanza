@@ -8,11 +8,11 @@ package rekammedis;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -62,23 +62,23 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private String[] kode,masalah;
-    private String masalahidentifikasi="",finger=""; 
+    private String masalahidentifikasi="",finger="";
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
-    
-    /** Creates new form 
+
+    /** Creates new form
      * @param parent
      * @param modal */
     public RMSkriningMPPFormA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Alamat","Tgl.Evaluasi","Ruang","Tgl.Masuk",
             "Kode DPJP","DPJP","Kode Konsulan","Dokter Konsulan","Diagnosis","Kelompok","Assesmen","Identifikasi",
@@ -137,7 +137,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeMasalah=new DefaultTableModel(null,new Object[]{
                 "P","Kode","Identifikasi Masalah"
             }){
@@ -160,7 +160,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
 
         tbIdentifikasiMPP.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbIdentifikasiMPP.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (i = 0; i < 3; i++) {
             TableColumn column = tbIdentifikasiMPP.getColumnModel().getColumn(i);
             if(i==0){
@@ -173,7 +173,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             }
         }
         tbIdentifikasiMPP.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailMasalah=new DefaultTableModel(null,new Object[]{
                 "Kode","Identifikasi Masalah"
             }){
@@ -202,7 +202,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         Identifikasi.setDocument(new batasInput((int)250).getKata(Identifikasi));
         Perencanaan.setDocument(new batasInput((int)2000).getKata(Perencanaan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -220,8 +220,8 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
-        
+
+
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -1141,7 +1141,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,BtnPetugas);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1180,7 +1180,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     emptTeks();
             }
         }
-    
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1214,8 +1214,8 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1346,7 +1346,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     }
                     rs=ps.executeQuery();
                     StringBuilder htmlContent = new StringBuilder();
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' bgcolor='#FFFAF8' align='center' width='50%'><b>PASIEN & PETUGAS</b></td>").append(
                             "<td valign='middle' bgcolor='#FFFAF8' align='center' width='30%'><b>IDENTIFIKASI</b></td>").append(
@@ -1447,7 +1447,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     );
                     htmlContent=null;
 
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1462,8 +1462,8 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     );
                     bg.close();
 
-                    File f = new File("DataEvaluasiMPP.html");            
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                    File f = new File("DataEvaluasiMPP.html");
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                 "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                 "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1472,12 +1472,12 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA EVALUASI MANAJER PELAYANAN PASIEN<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA EVALUASI MANAJER PELAYANAN PASIEN<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
                     );
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
@@ -1572,7 +1572,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatKeyPressed
 
     private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
-        
+
     }//GEN-LAST:event_KdPetugasKeyPressed
 
     private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPetugasActionPerformed
@@ -1582,10 +1582,10 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1596,15 +1596,15 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1675,7 +1675,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -1697,7 +1697,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     }
                 }
             });
-            
+
             TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -1732,16 +1732,16 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
 
     private void BtnPrintLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintLapActionPerformed
        if(tbObat.getSelectedRow()>-1){
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select logo from setting"));  
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),18).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()));  
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),18).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()));
            try {
                 masalahidentifikasi="";
                 ps2=koneksi.prepareStatement(
@@ -1768,7 +1768,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            param.put("masalah",masalahidentifikasi);  
+            param.put("masalah",masalahidentifikasi);
             Valid.MyReportqry("rptCetakEvaluasiAwalMPP.jasper","report","::[ Laporan Evaluasi Awal Manajer Pelayanan Pasien ]::",
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                         "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
@@ -1791,7 +1791,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                         "mpp_evaluasi.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"'",param);
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu..!!!!");
-        }  
+        }
     }//GEN-LAST:event_BtnPrintLapActionPerformed
 
     private void DetailRencanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DetailRencanaKeyPressed
@@ -1828,7 +1828,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                         TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         btnDokter2.requestFocus();
                     }
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1876,7 +1876,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                         TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         btnDokter2.requestFocus();
                     }
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2075,7 +2075,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     "pasien.nm_pasien like ? or mpp_evaluasi.nip like ? or petugas.nama like ?) "+
                     "group by mpp_evaluasi.no_rawat,mpp_evaluasi.tanggal order by mpp_evaluasi.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -2088,7 +2088,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2128,18 +2128,18 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         }
         TabRawat.setSelectedIndex(0);
         TDiagnosis.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
-            Alamat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()); 
-            Kamar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
-            TglMasuk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()); 
+            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
+            Alamat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            Kamar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            TglMasuk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             KdDok1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             TDokter1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             KdDok2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
@@ -2152,7 +2152,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
             NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
             Valid.SetTgl2(TglEvaluasi,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            
+
             try {
                 Valid.tabelKosong(tabModeMasalah);
                 ps=koneksi.prepareStatement(
@@ -2224,32 +2224,32 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmpp_skrining());
         BtnHapus.setEnabled(akses.getmpp_skrining());
         BtnEdit.setEnabled(akses.getmpp_skrining());
-        BtnPrint.setEnabled(akses.getmpp_skrining());   
+        BtnPrint.setEnabled(akses.getmpp_skrining());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
-        }            
+        }
     }
 
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
-    
+
     private void tampilMasalah() {
         try{
             Valid.tabelKosong(tabModeMasalah);
@@ -2279,7 +2279,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                 fileWriter.write("{\"masalahmpp\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -2288,7 +2288,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
-    
+
     private void tampilMasalah2() {
         try{
             jml=0;
@@ -2299,13 +2299,13 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             }
 
             pilih=null;
-            pilih=new boolean[jml]; 
+            pilih=new boolean[jml];
             kode=null;
             kode=new String[jml];
             masalah=null;
             masalah=new String[jml];
 
-            index=0;        
+            index=0;
             for(i=0;i<tbIdentifikasiMPP.getRowCount();i++){
                 if(tbIdentifikasiMPP.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -2313,7 +2313,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     masalah[index]=tbIdentifikasiMPP.getValueAt(i,2).toString();
                     index++;
                 }
-            } 
+            }
 
             Valid.tabelKosong(tabModeMasalah);
 
@@ -2322,7 +2322,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     pilih[i],kode[i],masalah[i]
                 });
             }
-            
+
             myObj = new FileReader("./cache/masalahmpp.iyem");
             root = mapper.readTree(myObj);
             response = root.path("masalahmpp");
@@ -2331,7 +2331,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     if(list.path("KodeMasalah").asText().toLowerCase().contains(TCariMasalah.getText().toLowerCase())||list.path("NamaMasalah").asText().toLowerCase().contains(TCariMasalah.getText().toLowerCase())){
                         tabModeMasalah.addRow(new Object[]{
                             false,list.path("KodeMasalah").asText(),list.path("NamaMasalah").asText()
-                        });                    
+                        });
                     }
                 }
             }
@@ -2344,19 +2344,19 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             root = null;
         }
     }
-    
+
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(470,HEIGHT));
-            FormMenu.setVisible(true);  
-            FormMasalahRencana.setVisible(true);  
+            FormMenu.setVisible(true);
+            FormMasalahRencana.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){   
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormMenu.setVisible(false);  
-            FormMasalahRencana.setVisible(false);   
+            FormMenu.setVisible(false);
+            FormMasalahRencana.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -2364,7 +2364,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     private void getMasalah() {
         if(tbObat.getSelectedRow()!= -1){
             TNoRM1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
+            TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             try {
                 Valid.tabelKosong(tabModeDetailMasalah);
@@ -2451,9 +2451,9 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        } 
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2479,7 +2479,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,10 +1,10 @@
 package tranfusidarah;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -13,15 +13,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.event.DocumentEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class UTDKomponenDarah extends javax.swing.JDialog {
     private final DefaultTableModel tabModeKomponen;
@@ -74,17 +74,17 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
         tbKomponen.setDefaultRenderer(Object.class, new WarnaTable());
 
         Kode.setDocument(new batasInput((byte)5).getKata(Kode));
-        Nama.setDocument(new batasInput((byte)70).getKata(Nama));      
-        Lama.setDocument(new batasInput((byte)5).getOnlyAngka(Lama));  
-        JasaSarana.setDocument(new batasInput((byte)10).getOnlyAngka(JasaSarana));  
-        PaketBHP.setDocument(new batasInput((byte)10).getOnlyAngka(PaketBHP));  
-        KSO.setDocument(new batasInput((byte)10).getOnlyAngka(KSO));  
-        Manajemen.setDocument(new batasInput((byte)10).getOnlyAngka(Manajemen));  
-        Total.setDocument(new batasInput((byte)10).getOnlyAngka(Total));  
-        Pembatalan.setDocument(new batasInput((byte)10).getOnlyAngka(Pembatalan));        
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
+        Nama.setDocument(new batasInput((byte)70).getKata(Nama));
+        Lama.setDocument(new batasInput((byte)5).getOnlyAngka(Lama));
+        JasaSarana.setDocument(new batasInput((byte)10).getOnlyAngka(JasaSarana));
+        PaketBHP.setDocument(new batasInput((byte)10).getOnlyAngka(PaketBHP));
+        KSO.setDocument(new batasInput((byte)10).getOnlyAngka(KSO));
+        Manajemen.setDocument(new batasInput((byte)10).getOnlyAngka(Manajemen));
+        Total.setDocument(new batasInput((byte)10).getOnlyAngka(Total));
+        Pembatalan.setDocument(new batasInput((byte)10).getOnlyAngka(Pembatalan));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
-        isForm();           
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -670,24 +670,24 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        
-        if(tabModeKomponen.getRowCount()==0){            
+
+        if(tabModeKomponen.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabModeKomponen.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptKomponenDarah.jasper","report","::[ Data Komponen Darah ]::",
-                    "select * from utd_komponen_darah where kode like '%"+TCari.getText().trim()+"%' or nama like '%"+TCari.getText().trim()+"%' order by nama",param);            
+                    "select * from utd_komponen_darah where kode like '%"+TCari.getText().trim()+"%' or nama like '%"+TCari.getText().trim()+"%' order by nama",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -712,12 +712,12 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
+            dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -761,7 +761,7 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -809,7 +809,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_KSOKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -835,7 +835,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void JasaSaranaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JasaSaranaKeyPressed
@@ -940,7 +940,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeKomponen.addRow(new Object[]{
@@ -975,7 +975,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Manajemen.setText("0");
         Total.setText("0");
         Pembatalan.setText("0");
-        
+
         Kode.requestFocus();
     }
 
@@ -996,34 +996,34 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbKomponen;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getutd_komponen_darah());
         BtnHapus.setEnabled(akses.getutd_komponen_darah());
         BtnEdit.setEnabled(akses.getutd_komponen_darah());
         BtnPrint.setEnabled(akses.getutd_komponen_darah());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,180));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    }    
+    }
 
     private void isjml() {
         if((! JasaSarana.getText().equals(""))&&(! PaketBHP.getText().equals(""))&&(! KSO.getText().equals(""))&&(! Manajemen.getText().equals(""))){
             Total.setText(Valid.SetAngka2(Double.parseDouble(JasaSarana.getText().trim())+Double.parseDouble(PaketBHP.getText().trim())+Double.parseDouble(KSO.getText().trim())+Double.parseDouble(Manajemen.getText().trim())));
         }
     }
- 
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1049,7 +1049,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

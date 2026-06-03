@@ -1,10 +1,10 @@
 package ipsrs;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -47,7 +47,7 @@ public class IPSRSNilaiPenerimaanVendorNonMedisPerBulan extends javax.swing.JDia
     public IPSRSNilaiPenerimaanVendorNonMedisPerBulan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"Kode Suplier","Nama Suplier","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember","Total"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -80,8 +80,8 @@ public class IPSRSNilaiPenerimaanVendorNonMedisPerBulan extends javax.swing.JDia
 
         kdbar.setDocument(new batasInput((byte)15).getKata(kdbar));
         kdjenis.setDocument(new batasInput((byte)4).getKata(kdjenis));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         Valid.LoadTahun(ThnCari);
     }
 
@@ -347,12 +347,12 @@ public class IPSRSNilaiPenerimaanVendorNonMedisPerBulan extends javax.swing.JDia
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -370,10 +370,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }   
+                }
                 kdbar.requestFocus();
             }
             @Override
@@ -385,7 +385,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -393,11 +393,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }                              
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         barang.emptTeks();
         barang.isCek();
         barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -415,10 +415,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jenis.getTable().getSelectedRow()!= -1){                   
-                    kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
+                if(jenis.getTable().getSelectedRow()!= -1){
+                    kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                     nmjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kdjenis.requestFocus();
             }
             @Override
@@ -440,10 +440,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void kdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select ipsrsbarang.nama_brng from ipsrsbarang where ipsrsbarang.kode_brng=?", nmbar,kdbar.getText());
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){            
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select ipsrsbarang.nama_brng from ipsrsbarang where ipsrsbarang.kode_brng=?", nmbar,kdbar.getText());
             kdjenis.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select ipsrsbarang.nama_brng from ipsrsbarang where ipsrsbarang.kode_brng=?", nmbar,kdbar.getText());
             TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -453,13 +453,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdjenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjenisKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select ipsrsjenisbarang.nm_jenis from ipsrsjenisbarang where ipsrsjenisbarang.kd_jenis=?", nmjenis,kdjenis.getText());         
+            Sequel.cariIsi("select ipsrsjenisbarang.nm_jenis from ipsrsjenisbarang where ipsrsjenisbarang.kd_jenis=?", nmjenis,kdjenis.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select ipsrsjenisbarang.nm_jenis from ipsrsjenisbarang where ipsrsjenisbarang.kd_jenis=?", nmjenis,kdjenis.getText());
             kdbar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select ipsrsjenisbarang.nm_jenis from ipsrsjenisbarang where ipsrsjenisbarang.kd_jenis=?", nmjenis,kdjenis.getText());
-            kdbar.requestFocus();   
+            kdbar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnSatuanActionPerformed(null);
         }
@@ -515,7 +515,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(ceksukses==false){
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 int row=tabMode.getRowCount();
-                for(i=0;i<row;i++){  
+                for(i=0;i<row;i++){
                     Sequel.menyimpan("temporary","'"+i+"','"+
                                     tabMode.getValueAt(i,0).toString()+"','"+
                                     tabMode.getValueAt(i,1).toString()+"','"+
@@ -531,16 +531,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
                                     Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
                                     Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','"+
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan"); 
+                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
                 }
-                Map<String, Object> param = new HashMap<>();    
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptIPSRSNilaiPenerimaanVendorNonMedisPerBulan.jasper","report","::[ Nilai Penerimaan Vendor Non Medis Per Bulan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }else{
                 JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
@@ -630,7 +630,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "select ipsrssuplier.kode_suplier,ipsrssuplier.nama_suplier from ipsrssuplier where "+
                     "ipsrssuplier.kode_suplier like ? or ipsrssuplier.nama_suplier like ? order by ipsrssuplier.nama_suplier");
@@ -645,7 +645,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(!kdbar.getText().equals("")){
                     kodebarang=" and ipsrsbarang.kode_brng='"+kdbar.getText()+"' ";
                 }
-                
+
                 totaltagihan=0;totaljanuari=0;totalfebruari=0;totalmaret=0;totalapril=0;totalmei=0;totaljuni=0;totaljuli=0;
                 totalagustus=0;totalseptember=0;totaloktober=0;totalnovember=0;totaldesember=0;
                 while(rs.next()){
@@ -656,7 +656,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-01' "+
                             kodejenis+kodebarang);
                     totaljanuari=totaljanuari+januari;
-                    
+
                     februari=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -664,7 +664,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-02' "+
                             kodejenis+kodebarang);
                     totalfebruari=totalfebruari+februari;
-                    
+
                     maret=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -672,7 +672,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-03' "+
                             kodejenis+kodebarang);
                     totalmaret=totalmaret+maret;
-                    
+
                     april=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -680,7 +680,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-04' "+
                             kodejenis+kodebarang);
                     totalapril=totalapril+april;
-                    
+
                     mei=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -688,7 +688,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-05' "+
                             kodejenis+kodebarang);
                     totalmei=totalmei+mei;
-                    
+
                     juni=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -696,7 +696,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-06' "+
                             kodejenis+kodebarang);
                     totaljuni=totaljuni+juni;
-                    
+
                     juli=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -704,7 +704,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-07' "+
                             kodejenis+kodebarang);
                     totaljuli=totaljuli+juli;
-                    
+
                     agustus=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -712,7 +712,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-08' "+
                             kodejenis+kodebarang);
                     totalagustus=totalagustus+agustus;
-                    
+
                     september=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -720,7 +720,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-09' "+
                             kodejenis+kodebarang);
                     totalseptember=totalseptember+september;
-                    
+
                     oktober=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -728,7 +728,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-10' "+
                             kodejenis+kodebarang);
                     totaloktober=totaloktober+oktober;
-                    
+
                     november=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -736,7 +736,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-11' "+
                             kodejenis+kodebarang);
                     totalnovember=totalnovember+november;
-                    
+
                     desember=Sequel.cariIsiAngka("select sum(ipsrsdetailpesan.total) as total from ipsrspemesanan "+
                             "inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
                             "inner join ipsrsbarang on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
@@ -744,10 +744,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(ipsrspemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-12' "+
                             kodejenis+kodebarang);
                     totaldesember=totaldesember+desember;
-                    
+
                     tagihan=januari+februari+maret+april+mei+juni+juli+agustus+september+oktober+november+desember;
                     totaltagihan=totaltagihan+tagihan;
-                    
+
                     tabMode.addRow(new Object[]{
                         rs.getString("kode_suplier"),rs.getString("nama_suplier"),januari,februari,maret,april,mei,juni,juli,agustus,september,oktober,november,desember,tagihan
                     });
@@ -760,24 +760,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
-                
+
             }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
         kdbar.setText("");
         nmbar.setText("");
         kdjenis.setText("");
-        kdbar.requestFocus();        
+        kdbar.requestFocus();
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getnilai_penerimaan_vendor_nonmedis_perbulan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -803,7 +803,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

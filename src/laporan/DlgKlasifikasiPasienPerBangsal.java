@@ -1,8 +1,8 @@
 package laporan;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -33,15 +33,15 @@ public class DlgKlasifikasiPasienPerBangsal extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private int i=0,jmlpasien=0,pasien=0,Minimal=0,Partial=0,Total=0,jmlMinimal=0,jmlPartial=0,jmlTotal=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgKlasifikasiPasienPerBangsal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -56,7 +56,7 @@ public class DlgKlasifikasiPasienPerBangsal extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        LoadHTML.setDocument(doc);        
+        LoadHTML.setDocument(doc);
     }
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -240,36 +240,36 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("HarianHAIs.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("HarianHAIs.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
                                 "<td valign='top' align='center'>"+
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+       
+                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -391,7 +391,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No.</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50%' rowspan='2'>Kamar/Bangsal</td>"+
@@ -403,12 +403,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Partial</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );     
+            );
             ps=koneksi.prepareStatement(
                     "select kd_bangsal,nm_bangsal from bangsal where status='1' and nm_bangsal like ? order by nm_bangsal");
             try {
                 i=1;
-                jmlpasien=0;pasien=0;Minimal=0;Partial=0;Total=0;jmlMinimal=0;jmlPartial=0;jmlTotal=0;                        
+                jmlpasien=0;pasien=0;Minimal=0;Partial=0;Total=0;jmlMinimal=0;jmlPartial=0;jmlTotal=0;
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -421,7 +421,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         jmlPartial=jmlPartial+Partial;
                         Total=Sequel.cariInteger("select count(data_klasifikasi_pasien_ranap.Total) from data_klasifikasi_pasien_ranap inner join kamar inner join bangsal on data_klasifikasi_pasien_ranap.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where data_klasifikasi_pasien_ranap.Total='IYA' and data_klasifikasi_pasien_ranap.tanggal between ? and ? and kamar.kd_bangsal=?",Valid.SetTgl(Tgl1.getSelectedItem()+""),Valid.SetTgl(Tgl2.getSelectedItem()+""),rs.getString("kd_bangsal"));
                         jmlTotal=jmlTotal+Total;
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>"+
                                 "<td valign='middle' align='center'>"+i+"</td>"+
                                 "<td valign='middle' align='left'>"+rs.getString("nm_bangsal")+"</td>"+
@@ -430,11 +430,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                 "<td valign='middle' align='center'>"+Partial+"</td>"+
                                 "<td valign='middle' align='center'>"+Total+"</td>"+
                             "</tr>"
-                        ); 
+                        );
                         i++;
-                    }                        
+                    }
                 }
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' align='right' colspan='2'>Total :</td>"+
                         "<td valign='middle' align='center'>"+jmlpasien+"</td>"+
@@ -442,7 +442,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' align='center'>"+jmlPartial+"</td>"+
                         "<td valign='middle' align='center'>"+jmlTotal+"</td>"+
                     "</tr>"
-                ); 
+                );
             } catch (Exception e) {
                 System.out.println("laporan.DlgHarianHAIs.tampil() : "+e);
             } finally{
@@ -453,7 +453,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -462,15 +462,15 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("laporan.DlgRL4A.tampil() 5 : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.gethais_perbangsal());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -496,7 +496,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

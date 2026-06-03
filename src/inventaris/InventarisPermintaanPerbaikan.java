@@ -11,11 +11,12 @@
 
 package inventaris;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,17 +28,16 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-import java.awt.Cursor;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -113,9 +113,9 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
         deskripsi.setDocument(new batasInput((int)300).getKata(deskripsi));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
-        
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -663,7 +663,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
                 Sequel.mengedit("inventaris","no_inventaris='"+no_inventaris.getText()+"'","status_barang='Perbaikan'");
                 runBackground(() ->tampil());
                 emptTeks();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -767,14 +767,14 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();   
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 if(nm_ruangcari.getText().equals("")&&TCari.getText().equals("")){
                     Valid.MyReportqry("rptPermintaanPerbaikanInventaris.jasper","report","::[ Data Permintaan Perbaikan Inventaris ]::",
                        "select permintaan_perbaikan_inventaris.no_permintaan,permintaan_perbaikan_inventaris.no_inventaris,"+
@@ -817,7 +817,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
                         "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.deskripsi_kerusakan like '%"+TCari.getText().trim()+"%' "+
                         "order by permintaan_perbaikan_inventaris.no_permintaan",param);
                 }
-                    
+
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -873,7 +873,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
@@ -887,7 +887,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
 }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void nopermintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nopermintaanKeyPressed
@@ -924,7 +924,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
     }//GEN-LAST:event_formWindowOpened
 
     private void btnRuang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuang1ActionPerformed
-        InventarisRuang ruang=new InventarisRuang(null,false); 
+        InventarisRuang ruang=new InventarisRuang(null,false);
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -932,10 +932,10 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){ 
+                if(ruang.getTable().getSelectedRow()!= -1){
                     nm_ruangcari.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                     TCari.requestFocus();
-                }                   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -947,7 +947,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         ruang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -955,7 +955,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ruang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -987,14 +987,14 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(inventaris.getTable().getSelectedRow()!= -1){     
+                if(inventaris.getTable().getSelectedRow()!= -1){
                    no_inventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
                    nama_barang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
                    merk.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),4).toString());
                    jenis.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),8).toString());
-                   kategori.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),7).toString());                        
+                   kategori.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),7).toString());
                    no_inventaris.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1005,7 +1005,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         inventaris.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1038,11 +1038,11 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     nip.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     nama_petugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     departemen.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),5).toString());
-                }   
+                }
                 nip.requestFocus();
             }
             @Override
@@ -1191,7 +1191,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
                         "order by permintaan_perbaikan_inventaris.no_permintaan"
                 );
             }
-                
+
             try {
                 if(nm_ruangcari.getText().equals("")&&TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1264,7 +1264,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             LCount.setText(tabMode.getRowCount()+"");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
@@ -1282,15 +1282,15 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
         Valid.autoNomer3(
             "select ifnull(MAX(CONVERT(RIGHT(permintaan_perbaikan_inventaris.no_permintaan,3),signed)),0) from permintaan_perbaikan_inventaris where date_format(permintaan_perbaikan_inventaris.tanggal,'%Y-%m-%d')='"+Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+"' ",
             "PPI"+tgl_permintaan.getSelectedItem().toString().substring(6,10)+tgl_permintaan.getSelectedItem().toString().substring(3,5)+tgl_permintaan.getSelectedItem().toString().substring(0,2),3,nopermintaan
-        ); 
+        );
         nopermintaan.requestFocus();
     }
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-             nopermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());   
-             no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());   
-             nama_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString()); 
+             nopermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+             no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+             nama_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
              merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
              kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
              jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
@@ -1305,21 +1305,21 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,185));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         if(akses.getjml2()>=1){
             nip.setEditable(false);
@@ -1330,10 +1330,10 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             BtnPrint.setEnabled(akses.getperbaikan_inventaris());
             nip.setText(akses.getkode());
             nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
-        } 
+        }
         TCari.requestFocus();
     }
-    
+
     public void isInventaris(){
         try {
             ps=koneksi.prepareStatement(
@@ -1398,7 +1398,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

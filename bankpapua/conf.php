@@ -11,7 +11,7 @@
         global $db_hostname;
         return $db_hostname;
     }
-    
+
 
     function  bukakoneksi(){
      	global $db_hostname, $db_username, $db_password, $db_name;
@@ -21,29 +21,29 @@
          or die("<font color=red><h3>Cannot chose database..!!</h3></font>". mysqli_error());
 	return $konektor;
     }
-     
+
     $sqlinjectionchars = array("=","-","'","\"","+"); //tambah sendiri
 
     function cleankar($dirty){
 	$konektor=bukakoneksi();
-	$clean = mysqli_real_escape_string($konektor,$dirty);	
+	$clean = mysqli_real_escape_string($konektor,$dirty);
 	mysqli_close($konektor);
 	return preg_replace('/[^a-zA-Z0-9\s_,@. ]/', '',$clean);
     }
-    
+
     function mysql_safe_query($format) {
         $args = array_slice(func_get_args(),1);
         $args = array_map('mysql_safe_string',$args);
         $query = vsprintf($format,$args);
         return mysqli_query($query);
     }
-    
+
     function validUrl($url){
         $format="/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/";
         $url=strtolower($url);
         if(preg_match($format,$url)) return true; else return false;
     }
-    
+
     function validTeks($data){
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);
@@ -87,7 +87,7 @@
         $save=str_replace("=","",$save);
         return $save;
     }
-    
+
     function validTeks3($data,$panjang){
         $save="";
         if(strlen($data)>$panjang){
@@ -136,7 +136,7 @@
         }
         return $save;
     }
-    
+
     function validTeks4($data,$panjang){
         $save="";
         if(strlen($data)>$panjang){
@@ -184,7 +184,7 @@
         }
         return $save;
     }
-    
+
     function validangka($angka){
         if (isset($angka)) {
             if(!is_numeric($angka)) {
@@ -196,22 +196,22 @@
             return 0;
         }
     }
-    
+
     function antisqlinjection($hal){
        /* if(!get_magic_quotes_gpc()){
-            $_GET = array_map('mysql_real_escape_string', $_GET); 
-            $_POST = array_map('mysql_real_escape_string', $_POST); 
+            $_GET = array_map('mysql_real_escape_string', $_GET);
+            $_POST = array_map('mysql_real_escape_string', $_POST);
             $_COOKIE = array_map('mysql_real_escape_string', $_COOKIE);
-        }else{  
-            $_GET = array_map('stripslashes', $_GET); 
-            $_POST = array_map('stripslashes', $_POST); 
+        }else{
+            $_GET = array_map('stripslashes', $_GET);
+            $_POST = array_map('stripslashes', $_POST);
             $_COOKIE = array_map('stripslashes', $_COOKIE);
-            $_GET = array_map('mysql_real_escape_string', $_GET); 
-            $_POST = array_map('mysql_real_escape_string', $_POST); 
+            $_GET = array_map('mysql_real_escape_string', $_GET);
+            $_POST = array_map('mysql_real_escape_string', $_POST);
             $_COOKIE = array_map('mysql_real_escape_string', $_COOKIE);
         }
-        if (strlen($_SERVER['REQUEST_URI']) > 255 || strpos($_SERVER['REQUEST_URI'], "concat") || 
-                strpos($_SERVER['REQUEST_URI'], "union") || strpos($_SERVER['REQUEST_URI'], "base64") || 
+        if (strlen($_SERVER['REQUEST_URI']) > 255 || strpos($_SERVER['REQUEST_URI'], "concat") ||
+                strpos($_SERVER['REQUEST_URI'], "union") || strpos($_SERVER['REQUEST_URI'], "base64") ||
                 strpos($_SERVER['REQUEST_URI'], "'")||strpos($_SERVER['REQUEST_URI'], "/")||
                 strpos($_SERVER['REQUEST_URI'], "*")||strpos($_SERVER['REQUEST_URI'], ";")||
                 strpos($_SERVER['REQUEST_URI'], "/*")||strpos($_SERVER['REQUEST_URI'], "\\")||
@@ -241,24 +241,24 @@
             @header("Connection: Close");
             @exit;
         }*/
-        
+
     }
-    
+
     function reportsqlinjection(){
         /*if(!get_magic_quotes_gpc()){
-            $_GET = array_map('mysql_real_escape_string', $_GET); 
-            $_POST = array_map('mysql_real_escape_string', $_POST); 
+            $_GET = array_map('mysql_real_escape_string', $_GET);
+            $_POST = array_map('mysql_real_escape_string', $_POST);
             $_COOKIE = array_map('mysql_real_escape_string', $_COOKIE);
-        }else{  
-            $_GET = array_map('stripslashes', $_GET); 
-            $_POST = array_map('stripslashes', $_POST); 
+        }else{
+            $_GET = array_map('stripslashes', $_GET);
+            $_POST = array_map('stripslashes', $_POST);
             $_COOKIE = array_map('stripslashes', $_COOKIE);
-            $_GET = array_map('mysql_real_escape_string', $_GET); 
-            $_POST = array_map('mysql_real_escape_string', $_POST); 
+            $_GET = array_map('mysql_real_escape_string', $_GET);
+            $_POST = array_map('mysql_real_escape_string', $_POST);
             $_COOKIE = array_map('mysql_real_escape_string', $_COOKIE);
         }
-        if (strlen($_SERVER['REQUEST_URI']) > 255 || strpos($_SERVER['REQUEST_URI'], "concat") || 
-                strpos($_SERVER['REQUEST_URI'], "union") || strpos($_SERVER['REQUEST_URI'], "base64") || 
+        if (strlen($_SERVER['REQUEST_URI']) > 255 || strpos($_SERVER['REQUEST_URI'], "concat") ||
+                strpos($_SERVER['REQUEST_URI'], "union") || strpos($_SERVER['REQUEST_URI'], "base64") ||
                 strpos($_SERVER['REQUEST_URI'], "'")||strpos($_SERVER['REQUEST_URI'], "/")||
                 strpos($_SERVER['REQUEST_URI'], "*")||strpos($_SERVER['REQUEST_URI'], ";")||
                 strpos($_SERVER['REQUEST_URI'], "/*")||strpos($_SERVER['REQUEST_URI'], "\\")||
@@ -288,27 +288,27 @@
             @header("Connection: Close");
             @exit;
         }*/
-        
+
     }
-    
+
     function tutupkoneksi(){
        global  $konektor;
        mysqli_close($konektor);
     }
 
-    function bukaquery($sql){    
+    function bukaquery($sql){
         $konektor=bukakoneksi();
         $result=mysqli_query($konektor, $sql)
         or die (/*mysqli_error($konektor).*/"hmmmmmmm.....??????????");
         mysqli_close($konektor);
         return $result;
     }
-    
+
     function fetch_assoc($sql) {
         $result = mysqli_fetch_assoc(bukaquery($sql));
         return $result;
     }
-     
+
     function bukaquery2($sql){
         $konektor=bukakoneksi();
         $result=mysqli_query($konektor,$sql);
@@ -337,13 +337,13 @@
         echo  "<img src='images/simpan.gif' />&nbsp;&nbsp; Data $pesan berhasil disimpan";
         return $command;
     }
-     
+
     function Tambah2($tabelname,$attrib,$pesan) {
         $command = bukainput("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         echo  "<img src='images/simpan.gif' />&nbsp;&nbsp; <font size='9'>Data $pesan berhasil disimpan</font>";
         return $command;
     }
-     
+
     function Tambah3($tabelname,$attrib) {
         $command = bukainput("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
@@ -353,12 +353,12 @@
         $command = bukaquery("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
     }
-     
+
     function InsertData2($tabelname,$attrib) {
         $command = bukaquery2("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
     }
-     
+
     function EditData($tabelname,$attrib) {
         $command = bukaquery("UPDATE ".$tabelname." SET ".$attrib." ");
         return $command;
@@ -369,7 +369,7 @@
         echo  "<img src='images/simpan.gif' />&nbsp;&nbsp; Data $pesan berhasil diubah";
         return $command;
     }
-     
+
     function Ubah2($tabelname,$attrib) {
         $command = bukaquery("UPDATE ".$tabelname." SET ".$attrib." ");
         return $command;
@@ -381,7 +381,7 @@
         Zet($hal);
         return $command;
     }
-     
+
     function Hapus2($tabelname,$param) {
         $sql ="DELETE FROM ".$tabelname." WHERE ".$param." ";
         $command = hapusinput($sql);
@@ -393,7 +393,7 @@
         $command = bukaquery($sql);
         return $command;
     }
-     
+
     function deletegb($sql){
          $_sql         = $sql;
          $hasil        = bukaquery($_sql);
@@ -451,15 +451,15 @@
     function formatDuit($duit){
         return "Rp. ".number_format($duit,0,",",".").",-";
     }
-        
+
     function formatDuit2($duit){
         return @number_format($duit,0,",",".")."";
     }
-        
+
     function formatDec($duit){
         return round($duit);
     }
-        
+
     function formatRound($duit){
         return str_replace(".",",",round($duit,5));
     }
@@ -473,14 +473,14 @@
         list($result) =mysqli_fetch_array($hasil);
         return $result;
     }
-    
+
     function getOne3($sql,$string) {
         $hasil=bukaquery($sql);
         list($result) =mysqli_fetch_array($hasil);
         if(empty($result)) $result=$string;
         return $result;
     }
-    
+
     function fetch_array($result) {
         return mysqli_fetch_array($result);
     }
@@ -490,7 +490,7 @@
         if ($jum==0) return true;
         else return false;
     }
-	
+
     function loadTgl(){
         echo "<option>-&nbsp</option>";
         for($tgl=1; $tgl<=31; $tgl++){
@@ -498,7 +498,7 @@
             if ($tgl_leng==1)
             $i="0".$tgl;
             else
-            $i=$tgl;                        
+            $i=$tgl;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -511,7 +511,7 @@
             if ($tgl_leng==1)
             $i="0".$tgl;
             else
-            $i=$tgl;                        
+            $i=$tgl;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -536,7 +536,7 @@
             if ($bln_leng==1)
             $i="0".$bln;
             else
-            $i=$bln;                        
+            $i=$bln;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -549,7 +549,7 @@
             if ($bln_leng==1)
             $i="0".$bln;
             else
-            $i=$bln;                        
+            $i=$bln;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -561,7 +561,7 @@
             if ($bln_leng==1)
             $i="0".$bln;
             else
-            $i=$bln;                        
+            $i=$bln;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -574,7 +574,7 @@
             if ($thn_leng==1)
             $i="0".$thn;
             else
-            $i=$thn;                        
+            $i=$thn;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -588,7 +588,7 @@
             if ($thn_leng==1)
             $i="0".$thn;
             else
-            $i=$thn;                        
+            $i=$thn;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -605,7 +605,7 @@
                 echo "<option value=$i>$i</option>";
         }
     }
-    
+
     function loadThn3(){
         $thnini=date('Y');
         //echo "<option>-&nbsp</option>";
@@ -627,7 +627,7 @@
             if ($thn_leng==1)
             $i="0".$thn;
             else
-            $i=$thn;                        
+            $i=$thn;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -639,7 +639,7 @@
             if ($jam_leng==1)
             $i="0".$jam;
             else
-            $i=$jam;                        
+            $i=$jam;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -651,7 +651,7 @@
             if ($menit_leng==1)
             $i="0".$menit;
             else
-            $i=$menit;                        
+            $i=$menit;
             echo "<option value=$i>$i</option>";
         }
     }
@@ -659,7 +659,7 @@
     function autonomer($table,$strawal,$pnj){
         $hasil        = bukaquery($table);
         $s            = mysqli_num_rows($hasil)+1;
-        $j            = strlen($s);         
+        $j            = strlen($s);
         $s1           = "";
         for($i=1;$i<=$pnj-$j;$i++){
             $s1=$s1+"0";
@@ -672,15 +672,15 @@
         $errors = '<div class="alert bg-pink alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'.$error.'</div>';
         return $errors;
     }
-    
+
     function encrypt_decrypt($string,$action){
-        $secret_key     = 'Bar12345Bar12345'; 
+        $secret_key     = 'Bar12345Bar12345';
         $secret_iv      = 'sayangsamakhanza';
         $output         = FALSE;
         $encrypt_method = "AES-256-CBC";
         $key            = hash('sha256', $secret_key);
         $iv             = substr(hash('sha256', $secret_iv), 0, 16);
- 
+
         switch ($action){
              case "e":
                 $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
@@ -689,22 +689,22 @@
                 $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
                 break;
         }
-        
+
         return $output;
     }
-    
+
     function decrypt($input){
-        $secret_key     = 'Bar12345Bar12345'; 
+        $secret_key     = 'Bar12345Bar12345';
         $secret_iv      = 'sayangsamakhanza';
         return openssl_decrypt(base64_decode($input), 'AES-128-CBC', $secret_key, OPENSSL_RAW_DATA, $secret_iv);
     }
-    
+
     function encrypt($input){
-        $secret_key     = 'Bar12345Bar12345'; 
+        $secret_key     = 'Bar12345Bar12345';
         $secret_iv      = 'sayangsamakhanza';
         return base64_encode(openssl_encrypt($input, 'AES-128-CBC', $secret_key, OPENSSL_RAW_DATA, $secret_iv));
     }
-    
+
     function Terbilang($x){
         $abil = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
         if ($x < 12)
@@ -724,5 +724,5 @@
         elseif ($x < 1000000000)
           return Terbilang($x / 1000000) . " juta" . Terbilang($x % 1000000);
     }
-        
+
 ?>

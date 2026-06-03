@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -49,7 +49,7 @@ public final class DlgRl32 extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private int i=0,rujukan=0,nonrujukan=0,dirawat=0,dirujuk=0,meninggal=0,pulang=0,
-            ttlrujukan=0,ttlnonrujukan=0,ttldirawat=0,ttldirujuk=0,ttlmeninggal=0,ttlpulang=0;   
+            ttlrujukan=0,ttlnonrujukan=0,ttldirawat=0,ttldirujuk=0,ttlmeninggal=0,ttlpulang=0;
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -81,9 +81,9 @@ public final class DlgRl32 extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-                   
 
-        
+
+
         try {
             ps=koneksi.prepareStatement(
                     "select poliklinik.kd_poli,poliklinik.nm_poli from poliklinik " +
@@ -91,7 +91,7 @@ public final class DlgRl32 extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -268,19 +268,19 @@ public final class DlgRl32 extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
-            Map<String, Object> param = new HashMap<>();         
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());  
-            param.put("tanggal",Tgl2.getDate());  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+            param.put("tanggal",Tgl2.getDate());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int r=0;r<tabMode.getRowCount();r++){ 
+            for(int r=0;r<tabMode.getRowCount();r++){
                 if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                     Sequel.menyimpan("temporary","'"+r+"','"+
                                     tabMode.getValueAt(r,0).toString()+"','"+
@@ -292,9 +292,9 @@ public final class DlgRl32 extends javax.swing.JDialog {
                                     tabMode.getValueAt(r,6).toString()+"','"+
                                     tabMode.getValueAt(r,7).toString()+"','"+
                                     tabMode.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-                }                    
+                }
             }
-               
+
             Valid.MyReportqry("rptRl32.jasper","report","::[ Formulir RL 3.2 ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -324,7 +324,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             runBackground(() ->tampil());
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -355,7 +355,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -418,10 +418,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode);   
+    public void tampil(){
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode);
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
             i=1;
@@ -442,26 +442,26 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         "on rujuk_masuk.no_rawat=reg_periksa.no_rawat where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and "+
                         "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"'");
                 ttlrujukan=ttlrujukan+rujukan;
-                
+
                 nonrujukan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa  where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and "+
                         "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and "+
                         "reg_periksa.no_rawat not in(select no_rawat from rujuk_masuk)");
                 ttlnonrujukan=ttlnonrujukan+nonrujukan;
-                
+
                 dirawat=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join kamar_inap "+
                         "on reg_periksa.no_rawat=kamar_inap.no_rawat where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and "+
                         "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' group by reg_periksa.no_rawat");
                 ttldirawat=ttldirawat+dirawat;
-                
+
                 dirujuk=Sequel.cariInteger("select count(rujuk.no_rawat) from reg_periksa inner join rujuk on rujuk.no_rawat=reg_periksa.no_rawat "+
                         "where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"'");
                 ttldirujuk=ttldirujuk+dirujuk;
-                
+
                 meninggal=Sequel.cariInteger("select count(reg_periksa.no_rkm_medis) from pasien_mati inner join reg_periksa "+
                         "on reg_periksa.no_rkm_medis=pasien_mati.no_rkm_medis  where kd_poli='"+rs.getString("kd_poli")+"' and "+
                         "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"'");
                 ttlmeninggal=ttlmeninggal+meninggal;
-                
+
                 pulang=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join kamar_inap "+
                         "on reg_periksa.no_rawat=kamar_inap.no_rawat where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and "+
                         "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and "+
@@ -508,7 +508,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

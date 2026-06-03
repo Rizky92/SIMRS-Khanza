@@ -1,10 +1,10 @@
 package parkir;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -20,7 +20,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
-import kepegawaian.DlgPetugas;
 
 /**
  *
@@ -98,7 +97,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         KdJenis.setDocument(new batasInput((byte)5).getKata(KdJenis));
         Tarif.setDocument(new batasInput((byte)10).getOnlyAngka(Tarif));
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -121,12 +120,12 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         WindowInputParkir.setSize(445,200);
         WindowInputParkir.setLocationRelativeTo(null);
-        
+
         try {
-            //  
+            //
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -589,11 +588,11 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NomorKendaraanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomorKendaraanKeyPressed
-        
+
 }//GEN-LAST:event_NomorKendaraanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -623,7 +622,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            
+
         }else if(tabMode.getRowCount()!=0){
 
                 /*String sql="select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab),"+
@@ -639,15 +638,15 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                    "and kamar.kd_bangsal=bangsal.kd_bangsal and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab " +
                    "where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk";
-                
-                Map<String, Object> param = new HashMap<>();    
+
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",var.getnamars());
                 param.put("alamatrs",var.getalamatrs());
                 param.put("kotars",var.getkabupatenrs());
                 param.put("propinsirs",var.getpropinsirs());
                 param.put("kontakrs",var.getkontakrs());
-                param.put("emailrs",var.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",var.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptKamarInap.jasper","report","::[ Data Kamar Inap Pasien ]::",sql,param);*/
 
         }
@@ -715,7 +714,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseInKeyPressed
 
     private void DTPTglItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPTglItemStateChanged
-        
+
     }//GEN-LAST:event_DTPTglItemStateChanged
 
     private void tbKamInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamInMouseClicked
@@ -724,7 +723,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
+
             if(evt.getClickCount()==2){
             }
         }
@@ -738,7 +737,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-            
+
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 i=tbKamIn.getSelectedColumn();
             }
@@ -755,8 +754,8 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                     if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KdPetugas.requestFocus(); 
+                    }
+                    KdPetugas.requestFocus();
                     petugas=null;
                 }
             });
@@ -764,16 +763,16 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
 }//GEN-LAST:event_btnPetugasActionPerformed
 
@@ -796,7 +795,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();        
+        tampil();
     }//GEN-LAST:event_formWindowOpened
 
     private void WindowInputParkirWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowInputParkirWindowActivated
@@ -819,11 +818,11 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }else{
                     WindowInputParkir.setVisible(true);
                     NomorKendaraan.requestFocus();
-                }            
+                }
             }
         }else{
             Valid.pindah(evt,KdJenis,TCari);
-        }            
+        }
     }//GEN-LAST:event_BarcodeKeyPressed
 
     private void KdJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdJenisKeyPressed
@@ -847,12 +846,12 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jenis.getTable().getSelectedRow()!= -1){                   
-                    KdJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
-                    NmJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());                    
-                    Tarif.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),2).toString());                    
-                    SIstem.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),3).toString());                    
-                }  
+                if(jenis.getTable().getSelectedRow()!= -1){
+                    KdJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
+                    NmJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
+                    Tarif.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),2).toString());
+                    SIstem.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),3).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -863,7 +862,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenis.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -875,7 +874,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
     }//GEN-LAST:event_btnJenisActionPerformed
 
     private void btnJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnJenisKeyPressed
@@ -968,7 +967,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
-        
+
         Valid.tabelKosong(tabMode);
         try{
             /*if(stts_pulang='Pindah Kamar',(IFNULL(to_days(concat(tgl_keluar,' ',jam_keluar))-to_days(concat(tgl_masuk,' ',jam_masuk)),to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk)))),"+
@@ -1024,8 +1023,8 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     rs.getString(16),
                                     rs.getString(17)});
                 }
-                
-                
+
+
             }
             //rs.close();*/
         }catch(Exception e){
@@ -1034,7 +1033,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {       
+    public void emptTeks() {
         NomorKendaraan.setText("");
         NomorKendaraan.requestFocus();
     }
@@ -1045,11 +1044,11 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
 
-    
-   
 
-    
-    
+
+
+
+
     public void isCek(){
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
@@ -1065,10 +1064,10 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             KdPetugas.setText("");
             NmPetugas.setText("");
             btnPetugas.setEnabled(true);
-        } 
-        
+        }
+
    }
-    
+
     private void updateHari(){
         tampil();
     }

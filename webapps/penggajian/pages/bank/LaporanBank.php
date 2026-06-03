@@ -26,7 +26,7 @@
                             </tr>";
                             while($baris = mysqli_fetch_array($hasil)) {
                                 echo "<tr class='isi'>
-                                        <td>$no</td>  
+                                        <td>$no</td>
                                         <td>$baris[0] &nbsp;</td>
                                      </tr>";$no++;
                             }
@@ -38,7 +38,7 @@
                                 <td width='88%'><div align='center'>Nama Bank</div></td>
                             </tr>
                           </table>";
-                } 
+                }
             }else{
                 exit(header("Location:../index.php"));
             }

@@ -1,10 +1,10 @@
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -50,7 +50,7 @@ public class KeuanganRekapJmDokter extends javax.swing.JDialog {
             psbiaya_dokter_umum;
     private ResultSet rs,rsralandokter,rsralandokterdrpr,rsranapdokter,rsranapdokterdrpr,rsbiayaoperator1,rsbiayaoperator2,rsbiayaoperator3,rsbiayadokter_anak,
             rsbiayadokter_anestesi,rsperiksa_lab,rsdetaillab,rsperiksa_radiologi,rsbiaya_dokter_pjanak,rsbiaya_dokter_umum;
-    
+
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -87,10 +87,10 @@ public class KeuanganRekapJmDokter extends javax.swing.JDialog {
                 column.setPreferredWidth(150);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         kddokter.setDocument(new batasInput((byte)10).getKata(kddokter));
-                
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -453,45 +453,45 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             BtnPrint.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            try {            
-                File g = new File("file2.css");            
+            try {
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                         ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                         ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                 );
                 bg.close();
 
-                File f;            
-                BufferedWriter bw; 
+                File f;
+                BufferedWriter bw;
 
                 pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%'>Kode Dokter</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55%'>Nama Dokter</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%'>Pendapatan Jasa</td>"+
                                 "</tr>"
-                            ); 
-                            for(i=0;i<tabMode.getRowCount();i++){  
-                                htmlContent.append(                             
+                            );
+                            for(i=0;i<tabMode.getRowCount();i++){
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
                                         "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
                                         "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,3)+"</td>"+
                                     "</tr>"
-                                ); 
-                            }            
+                                );
+                            }
 
-                            f = new File("RekapJasaDokter.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("RekapJasaDokter.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write("<html>"+
                                         "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                         "<body>"+
@@ -501,43 +501,43 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>REKAP JASA MEDIS DOKTER "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>REKAP JASA MEDIS DOKTER "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                 htmlContent.toString()+
                                             "</table>"+
-                                        "</body>"+                   
+                                        "</body>"+
                                      "</html>"
                             );
 
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
                             htmlContent = new StringBuilder();
-                           htmlContent.append(                             
+                           htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%'>Kode Dokter</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55%'>Nama Dokter</td>"+
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%'>Pendapatan Jasa</td>"+
                                 "</tr>"
-                            ); 
-                            for(i=0;i<tabMode.getRowCount();i++){  
-                                htmlContent.append(                             
+                            );
+                            for(i=0;i<tabMode.getRowCount();i++){
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
                                         "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
                                         "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
                                         "<td valign='top' align='right'>"+tabMode.getValueAt(i,3)+"</td>"+
                                     "</tr>"
-                                ); 
-                            }             
+                                );
+                            }
 
-                            f = new File("RekapJasaDokter.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("RekapJasaDokter.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write("<html>"+
                                         "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                         "<body>"+
@@ -547,41 +547,41 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>REKAP JASA MEDIS DOKTER "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>REKAP JASA MEDIS DOKTER "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                 htmlContent.toString()+
                                             "</table>"+
-                                        "</body>"+                   
+                                        "</body>"+
                                      "</html>"
                             );
 
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\"No.\";\"Kode Dokter\";\"Nama Dokter\";\"Pendapatan Jasa\"\n"
-                            ); 
-                            for(i=0;i<tabMode.getRowCount();i++){  
-                                htmlContent.append(                             
+                            );
+                            for(i=0;i<tabMode.getRowCount();i++){
+                                htmlContent.append(
                                     "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\"\n"
-                                ); 
-                            }            
+                                );
+                            }
 
-                            f = new File("RekapJasaDokter.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("RekapJasaDokter.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
 
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
+                        break;
                     case "Laporan 4 (Jasper)":
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<tabMode.getRowCount();r++){  
+                            for(int r=0;r<tabMode.getRowCount();r++){
                                     Sequel.menyimpan("temporary","'"+r+"','"+
                                             tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
                                             tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
@@ -590,19 +590,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","data");
                             }
 
-                            Map<String, Object> param = new HashMap<>();                 
+                            Map<String, Object> param = new HashMap<>();
                             param.put("namars",akses.getnamars());
                             param.put("alamatrs",akses.getalamatrs());
                             param.put("kotars",akses.getkabupatenrs());
                             param.put("propinsirs",akses.getpropinsirs());
                             param.put("kontakrs",akses.getkontakrs());
-                            param.put("emailrs",akses.getemailrs());   
-                            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                             Valid.MyReportqry("rptRekapJasaMedisDokter.jasper","report","::[ Data Rekap Jasa Medis Dokter ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-                        break; 
-                }                 
+                        break;
+                }
             } catch (Exception e) {
-            }     
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -702,7 +702,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -735,33 +735,33 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     if(penjab.getTable().getSelectedRow()!= -1){
                         KdCaraBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                         NmCaraBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                    }    
+                    }
                     KdCaraBayar.requestFocus();
                     penjab=null;
                 }
-            }); 
+            });
 
             penjab.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         penjab.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penjab.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (penjab == null) return;
         if (!penjab.isVisible()) {
             penjab.emptTeks();
             penjab.isCek();
-        }  
+        }
         if (penjab.isVisible()) {
             penjab.toFront();
             return;
-        }    
+        }
         penjab.setVisible(true);
     }//GEN-LAST:event_BtnCaraBayarRalanDokterActionPerformed
 
@@ -828,29 +828,29 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             runBackground(() ->prosesCariBelumTerclosing());
         }
     }
-    
-    private void prosesCariSemua() { 
-        try{  
+
+    private void prosesCariSemua() {
+        try{
             ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(nmdokter.getText().trim().equals("")?"":"and dokter.kd_dokter=? ")+" order by dokter.nm_dokter");
             try {
                  if(!nmdokter.getText().trim().equals("")){
-                    ps.setString(1,kddokter.getText()); 
+                    ps.setString(1,kddokter.getText());
                  }
                  rs=ps.executeQuery();
                  i=1;
                  totaljm=0;
                  while(rs.next()){
                     jm=0;
-                    //rawat jalan dokter   
+                    //rawat jalan dokter
                     if(chkRalan.isSelected()==true){
                          psralandokter=koneksi.prepareStatement(
                              "select sum(rawat_jl_dr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.tgl_registrasi between ? and ? and rawat_jl_dr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");
                          psralandokterdrpr=koneksi.prepareStatement(
                              "select sum(rawat_jl_drpr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.tgl_registrasi between ? and ? and rawat_jl_drpr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");
                          try {
                              psralandokter.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psralandokter.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -863,7 +863,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psralandokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psralandokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsralandokterdrpr=psralandokterdrpr.executeQuery();
-                             
+
                              while(rsralandokter.next()){
                                  jm=jm+rsralandokter.getDouble("total");
                              }
@@ -887,9 +887,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psralandokterdrpr.close();
                              }
                          }
-                    }                    
+                    }
 
-                    //rawat inap dokter   
+                    //rawat inap dokter
                     if(chkRanap.isSelected()==true){
                          psranapdokter=koneksi.prepareStatement(
                              "select sum(rawat_inap_dr.tarif_tindakandr) as total from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
@@ -911,11 +911,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psranapdokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psranapdokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsranapdokterdrpr=psranapdokterdrpr.executeQuery();
-                             
+
                              while(rsranapdokter.next()){
                                  jm=jm+rsranapdokter.getDouble("total");
                              }
-                             
+
                              while(rsranapdokterdrpr.next()){
                                  jm=jm+rsranapdokterdrpr.getDouble("total");
                              }
@@ -935,7 +935,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psranapdokterdrpr.close();
                              }
                          }
-                    } 
+                    }
 
                     if(chkOperasi.isSelected()==true){
                          psbiayaoperator1=koneksi.prepareStatement(
@@ -983,32 +983,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psbiayaoperator3.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayaoperator3.setString(3,rs.getString("kd_dokter"));
                              psbiayaoperator3.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayaoperator3=psbiayaoperator3.executeQuery(); 
+                             rsbiayaoperator3=psbiayaoperator3.executeQuery();
 
                              psbiayadokter_anak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anak.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();   
+                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();
 
                              psbiaya_dokter_pjanak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_pjanak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_pjanak.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_pjanak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();  
+                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();
 
                              psbiaya_dokter_umum.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_umum.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_umum.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_umum.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();  
+                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();
 
                              psbiayadokter_anestesi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anestesi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anestesi.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anestesi.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsbiayadokter_anestesi=psbiayadokter_anestesi.executeQuery();
-                             
+
                              while(rsbiayaoperator1.next()){
                                  jm=jm+rsbiayaoperator1.getDouble("total");
                              }
@@ -1016,15 +1016,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiayaoperator2.next()){
                                  jm=jm+rsbiayaoperator2.getDouble("total");
                              }
-                             
+
                              while(rsbiayaoperator3.next()){
                                  jm=jm+rsbiayaoperator3.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anak.next()){
                                  jm=jm+rsbiayadokter_anak.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anestesi.next()){
                                  jm=jm+rsbiayadokter_anestesi.getDouble("total");
                              }
@@ -1032,7 +1032,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiaya_dokter_pjanak.next()){
                                  jm=jm+rsbiaya_dokter_pjanak.getDouble("total");
                              }
-                             
+
                              while(rsbiaya_dokter_umum.next()){
                                  jm=jm+rsbiaya_dokter_umum.getDouble("total");
                              }
@@ -1057,13 +1057,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              }
                              if(psbiayaoperator3!=null){
                                  psbiayaoperator3.close();
-                             }                            
+                             }
                              if(rsbiayadokter_anak!=null){
                                  rsbiayadokter_anak.close();
                              }
                              if(psbiayadokter_anak!=null){
                                  psbiayadokter_anak.close();
-                             }                            
+                             }
                              if(rsbiaya_dokter_pjanak!=null){
                                  rsbiaya_dokter_pjanak.close();
                              }
@@ -1082,21 +1082,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              if(psbiayadokter_anestesi!=null){
                                  psbiayadokter_anestesi.close();
                              }
-                         }   
+                         }
                     }
 
                     if(chkLaborat.isSelected()==true){
                          psperiksa_lab=koneksi.prepareStatement(
                              "select sum(periksa_lab.tarif_tindakan_dokter) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where periksa_lab.tgl_periksa between ? and ? and periksa_lab.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0");
                          try {
                              psperiksa_lab.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                              psperiksa_lab.setString(3,rs.getString("kd_dokter"));
                              psperiksa_lab.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsperiksa_lab=psperiksa_lab.executeQuery();
-                             while(rsperiksa_lab.next()){    
+                             while(rsperiksa_lab.next()){
                                  jm=jm+rsperiksa_lab.getDouble("total");
                              }
                          } catch (Exception e) {
@@ -1141,7 +1141,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_lab2=koneksi.prepareStatement(
                              "select sum(periksa_lab.tarif_perujuk) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where periksa_lab.tgl_periksa between ? and ? and periksa_lab.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 ");
                          try {
                              psperiksa_lab2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1195,7 +1195,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_radiologi=koneksi.prepareStatement(
                              "select sum(periksa_radiologi.tarif_tindakan_dokter) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.kd_dokter=? "+
-                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 "); 
+                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 ");
                          try {
                              psperiksa_radiologi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1220,7 +1220,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_radiologi2=koneksi.prepareStatement(
                              "select sum(periksa_radiologi.tarif_perujuk) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.dokter_perujuk=? "+
-                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0"); 
+                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0");
                          try{
                              psperiksa_radiologi2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1240,15 +1240,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psperiksa_radiologi2.close();
                              }
                          }
-                    }    
+                    }
 
                     totaljm=totaljm+jm;
                     if(jm>0){
-                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});  
+                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});
                         i++;
-                    }    
-                        
-                 } 
+                    }
+
+                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi Perujuk Radiologi : "+e);
             } finally{
@@ -1258,58 +1258,58 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
 
             if(totaljm>0){
                 tabMode.addRow(new Object[]{">> ","Total Jasa Medis :","",Math.round(totaljm)});
-            }            
+            }
          }catch(Exception e){
             System.out.println("Catatan  "+e);
          }
     }
-    
+
     public void isCek(){
        // BtnPrint.setEnabled(var.getbulanan_dokter());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
 
     private void prosesCariPiutangBelumLunas() {
-        try{  
+        try{
             ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(nmdokter.getText().trim().equals("")?"":"and dokter.kd_dokter=? ")+" order by dokter.nm_dokter");
             try {
                  if(!nmdokter.getText().trim().equals("")){
-                    ps.setString(1,kddokter.getText()); 
+                    ps.setString(1,kddokter.getText());
                  }
                  rs=ps.executeQuery();
                  i=1;
                  totaljm=0;
                  while(rs.next()){
                     jm=0;
-                    //rawat jalan dokter   
+                    //rawat jalan dokter
                     if(chkRalan.isSelected()==true){
                          psralandokter=koneksi.prepareStatement(
                              "select sum(rawat_jl_dr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Belum Lunas' and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_dr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");
                          psralandokterdrpr=koneksi.prepareStatement(
                              "select sum(rawat_jl_drpr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Belum Lunas' and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_drpr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");
                          try {
                              psralandokter.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psralandokter.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1322,7 +1322,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psralandokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psralandokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsralandokterdrpr=psralandokterdrpr.executeQuery();
-                             
+
                              while(rsralandokter.next()){
                                  jm=jm+rsralandokter.getDouble("total");
                              }
@@ -1346,9 +1346,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psralandokterdrpr.close();
                              }
                          }
-                    }                    
+                    }
 
-                    //rawat inap dokter   
+                    //rawat inap dokter
                     if(chkRanap.isSelected()==true){
                          psranapdokter=koneksi.prepareStatement(
                              "select sum(rawat_inap_dr.tarif_tindakandr) as total from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
@@ -1372,11 +1372,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psranapdokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psranapdokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsranapdokterdrpr=psranapdokterdrpr.executeQuery();
-                             
+
                              while(rsranapdokter.next()){
                                  jm=jm+rsranapdokter.getDouble("total");
                              }
-                             
+
                              while(rsranapdokterdrpr.next()){
                                  jm=jm+rsranapdokterdrpr.getDouble("total");
                              }
@@ -1396,7 +1396,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psranapdokterdrpr.close();
                              }
                          }
-                    } 
+                    }
 
                     if(chkOperasi.isSelected()==true){
                          psbiayaoperator1=koneksi.prepareStatement(
@@ -1451,32 +1451,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psbiayaoperator3.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayaoperator3.setString(3,rs.getString("kd_dokter"));
                              psbiayaoperator3.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayaoperator3=psbiayaoperator3.executeQuery(); 
+                             rsbiayaoperator3=psbiayaoperator3.executeQuery();
 
                              psbiayadokter_anak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anak.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();   
+                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();
 
                              psbiaya_dokter_pjanak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_pjanak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_pjanak.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_pjanak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();  
+                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();
 
                              psbiaya_dokter_umum.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_umum.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_umum.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_umum.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();  
+                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();
 
                              psbiayadokter_anestesi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anestesi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anestesi.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anestesi.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsbiayadokter_anestesi=psbiayadokter_anestesi.executeQuery();
-                             
+
                              while(rsbiayaoperator1.next()){
                                  jm=jm+rsbiayaoperator1.getDouble("total");
                              }
@@ -1484,15 +1484,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiayaoperator2.next()){
                                  jm=jm+rsbiayaoperator2.getDouble("total");
                              }
-                             
+
                              while(rsbiayaoperator3.next()){
                                  jm=jm+rsbiayaoperator3.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anak.next()){
                                  jm=jm+rsbiayadokter_anak.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anestesi.next()){
                                  jm=jm+rsbiayadokter_anestesi.getDouble("total");
                              }
@@ -1500,7 +1500,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiaya_dokter_pjanak.next()){
                                  jm=jm+rsbiaya_dokter_pjanak.getDouble("total");
                              }
-                             
+
                              while(rsbiaya_dokter_umum.next()){
                                  jm=jm+rsbiaya_dokter_umum.getDouble("total");
                              }
@@ -1525,13 +1525,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              }
                              if(psbiayaoperator3!=null){
                                  psbiayaoperator3.close();
-                             }                            
+                             }
                              if(rsbiayadokter_anak!=null){
                                  rsbiayadokter_anak.close();
                              }
                              if(psbiayadokter_anak!=null){
                                  psbiayadokter_anak.close();
-                             }                            
+                             }
                              if(rsbiaya_dokter_pjanak!=null){
                                  rsbiaya_dokter_pjanak.close();
                              }
@@ -1550,7 +1550,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              if(psbiayadokter_anestesi!=null){
                                  psbiayadokter_anestesi.close();
                              }
-                         }   
+                         }
                     }
 
                     if(chkLaborat.isSelected()==true){
@@ -1558,14 +1558,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_lab.tarif_tindakan_dokter) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Belum Lunas' and periksa_lab.tgl_periksa between ? and ? and periksa_lab.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0");
                          try {
                              psperiksa_lab.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                              psperiksa_lab.setString(3,rs.getString("kd_dokter"));
                              psperiksa_lab.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsperiksa_lab=psperiksa_lab.executeQuery();
-                             while(rsperiksa_lab.next()){    
+                             while(rsperiksa_lab.next()){
                                  jm=jm+rsperiksa_lab.getDouble("total");
                              }
                          } catch (Exception e) {
@@ -1613,7 +1613,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_lab.tarif_perujuk) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Belum Lunas' and periksa_lab.tgl_periksa between ? and ? and periksa_lab.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 ");
                          try {
                              psperiksa_lab2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1670,7 +1670,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_radiologi.tarif_tindakan_dokter) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Belum Lunas' and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 ");
                          try {
                              psperiksa_radiologi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1696,7 +1696,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_radiologi.tarif_perujuk) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Belum Lunas' and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0");
                          try{
                              psperiksa_radiologi2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1716,15 +1716,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psperiksa_radiologi2.close();
                              }
                          }
-                    }    
+                    }
 
                     totaljm=totaljm+jm;
                     if(jm>0){
-                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});  
+                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});
                         i++;
-                    }    
-                        
-                 } 
+                    }
+
+                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi Perujuk Radiologi : "+e);
             } finally{
@@ -1734,40 +1734,40 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
 
             if(totaljm>0){
                 tabMode.addRow(new Object[]{">> ","Total Jasa Medis :","",Math.round(totaljm)});
-            }            
+            }
          }catch(Exception e){
             System.out.println("Catatan  "+e);
          }
     }
 
     private void prosesCariPiutangSudahLunas() {
-        try{  
+        try{
             ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(nmdokter.getText().trim().equals("")?"":"and dokter.kd_dokter=? ")+" order by dokter.nm_dokter");
             try {
                  if(!nmdokter.getText().trim().equals("")){
-                    ps.setString(1,kddokter.getText()); 
+                    ps.setString(1,kddokter.getText());
                  }
                  rs=ps.executeQuery();
                  i=1;
                  totaljm=0;
                  while(rs.next()){
                     jm=0;
-                    //rawat jalan dokter   
+                    //rawat jalan dokter
                     if(chkRalan.isSelected()==true){
                          psralandokter=koneksi.prepareStatement(
                              "select sum(rawat_jl_dr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Lunas' and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_dr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");
                          psralandokterdrpr=koneksi.prepareStatement(
                              "select sum(rawat_jl_drpr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Lunas' and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_drpr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");
                          try {
                              psralandokter.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psralandokter.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -1780,7 +1780,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psralandokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psralandokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsralandokterdrpr=psralandokterdrpr.executeQuery();
-                             
+
                              while(rsralandokter.next()){
                                  jm=jm+rsralandokter.getDouble("total");
                              }
@@ -1804,9 +1804,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psralandokterdrpr.close();
                              }
                          }
-                    }                    
+                    }
 
-                    //rawat inap dokter   
+                    //rawat inap dokter
                     if(chkRanap.isSelected()==true){
                          psranapdokter=koneksi.prepareStatement(
                              "select sum(rawat_inap_dr.tarif_tindakandr) as total from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
@@ -1830,11 +1830,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psranapdokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psranapdokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsranapdokterdrpr=psranapdokterdrpr.executeQuery();
-                             
+
                              while(rsranapdokter.next()){
                                  jm=jm+rsranapdokter.getDouble("total");
                              }
-                             
+
                              while(rsranapdokterdrpr.next()){
                                  jm=jm+rsranapdokterdrpr.getDouble("total");
                              }
@@ -1854,7 +1854,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psranapdokterdrpr.close();
                              }
                          }
-                    } 
+                    }
 
                     if(chkOperasi.isSelected()==true){
                          psbiayaoperator1=koneksi.prepareStatement(
@@ -1909,32 +1909,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psbiayaoperator3.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayaoperator3.setString(3,rs.getString("kd_dokter"));
                              psbiayaoperator3.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayaoperator3=psbiayaoperator3.executeQuery(); 
+                             rsbiayaoperator3=psbiayaoperator3.executeQuery();
 
                              psbiayadokter_anak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anak.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();   
+                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();
 
                              psbiaya_dokter_pjanak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_pjanak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_pjanak.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_pjanak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();  
+                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();
 
                              psbiaya_dokter_umum.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_umum.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_umum.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_umum.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();  
+                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();
 
                              psbiayadokter_anestesi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anestesi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anestesi.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anestesi.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsbiayadokter_anestesi=psbiayadokter_anestesi.executeQuery();
-                             
+
                              while(rsbiayaoperator1.next()){
                                  jm=jm+rsbiayaoperator1.getDouble("total");
                              }
@@ -1942,15 +1942,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiayaoperator2.next()){
                                  jm=jm+rsbiayaoperator2.getDouble("total");
                              }
-                             
+
                              while(rsbiayaoperator3.next()){
                                  jm=jm+rsbiayaoperator3.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anak.next()){
                                  jm=jm+rsbiayadokter_anak.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anestesi.next()){
                                  jm=jm+rsbiayadokter_anestesi.getDouble("total");
                              }
@@ -1958,7 +1958,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiaya_dokter_pjanak.next()){
                                  jm=jm+rsbiaya_dokter_pjanak.getDouble("total");
                              }
-                             
+
                              while(rsbiaya_dokter_umum.next()){
                                  jm=jm+rsbiaya_dokter_umum.getDouble("total");
                              }
@@ -1983,13 +1983,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              }
                              if(psbiayaoperator3!=null){
                                  psbiayaoperator3.close();
-                             }                            
+                             }
                              if(rsbiayadokter_anak!=null){
                                  rsbiayadokter_anak.close();
                              }
                              if(psbiayadokter_anak!=null){
                                  psbiayadokter_anak.close();
-                             }                            
+                             }
                              if(rsbiaya_dokter_pjanak!=null){
                                  rsbiaya_dokter_pjanak.close();
                              }
@@ -2008,7 +2008,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              if(psbiayadokter_anestesi!=null){
                                  psbiayadokter_anestesi.close();
                              }
-                         }   
+                         }
                     }
 
                     if(chkLaborat.isSelected()==true){
@@ -2016,14 +2016,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_lab.tarif_tindakan_dokter) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Lunas' and periksa_lab.tgl_periksa between ? and ? and periksa_lab.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0");
                          try {
                              psperiksa_lab.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                              psperiksa_lab.setString(3,rs.getString("kd_dokter"));
                              psperiksa_lab.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsperiksa_lab=psperiksa_lab.executeQuery();
-                             while(rsperiksa_lab.next()){    
+                             while(rsperiksa_lab.next()){
                                  jm=jm+rsperiksa_lab.getDouble("total");
                              }
                          } catch (Exception e) {
@@ -2071,7 +2071,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_lab.tarif_perujuk) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Lunas' and periksa_lab.tgl_periksa between ? and ? and periksa_lab.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 ");
                          try {
                              psperiksa_lab2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2128,7 +2128,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_radiologi.tarif_tindakan_dokter) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Lunas' and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 ");
                          try {
                              psperiksa_radiologi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2154,7 +2154,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              "select sum(periksa_radiologi.tarif_perujuk) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj inner join piutang_pasien on reg_periksa.no_rawat=piutang_pasien.no_rawat "+
                              "where reg_periksa.status_bayar='Sudah Bayar' and piutang_pasien.status='Lunas' and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0");
                          try{
                              psperiksa_radiologi2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2174,15 +2174,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psperiksa_radiologi2.close();
                              }
                          }
-                    }    
+                    }
 
                     totaljm=totaljm+jm;
                     if(jm>0){
-                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});  
+                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});
                         i++;
-                    }    
-                        
-                 } 
+                    }
+
+                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi Perujuk Radiologi : "+e);
             } finally{
@@ -2192,38 +2192,38 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
 
             if(totaljm>0){
                 tabMode.addRow(new Object[]{">> ","Total Jasa Medis :","",Math.round(totaljm)});
-            }            
+            }
          }catch(Exception e){
             System.out.println("Catatan  "+e);
          }
     }
 
     private void prosesCariBelumTerclosing() {
-        try{  
+        try{
             ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(nmdokter.getText().trim().equals("")?"":"and dokter.kd_dokter=? ")+" order by dokter.nm_dokter");
             try {
                  if(!nmdokter.getText().trim().equals("")){
-                    ps.setString(1,kddokter.getText()); 
+                    ps.setString(1,kddokter.getText());
                  }
                  rs=ps.executeQuery();
                  i=1;
                  totaljm=0;
                  while(rs.next()){
                     jm=0;
-                    //rawat jalan dokter   
+                    //rawat jalan dokter
                     if(chkRalan.isSelected()==true){
                          psralandokter=koneksi.prepareStatement(
                              "select sum(rawat_jl_dr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Belum Bayar' and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_dr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");
                          psralandokterdrpr=koneksi.prepareStatement(
                              "select sum(rawat_jl_drpr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Belum Bayar' and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_drpr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");
                          try {
                              psralandokter.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psralandokter.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2236,7 +2236,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psralandokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psralandokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsralandokterdrpr=psralandokterdrpr.executeQuery();
-                             
+
                              while(rsralandokter.next()){
                                  jm=jm+rsralandokter.getDouble("total");
                              }
@@ -2260,9 +2260,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psralandokterdrpr.close();
                              }
                          }
-                    }                    
+                    }
 
-                    //rawat inap dokter   
+                    //rawat inap dokter
                     if(chkRanap.isSelected()==true){
                          psranapdokter=koneksi.prepareStatement(
                              "select sum(rawat_inap_dr.tarif_tindakandr) as total from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
@@ -2284,11 +2284,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psranapdokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psranapdokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsranapdokterdrpr=psranapdokterdrpr.executeQuery();
-                             
+
                              while(rsranapdokter.next()){
                                  jm=jm+rsranapdokter.getDouble("total");
                              }
-                             
+
                              while(rsranapdokterdrpr.next()){
                                  jm=jm+rsranapdokterdrpr.getDouble("total");
                              }
@@ -2308,7 +2308,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psranapdokterdrpr.close();
                              }
                          }
-                    } 
+                    }
 
                     if(chkOperasi.isSelected()==true){
                          psbiayaoperator1=koneksi.prepareStatement(
@@ -2356,32 +2356,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psbiayaoperator3.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayaoperator3.setString(3,rs.getString("kd_dokter"));
                              psbiayaoperator3.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayaoperator3=psbiayaoperator3.executeQuery(); 
+                             rsbiayaoperator3=psbiayaoperator3.executeQuery();
 
                              psbiayadokter_anak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anak.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();   
+                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();
 
                              psbiaya_dokter_pjanak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_pjanak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_pjanak.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_pjanak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();  
+                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();
 
                              psbiaya_dokter_umum.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_umum.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_umum.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_umum.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();  
+                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();
 
                              psbiayadokter_anestesi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anestesi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anestesi.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anestesi.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsbiayadokter_anestesi=psbiayadokter_anestesi.executeQuery();
-                             
+
                              while(rsbiayaoperator1.next()){
                                  jm=jm+rsbiayaoperator1.getDouble("total");
                              }
@@ -2389,15 +2389,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiayaoperator2.next()){
                                  jm=jm+rsbiayaoperator2.getDouble("total");
                              }
-                             
+
                              while(rsbiayaoperator3.next()){
                                  jm=jm+rsbiayaoperator3.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anak.next()){
                                  jm=jm+rsbiayadokter_anak.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anestesi.next()){
                                  jm=jm+rsbiayadokter_anestesi.getDouble("total");
                              }
@@ -2405,7 +2405,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiaya_dokter_pjanak.next()){
                                  jm=jm+rsbiaya_dokter_pjanak.getDouble("total");
                              }
-                             
+
                              while(rsbiaya_dokter_umum.next()){
                                  jm=jm+rsbiaya_dokter_umum.getDouble("total");
                              }
@@ -2430,13 +2430,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              }
                              if(psbiayaoperator3!=null){
                                  psbiayaoperator3.close();
-                             }                            
+                             }
                              if(rsbiayadokter_anak!=null){
                                  rsbiayadokter_anak.close();
                              }
                              if(psbiayadokter_anak!=null){
                                  psbiayadokter_anak.close();
-                             }                            
+                             }
                              if(rsbiaya_dokter_pjanak!=null){
                                  rsbiaya_dokter_pjanak.close();
                              }
@@ -2455,21 +2455,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              if(psbiayadokter_anestesi!=null){
                                  psbiayadokter_anestesi.close();
                              }
-                         }   
+                         }
                     }
 
                     if(chkLaborat.isSelected()==true){
                          psperiksa_lab=koneksi.prepareStatement(
                              "select sum(periksa_lab.tarif_tindakan_dokter) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Belum Bayar' and periksa_lab.tgl_periksa between ? and ? and periksa_lab.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0");
                          try {
                              psperiksa_lab.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                              psperiksa_lab.setString(3,rs.getString("kd_dokter"));
                              psperiksa_lab.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsperiksa_lab=psperiksa_lab.executeQuery();
-                             while(rsperiksa_lab.next()){    
+                             while(rsperiksa_lab.next()){
                                  jm=jm+rsperiksa_lab.getDouble("total");
                              }
                          } catch (Exception e) {
@@ -2514,7 +2514,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_lab2=koneksi.prepareStatement(
                              "select sum(periksa_lab.tarif_perujuk) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Belum Bayar' and periksa_lab.tgl_periksa between ? and ? and periksa_lab.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 ");
                          try {
                              psperiksa_lab2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2568,7 +2568,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_radiologi=koneksi.prepareStatement(
                              "select sum(periksa_radiologi.tarif_tindakan_dokter) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Belum Bayar' and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.kd_dokter=? "+
-                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 "); 
+                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 ");
                          try {
                              psperiksa_radiologi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2593,7 +2593,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_radiologi2=koneksi.prepareStatement(
                              "select sum(periksa_radiologi.tarif_perujuk) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Belum Bayar' and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.dokter_perujuk=? "+
-                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0"); 
+                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0");
                          try{
                              psperiksa_radiologi2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2613,15 +2613,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psperiksa_radiologi2.close();
                              }
                          }
-                    }    
+                    }
 
                     totaljm=totaljm+jm;
                     if(jm>0){
-                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});  
+                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});
                         i++;
-                    }    
-                        
-                 } 
+                    }
+
+                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi Perujuk Radiologi : "+e);
             } finally{
@@ -2631,38 +2631,38 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
 
             if(totaljm>0){
                 tabMode.addRow(new Object[]{">> ","Total Jasa Medis :","",Math.round(totaljm)});
-            }            
+            }
          }catch(Exception e){
             System.out.println("Catatan  "+e);
          }
     }
 
     private void prosesCariSudahBayarNonPiutang() {
-        try{  
+        try{
             ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(nmdokter.getText().trim().equals("")?"":"and dokter.kd_dokter=? ")+" order by dokter.nm_dokter");
             try {
                  if(!nmdokter.getText().trim().equals("")){
-                    ps.setString(1,kddokter.getText()); 
+                    ps.setString(1,kddokter.getText());
                  }
                  rs=ps.executeQuery();
                  i=1;
                  totaljm=0;
                  while(rs.next()){
                     jm=0;
-                    //rawat jalan dokter   
+                    //rawat jalan dokter
                     if(chkRalan.isSelected()==true){
                          psralandokter=koneksi.prepareStatement(
                              "select sum(rawat_jl_dr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_dr on rawat_jl_dr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Sudah Bayar' and reg_periksa.no_rawat not in (select no_rawat from piutang_pasien) and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_dr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_dr.tarif_tindakandr>0");
                          psralandokterdrpr=koneksi.prepareStatement(
                              "select sum(rawat_jl_drpr.tarif_tindakandr) as total from reg_periksa inner join rawat_jl_drpr on rawat_jl_drpr.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Sudah Bayar' and reg_periksa.no_rawat not in (select no_rawat from piutang_pasien) and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_drpr.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");   
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and rawat_jl_drpr.tarif_tindakandr>0");
                          try {
                              psralandokter.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psralandokter.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -2675,7 +2675,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psralandokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psralandokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsralandokterdrpr=psralandokterdrpr.executeQuery();
-                             
+
                              while(rsralandokter.next()){
                                  jm=jm+rsralandokter.getDouble("total");
                              }
@@ -2699,9 +2699,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psralandokterdrpr.close();
                              }
                          }
-                    }                    
+                    }
 
-                    //rawat inap dokter   
+                    //rawat inap dokter
                     if(chkRanap.isSelected()==true){
                          psranapdokter=koneksi.prepareStatement(
                              "select sum(rawat_inap_dr.tarif_tindakandr) as total from rawat_inap_dr inner join reg_periksa on rawat_inap_dr.no_rawat=reg_periksa.no_rawat "+
@@ -2723,11 +2723,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psranapdokterdrpr.setString(3,rs.getString("kd_dokter"));
                              psranapdokterdrpr.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsranapdokterdrpr=psranapdokterdrpr.executeQuery();
-                             
+
                              while(rsranapdokter.next()){
                                  jm=jm+rsranapdokter.getDouble("total");
                              }
-                             
+
                              while(rsranapdokterdrpr.next()){
                                  jm=jm+rsranapdokterdrpr.getDouble("total");
                              }
@@ -2747,7 +2747,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psranapdokterdrpr.close();
                              }
                          }
-                    } 
+                    }
 
                     if(chkOperasi.isSelected()==true){
                          psbiayaoperator1=koneksi.prepareStatement(
@@ -2795,32 +2795,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              psbiayaoperator3.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayaoperator3.setString(3,rs.getString("kd_dokter"));
                              psbiayaoperator3.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayaoperator3=psbiayaoperator3.executeQuery(); 
+                             rsbiayaoperator3=psbiayaoperator3.executeQuery();
 
                              psbiayadokter_anak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anak.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();   
+                             rsbiayadokter_anak=psbiayadokter_anak.executeQuery();
 
                              psbiaya_dokter_pjanak.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_pjanak.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_pjanak.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_pjanak.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();  
+                             rsbiaya_dokter_pjanak=psbiaya_dokter_pjanak.executeQuery();
 
                              psbiaya_dokter_umum.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiaya_dokter_umum.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiaya_dokter_umum.setString(3,rs.getString("kd_dokter"));
                              psbiaya_dokter_umum.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
-                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();  
+                             rsbiaya_dokter_umum=psbiaya_dokter_umum.executeQuery();
 
                              psbiayadokter_anestesi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                              psbiayadokter_anestesi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                              psbiayadokter_anestesi.setString(3,rs.getString("kd_dokter"));
                              psbiayadokter_anestesi.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsbiayadokter_anestesi=psbiayadokter_anestesi.executeQuery();
-                             
+
                              while(rsbiayaoperator1.next()){
                                  jm=jm+rsbiayaoperator1.getDouble("total");
                              }
@@ -2828,15 +2828,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiayaoperator2.next()){
                                  jm=jm+rsbiayaoperator2.getDouble("total");
                              }
-                             
+
                              while(rsbiayaoperator3.next()){
                                  jm=jm+rsbiayaoperator3.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anak.next()){
                                  jm=jm+rsbiayadokter_anak.getDouble("total");
                              }
-                             
+
                              while(rsbiayadokter_anestesi.next()){
                                  jm=jm+rsbiayadokter_anestesi.getDouble("total");
                              }
@@ -2844,7 +2844,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              while(rsbiaya_dokter_pjanak.next()){
                                  jm=jm+rsbiaya_dokter_pjanak.getDouble("total");
                              }
-                             
+
                              while(rsbiaya_dokter_umum.next()){
                                  jm=jm+rsbiaya_dokter_umum.getDouble("total");
                              }
@@ -2869,13 +2869,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              }
                              if(psbiayaoperator3!=null){
                                  psbiayaoperator3.close();
-                             }                            
+                             }
                              if(rsbiayadokter_anak!=null){
                                  rsbiayadokter_anak.close();
                              }
                              if(psbiayadokter_anak!=null){
                                  psbiayadokter_anak.close();
-                             }                            
+                             }
                              if(rsbiaya_dokter_pjanak!=null){
                                  rsbiaya_dokter_pjanak.close();
                              }
@@ -2894,21 +2894,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                              if(psbiayadokter_anestesi!=null){
                                  psbiayadokter_anestesi.close();
                              }
-                         }   
+                         }
                     }
 
                     if(chkLaborat.isSelected()==true){
                          psperiksa_lab=koneksi.prepareStatement(
                              "select sum(periksa_lab.tarif_tindakan_dokter) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Sudah Bayar' and reg_periksa.no_rawat not in (select no_rawat from piutang_pasien) and periksa_lab.tgl_periksa between ? and ? and periksa_lab.kd_dokter=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0"); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_tindakan_dokter>0");
                          try {
                              psperiksa_lab.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                              psperiksa_lab.setString(3,rs.getString("kd_dokter"));
                              psperiksa_lab.setString(4,"%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%");
                              rsperiksa_lab=psperiksa_lab.executeQuery();
-                             while(rsperiksa_lab.next()){    
+                             while(rsperiksa_lab.next()){
                                  jm=jm+rsperiksa_lab.getDouble("total");
                              }
                          } catch (Exception e) {
@@ -2953,7 +2953,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_lab2=koneksi.prepareStatement(
                              "select sum(periksa_lab.tarif_perujuk) as total from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat "+
                              "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Sudah Bayar' and reg_periksa.no_rawat not in (select no_rawat from piutang_pasien) and periksa_lab.tgl_periksa between ? and ? and periksa_lab.dokter_perujuk=? "+
-                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 "); 
+                             "and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_lab.tarif_perujuk>0 ");
                          try {
                              psperiksa_lab2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_lab2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -3007,7 +3007,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_radiologi=koneksi.prepareStatement(
                              "select sum(periksa_radiologi.tarif_tindakan_dokter) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Sudah Bayar' and reg_periksa.no_rawat not in (select no_rawat from piutang_pasien) and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.kd_dokter=? "+
-                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 "); 
+                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and periksa_radiologi.tarif_tindakan_dokter>0 ");
                          try {
                              psperiksa_radiologi.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -3032,7 +3032,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                          psperiksa_radiologi2=koneksi.prepareStatement(
                              "select sum(periksa_radiologi.tarif_perujuk) as total from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
                              " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where reg_periksa.status_bayar='Sudah Bayar' and reg_periksa.no_rawat not in (select no_rawat from piutang_pasien) and periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.dokter_perujuk=? "+
-                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0"); 
+                             " and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? >0");
                          try{
                              psperiksa_radiologi2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                              psperiksa_radiologi2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -3052,15 +3052,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                  psperiksa_radiologi2.close();
                              }
                          }
-                    }    
+                    }
 
                     totaljm=totaljm+jm;
                     if(jm>0){
-                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});  
+                        tabMode.addRow(new Object[]{""+i,rs.getString("kd_dokter"),rs.getString("nm_dokter"),Math.round(jm)});
                         i++;
-                    }    
-                        
-                 } 
+                    }
+
+                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi Perujuk Radiologi : "+e);
             } finally{
@@ -3070,16 +3070,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
 
             if(totaljm>0){
                 tabMode.addRow(new Object[]{">> ","Total Jasa Medis :","",Math.round(totaljm)});
-            }            
+            }
          }catch(Exception e){
             System.out.println("Catatan  "+e);
          }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -3105,7 +3105,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

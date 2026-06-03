@@ -5,11 +5,11 @@
 package surat;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -44,7 +44,7 @@ import kepegawaian.DlgCariPegawai;
 
 
 /**
- * 
+ *
  * @author windiartohugroho
  */
 public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
@@ -60,13 +60,13 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
     private String finger="",lokasifile="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     public SuratPenolakanAnjuranMedis(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Persetujuan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","Kode","Penolakan Anjuran","Alasan Penolakan",
             "Risiko Penolakan","Nama Penanggung Jawab","Umur P.J.","Nomor KTP P.J.","J.K. P.J.","Nomor Telp/HP","Hubungan","NIP","Nama Petugas"
@@ -124,23 +124,23 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));  
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NoPernyataan.setDocument(new batasInput((byte)20).getKata(NoPernyataan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         NamaPJ.setDocument(new batasInput((byte)50).getKata(NamaPJ));
-        NoKTP.setDocument(new batasInput((byte)20).getKata(NoKTP)); 
-        UmurPJ.setDocument(new batasInput((byte)3).getKata(UmurPJ));  
-        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));  
+        NoKTP.setDocument(new batasInput((byte)20).getKata(NoKTP));
+        UmurPJ.setDocument(new batasInput((byte)3).getKata(UmurPJ));
+        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));
         AlasanPenolakan.setDocument(new batasInput((byte)60).getKata(AlasanPenolakan));
-        RisikoPenolakan.setDocument(new batasInput((byte)100).getKata(RisikoPenolakan));  
-        
+        RisikoPenolakan.setDocument(new batasInput((byte)100).getKata(RisikoPenolakan));
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -162,11 +162,11 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         LoadHTML2.setEditorKit(kit);
         LoadHTML2.setDocument(doc);
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -925,7 +925,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
@@ -976,7 +976,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm();  
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -998,7 +998,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1074,7 +1074,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Persetujuan</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
@@ -1098,7 +1098,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>"+
                     "</tr>"
                 );
-                
+
                 for (i = 0; i < tabMode.getRowCount(); i++) {
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -1124,7 +1124,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
                         "</tr>");
                 }
-                
+
                 LoadHTML.setText(
                     "<html>"+
                       "<table width='2000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
@@ -1133,7 +1133,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1148,8 +1148,8 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataPenolakanAnjuranMedis.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataPenolakanAnjuranMedis.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1158,12 +1158,12 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PENOLAKAN ANJURAN MEDIS<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PENOLAKAN ANJURAN MEDIS<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1216,8 +1216,8 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             Valid.pindah(evt, BtnCari, TPasien);
         }
 }//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1327,15 +1327,15 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             pegawai.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(pegawai.getTable().getSelectedRow()!= -1){                   
+                    if(pegawai.getTable().getSelectedRow()!= -1){
                         KodePetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                         NamaPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     KodePetugas.requestFocus();
                     pegawai=null;
                 }
             });
-            
+
             pegawai.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
@@ -1352,7 +1352,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         if (!pegawai.isVisible()) {
             pegawai.emptTeks();
         }
-        
+
         if (pegawai.isVisible()) {
             pegawai.toFront();
             return;
@@ -1373,10 +1373,10 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penolakan.getTable().getSelectedRow()!= -1){                   
+                if(penolakan.getTable().getSelectedRow()!= -1){
                     KodePenolakan.setText(penolakan.getTable().getValueAt(penolakan.getTable().getSelectedRow(),0).toString());
                     NamaPenolakan.setText(penolakan.getTable().getValueAt(penolakan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KodePenolakan.requestFocus();
             }
             @Override
@@ -1387,7 +1387,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         penolakan.emptTeks();
         penolakan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penolakan.setLocationRelativeTo(internalFrame1);
@@ -1589,7 +1589,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                     "surat_penolakan_anjuran_medis.nik like ? or pegawai.nama like ? or master_menolak_anjuran_medis.nama_penolakan like ?) "+
                     "order by surat_penolakan_anjuran_medis.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1606,7 +1606,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                 }
-                  
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1614,7 +1614,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                         rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),rs.getDate("tgl_lahir"),
                         rs.getString("tanggal"),rs.getString("kode_penolakan"),rs.getString("nama_penolakan"),rs.getString("alasan_penolakan"),
                         rs.getString("informasi_risiko_penolakan"),rs.getString("nama_pj"),rs.getString("umur_pj"),rs.getString("no_ktppj"),
-                        rs.getString("jkpj"),rs.getString("no_telp"),rs.getString("hubungan"),rs.getString("nik"),rs.getString("nama") 
+                        rs.getString("jkpj"),rs.getString("no_telp"),rs.getString("hubungan"),rs.getString("nik"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1650,7 +1650,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         AlasanPenolakan.requestFocus();
     }
 
- 
+
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoPernyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1660,16 +1660,16 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             LahirPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            KodePenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()); 
-            NamaPenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()); 
-            AlasanPenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()); 
-            RisikoPenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()); 
-            NamaPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()); 
-            UmurPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());  
-            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()); 
-            JKPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan")); 
-            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()); 
-            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());  
+            KodePenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+            NamaPenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            AlasanPenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            RisikoPenolakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            NamaPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            UmurPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            JKPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
+            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             Valid.SetTgl2(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
@@ -1705,7 +1705,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1719,30 +1719,30 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,246));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-       
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenolakan_anjuran_medis());
         BtnHapus.setEnabled(akses.getpenolakan_anjuran_medis());
         BtnEdit.setEnabled(akses.getpenolakan_anjuran_medis());
-        BtnPrint.setEnabled(akses.getpenolakan_anjuran_medis()); 
+        BtnPrint.setEnabled(akses.getpenolakan_anjuran_medis());
         if(akses.getjml2()>=1){
             KodePetugas.setEditable(false);
             btnPetugas.setEnabled(false);
             KodePetugas.setText(akses.getkode());
             NamaPetugas.setText(Sequel.CariPetugas(KodePetugas.getText()));
-        }            
+        }
     }
-  
+
     private void ganti() {
         if(Sequel.mengedittf("surat_penolakan_anjuran_medis","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,hubungan=?,nama_pj=?,umur_pj=?,no_ktppj=?,jkpj=?,no_telp=?,kode_penolakan=?,"+
             "alasan_penolakan=?,informasi_risiko_penolakan=?,nik=?",14,new String[]{
@@ -1784,17 +1784,17 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(480,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -1814,7 +1814,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
                         }else{
                             lokasifile=rs.getString("photo");
                             LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penolakananjuranmedis/"+rs.getString("photo")+"' alt='photo' width='500' height='500'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         lokasifile="";
                         LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
@@ -1835,7 +1835,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1861,13 +1861,10 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-
-
-

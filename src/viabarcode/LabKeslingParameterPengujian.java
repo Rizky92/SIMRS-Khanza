@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -34,7 +34,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -53,9 +53,9 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Double.class
              };
              @Override
@@ -100,11 +100,11 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         Manajemen.setDocument(new batasInput((int)15).getOnlyAngka(Manajemen));
         TotalTarif.setDocument(new batasInput((int)20).getOnlyAngka(TotalTarif));
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -680,7 +680,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             PaketBHP.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             Kategori.requestFocus();
         }
@@ -696,7 +696,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             KSO.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             JasaPJVerifikator.requestFocus();
         }
@@ -741,7 +741,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
                 });
                 LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -755,7 +755,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -810,7 +810,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
             Valid.textKosong(TotalTarif,"Total Tarif");
         }else{
             if(Sequel.mengedittf("labkesling_parameter_pengujian","kode_parameter=?","kode_parameter=?,nama_parameter=?,metode_pengujian=?,satuan=?,kategori=?,jasa_sarana=?,"+
-                "paket_bhp=?,jasa_pj_lab=?,jasa_pj_pengujian=?,jasa_verifikator=?,jasa_petugas=?,kso=?,jasa_menejemen=?,total=?",15,new String[]{   
+                "paket_bhp=?,jasa_pj_lab=?,jasa_pj_pengujian=?,jasa_verifikator=?,jasa_petugas=?,kso=?,jasa_menejemen=?,total=?",15,new String[]{
                 Kode.getText(),Parameter.getText(),MetodePengujian.getSelectedItem().toString(),Satuan.getText(),Kategori.getSelectedItem().toString(),
                 JasaSarana.getText(),PaketBHP.getText(),JasaPJLab.getText(),JasaPJPengujian.getText(),JasaPJVerifikator.getText(),JasaPetugas.getText(),
                 KSO.getText(),Manajemen.getText(),TotalTarif.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
@@ -860,22 +860,22 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();  
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptTarifLabKesLing.jasper","report","::[ Tarif & Parameter Pengujian Laboratorium Kesehatan Lingkungan ]::",
                     "select labkesling_parameter_pengujian.kode_parameter,labkesling_parameter_pengujian.nama_parameter,labkesling_parameter_pengujian.metode_pengujian,labkesling_parameter_pengujian.satuan,"+
                     "labkesling_parameter_pengujian.jasa_sarana,labkesling_parameter_pengujian.paket_bhp,labkesling_parameter_pengujian.jasa_pj_lab,labkesling_parameter_pengujian.jasa_pj_pengujian,"+
                     "labkesling_parameter_pengujian.jasa_verifikator,labkesling_parameter_pengujian.jasa_petugas,labkesling_parameter_pengujian.kso,labkesling_parameter_pengujian.jasa_menejemen,"+
                     "labkesling_parameter_pengujian.total from labkesling_parameter_pengujian "+(TCari.getText().trim().equals("")?"":"where labkesling_parameter_pengujian.kode_parameter like '%"+TCari.getText().trim()+"%' or "+
                     "labkesling_parameter_pengujian.nama_parameter like '%"+TCari.getText().trim()+"%' or labkesling_parameter_pengujian.metode_pengujian like '%"+TCari.getText().trim()+"%' or "+
-                    "labkesling_parameter_pengujian.kategori like '%"+TCari.getText().trim()+"%' ")+"order by labkesling_parameter_pengujian.kode_parameter",param);   
+                    "labkesling_parameter_pengujian.kategori like '%"+TCari.getText().trim()+"%' ")+"order by labkesling_parameter_pengujian.kode_parameter",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -935,16 +935,16 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
-            if(evt.getKeyCode()==KeyEvent.VK_A){                
-                for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+            if(evt.getKeyCode()==KeyEvent.VK_A){
+                for(i=0;i<tbJnsPerawatan.getRowCount();i++){
                     tbJnsPerawatan.setValueAt(true,i,0);
                 }
-            }             
+            }
         }
 }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -970,7 +970,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void JasaPJLabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JasaPJLabKeyPressed
@@ -979,7 +979,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             JasaPJPengujian.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             PaketBHP.requestFocus();
         }
@@ -991,7 +991,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             JasaPJLab.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             JasaSarana.requestFocus();
         }
@@ -1003,7 +1003,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             Manajemen.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             JasaPetugas.requestFocus();
         }
@@ -1015,7 +1015,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             TotalTarif.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             KSO.requestFocus();
         }
@@ -1028,7 +1028,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }           
+            }
         }
     }//GEN-LAST:event_tbJnsPerawatanKeyReleased
 
@@ -1050,7 +1050,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             JasaPJVerifikator.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             JasaPJLab.requestFocus();
         }
@@ -1062,7 +1062,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             JasaPetugas.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
             JasaPJPengujian.requestFocus();
         }
@@ -1148,7 +1148,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         "labkesling_parameter_pengujian.jasa_verifikator,labkesling_parameter_pengujian.jasa_petugas,labkesling_parameter_pengujian.kso,labkesling_parameter_pengujian.jasa_menejemen,labkesling_parameter_pengujian.total "+
                         "from labkesling_parameter_pengujian "+(TCari.getText().trim().equals("")?"":"where labkesling_parameter_pengujian.kode_parameter like ? or labkesling_parameter_pengujian.nama_parameter like ? "+
                         "or labkesling_parameter_pengujian.metode_pengujian like ? or labkesling_parameter_pengujian.kategori like ? ")+"order by labkesling_parameter_pengujian.kode_parameter");
-            try {    
+            try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -1172,7 +1172,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1189,7 +1189,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         PaketBHP.setText("0");
         JasaPJLab.setText("0");
         JasaPetugas.setText("0");
-        KSO.setText("0");        
+        KSO.setText("0");
         Manajemen.setText("0");
         TotalTarif.setText("0");
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_parameter_pengujian.kode_parameter,3),signed)),0) from labkesling_parameter_pengujian","",3,Kode);
@@ -1224,36 +1224,36 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             );
         }
     }
-    
+
     public JTextField getTextField(){
         return Kode;
     }
-   
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,185));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getparameter_pengujian_lab_kesehatan_lingkungan());
         BtnHapus.setEnabled(akses.getparameter_pengujian_lab_kesehatan_lingkungan());
         BtnEdit.setEnabled(akses.getparameter_pengujian_lab_kesehatan_lingkungan());
         BtnPrint.setEnabled(akses.getparameter_pengujian_lab_kesehatan_lingkungan());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1279,7 +1279,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

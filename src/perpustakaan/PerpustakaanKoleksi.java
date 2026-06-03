@@ -11,11 +11,11 @@
 
 package perpustakaan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -102,15 +102,15 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
         KodePengarang.setDocument(new batasInput((byte)7).getKata(KodePengarang));
         ISBN.setDocument(new batasInput((byte)20).getKata(ISBN));
         KodeKategori.setDocument(new batasInput((byte)5).getKata(KodeKategori));
-        IdJenis.setDocument(new batasInput((byte)5).getKata(IdJenis));        
+        IdJenis.setDocument(new batasInput((byte)5).getKata(IdJenis));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        TCari.requestFocus();        
-        
-      
+        TCari.requestFocus();
+
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
         Valid.LoadTahun(ThnTerbit);
-    } 
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -683,7 +683,7 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -764,14 +764,14 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();                
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());  
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptKoleksiPerpustakaan.jasper","report","::[ Data Koleksi Perpustakaan ]::","select perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, perpustakaan_buku.jml_halaman, "+
                    "perpustakaan_penerbit.nama_penerbit, perpustakaan_pengarang.nama_pengarang, perpustakaan_buku.thn_terbit, perpustakaan_buku.isbn,"+
                    "perpustakaan_kategori.nama_kategori, perpustakaan_jenis_buku.nama_jenis from perpustakaan_buku inner join perpustakaan_penerbit "+
@@ -842,7 +842,7 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
@@ -856,7 +856,7 @@ public final class PerpustakaanKoleksi extends javax.swing.JDialog {
 }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void KodeBukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeBukuKeyPressed
@@ -881,12 +881,12 @@ private void ThnTerbitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
 private void KodePenerbitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePenerbitKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select perpustakaan_penerbit.nama_penerbit from perpustakaan_penerbit where perpustakaan_penerbit.kode_penerbit=?",NamaPenerbit,KodePenerbit.getText());        
+        Sequel.cariIsi("select perpustakaan_penerbit.nama_penerbit from perpustakaan_penerbit where perpustakaan_penerbit.kode_penerbit=?",NamaPenerbit,KodePenerbit.getText());
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select perpustakaan_penerbit.nama_penerbit from perpustakaan_penerbit where perpustakaan_penerbit.kode_penerbit=?",NamaPenerbit,KodePenerbit.getText()); 
+        Sequel.cariIsi("select perpustakaan_penerbit.nama_penerbit from perpustakaan_penerbit where perpustakaan_penerbit.kode_penerbit=?",NamaPenerbit,KodePenerbit.getText());
         ThnTerbit.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select perpustakaan_penerbit.nama_penerbit from perpustakaan_penerbit where perpustakaan_penerbit.kode_penerbit=?",NamaPenerbit,KodePenerbit.getText()); 
+        Sequel.cariIsi("select perpustakaan_penerbit.nama_penerbit from perpustakaan_penerbit where perpustakaan_penerbit.kode_penerbit=?",NamaPenerbit,KodePenerbit.getText());
         KodePengarang.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnPenerbitActionPerformed(null);
@@ -894,7 +894,7 @@ private void KodePenerbitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
 }//GEN-LAST:event_KodePenerbitKeyPressed
 
 private void btnPenerbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenerbitActionPerformed
-    PerpustakaanPenerbit penerbit=new PerpustakaanPenerbit(null,false); 
+    PerpustakaanPenerbit penerbit=new PerpustakaanPenerbit(null,false);
     penerbit.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -902,10 +902,10 @@ private void btnPenerbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(penerbit.getTable().getSelectedRow()!= -1){                   
-                KodePenerbit.setText(penerbit.getTable().getValueAt(penerbit.getTable().getSelectedRow(),0).toString());                    
+            if(penerbit.getTable().getSelectedRow()!= -1){
+                KodePenerbit.setText(penerbit.getTable().getValueAt(penerbit.getTable().getSelectedRow(),0).toString());
                 NamaPenerbit.setText(penerbit.getTable().getValueAt(penerbit.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             KodePenerbit.requestFocus();
         }
         @Override
@@ -926,7 +926,7 @@ private void btnPenerbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 penerbit.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -939,12 +939,12 @@ private void btnPenerbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 private void KodePengarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePengarangKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select perpustakaan_pengarang.nama_pengarang from perpustakaan_pengarang where perpustakaan_pengarang.kode_pengarang=?",NamaPengarang,KodePengarang.getText());        
+        Sequel.cariIsi("select perpustakaan_pengarang.nama_pengarang from perpustakaan_pengarang where perpustakaan_pengarang.kode_pengarang=?",NamaPengarang,KodePengarang.getText());
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select perpustakaan_pengarang.nama_pengarang from perpustakaan_pengarang where perpustakaan_pengarang.kode_pengarang=?",NamaPengarang,KodePengarang.getText());   
+        Sequel.cariIsi("select perpustakaan_pengarang.nama_pengarang from perpustakaan_pengarang where perpustakaan_pengarang.kode_pengarang=?",NamaPengarang,KodePengarang.getText());
         KodePenerbit.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select perpustakaan_pengarang.nama_pengarang from perpustakaan_pengarang where perpustakaan_pengarang.kode_pengarang=?",NamaPengarang,KodePengarang.getText());   
+        Sequel.cariIsi("select perpustakaan_pengarang.nama_pengarang from perpustakaan_pengarang where perpustakaan_pengarang.kode_pengarang=?",NamaPengarang,KodePengarang.getText());
         ISBN.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnPengarangActionPerformed(null);
@@ -960,10 +960,10 @@ private void btnPengarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(pengarang.getTable().getSelectedRow()!= -1){                   
-                KodePengarang.setText(pengarang.getTable().getValueAt(pengarang.getTable().getSelectedRow(),0).toString());                    
+            if(pengarang.getTable().getSelectedRow()!= -1){
+                KodePengarang.setText(pengarang.getTable().getValueAt(pengarang.getTable().getSelectedRow(),0).toString());
                 NamaPengarang.setText(pengarang.getTable().getValueAt(pengarang.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             KodePengarang.requestFocus();
         }
         @Override
@@ -984,7 +984,7 @@ private void btnPengarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 pengarang.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -997,7 +997,7 @@ private void btnPengarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void KodeKategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeKategoriKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select perpustakaan_kategori.nama_kategori from perpustakaan_kategori where perpustakaan_kategori.id_kategori='"+KodeKategori.getText()+"'",NamaKategori);       
+        Sequel.cariIsi("select perpustakaan_kategori.nama_kategori from perpustakaan_kategori where perpustakaan_kategori.id_kategori='"+KodeKategori.getText()+"'",NamaKategori);
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select perpustakaan_kategori.nama_kategori from perpustakaan_kategori where perpustakaan_kategori.id_kategori='"+KodeKategori.getText()+"'",NamaKategori);
         ISBN.requestFocus();
@@ -1018,10 +1018,10 @@ private void btnKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(kategori.getTable().getSelectedRow()!= -1){                   
-                KodeKategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());                    
+            if(kategori.getTable().getSelectedRow()!= -1){
+                KodeKategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());
                 NamaKategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             KodeKategori.requestFocus();
         }
         @Override
@@ -1042,7 +1042,7 @@ private void btnKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 kategori.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1056,12 +1056,12 @@ private void btnKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 private void IdJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdJenisKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select perpustakaan_jenis_buku.nama_jenis from perpustakaan_jenis_buku where perpustakaan_jenis_buku.id_jenis=?",nm_jenis,IdJenis.getText());       
+        Sequel.cariIsi("select perpustakaan_jenis_buku.nama_jenis from perpustakaan_jenis_buku where perpustakaan_jenis_buku.id_jenis=?",nm_jenis,IdJenis.getText());
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select perpustakaan_jenis_buku.nama_jenis from perpustakaan_jenis_buku where perpustakaan_jenis_buku.id_jenis=?",nm_jenis,IdJenis.getText());  
+        Sequel.cariIsi("select perpustakaan_jenis_buku.nama_jenis from perpustakaan_jenis_buku where perpustakaan_jenis_buku.id_jenis=?",nm_jenis,IdJenis.getText());
         KodeKategori.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select perpustakaan_jenis_buku.nama_jenis from perpustakaan_jenis_buku where perpustakaan_jenis_buku.id_jenis=?",nm_jenis,IdJenis.getText());  
+        Sequel.cariIsi("select perpustakaan_jenis_buku.nama_jenis from perpustakaan_jenis_buku where perpustakaan_jenis_buku.id_jenis=?",nm_jenis,IdJenis.getText());
         BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnJenisActionPerformed(null);
@@ -1069,7 +1069,7 @@ private void IdJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_I
 }//GEN-LAST:event_IdJenisKeyPressed
 
 private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJenisActionPerformed
-    PerpustakaanJenis jenis=new PerpustakaanJenis(null,false); 
+    PerpustakaanJenis jenis=new PerpustakaanJenis(null,false);
     jenis.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -1077,10 +1077,10 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(jenis.getTable().getSelectedRow()!= -1){                   
-                IdJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
+            if(jenis.getTable().getSelectedRow()!= -1){
+                IdJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                 nm_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             IdJenis.requestFocus();
         }
         @Override
@@ -1101,7 +1101,7 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 jenis.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1292,7 +1292,7 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 NamaKategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
                 nm_jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
                 ThnTerbit.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-                
+
                 ps=koneksi.prepareStatement(
                        "select perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, perpustakaan_buku.jml_halaman, "+
                        "perpustakaan_buku.kode_penerbit, perpustakaan_buku.kode_pengarang, perpustakaan_buku.thn_terbit, perpustakaan_buku.isbn,"+
@@ -1329,28 +1329,28 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,155));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getkoleksi_perpustakaan());
         BtnHapus.setEnabled(akses.getkoleksi_perpustakaan());
         BtnEdit.setEnabled(akses.getkoleksi_perpustakaan());
         TCari.requestFocus();
     }
-    
+
    private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1376,7 +1376,7 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

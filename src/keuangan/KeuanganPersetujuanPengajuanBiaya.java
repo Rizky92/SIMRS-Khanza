@@ -3,11 +3,11 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -55,7 +55,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
-        
+
         DlgPersetujuan.setSize(532,106);
 
         tabMode=new DefaultTableModel(null,new Object[]{
@@ -116,8 +116,8 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         Harga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -134,7 +134,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                 isHitung();
             }
         });
-        
+
         Jumlah.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -534,14 +534,14 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPersetujuanPengajuanBiaya.jasper","report","::[ Data Pengajuan Biaya ]::",
                    "select pengajuan_biaya.no_pengajuan,pengajuan_biaya.tanggal,pengajuan_biaya.nik,pegawai.nama as namapengaju,"+
                    "pegawai.bidang,pegawai.departemen,pengajuan_biaya.urgensi,pengajuan_biaya.uraian_latar_belakang,pengajuan_biaya.tujuan_pengajuan,"+
@@ -634,7 +634,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     kdpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     nmpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdpegawai.requestFocus();
             }
             @Override
@@ -645,8 +645,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {pegawai.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -735,7 +735,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             hitung();
                     }
                     DlgPersetujuan.dispose();
-                }   
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Silahkan pilih No.Pengajuan yang diajukan..!!");
             }
@@ -878,7 +878,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(9,"%"+TCari.getText().trim()+"%");
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                     ps.setString(11,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -903,7 +903,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void hitung(){
         belumdisetujui=0;
         for(i=0;i<tabMode.getRowCount();i++){
@@ -911,16 +911,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
         LCount.setText(""+Valid.SetAngka(belumdisetujui));
     }
-    
+
     public void isCek(){
         if(akses.getjml2()>=1){
             kdpegawai.setEditable(false);
             BtnPegawai.setEnabled(false);
             kdpegawai.setText(akses.getkode());
             nmpegawai.setText(Sequel.CariPegawai(kdpegawai.getText()));
-        }  
+        }
     }
-    
+
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
             NoPengajuan.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
@@ -928,13 +928,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             Harga.setText(Valid.SetAngka(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),12).toString())+"");
         }
     }
-    
+
     private void isHitung(){
         if((!Harga.getText().equals(""))&&(!Jumlah.getText().equals(""))){
             Total.setText(Valid.SetAngka(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())));
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -960,7 +960,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

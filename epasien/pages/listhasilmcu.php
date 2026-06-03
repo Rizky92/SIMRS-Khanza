@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $nomcuhasil = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $nomcuhasil = json_decode(encrypt_decrypt($nomcuhasil,"d"),true); 
+    $nomcuhasil = json_decode(encrypt_decrypt($nomcuhasil,"d"),true);
     if (isset($nomcuhasil["nomcuhasil"])) {
         $nomcuhasil   = cleankar($nomcuhasil["nomcuhasil"]);
         $querynorawat = bukaquery("select booking_mcu_perusahaan_berhasil_registrasi.no_rawat from booking_mcu_perusahaan_berhasil_registrasi where booking_mcu_perusahaan_berhasil_registrasi.no_mcu='$nomcuhasil'");
@@ -16,7 +16,7 @@
                                 <h2><center>HASIL PEMERIKSAAN MEDICAL CHECK UP<br/>NO.$nomcuhasil</center></h2>
                             </div>
                             <div class='body' align='justify'>";
-            
+
             $querydatamcu = bukaquery(
                 "select penilaian_mcu.tanggal,penilaian_mcu.informasi,penilaian_mcu.rps,penilaian_mcu.rpk,penilaian_mcu.rpd,penilaian_mcu.alergi,penilaian_mcu.keadaan,".
                 "penilaian_mcu.kesadaran,penilaian_mcu.td,penilaian_mcu.nadi,penilaian_mcu.rr,penilaian_mcu.tb,penilaian_mcu.bb,penilaian_mcu.suhu,penilaian_mcu.bmi,".
@@ -42,7 +42,7 @@
                                     <caption><b>PENILAIAN AWAL MEDICAL CHECK UP</b></caption>
                                     <tr>
                                         <td valign='top'>
-                                           YANG MELAKUKAN PENGKAJIAN  
+                                           YANG MELAKUKAN PENGKAJIAN
                                            <table width='100%' align='right'>
                                               <tr>
                                                   <td width='33%'>Tanggal : ".$rsquerydatamcu["tanggal"]."</td>
@@ -54,7 +54,7 @@
                                      </tr>
                                      <tr>
                                         <td valign='top'>
-                                           ANAMNESA SINGKAT  
+                                           ANAMNESA SINGKAT
                                            <table width='100%' align='right'>
                                               <tr>
                                                   <td width='50%'>Riwayat Penyakit Sekarang : ".$rsquerydatamcu["rps"]."</td>
@@ -69,7 +69,7 @@
                                      </tr>
                                      <tr>
                                         <td valign='top'>
-                                           PEMERIKSAAN FISIK 
+                                           PEMERIKSAAN FISIK
                                            <table width='100%' align='right'>
                                               <tr>
                                                   <td width='25%'>Keadaan : ".$rsquerydatamcu["keadaan"]."</td>
@@ -479,13 +479,13 @@
                                      </tr>
                                 </table>";
             }
-            
+
             $querysoap = bukaquery(
                 "select pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.suhu_tubuh,pemeriksaan_ralan.tensi,pemeriksaan_ralan.nadi,pemeriksaan_ralan.respirasi,".
                 "pemeriksaan_ralan.tinggi,pemeriksaan_ralan.berat,pemeriksaan_ralan.gcs,pemeriksaan_ralan.spo2,pemeriksaan_ralan.kesadaran,pemeriksaan_ralan.keluhan, ".
                 "pemeriksaan_ralan.pemeriksaan,pemeriksaan_ralan.alergi,pemeriksaan_ralan.lingkar_perut,pemeriksaan_ralan.rtl,pemeriksaan_ralan.penilaian,".
                 "pemeriksaan_ralan.instruksi,pemeriksaan_ralan.evaluasi,pegawai.nama,pegawai.jbtn from pemeriksaan_ralan inner join pegawai on pemeriksaan_ralan.nip=pegawai.nik where ".
-                "pemeriksaan_ralan.no_rawat='".$rsquerynorawat["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat" 
+                "pemeriksaan_ralan.no_rawat='".$rsquerynorawat["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat"
             );
             if(mysqli_num_rows($querysoap)!=0) {
                 echo "          <table width='100%' align='center' class='table table-bordered table-hover js-basic-example dataTable'>
@@ -512,7 +512,7 @@
                                         <td valign='top' colspan='8'> : ".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerysoap["keluhan"])))."</td>
                                     </tr>";
                     }
-                    
+
                     if($rsquerysoap["pemeriksaan"]!=""){
                         echo "      <tr>
                                         <td valign='top' align='center'></td>
@@ -521,7 +521,7 @@
                                         <td valign='top' colspan='8'> : ".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerysoap["pemeriksaan"])))."</td>
                                     </tr>";
                     }
-                    
+
                     echo "          <tr>
                                         <td valign='top' align='center'></td>
                                         <td valign='top' align='center'></td>
@@ -550,7 +550,7 @@
                                         <td valign='top' align='center'>".$rsquerysoap["kesadaran"]."</td>
                                         <td valign='top' align='center'>".$rsquerysoap["lingkar_perut"]."</td>
                                     </tr>";
-                    
+
                     if($rsquerysoap["alergi"]!=""){
                         echo "      <tr>
                                         <td valign='top' align='center'></td>
@@ -559,7 +559,7 @@
                                         <td valign='top' colspan='8'> : ".$rsquerysoap["alergi"]."</td>
                                     </tr>";
                     }
-                    
+
                     if($rsquerysoap["penilaian"]!=""){
                         echo "      <tr>
                                         <td valign='top' align='center'></td>
@@ -568,7 +568,7 @@
                                         <td valign='top' colspan='8'> : ".$rsquerysoap["penilaian"]."</td>
                                     </tr>";
                     }
-                    
+
                     if($rsquerysoap["rtl"]!=""){
                         echo "      <tr>
                                         <td valign='top' align='center'></td>
@@ -577,7 +577,7 @@
                                         <td valign='top' colspan='8'> : ".$rsquerysoap["rtl"]."</td>
                                     </tr>";
                     }
-                    
+
                     if($rsquerysoap["instruksi"]!=""){
                         echo "      <tr>
                                         <td valign='top' align='center'></td>
@@ -586,7 +586,7 @@
                                         <td valign='top' colspan='8'> : ".$rsquerysoap["instruksi"]."</td>
                                     </tr>";
                     }
-                    
+
                     if($rsquerysoap["evaluasi"]!=""){
                         echo "      <tr>
                                         <td valign='top' align='center'></td>
@@ -598,10 +598,10 @@
                 }
                 echo "          </table>";
             }
-            
+
             $querytanggalperiksalab = bukaquery(
                 "select periksa_lab.tgl_periksa,periksa_lab.jam from periksa_lab where periksa_lab.kategori<>'PA' and periksa_lab.no_rawat='".$rsquerynorawat["no_rawat"]."' ".
-                "group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa,periksa_lab.jam" 
+                "group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa,periksa_lab.jam"
             );
             if(mysqli_num_rows($querytanggalperiksalab)!=0) {
                 echo "          <table width='100%' align='center' class='table table-bordered table-hover js-basic-example dataTable'>
@@ -631,7 +631,7 @@
                                         <td valign='top'>".$rsqueryperiksalab["nm_perawatan"]."</td>
                                         <td valign='top'>".$rsqueryperiksalab["nm_dokter"]."</td>
                                         <td valign='top'>".$rsqueryperiksalab["nama"]."</td>
-                                    </tr>"; 
+                                    </tr>";
                         }else{
                             echo"   <tr>
                                         <td valign='top' align='center'></td>
@@ -639,9 +639,9 @@
                                         <td valign='top'>".$rsqueryperiksalab["nm_perawatan"]."</td>
                                         <td valign='top'>".$rsqueryperiksalab["nm_dokter"]."</td>
                                         <td valign='top'>".$rsqueryperiksalab["nama"]."</td>
-                                    </tr>"; 
+                                    </tr>";
                         }
-                        
+
                         $querydetailperiksalab = bukaquery(
                             "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,".
                             "detail_periksa_lab.keterangan from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template ".
@@ -666,7 +666,7 @@
                                                 <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                                 <td valign='top' style='color:#0000FF'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</td>
                                                 <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                              </tr>"; 
+                                              </tr>";
                                         break;
                                     case "h":
                                         echo "<tr>
@@ -675,7 +675,7 @@
                                                 <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                                 <td valign='top' style='color:#FF0000'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</td>
                                                 <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                              </tr>"; 
+                                              </tr>";
                                         break;
                                     case "t":
                                         echo "<tr>
@@ -684,7 +684,7 @@
                                                 <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                                 <td valign='top'><b>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</b></td>
                                                 <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                              </tr>"; 
+                                              </tr>";
                                         break;
                                     default:
                                         echo "<tr>
@@ -693,14 +693,14 @@
                                                 <td valign='top'>".$rsquerydetailperiksalab["Pemeriksaan"]."</td>
                                                 <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai"])))." ".$rsquerydetailperiksalab["satuan"]."</td>
                                                 <td valign='top'>".str_replace(array("\r\n","\r","\n","\\r","\\n","\\r\\n"),"<br/>",str_replace(">","&gt;",str_replace("<","&lt;",$rsquerydetailperiksalab["nilai_rujukan"])))."</td>
-                                              </tr>"; 
+                                              </tr>";
                                 }
                             }
                         }
-                        
+
                         $s++;
                     }
-                    
+
                     $querysarankesanperiksalab = bukaquery(
                         "select saran_kesan_lab.saran,saran_kesan_lab.kesan from saran_kesan_lab where saran_kesan_lab.no_rawat='".$rsquerynorawat["no_rawat"]."' and saran_kesan_lab.tgl_periksa='".$rsquerytanggalperiksalab["tgl_periksa"]."' and saran_kesan_lab.jam='".$rsquerytanggalperiksalab["jam"]."'"
                     );
@@ -716,13 +716,13 @@
                                         <td valign='top' colspan='3'>: ".$querysarankesanperiksalab["saran"]."</td>
                                     </tr>";
                     }
-                    
+
                     $w++;
                 }
-                
+
                 echo "          </table>";
             }
-            
+
             $queryperiksaradiologi = bukaquery(
                 "select periksa_radiologi.tgl_periksa,periksa_radiologi.jam, ".
                  "jns_perawatan_radiologi.nm_perawatan,petugas.nama,periksa_radiologi.biaya,periksa_radiologi.dokter_perujuk,".
@@ -762,7 +762,7 @@
                 }
                 echo "          </table>";
             }
-            
+
             $queryhasilradiologi = bukaquery(
                 "select hasil_radiologi.tgl_periksa,hasil_radiologi.jam,hasil_radiologi.hasil from hasil_radiologi where hasil_radiologi.no_rawat='".$rsquerynorawat["no_rawat"]."' order by hasil_radiologi.tgl_periksa,hasil_radiologi.jam"
             );
@@ -784,7 +784,7 @@
                 }
                 echo "          </table>";
             }
-            
+
             $querygambarradiologi = bukaquery(
                 "select gambar_radiologi.tgl_periksa,gambar_radiologi.jam,gambar_radiologi.lokasi_gambar from gambar_radiologi where gambar_radiologi.no_rawat='".$rsquerynorawat["no_rawat"]."' order by gambar_radiologi.tgl_periksa,gambar_radiologi.jam"
             );
@@ -807,7 +807,7 @@
                 }
                 echo "          </table>";
             }
-                                
+
             echo "              <center><a href='index.php?act=RiwayatMCU' class='btn btn-danger waves-effect'>Kembali</a></center>
                             </div>
                         </div>

@@ -50,7 +50,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
     public DlgRestoreTokoBarang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row = {
             "P","Kode Barang","Nama Barang","Satuan","Jenis","Stok","H. Dasar","H. Beli","H. Distributor","H. Grosir","H. Retail"
         };
@@ -279,11 +279,11 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){ 
+        for(i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("tokobarang","kode_brng='"+tbObat.getValueAt(i,1).toString()+"'","status='1'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -296,11 +296,11 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){ 
+        for(i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("tokobarang","kode_brng",tbObat.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -381,7 +381,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -436,8 +436,8 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
                         "or tokobarang.status='0' and tokobarang.nama_brng like ? "+
                         "or tokobarang.status='0' and kodesatuan.satuan like ? "+
                         "or tokobarang.status='0' and tokojenisbarang.nm_jenis like ? order by tokobarang.kode_brng");
-            } 
-                
+            }
+
             try {
                 if(TCari.getText().trim().equals("")){}else{
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -445,7 +445,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -467,7 +467,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -493,7 +493,7 @@ public final class DlgRestoreTokoBarang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

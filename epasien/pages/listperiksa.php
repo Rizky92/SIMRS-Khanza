@@ -83,7 +83,7 @@
                                               <div class='col-md-12 col-sm-12'>
                                                    <div class='about-info wow fadeInUp' data-wow-delay='0.1s'>
                                                         <h3>Gagal melakukan booking</h3><br/>
-                                                        Nomor HP/Telp yang Anda gunakan untuk melakukan booking terdeteksi sudah digunakan sebelumnya pada tanggal yang sama. <a href='index.php?act=CekBooking' class='btn btn-danger'>Cek Booking</a> jika anda sudah melakukan booking sebelumnya 
+                                                        Nomor HP/Telp yang Anda gunakan untuk melakukan booking terdeteksi sudah digunakan sebelumnya pada tanggal yang sama. <a href='index.php?act=CekBooking' class='btn btn-danger'>Cek Booking</a> jika anda sudah melakukan booking sebelumnya
                                                    </div>
                                               </div>
                                          </div>

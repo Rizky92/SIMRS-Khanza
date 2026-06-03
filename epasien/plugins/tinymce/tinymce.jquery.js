@@ -83,7 +83,7 @@ window.console && console.log('Use tinymce.js instead of tinymce.jquery.js.');
 
 			target[fragments[fragments.length - 1]] = modules[id];
 		}
-		
+
 		// Expose private modules for unit tests
 		if (exports.AMDLC_TESTS) {
 			privateModules = exports.privateModules || {};

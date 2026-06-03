@@ -1,22 +1,22 @@
 /*
-  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software 
+  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software
   ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
 
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -99,7 +99,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
         NilaiNormal.setDocument(new batasInput((int)30).getKata(NilaiNormal));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -501,7 +501,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                 });
                 LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
-            }           
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -564,7 +564,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                     tbBangsal.setValueAt(BakuMutu.getText(),tbBangsal.getSelectedRow(),7);
                     emptTeks();
                 }
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -596,14 +596,14 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-            param.put("parameter","%"+TCari.getText().trim()+"%");     
+            param.put("parameter","%"+TCari.getText().trim()+"%");
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReport("rptLaboratKeslingNilaiNormalBakuMutu.jasper",param,"::[ Nilai Normal Baku Mutu Laboratorium Kesehatan Lingkungan ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -661,7 +661,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-           
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -676,7 +676,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
 
@@ -704,7 +704,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSampelActionPerformed
@@ -720,7 +720,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                     KodeSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),0).toString());
                     NamaSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),1).toString());
                     BakuMutu.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 BtnSampel.requestFocus();
             }
             @Override
@@ -732,7 +732,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         sampel.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -740,7 +740,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     sampel.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -769,7 +769,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                     NamaParameter.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),1).toString());
                     MetodePengujian.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),2).toString());
                     Satuan.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),3).toString());
-                }  
+                }
                 BtnSampel.requestFocus();
             }
             @Override
@@ -781,7 +781,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         sampel.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -789,7 +789,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     sampel.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -811,7 +811,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
     private void KodeParameterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeParameterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnParameterActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,KodeSampel);
         }
     }//GEN-LAST:event_KodeParameterKeyPressed
@@ -819,7 +819,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
     private void KodeSampelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeSampelKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnSampelActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,KodeParameter,NilaiNormal);
         }
     }//GEN-LAST:event_KodeSampelKeyPressed
@@ -911,7 +911,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -940,7 +940,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
     public JTable getTable(){
         return tbBangsal;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getnilai_normal_baku_mutu_lab_kesehatan_lingkungan());
         BtnHapus.setEnabled(akses.getnilai_normal_baku_mutu_lab_kesehatan_lingkungan());
@@ -973,7 +973,7 @@ public final class LabKeslingNilaiNormalBakuMutu extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

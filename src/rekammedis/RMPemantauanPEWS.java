@@ -4,13 +4,13 @@
 
 
 package rekammedis;
-import java.awt.Color;
 import fungsi.WarnaTablePEWS;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -50,7 +50,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -113,18 +113,18 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             }else{
                  column.setMinWidth(0);
                  column.setMaxWidth(0);
-            } 
+            }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTablePEWS());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -795,7 +795,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -825,7 +825,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                 if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem())==true){
                     simpan();
                 }
-            } 
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -839,7 +839,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -864,7 +864,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }          
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -891,13 +891,13 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
               Valid.MyReportqry("rptDataPemantauanPEWS.jasper","report","::[ Data Pemantauan PEWS ]::",
@@ -921,7 +921,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                     "or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
                     "or pemantauan_pews_anak.parameter_total like '%"+TCari.getText().trim()+"%' or pemantauan_pews_anak.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like ?) "+
                     "order by pemantauan_pews_anak.tanggal ",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1021,10 +1021,10 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1035,15 +1035,15 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1058,8 +1058,8 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("diagnosa",Sequel.cariIsi("select kamar_inap.diagnosa_awal from kamar_inap where kamar_inap.diagnosa_awal<>'' and kamar_inap.no_rawat=? ",TNoRw.getText()));
             Valid.MyReportqry("rptFormulirPemantauanPEWS.jasper","report","::[ Pemantauan PEWS ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur, "+
@@ -1140,8 +1140,8 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
-        } 
+            }
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1261,7 +1261,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1286,7 +1286,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                     "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or pemantauan_pews_anak.parameter_total like ? or pemantauan_pews_anak.nip like ? or petugas.nama like ?) "+
                     "order by pemantauan_pews_anak.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1301,7 +1301,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                     ps.setString(7,"%"+TCari.getText()+"%");
                     ps.setString(8,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1328,7 +1328,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void isCombo1(){
         if(cmbSkor1.getSelectedItem().equals("Tidur / Perubahan Perilaku")){
             Skor1.setBackground(Color.YELLOW);
@@ -1348,7 +1348,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             Skor1.setText("0");
         }
     }
-    
+
     private void isCombo2(){
         if(cmbSkor2.getSelectedItem().equals("3 dtk / Pucat")){
             Skor2.setBackground(Color.YELLOW);
@@ -1360,7 +1360,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             Skor2.setText("2");
         }else if(cmbSkor2.getSelectedItem().equals(">=5 dtk / Mottle")){
             Skor2.setBackground(Color.RED);
-            Skor2.setForeground(Color.WHITE); 
+            Skor2.setForeground(Color.WHITE);
             Skor2.setText("3");
         }else {
             Skor2.setBackground(Color.GREEN);
@@ -1368,7 +1368,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             Skor2.setText("0");
         }
     }
-    
+
     private void isCombo3(){
         if(cmbSkor3.getSelectedItem().equals("Cuping Hidung / O2 1-3 Lpm")){
             Skor3.setBackground(Color.YELLOW);
@@ -1387,8 +1387,8 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             Skor3.setForeground(Color.WHITE);
             Skor3.setText("0");
         }
-    } 
-    
+    }
+
     private void isjml(){
         if((!Skor1.getText().equals(""))&&(!Skor2.getText().equals(""))&&(!Skor3.getText().equals(""))){
             TotalSkor.setText(Valid.SetAngka2(
@@ -1398,7 +1398,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             ));
         }
     }
-    
+
     private void isHitung(){
         if(Integer.parseInt(TotalSkor.getText())>4){
             ParameterSkor.setText("Laporkan perubahan klinis ke perawat ketua tim, dokter jaga dan DPJP. Kolaborasikan langkah selanjutnya dengan seluruh tim perawatan");
@@ -1412,7 +1412,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             ParameterSkor.setText("Beresiko rendah, ulangi setiap 7 jam");
         }
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         cmbSkor1.setSelectedIndex(0);
@@ -1430,7 +1430,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         TotalSkor.setText("0");
         ParameterSkor.setText("Beresiko rendah, ulangi setiap 7 jam");
         cmbSkor1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1438,21 +1438,21 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             cmbSkor1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Skor1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Skor1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             cmbSkor2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Skor2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());  
+            Skor2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             cmbSkor3.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            Skor3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());  
-            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());  
-            ParameterSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());  
+            Skor3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            ParameterSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(14,16));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(17,19));
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -1484,36 +1484,36 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,224));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpemantauan_pews_anak());
         BtnHapus.setEnabled(akses.getpemantauan_pews_anak());
         BtnEdit.setEnabled(akses.getpemantauan_pews_anak());
-        BtnPrint.setEnabled(akses.getpemantauan_pews_anak()); 
+        BtnPrint.setEnabled(akses.getpemantauan_pews_anak());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -1523,8 +1523,8 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
-    
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -1545,7 +1545,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1588,7 +1588,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
 
     private void ganti() {
         isCombo1();
@@ -1622,7 +1622,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void hapus() {
         if(Sequel.queryu2tf("delete from pemantauan_pews_anak where tanggal=? and no_rawat=?",2,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -1653,9 +1653,9 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1681,11 +1681,10 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-

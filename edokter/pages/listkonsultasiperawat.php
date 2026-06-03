@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "SELECT date_format(konsultasi_perawat.tanggal,'%d/%m/%Y %H:%i:%s') as tanggalperiksa,konsultasi_perawat.no_permintaan,reg_periksa.no_rkm_medis,pasien.nm_pasien,petugas.nama FROM konsultasi_perawat ".
                                 "inner join reg_periksa on konsultasi_perawat.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on konsultasi_perawat.nip=petugas.nip ".

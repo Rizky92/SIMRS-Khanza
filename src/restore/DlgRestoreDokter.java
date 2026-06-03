@@ -51,7 +51,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
     public DlgRestoreDokter(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row = {
             "P","Kode Dokter","Nama Dokter","J.K.","Tmp.Lahir",
             "Tgl.Lahir","G.D.","Agama","Alamat Tinggal",
@@ -71,7 +71,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class ,
-                java.lang.Object.class ,java.lang.Object.class 
+                java.lang.Object.class ,java.lang.Object.class
             };
 
             @Override
@@ -117,7 +117,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -292,12 +292,12 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){ 
+        for(i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("dokter","kd_dokter='"+tbObat.getValueAt(i,1).toString()+"'","status='1'");
                 Sequel.mengedit("pegawai","nik='"+tbObat.getValueAt(i,1).toString()+"'","stts_aktif='AKTIF'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -310,11 +310,11 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){ 
+        for(i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("dokter","kd_dokter",tbObat.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -395,7 +395,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -476,7 +476,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -485,7 +485,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
             System.out.println("Notifikasi : " + e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -511,7 +511,7 @@ public final class DlgRestoreDokter extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

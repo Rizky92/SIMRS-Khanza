@@ -14,10 +14,10 @@ package simrskhanza;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -64,7 +64,7 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
         setSize(656,250);
 
         Object[] row={"Kode Spesialis","Nama Spesialis"};
-        
+
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -282,8 +282,8 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
         png_jawab.setLocationRelativeTo(internalFrame1);
         png_jawab.setAlwaysOnTop(false);
         png_jawab.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -389,13 +389,13 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"spesialis\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -417,14 +417,14 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeSpesialis").asText(),list.path("NamaSpesialis").asText()
-                        }); 
+                        });
                     }
                 }else{
                     for(JsonNode list:response){
                         if(list.path("KodeSpesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaSpesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabMode.addRow(new Object[]{
                                 list.path("KodeSpesialis").asText(),list.path("NamaSpesialis").asText()
-                            });                    
+                            });
                         }
                     }
                 }
@@ -443,7 +443,7 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         TCari.requestFocus();
     }
@@ -452,11 +452,11 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getdokter());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -482,7 +482,7 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

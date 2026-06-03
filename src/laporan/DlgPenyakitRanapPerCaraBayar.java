@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -82,7 +82,7 @@ public final class DlgPenyakitRanapPerCaraBayar extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new String[]{"No.","Kode","Diagnosa","Penyakit"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -106,7 +106,7 @@ public final class DlgPenyakitRanapPerCaraBayar extends javax.swing.JDialog {
         tbBangsal2.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -376,8 +376,8 @@ public final class DlgPenyakitRanapPerCaraBayar extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode.getRowCount()!=0){
-                
-                Map<String, Object> param = new HashMap<>();         
+
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
@@ -385,24 +385,24 @@ public final class DlgPenyakitRanapPerCaraBayar extends javax.swing.JDialog {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 if(nmpenjab.getText().equals("")){
-                    param.put("ruang","SEMUA CARA BAYAR"); 
+                    param.put("ruang","SEMUA CARA BAYAR");
                 }else{
-                    param.put("ruang",nmpenjab.getText().toUpperCase()); 
-                }                       
-                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());  
-                param.put("tanggal",Tgl2.getDate());  
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+                    param.put("ruang",nmpenjab.getText().toUpperCase());
+                }
+                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+                param.put("tanggal",Tgl2.getDate());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                for(int r=0;r<tabMode.getRowCount();r++){ 
+                for(int r=0;r<tabMode.getRowCount();r++){
                     if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
                                         tabMode.getValueAt(r,0).toString()+"','"+
                                         tabMode.getValueAt(r,1).toString()+"','"+
                                         tabMode.getValueAt(r,2).toString()+"','"+
                                         tabMode.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                    }                    
+                    }
                 }
-                   
+
                 Valid.MyReportqry("rptPenyakitRanapCaraBayar.jasper","report","::[ Laporan Penyakit Rawat Inap Per Cara Bayar ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
@@ -412,8 +412,8 @@ public final class DlgPenyakitRanapPerCaraBayar extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode2.getRowCount()!=0){
-                
-                Map<String, Object> param = new HashMap<>();         
+
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
@@ -421,24 +421,24 @@ public final class DlgPenyakitRanapPerCaraBayar extends javax.swing.JDialog {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 if(nmpenjab.getText().equals("")){
-                    param.put("ruang","SEMUA CARA BAYAR"); 
+                    param.put("ruang","SEMUA CARA BAYAR");
                 }else{
-                    param.put("ruang",nmpenjab.getText().toUpperCase()); 
-                }                       
-                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());  
-                param.put("tanggal",Tgl2.getDate());  
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+                    param.put("ruang",nmpenjab.getText().toUpperCase());
+                }
+                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+                param.put("tanggal",Tgl2.getDate());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                for(int r=0;r<tabMode2.getRowCount();r++){ 
+                for(int r=0;r<tabMode2.getRowCount();r++){
                     if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
                                         tabMode2.getValueAt(r,0).toString()+"','"+
                                         tabMode2.getValueAt(r,1).toString()+"','"+
                                         tabMode2.getValueAt(r,2).toString()+"','"+
                                         tabMode2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                    }                    
+                    }
                 }
-                   
+
                 Valid.MyReportqry("rptPenyakitRanapCaraBayar.jasper","report","::[ Laporan Penyakit Rawat Inap Per Cara Bayar ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
@@ -514,7 +514,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -570,7 +570,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -581,8 +581,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -617,7 +617,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }else if(TabRawat.getSelectedIndex()==1){
                             runBackground(() ->tampil2());
                         }
-                    }                        
+                    }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
@@ -686,7 +686,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal2;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
+    private void tampil(){
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -706,7 +706,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     tabMode.addRow(new Object[]{
                         i,rs.getString("kd_penyakit"),rs.getString("nm_penyakit"),rs.getString("jumlah")
                     });
-                    i++;                     
+                    i++;
                 }
                 if(ttljmlpasien>0){
                     tabMode.addRow(new Object[]{
@@ -722,13 +722,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
 
-    private void tampil2(){        
+    private void tampil2(){
         Valid.tabelKosong(tabMode2);
         try{
             ps=koneksi.prepareStatement(
@@ -750,7 +750,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     tabMode2.addRow(new Object[]{
                         i,rs.getString("kd_penyakit"),rs.getString("nm_penyakit"),rs.getString("jumlah")
                     });
-                    i++;                     
+                    i++;
                 }
                 if(ttljmlpasien>0){
                     tabMode2.addRow(new Object[]{
@@ -766,19 +766,19 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
             TKd.setText(tabMode.getValueAt(row,0).toString());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -804,7 +804,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

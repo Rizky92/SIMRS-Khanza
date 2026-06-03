@@ -18,13 +18,13 @@
 <html>
     <body>
     <?php
-        reportsqlinjection(); 
+        reportsqlinjection();
         $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
         $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
         if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-            $tanggal1      = validTeks4($_GET['tanggal1'],20); 
-            $tanggal2      = validTeks4($_GET['tanggal2'],20); 
-            $kamar         = validTeks4($_GET['kamar'],50); 
+            $tanggal1      = validTeks4($_GET['tanggal1'],20);
+            $tanggal2      = validTeks4($_GET['tanggal2'],20);
+            $kamar         = validTeks4($_GET['kamar'],50);
             echo "<table width='100%'  border='1' align='left' cellpadding='0' cellspacing='0'>
                     <caption><center><font color='000000' size='4' face='Arial'>Sensus Harian Ranap Inap<br> Periode $tanggal1 s.d. $tanggal2 </font></center><br/></caption>
                     <tr class=isi15>
@@ -46,14 +46,14 @@
                              </tr>";
               $_sql = "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,kamar.kelas,
                        kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.tgl_masuk,
-                       kamar_inap.tgl_keluar,kamar_inap.stts_pulang,dokter.nm_dokter from kamar_inap inner join reg_periksa 
-                       inner join pasien inner join kamar inner join bangsal inner join dokter inner join penjab 
-                       on kamar_inap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                       and reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj 
-                       and kamar_inap.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where 
-                       kamar_inap.tgl_masuk between '$tanggal1' and '$tanggal2' and bangsal.nm_bangsal like '%$kamar%' group by kamar_inap.no_rawat";            
+                       kamar_inap.tgl_keluar,kamar_inap.stts_pulang,dokter.nm_dokter from kamar_inap inner join reg_periksa
+                       inner join pasien inner join kamar inner join bangsal inner join dokter inner join penjab
+                       on kamar_inap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                       and reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj
+                       and kamar_inap.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where
+                       kamar_inap.tgl_masuk between '$tanggal1' and '$tanggal2' and bangsal.nm_bangsal like '%$kamar%' group by kamar_inap.no_rawat";
               $hasil=bukaquery($_sql);
-              while($baris = mysqli_fetch_array($hasil)) { 							  
+              while($baris = mysqli_fetch_array($hasil)) {
                   $ya="&nbsp;";
                   $tdk="&nbsp;";
                   if(getOne("select count(no_rawat) from rujuk_masuk where no_rawat='".$baris["no_rawat"]."'")>0){
@@ -93,15 +93,15 @@
                           </tr>";
                   $_sql = "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,kamar.kelas,
                            kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.stts_pulang,
-                           kamar_inap.tgl_keluar,kamar_inap.stts_pulang,dokter.nm_dokter from kamar_inap inner join reg_periksa 
-                           inner join pasien inner join kamar inner join bangsal inner join dokter inner join penjab 
-                           on kamar_inap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                           and reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj 
-                           and kamar_inap.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where 
-                           kamar_inap.tgl_masuk between '$tanggal1' and '$tanggal2' and bangsal.nm_bangsal like '%$kamar%' 
-                           and kamar_inap.tgl_keluar<>'0000-00-00' group by kamar_inap.no_rawat";            
+                           kamar_inap.tgl_keluar,kamar_inap.stts_pulang,dokter.nm_dokter from kamar_inap inner join reg_periksa
+                           inner join pasien inner join kamar inner join bangsal inner join dokter inner join penjab
+                           on kamar_inap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                           and reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj
+                           and kamar_inap.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where
+                           kamar_inap.tgl_masuk between '$tanggal1' and '$tanggal2' and bangsal.nm_bangsal like '%$kamar%'
+                           and kamar_inap.tgl_keluar<>'0000-00-00' group by kamar_inap.no_rawat";
                   $hasil=bukaquery($_sql);
-                  while($baris = mysqli_fetch_array($hasil)) { 							  
+                  while($baris = mysqli_fetch_array($hasil)) {
                       $ya="&nbsp;";
                       $tdk="&nbsp;";
                       if(getOne("select count(no_rawat) from rujuk_masuk where no_rawat='".$baris["no_rawat"]."'")>0){
@@ -124,10 +124,10 @@
             echo "    </table>
                     </td>
                  </tr>";
-            echo "</table>"; 
+            echo "</table>";
         }else {
             exit(header("Location:../index.php"));
-        }              
+        }
     ?>
 
     </body>

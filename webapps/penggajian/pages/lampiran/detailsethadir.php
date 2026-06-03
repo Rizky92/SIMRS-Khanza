@@ -2,7 +2,7 @@
     <div align="center" class="link">
         <a href=?act=ListLampiran&action=LIHAT>| List Lampiran |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php

@@ -9,7 +9,7 @@
     <div align="center" class="link">
         <a href=?act=ListResume>| List Resume |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -55,7 +55,7 @@
             </table>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="SIMPAN">&nbsp<input name=BtnKosong type=reset class="button" value="KOSONG"></div>
             <?php
-                $BtnSimpan = isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;	
+                $BtnSimpan = isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
                 if (isset($BtnSimpan)) {
                     $pendapatan_resume  = validangka(trim($_POST['pendapatan_resume']));
                     $persen_rs          = validangka(trim($_POST['persen_rs']));

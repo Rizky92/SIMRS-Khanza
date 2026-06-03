@@ -12,11 +12,11 @@
 package inventory;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -60,7 +60,7 @@ public final class DlgGolongan extends javax.swing.JDialog {
 
         Object[] row={"P","Kode Golongan","Nama Golongan"};
         tabMode=new DefaultTableModel(null,row){
-            @Override 
+            @Override
              public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
@@ -91,7 +91,7 @@ public final class DlgGolongan extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)4).getKata(Kd));
         Nm.setDocument(new batasInput((byte)30).getKata(Nm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -430,11 +430,11 @@ public final class DlgGolongan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("golongan_barang","kode",tbKamar.getValueAt(i,1).toString());
             }
-        } 
+        }
         BtnCariActionPerformed(evt);
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -484,14 +484,14 @@ public final class DlgGolongan extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){  
+        }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
             param.put("kotars", akses.getkabupatenrs());
             param.put("propinsirs", akses.getpropinsirs());
             param.put("kontakrs", akses.getkontakrs());
-            param.put("emailrs", akses.getemailrs());          
+            param.put("emailrs", akses.getemailrs());
             Valid.MyReportqry("rptGolongan.jasper","report","::[ Data Golongan ]::","select kode, nama "+
                 " from golongan_barang where  kode like '%"+TCari.getText().trim()+"%' or "+
                 " nama like '%"+TCari.getText().trim()+"%' order by kode",param);
@@ -587,7 +587,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
@@ -645,11 +645,11 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement("select kode,nama  "+
                     " from golongan_barang where  kode like ? or "+
                     " nama like ? order by nama ");
-            try {                
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
@@ -677,7 +677,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public void emptTeks() {
         Kd.setText("");
         Nm.setText("");
-        Kd.requestFocus();        
+        Kd.requestFocus();
         Valid.autoNomer("golongan_barang","G",2,Kd);
     }
 
@@ -692,14 +692,14 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getgolongan_barang());
         BtnHapus.setEnabled(akses.getgolongan_barang());
         BtnEdit.setEnabled(akses.getgolongan_barang());
         BtnPrint.setEnabled(akses.getgolongan_barang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -725,7 +725,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

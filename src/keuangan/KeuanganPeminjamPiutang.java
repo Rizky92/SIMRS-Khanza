@@ -12,11 +12,11 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -53,7 +53,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -89,14 +89,14 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         KdPeminjam.setDocument(new batasInput((byte)5).getKata(KdPeminjam));
         NmPeminjam.setDocument(new batasInput((byte)50).getKata(NmPeminjam));
         AlamatPeminjam.setDocument(new batasInput((int)150).getKata(AlamatPeminjam));
         NoTelp.setDocument(new batasInput((byte)13).getKata(NoTelp));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
 
@@ -589,7 +589,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
             tbKamar.requestFocus();
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -627,7 +627,7 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
                 tbKamar.requestFocus();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -655,14 +655,14 @@ public final class KeuanganPeminjamPiutang extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){       
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());       
+            param.put("emailrs",akses.getemailrs());
             Valid.MyReportqry("rptPeminjamPiutang.jasper","report","::[ Data Perusahaan/Peminjam Piutang ]::",
                     "select peminjampiutang.kode_peminjam,peminjampiutang.nama_peminjam,peminjampiutang.alamat,peminjampiutang.no_telp, "+
                     "peminjampiutang.kd_rek,rekening.nm_rek from peminjampiutang inner join rekening on peminjampiutang.kd_rek=rekening.kd_rek "+
@@ -803,17 +803,17 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("KeuanganPinjamPiutang")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                             rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             KodeRekening.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            NamaRekening.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            NamaRekening.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
-                                                                      
+
                         KodeRekening.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -825,7 +825,7 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -839,7 +839,7 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -855,7 +855,7 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private void KodeRekeningKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeRekeningKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnAkunActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,AlamatPeminjam,BtnSimpan);
         }
     }//GEN-LAST:event_KodeRekeningKeyPressed
@@ -953,9 +953,9 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         AlamatPeminjam.setText("");
         NoTelp.setText("0");
         KodeRekening.setText("");
-        NamaRekening.setText("");   
+        NamaRekening.setText("");
         Valid.autoNomer("peminjampiutang","PP",3,KdPeminjam);
-        KdPeminjam.requestFocus();     
+        KdPeminjam.requestFocus();
     }
 
     private void getData() {
@@ -972,11 +972,11 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void onCari(){        
+
+    public void onCari(){
         TCari.requestFocus();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpeminjam_piutang());
         BtnHapus.setEnabled(akses.getpeminjam_piutang());
@@ -988,21 +988,21 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             MnRestore.setEnabled(false);
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,125));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1028,7 +1028,7 @@ private void NmPeminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

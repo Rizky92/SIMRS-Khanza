@@ -11,13 +11,12 @@
 
 package bridging;
 
-import kepegawaian.DlgCariPegawai;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -37,6 +36,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariPegawai;
 
 /**
  *
@@ -60,7 +60,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"NIP","Petugas","Coder NIK"};
         tabMode=new DefaultTableModel(null,row){
@@ -110,7 +110,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -553,10 +553,10 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIK.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
-                    Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());                                        
-                }   
+                    Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
+                }
                 NIK.requestFocus();
             }
             @Override
@@ -665,7 +665,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -687,7 +687,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             CoderNIK.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return NIK;
     }
@@ -695,13 +695,13 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinacbg_coder_nik());
         BtnHapus.setEnabled(akses.getinacbg_coder_nik());
         BtnEdit.setEnabled(akses.getinacbg_coder_nik());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -727,7 +727,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -13,9 +13,9 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.util.HashMap;
@@ -77,7 +77,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
             }
         }
         tbData.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -156,44 +156,44 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        for(i=0;i<tbData.getRowCount();i++){ 
+        for(i=0;i<tbData.getRowCount();i++){
             if(tbData.getValueAt(i,0).toString().equals("true")){
                 if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
+                    param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptKartuBerobat5.jasper","report","::[ Kartu Periksa Pasien ]::","select * from pasien where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
+                    param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptKartuBerobat.jasper","report","::[ Kartu Periksa Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
                            "pasien.pnd, pasien.keluarga, pasien.namakeluarga from pasien inner join kelurahan inner join kecamatan inner join kabupaten "+
                            "on pasien.kd_kel=kelurahan.kd_kel "+
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+NoRm+"' ",param);
-                    this.setCursor(Cursor.getDefaultCursor()); 
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
+                    param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptKartuBerobat2.jasper","report","::[ Kartu Periksa Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -203,13 +203,13 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Kartu Pasien 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
+                    param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptKartuBerobat6.jasper","report","::[ Kartu Periksa Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -219,14 +219,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -238,14 +238,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM3.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -257,14 +257,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM2.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -276,14 +276,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 4")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM9.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -295,14 +295,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 5")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM11.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, DATE_FORMAT(pasien.tgl_lahir,'%d/%m/%Y') as tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -314,14 +314,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 6")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM12.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, DATE_FORMAT(pasien.tgl_lahir,'%d/%m/%Y') as tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -333,14 +333,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Rekam Medis 7")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM13.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, DATE_FORMAT(pasien.tgl_lahir,'%d/%m/%Y') as tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -352,14 +352,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Identitas Pasien 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM1.jasper","report","::[ Identitas Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -371,14 +371,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Identitas Pasien 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM5.jasper","report","::[ Identitas Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -390,14 +390,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Kartu Indeks Pasien")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        Map<String, Object> param = new HashMap<>();    
+                        Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
                         param.put("kotars",akses.getkabupatenrs());
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
-                        param.put("emailrs",akses.getemailrs());   
-                        param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptKartuPasien.jasper","report","::[ Kartu Periksa Pasien(Umum) ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -406,14 +406,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM2.jasper","report","::[ Identitas Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -425,14 +425,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM4.jasper","report","::[ Identitas Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -444,14 +444,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Rawat Jalan Model 3")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM6.jasper","report","::[ Lembar Rawat Jalan ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -463,14 +463,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Formulir Pendaftaran Pasien")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM7.jasper","report","::[ Formulir Pendaftaran ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -482,14 +482,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Screening Awal Pasien Masuk Rawat Jalan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM8.jasper","report","::[ Screening Awal ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -501,14 +501,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Formulir Penempelan Copy Resep")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptRM9.jasper","report","::[ Copy Resep ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -608,7 +608,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptCheckList.jasper","report","::[ Check List ]::",
-                            "select current_date() as sekarang",param); 
+                            "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kiri")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -646,7 +646,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptCheckList4.jasper","report","::[ Check List ]::",
-                            "select current_date() as sekarang",param); 
+                            "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Check List Kelengkapan Pendaftaran Kiri+Tracker")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -666,7 +666,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptCheckList3.jasper","report","::[ Check List ]::",
-                            "select current_date() as sekarang",param); 
+                            "select current_date() as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kanan")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -674,7 +674,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("poli",NamaPoli);
                     param.put("antrian",NoReg);
                     param.put("nama",NamaPasien);
-                    param.put("norm",NoRm);                
+                    param.put("norm",NoRm);
                     param.put("dokter",NamaDokter);
                     param.put("no_rawat",NoRawat);
                     param.put("bayar",NamaBayar);
@@ -687,7 +687,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptLembarPeriksa.jasper","report","::[ Lembar Periksa ]::",
-                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kiri")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -708,7 +708,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptLembarPeriksa2.jasper","report","::[ Lembar Periksa ]::",
-                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kanan 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -730,7 +730,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptLembarPeriksa3.jasper","report","::[ Lembar Periksa]::",
-                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar Periksa Pasien Kiri 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -752,7 +752,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptLembarPeriksa4.jasper","report","::[ Lembar Periksa]::",
-                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                            "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Label Tracker 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -821,15 +821,15 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     Map<String, Object> param = new HashMap<>();
                     param.put("nama",NamaPasien);
                     param.put("alamat",Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?",NoRm));
-                    param.put("norm",NoRm);    
+                    param.put("norm",NoRm);
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
+                    param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptBarcodeRawat.jasper","report","::[ Barcode No.Rawat ]::",
-                            "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+NoRawat+"'",param); 
+                            "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+NoRawat+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ralan 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -933,16 +933,16 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ranap 1")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());  
-                    param.put("tanggal",TanggalDaftar);    
-                    param.put("kamar",NamaPoli);    
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("tanggal",TanggalDaftar);
+                    param.put("kamar",NamaPoli);
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM4.jasper","report","::[ Gelang Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -954,16 +954,16 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Gelang Pasien Ranap 2")){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    Map<String, Object> param = new HashMap<>();                 
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());  
-                    param.put("tanggal",TanggalDaftar);    
-                    param.put("kamar",NamaPoli);    
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("tanggal",TanggalDaftar);
+                    param.put("kamar",NamaPoli);
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptBarcodeRM5.jasper","report","::[ Gelang Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                            "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                            "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
@@ -974,15 +974,15 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                            "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+NoRm+"' ",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 1")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
-                    param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));    
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
+                    param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEP.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1030,17 +1030,17 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
                         }
                     }
-                                        
+
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 2")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -1063,7 +1063,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }      
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEPInternal3.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1087,12 +1087,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }      
+                        }
                     }
-                                  
-                    this.setCursor(Cursor.getDefaultCursor());    
+
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 3")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -1101,7 +1101,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("norawat",NoRawat);
                     param.put("noreg",NoReg);
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -1124,7 +1124,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }   
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEPInternal5.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1148,12 +1148,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }   
+                        }
                     }
-                                     
-                    this.setCursor(Cursor.getDefaultCursor());  
+
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar SEP Model 4")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -1163,7 +1163,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("norawat",NoRawat);
                     param.put("noreg",NoReg);
                     param.put("dokter",NamaDokter);
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -1186,7 +1186,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }       
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEPInternal7.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1210,12 +1210,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }       
+                        }
                     }
-                                 
-                    this.setCursor(Cursor.getDefaultCursor());     
+
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("Lembar SJP")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -1226,18 +1226,18 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         Valid.MyReportqry("rptBridgingSJP.jasper","report","::[ Cetak SEP ]::","select * from bridging_inhealth where no_sjp='"+NoSEP+"'",param);
                     }else{
                         Valid.MyReportqry("rptBridgingSJP2.jasper","report","::[ Cetak SEP ]::","select * from bridging_inhealth where no_sjp='"+NoSEP+"'",param);
-                    }                
+                    }
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 1")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
-                    param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));  
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
+                    param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEP.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1259,7 +1259,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }    
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEPInternal.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1283,19 +1283,19 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }    
+                        }
                     }
-                                    
+
                     this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 2")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -1318,7 +1318,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }  
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEPInternal3.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1342,12 +1342,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }  
+                        }
                     }
-                                      
-                    this.setCursor(Cursor.getDefaultCursor());    
+
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 3")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -1356,7 +1356,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("norawat",NoRawat);
                     param.put("noreg",NoReg);
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -1379,7 +1379,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }   
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEPInternal5.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1403,12 +1403,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }   
+                        }
                     }
-                                     
-                    this.setCursor(Cursor.getDefaultCursor());  
+
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("PDF SEP Model 4")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -1418,7 +1418,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("norawat",NoRawat);
                     param.put("noreg",NoReg);
                     param.put("dokter",NamaDokter);
-                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+                    param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
@@ -1441,7 +1441,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),concat(bridging_sep.nmkec,', ',bridging_sep.nmkab,', ',bridging_sep.nmprop) as lokasilaka,bridging_sep.user, "+
                                     "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.notelep,"+
                                     "bridging_sep.tujuankunjungan,bridging_sep.flagprosedur,bridging_sep.klsnaik,bridging_sep.pembiayaan,bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep where no_sep='"+NoSEP+"'",param);
-                        }  
+                        }
                     }else{
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEPInternal7.jasper","report","::[ Cetak SEP Internal ]::","select bridging_sep_internal.no_sep, bridging_sep_internal.no_rawat,bridging_sep_internal.nomr,bridging_sep_internal.nama_pasien,bridging_sep_internal.tglsep,"+
@@ -1465,12 +1465,12 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                                     "bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.asal_rujukan,bridging_sep_internal.eksekutif,bridging_sep_internal.cob,bridging_sep_internal.notelep,"+
                                     "bridging_sep_internal.tujuankunjungan,bridging_sep_internal.flagprosedur,bridging_sep_internal.klsnaik,bridging_sep_internal.pembiayaan,bridging_sep_internal.nmdpdjp,bridging_sep_internal.lakalantas from bridging_sep_internal "+
                                     "where bridging_sep_internal.no_sep='"+NoSEP+"' and bridging_sep_internal.noskdp='"+NoRujukan+"' and bridging_sep_internal.tglrujukan='"+TglRujukan+"' and bridging_sep_internal.kdpolitujuan='"+KdpoliTujuan+"'",param);
-                        }  
+                        }
                     }
-                                      
-                    this.setCursor(Cursor.getDefaultCursor());     
+
+                    this.setCursor(Cursor.getDefaultCursor());
                 }else if(tbData.getValueAt(i,1).toString().equals("PDF SJP")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -1481,14 +1481,14 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                         Valid.MyReportqrypdf("rptBridgingSJP.jasper","report","::[ Cetak SEP ]::","select * from bridging_inhealth where no_sjp='"+NoSEP+"'",param);
                     }else{
                         Valid.MyReportqrypdf("rptBridgingSJP2.jasper","report","::[ Cetak SEP ]::","select * from bridging_inhealth where no_sjp='"+NoSEP+"'",param);
-                    }                
+                    }
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
         }
-        
-        
-        
+
+
+
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     /**
@@ -1517,7 +1517,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
-        try{         
+        try{
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
             TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
@@ -1574,11 +1574,11 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
+
     public void tampil2() {
-        try{         
+        try{
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
             TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
@@ -1625,11 +1625,11 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
+
     public void tampil3() {
-        try{         
+        try{
             Valid.tabelKosong(TabMode);
             TabMode.addRow(new Object[]{false,"Kartu Pasien 1"});//0,0
             TabMode.addRow(new Object[]{false,"Kartu Pasien 2"});//1,0
@@ -1680,10 +1680,10 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
-    
+
+
     public void setNoRm(String NoRawat,String NoRm,String NoSEP,String NoReg,String NamaPoli,
         String NamaBayar,String NamaDokter,String NamaPasien,String AlamatPasien,
         String PenanggungJawab,String TanggalDaftar, String JenisPelayanan) {
@@ -1703,7 +1703,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
             this.TanggalDaftar=TanggalDaftar;
             this.JenisPelayanan=JenisPelayanan;
     }
-    
+
     public void setRujukan(String NoRujukan,String TglRujukan,String KdpoliTujuan){
         this.NoRujukan=NoRujukan;
         this.TglRujukan=TglRujukan;

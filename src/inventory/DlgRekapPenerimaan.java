@@ -1,10 +1,10 @@
 package inventory;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -124,8 +124,8 @@ public class DlgRekapPenerimaan extends javax.swing.JDialog {
         kdbar.setDocument(new batasInput((byte)15).getKata(kdbar));
         KdIF.setDocument(new batasInput((byte)15).getKata(KdIF));
         kdJenis.setDocument(new batasInput((byte)4).getKata(kdJenis));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -626,12 +626,12 @@ public class DlgRekapPenerimaan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -649,10 +649,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(suplier.getTable().getSelectedRow()!= -1){                   
-                    kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());                    
+                if(suplier.getTable().getSelectedRow()!= -1){
+                    kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                     nmsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdsup.requestFocus();
             }
             @Override
@@ -664,7 +664,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -676,7 +676,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         suplier.emptTeks();
         suplier.isCek();
         suplier.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -694,10 +694,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }            
+                }
                 kdptg.requestFocus();
             }
             @Override
@@ -708,7 +708,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });  
+        });
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -730,10 +730,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }   
+                }
                 kdbar.requestFocus();
             }
             @Override
@@ -745,7 +745,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -753,7 +753,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }                                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -860,25 +860,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             if(ceksukses==false){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {            
-                    File g = new File("file2.css");            
+                try {
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                             ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                            ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                            ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                             ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                             ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                     );
                     bg.close();
 
-                    File f;            
-                    BufferedWriter bw; 
+                    File f;
+                    BufferedWriter bw;
 
                     pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No.Faktur</td>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No.Order</td>"+
@@ -899,9 +899,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='7%'>Total(Rp)</td>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Status Bayar</td>"+
                                     "</tr>"
-                                ); 
-                                for(i=0;i<tabMode.getRowCount();i++){  
-                                    htmlContent.append(                             
+                                );
+                                for(i=0;i<tabMode.getRowCount();i++){
+                                    htmlContent.append(
                                         "<tr class='isi'>"+
                                             "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
                                             "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
@@ -922,11 +922,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             "<td valign='top' align='right'>"+tabMode.getValueAt(i,16)+"</td>"+
                                             "<td valign='top' align='center'>"+tabMode.getValueAt(i,17)+"</td>"+
                                         "</tr>"
-                                    ); 
-                                }            
+                                    );
+                                }
 
-                                f = new File("RekapPenerimaanObatBHP.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("RekapPenerimaanObatBHP.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write("<html>"+
                                             "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                             "<body>"+
@@ -936,23 +936,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                            "<font size='2' face='Tahoma'>REKAP PENERIMAAN OBAT, ALKES & BHP PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+        
+                                                            "<font size='2' face='Tahoma'>REKAP PENERIMAAN OBAT, ALKES & BHP PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+
                                                         "</td>"+
                                                    "</tr>"+
                                                 "</table>"+
                                                 "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                     htmlContent.toString()+
                                                 "</table>"+
-                                            "</body>"+                   
+                                            "</body>"+
                                          "</html>"
                                 );
                                 htmlContent=null;
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No.Faktur</td>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>No.Order</td>"+
@@ -973,9 +973,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='7%'>Total(Rp)</td>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%'>Status Bayar</td>"+
                                     "</tr>"
-                                ); 
-                                for(i=0;i<tabMode.getRowCount();i++){  
-                                    htmlContent.append(                             
+                                );
+                                for(i=0;i<tabMode.getRowCount();i++){
+                                    htmlContent.append(
                                         "<tr class='isi'>"+
                                             "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
                                             "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
@@ -996,11 +996,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             "<td valign='top' align='right'>"+tabMode.getValueAt(i,16)+"</td>"+
                                             "<td valign='top' align='center'>"+tabMode.getValueAt(i,17)+"</td>"+
                                         "</tr>"
-                                    ); 
-                                }          
+                                    );
+                                }
 
-                                f = new File("RekapPenerimaanObatBHP.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("RekapPenerimaanObatBHP.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write("<html>"+
                                             "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                             "<body>"+
@@ -1010,48 +1010,48 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                            "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+        
+                                                            "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+
                                                         "</td>"+
                                                    "</tr>"+
                                                 "</table>"+
                                                 "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                     htmlContent.toString()+
                                                 "</table>"+
-                                            "</body>"+                   
+                                            "</body>"+
                                          "</html>"
                                 );
 
                                 htmlContent=null;
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"No.Faktur\";\"No.Order\";\"Suplier\";\"Petugas\";\"Tgl.Pesan\";\"Tgl.Faktur\";\"Jatuh Tempo\";\"Kadaluarsa\";\"No.Batch\";\"Barang\";\"Satuan\";\"Jml.Beli\";\"Harga Beli(Rp)\";\"SubTotal(Rp)\";\"Disk(%)\";\"Bsr.Disk(Rp)\";\"Total(Rp)\";\"Status Bayar\"\n"
-                                ); 
-                                for(i=0;i<tabMode.getRowCount();i++){  
-                                    htmlContent.append(                             
+                                );
+                                for(i=0;i<tabMode.getRowCount();i++){
+                                    htmlContent.append(
                                         "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\"\n"
-                                    ); 
-                                }            
+                                    );
+                                }
 
-                                f = new File("RekapPenerimaanObatBHP.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("RekapPenerimaanObatBHP.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
                                 htmlContent=null;
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
+                            break;
                         case "Laporan 4 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();    
+                                Map<String, Object> param = new HashMap<>();
                                 param.put("namars",akses.getnamars());
                                 param.put("alamatrs",akses.getalamatrs());
                                 param.put("kotars",akses.getkabupatenrs());
                                 param.put("propinsirs",akses.getpropinsirs());
                                 param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());   
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                                param.put("emailrs",akses.getemailrs());
+                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 Valid.MyReportqry("rptRekapPenerimaan.jasper","report","::[ Rekap Penerimaan Barang ]::",
                                     "select pemesanan.tgl_pesan,pemesanan.no_faktur, "+
                                     "pemesanan.kode_suplier,datasuplier.nama_suplier, "+
@@ -1076,10 +1076,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     " (pemesanan.no_faktur like '%"+TCari.getText().trim()+"%' or pemesanan.kode_suplier like '%"+TCari.getText().trim()+"%' or datasuplier.nama_suplier like '%"+TCari.getText().trim()+"%' or pemesanan.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%' or bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or detailpesan.kode_brng like '%"+TCari.getText().trim()+"%' or "+
                                     " databarang.nama_brng like '%"+TCari.getText().trim()+"%' or detailpesan.kode_sat like '%"+TCari.getText().trim()+"%' or detailpesan.no_batch like '%"+TCari.getText().trim()+"%' or industrifarmasi.nama_industri like '%"+TCari.getText().trim()+"%' or pemesanan.no_order like '%"+TCari.getText().trim()+"%') "+
                                     " order by pemesanan.tgl_pesan,pemesanan.no_faktur ",param);
-                            break; 
-                    }                 
+                            break;
+                    }
                 } catch (Exception e) {
-                }     
+                }
                 this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
@@ -1130,10 +1130,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(industri.getTable().getSelectedRow()!= -1){                   
-                    KdIF.setText(industri.getTable().getValueAt(industri.getTable().getSelectedRow(),0).toString());                    
+                if(industri.getTable().getSelectedRow()!= -1){
+                    KdIF.setText(industri.getTable().getValueAt(industri.getTable().getSelectedRow(),0).toString());
                     NmIF.setText(industri.getTable().getValueAt(industri.getTable().getSelectedRow(),1).toString());
-                }  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1144,7 +1144,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         industri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1152,11 +1152,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     industri.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         industri.isCek();
         industri.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         industri.setLocationRelativeTo(internalFrame1);
@@ -1309,7 +1309,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
        Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "select pemesanan.tgl_pesan,pemesanan.no_faktur, "+
                     "pemesanan.kode_suplier,datasuplier.nama_suplier, "+
@@ -1367,7 +1367,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("tgl_tempo"),rs.getString("kadaluarsa"),rs.getString("no_batch"),rs.getString("kode_brng")+" "+rs.getString("nama_brng"),
                         rs.getString("satuan"),rs.getDouble("jumlah"),rs.getDouble("h_pesan"),rs.getDouble("subtotal"),rs.getDouble("dis"),
                         rs.getDouble("besardis"),rs.getDouble("total"),rs.getString("status")
-                    });  
+                    });
                     tagihan=tagihan+rs.getDouble("total");
                     subtotal=subtotal+rs.getDouble("subtotal");
                     diskon=diskon+rs.getDouble("besardis");
@@ -1381,45 +1381,45 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }     
+            }
             if(tagihan>0){
                 tabMode.addRow(new Object[]{
                     "","Total :","","","","","","","","","",null,null,
                     subtotal,null,diskon,tagihan,null
-                }); 
+                });
             }
-                 
+
             LTotal.setText(Valid.SetAngka(tagihan));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
         kdbar.setText("");
         nmbar.setText("");
         kdJenis.setText("");
-        kdbar.requestFocus();        
+        kdbar.requestFocus();
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getrekap_pemesanan());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,125));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1445,7 +1445,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

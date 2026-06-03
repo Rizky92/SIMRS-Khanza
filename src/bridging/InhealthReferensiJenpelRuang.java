@@ -50,13 +50,13 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"No.Bed/Kamar","Kode Bangsal","Nama Bangsal/Kamar","Kode Jenis","Jenis Pelayanan Ruang Rawat","Tarif"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
              };
              @Override
@@ -117,7 +117,7 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         kamar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -125,11 +125,11 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){                   
+                if(kamar.getTable().getSelectedRow()!= -1){
                     kdkamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                     TKdBngsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),2).toString());
                     TBangsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),3).toString());
-                }  
+                }
                 kdkamar.requestFocus();
             }
             @Override
@@ -141,7 +141,7 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -154,9 +154,9 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
     }
-    
+
     private DlgKamar kamar=new DlgKamar(null,false);
 
     /** This method is called from within the constructor to
@@ -686,7 +686,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_formWindowOpened
 
     private void KdJenisPelayananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdJenisPelayananKeyPressed
-        Valid.pindah(evt,kdkamar,Tarif);        
+        Valid.pindah(evt,kdkamar,Tarif);
     }//GEN-LAST:event_KdJenisPelayananKeyPressed
 
     private void NmJenisPelayananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmJenisPelayananKeyPressed
@@ -754,14 +754,14 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                        "from inhealth_jenpel_ruang_rawat inner join kamar inner join bangsal "+
                        "on inhealth_jenpel_ruang_rawat.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal "+
                        "where inhealth_jenpel_ruang_rawat.kd_kamar like ? or bangsal.nm_bangsal like ? "+
-                       "or inhealth_jenpel_ruang_rawat.kode_jenpel_ruang_rawat like ? or inhealth_jenpel_ruang_rawat.nama_jenpel_ruang_rawat like ? order by inhealth_jenpel_ruang_rawat.kd_kamar"); 
-            try {                
+                       "or inhealth_jenpel_ruang_rawat.kode_jenpel_ruang_rawat like ? or inhealth_jenpel_ruang_rawat.nama_jenpel_ruang_rawat like ? order by inhealth_jenpel_ruang_rawat.kd_kamar");
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),
                         rs.getString(4),rs.getString(5),rs.getDouble(6)
@@ -803,10 +803,10 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Tarif.setText(tabMode.getValueAt(row,5).toString());
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 
 }

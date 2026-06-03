@@ -13,11 +13,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.koneksiDB;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
@@ -55,7 +55,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private DlgCariBangsal bangsal;
     private AplicareCekReferensiKamar referensi;
@@ -131,25 +131,25 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        Tersedia.setDocument(new batasInput((byte)4).getOnlyAngka(Tersedia)); 
-        Kapasitas.setDocument(new batasInput((byte)4).getOnlyAngka(Kapasitas)); 
-        TersediaPW.setDocument(new batasInput((byte)4).getOnlyAngka(TersediaPW)); 
-        TersediaPria.setDocument(new batasInput((byte)4).getOnlyAngka(TersediaPria)); 
-        TersediaWanita.setDocument(new batasInput((byte)4).getOnlyAngka(TersediaWanita)); 
-        KdKelas.setDocument(new batasInput((byte)15).getKata(KdKelas)); 
-        KdKamar.setDocument(new batasInput((byte)5).getKata(KdKamar)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        Tersedia.setDocument(new batasInput((byte)4).getOnlyAngka(Tersedia));
+        Kapasitas.setDocument(new batasInput((byte)4).getOnlyAngka(Kapasitas));
+        TersediaPW.setDocument(new batasInput((byte)4).getOnlyAngka(TersediaPW));
+        TersediaPria.setDocument(new batasInput((byte)4).getOnlyAngka(TersediaPria));
+        TersediaWanita.setDocument(new batasInput((byte)4).getOnlyAngka(TersediaWanita));
+        KdKelas.setDocument(new batasInput((byte)15).getKata(KdKelas));
+        KdKamar.setDocument(new batasInput((byte)5).getKata(KdKamar));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkInput.setSelected(false);
-        isForm(); 
-        
+        isForm();
+
         try {
-            URL = koneksiDB.URLAPIAPLICARE();	
+            URL = koneksiDB.URLAPIAPLICARE();
             CONSIDAPIAPLICARE=koneksiDB.CONSIDAPIAPLICARE();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-    
+
     }
 
     /** This method is called from within the constructor to
@@ -671,14 +671,14 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             referensi.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(referensi.getTable().getSelectedRow()!= -1){                   
+                    if(referensi.getTable().getSelectedRow()!= -1){
                         KdKelas.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),1).toString());
                         NmKelas.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),2).toString());
-                    }     
+                    }
                     KdKamar.requestFocus();
                     referensi=null;
                 }
-            });   
+            });
 
             referensi.getTable().addKeyListener(new KeyAdapter() {
                 @Override
@@ -695,12 +695,12 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         if (referensi.isVisible()) {
             referensi.toFront();
             return;
-        }    
+        }
         referensi.setVisible(true);
 }//GEN-LAST:event_btnKelasActionPerformed
 
     private void btnKelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKelasKeyPressed
-        
+
 }//GEN-LAST:event_btnKelasKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -728,12 +728,12 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                 headers.add("X-Signature",api.getHmac(utc));
                 headers.add("user_key",koneksiDB.USERKEYAPIAPLICARE());
                 requestJson ="{\"kodekelas\":\""+KdKelas.getText()+"\", "+
-                              "\"koderuang\":\""+KdKamar.getText()+"\","+ 
-                              "\"namaruang\":\""+NmKamar.getText()+"\","+ 
-                              "\"kapasitas\":\""+Kapasitas.getText()+"\","+ 
+                              "\"koderuang\":\""+KdKamar.getText()+"\","+
+                              "\"namaruang\":\""+NmKamar.getText()+"\","+
+                              "\"kapasitas\":\""+Kapasitas.getText()+"\","+
                               "\"tersedia\":\""+Tersedia.getText()+"\","+
-                              "\"tersediapria\":\""+TersediaPria.getText()+"\","+ 
-                              "\"tersediawanita\":\""+TersediaWanita.getText()+"\","+ 
+                              "\"tersediapria\":\""+TersediaPria.getText()+"\","+
+                              "\"tersediawanita\":\""+TersediaWanita.getText()+"\","+
                               "\"tersediapriawanita\":\""+TersediaPW.getText()+"\""+
                               "}";
                 requestEntity = new HttpEntity(requestJson,headers);
@@ -749,7 +749,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                         })==true){
                             emptTeks();
                             runBackground(() ->tampil());
-                    }                     
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
@@ -770,7 +770,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -781,7 +781,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 try {
                     headers = new HttpHeaders();
@@ -792,7 +792,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                     headers.add("X-Signature",api.getHmac(utc));
                     headers.add("user_key",koneksiDB.USERKEYAPIAPLICARE());
                     requestJson ="{\"kodekelas\":\""+tbJnsPerawatan.getValueAt(i,1).toString()+"\", "+
-                                  "\"koderuang\":\""+tbJnsPerawatan.getValueAt(i,2).toString()+"\""+ 
+                                  "\"koderuang\":\""+tbJnsPerawatan.getValueAt(i,2).toString()+"\""+
                                   "}";
                     requestEntity = new HttpEntity(requestJson,headers);
                     //System.out.println(rest.exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
@@ -814,7 +814,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                     }
                 }
             }
-        }  
+        }
         BtnCariActionPerformed(evt);
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -843,7 +843,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         }else if(TersediaWanita.getText().trim().equals("")){
             Valid.textKosong(TersediaWanita,"Tersedia Wanita");
         }else{
-            try {     
+            try {
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 headers.add("X-Cons-ID",CONSIDAPIAPLICARE);
@@ -852,12 +852,12 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                 headers.add("X-Signature",api.getHmac(utc));
                 headers.add("user_key",koneksiDB.USERKEYAPIAPLICARE());
                 requestJson ="{\"kodekelas\":\""+KdKelas.getText()+"\", "+
-                              "\"koderuang\":\""+KdKamar.getText()+"\","+ 
-                              "\"namaruang\":\""+NmKamar.getText()+"\","+ 
-                              "\"kapasitas\":\""+Kapasitas.getText()+"\","+ 
+                              "\"koderuang\":\""+KdKamar.getText()+"\","+
+                              "\"namaruang\":\""+NmKamar.getText()+"\","+
+                              "\"kapasitas\":\""+Kapasitas.getText()+"\","+
                               "\"tersedia\":\""+Tersedia.getText()+"\","+
-                              "\"tersediapria\":\""+TersediaPria.getText()+"\","+ 
-                              "\"tersediawanita\":\""+TersediaWanita.getText()+"\","+ 
+                              "\"tersediapria\":\""+TersediaPria.getText()+"\","+
+                              "\"tersediawanita\":\""+TersediaWanita.getText()+"\","+
                               "\"tersediapriawanita\":\""+TersediaPW.getText()+"\""+
                               "}";
                 requestEntity = new HttpEntity(requestJson,headers);
@@ -877,7 +877,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                       })==true){
                         emptTeks();
                         runBackground(() ->tampil());
-                    }                     
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
@@ -916,17 +916,17 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                param.put("parameter","%"+TCari.getText().trim()+"%"); 
-                Valid.MyReport("rptKamarAplicare.jasper","report","::[ Data Ketersediaan Kamar Aplicare]::",param);            
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptKamarAplicare.jasper","report","::[ Data Ketersediaan Kamar Aplicare]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -985,7 +985,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void KdKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKamarKeyPressed
@@ -1003,25 +1003,25 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             bangsal.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(bangsal.getTable().getSelectedRow()!= -1){                   
+                    if(bangsal.getTable().getSelectedRow()!= -1){
                         KdKamar.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                         NmKamar.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    }     
+                    }
                     isCariKetersediaan();
                     KdKamar.requestFocus();
                     bangsal=null;
                 }
-            }); 
-            
+            });
+
             bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             bangsal.setLocationRelativeTo(internalFrame1);
         }
         if (bangsal == null) return;
         if (!bangsal.isVisible()) {
-            bangsal.isCek();    
+            bangsal.isCek();
             bangsal.emptTeks();
         }
-        
+
         if (bangsal.isVisible()) {
             bangsal.toFront();
             return;
@@ -1053,13 +1053,13 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void KelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isCariKetersediaan();
-            Kapasitas.requestFocus();            
+            Kapasitas.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             KdKamar.requestFocus();
         }
@@ -1176,7 +1176,7 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1229,32 +1229,32 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
        }
     }
 
-    
-   
+
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,130));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getaplicare_ketersediaan_kamar());
         BtnHapus.setEnabled(akses.getaplicare_ketersediaan_kamar());
         BtnEdit.setEnabled(akses.getaplicare_ketersediaan_kamar());
         BtnPrint.setEnabled(akses.getaplicare_ketersediaan_kamar());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
     private void isCariKetersediaan() {
         if(!KdKamar.getText().equals("")){
@@ -1263,7 +1263,7 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             TersediaPW.setText(Tersedia.getText());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1289,7 +1289,7 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

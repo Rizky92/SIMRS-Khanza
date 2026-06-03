@@ -2,13 +2,13 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $nopernyataan="";
     $cari    = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
     $cari    = json_decode(encrypt_decrypt($cari,"d"),true);
     if (isset($cari["usere"])) {
         if(($cari["usere"]==USERHYBRIDWEB)&&($cari["passwordte"]==PASHYBRIDWEB)){
-            $nopernyataan=validTeks4($cari['nopernyataan'],20); 
+            $nopernyataan=validTeks4($cari['nopernyataan'],20);
         }else{
             exit(header("Location:../index.php"));
         }
@@ -56,7 +56,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -76,4 +76,3 @@
     </script>
 </body>
 </html>
-

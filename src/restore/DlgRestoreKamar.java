@@ -50,7 +50,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
     public DlgRestoreKamar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new String[]{
                 "P","Nomer Bed","Kode Kamar","Nama Kamar","Kelas","Tarif Kamar","Status Kamar"
             }){
@@ -62,7 +62,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
              };
              @Override
@@ -95,7 +95,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -270,11 +270,11 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("kamar","kd_kamar='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","statusdata='1'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -287,11 +287,11 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("kamar","kd_kamar",tbJnsPerawatan.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -409,7 +409,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{     
+        try{
             ps=koneksi.prepareStatement("select kamar.kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal, "+
                        "kamar.kelas,kamar.trf_kamar,kamar.status from bangsal inner join kamar "+
                        "on kamar.kd_bangsal=bangsal.kd_bangsal where "+
@@ -420,7 +420,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
                        "kamar.statusdata='0' and kamar.trf_kamar like ? or "+
                        "kamar.statusdata='0' and kamar.status like ? "+
                        "order by bangsal.nm_bangsal");
-            try {                
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -451,7 +451,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -477,7 +477,7 @@ public final class DlgRestoreKamar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

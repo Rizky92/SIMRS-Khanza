@@ -12,10 +12,10 @@
 package setting;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -53,7 +53,7 @@ public final class DlgCariJamDiet extends javax.swing.JDialog {
         setSize(656,250);
 
         Object[] row={"Waktu Diet Pasien","Jam Diet Pasien"};
-        
+
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -379,15 +379,15 @@ public final class DlgCariJamDiet extends javax.swing.JDialog {
         TCari.requestFocus();
     }
 
-    
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.getjam_diet_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -413,7 +413,7 @@ public final class DlgCariJamDiet extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

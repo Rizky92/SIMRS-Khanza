@@ -18,12 +18,12 @@ import java.sql.ResultSet;
 public class Jurnal {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
-    private final Connection koneksi=koneksiDB.condb(); 
+    private final Connection koneksi=koneksiDB.condb();
     private ResultSet rs,rscek;
     private PreparedStatement ps2,ps,pscek;
     private String nojur="";
     private boolean sukses=true;
-    public synchronized boolean simpanJurnal(String nobukti,String jenis,String keterangan){  
+    public synchronized boolean simpanJurnal(String nobukti,String jenis,String keterangan){
         try {
             pscek=koneksi.prepareStatement("select count(*) as jml,current_date() as tanggal,current_time() as jam,sum(tampjurnal.debet) as debet,sum(tampjurnal.kredit) as kredit from tampjurnal");
             try {
@@ -117,13 +117,13 @@ public class Jurnal {
                                                  rs.close();
                                              }
                                         }
-                                        Sequel.queryu2("delete from tampjurnal"); 
-                                    }   
-                                 }            
+                                        Sequel.queryu2("delete from tampjurnal");
+                                    }
+                                 }
                             } catch (Exception ex) {
                                 sukses=false;
-                                System.out.println("Notifikasi : "+ex);  
-                            } 
+                                System.out.println("Notifikasi : "+ex);
+                            }
                         }
                     }else{
                         System.out.println("Notif : Debet dan Kredit tidak sama");
@@ -148,5 +148,3 @@ public class Jurnal {
         return sukses;
    }
 }
-    
-

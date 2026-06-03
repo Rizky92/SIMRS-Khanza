@@ -11,11 +11,11 @@
 
 package toko;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgCariSatuan;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -122,9 +122,9 @@ public final class TokoBarang extends javax.swing.JDialog {
         retail.setDocument(new batasInput((byte)20).getKata(retail));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
-        isForm();   
+        isForm();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -705,7 +705,7 @@ public final class TokoBarang extends javax.swing.JDialog {
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -719,7 +719,7 @@ public final class TokoBarang extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -800,14 +800,14 @@ public final class TokoBarang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();                
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 if(TCari.getText().trim().equals("")){
                     Valid.MyReportqry("rptBarangToko.jasper","report","::[ Data Barang Toko / Minimarket / Koperasi ]::",
                        "select tokobarang.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,tokojenisbarang.nm_jenis, "+
@@ -826,7 +826,7 @@ public final class TokoBarang extends javax.swing.JDialog {
                         "or tokobarang.status='1' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
                         "or tokobarang.status='1' and tokojenisbarang.nm_jenis like '%"+TCari.getText().trim()+"%' order by tokobarang.kode_brng",param);
                 }
-                    
+
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -882,7 +882,7 @@ public final class TokoBarang extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
@@ -901,7 +901,7 @@ public final class TokoBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void kode_brngKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_brngKeyPressed
@@ -914,18 +914,18 @@ private void nama_brngKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
 private void kode_satKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_satKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?", nama_sat,kode_sat.getText());           
+            Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?", nama_sat,kode_sat.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             nama_brng.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            kdjenis.requestFocus(); 
+            kdjenis.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnSatuanActionPerformed(null);
         }
 }//GEN-LAST:event_kode_satKeyPressed
 
 private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatuanActionPerformed
-    DlgCariSatuan satuan=new DlgCariSatuan(null,false); 
+    DlgCariSatuan satuan=new DlgCariSatuan(null,false);
     satuan.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -933,10 +933,10 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(satuan.getTable().getSelectedRow()!= -1){                   
-                kode_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());                    
+            if(satuan.getTable().getSelectedRow()!= -1){
+                kode_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());
                 nama_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             kode_sat.requestFocus();
         }
         @Override
@@ -991,11 +991,11 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void kdjenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjenisKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nm_jenis from tokojenisbarang where kd_jenis=?", nmjenis,kdjenis.getText());           
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){            
+            Sequel.cariIsi("select nm_jenis from tokojenisbarang where kd_jenis=?", nmjenis,kdjenis.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kode_sat.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            beli.requestFocus(); 
+            beli.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnJenisActionPerformed(null);
         }
@@ -1010,10 +1010,10 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jenis.getTable().getSelectedRow()!= -1){                   
-                    kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
+                if(jenis.getTable().getSelectedRow()!= -1){
+                    kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                     nmjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kdjenis.requestFocus();
             }
             @Override
@@ -1041,7 +1041,7 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void beliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_beliKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            isHitung();        
+            isHitung();
             distributor.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             dasar.requestFocus();
@@ -1176,8 +1176,8 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         "or tokobarang.status='1' and tokobarang.nama_brng like ? "+
                         "or tokobarang.status='1' and kodesatuan.satuan like ? "+
                         "or tokobarang.status='1' and tokojenisbarang.nm_jenis like ? order by tokobarang.kode_brng");
-            } 
-                
+            }
+
             try {
                 if(TCari.getText().trim().equals("")){}else{
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -1185,7 +1185,7 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1227,7 +1227,7 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_brng,5),signed)),0) from tokobarang  ","BT",6,kode_brng);
         kode_brng.requestFocus();
     }
-    
+
     public void onCari(){
         TCari.requestFocus();
     }
@@ -1252,21 +1252,21 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,185));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettoko_barang());
         BtnHapus.setEnabled(akses.gettoko_barang());
@@ -1279,8 +1279,8 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
         TCari.requestFocus();
     }
-    
-   private void isHitung() {   
+
+   private void isHitung() {
         if(this.isVisible()==true){
             try {
                 if (!beli.getText().equals("")) {
@@ -1305,9 +1305,9 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-        }            
+        }
     }
-    
+
    private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1333,7 +1333,7 @@ private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

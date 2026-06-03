@@ -5,12 +5,12 @@
 
 package rekammedis;
 import fungsi.WarnaTableEWSNeonatus;
-import java.awt.Color;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -50,7 +50,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -116,11 +116,11 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             }else if(i==17){
                  column.setPreferredWidth(39);
             }else if(i==18){
-                 column.setPreferredWidth(80);     
+                 column.setPreferredWidth(80);
             }else if(i==19){
                  column.setPreferredWidth(39);
             }else if(i==20){
-                 column.setPreferredWidth(80);     
+                 column.setPreferredWidth(80);
             }else if(i==21){
                  column.setPreferredWidth(39);
             }else if(i==22){
@@ -136,18 +136,18 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             }else{
                  column.setMinWidth(0);
                  column.setMaxWidth(0);
-            } 
+            }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTableEWSNeonatus());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -1021,7 +1021,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1048,9 +1048,9 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
         }else if(Skor6.getText().trim().equals("")){
             Valid.textKosong(Skor6,"Skor 6");
         }else if(Skor7.getText().trim().equals("")){
-            Valid.textKosong(Skor7,"Skor 7");    
+            Valid.textKosong(Skor7,"Skor 7");
         }else if(Skor8.getText().trim().equals("")){
-            Valid.textKosong(Skor8,"Skor 8");    
+            Valid.textKosong(Skor8,"Skor 8");
         }else{
             if(akses.getkode().equals("Admin Utama")){
                 simpan();
@@ -1075,7 +1075,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1100,7 +1100,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }          
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1127,13 +1127,13 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
               Valid.MyReportqry("rptDataPemantauanEWSNeonatus.jasper","report","::[ Data Pemantauan EWS Neonatus ]::",
@@ -1161,7 +1161,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
                     "where pemantauan_ews_neonatus.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
                     "(reg_periksa.no_rawat like '%"+TCari.getText()+"%' or pasien.no_rkm_medis like '%"+TCari.getText()+"%' or pasien.nm_pasien like '%"+TCari.getText()+"%' or pemantauan_ews_neonatus.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%') "+
                     "order by pemantauan_ews_neonatus.tanggal ",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1298,8 +1298,8 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("diagnosa",Sequel.cariIsi("select kamar_inap.diagnosa_awal from kamar_inap where kamar_inap.diagnosa_awal<>'' and kamar_inap.no_rawat=? ",TNoRw.getText()));
             Valid.MyReportqry("rptFormulirPemantauanEWSNeonatus.jasper","report","::[ Pemantauan EWS Neonatus ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pemantauan_ews_neonatus.tanggal,"+
@@ -1370,9 +1370,9 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
         }else if(Skor6.getText().trim().equals("")){
             Valid.textKosong(Skor6,"Skor 6");
         }else if(Skor7.getText().trim().equals("")){
-            Valid.textKosong(Skor7,"Skor 7");    
+            Valid.textKosong(Skor7,"Skor 7");
         }else if(Skor8.getText().trim().equals("")){
-            Valid.textKosong(Skor8,"Skor 8");    
+            Valid.textKosong(Skor8,"Skor 8");
         }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
@@ -1393,8 +1393,8 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
-        } 
+            }
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1412,7 +1412,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
     private void cmbSkor4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSkor4ItemStateChanged
         isCombo4();
         isjml();
-        isHitung();    
+        isHitung();
     }//GEN-LAST:event_cmbSkor4ItemStateChanged
 
     private void cmbSkor4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbSkor4KeyPressed
@@ -1422,11 +1422,11 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
     private void cmbSkor5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSkor5ItemStateChanged
         isCombo5();
         isjml();
-        isHitung();    
+        isHitung();
     }//GEN-LAST:event_cmbSkor5ItemStateChanged
 
     private void cmbSkor5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbSkor5KeyPressed
-        Valid.pindah(evt, cmbSkor4,cmbSkor6);   
+        Valid.pindah(evt, cmbSkor4,cmbSkor6);
     }//GEN-LAST:event_cmbSkor5KeyPressed
 
     private void cmbSkor6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSkor6ItemStateChanged
@@ -1586,7 +1586,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1617,7 +1617,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
                     "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or pemantauan_ews_neonatus.nip like ? or petugas.nama like ?) "+
                     "order by pemantauan_ews_neonatus.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1631,7 +1631,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1657,7 +1657,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void isCombo1(){
         if(cmbSkor1.getSelectedItem().equals("<= 29")){
             Skor1.setBackground(Color.RED);
@@ -1677,7 +1677,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor1.setText("2");
         }
     }
-    
+
     private void isCombo2(){
         if(cmbSkor2.getSelectedItem().equals(">= 94")){
             Skor2.setBackground(Color.WHITE);
@@ -1689,23 +1689,23 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor2.setText("1");
         }else if(cmbSkor2.getSelectedItem().equals("<= 90")){
             Skor2.setBackground(Color.RED);
-            Skor2.setForeground(Color.WHITE); 
+            Skor2.setForeground(Color.WHITE);
             Skor2.setText("2");
         }
     }
-    
+
     private void isCombo3(){
         if(cmbSkor3.getSelectedItem().equals("Ya")){
             Skor3.setBackground(Color.RED);
             Skor3.setForeground(Color.WHITE);
-            Skor3.setText("2");   
+            Skor3.setText("2");
         }else{
             Skor3.setBackground(Color.WHITE);
             Skor3.setForeground(new Color(50,50,50));
             Skor3.setText("0");
         }
     }
-    
+
     private void isCombo4(){
         if(cmbSkor4.getSelectedItem().equals("<= 80")){
             Skor4.setBackground(Color.RED);
@@ -1729,7 +1729,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor4.setText("2");
         }
     }
-    
+
     private void isCombo5(){
         if(cmbSkor5.getSelectedItem().equals("Berat")){
             Skor5.setBackground(Color.RED);
@@ -1745,7 +1745,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor5.setText("0");
         }
     }
-    
+
     private void isCombo6(){
         if(cmbSkor6.getSelectedItem().equals(">= 3 Detik")){
             Skor6.setBackground(Color.YELLOW);
@@ -1756,8 +1756,8 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor6.setForeground(new Color(50,50,50));
             Skor6.setText("0");
         }
-    } 
-    
+    }
+
     private void isCombo7(){
         if(cmbSkor7.getSelectedItem().equals("<= 36,5")){
             Skor7.setBackground(Color.YELLOW);
@@ -1772,8 +1772,8 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor7.setForeground(Color.GREEN);
             Skor7.setText("1");
         }
-    }  
-    
+    }
+
     private void isCombo8(){
        if(cmbSkor8.getSelectedItem().equals("Pucat")){
             Skor8.setBackground(Color.RED);
@@ -1785,7 +1785,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor8.setText("0");
         }
     }
-    
+
     private void isjml(){
         if((!Skor1.getText().equals(""))&&(!Skor2.getText().equals(""))&&(!Skor3.getText().equals(""))&&(!Skor4.getText().equals(""))&&(!Skor5.getText().equals(""))&&(!Skor6.getText().equals(""))&&(!Skor7.getText().equals(""))){
             TotalSkor.setText(Valid.SetAngka2(
@@ -1799,7 +1799,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             ));
         }
     }
-    
+
     private void isHitung(){
         if(Integer.parseInt(TotalSkor.getText())>6){
             ParameterSkor.setText("Petugas : Panggilan Darurat, Monitoring : Berkelanjutan, Tindakan : Menghubungi tim emergency jaga/aktifkan Code Blue");
@@ -1817,7 +1817,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             ParameterSkor.setText("Beresiko rendah, ulangi setiap 7 jam");
         }
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         cmbSkor1.setSelectedIndex(2);
@@ -1856,7 +1856,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
         ParameterSkor.setText("Beresiko rendah, ulangi setiap 7 jam");
         cmbCodeBlue.setSelectedIndex(0);
         cmbSkor1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1866,9 +1866,9 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             cmbSkor1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Skor1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Skor1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             cmbSkor2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Skor2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());  
+            Skor2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             cmbSkor3.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Skor3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             cmbSkor4.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
@@ -1881,17 +1881,17 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             Skor7.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
             cmbSkor8.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
             Skor8.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());  
-            ParameterSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());  
-            cmbCodeBlue.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());  
+            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
+            ParameterSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
+            cmbCodeBlue.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(14,16));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(17,19));
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -1923,36 +1923,36 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,265));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpemantauan_ews_neonatus());
         BtnHapus.setEnabled(akses.getpemantauan_ews_neonatus());
         BtnEdit.setEnabled(akses.getpemantauan_ews_neonatus());
-        BtnPrint.setEnabled(akses.getpemantauan_ews_neonatus()); 
+        BtnPrint.setEnabled(akses.getpemantauan_ews_neonatus());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1962,8 +1962,8 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
-    
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -1975,7 +1975,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -1985,7 +1985,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -2028,7 +2028,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
 
     private void ganti() {
         isCombo1();
@@ -2083,7 +2083,7 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void hapus() {
         if(Sequel.queryu2tf("delete from pemantauan_ews_neonatus where tanggal=? and no_rawat=?",2,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -2123,9 +2123,9 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        }  
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2151,11 +2151,10 @@ public final class RMPemantauanEWSNeonatus extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-

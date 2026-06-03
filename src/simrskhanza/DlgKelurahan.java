@@ -64,7 +64,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Nama Kelurahan","Kode"};
         tabMode=new DefaultTableModel(null,row){
@@ -452,7 +452,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -474,7 +474,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -515,7 +515,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             file=new File("./cache/masterkelurahan.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -523,7 +523,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
             ps=koneksi.prepareStatement("select kelurahan.nm_kel,kelurahan.kd_kel from kelurahan");
             try {
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});
                     iyembuilder.append("{\"NamaKel\":\"").append(rs.getString(1)).append("\",\"KodeKel\":\"").append(rs.getString(2)).append("\"},");
                 }
@@ -542,7 +542,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
                 fileWriter.write("{\"masterkelurahan\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -552,7 +552,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/masterkelurahan.iyem");
@@ -605,7 +605,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public String tampil3(String nama) {
         try {
             if(Valid.daysOld("./cache/masterkelurahan.iyem")>7){
@@ -616,7 +616,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
                 runBackground(() ->tampil());
             }
         }
-        
+
         String iyem="";
         try {
             myObj = new FileReader("./cache/masterkelurahan.iyem");
@@ -654,16 +654,16 @@ public class DlgKelurahan extends javax.swing.JDialog {
             Nama.setText(tbkelurahan.getValueAt(tbkelurahan.getSelectedRow(),0).toString());
         }
     }
-    
+
     public JTable getTable() {
         return tbkelurahan;
     }
-    
+
     public void onCari(){
         TCari.setText("");
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -689,7 +689,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

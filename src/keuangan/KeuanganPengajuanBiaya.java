@@ -12,11 +12,11 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -137,10 +136,10 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         Jumlah.setDocument(new batasInput((byte)4).getOnlyAngka(Jumlah));
         Harga.setDocument(new batasInput((byte)20).getOnlyAngka(Harga));
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         Harga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -157,7 +156,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
                 isHitung();
             }
         });
-        
+
         Jumlah.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -846,7 +845,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
             Valid.textKosong(Keterangan,"Keterangan");
         }else{
             if(Sequel.menyimpantf("pengajuan_biaya","?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",14,new String[]{
-                    NoPengajuan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),Urgensi.getSelectedItem().toString(), 
+                    NoPengajuan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),Urgensi.getSelectedItem().toString(),
                     Uraian.getText(),Tujuan.getText(),TargetSasaran.getText(),Lokasi.getText(),Jumlah.getText(),Harga.getText(),
                     Double.toString(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())),Keterangan.getText(),
                     KdPetugasPJ.getText(),"Proses Pengajuan"
@@ -873,7 +872,7 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -967,14 +966,14 @@ public final class KeuanganPengajuanBiaya extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPengajuanBiaya.jasper","report","::[ Data Pengajuan Biaya ]::",
                    "select pengajuan_biaya.no_pengajuan,pengajuan_biaya.tanggal,pengajuan_biaya.nik,peg1.nama as namapengaju,"+
                    "peg1.bidang,peg1.departemen,pengajuan_biaya.urgensi,pengajuan_biaya.uraian_latar_belakang,pengajuan_biaya.tujuan_pengajuan,"+
@@ -1052,7 +1051,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_KdPetugasKeyPressed
@@ -1072,7 +1071,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                     Bidang.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),6).toString());
                     Departemen.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),5).toString());
                     btnPetugas.requestFocus();
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1146,7 +1145,7 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     KdPetugasPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugasPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     btnPetugasPJ.requestFocus();
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1315,7 +1314,7 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     ps.setString(13,"%"+TCari.getText().trim()+"%");
                     ps.setString(14,"%"+TCari.getText().trim()+"%");
                     ps.setString(15,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
@@ -1385,16 +1384,16 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,205));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpengajuan_biaya());
         BtnHapus.setEnabled(akses.getpengajuan_biaya());
@@ -1404,14 +1403,14 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             btnPetugas.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
-        }  
+        }
     }
-    
+
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pengajuan_biaya.no_pengajuan,3),signed)),0) from pengajuan_biaya where pengajuan_biaya.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "PK"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan); 
+                "PK"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan);
     }
-    
+
     private void isHitung(){
         if((!Harga.getText().equals(""))&&(!Jumlah.getText().equals(""))){
             Total.setText(Valid.SetAngka(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())));
@@ -1421,7 +1420,7 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void ganti() {
         if(Sequel.mengedittf("pengajuan_biaya","no_pengajuan=?","no_pengajuan=?,tanggal=?,nik=?,urgensi=?,uraian_latar_belakang=?,tujuan_pengajuan=?,"+
                 "target_sasaran=?,lokasi_kegiatan=?,jumlah=?,harga=?,total=?,keterangan=?,nik_pj=?",14,new String[]{
-                NoPengajuan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),Urgensi.getSelectedItem().toString(), 
+                NoPengajuan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),Urgensi.getSelectedItem().toString(),
                 Uraian.getText(),Tujuan.getText(),TargetSasaran.getText(),Lokasi.getText(),Jumlah.getText(),Harga.getText(),
                 Double.toString(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())),Keterangan.getText(),KdPetugasPJ.getText(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -1447,7 +1446,7 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 hitung();
         }
     }
-    
+
     private void hitung(){
         total=0;
         for(i=0;i<tabMode.getRowCount();i++){
@@ -1467,7 +1466,7 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;

@@ -7,11 +7,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -50,7 +50,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private String link="",json="";
     private ApiSatuSehat api=new ApiSatuSehat();
@@ -106,7 +106,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeKamar=new DefaultTableModel(null,new Object[]{
                 "Nomor Ruang","Kamar/Ruang","ID Lokasi Satu Sehat","Longitude","Latitude","Altitude",
                 "Kode Departemen","Nama Departemen","ID Organisasi Satu Sehat"
@@ -141,7 +141,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbLokasiKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRuangOK=new DefaultTableModel(null,new Object[]{
                 "ID Lokasi Satu Sehat","Longitude","Latitude","Altitude","Kode Departemen","Nama Departemen","ID Organisasi Satu Sehat"
             }){
@@ -201,7 +201,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbLokasiRuangLabPK.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRuangLabPA=new DefaultTableModel(null,new Object[]{
                 "ID Lokasi Satu Sehat","Longitude","Latitude","Altitude","Kode Departemen","Nama Departemen","ID Organisasi Satu Sehat"
             }){
@@ -231,7 +231,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbLokasiRuangLabPA.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRuangLabMB=new DefaultTableModel(null,new Object[]{
                 "ID Lokasi Satu Sehat","Longitude","Latitude","Altitude","Kode Departemen","Nama Departemen","ID Organisasi Satu Sehat"
             }){
@@ -261,7 +261,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbLokasiRuangLabMB.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRuangRadiologi=new DefaultTableModel(null,new Object[]{
                 "ID Lokasi Satu Sehat","Longitude","Latitude","Altitude","Kode Departemen","Nama Departemen","ID Organisasi Satu Sehat"
             }){
@@ -291,7 +291,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbLokasiRuangRadiologi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRuangFarmasi=new DefaultTableModel(null,new Object[]{
                 "Kode Farmasi","Nama Depo Farmasi","ID Lokasi Satu Sehat","Longitude","Latitude","Altitude",
                 "Kode Departemen","Nama Departemen","ID Organisasi Satu Sehat"
@@ -326,18 +326,18 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             }
         }
         tbLokasiFarmasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        KodeDepartemen.setDocument(new batasInput((byte)5).getKata(KodeDepartemen)); 
-        Longitude.setDocument(new batasInput((byte)30).getKata(Longitude)); 
-        Latitude.setDocument(new batasInput((byte)30).getKata(Latitude)); 
-        Altitude.setDocument(new batasInput((byte)30).getKata(Altitude)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+
+        KodeDepartemen.setDocument(new batasInput((byte)5).getKata(KodeDepartemen));
+        Longitude.setDocument(new batasInput((byte)30).getKata(Longitude));
+        Latitude.setDocument(new batasInput((byte)30).getKata(Latitude));
+        Altitude.setDocument(new batasInput((byte)30).getKata(Altitude));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         try {
             link=koneksiDB.URLFHIRSATUSEHAT();
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }  
+        }
     }
 
     /** This method is called from within the constructor to
@@ -1764,11 +1764,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){   
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemen.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemen.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemen.requestFocus();        
+                    KodeDepartemen.requestFocus();
                 }
             }
             @Override
@@ -1905,11 +1905,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }               
+                }
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(KodeDepartemenKamar.getText().trim().equals("")||NamaDepartemenKamar.getText().trim().equals("")){
@@ -2025,11 +2025,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }               
+                }
             }
         }else if(TabRawat.getSelectedIndex()==2){
             if(tabModeRuangOK.getRowCount()==0){
@@ -2143,11 +2143,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }               
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Untuk Ruang OK hanya diijinkan satu mapping lokasi");
@@ -2264,11 +2264,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }               
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Untuk Ruang Lab PK hanya diijinkan satu mapping lokasi");
@@ -2385,11 +2385,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }               
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Untuk Ruang Lab PA hanya diijinkan satu mapping lokasi");
@@ -2506,11 +2506,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }               
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Untuk Ruang Lab MB hanya diijinkan satu mapping lokasi");
@@ -2627,11 +2627,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }               
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Untuk Ruang Lab MB hanya diijinkan satu mapping lokasi");
@@ -2751,11 +2751,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }               
+                }
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -2896,11 +2896,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }  
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Silahkan pilih data terlebih dahulu..!!");
             }
@@ -3004,11 +3004,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }  
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Silahkan pilih data terlebih dahulu..!!");
             }
@@ -3121,12 +3121,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==3){
             if(KodeDepartemenRuangLabPK.getText().trim().equals("")||NamaDepartemenRuangLabPK.getText().trim().equals("")){
@@ -3237,12 +3237,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==4){
             if(KodeDepartemenRuangLabPA.getText().trim().equals("")||NamaDepartemenRuangLabPA.getText().trim().equals("")){
@@ -3353,12 +3353,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==5){
             if(KodeDepartemenRuangLabMB.getText().trim().equals("")||NamaDepartemenRuangLabMB.getText().trim().equals("")){
@@ -3469,12 +3469,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==6){
             if(KodeDepartemenRuangRadiologi.getText().trim().equals("")||NamaDepartemenRuangRadiologi.getText().trim().equals("")){
@@ -3585,12 +3585,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==7){
             if(tbLokasiFarmasi.getSelectedRow()>-1){
@@ -3693,15 +3693,15 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }  
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Silahkan pilih data terlebih dahulu..!!");
             }
-        }     
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -3834,12 +3834,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(KodeDepartemenKamar.getText().trim().equals("")||NamaDepartemenKamar.getText().trim().equals("")){
@@ -3961,12 +3961,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==2){
             if(KodeDepartemenRuangOK.getText().trim().equals("")||NamaDepartemenRuangOK.getText().trim().equals("")){
@@ -4084,12 +4084,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==3){
             if(KodeDepartemenRuangLabPK.getText().trim().equals("")||NamaDepartemenRuangLabPK.getText().trim().equals("")){
@@ -4207,12 +4207,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==4){
             if(KodeDepartemenRuangLabPA.getText().trim().equals("")||NamaDepartemenRuangLabPA.getText().trim().equals("")){
@@ -4330,12 +4330,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==5){
             if(KodeDepartemenRuangLabMB.getText().trim().equals("")||NamaDepartemenRuangLabMB.getText().trim().equals("")){
@@ -4453,12 +4453,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==6){
             if(KodeDepartemenRuangRadiologi.getText().trim().equals("")||NamaDepartemenRuangRadiologi.getText().trim().equals("")){
@@ -4576,12 +4576,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }else if(TabRawat.getSelectedIndex()==7){
             if(KodeDepartemenFarmasi.getText().trim().equals("")||NamaDepartemenFarmasi.getText().trim().equals("")){
@@ -4704,12 +4704,12 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                             }
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
-                        } 
+                        }
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                    }  
-                }                
+                    }
+                }
             }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
@@ -4738,17 +4738,17 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabMode.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabMode.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     param.put("parameter","%"+TCari.getText().trim()+"%");
-                    Valid.MyReport("rptMapingLokasiSatuSehat.jasper","report","::[ Mapping Poli/Lokasi Satu Sehat Kemenkes ]::",param);            
+                    Valid.MyReport("rptMapingLokasiSatuSehat.jasper","report","::[ Mapping Poli/Lokasi Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==1){
@@ -4756,17 +4756,17 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeKamar.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeKamar.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeKamar.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     param.put("parameter","%"+TCari.getText().trim()+"%");
-                    Valid.MyReport("rptMapingLokasiSatuSehat2.jasper","report","::[ Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes ]::",param);            
+                    Valid.MyReport("rptMapingLokasiSatuSehat2.jasper","report","::[ Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==2){
@@ -4774,16 +4774,16 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeRuangOK.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeRuangOK.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeRuangOK.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptMapingLokasiSatuSehat3.jasper","report","::[ Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes ]::",param);            
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                    Valid.MyReport("rptMapingLokasiSatuSehat3.jasper","report","::[ Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==3){
@@ -4791,16 +4791,16 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeRuangLabPK.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeRuangLabPK.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeRuangLabPK.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptMapingLokasiSatuSehat4.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes ]::",param);            
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                    Valid.MyReport("rptMapingLokasiSatuSehat4.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==4){
@@ -4808,16 +4808,16 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeRuangLabPA.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeRuangLabPA.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeRuangLabPA.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptMapingLokasiSatuSehat5.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes ]::",param);            
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                    Valid.MyReport("rptMapingLokasiSatuSehat5.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==5){
@@ -4825,16 +4825,16 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeRuangLabMB.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeRuangLabMB.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeRuangLabMB.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptMapingLokasiSatuSehat6.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes ]::",param);            
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                    Valid.MyReport("rptMapingLokasiSatuSehat6.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==6){
@@ -4842,16 +4842,16 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeRuangRadiologi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeRuangRadiologi.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeRuangRadiologi.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptMapingLokasiSatuSehat7.jasper","report","::[ Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes ]::",param);            
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                    Valid.MyReport("rptMapingLokasiSatuSehat7.jasper","report","::[ Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==7){
@@ -4859,20 +4859,20 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             if(tabModeRuangFarmasi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
-            }else if(tabModeRuangFarmasi.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabModeRuangFarmasi.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     param.put("parameter","%"+TCari.getText().trim()+"%");
-                    Valid.MyReport("rptMapingLokasiSatuSehat8.jasper","report","::[ Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes ]::",param);            
+                    Valid.MyReport("rptMapingLokasiSatuSehat8.jasper","report","::[ Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
-        }     
+        }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -4975,7 +4975,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     KodePoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NamaPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -4989,7 +4989,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
@@ -5029,11 +5029,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){   
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenKamar.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenKamar.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiKamar.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemenKamar.requestFocus();     
+                    KodeDepartemenKamar.requestFocus();
                 }
             }
             @Override
@@ -5063,10 +5063,10 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){   
-                    KodeKamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());  
-                    NamaKamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),3).toString()); 
-                }  
+                if(kamar.getTable().getSelectedRow()!= -1){
+                    KodeKamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
+                    NamaKamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),3).toString());
+                }
                 KodeKamar.requestFocus();
             }
             @Override
@@ -5078,7 +5078,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -5157,11 +5157,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){    
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenRuangOK.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenRuangOK.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiRuangOK.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemenRuangOK.requestFocus();        
+                    KodeDepartemenRuangOK.requestFocus();
                 }
             }
             @Override
@@ -5223,11 +5223,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){ 
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenRuangLabPK.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenRuangLabPK.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiRuangLabPK.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemenRuangLabPK.requestFocus();         
+                    KodeDepartemenRuangLabPK.requestFocus();
                 }
             }
             @Override
@@ -5289,11 +5289,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){ 
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenRuangLabPA.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenRuangLabPA.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiRuangLabPA.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemenRuangLabPA.requestFocus();        
+                    KodeDepartemenRuangLabPA.requestFocus();
                 }
             }
             @Override
@@ -5355,11 +5355,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){   
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenRuangLabMB.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenRuangLabMB.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiRuangLabMB.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemenRuangLabMB.requestFocus();        
+                    KodeDepartemenRuangLabMB.requestFocus();
                 }
             }
             @Override
@@ -5421,11 +5421,11 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){   
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenRuangRadiologi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenRuangRadiologi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiRuangRadiologi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
-                    KodeDepartemenRuangRadiologi.requestFocus();    
+                    KodeDepartemenRuangRadiologi.requestFocus();
                 }
             }
             @Override
@@ -5487,7 +5487,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(organisasi.getTable().getSelectedRow()!= -1){ 
+                if(organisasi.getTable().getSelectedRow()!= -1){
                     KodeDepartemenFarmasi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),0).toString());
                     NamaDepartemenFarmasi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),1).toString());
                     IDOrganisasiFarmasi.setText(organisasi.getTable().getValueAt(organisasi.getTable().getSelectedRow(),2).toString());
@@ -5521,7 +5521,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                    
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     KodeFarmasi.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     NamaFarmasi.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
                 }
@@ -5535,7 +5535,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         bangsal.isCek();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
@@ -5859,7 +5859,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             NamaDepartemenFarmasi.setText("");
             IDOrganisasiFarmasi.setText("");
             btnFarmasi.requestFocus();
-        }        
+        }
     }
 
     private void getData() {
@@ -5874,7 +5874,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
         }
     }
-    
+
     private void getDataKamar() {
        if(tbLokasiKamar.getSelectedRow()!= -1){
            KodeKamar.setText(tbLokasiKamar.getValueAt(tbLokasiKamar.getSelectedRow(),0).toString());
@@ -5887,14 +5887,14 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiKamar.setText(tbLokasiKamar.getValueAt(tbLokasiKamar.getSelectedRow(),8).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_lokasi());
         BtnHapus.setEnabled(akses.getsatu_sehat_mapping_lokasi());
         BtnEdit.setEnabled(akses.getsatu_sehat_mapping_lokasi());
         BtnPrint.setEnabled(akses.getsatu_sehat_mapping_lokasi());
     }
-    
+
     private void tampilkamar() {
         Valid.tabelKosong(tabModeKamar);
         try{
@@ -5937,7 +5937,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeKamar.getRowCount());
     }
-    
+
     private void tampilruangok() {
         Valid.tabelKosong(tabModeRuangOK);
         try{
@@ -5971,7 +5971,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeRuangOK.getRowCount());
     }
-    
+
     private void tampilruanglabpk() {
         Valid.tabelKosong(tabModeRuangLabPK);
         try{
@@ -6005,7 +6005,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeRuangLabPK.getRowCount());
     }
-    
+
     private void tampilruanglabpa() {
         Valid.tabelKosong(tabModeRuangLabPA);
         try{
@@ -6039,7 +6039,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeRuangLabPA.getRowCount());
     }
-    
+
     private void tampilruanglabmb() {
         Valid.tabelKosong(tabModeRuangLabMB);
         try{
@@ -6073,7 +6073,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeRuangLabMB.getRowCount());
     }
-    
+
     private void tampilruangradiologi() {
         Valid.tabelKosong(tabModeRuangRadiologi);
         try{
@@ -6107,7 +6107,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeRuangRadiologi.getRowCount());
     }
-    
+
     private void tampilruangfarmasi() {
         Valid.tabelKosong(tabModeRuangFarmasi);
         try{
@@ -6149,7 +6149,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabModeRuangFarmasi.getRowCount());
     }
-    
+
     private void getDataRuangOK() {
        if(tbLokasiRuangOK.getSelectedRow()!= -1){
            LongitudeRuangOK.setText(tbLokasiRuangOK.getValueAt(tbLokasiRuangOK.getSelectedRow(),1).toString());
@@ -6160,7 +6160,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiRuangOK.setText(tbLokasiRuangOK.getValueAt(tbLokasiRuangOK.getSelectedRow(),6).toString());
         }
     }
-    
+
     private void getDataRuangLabPK() {
        if(tbLokasiRuangLabPK.getSelectedRow()!= -1){
            LongitudeRuangLabPK.setText(tbLokasiRuangLabPK.getValueAt(tbLokasiRuangLabPK.getSelectedRow(),1).toString());
@@ -6171,7 +6171,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiRuangLabPK.setText(tbLokasiRuangLabPK.getValueAt(tbLokasiRuangLabPK.getSelectedRow(),6).toString());
         }
     }
-    
+
     private void getDataRuangLabPA() {
        if(tbLokasiRuangLabPA.getSelectedRow()!= -1){
            LongitudeRuangLabPA.setText(tbLokasiRuangLabPA.getValueAt(tbLokasiRuangLabPA.getSelectedRow(),1).toString());
@@ -6182,7 +6182,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiRuangLabPA.setText(tbLokasiRuangLabPA.getValueAt(tbLokasiRuangLabPA.getSelectedRow(),6).toString());
         }
     }
-    
+
     private void getDataRuangLabMB() {
        if(tbLokasiRuangLabMB.getSelectedRow()!= -1){
            LongitudeRuangLabMB.setText(tbLokasiRuangLabMB.getValueAt(tbLokasiRuangLabMB.getSelectedRow(),1).toString());
@@ -6193,7 +6193,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiRuangLabMB.setText(tbLokasiRuangLabMB.getValueAt(tbLokasiRuangLabMB.getSelectedRow(),6).toString());
         }
     }
-    
+
     private void getDataRuangRadiologi() {
        if(tbLokasiRuangRadiologi.getSelectedRow()!= -1){
            LongitudeRuangRadiologi.setText(tbLokasiRuangRadiologi.getValueAt(tbLokasiRuangRadiologi.getSelectedRow(),1).toString());
@@ -6204,7 +6204,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiRuangRadiologi.setText(tbLokasiRuangRadiologi.getValueAt(tbLokasiRuangRadiologi.getSelectedRow(),6).toString());
         }
     }
-    
+
     private void getDataRuangFarmasi() {
        if(tbLokasiFarmasi.getSelectedRow()!= -1){
            KodeFarmasi.setText(tbLokasiFarmasi.getValueAt(tbLokasiFarmasi.getSelectedRow(),0).toString());
@@ -6217,7 +6217,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
            IDOrganisasiFarmasi.setText(tbLokasiFarmasi.getValueAt(tbLokasiFarmasi.getSelectedRow(),8).toString());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -6243,7 +6243,7 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

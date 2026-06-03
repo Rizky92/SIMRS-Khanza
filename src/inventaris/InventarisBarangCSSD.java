@@ -12,11 +12,11 @@
 package inventaris;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -47,7 +47,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi(); 
+    private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -61,7 +61,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Inventaris","Kode Barang","Nama Barang","Ruang","Kategori"
@@ -89,7 +89,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             }
         }
         tbSpesialis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -523,7 +523,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisMouseClicked
 
@@ -533,7 +533,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -568,7 +568,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void no_inventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_inventarisKeyPressed
-        
+
     }//GEN-LAST:event_no_inventarisKeyPressed
 
     private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
@@ -580,10 +580,10 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(inventaris.getTable().getSelectedRow()!= -1){                   
+                if(inventaris.getTable().getSelectedRow()!= -1){
                     no_inventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
                     nama_barang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -594,7 +594,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         inventaris.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -632,7 +632,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("parameter","%"+TCari.getText()+"%"); 
+            param.put("parameter","%"+TCari.getText()+"%");
             Valid.MyReport("rptBarangCSSD.jasper","report","::[ Barang CSSD ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -742,7 +742,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -767,13 +767,13 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getbarang_cssd());
         BtnHapus.setEnabled(akses.getbarang_cssd());
         BtnEdit.setEnabled(akses.getbarang_cssd());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -799,7 +799,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

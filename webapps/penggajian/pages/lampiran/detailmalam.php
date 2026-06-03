@@ -75,7 +75,7 @@
                     $id                 = validTeks(trim($_POST['id']));
                     $tgl                = $tahun."-".$bulan."-01";
                     $jml                = validangka(trim($_POST['jml']));
-                    
+
                     if ((isset($id))&&(isset($jml))) {
                         switch($action) {
                             case "TAMBAH":
@@ -109,7 +109,7 @@
                             <td width='10%'><div align='center'>Proses</div></td>
                             <td width='90%'><div align='center'>Jml.Tambahan Jaga</div></td>
                         </tr>";
-                while($baris = mysqli_fetch_array($hasil)) {                        
+                while($baris = mysqli_fetch_array($hasil)) {
                   echo "<tr class='isi'>
                             <td width='70'>
                                 <center>"; ?>
@@ -135,9 +135,9 @@
 
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah </div></td>                        
-                    </tr>     
-                 </table>");   
+                        <td><div align='left'>Data : $jumlah </div></td>
+                    </tr>
+                 </table>");
         ?>
     </div>
 

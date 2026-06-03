@@ -4,11 +4,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,8 +35,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import kepegawaian.DlgCariPetugas;
 import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPetugas;
 
 
 /**
@@ -51,7 +50,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -118,11 +117,11 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
         Keluar.setDocument(new batasInput((int)200).getKata(Keluar));
         Instruksi.setDocument(new batasInput((int)200).getKata(Instruksi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -864,7 +863,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -888,7 +887,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -958,14 +957,14 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptBromageScorePascaAnestesi.jasper","report","::[ Data Monitoring Bromage Score Pasca Anestesi ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,skor_bromage_pasca_anestesi.tanggal,"+
@@ -990,7 +989,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                     "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
                     "or skor_bromage_pasca_anestesi.kd_dokter like '%"+TCari.getText().trim()+"%' or dokter.nm_dokter like '%"+TCari.getText().trim()+"%' or skor_bromage_pasca_anestesi.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
                     "order by skor_bromage_pasca_anestesi.tanggal ",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1051,16 +1050,16 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),10).toString():finger)+"\n"+Tanggal.getSelectedItem());
             finger2=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),12).toString():finger2)+"\n"+Tanggal.getSelectedItem());
             try {
-                param.put("gambar",getClass().getResource("/picture/bromage_score.png").openStream()); 
+                param.put("gambar",getClass().getResource("/picture/bromage_score.png").openStream());
             } catch (Exception e) {
-            } 
+            }
             Valid.MyReportqry("rptMonitoringBromageScore.jasper","report","::[ Monitoring Bromage Score Pasca Anestesi ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,skor_bromage_pasca_anestesi.tanggal,"+
                     "skor_bromage_pasca_anestesi.penilaian_skala1,skor_bromage_pasca_anestesi.penilaian_nilai1,skor_bromage_pasca_anestesi.keluar,"+
@@ -1355,7 +1354,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     private widget.ScrollPane scrollPane2;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1381,7 +1380,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                     "skor_bromage_pasca_anestesi.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or skor_bromage_pasca_anestesi.kd_dokter like ? or dokter.nm_dokter like ? or skor_bromage_pasca_anestesi.nip like ? or petugas.nama like ?) "+
                     "order by skor_bromage_pasca_anestesi.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1397,7 +1396,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                     ps.setString(8,"%"+TCari.getText()+"%");
                     ps.setString(9,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1421,7 +1420,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         SkalaKriteria.setSelectedIndex(3);
@@ -1430,11 +1429,11 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
         Keluar.setText("");
         Instruksi.setText("");
         SkalaKriteria.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
@@ -1451,7 +1450,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -1482,7 +1481,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1492,33 +1491,33 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             if(internalFrame1.getHeight()>615){
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,443));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }else{
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskor_bromage_pasca_anestesi());
         BtnHapus.setEnabled(akses.getskor_bromage_pasca_anestesi());
         BtnEdit.setEnabled(akses.getskor_bromage_pasca_anestesi());
-        BtnPrint.setEnabled(akses.getskor_bromage_pasca_anestesi()); 
+        BtnPrint.setEnabled(akses.getskor_bromage_pasca_anestesi());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1528,8 +1527,8 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }   
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -1551,7 +1550,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1631,7 +1630,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isTotalResiko(){
         try {
             if(Integer.parseInt(NilaiKriteria.getText())<=2){
@@ -1655,9 +1654,9 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             });
             emptTeks();
             LCount.setText(""+tabMode.getRowCount());
-        }  
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1683,7 +1682,7 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

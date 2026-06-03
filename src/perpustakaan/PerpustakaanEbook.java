@@ -59,46 +59,46 @@ import javax.swing.event.DocumentEvent;
 public class PerpustakaanEbook extends javax.swing.JDialog {
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
- 
+
     private final JLabel lblStatus = new JLabel();
 
     private final JTextField txtURL = new JTextField();
     private final JProgressBar progressBar = new JProgressBar();
-    private final Properties prop = new Properties(); 
+    private final Properties prop = new Properties();
     private final validasi Valid=new validasi();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     public PerpustakaanEbook(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         initComponents2();
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
-    private void initComponents2() {           
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             runBackground(() ->loadURL(txtURL.getText()));
         });
-  
+
         progressBar.setPreferredSize(new Dimension(150, 18));
         progressBar.setStringPainted(true);
-        
+
         panel.add(jfxPanel, BorderLayout.CENTER);
-        
-        internalFrame1.add(panel);        
+
+        internalFrame1.add(panel);
     }
-    
-     private void createScene() {        
+
+     private void createScene() {
         Platform.runLater(new Runnable() {
 
             public void run() {
                 WebView view = new WebView();
-                
+
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
-                
+
                 engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -106,27 +106,27 @@ public class PerpustakaanEbook extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         PerpustakaanEbook.this.setTitle(newValue);
                     });
                 });
-                
-                
+
+
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
+
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -140,14 +140,14 @@ public class PerpustakaanEbook extends javax.swing.JDialog {
                         });
                     }
                 });
-                
-                
+
+
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 engine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
                     @Override
                     public void changed(ObservableValue ov, State oldState, State newState) {
@@ -165,34 +165,34 @@ public class PerpustakaanEbook extends javax.swing.JDialog {
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
- 
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             try {
                 engine.load(url);
             }catch (Exception exception) {
                 engine.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
-    
+
     public void print(final Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
@@ -208,7 +208,7 @@ public class PerpustakaanEbook extends javax.swing.JDialog {
             }
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -373,10 +373,10 @@ public class PerpustakaanEbook extends javax.swing.JDialog {
         try {
             if(engine.getLocation().contains("List")){
                 runBackground(() ->loadURL("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"ebook/index.php?act=List&action=TAMBAH&keyword="+TCari.getText().replaceAll(" ","_")));
-            }                
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
-        }        
+        }
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -488,7 +488,7 @@ public class PerpustakaanEbook extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -5,7 +5,7 @@
     require_once('../../conf/conf.php');
 
     function getKey() {
-       $keyRS = "d9fb63486350ddaf053d4ea58bda1ccbe56f7aebcad95cbb810ed37ed39ad6d3";   
+       $keyRS = "d9fb63486350ddaf053d4ea58bda1ccbe56f7aebcad95cbb810ed37ed39ad6d3";
        return $keyRS;
     }
 
@@ -13,7 +13,7 @@
         $UrlWS = "http://192.168.1.249/E-Klaim/ws.php";
         return $UrlWS;
     }
-    
+
     function getKelasRS() {
         $kelasRS = "CS";
         return $kelasRS;
@@ -26,55 +26,55 @@
         }
 
         $iv_size = openssl_cipher_iv_length("aes-256-cbc");
-        $iv = openssl_random_pseudo_bytes($iv_size); 
+        $iv = openssl_random_pseudo_bytes($iv_size);
         $encrypted = openssl_encrypt($data,"aes-256-cbc",$key,OPENSSL_RAW_DATA,$iv );
         $signature = mb_substr(hash_hmac("sha256",$encrypted,$key,true),0,10,"8bit");
-        $encoded = chunk_split(base64_encode($signature.$iv.$encrypted));        
+        $encoded = chunk_split(base64_encode($signature.$iv.$encrypted));
         return $encoded;
     }
-    
+
     function mc_decrypt($str, $strkey){
         $key = hex2bin($strkey);
         if (mb_strlen($key, "8bit") !== 32) {
             throw new Exception("Needs a 256-bit key!");
         }
-        
+
         $iv_size = openssl_cipher_iv_length("aes-256-cbc");
         $decoded = base64_decode($str);
         $signature = mb_substr($decoded,0,10,"8bit");
         $iv = mb_substr($decoded,10,$iv_size,"8bit");
         $encrypted = mb_substr($decoded,$iv_size+10,NULL,"8bit");
-        $calc_signature = mb_substr(hash_hmac("sha256",$encrypted,$key,true),0,10,"8bit");        
+        $calc_signature = mb_substr(hash_hmac("sha256",$encrypted,$key,true),0,10,"8bit");
         if(!mc_compare($signature,$calc_signature)) {
-            return "SIGNATURE_NOT_MATCH"; 
+            return "SIGNATURE_NOT_MATCH";
         }
-        
+
         $decrypted = openssl_decrypt($encrypted,"aes-256-cbc",$key,OPENSSL_RAW_DATA,$iv);
         return $decrypted;
     }
-    
+
     function mc_compare($a, $b) {
         if (strlen($a) !== strlen($b)) {
             return false;
         }
-        
+
         $result = 0;
-        
+
         for($i = 0; $i < strlen($a); $i ++) {
             $result |= ord($a[$i]) ^ ord($b[$i]);
         }
-        
+
         return $result == 0;
     }
-    
-    function GenerateNomorCovid(){	
+
+    function GenerateNomorCovid(){
         $nomor="";
         $request ='{
                         "metadata": {
                             "method": "generate_claim_number"
-                        }, 
+                        },
                         "data": {
-                            "payor_id": "71" 
+                            "payor_id": "71"
                         }
                     }';
         $msg= Request($request);
@@ -83,8 +83,8 @@
         }
         return $nomor;
     }
-    
-    function BuatKlaimBaru($nomor_kartu,$nomor_sep,$nomor_rm,$nama_pasien,$tgl_lahir,$gender){	
+
+    function BuatKlaimBaru($nomor_kartu,$nomor_sep,$nomor_rm,$nama_pasien,$tgl_lahir,$gender){
         $request ='{
                         "metadata":{
                             "method":"new_claim"
@@ -101,8 +101,8 @@
         $msg= Request($request);
         return $msg['metadata']['message'];
     }
-    
-    function BuatKlaimBaru2($nomor_kartu,$nomor_sep,$nomor_rm,$nama_pasien,$tgl_lahir,$gender,$norawat){	
+
+    function BuatKlaimBaru2($nomor_kartu,$nomor_sep,$nomor_rm,$nama_pasien,$tgl_lahir,$gender,$norawat){
         $request ='{
                         "metadata":{
                             "method":"new_claim"
@@ -122,8 +122,8 @@
         }
         return $msg['metadata']['message'];
     }
-    
-    function UpdateDataPasien($nomor_rmlama,$nomor_kartu,$nomor_rm,$nama_pasien,$tgl_lahir,$gender){	
+
+    function UpdateDataPasien($nomor_rmlama,$nomor_kartu,$nomor_rm,$nama_pasien,$tgl_lahir,$gender){
         $request ='{
                         "metadata": {
                             "method": "update_patient",
@@ -140,8 +140,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function HapusDataPasien($nomor_rm,$coder_nik){	
+
+    function HapusDataPasien($nomor_rm,$coder_nik){
         $request ='{
                         "metadata": {
                             "method": "delete_patient"
@@ -154,12 +154,12 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
+
     function UpdateDataKlaim($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
-        
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){
+
         $prosedur_non_bedah="1";
         $prosedur_bedah="1";
         $konsultasi="1";
@@ -170,21 +170,21 @@
         $kamar="1";
         $obat_kronis="1";
         $obat_kemoterapi="1";
-        $obat="1";   
+        $obat="1";
         $bmhp="1";
         $sewa_alat="1";
-        
+
         $hasilcorona=bukaquery(
-                "select pemulasaraan_jenazah,if(pemulasaraan_jenazah='Ya',1,0) as ytpemulasaraan_jenazah, 
-                kantong_jenazah,if(kantong_jenazah='Ya',1,0) as ytkantong_jenazah, 
-                peti_jenazah,if(peti_jenazah='Ya',1,0) as ytpeti_jenazah,  
-                plastik_erat,if(plastik_erat='Ya',1,0) as ytplastik_erat,  
-                desinfektan_jenazah,if(desinfektan_jenazah='Ya',1,0) as ytdesinfektan_jenazah,   
-                mobil_jenazah,if(mobil_jenazah='Ya',1,0) as ytmobil_jenazah,    
-                desinfektan_mobil_jenazah,if(desinfektan_mobil_jenazah='Ya',1,0) as ytdesinfektan_mobil_jenazah,  
-                covid19_status_cd,if(covid19_status_cd='ODP',1,if(covid19_status_cd='PDP',2,3)) as ytcovid19_status_cd, 
-                nomor_kartu_t, episodes1, episodes2,episodes3, episodes4, episodes5, episodes6, 
-                covid19_cc_ind,if(covid19_cc_ind='Ya',1,0) as ytcovid19_cc_ind 
+                "select pemulasaraan_jenazah,if(pemulasaraan_jenazah='Ya',1,0) as ytpemulasaraan_jenazah,
+                kantong_jenazah,if(kantong_jenazah='Ya',1,0) as ytkantong_jenazah,
+                peti_jenazah,if(peti_jenazah='Ya',1,0) as ytpeti_jenazah,
+                plastik_erat,if(plastik_erat='Ya',1,0) as ytplastik_erat,
+                desinfektan_jenazah,if(desinfektan_jenazah='Ya',1,0) as ytdesinfektan_jenazah,
+                mobil_jenazah,if(mobil_jenazah='Ya',1,0) as ytmobil_jenazah,
+                desinfektan_mobil_jenazah,if(desinfektan_mobil_jenazah='Ya',1,0) as ytdesinfektan_mobil_jenazah,
+                covid19_status_cd,if(covid19_status_cd='ODP',1,if(covid19_status_cd='PDP',2,3)) as ytcovid19_status_cd,
+                nomor_kartu_t, episodes1, episodes2,episodes3, episodes4, episodes5, episodes6,
+                covid19_cc_ind,if(covid19_cc_ind='Ya',1,0) as ytcovid19_cc_ind
                 from perawatan_corona where no_rawat='".$norawat."'");
         if($bariscorona = mysqli_fetch_array($hasilcorona)) {
             $episodes1 = $bariscorona["episodes1"];
@@ -193,7 +193,7 @@
             $episodes4 = $bariscorona["episodes4"];
             $episodes5 = $bariscorona["episodes5"];
             $episodes6 = $bariscorona["episodes6"];
-            $episodes  = ($episodes1==0?"":"1;$episodes1#").($episodes2==0?"":"2;$episodes2#").($episodes3==0?"":"3;$episodes3#").($episodes4==0?"":"4;$episodes4#").($episodes5==0?"":"5;$episodes5#").($episodes6==0?"":"6;$episodes6#");  
+            $episodes  = ($episodes1==0?"":"1;$episodes1#").($episodes2==0?"":"2;$episodes2#").($episodes3==0?"":"3;$episodes3#").($episodes4==0?"":"4;$episodes4#").($episodes5==0?"":"5;$episodes5#").($episodes6==0?"":"6;$episodes6#");
             $episodes  = substr($episodes, 0, -1);
             $request ='{
                             "metadata": {
@@ -241,15 +241,15 @@
                                     "bmhp": "'.$bmhp.'",
                                     "sewa_alat": "'.$sewa_alat.'"
                                  },
-                                "pemulasaraan_jenazah": "'.$bariscorona["ytpemulasaraan_jenazah"].'", 
-                                "kantong_jenazah": "'.$bariscorona["ytkantong_jenazah"].'", 
-                                "peti_jenazah": "'.$bariscorona["ytpeti_jenazah"].'", 
-                                "plastik_erat": "'.$bariscorona["ytplastik_erat"].'", 
-                                "desinfektan_jenazah": "'.$bariscorona["ytdesinfektan_jenazah"].'", 
-                                "mobil_jenazah": "'.$bariscorona["ytmobil_jenazah"].'", 
-                                "desinfektan_mobil_jenazah": "'.$bariscorona["ytdesinfektan_mobil_jenazah"].'", 
-                                "covid19_status_cd": "'.$bariscorona["ytcovid19_status_cd"].'", 
-                                "nomor_kartu_t": "'.$bariscorona["nomor_kartu_t"].'", 
+                                "pemulasaraan_jenazah": "'.$bariscorona["ytpemulasaraan_jenazah"].'",
+                                "kantong_jenazah": "'.$bariscorona["ytkantong_jenazah"].'",
+                                "peti_jenazah": "'.$bariscorona["ytpeti_jenazah"].'",
+                                "plastik_erat": "'.$bariscorona["ytplastik_erat"].'",
+                                "desinfektan_jenazah": "'.$bariscorona["ytdesinfektan_jenazah"].'",
+                                "mobil_jenazah": "'.$bariscorona["ytmobil_jenazah"].'",
+                                "desinfektan_mobil_jenazah": "'.$bariscorona["ytdesinfektan_mobil_jenazah"].'",
+                                "covid19_status_cd": "'.$bariscorona["ytcovid19_status_cd"].'",
+                                "nomor_kartu_t": "'.$bariscorona["nomor_kartu_t"].'",
                                 "episodes": "'.$episodes.'",
                                 "covid19_cc_ind": "'.$bariscorona["ytcovid19_cc_ind"].'",
                                 "tarif_poli_eks": "'.$tarif_poli_eks.'",
@@ -328,14 +328,14 @@
             }
         }
     }
-    
+
     function UpdateDataKlaim2($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
-                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$cara_masuk){	
+                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$cara_masuk){
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -400,7 +400,7 @@
             }
         }
     }
-    
+
     function SetDiagnosaDRG($nomorsep,$diagnosa){
         if($diagnosa!=""){
             $request ='{
@@ -426,8 +426,8 @@
             $msg= Request($request);
         }
     }
-    
-    function SetProsedurDRG($nomorsep,$prosedur){	
+
+    function SetProsedurDRG($nomorsep,$prosedur){
         if($prosedur!=""){
             $request ='{
                             "metadata": {
@@ -451,16 +451,16 @@
             $msg= Request($request);
         }
     }
-    
+
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
-                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$pemulasaraan_jenazah,$kantong_jenazah, 
+                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$pemulasaraan_jenazah,$kantong_jenazah,
                             $peti_jenazah,$plastik_erat,$desinfektan_jenazah,$mobil_jenazah,$desinfektan_mobil_jenazah,
-                            $covid19_status_cd,$nomor_kartu_t,$episodes,$covid19_cc_ind,$cara_masuk){	
+                            $covid19_status_cd,$nomor_kartu_t,$episodes,$covid19_cc_ind,$cara_masuk){
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -505,15 +505,15 @@
                                 "bmhp": "'.$bmhp.'",
                                 "sewa_alat": "'.$sewa_alat.'"
                              },
-                            "pemulasaraan_jenazah": "'.$pemulasaraan_jenazah.'", 
-                            "kantong_jenazah": "'.$kantong_jenazah.'", 
-                            "peti_jenazah": "'.$peti_jenazah.'", 
-                            "plastik_erat": "'.$plastik_erat.'", 
-                            "desinfektan_jenazah": "'.$desinfektan_jenazah.'", 
-                            "mobil_jenazah": "'.$mobil_jenazah.'", 
-                            "desinfektan_mobil_jenazah": "'.$desinfektan_mobil_jenazah.'", 
-                            "covid19_status_cd": "'.$covid19_status_cd.'", 
-                            "nomor_kartu_t": "'.$nomor_kartu_t.'", 
+                            "pemulasaraan_jenazah": "'.$pemulasaraan_jenazah.'",
+                            "kantong_jenazah": "'.$kantong_jenazah.'",
+                            "peti_jenazah": "'.$peti_jenazah.'",
+                            "plastik_erat": "'.$plastik_erat.'",
+                            "desinfektan_jenazah": "'.$desinfektan_jenazah.'",
+                            "mobil_jenazah": "'.$mobil_jenazah.'",
+                            "desinfektan_mobil_jenazah": "'.$desinfektan_mobil_jenazah.'",
+                            "covid19_status_cd": "'.$covid19_status_cd.'",
+                            "nomor_kartu_t": "'.$nomor_kartu_t.'",
                             "episodes": "'.$episodes.'",
                             "covid19_cc_ind": "'.$covid19_cc_ind.'",
                             "tarif_poli_eks": "'.$tarif_poli_eks.'",
@@ -536,8 +536,8 @@
             }
         }
     }
-    
-    function UpdateDataProsedur($nomor_sep,$procedure,$coder_nik){	
+
+    function UpdateDataProsedur($nomor_sep,$procedure,$coder_nik){
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -551,8 +551,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function HapusSemuaProsedur($nomor_sep,$coder_nik){	
+
+    function HapusSemuaProsedur($nomor_sep,$coder_nik){
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -566,8 +566,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-     function GroupingStage1($nomor_sep,$penyakit,$coder_nik){	
+
+     function GroupingStage1($nomor_sep,$penyakit,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -586,8 +586,8 @@
             echo "<meta http-equiv='refresh' content='1;URL=?act=Tampil'>";
         }
     }
-    
-    function GroupingDRG($nomor_sep){	
+
+    function GroupingDRG($nomor_sep){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -614,8 +614,8 @@
         }
         return $pesan;
     }
-    
-    function InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg){	
+
+    function InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg){
         $request ='{
                     "metadata": {
                         "method": "idrg_to_inacbg_import"
@@ -648,7 +648,7 @@
                            }';
                 $msg= Request($request);
             }
-               
+
             if($procedureinacbg!=""){
                 $request ='{
                                 "metadata": {
@@ -673,8 +673,8 @@
             }
         }
     }
-    
-    function GroupingStage12($nomor_sep,$penyakit,$coder_nik){	
+
+    function GroupingStage12($nomor_sep,$penyakit,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -695,8 +695,8 @@
             InsertData2("perkiraan_biaya_ranap","'$nomor_sep','$penyakit','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
         }
     }
-    
-    function GroupingStage13($nomor_sep,$penyakit,$coder_nik){	
+
+    function GroupingStage13($nomor_sep,$penyakit,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -718,8 +718,8 @@
             FinalisasiKlaim($nomor_sep,$coder_nik);
         }
     }
-    
-    function GroupingStage2($nomor_sep,$special_cmg){	
+
+    function GroupingStage2($nomor_sep,$special_cmg){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -734,8 +734,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function FinalisasiKlaim($nomor_sep,$coder_nik){	
+
+    function FinalisasiKlaim($nomor_sep,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"claim_final"
@@ -750,8 +750,8 @@
             //KirimKlaimIndividualKeDC($nomor_sep);
         }
     }
-    
-    function EditUlangKlaim($nomor_sep){	
+
+    function EditUlangKlaim($nomor_sep){
         $request ='{
                         "metadata": {
                             "method":"reedit_claim"
@@ -780,8 +780,8 @@
                    }';
         $msg= Request($request);
     }
-    
-    function KirimKlaimPeriodeKeDC($start_dt,$stop_dt,$jenis_rawat){	
+
+    function KirimKlaimPeriodeKeDC($start_dt,$stop_dt,$jenis_rawat){
         $request ='{
                         "metadata": {
                             "method":"send_claim"
@@ -796,8 +796,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function KirimKlaimIndividualKeDC($nomor_sep){	
+
+    function KirimKlaimIndividualKeDC($nomor_sep){
         $request ='{
                         "metadata": {
                             "method":"send_claim_individual"
@@ -809,8 +809,8 @@
         $msg= Request($request);
         //echo $msg['metadata']['message']."";
     }
-    
-    function MenarikDataKlaimPeriode($start_dt,$stop_dt,$jenis_rawat){	
+
+    function MenarikDataKlaimPeriode($start_dt,$stop_dt,$jenis_rawat){
         $request ='{
                         "metadata": {
                             "method":"pull_claim"
@@ -824,8 +824,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function MengambilDataDetailPerklaim($nomor_sep){	
+
+    function MengambilDataDetailPerklaim($nomor_sep){
         $request ='{
                         "metadata": {
                             "method":"get_claim_data"
@@ -837,8 +837,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function MengambilSetatusPerklaim($nomor_sep){	
+
+    function MengambilSetatusPerklaim($nomor_sep){
         $request ='{
                         "metadata": {
                             "method":"get_claim_status"
@@ -850,8 +850,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function MenghapusKlaim($nomor_sep,$coder_nik){	
+
+    function MenghapusKlaim($nomor_sep,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"delete_claim"
@@ -864,8 +864,8 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
-    function CetakKlaim($nomor_sep){	
+
+    function CetakKlaim($nomor_sep){
         $request ='{
                         "metadata": {
                             "method": "claim_print"
@@ -877,10 +877,10 @@
         $msg= Request($request);
         echo $msg['metadata']['message']."";
     }
-    
+
     function Request($request){
-        $json = mc_encrypt ($request, getKey());  
-        $header = array("Content-Type: application/x-www-form-urlencoded");        
+        $json = mc_encrypt ($request, getKey());
+        $header = array("Content-Type: application/x-www-form-urlencoded");
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, getUrlWS());
         curl_setopt($ch, CURLOPT_HEADER, 0);

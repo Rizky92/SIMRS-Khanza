@@ -19,5 +19,5 @@ public class KhanzaPengenkripsiTeks {
         utama.setLocationRelativeTo(null);
         utama.setVisible(true);
     }
-    
+
 }

@@ -11,34 +11,34 @@
 
 package simrskhanza;
 
-import kepegawaian.DlgDokter;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.util.Date;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.SwingUtilities;
-import javax.swing.event.DocumentEvent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import kepegawaian.DlgDokter;
 
 /**
  *
@@ -53,7 +53,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     private ResultSet rs;
     private int jml=0,i=0,index=0;
     private String[] kode,nama;
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
@@ -74,7 +74,7 @@ public class DlgDpjp extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -107,7 +107,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             }
         }
         tbPasien.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Object[] row2={"P","Kode Dokter","Nama Dokter"};
         tabModeDiagnosa=new DefaultTableModel(null,row2){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -146,13 +146,13 @@ public class DlgDpjp extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        TCariPasien.setDocument(new batasInput((byte)20).getKata(TCariPasien));     
+        TCariPasien.setDocument(new batasInput((byte)20).getKata(TCariPasien));
         ChkInput.setSelected(false);
         isForm();
     }
 
     //private DlgCariObatDokter dlgobtpny=new DlgCariObatDokter(null,false);
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -650,8 +650,8 @@ public class DlgDpjp extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else if(jml==0){
             Valid.textKosong(Dokter,"Data Dokter");
-        }else{    
-            for(i=0;i<tbDiagnosa.getRowCount();i++){ 
+        }else{
+            for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
                     if(Sequel.menyimpantf("dpjp_ranap","?,?","Dokter",2,new String[]{
                             TNoRw.getText(),tbDiagnosa.getValueAt(i,1).toString()
@@ -661,7 +661,7 @@ public class DlgDpjp extends javax.swing.JDialog {
                         });
                         tbDiagnosa.setValueAt(false,i,0);
                     }
-                }                    
+                }
             }
             LCount.setText(""+TabModePasien.getRowCount());
         }
@@ -678,11 +678,11 @@ public class DlgDpjp extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         Dokter.setText("");
         TNoRw.requestFocus();
-        for(i=0;i<tbDiagnosa.getRowCount();i++){ 
+        for(i=0;i<tbDiagnosa.getRowCount();i++){
             tbDiagnosa.setValueAt(false,i,0);
         }
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -698,7 +698,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         }else if(TPasien.getText().trim().equals("")){
              JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
-            for(i=0;i<tbPasien.getRowCount();i++){ 
+            for(i=0;i<tbPasien.getRowCount();i++){
                 if(tbPasien.getValueAt(i,0).toString().equals("true")){
                     if(Sequel.queryu2tf("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{
                         tbPasien.getValueAt(i,2).toString(),tbPasien.getValueAt(i,5).toString()
@@ -733,7 +733,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDpjp.jasper","report","::[ Data Diagnosa Pasien ]::",
                     "select reg_periksa.tgl_registrasi,dpjp_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                     "dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter "+
@@ -801,9 +801,9 @@ public class DlgDpjp extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pasien.getTable().getSelectedRow()!= -1){                   
+                if(pasien.getTable().getSelectedRow()!= -1){
                     TCariPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),0).toString());
-                } 
+                }
                 TCariPasien.requestFocus();
             }
             @Override
@@ -815,7 +815,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pasien.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -828,7 +828,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        pasien.emptTeks();    
+        pasien.emptTeks();
         pasien.isCek();
         pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pasien.setLocationRelativeTo(internalFrame1);
@@ -845,8 +845,8 @@ public class DlgDpjp extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
-           
+
+
         }
 }//GEN-LAST:event_tbPasienMouseClicked
 
@@ -862,14 +862,14 @@ public class DlgDpjp extends javax.swing.JDialog {
 }//GEN-LAST:event_tbPasienKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void DokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(!TNoRw.getText().equals("")){
-               runBackground(() ->tampildiagnosa());   
-            }            
+               runBackground(() ->tampildiagnosa());
+            }
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             if(akses.getdokter()==true){
                 btnTarifActionPerformed(null);
@@ -907,11 +907,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     i=tbDiagnosa.getSelectedColumn();
                     if(i==1){
                         if(tbDiagnosa.getSelectedRow()>-1){
-                          tbDiagnosa.setValueAt(true,tbDiagnosa.getSelectedRow(),0);   
-                        }                               
+                          tbDiagnosa.setValueAt(true,tbDiagnosa.getSelectedRow(),0);
+                        }
                         Dokter.setText("");
                         Dokter.requestFocus();
-                    }           
+                    }
                 } catch (java.lang.NullPointerException e) {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
@@ -944,7 +944,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-            
+
             Dokter.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -965,7 +965,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1031,7 +1031,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void tampil() {
         Valid.tabelKosong(TabModePasien);
-        try{            
+        try{
             ps2=koneksi.prepareStatement("select reg_periksa.tgl_registrasi,dpjp_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                     "dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter "+
                     "on dpjp_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -1044,21 +1044,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 ps2.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps2.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 if(!TCariPasien.getText().trim().equals("")){
-                    ps2.setString(i,TCariPasien.getText().trim());  
+                    ps2.setString(i,TCariPasien.getText().trim());
                     i++;
                 }
                 if(!TCari.getText().trim().equals("")){
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");     
-                    i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");    
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
                     ps2.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");    
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");   
-                }            
-                     
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
+                    i++;
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
+                }
+
                 rs=ps2.executeQuery();
                 while(rs.next()){
                     TabModePasien.addRow(new Object[]{
@@ -1074,13 +1074,13 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(ps2!=null){
                     ps2.close();
                 }
-            }                            
+            }
             LCount.setText(""+TabModePasien.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1102,39 +1102,39 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Tanggal.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),1).toString());
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl1, Date tgl2,String status) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         Tanggal.setText(status);
         isRawat();
-        isPsien();   
+        isPsien();
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,158));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdpjp_ranap());
         BtnHapus.setEnabled(akses.getdpjp_ranap());
         btnTarif.setEnabled(akses.getdokter());
         BtnPrint.setEnabled(akses.getdpjp_ranap());
-        
+
     }
 
     private void tampildiagnosa() {
@@ -1153,7 +1153,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             nama=null;
             nama=new String[jml];
 
-            index=0; 
+            index=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -1166,18 +1166,18 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.tabelKosong(tabModeDiagnosa);
             for(i=0;i<jml;i++){
                 tabModeDiagnosa.addRow(new Object[] {pilih[i],kode[i],nama[i]});
-            }   
-            
-            ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(Dokter.getText().trim().equals("")?"":"and (dokter.kd_dokter like ? or dokter.nm_dokter like ?) ")+"order by dokter.nm_dokter");            
+            }
+
+            ps=koneksi.prepareStatement("select dokter.kd_dokter,dokter.nm_dokter from dokter where dokter.status='1' "+(Dokter.getText().trim().equals("")?"":"and (dokter.kd_dokter like ? or dokter.nm_dokter like ?) ")+"order by dokter.nm_dokter");
             try {
                 if(!Dokter.getText().trim().equals("")){
                     ps.setString(1,"%"+Dokter.getText().trim()+"%");
-                    ps.setString(2,"%"+Dokter.getText().trim()+"%");   
-                }         
+                    ps.setString(2,"%"+Dokter.getText().trim()+"%");
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeDiagnosa.addRow(new Object[]{false,rs.getString(1),rs.getString(2)});
-                }                   
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -1187,12 +1187,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(ps!=null){
                     ps.close();
                 }
-            }         
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1218,7 +1218,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

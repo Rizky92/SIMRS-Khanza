@@ -14,10 +14,10 @@ package kepegawaian;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -113,7 +113,7 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
 
     /** This method is called from within the constructor to
@@ -329,7 +329,7 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //nm_dokter.setModal(true);
         DlgDokter dokter=new DlgDokter(null,false);
         dokter.emptTeks();
@@ -338,8 +338,8 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setAlwaysOnTop(false);
         dokter.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -449,7 +449,7 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
                 if( rs != null ){
                     rs.close();
                 }
-                
+
                 if( ps != null ){
                     ps.close();
                 }
@@ -459,7 +459,7 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
                 fileWriter.write("{\"dokter\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -469,7 +469,7 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void tampil3() {
         runBackground(() ->tampil());
     }
@@ -477,24 +477,24 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
     public void setPoli(String namapoli){
         this.poli=namapoli;
     }
-    
-    public void emptTeks() { 
+
+    public void emptTeks() {
         TCari.requestFocus();
     }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getdokter());
     }
-    
+
     public void SetHari(Date tanggal){
         cal.setTime(tanggal);
         day=cal.get(Calendar.DAY_OF_WEEK);
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/dokter2.iyem");
@@ -526,8 +526,8 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -553,7 +553,7 @@ public final class DlgCariDokter2 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

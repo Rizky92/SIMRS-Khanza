@@ -2,16 +2,16 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $nopernyataan  = "";
     $norawat       = "";
-    $_sql          = "select * from antripersetujuan" ;  
+    $_sql          = "select * from antripersetujuan" ;
     $hasil         = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $nopernyataan = $data['no_pernyataan'];
         $norawat      = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -19,14 +19,14 @@
     $tgl_lahir    = "";
     $alamat       = "";
     $no_tlp       = "";
-    
+
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,
-               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
-               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+               pasien.umur,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
+               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
-               where reg_periksa.no_rawat='".$norawat."'" ;  
+               where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -37,7 +37,7 @@
         $alamat       = $data2['alamat'];
         $no_tlp       = $data2['no_tlp'];
     }
-    
+
     $tanggal                = "";
     $diagnosa               = "";
     $tindakan               = "";
@@ -68,8 +68,8 @@
                persetujuan_penolakan_tindakan.alasan_diwakilkan_penerima_informasi,if(persetujuan_penolakan_tindakan.jk_penerima_informasi='L','LAKI-LAKI','PEREMPUAN') as jk_penerima_informasi,
                DATE_FORMAT(persetujuan_penolakan_tindakan.tanggal_lahir_penerima_informasi,'%d-%m-%Y') as tanggal_lahir_penerima_informasi,
                persetujuan_penolakan_tindakan.umur_penerima_informasi,persetujuan_penolakan_tindakan.alamat_penerima_informasi,persetujuan_penolakan_tindakan.no_hp,
-               persetujuan_penolakan_tindakan.hubungan_penerima_informasi,persetujuan_penolakan_tindakan.saksi_keluarga 
-               from persetujuan_penolakan_tindakan where persetujuan_penolakan_tindakan.no_pernyataan='$nopernyataan'" ;  
+               persetujuan_penolakan_tindakan.hubungan_penerima_informasi,persetujuan_penolakan_tindakan.saksi_keluarga
+               from persetujuan_penolakan_tindakan where persetujuan_penolakan_tindakan.no_pernyataan='$nopernyataan'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $tanggal                = $data2['tanggal'];
@@ -116,8 +116,8 @@
         <form method="POST" action="pages/storeImage.php" onsubmit="return validasiIsi();" enctype=multipart/form-data>
             <input type="hidden" name="nopernyataan" value="<?=$nopernyataan;?>">
             <h7 class="text-dark">
-                Apabila pasien berusia dibawah 18 tahun atau tidak dapat memberikan persetujuan karena alasan lain (**) tidak dapat menandatangani surat pernyataan ini, 
-                Pihak rumah sakit dapat mengambil kebijakan dengan memperoleh tanda tangan dari orang tua, pasangan, anggota keluarga terdekat atau wali pasien.<br/> 
+                Apabila pasien berusia dibawah 18 tahun atau tidak dapat memberikan persetujuan karena alasan lain (**) tidak dapat menandatangani surat pernyataan ini,
+                Pihak rumah sakit dapat mengambil kebijakan dengan memperoleh tanda tangan dari orang tua, pasangan, anggota keluarga terdekat atau wali pasien.<br/>
                 (**) Sebutkan alasan lainnya : <?=$alasan_diwakilkan_penerima_informasi?> <br/><br/>
                 Yang bertanda tangan di bawah ini saya :
             </h7>
@@ -141,7 +141,7 @@
             </table>
             <br/>
             <h7 class="text-dark">
-                Dengan ini menyatakan <select name="pilihansetuju" class="text-dark"><option value='Persetujuan'>Persetujuan</option><option value='Penolakan'>Penolakan</option></select> untuk dapat dilakukan tindakan kedokteran berupa : 
+                Dengan ini menyatakan <select name="pilihansetuju" class="text-dark"><option value='Persetujuan'>Persetujuan</option><option value='Penolakan'>Penolakan</option></select> untuk dapat dilakukan tindakan kedokteran berupa :
             </h7>
             <table class="default" width="100%" border="0" align="center" cellpadding="3px" cellspacing="0px">
                 <tr class="text-dark">
@@ -163,7 +163,7 @@
                     <td width="30%">Tata Cara</td>
                     <td width="60%">: <?=$tata_cara;?></td>
                     <td width="10%"><input type="checkbox" name="tata_cara_konfirmasi"></td>
-                </tr> 
+                </tr>
                 <tr class="text-dark">
                     <td width="30%">Tujuan</td>
                     <td width="60%">: <?=$tujuan;?></td>
@@ -202,7 +202,7 @@
             </table>
             <br/>
             <h7 class="text-dark">
-                Terhadap Pasien : 
+                Terhadap Pasien :
             </h7>
             <table class="default" width="100%" border="0" align="center" cellpadding="3px" cellspacing="0px">
                 <tr class="text-dark">
@@ -241,7 +241,7 @@
             </div>
         </form>
     </div>
-    
+
     <script language="JavaScript">
         Webcam.set({
             width: 490,
@@ -261,4 +261,3 @@
     </script>
 </body>
 </html>
-

@@ -44,7 +44,7 @@ public class INACBGCariCoderNIK extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"NIP","Petugas","Coder NIK"};
         tabMode=new DefaultTableModel(null,row){
@@ -263,7 +263,7 @@ public class INACBGCariCoderNIK extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -313,7 +313,7 @@ public class INACBGCariCoderNIK extends javax.swing.JDialog {
                     ps.setString(1, "%"+TCari.getText().trim()+"%");
                     ps.setString(2, "%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3)});
@@ -327,13 +327,13 @@ public class INACBGCariCoderNIK extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }

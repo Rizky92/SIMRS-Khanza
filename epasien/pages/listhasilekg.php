@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat  = validTeks3($iyem["norawat"],20);
         $queryekg = bukaquery(
@@ -34,47 +34,47 @@
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Irama</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["irama"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Laju Jantung</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["laju_jantung"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Gelombang P</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["gelombangp"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Interval PR</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["intervalpr"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Axis</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["axis"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kompleks QRS</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["kompleksqrs"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Segmen ST</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["segmenst"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Gelombang T</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["gelombangt"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kesimpulan</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryekg["kesimpulan"]."</td>
                                     </tr>";
             $querygambarekg= bukaquery(

@@ -14,10 +14,10 @@ package viabarcode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -294,8 +294,8 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         form.setLocationRelativeTo(internalFrame1);
         form.setAlwaysOnTop(false);
-        form.setVisible(true);  
-        
+        form.setVisible(true);
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -385,7 +385,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement("select * from labkesling_master_sampel");
-            try{           
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3)});
@@ -397,7 +397,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -408,7 +408,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
                 fileWriter.write("{\"sampelbakumutulabkesling\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -419,18 +419,18 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getmaster_sampel_bakumutu());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/sampelbakumutulabkesling.iyem");
@@ -467,8 +467,8 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -494,7 +494,7 @@ public final class LabKeslingCariMasterSampelBakuMutu extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

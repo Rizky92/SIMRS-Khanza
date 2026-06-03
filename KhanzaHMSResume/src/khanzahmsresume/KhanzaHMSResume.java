@@ -22,5 +22,5 @@ public class KhanzaHMSResume {
            utama.setVisible(true);
        });
     }
-    
+
 }

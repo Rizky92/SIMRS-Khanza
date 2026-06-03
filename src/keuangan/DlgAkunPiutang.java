@@ -11,11 +11,11 @@
 
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
@@ -73,8 +73,8 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class                 
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -103,14 +103,14 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }
         }
-        
+
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         nama.setDocument(new batasInput((byte)50).getKata(nama));
         kdrek.setDocument(new batasInput((byte)15).getKata(kdrek));
         kdpnj.setDocument(new batasInput((int)3).getKata(kdpnj));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -512,14 +512,14 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("akun_piutang","nama_bayar",tbJadwal.getValueAt(i,1).toString())==true){
                     tabMode.removeRow(i);
                     i--;
                 }
             }
-        } 
+        }
         LCount.setText("" + tabMode.getRowCount());
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -554,7 +554,7 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
                 tbJadwal.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -582,14 +582,14 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptAkunPiutang.jasper","report","::[ Akun Piutang ]::","select akun_piutang.nama_bayar,akun_piutang.kd_rek,rekening.nm_rek,penjab.png_jawab,penjab.kd_pj "+
                     "from akun_piutang inner join rekening inner join penjab on akun_piutang.kd_rek=rekening.kd_rek "+
                     "and akun_piutang.kd_pj=penjab.kd_pj where akun_piutang.nama_bayar like '%"+TCari.getText().trim()+"%' or "+
@@ -665,7 +665,7 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
 private void kdrekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdrekKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPoliActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,kdrek,BtnSimpan);
         }
 }//GEN-LAST:event_kdrekKeyPressed
@@ -681,17 +681,17 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgAkunPiutang")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                             rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
-                                                                      
+
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -703,7 +703,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -717,7 +717,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -749,7 +749,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void namaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaKeyPressed
@@ -776,33 +776,33 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     if(penjab.getTable().getSelectedRow()!= -1){
                         kdpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                         nmpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                    } 
+                    }
                     kdpnj.requestFocus();
                     penjab=null;
                 }
-            }); 
+            });
 
             penjab.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         penjab.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penjab.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (penjab == null) return;
         if (!penjab.isVisible()) {
             penjab.emptTeks();
             penjab.isCek();
-        }  
+        }
         if (penjab.isVisible()) {
             penjab.toFront();
             return;
-        }    
+        }
         penjab.setVisible(true);
     }//GEN-LAST:event_BtnPenjabActionPerformed
 
@@ -867,7 +867,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -910,18 +910,18 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             kdpnj.setText(tabMode.getValueAt(row,5).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbJadwal;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getakun_piutang());
         BtnHapus.setEnabled(akses.getakun_piutang());
         BtnEdit.setEnabled(akses.getakun_piutang());
         BtnPrint.setEnabled(akses.getakun_piutang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -947,7 +947,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

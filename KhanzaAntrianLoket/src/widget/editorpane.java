@@ -16,7 +16,7 @@ import javax.swing.border.LineBorder;
 public class editorpane extends JEditorPane{
     public editorpane() {
         super();
-        setFont(new java.awt.Font("Tahoma", 0, 11));        
+        setFont(new java.awt.Font("Tahoma", 0, 11));
         setSelectionColor(new Color(50,51,0));
         setSelectedTextColor(new Color(255,255,0));
         setForeground(new Color(70,70,70));

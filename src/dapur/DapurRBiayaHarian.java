@@ -1,9 +1,9 @@
 package dapur;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -51,10 +51,10 @@ public class DapurRBiayaHarian extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());  
-            
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -222,23 +222,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Dapur"); 
+                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Dapur");
             }
-            
+
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRBiayaDapur.jasper","report","[ Rekap Biaya Pengadaan Stok Keluar Barang Dapur Kering & Basah ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -317,8 +317,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     private void prosesCari() {
         try {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode);  
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement("select dapurpembelian.tgl_beli,sum(dapurpembelian.total) from dapurpembelian  "+
                     "where dapurpembelian.tgl_beli between ? and ? group by dapurpembelian.tgl_beli order by dapurpembelian.tgl_beli");
             try {
@@ -332,7 +332,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
                 if(jumlah>0){
                     tabMode.addRow(new Object[]{"Total :",Valid.SetAngka(jumlah)});
-                } 
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -342,12 +342,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }           
-            this.setCursor(Cursor.getDefaultCursor());              
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         } catch (Exception e) {
             System.out.println(e);
-        }               
+        }
     }
-    
-    
+
+
 }

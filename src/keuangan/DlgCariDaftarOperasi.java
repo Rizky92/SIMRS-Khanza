@@ -14,10 +14,10 @@ package keuangan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -96,7 +96,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -314,14 +314,14 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJnsPerawatanOperasi bangsal=new DlgJnsPerawatanOperasi(null,false);
         bangsal.emptTeks();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -339,7 +339,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 }else{
                     cara_bayar_operasi="Yes";
                     kelas_operasi="Yes";
-                }  
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }finally{
@@ -352,8 +352,8 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        } 
-        
+        }
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -409,7 +409,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         try{
             Valid.tabelKosong(tabMode);
             file=new File("./cache/paketoperasi.iyem");
@@ -441,13 +441,13 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 if(pstindakan!=null){
                     pstindakan.close();
                 }
-            }   
+            }
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"paketoperasi\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -456,8 +456,8 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
-    
-    private void tampil2() {  
+
+    private void tampil2() {
         try{
             myObj = new FileReader("./cache/paketoperasi.iyem");
             root = mapper.readTree(myObj);
@@ -541,8 +541,8 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                         }
                     }
                 }
-            }   
-            myObj.close();   
+            }
+            myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }finally {
@@ -560,7 +560,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void setBayar(String penjab,String kelasoperasi){
         this.kd_pj=penjab;
         this.kelas=kelasoperasi;
@@ -571,11 +571,11 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.gettarif_operasi());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -601,7 +601,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

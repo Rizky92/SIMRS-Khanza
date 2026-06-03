@@ -44,7 +44,7 @@
                             )
                         );
                     }
-                        
+
                     echo json_encode($response);
                 break;
             case "tagihan":
@@ -53,12 +53,12 @@
                     $decode 	= json_decode($konten, true);
                     $response 	= array();
                     if ($header['X-Token'] == $token) {
-                        $data 	= array();  
-                        
+                        $data 	= array();
+
                         if (!preg_match("/^[0-9]{6}$/",$decode['no_rkm_medis'])) {
                            $errors[] = 'No RM Harus 6 digit';
                         }
-                        
+
                         if(!empty($errors)) {
                             foreach($errors as $error) {
                                 $response = array(
@@ -87,7 +87,7 @@
                                             'keterangan' => $data['keterangan'],
                                             'besar_bayar' => $data['besar_bayar']
                                         );
-                                    }    
+                                    }
                                     $response = array(
                                         'response' => array(
                                             'list' => (
@@ -104,7 +104,7 @@
                                         'metadata' => array(
                                             'message' => 'Tagihan Sudah Dibayar',
                                             'code' => '02'
-                                        )   
+                                        )
                                     );
                                 }
                             } else {
@@ -132,11 +132,11 @@
                     $decode = json_decode($konten, true);
                     $response = array();
                     if ($header['X-Token'] == $token) {
-                        $data = array();                
+                        $data = array();
                         if (!preg_match("/^[0-9]{6}$/",$decode['no_rkm_medis'])) {
                             $errors[] = 'Nomor RM Harus 6 digit';
                         }
-                        
+
                         if(empty($decode['no_nota'])) {
                             $errors[] = 'Nomor Nota Tidak Boleh Kosong';
                         }else{
@@ -144,7 +144,7 @@
                                 $errors[] = 'Nomor Nota Tidak Sesuai Format';
                             }
                         }
-                        
+
                         if(empty($decode['referensi'])) {
                             $errors[] = 'Nomor Referensi Tidak Boleh Kosong';
                         }else{
@@ -152,7 +152,7 @@
                                 $errors[] = 'Nomor Referensi Tidak Sesuai Format';
                             }
                         }
-                        
+
                         if(!empty($errors)) {
                             foreach($errors as $error) {
                                 $response = array(

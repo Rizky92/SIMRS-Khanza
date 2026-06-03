@@ -13,12 +13,12 @@ body  {
 h1 {
 	color:#84be19;
 }
-#container { 
+#container {
 	width: 900px;  /* using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
 	background: #FFFFFF;
 	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
-} 
-#header { 
+}
+#header {
 	background: #434343;
 	width: 900px;
 	height: 128px;
@@ -27,7 +27,7 @@ h1 {
 	width:900px;
 	height:84px;
 	background:url(images/img01.gif) repeat-x left top;
-} 
+}
 #header h1 {
 	margin: 0; /* zeroing the margin of the last element in the #header div will avoid margin collapse - an unexplainable space between divs. If the div has a border around it, this is not necessary as that also avoids the margin collapse */
 	padding: 0px 20px 20px 10px; /* using padding instead of margin will allow you to keep the element away from the edges of the div */
@@ -105,7 +105,7 @@ h1 {
 	float:left;
 	margin:0 20px 15px 0;
 }
-#footer { 
+#footer {
 	height:70px;
 	background:url(images/footer_bg.gif) repeat-x left top;
 }
@@ -120,7 +120,7 @@ h1 {
 	text-align:center;
         color:#666666;;
         font-style: italic;
-} 
+}
 .footerLink  {
 	color:#292b25;
 	text-decoration:underline;
@@ -145,7 +145,7 @@ h1 {
 	float: left;
 	width: 100%;
 }
-#navcontainer ul li { 
+#navcontainer ul li {
 	display: inline;
 }
 #navcontainer ul li a {
@@ -309,11 +309,11 @@ color: #333333;
 	padding: 6px 1px 6px 1px;
         background: #555555;
 	color:#DDDDDD;
-	font: 12px  "Comic Sans Ms", Arial, Helvetica, sans-serif;	
+	font: 12px  "Comic Sans Ms", Arial, Helvetica, sans-serif;
         height:100%
 }
 
-.head3 td{    
+.head3 td{
         border: 0px;
 	color:#BC8F8F;
         padding: 0px 0px 0px 0px;
@@ -475,13 +475,13 @@ color: #333333;
 	padding-left:8px;
 	padding-right:8px;
 	color:#CC6699;
-	font: 12px  "Comic Sans Ms", Arial, Helvetica, sans-serif;	
+	font: 12px  "Comic Sans Ms", Arial, Helvetica, sans-serif;
         height:100%
 }
 
 
 .isi12 td{
-	
+
 	border-bottom: 1px solid #C1DAD7;
 	background: #ffffff;
 	padding-top:0px;
@@ -493,7 +493,7 @@ color: #333333;
 }
 
 .isi13 td{
-	
+
 	border-bottom: 0px;
 	background: #ffffff;
 	padding-top:0px;
@@ -515,7 +515,7 @@ color: #333333;
 	font: 11px  "Comic Sans Ms", Arial, Helvetica, sans-serif;
 }
 
-.isi15 td{    
+.isi15 td{
         border: 0px;
 	color:#CC6699;
 	font: 11px  "Comic Sans Ms", Arial, Helvetica, sans-serif;
@@ -538,7 +538,7 @@ color: #333333;
 	border: none;
 	background: #915555;
 	font-size: 12px;
-	color: #FFFFFF;        
+	color: #FFFFFF;
         font-family: "Comic Sans Ms", Times, serif;
          width:100px;
 }

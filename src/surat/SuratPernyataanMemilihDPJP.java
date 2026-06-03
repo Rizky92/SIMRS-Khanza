@@ -6,11 +6,11 @@
 package surat;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -60,14 +60,14 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
     private String finger="",finger2="",lokasifile="",lokasifile2="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public SuratPernyataanMemilihDPJP(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Pernyataan","No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Tanggal","Pembuat Pernyataan","Alamat Pembuat Pernyataan",
             "Tgl.Lahir","J.K.P.P.","Hubungan","Saksi I Keluarga","Kode Dokter","Nama Dokter","Nip","Saksi II Petugas"
@@ -117,20 +117,20 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NoPenyataan.setDocument(new batasInput((byte)20).getKata(NoPenyataan));
         PembuatPernyataan.setDocument(new batasInput((int)50).getKata(PembuatPernyataan));
         AlamatPembuatPernyataan.setDocument(new batasInput((int)100).getKata(AlamatPembuatPernyataan));
         SaksiKeluarga.setDocument(new batasInput((int)50).getKata(SaksiKeluarga));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -947,8 +947,8 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             Valid.textKosong(SaksiKeluarga,"Saksi I Keluarga");
         }else{
             if(Sequel.menyimpantf("surat_pernyataan_memilih_dpjp","?,?,?,?,?,?,?,?,?,?,?","Data",11,new String[]{
-                    NoPenyataan.getText(),TNoRw.getText(),Valid.SetTgl(TglPernyataan.getSelectedItem()+""),KdDokter.getText(),KdPerawat.getText(),PembuatPernyataan.getText(), 
-                    AlamatPembuatPernyataan.getText(),Valid.SetTgl(TanggalLahir.getSelectedItem()+""),JKPembuatPernyataan.getSelectedItem().toString().substring(0,1), 
+                    NoPenyataan.getText(),TNoRw.getText(),Valid.SetTgl(TglPernyataan.getSelectedItem()+""),KdDokter.getText(),KdPerawat.getText(),PembuatPernyataan.getText(),
+                    AlamatPembuatPernyataan.getText(),Valid.SetTgl(TanggalLahir.getSelectedItem()+""),JKPembuatPernyataan.getSelectedItem().toString().substring(0,1),
                     HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText()
                 })==true){
                 Sequel.menyimpan2("dpjp_ranap","?,?","Dokter",2,new String[]{TNoRw.getText(),KdDokter.getText()});
@@ -976,14 +976,14 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
             ChkInput.setSelected(true);
-            isForm(); 
+            isForm();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
 
@@ -1000,8 +1000,8 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }              
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1065,7 +1065,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1080,10 +1080,10 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f;            
+                File f;
                 BufferedWriter bw;
                 StringBuilder htmlContent;
-                
+
                 String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
@@ -1135,9 +1135,9 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                   "</table>"+
                                 "</html>"
                             );
-                            
-                            f = new File("DataSuratPernyataanMemilihDPJP.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+
+                            f = new File("DataSuratPernyataanMemilihDPJP.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1146,12 +1146,12 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SURAT PENYATAAN MEMILIH DPJP<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA SURAT PENYATAAN MEMILIH DPJP<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
@@ -1203,9 +1203,9 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                   "</table>"+
                                 "</html>"
                             );
-                            
-                            f = new File("DataSuratPernyataanMemilihDPJP.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+
+                            f = new File("DataSuratPernyataanMemilihDPJP.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1214,30 +1214,30 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SURAT PENYATAAN MEMILIH DPJP<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA SURAT PENYATAAN MEMILIH DPJP<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\"No.Pernyataan\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Tanggal\";\"Pembuat Pernyataan\";\"Alamat Pembuat Pernyataan\";\"Tgl.Lahir\";\"J.K.P.P.\";\"Hubungan\";\"Saksi I Keluarga\";\"Kode Dokter\";\"Nama Dokter\";\"Nip\";\"Saksi II Petugas\"\n"
-                            ); 
+                            );
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").
                                                          append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\"\n");
                             }
-                            f = new File("DataSuratPernyataanMemilihDPJP.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataSuratPernyataanMemilihDPJP.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
-                }   
+                        break;
+                }
                 htmlContent=null;
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1390,16 +1390,16 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_BtnPerawatActionPerformed
 
@@ -1433,7 +1433,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                             "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
                             "inner join penjab on pasien.kd_pj=penjab.kd_pj "+
                             "where pasien.no_rkm_medis=?");
-                try {            
+                try {
                     ps.setString(1,TNoRM.getText());
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -1485,7 +1485,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 Sequel.queryu("delete from bukti_surat_pernyataan_memilih_dpjp_saksikeluarga where no_pernyataan='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Pernyataan terlebih dahulu..!!");
-            }   
+            }
         }
     }//GEN-LAST:event_btnAmbilActionPerformed
 
@@ -1533,13 +1533,13 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
             }else{
                 LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pernyataanmemilihdpjp/"+lokasifile+"' alt='photo' width='450' height='550'/></center></body></html>");
-            } 
+            }
         }else{
             if(lokasifile2.equals("")){
                 LoadHTML3.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
             }else{
                 LoadHTML3.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pernyataanmemilihdpjp/"+lokasifile2+"' alt='photo' width='450' height='550'/></center></body></html>");
-            } 
+            }
         }
     }//GEN-LAST:event_TabDataMouseClicked
 
@@ -1693,7 +1693,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                         "surat_pernyataan_memilih_dpjp.tanggal between ? and ? and (surat_pernyataan_memilih_dpjp.no_pernyataan like ? or reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "surat_pernyataan_memilih_dpjp.kd_dokter like ? or dokter.nm_dokter like ?) order by surat_pernyataan_memilih_dpjp.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1707,13 +1707,13 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                     ps.setString(8,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_pernyataan"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDate("tgl_lahir"),rs.getString("jk"),rs.getString("tanggal"),
                         rs.getString("pembuat_pernyataan"),rs.getString("alamat_pembuat_pernyataan"),rs.getString("tgl_lahir_pembuat_pernyataan"),rs.getString("jk_pembuat_pernyataan"),
-                        rs.getString("hubungan_pembuat_pernyataan"),rs.getString("saksi_keluarga"),rs.getString("kd_dokter"),rs.getString("nm_dokter"),rs.getString("nip"),rs.getString("nama")                
+                        rs.getString("hubungan_pembuat_pernyataan"),rs.getString("saksi_keluarga"),rs.getString("kd_dokter"),rs.getString("nm_dokter"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1726,7 +1726,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1745,16 +1745,16 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_pernyataan_memilih_dpjp.no_pernyataan,3),signed)),0) from surat_pernyataan_memilih_dpjp where surat_pernyataan_memilih_dpjp.tanggal='"+Valid.SetTgl(TglPernyataan.getSelectedItem()+"")+"' ",
                 "DPJP"+TglPernyataan.getSelectedItem().toString().substring(6,10)+TglPernyataan.getSelectedItem().toString().substring(3,5)+TglPernyataan.getSelectedItem().toString().substring(0,2),3,NoPenyataan);
         NoPenyataan.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoPenyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()); 
+            NoPenyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan")); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
             PembuatPernyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             AlamatPembuatPernyataan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             if(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().equals("L")){
@@ -1809,17 +1809,17 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_pernyataan_memilih_dpjp());
         BtnHapus.setEnabled(akses.getsurat_pernyataan_memilih_dpjp());
@@ -1834,7 +1834,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 KdPerawat.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan Petugas...!!");
             }
-        }            
+        }
     }
 
     private void hapus() {
@@ -1852,8 +1852,8 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
     private void ganti() {
         if(Sequel.mengedittf("surat_pernyataan_memilih_dpjp","no_pernyataan=?","no_pernyataan=?,no_rawat=?,tanggal=?,kd_dokter=?,nip=?,pembuat_pernyataan=?,alamat_pembuat_pernyataan=?,"+
             "tgl_lahir_pembuat_pernyataan=?,jk_pembuat_pernyataan=?,hubungan_pembuat_pernyataan=?,saksi_keluarga=?",12,new String[]{
-            NoPenyataan.getText(),TNoRw.getText(),Valid.SetTgl(TglPernyataan.getSelectedItem()+""),KdDokter.getText(),KdPerawat.getText(),PembuatPernyataan.getText(), 
-                    AlamatPembuatPernyataan.getText(),Valid.SetTgl(TanggalLahir.getSelectedItem()+""),JKPembuatPernyataan.getSelectedItem().toString().substring(0,1), 
+            NoPenyataan.getText(),TNoRw.getText(),Valid.SetTgl(TglPernyataan.getSelectedItem()+""),KdDokter.getText(),KdPerawat.getText(),PembuatPernyataan.getText(),
+                    AlamatPembuatPernyataan.getText(),Valid.SetTgl(TanggalLahir.getSelectedItem()+""),JKPembuatPernyataan.getSelectedItem().toString().substring(0,1),
                     HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
             Sequel.queryu2("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()});
@@ -1878,31 +1878,31 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,225));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(430,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -1920,7 +1920,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                             lokasifile="";
                         }else{
                             lokasifile=rs.getString("photo");
-                        }  
+                        }
                     }else{
                         lokasifile="";
                     }
@@ -1950,7 +1950,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                             lokasifile2="";
                         }else{
                             lokasifile2=rs.getString("photo");
-                        }  
+                        }
                     }else{
                         lokasifile2="";
                     }
@@ -1968,23 +1968,23 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            
+
             if(TabData.getSelectedIndex()==0){
                 if(lokasifile.equals("")){
                     LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                 }else{
                     LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pernyataanmemilihdpjp/"+lokasifile+"' alt='photo' width='450' height='550'/></center></body></html>");
-                } 
+                }
             }else{
                 if(lokasifile2.equals("")){
                     LoadHTML3.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                 }else{
                     LoadHTML3.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/pernyataanmemilihdpjp/"+lokasifile2+"' alt='photo' width='450' height='550'/></center></body></html>");
-                } 
+                }
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2010,7 +2010,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

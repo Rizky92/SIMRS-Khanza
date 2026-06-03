@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $sekarang    = date("Y-m-d");
     $thnsekarang = substr($sekarang,0,4);
     $blnsekarang = substr($sekarang,5,2);
@@ -22,7 +22,7 @@
         $blncarimcu2 = validTeks(trim(isset($_POST['tgl_cari_mcu2']))?substr($_POST['tgl_cari_mcu2'],3,2):$blnsekarang);
         $tglcarimcu2 = validTeks(trim(isset($_POST['tgl_cari_mcu2']))?substr($_POST['tgl_cari_mcu2'],0,2):$tglsekarang);
     }
-    
+
     if(isset($_GET['iyem'])){
         $json = json_decode(encrypt_decrypt($_GET['iyem'],"d"),true);
         if (isset($json["tgl_cari_mcu"])) {
@@ -88,7 +88,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $querypasiencari = bukaquery(
                                "select pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.umurdaftar,pasien.no_ktp,pasien.tgl_lahir,pasien.nip,penilaian_mcu.tanggal,penilaian_mcu.td,penilaian_mcu.bb,penilaian_mcu.tb,penilaian_mcu.kesimpulan,penilaian_mcu.anjuran from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis ".
                                "inner join penilaian_mcu on reg_periksa.no_rawat=penilaian_mcu.no_rawat inner join booking_mcu_perusahaan_berhasil_registrasi on reg_periksa.no_rawat=booking_mcu_perusahaan_berhasil_registrasi.no_rawat inner join booking_mcu_perusahaan on booking_mcu_perusahaan_berhasil_registrasi.no_mcu=booking_mcu_perusahaan.no_mcu ".
@@ -114,7 +114,7 @@
                         ?>
                         </tbody>
                     </table>
-                </div> 
+                </div>
             </div>
         </div>
     </div>

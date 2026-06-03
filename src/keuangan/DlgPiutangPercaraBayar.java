@@ -1,10 +1,10 @@
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -32,7 +32,7 @@ public class DlgPiutangPercaraBayar extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement pspenjab,pspiutang;
-    private ResultSet rspenjab,rspiutang; 
+    private ResultSet rspenjab,rspiutang;
     private int i=0,a=0;
     private double ttlpiutang=0,ttlsisapiutang,subttlpiutang,subttlsisapiutang;
     private String stringpiutang="",stringsisapiutang="";
@@ -50,7 +50,7 @@ public class DlgPiutangPercaraBayar extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, 
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.String.class
              };
              @Override
@@ -79,11 +79,11 @@ public class DlgPiutangPercaraBayar extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         kdpenjab.setDocument(new batasInput((byte)8).getKata(kdpenjab));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -320,9 +320,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(i=0;i<tabMode.getRowCount();i++){  
+            for(i=0;i<tabMode.getRowCount();i++){
                 stringpiutang="";
                 try {
                     stringpiutang=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()));
@@ -340,17 +340,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
                                 stringpiutang+"','"+stringsisapiutang+"','"+
-                                tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Per Cara Bayar"); 
+                                tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Per Cara Bayar");
             }
-                        
+
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPiutangPerCaraBayar.jasper","report","[ Piutang Per Cara Bayar ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -376,12 +376,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdpenjabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenjabKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?", nmpenjab,kdpenjab.getText()); 
+            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?", nmpenjab,kdpenjab.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?", nmpenjab,kdpenjab.getText()); 
+            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?", nmpenjab,kdpenjab.getText());
             BtnAll.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?", nmpenjab,kdpenjab.getText()); 
+            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?", nmpenjab,kdpenjab.getText());
             Tgl2.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnSeek2ActionPerformed(null);
@@ -415,7 +415,7 @@ private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     runBackground(() ->prosesCari());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -426,8 +426,8 @@ private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -514,16 +514,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    private void prosesCari() {             
-        try{   
-           this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+    private void prosesCari() {
+        try{
+           this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
            Valid.tabelKosong(tabMode);
            pspenjab=koneksi.prepareStatement("select penjab.kd_pj,penjab.png_jawab from penjab "+(nmpenjab.getText().trim().equals("")?"":"where penjab.png_jawab=? "));
-           try {                 
+           try {
                 if(!nmpenjab.getText().trim().equals("")){
-                    pspenjab.setString(1,nmpenjab.getText()); 
+                    pspenjab.setString(1,nmpenjab.getText());
                 }
-                    
+
                 rspenjab=pspenjab.executeQuery();
                 i=1;
                 ttlpiutang=0;ttlsisapiutang=0;
@@ -538,7 +538,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         pspiutang.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                         pspiutang.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         a=1;
-                        rspiutang=pspiutang.executeQuery();               
+                        rspiutang=pspiutang.executeQuery();
                         subttlpiutang=0;subttlsisapiutang=0;
                         while(rspiutang.next()){
                             subttlpiutang=subttlpiutang+rspiutang.getDouble("totalpiutang");
@@ -552,7 +552,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                         if(subttlpiutang>0){
                             tabMode.addRow(new Object[]{"","Subtotal ",":",subttlpiutang,subttlsisapiutang,""});
-                        }  
+                        }
                         i++;
                     } catch (Exception e) {
                         System.out.println("Notifikasi Piutang : "+e);
@@ -576,13 +576,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                if(pspenjab!=null){
                    pspenjab.close();
                }
-           }                
-           this.setCursor(Cursor.getDefaultCursor());             
+           }
+           this.setCursor(Cursor.getDefaultCursor());
         }catch(Exception e){
             System.out.println("Catatan  "+e);
-        }        
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -608,7 +608,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

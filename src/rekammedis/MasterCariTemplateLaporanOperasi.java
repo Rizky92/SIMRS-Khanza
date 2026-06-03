@@ -12,10 +12,10 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -56,7 +56,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
@@ -83,7 +83,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }   
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -294,7 +294,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //jabatan.setModal(true);
         MasterTemplateLaporanOperasi form=new MasterTemplateLaporanOperasi(null,false);
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -302,8 +302,8 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
         form.setAlwaysOnTop(false);
         form.emptTeks();
         form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -354,7 +354,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -429,7 +429,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         TCari.requestFocus();
     }
@@ -438,11 +438,11 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.gettemplate_laporan_operasi());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -468,7 +468,7 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

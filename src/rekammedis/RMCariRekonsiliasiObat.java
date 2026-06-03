@@ -1,11 +1,10 @@
 package rekammedis;
-import kepegawaian.DlgCariPetugas;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -28,6 +27,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariPetugas;
 import simrskhanza.DlgCariPasien;
 
 public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
@@ -48,7 +48,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
     public RMCariRekonsiliasiObat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         DlgKonfirmasiObatRekonsiliasi.setSize(572,165);
 
         Object[] row={"No.Rekonsiliasi","Pasien","Tanggal Wawancara","Rekonsiliasi Saat","Alergi Obat","Dampak Alergi","Manifestasi Alergi","Petugas Rekonsiliasi"};
@@ -81,7 +81,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoRawat.setDocument(new batasInput((byte)17).getKata(NoRawat));
         kdmem.setDocument(new batasInput((byte)8).getKata(kdmem));
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
@@ -602,10 +602,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(member.getTable().getSelectedRow()!= -1){                   
+                if(member.getTable().getSelectedRow()!= -1){
                     kdmem.setText(member.getTable().getValueAt(member.getTable().getSelectedRow(),0).toString());
                     nmmem.setText(member.getTable().getValueAt(member.getTable().getSelectedRow(),1).toString());
-                } 
+                }
                 kdmem.requestFocus();
             }
             @Override
@@ -617,7 +617,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         member.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -629,7 +629,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         member.emptTeks();
         member.isCek();
         member.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -648,7 +648,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(petugas.getTable().getSelectedRow()!= -1){
                         kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }   
+                    }
                     petugas=null;
                 }
             });
@@ -656,16 +656,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_btnPetugasActionPerformed
 
@@ -679,7 +679,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPasienActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Tgl1.requestFocus();      
+            Tgl1.requestFocus();
         }
     }//GEN-LAST:event_kdmemKeyPressed
 
@@ -693,7 +693,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            NoRawat.requestFocus();            
+            NoRawat.requestFocus();
         }
     }//GEN-LAST:event_kdptgKeyPressed
 
@@ -750,7 +750,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int i=0;i<row;i++){  
+            for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -759,16 +759,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 tabMode.getValueAt(i,4).toString()+"','"+
                                 tabMode.getValueAt(i,5).toString()+"','"+
                                 tabMode.getValueAt(i,6).toString()+"','"+
-                                tabMode.getValueAt(i,7).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi operasi"); 
+                                tabMode.getValueAt(i,7).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi operasi");
             }
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDataRekonsiliasiObat.jasper","report","::[ Data Rekonsiliasi Obat ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -814,7 +814,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
-        }     
+        }
     }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -840,7 +840,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 DlgKonfirmasiObatRekonsiliasi.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
-            }     
+            }
         }
     }//GEN-LAST:event_BtnKonfirmasiActionPerformed
 
@@ -905,7 +905,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     if(petugas.getTable().getSelectedRow()!= -1){
                         KodePetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }   
+                    }
                     petugas=null;
                 }
             });
@@ -913,16 +913,16 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
@@ -1116,18 +1116,18 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         } catch (Exception e) {
             System.out.println("Notif 1 : "+e);
         }
-        
+
     }
-    
+
     public void SetNoRw(String norw){
         NoRawat.setText(norw);
         runBackground(() ->tampil());
     }
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getrekonsiliasi_obat());
-        BtnPrint.setEnabled(akses.getrekonsiliasi_obat());  
-        BtnKonfirmasi.setEnabled(akses.getkonfirmasi_rekonsiliasi_obat());  
+        BtnPrint.setEnabled(akses.getrekonsiliasi_obat());
+        BtnKonfirmasi.setEnabled(akses.getkonfirmasi_rekonsiliasi_obat());
         if(akses.getjml2()>=1){
             KodePetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -1139,7 +1139,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1165,7 +1165,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -39,7 +39,7 @@ public class frmUtama extends javax.swing.JFrame {
     public frmUtama() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        
+
         jam();
     }
 
@@ -149,7 +149,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         autonomer();
-        try{            
+        try{
             ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
             try {
                 rs=ps.executeQuery();
@@ -160,7 +160,7 @@ public class frmUtama extends javax.swing.JFrame {
                     akses.setpropinsirs(rs.getString("propinsi"));
                     akses.setkontakrs(rs.getString("kontak"));
                     akses.setemailrs(rs.getString("email"));
-                }  
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -170,7 +170,7 @@ public class frmUtama extends javax.swing.JFrame {
                 if(ps!=null){
                     ps.close();
                 }
-            }                 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : Silahkan Set Aplikasi "+e);
         }
@@ -183,7 +183,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -228,9 +228,9 @@ public class frmUtama extends javax.swing.JFrame {
                 String nol_menit = "";
                 String nol_detik = "";
                 Date now = Calendar.getInstance().getTime();
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
-                LocalDateTime sekarang = LocalDateTime.now();  
-                LabelTanggal.setText("Antrian Loket Pendaftaran Tanggal : "+dtf.format(sekarang)); 
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                LocalDateTime sekarang = LocalDateTime.now();
+                LabelTanggal.setText("Antrian Loket Pendaftaran Tanggal : "+dtf.format(sekarang));
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
                 nilai_jam = now.getHours();
                 nilai_menit = now.getMinutes();
@@ -262,7 +262,7 @@ public class frmUtama extends javax.swing.JFrame {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
     private void autonomer(){
         Valid.autoNomer3("select ifnull(MAX(CONVERT(antriloketcetak.nomor,signed)),0) from antriloketcetak where antriloketcetak.tanggal=current_date()","",3,LabelNomor);
     }

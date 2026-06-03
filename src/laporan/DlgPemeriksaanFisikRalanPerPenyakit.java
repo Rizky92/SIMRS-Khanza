@@ -1,8 +1,8 @@
 package laporan;
-import fungsi.koneksiDB;
-import fungsi.validasi;
 import fungsi.akses;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -18,10 +18,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import javax.swing.SwingUtilities;
 
 public class DlgPemeriksaanFisikRalanPerPenyakit extends javax.swing.JDialog {
     private final validasi Valid=new validasi();
@@ -31,15 +31,15 @@ public class DlgPemeriksaanFisikRalanPerPenyakit extends javax.swing.JDialog {
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgPemeriksaanFisikRalanPerPenyakit(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -53,7 +53,7 @@ public class DlgPemeriksaanFisikRalanPerPenyakit extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -243,18 +243,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            File g = new File("file2.css");            
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("pemeriksaanfisikralanperpenyakit.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("pemeriksaanfisikralanperpenyakit.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
@@ -263,17 +263,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                     "<font size='2' face='Tahoma'>PEMERIKSAAN FISIK PASIEN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem()+"<br>"+
-                                    "Diagnosa : "+nmpenyakit.getText()+"<br>Kode ICD X : "+kdpenyakit.getText()+"<br><br></font>"+        
+                                    "Diagnosa : "+nmpenyakit.getText()+"<br>Kode ICD X : "+kdpenyakit.getText()+"<br><br></font>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -320,10 +320,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -398,7 +398,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
     private void prosesCari() {
         try {
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append("<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>NAMA PASIEN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>NO.KTP</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>ICD X</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TINGGI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>BERAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>L.P.</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TENSI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>TEMPAT LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TANGGAL LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>PEKERJAAN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='19%'>ALAMAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>NO.RM</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>REGISTRASI</td></tr>"); 
+            htmlContent.append("<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>NAMA PASIEN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>NO.KTP</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>ICD X</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TINGGI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>BERAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>L.P.</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TENSI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>TEMPAT LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TANGGAL LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>PEKERJAAN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='19%'>ALAMAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>NO.RM</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>REGISTRASI</td></tr>");
             ps=koneksi.prepareStatement(
                     "select pasien.nm_pasien,pasien.no_ktp,pemeriksaan_ralan.tinggi,pemeriksaan_ralan.berat,pemeriksaan_ralan.lingkar_perut,"+
                     "pemeriksaan_ralan.tensi,pasien.tmp_lahir,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab)as alamat,"+
@@ -417,7 +417,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 ps.setString(3,kdpenyakit.getText());
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    htmlContent.append("<tr class='isi'><td align='left'>").append(rs.getString("nm_pasien")).append("</td><td align='center'>").append(rs.getString("no_ktp")).append("</td><td align='center'>").append(kdpenyakit.getText()).append("</td><td align='center'>").append(rs.getString("tinggi")).append("</td><td align='center'>").append(rs.getString("berat")).append("</td><td align='center'>").append(rs.getString("lingkar_perut")).append("</td><td align='center'>").append(rs.getString("tensi")).append("</td><td align='center'>").append(rs.getString("tmp_lahir")).append("</td><td align='center'>").append(rs.getString("tgl_lahir")).append("</td><td align='center'>").append(rs.getString("pekerjaan")).append("</td><td align='left'>").append(rs.getString("alamat")).append("</td><td align='center'>").append(rs.getString("no_rkm_medis")).append("</td><td align='center'>").append(rs.getString("tgl_registrasi")).append("</td></tr>"); 
+                    htmlContent.append("<tr class='isi'><td align='left'>").append(rs.getString("nm_pasien")).append("</td><td align='center'>").append(rs.getString("no_ktp")).append("</td><td align='center'>").append(kdpenyakit.getText()).append("</td><td align='center'>").append(rs.getString("tinggi")).append("</td><td align='center'>").append(rs.getString("berat")).append("</td><td align='center'>").append(rs.getString("lingkar_perut")).append("</td><td align='center'>").append(rs.getString("tensi")).append("</td><td align='center'>").append(rs.getString("tmp_lahir")).append("</td><td align='center'>").append(rs.getString("tgl_lahir")).append("</td><td align='center'>").append(rs.getString("pekerjaan")).append("</td><td align='left'>").append(rs.getString("alamat")).append("</td><td align='center'>").append(rs.getString("no_rkm_medis")).append("</td><td align='center'>").append(rs.getString("tgl_registrasi")).append("</td></tr>");
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -438,13 +438,13 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getpemeriksaan_fisik_ralan_per_penyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -470,7 +470,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

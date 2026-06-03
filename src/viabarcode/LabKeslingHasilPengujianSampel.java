@@ -14,11 +14,11 @@ package viabarcode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -46,7 +46,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private String[] Kode,NamaParameter,MetodePengujian,Satuan,Kategori,Normal,Hasil;
     private int jml=0,i=0,index=0;
     private ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
     public LabKeslingHasilPengujianSampel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"P","Kode","Nama Parameter","Metode Pengujian","Satuan","Kategori","Nilai Normal","Hasil Pengujian"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -74,7 +74,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -82,8 +82,8 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
                 return types [columnIndex];
              }
         };
-        tbPengujian.setModel(tabMode);        
-        
+        tbPengujian.setModel(tabMode);
+
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbPengujian.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPengujian.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -111,7 +111,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         tbPengujian.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCariPeriksa.setDocument(new batasInput((int)100).getKata(TCariPeriksa));
-        
+
         ChkJln.setSelected(true);
         jam();
     }
@@ -567,7 +567,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             tbPengujian.setValueAt("",i,7);
         }
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -581,7 +581,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     LabKeslingCariHasilPengujianSampel form=new LabKeslingCariHasilPengujianSampel(null,false);
     form.isCek();
     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -681,17 +681,17 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 ChkJln.setSelected(false);
                 Sequel.AutoComitFalse();
                 berhasil=true;
-                
-                for(i=0;i<tbPengujian.getRowCount();i++){ 
+
+                for(i=0;i<tbPengujian.getRowCount();i++){
                     if(tbPengujian.getValueAt(i,0).toString().equals("true")){
                         if(Sequel.menyimpantf2("labkesling_hasil_pengujian_sampel","?,?,?,?,?","Hasil Pengujian",5,new String[]{
                             TNoPenugasan.getText(),tbPengujian.getValueAt(i,1).toString(),tbPengujian.getValueAt(i,7).toString(),Valid.SetTgl(TanggalPenugasan.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),"Belum Diverifikasi"
                         })==false){
                             berhasil=false;
                         }
-                    }                    
+                    }
                 }
-                
+
                 if(berhasil==true){
                     Sequel.queryu("update labkesling_penugasan_pengujian_sampel set status='Sudah Keluar Hasil' where no_penugasan='"+TNoPenugasan.getText()+"'");
                     Sequel.Commit();
@@ -704,11 +704,11 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
                 }
-                
-                Sequel.AutoComitTrue();    
-                ChkJln.setSelected(true);  
+
+                Sequel.AutoComitTrue();
+                ChkJln.setSelected(true);
                 this.setCursor(Cursor.getDefaultCursor());
-            }  
+            }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -754,7 +754,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void TNoPenugasanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoPenugasanKeyPressed
@@ -837,9 +837,9 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.ScrollPane scrollInput;
     private widget.Table tbPengujian;
     // End of variables declaration//GEN-END:variables
-    
-    
-    private void tampil() {   
+
+
+    private void tampil() {
         try {
             jml=0;
             for(i=0;i<tbPengujian.getRowCount();i++){
@@ -856,8 +856,8 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             Kategori = new String[jml];
             Normal = new String[jml];
             Hasil = new String[jml];
-            
-            index=0; 
+
+            index=0;
             for(i=0;i<tbPengujian.getRowCount();i++){
                 if(tbPengujian.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -873,10 +873,10 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
 
             Valid.tabelKosong(tabMode);
-            for(i=0;i<jml;i++){                
+            for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],Kode[i],NamaParameter[i],MetodePengujian[i],Satuan[i],Kategori[i],Normal[i],Hasil[i]});
-            }  
-            
+            }
+
             pilih=null;
             Kode=null;
             NamaParameter=null;
@@ -885,7 +885,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             Kategori=null;
             Normal=null;
             Hasil=null;
-            
+
             myObj = new FileReader("./cache/hasilpengujiansampellabkesling.iyem");
             root = mapper.readTree(myObj);
             response = root.path("hasilpengujiansampellabkesling");
@@ -905,7 +905,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 });
                             }
                         }
-                    }   
+                    }
                 }else{
                     if(KategoriParameter.getSelectedItem().toString().equals("Semua")){
                         for(JsonNode list:response){
@@ -926,7 +926,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             }
                         }
                     }
-                        
+
                 }
             }
             myObj.close();
@@ -943,7 +943,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void setData(String nopenugasan,String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String kodeanalis,String namaanalis) {
         TNoPenugasan.setText(nopenugasan);
         TNoPermintaan.setText(nopermintaan);
@@ -955,7 +955,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         NmAnalis.setText(namaanalis);
         TCariPeriksa.requestFocus();
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -1011,24 +1011,24 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         new Timer(1000, taskPerformer).start();
     }
 
-    public void isCek(){        
+    public void isCek(){
         BtnSimpan.setEnabled(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             FormInput.setPreferredSize(new Dimension(WIDTH,126));
-            scrollInput.setVisible(true);      
+            scrollInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             FormInput.setPreferredSize(new Dimension(WIDTH,20));
-            scrollInput.setVisible(false);      
+            scrollInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1054,7 +1054,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

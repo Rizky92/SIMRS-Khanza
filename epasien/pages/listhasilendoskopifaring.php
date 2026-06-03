@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $queryendoskopi = bukaquery(
@@ -40,22 +40,22 @@
                                             <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                 <tr width='100%'>
                                                     <td valign='middle' width='30%'>Dinding Posterior</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["faring_dinding_posterior"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Arkus Faring</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["faring_arkus_faring"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Uvula</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["faring_uvula"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Tonsil</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["faring_tonsil"]."</td>
                                                 </tr>
                                             </table>
@@ -67,47 +67,47 @@
                                             <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                 <tr width='100%'>
                                                     <td valign='middle' width='30%'>Tonsil Lingual</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_tonsil_lingual"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Sinus Piriformis</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_sinus_piriformis"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Plika Ventrikularis</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_plika_ventrikularis"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Rima Vocalis</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_rima_vocalis"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Valekula</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_valekula"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Epiglotis</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_epiglotis"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Arytenoid</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_arytenoid"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Pita Suara</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_pita_suara"]."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>Lain-lain</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["laring_lainlain"]."</td>
                                                 </tr>
                                             </table>

@@ -12,10 +12,10 @@
 package toko;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -44,7 +44,7 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;   
+    private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private double totalongkir,total,totalppn,totalpenjualan,totalpiutang,totaluangmuka,totalsisa;
@@ -91,7 +91,7 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
             }
         }
         tbPenjualan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new String[]{
                 "Tanggal","NIP","Petugas","Ongkir","Uang Muka","Total","Sisa Piutang"
             }){
@@ -132,7 +132,7 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
         tbPiutang.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -350,15 +350,15 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
-        Map<String, Object> param = new HashMap<>();         
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
         param.put("kotars",akses.getkabupatenrs());
         param.put("propinsirs",akses.getpropinsirs());
         param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs());   
-        param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem()); 
+        param.put("emailrs",akses.getemailrs());
+        param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
         if(TabRawat.getSelectedIndex()==0){
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -369,7 +369,7 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
                     (TCari.getText().equals("")?"":"and (tokopenjualan.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%')")+
                     "group by tokopenjualan.tgl_jual,tokopenjualan.nip order by tokopenjualan.tgl_jual,tokopenjualan.nip",param);
             }
-                
+
         }else if(TabRawat.getSelectedIndex()==1){
             if(tabMode2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -382,9 +382,9 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
                     "where tokopiutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
                     (TCari.getText().equals("")?"":"and (tokopiutang.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%')")+
                     "group by tokopiutang.tgl_piutang,tokopiutang.nip order by tokopiutang.tgl_piutang,tokopiutang.nip",param);
-            }                
+            }
         }
-        
+
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -413,7 +413,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             runBackground(() ->tampil());
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -512,7 +512,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbPiutang;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
+    private void tampil(){
         try {
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
@@ -553,14 +553,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
         isHitung();
     }
 
-    private void tampil2(){        
+    private void tampil2(){
         try {
             Valid.tabelKosong(tabMode2);
             ps=koneksi.prepareStatement(
@@ -606,17 +606,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
         isHitung();
     }
-    
+
     private void isHitung(){
         Total.setText("Total Pendapatan = Pendapatan Penjualan + Pendapatan Uang Muka Piutang = "+Valid.SetAngka(totalpenjualan)+" + "+Valid.SetAngka(totaluangmuka)+" = "+Valid.SetAngka(totalpenjualan+totaluangmuka));
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -642,7 +642,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

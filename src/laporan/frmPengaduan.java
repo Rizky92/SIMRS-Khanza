@@ -7,11 +7,11 @@ package laporan;
 
 import fungsi.BackgroundMusic;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -57,7 +57,7 @@ public class frmPengaduan extends javax.swing.JFrame {
      */
     public frmPengaduan() {
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "P","Id","Tanggal","No.RM","Nama Pasien","Pesan","Balasan"
             }){
@@ -69,7 +69,7 @@ public class frmPengaduan extends javax.swing.JFrame {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class , java.lang.Object.class , java.lang.Object.class , java.lang.Object.class 
+                java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class , java.lang.Object.class , java.lang.Object.class , java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -101,13 +101,13 @@ public class frmPengaduan extends javax.swing.JFrame {
         tbPengaduan.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             alarm=koneksiDB.ALARMPENGADUANPASIEN();
         } catch (Exception ex) {
             alarm="no";
         }
-        
+
         if(alarm.equals("yes")){
             jam();
         }
@@ -615,11 +615,11 @@ public class frmPengaduan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbPengaduanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPengaduanMouseClicked
-        
+
     }//GEN-LAST:event_tbPengaduanMouseClicked
 
     private void tbPengaduanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPengaduanKeyPressed
-        
+
     }//GEN-LAST:event_tbPengaduanKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -639,7 +639,7 @@ public class frmPengaduan extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        
+
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
@@ -648,7 +648,7 @@ public class frmPengaduan extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        
+
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -657,16 +657,16 @@ public class frmPengaduan extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbPengaduan.getRowCount();i++){ 
+        for(i=0;i<tbPengaduan.getRowCount();i++){
             if(tbPengaduan.getValueAt(i,0).toString().equals("true")){
                 Sequel.queryu2("delete from pengaduan where id=?",1,new String[]{tbPengaduan.getValueAt(i,1).toString()});
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        
+
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapusTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusTotalActionPerformed
@@ -705,7 +705,7 @@ public class frmPengaduan extends javax.swing.JFrame {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -713,14 +713,14 @@ public class frmPengaduan extends javax.swing.JFrame {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptPengaduan.jasper","report","::[ Data Pengaduan ]::",
                         "select id, date_time, username, message from pengaduan where "+
                         "date_time between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 00:00:00' and id like '%"+TCari.getText().trim()+"%' or "+
@@ -755,11 +755,11 @@ public class frmPengaduan extends javax.swing.JFrame {
     }//GEN-LAST:event_Tgl1ItemStateChanged
 
     private void R2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R2ActionPerformed
-        
+
     }//GEN-LAST:event_R2ActionPerformed
 
     private void R1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R1ActionPerformed
-        
+
     }//GEN-LAST:event_R1ActionPerformed
 
     private void BtnJawabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJawabActionPerformed
@@ -797,17 +797,17 @@ public class frmPengaduan extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            
+
             TambahanPesan.setText(tbPengaduan.getValueAt(tbPengaduan.getSelectedRow(),5).toString());
             BalasanPesan.setText(tbPengaduan.getValueAt(tbPengaduan.getSelectedRow(),6).toString());
             WindowBalas.setSize(internalFrame1.getWidth()-10, 300);
             WindowBalas.setLocationRelativeTo(internalFrame1);
             WindowBalas.setVisible(true);
             BalasanPesan.requestFocus();
-            this.setCursor(Cursor.getDefaultCursor());  
+            this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        } 
+        }
     }//GEN-LAST:event_BtnJawabActionPerformed
 
     private void BtnJawabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnJawabKeyPressed
@@ -827,7 +827,7 @@ public class frmPengaduan extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSimpanBalasActionPerformed
 
     private void BtnSimpanBalasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanBalasKeyPressed
-        
+
     }//GEN-LAST:event_BtnSimpanBalasKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
@@ -868,7 +868,7 @@ public class frmPengaduan extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -954,7 +954,7 @@ public class frmPengaduan extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             if(R1.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select pengaduan.id,pengaduan.tanggal,pengaduan.no_rkm_medis,pasien.nm_pasien,pengaduan.pesan "+
@@ -980,7 +980,7 @@ public class frmPengaduan extends javax.swing.JFrame {
                     if(ps!=null){
                         ps.close();
                     }
-                } 
+                }
             }else if(R2.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select pengaduan.id,pengaduan.tanggal,pengaduan.no_rkm_medis,pasien.nm_pasien,pengaduan.pesan,"+
@@ -1011,14 +1011,14 @@ public class frmPengaduan extends javax.swing.JFrame {
                     if(ps!=null){
                         ps.close();
                     }
-                }   
-            }             
+                }
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
             if(aktif==true){
@@ -1047,7 +1047,7 @@ public class frmPengaduan extends javax.swing.JFrame {
                         }
                     }
                 }
-            }                
+            }
         };
         new Timer(1000, taskPerformer).start();
     }
@@ -1077,7 +1077,7 @@ public class frmPengaduan extends javax.swing.JFrame {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

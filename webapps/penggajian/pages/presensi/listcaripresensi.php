@@ -14,7 +14,7 @@
 <div id="post">
     <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div> 
+    </div>
     <div class="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <table width="100%" align="center">
@@ -24,12 +24,12 @@
                     <input name=BtnCari type=submit class="button" value="&nbsp;&nbsp;Cari&nbsp;&nbsp;">
                 </td>
             </tr>
-        </table><br>          
+        </table><br>
         <div style="width: 100%; height: 500px; overflow: auto;">
         <?php
             $keyword = trim($_POST['keyword']);
             $keyword = validTeks($keyword);
-            $_sql    = "SELECT pegawai.id,pegawai.nik,pegawai.nama,count(presensi.id) FROM pegawai LEFT OUTER JOIN presensi ON pegawai.id=presensi.id  
+            $_sql    = "SELECT pegawai.id,pegawai.nik,pegawai.nama,count(presensi.id) FROM pegawai LEFT OUTER JOIN presensi ON pegawai.id=presensi.id
                         where presensi.tgl like '%".$tahun."-".$bulan."%' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%')
                         group by pegawai.id ORDER BY pegawai.nik ASC ";
             $hasil   = bukaquery($_sql);

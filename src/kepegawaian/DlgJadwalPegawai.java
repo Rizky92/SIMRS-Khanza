@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -74,9 +74,9 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
         Departemen.addItem("Semua");
         Departemen.setSelectedItem("Semua");
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -338,8 +338,8 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        
-        for(i=0;i<tabMode.getRowCount();i++){ 
+
+        for(i=0;i<tabMode.getRowCount();i++){
             Sequel.menyimpan2("jadwal_pegawai","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 34,
                 new String[]{
                     tabMode.getValueAt(i,1).toString(),
@@ -378,9 +378,9 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     tabMode.getValueAt(i,32).toString(),tabMode.getValueAt(i,33).toString(),tabMode.getValueAt(i,34).toString(),
                     tabMode.getValueAt(i,35).toString(),tabMode.getValueAt(i,1).toString(),ThnCari.getSelectedItem().toString(),
                     BlnCari.getSelectedItem().toString()
-                });            
-        } 
-        
+                });
+        }
+
         JOptionPane.showMessageDialog(null,"Proses selesai...!!!!");
         runBackground(() ->tampil());
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -402,7 +402,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                 });
                 runBackground(() ->tampil());
             }
-        }            
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -433,7 +433,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
@@ -468,19 +468,19 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                                 tabMode.getValueAt(r,32).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','"+
                                 tabMode.getValueAt(r,33).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','"+
                                 tabMode.getValueAt(r,34).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','"+
-                                tabMode.getValueAt(r,35).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','','','"+akses.getalamatip()+"'","Rekap Presensi"); 
+                                tabMode.getValueAt(r,35).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','','','"+akses.getalamatip()+"'","Rekap Presensi");
             }
-            
-            Map<String, Object> param = new HashMap<>();   
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
+                param.put("emailrs",akses.getemailrs());
                 param.put("departemen",Departemen.getSelectedItem().toString().replaceAll("Semua",""));
-                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("jd1","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")");
                 param.put("jd2","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")");
                 param.put("jd3","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),3)+")");
@@ -516,15 +516,15 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih model cetak..!","Jadwal",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tampilkan Semua", "Tanpa departemen & jabatan"},"Tampilkan Semua");
                     switch (pilihan) {
                         case "Tampilkan Semua":
-                            Valid.MyReportqry("rptJadwalPegawai.jasper","report","::[ Jadwal Masuk Pegawai ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);            
+                            Valid.MyReportqry("rptJadwalPegawai.jasper","report","::[ Jadwal Masuk Pegawai ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                         case "Tanpa departemen & jabatan":
-                            Valid.MyReportqry("rptJadwalPegawai2.jasper","report","::[ Jadwal Masuk Pegawai ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);            
+                            Valid.MyReportqry("rptJadwalPegawai2.jasper","report","::[ Jadwal Masuk Pegawai ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                     }
                 }catch(Exception e){
                     System.out.println(e);
-                }                 
+                }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -565,7 +565,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TCari.setText("");
             runBackground(() ->tampil());
         }else{
@@ -596,7 +596,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
@@ -610,11 +610,11 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(jammasuk.getTable().getSelectedRow()!= -1){    
+                        if(jammasuk.getTable().getSelectedRow()!= -1){
                             if(tbJadwal.getSelectedColumn()>4){
                                 tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(),1).toString(),tbJadwal.getSelectedRow(),tbJadwal.getSelectedColumn());
-                            }                    
-                        }   
+                            }
+                        }
                         tbJadwal.requestFocus();
                     }
                     @Override
@@ -634,7 +634,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             jammasuk.dispose();
-                        }   
+                        }
                     }
                     @Override
                     public void keyReleased(KeyEvent e) {}
@@ -709,7 +709,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {        
+    private void tampil() {
         Object[] row={"No","ID","Nama","Pendidikan","Departemen",
             "1("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")",
             "2("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")",
@@ -758,7 +758,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -767,7 +767,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
              }
         };
         tbJadwal.setModel(tabMode);
-        
+
         for (int i = 0; i < 36; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
@@ -785,7 +785,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -846,7 +846,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                             h28=rs2.getString("h28");
                             h29=rs2.getString("h29");
                             h30=rs2.getString("h30");
-                            h31=rs2.getString("h31"); 
+                            h31=rs2.getString("h31");
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : "+e);
@@ -857,11 +857,11 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }  
+                    }
 
                     tabMode.addRow(new Object[]{
                         " "+i+".",rs.getString("id"),rs.getString("nama"),rs.getString("pendidikan"),rs.getString("departemen"),
-                        h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31 
+                        h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31
                     });
                     i++;
                 }
@@ -880,14 +880,14 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getjadwal_pegawai());
         BtnHapus.setEnabled(akses.getjadwal_pegawai());
     }
-    
+
     String konversi(int year, int month, int day){
-        dateString = String.format("%d-%d-%d", year, month, day);        
+        dateString = String.format("%d-%d-%d", year, month, day);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
         } catch (Exception ex) {
@@ -922,7 +922,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
         }
         return hari;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -948,7 +948,7 @@ public class DlgJadwalPegawai extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

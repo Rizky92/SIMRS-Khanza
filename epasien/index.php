@@ -10,7 +10,7 @@
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-    
+
     if(!isset($_SESSION["nama_instansi"])){
         $querypengaturan                    = bukaquery("select * from setting");
         while($pengaturan = mysqli_fetch_array($querypengaturan)) {
@@ -25,7 +25,7 @@
             $_SESSION["kode_ppkkemenkes"]   = $pengaturan["kode_ppkkemenkes"];
         }
     }
-    
+
     if(!isset($_SESSION["ses_pasien"])){
         include_once "indexpengunjung.php";
     }else{

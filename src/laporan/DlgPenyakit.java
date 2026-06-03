@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -75,8 +75,8 @@ public final class DlgPenyakit extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -119,17 +119,17 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         }
         tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable());
 
-        
+
         TKd.setDocument(new batasInput((byte)15).getKata(TKd));
         TNm.setDocument(new batasInput((int)100).getKata(TNm));
         TCiri.setDocument(new batasInput((int)1500).getKata(TCiri));
         TKeterangan.setDocument(new batasInput((byte)60).getKata(TKeterangan));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -675,7 +675,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             Valid.textKosong(TKeterangan,"Keterangan");
         }else if(TKtg.getText().trim().equals("")){
             Valid.textKosong(kd_ktg,"Kategori Penyakit");
-        }else{            
+        }else{
             if(Sequel.menyimpantf("penyakit","?,?,?,?,?,?,?,?,?,?","Kode Penyakit",10,new String[]{
                 TKd.getText(),TNm.getText(),TCiri.getText(),TKeterangan.getText(),kd_ktg.getText(),cmbStatus.getSelectedItem().toString(),
                 cmbValidCode.getSelectedItem().toString(),cmbACCPDX.getSelectedItem().toString(),cmbAsterisk.getSelectedItem().toString(),
@@ -697,8 +697,8 @@ public final class DlgPenyakit extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
-        emptTeks(); 
+        isForm();
+        emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -708,11 +708,11 @@ public final class DlgPenyakit extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(z=0;z<tbPenyakit.getRowCount();z++){ 
+        for(z=0;z<tbPenyakit.getRowCount();z++){
             if(tbPenyakit.getValueAt(z,0).toString().equals("true")){
                 Sequel.meghapus("penyakit","kd_penyakit",tbPenyakit.getValueAt(z,1).toString());
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -770,15 +770,15 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){  
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));           
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPenyakit.jasper","report","::[ Data Penyakit ]::","select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
                 "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum "+
                 "from kategori_penyakit inner join penyakit "+
@@ -848,10 +848,10 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){                   
-                    kd_ktg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());                    
+                if(ktg.getTable().getSelectedRow()!= -1){
+                    kd_ktg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
                     TKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),2).toString());
-                }   
+                }
                 kd_ktg.requestFocus();
             }
             @Override
@@ -863,7 +863,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -871,11 +871,11 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ktg.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         ktg.emptTeks();
         ktg.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         ktg.setLocationRelativeTo(internalFrame1);
@@ -902,12 +902,12 @@ public final class DlgPenyakit extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }else if(evt.getKeyCode()==KeyEvent.VK_A){                
-                for(z=0;z<tbPenyakit.getRowCount();z++){ 
+            }else if(evt.getKeyCode()==KeyEvent.VK_A){
+                for(z=0;z<tbPenyakit.getRowCount();z++){
                     tbPenyakit.setValueAt(true,z,0);
                 }
             }
-            
+
         }
 }//GEN-LAST:event_tbPenyakitKeyPressed
 
@@ -922,7 +922,7 @@ private void kd_ktgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kd
 }//GEN-LAST:event_kd_ktgKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1093,7 +1093,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 rs2=ps2.executeQuery();
                 jumlah=0;
                 if(rs2.next()){
-                   jumlah=rs2.getDouble("jumlah");   
+                   jumlah=rs2.getDouble("jumlah");
                 }
                 x=jumlah/499;
                 i=Math.ceil(x);
@@ -1111,15 +1111,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
-                
+
                 if(rs2 != null){
                     rs2.close();
                 }
-                
+
                 if(ps2 != null){
                     ps2.close();
                 }
@@ -1164,28 +1164,28 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTabel(){
         return tbPenyakit;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,205));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenyakit());
         BtnHapus.setEnabled(akses.getpenyakit());
         BtnEdit.setEnabled(akses.getpenyakit());
         BtnPrint.setEnabled(akses.getpenyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1211,7 +1211,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

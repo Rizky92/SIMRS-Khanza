@@ -3,11 +3,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -131,23 +131,23 @@ public class BPJSSPRI extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         Diagnosa.setDocument(new batasInput((byte)50).getKata(Diagnosa));
         KdDokter.setDocument(new batasInput((byte)20).getKata(KdDokter));
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         try {
             user=akses.getkode().replace(" ","").substring(0,9);
         } catch (Exception e) {
             user=akses.getkode();
         }
-        
+
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
     }
- 
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -842,7 +842,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
                 headers.add("X-Timestamp",utc);
                 headers.add("X-Signature",api.getHmac(utc));
                 headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-                URL = link+"/RencanaKontrol/InsertSPRI";            
+                URL = link+"/RencanaKontrol/InsertSPRI";
                 requestJson ="{" +
                                 "\"request\": {" +
                                     "\"noKartu\":\""+NoKartu.getText()+"\"," +
@@ -861,7 +861,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
                 if(nameNode.path("code").asText().equals("200")){
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSPRI");
                     //response = root.path("response").path("noSPRI");
-                
+
                     if(Sequel.menyimpantf("bridging_surat_pri_bpjs","?,?,?,?,?,?,?,?,?,?,?","No.Surat",11,new String[]{
                             NoRawat.getText(),NoKartu.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),Diagnosa.getText(),NoSEP.getText()
                         })==true){
@@ -870,7 +870,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-                }   
+                }
             }catch (Exception ex) {
                 System.out.println("Notifikasi Bridging : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -891,7 +891,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -937,14 +937,14 @@ public class BPJSSPRI extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             if(R1.isSelected()==true){
-                Map<String, Object> param = new HashMap<>(); 
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptBridgingSuratPRI.jasper","report","::[ Data Surat PRI VClaim ]::",
                     "select bridging_surat_pri_bpjs.no_rawat,bridging_surat_pri_bpjs.no_kartu,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,"+
                     "pasien.jk,bridging_surat_pri_bpjs.diagnosa,bridging_surat_pri_bpjs.tgl_surat,bridging_surat_pri_bpjs.no_surat,"+
@@ -957,14 +957,14 @@ public class BPJSSPRI extends javax.swing.JDialog {
                     "bridging_surat_pri_bpjs.nm_poli_bpjs like '%"+TCari.getText().trim()+"%' or bridging_surat_pri_bpjs.nm_dokter_bpjs like '%"+TCari.getText().trim()+"%')")+
                     "order by bridging_surat_pri_bpjs.tgl_surat",param);
             }else if(R2.isSelected()==true){
-                Map<String, Object> param = new HashMap<>(); 
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptBridgingSuratPRI.jasper","report","::[ Data Surat PRI VClaim ]::",
                     "select bridging_surat_pri_bpjs.no_rawat,bridging_surat_pri_bpjs.no_kartu,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,"+
                     "pasien.jk,bridging_surat_pri_bpjs.diagnosa,bridging_surat_pri_bpjs.tgl_surat,bridging_surat_pri_bpjs.no_surat,"+
@@ -977,7 +977,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
                     "bridging_surat_pri_bpjs.nm_poli_bpjs like '%"+TCari.getText().trim()+"%' or bridging_surat_pri_bpjs.nm_dokter_bpjs like '%"+TCari.getText().trim()+"%')")+
                     "order by bridging_surat_pri_bpjs.tgl_rencana",param);
             }
-                
+
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1047,7 +1047,7 @@ private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){                    
+                if(dokter.getTable().getSelectedRow()!= -1){
                     KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                 }
@@ -1061,7 +1061,7 @@ private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1073,13 +1073,13 @@ private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         dokter.SetKontrol(KdPoli.getText(),"1: SPRI",Valid.SetTgl(TanggalKontrol.getSelectedItem()+""));
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }
-        
+
 }//GEN-LAST:event_BtnDokterActionPerformed
 
 private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
@@ -1087,11 +1087,11 @@ private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         BtnDokterActionPerformed(null);
     }else{
         Valid.pindah(evt,TanggalKontrol,BtnPoli);
-    }        
+    }
 }//GEN-LAST:event_BtnDokterKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void DTPTanggalKontrol1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTanggalKontrol1KeyPressed
@@ -1119,7 +1119,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     headers.add("X-Timestamp",utc);
                     headers.add("X-Signature",api.getHmac(utc));
                     headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-                    URL = link+"/RencanaKontrol/UpdateSPRI";            
+                    URL = link+"/RencanaKontrol/UpdateSPRI";
                     requestJson ="{" +
                                     "\"request\": {" +
                                         "\"noSPRI\":\""+NoSurat.getText()+"\"," +
@@ -1144,7 +1144,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-                    }   
+                    }
                 }catch (Exception ex) {
                     System.out.println("Notifikasi Bridging : "+ex);
                     if(ex.toString().contains("UnknownHostException")){
@@ -1153,7 +1153,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih terlebih dulu data yang mau anda ganti...\n Klik data pada table untuk memilih data...!!!!");
-            }                
+            }
         }
     }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1198,10 +1198,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1212,7 +1212,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1224,7 +1224,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         poli.SetKontrol(NoKartu.getText(),"1: SPRI",Valid.SetTgl(TanggalKontrol.getSelectedItem()+""));
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
@@ -1233,14 +1233,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void MnSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratActionPerformed
         if(tbObat.getSelectedRow()!= -1){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
+            param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar"));
             param.put("parameter",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
             Valid.MyReportqry("rptBridgingSuratPRI2.jasper","report","::[ Data Surat PRI VClaim ]::",
@@ -1249,12 +1249,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "bridging_surat_pri_bpjs.tgl_rencana,bridging_surat_pri_bpjs.kd_dokter_bpjs,bridging_surat_pri_bpjs.nm_dokter_bpjs,"+
                     "bridging_surat_pri_bpjs.kd_poli_bpjs,bridging_surat_pri_bpjs.nm_poli_bpjs from reg_periksa inner join bridging_surat_pri_bpjs "+
                     "on bridging_surat_pri_bpjs.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "where bridging_surat_pri_bpjs.no_surat='"+NoSurat.getText()+"'",param);              
+                    "where bridging_surat_pri_bpjs.no_surat='"+NoSurat.getText()+"'",param);
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data Surat PRI yang mau dicetak...!!!!");
             BtnBatal.requestFocus();
-        }  
+        }
     }//GEN-LAST:event_MnSuratActionPerformed
 
     private void tbObatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyReleased
@@ -1293,9 +1293,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     Diagnosa.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),2).toString());
-                }                      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1306,7 +1306,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penyakit.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1318,7 +1318,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
@@ -1350,7 +1350,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1435,7 +1435,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {     
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
            if(R1.isSelected()==true){
@@ -1461,14 +1461,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         ps.setString(8,"%"+TCari.getText().trim()+"%");
                         ps.setString(9,"%"+TCari.getText().trim()+"%");
                     }
-                        
+
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new Object[]{
                             rs.getString("no_rawat"),rs.getString("no_kartu"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
                             rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("diagnosa"),rs.getString("tgl_surat"),rs.getString("no_surat"),
                             rs.getString("tgl_rencana"),rs.getString("kd_dokter_bpjs"),rs.getString("nm_dokter_bpjs"),rs.getString("kd_poli_bpjs"),rs.getString("nm_poli_bpjs")
-                        });                    
+                        });
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
@@ -1503,7 +1503,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         ps.setString(8,"%"+TCari.getText().trim()+"%");
                         ps.setString(9,"%"+TCari.getText().trim()+"%");
                     }
-                        
+
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new Object[]{
@@ -1511,7 +1511,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("diagnosa"),rs.getString("tgl_surat"),rs.getString("no_surat"),
                             rs.getString("tgl_rencana"),rs.getString("kd_dokter_bpjs"),rs.getString("nm_dokter_bpjs"),rs.getString("kd_poli_bpjs"),
                             rs.getString("nm_poli_bpjs"),rs.getString("no_sep")
-                        });                    
+                        });
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
@@ -1522,11 +1522,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     if(ps!=null){
                         ps.close();
                     }
-                }       
+                }
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         LCount.setText(""+tabMode.getRowCount());
     }
 
@@ -1549,11 +1549,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         NmPoli.setText("");
         Diagnosa.requestFocus();
     }
-   
+
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            NoRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             NoKartu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
@@ -1570,7 +1570,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.SetTgl(TanggalKontrol,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
         }
     }
-    
+
     public void setNoRm(String norawat,String nokartu,String norm,String namapasien,String tanggallahir,String jk,String nosep) {
         NoRawat.setText(norawat);
         NoKartu.setText(nokartu);
@@ -1584,7 +1584,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     public void setNoRm(String norawat,String nokartu,String norm,String namapasien,String tanggallahir,String jk,String diagnosa,String nosep) {
         NoRawat.setText(norawat);
         NoKartu.setText(nokartu);
@@ -1599,28 +1599,28 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     public void setNoRm(String norm) {
         TCari.setText(norm);
         ChkInput.setSelected(false);
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,156));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getbpjs_surat_pri());
         BtnHapus.setEnabled(akses.getbpjs_surat_pri());
@@ -1631,7 +1631,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbObat;
     }
-    
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -1658,7 +1658,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -1670,7 +1670,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1680,7 +1680,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             URL = link+"/RencanaKontrol/Delete";
-            requestJson ="{\"request\":{\"t_suratkontrol\":{\"noSuratKontrol\":\""+NoSurat.getText()+"\",\"user\":\""+user+"\"}}}";            
+            requestJson ="{\"request\":{\"t_suratkontrol\":{\"noSuratKontrol\":\""+NoSurat.getText()+"\",\"user\":\""+user+"\"}}}";
             requestEntity = new HttpEntity(requestJson,headers);
             root = mapper.readTree(restTemplate.exchange(URL, HttpMethod.DELETE,requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -1693,7 +1693,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }
-        } catch (Exception e) {   
+        } catch (Exception e) {
             System.out.println("Notif : "+e);
             if(e.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
@@ -1726,7 +1726,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

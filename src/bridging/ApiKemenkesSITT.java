@@ -15,18 +15,18 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiKemenkesSITT {        
+public class ApiKemenkesSITT {
     private String Key,pass;
     public ApiKemenkesSITT(){
-        try {            
+        try {
             pass = koneksiDB.PASSSITT();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
     }
-    
-    public String getHmac() {        
-        try {                    
+
+    public String getHmac() {
+        try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] hashInBytes = md.digest(pass.getBytes(StandardCharsets.UTF_8));
 
@@ -34,18 +34,18 @@ public class ApiKemenkesSITT {
             for (byte b : hashInBytes) {
                 sb.append(String.format("%02x", b));
             }
-            Key=sb.toString();            
+            Key=sb.toString();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
 	return Key;
     }
 
-    public long GetUTCdatetimeAsString(){    
-        long millis = System.currentTimeMillis();   
+    public long GetUTCdatetimeAsString(){
+        long millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

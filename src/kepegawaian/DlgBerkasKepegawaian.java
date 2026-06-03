@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -42,13 +43,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import javax.swing.SwingUtilities;
-import java.util.concurrent.RejectedExecutionException;
 
 /**
  *
@@ -77,13 +77,13 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
-        
+
         initComponents2();
-        
+
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
         TNm.setDocument(new batasInput((byte)50).getKata(TNm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML1.setEditable(true);
         LoadHTML1.setEditorKit(kit);
@@ -110,13 +110,13 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
         LoadHTML3.setDocument(doc);
         LoadHTML4.setDocument(doc);
         LoadHTML5.setDocument(doc);
-        
+
         LoadHTML1.setEditable(false);
         LoadHTML2.setEditable(false);
         LoadHTML3.setEditable(false);
         LoadHTML4.setEditable(false);
         LoadHTML5.setEditable(false);
-        
+
         LoadHTML1.addHyperlinkListener(e -> {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
               Desktop desktop = Desktop.getDesktop();
@@ -167,29 +167,29 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
               }
             }
         });
-    }    
-    
-    private void initComponents2() {           
+    }
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             runBackground(() ->loadURL(txtURL.getText()));
         });
-  
+
         progressBar.setPreferredSize(new Dimension(150, 18));
         progressBar.setStringPainted(true);
-        
+
         PanelContent.add(jfxPanel, BorderLayout.CENTER);
-        internalFrame2.add(PanelContent);        
+        internalFrame2.add(PanelContent);
     }
-    
-    private void createScene() {        
+
+    private void createScene() {
         Platform.runLater(new Runnable() {
 
             public void run() {
                 WebView view = new WebView();
-                
+
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
-                
+
                 engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -197,27 +197,27 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         DlgBerkasKepegawaian.this.setTitle(newValue);
                     });
                 });
-                
-                
+
+
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
+
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -231,14 +231,14 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                         });
                     }
                 });
-                
-                
+
+
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
                     @Override
                     public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
@@ -250,39 +250,39 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                                     engine.executeScript("history.back()");
                                     setCursor(Cursor.getDefaultCursor());
                                 }else if(engine.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/","").contains("Keluar")){
-                                    dispose();    
+                                    dispose();
                                 }
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
- 
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             try {
                 engine.load(url);
             }catch (Exception exception) {
                 engine.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
-    
+
     public void print(final Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
@@ -764,7 +764,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
@@ -776,7 +776,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                     }
-                } 
+                }
                 break;
             case 1:
                 runBackground(() ->tampil());
@@ -815,7 +815,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     TKd.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     TNm.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     JK.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),2).toString());
@@ -824,13 +824,13 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     Departemen.setText(Sequel.cariIsi("select nama from departemen where dep_id=?",pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),5).toString()));
                     Jabatan.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),3).toString());
                     JenjangJabatan.setText(Sequel.cariIsi("select nama from jnj_jabatan where kode=?",pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),4).toString()));
- 
+
                     try {
                         runBackground(() ->loadURL("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"penggajian/loginberkaspegawai.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&nik="+TKd.getText().replaceAll(" ","_")+"&kategori="+CmbKategori.getSelectedItem().toString().replaceAll(" ","_")+""));
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                     }
-                }   
+                }
                 TKd.requestFocus();
             }
             @Override
@@ -909,7 +909,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
             } catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
             }
-        }            
+        }
     }//GEN-LAST:event_CmbKategoriItemStateChanged
 
     private void JKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JKKeyPressed
@@ -1000,7 +1000,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
     private widget.panelisi panelGlass6;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
+    private void tampil(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
@@ -1016,7 +1016,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Status Karyawan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='11%'>Pendidikan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Mulai Kerja</td>"+
-                "</tr>"); 
+                "</tr>");
             ps=koneksi.prepareStatement(
                  "select pegawai.nik,pegawai.nama,pegawai.jbtn,pegawai.jnj_jabatan,"+
                  "pegawai.departemen,pegawai.bidang,pegawai.stts_kerja,pegawai.pendidikan,"+
@@ -1061,7 +1061,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='10%'>Tgl.Uploud</td>"+
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='88%'>Berkas Pegawai</td>"+
                                 "</tr>");
-                    
+
                     ps2=koneksi.prepareStatement("SELECT berkas_pegawai.nik, berkas_pegawai.tgl_uploud,berkas_pegawai.kode_berkas," +
                         "master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join " +
                         "master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode " +
@@ -1114,11 +1114,11 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void tampil2(){        
+
+    private void tampil2(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
@@ -1134,7 +1134,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Status Karyawan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='11%'>Pendidikan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Mulai Kerja</td>"+
-                "</tr>"); 
+                "</tr>");
             ps=koneksi.prepareStatement(
                  "select pegawai.nik,pegawai.nama,pegawai.jbtn,pegawai.jnj_jabatan,"+
                  "pegawai.departemen,pegawai.bidang,pegawai.stts_kerja,pegawai.pendidikan,"+
@@ -1179,7 +1179,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='10%'>Tgl.Uploud</td>"+
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='88%'>Berkas Pegawai</td>"+
                                 "</tr>");
-                    
+
                     ps2=koneksi.prepareStatement("SELECT berkas_pegawai.nik, berkas_pegawai.tgl_uploud,berkas_pegawai.kode_berkas," +
                         "master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join " +
                         "master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode " +
@@ -1232,11 +1232,11 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void tampil3(){        
+
+    private void tampil3(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
@@ -1252,7 +1252,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Status Karyawan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='11%'>Pendidikan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Mulai Kerja</td>"+
-                "</tr>"); 
+                "</tr>");
             ps=koneksi.prepareStatement(
                  "select pegawai.nik,pegawai.nama,pegawai.jbtn,pegawai.jnj_jabatan,"+
                  "pegawai.departemen,pegawai.bidang,pegawai.stts_kerja,pegawai.pendidikan,"+
@@ -1297,7 +1297,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='10%'>Tgl.Uploud</td>"+
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='88%'>Berkas Pegawai</td>"+
                                 "</tr>");
-                    
+
                     ps2=koneksi.prepareStatement("SELECT berkas_pegawai.nik, berkas_pegawai.tgl_uploud,berkas_pegawai.kode_berkas," +
                         "master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join " +
                         "master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode " +
@@ -1350,11 +1350,11 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void tampil4(){        
+    private void tampil4(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
@@ -1370,7 +1370,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Status Karyawan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='11%'>Pendidikan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Mulai Kerja</td>"+
-                "</tr>"); 
+                "</tr>");
             ps=koneksi.prepareStatement(
                  "select pegawai.nik,pegawai.nama,pegawai.jbtn,pegawai.jnj_jabatan,"+
                  "pegawai.departemen,pegawai.bidang,pegawai.stts_kerja,pegawai.pendidikan,"+
@@ -1415,7 +1415,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='10%'>Tgl.Uploud</td>"+
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='88%'>Berkas Pegawai</td>"+
                                 "</tr>");
-                    
+
                     ps2=koneksi.prepareStatement("SELECT berkas_pegawai.nik, berkas_pegawai.tgl_uploud,berkas_pegawai.kode_berkas," +
                         "master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join " +
                         "master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode " +
@@ -1468,11 +1468,11 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void tampil5(){        
+
+    private void tampil5(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
@@ -1488,7 +1488,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Status Karyawan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='11%'>Pendidikan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>Mulai Kerja</td>"+
-                "</tr>"); 
+                "</tr>");
             ps=koneksi.prepareStatement(
                  "select pegawai.nik,pegawai.nama,pegawai.jbtn,pegawai.jnj_jabatan,"+
                  "pegawai.departemen,pegawai.bidang,pegawai.stts_kerja,pegawai.pendidikan,"+
@@ -1533,7 +1533,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='10%'>Tgl.Uploud</td>"+
                                     "<td valign='middle' bgcolor='#fdfff9' align='center' width='88%'>Berkas Pegawai</td>"+
                                 "</tr>");
-                    
+
                     ps2=koneksi.prepareStatement("SELECT berkas_pegawai.nik, berkas_pegawai.tgl_uploud,berkas_pegawai.kode_berkas," +
                         "master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join " +
                         "master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode " +
@@ -1586,10 +1586,10 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1615,7 +1615,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

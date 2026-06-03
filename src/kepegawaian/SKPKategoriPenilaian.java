@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -28,10 +28,10 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -88,9 +88,9 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
         Kategori.setDocument(new batasInput((int)100).getKata(Kategori));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         Kode.requestFocus();
-        
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -428,7 +428,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                 });
                 LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
-            }           
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -483,7 +483,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                     tbBangsal.setValueAt(Sasaran.getSelectedItem().toString(),tbBangsal.getSelectedRow(),2);
                     emptTeks();
                 }
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -515,14 +515,14 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-            param.put("parameter","%"+TCari.getText().trim()+"%");     
+            param.put("parameter","%"+TCari.getText().trim()+"%");
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReport("rptSKPKategoriPenilaian.jasper",param,"::[ Kategori Pengkajian Pasien ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -580,7 +580,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-           
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -595,7 +595,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
 
@@ -622,7 +622,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void SasaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SasaranKeyPressed
@@ -706,7 +706,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -728,7 +728,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
             Sasaran.setSelectedItem(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return Kode;
     }
@@ -762,7 +762,7 @@ public final class SKPKategoriPenilaian extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -48,7 +48,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
     private ResultSet rstindakan;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private int i=0,ttl=0;   
+    private int i=0,ttl=0;
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -80,7 +80,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -254,27 +254,27 @@ public final class DlgRl37 extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
-            Map<String, Object> param = new HashMap<>();         
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());   
-            param.put("tanggal",Tgl2.getDate());  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+            param.put("tanggal",Tgl2.getDate());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int r=0;r<tabMode.getRowCount();r++){ 
+            for(int r=0;r<tabMode.getRowCount();r++){
                 if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                     Sequel.menyimpan("temporary","'"+r+"','"+
                                     tabMode.getValueAt(r,0).toString()+"','"+
                                     tabMode.getValueAt(r,1).toString()+"','"+
                                     tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-                }                    
+                }
             }
-               
+
             Valid.MyReportqry("rptRl37.jasper","report","::[ Formulir RL 3.7 ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -302,7 +302,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             runBackground(() ->tampil());
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -353,7 +353,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -390,15 +390,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
-        try{   
-            Valid.tabelKosong(tabMode); 
+    private void tampil(){
+        try{
+            Valid.tabelKosong(tabMode);
             pstindakan=koneksi.prepareStatement(
                 "select jns_perawatan_radiologi.nm_perawatan,count(jns_perawatan_radiologi.nm_perawatan) from periksa_radiologi "+
                 "inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw where periksa_radiologi.tgl_periksa between ? and ? "+
                 (TCari.getText().trim().equals("")?"":"and jns_perawatan_radiologi.nm_perawatan like ? ")+"group by jns_perawatan_radiologi.nm_perawatan"
             );
-            try {            
+            try {
                 pstindakan.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 pstindakan.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 if(!TCari.getText().trim().equals("")){
@@ -412,7 +412,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         i,rstindakan.getString(1),rstindakan.getInt(2)
                     });
                     ttl=ttl+rstindakan.getInt(2);
-                    i++;                    
+                    i++;
                 }
 
                 if(i>1){
@@ -460,7 +460,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,8 +1,8 @@
 package laporan;
-import fungsi.koneksiDB;
-import fungsi.validasi;
 import fungsi.akses;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -34,15 +34,15 @@ public class DlgRekapPermintaanDiet extends javax.swing.JDialog {
     private int[] totalk1,totalk2,totalk3,totalutama,totalvip,totalvvip;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgRekapPermintaanDiet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -55,7 +55,7 @@ public class DlgRekapPermintaanDiet extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         Valid.LoadTahun(ThnCari);
     }
 
@@ -327,13 +327,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.close();
                 }
             }
-            htmlContent.append("<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='2'>Jumlah</td></tr>");   
+            htmlContent.append("<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='2'>Jumlah</td></tr>");
             htmlContent.append("<tr class='isi'>");
             for(i=0;i<kolom;i++){
                 htmlContent.append("<td valign='middle' bgcolor='#FFFAFA' align='center'>K 1</td><td valign='middle' bgcolor='#FFFAFA' align='center'>K 2</td><td valign='middle' bgcolor='#FFFAFA' align='center'>K 3</td><td valign='middle' bgcolor='#FFFAFA' align='center'>Utama</td><td valign='middle' bgcolor='#FFFAFA' align='center'>VIP</td><td valign='middle' bgcolor='#FFFAFA' align='center'>VVIP</td>");
             }
-            htmlContent.append("</tr>"); 
-            
+            htmlContent.append("</tr>");
+
             totaljumlah=0;
             for(x=1;x<32;x++){
                 if(x<10){
@@ -342,7 +342,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     tanggal=""+x;
                 }
                 htmlContent.append("<tr class='isi'><td valign='middle' align='center'>").append(x).append("</td>");
-                
+
                 jumlah=0;
                 for(i=0;i<kolom;i++){
                     stringk1="";stringk2="";stringk3="";stringutama="";stringvip="";stringvvip="";
@@ -354,7 +354,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(k1>0){
                         stringk1=""+k1;
                     }
-                    
+
                     k2=Sequel.cariInteger("select count(detail_beri_diet.no_rawat) from detail_beri_diet inner join reg_periksa inner join kamar_inap inner join kamar on "+
                          "detail_beri_diet.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat and kamar_inap.kd_kamar=kamar.kd_kamar where "+
                          "detail_beri_diet.tanggal='"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-"+tanggal+"' and kamar.kelas='Kelas 2' and reg_periksa.kd_pj='"+kodebayar[i]+"'");
@@ -363,7 +363,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(k2>0){
                         stringk2=""+k2;
                     }
-                    
+
                     k3=Sequel.cariInteger("select count(detail_beri_diet.no_rawat) from detail_beri_diet inner join reg_periksa inner join kamar_inap inner join kamar on "+
                          "detail_beri_diet.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat and kamar_inap.kd_kamar=kamar.kd_kamar where "+
                          "detail_beri_diet.tanggal='"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-"+tanggal+"' and kamar.kelas='Kelas 3' and reg_periksa.kd_pj='"+kodebayar[i]+"'");
@@ -372,7 +372,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(k3>0){
                         stringk3=""+k3;
                     }
-                    
+
                     utama=Sequel.cariInteger("select count(detail_beri_diet.no_rawat) from detail_beri_diet inner join reg_periksa inner join kamar_inap inner join kamar on "+
                          "detail_beri_diet.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat and kamar_inap.kd_kamar=kamar.kd_kamar where "+
                          "detail_beri_diet.tanggal='"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-"+tanggal+"' and kamar.kelas='Kelas Utama' and reg_periksa.kd_pj='"+kodebayar[i]+"'");
@@ -381,7 +381,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(utama>0){
                         stringutama=""+utama;
                     }
-                    
+
                     vip=Sequel.cariInteger("select count(detail_beri_diet.no_rawat) from detail_beri_diet inner join reg_periksa inner join kamar_inap inner join kamar on "+
                          "detail_beri_diet.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat and kamar_inap.kd_kamar=kamar.kd_kamar where "+
                          "detail_beri_diet.tanggal='"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-"+tanggal+"' and kamar.kelas='Kelas VIP' and reg_periksa.kd_pj='"+kodebayar[i]+"'");
@@ -390,7 +390,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(vip>0){
                         stringvip=""+vip;
                     }
-                    
+
                     vvip=Sequel.cariInteger("select count(detail_beri_diet.no_rawat) from detail_beri_diet inner join reg_periksa inner join kamar_inap inner join kamar on "+
                          "detail_beri_diet.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat and kamar_inap.kd_kamar=kamar.kd_kamar where "+
                          "detail_beri_diet.tanggal='"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-"+tanggal+"' and kamar.kelas='Kelas VVIP' and reg_periksa.kd_pj='"+kodebayar[i]+"'");
@@ -399,21 +399,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(vvip>0){
                         stringvvip=""+vvip;
                     }
-                    
+
                     htmlContent.append("<td valign='middle' align='center'>").append(stringk1).append("</td><td valign='middle' align='center'>").append(stringk2).append("</td><td valign='middle' align='center'>").append(stringk3).append("</td><td valign='middle' align='center'>").append(stringutama).append("</td><td valign='middle' align='center'>").append(stringvip).append("</td><td valign='middle' align='center'>").append(stringvvip).append("</td>");
                 }
-                htmlContent.append("<td valign='middle' align='center'>").append(jumlah).append("</td></tr>"); 
+                htmlContent.append("<td valign='middle' align='center'>").append(jumlah).append("</td></tr>");
                 totaljumlah=totaljumlah+jumlah;
             }
-            
+
             htmlContent.append("<tr class='isi'><td valign='middle' align='center'><b>Total :</b></td>");
             for(i=0;i<kolom;i++){
                 htmlContent.append("<td valign='middle' align='center'><b>").append(totalk1[i]).append("</b></td><td valign='middle' align='center'><b>").append(totalk2[i]).append("</b></td><td valign='middle' align='center'><b>").append(totalk3[i]).append("</b></td><td valign='middle' align='center'><b>").append(totalutama[i]).append("</b></td><td valign='middle' align='center'><b>").append(totalvip[i]).append("</b></td><td valign='middle' align='center'><b>").append(totalvvip[i]).append("</b></td>");
             }
-            htmlContent.append("<td valign='middle' align='center'><b>").append(totaljumlah).append("</b></td></tr>"); 
+            htmlContent.append("<td valign='middle' align='center'><b>").append(totaljumlah).append("</b></td></tr>");
             htmlContent.append("<tr class='isi'><td valign='middle' colspan='").append(2).append(kolom*6).append("'>&nbsp;</td></tr>");
             htmlContent.append("<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='7'>Status/Cara Bayar</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>K 1</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>K 2</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>K 3</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>Utama</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>VIP</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>VVIP</td><td valign='middle' colspan='").append((kolom*6)-17).append("'>&nbsp;</td></tr>");
-            
+
             jumlahtotalk1=0;jumlahtotalk2=0;jumlahtotalk3=0;jumlahtotalutama=0;jumlahtotalvip=0;jumlahtotalvvip=0;
             for(i=0;i<kolom;i++){
                 jumlahtotalk1=jumlahtotalk1+totalk1[i];
@@ -425,7 +425,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 htmlContent.append("<tr class='isi'><td valign='middle' colspan='7'>").append(carabayar[i]).append("</td><td valign='middle' align='center' colspan='2'>").append(totalk1[i]).append("</td><td valign='middle' align='center' colspan='2'>").append(totalk2[i]).append("</td><td valign='middle' align='center' colspan='2'>").append(totalk3[i]).append("</td><td valign='middle' align='center' colspan='2'>").append(totalutama[i]).append("</td><td valign='middle' align='center' colspan='2'>").append(totalvip[i]).append("</td><td valign='middle' align='center' colspan='2'>").append(totalvvip[i]).append("</td><td valign='middle' colspan='").append((kolom*6)-17).append("'>&nbsp;</td></tr>");
             }
             htmlContent.append("<tr class='isi'><td valign='middle' colspan='7'><b>Total :</b></td><td valign='middle' align='center' colspan='2'><b>").append(jumlahtotalk1).append("</b></td><td valign='middle' align='center' colspan='2'><b>").append(jumlahtotalk2).append("</b></td><td valign='middle' align='center' colspan='2'><b>").append(jumlahtotalk3).append("</b></td><td valign='middle' align='center' colspan='2'><b>").append(jumlahtotalutama).append("</b></td><td valign='middle' align='center' colspan='2'><b>").append(jumlahtotalvip).append("</b></td><td valign='middle' align='center' colspan='2'><b>").append(jumlahtotalvvip).append("</b></td><td valign='middle' colspan='").append((kolom*6)-17).append("'>&nbsp;</td></tr>");
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='"+(50+(kolom*180))+"px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -434,15 +434,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "</html>");
         } catch (Exception e) {
             System.out.println("laporan.DlgRL4A.prosesCari() 5 : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getrekap_permintaan_diet());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -468,7 +468,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

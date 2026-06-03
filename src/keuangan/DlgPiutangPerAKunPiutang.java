@@ -10,11 +10,11 @@
  */
 
 package keuangan;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -74,9 +74,9 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-    }    
-    
-     
+    }
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -258,8 +258,8 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try {            
-            File g = new File("fileakunbayar.css");            
+        try {
+            File g = new File("fileakunbayar.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                 ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -269,15 +269,15 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                 ".isi4 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
+
             BufferedWriter bw;
             File f;
-            
+
             String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (XLS)"},"Laporan 1 (HTML)");
             switch (pilihan) {
                 case "Laporan 1 (HTML)":
-                    f = new File("PiutangPerAkunPiutang.html");            
-                    bw = new BufferedWriter(new FileWriter(f));            
+                    f = new File("PiutangPerAkunPiutang.html");
+                    bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                 "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                     "<tr class='isi2'>"+
@@ -285,34 +285,34 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>PIUTANG PER AKUN PIUTANG<br>TANGGAL "+Tgl1.getSelectedItem()+"<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>PIUTANG PER AKUN PIUTANG<br>TANGGAL "+Tgl1.getSelectedItem()+"<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
                     );
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 2 (WPS)":
-                    f = new File("PiutangPerAkunPiutang.wps");            
-                    bw = new BufferedWriter(new FileWriter(f));            
+                    f = new File("PiutangPerAkunPiutang.wps");
+                    bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText());
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 3 (XLS)":
-                    f= new File("PiutangPerAkunPiutang.xls");            
-                    bw = new BufferedWriter(new FileWriter(f));            
+                    f= new File("PiutangPerAkunPiutang.xls");
+                    bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText());
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                     break;
 
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -335,9 +335,9 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try{        
+        try{
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='27px'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Tanggal</td>").append(
@@ -346,7 +346,7 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='90px'>Uang Muka</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='90px'>Piutang</td>").append(
                 "</tr>"
-            );           
+            );
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -454,10 +454,10 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-        try{        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try{
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='head'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='27px'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Tanggal</td>").append(
@@ -487,11 +487,11 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                     psakunpiutang.close();
                 }
             }
-            totalpiutang=new double[kolom];            
+            totalpiutang=new double[kolom];
             htmlContent.append(
                 "</tr>"
-            );   
-            
+            );
+
             no=1;
             uangmuka=0;
             piutang=0;
@@ -512,7 +512,7 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                 while(rs.next()){
                     uangmuka=uangmuka+rs.getDouble("uangmuka");
                     piutang=piutang+rs.getDouble("totalpiutang");
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                             "<td valign='middle' align='center'>").append(rs.getString("tanggal")).append("</td>").append(
@@ -525,9 +525,9 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                         htmlContent.append("<td valign='middle' align='right'>").append(Valid.SetAngka(bayar)).append("</td>");
                         totalpiutang[i]=totalpiutang[i]+bayar;
                     }
-                    htmlContent.append( 
+                    htmlContent.append(
                         "</tr>"
-                    ); 
+                    );
                     no++;
                 }
             }  catch (Exception e) {
@@ -539,8 +539,8 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-           
+            }
+
             ps= koneksi.prepareStatement(
                     "select nota_inap.no_rawat,nota_inap.no_nota,nota_inap.tanggal,pasien.nm_pasien,(piutang_pasien.totalpiutang-piutang_pasien.uangmuka) as totalpiutang,"+
                     "piutang_pasien.uangmuka from piutang_pasien inner join nota_inap inner join pasien "+
@@ -558,7 +558,7 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                 while(rs.next()){
                     uangmuka=uangmuka+rs.getDouble("uangmuka");
                     piutang=piutang+rs.getDouble("totalpiutang");
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                             "<td valign='middle' align='center'>").append(rs.getString("tanggal")).append("</td>").append(
@@ -571,9 +571,9 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                         htmlContent.append("<td valign='middle' align='right'>").append(Valid.SetAngka(bayar)).append("</td>");
                         totalpiutang[i]=totalpiutang[i]+bayar;
                     }
-                    htmlContent.append( 
+                    htmlContent.append(
                         "</tr>"
-                    ); 
+                    );
                     no++;
                 }
             }  catch (Exception e) {
@@ -585,9 +585,9 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-            
-            htmlContent.append(                             
+            }
+
+            htmlContent.append(
                 "<tr class='isi'>").append(
                     "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='right'>Total :</td>").append(
@@ -596,12 +596,12 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                     "<td valign='middle' align='right'>").append(Valid.SetAngka(uangmuka)).append("</td>").append(
                     "<td valign='middle' align='right'>").append(Valid.SetAngka(piutang)).append("</td>");
             for(i=0;i<kolom;i++){
-                htmlContent.append("<td valign='middle' align='right'>").append(Valid.SetAngka(totalpiutang[i])).append("</td>"); 
+                htmlContent.append("<td valign='middle' align='right'>").append(Valid.SetAngka(totalpiutang[i])).append("</td>");
             }
-            htmlContent.append( 
+            htmlContent.append(
                 "</tr>"
-            );  
-            
+            );
+
             if(kolom==0){
                 LoadHTML.setText(
                         "<html>"+
@@ -630,13 +630,13 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
                            htmlContent.toString()+
                           "</table>"+
                         "</html>");
-            } 
+            }
             htmlContent=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
-    }    
+    }
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
@@ -663,7 +663,7 @@ public final class DlgPiutangPerAKunPiutang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

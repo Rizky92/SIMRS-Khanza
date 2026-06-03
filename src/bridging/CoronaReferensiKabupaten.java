@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -17,15 +17,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -75,7 +75,7 @@ public final class CoronaReferensiKabupaten extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -97,7 +97,7 @@ public final class CoronaReferensiKabupaten extends javax.swing.JDialog {
                     }
                 }
             });
-        }   
+        }
         try {
             link=koneksiDB.URLAPICORONA();
             idrs=koneksiDB.IDCORONA();
@@ -105,8 +105,8 @@ public final class CoronaReferensiKabupaten extends javax.swing.JDialog {
             System.out.println("E : "+e);
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -308,8 +308,8 @@ public final class CoronaReferensiKabupaten extends javax.swing.JDialog {
         try {
             headers = new HttpHeaders();
 	   headers.add("X-rs-id",idrs);
-	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-	   headers.add("X-pass",api.getHmac()); 
+	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+	   headers.add("X-pass",api.getHmac());
             body="{" +
                     "\"propinsi\":\""+kodeprop+"\"" +
                   "}";
@@ -322,7 +322,7 @@ public final class CoronaReferensiKabupaten extends javax.swing.JDialog {
                     if(list.path("nama").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                         tabMode.addRow(new Object[]{
                            list.path("kode").asText(),list.path("nama").asText()
-                        }); 
+                        });
                     }
                 }
             }
@@ -338,18 +338,18 @@ public final class CoronaReferensiKabupaten extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Server kemenkes lelah broo....!");
             }
         }
-    }     
-    
-    
- 
+    }
+
+
+
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void SetProp(String kodeprop){
         this.kodeprop=kodeprop;
     }
-    
+
     public void setCari(String cari){
         TCari.setText(cari);
     }

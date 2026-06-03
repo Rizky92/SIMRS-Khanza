@@ -45,7 +45,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private ApiMobileJKN api=new ApiMobileJKN();
     private String URL="",link="",utc="",requestJson="";
@@ -111,7 +111,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             link=koneksiDB.URLAPIMOBILEJKN();
         } catch (Exception e) {
@@ -412,7 +412,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     try {
@@ -427,7 +427,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                         "\"kodebooking\": \""+rs.getString("no_rawat")+"\"" +
                                      "}";
                         requestEntity = new HttpEntity(requestJson,headers);
-                        URL = link+"/antrean/getlisttask";	
+                        URL = link+"/antrean/getlisttask";
                         System.out.println("URL : "+URL);
                         System.out.println("JSON : "+requestJson);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
@@ -446,8 +446,8 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                 }
                             }
                         }else {
-                            System.out.println("Notif : "+nameNode.path("message").asText());               
-                        }   
+                            System.out.println("Notif : "+nameNode.path("message").asText());
+                        }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                         if(ex.toString().contains("UnknownHostException")){
@@ -468,7 +468,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "SELECT referensi_mobilejkn_bpjs.nobooking,reg_periksa.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
@@ -495,7 +495,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     try {
@@ -510,7 +510,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                         "\"kodebooking\": \""+rs.getString("nobooking")+"\"" +
                                      "}";
                         requestEntity = new HttpEntity(requestJson,headers);
-                        URL = link+"/antrean/getlisttask";	
+                        URL = link+"/antrean/getlisttask";
                         System.out.println("URL : "+URL);
                         System.out.println("JSON : "+requestJson);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
@@ -529,8 +529,8 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
                                 }
                             }
                         }else {
-                            System.out.println("Notif : "+nameNode.path("message").asText());                  
-                        }   
+                            System.out.println("Notif : "+nameNode.path("message").asText());
+                        }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                         if(ex.toString().contains("UnknownHostException")){
@@ -553,7 +553,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -579,7 +579,7 @@ public final class BPJSTaskIDMobileJKN extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

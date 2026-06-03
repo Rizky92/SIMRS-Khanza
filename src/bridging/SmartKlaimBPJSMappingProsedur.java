@@ -5,11 +5,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -42,7 +42,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -83,11 +83,11 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        KodeSnomed.setDocument(new batasInput((byte)20).getKata(KodeSnomed)); 
-        SnomedSystem.setDocument(new batasInput((int)100).getKata(SnomedSystem)); 
-        Display.setDocument(new batasInput((int)300).getKata(Display)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        KodeSnomed.setDocument(new batasInput((byte)20).getKata(KodeSnomed));
+        SnomedSystem.setDocument(new batasInput((int)100).getKata(SnomedSystem));
+        Display.setDocument(new batasInput((int)300).getKata(Display));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -484,7 +484,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(prosedur.getTable().getSelectedRow()!= -1){                    
+                if(prosedur.getTable().getSelectedRow()!= -1){
                     KodeProsedur.setText(prosedur.getTable().getValueAt(prosedur.getTable().getSelectedRow(),0).toString());
                     NamaProsedur.setText(prosedur.getTable().getValueAt(prosedur.getTable().getSelectedRow(),1).toString());
                 }
@@ -498,8 +498,8 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         prosedur.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -507,7 +507,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     prosedur.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -539,7 +539,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -596,7 +596,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
                     tabMode.setValueAt(NamaProsedur.getText(),tbJnsPerawatan.getSelectedRow(),4);
                     emptTeks();
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -623,17 +623,17 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingProsedurSmartKlaim.jasper","report","::[ Mapping Prosedur Smart Klaim BPJS ]::",param);            
+                Valid.MyReport("rptMapingProsedurSmartKlaim.jasper","report","::[ Mapping Prosedur Smart Klaim BPJS ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -855,18 +855,18 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
            NamaProsedur.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmapping_prosedur_smart_klaim_bpjs());
         BtnHapus.setEnabled(akses.getmapping_prosedur_smart_klaim_bpjs());
         BtnEdit.setEnabled(akses.getmapping_prosedur_smart_klaim_bpjs());
         BtnPrint.setEnabled(akses.getmapping_prosedur_smart_klaim_bpjs());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }  
-    
+    }
+
     private void isForm() {
         if (ChkInput.isSelected() == true) {
             ChkInput.setVisible(false);
@@ -880,7 +880,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -906,7 +906,7 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

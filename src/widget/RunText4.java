@@ -1,12 +1,12 @@
 package widget;
 
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
- 
+import javax.swing.*;
+
 public class RunText4 extends JFrame implements ActionListener{
-  JLabel label;  
- 
+  JLabel label;
+
   public RunText4()  {
     label = new JLabel( "Hello World,Where there is will there is& nbsp;a way");
     getContentPane().add(label, BorderLayout.NORTH);

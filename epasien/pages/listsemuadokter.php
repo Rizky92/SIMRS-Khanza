@@ -11,7 +11,7 @@
                           <h2 class="wow fadeInUp" data-wow-delay="0.1s"><center>Dokter Kami</center></h2>
                      </div>
                 </div>
-                       
+
                 <div class="clearfix"></div>
                 <?php
                     if(!isset($_SESSION["semuadokter"])){

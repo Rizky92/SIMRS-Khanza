@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div id="entry">        
+<div id="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action             = isset($_GET['action'])?$_GET['action']:NULL;
@@ -14,7 +14,7 @@
             echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
             $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil              = bukaquery($_sql);
-            $baris              = mysqli_fetch_row($hasil);   
+            $baris              = mysqli_fetch_row($hasil);
             $_sqlnext         	= "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
             $hasilnext        	= bukaquery($_sqlnext);
             $barisnext        	= mysqli_fetch_row($hasilnext);
@@ -34,7 +34,7 @@
                     <a href=?act=ListRiwayatPangkat&action=LIHAT>| List Riwayat Pangkat |</a>
                     <a href=?act=InputRiwayatPangkat&action=TAMBAH&id=$next>-->></a>
                   </div>";
-        ?>            
+        ?>
         <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" class="tbl_form">
             <tr class="isi2">
                 <td width="17%" >NIP</td><td width="">:</td>
@@ -130,14 +130,14 @@
                     <input name="dokumen" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi10'));" type=file id="TxtIsi10" value="<?php echo $dokumen;?>" size="40" maxlength="255" accept="image/jpeg,image/jpg"/>
                     <span id="MsgIsi10" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr>                
+            </tr>
             <tr class="isi2">
                 <td width="17%" >Pejabat Penetap</td><td width="">:</td>
                 <td width="31%" colspan="4"><input name="pejabat_penetap" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type=text id="TxtIsi4" class="inputbox" value="<?php echo isset($pejabat_penetap)?$pejabat_penetap:NULL;?>" size="40" maxlength="50">
                 <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
                 </td>
             </tr>
-        </table>           
+        </table>
         <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;SIMPAN&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;KOSONG&nbsp;&nbsp;"></div><br>
         <div style="width: 100%; height: 62%; overflow: auto;">
         <?php
@@ -174,13 +174,13 @@
                                         }
                                     }else{
                                         echo "Berkas harus JPEG/JPG";
-                                    } 
+                                    }
                                 }else{
                                     echo "Berkas harus JPEG/JPG";
-                                } 
+                                }
                             }else{
                                 echo "Berkas harus JPEG/JPG";
-                            }                                    
+                            }
                             break;
                     }
                 }else if ((empty($id))||(empty($jabatan))){
@@ -206,10 +206,10 @@
                             <td width='15%'><div align='center'>Dasar Peraturan</div></td>
                             <td width='10%'><div align='center'>Masa Kerja</div></td>
                         </tr>";
-                while($baris = mysqli_fetch_array($hasil)) {  
+                while($baris = mysqli_fetch_array($hasil)) {
                     $gb="-";
                     if($baris["berkas"]=="pages/riwayatpangkat/berkas"){
-                        $gb="-";                            
+                        $gb="-";
                     }else{
                         $gb="<img src='".$baris["berkas"]."' width='850px' height='950px'>";
                     }
@@ -250,7 +250,7 @@
                             </tr>
                       </table>";
             }
-        ?> 
+        ?>
         </div>
     </form>
     <?php
@@ -264,4 +264,3 @@
         }
     ?>
 </div>
-

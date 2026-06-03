@@ -2,11 +2,11 @@
 
 package inventaris;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -130,11 +130,11 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
         NoInventaris.setDocument(new batasInput((byte)30).getKata(NoInventaris));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-     
-        
+
+
         WindowInput.setSize(735,245);
-        WindowInput.setLocationRelativeTo(null);  
-        
+        WindowInput.setLocationRelativeTo(null);
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -812,7 +812,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -827,10 +827,10 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f;            
+                File f;
                 BufferedWriter bw;
                 StringBuilder htmlContent;
-                
+
                 String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
@@ -890,9 +890,9 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                                   "</table>"+
                                 "</html>"
                             );
-                            
-                            f = new File("DataSirkulasiCSSD.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+
+                            f = new File("DataSirkulasiCSSD.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -901,12 +901,12 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SIRKULASI CSSD<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA SIRKULASI CSSD<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
@@ -966,9 +966,9 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                                   "</table>"+
                                 "</html>"
                             );
-                            
-                            f = new File("DataSirkulasiCSSD.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+
+                            f = new File("DataSirkulasiCSSD.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -977,29 +977,29 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SIRKULASI CSSD<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA SIRKULASI CSSD<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\"No.Sirkulasi\";\"No.Inventaris\";\"Kode Barang\";\"Nama Barang\";\"Produsen\";\"Type/Merk\";\"Thn.Produksi\";\"ISBN\";\"Jenis Barang\";\"Keterangan Diambil\";\"NIP Pengambil\";\"Petugas Pengambil\";\"Tgl & Jam Ambil\";\"Keterangan Sterilisasi\";\"NIP Penyeteril\";\"Petugas Penyeteril\";\"Tgl & Jam Starilisasi\";\"Keterangan Kembali\";\"NIP Pengembali\";\"Petugas Pengembali\";\"Tgl & Jam Kembali\"\n"
-                            ); 
+                            );
                             for (int i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbKamIn.getValueAt(i,0).toString()).append("\";\"").append(tbKamIn.getValueAt(i,1).toString()).append("\";\"").append(tbKamIn.getValueAt(i,2).toString()).append("\";\"").append(tbKamIn.getValueAt(i,3).toString()).append("\";\"").append(tbKamIn.getValueAt(i,4).toString()).append("\";\"").append(tbKamIn.getValueAt(i,5).toString()).append("\";\"").append(tbKamIn.getValueAt(i,6).toString()).append("\";\"").append(tbKamIn.getValueAt(i,7).toString()).append("\";\"").append(tbKamIn.getValueAt(i,8).toString()).append("\";\"").append(tbKamIn.getValueAt(i,9).toString()).append("\";\"").append(tbKamIn.getValueAt(i,10).toString()).append("\";\"").append(tbKamIn.getValueAt(i,11).toString()).append("\";\"").append(tbKamIn.getValueAt(i,12).toString()).append("\";\"").append(tbKamIn.getValueAt(i,13).toString()).append("\";\"").append(tbKamIn.getValueAt(i,14).toString()).append("\";\"").append(tbKamIn.getValueAt(i,15).toString()).append(tbKamIn.getValueAt(i,16).toString()).append("\";\"").append(tbKamIn.getValueAt(i,17).toString()).append("\";\"").append(tbKamIn.getValueAt(i,18).toString()).append("\";\"").append(tbKamIn.getValueAt(i,19).toString()).append("\";\"").append(tbKamIn.getValueAt(i,20).toString()).append("\"\n");
                             }
-                            f = new File("DataSirkulasiCSSD.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataSirkulasiCSSD.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
-                }   
+                        break;
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -1075,11 +1075,11 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 }else if(Status.getText().trim().equals("Ada")){
                     if(Sequel.menyimpantf("inventaris_ambil_cssd","'"+Keterangan.getText()+"','"+NoSirkulasi.getText()+"','"+NoInventaris.getText()+"','"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19)+"','"+NIP.getText()+"'","No.Sirkulasi")==true){
                         Sequel.queryu("update inventaris set status_barang='Dipinjam' where no_inventaris='"+NoInventaris.getText()+"'");
-                        NoInventaris.requestFocus();  
+                        NoInventaris.requestFocus();
                         emptTeks();
                         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(inventaris_ambil_cssd.no_sirkulasi,3),signed)),0) from inventaris_ambil_cssd where DATE_FORMAT(inventaris_ambil_cssd.tgl_ambil, '%Y-%m-%d')='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","AC"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoSirkulasi);
                         runBackground(() ->tampil());
-                    }   
+                    }
                 }
             }else if(aksi.equals("steril")){
                 if(Sequel.menyimpantf("inventaris_sterilisasi_cssd","'"+Keterangan.getText()+"','"+NoSirkulasi.getText()+"','"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19)+"','"+NIP.getText()+"'","No.Sirkulasi")==true){
@@ -1137,8 +1137,8 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
-            
+
+
         }
 }//GEN-LAST:event_tbKamInMouseClicked
 
@@ -1146,7 +1146,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         if(tabMode.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.requestFocus();
-            }                    
+            }
         }
 }//GEN-LAST:event_tbKamInKeyPressed
 
@@ -1200,14 +1200,14 @@ private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(inventaris.getTable().getSelectedRow()!= -1){                   
+            if(inventaris.getTable().getSelectedRow()!= -1){
                 NoInventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
                 NamaBarang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
                 Merk.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),4).toString());
                 Jenis.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),8).toString());
-                Sequel.cariIsi("select inventaris.status_barang from inventaris where inventaris.no_inventaris='"+NoInventaris.getText()+"'",Status);                       
+                Sequel.cariIsi("select inventaris.status_barang from inventaris where inventaris.no_inventaris='"+NoInventaris.getText()+"'",Status);
                 NoInventaris.requestFocus();
-            }                
+            }
         }
         @Override
         public void windowIconified(WindowEvent e) {}
@@ -1235,7 +1235,7 @@ private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     inventaris.setLocationRelativeTo(internalFrame1);
     inventaris.setAlwaysOnTop(false);
-    inventaris.setVisible(true);        
+    inventaris.setVisible(true);
 }//GEN-LAST:event_btnInvActionPerformed
 
 private void NIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NIPKeyPressed
@@ -1259,10 +1259,10 @@ private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         petugas.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                } 
+                }
                 petugas=null;
             }
         });
@@ -1273,13 +1273,13 @@ private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
     if (petugas == null) return;
     if (!petugas.isVisible()) {
-        petugas.isCek();    
+        petugas.isCek();
         petugas.emptTeks();
-    }  
+    }
     if (petugas.isVisible()) {
         petugas.toFront();
         return;
-    }    
+    }
     petugas.setVisible(true);
 }//GEN-LAST:event_btnPtgActionPerformed
 
@@ -1298,7 +1298,7 @@ private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }                  
+            }
         }
     }//GEN-LAST:event_tbKamInKeyReleased
 
@@ -1499,14 +1499,14 @@ private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
                         ps.close();
                     }
                 }
-            }  
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {       
+    public void emptTeks() {
         NoInventaris.setText("");
         NamaBarang.setText("");
         Jenis.setText("");
@@ -1528,11 +1528,11 @@ private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
             Jenis.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
             Merk.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString());
             //TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
-            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString());            
+            TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString());
         }
     }
 
-    
+
     public void isCek(){
         if(akses.getjml2()>=1){
             NIP.setEditable(false);
@@ -1543,9 +1543,9 @@ private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
             BtnSteril.setEnabled(akses.getsirkulasi_cssd());
             NIP.setText(akses.getkode());
             NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
-        } 
+        }
     }
-    
+
     private void isInventaris(){
         try {
             ps=koneksi.prepareStatement(
@@ -1583,7 +1583,7 @@ private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
             System.out.println("Notifikasi : "+ex);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1609,7 +1609,7 @@ private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

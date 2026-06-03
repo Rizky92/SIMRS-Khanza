@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -59,9 +59,9 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
             Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -96,7 +96,7 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
             }
         }
         tbPembayaran.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailPermintaan=new DefaultTableModel(null,new Object[]{
                 "Akun Bayar","Jumlah Bayar","Kode Akun"
             }){
@@ -126,8 +126,8 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
         tbDetailPembayaran.setDefaultRenderer(Object.class, new WarnaTable());
 
         NoPermintaan.setDocument(new batasInput((byte)20).getKata(NoPermintaan));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -145,10 +145,10 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         ChkAccor.setSelected(false);
         PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-        scrollPaneDetail.setVisible(false); 
+        scrollPaneDetail.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -530,12 +530,12 @@ public class LabKeslingRekapPembayaran extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,KodePelanggan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -551,7 +551,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             TCari.requestFocus();
         }else if(tabModePembayaran.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -566,7 +566,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 );
                 bg.close();
 
-                File f;            
+                File f;
                 BufferedWriter bw;
                 StringBuilder htmlContent;
 
@@ -611,8 +611,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "</html>"
                             );
 
-                            f = new File("DataRekapPembayaranPengujianSampel.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataRekapPembayaranPengujianSampel.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -621,12 +621,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA REKAP PEMBAYARAN LAB KESEHATAN LINGKUNGAN<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA REKAP PEMBAYARAN LAB KESEHATAN LINGKUNGAN<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
@@ -668,8 +668,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "</html>"
                             );
 
-                            f = new File("DataRekapPembayaranPengujianSampel.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataRekapPembayaranPengujianSampel.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -678,28 +678,28 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA REKAP PEMBAYARAN LAB KESEHATAN LINGKUNGAN<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA REKAP PEMBAYARAN LAB KESEHATAN LINGKUNGAN<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append("\"Tanggal Bayar\";\"No.Bayar/Nota\";\"Dibayar Oleh\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Pembayaran\"\n"); 
+                            htmlContent.append("\"Tanggal Bayar\";\"No.Bayar/Nota\";\"Dibayar Oleh\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Pembayaran\"\n");
                             for (int i = 0; i < tabModePembayaran.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbPembayaran.getValueAt(i,0).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,1).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,2).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,3).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,4).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,5).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,6).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,7).toString()).append("\";\"").append(tbPembayaran.getValueAt(i,8).toString()).append("\"\n");
                             }
-                            htmlContent.append("\"\";\"\";\"Record :\";\"").append(LTotal.getText()).append("\";\"\";\"\";\"\";\"Total Pembayaran : \";\"").append(total+"").append("\"\n"); 
-                            f = new File("DataRekapPembayaranPengujianSampel.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            htmlContent.append("\"\";\"\";\"Record :\";\"").append(LTotal.getText()).append("\";\"\";\"\";\"\";\"Total Pembayaran : \";\"").append(total+"").append("\"\n");
+                            f = new File("DataRekapPembayaranPengujianSampel.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
-                }   
+                        break;
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -748,7 +748,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(berhasil==true){
                     Sequel.queryu("update labkesling_validasi_pengujian_sampel set status='Belum Bayar' where no_permintaan='"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),3).toString()+"'");
                     Sequel.Commit();
-                    JOptionPane.showMessageDialog(null,"Proses hapus berhasil...!");  
+                    JOptionPane.showMessageDialog(null,"Proses hapus berhasil...!");
                     tabModePembayaran.removeRow(tbPembayaran.getSelectedRow());
                     Valid.tabelKosong(tabModeDetailPermintaan);
                     LTotal.setText(tabModePembayaran.getRowCount()+"");
@@ -978,11 +978,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -1065,7 +1065,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabModePembayaran);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                         "select labkesling_pembayaran_pengujian_sampel.tanggal,labkesling_pembayaran_pengujian_sampel.no_pembayaran,labkesling_pembayaran_pengujian_sampel.dibayar_oleh,labkesling_pembayaran_pengujian_sampel.no_permintaan,"+
                         "labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_permintaan_pengujian_sampel.kode_sampel,labkesling_master_sampel.nama_sampel,"+
@@ -1079,7 +1079,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         (NamaSampel.getText().trim().equals("")?"":" and labkesling_permintaan_pengujian_sampel.kode_sampel='"+KodeSampel.getText()+"' ")+
                         (TCari.getText().trim().equals("")?"":" and (labkesling_pembayaran_pengujian_sampel.dibayar_oleh like ? or labkesling_pelanggan.nama_pelanggan like ? or labkesling_pembayaran_pengujian_sampel.no_permintaan like ? "+
                         "or labkesling_master_sampel.nama_sampel like ? ) ")+"group by labkesling_pembayaran_pengujian_sampel.no_pembayaran order by labkesling_pembayaran_pengujian_sampel.tanggal,labkesling_pembayaran_pengujian_sampel.no_pembayaran ");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -1089,15 +1089,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                 }
-                    
+
                 total=0;
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModePembayaran.addRow(new Object[]{
                         rs.getString("tanggal"),rs.getString("no_pembayaran"),rs.getString("dibayar_oleh"),rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getDouble("pembayaran")
-                    }); 
+                    });
                     total=total+rs.getDouble("pembayaran");
-                }        
+                }
                 LTotal.setText(tabModePembayaran.getRowCount()+"");
                 LTotalBayar.setText(Valid.SetAngka(total));
             } catch (Exception e) {
@@ -1109,18 +1109,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         BtnPrint.setEnabled(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan());
-        BtnHapus.setEnabled(akses.gethapus_nota_salah());  
+        BtnHapus.setEnabled(akses.gethapus_nota_salah());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1146,7 +1146,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

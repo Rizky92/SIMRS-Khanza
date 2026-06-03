@@ -11,11 +11,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -44,7 +44,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -305,14 +305,14 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptBatalPendaftaranMobileJKN.jasper","report","::[ Data Batal Pendaftaran Mobile JKN ]::",
                    "SELECT referensi_mobilejkn_bpjs_batal.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs_batal.no_rawat_batal,"+
                    "referensi_mobilejkn_bpjs_batal.nomorreferensi,referensi_mobilejkn_bpjs_batal.tanggalbatal,referensi_mobilejkn_bpjs_batal.keterangan "+
@@ -322,7 +322,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
                    "referensi_mobilejkn_bpjs_batal.nomorreferensi LIKE '%"+TCari.getText()+"%' OR referensi_mobilejkn_bpjs_batal.keterangan LIKE '%"+TCari.getText()+"%') ")+
                    "ORDER BY referensi_mobilejkn_bpjs_batal.tanggalbatal",param);
         }
-        this.setCursor(Cursor.getDefaultCursor());  
+        this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -469,7 +469,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -493,7 +493,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -519,7 +519,7 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

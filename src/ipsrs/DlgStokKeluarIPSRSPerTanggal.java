@@ -11,11 +11,11 @@
 
 package ipsrs;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -72,9 +72,9 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         Valid.LoadTahun(ThnCari);
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -275,7 +275,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TCari.setText("");
             runBackground(() ->tampil());
         }else{
@@ -305,11 +305,11 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        
+
     }//GEN-LAST:event_tbJadwalKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -332,7 +332,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
             if(ceksukses==false){
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 int row=tabMode.getRowCount();
-                for(int r=0;r<row;r++){  
+                for(int r=0;r<row;r++){
                     Sequel.menyimpan("temporary","'"+r+"','"+
                                     tabMode.getValueAt(r,0).toString()+"','"+
                                     tabMode.getValueAt(r,1).toString()+"','"+
@@ -368,18 +368,18 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
                                     Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,33).toString()))+"','"+
                                     Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,34).toString()))+"','"+
                                     Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,35).toString()))+"','"+
-                                    Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,36).toString()))+"','','"+akses.getalamatip()+"'","Rekap Presensi"); 
+                                    Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,36).toString()))+"','','"+akses.getalamatip()+"'","Rekap Presensi");
                 }
 
-                Map<String, Object> param = new HashMap<>();   
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("jd1","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")");
                 param.put("jd2","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")");
                 param.put("jd3","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),3)+")");
@@ -411,10 +411,10 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
                 param.put("jd29","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),29)+")");
                 param.put("jd30","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),30)+")");
                 param.put("jd31","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),31)+")");
-                Valid.MyReportqry("rptStokKeluarIPSRSPerTanggal.jasper","report","::[ Pengadaan Barang Non Medis Per Tanggal ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);            
+                Valid.MyReportqry("rptStokKeluarIPSRSPerTanggal.jasper","report","::[ Pengadaan Barang Non Medis Per Tanggal ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }else{
                 JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
-            }                   
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -461,7 +461,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         Object[] row={"Kode Barang","Nama Barang","Satuan","Jenis","Stok Saat Ini",
             "1("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")",
             "2("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")",
@@ -511,7 +511,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
              };
              @Override
@@ -520,7 +520,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
              }
         };
         tbJadwal.setModel(tabMode);
-        
+
         for (int i = 0; i < 37; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
@@ -538,7 +538,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -552,7 +552,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
@@ -587,7 +587,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
                     h29=JmlBarang(ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-29",rs.getString("kode_brng"));
                     h30=JmlBarang(ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-30",rs.getString("kode_brng"));
                     h31=JmlBarang(ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-31",rs.getString("kode_brng"));
-                    
+
                     tabMode.addRow(new Object[]{
                         rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("satuan"),rs.getString("ipsrsjenisbarang"),rs.getString("stok"),
                         h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
@@ -610,10 +610,10 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
-    
+
+
     String konversi(int year, int month, int day){
-        dateString = String.format("%d-%d-%d", year, month, day);        
+        dateString = String.format("%d-%d-%d", year, month, day);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
         } catch (Exception ex) {
@@ -648,11 +648,11 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
         }
         return hari;
     }
-    
+
     private double JmlBarang(String tanggal,String kodebarang){
         return Sequel.cariIsiAngka("select sum(ipsrsdetailpengeluaran.jumlah) from ipsrspengeluaran inner join ipsrsdetailpengeluaran on ipsrspengeluaran.no_keluar=ipsrsdetailpengeluaran.no_keluar where ipsrsdetailpengeluaran.kode_brng='"+kodebarang+"' and ipsrspengeluaran.tanggal=?",tanggal);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -678,7 +678,7 @@ public class DlgStokKeluarIPSRSPerTanggal extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

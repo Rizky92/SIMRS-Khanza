@@ -5,11 +5,11 @@ package keuangan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -46,7 +46,7 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
     private Scanner sc;
     private StringBuffer data;
     private String f,json="",kodemcm=Sequel.cariIsi("select set_akun_mandiri.kode_mcm from set_akun_mandiri");;
-    private javax.swing.JFileChooser jfc = new JFileChooser();   
+    private javax.swing.JFileChooser jfc = new JFileChooser();
     private JsonNode root;
     private ObjectMapper mapper = new ObjectMapper();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -106,7 +106,7 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -309,14 +309,14 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPembayaranPihakke3BankMandiri.jasper","report","::[ Data Pembayaran Pihak Ke 3 Bank Mandiri ]::",
                "select pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,pembayaran_pihak_ke3_bankmandiri.no_rekening_sumber,"+
                "pembayaran_pihak_ke3_bankmandiri.no_rekening_tujuan,pembayaran_pihak_ke3_bankmandiri.atas_nama_rekening_tujuan,pembayaran_pihak_ke3_bankmandiri.kota_atas_nama_rekening_tujuan,"+
@@ -395,19 +395,19 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             f = jfc.getSelectedFile().toString();
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
-                sc = new Scanner(new File(f));  
+                sc = new Scanner(new File(f));
                 sc.useDelimiter(":");
                 data=new StringBuffer();
                 json="";
-                while (sc.hasNext()){  
+                while (sc.hasNext()){
                     json=sc.nextLine();
                     if(json.contains(":61:")||json.contains(":86:")){
                         data.append(json+";");
                     }
-                }   
+                }
                 json="{"+data.toString().replaceAll(";:86:","\",\"referensi\":\"").replaceAll(";:61:","\"},{\"transaksi\":\"").replaceAll(":61:","\"transaksi\":\"")+"}";
                 json="{\"data\":["+json.substring(0,json.length()-2)+"\"}]}";
-                sc.close();   
+                sc.close();
                 System.out.println(json);
                 if(!json.equals("")){
                     root = mapper.readTree(json);
@@ -459,7 +459,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -527,7 +527,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                     ps.setString(11,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 total=0;
                 while(rs.next()){
@@ -556,7 +556,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -582,7 +582,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -74,7 +74,7 @@ public class DlgSetKamarInap extends javax.swing.JDialog {
 
         for (int i = 0; i < 8; i++) {
             TableColumn column = tbAdmin.getColumnModel().getColumn(i);
-            column.setPreferredWidth(150);            
+            column.setPreferredWidth(150);
         }
 
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
@@ -603,7 +603,7 @@ private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKe
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement("select * from set_jam_minimal ");
             try {
                 rs=ps.executeQuery();
@@ -625,7 +625,7 @@ private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKe
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -634,9 +634,9 @@ private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKe
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            Jam.setText(tbAdmin.getValueAt(row,0).toString());            
+            Jam.setText(tbAdmin.getValueAt(row,0).toString());
             cmbYes.setSelectedItem(tbAdmin.getValueAt(row,1).toString());
-            fee.setText(tbAdmin.getValueAt(row,2).toString());            
+            fee.setText(tbAdmin.getValueAt(row,2).toString());
             cmbYes2.setSelectedItem(tbAdmin.getValueAt(row,3).toString());
             Bayi.setText(tbAdmin.getValueAt(row,4).toString());
             cmbYes3.setSelectedItem(tbAdmin.getValueAt(row,5).toString());
@@ -656,7 +656,7 @@ private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKe
         cmbYes5.setSelectedItem("No");
         Jam.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -682,7 +682,7 @@ private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKe
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

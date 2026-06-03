@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -15,10 +15,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,8 @@ import java.awt.event.WindowEvent;
 import java.io.FileReader;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -35,9 +38,6 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
-import java.awt.Cursor;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -58,7 +58,7 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
     private DlgCariDokter dokter;
     private String iterasi,noresepawal,noiterasi="";
     private int i;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -71,7 +71,7 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
         tabModeobat=new DefaultTableModel(null,new Object[]{
                 "Jml","Kode Barang","Nama Barang","Aturan Pakai"
             }){
-            @Override 
+            @Override
             public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if ((colIndex==0)||(colIndex==3)) {
@@ -79,17 +79,17 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
                 }
                 return a;
             }
-            
+
             Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
             };
-             
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         };
-        
+
         tbObat.setModel(tabModeobat);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -103,11 +103,11 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             }else if(i==3){
                 column.setPreferredWidth(100);
-            }              
+            }
         }
         warna.kolom=0;
         tbObat.setDefaultRenderer(Object.class,warna);
-        
+
         tabModeObatRacikan=new DefaultTableModel(null,new Object[]{
                 "No","Nama Racikan","Kode Racik","Metode Racik","Jml.Racik","Aturan Pakai","Keterangan"
             }){
@@ -115,7 +115,7 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
                 return true;
              }
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -126,8 +126,8 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
 
         tbObatRacikan.setModel(tabModeObatRacikan);
         tbObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
-        tbObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);        
-        
+        tbObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         for (i = 0; i < 7; i++) {
             TableColumn column = tbObatRacikan.getColumnModel().getColumn(i);
             if(i==0){
@@ -150,7 +150,7 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
 
         warna2.kolom=4;
         tbObatRacikan.setDefaultRenderer(Object.class,warna2);
-        
+
         tabModeDetailObatRacikan=new DefaultTableModel(null,new Object[]{
                 "No","Jml","Kode Barang","Nama Barang"
             }){
@@ -172,8 +172,8 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
 
         tbDetailObatRacikan.setModel(tabModeDetailObatRacikan);
         tbDetailObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
-        tbDetailObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);        
-        
+        tbDetailObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         for (i = 0; i < 4; i++) {
             TableColumn column = tbDetailObatRacikan.getColumnModel().getColumn(i);
             if(i==0){
@@ -189,10 +189,10 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
 
         warna3.kolom=1;
         tbDetailObatRacikan.setDefaultRenderer(Object.class,warna3);
-        
+
         jam();
-    }    
-    
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -509,7 +509,7 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
-    
+
 private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
@@ -519,8 +519,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             Valid.textKosong(NoResep,"No.Resep");
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {                 
-                ChkJln.setSelected(false);    
+            if (reply == JOptionPane.YES_OPTION) {
+                ChkJln.setSelected(false);
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
@@ -586,7 +586,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         }
                     }
                 }
-                
+
                 if(sukses==true){
                     if(noiterasi.equals("")){
                         noiterasi="Iterasi Ke 1";
@@ -600,9 +600,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             sukses=false;
                             JOptionPane.showMessageDialog(null,"Gagal menyimpan iterasi, kemungkinan sudah terbit sebelumnya..!");
                         }
-                    }  
+                    }
                 }
-                
+
                 if(sukses==true){
                     Sequel.Commit();
                 }else{
@@ -610,7 +610,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
-                
+
                 if(sukses==true){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Map<String, Object> param = new HashMap<>();
@@ -631,7 +631,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                            "inner join permintaan_resep_iterasi_bpjs on permintaan_resep_iterasi_bpjs.no_resep=resep_obat.no_resep "+
                            "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
                     this.setCursor(Cursor.getDefaultCursor());
-                    
+
                     if(iterasi.equals("2. Iterasi 2x")){
                         if(noiterasi.equals("Iterasi Ke 1")){
                             JOptionPane.showMessageDialog(null,"Resep iterasi ke 1 berhasil dibuat,\nsilahkan lanjutkan untuk menyimpan resep iterasi ke 2...!");
@@ -643,14 +643,14 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             sukses=false;
                         }else{
                             sukses=true;
-                        }   
+                        }
                     }
-                    
+
                     if(sukses==true){
                         dispose();
                     }
                 }
-            } 
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -669,7 +669,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     tabModeDetailObatRacikan.removeRow(tbDetailObatRacikan.getSelectedRow());
                 }
             }
-        } 
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -819,8 +819,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Table tbObat;
     private widget.Table tbObatRacikan;
     // End of variables declaration//GEN-END:variables
-    
-    public void setNoRm(String norwt,String norm,String nama,Date tanggal,String kodedokter,String iterasi,String resepawal) {  
+
+    public void setNoRm(String norwt,String norm,String nama,Date tanggal,String kodedokter,String iterasi,String resepawal) {
         TNoRw.setText(norwt);
         TPasien.setText(norm+" "+nama);
         Calendar cal = Calendar.getInstance();
@@ -836,7 +836,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             KdDokter.setText(Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",norwt));
             NmDokter.setText(Sequel.CariDokter(KdDokter.getText()));
         }
-        
+
         try {
             Valid.tabelKosong(tabModeobat);
             myObj = new FileReader("./cache/resepnonracikaniter.iyem");
@@ -850,7 +850,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
             myObj.close();
-            
+
             Valid.tabelKosong(tabModeObatRacikan);
             myObj = new FileReader("./cache/resepracikaniter.iyem");
             root = mapper.readTree(myObj);
@@ -863,7 +863,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
             myObj.close();
-            
+
             Valid.tabelKosong(tabModeDetailObatRacikan);
             myObj = new FileReader("./cache/resepdetailracikaniter.iyem");
             root = mapper.readTree(myObj);
@@ -882,64 +882,64 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             if (myObj != null) try { myObj.close(); } catch (Exception e) {}
             response = null;
             root = null;
-        } 
+        }
     }
-    
+
     public void emptTeksobat() {
         if(ChkRM.isSelected()==true){
             Valid.autoNomer3(
                 "select ifnull(MAX(CONVERT(RIGHT(resep_obat.no_resep,4),signed)),0) from resep_obat where resep_obat.tgl_peresepan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"'",
                 DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep
-            );        
-        } 
+            );
+        }
     }
-    
+
     private void emptTeksobat2() {
         if(ChkRM.isSelected()==true){
-            Valid.autoNomer7(NoResep.getText().substring(NoResep.getText().length()-4),DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep);  
-        } 
+            Valid.autoNomer7(NoResep.getText().substring(NoResep.getText().length()-4),DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep);
+        }
     }
-    
+
     private void simpandata() {
         try {
-            for(i=0;i<tbObat.getRowCount();i++){ 
-                if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){  
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
                     if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
                         NoResep.getText(),tbObat.getValueAt(i,1).toString(),tbObat.getValueAt(i,0).toString(),tbObat.getValueAt(i,3).toString()
                     })==false){
                         sukses=false;
-                    }                  
+                    }
                 }
-            } 
+            }
 
-            for(i=0;i<tbObatRacikan.getRowCount();i++){ 
-                if(Valid.SetAngka(tbObatRacikan.getValueAt(i,4).toString())>0){ 
+            for(i=0;i<tbObatRacikan.getRowCount();i++){
+                if(Valid.SetAngka(tbObatRacikan.getValueAt(i,4).toString())>0){
                     if(Sequel.menyimpantf2("resep_dokter_racikan","?,?,?,?,?,?,?","resep obat racikan",7,new String[]{
                        NoResep.getText(),tbObatRacikan.getValueAt(i,0).toString(),tbObatRacikan.getValueAt(i,1).toString(),
                        tbObatRacikan.getValueAt(i,2).toString(),tbObatRacikan.getValueAt(i,4).toString(),
                        tbObatRacikan.getValueAt(i,5).toString(),tbObatRacikan.getValueAt(i,6).toString()
                     })==false){
                         sukses=false;
-                    } 
+                    }
                 }
             }
-            
-            for(i=0;i<tbDetailObatRacikan.getRowCount();i++){ 
+
+            for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
                 if(Valid.SetAngka(tbDetailObatRacikan.getValueAt(i,1).toString())>0){
                     if(Sequel.menyimpantf2("resep_dokter_racikan_detail","?,?,?,?,?,?,?","resep dokter racikan detail",7,new String[]{
                         NoResep.getText(),tbDetailObatRacikan.getValueAt(i,0).toString(),tbDetailObatRacikan.getValueAt(i,2).toString(),
                         "1","1","",tbDetailObatRacikan.getValueAt(i,1).toString()
                     })==false){
                         sukses=false;
-                    } 
+                    }
                 }
             }
         } catch (Exception e) {
             sukses=false;
             System.out.println("Notif : "+e);
-        } 
+        }
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;

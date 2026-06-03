@@ -11,17 +11,18 @@
 
 package rekammedis;
 
-import kepegawaian.DlgCariPetugas;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,11 +32,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.Cursor;
-import java.awt.event.WindowAdapter;
-import javax.swing.WindowConstants;
+import kepegawaian.DlgCariPetugas;
 
 /**
  *
@@ -50,7 +50,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i,reply;
-    
+
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -58,15 +58,15 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
     public RMRekonsiliasiObat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         DlgTambahObatRekonsiliasi.setSize(650,163);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "Nama Obat","Dosis Obat","Frekuensi","Cara Pemberian/Aturan Pakai","Waktu Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        tbPemeriksaan.setModel(tabMode);        
-        
+        tbPemeriksaan.setModel(tabMode);
+
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbPemeriksaan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPemeriksaan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -101,7 +101,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         TNoRekonsialiasi.setDocument(new batasInput((byte)20).getKata(TNoRekonsialiasi));
         AlergiObat.setDocument(new batasInput((int)70).getKata(AlergiObat));
         ManifestasiAlergi.setDocument(new batasInput((int)70).getKata(ManifestasiAlergi));
-        
+
         ChkJln.setSelected(true);
         jam();
     }
@@ -713,10 +713,10 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -727,15 +727,15 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void TNoRekonsialiasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRekonsialiasiKeyPressed
@@ -789,7 +789,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             tabMode.removeRow(tbPemeriksaan.getSelectedRow());
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -812,7 +812,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMCariRekonsiliasiObat form=new RMCariRekonsiliasiObat(null,false);
         form.isCek();
         form.SetNoRw(TNoRw.getText());
@@ -849,7 +849,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 if(Sequel.menyimpantf("rekonsiliasi_obat","?,?,?,?,?,?,?,?","No.Rawat",8,new String[]{
-                        TNoRekonsialiasi.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
+                        TNoRekonsialiasi.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                         RekonsiliasiSaat.getSelectedItem().toString(),AlergiObat.getText(),ManifestasiAlergi.getText(),DampakAlergi.getSelectedItem().toString(),KdPetugas.getText(),
                     })==true){
                         for (i = 0; i < tbPemeriksaan.getRowCount(); i++) {
@@ -1017,11 +1017,11 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         AlergiObat.setText("");
         ManifestasiAlergi.setText("");
         DampakAlergi.setSelectedIndex(0);
-        
+
         autoNomor();
         TNoRekonsialiasi.requestFocus();
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -1075,10 +1075,10 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         };
         // Timer
         new Timer(1000, taskPerformer).start();
-    } 
-    
+    }
+
     public void setNoRm(String norwt) {
-        TNoRw.setText(norwt);   
+        TNoRw.setText(norwt);
         try {
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi "+
@@ -1106,8 +1106,8 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnSimpan.setEnabled(akses.getrekonsiliasi_obat());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
@@ -1118,11 +1118,11 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        } 
+        }
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(rekonsiliasi_obat.no_rekonsiliasi,4),signed)),0) from rekonsiliasi_obat where left(rekonsiliasi_obat.tanggal_wawancara,10)='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","RO"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoRekonsialiasi);           
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(rekonsiliasi_obat.no_rekonsiliasi,4),signed)),0) from rekonsiliasi_obat where left(rekonsiliasi_obat.tanggal_wawancara,10)='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","RO"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoRekonsialiasi);
     }
 
     private void emptTeksTambahRekon() {

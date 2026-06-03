@@ -11,18 +11,18 @@
 
 package laporan;
 
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.util.Date;
-import javax.swing.JOptionPane;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 
 /**
@@ -43,8 +43,8 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
         setSize(885,674);
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));       
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         panelDiagnosa1.tbDiagnosaPasien.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -52,7 +52,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                     TNoRw.setText(panelDiagnosa1.tbDiagnosaPasien.getValueAt(panelDiagnosa1.tbDiagnosaPasien.getSelectedRow(),2).toString());
                     TNoRM.setText(panelDiagnosa1.tbDiagnosaPasien.getValueAt(panelDiagnosa1.tbDiagnosaPasien.getSelectedRow(),3).toString());
                     TPasien.setText(panelDiagnosa1.tbDiagnosaPasien.getValueAt(panelDiagnosa1.tbDiagnosaPasien.getSelectedRow(),4).toString());
-                }                
+                }
             }
 
             @Override
@@ -64,7 +64,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
             @Override
             public void mouseExited(MouseEvent e) {}
         });
-        
+
         panelDiagnosa1.tbDiagnosaPasien.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -76,10 +76,10 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                     TNoRw.setText(panelDiagnosa1.tbDiagnosaPasien.getValueAt(panelDiagnosa1.tbDiagnosaPasien.getSelectedRow(),2).toString());
                     TNoRM.setText(panelDiagnosa1.tbDiagnosaPasien.getValueAt(panelDiagnosa1.tbDiagnosaPasien.getSelectedRow(),3).toString());
                     TPasien.setText(panelDiagnosa1.tbDiagnosaPasien.getValueAt(panelDiagnosa1.tbDiagnosaPasien.getSelectedRow(),4).toString());
-                } 
+                }
             }
         });
-        
+
         panelDiagnosa1.tbTindakanPasien.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -87,7 +87,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                     TNoRw.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),2).toString());
                     TNoRM.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),3).toString());
                     TPasien.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),4).toString());
-                }                
+                }
             }
 
             @Override
@@ -99,7 +99,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
             @Override
             public void mouseExited(MouseEvent e) {}
         });
-        
+
         panelDiagnosa1.tbTindakanPasien.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -111,13 +111,13 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                     TNoRw.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),2).toString());
                     TNoRM.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),3).toString());
                     TPasien.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),4).toString());
-                } 
+                }
             }
         });
     }
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -460,7 +460,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
-        }else{ 
+        }else{
             panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),Status.getSelectedItem().toString(),TCari.getText().trim());
             panelDiagnosa1.simpan();
         }
@@ -550,7 +550,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                         panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),Status.getSelectedItem().toString(),TCari.getText().trim());
                         panelDiagnosa1.pilihTab();
                         LCount.setText(panelDiagnosa1.getRecord()+"");
-                    }                        
+                    }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
@@ -558,7 +558,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                         panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),Status.getSelectedItem().toString(),TCari.getText().trim());
                         panelDiagnosa1.pilihTab();
                         LCount.setText(panelDiagnosa1.getRecord()+"");
-                    } 
+                    }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
@@ -566,29 +566,29 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
                         panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),Status.getSelectedItem().toString(),TCari.getText().trim());
                         panelDiagnosa1.pilihTab();
                         LCount.setText(panelDiagnosa1.getRecord()+"");
-                    } 
+                    }
                 }
             });
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(this.getHeight()<605){   
+        if(this.getHeight()<605){
             panelDiagnosa1.ScrollInput.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             panelDiagnosa1.FormData.setPreferredSize(new Dimension(panelDiagnosa1.FormData.WIDTH,420));
             if(this.getWidth()<900){
-                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
+                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
                 panelDiagnosa1.FormData.setPreferredSize(new Dimension(890,420));
             }else{
-                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
+                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             }
         }else{
-            panelDiagnosa1.ScrollInput.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);            
+            panelDiagnosa1.ScrollInput.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
             if(this.getWidth()<900){
-                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
+                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
                 panelDiagnosa1.FormData.setPreferredSize(new Dimension(890,panelDiagnosa1.FormData.HEIGHT));
             }else{
-                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
+                panelDiagnosa1.ScrollInput.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             }
         }
     }//GEN-LAST:event_formWindowActivated
@@ -640,7 +640,7 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     // End of variables declaration//GEN-END:variables
 
-    
+
 
     private void isRawat() {
          Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRM,TNoRw.getText());
@@ -651,29 +651,29 @@ public class DlgDiagnosaPenyakit extends javax.swing.JDialog {
     }
 
 
-    
+
     public void setNoRm(String norwt, Date tgl1, Date tgl2,String status) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         Status.setSelectedItem(status);
         isRawat();
-        isPsien();   
+        isPsien();
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),Status.getSelectedItem().toString(),TCari.getText().trim());
     }
-    
-    
-    
+
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdiagnosa_pasien());
-        BtnHapus.setEnabled(akses.getdiagnosa_pasien());        
+        BtnHapus.setEnabled(akses.getdiagnosa_pasien());
         BtnPrint.setEnabled(akses.getdiagnosa_pasien());
         panelDiagnosa1.btnTambahPenyakit.setEnabled(akses.getpenyakit());
         panelDiagnosa1.btnTambahProsedur.setEnabled(akses.geticd9());
     }
 
-    
+
 
 
 }

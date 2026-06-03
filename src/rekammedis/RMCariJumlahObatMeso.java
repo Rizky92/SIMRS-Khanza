@@ -93,7 +93,7 @@ public final class RMCariJumlahObatMeso extends javax.swing.JDialog {
             });
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -404,10 +404,10 @@ public final class RMCariJumlahObatMeso extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRawat(String norawat){
         this.norawat=norawat;
     }
@@ -415,5 +415,5 @@ public final class RMCariJumlahObatMeso extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
 }

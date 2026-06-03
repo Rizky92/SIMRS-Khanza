@@ -12,11 +12,11 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -53,7 +53,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -100,12 +100,12 @@ public final class DlgPoli extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)5).getKata(Kd));
         By.setDocument(new batasInput((byte)13).getOnlyAngka(By));
         ByLm.setDocument(new batasInput((byte)13).getOnlyAngka(ByLm));
         Nm.setDocument(new batasInput((byte)50).getKata(Nm));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
 
@@ -579,13 +579,13 @@ public final class DlgPoli extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("poliklinik","kd_poli='"+tbKamar.getValueAt(i,1).toString()+"'","status='0'");
                 tabMode.removeRow(i);
                 i--;
             }
-        } 
+        }
         emptTeks();
         LCount.setText(""+tabMode.getRowCount());
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -642,15 +642,15 @@ public final class DlgPoli extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){     
-                    Map<String, Object> param = new HashMap<>();  
+        }else if(tabMode.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));        
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPoli.jasper","report","::[ Data Unit ]::","select kd_poli, nm_poli, registrasi, registrasilama "+
                 " from poliklinik where status='1' and kd_poli like '%"+TCari.getText().trim()+"%' or "+
                 " status='1' and nm_poli like '%"+TCari.getText().trim()+"%' order by kd_poli",param);
@@ -753,7 +753,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void ByLmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ByLmKeyPressed
@@ -840,7 +840,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             sql="select poliklinik.kd_poli,poliklinik.nm_poli,poliklinik.registrasi,poliklinik.registrasilama "+
                 "from poliklinik where poliklinik.status='1' and poliklinik.kd_poli like '%"+TCari.getText().trim()+"%' or "+
                 "poliklinik.status='1' and poliklinik.nm_poli like '%"+TCari.getText().trim()+"%' "+order;
-        } 
+        }
         prosesCari(sql);
     }
 
@@ -862,7 +862,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                 if( rs != null){
                     rs.close();
                 }
-                
+
                 if( stat != null){
                     stat.close();
                 }
@@ -870,7 +870,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         LCount.setText(""+tabMode.getRowCount());
     }
 
@@ -880,7 +880,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         By.setText("0");
         ByLm.setText("0");
         Nm.setText("");
-        Kd.requestFocus();        
+        Kd.requestFocus();
         Valid.autoNomer("poliklinik","U",4,Kd);
     }
 
@@ -901,7 +901,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getregistrasi());
         BtnHapus.setEnabled(akses.getregistrasi());
@@ -913,7 +913,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             MnRestore.setEnabled(false);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -939,7 +939,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

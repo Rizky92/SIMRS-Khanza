@@ -59,7 +59,7 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Nomer Kamar","Nama Kamar","Nama Biaya","Jumlah","Besar Biaya"};
         tabMode=new DefaultTableModel(null,row){
@@ -611,10 +611,10 @@ private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){                   
+                if(kamar.getTable().getSelectedRow()!= -1){
                     kdkamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                     isKmr();
-                }  
+                }
                 kdkamar.requestFocus();
             }
             @Override
@@ -626,7 +626,7 @@ private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -638,7 +638,7 @@ private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         kamar.load();
         kamar.isCek();
         kamar.emptTeks();
@@ -679,7 +679,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -761,7 +761,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -788,7 +788,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
             BiayaHarian.setText(tabMode.getValueAt(row,4).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return NmBiaya;
     }
@@ -796,7 +796,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     private void isKmr() {
         Sequel.cariIsi("select kd_bangsal from kamar where kd_kamar=? ",TKdBngsal,kdkamar.getText());
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=? ",TBangsal,TKdBngsal.getText());
@@ -827,7 +827,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -4,11 +4,11 @@ package keuangan;
 
 import bridging.ApiBRI;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -97,7 +97,7 @@ public final class DlgLhtBRIVA extends javax.swing.JDialog {
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
         DlgSinkron.setSize(330,115);
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -377,14 +377,14 @@ public final class DlgLhtBRIVA extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptBRIVA.jasper","report","::[ Data Pembayaran BRI Virtual Account ]::",
                "select * from tagihan_briva where tagihan_briva.tgl_closing between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
                (TCari.getText().equals("")?"":"and (tagihan_briva.no_rkm_medis like '%"+TCari.getText().trim()+"%' or tagihan_briva.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
@@ -559,7 +559,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(9,"%"+TCari.getText().trim()+"%");
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 total=0;
                 while(rs.next()){

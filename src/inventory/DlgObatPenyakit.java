@@ -11,13 +11,12 @@
 
 package inventory;
 
-import laporan.DlgKtgPenyakit;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -40,6 +39,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import laporan.DlgCariPenyakit;
+import laporan.DlgKtgPenyakit;
 
 /**
  *
@@ -87,8 +87,8 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
              };
              @Override
@@ -630,13 +630,13 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbObatPenyakit.getRowCount();i++){ 
+        for(i=0;i<tbObatPenyakit.getRowCount();i++){
             if(tbObatPenyakit.getValueAt(i,0).toString().equals("true")){
                 Sequel.queryu2("delete from obat_penyakit where kd_penyakit=? and kode_brng=?",2,new String[]{
                     tbObatPenyakit.getValueAt(i,1).toString(),tbObatPenyakit.getValueAt(i,7).toString()
                 });
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -656,14 +656,14 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             if(ceksukses==false){
-                Map<String, Object> param = new HashMap<>();    
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
                 " and nm_penyakit like '%"+PenyakitCari.getText()+"%' ";
 
@@ -763,10 +763,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     TPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -798,10 +798,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }    
+                }
                 kdobat.requestFocus();
             }
             @Override
@@ -813,7 +813,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -821,7 +821,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -894,9 +894,9 @@ private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){                                   
+                if(ktg.getTable().getSelectedRow()!= -1){
                     KtgCari.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KtgCari.requestFocus();
             }
             @Override
@@ -908,7 +908,7 @@ private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -916,12 +916,12 @@ private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ktg.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        ktg.emptTeks();        
+        ktg.emptTeks();
         ktg.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         ktg.setLocationRelativeTo(internalFrame1);
         ktg.setVisible(true);
@@ -948,10 +948,10 @@ private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//G
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     PenyakitCari.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }  
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -997,7 +997,7 @@ private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1123,14 +1123,14 @@ private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST
             nmobat.setText(tbObatPenyakit.getValueAt(row,8).toString());
             TRef.setText(tbObatPenyakit.getValueAt(row,11).toString());
         }
-    }  
-    
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getobat_penyakit());
         BtnHapus.setEnabled(akses.getobat_penyakit());
         BtnPrint.setEnabled(akses.getobat_penyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1156,7 +1156,7 @@ private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -44,7 +44,7 @@ public class pengaturanbillingranap {
             System.out.println("Notif Pengaturan Billing Ranap : "+e);
         }
     }
-    
+
     public static String getCetakNotaSimpanRanap(){return pengaturanbillingranap.CetakNotaSimpanRanap;}
     public static String getCentangDokterRanap(){return pengaturanbillingranap.CentangDokterRanap;}
     public static String getRincianDokterRanap(){return pengaturanbillingranap.RincianDokterRanap;}

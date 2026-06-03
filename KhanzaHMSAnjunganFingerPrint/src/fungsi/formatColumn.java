@@ -25,7 +25,7 @@ public class formatColumn {
     public static int kanan = 2;
     public static int tengah = 3;
     public static int tanggal = 4;
-    
+
     public void  setColumnFormat(DefaultTableModel tabMode,int column, int format) {
         tc = tcm.getColumn(column);
         switch (format) {
@@ -43,7 +43,7 @@ public class formatColumn {
                          value = formatter.format(numberValue.doubleValue());
                     }
                     super.setValue(value);
-                }                                   
+                }
                 }
             }
         }

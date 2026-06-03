@@ -27,6 +27,6 @@ public class feeperujukranap {
             System.out.println("Notif Pengaturan Fee Perujuk Ranap : "+e);
         }
     }
-    
+
     public static Double getFeePerujukRanap(){return feeperujukranap.FeePerujukRanap;}
 }

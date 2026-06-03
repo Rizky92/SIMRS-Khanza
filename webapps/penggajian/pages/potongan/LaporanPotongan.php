@@ -15,11 +15,11 @@
         $tahun        = empty($baris[0])?date("Y"):$baris[0];
         $bulan        = empty($baris[1])?date("m"):$baris[1];
         $_sql         = "SELECT pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen,keanggotaan.koperasi,keanggotaan.jamsostek,keanggotaan.bpjs,
-                        potongan.bpjs,potongan.jamsostek,potongan.dansos,potongan.simwajib,potongan.angkop,potongan.angla,potongan.telpri,potongan.pajak, 
-                        potongan.pribadi,potongan.lain,potongan.ktg FROM keanggotaan inner join pegawai on keanggotaan.id=pegawai.id 
-                        inner join potongan on pegawai.id=potongan.id WHERE potongan.tahun like '%".$tahun."%' and potongan.bulan like '%".$bulan."%' 
-                        and pegawai.stts_aktif='AKTIF' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%' or pegawai.departemen 
-                        like '%".$keyword."%' or keanggotaan.koperasi like '%".$keyword."%' or keanggotaan.bpjs like '%".$keyword."%' or 
+                        potongan.bpjs,potongan.jamsostek,potongan.dansos,potongan.simwajib,potongan.angkop,potongan.angla,potongan.telpri,potongan.pajak,
+                        potongan.pribadi,potongan.lain,potongan.ktg FROM keanggotaan inner join pegawai on keanggotaan.id=pegawai.id
+                        inner join potongan on pegawai.id=potongan.id WHERE potongan.tahun like '%".$tahun."%' and potongan.bulan like '%".$bulan."%'
+                        and pegawai.stts_aktif='AKTIF' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%' or pegawai.departemen
+                        like '%".$keyword."%' or keanggotaan.koperasi like '%".$keyword."%' or keanggotaan.bpjs like '%".$keyword."%' or
                         keanggotaan.jamsostek like '%".$keyword."%') order by pegawai.id ASC ";
         $hasil        = bukaquery($_sql);
         $jumlah       = mysqli_num_rows($hasil);
@@ -119,37 +119,37 @@
         }
         echo("<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                   <tr class='head'>
-                      <td width='50%'>Total BPJS </td><td width='1%'>:</td><td width='49%'>".formatDuit($bpjs)."</td> 
+                      <td width='50%'>Total BPJS </td><td width='1%'>:</td><td width='49%'>".formatDuit($bpjs)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Jamsostek </td><td width='1%'>:</td><td width='49%'>".formatDuit($jamsos)."</td> 
+                      <td width='50%'>Total Jamsostek </td><td width='1%'>:</td><td width='49%'>".formatDuit($jamsos)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Dana Sosial </td><td width='1%'>:</td><td width='49%'>".formatDuit($dansos)."</td> 
+                      <td width='50%'>Total Dana Sosial </td><td width='1%'>:</td><td width='49%'>".formatDuit($dansos)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Simpanan Wajib</td><td width='1%'>:</td><td width='49%'>".formatDuit($simwa)."</td> 
+                      <td width='50%'>Total Simpanan Wajib</td><td width='1%'>:</td><td width='49%'>".formatDuit($simwa)."</td>
                   </tr>
                   <tr class='head'>
                       <td width='50%'>Total Angsuran koperasi </td><td width='1%'>:</td><td width='49%'>".formatDuit($angkop)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Angsuran Lain </td><td width='1%'>:</td><td width='49%'>".formatDuit($angla)."</td> 
+                      <td width='50%'>Total Angsuran Lain </td><td width='1%'>:</td><td width='49%'>".formatDuit($angla)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Telephone Pribadi </td><td width='1%'>:</td><td width='49%'>".formatDuit($telpri)."</td> 
+                      <td width='50%'>Total Telephone Pribadi </td><td width='1%'>:</td><td width='49%'>".formatDuit($telpri)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Pajak </td><td width='1%'>:</td><td width='49%'>".formatDuit($pajak)."</td>                        
-                  </tr>   
-                  <tr class='head'>
-                      <td width='50%'>Total Pribadi  </td><td width='1%'>:</td><td width='49%'>".formatDuit($pribadi)."</td>                        
+                      <td width='50%'>Total Pajak </td><td width='1%'>:</td><td width='49%'>".formatDuit($pajak)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Total Lain-Lain </td><td width='1%'>:</td><td width='49%'>".formatDuit($lain)."</td>                        
+                      <td width='50%'>Total Pribadi  </td><td width='1%'>:</td><td width='49%'>".formatDuit($pribadi)."</td>
                   </tr>
                   <tr class='head'>
-                      <td width='50%'>Jumlah Total Potongan Gaji </td><td width='1%'>:</td><td width='49%'>".formatDuit($jml)."</td>                        
+                      <td width='50%'>Total Lain-Lain </td><td width='1%'>:</td><td width='49%'>".formatDuit($lain)."</td>
+                  </tr>
+                  <tr class='head'>
+                      <td width='50%'>Jumlah Total Potongan Gaji </td><td width='1%'>:</td><td width='49%'>".formatDuit($jml)."</td>
                   </tr>
              </table>");
     ?>

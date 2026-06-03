@@ -11,11 +11,11 @@
 
 package simrskhanza;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -103,7 +103,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TKd.requestFocus();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -448,7 +448,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                 LCount.setText(""+tabMode.getRowCount());
             }else{
                 TKd.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -471,13 +471,13 @@ public final class DlgBangsal extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbBangsal.getRowCount();i++){ 
+        for(i=0;i<tbBangsal.getRowCount();i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("bangsal","kd_bangsal='"+tbBangsal.getValueAt(i,1).toString()+"'","status='0'");
                 tabMode.removeRow(i);
                 i--;
             }
-        } 
+        }
         LCount.setText(""+tabMode.getRowCount());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -502,7 +502,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                     tabMode.setValueAt(TNm.getText(),tbBangsal.getSelectedRow(),2);
                     emptTeks();
                 }
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -531,14 +531,14 @@ public final class DlgBangsal extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptBangsal.jasper",param,"::[ Laporan Data Kamar ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -596,7 +596,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-           
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -606,7 +606,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
 
@@ -708,7 +708,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{false,rs.getString(1),rs.getString(2)});
@@ -723,7 +723,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -744,7 +744,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
             TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -752,7 +752,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
     public JTable getTable(){
         return tbBangsal;
     }
-    
+
     public void isCek(){
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);
@@ -786,7 +786,7 @@ public final class DlgBangsal extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,6 +1,6 @@
 /*
-  Kontribusi dari Mas Abdul Wahid RSUD Cipayung & Mas Fanji dari RSUD Kramatjati 
-  
+  Kontribusi dari Mas Abdul Wahid RSUD Cipayung & Mas Fanji dari RSUD Kramatjati
+
  */
 
 package bridging;
@@ -8,21 +8,21 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -44,7 +44,7 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response,responsename;
-        
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -73,9 +73,9 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -97,16 +97,16 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             link=koneksiDB.URLFHIRSATUSEHAT();
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }     
+        }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -242,23 +242,23 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'0','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
-                                tabMode.getValueAt(r,1).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,1).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select logo from setting"));
             Valid.MyReport("rptCariSatuSehatPraktisi.jasper","report","[ Pencarian Referensi Praktisi Satu Sehat ]",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -337,13 +337,13 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
                 for(JsonNode list2:responsename){
                     tabMode.addRow(new Object[]{
                       list.path("resource").path("id").asText(),list2.path("text").asText()
-                    }); 
+                    });
                 }
             }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         if(tabMode.getRowCount()==0){
             try{
                 headers = new HttpHeaders();
@@ -358,13 +358,13 @@ public final class SatuSehatReferensiPraktisi extends javax.swing.JDialog {
                 for(JsonNode list:response){
                     tabMode.addRow(new Object[]{
                       TCari.getText(),list.path("text").asText()
-                    }); 
+                    });
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
         }
-        
+
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, Belum Ada data di Server Satu Sehat");
         }

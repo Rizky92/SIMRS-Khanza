@@ -14,10 +14,10 @@ package keuangan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -55,8 +55,8 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
-    
+
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -92,7 +92,7 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -306,8 +306,8 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
         peminjampiutang.setLocationRelativeTo(internalFrame1);
         peminjampiutang.setAlwaysOnTop(false);
         peminjampiutang.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -399,7 +399,7 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
             ps=koneksi.prepareStatement("select peminjampiutang.kode_peminjam,peminjampiutang.nama_peminjam,peminjampiutang.alamat,peminjampiutang.no_telp, "+
                     "peminjampiutang.kd_rek,rekening.nm_rek from peminjampiutang inner join rekening on peminjampiutang.kd_rek=rekening.kd_rek "+
                     "where peminjampiutang.status='1' order by nama_peminjam");
-            try{           
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
@@ -411,7 +411,7 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -422,7 +422,7 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
                 fileWriter.write("{\"peminjampiutang\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -433,18 +433,18 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getpeminjam_piutang());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/peminjampiutang.iyem");
@@ -469,12 +469,12 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
-    public void onCari(){        
+    }
+
+    public void onCari(){
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -500,7 +500,7 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

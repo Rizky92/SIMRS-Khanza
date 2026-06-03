@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -18,8 +18,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -27,12 +33,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 
 public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog {
     private final DefaultTableModel tabModePermintaan,tabModeDetailPermintaan,tabModeRekapPermintaan;
@@ -115,7 +115,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             }
         }
         tbPermintaan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailPermintaan=new DefaultTableModel(null,new Object[]{
                 "Kode","Nama Parameter","Metode Pengujian","Satuan","Kategori","Nilai Normal"
             }){
@@ -141,7 +141,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             }
         }
         tbDetailPermintaan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRekapPermintaan=new DefaultTableModel(null,new Object[]{
                 "Waktu Diterima","No.Permintaan","No.Pelanggan","Nama Pelanggan","Alamat Pelanggan","Kegiatan Usaha","Personal Dihubungi","Kontak Pelanggan",
                 "NIP","Sampel Diterima Oleh","Waktu Sampling","Lokasi Sampling","Deskripsi Sampel","Jenis Sampel","Jml.Sampel","Sampling Dilakukan Oleh",
@@ -218,14 +218,14 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
             }
         }
         tbRekapPermintaan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoPermintaan.setDocument(new batasInput((byte)20).getKata(NoPermintaan));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkAccor.setSelected(false);
         PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-        scrollPaneDetail.setVisible(false); 
-        
+        scrollPaneDetail.setVisible(false);
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -243,11 +243,11 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         WindowInput.setSize(735,245);
-        WindowInput.setLocationRelativeTo(null); 
+        WindowInput.setLocationRelativeTo(null);
         WindowInput2.setSize(735,245);
-        WindowInput2.setLocationRelativeTo(null); 
+        WindowInput2.setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
@@ -1033,12 +1033,12 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,KodePelanggan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -1056,10 +1056,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KodePetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPetugas.requestFocus();
             }
             @Override
@@ -1070,7 +1070,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1094,7 +1094,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(pelanggan.getTable().getSelectedRow()!= -1){
                     KodePelanggan.setText(pelanggan.getTable().getValueAt(pelanggan.getTable().getSelectedRow(),0).toString());
                     NamaPelanggan.setText(pelanggan.getTable().getValueAt(pelanggan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPelanggan.requestFocus();
             }
             @Override
@@ -1106,7 +1106,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pelanggan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1114,7 +1114,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pelanggan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -1186,7 +1186,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }else if(tabModePermintaan.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1201,7 +1201,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -1269,8 +1269,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataPermintaanPengujianSampel.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataPermintaanPengujianSampel.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1279,12 +1279,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -1349,8 +1349,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataPermintaanPengujianSampel.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataPermintaanPengujianSampel.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1359,29 +1359,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Alamat Pelanggan\";\"Kegiatan Usaha\";\"Personal Dihubungi\";\"Kontak Pelanggan\";\"NIP\";\"Sampel Diterima Oleh\";\"Waktu Sampling\";\"Lokasi Sampling\";\"Deskripsi Sampel\";\"Jenis Sampel\";\"Jml.Sampel\";\"Sampling Dilakukan Oleh\";\"Volume Sampel\";\"Wadah Sampel\";\"Kondisi Wadah Sampel\";\"Kode Sampel\";\"Nama Sampel\";\"Baku Mutu\";\"Status\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModePermintaan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbPermintaan.getValueAt(i,0).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,1).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,2).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,3).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,4).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,5).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,6).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,7).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,8).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,9).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,10).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,11).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,12).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,13).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,14).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,15).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,16).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,17).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,18).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,19).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,20).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,21).toString()).append("\";\"").append(tbPermintaan.getValueAt(i,22).toString()).append("\"\n");
                                 }
-                                f = new File("DataPermintaanPengujianSampel.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataPermintaanPengujianSampel.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -1394,7 +1394,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }else if(tabModeRekapPermintaan.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1409,7 +1409,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -1489,8 +1489,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapPermintaanPengujianSampel.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapPermintaanPengujianSampel.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='2500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1499,12 +1499,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -1581,8 +1581,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapPermintaanPengujianSampel.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapPermintaanPengujianSampel.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='2500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1591,29 +1591,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP PERMINTAAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"Waktu Diterima\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Alamat Pelanggan\";\"Kegiatan Usaha\";\"Personal Dihubungi\";\"Kontak Pelanggan\";\"NIP\";\"Sampel Diterima Oleh\";\"Waktu Sampling\";\"Lokasi Sampling\";\"Deskripsi Sampel\";\"Jenis Sampel\";\"Jml.Sampel\";\"Sampling Dilakukan Oleh\";\"Volume Sampel\";\"Wadah Sampel\";\"Kondisi Wadah Sampel\";\"Kode Sampel\";\"Nama Sampel\";\"Baku Mutu\";\"Status\";\"Kode Param\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModeRekapPermintaan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapPermintaan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,18).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,19).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,20).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,21).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,22).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,23).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,24).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,25).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,26).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,27).toString()).append("\";\"").append(tbRekapPermintaan.getValueAt(i,28).toString()).append("\"\n");
                                 }
-                                f = new File("DataRekapPermintaanPengujianSampel.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapPermintaanPengujianSampel.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -1642,7 +1642,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(sampel.getTable().getSelectedRow()!= -1){
                     KodeSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),0).toString());
                     NamaSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnSampel.requestFocus();
             }
             @Override
@@ -1654,7 +1654,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         sampel.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1662,7 +1662,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     sampel.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -1701,7 +1701,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(ChkAccor.isSelected()==true){
                 ChkAccor.setVisible(false);
                 PanelAccor.setPreferredSize(new Dimension(670,HEIGHT));
-                scrollPaneDetail.setVisible(true);  
+                scrollPaneDetail.setVisible(true);
                 ChkAccor.setVisible(true);
                 Valid.tabelKosong(tabModeDetailPermintaan);
                 try {
@@ -1720,7 +1720,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             tabModeDetailPermintaan.addRow(new Object[]{
                                 rs.getString("kode_parameter"),rs.getString("nama_parameter"),rs.getString("metode_pengujian"),rs.getString("satuan"),rs.getString("kategori"),rs.getString("nilai_normal")
                             });
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println(e);
                     } finally{
@@ -1734,10 +1734,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
                 }
-            }else if(ChkAccor.isSelected()==false){    
+            }else if(ChkAccor.isSelected()==false){
                 ChkAccor.setVisible(false);
                 PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-                scrollPaneDetail.setVisible(false);  
+                scrollPaneDetail.setVisible(false);
                 ChkAccor.setVisible(true);
             }
         }else{
@@ -1758,10 +1758,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(tbDetailPermintaan.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Sequel.queryu("delete from temporary");
-                    for(i=0;i<tbDetailPermintaan.getRowCount();i++){ 
+                    for(i=0;i<tbDetailPermintaan.getRowCount();i++){
                         Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
                             "0",tbDetailPermintaan.getValueAt(i,0).toString(),tbDetailPermintaan.getValueAt(i,1).toString(),tbDetailPermintaan.getValueAt(i,2).toString(),tbDetailPermintaan.getValueAt(i,4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
-                        });               
+                        });
                     }
                     Map<String, Object> param = new HashMap<>();
                     param.put("namapelanggan",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),3).toString().trim());
@@ -1788,11 +1788,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),8).toString().trim());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),9).toString().trim()+"\nID "+(finger.equals("")?tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),8).toString().trim():finger)+"\n"+Valid.SetTgl5(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),0).toString().trim())); 
-                    Valid.MyReport("rptPermintaanPengujianSampelLaboratKesling.jasper","report","::[ Permintaan Pengujian Sampel Laborat Kesehatan Lingkungan ]::",param);   
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),9).toString().trim()+"\nID "+(finger.equals("")?tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),8).toString().trim():finger)+"\n"+Valid.SetTgl5(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),0).toString().trim()));
+                    Valid.MyReport("rptPermintaanPengujianSampelLaboratKesling.jasper","report","::[ Permintaan Pengujian Sampel Laborat Kesehatan Lingkungan ]::",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
                     JOptionPane.showMessageDialog(null,"Silahkan tampilkan data detail permintaan terlebih dahulu...!!!");
@@ -2074,7 +2074,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabModePermintaan);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                         "select labkesling_permintaan_pengujian_sampel.no_permintaan,labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_pelanggan.alamat,labkesling_pelanggan.no_telp,"+
                         "labkesling_pelanggan.kegiatan_usaha,labkesling_pelanggan.personal_dihubungi,labkesling_permintaan_pengujian_sampel.nip,petugas.nama,labkesling_permintaan_pengujian_sampel.waktu_sampling,"+
@@ -2091,7 +2091,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         (TCari.getText().trim().equals("")?"":" and (labkesling_permintaan_pengujian_sampel.lokasi_sampling like ? or labkesling_permintaan_pengujian_sampel.deskripsi_sampel like ? or labkesling_permintaan_pengujian_sampel.jenis_sampel like ? "+
                         "or labkesling_permintaan_pengujian_sampel.sampling_dilakukan_oleh like ? or labkesling_permintaan_pengujian_sampel.wadah_sampel like ? or labkesling_permintaan_pengujian_sampel.kondisi_wadah_sampel like ?) ")+
                         "order by labkesling_permintaan_pengujian_sampel.waktu_diterima,labkesling_permintaan_pengujian_sampel.no_permintaan");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -2103,7 +2103,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(7,"%"+TCari.getText()+"%");
                     ps.setString(8,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModePermintaan.addRow(new Object[]{
@@ -2111,8 +2111,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("personal_dihubungi"),rs.getString("no_telp"),rs.getString("nip"),rs.getString("nama"),rs.getString("waktu_sampling"),rs.getString("lokasi_sampling"),rs.getString("deskripsi_sampel"),
                         rs.getString("jenis_sampel"),rs.getString("jumlah_sampel"),rs.getString("sampling_dilakukan_oleh"),rs.getString("volume_sampel"),rs.getString("wadah_sampel"),rs.getString("kondisi_wadah_sampel"),
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("baku_mutu"),rs.getString("status")
-                    }); 
-                }        
+                    });
+                }
                 LTotal.setText(tabModePermintaan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
@@ -2123,15 +2123,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabModeRekapPermintaan);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                         "select labkesling_permintaan_pengujian_sampel.no_permintaan,labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_pelanggan.alamat,labkesling_pelanggan.no_telp,"+
                         "labkesling_pelanggan.kegiatan_usaha,labkesling_pelanggan.personal_dihubungi,labkesling_permintaan_pengujian_sampel.nip,petugas.nama,labkesling_permintaan_pengujian_sampel.waktu_sampling,"+
@@ -2154,7 +2154,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "or labkesling_permintaan_pengujian_sampel.sampling_dilakukan_oleh like ? or labkesling_permintaan_pengujian_sampel.wadah_sampel like ? or labkesling_permintaan_pengujian_sampel.kondisi_wadah_sampel like ? "+
                         "or labkesling_detail_permintaan_pengujian_sampel.kode_parameter like ? or labkesling_parameter_pengujian.nama_parameter like ? or labkesling_parameter_pengujian.metode_pengujian like ? or labkesling_parameter_pengujian.kategori like ?) ")+
                         "order by labkesling_permintaan_pengujian_sampel.waktu_diterima,labkesling_permintaan_pengujian_sampel.no_permintaan");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -2170,7 +2170,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(11,"%"+TCari.getText()+"%");
                     ps.setString(12,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeRekapPermintaan.addRow(new Object[]{
@@ -2179,8 +2179,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("jenis_sampel"),rs.getString("jumlah_sampel"),rs.getString("sampling_dilakukan_oleh"),rs.getString("volume_sampel"),rs.getString("wadah_sampel"),rs.getString("kondisi_wadah_sampel"),
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("baku_mutu"),rs.getString("status"),rs.getString("kode_parameter"),rs.getString("nama_parameter"),rs.getString("metode_pengujian"),
                         rs.getString("satuan"),rs.getString("kategori"),rs.getString("nilai_normal")
-                    }); 
-                }        
+                    });
+                }
                 LTotal.setText(tabModeRekapPermintaan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
@@ -2191,12 +2191,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         BtnPrint.setEnabled(akses.getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan());
@@ -2205,7 +2205,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         ppSuratPermintaan.setEnabled(akses.getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan());
         BtnHapus.setEnabled(akses.getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2231,7 +2231,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

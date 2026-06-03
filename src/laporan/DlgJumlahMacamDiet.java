@@ -11,10 +11,10 @@
 
 package laporan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -69,10 +69,10 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
 
         tbJadwal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        Valid.LoadTahun(ThnCari); 
-        
+        Valid.LoadTahun(ThnCari);
+
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -232,7 +232,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
             if(ceksukses==false){
                 Sequel.queryu("delete from temporary_gizi");
                 int row=tabMode.getRowCount();
-                for(int r=0;r<row;r++){  
+                for(int r=0;r<row;r++){
                     Sequel.menyimpan("temporary_gizi","'0','"+
                                     tabMode.getValueAt(r,1).toString()+"','"+
                                     tabMode.getValueAt(r,2).toString()+"','"+
@@ -266,18 +266,18 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
                                     tabMode.getValueAt(r,30).toString()+"','"+
                                     tabMode.getValueAt(r,31).toString()+"','"+
                                     tabMode.getValueAt(r,32).toString()+"','"+
-                                    tabMode.getValueAt(r,33).toString()+"','','','',''","Rekap Gizi"); 
+                                    tabMode.getValueAt(r,33).toString()+"','','','',''","Rekap Gizi");
                 }
 
-                Map<String, Object> param = new HashMap<>();   
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("jd1","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")");
                 param.put("jd2","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")");
                 param.put("jd3","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),3)+")");
@@ -309,13 +309,13 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
                 param.put("jd29","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),29)+")");
                 param.put("jd30","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),30)+")");
                 param.put("jd31","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),31)+")");
-                
+
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Valid.MyReport("rptRekapGizi2.jasper","report","::[ Rekap Kehadiran Non Jadwal Tambahan ]::",param);            
-                this.setCursor(Cursor.getDefaultCursor());    
+                Valid.MyReport("rptRekapGizi2.jasper","report","::[ Rekap Kehadiran Non Jadwal Tambahan ]::",param);
+                this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
-            }                       
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -407,7 +407,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {        
+    private void tampil() {
         Object[] row={"No.","Nama/Macam Diet",
             "1("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")",
             "2("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")",
@@ -456,7 +456,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class
              };
              @Override
@@ -465,7 +465,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
              }
         };
         tbJadwal.setModel(tabMode);
-        
+
         for (int i = 0; i < 34; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
@@ -477,7 +477,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -554,15 +554,15 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
                     jmlh28=jmlh28+h28;
                     jmlh29=jmlh28+h28;
                     jmlh30=jmlh30+h30;
-                    jmlh31=jmlh31+h31;    
-                    tabMode.addRow(new Object[]{                        
+                    jmlh31=jmlh31+h31;
+                    tabMode.addRow(new Object[]{
                         i+"",rs.getString("nama_diet"),h1+"",h2+"",h3+"",h4+"",h5+"",h6+"",h7+"",h8+"",h9+"",h10+"",
                         h11+"",h12+"",h13+"",h14+"",h15+"",h16+"",h17+"",h18+"",h19+"",h20+"",
                         h21+"",h22+"",h23+"",h24+"",h25+"",h26+"",h27+"",h28+"",h29+"",h30+"",h31+"",
                         (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+
                         h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)+""
                     });
-                    i++;                 
+                    i++;
                 }
                 if(i>1){
                     tabMode.addRow(new Object[]{
@@ -583,14 +583,14 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     String konversi(int year, int month, int day){
-        dateString = String.format("%d-%d-%d", year, month, day);        
+        dateString = String.format("%d-%d-%d", year, month, day);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
         } catch (Exception ex) {
@@ -625,7 +625,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
         }
         return hari;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -651,7 +651,7 @@ public class DlgJumlahMacamDiet extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

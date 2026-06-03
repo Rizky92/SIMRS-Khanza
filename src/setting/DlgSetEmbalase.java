@@ -435,7 +435,7 @@ private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select * from set_embalase ");
             try {
                 rs=ps.executeQuery();
@@ -451,7 +451,7 @@ private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -470,7 +470,7 @@ private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         Tuslah.setText("");
         Embalase.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -496,7 +496,7 @@ private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

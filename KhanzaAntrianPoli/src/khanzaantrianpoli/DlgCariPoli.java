@@ -88,7 +88,7 @@ public final class DlgCariPoli extends javax.swing.JDialog {
             }
 
         });
-        
+
         try {
             ps=koneksi.prepareStatement("select kd_poli, nm_poli, registrasi "+
                 " from poliklinik where kd_poli<>'IGDK' and kd_poli like ? or "+
@@ -338,7 +338,7 @@ public final class DlgCariPoli extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -352,13 +352,13 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    
+
+
 }

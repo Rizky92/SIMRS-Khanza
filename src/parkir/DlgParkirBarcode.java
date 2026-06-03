@@ -12,11 +12,11 @@
 package parkir;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -48,7 +48,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode Barcode","Nomer Kartu"};
         tabMode=new DefaultTableModel(null,row){
@@ -96,7 +96,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try {
             ps=koneksi.prepareStatement("select * from parkir_barcode where kode_barcode like ? or nomer_kartu like ? order by kode_barcode");
         } catch (Exception e) {
@@ -546,7 +546,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -716,7 +716,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
-            while(rs.next()){                
+            while(rs.next()){
                 tabMode.addRow(new Object[]{
                     rs.getString(1),rs.getString(2)
                 });
@@ -745,7 +745,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getparkir_barcode());
        BtnHapus.setEnabled(akses.getparkir_barcode());

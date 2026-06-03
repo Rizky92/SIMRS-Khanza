@@ -15,7 +15,6 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -55,7 +54,7 @@ public final class DlgPulang extends javax.swing.JDialog {
     public DlgPulang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"NIK","Nama","Shift","Jam Datang","Jam Pulang","Status","Keterlambatan","Durasi","Catatan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -88,13 +87,13 @@ public final class DlgPulang extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         //catatan.setDocument(new batasInput((int)100).getKata(catatan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         DlgInput.setSize(744,127);
         DlgInput.setVisible(false);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -526,7 +525,7 @@ public final class DlgPulang extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -573,9 +572,9 @@ public final class DlgPulang extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {        
+    public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                 "select  pegawai.id, "+
                 "pegawai.nik, "+
@@ -595,7 +594,7 @@ public final class DlgPulang extends javax.swing.JDialog {
                 "  pegawai.stts_aktif<>'KELUAR' and rekap_presensi.keterlambatan like ? and "+say+" or "+
                 "  pegawai.stts_aktif<>'KELUAR' and rekap_presensi.jam_datang like ? and "+say+" or "+
                 "  pegawai.stts_aktif<>'KELUAR' and rekap_presensi.keterangan like ? and "+say+" or "+
-                " pegawai.stts_aktif<>'KELUAR' and rekap_presensi.jam_pulang like ? and "+say+" order by rekap_presensi.jam_datang ");   
+                " pegawai.stts_aktif<>'KELUAR' and rekap_presensi.jam_pulang like ? and "+say+" order by rekap_presensi.jam_datang ");
             try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -609,7 +608,7 @@ public final class DlgPulang extends javax.swing.JDialog {
                 rs.last();
                 primary=new String[rs.getRow()];
                 rs.beforeFirst();
-                int i=0;            
+                int i=0;
                 while(rs.next()){
                     String[] data={rs.getString(2),
                                    rs.getString(3),
@@ -639,17 +638,17 @@ public final class DlgPulang extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
             id_pegawai.setText(primary[row]);
             jam_datang.setText(tbBangsal.getValueAt(row,3).toString());
             catatan.setText(tbBangsal.getValueAt(row,8).toString());
-            
+
         }
     }
-    
+
     public void emptTeks() {
         catatan.setText("");
         id_pegawai.setText("");
@@ -681,7 +680,7 @@ public final class DlgPulang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

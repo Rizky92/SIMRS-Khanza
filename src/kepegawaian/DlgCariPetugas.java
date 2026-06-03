@@ -3,11 +3,11 @@ package kepegawaian;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.validasi;
-import fungsi.akses;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -92,7 +92,7 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -350,7 +350,7 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -384,7 +384,7 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             file=new File("./cache/petugas.iyem");
@@ -413,13 +413,13 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"petugas\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -437,11 +437,11 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getpetugas());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/petugas.iyem");
@@ -477,8 +477,8 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-    } 
-    
+    }
+
     public String tampil3(String kode) {
         try {
             if(Valid.daysOld("./cache/petugas.iyem")>7){
@@ -489,7 +489,7 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
                 tampil();
             }
         }
-        
+
         String iyem="";
         try {
             myObj = new FileReader("./cache/petugas.iyem");
@@ -516,7 +516,7 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
         }
         return iyem;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -542,7 +542,7 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

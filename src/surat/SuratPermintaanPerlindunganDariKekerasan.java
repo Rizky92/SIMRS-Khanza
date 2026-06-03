@@ -6,11 +6,11 @@
 package surat;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -39,7 +39,7 @@ import kepegawaian.DlgCariPetugas;
 
 
 /**
- * 
+ *
  * @author windiartohugroho
  */
 public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.JDialog {
@@ -54,13 +54,13 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private String finger="",lokasifile="";
-    
+
     public SuratPermintaanPerlindunganDariKekerasan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Permintaan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","Nama Penanggung Jawab",
             "Tempat Lahir P.J.","Tgl.Lahir P.J.","Hubungan","J.K. P.J.","Nomor Telp/HP","Nomor KTP","Alamat P.J.","NIP","Nama Petugas"
@@ -114,23 +114,23 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));    
-        KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));  
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         NoSurat.setDocument(new batasInput((byte)20).getKata(NoSurat));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         NamaPJ.setDocument(new batasInput((byte)50).getKata(NamaPJ));
         NoKTP.setDocument(new batasInput((byte)20).getKata(NoKTP));
-        AlamatPj.setDocument(new batasInput((int)100).getKata(AlamatPj));  
-        TempatLahir.setDocument(new batasInput((byte)20).getKata(TempatLahir));  
-        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));    
-        
+        AlamatPj.setDocument(new batasInput((int)100).getKata(AlamatPj));
+        TempatLahir.setDocument(new batasInput((byte)20).getKata(TempatLahir));
+        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
@@ -149,11 +149,11 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         Document doc = kit.createDefaultDocument();
         LoadHTML2.setDocument(doc);
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -841,7 +841,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
@@ -888,7 +888,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm();  
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -910,7 +910,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -980,15 +980,15 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptDataPermintaanPerlindunganDariKekerasan.jasper","report","::[ Data Permintaan Perlindungan Dari Kekerasan ]::",
                     "select surat_perlindungan_dari_kekerasan.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
@@ -1015,7 +1015,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                     "surat_perlindungan_dari_kekerasan.alamatpj like '%"+TCari.getText().trim()+"%' or surat_perlindungan_dari_kekerasan.nama_pj like '%"+TCari.getText().trim()+"%' or "+
                     "surat_perlindungan_dari_kekerasan.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
                     "order by surat_perlindungan_dari_kekerasan.tanggal",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1063,8 +1063,8 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             Valid.pindah(evt, BtnCari, TPasien);
         }
 }//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1105,10 +1105,10 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1119,10 +1119,10 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1382,7 +1382,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                     "surat_perlindungan_dari_kekerasan.nip like ? or petugas.nama like ?) "+
                     "order by surat_perlindungan_dari_kekerasan.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -1398,7 +1398,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                     ps.setString(8,"%"+TCari.getText()+"%");
                     ps.setString(9,"%"+TCari.getText()+"%");
                 }
-                  
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1406,7 +1406,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                         rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),rs.getDate("tgl_lahir"),
                         rs.getString("tanggal"),rs.getString("nama_pj"),rs.getString("tempat_lahirpj"),rs.getString("lahirpj"),
                         rs.getString("hubungan"),rs.getString("jkpj"),rs.getString("no_telp"),rs.getString("no_ktppj"),
-                        rs.getString("alamatpj"),rs.getString("nip"),rs.getString("nama") 
+                        rs.getString("alamatpj"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1439,7 +1439,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         NamaPJ.requestFocus();
     }
 
- 
+
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1449,13 +1449,13 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             LahirPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NamaPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()); 
-            TempatLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()); 
-            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()); 
-            JKPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan")); 
-            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()); 
-            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());  
-            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString()); 
+            NamaPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+            TempatLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+            Hubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            JKPJ.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
+            NoTelp.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            NoKTP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             Valid.SetTgl(TglLahir,tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
         }
@@ -1492,7 +1492,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1506,22 +1506,22 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,205));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-       
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_permintaan_perlindungan_dari_kekerasan());
         BtnHapus.setEnabled(akses.getsurat_permintaan_perlindungan_dari_kekerasan());
         BtnEdit.setEnabled(akses.getsurat_permintaan_perlindungan_dari_kekerasan());
-        BtnPrint.setEnabled(akses.getsurat_permintaan_perlindungan_dari_kekerasan()); 
+        BtnPrint.setEnabled(akses.getsurat_permintaan_perlindungan_dari_kekerasan());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -1531,9 +1531,9 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
+        }
     }
-  
+
     private void ganti() {
         if(Sequel.mengedittf("surat_perlindungan_dari_kekerasan","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,nama_pj=?,no_ktppj=?,tempat_lahirpj=?,lahirpj=?,jkpj=?,alamatpj=?,hubungan=?,no_telp=?,nip=?",13,new String[]{
             NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),NamaPJ.getText(),NoKTP.getText(),
@@ -1573,17 +1573,17 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(480,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -1603,7 +1603,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                         }else{
                             lokasifile=rs.getString("photo");
                             LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/perlindungankekerasan/"+rs.getString("photo")+"' alt='photo' width='500' height='500'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         lokasifile="";
                         LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
@@ -1624,7 +1624,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1650,13 +1650,10 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-
-
-

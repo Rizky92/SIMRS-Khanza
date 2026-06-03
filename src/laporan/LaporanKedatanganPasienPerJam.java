@@ -11,9 +11,9 @@
 
 package laporan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -36,8 +36,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
-import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgCariCaraBayar;
+import simrskhanza.DlgCariPoli;
 
 /**
  *
@@ -68,12 +68,12 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
         tbJadwal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         Valid.LoadTahun(ThnCari);
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -380,7 +380,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
             runBackground(() ->tampil());
         }else{
@@ -389,7 +389,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
-        
+
     }//GEN-LAST:event_tbJadwalKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -409,10 +409,10 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,1).toString()))+"','"+
@@ -446,18 +446,18 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                                 Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,29).toString()))+"','"+
                                 Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,30).toString()))+"','"+
                                 Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,31).toString()))+"','"+
-                                Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,32).toString()))+"','','','','"+akses.getalamatip()+"'","kedatangan pasien per jam"); 
+                                Valid.SetAngka3(Double.parseDouble(tabMode.getValueAt(r,32).toString()))+"','','','','"+akses.getalamatip()+"'","kedatangan pasien per jam");
             }
-            
-            Map<String, Object> param = new HashMap<>();   
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("jd1","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")");
                 param.put("jd2","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")");
                 param.put("jd3","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),3)+")");
@@ -489,7 +489,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                 param.put("jd29","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),29)+")");
                 param.put("jd30","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),30)+")");
                 param.put("jd31","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),31)+")");
-                Valid.MyReportqry("rptKedatanganPasienPerJam.jasper","report","::[ Kedatangan Pasien Per Jam ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);   
+                Valid.MyReportqry("rptKedatanganPasienPerJam.jasper","report","::[ Kedatangan Pasien Per Jam ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -519,7 +519,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                     KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     BtnDokterRalanDokter.requestFocus();
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -529,8 +529,8 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -563,7 +563,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                     KdCaraBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     NmCaraBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     BtnCaraBayarRalanDokter.requestFocus();
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -573,8 +573,8 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -607,7 +607,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                     KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                     BtnPoliRalanDokter.requestFocus();
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -673,7 +673,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Object[] row={"Jam",
             "1("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")",
@@ -718,12 +718,12 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Object.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.Object.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class,java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
              };
              @Override
@@ -732,7 +732,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
              }
         };
         tbJadwal.setModel(tabMode);
-        
+
         for (i = 0; i < 33; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
@@ -742,9 +742,9 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Valid.tabelKosong(tabMode);
-        
+
         h1=JmlPasien("01","00:00:00","01:00:00");
         h2=JmlPasien("02","00:00:00","01:00:00");
         h3=JmlPasien("03","00:00:00","01:00:00");
@@ -780,7 +780,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "01",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","01:00:01","02:00:00");
         h2=JmlPasien("02","01:00:01","02:00:00");
         h3=JmlPasien("03","01:00:01","02:00:00");
@@ -816,7 +816,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "02",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","02:00:01","03:00:00");
         h2=JmlPasien("02","02:00:01","03:00:00");
         h3=JmlPasien("03","02:00:01","03:00:00");
@@ -852,7 +852,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "03",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","03:00:01","04:00:00");
         h2=JmlPasien("02","03:00:01","04:00:00");
         h3=JmlPasien("03","03:00:01","04:00:00");
@@ -888,7 +888,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "04",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","04:00:01","05:00:00");
         h2=JmlPasien("02","04:00:01","05:00:00");
         h3=JmlPasien("03","04:00:01","05:00:00");
@@ -924,7 +924,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "05",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","05:00:01","06:00:00");
         h2=JmlPasien("02","05:00:01","06:00:00");
         h3=JmlPasien("03","05:00:01","06:00:00");
@@ -960,7 +960,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "06",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","06:00:01","07:00:00");
         h2=JmlPasien("02","06:00:01","07:00:00");
         h3=JmlPasien("03","06:00:01","07:00:00");
@@ -996,7 +996,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "07",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","07:00:01","08:00:00");
         h2=JmlPasien("02","07:00:01","08:00:00");
         h3=JmlPasien("03","07:00:01","08:00:00");
@@ -1032,7 +1032,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "08",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","08:00:01","09:00:00");
         h2=JmlPasien("02","08:00:01","09:00:00");
         h3=JmlPasien("03","08:00:01","09:00:00");
@@ -1068,7 +1068,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "09",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","09:00:01","10:00:00");
         h2=JmlPasien("02","09:00:01","10:00:00");
         h3=JmlPasien("03","09:00:01","10:00:00");
@@ -1104,7 +1104,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "10",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","10:00:01","11:00:00");
         h2=JmlPasien("02","10:00:01","11:00:00");
         h3=JmlPasien("03","10:00:01","11:00:00");
@@ -1140,7 +1140,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "11",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","11:00:01","12:00:00");
         h2=JmlPasien("02","11:00:01","12:00:00");
         h3=JmlPasien("03","11:00:01","12:00:00");
@@ -1176,7 +1176,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "12",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","12:00:01","13:00:00");
         h2=JmlPasien("02","12:00:01","13:00:00");
         h3=JmlPasien("03","12:00:01","13:00:00");
@@ -1212,7 +1212,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "13",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","13:00:01","14:00:00");
         h2=JmlPasien("02","13:00:01","14:00:00");
         h3=JmlPasien("03","13:00:01","14:00:00");
@@ -1248,7 +1248,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "14",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","14:00:01","15:00:00");
         h2=JmlPasien("02","14:00:01","15:00:00");
         h3=JmlPasien("03","14:00:01","15:00:00");
@@ -1284,7 +1284,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "15",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","15:00:01","16:00:00");
         h2=JmlPasien("02","15:00:01","16:00:00");
         h3=JmlPasien("03","15:00:01","16:00:00");
@@ -1320,7 +1320,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "16",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","16:00:01","17:00:00");
         h2=JmlPasien("02","16:00:01","17:00:00");
         h3=JmlPasien("03","16:00:01","17:00:00");
@@ -1356,7 +1356,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "17",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","17:00:01","18:00:00");
         h2=JmlPasien("02","17:00:01","18:00:00");
         h3=JmlPasien("03","17:00:01","18:00:00");
@@ -1392,7 +1392,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "18",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","18:00:01","19:00:00");
         h2=JmlPasien("02","18:00:01","19:00:00");
         h3=JmlPasien("03","18:00:01","19:00:00");
@@ -1428,7 +1428,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "19",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","19:00:01","20:00:00");
         h2=JmlPasien("02","19:00:01","20:00:00");
         h3=JmlPasien("03","19:00:01","20:00:00");
@@ -1464,7 +1464,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "20",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","20:00:01","21:00:00");
         h2=JmlPasien("02","20:00:01","21:00:00");
         h3=JmlPasien("03","20:00:01","21:00:00");
@@ -1500,7 +1500,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "21",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","21:00:01","22:00:00");
         h2=JmlPasien("02","21:00:01","22:00:00");
         h3=JmlPasien("03","21:00:01","22:00:00");
@@ -1536,7 +1536,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "22",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","22:00:01","23:00:00");
         h2=JmlPasien("02","22:00:01","23:00:00");
         h3=JmlPasien("03","22:00:01","23:00:00");
@@ -1572,7 +1572,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             "23",h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
             (h1+h2+h3+h4+h5+h6+h7+h8+h9+h10+h11+h12+h13+h14+h15+h16+h17+h18+h19+h20+h21+h22+h23+h24+h25+h26+h27+h28+h29+h30+h31)
         });
-        
+
         h1=JmlPasien("01","23:00:01","24:00:00");
         h2=JmlPasien("02","23:00:01","24:00:00");
         h3=JmlPasien("03","23:00:01","24:00:00");
@@ -1610,10 +1610,10 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
         });
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    
+
+
     String konversi(int year, int month, int day){
-        dateString = String.format("%d-%d-%d", year, month, day);        
+        dateString = String.format("%d-%d-%d", year, month, day);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
         } catch (Exception ex) {
@@ -1648,7 +1648,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
         }
         return hari;
     }
-    
+
     private double JmlPasien(String tanggal,String jam1,String jam2){
         return Sequel.cariInteger(
                 "select count(*) from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
@@ -1656,21 +1656,21 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
                 "and concat(reg_periksa.kd_poli,poliklinik.nm_poli) like '%"+KdPoli.getText()+NmPoli.getText()+"%' and concat(reg_periksa.kd_dokter,dokter.nm_dokter) like '%"+KdDokter.getText()+NmDokter.getText()+"%' "+
                 "and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayar.getText()+NmCaraBayar.getText()+"%' and reg_periksa.stts_daftar like '%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%'");
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1696,7 +1696,7 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -14,10 +14,10 @@ package keuangan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -54,7 +54,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -250,7 +250,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        try{     
+        try{
             ps=koneksi.prepareStatement(
                     "select set_akun_mandiri.kd_rek,set_akun_mandiri.kd_rek_biaya,set_akun_mandiri.kode_mcm,set_akun_mandiri.no_rekening from set_akun_mandiri");
             try {
@@ -340,7 +340,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -376,7 +376,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             file=new File("./cache/kategoripengeluaran.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -384,7 +384,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                      "select kategori_pengeluaran_harian.kode_kategori,kategori_pengeluaran_harian.nama_kategori,akun1.nm_rek as akun1,akun2.nm_rek as akun2 "+
                      "from kategori_pengeluaran_harian inner join rekening as akun1 on kategori_pengeluaran_harian.kd_rek=akun1.kd_rek "+
-                     "inner join rekening as akun2 on kategori_pengeluaran_harian.kd_rek2=akun2.kd_rek order by kategori_pengeluaran_harian.nama_kategori"); 
+                     "inner join rekening as akun2 on kategori_pengeluaran_harian.kd_rek2=akun2.kd_rek order by kategori_pengeluaran_harian.nama_kategori");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -403,13 +403,13 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"kategoripengeluaran\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -419,7 +419,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/kategoripengeluaran.iyem");
@@ -456,16 +456,16 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
+    }
 
     public JTable getTabel(){
         return tbKamar;
     }
-    
+
     public void isCek(){
-        BtnTambah.setEnabled(akses.getkategori_pengeluaran_harian());     
+        BtnTambah.setEnabled(akses.getkategori_pengeluaran_harian());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -491,7 +491,7 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

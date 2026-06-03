@@ -3,11 +3,11 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -78,7 +78,7 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -263,14 +263,14 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptCatatanPasien.jasper",param,"::[ Laporan Catatan Pasien ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -368,8 +368,8 @@ public final class DlgLhtCatatanPasien extends javax.swing.JDialog {
                     catatan.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
                     catatan.setSize(720,330);
                     catatan.setLocationRelativeTo(internalFrame1);
-                    catatan.setVisible(true);                                       
-                }             
+                    catatan.setVisible(true);
+                }
             }
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
@@ -450,7 +450,7 @@ private void MnCatatanPasienActionPerformed(java.awt.event.ActionEvent evt) {//G
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -492,7 +492,7 @@ private void MnCatatanPasienActionPerformed(java.awt.event.ActionEvent evt) {//G
             ps=koneksi.prepareStatement("select catatan_pasien.no_rkm_medis,pasien.nm_pasien,catatan_pasien.catatan "+
                        "from catatan_pasien inner join pasien on catatan_pasien.no_rkm_medis=pasien.no_rkm_medis where "+
                        "catatan_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or catatan_pasien.catatan like ? order by catatan_pasien.no_rkm_medis");
-            try {                
+            try {
                 ps.setString(1,"%"+TCari.getText()+"%");
                 ps.setString(2,"%"+TCari.getText()+"%");
                 ps.setString(3,"%"+TCari.getText()+"%");
@@ -542,7 +542,7 @@ private void MnCatatanPasienActionPerformed(java.awt.event.ActionEvent evt) {//G
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

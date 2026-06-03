@@ -1,10 +1,10 @@
 package inventory;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -35,7 +35,7 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
     private ResultSet rs;
-    private String tanggal="",noret="",ptg="",sat="",bar="",nonot=""; 
+    private String tanggal="",noret="",ptg="",sat="",bar="",nonot="";
     private String order="order by databarang.nama_brng";
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -47,12 +47,12 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
     public InventoryRingkasanReturJualBarangMedis(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"Kode Barang","Nama Barang","Satuan","Jenis","Jumlah","Total","Kode Sat"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Double.class, java.lang.Double.class,java.lang.Object.class
              };
              /*Class[] types = new Class[] {
@@ -675,8 +675,8 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbReturKeyPressed(java.awt.event.KeyEvent evt) {                                    
-        
+    private void tbReturKeyPressed(java.awt.event.KeyEvent evt) {
+
 }
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
@@ -689,10 +689,10 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     Kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     Nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Kdptg.requestFocus();
             }
             @Override
@@ -721,7 +721,7 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             TglRetur1.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            NoNota.requestFocus();   
+            NoNota.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }
@@ -777,22 +777,22 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());  
-            param.put("tanggal1",Valid.SetTgl(TglRetur1.getSelectedItem()+""));  
-            param.put("tanggal2",Valid.SetTgl(TglRetur2.getSelectedItem()+""));  
-            param.put("parameter","%"+TCari.getText().trim()+"%");   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("tanggal1",Valid.SetTgl(TglRetur1.getSelectedItem()+""));
+            param.put("tanggal2",Valid.SetTgl(TglRetur2.getSelectedItem()+""));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             tanggal=" returjual.tgl_retur between '"+Valid.SetTgl(TglRetur1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglRetur2.getSelectedItem()+"")+"' ";
-            noret="";ptg="";sat="";bar="";nonot="";     
+            noret="";ptg="";sat="";bar="";nonot="";
             if(!NoRetur.getText().equals("")){
                 noret=" and returjual.no_retur_jual='"+NoRetur.getText()+"' ";
-            } 
+            }
 
             if(!Nmptg.getText().equals("")){
                 ptg=" and petugas.nama='"+Nmptg.getText()+"' ";
@@ -832,7 +832,7 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
                     tanggal+noret+ptg+sat+bar+nonot+" and detreturjual.nota_jual like '%"+TCari.getText()+"%' or "+
                     tanggal+noret+ptg+sat+bar+nonot+" and kodesatuan.satuan like '%"+TCari.getText()+"%' or "+
                     tanggal+noret+ptg+sat+bar+nonot+" and detreturjual.kode_sat like '%"+TCari.getText()+"%' "+
-                    " group by detreturjual.kode_brng "+order,param); 
+                    " group by detreturjual.kode_brng "+order,param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -900,10 +900,10 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }    
+                }
                 kdbar.requestFocus();
             }
             @Override
@@ -915,7 +915,7 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1098,23 +1098,23 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
 
     private void tampil() {
         tanggal=" returjual.tgl_retur between '"+Valid.SetTgl(TglRetur1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglRetur2.getSelectedItem()+"")+"' ";
-        noret="";ptg="";sat="";bar="";nonot="";     
+        noret="";ptg="";sat="";bar="";nonot="";
         if(!NoRetur.getText().equals("")){
             noret=" and returjual.no_retur_jual='"+NoRetur.getText()+"' ";
-        } 
-        
+        }
+
         if(!Nmptg.getText().equals("")){
             ptg=" and petugas.nama='"+Nmptg.getText()+"' ";
         }
-        
+
         if(!nmjenis.getText().equals("")){
             sat=" and jenis.nama='"+nmjenis.getText()+"' ";
         }
-        
+
         if(!nmbar.getText().equals("")){
             bar=" and databarang.nama_brng='"+nmbar.getText()+"' ";
         }
-     
+
         if(!NoNota.getText().equals("")){
             nonot=" and detreturjual.nota_jual='"+NoNota.getText()+"' ";
         }
@@ -1137,9 +1137,9 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
                     ttlretur=ttlretur+rs.getDouble("total");
                     tabMode.addRow(new Object[]{
                         rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("satuan"),rs.getString("namajenis"),rs.getDouble("jumlah"),rs.getDouble("total"),rs.getString("kode_sat")
-                    }); 
-                }                 
-                LTotal.setText(Valid.SetAngka(ttlretur)); 
+                    });
+                }
+                LTotal.setText(Valid.SetAngka(ttlretur));
             } catch (Exception e) {
                 System.out.println("Notif Retur : "+e);
             } finally{
@@ -1149,11 +1149,11 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
 
     public void isCek(){
@@ -1185,7 +1185,7 @@ public class InventoryRingkasanReturJualBarangMedis extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

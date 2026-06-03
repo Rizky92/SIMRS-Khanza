@@ -12,11 +12,11 @@
 package inventory;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -37,7 +37,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import simrskhanza.DlgCariBangsal;
 
 /**
  *
@@ -46,8 +45,8 @@ import simrskhanza.DlgCariBangsal;
 public final class DlgPindahGudang extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi(); 
-    private Connection koneksi=koneksiDB.condb(); 
+    private validasi Valid=new validasi();
+    private Connection koneksi=koneksiDB.condb();
     private riwayatobat Trackobat=new riwayatobat();
     private PreparedStatement ps;
     private ResultSet rs;
@@ -117,13 +116,13 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         kddari.setDocument(new batasInput((byte)10).getKata(kddari));
         kdke.setDocument(new batasInput((byte)10).getKata(kddari));
         jumlah.setDocument(new batasInput((byte)10).getKata(jumlah));
-        Keterangan.setDocument(new batasInput((byte)60).getKata(Keterangan));        
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
-        
+        Keterangan.setDocument(new batasInput((byte)60).getKata(Keterangan));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
             DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
@@ -132,7 +131,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
             aktifkanbatch = "no";
             DEPOAKTIFOBAT = "";
         }
-    } 
+    }
 
 
     /** This method is called from within the constructor to
@@ -1068,16 +1067,16 @@ private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             BtnKeluar.requestFocus();
-        }else {   
+        }else {
             if(ceksukses==false){
-                Map<String, Object> param = new HashMap<>();    
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));      
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 if(TCari.getText().trim().equals("")&&nmjns.getText().trim().equals("")&&nmkategori.getText().trim().equals("")&&nmgolongan.getText().trim().equals("")){
                     sql="select mutasibarang.kd_bangsaldari,bangsaldari.nm_bangsal as dari,"+
                         "mutasibarang.kd_bangsalke,bangsalke.nm_bangsal as ke, "+
@@ -1106,9 +1105,9 @@ private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         (nmkategori.getText().trim().equals("")?"":"and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText().trim()+"%' ")+
                         (nmgolongan.getText().trim().equals("")?"":"and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText().trim()+"%' ")+
                         (TCari.getText().trim().equals("")?"":"and (mutasibarang.kd_bangsaldari like '%"+TCari.getText().trim()+"%' or bangsaldari.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                        "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+ 
-                        "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+ 
-                        "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+ 
+                        "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
+                        "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                        "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+
                         "mutasibarang.tanggal like '%"+TCari.getText().trim()+"%' or mutasibarang.keterangan like '%"+TCari.getText().trim()+"%') ");
                 }
 
@@ -1125,7 +1124,7 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnCetakKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        BtnHapus.setEnabled(akses.getmutasi_barang());       
+        BtnHapus.setEnabled(akses.getmutasi_barang());
     }//GEN-LAST:event_formWindowActivated
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
@@ -1240,7 +1239,7 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     kdgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 0).toString());
                     nmgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 1).toString());
                 }
-                
+
                 TCari.requestFocus();
             }
 
@@ -1513,15 +1512,15 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     (nmkategori.getText().trim().equals("")?"":"and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText().trim()+"%' ")+
                     (nmgolongan.getText().trim().equals("")?"":"and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText().trim()+"%' ")+
                     (TCari.getText().trim().equals("")?"":"and (mutasibarang.kd_bangsaldari like '%"+TCari.getText().trim()+"%' or bangsaldari.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                    "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+ 
-                    "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+ 
-                    "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+ 
+                    "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
+                    "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                    "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+
                     "mutasibarang.tanggal like '%"+TCari.getText().trim()+"%' or mutasibarang.keterangan like '%"+TCari.getText().trim()+"%') ")+order);
             }
-                
+
             try {
                 rs=ps.executeQuery();
-                while(rs.next()){    
+                while(rs.next()){
                     nilaitotal=nilaitotal+rs.getDouble(9);
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
@@ -1546,7 +1545,7 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         LCount.setText(""+tabMode.getRowCount());
         LTotalMutasi.setText(df2.format(nilaitotal));
     }
-    
+
     public void tampil2(String order) {
         runBackground(() ->tampil(order));
     }
@@ -1579,17 +1578,17 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 })==true){
                 if(aktifkanbatch.equals("yes")){
                     Trackobat.catatRiwayat(kdbarang.getText(),Valid.SetAngka(jumlah.getText()),0,"Mutasi",akses.getkode(),kddari.getText(),"Hapus",nobatch.getText(),nofaktur.getText(),Keterangan+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'",
                                      "stok=stok+"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kddari.getText()+"' and no_batch='"+nobatch.getText()+"' and no_faktur='"+nofaktur.getText()+"'");
                     Trackobat.catatRiwayat(kdbarang.getText(),0,Valid.SetAngka(jumlah.getText()),"Mutasi",akses.getkode(),kdke.getText(),"Hapus",nobatch.getText(),nofaktur.getText(),Keterangan.getText()+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'",
                                      "stok=stok-"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kdke.getText()+"' and no_batch='"+nobatch.getText()+"' and no_faktur='"+nofaktur.getText()+"'");
                 }else{
                     Trackobat.catatRiwayat(kdbarang.getText(),Valid.SetAngka(jumlah.getText()),0,"Mutasi",akses.getkode(),kddari.getText(),"Hapus","","",Keterangan.getText()+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','',''", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','',''",
                                      "stok=stok+"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kddari.getText()+"' and no_batch='' and no_faktur=''");
                     Trackobat.catatRiwayat(kdbarang.getText(),0,Valid.SetAngka(jumlah.getText()),"Mutasi",akses.getkode(),kdke.getText(),"Hapus","","",Keterangan.getText()+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','',''", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','',''",
                                      "stok=stok-"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kdke.getText()+"' and no_batch='' and no_faktur=''");
                 }
             }else{
@@ -1601,18 +1600,18 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }else{
                 JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 Sequel.RollBack();
-            } 
+            }
             Sequel.AutoComitTrue();
             if(sukses==true){
                 LTotalMutasi.setText(""+Valid.SetAngka(nilaitotal-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())));
                 tabMode.removeRow(tbKamar.getSelectedRow());
                 LCount.setText(""+tabMode.getRowCount());
-            } 
+            }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data untuk menghapus..!!");
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1638,7 +1637,7 @@ private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

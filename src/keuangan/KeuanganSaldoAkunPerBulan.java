@@ -1,8 +1,8 @@
 package keuangan;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -12,14 +12,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.text.Document;
-import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.html.StyleSheet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 
 public class KeuanganSaldoAkunPerBulan extends javax.swing.JDialog {
     private final sekuel Sequel=new sekuel();
@@ -38,7 +38,7 @@ public class KeuanganSaldoAkunPerBulan extends javax.swing.JDialog {
             saldoakhirdesember=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -59,8 +59,8 @@ public class KeuanganSaldoAkunPerBulan extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        LoadHTML.setDocument(doc);      
-        
+        LoadHTML.setDocument(doc);
+
         Valid.LoadTahun(ThnCari);
     }
 
@@ -230,36 +230,36 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("SaldoAkunPerBulan.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("SaldoAkunPerBulan.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
                                 "<td valign='top' align='center'>"+
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+       
+                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -383,7 +383,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>Kode Akun</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%' rowspan='2'>Akun Rekening</td>").append(
@@ -450,14 +450,14 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kredit</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Saldo Akhir</td>").append(
                 "</tr>"
-            );     
+            );
             ps=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.level='0' "+(TCari.getText().trim().equals("")?"":"and (rekening.kd_rek like ? or rekening.nm_rek like ?) ")+" order by kd_rek");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     saldoawaljanuari=Sequel.cariIsiAngka2("select saldo_awal from rekeningtahun where thn=? and kd_rek=?",ThnCari.getSelectedItem().toString(),rs.getString("kd_rek"));
@@ -497,7 +497,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs.getString("kd_rek"));
                     kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs.getString("kd_rek"));
                     saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                    htmlContent.append(    
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td>").append(rs.getString("kd_rek")).append("</td>").append(
                             "<td>").append(rs.getString("nm_rek")).append("</td>").append(
@@ -599,7 +599,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs2.getString("kd_rek"));
                             kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs2.getString("kd_rek"));
                             saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                            htmlContent.append(    
+                            htmlContent.append(
                                 "<tr class='isi'>").append(
                                     "<td>&nbsp;").append(rs2.getString("kd_rek")).append("</td>").append(
                                     "<td>&nbsp;").append(rs2.getString("nm_rek")).append("</td>").append(
@@ -701,7 +701,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                     debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs3.getString("kd_rek"));
                                     kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs3.getString("kd_rek"));
                                     saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                                    htmlContent.append(    
+                                    htmlContent.append(
                                         "<tr class='isi'>").append(
                                             "<td>&nbsp;&nbsp;").append(rs3.getString("kd_rek")).append("</td>").append(
                                             "<td>&nbsp;&nbsp;").append(rs3.getString("nm_rek")).append("</td>").append(
@@ -803,7 +803,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                             debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs4.getString("kd_rek"));
                                             kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs4.getString("kd_rek"));
                                             saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                                            htmlContent.append(    
+                                            htmlContent.append(
                                                 "<tr class='isi'>").append(
                                                     "<td>&nbsp;&nbsp;&nbsp;").append(rs4.getString("kd_rek")).append("</td>").append(
                                                     "<td>&nbsp;&nbsp;&nbsp;").append(rs4.getString("nm_rek")).append("</td>").append(
@@ -905,7 +905,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                                     debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs5.getString("kd_rek"));
                                                     kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs5.getString("kd_rek"));
                                                     saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                                                    htmlContent.append(    
+                                                    htmlContent.append(
                                                         "<tr class='isi'>").append(
                                                             "<td>&nbsp;&nbsp;&nbsp;&nbsp;").append(rs5.getString("kd_rek")).append("</td>").append(
                                                             "<td>&nbsp;&nbsp;&nbsp;&nbsp;").append(rs5.getString("nm_rek")).append("</td>").append(
@@ -1007,7 +1007,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                                             debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs6.getString("kd_rek"));
                                                             kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs6.getString("kd_rek"));
                                                             saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                                                            htmlContent.append(    
+                                                            htmlContent.append(
                                                                 "<tr class='isi'>").append(
                                                                     "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(rs6.getString("kd_rek")).append("</td>").append(
                                                                     "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(rs6.getString("nm_rek")).append("</td>").append(
@@ -1555,16 +1555,16 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     private void prosesCari2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>Kode Akun</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='6%' rowspan='2'>Akun Rekening</td>").append(
@@ -1631,14 +1631,14 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kredit</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Saldo Akhir</td>").append(
                 "</tr>"
-            );     
+            );
             ps=koneksi.prepareStatement("select rekening.kd_rek, rekening.nm_rek from rekening "+(TCari.getText().trim().equals("")?"":"where rekening.kd_rek like ? or rekening.nm_rek like ? ")+" order by rekening.kd_rek");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     saldoawaljanuari=Sequel.cariIsiAngka2("select saldo_awal from rekeningtahun where thn=? and kd_rek=?",ThnCari.getSelectedItem().toString(),rs.getString("kd_rek"));
@@ -1678,7 +1678,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     debetdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.debet) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs.getString("kd_rek"));
                     kreditdesember=Sequel.cariIsiAngka2("select sum(detailjurnal.kredit) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where jurnal.tgl_jurnal like ? and detailjurnal.kd_rek=?","%"+ThnCari.getSelectedItem().toString()+"-12"+"%",rs.getString("kd_rek"));
                     saldoakhirdesember=saldoakhirnovember+(debetdesember-kreditdesember);
-                    htmlContent.append("<tr class='isi'><td>").append(rs.getString("kd_rek")).append("</td><td>").append(rs.getString("nm_rek")).append("</td><td align='right'>").append(Valid.SetAngka(saldoawaljanuari)).append("</td><td align='right'>").append(Valid.SetAngka(debetjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(kreditjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(debetfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(kreditfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(debetmaret)).append("</td><td align='right'>").append(Valid.SetAngka(kreditmaret)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmaret)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmaret)).append("</td><td align='right'>").append(Valid.SetAngka(debetapril)).append("</td><td align='right'>").append(Valid.SetAngka(kreditapril)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirapril)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirapril)).append("</td><td align='right'>").append(Valid.SetAngka(debetmei)).append("</td><td align='right'>").append(Valid.SetAngka(kreditmei)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmei)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmei)).append("</td><td align='right'>").append(Valid.SetAngka(debetjuni)).append("</td><td align='right'>").append(Valid.SetAngka(kreditjuni)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuni)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuni)).append("</td><td align='right'>").append(Valid.SetAngka(debetjuli)).append("</td><td align='right'>").append(Valid.SetAngka(kreditjuli)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuli)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuli)).append("</td><td align='right'>").append(Valid.SetAngka(debetagustus)).append("</td><td align='right'>").append(Valid.SetAngka(kreditagustus)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiragustus)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiragustus)).append("</td><td align='right'>").append(Valid.SetAngka(debetseptember)).append("</td><td align='right'>").append(Valid.SetAngka(kreditseptember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirseptember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirseptember)).append("</td><td align='right'>").append(Valid.SetAngka(debetoktober)).append("</td><td align='right'>").append(Valid.SetAngka(kreditoktober)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiroktober)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiroktober)).append("</td><td align='right'>").append(Valid.SetAngka(debetnovember)).append("</td><td align='right'>").append(Valid.SetAngka(kreditnovember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirnovember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirnovember)).append("</td><td align='right'>").append(Valid.SetAngka(debetdesember)).append("</td><td align='right'>").append(Valid.SetAngka(kreditdesember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirdesember)).append("</td></tr>");                    
+                    htmlContent.append("<tr class='isi'><td>").append(rs.getString("kd_rek")).append("</td><td>").append(rs.getString("nm_rek")).append("</td><td align='right'>").append(Valid.SetAngka(saldoawaljanuari)).append("</td><td align='right'>").append(Valid.SetAngka(debetjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(kreditjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjanuari)).append("</td><td align='right'>").append(Valid.SetAngka(debetfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(kreditfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirfebruari)).append("</td><td align='right'>").append(Valid.SetAngka(debetmaret)).append("</td><td align='right'>").append(Valid.SetAngka(kreditmaret)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmaret)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmaret)).append("</td><td align='right'>").append(Valid.SetAngka(debetapril)).append("</td><td align='right'>").append(Valid.SetAngka(kreditapril)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirapril)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirapril)).append("</td><td align='right'>").append(Valid.SetAngka(debetmei)).append("</td><td align='right'>").append(Valid.SetAngka(kreditmei)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmei)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirmei)).append("</td><td align='right'>").append(Valid.SetAngka(debetjuni)).append("</td><td align='right'>").append(Valid.SetAngka(kreditjuni)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuni)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuni)).append("</td><td align='right'>").append(Valid.SetAngka(debetjuli)).append("</td><td align='right'>").append(Valid.SetAngka(kreditjuli)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuli)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirjuli)).append("</td><td align='right'>").append(Valid.SetAngka(debetagustus)).append("</td><td align='right'>").append(Valid.SetAngka(kreditagustus)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiragustus)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiragustus)).append("</td><td align='right'>").append(Valid.SetAngka(debetseptember)).append("</td><td align='right'>").append(Valid.SetAngka(kreditseptember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirseptember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirseptember)).append("</td><td align='right'>").append(Valid.SetAngka(debetoktober)).append("</td><td align='right'>").append(Valid.SetAngka(kreditoktober)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiroktober)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhiroktober)).append("</td><td align='right'>").append(Valid.SetAngka(debetnovember)).append("</td><td align='right'>").append(Valid.SetAngka(kreditnovember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirnovember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirnovember)).append("</td><td align='right'>").append(Valid.SetAngka(debetdesember)).append("</td><td align='right'>").append(Valid.SetAngka(kreditdesember)).append("</td><td align='right'>").append(Valid.SetAngka(saldoakhirdesember)).append("</td></tr>");
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -1698,15 +1698,15 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getsaldo_akun_perbulan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1732,7 +1732,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

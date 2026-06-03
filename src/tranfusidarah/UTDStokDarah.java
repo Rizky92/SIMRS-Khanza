@@ -1,24 +1,21 @@
 package tranfusidarah;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -58,7 +55,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
             "KSO","Manajemen","Biaya","Pembatalan","Kode Komponen"
         };
         tabMode=new DefaultTableModel(null,row){
-            @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}            
+            @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbDokter.setModel(tabMode);
 
@@ -92,13 +89,13 @@ public class UTDStokDarah extends javax.swing.JDialog {
 
         NoKantong.setDocument(new batasInput((byte)20).getKata(NoKantong));
         KodeKomponen.setDocument(new batasInput((byte)5).getKata(KodeKomponen));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
-          
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
+
         ChkInput.setSelected(false);
         panelCari.setVisible(false);
-        posisi(); 
-        isForm();           
+        posisi();
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -767,7 +764,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
         }else{
             if(Sequel.mengedittf("utd_stok_darah","no_kantong=?",
                 "no_kantong=?,kode_komponen=?,golongan_darah=?,resus=?,"+
-                "tanggal_aftap=?,tanggal_kadaluarsa=?,asal_darah=?",8,new String[]{     
+                "tanggal_aftap=?,tanggal_kadaluarsa=?,asal_darah=?",8,new String[]{
                     NoKantong.getText(),KodeKomponen.getText(),GolonganDarah.getSelectedItem().toString(),
                     Resus.getSelectedItem().toString(),Valid.SetTgl(Aftap.getSelectedItem()+""),
                     Valid.SetTgl(Kadaluarsa.getSelectedItem()+""),Asal.getSelectedItem().toString(),
@@ -788,19 +785,19 @@ public class UTDStokDarah extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(tabMode.getRowCount()==0){            
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));                 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(panelCari.isVisible()==false){
                 Valid.MyReportqry("rptUTDStokDarah.jasper","report","::[ Data Stok Darah ]::",
                     "select utd_stok_darah.no_kantong,utd_komponen_darah.nama as darah,"+
@@ -817,7 +814,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
                     "utd_stok_darah.status='Ada' and utd_stok_darah.resus like '%"+TCari.getText().trim()+"%' or "+
                     "utd_stok_darah.status='Ada' and utd_stok_darah.asal_darah like '%"+TCari.getText().trim()+"%' or "+
                     "utd_stok_darah.status='Ada' and utd_stok_darah.status like '%"+TCari.getText().trim()+"%' "+
-                    "order by utd_stok_darah.tanggal_kadaluarsa",param);            
+                    "order by utd_stok_darah.tanggal_kadaluarsa",param);
             }else{
                 Valid.MyReportqry("rptUTDStokDarah.jasper","report","::[ Data Stok Darah ]::",
                     "select utd_stok_darah.no_kantong,utd_komponen_darah.nama as darah,"+
@@ -835,10 +832,10 @@ public class UTDStokDarah extends javax.swing.JDialog {
                     "utd_stok_darah.status='"+CmbCrStatus.getSelectedItem().toString()+"' and utd_stok_darah.resus='"+CmbCariResus.getSelectedItem().toString()+"' and "+
                     "utd_stok_darah.golongan_darah='"+CmbCariGd.getSelectedItem().toString()+"' and utd_stok_darah.asal_darah='"+CmbCariAsal.getSelectedItem().toString()+"' and "+
                     "utd_komponen_darah.nama like '%"+TCari.getText().trim()+"%' "+
-                    " order by utd_stok_darah.tanggal_kadaluarsa",param);            
+                    " order by utd_stok_darah.tanggal_kadaluarsa",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -863,12 +860,12 @@ public class UTDStokDarah extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
+            dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -900,7 +897,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -920,7 +917,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_NoKantongKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -946,7 +943,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void KodeKomponenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeKomponenKeyPressed
@@ -963,7 +960,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             komponen.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(komponen.getTable().getSelectedRow()!= -1){ 
+                    if(komponen.getTable().getSelectedRow()!= -1){
                         KodeKomponen.setText(komponen.getTable().getValueAt(komponen.getTable().getSelectedRow(),0).toString());
                         NoKantong.setText(komponen.getTable().getValueAt(komponen.getTable().getSelectedRow(),0).toString()+NoKantong.getText());
                         NamaKomponen.setText(komponen.getTable().getValueAt(komponen.getTable().getSelectedRow(),1).toString());
@@ -974,7 +971,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Valid.SetTgl(Kadaluarsa,sdf.format(cal.getTime()));
                         NoKantong.requestFocus();
-                    } 
+                    }
                     komponen=null;
                 }
             });
@@ -986,19 +983,19 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         komponen.dispose();
                     }
                 }
-            });  
+            });
             komponen.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            komponen.setLocationRelativeTo(internalFrame1);   
+            komponen.setLocationRelativeTo(internalFrame1);
         }
         if (komponen == null) return;
         if (!komponen.isVisible()) {
             komponen.emptTeks();
-        }  
+        }
         if (komponen.isVisible()) {
             komponen.toFront();
             return;
-        }     
-        komponen.setVisible(true);   
+        }
+        komponen.setVisible(true);
     }//GEN-LAST:event_btnKomponenActionPerformed
 
     private void GolonganDarahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GolonganDarahKeyPressed
@@ -1171,7 +1168,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "utd_komponen_darah.nama like ? "+
                     " order by utd_stok_darah.tanggal_kadaluarsa");
             }
-            
+
             try {
                 if(panelCari.isVisible()==false){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -1191,7 +1188,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(9,CmbCariAsal.getSelectedItem().toString());
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1241,27 +1238,27 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbDokter;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getutd_stok_darah());
         BtnHapus.setEnabled(akses.getutd_stok_darah());
         BtnEdit.setEnabled(akses.getutd_stok_darah());
         BtnPrint.setEnabled(akses.getutd_stok_darah());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,158));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    }    
+    }
 
     private void posisi() {
         if(panelCari.isVisible()==false){
@@ -1272,7 +1269,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             PanelCariUtama.setPreferredSize(new Dimension(WIDTH,161));
         }
     }
- 
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1298,7 +1295,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -11,11 +11,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -44,7 +44,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -379,7 +379,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString().replaceAll("'","") +"','"+
                                 tabMode.getValueAt(r,1).toString().replaceAll("'","")+"','"+
@@ -395,17 +395,17 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                                 tabMode.getValueAt(r,11).toString().replaceAll("'","")+"','"+
                                 tabMode.getValueAt(r,12).toString().replaceAll("'","")+"','"+
                                 tabMode.getValueAt(r,13).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,14).toString().replaceAll("'","")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter"); 
+                                tabMode.getValueAt(r,14).toString().replaceAll("'","")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter");
             }
-            
+
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptReferensiPendaftaranMobileJKN.jasper","report","::[ Data Referensi Pendaftaran Mobile JKN ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -461,7 +461,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                 tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
             })==true){
                 Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(), 
+                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),
                     tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
                 });
                 runBackground(() ->tampil());
@@ -533,7 +533,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -603,7 +603,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                     ps.setString(10,"%"+TCari.getText()+"%");
                     ps.setString(11,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -630,7 +630,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -656,7 +656,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
