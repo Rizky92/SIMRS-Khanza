@@ -5818,9 +5818,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(! TCari.getText().trim().equals("")){
-            BtnCariActionPerformed(evt);
-        }
+
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 if(tabModeDr.getRowCount()==0){
