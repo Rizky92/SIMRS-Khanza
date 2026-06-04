@@ -930,7 +930,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         if(!TCariPasien.getText().equals("")){
-                           pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' ";
+                            pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' ";
                         }
                         tgl=" detail_pemberian_obat.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                         Valid.MyReportqry("rptBrObt.jasper","report","::[ Rekam Data Pemberian Obat (UMUM) ]::",

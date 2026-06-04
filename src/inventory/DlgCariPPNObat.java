@@ -547,285 +547,227 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         param.put("kontakrs",akses.getkontakrs());
         param.put("emailrs",akses.getemailrs());
         param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
-        if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PPNPembelian.html", "PPN Pengadaan Barang", tbPengadaan);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PPNPembelian.wps", "PPN Pengadaan Barang", tbPengadaan);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PPNPembelian.csv", tbPengadaan);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PPNPembelian.xlsx", tbPengadaan);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Valid.MyReportqry("rptPPNPembelian.jasper","report","::[ PPN Pengadaan Barang ]::",
-                                "select pembelian.tgl_beli,pembelian.no_faktur, "+
-                                " pembelian.kode_suplier,datasuplier.nama_suplier, "+
-                                " pembelian.nip,petugas.nama,pembelian.total1,"+
-                                " pembelian.potongan,pembelian.total2,pembelian.ppn,pembelian.tagihan "+
-                                " from pembelian inner join datasuplier inner join petugas on "+
-                                " pembelian.kode_suplier=datasuplier.kode_suplier and pembelian.nip=petugas.nip "+
-                                " where pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pembelian.no_faktur like '%"+TCari.getText()+"%' or "+
-                                " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pembelian.kode_suplier like '%"+TCari.getText()+"%' or "+
-                                " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
-                                " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pembelian.nip like '%"+TCari.getText()+"%' or "+
-                                " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and petugas.nama like '%"+TCari.getText()+"%' order by pembelian.tgl_beli,pembelian.no_faktur ",param);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
+        try {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
             }
-        }else if(TabRawat.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode2.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            switch (TabRawat.getSelectedIndex()) {
+                case 0:
+                    if(tabMode.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabMode.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("PPNPembelian.html", "PPN Pengadaan Barang", tbPengadaan);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("PPNPembelian.wps", "PPN Pengadaan Barang", tbPengadaan);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("PPNPembelian.csv", tbPengadaan);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PPNPembelian.xlsx", tbPengadaan);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Valid.MyReportqry("rptPPNPembelian.jasper","report","::[ PPN Pengadaan Barang ]::",
+                                    "select pembelian.tgl_beli,pembelian.no_faktur, "+
+                                    " pembelian.kode_suplier,datasuplier.nama_suplier, "+
+                                    " pembelian.nip,petugas.nama,pembelian.total1,"+
+                                    " pembelian.potongan,pembelian.total2,pembelian.ppn,pembelian.tagihan "+
+                                    " from pembelian inner join datasuplier inner join petugas on "+
+                                    " pembelian.kode_suplier=datasuplier.kode_suplier and pembelian.nip=petugas.nip "+
+                                    " where pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pembelian.no_faktur like '%"+TCari.getText()+"%' or "+
+                                    " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pembelian.kode_suplier like '%"+TCari.getText()+"%' or "+
+                                    " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
+                                    " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pembelian.nip like '%"+TCari.getText()+"%' or "+
+                                    " pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and petugas.nama like '%"+TCari.getText()+"%' order by pembelian.tgl_beli,pembelian.no_faktur ",param);
+                                break;
+                        }
                     }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PPNPemesanan.html", "PPN Penerimaan Barang", tbPembelian);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PPNPemesanan.wps", "PPN Penerimaan Barang", tbPembelian);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PPNPemesanan.csv", tbPembelian);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PPNPemesanan.xlsx", tbPembelian);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Valid.MyReportqry("rptPPNPemesanan.jasper","report","::[ PPN Penerimaan Barang ]::",
-                                "select pemesanan.tgl_pesan,pemesanan.no_faktur, "+
-                                " pemesanan.kode_suplier,datasuplier.nama_suplier, "+
-                                " pemesanan.nip,petugas.nama,pemesanan.total1,"+
-                                " pemesanan.potongan,pemesanan.total2,pemesanan.ppn,pemesanan.tagihan "+
-                                " from pemesanan inner join datasuplier inner join petugas on "+
-                                " pemesanan.kode_suplier=datasuplier.kode_suplier and pemesanan.nip=petugas.nip "+
-                                " where pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.no_faktur like '%"+TCari.getText()+"%' or "+
-                                " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.kode_suplier like '%"+TCari.getText()+"%' or "+
-                                " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
-                                " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.nip like '%"+TCari.getText()+"%' or "+
-                                " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and petugas.nama like '%"+TCari.getText()+"%' order by pemesanan.tgl_pesan,pemesanan.no_faktur ",param);
-                            break;
+                    break;
+                case 1:
+                    if(tabMode2.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabMode2.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("PPNPemesanan.html", "PPN Penerimaan Barang", tbPembelian);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("PPNPemesanan.wps", "PPN Penerimaan Barang", tbPembelian);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("PPNPemesanan.csv", tbPembelian);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PPNPemesanan.xlsx", tbPembelian);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Valid.MyReportqry("rptPPNPemesanan.jasper","report","::[ PPN Penerimaan Barang ]::",
+                                    "select pemesanan.tgl_pesan,pemesanan.no_faktur, "+
+                                    " pemesanan.kode_suplier,datasuplier.nama_suplier, "+
+                                    " pemesanan.nip,petugas.nama,pemesanan.total1,"+
+                                    " pemesanan.potongan,pemesanan.total2,pemesanan.ppn,pemesanan.tagihan "+
+                                    " from pemesanan inner join datasuplier inner join petugas on "+
+                                    " pemesanan.kode_suplier=datasuplier.kode_suplier and pemesanan.nip=petugas.nip "+
+                                    " where pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.no_faktur like '%"+TCari.getText()+"%' or "+
+                                    " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.kode_suplier like '%"+TCari.getText()+"%' or "+
+                                    " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
+                                    " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.nip like '%"+TCari.getText()+"%' or "+
+                                    " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and petugas.nama like '%"+TCari.getText()+"%' order by pemesanan.tgl_pesan,pemesanan.no_faktur ",param);
+                                break;
+                        }
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
+                    break;
+                case 2:
+                    if(tabMode3.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabMode3.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("PPNRalan.html", "Laporan PPN Obat Ralan", tbRawatJalan);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("PPNRalan.wps", "Laporan PPN Obat Ralan", tbRawatJalan);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("PPNRalan.csv", tbRawatJalan);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PPNRalan.xlsx", tbRawatJalan);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                                for(int r=0;r<tabMode3.getRowCount();r++){
+                                        Sequel.menyimpan("temporary","'"+r+"','"+
+                                                    tabMode3.getValueAt(r,0).toString()+"','"+
+                                                    tabMode3.getValueAt(r,1).toString()+"','"+
+                                                    tabMode3.getValueAt(r,2).toString()+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,3).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,4).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                }
+                                Valid.MyReportqry("rptPPNRalan.jasper","report","::[ Laporan PPN Obat Ralan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                                break;
+                        }
+                    }
+                    break;
+                case 3:
+                    if(tabMode4.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabMode4.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("PPNJualBebas.html", "PPN Obat Jual Bebas", tbObatJualBebas);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("PPNJualBebas.wps", "PPN Obat Jual Bebas", tbObatJualBebas);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("PPNJualBebas.csv", tbObatJualBebas);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PPNJualBebas.xlsx", tbObatJualBebas);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Valid.MyReportqry("rptPPNJualBebas.jasper","report","::[ PPN Obat Jual Bebas ]::",
+                                    "select penjualan.tgl_jual,penjualan.nota_jual, "+
+                                    " penjualan.no_rkm_medis,pasien.nm_pasien, "+
+                                    " penjualan.nip,petugas.nama,penjualan.ppn as ppn,sum(detailjual.total) as total "+
+                                    " from penjualan inner join pasien on penjualan.no_rkm_medis=pasien.no_rkm_medis "+
+                                    " inner join petugas on penjualan.nip=petugas.nip inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
+                                    " where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                                    (TCari.getText().trim().equals("")?"":" and (penjualan.nota_jual like '%"+TCari.getText()+"%' or "+
+                                    " penjualan.no_rkm_medis like '%"+TCari.getText()+"%' or "+
+                                    " penjualan.nm_pasien like '%"+TCari.getText()+"%' or "+
+                                    " penjualan.nip like '%"+TCari.getText()+"%' or "+
+                                    " petugas.nama like '%"+TCari.getText()+"%') ")+" group by penjualan.nota_jual "+
+                                    " order by penjualan.tgl_jual,penjualan.nota_jual ",param);
+                                break;
+                        }
+                    }
+                    break;
+                case 4:
+                    if(tabMode5.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabMode5.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("PPNRanap.html", "Laporan PPN Obat Ranap", tbRawatInap);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("PPNRanap.wps", "Laporan PPN Obat Ranap", tbRawatInap);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("PPNRanap.csv", tbRawatInap);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PPNRanap.xlsx", tbRawatInap);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                                for(int r=0;r<tabMode5.getRowCount();r++){
+                                        Sequel.menyimpan("temporary","'"+r+"','"+
+                                                    tabMode5.getValueAt(r,0).toString()+"','"+
+                                                    tabMode5.getValueAt(r,1).toString()+"','"+
+                                                    tabMode5.getValueAt(r,2).toString()+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,3).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,4).toString()))+"','"+
+                                                    Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                }
+                                Valid.MyReportqry("rptPPNRanap.jasper","report","::[ Laporan PPN Obat Ranap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                                break;
+                        }
+                    }
+                    break;
+                case 5:
+                    if(tabMode6.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabMode6.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("PPNPiutangObat.html", "PPN Piutang Obat & BHP", tbPiutangObat);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("PPNPiutangObat.wps", "PPN Piutang Obat & BHP", tbPiutangObat);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("PPNPiutangObat.csv", tbPiutangObat);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PPNPiutangObat.xlsx", tbPiutangObat);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Valid.MyReportqry("rptPPNPiutangObat.jasper","report","::[ PPN Piutang Obat & BHP ]::",
+                                    "select piutang.tgl_piutang,piutang.nota_piutang,piutang.no_rkm_medis,pasien.nm_pasien, "+
+                                    "piutang.nip,petugas.nama,round(piutang.ppn) as ppn,sum(detailpiutang.total) as total "+
+                                    "from piutang inner join pasien on piutang.no_rkm_medis=pasien.no_rkm_medis "+
+                                    "inner join petugas on piutang.nip=petugas.nip inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang "+
+                                    "where piutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                                    (TCari.getText().trim().equals("")?"":" and (piutang.nota_piutang like '%"+TCari.getText()+"%' or "+
+                                    "piutang.no_rkm_medis like '%"+TCari.getText()+"%' or piutang.nm_pasien like '%"+TCari.getText()+"%' or "+
+                                    "piutang.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%') ")+
+                                    "group by piutang.nota_piutang order by piutang.tgl_piutang,piutang.nota_piutang ",param);
+                                break;
+                        }
+                    }
+                    break;
             }
-        }else if(TabRawat.getSelectedIndex()==2){
-            if(tabMode3.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode3.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PPNRalan.html", "Laporan PPN Obat Ralan", tbRawatJalan);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PPNRalan.wps", "Laporan PPN Obat Ralan", tbRawatJalan);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PPNRalan.csv", tbRawatJalan);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PPNRalan.xlsx", tbRawatJalan);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<tabMode3.getRowCount();r++){
-                                    Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode3.getValueAt(r,0).toString()+"','"+
-                                                tabMode3.getValueAt(r,1).toString()+"','"+
-                                                tabMode3.getValueAt(r,2).toString()+"','"+
-                                                Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,3).toString()))+"','"+
-                                                Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,4).toString()))+"','"+
-                                                Valid.SetAngka(Double.parseDouble(tabMode3.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-                            }
-                            Valid.MyReportqry("rptPPNRalan.jasper","report","::[ Laporan PPN Obat Ralan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }else if(TabRawat.getSelectedIndex()==3){
-            if(tabMode4.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode4.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PPNJualBebas.html", "PPN Obat Jual Bebas", tbObatJualBebas);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PPNJualBebas.wps", "PPN Obat Jual Bebas", tbObatJualBebas);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PPNJualBebas.csv", tbObatJualBebas);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PPNJualBebas.xlsx", tbObatJualBebas);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Valid.MyReportqry("rptPPNJualBebas.jasper","report","::[ PPN Obat Jual Bebas ]::",
-                                "select penjualan.tgl_jual,penjualan.nota_jual, "+
-                                " penjualan.no_rkm_medis,pasien.nm_pasien, "+
-                                " penjualan.nip,petugas.nama,penjualan.ppn as ppn,sum(detailjual.total) as total "+
-                                " from penjualan inner join pasien on penjualan.no_rkm_medis=pasien.no_rkm_medis "+
-                                " inner join petugas on penjualan.nip=petugas.nip inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
-                                " where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
-                                (TCari.getText().trim().equals("")?"":" and (penjualan.nota_jual like '%"+TCari.getText()+"%' or "+
-                                " penjualan.no_rkm_medis like '%"+TCari.getText()+"%' or "+
-                                " penjualan.nm_pasien like '%"+TCari.getText()+"%' or "+
-                                " penjualan.nip like '%"+TCari.getText()+"%' or "+
-                                " petugas.nama like '%"+TCari.getText()+"%') ")+" group by penjualan.nota_jual "+
-                                " order by penjualan.tgl_jual,penjualan.nota_jual ",param);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }else if(TabRawat.getSelectedIndex()==4){
-            if(tabMode5.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode5.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PPNRanap.html", "Laporan PPN Obat Ranap", tbRawatInap);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PPNRanap.wps", "Laporan PPN Obat Ranap", tbRawatInap);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PPNRanap.csv", tbRawatInap);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PPNRanap.xlsx", tbRawatInap);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                            for(int r=0;r<tabMode5.getRowCount();r++){
-                                    Sequel.menyimpan("temporary","'"+r+"','"+
-                                                tabMode5.getValueAt(r,0).toString()+"','"+
-                                                tabMode5.getValueAt(r,1).toString()+"','"+
-                                                tabMode5.getValueAt(r,2).toString()+"','"+
-                                                Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,3).toString()))+"','"+
-                                                Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,4).toString()))+"','"+
-                                                Valid.SetAngka(Double.parseDouble(tabMode5.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-                            }
-                            Valid.MyReportqry("rptPPNRanap.jasper","report","::[ Laporan PPN Obat Ranap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }else if(TabRawat.getSelectedIndex()==5){
-            if(tabMode6.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode6.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PPNPiutangObat.html", "PPN Piutang Obat & BHP", tbPiutangObat);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PPNPiutangObat.wps", "PPN Piutang Obat & BHP", tbPiutangObat);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PPNPiutangObat.csv", tbPiutangObat);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PPNPiutangObat.xlsx", tbPiutangObat);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Valid.MyReportqry("rptPPNPiutangObat.jasper","report","::[ PPN Piutang Obat & BHP ]::",
-                                "select piutang.tgl_piutang,piutang.nota_piutang,piutang.no_rkm_medis,pasien.nm_pasien, "+
-                                "piutang.nip,petugas.nama,round(piutang.ppn) as ppn,sum(detailpiutang.total) as total "+
-                                "from piutang inner join pasien on piutang.no_rkm_medis=pasien.no_rkm_medis "+
-                                "inner join petugas on piutang.nip=petugas.nip inner join detailpiutang on piutang.nota_piutang=detailpiutang.nota_piutang "+
-                                "where piutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
-                                (TCari.getText().trim().equals("")?"":" and (piutang.nota_piutang like '%"+TCari.getText()+"%' or "+
-                                "piutang.no_rkm_medis like '%"+TCari.getText()+"%' or piutang.nm_pasien like '%"+TCari.getText()+"%' or "+
-                                "piutang.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%') ")+
-                                "group by piutang.nota_piutang order by piutang.tgl_piutang,piutang.nota_piutang ",param);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
-            }
+            this.setCursor(Cursor.getDefaultCursor());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
