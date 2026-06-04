@@ -32,6 +32,7 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -605,6 +606,10 @@ public final class validasi {
             columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
                 .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
                 .toArray();
+        } else {
+            columnIndexes = Arrays.stream(columnIndexes)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
         }
 
         File file = new File(filename);
@@ -655,6 +660,10 @@ public final class validasi {
 
         if (columnIndexes.length == 0) {
             columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
+        } else {
+            columnIndexes = Arrays.stream(columnIndexes)
                 .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
                 .toArray();
         }
@@ -708,6 +717,10 @@ public final class validasi {
             columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
                 .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
                 .toArray();
+        } else {
+            columnIndexes = Arrays.stream(columnIndexes)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
         }
 
         File file = new File(filename);
@@ -755,6 +768,10 @@ public final class validasi {
 
         if (columnIndexes.length == 0) {
             columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
+        } else {
+            columnIndexes = Arrays.stream(columnIndexes)
                 .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
                 .toArray();
         }
