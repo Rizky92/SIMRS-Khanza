@@ -427,7 +427,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("ReklasifikasiRalan.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.queryu("delete from temporary2 where temp37='"+akses.getalamatip()+"'");
+                        Sequel.queryu("delete from temporary2 where temp100='"+akses.getalamatip()+"'");
                         for(int r=0;r<tabMode.getRowCount();r++){
                                 Sequel.menyimpan("temporary2","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+

@@ -4748,8 +4748,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat.html", "Mapping Poli/Lokasi Satu Sehat Kemenkes", tbJnsPerawatan);
@@ -4793,8 +4793,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat2.html", "Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes", tbLokasiKamar);
@@ -4838,8 +4838,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat3.html", "Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes", tbLokasiRuangOK);
@@ -4882,8 +4882,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat4.html", "Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes", tbLokasiRuangLabPK);
@@ -4926,8 +4926,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat5.html", "Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes", tbLokasiRuangLabPA);
@@ -4970,8 +4970,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat6.html", "Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes", tbLokasiRuangLabMB);
@@ -5014,8 +5014,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat7.html", "Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes", tbLokasiRuangRadiologi);
@@ -5058,8 +5058,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("MapingLokasiSatuSehat8.html", "Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes", tbLokasiFarmasi);

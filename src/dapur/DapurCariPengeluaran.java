@@ -733,7 +733,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
 
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                         "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                    }, "Laporan 1 (HTML)");
+                    }, "Laporan 5 (Jasper)");
 
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
@@ -796,7 +796,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
 
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                         "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                    }, "Laporan 1 (HTML)");
+                    }, "Laporan 5 (Jasper)");
 
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":

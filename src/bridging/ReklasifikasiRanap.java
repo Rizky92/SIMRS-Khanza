@@ -417,19 +417,19 @@ public final class ReklasifikasiRanap extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("ReklasifikasiRalan.html", "Reklasifikasi Ranap", tbBangsal);
+                        Valid.exportHtmlSmc("ReklasifikasiRanap.html", "Reklasifikasi Ranap", tbBangsal);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("ReklasifikasiRalan.wps", "Reklasifikasi Ranap", tbBangsal);
+                        Valid.exportWPSSmc("ReklasifikasiRanap.wps", "Reklasifikasi Ranap", tbBangsal);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("ReklasifikasiRalan.csv", tbBangsal);
+                        Valid.exportCSVSmc("ReklasifikasiRanap.csv", tbBangsal);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("ReklasifikasiRalan.xlsx", tbBangsal);
+                        Valid.exportXlsxSmc("ReklasifikasiRanap.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.queryu("delete from temporary2 where temp37='"+akses.getalamatip()+"'");
+                        Sequel.queryu("delete from temporary2 where temp100='"+akses.getalamatip()+"'");
                         for(int r=0;r<tabMode.getRowCount();r++){
                                 Sequel.menyimpan("temporary2","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
