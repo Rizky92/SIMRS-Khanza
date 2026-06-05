@@ -694,18 +694,18 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "SELECT referensi_mobilejkn_bpjs.no_rawat,referensi_mobilejkn_bpjs.norm,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
-                    "referensi_mobilejkn_bpjs.nik,referensi_mobilejkn_bpjs.tanggalperiksa,referensi_mobilejkn_bpjs.kodepoli,referensi_mobilejkn_bpjs.kodedokter,referensi_mobilejkn_bpjs.jampraktek,"+
-                    "referensi_mobilejkn_bpjs.jeniskunjungan,referensi_mobilejkn_bpjs.nomorreferensi,referensi_mobilejkn_bpjs.status,referensi_mobilejkn_bpjs.validasi,"+
-                    "ifnull(maping_dokter_dpjpvclaim.nm_dokter_bpjs, '') as nm_dokter_bpjs, ifnull(maping_poli_bpjs..nm_poli_bpjs, '') as nm_poli_bpjs, " +
-                    "referensi_mobilejkn_bpjs.nobooking FROM referensi_mobilejkn_bpjs INNER JOIN pasien on referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis "+
-                    "left join maping_dokter_dpjpvclaim on referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs " +
-                    "left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
-                    "WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN ? AND ? "+(TCari.getText().isBlank()?"":
-                    "and (referensi_mobilejkn_bpjs.no_rawat LIKE ? OR referensi_mobilejkn_bpjs.norm LIKE ? OR pasien.nm_pasien LIKE ? OR "+
-                    "referensi_mobilejkn_bpjs.nohp LIKE ? OR referensi_mobilejkn_bpjs.nomorkartu LIKE ? OR referensi_mobilejkn_bpjs.nik LIKE ? OR "+
-                    "referensi_mobilejkn_bpjs.jeniskunjungan LIKE ? OR referensi_mobilejkn_bpjs.nomorreferensi LIKE ? OR referensi_mobilejkn_bpjs.status LIKE ? OR referensi_mobilejkn_bpjs.kodedokter LIKE ? OR referensi_mobilejkn_bpjs.kodepoli LIKE ? OR maping_dokter_dpjpvclaim.nm_dokter_bpjs LIKE ? OR maping_poli_bpjsnm_poli_bpjs LIKE ?) ")+
-                    "order by referensi_mobilejkn_bpjs.tanggalperiksa");
+                    "select referensi_mobilejkn_bpjs.no_rawat, referensi_mobilejkn_bpjs.norm, pasien.nm_pasien, referensi_mobilejkn_bpjs.nohp, referensi_mobilejkn_bpjs.nomorkartu, " +
+                    "referensi_mobilejkn_bpjs.nik, referensi_mobilejkn_bpjs.tanggalperiksa, referensi_mobilejkn_bpjs.jampraktek, referensi_mobilejkn_bpjs.jeniskunjungan, " +
+                    "referensi_mobilejkn_bpjs.nomorreferensi, if(referensi_mobilejkn_bpjs.validasi = '0000-00-00 00:00:00', '', referensi_mobilejkn_bpjs.validasi) as validasi, " +
+                    "referensi_mobilejkn_bpjs.nobooking, referensi_mobilejkn_bpjs.kodepoli, referensi_mobilejkn_bpjs.kodedokter, referensi_mobilejkn_bpjs.status, " +
+                    "ifnull(maping_dokter_dpjpvclaim.nm_dokter_bpjs, '') as nm_dokter_bpjs, ifnull(maping_poli_bpjs.nm_poli_bpjs, '') as nm_poli_bpjs from " +
+                    "referensi_mobilejkn_bpjs inner join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis left join maping_dokter_dpjpvclaim on " +
+                    "referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
+                    "where referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? " + (TCari.getText().isBlank() ? "" : "and (referensi_mobilejkn_bpjs.no_rawat like ? or referensi_mobilejkn_bpjs.norm " +
+                    "like ? or referensi_mobilejkn_bpjs.pasien.nm_pasien like ? or referensi_mobilejkn_bpjs.nohp like ? or referensi_mobilejkn_bpjs.nomorkartu like ? or referensi_mobilejkn_bpjs.nik like ? " +
+                    "or referensi_mobilejkn_bpjs.jeniskunjungan like ? or referensi_mobilejkn_bpjs.nomorreferensi like ? or referensi_mobilejkn_bpjs.status like ? or referensi_mobilejkn_bpjs.kodedokter " +
+                    "like ? or referensi_mobilejkn_bpjs.kodepoli like ? or ifnull(maping_dokter_dpjpvclaim.nm_dokter_bpjs, '') like ? or ifnull(maping_poli_bpjs.nm_poli_bpjs, '') like ?) ") +
+                    "group by referensi_mobilejkn_bpjs.nobooking order by referensi_mobilejkn_bpjs.tanggalperiksa, referensi_mobilejkn_bpjs.nobooking");
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
