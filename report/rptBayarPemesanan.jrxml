@@ -465,7 +465,7 @@ and pemesanan.kode_suplier=datasuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+				<text><![CDATA[dr. INDRIANI LIM, MARS]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="652" y="94" width="145" height="11" uuid="2e086443-10e2-481f-954b-fa5146515685">
@@ -475,7 +475,7 @@ and pemesanan.kode_suplier=datasuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Plt. DIREKTUR " + $P{namars}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

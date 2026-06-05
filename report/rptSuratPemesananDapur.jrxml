@@ -349,7 +349,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+				<text><![CDATA[dr. INDRIANI LIM, MARS]]></text>
 			</staticText>
 			<textField>
 				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="264" y="236" width="145" height="10" forecolor="#000000" backcolor="#F0F0DC" uuid="593bbc8a-440c-4f15-adb4-45bfe231f144"/>
