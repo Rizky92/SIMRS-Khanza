@@ -812,20 +812,23 @@ public final class DlgJnsPerawatanRadiologi extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptTarifRad.jasper", "report", "::[ Data Tarif Radiologi ]::", param, "select jns_perawatan_radiologi.kd_jenis_prw, jns_perawatan_radiologi.nm_perawatan, " +
-                            "jns_perawatan_radiologi.bagian_rs, jns_perawatan_radiologi.bhp, jns_perawatan_radiologi.tarif_perujuk, jns_perawatan_radiologi.tarif_tindakan_dokter, " +
-                            "jns_perawatan_radiologi.tarif_tindakan_petugas, jns_perawatan_radiologi.kso, jns_perawatan_radiologi.menejemen, jns_perawatan_radiologi.total_byr, " +
-                            "penjab.png_jawab from jns_perawatan_radiologi inner join penjab on penjab.kd_pj = jns_perawatan_radiologi.kd_pj where jns_perawatan_radiologi.status = '1' " +
-                            "and (if(trim(?) = '', 1 = 1, jns_perawatan_radiologi.kd_jenis_prw like ? or jns_perawatan_radiologi.nm_perawatan like ? or jns_perawatan_radiologi.kelas like ? " +
-                            "or penjab.png_jawab like ?)) order by jns_perawatan_radiologi.kd_jenis_prw", TCari.getText().trim(), "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptTarifRad.jasper","report","::[ Data Tarif Radiologi ]::",
+                            "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.bagian_rs,"+
+                            "jns_perawatan_radiologi.bhp,jns_perawatan_radiologi.tarif_perujuk,jns_perawatan_radiologi.tarif_tindakan_dokter,jns_perawatan_radiologi.tarif_tindakan_petugas,"+
+                            "jns_perawatan_radiologi.kso,jns_perawatan_radiologi.menejemen,jns_perawatan_radiologi.total_byr,penjab.png_jawab "+
+                            "from jns_perawatan_radiologi inner join penjab on penjab.kd_pj=jns_perawatan_radiologi.kd_pj where "+
+                            " jns_perawatan_radiologi.status='1' and jns_perawatan_radiologi.kd_jenis_prw like '%"+TCari.getText().trim()+"%' or "+
+                            " jns_perawatan_radiologi.status='1' and jns_perawatan_radiologi.nm_perawatan like '%"+TCari.getText().trim()+"%' or "+
+                            " jns_perawatan_radiologi.status='1' and jns_perawatan_radiologi.kelas like '%"+TCari.getText().trim()+"%' or "+
+                            " jns_perawatan_radiologi.status='1' and penjab.png_jawab like '%"+TCari.getText().trim()+"%' "+
+                            "order by jns_perawatan_radiologi.kd_jenis_prw",param);
                         break;
                 }
             } catch (Exception e) {

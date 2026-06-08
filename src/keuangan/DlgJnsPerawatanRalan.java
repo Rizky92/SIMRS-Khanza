@@ -1050,21 +1050,23 @@ public final class DlgJnsPerawatanRalan extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptJnsPrw.jasper", "report", "::[ Data Tarif Perawatan ]::", param, "select jns_perawatan.kd_jenis_prw, jns_perawatan.nm_perawatan, " +
-                            "kategori_perawatan.nm_kategori, jns_perawatan.material, jns_perawatan.bhp, jns_perawatan.tarif_tindakandr, jns_perawatan.tarif_tindakanpr, jns_perawatan.kso, " +
-                            "jns_perawatan.menejemen, jns_perawatan.total_byrdr, jns_perawatan.total_byrpr, jns_perawatan.total_byrdrpr, penjab.png_jawab, poliklinik.nm_poli from " +
-                            "jns_perawatan inner join kategori_perawatan on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori inner join penjab on penjab.kd_pj = jns_perawatan.kd_pj " +
-                            "inner join poliklinik on poliklinik.kd_poli = jns_perawatan.kd_poli where jns_perawatan.status = '1' and (if(trim(?) = '', 1 = 1, jns_perawatan.kd_jenis_prw like ? " +
-                            "or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ? or penjab.png_jawab like ? or poliklinik.nm_poli like ?)) order by jns_perawatan.kd_jenis_prw",
-                            TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptJnsPrw.jasper","report","::[ Data Tarif Perawatan ]::",
+                           "select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
+                           "jns_perawatan.material,jns_perawatan.bhp,jns_perawatan.tarif_tindakandr,jns_perawatan.tarif_tindakanpr,jns_perawatan.kso,jns_perawatan.menejemen,"+
+                           "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,penjab.png_jawab,poliklinik.nm_poli "+
+                           "from jns_perawatan inner join kategori_perawatan on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori "+
+                           "inner join penjab on penjab.kd_pj=jns_perawatan.kd_pj "+
+                           "inner join poliklinik on poliklinik.kd_poli=jns_perawatan.kd_poli "+
+                           "where jns_perawatan.status='1' "+(TCari.getText().trim().equals("")?"":"and (jns_perawatan.kd_jenis_prw like '%"+TCari.getText().trim()+"%' "+
+                           "or jns_perawatan.nm_perawatan like '%"+TCari.getText().trim()+"%' or kategori_perawatan.nm_kategori like '%"+TCari.getText().trim()+"%' "+
+                           "or penjab.png_jawab like '%"+TCari.getText().trim()+"%' or poliklinik.nm_poli like '%"+TCari.getText().trim()+"%')")+"order by jns_perawatan.kd_jenis_prw",param);
                         break;
                 }
             } catch (Exception e) {

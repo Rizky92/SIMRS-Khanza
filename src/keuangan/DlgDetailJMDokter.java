@@ -559,16 +559,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("JMRanapDokter.html", "Detail J.M. Dokter ", tbDokter, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+                            Valid.exportHtmlSmc("JMRanapDokter.html", "Detail J.M. Dokter ", tbDokter);
                             break;
                         case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("JMRanapDokter.wps", "Detail J.M. Dokter ", tbDokter, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+                            Valid.exportWPSSmc("JMRanapDokter.wps", "Detail J.M. Dokter ", tbDokter);
                             break;
                         case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("JMRanapDokter.csv", tbDokter, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+                            Valid.exportCSVSmc("JMRanapDokter.csv", tbDokter);
                             break;
                         case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("JMRanapDokter.xlsx", tbDokter, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+                            Valid.exportXlsxSmc("JMRanapDokter.xlsx", tbDokter);
                             break;
                         case "Laporan 5 (Jasper)":
                             Sequel.deleteTemporary();

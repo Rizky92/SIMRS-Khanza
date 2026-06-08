@@ -1370,23 +1370,27 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptPaketOperasi.jasper", "report", "::[ Data Paket Operasi ]::", param, "select paket_operasi.kode_paket, paket_operasi.nm_perawatan, " +
-                            "(paket_operasi.operator1 + paket_operasi.operator2 + paket_operasi.operator3 + paket_operasi.asisten_operator1 + paket_operasi.asisten_operator2 + " +
-                            "paket_operasi.asisten_operator3 + paket_operasi.instrumen + paket_operasi.dokter_anak + paket_operasi.perawaat_resusitas + paket_operasi.alat + " +
-                            "paket_operasi.dokter_anestesi + paket_operasi.asisten_anestesi + paket_operasi.asisten_anestesi2 + paket_operasi.bidan + paket_operasi.bidan2 + " +
-                            "paket_operasi.bidan3 + paket_operasi.perawat_luar + paket_operasi.sewa_ok + paket_operasi.akomodasi + paket_operasi.bagian_rs + paket_operasi.omloop + " +
-                            "paket_operasi.omloop2 + paket_operasi.omloop3 + paket_operasi.omloop4 + paket_operasi.omloop5 + paket_operasi.sarpras + paket_operasi.dokter_pjanak + " +
-                            "paket_operasi.dokter_umum) as jumlah from paket_operasi inner join penjab on penjab.kd_pj = paket_operasi.kd_pj where paket_operasi.status = '1' and " +
-                            "(if(trim(?) = '', 1 = 1, paket_operasi.kode_paket like ? or paket_operasi.nm_perawatan like ? or paket_operasi.kelas like ? or penjab.png_jawab like ?)) " +
-                            "order by paket_operasi.kode_paket", TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPaketOperasi.jasper","report","::[ Data Paket Operasi ]::",
+                               "select paket_operasi.kode_paket, paket_operasi.nm_perawatan,(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+"+
+                                "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.asisten_operator3+paket_operasi.instrumen+"+
+                                "paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+"+
+                                "paket_operasi.alat+paket_operasi.dokter_anestesi+paket_operasi.asisten_anestesi+paket_operasi.asisten_anestesi2+"+
+                                "paket_operasi.bidan+paket_operasi.bidan2+paket_operasi.bidan3+paket_operasi.perawat_luar+"+
+                                "paket_operasi.sewa_ok+paket_operasi.akomodasi+paket_operasi.bagian_rs+"+
+                                "paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+paket_operasi.omloop4+paket_operasi.omloop5+"+
+                                "paket_operasi.sarpras+paket_operasi.dokter_pjanak+paket_operasi.dokter_umum) as jumlah "+
+                               "from paket_operasi inner join penjab on penjab.kd_pj=paket_operasi.kd_pj "+
+                               "where paket_operasi.status='1' and paket_operasi.kode_paket like '%"+TCari.getText()+"%' or "+
+                               "paket_operasi.status='1' and paket_operasi.nm_perawatan like '%"+TCari.getText()+"%' or "+
+                               "paket_operasi.status='1' and paket_operasi.kelas like '%"+TCari.getText()+"%' or "+
+                               "paket_operasi.status='1' and penjab.png_jawab like '%"+TCari.getText()+"%' order by paket_operasi.kode_paket ",param);
                         break;
                 }
             } catch (Exception e) {
