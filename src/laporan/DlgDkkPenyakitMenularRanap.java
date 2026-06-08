@@ -319,16 +319,32 @@ public final class DlgDkkPenyakitMenularRanap extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("DkkPenyakitMenularRanap.html", "Penyakit Menular Rawat Inap", tbBangsal);
+                        if (TabRawat.getSelectedIndex() == 0) {
+                            Valid.exportHtmlSmc("DkkPenyakitMenularRanap.html", "Penyakit Menular Rawat Inap", tbBangsal);
+                        } else if (TabRawat.getSelectedIndex() == 1) {
+                            Valid.exportHtmlSmc("DkkPenyakitMenularRanap.html", "Penyakit Menular Rawat Inap", tbBangsal2);
+                        }
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("DkkPenyakitMenularRanap.wps", "Penyakit Menular Rawat Inap", tbBangsal);
+                        if (TabRawat.getSelectedIndex() == 0) {
+                            Valid.exportWPSSmc("DkkPenyakitMenularRanap.wps", "Penyakit Menular Rawat Inap", tbBangsal);
+                        } else if (TabRawat.getSelectedIndex() == 1) {
+                            Valid.exportWPSSmc("DkkPenyakitMenularRanap.wps", "Penyakit Menular Rawat Inap", tbBangsal2);
+                        }
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("DkkPenyakitMenularRanap.csv", tbBangsal);
+                        if (TabRawat.getSelectedIndex() == 0) {
+                            Valid.exportCSVSmc("DkkPenyakitMenularRanap.csv", tbBangsal);
+                        } else if (TabRawat.getSelectedIndex() == 1) {
+                            Valid.exportCSVSmc("DkkPenyakitMenularRanap.csv", tbBangsal2);
+                        }
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("DkkPenyakitMenularRanap.xlsx", tbBangsal);
+                        if (TabRawat.getSelectedIndex() == 0) {
+                            Valid.exportXlsxSmc("DkkPenyakitMenularRanap.xlsx", tbBangsal);
+                        } else if (TabRawat.getSelectedIndex() == 1) {
+                            Valid.exportXlsxSmc("DkkPenyakitMenularRanap.xlsx", tbBangsal2);
+                        }
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
