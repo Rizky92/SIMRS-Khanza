@@ -541,24 +541,35 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("IPSRSNilaiPenerimaanVendorNonMedisPerBulan.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), Valid.SetAngka((Double) tabMode.getValueAt(i, 2)),
-                                Valid.SetAngka((Double) tabMode.getValueAt(i, 3)), Valid.SetAngka((Double) tabMode.getValueAt(i, 4)), Valid.SetAngka((Double) tabMode.getValueAt(i, 5)),
-                                Valid.SetAngka((Double) tabMode.getValueAt(i, 6)), Valid.SetAngka((Double) tabMode.getValueAt(i, 7)), Valid.SetAngka((Double) tabMode.getValueAt(i, 8)),
-                                Valid.SetAngka((Double) tabMode.getValueAt(i, 9)), Valid.SetAngka((Double) tabMode.getValueAt(i, 10)), Valid.SetAngka((Double) tabMode.getValueAt(i, 11)),
-                                Valid.SetAngka((Double) tabMode.getValueAt(i, 12)), Valid.SetAngka((Double) tabMode.getValueAt(i, 13)), Valid.SetAngka((Double) tabMode.getValueAt(i, 14)));
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,2).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
                         }
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptIPSRSNilaiPenerimaanVendorNonMedisPerBulan.jasper", "report", "::[ Nilai Penerimaan Vendor Non Medis Per Bulan ]::", param);
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptIPSRSNilaiPenerimaanVendorNonMedisPerBulan.jasper","report","::[ Nilai Penerimaan Vendor Non Medis Per Bulan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

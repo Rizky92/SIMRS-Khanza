@@ -869,31 +869,38 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("tanggal1", Valid.SetTgl(TglBeli1.getSelectedItem() + ""));
-                        param.put("tanggal2", Valid.SetTgl(TglBeli2.getSelectedItem() + ""));
-                        param.put("parameter", "%" + TCari.getText().trim() + "%");
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptRingkasanPenerimaanNonMedis.jasper", "report", "::[ Laporan Ringkasan Penerimaan Barang Non Medis ]::", param, "select ipsrsdetailpesan.kode_brng, " +
-                            "ipsrsbarang.nama_brng, ipsrsjenisbarang.nm_jenis as namajenis, ipsrsdetailpesan.kode_sat, kodesatuan.satuan, sum(ipsrsdetailpesan.jumlah) as jumlah, " +
-                            "sum(ipsrsdetailpesan.total) as total from ipsrspemesanan inner join ipsrssuplier on ipsrspemesanan.kode_suplier = ipsrssuplier.kode_suplier inner join " +
-                            "petugas on ipsrspemesanan.nip = petugas.nip inner join ipsrsdetailpesan on ipsrspemesanan.no_faktur = ipsrsdetailpesan.no_faktur inner join ipsrsbarang " +
-                            "on ipsrsdetailpesan.kode_brng = ipsrsbarang.kode_brng inner join kodesatuan on ipsrsdetailpesan.kode_sat = kodesatuan.kode_sat inner join ipsrsjenisbarang " +
-                            "on ipsrsbarang.jenis = ipsrsjenisbarang.kd_jenis where ipsrspemesanan.tgl_pesan between ? and ? and (if(trim(?) = '', 1 = 1, ipsrspemesanan.no_faktur like ?)) " +
-                            "and (if(trim(?) = '', 1 = 1, ipsrspemesanan.kode_suplier like ?)) and (if(trim(?) = '', 1 = 1, ipsrspemesanan.nip like ?)) and (if(trim(?) = '', 1 = 1, " +
-                            "ipsrsbarang.jenis like ?)) and (if(trim(?) = '', 1 = 1, ipsrsdetailpesan.kode_brng like ?)) and (if(trim(?) = '', 1 = 1, ipsrspemesanan.no_faktur like ? " +
-                            "or ipsrspemesanan.kode_suplier like ? or ipsrssuplier.nama_suplier like ? or ipsrspemesanan.nip like ? or petugas.nama like ? or ipsrsdetailpesan.kode_brng " +
-                            "like ? or ipsrsbarang.nama_brng like ? or ipsrsdetailpesan.kode_sat like ? or ipsrspemesanan.no_order like ? or ipsrsjenisbarang.nm_jenis like ?)) group by " +
-                            "ipsrsdetailpesan.kode_brng " + order, Valid.getTglSmc(TglBeli1), Valid.getTglSmc(TglBeli2), NoFaktur.getText().trim(), NoFaktur.getText() + "%", kdsup.getText().trim(),
-                            kdsup.getText() + "%", kdptg.getText().trim(), kdptg.getText() + "%", kdjenis.getText().trim(), kdjenis.getText() + "%", kdbar.getText().trim(), kdbar.getText() + "%",
-                            TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptRingkasanPenerimaanNonMedis.jasper","report","::[ Laporan Ringkasan Penerimaan Barang Non Medis ]::",
+                                "select ipsrsdetailpesan.kode_brng,ipsrsbarang.nama_brng,ipsrsjenisbarang.nm_jenis as namajenis, "+
+                                "ipsrsdetailpesan.kode_sat,kodesatuan.satuan,sum(ipsrsdetailpesan.jumlah) as jumlah,sum(ipsrsdetailpesan.total) as total "+
+                                " from ipsrspemesanan inner join ipsrssuplier inner join petugas  "+
+                                " inner join ipsrsdetailpesan inner join ipsrsbarang inner join kodesatuan "+
+                                " inner join ipsrsjenisbarang "+
+                                " on ipsrsdetailpesan.kode_brng=ipsrsbarang.kode_brng "+
+                                " and ipsrsdetailpesan.kode_sat=kodesatuan.kode_sat "+
+                                " and ipsrspemesanan.no_faktur=ipsrsdetailpesan.no_faktur "+
+                                " and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier "+
+                                " and ipsrspemesanan.nip=petugas.nip and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis "+
+                                " where ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrspemesanan.no_faktur like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrspemesanan.kode_suplier like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrssuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrspemesanan.nip like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and petugas.nama like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrsdetailpesan.kode_brng like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrsbarang.nama_brng like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrsdetailpesan.kode_sat like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrspemesanan.no_order like '%"+TCari.getText()+"%' or "+
+                                " ipsrspemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrsjenisbarang.nm_jenis like '%"+TCari.getText()+"%' "+
+                                " group by ipsrsdetailpesan.kode_brng "+order,param);
                         break;
                 }
             } catch (Exception e) {

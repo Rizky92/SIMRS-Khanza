@@ -758,11 +758,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
                         bw.flush();
                     }
-
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                         "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
                     }, "Laporan 5 (Jasper)");
-
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("PengeluaranIpsrs.html", "Transaksi Pengeluaran Barang Non Medis", tbDokter, 0, 1, 2, 3, 4, 5, 6, 8, 9);
@@ -777,24 +775,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             Valid.exportXlsxSmc("PengeluaranIpsrs.xlsx", tbDokter, 0, 1, 2, 3, 4, 5, 6, 8, 9);
                             break;
                         case "Laporan 5 (Jasper)":
-                            Sequel.deleteTemporary();
-                            int i = 0;
-                            for (; i < tabMode.getRowCount(); i++) {
-                                Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
-                                    (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6),
-                                    (String) tabMode.getValueAt(i, 8));
+                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                            int row=tabMode.getRowCount();
+                            for(i=0;i<row;i++){
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                                tabMode.getValueAt(i,0).toString()+"','"+
+                                                tabMode.getValueAt(i,1).toString()+"','"+
+                                                tabMode.getValueAt(i,2).toString()+"','"+
+                                                tabMode.getValueAt(i,3).toString()+"','"+
+                                                tabMode.getValueAt(i,4).toString()+"','"+
+                                                tabMode.getValueAt(i,5).toString()+"','"+
+                                                tabMode.getValueAt(i,6).toString()+"','"+
+                                                tabMode.getValueAt(i,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pengeluaran");
                             }
-                            Sequel.temporary(String.valueOf(++i));
-                            Sequel.temporary(String.valueOf(++i), "Jml.Total :", "", "", "", "", "", "", LTotal.getText());
+                            i++;
+                            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+                            i++;
+                            Sequel.menyimpan("temporary","'"+i+"','Jml.Total :','','','','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+
                             Map<String, Object> param = new HashMap<>();
-                            param.put("namars", akses.getnamars());
-                            param.put("alamatrs", akses.getalamatrs());
-                            param.put("kotars", akses.getkabupatenrs());
-                            param.put("propinsirs", akses.getpropinsirs());
-                            param.put("kontakrs", akses.getkontakrs());
-                            param.put("emailrs", akses.getemailrs());
-                            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                            Valid.reportTempSmc("rptPengeluaranIpsrs.jasper", "report", "::[ Transaksi Pengeluaran Barang Non Medis ]::", param);
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReportqry("rptPengeluaranIpsrs.jasper","report","::[ Transaksi Pengeluaran Barang ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                     }
                 } catch (Exception e) {
@@ -813,11 +820,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
                         bw.flush();
                     }
-
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                         "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
                     }, "Laporan 5 (Jasper)");
-
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("PengeluaranIpsrs2.html", "Detail Transaksi Pengeluaran Barang Non Medis", tbDokter2);
@@ -833,26 +838,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             break;
                         case "Laporan 5 (Jasper)":
                             Map<String, Object> param = new HashMap<>();
-                            param.put("namars", akses.getnamars());
-                            param.put("alamatrs", akses.getalamatrs());
-                            param.put("kotars", akses.getkabupatenrs());
-                            param.put("propinsirs", akses.getpropinsirs());
-                            param.put("kontakrs", akses.getkontakrs());
-                            param.put("emailrs", akses.getemailrs());
-                            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                            Valid.reportSmc("rptPengeluaranIpsrs2.jasper", "report", "::[ Detail Transaksi Pengeluaran Barang Non Medis ]::", param, "select ipsrspengeluaran.no_keluar, " +
-                                "ipsrspengeluaran.tanggal, ipsrspengeluaran.nip, ipsrspengeluaran.keterangan, petugas.nama, ipsrsdetailpengeluaran.kode_brng, ipsrsbarang.nama_brng, " +
-                                "kodesatuan.satuan, ipsrsdetailpengeluaran.jumlah, ipsrsdetailpengeluaran.harga, ipsrsdetailpengeluaran.total from ipsrspengeluaran inner join " +
-                                "ipsrsdetailpengeluaran on ipsrspengeluaran.no_keluar = ipsrsdetailpengeluaran.no_keluar inner join petugas on ipsrspengeluaran.nip = petugas.nip " +
-                                "inner join ipsrsbarang on ipsrsdetailpengeluaran.kode_brng = ipsrsbarang.kode_brng inner join kodesatuan on ipsrsdetailpengeluaran.kode_sat = kodesatuan.kode_sat " +
-                                "where ipsrspengeluaran.tanggal between ? and ? and (if(trim(?) = '', 1 = 1, ipsrspengeluaran.no_keluar like ?)) and (if(trim(?) = '', 1 = 1, ipsrspengeluaran.nip like ?)) " +
-                                "and (if(trim(?) = '', 1 = 1, ipsrsdetailpengeluaran.kode_brng like ?)) and (if(trim(?) = '', 1 = 1, ipsrsbarang.jenis like ?)) and (if(trim(?) = '', 1 = 1, " +
-                                "ipsrspengeluaran.no_keluar like ? or ipsrspengeluaran.keterangan like ? or ipsrspengeluaran.nip like ? or petugas.nama like ? or ipsrsbarang.jenis like ? or " +
-                                "ipsrsdetailpengeluaran.kode_brng like ? or ipsrsbarang.nama_brng like ? or ipsrsdetailpengeluaran.kode_sat like ? or kodesatuan.satuan like ?)) order by " +
-                                "ipsrspengeluaran.tanggal, ipsrspengeluaran.no_keluar", Valid.getTglSmc(TglBeli1), Valid.getTglSmc(TglBeli2), NoKeluar.getText().trim(), NoKeluar.getText().trim() + "%",
-                                kdptg.getText().trim(), kdptg.getText().trim() + "%", kdbar.getText().trim(), kdbar.getText().trim() + "%", kdjenis.getText().trim(), kdjenis.getText().trim() + "%",
-                                TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                                "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReportqry("rptPengeluaranIpsrs2.jasper","report","::[ Transaksi Pengeluaran Barang ]::",
+                                "select ipsrspengeluaran.no_keluar,ipsrspengeluaran.tanggal,ipsrspengeluaran.nip,"+
+                                "ipsrspengeluaran.keterangan,petugas.nama,ipsrsdetailpengeluaran.kode_brng,"+
+                                "ipsrsbarang.nama_brng,kodesatuan.satuan,ipsrsdetailpengeluaran.jumlah,"+
+                                "ipsrsdetailpengeluaran.harga,ipsrsdetailpengeluaran.total from ipsrspengeluaran "+
+                                "inner join ipsrsdetailpengeluaran on ipsrspengeluaran.no_keluar=ipsrsdetailpengeluaran.no_keluar "+
+                                "inner join petugas on ipsrspengeluaran.nip=petugas.nip "+
+                                "inner join ipsrsbarang on ipsrsdetailpengeluaran.kode_brng=ipsrsbarang.kode_brng "+
+                                "inner join kodesatuan on ipsrsdetailpengeluaran.kode_sat=kodesatuan.kode_sat "+
+                                "where ipsrspengeluaran.tanggal between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and ipsrspengeluaran.no_keluar like '%"+NoKeluar.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and ipsrsbarang.jenis like '%"+kdjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and "+
+                                "(ipsrspengeluaran.no_keluar like '%"+TCari.getText()+"%' or ipsrspengeluaran.keterangan like '%"+TCari.getText()+"%' or ipsrspengeluaran.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%' or ipsrsbarang.jenis like '%"+TCari.getText()+"%' or ipsrsdetailpengeluaran.kode_brng like '%"+TCari.getText()+"%' or "+
+                                "ipsrsbarang.nama_brng like '%"+TCari.getText()+"%' or ipsrsdetailpengeluaran.kode_sat like '%"+TCari.getText()+"%' or kodesatuan.satuan like '%"+TCari.getText()+"%') order by ipsrspengeluaran.tanggal,ipsrspengeluaran.no_keluar ",param);
                             break;
                     }
                 } catch (Exception e) {

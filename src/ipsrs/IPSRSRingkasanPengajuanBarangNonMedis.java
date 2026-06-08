@@ -877,30 +877,34 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("tanggal1", Valid.SetTgl(Tanggal1.getSelectedItem() + ""));
-                        param.put("tanggal2", Valid.SetTgl(Tanggal2.getSelectedItem() + ""));
-                        param.put("parameter", "%" + TCari.getText().trim() + "%");
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptRingkasanPengajuanNonMedis.jasper", "report", "::[ Laporan Ringkasan Pengajuan Barang Non Medis ]::", param, "select detail_pengajuan_barang_nonmedis.kode_brng, " +
-                            "ipsrsbarang.nama_brng, detail_pengajuan_barang_nonmedis.kode_sat, kodesatuan.satuan, ipsrsjenisbarang.nm_jenis as namajenis, sum(detail_pengajuan_barang_nonmedis.jumlah) as " +
-                            "jumlah, sum(detail_pengajuan_barang_nonmedis.total) as total from pengajuan_barang_nonmedis inner join pegawai on pengajuan_barang_nonmedis.nip = pegawai.nik inner join " +
-                            "detail_pengajuan_barang_nonmedis on pengajuan_barang_nonmedis.no_pengajuan = detail_pengajuan_barang_nonmedis.no_pengajuan inner join ipsrsbarang on " +
-                            "detail_pengajuan_barang_nonmedis.kode_brng = ipsrsbarang.kode_brng inner join kodesatuan on ipsrsbarang.kode_sat = kodesatuan.kode_sat inner join ipsrsjenisbarang on " +
-                            "ipsrsbarang.jenis = ipsrsjenisbarang.kd_jenis where pengajuan_barang_nonmedis.tanggal between ? and ? and (if(trim(?) = '', 1 = 1, pengajuan_barang_nonmedis.no_pengajuan " +
-                            "like ?)) and (if(trim(?) = 'Semua', 1 = 1, pengajuan_barang_nonmedis.status = ?)) and (if(trim(?) = '', 1 = 1, pengajuan_barang_nonmedis.nip like ?)) and " +
-                            "(if(trim(?) = '', 1 = 1, ipsrsbarang.kd_jenis like ?)) and (if(trim(?) = '', 1 = 1, detail_pengajuan_barang_nonmedis.kode_brng like ?)) and (if(trim(?) = '', " +
-                            "1 = 1, pengajuan_barang_nonmedis.no_pengajuan like ? or pengajuan_barang_nonmedis.nip like ? or pegawai.nama like ? or ipsrsjenisbarang.nm_jenis like ? or " +
-                            "detail_pengajuan_barang_nonmedis.kode_brng like ? or ipsrsbarang.nama_brng like ? or detail_pengajuan_barang_nonmedis.kode_sat like ? or kodesatuan.satuan like ?)) " +
-                            "group by detail_pengajuan_barang_nonmedis.kode_brng " + order, Valid.getTglSmc(Tanggal1), Valid.getTglSmc(Tanggal2), NoPermintaan.getText().trim(), NoPermintaan.getText() + "%",
-                            Status.getSelectedItem().toString(), Status.getSelectedItem().toString(), KdPeg.getText().trim(), KdPeg.getText() + "%", kdjenis.getText().trim(), kdjenis.getText() + "%",
-                            kdbar.getText().trim(), kdbar.getText() + "%", TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("tanggal1",Valid.SetTgl(Tanggal1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(Tanggal2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptRingkasanPengajuanNonMedis.jasper","report","::[ Laporan Ringkasan Pengajuan Barang Non Medis ]::",
+                                "select detail_pengajuan_barang_nonmedis.kode_brng,ipsrsbarang.nama_brng,detail_pengajuan_barang_nonmedis.kode_sat,kodesatuan.satuan,ipsrsjenisbarang.nm_jenis as namajenis,"+
+                                "sum(detail_pengajuan_barang_nonmedis.jumlah) as jumlah,sum(detail_pengajuan_barang_nonmedis.total) as total "+
+                                "from pengajuan_barang_nonmedis inner join pegawai inner join kodesatuan inner join detail_pengajuan_barang_nonmedis "+
+                                "inner join ipsrsjenisbarang inner join ipsrsbarang on detail_pengajuan_barang_nonmedis.kode_brng=ipsrsbarang.kode_brng "+
+                                " and ipsrsbarang.kode_sat=kodesatuan.kode_sat "+
+                                " and pengajuan_barang_nonmedis.no_pengajuan=detail_pengajuan_barang_nonmedis.no_pengajuan "+
+                                " and pengajuan_barang_nonmedis.nip=pegawai.nik "+
+                                " and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis "+
+                                " where pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and pengajuan_barang_nonmedis.no_pengajuan like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and pengajuan_barang_nonmedis.nip like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and pegawai.nama like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrsjenisbarang.nm_jenis like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_pengajuan_barang_nonmedis.kode_brng like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and ipsrsbarang.nama_brng like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_pengajuan_barang_nonmedis.kode_sat like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_nonmedis.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_nonmedis.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_nonmedis.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText()+"%' "+
+                                " group by detail_pengajuan_barang_nonmedis.kode_brng "+order,param);
                         break;
                 }
             } catch (Exception e) {

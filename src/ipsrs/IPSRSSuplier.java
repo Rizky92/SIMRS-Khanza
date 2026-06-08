@@ -658,11 +658,14 @@ public class IPSRSSuplier extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptSuplier.jasper", "report", "::[ Data Suplier ]::", param, "select ipsrssuplier.kode_suplier, ipsrssuplier.nama_suplier, ipsrssuplier.alamat, ipsrssuplier.kota, " +
-                            "ipsrssuplier.no_telp, ipsrssuplier.nama_bank, ipsrssuplier.rekening from ipsrssuplier where (if(trim(?) = '', 1 = 1, ipsrssuplier.kode_suplier like ? or ipsrssuplier.nama_suplier " +
-                            "like ? or ipsrssuplier.alamat like ? or ipsrssuplier.kota like ? or ipsrssuplier.nama_bank like ? or ipsrssuplier.no_telp like ?)) order by ipsrssuplier.kode_suplier",
-                            TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        Valid.MyReportqry("rptSuplier.jasper","report","::[ Data Suplier ]::","select ipsrssuplier.kode_suplier, ipsrssuplier.nama_suplier, "+
+                                " ipsrssuplier.alamat,ipsrssuplier.kota, ipsrssuplier.no_telp,ipsrssuplier.nama_bank,ipsrssuplier.rekening from ipsrssuplier "+
+                                " where ipsrssuplier.kode_suplier like '%"+TCari.getText().trim()+"%' or "+
+                                " ipsrssuplier.nama_suplier like '%"+TCari.getText().trim()+"%' or "+
+                                " ipsrssuplier.alamat like '%"+TCari.getText().trim()+"%' or "+
+                                " ipsrssuplier.kota like '%"+TCari.getText().trim()+"%' or "+
+                                " ipsrssuplier.nama_bank like '%"+TCari.getText().trim()+"%' or "+
+                                " ipsrssuplier.no_telp like '%"+TCari.getText().trim()+"%' order by ipsrssuplier.kode_suplier",param);
                         break;
                 }
             } catch (Exception e) {

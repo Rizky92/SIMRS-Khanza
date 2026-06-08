@@ -395,18 +395,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("barang", "%" + nmbarang.getText().trim() + "%");
-                        param.put("tanggal1", Valid.SetTgl(Tgl1.getSelectedItem() + ""));
-                        param.put("tanggal2", Valid.SetTgl(Tgl2.getSelectedItem() + ""));
-                        param.put("parameter", "%" + TCari.getText().trim() + "%");
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptRekapPermintaanNonMedis.jasper", "report", "::[ Laporan Ringkasan Permintaan Barang Non Medis ]::", param);
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("barang","%"+nmbarang.getText().trim()+"%");
+                        param.put("tanggal1",Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReport("rptRekapPermintaanNonMedis.jasper",param,"::[ Laporan Ringkasan Permintaan Barang Non Medis ]::");
                         break;
                 }
             } catch (Exception e) {

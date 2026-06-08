@@ -715,18 +715,21 @@ public final class IPSRSBarang extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptBarangIpsrs.jasper", "report", "::[ Data Barang Non Medis, Radiologi, Loundry, ATK, IPSRS ]::", param, "select ipsrsbarang.kode_brng, ipsrsbarang.nama_brng, " +
-                            "kodesatuan.satuan, ipsrsjenisbarang.nm_jenis, ipsrsbarang.stok, ipsrsbarang.harga from ipsrsbarang inner join kodesatuan on ipsrsbarang.kode_sat = kodesatuan.kode_sat " +
-                            "inner join ipsrsjenisbarang on ipsrsbarang.jenis = ipsrsjenisbarang.kd_jenis where ipsrsbarang.status = '1' and (if(trim(?) = '', 1 = 1, ipsrsbarang.kode_brng like ? " +
-                            "or ipsrsbarang.nama_brng like ? or kodesatuan.satuan like ? or ipsrsjenisbarang.nm_jenis like ?)) order by ipsrsbarang.kode_brng", TCari.getText().trim(),
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptBarangIpsrs.jasper","report","::[ Data Barang Non Medis, Radiologi, Loundry, ATK, IPSRS ]::",
+                            "select ipsrsbarang.kode_brng, ipsrsbarang.nama_brng, kodesatuan.satuan, ipsrsjenisbarang.nm_jenis, "+
+                            "ipsrsbarang.stok,ipsrsbarang.harga from ipsrsbarang inner join kodesatuan inner join ipsrsjenisbarang "+
+                            "on ipsrsbarang.kode_sat=kodesatuan.kode_sat and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis "+
+                            "where ipsrsbarang.status='1' and ipsrsbarang.kode_brng like '%"+TCari.getText().trim()+"%' "+
+                            "or ipsrsbarang.status='1' and ipsrsbarang.nama_brng like '%"+TCari.getText().trim()+"%' "+
+                            "or ipsrsbarang.status='1' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
+                            "or ipsrsbarang.status='1' and ipsrsjenisbarang.nm_jenis like '%"+TCari.getText().trim()+"%' order by ipsrsbarang.kode_brng",param);
                         break;
                 }
             } catch (Exception e) {
