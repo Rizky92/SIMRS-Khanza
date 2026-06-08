@@ -662,34 +662,34 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        Map<String, Object> param = new HashMap<>();
-        param.put("namars",akses.getnamars());
-        param.put("alamatrs",akses.getalamatrs());
-        param.put("kotars",akses.getkabupatenrs());
-        param.put("propinsirs",akses.getpropinsirs());
-        param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs());
-        param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
-        param.put("lama",lama);
-        param.put("baru",baru);
-        param.put("total",(lama+baru));
-        param.put("laki",laki);
-        param.put("perempuan",per);
-        param.put("tanggal",Tgl2.getDate());
-        if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+            param.put("lama",lama);
+            param.put("baru",baru);
+            param.put("total",(lama+baru));
+            param.put("laki",laki);
+            param.put("perempuan",per);
+            param.put("tanggal",Tgl2.getDate());
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            if(TabRawat.getSelectedIndex()==0){
+                if(tabMode.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                    //TCari.requestFocus();
+                }else if(tabMode.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("KunjunganRanap.html", "Laporan Kunjungan Rawat Inap", tbBangsal);
@@ -707,46 +707,31 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode.getRowCount();r++){
                                 if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
-                                    try {
-                                        Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tabMode.getValueAt(r,0).toString()+"','"+
-                                                    tabMode.getValueAt(r,1).toString()+"','"+
-                                                    tabMode.getValueAt(r,2).toString()+"','"+
-                                                    tabMode.getValueAt(r,3).toString()+"','"+
-                                                    tabMode.getValueAt(r,4).toString()+"','"+
-                                                    tabMode.getValueAt(r,5).toString()+"','"+
-                                                    tabMode.getValueAt(r,6).toString()+"','"+
-                                                    tabMode.getValueAt(r,7).toString()+"','"+
-                                                    tabMode.getValueAt(r,8).toString()+"','"+
-                                                    tabMode.getValueAt(r,9).toString()+"','"+
-                                                    tabMode.getValueAt(r,10).toString()+"','"+
-                                                    tabMode.getValueAt(r,11).toString()+"','"+
-                                                    tabMode.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-                                    } catch (Exception e) {
-                                    }
+                                    Sequel.menyimpan("temporary","'"+r+"','"+
+                                                tabMode.getValueAt(r,0).toString()+"','"+
+                                                tabMode.getValueAt(r,1).toString()+"','"+
+                                                tabMode.getValueAt(r,2).toString()+"','"+
+                                                tabMode.getValueAt(r,3).toString()+"','"+
+                                                tabMode.getValueAt(r,4).toString()+"','"+
+                                                tabMode.getValueAt(r,5).toString()+"','"+
+                                                tabMode.getValueAt(r,6).toString()+"','"+
+                                                tabMode.getValueAt(r,7).toString()+"','"+
+                                                tabMode.getValueAt(r,8).toString()+"','"+
+                                                tabMode.getValueAt(r,9).toString()+"','"+
+                                                tabMode.getValueAt(r,10).toString()+"','"+
+                                                tabMode.getValueAt(r,11).toString()+"','"+
+                                                tabMode.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                             }
                             Valid.MyReportqry("rptKunjunganRanap.jasper","report","::[ Laporan Kunjungan Rawat Inap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                     }
-                }catch(Exception e){
-                    System.out.println("Notifikasi : "+e);
                 }
-            }
-        }else if(TabRawat.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabMode2.getRowCount()!=0){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+            }else if(TabRawat.getSelectedIndex()==1){
+                if(tabMode2.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                    //TCari.requestFocus();
+                }else if(tabMode2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("KunjunganRanap.html", "Laporan Kunjungan Rawat Inap", tbBangsal2);
@@ -764,34 +749,31 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             for(int r=0;r<tabMode2.getRowCount();r++){
                                 if(!tbBangsal2.getValueAt(r,0).toString().contains(">>")){
-                                    try{
-                                        Sequel.menyimpan("temporary","'"+r+"','"+
-                                                    tabMode2.getValueAt(r,0).toString()+"','"+
-                                                    tabMode2.getValueAt(r,1).toString()+"','"+
-                                                    tabMode2.getValueAt(r,2).toString()+"','"+
-                                                    tabMode2.getValueAt(r,3).toString()+"','"+
-                                                    tabMode2.getValueAt(r,4).toString()+"','"+
-                                                    tabMode2.getValueAt(r,5).toString()+"','"+
-                                                    tabMode2.getValueAt(r,6).toString()+"','"+
-                                                    tabMode2.getValueAt(r,7).toString()+"','"+
-                                                    tabMode2.getValueAt(r,8).toString()+"','"+
-                                                    tabMode2.getValueAt(r,9).toString()+"','"+
-                                                    tabMode2.getValueAt(r,10).toString()+"','"+
-                                                    tabMode2.getValueAt(r,11).toString()+"','"+
-                                                    tabMode2.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-                                    } catch (Exception e) {
-                                    }
+                                    Sequel.menyimpan("temporary","'"+r+"','"+
+                                                tabMode2.getValueAt(r,0).toString()+"','"+
+                                                tabMode2.getValueAt(r,1).toString()+"','"+
+                                                tabMode2.getValueAt(r,2).toString()+"','"+
+                                                tabMode2.getValueAt(r,3).toString()+"','"+
+                                                tabMode2.getValueAt(r,4).toString()+"','"+
+                                                tabMode2.getValueAt(r,5).toString()+"','"+
+                                                tabMode2.getValueAt(r,6).toString()+"','"+
+                                                tabMode2.getValueAt(r,7).toString()+"','"+
+                                                tabMode2.getValueAt(r,8).toString()+"','"+
+                                                tabMode2.getValueAt(r,9).toString()+"','"+
+                                                tabMode2.getValueAt(r,10).toString()+"','"+
+                                                tabMode2.getValueAt(r,11).toString()+"','"+
+                                                tabMode2.getValueAt(r,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                                 }
                             }
                             Valid.MyReportqry("rptKunjunganRanap.jasper","report","::[ Laporan Kunjungan Rawat Inap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
-                this.setCursor(Cursor.getDefaultCursor());
             }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

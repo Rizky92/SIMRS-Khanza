@@ -30,6 +30,8 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -462,182 +464,29 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-
-                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='105px'>No.Rawat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Tanggal</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='150px'>Dokter Dituju</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Nomer RM</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='150px'>Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Poliklinik</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='43px'>Status</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>SOAPI Ralan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>SOAPI Ranap</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Resume Ralan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Resume Ranap</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Triase IGD</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Askep IGD</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='54px'>ICD 10</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='54px'>ICD 9</td>"+
-                                "</tr>"
-                            );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,10)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,13)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,14)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
-
-                            f = new File("StatusDataRM.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='1408px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>REKAP STATUS DATA RM PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='1408px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
-
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportHtmlSmc("StatusDataRM.html", "REKAP STATUS DATA REKAM MEDIS PASIEN PERIODE " + Tgl1.getSelectedItem().toString() + " s.d. " + Tgl2.getSelectedItem().toString(), tbBangsal);
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='105px'>No.Rawat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Tanggal</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='150px'>Dokter Dituju</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Nomer RM</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='150px'>Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Poliklinik</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='43px'>Status</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>SOAPI Ralan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>SOAPI Ranap</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Resume Ralan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Resume Ranap</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Triase IGD</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'>Askep IGD</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='54px'>ICD 10</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='54px'>ICD 9</td>"+
-                                "</tr>"
-                            );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,10)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,13)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,14)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
-
-                            f = new File("StatusDataRM.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='1408px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>REKAP STATUS DATA RM PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='1408px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
-
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportWPSSmc("StatusDataRM.wps", "REKAP STATUS DATA REKAM MEDIS PASIEN PERIODE " + Tgl1.getSelectedItem().toString() + " s.d. " + Tgl2.getSelectedItem().toString(), tbBangsal);
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "\"No.Rawat\";\"Tanggal\";\"Dokter Dituju\";\"Nomer RM\";\"Pasien\";\"Poliklinik\";\"Status\";\"SOAPI Ralan\";\"SOAPI Ranap\";\"Resume Ralan\";\"Resume Ranap\";\"Triase IGD\";\"Askep IGD\";\"ICD 10\";\"ICD 9\"\n"
-                            );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";"+
-                                    "\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";"+
-                                    "\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\"\n"
-                                );
-                            }
-
-                            f = new File("StatusDataRM.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
-
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportCSVSmc("StatusDataRM.csv", tbBangsal);
                         break;
                     case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("StatusDataRM.xlsx",tbBangsal);
+                        Valid.exportXlsxSmc("StatusDataRM.xlsx", tbBangsal);
                         break;
                 }
             } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
