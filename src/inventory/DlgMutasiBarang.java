@@ -924,6 +924,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbDokterPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDokterPropertyChange
         if(this.isActive()==true){
+            int currentRow = tbDokter.getEditingRow();
+            int currentColumn = tbDokter.getEditingColumn();
+            if (tbDokter.getSelectedRow() != currentRow) {
+                tbDokter.changeSelection(currentRow, currentColumn, false, false);
+            }
             getData();
         }
     }//GEN-LAST:event_tbDokterPropertyChange
