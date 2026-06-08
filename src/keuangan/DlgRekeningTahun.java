@@ -629,21 +629,19 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("RekeningTahun.xlsx", tbKamar);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(
-                                String.valueOf(i + 1),
-                                tabMode.getValueAt(i, 0).toString(),
-                                tabMode.getValueAt(i, 1).toString(),
-                                tabMode.getValueAt(i, 2).toString(),
-                                tabMode.getValueAt(i, 3).toString(),
-                                tabMode.getValueAt(i, 4).toString(),
-                                tabMode.getValueAt(i, 5).toString(),
-                                tabMode.getValueAt(i, 6).toString(),
-                                tabMode.getValueAt(i, 7).toString(),
-                                tabMode.getValueAt(i, 8).toString()
-                            );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(int i=0;i<row;i++){
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','"+
+                                            tabMode.getValueAt(i,5).toString()+"','"+
+                                            tabMode.getValueAt(i,6).toString()+"','"+
+                                            tabMode.getValueAt(i,7).toString()+"','"+
+                                            tabMode.getValueAt(i,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekening Tahun");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -653,7 +651,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRekeningTahun.jasper", "report", "::[ Saldo Rekening ]::", param);
+                        Valid.MyReportqry("rptRekeningTahun.jasper","report","::[ Saldo Rekening ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

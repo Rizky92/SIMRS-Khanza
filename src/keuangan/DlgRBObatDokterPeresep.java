@@ -445,7 +445,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("RBObatPerdokterPeresep.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         for(i=0;i<tabMode.getRowCount();i++){
                             jumlah="";
                             try {
@@ -471,13 +471,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             } catch (Exception e) {
                                 tsl="";
                             }
-                            Sequel.temporary(String.valueOf(i+1),
-                                tabMode.getValueAt(i,0).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,1).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,2).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,3).toString().replaceAll("'","`"),
-                                jumlah,total,emb,tsl);
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            jumlah+"','"+total+"','"+emb+"','"+tsl+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Poli");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -486,7 +487,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRBObatPerdokterPeresep.jasper","report","Rekap Obat Per Dokter Peresep",param);
+                        Valid.MyReportqry("rptRBObatPerdokterPeresep.jasper","report","::[ Rekap Obat Per Dokter Peresep ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

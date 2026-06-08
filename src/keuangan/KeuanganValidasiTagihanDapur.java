@@ -376,12 +376,18 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("ValidasiTagihanDapur.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), tabMode.getValueAt(i, 0).toString(), tabMode.getValueAt(i, 1).toString(), tabMode.getValueAt(i, 2).toString(), tabMode.getValueAt(i, 3).toString(), tabMode.getValueAt(i, 4).toString());
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien");
                         }
-                        Sequel.temporary(String.valueOf(i + 1), "TOTAL TAGIHAN :", "", "", "", LCount.getText());
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','TOTAL TAGIHAN :','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien");
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -390,7 +396,7 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptValidasiTagihanDapur.jasper", "report", "::[ Data Pegajuan Titip Faktur/Tagihan Dapur ]::", param);
+                        Valid.MyReportqry("rptValidasiTagihanDapur.jasper","report","::[ Data Pegajuan Titip Faktur/Tagihan Dapur ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

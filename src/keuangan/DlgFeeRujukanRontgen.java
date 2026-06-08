@@ -351,28 +351,30 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("FeeRujukanRontgen.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 sfeeradiologi=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()));
                             } catch (Exception e) {
                                 sfeeradiologi="";
                             }
+
                             try {
                                 sfeeusg=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 sfeeusg="";
                             }
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                tabMode.getValueAt(i,2).toString(),
-                                tabMode.getValueAt(i,3).toString(),
-                                tabMode.getValueAt(i,4).toString(),
-                                sfeeradiologi, sfeeusg
-                            );
+
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                            sfeeradiologi+"','"+
+                                            sfeeusg+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -380,8 +382,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
+                        param.put("dokter",nmdokter.getText());
+                        param.put("periode",Tgl1.getSelectedItem()+" s/d "+Tgl2.getSelectedItem());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptFeeRujukanRontgen.jasper", "report", "[ Rekap Fee Rujukan Rontgen ]", param);
+                        Valid.MyReportqry("rptFeeRujukanRontgen.jasper","report","::[ Rekap Fee Rujukan Rontgen ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

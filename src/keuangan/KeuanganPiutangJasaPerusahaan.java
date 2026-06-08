@@ -1151,21 +1151,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("PiutangJasaPerusahaan.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        for(i = 0; i < tabMode.getRowCount(); i++) {
-                            if(Valid.SetAngka(tbDokter.getValueAt(i, 2).toString()) > 0) {
-                                Sequel.temporary(
-                                    String.valueOf(i + 1),
-                                    tabMode.getValueAt(i, 1).toString(),
-                                    tabMode.getValueAt(i, 2).toString(),
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 3).toString())),
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 4).toString())),
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 5).toString())),
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 6).toString())),
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 7).toString()))
-                                );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                            if(Valid.SetAngka(tbDokter.getValueAt(i,2).toString())>0){
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pemesanan");
                             }
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -1193,7 +1193,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdPetugas.getText());
                         param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPetugas.getText()+"\nID "+(finger.equals("")?KdPetugas.getText():finger)+"\n"+TanggalPiutang.getSelectedItem());
-                        Valid.reportTempSmc("rptSuratPiutangJasaPerusahaan.jasper", "report", "::[ Tagihan Piutang Jasa Perusahaan ]::", param);
+                        Valid.MyReportqry("rptSuratPiutangJasaPerusahaan.jasper","report","::[ Tagihan Piutang Jasa Perusahaan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

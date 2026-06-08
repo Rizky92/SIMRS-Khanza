@@ -845,27 +845,26 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("HutangToko.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i, 1).toString(),
-                                tabMode.getValueAt(i, 2).toString(),
-                                tabMode.getValueAt(i, 3).toString(),
-                                tabMode.getValueAt(i, 4).toString(),
-                                tabMode.getValueAt(i, 5).toString(),
-                                tabMode.getValueAt(i, 6).toString(),
-                                tabMode.getValueAt(i, 7).toString(),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 8).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 9).toString())),
-                                tabMode.getValueAt(i, 12).toString(),
-                                tabMode.getValueAt(i, 13).toString()
-                            );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','"+
+                                            tabMode.getValueAt(i,5).toString()+"','"+
+                                            tabMode.getValueAt(i,6).toString()+"','"+
+                                            tabMode.getValueAt(i,7).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
+                                            tabMode.getValueAt(i,12).toString()+"','"+
+                                            tabMode.getValueAt(i,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
                         }
-                        Sequel.temporary(String.valueOf(i + 1));
-                        Sequel.temporary(String.valueOf(i + 2),
-                            "", "", "", "", "", "", "TOTAL HUTANG :", LCount.getText()
-                        );
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','','','','','','','TOTAL HUTANG :','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -874,7 +873,7 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptHutangTokoBelumLunas.jasper", "report", "::[ Data Hutang Barang Toko / Minimarket / Koperasi ]::", param);
+                        Valid.MyReportqry("rptHutangTokoBelumLunas.jasper","report","::[ Data Hutang Barang Toko / Minimarket / Koperasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

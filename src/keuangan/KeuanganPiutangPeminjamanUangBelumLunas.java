@@ -502,26 +502,24 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
                         Valid.exportXlsxSmc("PiutangPeminjamanUangBelumLunas.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        for(i = 0; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(
-                                String.valueOf(i + 1),
-                                tabMode.getValueAt(i, 1).toString(),
-                                tabMode.getValueAt(i, 2).toString(),
-                                tabMode.getValueAt(i, 3).toString(),
-                                tabMode.getValueAt(i, 4).toString(),
-                                tabMode.getValueAt(i, 5).toString(),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 6).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 7).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 8).toString())),
-                                tabMode.getValueAt(i, 9).toString()
-                            );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','"+
+                                            tabMode.getValueAt(i,5).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
+                                            tabMode.getValueAt(i,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Jasa Perusahaan");
                         }
-                        Sequel.temporary(String.valueOf(++i));
-                        Sequel.temporary(
-                            String.valueOf(++i),
-                            "TOTAL PIUTANG :", "", "", "", "", "", "", LCount.getText()
-                        );
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Jasa Perusahaan");
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','TOTAL PIUTANG :','','','','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Jasa Perusahaan");
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -530,7 +528,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptPiutangPeminjamanUangBelumLunas.jasper", "report", "::[ Rekap Piutang Peminjaman Uang Belum lunas ]::", param);
+                        Valid.MyReportqry("rptPiutangPeminjamanUangBelumLunas.jasper","report","::[ Rekap Piutang Peminjaman Uang Belum lunas ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

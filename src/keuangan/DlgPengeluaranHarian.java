@@ -987,22 +987,21 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptPengeluaranHarian.jasper", "report", "::[ Data Pengeluaran Harian ]::", param, "select pengeluaran_harian.no_keluar, " +
-                            "pengeluaran_harian.tanggal, pengeluaran_harian.keterangan, pengeluaran_harian.biaya, pengeluaran_harian.nip, petugas.nama, " +
-                            "pengeluaran_harian.kode_kategori, kategori_pengeluaran_harian.nama_kategori from pengeluaran_harian inner join petugas on " +
-                            "pengeluaran_harian.nip = petugas.nip inner join kategori_pengeluaran_harian on pengeluaran_harian.kode_kategori = kategori_pengeluaran_harian.kode_kategori " +
-                            "where pengeluaran_harian.tanggal between ? and ? and (if(trim(?) = '', 1 = 1, pengeluaran_harian.keterangan like ? or pengeluaran_harian.nip like ? or " +
-                            "petugas.nama like ? or pengeluaran_harian.kode_kategori like ? or kategori_pengeluaran_harian.nama_kategori like ? or pengeluaran_harian.no_keluar like ?)) " +
-                            "order by pengeluaran_harian.tanggal", Valid.getTglSmc(DTPCari1) + " 00:00:00.000", Valid.getTglSmc(DTPCari2) + " 23:59:59.999", TCari.getText().trim(),
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranHarian.jasper","report","::[ Data Pengeluaran Harian ]::",
+                            "select pengeluaran_harian.no_keluar,pengeluaran_harian.tanggal, pengeluaran_harian.keterangan, pengeluaran_harian.biaya, pengeluaran_harian.nip, "+
+                            "petugas.nama,pengeluaran_harian.kode_kategori,kategori_pengeluaran_harian.nama_kategori "+
+                            "from pengeluaran_harian inner join petugas inner join kategori_pengeluaran_harian on pengeluaran_harian.nip=petugas.nip "+
+                            "and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori where pengeluaran_harian.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
+                            (TCari.getText().trim().equals("")?"":"and (pengeluaran_harian.keterangan like '%"+TCari.getText().trim()+"%' or pengeluaran_harian.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%' or "+
+                            "pengeluaran_harian.kode_kategori like '%"+TCari.getText().trim()+"%' or kategori_pengeluaran_harian.nama_kategori like '%"+TCari.getText().trim()+"%' or pengeluaran_harian.no_keluar like '%"+TCari.getText().trim()+"%') ")+
+                            "order by pengeluaran_harian.tanggal",param);
                         break;
                 }
             } catch (Exception e) {

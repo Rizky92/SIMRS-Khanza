@@ -630,16 +630,16 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("AkunPenagihanPiutang.html", "Akun Penagihan Piutang", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("AkunPenagihanPiutang.html", "Akun Penagihan Piutang", tbJadwal);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("AkunPenagihanPiutang.wps", "Akun Penagihan Piutang", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("AkunPenagihanPiutang.wps", "Akun Penagihan Piutang", tbJadwal);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("AkunPenagihanPiutang.csv", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("AkunPenagihanPiutang.csv", tbJadwal);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("AkunPenagihanPiutang.xlsx", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("AkunPenagihanPiutang.xlsx", tbJadwal);
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();

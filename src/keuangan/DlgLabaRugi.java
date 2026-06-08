@@ -369,26 +369,44 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("LabaRugi.xlsx", Table1);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int r = 0;
-                        for (int i = 0; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(++r), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2));
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        no=0;
+                        for(int i=0;i<row;i++){
+                            Sequel.menyimpan("temporary","'"+no+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                            no++;
                         }
-                        for (int i = 0; i < tabMode2.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(++r), (String) tabMode2.getValueAt(i, 0), (String) tabMode2.getValueAt(i, 1), (String) tabMode2.getValueAt(i, 2));
+                        no++;
+                        int row2=tabMode2.getRowCount();
+                        for(int i=0;i<row2;i++){
+                            Sequel.menyimpan("temporary","'"+no+"','"+
+                                            tabMode2.getValueAt(i,0).toString()+"','"+
+                                            tabMode2.getValueAt(i,1).toString()+"','"+
+                                            tabMode2.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                            no++;
                         }
-                        for (int i = 0; i < tabMode3.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(++r), (String) tabMode3.getValueAt(i, 0), (String) tabMode3.getValueAt(i, 1), (String) tabMode3.getValueAt(i, 2));
+                        no++;
+                        int row3=tabMode3.getRowCount();
+                        for(int i=0;i<row3;i++){
+                            Sequel.menyimpan("temporary","'"+no+"','"+
+                                            tabMode3.getValueAt(i,0).toString()+"','"+
+                                            tabMode3.getValueAt(i,1).toString()+"','"+
+                                            tabMode3.getValueAt(i,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
+                            no++;
                         }
+
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptLabaRugi.jasper", "report", "::[ Laporan Keuangan ]::", param);
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptLabaRugi.jasper","report","::[ Laporan Keuangan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

@@ -288,29 +288,6 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("RekapPengajuanBiaya.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (int r = 0; r < tabMode.getRowCount(); r++) {
-                            if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
-                                Sequel.temporary(String.valueOf(i + 1),
-                                    tabMode.getValueAt(r,0).toString(),
-                                    tabMode.getValueAt(r,1).toString(),
-                                    tabMode.getValueAt(r,2).toString(),
-                                    tabMode.getValueAt(r,3).toString(),
-                                    tabMode.getValueAt(r,4).toString(),
-                                    tabMode.getValueAt(r,5).toString(),
-                                    tabMode.getValueAt(r,6).toString(),
-                                    tabMode.getValueAt(r,7).toString(),
-                                    tabMode.getValueAt(r,8).toString(),
-                                    tabMode.getValueAt(r,9).toString(),
-                                    tabMode.getValueAt(r,10).toString(),
-                                    tabMode.getValueAt(r,11).toString(),
-                                    tabMode.getValueAt(r,12).toString(),
-                                    tabMode.getValueAt(r,13).toString(),
-                                    tabMode.getValueAt(r,14).toString());
-                                i++;
-                            }
-                        }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -318,8 +295,29 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
-                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRekapPengajuanBiaya.jasper", "report", "::[ Laporan Rekap Pengajuan Biaya/Anggaran Per Departemen ]::", param);
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(int r=0;r<tabMode.getRowCount();r++){
+                            if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                                tabMode.getValueAt(r,0).toString()+"','"+
+                                                tabMode.getValueAt(r,1).toString()+"','"+
+                                                tabMode.getValueAt(r,2).toString()+"','"+
+                                                tabMode.getValueAt(r,3).toString()+"','"+
+                                                tabMode.getValueAt(r,4).toString()+"','"+
+                                                tabMode.getValueAt(r,5).toString()+"','"+
+                                                tabMode.getValueAt(r,6).toString()+"','"+
+                                                tabMode.getValueAt(r,7).toString()+"','"+
+                                                tabMode.getValueAt(r,8).toString()+"','"+
+                                                tabMode.getValueAt(r,9).toString()+"','"+
+                                                tabMode.getValueAt(r,10).toString()+"','"+
+                                                tabMode.getValueAt(r,11).toString()+"','"+
+                                                tabMode.getValueAt(r,12).toString()+"','"+
+                                                tabMode.getValueAt(r,13).toString()+"','"+
+                                                tabMode.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Pengajuan Biaya");
+                                i++;
+                            }
+                        }
+                        Valid.MyReportqry("rptRekapPengajuanBiaya.jasper","report","::[ Laporan Rekap Pengajuan Biaya/Anggaran Per Departemen ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

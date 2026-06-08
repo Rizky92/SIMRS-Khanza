@@ -330,25 +330,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("KeuanganNilaiPiutangPerCaraBayarPerBulan.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         int row=tabMode.getRowCount();
                         for(i=0;i<row;i++){
-                            Sequel.temporary(String.valueOf(i),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,2).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString())),
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString())));
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,2).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
@@ -358,7 +358,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptKeuanganNilaiPiutangPerCaraBayarPerBulan.jasper","report","::[ Nilai Piutang Per Cara Bayar Per Bulan ]::",param);
+                        Valid.MyReportqry("rptKeuanganNilaiPiutangPerCaraBayarPerBulan.jasper","report","::[ Nilai Piutang Per Cara Bayar Per Bulan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

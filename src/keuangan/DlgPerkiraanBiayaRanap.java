@@ -712,33 +712,31 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("PerkiraanBiayaRanap.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(
-                                String.valueOf(i + 1),
-                                tabMode.getValueAt(i, 0).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 1).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 2).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 3).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 4).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 5).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 6).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 7).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 8).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 9).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 10).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 11).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 12).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 13).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 14).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 15).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 16).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 17).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 18).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i, 19).toString().replaceAll("'","`")
-                            );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(int r=0;r<tabMode.getRowCount();r++){
+                                Sequel.menyimpan("temporary","'"+r+"','"+
+                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Perkiraan Ranap");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -747,7 +745,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptPerkiraanBiayaRanap.jasper", "report", "::[ Perkiraan Biaya Rawat Inap ]::", param);
+                        Valid.MyReportqry("rptPerkiraanBiayaRanap.jasper","report","::[ Perkiraan Biaya Rawat Inap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

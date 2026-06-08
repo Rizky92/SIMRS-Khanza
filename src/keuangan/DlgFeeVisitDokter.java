@@ -366,65 +366,79 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("FeeVisitDokter.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 sjmlvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
                             } catch (Exception e) {
                                 sjmlvisit="";
                             }
+
                             try {
                                 sjmlbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
                             } catch (Exception e) {
                                 sjmlbyphone="";
                             }
+
                             try {
                                 starifvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
                             } catch (Exception e) {
                                 starifvisit="";
                             }
+
                             try {
                                 starifbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
                             } catch (Exception e) {
                                 starifbyphone="";
                             }
+
                             try {
                                 svisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
                             } catch (Exception e) {
                                 svisit="";
                             }
+
                             try {
                                 sbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
                             } catch (Exception e) {
                                 sbyphone="";
                             }
+
                             try {
                                 sbruto=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()));
                             } catch (Exception e) {
                                 sbruto="";
                             }
+
                             try {
                                 sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()));
                             } catch (Exception e) {
                                 sjasa="";
                             }
+
                             try {
                                 suangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()));
                             } catch (Exception e) {
                                 suangrs="";
                             }
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                tabMode.getValueAt(i,2).toString(),
-                                tabMode.getValueAt(i,3).toString(),
-                                tabMode.getValueAt(i,4).toString(),
-                                tabMode.getValueAt(i,5).toString(),
-                                sjmlvisit, sjmlbyphone, starifvisit, starifbyphone,
-                                svisit, sbyphone, sbruto, sjasa, suangrs
-                            );
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                                            sjmlvisit+"','"+
+                                            sjmlbyphone+"','"+
+                                            starifvisit+"','"+
+                                            starifbyphone+"','"+
+                                            svisit+"','"+
+                                            sbyphone+"','"+
+                                            sbruto+"','"+
+                                            sjasa+"','"+
+                                            suangrs+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -432,8 +446,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
+                        param.put("dokter",nmdokter.getText());
+                        param.put("periode",Tgl1.getSelectedItem()+" s/d "+Tgl2.getSelectedItem());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptFeeVisitDokter.jasper", "report", "[ Rekap Jasa Visit Dokter ]", param);
+                        Valid.MyReportqry("rptFeeVisitDokter.jasper","report","::[ Rekap Jasa Visit Dokter ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

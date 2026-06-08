@@ -600,10 +600,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("Jurnal.html", "Bayar Piutang", tbDokter);
+                        Valid.exportHtmlSmc("Jurnal.html", "Transaksi Posting Jurnal", tbDokter);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("Jurnal.wps", "Bayar Piutang", tbDokter);
+                        Valid.exportWPSSmc("Jurnal.wps", "Transaksi Posting Jurnal", tbDokter);
                         break;
                     case "Laporan 3 (CSV)":
                         Valid.exportCSVSmc("Jurnal.csv", tbDokter);

@@ -597,16 +597,16 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("AkunPiutang.html", "Akun Piutang", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("AkunPiutang.html", "Akun Piutang", tbJadwal);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("AkunPiutang.wps", "Akun Piutang", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("AkunPiutang.wps", "Akun Piutang", tbJadwal);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("AkunPiutang.csv", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("AkunPiutang.csv", tbJadwal);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("AkunPiutang.xlsx", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("AkunPiutang.xlsx", tbJadwal);
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();

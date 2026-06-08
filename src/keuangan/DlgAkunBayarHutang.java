@@ -545,16 +545,16 @@ public class DlgAkunBayarHutang extends javax.swing.JDialog {
                 }, "Laporan 5 (Jasper)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("AkunBayarHutang.html", "Akun Bayar Hutang", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportHtmlSmc("AkunBayarHutang.html", "Akun Bayar Hutang", tbJadwal);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("AkunBayarHutang.wps", "Akun Bayar Hutang", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportWPSSmc("AkunBayarHutang.wps", "Akun Bayar Hutang", tbJadwal);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("AkunBayarHutang.csv", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportCSVSmc("AkunBayarHutang.csv", tbJadwal);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("AkunBayarHutang.xlsx", tbJadwal, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        Valid.exportXlsxSmc("AkunBayarHutang.xlsx", tbJadwal);
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
@@ -565,7 +565,7 @@ public class DlgAkunBayarHutang extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.MyReportqry("rptAkunBayarHutang.jasper","report","::[ Akun Bayar ]::","select akun_bayar_hutang.nama_bayar,akun_bayar_hutang.kd_rek,rekening.nm_rek  "+
+                        Valid.MyReportqry("rptAkunBayarHutang.jasper","report","::[ Akun Bayar Hutang ]::","select akun_bayar_hutang.nama_bayar,akun_bayar_hutang.kd_rek,rekening.nm_rek  "+
                             "from akun_bayar_hutang inner join rekening on akun_bayar_hutang.kd_rek=rekening.kd_rek "+
                             "where akun_bayar_hutang.nama_bayar like '%"+TCari.getText().trim()+"%' or "+
                             "rekening.nm_rek like '%"+TCari.getText().trim()+"%' order by akun_bayar_hutang.nama_bayar",param);

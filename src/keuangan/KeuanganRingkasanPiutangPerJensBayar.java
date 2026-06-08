@@ -275,13 +275,18 @@ public final class KeuanganRingkasanPiutangPerJensBayar extends javax.swing.JDia
                         Valid.exportXlsxSmc("RingkasanPiutangPerJensBayar.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1), tabMode.getValueAt(i, 0).toString(), tabMode.getValueAt(i, 1).toString(), Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 2).toString())));
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,2).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
                         }
-                        Sequel.temporary(String.valueOf(i + 1), "", "", "");
-                        Sequel.temporary(String.valueOf(i + 2), "TOTAL Piutang :", "", LCount.getText());
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','TOTAL Piutang :','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Hutang");
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -290,7 +295,7 @@ public final class KeuanganRingkasanPiutangPerJensBayar extends javax.swing.JDia
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRingkasanPiutangPerCaraBayar.jasper", "report", "::[ Ringkasan Sisa Piutang Per Jenis/Cara Bayar ]::", param);
+                        Valid.MyReportqry("rptRingkasanPiutangPerCaraBayar.jasper","report","::[ Ringkasan Sisa Piutang Per Jenis/Cara Bayar ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

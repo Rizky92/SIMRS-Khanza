@@ -358,25 +358,26 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("RBTindakanKamar.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i,0).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,1).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,2).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,3).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,4).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,5).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,6).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,7).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,8).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,9).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,10).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,11).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,12).toString().replaceAll("'","`"),
-                                tabMode.getValueAt(i,13).toString().replaceAll("'","`"));
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(int r=0;r<row;r++){
+                            Sequel.menyimpan("temporary","'"+r+"','"+
+                                            tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                            tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Pemasukan Perbangsal Dokter");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -385,7 +386,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRBTindakanKamar.jasper", "report", "[ Rekap Harian Per Bangsal/Kamar ]", param);
+                        Valid.MyReportqry("rptRBTindakanKamar.jasper","report","::[ Rekap Harian Per Bangsal/Kamar ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

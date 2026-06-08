@@ -326,21 +326,19 @@ public final class DlgLhtBankMandiri extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptHtHBankMandiri.jasper", "report", "::[ Data Pembayaran Bank Mandiri ]::", param, "select * from tagihan_mandiri where tagihan_mandiri.tgl_closing " +
-                            "between ? and ? and (if(trim(?) = '', 1 = 1, tagihan_mandiri.no_rkm_medis like ? or tagihan_mandiri.nm_pasien like ? or tagihan_mandiri.no_nota like ? " +
-                            "or tagihan_mandiri.referensi like ? or tagihan_mandiri.no_rawat like ? or tagihan_mandiri.status_lanjut like ? or tagihan_mandiri.status_bayar like ? " +
-                            "or tagihan_mandiri.kasir like ? or tagihan_mandiri.referensi like ? or tagihan_mandiri.no_id like ?)) order by tagihan_mandiri.tgl_closing",
-                            Valid.getTglSmc(Tgl1) + " 00:00:00.000", Valid.getTglSmc(Tgl2) + " 23:59:59.999", TCari.getText().trim(), "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptHtHBankMandiri.jasper","report","::[ Data Pembayaran Bank Mandiri ]::",
+                           "select * from tagihan_mandiri where tagihan_mandiri.tgl_closing between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:01' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59' "+
+                           (TCari.getText().equals("")?"":"and (tagihan_mandiri.no_rkm_medis like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_mandiri.no_nota like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.referensi like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_mandiri.status_lanjut like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.status_bayar like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.kasir like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_mandiri.referensi like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.no_id like '%"+TCari.getText().trim()+"%') ")+"order by tagihan_mandiri.tgl_closing",param);
                         break;
                 }
             } catch (Exception e) {

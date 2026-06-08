@@ -825,21 +825,23 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptPemasukanLain.jasper", "report", "::[ Data Pemasukan Lain-Lain ]::", param, "select pemasukan_lain.no_masuk, pemasukan_lain.tanggal, " +
-                            "pemasukan_lain.keterangan, pemasukan_lain.keperluan, pemasukan_lain.besar, pemasukan_lain.nip, petugas.nama, pemasukan_lain.kode_kategori, " +
-                            "kategori_pemasukan_lain.nama_kategori from pemasukan_lain inner join petugas on pemasukan_lain.nip = petugas.nip inner join kategori_pemasukan_lain " +
-                            "on pemasukan_lain.kode_kategori = kategori_pemasukan_lain.kode_kategori where pemasukan_lain.tanggal between ? and ? and (if(trim(?) = '', 1 = 1, " +
-                            "pemasukan_lain.keperluan like ? or pemasukan_lain.keterangan like ? or pemasukan_lain.nip like ? or petugas.nama like ? or pemasukan_lain.kode_kategori " +
-                            "like ? or kategori_pemasukan_lain.nama_kategori like ? or pemasukan_lain.no_masuk like ?)) order by pemasukan_lain.tanggal", Valid.getTglSmc(DTPCari1) + " 00:00:00.000",
-                            Valid.getTglSmc(DTPCari2) + " 23:59:59.999", TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPemasukanLain.jasper","report","::[ Data Pemasukan Lain-Lain ]::",
+                            "select pemasukan_lain.no_masuk,pemasukan_lain.tanggal, pemasukan_lain.keterangan, pemasukan_lain.keperluan, pemasukan_lain.besar, pemasukan_lain.nip, "+
+                            "petugas.nama,pemasukan_lain.kode_kategori,kategori_pemasukan_lain.nama_kategori "+
+                            "from pemasukan_lain inner join petugas inner join kategori_pemasukan_lain on pemasukan_lain.nip=petugas.nip "+
+                            "and pemasukan_lain.kode_kategori=kategori_pemasukan_lain.kode_kategori where "+
+                            "pemasukan_lain.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
+                            (TCari.getText().trim().equals("")?"":" and (pemasukan_lain.keperluan like '%"+TCari.getText().trim()+"%' or pemasukan_lain.keterangan like '%"+TCari.getText().trim()+"%' or "+
+                            "pemasukan_lain.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%' or pemasukan_lain.kode_kategori like '%"+TCari.getText().trim()+"%' or "+
+                            "kategori_pemasukan_lain.nama_kategori like '%"+TCari.getText().trim()+"%' or pemasukan_lain.no_masuk like '%"+TCari.getText().trim()+"%') ")+
+                            "order by pemasukan_lain.tanggal ",param);
                         break;
                 }
             } catch (Exception e) {

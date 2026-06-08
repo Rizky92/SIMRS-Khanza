@@ -287,40 +287,40 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("LhtBiaya.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(int r=0;r<row;r++){
                             biaya="";
                             try{
-                                biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()));
+                                biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,3).toString()));
                             }catch(Exception e){
                                 biaya="";
                             }
                             tambahan="";
                             try{
-                                tambahan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()));
+                                tambahan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString()));
                             }catch(Exception e){
                                 tambahan="";
                             }
                             totalx="";
                             try{
-                                totalx=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                                totalx=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,6).toString()));
                             }catch(Exception e){
                                 totalx="";
                             }
                             jml="";
                             try{
-                                jml=tabMode.getValueAt(i,4).toString();
+                                jml=tabMode.getValueAt(r,4).toString();
                             }catch(Exception e){
                                 jml="";
                             }
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                tabMode.getValueAt(i,2).toString(),
-                                biaya, jml, tambahan, totalx
+                            Sequel.menyimpan("temporary","'"+r+"','"+tabMode.getValueAt(r,0).toString()+"','"+
+                                tabMode.getValueAt(r,1).toString()+"','"+tabMode.getValueAt(r,2).toString()+"','"+
+                                biaya+"','"+jml+"','"+tambahan+"','"+totalx+"','','','','','','','','','','','',"+
+                                "'','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran"
                             );
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -330,7 +330,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
                         param.put("emailrs",akses.getemailrs());
                         param.put("tagihan",LCount.getText());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRTagihanMasuk.jasper", "report", "::[ Rekap Tagihan Masuk ]::", param);
+                        Valid.MyReportqry("rptRTagihanMasuk.jasper","report","::[ Rekap Tagihan Masuk ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

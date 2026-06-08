@@ -639,18 +639,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("PiutangJasaPerusahaan.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         int row=tabMode.getRowCount();
                         for(int i=0;i<row;i++){
-                            Sequel.temporary(String.valueOf(i),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                tabMode.getValueAt(i,2).toString(),
-                                tabMode.getValueAt(i,3).toString(),
-                                tabMode.getValueAt(i,4).toString(),
-                                tabMode.getValueAt(i,5).toString(),
-                                tabMode.getValueAt(i,6).toString());
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','"+
+                                            tabMode.getValueAt(i,5).toString()+"','"+
+                                            tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Piutang");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -659,7 +660,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptPiutangJasaPerusahaan.jasper","report","::[ Transaksi Piutang Jasa Perusahaan ]::",param);
+                        Valid.MyReportqry("rptPiutangJasaPerusahaan.jasper","report","::[ Transaksi Piutang Jasa Perusahaan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

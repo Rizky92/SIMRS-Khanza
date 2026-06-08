@@ -397,11 +397,11 @@ public final class DlgPembayaranRalanPerHari extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
                     bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
@@ -424,22 +424,21 @@ public final class DlgPembayaranRalanPerHari extends javax.swing.JDialog {
                         Valid.exportXlsxSmc("PembayaranRalanPerHari.xlsx", tbBangsal);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                tabMode.getValueAt(i,2).toString(),
-                                tabMode.getValueAt(i,3).toString(),
-                                tabMode.getValueAt(i,4).toString(),
-                                tabMode.getValueAt(i,5).toString(),
-                                tabMode.getValueAt(i,6).toString(),
-                                tabMode.getValueAt(i,7).toString(),
-                                tabMode.getValueAt(i,8).toString(),
-                                tabMode.getValueAt(i,9).toString()
-                            );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(int r=0;r<tabMode.getRowCount();r++){
+                                Sequel.menyimpan("temporary","'"+r+"','"+
+                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -448,14 +447,14 @@ public final class DlgPembayaranRalanPerHari extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRTagihanRalanHarian.jasper", "report", "::[ Rekap Tagihan Ralan Masuk Harian ]::", param);
+                        Valid.MyReportqry("rptRTagihanRalanHarian.jasper","report","::[ Rekap Tagihan Ralan Masuk Harian ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

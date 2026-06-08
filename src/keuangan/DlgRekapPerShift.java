@@ -518,7 +518,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                         }
                         String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                             "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                        }, "Laporan 1 (HTML)");
+                        }, "Laporan 5 (Jasper)");
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("RekapPendapatanRalan.html", "Rekap Pendapatan Ralan", tbRalan);
@@ -566,7 +566,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                         }
                         String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                             "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                        }, "Laporan 1 (HTML)");
+                        }, "Laporan 5 (Jasper)");
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("RekapPendapatanRanap.html", "Rekap Pendapatan Ranap", tbRanap);
@@ -616,7 +616,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                         }
                         String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                             "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                        }, "Laporan 1 (HTML)");
+                        }, "Laporan 5 (Jasper)");
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("RekapPemasukanLain.html", "Rekap Pemasukan Lain", tbPemasukan);
@@ -661,7 +661,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                         }
                         String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                             "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                        }, "Laporan 1 (HTML)");
+                        }, "Laporan 5 (Jasper)");
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("RekapDeposit.html", "Rekap Deposit", tbDeposit);
@@ -707,7 +707,7 @@ public class DlgRekapPerShift extends javax.swing.JDialog {
                         }
                         String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                             "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                        }, "Laporan 1 (HTML)");
+                        }, "Laporan 5 (Jasper)");
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("RekapPengeluaranHarian.html", "Rekap Pengeluaran Harian", tbPengeluaran);

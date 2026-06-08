@@ -395,16 +395,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("RBMenejemen.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         int row=tabMode.getRowCount();
                         for(int r=0;r<row;r++){
-                            Sequel.temporary(String.valueOf(r+1),
-                                tabMode.getValueAt(r,0).toString(),
-                                tabMode.getValueAt(r,1).toString(),
-                                tabMode.getValueAt(r,2).toString(),
-                                tabMode.getValueAt(r,3).toString(),
-                                tabMode.getValueAt(r,4).toString());
+                            Sequel.menyimpan("temporary","'"+r+"','"+
+                                            tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                            tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -413,7 +414,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRBMenejemen.jasper","report","Rekap Bulanan Menejemen Rumah Sakit",param);
+                        Valid.MyReportqry("rptRBMenejemen.jasper","report","::[ Rekap Bulanan Menejemen Rumah Sakit ]:: ","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

@@ -503,16 +503,16 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptKategoriPiutangJasaPerusahaan.jasper", "report", "::[ Kategori Piutang Jasa Perusahaan ]::", param, "select * from kategori_piutang_jasa_perusahaan " +
-                            "where (if(trim(?) = '', 1 = 1, kategori_piutang_jasa_perusahaan.kode_kategori like ? or kategori_piutang_jasa_perusahaan.nama_kategori like ?)) order by " +
-                            "kategori_piutang_jasa_perusahaan.kode_kategori", TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptKategoriPiutangJasaPerusahaan.jasper","report","::[ Kategori Piutang Jasa Perusahaan ]::",
+                                "select * from kategori_piutang_jasa_perusahaan "+(TCari.getText().trim().equals("")?"":"where kategori_piutang_jasa_perusahaan.kode_kategori like '%"+TCari.getText().trim()+"%' or "+
+                                "kategori_piutang_jasa_perusahaan.nama_kategori like '%"+TCari.getText().trim()+"%'")+" order by kategori_piutang_jasa_perusahaan.kode_kategori",param);
                         break;
                 }
             } catch (Exception e) {

@@ -392,19 +392,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("RHPaketBHP.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
-                            Sequel.temporary(
-                                String.valueOf(i + 1),
-                                tabMode.getValueAt(i, 0).toString(),
-                                tabMode.getValueAt(i, 1).toString(),
-                                tabMode.getValueAt(i, 2).toString(),
-                                tabMode.getValueAt(i, 3).toString(),
-                                tabMode.getValueAt(i, 4).toString(),
-                                tabMode.getValueAt(i, 5).toString()
-                            );
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(int r=0;r<row;r++){
+                            Sequel.menyimpan("temporary","'"+r+"','"+
+                                            tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                            tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -413,7 +412,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptRHPaketBHP.jasper", "report", "::[ Rekap Harian BHP Medis/Paket BHP ]::", param);
+                        Valid.MyReportqry("rptRHPaketBHP.jasper","report","::[ Rekap Harian BHP Medis/Paket BHP ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

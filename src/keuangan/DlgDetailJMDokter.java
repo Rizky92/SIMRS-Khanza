@@ -571,22 +571,62 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             Valid.exportXlsxSmc("JMRanapDokter.xlsx", tbDokter);
                             break;
                         case "Laporan 5 (Jasper)":
-                            Sequel.deleteTemporary();
-                            for (int i = 0; i < tabMode.getRowCount(); i++) {
-                                Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
-                                    (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), Valid.SetAngka((Double) tabMode.getValueAt(i, 6)),
-                                    Valid.SetAngka((Double) tabMode.getValueAt(i, 7)), Valid.SetAngka((Double) tabMode.getValueAt(i, 8)), Valid.SetAngka((Double) tabMode.getValueAt(i, 9)),
-                                    Valid.SetAngka((Double) tabMode.getValueAt(i, 10)), Valid.SetAngka((Double) tabMode.getValueAt(i, 11)));
+                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                            for(i=0;i<tabMode.getRowCount();i++){
+                                try {
+                                    uangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
+                                } catch (Exception e) {
+                                    uangrs="";
+                                }
+                                try {
+                                    jm=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
+                                } catch (Exception e) {
+                                    jm="";
+                                }
+                                try {
+                                    bhp=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
+                                } catch (Exception e) {
+                                    bhp="";
+                                }
+                                try {
+                                    biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
+                                } catch (Exception e) {
+                                    biaya="";
+                                }
+                                try {
+                                    jml=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
+                                } catch (Exception e) {
+                                    jml="";
+                                }
+                                try {
+                                    tarif=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                                } catch (Exception e) {
+                                    tarif="";
+                                }
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                                tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                                                tarif+"','"+
+                                                jml+"','"+
+                                                biaya+"','"+
+                                                bhp+"','"+
+                                                jm+"','"+
+                                                uangrs+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
                             }
+
                             Map<String, Object> param = new HashMap<>();
-                            param.put("namars", akses.getnamars());
-                            param.put("alamatrs", akses.getalamatrs());
-                            param.put("kotars", akses.getkabupatenrs());
-                            param.put("propinsirs", akses.getpropinsirs());
-                            param.put("kontakrs", akses.getkontakrs());
-                            param.put("emailrs", akses.getemailrs());
-                            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                            Valid.reportTempSmc("rptJMRanapDokter.jasper", "report", "::[ Detail J.M. Dokter ]::", param);
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReportqry("rptJMRanapDokter.jasper","report","::[ Detail J.M. Dokter ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                     }
                 } catch (Exception e) {

@@ -313,20 +313,19 @@ public final class DlgLhtBankPapua extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptHtHBankPapua.jasper", "report", "::[ Data Pembayaran Bank Papua ]::", param, "select * from tagihan_bpd_papua where tagihan_bpd_papua.tgl_closing " +
-                            "between ? and ? and (if(trim(?) = '', 1 = 1, tagihan_bpd_papua.no_rkm_medis like ? or tagihan_bpd_papua.nm_pasien like ? or tagihan_bpd_papua.no_nota like ? or " +
-                            "tagihan_bpd_papua.referensi like ? or tagihan_bpd_papua.no_rawat like ? or tagihan_bpd_papua.status_lanjut like ? or tagihan_bpd_papua.status_bayar like ? or " +
-                            "tagihan_bpd_papua.kasir like ? or tagihan_bpd_papua.keterangan like ?)) order by tagihan_bpd_papua.tgl_closing", Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2),
-                            TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() +
-                            "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptHtHBankPapua.jasper","report","::[ Data Pembayaran Bank Papua ]::",
+                           "select * from tagihan_bpd_papua where tagihan_bpd_papua.tgl_closing between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                           (TCari.getText().equals("")?"":"and (tagihan_bpd_papua.no_rkm_medis like '%"+TCari.getText().trim()+"%' or tagihan_bpd_papua.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_bpd_papua.no_nota like '%"+TCari.getText().trim()+"%' or tagihan_bpd_papua.referensi like '%"+TCari.getText().trim()+"%' or tagihan_bpd_papua.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_bpd_papua.status_lanjut like '%"+TCari.getText().trim()+"%' or tagihan_bpd_papua.status_bayar like '%"+TCari.getText().trim()+"%' or tagihan_bpd_papua.kasir like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_bpd_papua.keterangan like '%"+TCari.getText().trim()+"%') ")+"order by tagihan_bpd_papua.tgl_closing",param);
                         break;
                 }
             } catch (Exception e) {

@@ -349,9 +349,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.exportXlsxSmc("PiutangPercaraBayar.xlsx", tbDokter);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Sequel.deleteTemporary();
-                        int i = 0;
-                        for (; i < tabMode.getRowCount(); i++) {
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(i=0;i<tabMode.getRowCount();i++){
                             stringpiutang="";
                             try {
                                 stringpiutang=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,3).toString()));
@@ -364,15 +363,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             } catch (Exception e) {
                                 stringsisapiutang="";
                             }
-                            Sequel.temporary(String.valueOf(i + 1),
-                                tabMode.getValueAt(i,0).toString(),
-                                tabMode.getValueAt(i,1).toString(),
-                                tabMode.getValueAt(i,2).toString(),
-                                stringpiutang,
-                                stringsisapiutang,
-                                tabMode.getValueAt(i,5).toString()
-                            );
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                            tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                            stringpiutang+"','"+stringsisapiutang+"','"+
+                                            tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Per Cara Bayar");
                         }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());
@@ -381,7 +379,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportTempSmc("rptPiutangPerCaraBayar.jasper", "report", "[ Piutang Per Cara Bayar ]", param);
+                        Valid.MyReportqry("rptPiutangPerCaraBayar.jasper","report","[ Piutang Per Cara Bayar ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

@@ -313,19 +313,19 @@ public final class DlgLhtBankJateng extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptHtHBankJateng.jasper", "report", "::[ Data Pembayaran Bank Jateng ]::", param, "select * from tagihan_bpd_jateng where tagihan_bpd_jateng.tgl_closing " +
-                            "between ? and ? and (if(trim(?) = '', 1 = 1, tagihan_bpd_jateng.no_rkm_medis like ? or tagihan_bpd_jateng.nm_pasien like ? or tagihan_bpd_jateng.no_nota like ? or " +
-                            "tagihan_bpd_jateng.referensi like ? or tagihan_bpd_jateng.no_rawat like ? or tagihan_bpd_jateng.status_lanjut like ? or tagihan_bpd_jateng.status_bayar like ? or " +
-                            "tagihan_bpd_jateng.kasir like ? or tagihan_bpd_jateng.keterangan like ?)) order by tagihan_bpd_jateng.tgl_closing", Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2),
-                            TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptHtHBankJateng.jasper","report","::[ Data Pembayaran Bank Jateng ]::",
+                           "select * from tagihan_bpd_jateng where tagihan_bpd_jateng.tgl_closing between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                           (TCari.getText().equals("")?"":"and (tagihan_bpd_jateng.no_rkm_medis like '%"+TCari.getText().trim()+"%' or tagihan_bpd_jateng.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_bpd_jateng.no_nota like '%"+TCari.getText().trim()+"%' or tagihan_bpd_jateng.referensi like '%"+TCari.getText().trim()+"%' or tagihan_bpd_jateng.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_bpd_jateng.status_lanjut like '%"+TCari.getText().trim()+"%' or tagihan_bpd_jateng.status_bayar like '%"+TCari.getText().trim()+"%' or tagihan_bpd_jateng.kasir like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_bpd_jateng.keterangan like '%"+TCari.getText().trim()+"%') ")+"order by tagihan_bpd_jateng.tgl_closing",param);
                         break;
                 }
             } catch (Exception e) {

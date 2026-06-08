@@ -403,20 +403,19 @@ public final class DlgLhtBRIVA extends javax.swing.JDialog {
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.reportSmc("rptBRIVA.jasper", "report", "::[ Data Pembayaran BRI Virtual Account ]::", param, "select * from tagihan_briva where tagihan_briva.tgl_closing " +
-                            "between ? and ? and (if(trim(?) = '', 1 = 1, tagihan_briva.no_rkm_medis like ? or tagihan_briva.nm_pasien like ? or tagihan_briva.no_tagihan like ? or " +
-                            "tagihan_briva.referensi like ? or tagihan_briva.no_rawat like ? or tagihan_briva.status_tagihan like ? or tagihan_briva.status_bayar like ? or " +
-                            "tagihan_briva.kasir like ? or tagihan_briva.keterangan like ?)) order by tagihan_briva.tgl_closing", Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2),
-                            TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
-                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptBRIVA.jasper","report","::[ Data Pembayaran BRI Virtual Account ]::",
+                           "select * from tagihan_briva where tagihan_briva.tgl_closing between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                           (TCari.getText().equals("")?"":"and (tagihan_briva.no_rkm_medis like '%"+TCari.getText().trim()+"%' or tagihan_briva.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_briva.no_tagihan like '%"+TCari.getText().trim()+"%' or tagihan_briva.referensi like '%"+TCari.getText().trim()+"%' or tagihan_briva.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_briva.status_tagihan like '%"+TCari.getText().trim()+"%' or tagihan_briva.status_bayar like '%"+TCari.getText().trim()+"%' or tagihan_briva.kasir like '%"+TCari.getText().trim()+"%' or "+
+                           "tagihan_briva.keterangan like '%"+TCari.getText().trim()+"%') ")+" order by tagihan_briva.tgl_closing",param);
                         break;
                 }
             } catch (Exception e) {
