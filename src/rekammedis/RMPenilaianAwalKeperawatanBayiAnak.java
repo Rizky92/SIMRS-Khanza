@@ -3306,282 +3306,122 @@ public final class RMPenilaianAwalKeperawatanBayiAnak extends javax.swing.JDialo
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                if(TCari.getText().equals("")){
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_bayi.tanggal,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.informasi,penilaian_awal_keperawatan_ralan_bayi.td,penilaian_awal_keperawatan_ralan_bayi.nadi,penilaian_awal_keperawatan_ralan_bayi.rr,penilaian_awal_keperawatan_ralan_bayi.suhu,penilaian_awal_keperawatan_ralan_bayi.gcs,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.bb,penilaian_awal_keperawatan_ralan_bayi.tb,penilaian_awal_keperawatan_ralan_bayi.lp,penilaian_awal_keperawatan_ralan_bayi.lk,penilaian_awal_keperawatan_ralan_bayi.ld,penilaian_awal_keperawatan_ralan_bayi.keluhan_utama,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.rpd,penilaian_awal_keperawatan_ralan_bayi.rpk,penilaian_awal_keperawatan_ralan_bayi.rpo,penilaian_awal_keperawatan_ralan_bayi.alergi,penilaian_awal_keperawatan_ralan_bayi.anakke,penilaian_awal_keperawatan_ralan_bayi.darisaudara,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.caralahir,penilaian_awal_keperawatan_ralan_bayi.ket_caralahir,penilaian_awal_keperawatan_ralan_bayi.umurkelahiran,penilaian_awal_keperawatan_ralan_bayi.kelainanbawaan,penilaian_awal_keperawatan_ralan_bayi.ket_kelainan_bawaan,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.usiatengkurap,penilaian_awal_keperawatan_ralan_bayi.usiaduduk,penilaian_awal_keperawatan_ralan_bayi.usiaberdiri,penilaian_awal_keperawatan_ralan_bayi.usiagigipertama,penilaian_awal_keperawatan_ralan_bayi.usiaberjalan,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.usiabicara,penilaian_awal_keperawatan_ralan_bayi.usiamembaca,penilaian_awal_keperawatan_ralan_bayi.usiamenulis,penilaian_awal_keperawatan_ralan_bayi.gangguanemosi,penilaian_awal_keperawatan_ralan_bayi.alat_bantu,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.ket_bantu,penilaian_awal_keperawatan_ralan_bayi.prothesa,penilaian_awal_keperawatan_ralan_bayi.ket_pro,penilaian_awal_keperawatan_ralan_bayi.adl,penilaian_awal_keperawatan_ralan_bayi.status_psiko,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.ket_psiko,penilaian_awal_keperawatan_ralan_bayi.hub_keluarga,penilaian_awal_keperawatan_ralan_bayi.pengasuh,penilaian_awal_keperawatan_ralan_bayi.ket_pengasuh,penilaian_awal_keperawatan_ralan_bayi.ekonomi,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.budaya,penilaian_awal_keperawatan_ralan_bayi.ket_budaya,penilaian_awal_keperawatan_ralan_bayi.edukasi,penilaian_awal_keperawatan_ralan_bayi.ket_edukasi,penilaian_awal_keperawatan_ralan_bayi.berjalan_a,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.berjalan_b,penilaian_awal_keperawatan_ralan_bayi.berjalan_c,penilaian_awal_keperawatan_ralan_bayi.hasil,penilaian_awal_keperawatan_ralan_bayi.lapor,penilaian_awal_keperawatan_ralan_bayi.ket_lapor,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.sg1,penilaian_awal_keperawatan_ralan_bayi.nilai1,penilaian_awal_keperawatan_ralan_bayi.sg2,penilaian_awal_keperawatan_ralan_bayi.nilai2,penilaian_awal_keperawatan_ralan_bayi.sg3,penilaian_awal_keperawatan_ralan_bayi.nilai3,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.sg4,penilaian_awal_keperawatan_ralan_bayi.nilai4,penilaian_awal_keperawatan_ralan_bayi.total_hasil,penilaian_awal_keperawatan_ralan_bayi.wajah,penilaian_awal_keperawatan_ralan_bayi.nilaiwajah,penilaian_awal_keperawatan_ralan_bayi.kaki,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.nilaikaki,penilaian_awal_keperawatan_ralan_bayi.aktifitas,penilaian_awal_keperawatan_ralan_bayi.nilaiaktifitas,penilaian_awal_keperawatan_ralan_bayi.menangis,penilaian_awal_keperawatan_ralan_bayi.nilaimenangis,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.bersuara,penilaian_awal_keperawatan_ralan_bayi.nilaibersuara,penilaian_awal_keperawatan_ralan_bayi.hasilnyeri,penilaian_awal_keperawatan_ralan_bayi.nyeri,penilaian_awal_keperawatan_ralan_bayi.lokasi,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.durasi,penilaian_awal_keperawatan_ralan_bayi.frekuensi,penilaian_awal_keperawatan_ralan_bayi.nyeri_hilang,penilaian_awal_keperawatan_ralan_bayi.ket_nyeri,penilaian_awal_keperawatan_ralan_bayi.pada_dokter,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.ket_dokter,penilaian_awal_keperawatan_ralan_bayi.rencana,penilaian_awal_keperawatan_ralan_bayi.nip,petugas.nama "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_awal_keperawatan_ralan_bayi on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_bayi.no_rawat "+
-                            "inner join petugas on penilaian_awal_keperawatan_ralan_bayi.nip=petugas.nip "+
-                            "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
-                            "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
-                            "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? order by penilaian_awal_keperawatan_ralan_bayi.tanggal");
-                }else{
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_bayi.tanggal,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.informasi,penilaian_awal_keperawatan_ralan_bayi.td,penilaian_awal_keperawatan_ralan_bayi.nadi,penilaian_awal_keperawatan_ralan_bayi.rr,penilaian_awal_keperawatan_ralan_bayi.suhu,penilaian_awal_keperawatan_ralan_bayi.gcs,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.bb,penilaian_awal_keperawatan_ralan_bayi.tb,penilaian_awal_keperawatan_ralan_bayi.lp,penilaian_awal_keperawatan_ralan_bayi.lk,penilaian_awal_keperawatan_ralan_bayi.ld,penilaian_awal_keperawatan_ralan_bayi.keluhan_utama,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.rpd,penilaian_awal_keperawatan_ralan_bayi.rpk,penilaian_awal_keperawatan_ralan_bayi.rpo,penilaian_awal_keperawatan_ralan_bayi.alergi,penilaian_awal_keperawatan_ralan_bayi.anakke,penilaian_awal_keperawatan_ralan_bayi.darisaudara,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.caralahir,penilaian_awal_keperawatan_ralan_bayi.ket_caralahir,penilaian_awal_keperawatan_ralan_bayi.umurkelahiran,penilaian_awal_keperawatan_ralan_bayi.kelainanbawaan,penilaian_awal_keperawatan_ralan_bayi.ket_kelainan_bawaan,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.usiatengkurap,penilaian_awal_keperawatan_ralan_bayi.usiaduduk,penilaian_awal_keperawatan_ralan_bayi.usiaberdiri,penilaian_awal_keperawatan_ralan_bayi.usiagigipertama,penilaian_awal_keperawatan_ralan_bayi.usiaberjalan,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.usiabicara,penilaian_awal_keperawatan_ralan_bayi.usiamembaca,penilaian_awal_keperawatan_ralan_bayi.usiamenulis,penilaian_awal_keperawatan_ralan_bayi.gangguanemosi,penilaian_awal_keperawatan_ralan_bayi.alat_bantu,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.ket_bantu,penilaian_awal_keperawatan_ralan_bayi.prothesa,penilaian_awal_keperawatan_ralan_bayi.ket_pro,penilaian_awal_keperawatan_ralan_bayi.adl,penilaian_awal_keperawatan_ralan_bayi.status_psiko,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.ket_psiko,penilaian_awal_keperawatan_ralan_bayi.hub_keluarga,penilaian_awal_keperawatan_ralan_bayi.pengasuh,penilaian_awal_keperawatan_ralan_bayi.ket_pengasuh,penilaian_awal_keperawatan_ralan_bayi.ekonomi,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.budaya,penilaian_awal_keperawatan_ralan_bayi.ket_budaya,penilaian_awal_keperawatan_ralan_bayi.edukasi,penilaian_awal_keperawatan_ralan_bayi.ket_edukasi,penilaian_awal_keperawatan_ralan_bayi.berjalan_a,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.berjalan_b,penilaian_awal_keperawatan_ralan_bayi.berjalan_c,penilaian_awal_keperawatan_ralan_bayi.hasil,penilaian_awal_keperawatan_ralan_bayi.lapor,penilaian_awal_keperawatan_ralan_bayi.ket_lapor,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.sg1,penilaian_awal_keperawatan_ralan_bayi.nilai1,penilaian_awal_keperawatan_ralan_bayi.sg2,penilaian_awal_keperawatan_ralan_bayi.nilai2,penilaian_awal_keperawatan_ralan_bayi.sg3,penilaian_awal_keperawatan_ralan_bayi.nilai3,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.sg4,penilaian_awal_keperawatan_ralan_bayi.nilai4,penilaian_awal_keperawatan_ralan_bayi.total_hasil,penilaian_awal_keperawatan_ralan_bayi.wajah,penilaian_awal_keperawatan_ralan_bayi.nilaiwajah,penilaian_awal_keperawatan_ralan_bayi.kaki,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.nilaikaki,penilaian_awal_keperawatan_ralan_bayi.aktifitas,penilaian_awal_keperawatan_ralan_bayi.nilaiaktifitas,penilaian_awal_keperawatan_ralan_bayi.menangis,penilaian_awal_keperawatan_ralan_bayi.nilaimenangis,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.bersuara,penilaian_awal_keperawatan_ralan_bayi.nilaibersuara,penilaian_awal_keperawatan_ralan_bayi.hasilnyeri,penilaian_awal_keperawatan_ralan_bayi.nyeri,penilaian_awal_keperawatan_ralan_bayi.lokasi,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.durasi,penilaian_awal_keperawatan_ralan_bayi.frekuensi,penilaian_awal_keperawatan_ralan_bayi.nyeri_hilang,penilaian_awal_keperawatan_ralan_bayi.ket_nyeri,penilaian_awal_keperawatan_ralan_bayi.pada_dokter,"+
-                            "penilaian_awal_keperawatan_ralan_bayi.ket_dokter,penilaian_awal_keperawatan_ralan_bayi.rencana,penilaian_awal_keperawatan_ralan_bayi.nip,petugas.nama "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_awal_keperawatan_ralan_bayi on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_bayi.no_rawat "+
-                            "inner join petugas on penilaian_awal_keperawatan_ralan_bayi.nip=petugas.nip "+
-                            "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
-                            "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
-                            "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and reg_periksa.no_rawat like ? or "+
-                            "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and pasien.no_rkm_medis like ? or "+
-                            "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and pasien.nm_pasien like ? or "+
-                            "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and penilaian_awal_keperawatan_ralan_bayi.nip like ? or "+
-                            "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and petugas.nama like ? order by penilaian_awal_keperawatan_ralan_bayi.tanggal");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi2 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#323232}.isi3 td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi5 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#AA0000}.isi6 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#FF0000}.isi7 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#C8C800}.isi8 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#00AA00}.isi9 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#969696}");
+                    bw.flush();
                 }
-
-                try {
-                    if(TCari.getText().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(5,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(8,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(9,"%"+TCari.getText()+"%");
-                        ps.setString(10,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(11,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(12,"%"+TCari.getText()+"%");
-                        ps.setString(13,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(14,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(15,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    StringBuilder htmlContent = new StringBuilder();
-                    htmlContent.append(
-                        "<tr class='isi'>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%'><b>PASIEN & PETUGAS</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>II. RIWAYAT KESEHATAN DAHULU</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%'><b>V. RIWAYAT TUMBUH KEMBANG ANAK</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>VII. RIWAYAT PSIKO-SOSIAL, SPIRITUAL DAN BUDAYA</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>VIII. PENGKAJIAN RESIKO JATUH</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%'><b>IX. SKRINING GIZI (Strong kid)</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>X. PENGKAJIAN TINGKAT NYERI</b></td>").append(
-                        "</tr>"
-                    );
-                    while(rs.next()){
-                        masalahkeperawatan="";
-                        ps2=koneksi.prepareStatement(
-                            "select master_masalah_keperawatan_anak.kode_masalah,master_masalah_keperawatan_anak.nama_masalah from master_masalah_keperawatan_anak "+
-                            "inner join penilaian_awal_keperawatan_ralan_bayi_masalah on penilaian_awal_keperawatan_ralan_bayi_masalah.kode_masalah=master_masalah_keperawatan_anak.kode_masalah "+
-                            "where penilaian_awal_keperawatan_ralan_bayi_masalah.no_rawat=? order by kode_masalah");
-                        try {
-                            ps2.setString(1,rs.getString("no_rawat"));
-                            rs2=ps2.executeQuery();
-                            while(rs2.next()){
-                                masalahkeperawatan=rs2.getString("nama_masalah")+", "+masalahkeperawatan;
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Notif : "+e);
-                        } finally{
-                            if(rs2!=null){
-                                rs2.close();
-                            }
-                            if(ps2!=null){
-                                ps2.close();
-                            }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (HTML)", "Laporan 3 (WPS)", "Laporan 4 (CSV)", "Laporan 5 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        if(TCari.getText().equals("")){
+                            ps=koneksi.prepareStatement(
+                                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_bayi.tanggal,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.informasi,penilaian_awal_keperawatan_ralan_bayi.td,penilaian_awal_keperawatan_ralan_bayi.nadi,penilaian_awal_keperawatan_ralan_bayi.rr,penilaian_awal_keperawatan_ralan_bayi.suhu,penilaian_awal_keperawatan_ralan_bayi.gcs,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.bb,penilaian_awal_keperawatan_ralan_bayi.tb,penilaian_awal_keperawatan_ralan_bayi.lp,penilaian_awal_keperawatan_ralan_bayi.lk,penilaian_awal_keperawatan_ralan_bayi.ld,penilaian_awal_keperawatan_ralan_bayi.keluhan_utama,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.rpd,penilaian_awal_keperawatan_ralan_bayi.rpk,penilaian_awal_keperawatan_ralan_bayi.rpo,penilaian_awal_keperawatan_ralan_bayi.alergi,penilaian_awal_keperawatan_ralan_bayi.anakke,penilaian_awal_keperawatan_ralan_bayi.darisaudara,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.caralahir,penilaian_awal_keperawatan_ralan_bayi.ket_caralahir,penilaian_awal_keperawatan_ralan_bayi.umurkelahiran,penilaian_awal_keperawatan_ralan_bayi.kelainanbawaan,penilaian_awal_keperawatan_ralan_bayi.ket_kelainan_bawaan,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.usiatengkurap,penilaian_awal_keperawatan_ralan_bayi.usiaduduk,penilaian_awal_keperawatan_ralan_bayi.usiaberdiri,penilaian_awal_keperawatan_ralan_bayi.usiagigipertama,penilaian_awal_keperawatan_ralan_bayi.usiaberjalan,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.usiabicara,penilaian_awal_keperawatan_ralan_bayi.usiamembaca,penilaian_awal_keperawatan_ralan_bayi.usiamenulis,penilaian_awal_keperawatan_ralan_bayi.gangguanemosi,penilaian_awal_keperawatan_ralan_bayi.alat_bantu,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.ket_bantu,penilaian_awal_keperawatan_ralan_bayi.prothesa,penilaian_awal_keperawatan_ralan_bayi.ket_pro,penilaian_awal_keperawatan_ralan_bayi.adl,penilaian_awal_keperawatan_ralan_bayi.status_psiko,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.ket_psiko,penilaian_awal_keperawatan_ralan_bayi.hub_keluarga,penilaian_awal_keperawatan_ralan_bayi.pengasuh,penilaian_awal_keperawatan_ralan_bayi.ket_pengasuh,penilaian_awal_keperawatan_ralan_bayi.ekonomi,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.budaya,penilaian_awal_keperawatan_ralan_bayi.ket_budaya,penilaian_awal_keperawatan_ralan_bayi.edukasi,penilaian_awal_keperawatan_ralan_bayi.ket_edukasi,penilaian_awal_keperawatan_ralan_bayi.berjalan_a,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.berjalan_b,penilaian_awal_keperawatan_ralan_bayi.berjalan_c,penilaian_awal_keperawatan_ralan_bayi.hasil,penilaian_awal_keperawatan_ralan_bayi.lapor,penilaian_awal_keperawatan_ralan_bayi.ket_lapor,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.sg1,penilaian_awal_keperawatan_ralan_bayi.nilai1,penilaian_awal_keperawatan_ralan_bayi.sg2,penilaian_awal_keperawatan_ralan_bayi.nilai2,penilaian_awal_keperawatan_ralan_bayi.sg3,penilaian_awal_keperawatan_ralan_bayi.nilai3,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.sg4,penilaian_awal_keperawatan_ralan_bayi.nilai4,penilaian_awal_keperawatan_ralan_bayi.total_hasil,penilaian_awal_keperawatan_ralan_bayi.wajah,penilaian_awal_keperawatan_ralan_bayi.nilaiwajah,penilaian_awal_keperawatan_ralan_bayi.kaki,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.nilaikaki,penilaian_awal_keperawatan_ralan_bayi.aktifitas,penilaian_awal_keperawatan_ralan_bayi.nilaiaktifitas,penilaian_awal_keperawatan_ralan_bayi.menangis,penilaian_awal_keperawatan_ralan_bayi.nilaimenangis,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.bersuara,penilaian_awal_keperawatan_ralan_bayi.nilaibersuara,penilaian_awal_keperawatan_ralan_bayi.hasilnyeri,penilaian_awal_keperawatan_ralan_bayi.nyeri,penilaian_awal_keperawatan_ralan_bayi.lokasi,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.durasi,penilaian_awal_keperawatan_ralan_bayi.frekuensi,penilaian_awal_keperawatan_ralan_bayi.nyeri_hilang,penilaian_awal_keperawatan_ralan_bayi.ket_nyeri,penilaian_awal_keperawatan_ralan_bayi.pada_dokter,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.ket_dokter,penilaian_awal_keperawatan_ralan_bayi.rencana,penilaian_awal_keperawatan_ralan_bayi.nip,petugas.nama "+
+                                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                    "inner join penilaian_awal_keperawatan_ralan_bayi on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_bayi.no_rawat "+
+                                    "inner join petugas on penilaian_awal_keperawatan_ralan_bayi.nip=petugas.nip "+
+                                    "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
+                                    "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
+                                    "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? order by penilaian_awal_keperawatan_ralan_bayi.tanggal");
+                        }else{
+                            ps=koneksi.prepareStatement(
+                                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_bayi.tanggal,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.informasi,penilaian_awal_keperawatan_ralan_bayi.td,penilaian_awal_keperawatan_ralan_bayi.nadi,penilaian_awal_keperawatan_ralan_bayi.rr,penilaian_awal_keperawatan_ralan_bayi.suhu,penilaian_awal_keperawatan_ralan_bayi.gcs,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.bb,penilaian_awal_keperawatan_ralan_bayi.tb,penilaian_awal_keperawatan_ralan_bayi.lp,penilaian_awal_keperawatan_ralan_bayi.lk,penilaian_awal_keperawatan_ralan_bayi.ld,penilaian_awal_keperawatan_ralan_bayi.keluhan_utama,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.rpd,penilaian_awal_keperawatan_ralan_bayi.rpk,penilaian_awal_keperawatan_ralan_bayi.rpo,penilaian_awal_keperawatan_ralan_bayi.alergi,penilaian_awal_keperawatan_ralan_bayi.anakke,penilaian_awal_keperawatan_ralan_bayi.darisaudara,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.caralahir,penilaian_awal_keperawatan_ralan_bayi.ket_caralahir,penilaian_awal_keperawatan_ralan_bayi.umurkelahiran,penilaian_awal_keperawatan_ralan_bayi.kelainanbawaan,penilaian_awal_keperawatan_ralan_bayi.ket_kelainan_bawaan,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.usiatengkurap,penilaian_awal_keperawatan_ralan_bayi.usiaduduk,penilaian_awal_keperawatan_ralan_bayi.usiaberdiri,penilaian_awal_keperawatan_ralan_bayi.usiagigipertama,penilaian_awal_keperawatan_ralan_bayi.usiaberjalan,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.usiabicara,penilaian_awal_keperawatan_ralan_bayi.usiamembaca,penilaian_awal_keperawatan_ralan_bayi.usiamenulis,penilaian_awal_keperawatan_ralan_bayi.gangguanemosi,penilaian_awal_keperawatan_ralan_bayi.alat_bantu,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.ket_bantu,penilaian_awal_keperawatan_ralan_bayi.prothesa,penilaian_awal_keperawatan_ralan_bayi.ket_pro,penilaian_awal_keperawatan_ralan_bayi.adl,penilaian_awal_keperawatan_ralan_bayi.status_psiko,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.ket_psiko,penilaian_awal_keperawatan_ralan_bayi.hub_keluarga,penilaian_awal_keperawatan_ralan_bayi.pengasuh,penilaian_awal_keperawatan_ralan_bayi.ket_pengasuh,penilaian_awal_keperawatan_ralan_bayi.ekonomi,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.budaya,penilaian_awal_keperawatan_ralan_bayi.ket_budaya,penilaian_awal_keperawatan_ralan_bayi.edukasi,penilaian_awal_keperawatan_ralan_bayi.ket_edukasi,penilaian_awal_keperawatan_ralan_bayi.berjalan_a,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.berjalan_b,penilaian_awal_keperawatan_ralan_bayi.berjalan_c,penilaian_awal_keperawatan_ralan_bayi.hasil,penilaian_awal_keperawatan_ralan_bayi.lapor,penilaian_awal_keperawatan_ralan_bayi.ket_lapor,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.sg1,penilaian_awal_keperawatan_ralan_bayi.nilai1,penilaian_awal_keperawatan_ralan_bayi.sg2,penilaian_awal_keperawatan_ralan_bayi.nilai2,penilaian_awal_keperawatan_ralan_bayi.sg3,penilaian_awal_keperawatan_ralan_bayi.nilai3,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.sg4,penilaian_awal_keperawatan_ralan_bayi.nilai4,penilaian_awal_keperawatan_ralan_bayi.total_hasil,penilaian_awal_keperawatan_ralan_bayi.wajah,penilaian_awal_keperawatan_ralan_bayi.nilaiwajah,penilaian_awal_keperawatan_ralan_bayi.kaki,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.nilaikaki,penilaian_awal_keperawatan_ralan_bayi.aktifitas,penilaian_awal_keperawatan_ralan_bayi.nilaiaktifitas,penilaian_awal_keperawatan_ralan_bayi.menangis,penilaian_awal_keperawatan_ralan_bayi.nilaimenangis,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.bersuara,penilaian_awal_keperawatan_ralan_bayi.nilaibersuara,penilaian_awal_keperawatan_ralan_bayi.hasilnyeri,penilaian_awal_keperawatan_ralan_bayi.nyeri,penilaian_awal_keperawatan_ralan_bayi.lokasi,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.durasi,penilaian_awal_keperawatan_ralan_bayi.frekuensi,penilaian_awal_keperawatan_ralan_bayi.nyeri_hilang,penilaian_awal_keperawatan_ralan_bayi.ket_nyeri,penilaian_awal_keperawatan_ralan_bayi.pada_dokter,"+
+                                    "penilaian_awal_keperawatan_ralan_bayi.ket_dokter,penilaian_awal_keperawatan_ralan_bayi.rencana,penilaian_awal_keperawatan_ralan_bayi.nip,petugas.nama "+
+                                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                    "inner join penilaian_awal_keperawatan_ralan_bayi on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_bayi.no_rawat "+
+                                    "inner join petugas on penilaian_awal_keperawatan_ralan_bayi.nip=petugas.nip "+
+                                    "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
+                                    "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
+                                    "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and reg_periksa.no_rawat like ? or "+
+                                    "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and pasien.no_rkm_medis like ? or "+
+                                    "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and pasien.nm_pasien like ? or "+
+                                    "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and penilaian_awal_keperawatan_ralan_bayi.nip like ? or "+
+                                    "penilaian_awal_keperawatan_ralan_bayi.tanggal between ? and ? and petugas.nama like ? order by penilaian_awal_keperawatan_ralan_bayi.tanggal");
                         }
-                        htmlContent.append(
-                            "<tr class='isi'>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>No.Rawat</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>No.R.M.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Nama Pasien</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>J.K.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("jk")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Agama</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("agama")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Bahasa</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nama_bahasa")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Tgl.Lahir</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nama_cacat")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Cacat Fisik</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Petugas</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nip")).append(" ").append(rs.getString("nama")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Tgl.Asuhan</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Informasi</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("informasi")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='3' width='100%'><b>I. KEADAAN UMUM</b></td></tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>TD</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("td")).append("mmHg</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>Nadi</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("nadi")).append("x/menit</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>RR</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("rr")).append("x/menit</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>Suhu</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("suhu")).append("°C</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>GCS(E,V,M)</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("gcs")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>BB</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("bb")).append("Kg</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>TB</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("tb")).append("cm</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>LP</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("lp")).append("cm</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>LK</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("lk")).append("cm</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top' align='justify'>LD</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("ld")).append("cm</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Keluhan Utama</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("keluhan_utama")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>RPD</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("rpd")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>RPK</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("rpk")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>RPO</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("rpo")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top' align='justify'>Alergi</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("alergi")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='3' width='100%'><b>III. RIWAYAT TUMBUH KEMBANG DAN PERINATAL CARE</b></td></tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='40%' valign='top' align='justify'>Riwayat Kelahiran</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'> Anak ke ").append(rs.getString("anakke")).append(" dari ").append(rs.getString("darisaudara")).append(" saudara</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='40%' valign='top' align='justify'>Umur Kelahiran</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'>").append(rs.getString("umurkelahiran")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='40%' valign='top' align='justify'>Cara kelahiran</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'>").append(rs.getString("caralahir")).append("<br>").append(rs.getString("ket_caralahir")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='40%' valign='top' align='justify'>Kelainan Bawaan</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'>").append(rs.getString("kelainanbawaan")).append("<br>").append(rs.getString("ket_kelainan_bawaan")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td valign='top' cellpadding='0' cellspacing='0' colspan='3'>").append(
-                                                "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                                    "<tr class='isi2'>").append(
-                                                        "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='7'><b>IV. RIWAYAT IMUNISASI</b></td>").append(
-                                                    "</tr>").append(
-                                                    "<tr class='isi2'>").append(
-                                                        "<td width='70%' valign='top'>Nama Imunisasi</td><td width='5%' valign='top'>Ke 1</td><td width='5%' valign='top'>Ke 2</td><td width='5%' valign='top'>Ke 3</td><td width='5%' valign='top'>Ke 4</td><td width='5%' valign='top'>Ke 5</td><td width='5%' valign='top'>Ke 6</td>");
+                        try {
+                            if(TCari.getText().equals("")){
+                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                            }else{
+                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(3,"%"+TCari.getText()+"%");
+                                ps.setString(4,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(5,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(6,"%"+TCari.getText()+"%");
+                                ps.setString(7,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(8,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(9,"%"+TCari.getText()+"%");
+                                ps.setString(10,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(11,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(12,"%"+TCari.getText()+"%");
+                                ps.setString(13,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(14,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(15,"%"+TCari.getText()+"%");
+                            }
+                            rs=ps.executeQuery();
+                            StringBuilder htmlContent = new StringBuilder();
+                            htmlContent.append(
+                                "<tr class='isi'>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%'><b>PASIEN & PETUGAS</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>II. RIWAYAT KESEHATAN DAHULU</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%'><b>V. RIWAYAT TUMBUH KEMBANG ANAK</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>VII. RIWAYAT PSIKO-SOSIAL, SPIRITUAL DAN BUDAYA</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>VIII. PENGKAJIAN RESIKO JATUH</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%'><b>IX. SKRINING GIZI (Strong kid)</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'><b>X. PENGKAJIAN TINGKAT NYERI</b></td>").append(
+                                "</tr>"
+                            );
+                            while(rs.next()){
+                                masalahkeperawatan="";
                                 ps2=koneksi.prepareStatement(
-                                        "select master_imunisasi.kode_imunisasi,master_imunisasi.nama_imunisasi from master_imunisasi inner join riwayat_imunisasi on riwayat_imunisasi.kode_imunisasi=master_imunisasi.kode_imunisasi "+
-                                        "where riwayat_imunisasi.no_rkm_medis=? group by master_imunisasi.kode_imunisasi order by master_imunisasi.kode_imunisasi  ");
+                                    "select master_masalah_keperawatan_anak.kode_masalah,master_masalah_keperawatan_anak.nama_masalah from master_masalah_keperawatan_anak "+
+                                    "inner join penilaian_awal_keperawatan_ralan_bayi_masalah on penilaian_awal_keperawatan_ralan_bayi_masalah.kode_masalah=master_masalah_keperawatan_anak.kode_masalah "+
+                                    "where penilaian_awal_keperawatan_ralan_bayi_masalah.no_rawat=? order by kode_masalah");
                                 try {
-                                    ps2.setString(1,rs.getString("no_rkm_medis"));
+                                    ps2.setString(1,rs.getString("no_rawat"));
                                     rs2=ps2.executeQuery();
                                     while(rs2.next()){
-                                        htmlke1="&nbsp;";htmlke2="&nbsp;";htmlke3="&nbsp;";htmlke4="&nbsp;";htmlke5="&nbsp;";htmlke6="&nbsp;";
-                                        ps3=koneksi.prepareStatement("select * from riwayat_imunisasi where no_rkm_medis=? and kode_imunisasi=?");
-                                        try {
-                                            ps3.setString(1,rs.getString("no_rkm_medis"));
-                                            ps3.setString(2,rs2.getString(1));
-                                            rs3=ps3.executeQuery();
-                                            while(rs3.next()){
-                                                if(rs3.getInt("no_imunisasi")==1){
-                                                    htmlke1="V";
-                                                }
-                                                if(rs3.getInt("no_imunisasi")==2){
-                                                    htmlke2="V";
-                                                }
-                                                if(rs3.getInt("no_imunisasi")==3){
-                                                    htmlke3="V";
-                                                }
-                                                if(rs3.getInt("no_imunisasi")==4){
-                                                    htmlke4="V";
-                                                }
-                                                if(rs3.getInt("no_imunisasi")==5){
-                                                    htmlke5="V";
-                                                }
-                                                if(rs3.getInt("no_imunisasi")==6){
-                                                    htmlke6="V";
-                                                }
-                                            }
-                                        } catch (Exception e) {
-                                            System.out.println("Notif : "+e);
-                                        } finally{
-                                            if(rs3!=null){
-                                                rs3.close();
-                                            }
-                                            if(ps3!=null){
-                                                ps3.close();
-                                            }
-                                        }
-
-                                        htmlContent.append("<tr class='isi2'>").append(
-                                                              "<td>").append(rs2.getString(2)).append("</td><td>").append(htmlke1).append("</td><td>").append(htmlke2).append("</td><td>").append(htmlke3).append("</td><td>").append(htmlke4).append("</td><td>").append(htmlke5).append("</td><td>").append(htmlke6).append("</td>").append(
-                                                           "</tr>");
+                                        masalahkeperawatan=rs2.getString("nama_masalah")+", "+masalahkeperawatan;
                                     }
-                                } catch (Exception e) {
-                                    System.out.println("Notif : "+e);
                                 } finally{
                                     if(rs2!=null){
                                         rs2.close();
@@ -3590,215 +3430,373 @@ public final class RMPenilaianAwalKeperawatanBayiAnak extends javax.swing.JDialo
                                         ps2.close();
                                     }
                                 }
-                        htmlContent.append(     "</table>").append(
-                                            "</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>a. Tengkurap, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiatengkurap")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>b. Duduk, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiaduduk")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>c. Berdiri, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiaberdiri")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>d. Gigi pertama, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiagigipertama")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>e. Berjalan, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiaberjalan")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>f. Bicara Usia, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiabicara")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>g. Mulai bisa membaca, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiamembaca")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='80%' valign='top' align='justify'>h. Mulai bisa menulis, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiamenulis")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='100%' valign='top' colspan='3' align='justify'>Gangguan perkembangan mental / emosi : ").append(rs.getString("gangguanemosi")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='3'><b>VI. FUNGSIONAL</b></td></tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='30%' valign='top' align='justify'>Alat Bantu</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("alat_bantu")).append("<br>").append(rs.getString("ket_bantu")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='30%' valign='top' align='justify'>Prothesa</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("prothesa")).append("<br>").append(rs.getString("ket_pro")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='30%' valign='top' align='justify'>Cacat Fisik</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("nama_cacat")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='30%' valign='top' align='justify'>ADL</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("adl")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Status Psikologis</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("status_psiko")).append("<br>").append(rs.getString("ket_psiko")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Bahasa yang digunakan sehari-hari</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("nama_bahasa")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' colspan='3' align='justify'>Status Sosial dan ekonomi :</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>a. Hubungan dengan anggota keluarga</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("hub_keluarga")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>b. Pengasuh</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("pengasuh")).append(" ").append(rs.getString("ket_pengasuh")).append(" </td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>c. Ekonomi (Ortu)</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("ekonomi")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Kepercayaan / Budaya / Nilai-nilai khusus yang perlu diperhatikan</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("budaya")).append("<br>").append(rs.getString("ket_budaya")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Agama</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("agama")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Edukasi diberikan kepada</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("edukasi")).append("<br>").append(rs.getString("ket_edukasi")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='100%' valign='top' colspan='3' align='justify'>a. Cara berjalan pasien (salah satu atau lebih) :</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>1. Tidak seimbang/ Sempoyongan/ Limbung</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("berjalan_a")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>2. Jalan dengan menggunakan alat bantu (kruk, tripot, kursi roda, orang lain)</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("berjalan_b")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>b. Duduk di kursi tanpa menggunakan tangan sebagai penopang (tampak memegang kursi atau meja/ benda lain)</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("berjalan_c")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Hasil</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("hasil")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Dilaporkan kepada dokter</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("lapor")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='50%' valign='top' align='justify'>Jam dilaporkan</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("ket_lapor")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='85%' valign='top' align='justify'>1. Apakah pasien tampak kurus</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg1")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai1")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='85%' valign='top' align='justify'>2. Apakah terdapat penurunan berat badan selama satu bulan terakhir? (berdasarkan penilaian objektif data berat badan bila ada atau untuk bayi < 1 tahun ; berat badan tidak naik selama 3 bulan terakhir)</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg2")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai2")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='85%' valign='top' align='justify'>3. Apakah terdapat salah satu dari kondisi tersebut? Diare > 5 kali/hari dan/muntah > 3 kali/hari salam seminggu terakhir;Asupan makanan berkurang selama 1 minggu terakhir</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg3")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai3")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='85%' valign='top' align='justify'>4. Apakah terdapat penyakit atau keadaan yang menyebabkan pasien beresiko mengalami malnutrisi?</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg4")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai4")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='85%' valign='top' align='justify'>Total Skor</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'></td><td width='5%' valign='top' align='right'>").append(rs.getString("total_hasil")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='25%' valign='top' align='justify'>Wajah</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("wajah")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaiwajah")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='25%' valign='top' align='justify'>Kaki</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("kaki")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaikaki")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='25%' valign='top' align='justify'>Aktifitas</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("aktifitas")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaiaktifitas")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='25%' valign='top' align='justify'>Menangis</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("menangis")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaimenangis")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='25%' valign='top' align='justify'>Bersuara</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("bersuara")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaibersuara")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='25%' valign='top' align='justify'>Skala nyeri</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'></td><td width='5%' valign='top' align='right'>").append(rs.getString("hasilnyeri")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                    "<br><center><b>MASALAH & RENCANA KEPERAWATAN</b></center><br>").append(
-                                    "Masalah Keperawatan : ").append(masalahkeperawatan).append("<br><br>").append(
-                                    "Rencana Keperawatan : ").append(rs.getString("rencana")).append(
-                                "</td>").append(
-                            "</tr>"
-                        );
-                    }
-                    LoadHTML.setText(
-                        "<html>"+
-                          "<table width='1800px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                           htmlContent.toString()+
-                          "</table>"+
-                        "</html>"
-                    );
-                    htmlContent=null;
+                                htmlContent.append(
+                                    "<tr class='isi'>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>No.Rawat</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>No.R.M.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Nama Pasien</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>J.K.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("jk")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Agama</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("agama")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Bahasa</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nama_bahasa")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Tgl.Lahir</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nama_cacat")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Cacat Fisik</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Petugas</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nip")).append(" ").append(rs.getString("nama")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Tgl.Asuhan</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Informasi</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("informasi")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='3' width='100%'><b>I. KEADAAN UMUM</b></td></tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>TD</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("td")).append("mmHg</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>Nadi</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("nadi")).append("x/menit</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>RR</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("rr")).append("x/menit</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>Suhu</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("suhu")).append("°C</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>GCS(E,V,M)</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("gcs")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>BB</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("bb")).append("Kg</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>TB</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("tb")).append("cm</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>LP</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("lp")).append("cm</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>LK</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("lk")).append("cm</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top' align='justify'>LD</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("ld")).append("cm</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Keluhan Utama</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("keluhan_utama")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>RPD</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("rpd")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>RPK</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("rpk")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>RPO</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("rpo")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top' align='justify'>Alergi</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("alergi")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='3' width='100%'><b>III. RIWAYAT TUMBUH KEMBANG DAN PERINATAL CARE</b></td></tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='40%' valign='top' align='justify'>Riwayat Kelahiran</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'> Anak ke ").append(rs.getString("anakke")).append(" dari ").append(rs.getString("darisaudara")).append(" saudara</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='40%' valign='top' align='justify'>Umur Kelahiran</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'>").append(rs.getString("umurkelahiran")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='40%' valign='top' align='justify'>Cara kelahiran</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'>").append(rs.getString("caralahir")).append("<br>").append(rs.getString("ket_caralahir")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='40%' valign='top' align='justify'>Kelainan Bawaan</td><td valign='top'>:&nbsp;</td><td width='59%' valign='top'>").append(rs.getString("kelainanbawaan")).append("<br>").append(rs.getString("ket_kelainan_bawaan")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td valign='top' cellpadding='0' cellspacing='0' colspan='3'>").append(
+                                                        "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                            "<tr class='isi2'>").append(
+                                                                "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='7'><b>IV. RIWAYAT IMUNISASI</b></td>").append(
+                                                            "</tr>").append(
+                                                            "<tr class='isi2'>").append(
+                                                                "<td width='70%' valign='top'>Nama Imunisasi</td><td width='5%' valign='top'>Ke 1</td><td width='5%' valign='top'>Ke 2</td><td width='5%' valign='top'>Ke 3</td><td width='5%' valign='top'>Ke 4</td><td width='5%' valign='top'>Ke 5</td><td width='5%' valign='top'>Ke 6</td>");
+                                        ps2=koneksi.prepareStatement(
+                                                "select master_imunisasi.kode_imunisasi,master_imunisasi.nama_imunisasi from master_imunisasi inner join riwayat_imunisasi on riwayat_imunisasi.kode_imunisasi=master_imunisasi.kode_imunisasi "+
+                                                "where riwayat_imunisasi.no_rkm_medis=? group by master_imunisasi.kode_imunisasi order by master_imunisasi.kode_imunisasi  ");
+                                        try {
+                                            ps2.setString(1,rs.getString("no_rkm_medis"));
+                                            rs2=ps2.executeQuery();
+                                            while(rs2.next()){
+                                                htmlke1="&nbsp;";htmlke2="&nbsp;";htmlke3="&nbsp;";htmlke4="&nbsp;";htmlke5="&nbsp;";htmlke6="&nbsp;";
+                                                ps3=koneksi.prepareStatement("select * from riwayat_imunisasi where no_rkm_medis=? and kode_imunisasi=?");
+                                                try {
+                                                    ps3.setString(1,rs.getString("no_rkm_medis"));
+                                                    ps3.setString(2,rs2.getString(1));
+                                                    rs3=ps3.executeQuery();
+                                                    while(rs3.next()){
+                                                        if(rs3.getInt("no_imunisasi")==1){
+                                                            htmlke1="V";
+                                                        }
+                                                        if(rs3.getInt("no_imunisasi")==2){
+                                                            htmlke2="V";
+                                                        }
+                                                        if(rs3.getInt("no_imunisasi")==3){
+                                                            htmlke3="V";
+                                                        }
+                                                        if(rs3.getInt("no_imunisasi")==4){
+                                                            htmlke4="V";
+                                                        }
+                                                        if(rs3.getInt("no_imunisasi")==5){
+                                                            htmlke5="V";
+                                                        }
+                                                        if(rs3.getInt("no_imunisasi")==6){
+                                                            htmlke6="V";
+                                                        }
+                                                    }
+                                                } finally{
+                                                    if(rs3!=null){
+                                                        rs3.close();
+                                                    }
+                                                    if(ps3!=null){
+                                                        ps3.close();
+                                                    }
+                                                }
 
-                    File g = new File("file2.css");
-                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                    bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                        ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                        ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                        ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                        ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                    );
-                    bg.close();
+                                                htmlContent.append("<tr class='isi2'>").append(
+                                                                      "<td>").append(rs2.getString(2)).append("</td><td>").append(htmlke1).append("</td><td>").append(htmlke2).append("</td><td>").append(htmlke3).append("</td><td>").append(htmlke4).append("</td><td>").append(htmlke5).append("</td><td>").append(htmlke6).append("</td>").append(
+                                                                   "</tr>");
+                                            }
+                                        } finally{
+                                            if(rs2!=null){
+                                                rs2.close();
+                                            }
+                                            if(ps2!=null){
+                                                ps2.close();
+                                            }
+                                        }
+                                htmlContent.append(     "</table>").append(
+                                                    "</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>a. Tengkurap, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiatengkurap")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>b. Duduk, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiaduduk")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>c. Berdiri, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiaberdiri")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>d. Gigi pertama, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiagigipertama")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>e. Berjalan, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiaberjalan")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>f. Bicara Usia, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiabicara")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>g. Mulai bisa membaca, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiamembaca")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='80%' valign='top' align='justify'>h. Mulai bisa menulis, usia</td><td valign='top'>:&nbsp;</td><td width='19%' valign='top'> ").append(rs.getString("usiamenulis")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='100%' valign='top' colspan='3' align='justify'>Gangguan perkembangan mental / emosi : ").append(rs.getString("gangguanemosi")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='3'><b>VI. FUNGSIONAL</b></td></tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='30%' valign='top' align='justify'>Alat Bantu</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("alat_bantu")).append("<br>").append(rs.getString("ket_bantu")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='30%' valign='top' align='justify'>Prothesa</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("prothesa")).append("<br>").append(rs.getString("ket_pro")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='30%' valign='top' align='justify'>Cacat Fisik</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("nama_cacat")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='30%' valign='top' align='justify'>ADL</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("adl")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Status Psikologis</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("status_psiko")).append("<br>").append(rs.getString("ket_psiko")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Bahasa yang digunakan sehari-hari</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("nama_bahasa")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' colspan='3' align='justify'>Status Sosial dan ekonomi :</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>a. Hubungan dengan anggota keluarga</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("hub_keluarga")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>b. Pengasuh</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("pengasuh")).append(" ").append(rs.getString("ket_pengasuh")).append(" </td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>c. Ekonomi (Ortu)</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("ekonomi")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Kepercayaan / Budaya / Nilai-nilai khusus yang perlu diperhatikan</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("budaya")).append("<br>").append(rs.getString("ket_budaya")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Agama</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("agama")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Edukasi diberikan kepada</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("edukasi")).append("<br>").append(rs.getString("ket_edukasi")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='100%' valign='top' colspan='3' align='justify'>a. Cara berjalan pasien (salah satu atau lebih) :</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>1. Tidak seimbang/ Sempoyongan/ Limbung</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("berjalan_a")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>2. Jalan dengan menggunakan alat bantu (kruk, tripot, kursi roda, orang lain)</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("berjalan_b")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>b. Duduk di kursi tanpa menggunakan tangan sebagai penopang (tampak memegang kursi atau meja/ benda lain)</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("berjalan_c")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Hasil</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("hasil")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Dilaporkan kepada dokter</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("lapor")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='50%' valign='top' align='justify'>Jam dilaporkan</td><td valign='top'>:&nbsp;</td><td width='49%' valign='top'>").append(rs.getString("ket_lapor")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='85%' valign='top' align='justify'>1. Apakah pasien tampak kurus</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg1")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai1")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='85%' valign='top' align='justify'>2. Apakah terdapat penurunan berat badan selama satu bulan terakhir? (berdasarkan penilaian objektif data berat badan bila ada atau untuk bayi < 1 tahun ; berat badan tidak naik selama 3 bulan terakhir)</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg2")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai2")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='85%' valign='top' align='justify'>3. Apakah terdapat salah satu dari kondisi tersebut? Diare > 5 kali/hari dan/muntah > 3 kali/hari salam seminggu terakhir;Asupan makanan berkurang selama 1 minggu terakhir</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg3")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai3")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='85%' valign='top' align='justify'>4. Apakah terdapat penyakit atau keadaan yang menyebabkan pasien beresiko mengalami malnutrisi?</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'>").append(rs.getString("sg4")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilai4")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='85%' valign='top' align='justify'>Total Skor</td><td valign='top'>:&nbsp;</td><td width='9%' valign='top'></td><td width='5%' valign='top' align='right'>").append(rs.getString("total_hasil")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='25%' valign='top' align='justify'>Wajah</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("wajah")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaiwajah")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='25%' valign='top' align='justify'>Kaki</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("kaki")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaikaki")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='25%' valign='top' align='justify'>Aktifitas</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("aktifitas")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaiaktifitas")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='25%' valign='top' align='justify'>Menangis</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("menangis")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaimenangis")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='25%' valign='top' align='justify'>Bersuara</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'>").append(rs.getString("bersuara")).append("</td><td width='5%' valign='top' align='right'>").append(rs.getString("nilaibersuara")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='25%' valign='top' align='justify'>Skala nyeri</td><td valign='top'>:&nbsp;</td><td width='69%' valign='top'></td><td width='5%' valign='top' align='right'>").append(rs.getString("hasilnyeri")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                            "<br><center><b>MASALAH & RENCANA KEPERAWATAN</b></center><br>").append(
+                                            "Masalah Keperawatan : ").append(masalahkeperawatan).append("<br><br>").append(
+                                            "Rencana Keperawatan : ").append(rs.getString("rencana")).append(
+                                        "</td>").append(
+                                    "</tr>"
+                                );
+                            }
+                            LoadHTML.setText(
+                                "<html>"+
+                                  "<table width='1800px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                                   htmlContent.toString()+
+                                  "</table>"+
+                                "</html>"
+                            );
+                            htmlContent=null;
 
-                    File f = new File("DataPenilaianAwalKeperawatanRalanBayiAnak.html");
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                "<table width='1800px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr class='isi2'>"+
-                                        "<td valign='top' align='center'>"+
-                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN BAYI/ANAK<br><br></font>"+
-                                        "</td>"+
-                                   "</tr>"+
-                                "</table>")
-                    );
-                    bw.close();
-                    Desktop.getDesktop().browse(f.toURI());
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                            File f = new File("DataPenilaianAwalKeperawatanRalanBayiAnak.html");
+                            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                        "<table width='1800px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                    "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN BAYI/ANAK<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>")
+                            );
+                            bw.close();
+                            Desktop.getDesktop().browse(f.toURI());
+                        } finally{
+                            if(rs!=null){
+                                rs.close();
+                            }
+                            if(ps!=null){
+                                ps.close();
+                            }
+                        }
+                        break;
+                    case "Laporan 2 (HTML)":
+                        Valid.exportHtmlSmc("DataPenilaianAwalKeperawatanRalanBayiAnak.html", "DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN BAYI/ANAK", tbObat);
+                        break;
+                    case "Laporan 3 (WPS)":
+                        Valid.exportWPSSmc("DataPenilaianAwalKeperawatanRalanBayiAnak.wps", "DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN BAYI/ANAK", tbObat);
+                        break;
+                    case "Laporan 4 (CSV)":
+                        Valid.exportCSVSmc("DataPenilaianAwalKeperawatanRalanBayiAnak.csv", tbObat);
+                        break;
+                    case "Laporan 5 (XLSX)":
+                        Valid.exportXlsxSmc("DataPenilaianAwalKeperawatanRalanBayiAnak.xlsx", tbObat);
+                        break;
                 }
-
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
