@@ -972,196 +972,29 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-
-                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.R.M.</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nama Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Umur</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>JK</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Lahir</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Obser</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jam Obser</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Produk/Jenis Darah</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Kantong</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Lokasi Insersi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TD(mmHg)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>HR(x/menit)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>RR(x/menit)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Suhu(°C)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Alergi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Keterangan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>NIP</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nama Petugas</td>"+
-                                "</tr>"
-                            );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,10)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,13)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,14)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,15)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,16)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,17)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,18)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
-
-                            f = new File("MonitoringReaksiTranfusi.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>MONITORING REAKSI TRANFUSI PERIODE "+DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
-
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportHtmlSmc("MonitoringReaksiTranfusi.html", "MONITORING REAKSI TRANFUSI PERIODE " + DTPCari1.getSelectedItem().toString() + " s.d. " + DTPCari2.getSelectedItem().toString(), tbObat);
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.R.M.</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nama Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Umur</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>JK</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Lahir</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Obser</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jam Obser</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Produk/Jenis Darah</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Kantong</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Lokasi Insersi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>TD(mmHg)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>HR(x/menit)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>RR(x/menit)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Suhu(°C)</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Alergi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Keterangan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>NIP</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nama Petugas</td>"+
-                                "</tr>"
-                            );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,10)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,13)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,14)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,15)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,16)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,17)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,18)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
-
-                            f = new File("MonitoringReaksiTranfusi.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>MONITORING REAKSI TRANFUSI PERIODE "+DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
-
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportWPSSmc("MonitoringReaksiTranfusi.wps", "MONITORING REAKSI TRANFUSI PERIODE " + DTPCari1.getSelectedItem().toString() + " s.d. " + DTPCari2.getSelectedItem().toString(), tbObat);
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "\"No.Rawat\";\"No.R.M.\";\"Nama Pasien\";\"Umur\";\"JK\";\"Tgl.Lahir\";\"Tgl.Obser\";\"Jam Obser\";\"Produk/Jenis Darah\";\"No.Kantong\";\"Lokasi Insersi\";\"TD(mmHg)\";\"HR(x/menit)\";\"RR(x/menit)\";\"Suhu(°C)\";\"Alergi\";\"Keterangan\";\"NIP\";\"Nama Petugas\"\n"
-                            );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\"\n"
-                                );
-                            }
-
-                            f = new File("MonitoringReaksiTranfusi.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
-
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportCSVSmc("MonitoringReaksiTranfusi.csv", tbObat);
                         break;
                     case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("MonitoringReaksiTranfusi.xlsx",tbObat);
+                        Valid.exportXlsxSmc("MonitoringReaksiTranfusi.xlsx", tbObat);
                         break;
                 }
             } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }

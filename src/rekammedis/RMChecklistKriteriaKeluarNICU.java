@@ -1203,116 +1203,38 @@ public final class RMChecklistKriteriaKeluarNICU extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                StringBuilder htmlContent = new StringBuilder();
-                htmlContent.append(
-                    "<tr class='isi'>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Memerlukan Ventilasi Mekanik Atau CPAP</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Saturasi O₂ ≥ 90% Tanpa Oksigen Tambahan</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Ada Apnea Atau Bradikardia Dalam 5–7 Hari Terakhir</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tekanan Darah Stabil Sesuai Usia</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Ada Episode Syok Dalam 5 Hari Terakhir</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Asupan Oral Penuh (ASI/PMK) Tanpa Distress</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Memerlukan Nutrisi Parenteral</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Berat Badan Stabil/Meningkat ≥ 15 g/Kg/Hari</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Suhu Stabil (36,5–37,5°C) Di Ruang/Incubator Terbuka</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Ada Episode Hipotermia/Hipertermia 3 Hari Terakhir</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Memerlukan Monitoring Invasif</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Semua Terapi/Tindakan Invasif Telah Selesai</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tidak Ada Tanda Infeksi Aktif</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keputusan</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan/Catatan</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP/Kode Dokter</b></td>").append(
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>DPJP/Dokter Jaga/NICU</b></td>").append(
-                    "</tr>"
-                );
-
-                for (i = 0; i < tabMode.getRowCount(); i++) {
-                    htmlContent.append(
-                        "<tr class='isi'>").append(
-                           "<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").append(
-                        "</tr>");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-
-                LoadHTML.setText(
-                    "<html>"+
-                      "<table width='3300px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                       htmlContent.toString()+
-                      "</table>"+
-                    "</html>"
-                );
-
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                );
-                bg.close();
-
-                File f = new File("DataChecklistKriteriaKeluarNICU.html");
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                            "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                            "<table width='3300px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                "<tr class='isi2'>"+
-                                    "<td valign='top' align='center'>"+
-                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA CHECK LIST KRITERIA KELUAR NICU<br><br></font>"+
-                                    "</td>"+
-                               "</tr>"+
-                            "</table>")
-                );
-                bw.close();
-                Desktop.getDesktop().browse(f.toURI());
-                htmlContent=null;
-            }catch(Exception e){
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataChecklistKriteriaKeluarNICU.html", "DATA CHECK LIST KRITERIA KELUAR NICU", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataChecklistKriteriaKeluarNICU.wps", "DATA CHECK LIST KRITERIA KELUAR NICU", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataChecklistKriteriaKeluarNICU.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataChecklistKriteriaKeluarNICU.xlsx", tbObat);
+                        break;
+                }
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
