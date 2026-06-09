@@ -509,11 +509,11 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
         penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setVisible(true);
-}//GEN-LAST:event_BtnSeekActionPerformed
+    }//GEN-LAST:event_BtnSeekActionPerformed
 
     private void BtnSeekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeekKeyPressed
         Valid.pindah(evt,kdpj,BtnSimpan);
-}//GEN-LAST:event_BtnSeekKeyPressed
+    }//GEN-LAST:event_BtnSeekKeyPressed
 
     private void tbObatPenyakitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatPenyakitMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -522,7 +522,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatPenyakitMouseClicked
+    }//GEN-LAST:event_tbObatPenyakitMouseClicked
 
     private void tbObatPenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatPenyakitKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -533,11 +533,11 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatPenyakitKeyPressed
+    }//GEN-LAST:event_tbObatPenyakitKeyPressed
 
-private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpjKeyPressed
+    private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpjKeyPressed
         Valid.pindah(evt,TCari,BtnSeek);
-}//GEN-LAST:event_kdpjKeyPressed
+    }//GEN-LAST:event_kdpjKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();

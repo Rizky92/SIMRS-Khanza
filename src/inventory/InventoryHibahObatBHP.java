@@ -585,7 +585,7 @@ public class InventoryHibahObatBHP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -593,11 +593,12 @@ public class InventoryHibahObatBHP extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=tbDokter.getRowCount();
@@ -639,25 +640,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     Sequel.AutoComitFalse();
                     sukses=true;
                     if(Sequel.menyimpantf2("hibah_obat_bhp","?,?,?,?,?,?,?","No.Hibah",7,new String[]{
-                            NoFaktur.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglBeli.getSelectedItem()+""),""+ttl,""+ttl2,kdgudang.getText()
-                        })==true){
+                        NoFaktur.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglBeli.getSelectedItem()+""),""+ttl,""+ttl2,kdgudang.getText()
+                    })==true){
                         jml=tbDokter.getRowCount();
                         for(i=0;i<jml;i++){
                             setKonversi(i);
                             try {
                                 if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                                     if(Sequel.menyimpantf2("detailhibah_obat_bhp","?,?,?,?,?,?,?,?,?,?,?","Transaksi Hibah",11,new String[]{
-                                           NoFaktur.getText(),
-                                           tbDokter.getValueAt(i,2).toString(),
-                                           tbDokter.getValueAt(i,1).toString(),
-                                           tbDokter.getValueAt(i,0).toString(),
-                                           tbDokter.getValueAt(i,6).toString(),
-                                           tbDokter.getValueAt(i,7).toString(),
-                                           tbDokter.getValueAt(i,8).toString(),
-                                           tbDokter.getValueAt(i,9).toString(),
-                                           tbDokter.getValueAt(i,11).toString(),
-                                           tbDokter.getValueAt(i,10).toString(),
-                                           Valid.SetTgl(tbDokter.getValueAt(i,5).toString()+"")
+                                        NoFaktur.getText(),
+                                        tbDokter.getValueAt(i,2).toString(),
+                                        tbDokter.getValueAt(i,1).toString(),
+                                        tbDokter.getValueAt(i,0).toString(),
+                                        tbDokter.getValueAt(i,6).toString(),
+                                        tbDokter.getValueAt(i,7).toString(),
+                                        tbDokter.getValueAt(i,8).toString(),
+                                        tbDokter.getValueAt(i,9).toString(),
+                                        tbDokter.getValueAt(i,11).toString(),
+                                        tbDokter.getValueAt(i,10).toString(),
+                                        Valid.SetTgl(tbDokter.getValueAt(i,5).toString()+"")
                                     })==true){
                                         if(aktifkanbatch.equals("yes")){
                                             Trackobat.catatRiwayat(tbDokter.getValueAt(i,2).toString(),Valid.SetAngka(tbDokter.getValueAt(i,10).toString()),0,"Hibah",akses.getkode(),kdgudang.getText(),"Simpan",tbDokter.getValueAt(i,11).toString(),NoFaktur.getText(),NoFaktur.getText()+" "+nmsup.getText());
@@ -763,13 +764,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(0,i,7);
-                tbDokter.setValueAt(0,i,9);
-                tbDokter.setValueAt(0,i,10);
-                tbDokter.setValueAt("",i,11);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,7);
+            tbDokter.setValueAt(0,i,9);
+            tbDokter.setValueAt(0,i,10);
+            tbDokter.setValueAt("",i,11);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoFakturKeyPressed
@@ -1013,7 +1014,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             TCari.requestFocus();
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_DELETE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1026,7 +1028,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             tbDokter.setValueAt("", tbDokter.getSelectedRow(),11);
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_BACK_SPACE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1047,14 +1050,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_SHIFT:
                     TCari.setText("");
                     TCari.requestFocus();
                     break;
                 case KeyEvent.VK_RIGHT:
-                        setKonversi(tbDokter.getSelectedRow());
-                        getData();
+                    setKonversi(tbDokter.getSelectedRow());
+                    getData();
                     break;
                 case KeyEvent.VK_SPACE:
                     if(tbDokter.getSelectedColumn()==1){
@@ -1121,7 +1125,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else{
                             JOptionPane.showMessageDialog(null,"Silahkan masukkan jumlah hibah obat & bhp terelebih dahulu..!!");
                         }
-                    }   break;
+                    }
+                    break;
                 default:
                     break;
             }

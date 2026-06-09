@@ -658,7 +658,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
         }
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -715,20 +715,20 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-            TCari.setText("");
-            if(TabRawat.getSelectedIndex()==0){
-                runBackground(() ->tampil());
-            }else if(TabRawat.getSelectedIndex()==1){
-                runBackground(() ->tampil2());
-            }else if(TabRawat.getSelectedIndex()==2){
-                runBackground(() ->tampil3());
-            }else if(TabRawat.getSelectedIndex()==3){
-                runBackground(() ->tampil4());
-            }else if(TabRawat.getSelectedIndex()==4){
-                runBackground(() ->tampil5());
-            }else if(TabRawat.getSelectedIndex()==5){
-                runBackground(() ->tampil6());
-            }
+        TCari.setText("");
+        if(TabRawat.getSelectedIndex()==0){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==1){
+            runBackground(() ->tampil2());
+        }else if(TabRawat.getSelectedIndex()==2){
+            runBackground(() ->tampil3());
+        }else if(TabRawat.getSelectedIndex()==3){
+            runBackground(() ->tampil4());
+        }else if(TabRawat.getSelectedIndex()==4){
+            runBackground(() ->tampil5());
+        }else if(TabRawat.getSelectedIndex()==5){
+            runBackground(() ->tampil6());
+        }
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed

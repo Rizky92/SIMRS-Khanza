@@ -783,11 +783,12 @@ public class DlgPemesanan extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(aktifkanbatch.equals("yes")){
@@ -836,18 +837,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         try {
                             if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                                 if(Sequel.menyimpantf2("detailpesan","?,?,?,?,?,?,?,?,?,?,?,?","Transaksi Penerimaan",12,new String[]{
-                                       NoFaktur.getText(),
-                                       tbDokter.getValueAt(i,2).toString(),
-                                       tbDokter.getValueAt(i,1).toString(),
-                                       tbDokter.getValueAt(i,0).toString(),
-                                       tbDokter.getValueAt(i,7).toString(),
-                                       tbDokter.getValueAt(i,8).toString(),
-                                       tbDokter.getValueAt(i,9).toString(),
-                                       tbDokter.getValueAt(i,10).toString(),
-                                       tbDokter.getValueAt(i,11).toString(),
-                                       tbDokter.getValueAt(i,13).toString(),
-                                       tbDokter.getValueAt(i,12).toString(),
-                                       Valid.SetTgl(tbDokter.getValueAt(i,6).toString()+"")
+                                    NoFaktur.getText(),
+                                    tbDokter.getValueAt(i,2).toString(),
+                                    tbDokter.getValueAt(i,1).toString(),
+                                    tbDokter.getValueAt(i,0).toString(),
+                                    tbDokter.getValueAt(i,7).toString(),
+                                    tbDokter.getValueAt(i,8).toString(),
+                                    tbDokter.getValueAt(i,9).toString(),
+                                    tbDokter.getValueAt(i,10).toString(),
+                                    tbDokter.getValueAt(i,11).toString(),
+                                    tbDokter.getValueAt(i,13).toString(),
+                                    tbDokter.getValueAt(i,12).toString(),
+                                    Valid.SetTgl(tbDokter.getValueAt(i,6).toString()+"")
                                 })==true){
                                     if(aktifkanbatch.equals("yes")){
                                         Trackobat.catatRiwayat(tbDokter.getValueAt(i,2).toString(),Valid.SetAngka(tbDokter.getValueAt(i,12).toString()),0,"Penerimaan",akses.getkode(),kdgudang.getText(),"Simpan",tbDokter.getValueAt(i,13).toString(),NoFaktur.getText(),NoFaktur.getText()+" "+NoOrder.getText()+" "+nmsup.getText());
@@ -972,15 +973,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(0,i,8);
-                tbDokter.setValueAt(0,i,9);
-                tbDokter.setValueAt(0,i,10);
-                tbDokter.setValueAt(0,i,11);
-                tbDokter.setValueAt(0,i,12);
-                tbDokter.setValueAt(0,i,13);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,8);
+            tbDokter.setValueAt(0,i,9);
+            tbDokter.setValueAt(0,i,10);
+            tbDokter.setValueAt(0,i,11);
+            tbDokter.setValueAt(0,i,12);
+            tbDokter.setValueAt(0,i,13);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
@@ -1016,7 +1017,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             getData();
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_DELETE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1029,7 +1031,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             tbDokter.setValueAt("", tbDokter.getSelectedRow(),10);
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_BACK_SPACE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1050,7 +1053,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_SHIFT:
                     TCari.setText("");
                     TCari.requestFocus();
@@ -1071,7 +1075,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if((tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==13)){
                         setKonversi(tbDokter.getSelectedRow());
                         getData();
-                    }break;
+                    }
+                    break;
                 case KeyEvent.VK_SPACE:
                     if(tbDokter.getSelectedColumn()==1){
                         y=0;
@@ -1137,7 +1142,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else{
                             JOptionPane.showMessageDialog(null,"Silahkan masukkan jumlah pembelian terelebih dahulu..!!");
                         }
-                    }   break;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -1250,7 +1256,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_btnPetugasActionPerformed
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kdptg.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             TCari.requestFocus();
@@ -1364,7 +1370,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         barang.setAlwaysOnTop(false);
         barang.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
-
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbDokterPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDokterPropertyChange

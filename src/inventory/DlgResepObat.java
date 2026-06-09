@@ -1223,10 +1223,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
             Valid.textKosong(NoResep,"No.Resep");
         }else{
             if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
-                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                    cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                    TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00",null
-                })==true){
+                NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
+                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+                TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00",null
+            })==true){
                 runBackground(() -> tampil());
                 if(lembarobat.equals("yes")){
                     ppLembarObatActionPerformed(null);
@@ -1235,10 +1235,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
             }else{
                 autoresep();
                 if(Sequel.menyimpantf("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
-                        NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                        TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00",null
-                    })==true){
+                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
+                    cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+                    TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00",null
+                })==true){
                     runBackground(() -> tampil());
                     if(lembarobat.equals("yes")){
                         ppLembarObatActionPerformed(null);
@@ -1271,14 +1271,14 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.Klik data pada table untuk memilih...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.Klik data pada table untuk memilih...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
-           Sequel.meghapus("resep_obat","no_resep",NoResep.getText());
-           Sequel.meghapus("resep_dokter","no_resep",NoResep.getText());
-           runBackground(() -> tampil());
+            Sequel.meghapus("resep_obat","no_resep",NoResep.getText());
+            Sequel.meghapus("resep_dokter","no_resep",NoResep.getText());
+            runBackground(() -> tampil());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1317,20 +1317,20 @@ public final class DlgResepObat extends javax.swing.JDialog {
                 }
 
                 Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptResep.jasper","report","::[ Daftar Pemberian Obat Resep ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no",param);
                 this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
             }
         }
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1395,7 +1395,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbResepKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
@@ -1495,10 +1495,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObatActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
@@ -1556,10 +1556,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppLembarObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObatActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
@@ -1599,7 +1599,6 @@ public final class DlgResepObat extends javax.swing.JDialog {
         if(NoResepUbah.getText().trim().equals("")||(tbTambahan.getRowCount()<=0)){
             Valid.textKosong(NoResepUbah,"Data");
         }else{
-
             for(i=0;i<tbTambahan.getRowCount();i++){
                 Sequel.queryu2("delete from aturan_pakai where tgl_perawatan=? and jam=? and no_rawat=? and kode_brng=?",4,new String[]{
                     tbTambahan.getValueAt(i,0).toString(),tbTambahan.getValueAt(i,1).toString(),
@@ -1625,10 +1624,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppUbahAturanPakaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakaiActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk ubah aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk ubah aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             NoResepUbah.setText(NoResep.getText());
             runBackground(() -> tampilresep());
@@ -1640,10 +1639,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppUbahAturanPakai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakai1ActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk ubah aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk ubah aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             NoResepUbah1.setText(NoResep.getText());
             runBackground(() -> tampilresep2());
@@ -1722,10 +1721,9 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_NoResepUbah1KeyPressed
 
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
-       if(NoResepUbah1.getText().trim().equals("")||(tbTambahan1.getRowCount()<=0)){
+        if(NoResepUbah1.getText().trim().equals("")||(tbTambahan1.getRowCount()<=0)){
             Valid.textKosong(NoResepUbah1,"Data");
         }else{
-
             for(i=0;i<tbTambahan1.getRowCount();i++){
                 if(!tbTambahan1.getValueAt(i,5).toString().equals("")){
                     Sequel.queryu2("update obat_racikan set aturan_pakai=? where tgl_perawatan=? and jam=? and no_rawat=? and no_racik=?",5,new String[]{
@@ -1734,7 +1732,6 @@ public final class DlgResepObat extends javax.swing.JDialog {
                     });
                 }
             }
-
             runBackground(() -> tampil());
             WindowInput4.dispose();
         }
@@ -1746,10 +1743,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppResepObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat1ActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
@@ -1807,10 +1804,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppResepObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppResepObat2ActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
@@ -1877,10 +1874,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppLembarObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObat1ActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary_resep where temp35 = 'LEMBAR PEMBERIAN OBAT 2' and temp36 = '"+akses.getkode()+"' and temp37='"+akses.getalamatip()+"'");
@@ -2021,10 +2018,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppLabelDataObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLabelDataObatActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary_resep where temp35 = 'LABEL DAFTAR OBAT' and temp36 = '"+akses.getkode()+"' and temp37='"+akses.getalamatip()+"'");
@@ -2137,10 +2134,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void ppLembarObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLembarObat2ActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No Resep untuk mencetak aturan pakai...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary_resep where temp35 = 'LEMBAR PEMBERIAN OBAT 3' and temp36 = '"+akses.getkode()+"' and temp37='"+akses.getalamatip()+"'");

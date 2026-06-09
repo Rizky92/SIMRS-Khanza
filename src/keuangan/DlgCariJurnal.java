@@ -440,11 +440,12 @@ public class DlgCariJurnal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void TglJurnal2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglJurnal2KeyPressed
         Valid.pindah(evt, TglJurnal1,Jenis);

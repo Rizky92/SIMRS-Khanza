@@ -837,7 +837,7 @@ public class DlgReturJual extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -845,11 +845,12 @@ public class DlgReturJual extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnBatal,Kdbar);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPtgActionPerformed
         if (petugas == null || !petugas.isDisplayable()) {
@@ -989,7 +990,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void NoNotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoNotaKeyPressed
-            Valid.pindah(evt, Kdptg, Jmlretur);
+        Valid.pindah(evt, Kdptg, Jmlretur);
     }//GEN-LAST:event_NoNotaKeyPressed
 
     private void HargareturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HargareturKeyPressed
@@ -1023,29 +1024,28 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
                         Satuanbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),6).toString());
                         if(Jenisjual.getSelectedItem().equals("Jual Bebas")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),20).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),20).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Karyawan")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),21).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),21).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Beli Luar")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),19).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),19).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Rawat Jalan")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),12).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),12).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Kelas 1")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),13).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),13).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Kelas 2")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),14).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),14).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Kelas 3")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),15).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),15).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Utama/BPJS")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),16).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),16).toString());
                         }else if(Jenisjual.getSelectedItem().equals("VIP")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),17).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),17).toString());
                         }else if(Jenisjual.getSelectedItem().equals("VVIP")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),18).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),18).toString());
                         }else if(Jenisjual.getSelectedItem().equals("Harga Beli")){
-                               Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),11).toString());
+                            Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),11).toString());
                         }
-
                         if(aktifkanbatch.equals("yes")){
                             NoBatch.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),32).toString());
                             NoFaktur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),33).toString());
@@ -1055,7 +1055,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     barang=null;
                 }
             });
-
             barang.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
@@ -1067,7 +1066,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             barang.setLocationRelativeTo(internalFrame1);
         }
-
         if (barang == null) return;
         if (!barang.isVisible()) {
             if(aktifkanbatch.equals("yes")){
@@ -1120,7 +1118,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     member=null;
                 }
             });
-
             member.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
@@ -1129,11 +1126,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-
             member.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             member.setLocationRelativeTo(internalFrame1);
         }
-
         if (member == null) return;
         if (!member.isVisible()) {
             member.isCek();
@@ -1148,7 +1143,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnMmbActionPerformed
 
     private void JenisjualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisjualItemStateChanged
-       runBackground(() ->cariBatch());
+        runBackground(() ->cariBatch());
     }//GEN-LAST:event_JenisjualItemStateChanged
 
     private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
@@ -1169,49 +1164,49 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
-        Kdptg.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
-        BtnSimpan.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        BtnGudangActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
+            Kdptg.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnGudangActionPerformed(null);
+        }
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-    if (bangsal == null || !bangsal.isDisplayable()) {
-        bangsal=new DlgCariBangsal(null,false);
-        bangsal.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        bangsal.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){
-                    kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
-                    nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
+        if (bangsal == null || !bangsal.isDisplayable()) {
+            bangsal=new DlgCariBangsal(null,false);
+            bangsal.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            bangsal.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(bangsal.getTable().getSelectedRow()!= -1){
+                        kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
+                        nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
+                    }
+                    kdgudang.requestFocus();
+                    bangsal=null;
                 }
-                kdgudang.requestFocus();
-                bangsal=null;
-            }
-        });
+            });
 
-        bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        bangsal.setLocationRelativeTo(internalFrame1);
-    }
-    if (bangsal == null) return;
-    if (!bangsal.isVisible()) {
-        bangsal.isCek();
-        bangsal.emptTeks();
-    }
+            bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            bangsal.setLocationRelativeTo(internalFrame1);
+        }
+        if (bangsal == null) return;
+        if (!bangsal.isVisible()) {
+            bangsal.isCek();
+            bangsal.emptTeks();
+        }
 
-    if (bangsal.isVisible()) {
-        bangsal.toFront();
-        return;
-    }
-    bangsal.setVisible(true);
+        if (bangsal.isVisible()) {
+            bangsal.toFront();
+            return;
+        }
+        bangsal.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1316,9 +1311,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-         try{
-             ps=koneksi.prepareStatement("select tampreturjual.nota_jual,tampreturjual.kode_brng,tampreturjual.nama_brng,tampreturjual.satuan,tampreturjual.h_jual,tampreturjual.jml_jual,tampreturjual.h_retur,tampreturjual.jml_retur,tampreturjual.subtotal,tampreturjual.no_batch,tampreturjual.no_faktur from tampreturjual where tampreturjual.petugas=? ");
-             try {
+        try{
+            ps=koneksi.prepareStatement("select tampreturjual.nota_jual,tampreturjual.kode_brng,tampreturjual.nama_brng,tampreturjual.satuan,tampreturjual.h_jual,tampreturjual.jml_jual,tampreturjual.h_retur,tampreturjual.jml_retur,tampreturjual.subtotal,tampreturjual.no_batch,tampreturjual.no_faktur from tampreturjual where tampreturjual.petugas=? ");
+            try {
                 ps.setString(1,akses.getkode());
                 rs=ps.executeQuery();
                 ttlretur=0;
@@ -1332,20 +1327,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     });
                 }
                 LTotal.setText(Valid.SetAngka(ttlretur));
-             } catch (Exception e) {
-                 System.out.println("Notifikasi : "+e);
-             } finally{
-                 if(rs!=null){
-                     rs.close();
-                 }
-                 if(ps!=null){
-                     ps.close();
-                 }
-             }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-
     }
 
     public void emptTeks() {
@@ -1361,17 +1355,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     private void getData() {
-       int row=tbDokter.getSelectedRow();
+        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-             NoNota.setText(tabMode.getValueAt(row,0).toString());
-             Kdbar.setText(tabMode.getValueAt(row,1).toString());
-             nmbar.setText(tabMode.getValueAt(row,2).toString());
-             Satuanbar.setText(tabMode.getValueAt(row,3).toString());
-             Hargaretur.setText(tabMode.getValueAt(row,4).toString());
-             Jmlretur.setText(tabMode.getValueAt(row,5).toString());
-             NoBatch.setText(tabMode.getValueAt(row,7).toString());
-             NoFaktur.setText(tabMode.getValueAt(row,8).toString());
-             isHitung();
+            NoNota.setText(tabMode.getValueAt(row,0).toString());
+            Kdbar.setText(tabMode.getValueAt(row,1).toString());
+            nmbar.setText(tabMode.getValueAt(row,2).toString());
+            Satuanbar.setText(tabMode.getValueAt(row,3).toString());
+            Hargaretur.setText(tabMode.getValueAt(row,4).toString());
+            Jmlretur.setText(tabMode.getValueAt(row,5).toString());
+            NoBatch.setText(tabMode.getValueAt(row,7).toString());
+            NoFaktur.setText(tabMode.getValueAt(row,8).toString());
+            isHitung();
         }
     }
 

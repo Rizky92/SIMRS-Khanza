@@ -729,11 +729,12 @@ public class DapurSuratPemesanan extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
-*/
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
+    }//GEN-LAST:event_TKdKeyPressed
+    */
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for(i=0;i<tbDokter.getRowCount();i++){
@@ -992,18 +993,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getRowCount()!=0){
             try {
-               if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==7)){
+                if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==7)){
                     getData();
-               }else if(tbDokter.getSelectedColumn()==6){
-                   try {
-                       tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
-                           (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
-                   } catch (Exception e) {
-                       tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                   }
-
-                   getData();
-               }
+                }else if(tbDokter.getSelectedColumn()==6){
+                    try {
+                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
+                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
+                    } catch (Exception e) {
+                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                    }
+                    getData();
+                }
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -1019,23 +1019,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==7)){
+                    if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==7)){
                         getData();
                         TCari.setText("");
                         TCari.requestFocus();
-                   }else if(tbDokter.getSelectedColumn()==6){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                       }
-
-                       getData();
-                   }else if((tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
-                       TCari.setText("");
-                       TCari.requestFocus();
-                   }
+                    }else if(tbDokter.getSelectedColumn()==6){
+                        try {
+                            tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
+                                (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
+                        } catch (Exception e) {
+                            tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                        }
+                        getData();
+                    }else if((tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
+                        TCari.setText("");
+                        TCari.requestFocus();
+                    }
                 } catch (Exception e) {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
@@ -1076,17 +1075,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.setText("");
                 TCari.requestFocus();
             }else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==7)){
-                       getData();
-                   }else if(tbDokter.getSelectedColumn()==6){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
-                       }
-                       getData();
-                   }
+                if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==4)||(tbDokter.getSelectedColumn()==7)){
+                    getData();
+                }else if(tbDokter.getSelectedColumn()==6){
+                    try {
+                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString())*
+                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())/100)),tbDokter.getSelectedRow(),7);
+                    } catch (Exception e) {
+                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),7);
+                    }
+                    getData();
+                }
             }
         }
     }//GEN-LAST:event_tbDokterKeyPressed

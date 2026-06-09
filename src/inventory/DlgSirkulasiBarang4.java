@@ -542,11 +542,12 @@ public class DlgSirkulasiBarang4 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(tabMode.getRowCount()==0){
@@ -656,55 +657,55 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void ppGrafikJualBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikJualBanyakActionPerformed
         grafikpenjualanterbanyak grafik=new grafikpenjualanterbanyak("Grafik 10 Barang Penjualan Terbanyak"," penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikJualBanyakActionPerformed
 
     private void ppGrafikJualDikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikJualDikitActionPerformed
         grafikpenjualantersedikit grafik=new grafikpenjualantersedikit("Grafik 10 Barang Penjualan Tersedikit"," penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikJualDikitActionPerformed
 
     private void ppGrafikbeliBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikbeliBanyakActionPerformed
         grafikpembelianterbanyak grafik=new grafikpembelianterbanyak("Grafik 10 Barang Pembelian Terbanyak"," pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikbeliBanyakActionPerformed
 
     private void ppGrafikbelidikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikbelidikitActionPerformed
         grafikpembeliantersedikit grafik=new grafikpembeliantersedikit("Grafik 10 Barang Pembelian Tersedikit"," pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikbelidikitActionPerformed
 
     private void ppGrafikPiutangBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiutangBanyakActionPerformed
         grafikpiutangterbanyak grafik=new grafikpiutangterbanyak("Grafik 10 Barang Piutang Terbanyak"," piutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiutangBanyakActionPerformed
 
     private void ppGrafikPiutangDikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiutangDikitActionPerformed
         grafikpiutangtersedikit grafik=new grafikpiutangtersedikit("Grafik 10 Barang Piutang Tersedikit"," piutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiutangDikitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

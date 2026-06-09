@@ -510,11 +510,12 @@ public class InventoryPengajuanBarangMedis extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
@@ -541,23 +542,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(Sequel.menyimpantf2("pengajuan_barang_medis","?,?,?,?,?","No.Pengajuan",5,new String[]{
-                        NoPengajuan.getText(),kdptg.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),"Proses Pengajuan",Keterangan.getText()
-                    })==true){
-                        jml=tbDokter.getRowCount();
-                        for(i=0;i<jml;i++){
-                            try {
-                                if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                                    if(Sequel.menyimpantf2("detail_pengajuan_barang_medis","?,?,?,?,?,?,?","Detail Pengajuan Barang Medis",7,new String[]{
-                                        NoPengajuan.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,0).toString(),
-                                        tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,9).toString(),tbDokter.getValueAt(i,10).toString()
-                                    })==false){
-                                        sukses=false;
-                                    }
+                    NoPengajuan.getText(),kdptg.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),"Proses Pengajuan",Keterangan.getText()
+                })==true){
+                    jml=tbDokter.getRowCount();
+                    for(i=0;i<jml;i++){
+                        try {
+                            if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                                if(Sequel.menyimpantf2("detail_pengajuan_barang_medis","?,?,?,?,?,?,?","Detail Pengajuan Barang Medis",7,new String[]{
+                                    NoPengajuan.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,0).toString(),
+                                    tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,9).toString(),tbDokter.getValueAt(i,10).toString()
+                                })==false){
+                                    sukses=false;
                                 }
-                            } catch (Exception e) {
-                                System.out.println("Notifikasi : "+e);
                             }
+                        } catch (Exception e) {
+                            System.out.println("Notifikasi : "+e);
                         }
+                    }
                 }else{
                     sukses=false;
                 }
@@ -623,11 +624,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(0,i,9);
-                tbDokter.setValueAt(0,i,10);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,9);
+            tbDokter.setValueAt(0,i,10);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked

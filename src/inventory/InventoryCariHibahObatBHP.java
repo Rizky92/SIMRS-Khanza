@@ -572,7 +572,7 @@ public class InventoryCariHibahObatBHP extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -580,11 +580,12 @@ public class InventoryCariHibahObatBHP extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuplierActionPerformed
         InventarisAsalHibah suplier=new InventarisAsalHibah(null,false);
@@ -900,100 +901,96 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tabMode.getRowCount()==0){
-        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-        TCari.requestFocus();
-    }else if(tbDokter.getSelectedRow()<= -1){
-        JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
-    }else{
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
-            Valid.textKosong(TCari,"pilihan data");
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else if(tbDokter.getSelectedRow()<= -1){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
-           try {
-               pscaribeli=koneksi.prepareStatement("select no_hibah, totalnilai, kd_bangsal,tgl_hibah from hibah_obat_bhp where no_hibah=?");
-               try {
-                  pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                  rs=pscaribeli.executeQuery();
-                  if(rs.next()){
-                      Sequel.AutoComitFalse();
-                      sukses=true;
-                      psdetailhibah_obat_bhp=koneksi.prepareStatement("select kode_brng,jumlah2,no_batch,no_hibah from detailhibah_obat_bhp where no_hibah=? ");
-                      try {
-                          psdetailhibah_obat_bhp.setString(1,rs.getString(1));
-                          rs2=psdetailhibah_obat_bhp.executeQuery();
-                          while(rs2.next()){
-                              if(aktifkanbatch.equals("yes")){
-                                  Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Hibah",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_hibah"),rs.getString("no_hibah"));
-                                  Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_hibah")+"'",
-                                                         "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_hibah")+"'");
-                                  Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
-                                      rs2.getString("kode_brng"),rs2.getString("no_batch"),rs2.getString("no_hibah")
-                                  });
-                              }else{
-                                  Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Hibah",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("no_hibah"));
-                                  Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','',''",
-                                                         "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
-                                  Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
-                                      rs2.getString("kode_brng"),"",""
-                                  });
-                              }
-                          }
-                          sukses=true;
-                      } catch (Exception e) {
-                          sukses=false;
-                          System.out.println(e);
-                      } finally{
-                          if(rs2!=null){
-                              rs2.close();
-                          }
-                          if(psdetailhibah_obat_bhp!=null){
-                              psdetailhibah_obat_bhp.close();
-                          }
-                      }
-
-                      if(sukses==true){
-                        Sequel.deleteTampJurnal();
-                        if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Obat from set_akun"), "PERSEDIAAN HIBAH OBAT & BHP", 0, rs.getDouble("totalnilai"))==false){
-                            sukses=false;
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+                Valid.textKosong(TCari,"pilihan data");
+            }else{
+                try {
+                    pscaribeli=koneksi.prepareStatement("select no_hibah, totalnilai, kd_bangsal,tgl_hibah from hibah_obat_bhp where no_hibah=?");
+                    try {
+                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        rs=pscaribeli.executeQuery();
+                        if(rs.next()){
+                            Sequel.AutoComitFalse();
+                            sukses=true;
+                            psdetailhibah_obat_bhp=koneksi.prepareStatement("select kode_brng,jumlah2,no_batch,no_hibah from detailhibah_obat_bhp where no_hibah=? ");
+                            try {
+                                psdetailhibah_obat_bhp.setString(1,rs.getString(1));
+                                rs2=psdetailhibah_obat_bhp.executeQuery();
+                                while(rs2.next()){
+                                    if(aktifkanbatch.equals("yes")){
+                                        Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Hibah",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_hibah"),rs.getString("no_hibah"));
+                                        Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_hibah")+"'",
+                                            "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_hibah")+"'");
+                                        Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
+                                            rs2.getString("kode_brng"),rs2.getString("no_batch"),rs2.getString("no_hibah")
+                                        });
+                                    }else{
+                                        Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Hibah",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("no_hibah"));
+                                        Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','',''",
+                                            "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
+                                        Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
+                                            rs2.getString("kode_brng"),"",""
+                                        });
+                                    }
+                                }
+                                sukses=true;
+                            } catch (Exception e) {
+                                sukses=false;
+                                System.out.println(e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(psdetailhibah_obat_bhp!=null){
+                                    psdetailhibah_obat_bhp.close();
+                                }
+                            }
+                            if(sukses==true){
+                                Sequel.deleteTampJurnal();
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Obat from set_akun"), "PERSEDIAAN HIBAH OBAT & BHP", 0, rs.getDouble("totalnilai"))==false){
+                                    sukses=false;
+                                }
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Obat from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalnilai"), 0)==false){
+                                    sukses=false;
+                                }
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(rs.getString("no_hibah"),"U","BATAL HIBAH OBAT & BHP DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
+                                }
+                            }
+                            if(sukses==true){
+                                Sequel.queryu2("delete from hibah_obat_bhp where no_hibah=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                Sequel.Commit();
+                            }else{
+                                sukses=false;
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                                Sequel.RollBack();
+                            }
+                            Sequel.AutoComitTrue();
                         }
-                        if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Obat from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalnilai"), 0)==false){
-                            sukses=false;
+                        if(sukses==true){
+                            runBackground(() ->tampil());
                         }
-                          if(sukses==true){
-                              sukses=jur.simpanJurnal(rs.getString("no_hibah"),"U","BATAL HIBAH OBAT & BHP DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
-                          }
-                      }
-
-                      if(sukses==true){
-                          Sequel.queryu2("delete from hibah_obat_bhp where no_hibah=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
-                          Sequel.Commit();
-                      }else{
-                          sukses=false;
-                          JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                          Sequel.RollBack();
-                      }
-                      Sequel.AutoComitTrue();
-                  }
-
-                  if(sukses==true){
-                      runBackground(() ->tampil());
-                  }
-
-               } catch (Exception e) {
-                   System.out.println("Notifikasi : "+e);
-               } finally{
-                   if(rs!=null){
-                       rs.close();
-                   }
-                   if(pscaribeli!=null){
-                       pscaribeli.close();
-                   }
-               }
-           } catch (SQLException ex) {
-               System.out.println(ex);
-           }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally{
+                        if(rs!=null){
+                            rs.close();
+                        }
+                        if(pscaribeli!=null){
+                            pscaribeli.close();
+                        }
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
         }
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void KdIFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdIFKeyPressed
