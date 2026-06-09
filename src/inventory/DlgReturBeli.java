@@ -849,7 +849,7 @@ public class DlgReturBeli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -857,11 +857,12 @@ public class DlgReturBeli extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnBatal,Kdbar);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPtgActionPerformed
         if (petugas == null || !petugas.isDisplayable()) {
@@ -998,7 +999,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoFakturKeyPressed
-            Valid.pindah(evt, Kdptg, Jmlretur);
+        Valid.pindah(evt, Kdptg, Jmlretur);
     }//GEN-LAST:event_NoFakturKeyPressed
 
     private void HargareturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HargareturKeyPressed
@@ -1305,7 +1306,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
                     "select tampreturbeli.no_faktur,tampreturbeli.kode_brng,tampreturbeli.nama_brng,tampreturbeli.satuan,tampreturbeli.h_beli,"+
@@ -1338,7 +1339,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-
     }
 
     public void emptTeks() {
@@ -1357,18 +1357,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void getData() {
        int row=tbDokter.getSelectedRow();
         if(row!= -1){
-             NoFaktur.setText(tabMode.getValueAt(row,0).toString());
-             Kdbar.setText(tabMode.getValueAt(row,1).toString());
-             nmbar.setText(tabMode.getValueAt(row,2).toString());
-             Satuanbar.setText(tabMode.getValueAt(row,3).toString());
-             Hargaretur.setText(tabMode.getValueAt(row,4).toString());
-             Jmlretur.setText(tabMode.getValueAt(row,5).toString());
-             NoBatch.setText(tabMode.getValueAt(row,7).toString());
-             Kadaluwarsa.setText(tabMode.getValueAt(row,8).toString());
-             isHitung();
+            NoFaktur.setText(tabMode.getValueAt(row,0).toString());
+            Kdbar.setText(tabMode.getValueAt(row,1).toString());
+            nmbar.setText(tabMode.getValueAt(row,2).toString());
+            Satuanbar.setText(tabMode.getValueAt(row,3).toString());
+            Hargaretur.setText(tabMode.getValueAt(row,4).toString());
+            Jmlretur.setText(tabMode.getValueAt(row,5).toString());
+            NoBatch.setText(tabMode.getValueAt(row,7).toString());
+            Kadaluwarsa.setText(tabMode.getValueAt(row,8).toString());
+            isHitung();
         }
     }
-
 
     private void isHitung(){
         if((!Jmlretur.getText().equals(""))&&(!Hargaretur.getText().equals(""))){

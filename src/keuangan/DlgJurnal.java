@@ -639,11 +639,12 @@ public class DlgJurnal extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnBatal,kdrek);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void TglJurnalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglJurnalKeyPressed
         Valid.pindah(evt, NoBukti,Jenis);

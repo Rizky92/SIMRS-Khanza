@@ -697,7 +697,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -874,8 +874,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
 
     private void ppUbahAturanPakaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakaiActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TCari.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
             if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
                 NoResepUbah3.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
@@ -889,8 +889,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
 
     private void ppUbahAturanPakai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUbahAturanPakai1ActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TCari.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
             if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
                 NoResepUbah4.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
@@ -904,8 +904,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
 
     private void BtnResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResepActionPerformed
         if(tabMode.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TCari.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
             if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
                 try{
