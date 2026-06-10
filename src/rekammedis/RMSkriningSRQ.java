@@ -601,7 +601,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -615,7 +615,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -734,7 +734,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-02-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-04-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1767,159 +1767,29 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            try{
-                htmlContent = new StringBuilder();
-                htmlContent.append(
-                    "<tr class='isi'>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NamaPasien</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>KodePetugas</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NamaPetugas</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ1</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ1</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ2</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ2</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ3</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ3</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ4</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ4</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ5</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ5</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ6</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ6</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ7</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ7</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ8</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ8</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ9</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ9</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ10</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ10</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ11</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ11</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ12</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ12</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ13</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ13</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ14</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ14</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ15</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ15</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ16</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ16</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ17</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ17</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ18</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ18</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ19</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ19</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ20</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ20</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.Total</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kesimpulan</b></td>"+
-                    "</tr>"
-                );
-                for (i = 0; i < tabMode.getRowCount(); i++) {
-                    htmlContent.append(
-                        "<tr class='isi'>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,24).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,25).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,26).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,27).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,28).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,29).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,30).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,31).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,32).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,33).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,34).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,35).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,36).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,37).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,38).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,39).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,40).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,41).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,42).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,43).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,44).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,45).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,46).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,47).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,48).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,49).toString()+"</td>"+
-                        "</tr>");
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi2 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#323232}.isi3 td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi5 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#AA0000}.isi6 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#FF0000}.isi7 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#C8C800}.isi8 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#00AA00}.isi9 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#969696}");
+                    bw.flush();
                 }
-                LoadHTML.setText(
-                    "<html>"+
-                      "<table width='3000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                       htmlContent.toString()+
-                      "</table>"+
-                    "</html>"
-                );
-
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                );
-                bg.close();
-
-                File f = new File("DataSkriningInstrumenSRQ.html");
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                            "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                            "<table width='3000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                "<tr class='isi2'>"+
-                                    "<td valign='top' align='center'>"+
-                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN SRQ<br><br></font>"+
-                                    "</td>"+
-                               "</tr>"+
-                            "</table>")
-                );
-                bw.close();
-                Desktop.getDesktop().browse(f.toURI());
-
-            }catch(Exception e){
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataSkriningSRQ.html", "DATA SKRINING INSTRUMEN SRQ", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataSkriningSRQ.wps", "DATA SKRINING INSTRUMEN SRQ", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataSkriningSRQ.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataSkriningSRQ.xlsx", tbObat);
+                        break;
+                }
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
             this.setCursor(Cursor.getDefaultCursor());
