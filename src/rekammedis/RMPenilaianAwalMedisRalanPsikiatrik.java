@@ -1840,361 +1840,38 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-                StringBuilder htmlContent;
-
-                if(TCari.getText().trim().equals("")){
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan_psikiatrik.tanggal,"+
-                            "penilaian_medis_ralan_psikiatrik.kd_dokter,penilaian_medis_ralan_psikiatrik.anamnesis,penilaian_medis_ralan_psikiatrik.hubungan,penilaian_medis_ralan_psikiatrik.keluhan_utama,penilaian_medis_ralan_psikiatrik.rps,penilaian_medis_ralan_psikiatrik.rpk,penilaian_medis_ralan_psikiatrik.rpd,penilaian_medis_ralan_psikiatrik.rpo,penilaian_medis_ralan_psikiatrik.penampilan,"+
-                            "penilaian_medis_ralan_psikiatrik.pembicaraan,penilaian_medis_ralan_psikiatrik.psikomotor,penilaian_medis_ralan_psikiatrik.sikap,penilaian_medis_ralan_psikiatrik.mood,"+
-                            "penilaian_medis_ralan_psikiatrik.fungsi_kognitif,penilaian_medis_ralan_psikiatrik.gangguan_persepsi,penilaian_medis_ralan_psikiatrik.proses_pikir,penilaian_medis_ralan_psikiatrik.pengendalian_impuls,penilaian_medis_ralan_psikiatrik.tilikan,penilaian_medis_ralan_psikiatrik.rta,"+
-                            "penilaian_medis_ralan_psikiatrik.keadaan,penilaian_medis_ralan_psikiatrik.gcs,penilaian_medis_ralan_psikiatrik.kesadaran,penilaian_medis_ralan_psikiatrik.td,penilaian_medis_ralan_psikiatrik.nadi,penilaian_medis_ralan_psikiatrik.rr,penilaian_medis_ralan_psikiatrik.suhu,penilaian_medis_ralan_psikiatrik.spo,penilaian_medis_ralan_psikiatrik.bb,penilaian_medis_ralan_psikiatrik.tb,"+
-                            "penilaian_medis_ralan_psikiatrik.kepala,penilaian_medis_ralan_psikiatrik.gigi,penilaian_medis_ralan_psikiatrik.tht,penilaian_medis_ralan_psikiatrik.thoraks,penilaian_medis_ralan_psikiatrik.abdomen,penilaian_medis_ralan_psikiatrik.ekstremitas,penilaian_medis_ralan_psikiatrik.genital,penilaian_medis_ralan_psikiatrik.kulit,"+
-                            "penilaian_medis_ralan_psikiatrik.ket_fisik,penilaian_medis_ralan_psikiatrik.alergi,penilaian_medis_ralan_psikiatrik.penunjang,penilaian_medis_ralan_psikiatrik.diagnosis,penilaian_medis_ralan_psikiatrik.tata,penilaian_medis_ralan_psikiatrik.konsulrujuk,dokter.nm_dokter "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_medis_ralan_psikiatrik on reg_periksa.no_rawat=penilaian_medis_ralan_psikiatrik.no_rawat "+
-                            "inner join dokter on penilaian_medis_ralan_psikiatrik.kd_dokter=dokter.kd_dokter where "+
-                            "penilaian_medis_ralan_psikiatrik.tanggal between ? and ? order by penilaian_medis_ralan_psikiatrik.tanggal");
-                }else{
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan_psikiatrik.tanggal,"+
-                            "penilaian_medis_ralan_psikiatrik.kd_dokter,penilaian_medis_ralan_psikiatrik.anamnesis,penilaian_medis_ralan_psikiatrik.hubungan,penilaian_medis_ralan_psikiatrik.keluhan_utama,penilaian_medis_ralan_psikiatrik.rps,penilaian_medis_ralan_psikiatrik.rpk,penilaian_medis_ralan_psikiatrik.rpd,penilaian_medis_ralan_psikiatrik.rpo,penilaian_medis_ralan_psikiatrik.penampilan,"+
-                            "penilaian_medis_ralan_psikiatrik.pembicaraan,penilaian_medis_ralan_psikiatrik.psikomotor,penilaian_medis_ralan_psikiatrik.sikap,penilaian_medis_ralan_psikiatrik.mood,"+
-                            "penilaian_medis_ralan_psikiatrik.fungsi_kognitif,penilaian_medis_ralan_psikiatrik.gangguan_persepsi,penilaian_medis_ralan_psikiatrik.proses_pikir,penilaian_medis_ralan_psikiatrik.pengendalian_impuls,penilaian_medis_ralan_psikiatrik.tilikan,penilaian_medis_ralan_psikiatrik.rta,"+
-                            "penilaian_medis_ralan_psikiatrik.keadaan,penilaian_medis_ralan_psikiatrik.gcs,penilaian_medis_ralan_psikiatrik.kesadaran,penilaian_medis_ralan_psikiatrik.td,penilaian_medis_ralan_psikiatrik.nadi,penilaian_medis_ralan_psikiatrik.rr,penilaian_medis_ralan_psikiatrik.suhu,penilaian_medis_ralan_psikiatrik.spo,penilaian_medis_ralan_psikiatrik.bb,penilaian_medis_ralan_psikiatrik.tb,"+
-                            "penilaian_medis_ralan_psikiatrik.kepala,penilaian_medis_ralan_psikiatrik.gigi,penilaian_medis_ralan_psikiatrik.tht,penilaian_medis_ralan_psikiatrik.thoraks,penilaian_medis_ralan_psikiatrik.abdomen,penilaian_medis_ralan_psikiatrik.ekstremitas,penilaian_medis_ralan_psikiatrik.genital,penilaian_medis_ralan_psikiatrik.kulit,"+
-                            "penilaian_medis_ralan_psikiatrik.ket_fisik,penilaian_medis_ralan_psikiatrik.alergi,penilaian_medis_ralan_psikiatrik.penunjang,penilaian_medis_ralan_psikiatrik.diagnosis,penilaian_medis_ralan_psikiatrik.tata,penilaian_medis_ralan_psikiatrik.konsulrujuk,dokter.nm_dokter "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_medis_ralan_psikiatrik on reg_periksa.no_rawat=penilaian_medis_ralan_psikiatrik.no_rawat "+
-                            "inner join dokter on penilaian_medis_ralan_psikiatrik.kd_dokter=dokter.kd_dokter where "+
-                            "penilaian_medis_ralan_psikiatrik.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                            "penilaian_medis_ralan_psikiatrik.kd_dokter like ? or dokter.nm_dokter like ?) order by penilaian_medis_ralan_psikiatrik.tanggal");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-
-                try {
-                    if(TCari.getText().trim().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "<tr class='isi'>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.RM</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nama Pasien</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Lahir</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>J.K.</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kode Dokter</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nama Dokter</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tanggal</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Anamnesis</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Hubungan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Keluhan Utama</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Riwayat Penyakit Sekarang</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Riwayat Penyakit Dahulu</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Riwayat Penyakit Keluarga</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Riwayat Napza</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Riwayat Alergi</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Penampilan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pembicaraan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Psikomotor</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sikap</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Mood</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Fungsi Kognitif</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Gangguan Persepsi</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Proses Pikir</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pengendalian Impuls</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tilikan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Reality Testing Ability</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Keadaan Umum</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>GCS</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kesadaran</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>TD(mmHg)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nadi(x/menit)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAFA' align='center'>RR(x/menit)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Suhu</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>SpO2</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>BB(Kg)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>TB(cm)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kepala</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Gigi & Mulut</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>THT</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Thoraks</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Abdomen</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Genital & Anus</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ekstremitas</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kulit</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pemeriksaan Fisik</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pemeriksaan Penunjang</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Diagnosis/Asesmen</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tatalaksana</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Konsul/Rujuk</td>").append(
-                                    "</tr>"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>").append(
-                                           "<td valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("jk")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kd_dokter")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("nm_dokter")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("anamnesis")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("hubungan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("keluhan_utama")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rps")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rpd")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rpk")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rpo")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("alergi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("penampilan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("pembicaraan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("psikomotor")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("sikap")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("mood")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("fungsi_kognitif")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("gangguan_persepsi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("proses_pikir")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("pengendalian_impuls")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tilikan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rta")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("keadaan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("gcs")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kesadaran")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("td")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("nadi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rr")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("suhu")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("spo")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("bb")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tb")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kepala")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("gigi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tht")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("thoraks")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("abdomen")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("genital")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("ekstremitas")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kulit")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("ket_fisik")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("penunjang")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("diagnosis")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tata")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("konsulrujuk")).append("</td>").append(
-                                        "</tr>");
-                                }
-                                f = new File("PenilaianAwalMedisRalanPsikiatrik.html");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write("<html>"+
-                                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                            "<body>"+
-                                                "<table width='4600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                    htmlContent.toString()+
-                                                "</table>"+
-                                            "</body>"+
-                                         "</html>"
-                                );
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 2 (WPS)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "<tr class='isi'>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Pasien</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K.</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kode Dokter</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Dokter</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tanggal</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Anamnesis</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Hubungan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keluhan Utama</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Riwayat Penyakit Sekarang</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Riwayat Penyakit Dahulu</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Riwayat Penyakit Keluarga</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Riwayat Napza</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Riwayat Alergi</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Penampilan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pembicaraan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Psikomotor</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Sikap</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Mood</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Fungsi Kognitif</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Gangguan Persepsi</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Proses Pikir</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengendalian Impuls</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tilikan</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Reality Testing Ability</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keadaan Umum</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>GCS</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kesadaran</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>TD(mmHg)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nadi(x/menit)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>RR(x/menit)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Suhu</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>SpO2</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>BB(Kg)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>TB(cm)</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kepala</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Gigi & Mulut</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>THT</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Thoraks</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Abdomen</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Genital & Anus</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ekstremitas</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kulit</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pemeriksaan Fisik</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pemeriksaan Penunjang</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Diagnosis/Asesmen</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tatalaksana</td>").append(
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Konsul/Rujuk</td>").append(
-                                    "</tr>"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>").append(
-                                           "<td valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("jk")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kd_dokter")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("nm_dokter")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("anamnesis")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("hubungan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("keluhan_utama")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rps")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rpd")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rpk")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rpo")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("alergi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("penampilan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("pembicaraan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("psikomotor")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("sikap")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("mood")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("fungsi_kognitif")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("gangguan_persepsi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("proses_pikir")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("pengendalian_impuls")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tilikan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rta")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("keadaan")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("gcs")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kesadaran")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("td")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("nadi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("rr")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("suhu")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("spo")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("bb")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tb")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kepala")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("gigi")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tht")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("thoraks")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("abdomen")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("genital")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("ekstremitas")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("kulit")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("ket_fisik")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("penunjang")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("diagnosis")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("tata")).append("</td>").append(
-                                           "<td valign='top'>").append(rs.getString("konsulrujuk")).append("</td>").append(
-                                        "</tr>");
-                                }
-                                f = new File("PenilaianAwalMedisRalanPsikiatrik.wps");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write("<html>"+
-                                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                            "<body>"+
-                                                "<table width='4600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                    htmlContent.toString()+
-                                                "</table>"+
-                                            "</body>"+
-                                         "</html>"
-                                );
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 3 (CSV)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Kode Dokter\";\"Nama Dokter\";\"Tanggal\";\"Anamnesis\";\"Hubungan\";\"Keluhan Utama\";\"Riwayat Penyakit Sekarang\";\"Riwayat Penyakit Dahulu\";\"Riwayat Penyakit Keluarga\";\"Riwayat Napza\";\"Riwayat Alergi\";\"Penampilan\";\"Pembicaraan\";\"Psikomotor\";\"Sikap\";\"Mood\";\"Fungsi Kognitif\";\"Gangguan Persepsi\";\"Proses Pikir\";\"Pengendalian Impuls\";\"Tilikan\";\"Reality Testing Ability\";\"Keadaan Umum\";\"GCS\";\"Kesadaran\";\"TD(mmHg)\";\"Nadi(x/menit)\";\"RR(x/menit)\";\"Suhu\";\"SpO2\";\"BB(Kg)\";\"TB(cm)\";\"Kepala\";\"Gigi & Mulut\";\"THT\";\"Thoraks\";\"Abdomen\";\"Genital & Anus\";\"Ekstremitas\";\"Kulit\";\"Keterangan Pemeriksaan Fisik\";\"Pemeriksaan Penunjang\";\"Diagnosis/Asesmen\";\"Tatalaksana\";\"Konsul/Rujuk\"\n"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "\"").append(rs.getString("no_rawat")).append("\";\" ").append(rs.getString("no_rkm_medis")).append("\";\"").append(rs.getString("nm_pasien")).append("\";\"").append(rs.getString("tgl_lahir")).append("\";\"").append(rs.getString("jk")).append("\";\"").append(rs.getString("kd_dokter")).append("\";\"").append(rs.getString("nm_dokter")).append("\";\"").append(rs.getString("tanggal")).append("\";\"").append(rs.getString("anamnesis")).append("\";\"").append(rs.getString("hubungan")).append("\";\"").append(rs.getString("keluhan_utama")).append("\";\"").append(rs.getString("rps")).append("\";\"").append(rs.getString("rpd")).append("\";\"").append(rs.getString("rpk")).append("\";\"").append(rs.getString("rpo")).append("\";\"").append(rs.getString("alergi")).append("\";\"").append(rs.getString("penampilan")).append("\";\"").append(rs.getString("pembicaraan")).append("\";\"").append(rs.getString("psikomotor")).append("\";\"").append(rs.getString("sikap")).append("\";\"").append(rs.getString("mood")).append("\";\"").append(rs.getString("fungsi_kognitif")).append("\";\"").append(rs.getString("gangguan_persepsi")).append("\";\"").append(rs.getString("proses_pikir")).append("\";\"").append(rs.getString("pengendalian_impuls")).append("\";\"").append(rs.getString("tilikan")).append("\";\"").append(rs.getString("rta")).append("\";\"").append(rs.getString("keadaan")).append("\";\"").append(rs.getString("gcs")).append("\";\"").append(rs.getString("kesadaran")).append("\";\"").append(rs.getString("td")).append("\";\"").append(rs.getString("nadi")).append("\";\"").append(rs.getString("rr")).append("\";\"").append(rs.getString("suhu")).append("\";\"").append(rs.getString("spo")).append("\";\"").append(rs.getString("bb")).append("\";\"").append(rs.getString("tb")).append("\";\"").append(rs.getString("kepala")).append("\";\"").append(rs.getString("gigi")).append("\";\"").append(rs.getString("tht")).append("\";\"").append(rs.getString("thoraks")).append("\";\"").append(rs.getString("abdomen")).append("\";\"").append(rs.getString("genital")).append("\";\"").append(rs.getString("ekstremitas")).append("\";\"").append(rs.getString("kulit")).append("\";\"").append(rs.getString("ket_fisik")).append("\";\"").append(rs.getString("penunjang")).append("\";\"").append(rs.getString("diagnosis")).append("\";\"").append(rs.getString("tata")).append("\";\"").append(rs.getString("konsulrujuk")).append("\"\n"
-                                    );
-                                }
-                                f = new File("PenilaianAwalMedisRalanPsikiatrik.csv");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write(htmlContent.toString());
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 4 (XLSX)":
-                                Valid.exportXlsxSmc("PenilaianAwalMedisRalanPsikiatrik.xlsx",tbObat);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataPenilaianAwalMedisRalanPsikiatrik.html", "DATA PENGKAJIAN AWAL MEDIS RAWAT JALAN PSIKIATRIK", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataPenilaianAwalMedisRalanPsikiatrik.wps", "DATA PENGKAJIAN AWAL MEDIS RAWAT JALAN PSIKIATRIK", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataPenilaianAwalMedisRalanPsikiatrik.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPenilaianAwalMedisRalanPsikiatrik.xlsx", tbObat);
+                        break;
                 }
-                htmlContent=null;
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
-
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
