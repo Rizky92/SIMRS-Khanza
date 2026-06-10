@@ -218,6 +218,7 @@ import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTerapiWicara;
+import rekammedis.RMPenilaianTindakanInvasifNonBedah;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMRiwayatPerawatan;
@@ -14910,6 +14911,28 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
+    private void MnPengkajianInvasifNonBedahActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMPenilaianTindakanInvasifNonBedah form=new RMPenilaianTindakanInvasifNonBedah(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     private void MnHasilPemeriksaanUSGUrologiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -17093,6 +17116,7 @@ public final class DlgReg extends javax.swing.JDialog {
                                  MnPenilaianRisikoJatuhPsikiatri,
                                  MnPenilaianLanjutanSkriningFungsional,
                                  MnPenilaianPreInduksi,
+                                 MnPengkajianInvasifNonBedah,
                                  MnHasilPemeriksaanUSGUrologi,
                                  MnHasilPemeriksaanUSGGynecologi,
                                  MnHasilPemeriksaanEKG,
@@ -17752,6 +17776,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSkorStewardPascaAnestesi.setEnabled(akses.getskor_steward_pasca_anestesi());
         MnSkorBromagePascaAnestesi.setEnabled(akses.getskor_bromage_pasca_anestesi());
         MnPenilaianPreInduksi.setEnabled(akses.getpenilaian_pre_induksi());
+        MnPengkajianInvasifNonBedah.setEnabled(akses.getpengkajian_invasif_non_bedah());
         MnHasilPemeriksaanUSGUrologi.setEnabled(akses.gethasil_usg_urologi());
         MnHasilPemeriksaanUSGNeonatus.setEnabled(akses.gethasil_usg_neonatus());
         MnHasilEndoskopiFaringLaring.setEnabled(akses.gethasil_endoskopi_faring_laring());
@@ -18171,6 +18196,18 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPreInduksi.setName("MnPenilaianPreInduksi");
         MnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPenilaianPreInduksi.addActionListener(this::MnPenilaianPreInduksiActionPerformed);
+
+        MnPengkajianInvasifNonBedah = new javax.swing.JMenuItem();
+        MnPengkajianInvasifNonBedah.setBackground(new java.awt.Color(255, 255, 254));
+        MnPengkajianInvasifNonBedah.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPengkajianInvasifNonBedah.setForeground(new java.awt.Color(50, 50, 50));
+        MnPengkajianInvasifNonBedah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPengkajianInvasifNonBedah.setText("Pengkajian Invasif Non Bedah");
+        MnPengkajianInvasifNonBedah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPengkajianInvasifNonBedah.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPengkajianInvasifNonBedah.setName("MnPengkajianInvasifNonBedah");
+        MnPengkajianInvasifNonBedah.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnPengkajianInvasifNonBedah.addActionListener(this::MnPengkajianInvasifNonBedahActionPerformed);
 
         MnSkorAldrettePascaAnestesi = new javax.swing.JMenuItem();
         MnSkorAldrettePascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
@@ -19364,6 +19401,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSkriningParu.setPreferredSize(new java.awt.Dimension(200, 26));
 
         MnRMOperasi.add(MnPenilaianPreInduksi);
+        MnRMOperasi.add(MnPengkajianInvasifNonBedah);
         MnRMOperasi.add(MnChecklistPreOperasi);
         MnRMOperasi.add(MnSignInSebelumAnestesi);
         MnRMOperasi.add(MnTimeOutSebelumInsisi);

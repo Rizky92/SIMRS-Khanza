@@ -224,7 +224,7 @@ public final class akses {
             pembayaran_bank_mandiri=false,penilaian_ulang_nyeri=false,penilaian_terapi_wicara=false,bpjs_obat_23hari_apotek=false,pengkajian_restrain=false,
             bpjs_kunjungan_sep_apotek=false,bpjs_monitoring_klaim_apotek=false,bpjs_daftar_pelayanan_obat_apotek=false,penilaian_awal_medis_ralan_paru=false,
             catatan_keperawatan_ralan=false,catatan_persalinan=false,skor_aldrette_pasca_anestesi=false,skor_steward_pasca_anestesi=false,skor_bromage_pasca_anestesi=false,
-            penilaian_pre_induksi=false,hasil_usg_urologi=false,hasil_usg_gynecologi=false,hasil_pemeriksaan_ekg=false,hapus_edit_sep_bpjs=false,satu_sehat_kirim_diet=false,
+            penilaian_pre_induksi=false,pengkajian_invasif_non_bedah=false,hasil_usg_urologi=false,hasil_usg_gynecologi=false,hasil_pemeriksaan_ekg=false,hapus_edit_sep_bpjs=false,satu_sehat_kirim_diet=false,
             satu_sehat_mapping_obat=false,dapur_ringkasan_pembelian=false,satu_sehat_kirim_medication=false,satu_sehat_kirim_medicationrequest=false,
             penatalaksanaan_terapi_okupasi=false,satu_sehat_kirim_medicationdispense=false,hasil_usg_neonatus=false,hasil_endoskopi_faring_laring=false,
             satu_sehat_mapping_radiologi=false,satu_sehat_kirim_servicerequest_radiologi=false,hasil_endoskopi_hidung=false,satu_sehat_kirim_specimen_radiologi=false,
@@ -1318,6 +1318,7 @@ public final class akses {
                         akses.skor_steward_pasca_anestesi=akses.getBoolean(rs2, "skor_steward_pasca_anestesi");
                         akses.skor_bromage_pasca_anestesi=akses.getBoolean(rs2, "skor_bromage_pasca_anestesi");
                         akses.penilaian_pre_induksi=akses.getBoolean(rs2, "penilaian_pre_induksi");
+                        akses.pengkajian_invasif_non_bedah=akses.getBoolean(rs2, "pengkajian_invasif_non_bedah");
                         akses.hasil_usg_urologi=akses.getBoolean(rs2, "hasil_usg_urologi");
                         akses.hasil_usg_gynecologi=akses.getBoolean(rs2, "hasil_usg_gynecologi");
                         akses.hasil_pemeriksaan_ekg=akses.getBoolean(rs2, "hasil_pemeriksaan_ekg");
@@ -2574,6 +2575,7 @@ public final class akses {
         akses.skor_steward_pasca_anestesi=isadmin;
         akses.skor_bromage_pasca_anestesi=isadmin;
         akses.penilaian_pre_induksi=isadmin;
+        akses.pengkajian_invasif_non_bedah=isadmin;
         akses.hasil_usg_urologi=isadmin;
         akses.hasil_usg_gynecologi=isadmin;
         akses.hasil_pemeriksaan_ekg=isadmin;
@@ -3833,6 +3835,7 @@ public final class akses {
     public static boolean getskor_steward_pasca_anestesi(){return akses.skor_steward_pasca_anestesi;}
     public static boolean getskor_bromage_pasca_anestesi(){return akses.skor_bromage_pasca_anestesi;}
     public static boolean getpenilaian_pre_induksi(){return akses.penilaian_pre_induksi;}
+    public static boolean getpengkajian_invasif_non_bedah(){return akses.pengkajian_invasif_non_bedah;}
     public static boolean gethasil_usg_urologi(){return akses.hasil_usg_urologi;}
     public static boolean gethasil_usg_gynecologi(){return akses.hasil_usg_gynecologi;}
     public static boolean gethasil_pemeriksaan_ekg(){return akses.hasil_pemeriksaan_ekg;}

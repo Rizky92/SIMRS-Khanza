@@ -182,6 +182,7 @@ import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTerapiWicara;
+import rekammedis.RMPenilaianTindakanInvasifNonBedah;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMRiwayatPerawatan;
@@ -9347,6 +9348,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
+    private void MnPengkajianInvasifNonBedahActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianTindakanInvasifNonBedah form=new RMPenilaianTindakanInvasifNonBedah(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.emptTeks();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     private void BtnHasilPemeriksaanUSGUrologiActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -10943,7 +10961,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaMasukPICU,BtnSkriningInstrumenMentalEmosional,BtnSkriningInstrumenAMT,BtnSkriningPneumoniaSeverityIndex,BtnAwalMedisJantung,BtnAwalMedisUrologi,
                           BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnSkriningCURB65,BtnSkriningGiziKehamilan,BtnResepIterasiBPJS,BtnPermintaanKonsultasiPerawat;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
-    private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
+    private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP,MnPengkajianInvasifNonBedah;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -14189,6 +14207,18 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnPasteSOAP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPasteSOAP.addActionListener(this::MnPasteSOAPActionPerformed);
 
+        MnPengkajianInvasifNonBedah = new javax.swing.JMenuItem();
+        MnPengkajianInvasifNonBedah.setBackground(new java.awt.Color(255, 255, 254));
+        MnPengkajianInvasifNonBedah.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPengkajianInvasifNonBedah.setForeground(new java.awt.Color(50, 50, 50));
+        MnPengkajianInvasifNonBedah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPengkajianInvasifNonBedah.setText("Pengkajian Invasif Non Bedah");
+        MnPengkajianInvasifNonBedah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPengkajianInvasifNonBedah.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPengkajianInvasifNonBedah.setName("MnPengkajianInvasifNonBedah");
+        MnPengkajianInvasifNonBedah.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnPengkajianInvasifNonBedah.addActionListener(this::MnPengkajianInvasifNonBedahActionPerformed);
+
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");
 
@@ -14196,6 +14226,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         PopupSOAP.add(MnSOAPPetugas);
         PopupSOAP.add(MnCopySOAP);
         PopupPemeriksaan.add(MnPasteSOAP);
+        PopupPemeriksaan.add(MnPengkajianInvasifNonBedah);
 
         FormMenu.add(BtnRiwayat);
         FormMenu.add(BtnResepObat);
