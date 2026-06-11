@@ -705,7 +705,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         FormInput.setBackground(new java.awt.Color(255, 255, 255));
         FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(893, 1800));
+        FormInput.setPreferredSize(new java.awt.Dimension(800, 1700));
         FormInput.setLayout(null);
 
         TNoRw.setName("TNoRw"); // NOI18N
@@ -2335,6 +2335,15 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     }//GEN-LAST:event_TCariRencanaKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            if(Valid.daysOld("./cache/masalahkeperawatan.iyem")<30){
+                runBackground(() ->tampilMasalah2());
+            }else{
+                runBackground(() ->tampilMasalah());
+            }
+        } catch (Exception e) {
+        }
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -2353,6 +2362,27 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
                         runBackground(() ->tampil());
+                    }
+                }
+            });
+
+            TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
                     }
                 }
             });
