@@ -1357,181 +1357,42 @@ public final class RMSkriningNutrisiLansia extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                if(TCari.getText().trim().equals("")){
-                    ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,skrining_nutrisi_lansia.tanggal,"+
-                        "skrining_nutrisi_lansia.td,skrining_nutrisi_lansia.hr,skrining_nutrisi_lansia.rr,skrining_nutrisi_lansia.suhu,"+
-                        "skrining_nutrisi_lansia.bb,skrining_nutrisi_lansia.tbpb,skrining_nutrisi_lansia.spo2,skrining_nutrisi_lansia.alergi,"+
-                        "skrining_nutrisi_lansia.sg1,skrining_nutrisi_lansia.nilai1,skrining_nutrisi_lansia.sg2,skrining_nutrisi_lansia.nilai2,"+
-                        "skrining_nutrisi_lansia.sg3,skrining_nutrisi_lansia.nilai3,skrining_nutrisi_lansia.sg4,skrining_nutrisi_lansia.nilai4,"+
-                        "skrining_nutrisi_lansia.sg5,skrining_nutrisi_lansia.nilai5,skrining_nutrisi_lansia.sg6,skrining_nutrisi_lansia.nilai6,"+
-                        "skrining_nutrisi_lansia.total_hasil,skrining_nutrisi_lansia.skor_nutrisi,skrining_nutrisi_lansia.nip,petugas.nama,"+
-                        "pasien.jk from skrining_nutrisi_lansia inner join reg_periksa on skrining_nutrisi_lansia.no_rawat=reg_periksa.no_rawat "+
-                        "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_nutrisi_lansia.nip=petugas.nip "+
-                        "where skrining_nutrisi_lansia.tanggal between ? and ? order by skrining_nutrisi_lansia.tanggal ");
-                }else{
-                    ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,skrining_nutrisi_lansia.tanggal,"+
-                        "skrining_nutrisi_lansia.td,skrining_nutrisi_lansia.hr,skrining_nutrisi_lansia.rr,skrining_nutrisi_lansia.suhu,"+
-                        "skrining_nutrisi_lansia.bb,skrining_nutrisi_lansia.tbpb,skrining_nutrisi_lansia.spo2,skrining_nutrisi_lansia.alergi,"+
-                        "skrining_nutrisi_lansia.sg1,skrining_nutrisi_lansia.nilai1,skrining_nutrisi_lansia.sg2,skrining_nutrisi_lansia.nilai2,"+
-                        "skrining_nutrisi_lansia.sg3,skrining_nutrisi_lansia.nilai3,skrining_nutrisi_lansia.sg4,skrining_nutrisi_lansia.nilai4,"+
-                        "skrining_nutrisi_lansia.sg5,skrining_nutrisi_lansia.nilai5,skrining_nutrisi_lansia.sg6,skrining_nutrisi_lansia.nilai6,"+
-                        "skrining_nutrisi_lansia.total_hasil,skrining_nutrisi_lansia.skor_nutrisi,skrining_nutrisi_lansia.nip,petugas.nama,"+
-                        "pasien.jk from skrining_nutrisi_lansia inner join reg_periksa on skrining_nutrisi_lansia.no_rawat=reg_periksa.no_rawat "+
-                        "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_nutrisi_lansia.nip=petugas.nip "+
-                        "where skrining_nutrisi_lansia.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
-                        "pasien.nm_pasien like ? or skrining_nutrisi_lansia.alergi like ? or skrining_nutrisi_lansia.nip like ? or petugas.nama like ?) "+
-                        "order by skrining_nutrisi_lansia.tanggal ");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi2 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#323232}.isi3 td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi5 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#AA0000}.isi6 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#FF0000}.isi7 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#C8C800}.isi8 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#00AA00}.isi9 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#969696}");
+                    bw.flush();
                 }
-
-                try {
-                    if(TCari.getText().trim().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                        ps.setString(8,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    htmlContent = new StringBuilder();
-                    htmlContent.append(
-                        "<tr class='isi'>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.RM</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Pasien</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tgl.Lahir</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>J.K.</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Kode Petugas</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Petugas</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tanggal</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>BB(Kg)</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>TB/PB(Cm)</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>TD(mmHg)</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>HR(x/menit)</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>RR(x/menit)</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Suhu</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>SpO2</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Alergi</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skrining Gizi 1</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nilai 1</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skrining Gizi 2</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nilai 2</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skrining Gizi 3</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nilai 3</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skrining Gizi 4</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nilai 4</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skrining Gizi 5</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nilai 5</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skrining Gizi 6</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nilai 6</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Total Skor</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Hasil Skrining</b></td>"+
-                        "</tr>"
-                    );
-                    while(rs.next()){
-                        htmlContent.append(
-                            "<tr class='isi'>"+
-                               "<td valign='top'>"+rs.getString("no_rawat")+"</td>"+
-                               "<td valign='top'>"+rs.getString("no_rkm_medis")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nm_pasien")+"</td>"+
-                               "<td valign='top'>"+rs.getString("tgl_lahir")+"</td>"+
-                               "<td valign='top'>"+rs.getString("jk")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nip")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nama")+"</td>"+
-                               "<td valign='top'>"+rs.getString("tanggal")+"</td>"+
-                               "<td valign='top'>"+rs.getString("bb")+"</td>"+
-                               "<td valign='top'>"+rs.getString("tbpb")+"</td>"+
-                               "<td valign='top'>"+rs.getString("td")+"</td>"+
-                               "<td valign='top'>"+rs.getString("hr")+"</td>"+
-                               "<td valign='top'>"+rs.getString("rr")+"</td>"+
-                               "<td valign='top'>"+rs.getString("suhu")+"</td>"+
-                               "<td valign='top'>"+rs.getString("spo2")+"</td>"+
-                               "<td valign='top'>"+rs.getString("alergi")+"</td>"+
-                               "<td valign='top'>"+rs.getString("sg1")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nilai1")+"</td>"+
-                               "<td valign='top'>"+rs.getString("sg2")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nilai2")+"</td>"+
-                               "<td valign='top'>"+rs.getString("sg3")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nilai3")+"</td>"+
-                               "<td valign='top'>"+rs.getString("sg4")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nilai4")+"</td>"+
-                               "<td valign='top'>"+rs.getString("sg5")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nilai5")+"</td>"+
-                               "<td valign='top'>"+rs.getString("sg6")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nilai6")+"</td>"+
-                               "<td valign='top'>"+rs.getString("total_hasil")+"</td>"+
-                               "<td valign='top'>"+rs.getString("skor_nutrisi")+"</td>"+
-                            "</tr>");
-                    }
-                    LoadHTML.setText(
-                        "<html>"+
-                          "<table width='2200px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                           htmlContent.toString()+
-                          "</table>"+
-                        "</html>"
-                    );
-
-                    File g = new File("file2.css");
-                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                    bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                        ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                        ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                        ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                        ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                    );
-                    bg.close();
-
-                    File f = new File("DataSkriningNutrisiLansia.html");
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                "<table width='2200px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr class='isi2'>"+
-                                        "<td valign='top' align='center'>"+
-                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA SKRINING NUTRISI PASIEN LANSIA<br><br></font>"+
-                                        "</td>"+
-                                   "</tr>"+
-                                "</table>")
-                    );
-                    bw.close();
-                    Desktop.getDesktop().browse(f.toURI());
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataSkriningNutrisiLansia.html", "DATA SKRINING NUTRISI PASIEN LANSIA", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataSkriningNutrisiLansia.wps", "DATA SKRINING NUTRISI PASIEN LANSIA", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataSkriningNutrisiLansia.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataSkriningNutrisiLansia.xlsx", tbObat);
+                        break;
                 }
-
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

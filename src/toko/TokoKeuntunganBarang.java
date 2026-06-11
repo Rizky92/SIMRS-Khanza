@@ -20,6 +20,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -383,48 +386,94 @@ public final class TokoKeuntunganBarang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Map<String, Object> param = new HashMap<>();
-        param.put("namars",akses.getnamars());
-        param.put("alamatrs",akses.getalamatrs());
-        param.put("kotars",akses.getkabupatenrs());
-        param.put("propinsirs",akses.getpropinsirs());
-        param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs());
-        param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
-        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-        if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            }else if(tabMode.getRowCount()!=0){
-                Valid.MyReportqry("rptKeuntunganBarangToko1.jasper","report","::[ Keuntungan Penjualan Barang Toko ]::",
-                    "select tokopenjualan.tgl_jual,tokopenjualan.nota_jual,toko_detail_jual.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_jual.h_jual,toko_detail_jual.jumlah, "+
-                    "toko_detail_jual.subtotal,toko_detail_jual.dis,toko_detail_jual.bsr_dis,toko_detail_jual.tambahan,toko_detail_jual.total, toko_detail_jual.h_beli,(toko_detail_jual.h_beli * toko_detail_jual.jumlah) as total_asal, "+
-                    "(toko_detail_jual.total-(toko_detail_jual.h_beli * toko_detail_jual.jumlah)) as keuntungan "+
-                    "from tokopenjualan inner join toko_detail_jual on tokopenjualan.nota_jual=toko_detail_jual.nota_jual "+
-                    "inner join tokobarang on toko_detail_jual.kode_brng=tokobarang.kode_brng "+
-                    "inner join kodesatuan on toko_detail_jual.kode_sat=kodesatuan.kode_sat "+
-                    "where tokopenjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().trim().equals("")?"":" and (tokobarang.nama_brng like '%"+TCari.getText()+"%' or tokopenjualan.nota_jual like '%"+TCari.getText()+"%' or toko_detail_jual.kode_brng like '%"+TCari.getText()+"%' )")+
-                    "order by tokopenjualan.tgl_jual,tokopenjualan.nota_jual",param);
-            }
-        }else if(TabRawat.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            }else if(tabMode2.getRowCount()!=0){
-                Valid.MyReportqry("rptKeuntunganBarangToko2.jasper","report","::[ Keuntungan Piutang Barang Toko ]::",
-                    "select tokopiutang.tgl_piutang,tokopiutang.nota_piutang,toko_detail_piutang.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_piutang.h_jual,toko_detail_piutang.jumlah, "+
-                    "toko_detail_piutang.subtotal,toko_detail_piutang.dis,toko_detail_piutang.bsr_dis,toko_detail_piutang.total, toko_detail_piutang.h_beli,(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah) as total_asal, "+
-                    "(toko_detail_piutang.total-(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah)) as keuntungan "+
-                    "from tokopiutang inner join toko_detail_piutang on tokopiutang.nota_piutang=toko_detail_piutang.nota_piutang "+
-                    "inner join tokobarang on toko_detail_piutang.kode_brng=tokobarang.kode_brng "+
-                    "inner join kodesatuan on toko_detail_piutang.kode_sat=kodesatuan.kode_sat "+
-                    "where tokopiutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().trim().equals("")?"":" and (tokobarang.nama_brng like '%"+TCari.getText()+"%' or tokopiutang.nota_piutang like '%"+TCari.getText()+"%' or toko_detail_piutang.kode_brng like '%"+TCari.getText()+"%' )")+
-                    "order by tokopiutang.tgl_piutang,tokopiutang.nota_piutang",param);
-            }
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
         }
-
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            if(TabRawat.getSelectedIndex()==0){
+                if(tabMode.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                }else if(tabMode.getRowCount()!=0){
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("KeuntunganBarangToko1.html", "Keuntungan Penjualan Barang Toko", tbPenjualan);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("KeuntunganBarangToko1.wps", "Keuntungan Penjualan Barang Toko", tbPenjualan);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("KeuntunganBarangToko1.csv", tbPenjualan);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("KeuntunganBarangToko1.xlsx", tbPenjualan);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Valid.MyReportqry("rptKeuntunganBarangToko1.jasper","report","::[ Keuntungan Penjualan Barang Toko ]::",
+                                "select tokopenjualan.tgl_jual,tokopenjualan.nota_jual,toko_detail_jual.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_jual.h_jual,toko_detail_jual.jumlah, "+
+                                "toko_detail_jual.subtotal,toko_detail_jual.dis,toko_detail_jual.bsr_dis,toko_detail_jual.tambahan,toko_detail_jual.total, toko_detail_jual.h_beli,(toko_detail_jual.h_beli * toko_detail_jual.jumlah) as total_asal, "+
+                                "(toko_detail_jual.total-(toko_detail_jual.h_beli * toko_detail_jual.jumlah)) as keuntungan "+
+                                "from tokopenjualan inner join toko_detail_jual on tokopenjualan.nota_jual=toko_detail_jual.nota_jual "+
+                                "inner join tokobarang on toko_detail_jual.kode_brng=tokobarang.kode_brng "+
+                                "inner join kodesatuan on toko_detail_jual.kode_sat=kodesatuan.kode_sat "+
+                                "where tokopenjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                                (TCari.getText().trim().equals("")?"":" and (tokobarang.nama_brng like '%"+TCari.getText()+"%' or tokopenjualan.nota_jual like '%"+TCari.getText()+"%' or toko_detail_jual.kode_brng like '%"+TCari.getText()+"%' )")+
+                                "order by tokopenjualan.tgl_jual,tokopenjualan.nota_jual",param);
+                            break;
+                    }
+                }
+            }else if(TabRawat.getSelectedIndex()==1){
+                if(tabMode2.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                }else if(tabMode2.getRowCount()!=0){
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("rptKeuntunganBarangToko2.html", "Keuntungan Penjualan Barang Toko", tbPiutang);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("rptKeuntunganBarangToko2.wps", "Keuntungan Penjualan Barang Toko", tbPiutang);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("rptKeuntunganBarangToko2.csv", tbPiutang);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("rptKeuntunganBarangToko2.xlsx", tbPiutang);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Valid.MyReportqry("rptKeuntunganBarangToko2.jasper","report","::[ Keuntungan Piutang Barang Toko ]::",
+                                "select tokopiutang.tgl_piutang,tokopiutang.nota_piutang,toko_detail_piutang.kode_brng,tokobarang.nama_brng,kodesatuan.satuan,toko_detail_piutang.h_jual,toko_detail_piutang.jumlah, "+
+                                "toko_detail_piutang.subtotal,toko_detail_piutang.dis,toko_detail_piutang.bsr_dis,toko_detail_piutang.total, toko_detail_piutang.h_beli,(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah) as total_asal, "+
+                                "(toko_detail_piutang.total-(toko_detail_piutang.h_beli * toko_detail_piutang.jumlah)) as keuntungan "+
+                                "from tokopiutang inner join toko_detail_piutang on tokopiutang.nota_piutang=toko_detail_piutang.nota_piutang "+
+                                "inner join tokobarang on toko_detail_piutang.kode_brng=tokobarang.kode_brng "+
+                                "inner join kodesatuan on toko_detail_piutang.kode_sat=kodesatuan.kode_sat "+
+                                "where tokopiutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                                (TCari.getText().trim().equals("")?"":" and (tokobarang.nama_brng like '%"+TCari.getText()+"%' or tokopiutang.nota_piutang like '%"+TCari.getText()+"%' or toko_detail_piutang.kode_brng like '%"+TCari.getText()+"%' )")+
+                                "order by tokopiutang.tgl_piutang,tokopiutang.nota_piutang",param);
+                            break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 

@@ -11,6 +11,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -785,54 +788,85 @@ public class UTDStokDarah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(panelCari.isVisible()==false){
-                Valid.MyReportqry("rptUTDStokDarah.jasper","report","::[ Data Stok Darah ]::",
-                    "select utd_stok_darah.no_kantong,utd_komponen_darah.nama as darah,"+
-                    "utd_stok_darah.golongan_darah,utd_stok_darah.resus,"+
-                    "utd_stok_darah.tanggal_aftap,utd_stok_darah.tanggal_kadaluarsa,"+
-                    "utd_stok_darah.asal_darah,utd_stok_darah.status,"+
-                    "utd_komponen_darah.jasa_sarana,utd_komponen_darah.paket_bhp,"+
-                    "utd_komponen_darah.kso,utd_komponen_darah.manajemen,"+
-                    "utd_komponen_darah.total,utd_komponen_darah.pembatalan,utd_stok_darah.kode_komponen "+
-                    "from utd_komponen_darah inner join utd_stok_darah "+
-                    "on utd_stok_darah.kode_komponen=utd_komponen_darah.kode "+
-                    "where utd_stok_darah.status='Ada' and utd_stok_darah.no_kantong like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_stok_darah.status='Ada' and utd_komponen_darah.nama like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_stok_darah.status='Ada' and utd_stok_darah.resus like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_stok_darah.status='Ada' and utd_stok_darah.asal_darah like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_stok_darah.status='Ada' and utd_stok_darah.status like '%"+TCari.getText().trim()+"%' "+
-                    "order by utd_stok_darah.tanggal_kadaluarsa",param);
-            }else{
-                Valid.MyReportqry("rptUTDStokDarah.jasper","report","::[ Data Stok Darah ]::",
-                    "select utd_stok_darah.no_kantong,utd_komponen_darah.nama as darah,"+
-                    "utd_stok_darah.golongan_darah,utd_stok_darah.resus,"+
-                    "utd_stok_darah.tanggal_aftap,utd_stok_darah.tanggal_kadaluarsa,"+
-                    "utd_stok_darah.asal_darah,utd_stok_darah.status,"+
-                    "utd_komponen_darah.jasa_sarana,utd_komponen_darah.paket_bhp,"+
-                    "utd_komponen_darah.kso,utd_komponen_darah.manajemen,"+
-                    "utd_komponen_darah.total,utd_komponen_darah.pembatalan,utd_stok_darah.kode_komponen "+
-                    "from utd_komponen_darah inner join utd_stok_darah "+
-                    "on utd_stok_darah.kode_komponen=utd_komponen_darah.kode "+
-                    "where utd_stok_darah.status='"+CmbCrStatus.getSelectedItem().toString()+"' and utd_stok_darah.resus='"+CmbCariResus.getSelectedItem().toString()+"' and "+
-                    "utd_stok_darah.golongan_darah='"+CmbCariGd.getSelectedItem().toString()+"' and utd_stok_darah.asal_darah='"+CmbCariAsal.getSelectedItem().toString()+"' and "+
-                    "utd_stok_darah.no_kantong like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_stok_darah.status='"+CmbCrStatus.getSelectedItem().toString()+"' and utd_stok_darah.resus='"+CmbCariResus.getSelectedItem().toString()+"' and "+
-                    "utd_stok_darah.golongan_darah='"+CmbCariGd.getSelectedItem().toString()+"' and utd_stok_darah.asal_darah='"+CmbCariAsal.getSelectedItem().toString()+"' and "+
-                    "utd_komponen_darah.nama like '%"+TCari.getText().trim()+"%' "+
-                    " order by utd_stok_darah.tanggal_kadaluarsa",param);
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("UTDStokDarah.html", "Data Stok Darah", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("UTDStokDarah.wps", "Data Stok Darah", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("UTDStokDarah.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("UTDStokDarah.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(panelCari.isVisible()==false){
+                            Valid.MyReportqry("rptUTDStokDarah.jasper","report","::[ Data Stok Darah ]::",
+                                "select utd_stok_darah.no_kantong,utd_komponen_darah.nama as darah,"+
+                                "utd_stok_darah.golongan_darah,utd_stok_darah.resus,"+
+                                "utd_stok_darah.tanggal_aftap,utd_stok_darah.tanggal_kadaluarsa,"+
+                                "utd_stok_darah.asal_darah,utd_stok_darah.status,"+
+                                "utd_komponen_darah.jasa_sarana,utd_komponen_darah.paket_bhp,"+
+                                "utd_komponen_darah.kso,utd_komponen_darah.manajemen,"+
+                                "utd_komponen_darah.total,utd_komponen_darah.pembatalan,utd_stok_darah.kode_komponen "+
+                                "from utd_komponen_darah inner join utd_stok_darah "+
+                                "on utd_stok_darah.kode_komponen=utd_komponen_darah.kode "+
+                                "where utd_stok_darah.status='Ada' and utd_stok_darah.no_kantong like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_stok_darah.status='Ada' and utd_komponen_darah.nama like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_stok_darah.status='Ada' and utd_stok_darah.resus like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_stok_darah.status='Ada' and utd_stok_darah.asal_darah like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_stok_darah.status='Ada' and utd_stok_darah.status like '%"+TCari.getText().trim()+"%' "+
+                                "order by utd_stok_darah.tanggal_kadaluarsa",param);
+                        }else{
+                            Valid.MyReportqry("rptUTDStokDarah.jasper","report","::[ Data Stok Darah ]::",
+                                "select utd_stok_darah.no_kantong,utd_komponen_darah.nama as darah,"+
+                                "utd_stok_darah.golongan_darah,utd_stok_darah.resus,"+
+                                "utd_stok_darah.tanggal_aftap,utd_stok_darah.tanggal_kadaluarsa,"+
+                                "utd_stok_darah.asal_darah,utd_stok_darah.status,"+
+                                "utd_komponen_darah.jasa_sarana,utd_komponen_darah.paket_bhp,"+
+                                "utd_komponen_darah.kso,utd_komponen_darah.manajemen,"+
+                                "utd_komponen_darah.total,utd_komponen_darah.pembatalan,utd_stok_darah.kode_komponen "+
+                                "from utd_komponen_darah inner join utd_stok_darah "+
+                                "on utd_stok_darah.kode_komponen=utd_komponen_darah.kode "+
+                                "where utd_stok_darah.status='"+CmbCrStatus.getSelectedItem().toString()+"' and utd_stok_darah.resus='"+CmbCariResus.getSelectedItem().toString()+"' and "+
+                                "utd_stok_darah.golongan_darah='"+CmbCariGd.getSelectedItem().toString()+"' and utd_stok_darah.asal_darah='"+CmbCariAsal.getSelectedItem().toString()+"' and "+
+                                "utd_stok_darah.no_kantong like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_stok_darah.status='"+CmbCrStatus.getSelectedItem().toString()+"' and utd_stok_darah.resus='"+CmbCariResus.getSelectedItem().toString()+"' and "+
+                                "utd_stok_darah.golongan_darah='"+CmbCariGd.getSelectedItem().toString()+"' and utd_stok_darah.asal_darah='"+CmbCariAsal.getSelectedItem().toString()+"' and "+
+                                "utd_komponen_darah.nama like '%"+TCari.getText().trim()+"%' "+
+                                " order by utd_stok_darah.tanggal_kadaluarsa",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }

@@ -1725,331 +1725,42 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-                StringBuilder htmlContent;
-
-                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append("<tr class='isi'>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Asisten Anestesi</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode Dokter</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Dokter Anestesi</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tindakan</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Teknik Anestesi</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 7</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 8</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 9</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 7</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 8</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Lainnya</b></td>").
-                                        append("</tr>");
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,24).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,25).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,26).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,27).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,28).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,29).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,30).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,31).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,32).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,33).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,34).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,35).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,36).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,37).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,38).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,39).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,41).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,42).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,43).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,44).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,45).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,46).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,47).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,48).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,49).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,50).toString()).append("</td>").
-                                            append("</tr>");
-                            }
-                            LoadHTML.setText(
-                                "<html>"+
-                                  "<table width='4000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                                   htmlContent.toString()+
-                                  "</table>"+
-                                "</html>"
-                            );
-
-                            f = new File("DataChecklistKesiapanAnestesi.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                        "<table width='4000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA CHECK LIST KESIAPAN ANESTESI<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>")
-                            );
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportHtmlSmc("DataChecklistKesiapanAnestesi.html", "DATA CHECK LIST KESIAPAN ANESTESI", tbObat);
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append("<tr class='isi'>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Asisten Anestesi</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode Dokter</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Dokter Anestesi</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tindakan</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Teknik Anestesi</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Listrik 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gas Medis 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mesin Anes 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 7</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 8</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jalan Napas 9</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 7</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lain-lain 8</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 1</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 2</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 3</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 4</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 5</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat-obat 6</b></td>").
-                                            append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Lainnya</b></td>").
-                                        append("</tr>");
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append("<tr class='isi'>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,24).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,25).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,26).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,27).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,28).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,29).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,30).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,31).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,32).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,33).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,34).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,35).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,36).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,37).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,38).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,39).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,41).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,42).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,43).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,44).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,45).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,46).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,47).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,48).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,49).toString()).append("</td>").
-                                                append("<td valign='top'>").append(tbObat.getValueAt(i,50).toString()).append("</td>").
-                                            append("</tr>");
-                            }
-                            LoadHTML.setText(
-                                "<html>"+
-                                  "<table width='4000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                                   htmlContent.toString()+
-                                  "</table>"+
-                                "</html>"
-                            );
-
-                            f = new File("DataChecklistKesiapanAnestesi.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                        "<table width='4000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA CHECK LIST KESIAPAN ANESTESI<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>")
-                            );
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportWPSSmc("DataChecklistKesiapanAnestesi.wps", "DATA CHECK LIST KESIAPAN ANESTESI", tbObat);
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Tanggal\";\"NIP\";\"Asisten Anestesi\";\"Kode Dokter\";\"Dokter Anestesi\";\"Tindakan\";\"Teknik Anestesi\";\"Listrik 1\";\"Listrik 2\";\"Listrik 3\";\"Listrik 4\";\"Gas Medis 1\";\"Gas Medis 2\";\"Gas Medis 3\";\"Gas Medis 4\";\"Gas Medis 5\";\"Gas Medis 6\";\"Mesin Anes 1\";\"Mesin Anes 2\";\"Mesin Anes 3\";\"Mesin Anes 4\";\"Mesin Anes 5\";\"Jalan Napas 1\";\"Jalan Napas 2\";\"Jalan Napas 3\";\"Jalan Napas 4\";\"Jalan Napas 5\";\"Jalan Napas 6\";\"Jalan Napas 7\";\"Jalan Napas 8\";\"Jalan Napas 9\";\"Lain-lain 1\";\"Lain-lain 2\";\"Lain-lain 3\";\"Lain-lain 4\";\"Lain-lain 5\";\"Lain-lain 6\";\"Lain-lain 7\";\"Lain-lain 8\";\"Obat-obat 1\";\"Obat-obat 2\";\"Obat-obat 3\";\"Obat-obat 4\";\"Obat-obat 5\";\"Obat-obat 6\";\"Keterangan Lainnya\"\n"
-                            );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").
-                                                         append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\";\"").append(tbObat.getValueAt(i,17).toString()).append("\";\"").append(tbObat.getValueAt(i,18).toString()).append("\";\"").append(tbObat.getValueAt(i,19).toString()).append("\";\"").
-                                                         append(tbObat.getValueAt(i,20).toString()).append("\";\"").append(tbObat.getValueAt(i,21).toString()).append("\";\"").append(tbObat.getValueAt(i,22).toString()).append("\";\"").append(tbObat.getValueAt(i,23).toString()).append("\";\"").append(tbObat.getValueAt(i,24).toString()).append("\";\"").append(tbObat.getValueAt(i,25).toString()).append("\";\"").append(tbObat.getValueAt(i,26).toString()).append("\";\"").append(tbObat.getValueAt(i,27).toString()).append("\";\"").append(tbObat.getValueAt(i,28).toString()).append("\";\"").append(tbObat.getValueAt(i,29).toString()).append("\";\"").
-                                                         append(tbObat.getValueAt(i,30).toString()).append("\";\"").append(tbObat.getValueAt(i,31).toString()).append("\";\"").append(tbObat.getValueAt(i,32).toString()).append("\";\"").append(tbObat.getValueAt(i,33).toString()).append("\";\"").append(tbObat.getValueAt(i,34).toString()).append("\";\"").append(tbObat.getValueAt(i,35).toString()).append("\";\"").append(tbObat.getValueAt(i,36).toString()).append("\";\"").append(tbObat.getValueAt(i,37).toString()).append("\";\"").append(tbObat.getValueAt(i,38).toString()).append("\";\"").append(tbObat.getValueAt(i,39).toString()).append("\";\"").
-                                                         append(tbObat.getValueAt(i,40).toString()).append("\";\"").append(tbObat.getValueAt(i,41).toString()).append("\";\"").append(tbObat.getValueAt(i,42).toString()).append("\";\"").append(tbObat.getValueAt(i,43).toString()).append("\";\"").append(tbObat.getValueAt(i,44).toString()).append("\";\"").append(tbObat.getValueAt(i,45).toString()).append("\";\"").append(tbObat.getValueAt(i,46).toString()).append("\";\"").append(tbObat.getValueAt(i,47).toString()).append("\";\"").append(tbObat.getValueAt(i,48).toString()).append("\";\"").append(tbObat.getValueAt(i,49).toString()).append("\";\"").
-                                                         append(tbObat.getValueAt(i,50).toString()).append("\"\n");
-                            }
-                            f = new File("DataChecklistKesiapanAnestesi.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportCSVSmc("DataChecklistKesiapanAnestesi.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataChecklistKesiapanAnestesi.xlsx", tbObat);
                         break;
                 }
-                htmlContent=null;
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

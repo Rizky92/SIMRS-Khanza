@@ -19,6 +19,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -1201,233 +1205,416 @@ public final class DlgPengeluaranPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabModeBayarPesanObat.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPesanObat.jasper","report","::[ Pembayaran Pemesanan Obat & BHP ]::",
-                "select bayar_pemesanan.tgl_bayar,bayar_pemesanan.no_faktur,datasuplier.nama_suplier,bayar_pemesanan.nip,"+
-                "petugas.nama,bayar_pemesanan.nama_bayar,bayar_pemesanan.no_bukti,bayar_pemesanan.besar_bayar "+
-                "from bayar_pemesanan inner join pemesanan on bayar_pemesanan.no_faktur=pemesanan.no_faktur "+
-                "inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=bayar_pemesanan.nip "+
-                "where bayar_pemesanan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan.tgl_bayar ",param);
-        }
+        try {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            switch (pilihan) {
+                case "Laporan 1 (HTML)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPesanObat.html","Pembayaran Pemesanan Obat BHP",tbBayarPesanObat);
+                    }
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPesanNonMedis.html","Pembayaran Pemesanan Non Medis",tbBayarPesanNonMedis);
+                    }
+                    if(tabModeBayarPesanAset.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPesanAset.html","Pembayaran Pemesanan Aset",tbBayarPesanAset);
+                    }
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPesanDapur.html","Pembayaran Pemesanan Dapur",tbBayarPesanDapur);
+                    }
+                    if(tabModeBayarJM.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarJMDokter.html","Pembayaran JM Dokter",tbBayarJM);
+                    }
+                    if(tabModePengeluaranHarian.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("PengeluaranHarian.html","Pengeluaran Harian",tbPengeluaranHarian);
+                    }
+                    if(tabModeBebanHutang.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarBebanHutangLain.html","Bayar Beban Hutang Lain",tbBebanHutang);
+                    }
+                    if(tabModePengadaanObat.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPengadaanObat.html","Pembayaran Pengadaan Obat BHP",tbPengadaanObat);
+                    }
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPengadaanNonMedis.html","Pembayaran Pengadaan Non Medis",tbPengadaanNonMedis);
+                    }
+                    if(tabModePengadaanInventaris.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPengadaanInventaris.html","Pembayaran Pengadaan Aset Inventaris",tbPengadaanAsetInventaris);
+                    }
+                    if(tabModePengadaanDapur.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPengadaanDapur.html","Pembayaran Pengadaan Dapur",tbPengadaanDapur);
+                    }
+                    if(tabModeBayarPesanToko.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPesanToko.html","Pembayaran Pemesanan Toko",tbBayarPesanToko);
+                    }
+                    if(tabModePengadaanToko.getRowCount()!=0) {
+                        Valid.exportHtmlSmc("BayarPengadaanToko.html","Pembayaran Pengadaan Toko",tbPengadaanToko);
+                    }
+                    break;
+                case "Laporan 2 (WPS)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPesanObat.wps","Pembayaran Pemesanan Obat BHP",tbBayarPesanObat);
+                    }
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPesanNonMedis.wps","Pembayaran Pemesanan Non Medis",tbBayarPesanNonMedis);
+                    }
+                    if(tabModeBayarPesanAset.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPesanAset.wps","Pembayaran Pemesanan Aset",tbBayarPesanAset);
+                    }
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPesanDapur.wps","Pembayaran Pemesanan Dapur",tbBayarPesanDapur);
+                    }
+                    if(tabModeBayarJM.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarJMDokter.wps","Pembayaran JM Dokter",tbBayarJM);
+                    }
+                    if(tabModePengeluaranHarian.getRowCount()!=0) {
+                        Valid.exportWPSSmc("PengeluaranHarian.wps","Pengeluaran Harian",tbPengeluaranHarian);
+                    }
+                    if(tabModeBebanHutang.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarBebanHutangLain.wps","Bayar Beban Hutang Lain",tbBebanHutang);
+                    }
+                    if(tabModePengadaanObat.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPengadaanObat.wps","Pembayaran Pengadaan Obat BHP",tbPengadaanObat);
+                    }
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPengadaanNonMedis.wps","Pembayaran Pengadaan Non Medis",tbPengadaanNonMedis);
+                    }
+                    if(tabModePengadaanInventaris.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPengadaanInventaris.wps","Pembayaran Pengadaan Aset Inventaris",tbPengadaanAsetInventaris);
+                    }
+                    if(tabModePengadaanDapur.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPengadaanDapur.wps","Pembayaran Pengadaan Dapur",tbPengadaanDapur);
+                    }
+                    if(tabModeBayarPesanToko.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPesanToko.wps","Pembayaran Pemesanan Toko",tbBayarPesanToko);
+                    }
+                    if(tabModePengadaanToko.getRowCount()!=0) {
+                        Valid.exportWPSSmc("BayarPengadaanToko.wps","Pembayaran Pengadaan Toko",tbPengadaanToko);
+                    }
+                    break;
+                case "Laporan 3 (CSV)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPesanObat.csv",tbBayarPesanObat);
+                    }
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPesanNonMedis.csv",tbBayarPesanNonMedis);
+                    }
+                    if(tabModeBayarPesanAset.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPesanAset.csv",tbBayarPesanAset);
+                    }
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPesanDapur.csv",tbBayarPesanDapur);
+                    }
+                    if(tabModeBayarJM.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarJMDokter.csv",tbBayarJM);
+                    }
+                    if(tabModePengeluaranHarian.getRowCount()!=0) {
+                        Valid.exportCSVSmc("PengeluaranHarian.csv",tbPengeluaranHarian);
+                    }
+                    if(tabModeBebanHutang.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarBebanHutangLain.csv",tbBebanHutang);
+                    }
+                    if(tabModePengadaanObat.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPengadaanObat.csv",tbPengadaanObat);
+                    }
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPengadaanNonMedis.csv",tbPengadaanNonMedis);
+                    }
+                    if(tabModePengadaanInventaris.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPengadaanInventaris.csv",tbPengadaanAsetInventaris);
+                    }
+                    if(tabModePengadaanDapur.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPengadaanDapur.csv",tbPengadaanDapur);
+                    }
+                    if(tabModeBayarPesanToko.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPesanToko.csv",tbBayarPesanToko);
+                    }
+                    if(tabModePengadaanToko.getRowCount()!=0) {
+                        Valid.exportCSVSmc("BayarPengadaanToko.csv",tbPengadaanToko);
+                    }
+                    break;
+                case "Laporan 4 (XLSX)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPesanObat.xlsx",tbBayarPesanObat);
+                    }
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPesanNonMedis.xlsx",tbBayarPesanNonMedis);
+                    }
+                    if(tabModeBayarPesanAset.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPesanAset.xlsx",tbBayarPesanAset);
+                    }
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPesanDapur.xlsx",tbBayarPesanDapur);
+                    }
+                    if(tabModeBayarJM.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarJMDokter.xlsx",tbBayarJM);
+                    }
+                    if(tabModePengeluaranHarian.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("PengeluaranHarian.xlsx",tbPengeluaranHarian);
+                    }
+                    if(tabModeBebanHutang.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarBebanHutangLain.xlsx",tbBebanHutang);
+                    }
+                    if(tabModePengadaanObat.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPengadaanObat.xlsx",tbPengadaanObat);
+                    }
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPengadaanNonMedis.xlsx",tbPengadaanNonMedis);
+                    }
+                    if(tabModePengadaanInventaris.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPengadaanInventaris.xlsx",tbPengadaanAsetInventaris);
+                    }
+                    if(tabModePengadaanDapur.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPengadaanDapur.xlsx",tbPengadaanDapur);
+                    }
+                    if(tabModeBayarPesanToko.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPesanToko.xlsx",tbBayarPesanToko);
+                    }
+                    if(tabModePengadaanToko.getRowCount()!=0) {
+                        Valid.exportXlsxSmc("BayarPengadaanToko.xlsx",tbPengadaanToko);
+                    }
+                    break;
+                case "Laporan 5 (Jasper)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPesanObat.jasper","report","::[ Pembayaran Pemesanan Obat & BHP ]::",
+                            "select bayar_pemesanan.tgl_bayar,bayar_pemesanan.no_faktur,datasuplier.nama_suplier,bayar_pemesanan.nip,"+
+                            "petugas.nama,bayar_pemesanan.nama_bayar,bayar_pemesanan.no_bukti,bayar_pemesanan.besar_bayar "+
+                            "from bayar_pemesanan inner join pemesanan on bayar_pemesanan.no_faktur=pemesanan.no_faktur "+
+                            "inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=bayar_pemesanan.nip "+
+                            "where bayar_pemesanan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan.tgl_bayar ",param);
+                    }
 
-        if(tabModeBayarPesanNonMedis.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPesanNonMedis.jasper","report","::[ Pembayaran Pemesanan Non Medis ]::",
-                "select bayar_pemesanan_non_medis.tgl_bayar,bayar_pemesanan_non_medis.no_faktur,ipsrssuplier.nama_suplier,bayar_pemesanan_non_medis.nip,"+
-                "petugas.nama,bayar_pemesanan_non_medis.nama_bayar,bayar_pemesanan_non_medis.no_bukti,bayar_pemesanan_non_medis.besar_bayar "+
-                "from bayar_pemesanan_non_medis inner join ipsrspemesanan on bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur "+
-                "inner join ipsrssuplier on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=bayar_pemesanan_non_medis.nip "+
-                "where bayar_pemesanan_non_medis.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan_non_medis.tgl_bayar",param);
-        }
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPesanNonMedis.jasper","report","::[ Pembayaran Pemesanan Non Medis ]::",
+                            "select bayar_pemesanan_non_medis.tgl_bayar,bayar_pemesanan_non_medis.no_faktur,ipsrssuplier.nama_suplier,bayar_pemesanan_non_medis.nip,"+
+                            "petugas.nama,bayar_pemesanan_non_medis.nama_bayar,bayar_pemesanan_non_medis.no_bukti,bayar_pemesanan_non_medis.besar_bayar "+
+                            "from bayar_pemesanan_non_medis inner join ipsrspemesanan on bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur "+
+                            "inner join ipsrssuplier on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=bayar_pemesanan_non_medis.nip "+
+                            "where bayar_pemesanan_non_medis.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan_non_medis.tgl_bayar",param);
+                    }
 
-        if(tabModeBayarPesanAset.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPesanAset.jasper","report","::[ Pembayaran Pemesanan Aset ]::",
-                "select bayar_pemesanan_inventaris.tgl_bayar,bayar_pemesanan_inventaris.no_faktur,inventaris_suplier.nama_suplier,bayar_pemesanan_inventaris.nip,"+
-                "petugas.nama,bayar_pemesanan_inventaris.nama_bayar,bayar_pemesanan_inventaris.no_bukti,bayar_pemesanan_inventaris.besar_bayar "+
-                "from bayar_pemesanan_inventaris inner join inventaris_pemesanan on bayar_pemesanan_inventaris.no_faktur=inventaris_pemesanan.no_faktur "+
-                "inner join inventaris_suplier on inventaris_pemesanan.kode_suplier=inventaris_suplier.kode_suplier "+
-                "inner join petugas on petugas.nip=bayar_pemesanan_inventaris.nip "+
-                "where bayar_pemesanan_inventaris.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan_inventaris.tgl_bayar",param);
-        }
+                    if(tabModeBayarPesanAset.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPesanAset.jasper","report","::[ Pembayaran Pemesanan Aset ]::",
+                            "select bayar_pemesanan_inventaris.tgl_bayar,bayar_pemesanan_inventaris.no_faktur,inventaris_suplier.nama_suplier,bayar_pemesanan_inventaris.nip,"+
+                            "petugas.nama,bayar_pemesanan_inventaris.nama_bayar,bayar_pemesanan_inventaris.no_bukti,bayar_pemesanan_inventaris.besar_bayar "+
+                            "from bayar_pemesanan_inventaris inner join inventaris_pemesanan on bayar_pemesanan_inventaris.no_faktur=inventaris_pemesanan.no_faktur "+
+                            "inner join inventaris_suplier on inventaris_pemesanan.kode_suplier=inventaris_suplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=bayar_pemesanan_inventaris.nip "+
+                            "where bayar_pemesanan_inventaris.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan_inventaris.tgl_bayar",param);
+                    }
 
-        if(tabModeBayarPesanDapur.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPesanDapur.jasper","report","::[ Pembayaran Pemesanan Dapur ]::",
-                "select bayar_pemesanan_dapur.tgl_bayar,bayar_pemesanan_dapur.no_faktur,dapursuplier.nama_suplier,bayar_pemesanan_dapur.nip,"+
-                "petugas.nama,bayar_pemesanan_dapur.nama_bayar,bayar_pemesanan_dapur.no_bukti,bayar_pemesanan_dapur.besar_bayar "+
-                "from bayar_pemesanan_dapur inner join dapurpemesanan on bayar_pemesanan_dapur.no_faktur=dapurpemesanan.no_faktur "+
-                "inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=bayar_pemesanan_dapur.nip "+
-                "where bayar_pemesanan_dapur.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan_dapur.tgl_bayar",param);
-        }
+                    if(tabModeBayarPesanDapur.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPesanDapur.jasper","report","::[ Pembayaran Pemesanan Dapur ]::",
+                            "select bayar_pemesanan_dapur.tgl_bayar,bayar_pemesanan_dapur.no_faktur,dapursuplier.nama_suplier,bayar_pemesanan_dapur.nip,"+
+                            "petugas.nama,bayar_pemesanan_dapur.nama_bayar,bayar_pemesanan_dapur.no_bukti,bayar_pemesanan_dapur.besar_bayar "+
+                            "from bayar_pemesanan_dapur inner join dapurpemesanan on bayar_pemesanan_dapur.no_faktur=dapurpemesanan.no_faktur "+
+                            "inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=bayar_pemesanan_dapur.nip "+
+                            "where bayar_pemesanan_dapur.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_pemesanan_dapur.tgl_bayar",param);
+                    }
 
-        if(tabModeBayarJM.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarJMDokter.jasper","report","::[ Pembayaran JM Dokter ]::",
-                "select bayar_jm_dokter.tanggal,bayar_jm_dokter.no_bayar,bayar_jm_dokter.kd_dokter,dokter.nm_dokter,bayar_jm_dokter.nama_bayar, "+
-                "bayar_jm_dokter.besar_bayar from bayar_jm_dokter inner join dokter on bayar_jm_dokter.kd_dokter=dokter.kd_dokter "+
-                "where bayar_jm_dokter.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_jm_dokter.tanggal",param);
-        }
+                    if(tabModeBayarJM.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarJMDokter.jasper","report","::[ Pembayaran JM Dokter ]::",
+                            "select bayar_jm_dokter.tanggal,bayar_jm_dokter.no_bayar,bayar_jm_dokter.kd_dokter,dokter.nm_dokter,bayar_jm_dokter.nama_bayar, "+
+                            "bayar_jm_dokter.besar_bayar from bayar_jm_dokter inner join dokter on bayar_jm_dokter.kd_dokter=dokter.kd_dokter "+
+                            "where bayar_jm_dokter.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_jm_dokter.tanggal",param);
+                    }
 
-        if(tabModePengeluaranHarian.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranPengeluaranHarian.jasper","report","::[ Pengeluaran Harian ]::",
-                "select DATE_FORMAT(pengeluaran_harian.tanggal,'%Y-%m-%d') as tanggal,pengeluaran_harian.no_keluar,pengeluaran_harian.nip,"+
-                "petugas.nama,kategori_pengeluaran_harian.nama_kategori,pengeluaran_harian.biaya from pengeluaran_harian "+
-                "inner join kategori_pengeluaran_harian on pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori "+
-                "inner join petugas on pengeluaran_harian.nip=petugas.nip "+
-                "where pengeluaran_harian.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by pengeluaran_harian.tanggal ",param);
-        }
+                    if(tabModePengeluaranHarian.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranPengeluaranHarian.jasper","report","::[ Pengeluaran Harian ]::",
+                            "select DATE_FORMAT(pengeluaran_harian.tanggal,'%Y-%m-%d') as tanggal,pengeluaran_harian.no_keluar,pengeluaran_harian.nip,"+
+                            "petugas.nama,kategori_pengeluaran_harian.nama_kategori,pengeluaran_harian.biaya from pengeluaran_harian "+
+                            "inner join kategori_pengeluaran_harian on pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori "+
+                            "inner join petugas on pengeluaran_harian.nip=petugas.nip "+
+                            "where pengeluaran_harian.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by pengeluaran_harian.tanggal ",param);
+                    }
 
-        if(tabModeBebanHutang.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptBayarBebanHutangLain.jasper","report","::[ Bayar Beban Hutang Lain ]::",
-                "select bayar_beban_hutang_lain.tgl_bayar, bayar_beban_hutang_lain.kode_pemberi_hutang,pemberi_hutang_lain.nama_pemberi_hutang, bayar_beban_hutang_lain.besar_cicilan,"+
-                "bayar_beban_hutang_lain.keterangan, bayar_beban_hutang_lain.no_hutang,bayar_beban_hutang_lain.nama_bayar,bayar_beban_hutang_lain.no_bukti from bayar_beban_hutang_lain "+
-                "inner join pemberi_hutang_lain on bayar_beban_hutang_lain.kode_pemberi_hutang=pemberi_hutang_lain.kode_pemberi_hutang where "+
-                "bayar_beban_hutang_lain.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_beban_hutang_lain.tgl_bayar ",param);
-        }
+                    if(tabModeBebanHutang.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptBayarBebanHutangLain.jasper","report","::[ Bayar Beban Hutang Lain ]::",
+                            "select bayar_beban_hutang_lain.tgl_bayar, bayar_beban_hutang_lain.kode_pemberi_hutang,pemberi_hutang_lain.nama_pemberi_hutang, bayar_beban_hutang_lain.besar_cicilan,"+
+                            "bayar_beban_hutang_lain.keterangan, bayar_beban_hutang_lain.no_hutang,bayar_beban_hutang_lain.nama_bayar,bayar_beban_hutang_lain.no_bukti from bayar_beban_hutang_lain "+
+                            "inner join pemberi_hutang_lain on bayar_beban_hutang_lain.kode_pemberi_hutang=pemberi_hutang_lain.kode_pemberi_hutang where "+
+                            "bayar_beban_hutang_lain.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by bayar_beban_hutang_lain.tgl_bayar ",param);
+                    }
 
-        if(tabModePengadaanObat.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPengadaanObat.jasper","report","::[ Pembayaran Pengadaan Obat & BHP ]::",
-                "select pembelian.tgl_beli,pembelian.no_faktur,datasuplier.nama_suplier,pembelian.nip,"+
-                "petugas.nama,rekening.nm_rek,pembelian.tagihan from pembelian "+
-                "inner join datasuplier on pembelian.kode_suplier=datasuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=pembelian.nip "+
-                "inner join rekening on rekening.kd_rek=pembelian.kd_rek "+
-                "where pembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by pembelian.tgl_beli",param);
-        }
+                    if(tabModePengadaanObat.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPengadaanObat.jasper","report","::[ Pembayaran Pengadaan Obat & BHP ]::",
+                            "select pembelian.tgl_beli,pembelian.no_faktur,datasuplier.nama_suplier,pembelian.nip,"+
+                            "petugas.nama,rekening.nm_rek,pembelian.tagihan from pembelian "+
+                            "inner join datasuplier on pembelian.kode_suplier=datasuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=pembelian.nip "+
+                            "inner join rekening on rekening.kd_rek=pembelian.kd_rek "+
+                            "where pembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by pembelian.tgl_beli",param);
+                    }
 
-        if(tabModePengadaanNonMedis.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPengadaanNonMedis.jasper","report","::[ Pembayaran Pengadaan Barang Non Medis ]::",
-                "select ipsrspembelian.tgl_beli,ipsrspembelian.no_faktur,ipsrssuplier.nama_suplier,ipsrspembelian.nip,"+
-                "petugas.nama,rekening.nm_rek,ipsrspembelian.tagihan from ipsrspembelian "+
-                "inner join ipsrssuplier on ipsrspembelian.kode_suplier=ipsrssuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=ipsrspembelian.nip "+
-                "inner join rekening on rekening.kd_rek=ipsrspembelian.kd_rek "+
-                "where ipsrspembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by ipsrspembelian.tgl_beli",param);
-        }
+                    if(tabModePengadaanNonMedis.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPengadaanNonMedis.jasper","report","::[ Pembayaran Pengadaan Barang Non Medis ]::",
+                            "select ipsrspembelian.tgl_beli,ipsrspembelian.no_faktur,ipsrssuplier.nama_suplier,ipsrspembelian.nip,"+
+                            "petugas.nama,rekening.nm_rek,ipsrspembelian.tagihan from ipsrspembelian "+
+                            "inner join ipsrssuplier on ipsrspembelian.kode_suplier=ipsrssuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=ipsrspembelian.nip "+
+                            "inner join rekening on rekening.kd_rek=ipsrspembelian.kd_rek "+
+                            "where ipsrspembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by ipsrspembelian.tgl_beli",param);
+                    }
 
-        if(tabModePengadaanInventaris.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPengadaanInventaris.jasper","report","::[ Pembayaran Pengadaan Aset/Inventaris ]::",
-                "select inventaris_pembelian.tgl_beli,inventaris_pembelian.no_faktur,inventaris_suplier.nama_suplier,inventaris_pembelian.nip,"+
-                "petugas.nama,rekening.nm_rek,inventaris_pembelian.tagihan from inventaris_pembelian "+
-                "inner join inventaris_suplier on inventaris_pembelian.kode_suplier=inventaris_suplier.kode_suplier "+
-                "inner join petugas on petugas.nip=inventaris_pembelian.nip "+
-                "inner join rekening on rekening.kd_rek=inventaris_pembelian.kd_rek "+
-                "where inventaris_pembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by inventaris_pembelian.tgl_beli",param);
-        }
+                    if(tabModePengadaanInventaris.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPengadaanInventaris.jasper","report","::[ Pembayaran Pengadaan Aset/Inventaris ]::",
+                            "select inventaris_pembelian.tgl_beli,inventaris_pembelian.no_faktur,inventaris_suplier.nama_suplier,inventaris_pembelian.nip,"+
+                            "petugas.nama,rekening.nm_rek,inventaris_pembelian.tagihan from inventaris_pembelian "+
+                            "inner join inventaris_suplier on inventaris_pembelian.kode_suplier=inventaris_suplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=inventaris_pembelian.nip "+
+                            "inner join rekening on rekening.kd_rek=inventaris_pembelian.kd_rek "+
+                            "where inventaris_pembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by inventaris_pembelian.tgl_beli",param);
+                    }
 
-        if(tabModePengadaanDapur.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPengadaanDapur.jasper","report","::[ Pembayaran Pengadaan Dapur ]::",
-                "select dapurpembelian.tgl_beli,dapurpembelian.no_faktur,dapursuplier.nama_suplier,dapurpembelian.nip,"+
-                "petugas.nama,rekening.nm_rek,dapurpembelian.tagihan from dapurpembelian "+
-                "inner join dapursuplier on dapurpembelian.kode_suplier=dapursuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=dapurpembelian.nip "+
-                "inner join rekening on rekening.kd_rek=dapurpembelian.kd_rek "+
-                "where dapurpembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by dapurpembelian.tgl_beli",param);
-        }
+                    if(tabModePengadaanDapur.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPengadaanDapur.jasper","report","::[ Pembayaran Pengadaan Dapur ]::",
+                            "select dapurpembelian.tgl_beli,dapurpembelian.no_faktur,dapursuplier.nama_suplier,dapurpembelian.nip,"+
+                            "petugas.nama,rekening.nm_rek,dapurpembelian.tagihan from dapurpembelian "+
+                            "inner join dapursuplier on dapurpembelian.kode_suplier=dapursuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=dapurpembelian.nip "+
+                            "inner join rekening on rekening.kd_rek=dapurpembelian.kd_rek "+
+                            "where dapurpembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by dapurpembelian.tgl_beli",param);
+                    }
 
-        if(tabModeBayarPesanToko.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPesanToko.jasper","report","::[ Pembayaran Pemesanan Toko ]::",
-                "select toko_bayar_pemesanan.tgl_bayar,toko_bayar_pemesanan.no_faktur,tokosuplier.nama_suplier,toko_bayar_pemesanan.nip,"+
-                "petugas.nama,toko_bayar_pemesanan.nama_bayar,toko_bayar_pemesanan.no_bukti,toko_bayar_pemesanan.besar_bayar "+
-                "from toko_bayar_pemesanan inner join tokopemesanan on toko_bayar_pemesanan.no_faktur=tokopemesanan.no_faktur "+
-                "inner join tokosuplier on tokopemesanan.kode_suplier=tokosuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=toko_bayar_pemesanan.nip "+
-                "where toko_bayar_pemesanan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by toko_bayar_pemesanan.tgl_bayar",param);
-        }
+                    if(tabModeBayarPesanToko.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPesanToko.jasper","report","::[ Pembayaran Pemesanan Toko ]::",
+                            "select toko_bayar_pemesanan.tgl_bayar,toko_bayar_pemesanan.no_faktur,tokosuplier.nama_suplier,toko_bayar_pemesanan.nip,"+
+                            "petugas.nama,toko_bayar_pemesanan.nama_bayar,toko_bayar_pemesanan.no_bukti,toko_bayar_pemesanan.besar_bayar "+
+                            "from toko_bayar_pemesanan inner join tokopemesanan on toko_bayar_pemesanan.no_faktur=tokopemesanan.no_faktur "+
+                            "inner join tokosuplier on tokopemesanan.kode_suplier=tokosuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=toko_bayar_pemesanan.nip "+
+                            "where toko_bayar_pemesanan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by toko_bayar_pemesanan.tgl_bayar",param);
+                    }
 
-        if(tabModePengadaanToko.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengeluaranBayarPengadaanToko.jasper","report","::[ Pembayaran Pengadaan Toko ]::",
-                "select tokopembelian.tgl_beli,tokopembelian.no_faktur,tokosuplier.nama_suplier,tokopembelian.nip,"+
-                "petugas.nama,rekening.nm_rek,tokopembelian.tagihan from tokopembelian "+
-                "inner join tokosuplier on tokopembelian.kode_suplier=tokosuplier.kode_suplier "+
-                "inner join petugas on petugas.nip=tokopembelian.nip "+
-                "inner join rekening on rekening.kd_rek=tokopembelian.kd_rek "+
-                "where tokopembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by tokopembelian.tgl_beli",param);
+                    if(tabModePengadaanToko.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengeluaranBayarPengadaanToko.jasper","report","::[ Pembayaran Pengadaan Toko ]::",
+                            "select tokopembelian.tgl_beli,tokopembelian.no_faktur,tokosuplier.nama_suplier,tokopembelian.nip,"+
+                            "petugas.nama,rekening.nm_rek,tokopembelian.tagihan from tokopembelian "+
+                            "inner join tokosuplier on tokopembelian.kode_suplier=tokosuplier.kode_suplier "+
+                            "inner join petugas on petugas.nip=tokopembelian.nip "+
+                            "inner join rekening on rekening.kd_rek=tokopembelian.kd_rek "+
+                            "where tokopembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by tokopembelian.tgl_beli",param);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
 
         if(tabModePengembalianDeposit.getRowCount()!=0){

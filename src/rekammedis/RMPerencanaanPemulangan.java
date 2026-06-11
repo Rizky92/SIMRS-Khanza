@@ -1351,327 +1351,42 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-
-                if(TCari.getText().trim().equals("")){
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                            "perencanaan_pemulangan.rencana_pulang,perencanaan_pemulangan.alasan_masuk,perencanaan_pemulangan.diagnosa_medis,perencanaan_pemulangan.pengaruh_ri_pasien_dan_keluarga,"+
-                            "perencanaan_pemulangan.keterangan_pengaruh_ri_pasien_dan_keluarga,perencanaan_pemulangan.pengaruh_ri_pekerjaan_sekolah,perencanaan_pemulangan.keterangan_pengaruh_ri_pekerjaan_sekolah,"+
-                            "perencanaan_pemulangan.pengaruh_ri_keuangan,perencanaan_pemulangan.keterangan_pengaruh_ri_keuangan,perencanaan_pemulangan.antisipasi_masalah_saat_pulang,"+
-                            "perencanaan_pemulangan.keterangan_antisipasi_masalah_saat_pulang,perencanaan_pemulangan.bantuan_diperlukan_dalam,perencanaan_pemulangan.keterangan_bantuan_diperlukan_dalam,"+
-                            "perencanaan_pemulangan.adakah_yang_membantu_keperluan,perencanaan_pemulangan.keterangan_adakah_yang_membantu_keperluan,perencanaan_pemulangan.pasien_tinggal_sendiri,"+
-                            "perencanaan_pemulangan.keterangan_pasien_tinggal_sendiri,perencanaan_pemulangan.pasien_menggunakan_peralatan_medis,perencanaan_pemulangan.keterangan_pasien_menggunakan_peralatan_medis,"+
-                            "perencanaan_pemulangan.pasien_memerlukan_alat_bantu,perencanaan_pemulangan.keterangan_pasien_memerlukan_alat_bantu,perencanaan_pemulangan.memerlukan_perawatan_khusus,"+
-                            "perencanaan_pemulangan.keterangan_memerlukan_perawatan_khusus,perencanaan_pemulangan.bermasalah_memenuhi_kebutuhan,perencanaan_pemulangan.keterangan_bermasalah_memenuhi_kebutuhan,"+
-                            "perencanaan_pemulangan.memiliki_nyeri_kronis,perencanaan_pemulangan.keterangan_memiliki_nyeri_kronis,perencanaan_pemulangan.memerlukan_edukasi_kesehatan,"+
-                            "perencanaan_pemulangan.keterangan_memerlukan_edukasi_kesehatan,perencanaan_pemulangan.memerlukan_keterampilkan_khusus,perencanaan_pemulangan.keterangan_memerlukan_keterampilkan_khusus,"+
-                            "perencanaan_pemulangan.nama_pasien_keluarga,perencanaan_pemulangan.nip,petugas.nama "+
-                            "from perencanaan_pemulangan inner join reg_periksa on perencanaan_pemulangan.no_rawat=reg_periksa.no_rawat "+
-                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
-                            "inner join petugas on petugas.nip=perencanaan_pemulangan.nip where "+
-                            "reg_periksa.tgl_registrasi between ? and ? order by reg_periksa.tgl_registrasi");
-                }else{
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                            "perencanaan_pemulangan.rencana_pulang,perencanaan_pemulangan.alasan_masuk,perencanaan_pemulangan.diagnosa_medis,perencanaan_pemulangan.pengaruh_ri_pasien_dan_keluarga,"+
-                            "perencanaan_pemulangan.keterangan_pengaruh_ri_pasien_dan_keluarga,perencanaan_pemulangan.pengaruh_ri_pekerjaan_sekolah,perencanaan_pemulangan.keterangan_pengaruh_ri_pekerjaan_sekolah,"+
-                            "perencanaan_pemulangan.pengaruh_ri_keuangan,perencanaan_pemulangan.keterangan_pengaruh_ri_keuangan,perencanaan_pemulangan.antisipasi_masalah_saat_pulang,"+
-                            "perencanaan_pemulangan.keterangan_antisipasi_masalah_saat_pulang,perencanaan_pemulangan.bantuan_diperlukan_dalam,perencanaan_pemulangan.keterangan_bantuan_diperlukan_dalam,"+
-                            "perencanaan_pemulangan.adakah_yang_membantu_keperluan,perencanaan_pemulangan.keterangan_adakah_yang_membantu_keperluan,perencanaan_pemulangan.pasien_tinggal_sendiri,"+
-                            "perencanaan_pemulangan.keterangan_pasien_tinggal_sendiri,perencanaan_pemulangan.pasien_menggunakan_peralatan_medis,perencanaan_pemulangan.keterangan_pasien_menggunakan_peralatan_medis,"+
-                            "perencanaan_pemulangan.pasien_memerlukan_alat_bantu,perencanaan_pemulangan.keterangan_pasien_memerlukan_alat_bantu,perencanaan_pemulangan.memerlukan_perawatan_khusus,"+
-                            "perencanaan_pemulangan.keterangan_memerlukan_perawatan_khusus,perencanaan_pemulangan.bermasalah_memenuhi_kebutuhan,perencanaan_pemulangan.keterangan_bermasalah_memenuhi_kebutuhan,"+
-                            "perencanaan_pemulangan.memiliki_nyeri_kronis,perencanaan_pemulangan.keterangan_memiliki_nyeri_kronis,perencanaan_pemulangan.memerlukan_edukasi_kesehatan,"+
-                            "perencanaan_pemulangan.keterangan_memerlukan_edukasi_kesehatan,perencanaan_pemulangan.memerlukan_keterampilkan_khusus,perencanaan_pemulangan.keterangan_memerlukan_keterampilkan_khusus,"+
-                            "perencanaan_pemulangan.nama_pasien_keluarga,perencanaan_pemulangan.nip,petugas.nama "+
-                            "from perencanaan_pemulangan inner join reg_periksa on perencanaan_pemulangan.no_rawat=reg_periksa.no_rawat "+
-                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
-                            "inner join petugas on petugas.nip=perencanaan_pemulangan.nip where "+
-                            "reg_periksa.tgl_registrasi between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                            "perencanaan_pemulangan.nip like ? or petugas.nama like ?) order by reg_periksa.tgl_registrasi");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-
-                try {
-                    if(TCari.getText().trim().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Pasien</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Masuk Dirawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Rencana Pulang</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Diagnosa Medis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alasan Masuk / Dirawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengaruh RI Pasien & Keluarga</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pengaruh RI Pasien & Keluarga</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengaruh RI Pekerjaan/Sekolah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pengaruh RI Pekerjaan/Sekolah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengaruh RI Keuangan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pengaruh RI Keuangan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Antisipasi Masalah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Antisipasi Masalah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Bantuan Diperlukan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Bantuan Diperlukan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Membantu Keperluan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Yang Membantu Keperluan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tinggal Sendiri</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pasien Tinggal Sendiri</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Peralatan Medis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Peralatan Medis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alat Bantu</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Memerlukan Alat Bantu</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Perawatan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Perawatan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Memenuhi Kebutuhan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Memenuhi Kebutuhan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nyeri Kronis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Nyeri Kronis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Edukasi Kesehatan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Edukasi Kesehatan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterampilkan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Keterampilkan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pasien/Keluarga</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>NIP</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Petugas</td>"+
-                                    "</tr>"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>"+
-                                            "<td valign='top'>"+rs.getString("no_rawat")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_rkm_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nm_pasien")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tgl_lahir")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("jk")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("rencana_pulang")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("diagnosa_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("alasan_masuk")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pengaruh_ri_pasien_dan_keluarga")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pengaruh_ri_pasien_dan_keluarga")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pengaruh_ri_pekerjaan_sekolah")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pengaruh_ri_pekerjaan_sekolah")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pengaruh_ri_keuangan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pengaruh_ri_keuangan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("antisipasi_masalah_saat_pulang")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_antisipasi_masalah_saat_pulang")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("bantuan_diperlukan_dalam")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_bantuan_diperlukan_dalam")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("adakah_yang_membantu_keperluan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_adakah_yang_membantu_keperluan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pasien_tinggal_sendiri")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pasien_tinggal_sendiri")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pasien_menggunakan_peralatan_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pasien_menggunakan_peralatan_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pasien_memerlukan_alat_bantu")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pasien_memerlukan_alat_bantu")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memerlukan_perawatan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memerlukan_perawatan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("bermasalah_memenuhi_kebutuhan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_bermasalah_memenuhi_kebutuhan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memiliki_nyeri_kronis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memiliki_nyeri_kronis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memerlukan_edukasi_kesehatan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memerlukan_edukasi_kesehatan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memerlukan_keterampilkan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memerlukan_keterampilkan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nama_pasien_keluarga")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nip")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nama")+"</td>"+
-                                        "</tr>"
-                                    );
-                                }
-                                f = new File("RencanaPemulangan.html");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write("<html>"+
-                                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                            "<body>"+
-                                                "<table width='5500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                    htmlContent.toString()+
-                                                "</table>"+
-                                            "</body>"+
-                                         "</html>"
-                                );
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 2 (WPS)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Pasien</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Masuk Dirawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Rencana Pulang</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Diagnosa Medis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alasan Masuk / Dirawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengaruh RI Pasien & Keluarga</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pengaruh RI Pasien & Keluarga</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengaruh RI Pekerjaan/Sekolah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pengaruh RI Pekerjaan/Sekolah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pengaruh RI Keuangan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pengaruh RI Keuangan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Antisipasi Masalah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Antisipasi Masalah</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Bantuan Diperlukan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Bantuan Diperlukan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Membantu Keperluan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Yang Membantu Keperluan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tinggal Sendiri</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Pasien Tinggal Sendiri</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Peralatan Medis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Peralatan Medis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alat Bantu</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Memerlukan Alat Bantu</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Perawatan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Perawatan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Memenuhi Kebutuhan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Memenuhi Kebutuhan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nyeri Kronis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Nyeri Kronis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Edukasi Kesehatan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Edukasi Kesehatan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterampilkan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Keterangan Keterampilkan Khusus</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pasien/Keluarga</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>NIP</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Petugas</td>"+
-                                    "</tr>"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>"+
-                                            "<td valign='top'>"+rs.getString("no_rawat")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_rkm_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nm_pasien")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tgl_lahir")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("jk")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("rencana_pulang")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("diagnosa_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("alasan_masuk")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pengaruh_ri_pasien_dan_keluarga")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pengaruh_ri_pasien_dan_keluarga")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pengaruh_ri_pekerjaan_sekolah")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pengaruh_ri_pekerjaan_sekolah")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pengaruh_ri_keuangan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pengaruh_ri_keuangan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("antisipasi_masalah_saat_pulang")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_antisipasi_masalah_saat_pulang")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("bantuan_diperlukan_dalam")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_bantuan_diperlukan_dalam")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("adakah_yang_membantu_keperluan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_adakah_yang_membantu_keperluan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pasien_tinggal_sendiri")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pasien_tinggal_sendiri")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pasien_menggunakan_peralatan_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pasien_menggunakan_peralatan_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pasien_memerlukan_alat_bantu")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_pasien_memerlukan_alat_bantu")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memerlukan_perawatan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memerlukan_perawatan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("bermasalah_memenuhi_kebutuhan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_bermasalah_memenuhi_kebutuhan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memiliki_nyeri_kronis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memiliki_nyeri_kronis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memerlukan_edukasi_kesehatan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memerlukan_edukasi_kesehatan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("memerlukan_keterampilkan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("keterangan_memerlukan_keterampilkan_khusus")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nama_pasien_keluarga")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nip")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nama")+"</td>"+
-                                        "</tr>"
-                                    );
-                                }
-                                f = new File("RencanaPemulangan.wps");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write("<html>"+
-                                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                            "<body>"+
-                                                "<table width='5500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                    htmlContent.toString()+
-                                                "</table>"+
-                                            "</body>"+
-                                         "</html>"
-                                );
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 3 (CSV)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Masuk Dirawat\";\"Rencana Pulang\";\"Diagnosa Medis\";\"Alasan Masuk / Dirawat\";\"Pengaruh RI Pasien & Keluarga\";\"Keterangan Pengaruh RI Pasien & Keluarga\";\"Pengaruh RI Pekerjaan/Sekolah\";\"Keterangan Pengaruh RI Pekerjaan/Sekolah\";\"Pengaruh RI Keuangan\";\"Keterangan Pengaruh RI Keuangan\";\"Antisipasi Masalah\";\"Keterangan Antisipasi Masalah\";\"Bantuan Diperlukan\";\"Keterangan Bantuan Diperlukan\";\"Membantu Keperluan\";\"Keterangan Yang Membantu Keperluan\";\"Tinggal Sendiri\";\"Keterangan Pasien Tinggal Sendiri\";\"Peralatan Medis\";\"Keterangan Peralatan Medis\";\"Alat Bantu\";\"Keterangan Memerlukan Alat Bantu\";\"Perawatan Khusus\";\"Keterangan Perawatan Khusus\";\"Memenuhi Kebutuhan\";\"Keterangan Memenuhi Kebutuhan\";\"Nyeri Kronis\";\"Keterangan Nyeri Kronis\";\"Edukasi Kesehatan\";\"Keterangan Edukasi Kesehatan\";\"Keterampilkan Khusus\";\"Keterangan Keterampilkan Khusus\";\"Pasien/Keluarga\";\"NIP\";\"Nama Petugas\"\n"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "\""+rs.getString("no_rawat")+"\";\""+rs.getString("no_rkm_medis")+"\";\""+rs.getString("nm_pasien")+"\";\""+rs.getString("tgl_lahir")+"\";\""+rs.getString("jk")+"\";\""+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\";\""+rs.getString("rencana_pulang")+"\";\""+rs.getString("diagnosa_medis")+"\";\""+rs.getString("alasan_masuk")+"\";\""+rs.getString("pengaruh_ri_pasien_dan_keluarga")+"\";\""+rs.getString("keterangan_pengaruh_ri_pasien_dan_keluarga")+"\";\""+rs.getString("pengaruh_ri_pekerjaan_sekolah")+"\";\""+rs.getString("keterangan_pengaruh_ri_pekerjaan_sekolah")+"\";\""+rs.getString("pengaruh_ri_keuangan")+"\";\""+rs.getString("keterangan_pengaruh_ri_keuangan")+"\";\""+rs.getString("antisipasi_masalah_saat_pulang")+"\";\""+rs.getString("keterangan_antisipasi_masalah_saat_pulang")+"\";\""+rs.getString("bantuan_diperlukan_dalam")+"\";\""+rs.getString("keterangan_bantuan_diperlukan_dalam")+"\";\""+rs.getString("adakah_yang_membantu_keperluan")+"\";\""+rs.getString("keterangan_adakah_yang_membantu_keperluan")+"\";\""+rs.getString("pasien_tinggal_sendiri")+"\";\""+rs.getString("keterangan_pasien_tinggal_sendiri")+"\";\""+rs.getString("pasien_menggunakan_peralatan_medis")+"\";\""+rs.getString("keterangan_pasien_menggunakan_peralatan_medis")+"\";\""+rs.getString("pasien_memerlukan_alat_bantu")+"\";\""+rs.getString("keterangan_pasien_memerlukan_alat_bantu")+"\";\""+rs.getString("memerlukan_perawatan_khusus")+"\";\""+rs.getString("keterangan_memerlukan_perawatan_khusus")+"\";\""+rs.getString("bermasalah_memenuhi_kebutuhan")+"\";\""+rs.getString("keterangan_bermasalah_memenuhi_kebutuhan")+"\";\""+rs.getString("memiliki_nyeri_kronis")+"\";\""+rs.getString("keterangan_memiliki_nyeri_kronis")+"\";\""+rs.getString("memerlukan_edukasi_kesehatan")+"\";\""+rs.getString("keterangan_memerlukan_edukasi_kesehatan")+"\";\""+rs.getString("memerlukan_keterampilkan_khusus")+"\";\""+rs.getString("keterangan_memerlukan_keterampilkan_khusus")+"\";\""+rs.getString("nama_pasien_keluarga")+"\";\""+rs.getString("nip")+"\";\""+rs.getString("nama")+"\"\n"
-                                    );
-                                }
-                                f = new File("RencanaPemulangan.csv");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write(htmlContent.toString());
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RencanaPemulangan.html", "DATA PERENCANAAN PEMULANGAN PASIEN", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RencanaPemulangan.wps", "DATA PERENCANAAN PEMULANGAN PASIEN", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RencanaPemulangan.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RencanaPemulangan.xlsx", tbObat);
+                        break;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

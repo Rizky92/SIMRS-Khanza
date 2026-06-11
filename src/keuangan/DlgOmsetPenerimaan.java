@@ -19,6 +19,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -972,192 +976,350 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetRalan.jasper","report","::[ Penerimaan Pembayaran Pasien Rawat Jalan ]::",
-                "select DATE_FORMAT(nota_jalan.tanggal,'%Y-%m-%d') as tanggal,nota_jalan.no_nota,nota_jalan.no_rawat,reg_periksa.no_rkm_medis,"+
-                "pasien.nm_pasien,detail_nota_jalan.nama_bayar,detail_nota_jalan.besar_bayar "+
-                "from nota_jalan inner join reg_periksa on nota_jalan.no_rawat=reg_periksa.no_rawat "+
-                "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
-                "inner join detail_nota_jalan on detail_nota_jalan.no_rawat=reg_periksa.no_rawat "+
-                "where nota_jalan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_jalan.tanggal,nota_jalan.jam ",param);
-        }
+        try {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            switch (pilihan) {
+                case "Laporan 1 (HTML)":
+                    if(tabMode.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetRalan.html", "Penerimaan Pembayaran Pasien Rawat Jalan", tbRawatJalan);
+                    }
+                    if(tabMode2.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetRanap.html", "Penerimaan Pembayaran Pasien Rawat Inap", tbRawatInap);
+                    }
+                    if(tabMode3.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPenjualanObat.html", "Penerimaan Penjualan Bebas", tbPenjualanBebas);
+                    }
+                    if(tabMode4.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPemasukanLain.html", "Penerimaan Pemasukan Lain-lain", tbPemasukanLain);
+                    }
+                    if(tabMode5.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetDeposit.html", "Penerimaan Deposit Pasien", tbDeposit);
+                    }
+                    if(tabMode6.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPiutangDibayar.html", "Penerimaan Pembayaran Piutang", tbPiutangPasienDibayar);
+                    }
+                    if(tabMode7.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPiutangUangDibayar.html", "Penerimaan Pembayaran Piutang Peminjaman Uang", tbPiutangUangDibayar);
+                    }
+                    if(tabMode8.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPiutangJasaDibayar.html", "Penerimaan Pembayaran Piutang Jasa Perusahaan", tbPiutangJasaDibayar);
+                    }
+                    if(tabMode9.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetLabKesehetanLingkungan.html", "Penerimaan Pembayaran Laborat Kesehatan Lingkungan", tbLabKesehatanLingkungan);
+                    }
+                    if(tabMode10.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPenjualanToko.html", "Penerimaan Penjualan Toko", tbPenjualanToko);
+                    }
+                    if(tabMode11.getRowCount()!=0){
+                        Valid.exportHtmlSmc("OmsetPiutangTokoDibayar.html", "Penerimaan Pembayaran Piutang Toko", tbPiutangTokoDibayar);
+                    }
+                    break;
+                case "Laporan 2 (WPS)":
+                    if(tabMode.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetRalan.wps", "Penerimaan Pembayaran Pasien Rawat Jalan", tbRawatJalan);
+                    }
+                    if(tabMode2.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetRanap.wps", "Penerimaan Pembayaran Pasien Rawat Inap", tbRawatInap);
+                    }
+                    if(tabMode3.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPenjualanObat.wps", "Penerimaan Penjualan Bebas", tbPenjualanBebas);
+                    }
+                    if(tabMode4.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPemasukanLain.wps", "Penerimaan Pemasukan Lain-lain", tbPemasukanLain);
+                    }
+                    if(tabMode5.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetDeposit.wps", "Penerimaan Deposit Pasien", tbDeposit);
+                    }
+                    if(tabMode6.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPiutangDibayar.wps", "Penerimaan Pembayaran Piutang", tbPiutangPasienDibayar);
+                    }
+                    if(tabMode7.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPiutangUangDibayar.wps", "Penerimaan Pembayaran Piutang Peminjaman Uang", tbPiutangUangDibayar);
+                    }
+                    if(tabMode8.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPiutangJasaDibayar.wps", "Penerimaan Pembayaran Piutang Jasa Perusahaan", tbPiutangJasaDibayar);
+                    }
+                    if(tabMode9.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetLabKesehetanLingkungan.wps", "Penerimaan Pembayaran Laborat Kesehatan Lingkungan", tbLabKesehatanLingkungan);
+                    }
+                    if(tabMode10.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPenjualanToko.wps", "Penerimaan Penjualan Toko", tbPenjualanToko);
+                    }
+                    if(tabMode11.getRowCount()!=0){
+                        Valid.exportWPSSmc("OmsetPiutangTokoDibayar.wps", "Penerimaan Pembayaran Piutang Toko", tbPiutangTokoDibayar);
+                    }
+                    break;
+                case "Laporan 3 (CSV)":
+                    if(tabMode.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetRalan.csv", tbRawatJalan);
+                    }
+                    if(tabMode2.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetRanap.csv", tbRawatInap);
+                    }
+                    if(tabMode3.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPenjualanObat.csv", tbPenjualanBebas);
+                    }
+                    if(tabMode4.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPemasukanLain.csv", tbPemasukanLain);
+                    }
+                    if(tabMode5.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetDeposit.csv", tbDeposit);
+                    }
+                    if(tabMode6.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPiutangDibayar.csv", tbPiutangPasienDibayar);
+                    }
+                    if(tabMode7.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPiutangUangDibayar.csv", tbPiutangUangDibayar);
+                    }
+                    if(tabMode8.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPiutangJasaDibayar.csv", tbPiutangJasaDibayar);
+                    }
+                    if(tabMode9.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetLabKesehetanLingkungan.csv", tbLabKesehatanLingkungan);
+                    }
+                    if(tabMode10.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPenjualanToko.csv", tbPenjualanToko);
+                    }
+                    if(tabMode11.getRowCount()!=0){
+                        Valid.exportCSVSmc("OmsetPiutangTokoDibayar.csv", tbPiutangTokoDibayar);
+                    }
+                    break;
+                case "Laporan 4 (XLSX)":
+                    if(tabMode.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetRalan.xlsx", tbRawatJalan);
+                    }
+                    if(tabMode2.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetRanap.xlsx", tbRawatInap);
+                    }
+                    if(tabMode3.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPenjualanObat.xlsx", tbPenjualanBebas);
+                    }
+                    if(tabMode4.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPemasukanLain.xlsx", tbPemasukanLain);
+                    }
+                    if(tabMode5.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetDeposit.xlsx", tbDeposit);
+                    }
+                    if(tabMode6.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPiutangDibayar.xlsx", tbPiutangPasienDibayar);
+                    }
+                    if(tabMode7.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPiutangUangDibayar.xlsx", tbPiutangUangDibayar);
+                    }
+                    if(tabMode8.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPiutangJasaDibayar.xlsx", tbPiutangJasaDibayar);
+                    }
+                    if(tabMode9.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetLabKesehetanLingkungan.xlsx", tbLabKesehatanLingkungan);
+                    }
+                    if(tabMode10.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPenjualanToko.xlsx", tbPenjualanToko);
+                    }
+                    if(tabMode11.getRowCount()!=0){
+                        Valid.exportXlsxSmc("OmsetPiutangTokoDibayar.xlsx", tbPiutangTokoDibayar);
+                    }
+                    break;
+                case "Laporan 5 (Jasper)":
+                    if(tabMode.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetRalan.jasper","report","::[ Penerimaan Pembayaran Pasien Rawat Jalan ]::",
+                            "select DATE_FORMAT(nota_jalan.tanggal,'%Y-%m-%d') as tanggal,nota_jalan.no_nota,nota_jalan.no_rawat,reg_periksa.no_rkm_medis,"+
+                            "pasien.nm_pasien,detail_nota_jalan.nama_bayar,detail_nota_jalan.besar_bayar "+
+                            "from nota_jalan inner join reg_periksa on nota_jalan.no_rawat=reg_periksa.no_rawat "+
+                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
+                            "inner join detail_nota_jalan on detail_nota_jalan.no_rawat=reg_periksa.no_rawat "+
+                            "where nota_jalan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_jalan.tanggal,nota_jalan.jam ",param);
+                    }
 
-        if(tabMode2.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetRanap.jasper","report","::[ Penerimaan Pembayaran Pasien Rawat Inap ]::",
-                "select DATE_FORMAT(nota_inap.tanggal,'%Y-%m-%d') as tanggal,nota_inap.no_nota,nota_inap.no_rawat,reg_periksa.no_rkm_medis,"+
-                "pasien.nm_pasien,detail_nota_inap.nama_bayar,detail_nota_inap.besar_bayar "+
-                "from nota_inap inner join reg_periksa on nota_inap.no_rawat=reg_periksa.no_rawat "+
-                "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
-                "inner join detail_nota_inap on detail_nota_inap.no_rawat=reg_periksa.no_rawat "+
-                "where nota_inap.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_inap.tanggal,nota_inap.jam ",param);
-        }
+                    if(tabMode2.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetRanap.jasper","report","::[ Penerimaan Pembayaran Pasien Rawat Inap ]::",
+                            "select DATE_FORMAT(nota_inap.tanggal,'%Y-%m-%d') as tanggal,nota_inap.no_nota,nota_inap.no_rawat,reg_periksa.no_rkm_medis,"+
+                            "pasien.nm_pasien,detail_nota_inap.nama_bayar,detail_nota_inap.besar_bayar "+
+                            "from nota_inap inner join reg_periksa on nota_inap.no_rawat=reg_periksa.no_rawat "+
+                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
+                            "inner join detail_nota_inap on detail_nota_inap.no_rawat=reg_periksa.no_rawat "+
+                            "where nota_inap.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_inap.tanggal,nota_inap.jam ",param);
+                    }
 
-        if(tabMode3.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPenjualanObat.jasper","report","::[ Penerimaan Penjualan Bebas ]::",
-                "select DATE_FORMAT(penjualan.tgl_jual,'%Y-%m-%d') as tanggal,penjualan.nota_jual,penjualan.jns_jual,penjualan.no_rkm_medis,"+
-                "penjualan.nm_pasien,penjualan.nama_bayar,round(penjualan.ongkir+penjualan.ppn+sum(detailjual.total)) as total "+
-                "from penjualan inner join detailjual on detailjual.nota_jual=penjualan.nota_jual "+
-                "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' "+
-                "group by penjualan.nota_jual order by penjualan.tgl_jual,penjualan.nota_jual ",param);
-        }
+                    if(tabMode3.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPenjualanObat.jasper","report","::[ Penerimaan Penjualan Bebas ]::",
+                            "select DATE_FORMAT(penjualan.tgl_jual,'%Y-%m-%d') as tanggal,penjualan.nota_jual,penjualan.jns_jual,penjualan.no_rkm_medis,"+
+                            "penjualan.nm_pasien,penjualan.nama_bayar,round(penjualan.ongkir+penjualan.ppn+sum(detailjual.total)) as total "+
+                            "from penjualan inner join detailjual on detailjual.nota_jual=penjualan.nota_jual "+
+                            "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' "+
+                            "group by penjualan.nota_jual order by penjualan.tgl_jual,penjualan.nota_jual ",param);
+                    }
 
-        if(tabMode4.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPemasukanLain.jasper","report","::[ Penerimaan Pemasukan Lain-lain ]::",
-                "select DATE_FORMAT(pemasukan_lain.tanggal,'%Y-%m-%d') as tanggal,pemasukan_lain.no_masuk,pemasukan_lain.keterangan,"+
-                "pemasukan_lain.keperluan,kategori_pemasukan_lain.nama_kategori,pemasukan_lain.besar "+
-                "from pemasukan_lain inner join kategori_pemasukan_lain on pemasukan_lain.kode_kategori=kategori_pemasukan_lain.kode_kategori "+
-                "where pemasukan_lain.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by pemasukan_lain.tanggal ",param);
-        }
+                    if(tabMode4.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPemasukanLain.jasper","report","::[ Penerimaan Pemasukan Lain-lain ]::",
+                            "select DATE_FORMAT(pemasukan_lain.tanggal,'%Y-%m-%d') as tanggal,pemasukan_lain.no_masuk,pemasukan_lain.keterangan,"+
+                            "pemasukan_lain.keperluan,kategori_pemasukan_lain.nama_kategori,pemasukan_lain.besar "+
+                            "from pemasukan_lain inner join kategori_pemasukan_lain on pemasukan_lain.kode_kategori=kategori_pemasukan_lain.kode_kategori "+
+                            "where pemasukan_lain.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by pemasukan_lain.tanggal ",param);
+                    }
 
-        if(tabMode5.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetDeposit.jasper","report","::[ Penerimaan Deposit Pasien ]::",
-                "select DATE_FORMAT(deposit.tgl_deposit,'%Y-%m-%d') as tanggal,deposit.no_deposit,deposit.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,deposit.nama_bayar, "+
-                "deposit.besar_deposit from deposit inner join reg_periksa on deposit.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "where deposit.tgl_deposit between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59"+"' order by deposit.tgl_deposit ",param);
-        }
+                    if(tabMode5.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetDeposit.jasper","report","::[ Penerimaan Deposit Pasien ]::",
+                            "select DATE_FORMAT(deposit.tgl_deposit,'%Y-%m-%d') as tanggal,deposit.no_deposit,deposit.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,deposit.nama_bayar, "+
+                            "deposit.besar_deposit from deposit inner join reg_periksa on deposit.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                            "where deposit.tgl_deposit between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59"+"' order by deposit.tgl_deposit ",param);
+                    }
 
-        if(tabMode6.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPiutangDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang ]::",
-                "select DATE_FORMAT(bayar_piutang.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang.no_rawat,bayar_piutang.no_rkm_medis,pasien.nm_pasien,"+
-                "rekening.nm_rek,rekening2.nm_rek,bayar_piutang.besar_cicilan "+
-                "from bayar_piutang inner join pasien on bayar_piutang.no_rkm_medis=pasien.no_rkm_medis "+
-                "inner join rekening on rekening.kd_rek=bayar_piutang.kd_rek "+
-                "inner join rekening as rekening2 on rekening2.kd_rek=bayar_piutang.kd_rek_kontra "+
-                "where bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang.tgl_bayar ",param);
-        }
+                    if(tabMode6.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPiutangDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang ]::",
+                            "select DATE_FORMAT(bayar_piutang.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang.no_rawat,bayar_piutang.no_rkm_medis,pasien.nm_pasien,"+
+                            "rekening.nm_rek,rekening2.nm_rek,bayar_piutang.besar_cicilan "+
+                            "from bayar_piutang inner join pasien on bayar_piutang.no_rkm_medis=pasien.no_rkm_medis "+
+                            "inner join rekening on rekening.kd_rek=bayar_piutang.kd_rek "+
+                            "inner join rekening as rekening2 on rekening2.kd_rek=bayar_piutang.kd_rek_kontra "+
+                            "where bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang.tgl_bayar ",param);
+                    }
 
-        if(tabMode7.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPiutangUangDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang Peminjaman Uang ]::",
-                "select DATE_FORMAT(bayar_piutang_lainlain.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang_lainlain.nota_piutang,bayar_piutang_lainlain.kode_peminjam,"+
-                "peminjampiutang.nama_peminjam,bayar_piutang_lainlain.nama_bayar,bayar_piutang_lainlain.besar_cicilan "+
-                "from bayar_piutang_lainlain inner join peminjampiutang on bayar_piutang_lainlain.kode_peminjam=peminjampiutang.kode_peminjam "+
-                "where bayar_piutang_lainlain.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_lainlain.tgl_bayar ",param);
-        }
+                    if(tabMode7.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPiutangUangDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang Peminjaman Uang ]::",
+                            "select DATE_FORMAT(bayar_piutang_lainlain.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang_lainlain.nota_piutang,bayar_piutang_lainlain.kode_peminjam,"+
+                            "peminjampiutang.nama_peminjam,bayar_piutang_lainlain.nama_bayar,bayar_piutang_lainlain.besar_cicilan "+
+                            "from bayar_piutang_lainlain inner join peminjampiutang on bayar_piutang_lainlain.kode_peminjam=peminjampiutang.kode_peminjam "+
+                            "where bayar_piutang_lainlain.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_lainlain.tgl_bayar ",param);
+                    }
 
-        if(tabMode8.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPiutangJasaDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang Jasa Perusahaan ]::",
-                "select DATE_FORMAT(bayar_piutang_jasa_perusahaan.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang_jasa_perusahaan.no_piutang,bayar_piutang_jasa_perusahaan.kode_perusahaan,"+
-                "perusahaan_pasien.nama_perusahaan,bayar_piutang_jasa_perusahaan.nama_bayar,bayar_piutang_jasa_perusahaan.besar_cicilan "+
-                "from bayar_piutang_jasa_perusahaan inner join perusahaan_pasien on bayar_piutang_jasa_perusahaan.kode_perusahaan=perusahaan_pasien.kode_perusahaan "+
-                "where bayar_piutang_jasa_perusahaan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_jasa_perusahaan.tgl_bayar ",param);
-        }
+                    if(tabMode8.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPiutangJasaDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang Jasa Perusahaan ]::",
+                            "select DATE_FORMAT(bayar_piutang_jasa_perusahaan.tgl_bayar,'%Y-%m-%d') as tanggal,bayar_piutang_jasa_perusahaan.no_piutang,bayar_piutang_jasa_perusahaan.kode_perusahaan,"+
+                            "perusahaan_pasien.nama_perusahaan,bayar_piutang_jasa_perusahaan.nama_bayar,bayar_piutang_jasa_perusahaan.besar_cicilan "+
+                            "from bayar_piutang_jasa_perusahaan inner join perusahaan_pasien on bayar_piutang_jasa_perusahaan.kode_perusahaan=perusahaan_pasien.kode_perusahaan "+
+                            "where bayar_piutang_jasa_perusahaan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_jasa_perusahaan.tgl_bayar ",param);
+                    }
 
-        if(tabMode9.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetLabKesehetanLingkungan.jasper","report","::[ Penerimaan Pembayaran Laborat Kesehatan Lingkungan ]::",
-                "select DATE_FORMAT(labkesling_pembayaran_pengujian_sampel.tanggal,'%Y-%m-%d'),labkesling_pembayaran_pengujian_sampel.no_pembayaran,labkesling_pembayaran_pengujian_sampel.no_permintaan,"+
-                "labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_detail_pembayaran_pengujian_sampel.nama_bayar,labkesling_detail_pembayaran_pengujian_sampel.besar_bayar "+
-                "from labkesling_pembayaran_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_pembayaran_pengujian_sampel.no_permintaan=labkesling_permintaan_pengujian_sampel.no_permintaan "+
-                "inner join labkesling_pelanggan on labkesling_permintaan_pengujian_sampel.kode_pelanggan=labkesling_pelanggan.kode_pelanggan "+
-                "inner join labkesling_detail_pembayaran_pengujian_sampel on labkesling_detail_pembayaran_pengujian_sampel.no_pembayaran=labkesling_pembayaran_pengujian_sampel.no_pembayaran "+
-                "where labkesling_pembayaran_pengujian_sampel.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by labkesling_pembayaran_pengujian_sampel.tanggal ",param);
-        }
+                    if(tabMode9.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetLabKesehetanLingkungan.jasper","report","::[ Penerimaan Pembayaran Laborat Kesehatan Lingkungan ]::",
+                            "select DATE_FORMAT(labkesling_pembayaran_pengujian_sampel.tanggal,'%Y-%m-%d'),labkesling_pembayaran_pengujian_sampel.no_pembayaran,labkesling_pembayaran_pengujian_sampel.no_permintaan,"+
+                            "labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_detail_pembayaran_pengujian_sampel.nama_bayar,labkesling_detail_pembayaran_pengujian_sampel.besar_bayar "+
+                            "from labkesling_pembayaran_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_pembayaran_pengujian_sampel.no_permintaan=labkesling_permintaan_pengujian_sampel.no_permintaan "+
+                            "inner join labkesling_pelanggan on labkesling_permintaan_pengujian_sampel.kode_pelanggan=labkesling_pelanggan.kode_pelanggan "+
+                            "inner join labkesling_detail_pembayaran_pengujian_sampel on labkesling_detail_pembayaran_pengujian_sampel.no_pembayaran=labkesling_pembayaran_pengujian_sampel.no_pembayaran "+
+                            "where labkesling_pembayaran_pengujian_sampel.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by labkesling_pembayaran_pengujian_sampel.tanggal ",param);
+                    }
 
-        if(tabMode10.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPenjualanToko.jasper","report","::[ Penerimaan Penjualan Toko ]::",
-                "select DATE_FORMAT(tokopenjualan.tgl_jual,'%Y-%m-%d') as tanggal,tokopenjualan.nota_jual,tokopenjualan.jns_jual,tokopenjualan.no_member,"+
-                "tokopenjualan.nm_member,tokopenjualan.nama_bayar,(tokopenjualan.ongkir+tokopenjualan.ppn+tokopenjualan.total) as total "+
-                "from tokopenjualan where tokopenjualan.tgl_jual between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' "+
-                "order by tokopenjualan.tgl_jual,tokopenjualan.nota_jual ",param);
-        }
+                    if(tabMode10.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPenjualanToko.jasper","report","::[ Penerimaan Penjualan Toko ]::",
+                            "select DATE_FORMAT(tokopenjualan.tgl_jual,'%Y-%m-%d') as tanggal,tokopenjualan.nota_jual,tokopenjualan.jns_jual,tokopenjualan.no_member,"+
+                            "tokopenjualan.nm_member,tokopenjualan.nama_bayar,(tokopenjualan.ongkir+tokopenjualan.ppn+tokopenjualan.total) as total "+
+                            "from tokopenjualan where tokopenjualan.tgl_jual between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' "+
+                            "order by tokopenjualan.tgl_jual,tokopenjualan.nota_jual ",param);
+                    }
 
-        if(tabMode11.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptOmsetPiutangTokoDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang Toko ]::",
-                "select DATE_FORMAT(toko_bayar_piutang.tgl_bayar,'%Y-%m-%d') as tanggal,toko_bayar_piutang.nota_piutang,"+
-                "toko_bayar_piutang.no_member,tokomember.nama,rekening.nm_rek,toko_bayar_piutang.besar_cicilan "+
-                "from toko_bayar_piutang inner join tokomember on toko_bayar_piutang.no_member=tokomember.no_member "+
-                "inner join rekening on rekening.kd_rek=toko_bayar_piutang.kd_rek "+
-                "where toko_bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by toko_bayar_piutang.tgl_bayar ",param);
+                    if(tabMode11.getRowCount()!=0){
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptOmsetPiutangTokoDibayar.jasper","report","::[ Penerimaan Pembayaran Piutang Toko ]::",
+                            "select DATE_FORMAT(toko_bayar_piutang.tgl_bayar,'%Y-%m-%d') as tanggal,toko_bayar_piutang.nota_piutang,"+
+                            "toko_bayar_piutang.no_member,tokomember.nama,rekening.nm_rek,toko_bayar_piutang.besar_cicilan "+
+                            "from toko_bayar_piutang inner join tokomember on toko_bayar_piutang.no_member=tokomember.no_member "+
+                            "inner join rekening on rekening.kd_rek=toko_bayar_piutang.kd_rek "+
+                            "where toko_bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by toko_bayar_piutang.tgl_bayar ",param);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 

@@ -2973,6 +2973,10 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPasienKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(NoRM.getText().trim().equals("")||NmPasien.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Pasien masih kosong...!!!");
         }else{

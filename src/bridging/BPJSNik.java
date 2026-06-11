@@ -180,7 +180,7 @@ public final class BPJSNik extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptCariBPJSNik.jasper","report","[ Pencarian Peserta BPJS Berdasarkan NIK/No.KTP ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            Valid.MyReportqry("rptCariBPJSNik.jasper","report","::[ Pencarian Peserta BPJS Berdasarkan NIK/No.KTP ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

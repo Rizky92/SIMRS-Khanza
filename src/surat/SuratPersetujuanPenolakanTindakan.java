@@ -1476,342 +1476,42 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-
-                if(TCari.getText().trim().equals("")){
-                    ps=koneksi.prepareStatement(
-                            "select persetujuan_penolakan_tindakan.no_pernyataan,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
-                            "persetujuan_penolakan_tindakan.tanggal,persetujuan_penolakan_tindakan.diagnosa,persetujuan_penolakan_tindakan.diagnosa_konfirmasi,persetujuan_penolakan_tindakan.tindakan,"+
-                            "persetujuan_penolakan_tindakan.tindakan_konfirmasi,persetujuan_penolakan_tindakan.indikasi_tindakan,persetujuan_penolakan_tindakan.indikasi_tindakan_konfirmasi,"+
-                            "persetujuan_penolakan_tindakan.tata_cara,persetujuan_penolakan_tindakan.tata_cara_konfirmasi,persetujuan_penolakan_tindakan.tujuan,persetujuan_penolakan_tindakan.tujuan_konfirmasi,"+
-                            "persetujuan_penolakan_tindakan.risiko,persetujuan_penolakan_tindakan.risiko_konfirmasi,persetujuan_penolakan_tindakan.komplikasi,persetujuan_penolakan_tindakan.komplikasi_konfirmasi,"+
-                            "persetujuan_penolakan_tindakan.prognosis,persetujuan_penolakan_tindakan.prognosis_konfirmasi,persetujuan_penolakan_tindakan.alternatif_dan_risikonya,"+
-                            "persetujuan_penolakan_tindakan.alternatif_konfirmasi,persetujuan_penolakan_tindakan.biaya,persetujuan_penolakan_tindakan.biaya_konfirmasi,persetujuan_penolakan_tindakan.lain_lain,"+
-                            "persetujuan_penolakan_tindakan.lain_lain_konfirmasi,persetujuan_penolakan_tindakan.kd_dokter,dokter.nm_dokter,persetujuan_penolakan_tindakan.nip,petugas.nama,"+
-                            "persetujuan_penolakan_tindakan.penerima_informasi,persetujuan_penolakan_tindakan.alasan_diwakilkan_penerima_informasi,persetujuan_penolakan_tindakan.jk_penerima_informasi,"+
-                            "persetujuan_penolakan_tindakan.tanggal_lahir_penerima_informasi,persetujuan_penolakan_tindakan.umur_penerima_informasi,persetujuan_penolakan_tindakan.alamat_penerima_informasi,"+
-                            "persetujuan_penolakan_tindakan.no_hp,persetujuan_penolakan_tindakan.hubungan_penerima_informasi,persetujuan_penolakan_tindakan.pernyataan,persetujuan_penolakan_tindakan.saksi_keluarga "+
-                            "from persetujuan_penolakan_tindakan inner join reg_periksa on persetujuan_penolakan_tindakan.no_rawat=reg_periksa.no_rawat "+
-                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
-                            "inner join dokter on dokter.kd_dokter=persetujuan_penolakan_tindakan.kd_dokter "+
-                            "inner join petugas on petugas.nip=persetujuan_penolakan_tindakan.nip where "+
-                            "persetujuan_penolakan_tindakan.tanggal between ? and ? order by persetujuan_penolakan_tindakan.tanggal");
-                }else{
-                    ps=koneksi.prepareStatement(
-                            "select persetujuan_penolakan_tindakan.no_pernyataan,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
-                            "persetujuan_penolakan_tindakan.tanggal,persetujuan_penolakan_tindakan.diagnosa,persetujuan_penolakan_tindakan.diagnosa_konfirmasi,persetujuan_penolakan_tindakan.tindakan,"+
-                            "persetujuan_penolakan_tindakan.tindakan_konfirmasi,persetujuan_penolakan_tindakan.indikasi_tindakan,persetujuan_penolakan_tindakan.indikasi_tindakan_konfirmasi,"+
-                            "persetujuan_penolakan_tindakan.tata_cara,persetujuan_penolakan_tindakan.tata_cara_konfirmasi,persetujuan_penolakan_tindakan.tujuan,persetujuan_penolakan_tindakan.tujuan_konfirmasi,"+
-                            "persetujuan_penolakan_tindakan.risiko,persetujuan_penolakan_tindakan.risiko_konfirmasi,persetujuan_penolakan_tindakan.komplikasi,persetujuan_penolakan_tindakan.komplikasi_konfirmasi,"+
-                            "persetujuan_penolakan_tindakan.prognosis,persetujuan_penolakan_tindakan.prognosis_konfirmasi,persetujuan_penolakan_tindakan.alternatif_dan_risikonya,"+
-                            "persetujuan_penolakan_tindakan.alternatif_konfirmasi,persetujuan_penolakan_tindakan.biaya,persetujuan_penolakan_tindakan.biaya_konfirmasi,persetujuan_penolakan_tindakan.lain_lain,"+
-                            "persetujuan_penolakan_tindakan.lain_lain_konfirmasi,persetujuan_penolakan_tindakan.kd_dokter,dokter.nm_dokter,persetujuan_penolakan_tindakan.nip,petugas.nama,"+
-                            "persetujuan_penolakan_tindakan.penerima_informasi,persetujuan_penolakan_tindakan.alasan_diwakilkan_penerima_informasi,persetujuan_penolakan_tindakan.jk_penerima_informasi,"+
-                            "persetujuan_penolakan_tindakan.tanggal_lahir_penerima_informasi,persetujuan_penolakan_tindakan.umur_penerima_informasi,persetujuan_penolakan_tindakan.alamat_penerima_informasi,"+
-                            "persetujuan_penolakan_tindakan.no_hp,persetujuan_penolakan_tindakan.hubungan_penerima_informasi,persetujuan_penolakan_tindakan.pernyataan,persetujuan_penolakan_tindakan.saksi_keluarga "+
-                            "from persetujuan_penolakan_tindakan inner join reg_periksa on persetujuan_penolakan_tindakan.no_rawat=reg_periksa.no_rawat "+
-                            "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
-                            "inner join dokter on dokter.kd_dokter=persetujuan_penolakan_tindakan.kd_dokter "+
-                            "inner join petugas on petugas.nip=persetujuan_penolakan_tindakan.nip where "+
-                            "persetujuan_penolakan_tindakan.tanggal between ? and ? and (persetujuan_penolakan_tindakan.no_pernyataan like ? or reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                            "petugas.nip like ? or petugas.nama like ? or persetujuan_penolakan_tindakan.kd_dokter like ? or dokter.nm_dokter like ?) order by persetujuan_penolakan_tindakan.tanggal");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi2 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#323232}.isi3 td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi5 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#AA0000}.isi6 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#FF0000}.isi7 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#C8C800}.isi8 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#00AA00}.isi9 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#969696}");
+                    bw.flush();
                 }
-
-                try {
-                    if(TCari.getText().trim().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                        ps.setString(8,"%"+TCari.getText()+"%");
-                        ps.setString(9,"%"+TCari.getText()+"%");
-                        ps.setString(10,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Pernyataan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Pasien</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tanggal</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Diagnosa</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tindakan Kedokteran</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Indikasi Tindakan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tata Cara</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tujuan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Risiko</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Komplikasi</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Prognosis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alternatif & Resikonya</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Lain-lain</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Biaya</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kode Dokter</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Dokter</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nip</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Saksi II Perawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Penerima Informasi</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alasan Jika Diwakilkan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K. P.I</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir P.I.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Umur P.I.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alamat Penerima Informasi</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.H.P. P.I</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Hubungan Dengan Pasien</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pernyataan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Saksi I Keluarga</td>"+
-                                    "</tr>"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>"+
-                                            "<td valign='top'>"+rs.getString("no_pernyataan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_rawat")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_rkm_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nm_pasien")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tgl_lahir")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("jk")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tanggal")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("diagnosa")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("diagnosa_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("tindakan")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("tindakan_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("indikasi_tindakan")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("indikasi_tindakan_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("tata_cara")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("tata_cara_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("tujuan")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("tujuan_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("risiko")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("risiko_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("komplikasi")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("komplikasi_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("prognosis")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("prognosis_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("alternatif_dan_risikonya")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("alternatif_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("lain_lain")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("lain_lain_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("biaya")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("biaya_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("kd_dokter")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nm_dokter")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nip")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nama")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("alasan_diwakilkan_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("jk_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tanggal_lahir_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("umur_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("alamat_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_hp")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("hubungan_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pernyataan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("saksi_keluarga")+"</td>"+
-                                        "</tr>"
-                                    );
-                                }
-                                f = new File("PersetujuanPenolakanTindakan.html");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write("<html>"+
-                                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                            "<body>"+
-                                                "<table width='3600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                    htmlContent.toString()+
-                                                "</table>"+
-                                            "</body>"+
-                                         "</html>"
-                                );
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 2 (WPS)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Pernyataan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Pasien</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tanggal</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Diagnosa</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tindakan Kedokteran</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Indikasi Tindakan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tata Cara</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tujuan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Risiko</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Komplikasi</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Prognosis</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alternatif & Resikonya</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Lain-lain</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Biaya</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Ya/Tidak</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Kode Dokter</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nama Dokter</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Nip</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Saksi II Perawat</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Penerima Informasi</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alasan Jika Diwakilkan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>J.K. P.I</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Tgl.Lahir P.I.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Umur P.I.</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Alamat Penerima Informasi</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.H.P. P.I</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Hubungan Dengan Pasien</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pernyataan</td>"+
-                                        "<td valign='middle' bgcolor='#FFFAF8' align='center'>Saksi I Keluarga</td>"+
-                                    "</tr>"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>"+
-                                            "<td valign='top'>"+rs.getString("no_pernyataan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_rawat")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_rkm_medis")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nm_pasien")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tgl_lahir")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("jk")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tanggal")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("diagnosa")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("diagnosa_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("tindakan")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("tindakan_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("indikasi_tindakan")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("indikasi_tindakan_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("tata_cara")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("tata_cara_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("tujuan")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("tujuan_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("risiko")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("risiko_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("komplikasi")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("komplikasi_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("prognosis")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("prognosis_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("alternatif_dan_risikonya")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("alternatif_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("lain_lain")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("lain_lain_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("biaya")+"</td>"+
-                                            "<td valign='top' align='center'><input type=checkbox "+rs.getString("biaya_konfirmasi").replaceAll("true","checked").replaceAll("false","")+"></td>"+
-                                            "<td valign='top'>"+rs.getString("kd_dokter")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nm_dokter")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nip")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("nama")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("alasan_diwakilkan_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("jk_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("tanggal_lahir_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("umur_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("alamat_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("no_hp")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("hubungan_penerima_informasi")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("pernyataan")+"</td>"+
-                                            "<td valign='top'>"+rs.getString("saksi_keluarga")+"</td>"+
-                                        "</tr>"
-                                    );
-                                }
-                                f = new File("PersetujuanPenolakanTindakan.wps");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write("<html>"+
-                                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                            "<body>"+
-                                                "<table width='3600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                    htmlContent.toString()+
-                                                "</table>"+
-                                            "</body>"+
-                                         "</html>"
-                                );
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                        case "Laporan 3 (CSV)":
-                                htmlContent = new StringBuilder();
-                                htmlContent.append(
-                                    "\"No.Pernyataan\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Tanggal\";\"Diagnosa\";\"Ya/Tidak\";\"Tindakan Kedokteran\";\"Ya/Tidak\";\"Indikasi Tindakan\";\"Ya/Tidak\";\"Tata Cara\";\"Ya/Tidak\";\"Tujuan\";\"Ya/Tidak\";\"Risiko\";\"Ya/Tidak\";\"Komplikasi\";\"Ya/Tidak\";\"Prognosis\";\"Ya/Tidak\";\"Alternatif & Resikonya\";\"Ya/Tidak\";\"Lain-lain\";\"Ya/Tidak\";\"Biaya\";\"Ya/Tidak\";\"Kode Dokter\";\"Nama Dokter\";\"Nip\";\"Saksi II Perawat\";\"Penerima Informasi\";\"Alasan Jika Diwakilkan\";\"J.K. P.I\";\"Tgl.Lahir P.I.\";\"Umur P.I.\";\"Alamat Penerima Informasi\";\"No.H.P. P.I\";\"Hubungan Dengan Pasien\";\"Pernyataan\";\"Saksi I Keluarga\"\n"
-                                );
-                                while(rs.next()){
-                                    htmlContent.append(
-                                        "\""+rs.getString("no_pernyataan")+"\";\""+rs.getString("no_rawat")+"\";\" "+rs.getString("no_rkm_medis")+"\";\""+rs.getString("nm_pasien")+"\";\""+rs.getString("tgl_lahir")+"\";\""+rs.getString("jk")+"\";\""+rs.getString("tanggal")+"\";\""+rs.getString("diagnosa")+"\";\""+rs.getString("diagnosa_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("tindakan")+"\";\""+rs.getString("tindakan_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("indikasi_tindakan")+"\";\""+rs.getString("indikasi_tindakan_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("tata_cara")+"\";\""+rs.getString("tata_cara_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("tujuan")+"\";\""+rs.getString("tujuan_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("risiko")+"\";\""+rs.getString("risiko_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("komplikasi")+"\";\""+rs.getString("komplikasi_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("prognosis")+"\";\""+rs.getString("prognosis_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("alternatif_dan_risikonya")+"\";\""+rs.getString("alternatif_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("lain_lain")+"\";\""+rs.getString("lain_lain_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("biaya")+"\";\""+rs.getString("biaya_konfirmasi").replaceAll("true","Ya").replaceAll("false","Tidak")+"\";\""+rs.getString("kd_dokter")+"\";\""+rs.getString("nm_dokter")+"\";\""+rs.getString("nip")+"\";\""+rs.getString("nama")+"\";\""+rs.getString("penerima_informasi")+"\";\""+rs.getString("alasan_diwakilkan_penerima_informasi")+"\";\""+rs.getString("jk_penerima_informasi")+"\";\""+rs.getString("tanggal_lahir_penerima_informasi")+"\";\""+rs.getString("umur_penerima_informasi")+"\";\""+rs.getString("alamat_penerima_informasi")+"\";\""+rs.getString("no_hp")+"\";\""+rs.getString("hubungan_penerima_informasi")+"\";\""+rs.getString("pernyataan")+"\";\""+rs.getString("saksi_keluarga")+"\"\n"
-                                    );
-                                }
-                                f = new File("PersetujuanPenolakanTindakan.csv");
-                                bw = new BufferedWriter(new FileWriter(f));
-                                bw.write(htmlContent.toString());
-
-                                bw.close();
-                                Desktop.getDesktop().browse(f.toURI());
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("PersetujuanPenolakanTindakan.html", "DATA PERSETUJUAN PENOLAKAN TINDAKAN", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("PersetujuanPenolakanTindakan.wps", "DATA PERSETUJUAN PENOLAKAN TINDAKAN", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("PersetujuanPenolakanTindakan.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PersetujuanPenolakanTindakan.xlsx", tbObat);
+                        break;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

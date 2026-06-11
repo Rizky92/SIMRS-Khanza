@@ -303,6 +303,10 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             File g = new File("fileakunbayar.css");

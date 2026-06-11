@@ -1195,221 +1195,42 @@ public final class RMSkriningIndraPendengaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                );
-                bg.close();
-
-                File f;
-                BufferedWriter bw;
-                StringBuilder htmlContent;
-
-                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode Petugas</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Curiga Tuli Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Curiga Tuli Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rujuk Curiga Tuli</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penurunan Pendengaran Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penurunan Pendengaran Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mendengar Bisikan Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mendengar Bisikan Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Congek Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Congek Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rujuk Congek</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sumbatan Serumen Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sumbatan Serumen Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rujuk Sumbatan Serumen</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Skrining</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
-                                "</tr>"
-                            );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
-                                    "</tr>");
-                            }
-                            LoadHTML.setText(
-                                "<html>"+
-                                  "<table width='1900px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                                   htmlContent.toString()+
-                                  "</table>"+
-                                "</html>"
-                            );
-
-                            f = new File("DataSkriningIndraPendengaran.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                        "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SEKRINING INDRA PENDENGARAN<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>")
-                            );
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportHtmlSmc("DataSkriningIndraPendengaran.html", "DATA SKRINING INDRA PENDENGARAN", tbObat);
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode Petugas</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Curiga Tuli Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Curiga Tuli Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rujuk Curiga Tuli</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penurunan Pendengaran Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penurunan Pendengaran Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mendengar Bisikan Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mendengar Bisikan Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Congek Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Congek Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rujuk Congek</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sumbatan Serumen Kiri</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sumbatan Serumen Kanan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rujuk Sumbatan Serumen</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Skrining</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
-                                "</tr>"
-                            );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
-                                    "</tr>");
-                            }
-                            LoadHTML.setText(
-                                "<html>"+
-                                  "<table width='1900px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                                   htmlContent.toString()+
-                                  "</table>"+
-                                "</html>"
-                            );
-
-                            f = new File("DataSkriningIndraPendengaran.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                        "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SEKRINING INDRA PENDENGARAN<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>")
-                            );
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportWPSSmc("DataSkriningIndraPendengaran.wps", "DATA SKRINING INDRA PENDENGARAN", tbObat);
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Kode Petugas\";\"Nama Petugas\";\"Tanggal\";\"Curiga Tuli Kiri\";\"Curiga Tuli Kanan\";\"Rujuk Curiga Tuli\";\"Penurunan Pendengaran Kiri\";\"Penurunan Pendengaran Kanan\";\"Mendengar Bisikan Kiri\";\"Mendengar Bisikan Kanan\";\"Congek Kiri\";\"Congek Kanan\";\"Rujuk Congek\";\"Sumbatan Serumen Kiri\";\"Sumbatan Serumen Kanan\";\"Rujuk Sumbatan Serumen\";\"Hasil Skrining\";\"Keterangan\"\n"
-                            );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\";\""+tbObat.getValueAt(i,11).toString()+"\";\""+tbObat.getValueAt(i,12).toString()+"\";\""+tbObat.getValueAt(i,13).toString()+"\";\""+tbObat.getValueAt(i,14).toString()+"\";\""+tbObat.getValueAt(i,15).toString()+"\";\""+tbObat.getValueAt(i,16).toString()+"\";\""+tbObat.getValueAt(i,17).toString()+"\";\""+tbObat.getValueAt(i,18).toString()+"\";\""+tbObat.getValueAt(i,19).toString()+"\";\""+tbObat.getValueAt(i,20).toString()+"\";\""+tbObat.getValueAt(i,21).toString()+"\";\""+tbObat.getValueAt(i,22).toString()+"\"\n"
-                                );
-                            }
-                            f = new File("DataSkriningIndraPendengaran.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        Valid.exportCSVSmc("DataSkriningIndraPendengaran.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataSkriningIndraPendengaran.xlsx", tbObat);
                         break;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -784,41 +787,71 @@ public class DapurRingkasanPenerimaanBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
-            param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptRingkasanPenerimaanDapur.jasper","report","::[ Laporan Ringkasan Penerimaan Barang Dapur ]::",
-                    "select dapurdetailpesan.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+
-                    "dapurdetailpesan.kode_sat,kodesatuan.satuan,sum(dapurdetailpesan.jumlah) as jumlah,sum(dapurdetailpesan.total) as total "+
-                    "from dapurpemesanan inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier "+
-                    "inner join petugas on dapurpemesanan.nip=petugas.nip "+
-                    "inner join dapurdetailpesan on dapurpemesanan.no_faktur=dapurdetailpesan.no_faktur "+
-                    "inner join dapurbarang on dapurdetailpesan.kode_brng=dapurbarang.kode_brng "+
-                    "inner join kodesatuan on dapurdetailpesan.kode_sat=kodesatuan.kode_sat where dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.no_faktur like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.kode_suplier like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapursuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.nip like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and petugas.nama like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurdetailpesan.kode_brng like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.nama_brng like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurdetailpesan.kode_sat like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.no_order like '%"+TCari.getText()+"%' or "+
-                    "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.jenis like '%"+TCari.getText()+"%' "+
-                    "group by dapurdetailpesan.kode_brng "+order,param);
-
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RingkasanPenerimaanDapur.html", "Laporan Ringkasan Penerimaan Barang Dapur", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RingkasanPenerimaanDapur.wps", "Laporan Ringkasan Penerimaan Barang Dapur", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RingkasanPenerimaanDapur.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RingkasanPenerimaanDapur.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptRingkasanPenerimaanDapur.jasper","report","::[ Laporan Ringkasan Penerimaan Barang Dapur ]::",
+                                "select dapurdetailpesan.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+
+                                "dapurdetailpesan.kode_sat,kodesatuan.satuan,sum(dapurdetailpesan.jumlah) as jumlah,sum(dapurdetailpesan.total) as total "+
+                                "from dapurpemesanan inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier "+
+                                "inner join petugas on dapurpemesanan.nip=petugas.nip "+
+                                "inner join dapurdetailpesan on dapurpemesanan.no_faktur=dapurdetailpesan.no_faktur "+
+                                "inner join dapurbarang on dapurdetailpesan.kode_brng=dapurbarang.kode_brng "+
+                                "inner join kodesatuan on dapurdetailpesan.kode_sat=kodesatuan.kode_sat where dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.no_faktur like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.kode_suplier like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapursuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.nip like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and petugas.nama like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurdetailpesan.kode_brng like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.nama_brng like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurdetailpesan.kode_sat like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurpemesanan.no_order like '%"+TCari.getText()+"%' or "+
+                                "dapurpemesanan.tgl_pesan between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and dapurpemesanan.no_faktur like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and petugas.nama like '%"+nmptg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.jenis like '%"+TCari.getText()+"%' "+
+                                "group by dapurdetailpesan.kode_brng "+order,param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

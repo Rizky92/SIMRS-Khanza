@@ -496,6 +496,10 @@ public class DlgDataSasaranUsiaProduktif extends javax.swing.JDialog {
     */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             File g = new File("file2.css");

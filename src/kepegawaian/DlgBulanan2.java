@@ -19,6 +19,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -346,24 +349,49 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnKeluar.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                say=" rekap_presensi.jam_datang like '%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%' ";
-                try{
-                      pilih = (String)JOptionPane.showInputDialog(null,"Urutkan berdasakan","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"NIP","Nama","Shift","Jam Datang","Jam Pulang","Status","Keterlambatan","Durasi","Catatan"},"NIP");
-                      switch (pilih) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("Harian.html", "Rekap Harian", tbBangsal);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("Harian.wps", "Rekap Harian", tbBangsal);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("Harian.csv", tbBangsal);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("Harian.xlsx", tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        say=" rekap_presensi.jam_datang like '%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%' ";
+                        pilih = (String)JOptionPane.showInputDialog(null,"Urutkan berdasakan","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"NIP","Nama","Shift","Jam Datang","Jam Pulang","Status","Keterlambatan","Durasi","Catatan"},"NIP");
+                        switch (pilih) {
                             case "NIP":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                   Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
@@ -376,10 +404,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by pegawai.nik  ",param);
-                                 this.setCursor(Cursor.getDefaultCursor()); break;
+                                 break;
                             case "Nama":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -391,11 +418,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by pegawai.nama  ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Shift":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -407,11 +432,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.shift  ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Jam Datang":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -423,11 +446,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.jam_datang  ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Jam Pulang":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -439,11 +460,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.jam_pulang  ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Status":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -455,11 +474,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.status  ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Keterlambatan":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -471,11 +488,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.keterlambatan ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Durasi":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -487,11 +502,9 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.durasi ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
+                                break;
                             case "Catatan":
-                                  this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                  Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
+                                Valid.MyReportqry("rptHarian.jasper","report","::[ Rekap Harian ]::",
                                         "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
                                         "rekap_presensi.jam_pulang, rekap_presensi.status, rekap_presensi.keterlambatan, rekap_presensi.durasi, "+
                                         "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
@@ -503,12 +516,14 @@ public final class DlgBulanan2 extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.keterangan ",param);
-                                  this.setCursor(Cursor.getDefaultCursor());
-                                  break;
-                      }
-                }catch(Exception e){
-                      System.out.println(e);
+                                break;
+                        }
+                        break;
                 }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
 

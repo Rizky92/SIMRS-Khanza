@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1091,218 +1094,266 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(TabPilihRawat.getSelectedIndex()==0){
-            if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
-                    Sequel.queryu("delete from temporary_permintaan_labmb");
-                    int row=tabMode.getRowCount();
-                    for(i=0;i<row;i++){
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode.getValueAt(i,5).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode.getValueAt(i,7).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
-                            tabMode.getValueAt(i,0).toString()+"','"+
-                            tabMode.getValueAt(i,1).toString()+"','"+
-                            tabMode.getValueAt(i,2).toString()+"','"+
-                            tabMode.getValueAt(i,3).toString()+"','"+
-                            tabMode.getValueAt(i,4).toString()+"','"+
-                            tglsampel+"','"+
-                            tabMode.getValueAt(i,6).toString()+"','"+
-                            tglhasil+"','"+
-                            tabMode.getValueAt(i,8).toString()+"','"+
-                            tabMode.getValueAt(i,9).toString()+"','"+
-                            tabMode.getValueAt(i,10).toString()+"','"+
-                            tabMode.getValueAt(i,11).toString()+"','"+
-                            tabMode.getValueAt(i,12).toString()+"','"+
-                            tabMode.getValueAt(i,13).toString()+"','"+
-                            tabMode.getValueAt(i,14).toString()+"','"+
-                            tabMode.getValueAt(i,15).toString()+"','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
-                    }
-
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptLapPermintaanLabMB.jasper","report","::[ Data Permintaan Laboratorium ]::",param);
-                }
-            }else if(TabRawatJalan.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode2.getRowCount()!=0){
-
-                    Sequel.queryu("delete from temporary_permintaan_labmb");
-                    int row=tabMode2.getRowCount();
-                    for(i=0;i<row;i++){
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode2.getValueAt(i,9).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode2.getValueAt(i,11).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
-                            tabMode2.getValueAt(i,0).toString()+"','"+
-                            tabMode2.getValueAt(i,1).toString()+"','"+
-                            tabMode2.getValueAt(i,2).toString()+"','"+
-                            tabMode2.getValueAt(i,3).toString()+"','"+
-                            tabMode2.getValueAt(i,4).toString()+"','"+
-                            tabMode2.getValueAt(i,5).toString()+"','"+
-                            tabMode2.getValueAt(i,6).toString()+"','"+
-                            tabMode2.getValueAt(i,7).toString()+"','"+
-                            tabMode2.getValueAt(i,8).toString()+"','"+
-                            tglsampel+"','"+
-                            tabMode2.getValueAt(i,10).toString()+"','"+
-                            tglhasil+"','"+
-                            tabMode2.getValueAt(i,12).toString()+"','"+
-                            tabMode2.getValueAt(i,13).toString()+"','"+
-                            tabMode2.getValueAt(i,14).toString()+"','"+
-                            tabMode2.getValueAt(i,15).toString()+"','"+
-                            tabMode2.getValueAt(i,16).toString()+"','"+
-                            tabMode2.getValueAt(i,17).toString()+"','"+
-                            tabMode2.getValueAt(i,18).toString()+"','"+
-                            tabMode2.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','',''","Periksa Lab");
-                    }
-
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptLapPermintaanLab2MB.jasper","report","::[ Data Detail Permintaan Laboratorium ]::",param);
-                }
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
             }
-        }else if(TabPilihRawat.getSelectedIndex()==1){
-            if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode3.getRowCount()!=0){
-
-                    Sequel.queryu("delete from temporary_permintaan_labmb");
-                    int row=tabMode3.getRowCount();
-                    for(i=0;i<row;i++){
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode3.getValueAt(i,5).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode3.getValueAt(i,7).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
-                            tabMode3.getValueAt(i,0).toString()+"','"+
-                            tabMode3.getValueAt(i,1).toString()+"','"+
-                            tabMode3.getValueAt(i,2).toString()+"','"+
-                            tabMode3.getValueAt(i,3).toString()+"','"+
-                            tabMode3.getValueAt(i,4).toString()+"','"+
-                            tglsampel+"','"+
-                            tabMode3.getValueAt(i,6).toString()+"','"+
-                            tglhasil+"','"+
-                            tabMode3.getValueAt(i,8).toString()+"','"+
-                            tabMode3.getValueAt(i,9).toString()+"','"+
-                            tabMode3.getValueAt(i,10).toString()+"','"+
-                            tabMode3.getValueAt(i,11).toString()+"','"+
-                            tabMode3.getValueAt(i,12).toString()+"','"+
-                            tabMode3.getValueAt(i,13).toString()+"','"+
-                            tabMode3.getValueAt(i,14).toString()+"','"+
-                            tabMode3.getValueAt(i,15).toString()+"','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
-                    }
-
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptLapPermintaanLab3MB.jasper","report","::[ Data Permintaan Laboratorium ]::",param);
-                }
-            }else if(TabRawatInap.getSelectedIndex()==1){
-                if(tabMode4.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode4.getRowCount()!=0){
-
-                    Sequel.queryu("delete from temporary_permintaan_labmb");
-                    int row=tabMode4.getRowCount();
-                    for(i=0;i<row;i++){
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode4.getValueAt(i,9).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode4.getValueAt(i,11).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
-                                        tabMode4.getValueAt(i,0).toString()+"','"+
-                                        tabMode4.getValueAt(i,1).toString()+"','"+
-                                        tabMode4.getValueAt(i,2).toString()+"','"+
-                                        tabMode4.getValueAt(i,3).toString()+"','"+
-                                        tabMode4.getValueAt(i,4).toString()+"','"+
-                                        tabMode4.getValueAt(i,5).toString()+"','"+
-                                        tabMode4.getValueAt(i,6).toString()+"','"+
-                                        tabMode4.getValueAt(i,7).toString()+"','"+
-                                        tabMode4.getValueAt(i,8).toString()+"','"+
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            if(TabPilihRawat.getSelectedIndex()==0){
+                if(TabRawatJalan.getSelectedIndex()==0){
+                    if(tabMode.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        TCari.requestFocus();
+                    }else if(tabMode.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("LapPermintaanLabMB.html", "Data Permintaan Laboratorium", tbLabRalan);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("LapPermintaanLabMB.wps", "Data Permintaan Laboratorium", tbLabRalan);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("LapPermintaanLabMB.csv", tbLabRalan);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("LapPermintaanLabMB.xlsx", tbLabRalan);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary_permintaan_labmb");
+                                int row=tabMode.getRowCount();
+                                for(i=0;i<row;i++){
+                                    tglsampel="";
+                                    try {
+                                        tglsampel=tabMode.getValueAt(i,5).toString();
+                                    } catch (Exception e) {
+                                        tglsampel="";
+                                    }
+                                    tglhasil="";
+                                    try {
+                                        tglhasil=tabMode.getValueAt(i,7).toString();
+                                    } catch (Exception e) {
+                                        tglhasil="";
+                                    }
+                                    Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
+                                        tabMode.getValueAt(i,0).toString()+"','"+
+                                        tabMode.getValueAt(i,1).toString()+"','"+
+                                        tabMode.getValueAt(i,2).toString()+"','"+
+                                        tabMode.getValueAt(i,3).toString()+"','"+
+                                        tabMode.getValueAt(i,4).toString()+"','"+
                                         tglsampel+"','"+
-                                        tabMode4.getValueAt(i,10).toString()+"','"+
+                                        tabMode.getValueAt(i,6).toString()+"','"+
                                         tglhasil+"','"+
-                                        tabMode4.getValueAt(i,12).toString()+"','"+
-                                        tabMode4.getValueAt(i,13).toString()+"','"+
-                                        tabMode4.getValueAt(i,14).toString()+"','"+
-                                        tabMode4.getValueAt(i,15).toString()+"','"+
-                                        tabMode4.getValueAt(i,16).toString()+"','"+
-                                        tabMode4.getValueAt(i,17).toString()+"','"+
-                                        tabMode4.getValueAt(i,18).toString()+"','"+
-                                        tabMode4.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                        tabMode.getValueAt(i,8).toString()+"','"+
+                                        tabMode.getValueAt(i,9).toString()+"','"+
+                                        tabMode.getValueAt(i,10).toString()+"','"+
+                                        tabMode.getValueAt(i,11).toString()+"','"+
+                                        tabMode.getValueAt(i,12).toString()+"','"+
+                                        tabMode.getValueAt(i,13).toString()+"','"+
+                                        tabMode.getValueAt(i,14).toString()+"','"+
+                                        tabMode.getValueAt(i,15).toString()+"','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                }
+                                Valid.MyReport("rptLapPermintaanLabMB.jasper","report","::[ Data Permintaan Laboratorium ]::",param);
+                                break;
+                        }
                     }
-
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptLapPermintaanLab4MB.jasper","report","::[ Data Detail Permintaan Laboratorium ]::",param);
+                }else if(TabRawatJalan.getSelectedIndex()==1){
+                    if(tabMode2.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        TCari.requestFocus();
+                    }else if(tabMode2.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("LapPermintaanLab2MB.html", "Data Detail Permintaan Laboratorium", tbLabRalan2);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("LapPermintaanLab2MB.wps", "Data Detail Permintaan Laboratorium", tbLabRalan2);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("LapPermintaanLab2MB.csv", tbLabRalan2);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("LapPermintaanLab2MB.xlsx", tbLabRalan2);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary_permintaan_labmb");
+                                int row=tabMode2.getRowCount();
+                                for(i=0;i<row;i++){
+                                    tglsampel="";
+                                    try {
+                                        tglsampel=tabMode2.getValueAt(i,9).toString();
+                                    } catch (Exception e) {
+                                        tglsampel="";
+                                    }
+                                    tglhasil="";
+                                    try {
+                                        tglhasil=tabMode2.getValueAt(i,11).toString();
+                                    } catch (Exception e) {
+                                        tglhasil="";
+                                    }
+                                    Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
+                                        tabMode2.getValueAt(i,0).toString()+"','"+
+                                        tabMode2.getValueAt(i,1).toString()+"','"+
+                                        tabMode2.getValueAt(i,2).toString()+"','"+
+                                        tabMode2.getValueAt(i,3).toString()+"','"+
+                                        tabMode2.getValueAt(i,4).toString()+"','"+
+                                        tabMode2.getValueAt(i,5).toString()+"','"+
+                                        tabMode2.getValueAt(i,6).toString()+"','"+
+                                        tabMode2.getValueAt(i,7).toString()+"','"+
+                                        tabMode2.getValueAt(i,8).toString()+"','"+
+                                        tglsampel+"','"+
+                                        tabMode2.getValueAt(i,10).toString()+"','"+
+                                        tglhasil+"','"+
+                                        tabMode2.getValueAt(i,12).toString()+"','"+
+                                        tabMode2.getValueAt(i,13).toString()+"','"+
+                                        tabMode2.getValueAt(i,14).toString()+"','"+
+                                        tabMode2.getValueAt(i,15).toString()+"','"+
+                                        tabMode2.getValueAt(i,16).toString()+"','"+
+                                        tabMode2.getValueAt(i,17).toString()+"','"+
+                                        tabMode2.getValueAt(i,18).toString()+"','"+
+                                        tabMode2.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                }
+                                Valid.MyReport("rptLapPermintaanLab2MB.jasper","report","::[ Data Detail Permintaan Laboratorium ]::",param);
+                                break;
+                        }
+                    }
+                }
+            }else if(TabPilihRawat.getSelectedIndex()==1){
+                if(TabRawatInap.getSelectedIndex()==0){
+                    if(tabMode3.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        TCari.requestFocus();
+                    }else if(tabMode3.getRowCount()!=0){
+                            switch (pilihan) {
+                                case "Laporan 1 (HTML)":
+                                    Valid.exportHtmlSmc("LapPermintaanLab3MB.html", "Data Permintaan Laboratorium", tbLabRanap);
+                                    break;
+                                case "Laporan 2 (WPS)":
+                                    Valid.exportWPSSmc("LapPermintaanLab3MB.wps", "Data Permintaan Laboratorium", tbLabRanap);
+                                    break;
+                                case "Laporan 3 (CSV)":
+                                    Valid.exportCSVSmc("LapPermintaanLab3MB.csv", tbLabRanap);
+                                    break;
+                                case "Laporan 4 (XLSX)":
+                                    Valid.exportXlsxSmc("LapPermintaanLab3MB.xlsx", tbLabRanap);
+                                    break;
+                                case "Laporan 5 (Jasper)":
+                                    Sequel.queryu("delete from temporary_permintaan_labmb");
+                                    int row=tabMode3.getRowCount();
+                                    for(i=0;i<row;i++){
+                                        tglsampel="";
+                                        try {
+                                            tglsampel=tabMode3.getValueAt(i,5).toString();
+                                        } catch (Exception e) {
+                                            tglsampel="";
+                                        }
+                                        tglhasil="";
+                                        try {
+                                            tglhasil=tabMode3.getValueAt(i,7).toString();
+                                        } catch (Exception e) {
+                                            tglhasil="";
+                                        }
+                                        Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
+                                            tabMode3.getValueAt(i,0).toString()+"','"+
+                                            tabMode3.getValueAt(i,1).toString()+"','"+
+                                            tabMode3.getValueAt(i,2).toString()+"','"+
+                                            tabMode3.getValueAt(i,3).toString()+"','"+
+                                            tabMode3.getValueAt(i,4).toString()+"','"+
+                                            tglsampel+"','"+
+                                            tabMode3.getValueAt(i,6).toString()+"','"+
+                                            tglhasil+"','"+
+                                            tabMode3.getValueAt(i,8).toString()+"','"+
+                                            tabMode3.getValueAt(i,9).toString()+"','"+
+                                            tabMode3.getValueAt(i,10).toString()+"','"+
+                                            tabMode3.getValueAt(i,11).toString()+"','"+
+                                            tabMode3.getValueAt(i,12).toString()+"','"+
+                                            tabMode3.getValueAt(i,13).toString()+"','"+
+                                            tabMode3.getValueAt(i,14).toString()+"','"+
+                                            tabMode3.getValueAt(i,15).toString()+"','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                    }
+                                    Valid.MyReport("rptLapPermintaanLab3MB.jasper","report","::[ Data Permintaan Laboratorium ]::",param);
+                                    break;
+                            }
+                    }
+                }else if(TabRawatInap.getSelectedIndex()==1){
+                    if(tabMode4.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        TCari.requestFocus();
+                    }else if(tabMode4.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("LapPermintaanLab4MB.html", "Data Detail Permintaan Laboratorium", tbLabRanap2);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("LapPermintaanLab4MB.wps", "Data Detail Permintaan Laboratorium", tbLabRanap2);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("LapPermintaanLab4MB.csv", tbLabRanap2);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("LapPermintaanLab4MB.xlsx", tbLabRanap2);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary_permintaan_labmb");
+                                int row=tabMode4.getRowCount();
+                                for(i=0;i<row;i++){
+                                    tglsampel="";
+                                    try {
+                                        tglsampel=tabMode4.getValueAt(i,9).toString();
+                                    } catch (Exception e) {
+                                        tglsampel="";
+                                    }
+                                    tglhasil="";
+                                    try {
+                                        tglhasil=tabMode4.getValueAt(i,11).toString();
+                                    } catch (Exception e) {
+                                        tglhasil="";
+                                    }
+                                    Sequel.menyimpan("temporary_permintaan_labmb","'0','"+
+                                                    tabMode4.getValueAt(i,0).toString()+"','"+
+                                                    tabMode4.getValueAt(i,1).toString()+"','"+
+                                                    tabMode4.getValueAt(i,2).toString()+"','"+
+                                                    tabMode4.getValueAt(i,3).toString()+"','"+
+                                                    tabMode4.getValueAt(i,4).toString()+"','"+
+                                                    tabMode4.getValueAt(i,5).toString()+"','"+
+                                                    tabMode4.getValueAt(i,6).toString()+"','"+
+                                                    tabMode4.getValueAt(i,7).toString()+"','"+
+                                                    tabMode4.getValueAt(i,8).toString()+"','"+
+                                                    tglsampel+"','"+
+                                                    tabMode4.getValueAt(i,10).toString()+"','"+
+                                                    tglhasil+"','"+
+                                                    tabMode4.getValueAt(i,12).toString()+"','"+
+                                                    tabMode4.getValueAt(i,13).toString()+"','"+
+                                                    tabMode4.getValueAt(i,14).toString()+"','"+
+                                                    tabMode4.getValueAt(i,15).toString()+"','"+
+                                                    tabMode4.getValueAt(i,16).toString()+"','"+
+                                                    tabMode4.getValueAt(i,17).toString()+"','"+
+                                                    tabMode4.getValueAt(i,18).toString()+"','"+
+                                                    tabMode4.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                }
+                                Valid.MyReport("rptLapPermintaanLab4MB.jasper","report","::[ Data Detail Permintaan Laboratorium ]::",param);
+                                break;
+                        }
+                    }
                 }
             }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

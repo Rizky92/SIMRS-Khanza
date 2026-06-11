@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -484,55 +487,82 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
     */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         }else if(tabMode.getRowCount()!=0){
-            if(ceksukses==false){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                if(Jenisjual.getSelectedItem().toString().equals("Semua")&nmasal.getText().equals("")&&nmjns.getText().equals("")&&nmkategori.getText().equals("")&&nmgolongan.getText().equals("")&&TCari.getText().equals("")){
-                    Valid.MyReportqry("rptProyeksi.jasper","report","::[ Proyeksi Keuntungan Penjualan ]::",
-                            "select penjualan.tgl_jual,penjualan.nota_jual,detailjual.kode_brng,databarang.nama_brng,kodesatuan.satuan,detailjual.h_jual,detailjual.jumlah, "+
-                            "detailjual.subtotal,detailjual.dis,detailjual.bsr_dis,detailjual.tambahan,detailjual.total, detailjual.h_beli,(detailjual.h_beli * detailjual.jumlah) as total_asal, "+
-                            "(detailjual.total-(detailjual.h_beli * detailjual.jumlah)) as keuntungan "+
-                            "from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
-                            "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
-                            "inner join kodesatuan on detailjual.kode_sat=kodesatuan.kode_sat "+
-                            "inner join bangsal on penjualan.kd_bangsal=bangsal.kd_bangsal "+
-                            "inner join jenis on databarang.kdjns=jenis.kdjns "+
-                            "inner join kategori_barang on kategori_barang.kode=databarang.kode_kategori "+
-                            "inner join golongan_barang on golongan_barang.kode=databarang.kode_golongan "+
-                            "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by penjualan.tgl_jual,penjualan.nota_jual",param);
-                }else{
-                    Valid.MyReportqry("rptProyeksi.jasper","report","::[ Proyeksi Keuntungan Penjualan ]::",
-                            "select penjualan.tgl_jual,penjualan.nota_jual,detailjual.kode_brng,databarang.nama_brng,kodesatuan.satuan,detailjual.h_jual,detailjual.jumlah, "+
-                            "detailjual.subtotal,detailjual.dis,detailjual.bsr_dis,detailjual.tambahan,detailjual.total, detailjual.h_beli,(detailjual.h_beli * detailjual.jumlah) as total_asal, "+
-                            "(detailjual.total-(detailjual.h_beli * detailjual.jumlah)) as keuntungan "+
-                            "from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
-                            "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
-                            "inner join kodesatuan on detailjual.kode_sat=kodesatuan.kode_sat "+
-                            "inner join bangsal on penjualan.kd_bangsal=bangsal.kd_bangsal "+
-                            "inner join jenis on databarang.kdjns=jenis.kdjns "+
-                            "inner join kategori_barang on kategori_barang.kode=databarang.kode_kategori "+
-                            "inner join golongan_barang on golongan_barang.kode=databarang.kode_golongan "+
-                            "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and penjualan.nota_jual like '%"+TCari.getText().trim()+"%' or "+
-                            "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and detailjual.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                            "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
-                            "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
-                            " order by penjualan.tgl_jual,penjualan.nota_jual",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("Proyeksi.html", "Proyeksi Keuntungan Penjualan", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("Proyeksi.wps", "Proyeksi Keuntungan Penjualan", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("Proyeksi.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("Proyeksi.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(Jenisjual.getSelectedItem().toString().equals("Semua")&nmasal.getText().equals("")&&nmjns.getText().equals("")&&nmkategori.getText().equals("")&&nmgolongan.getText().equals("")&&TCari.getText().equals("")){
+                            Valid.MyReportqry("rptProyeksi.jasper","report","::[ Proyeksi Keuntungan Penjualan ]::",
+                                    "select penjualan.tgl_jual,penjualan.nota_jual,detailjual.kode_brng,databarang.nama_brng,kodesatuan.satuan,detailjual.h_jual,detailjual.jumlah, "+
+                                    "detailjual.subtotal,detailjual.dis,detailjual.bsr_dis,detailjual.tambahan,detailjual.total, detailjual.h_beli,(detailjual.h_beli * detailjual.jumlah) as total_asal, "+
+                                    "(detailjual.total-(detailjual.h_beli * detailjual.jumlah)) as keuntungan "+
+                                    "from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
+                                    "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
+                                    "inner join kodesatuan on detailjual.kode_sat=kodesatuan.kode_sat "+
+                                    "inner join bangsal on penjualan.kd_bangsal=bangsal.kd_bangsal "+
+                                    "inner join jenis on databarang.kdjns=jenis.kdjns "+
+                                    "inner join kategori_barang on kategori_barang.kode=databarang.kode_kategori "+
+                                    "inner join golongan_barang on golongan_barang.kode=databarang.kode_golongan "+
+                                    "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by penjualan.tgl_jual,penjualan.nota_jual",param);
+                        }else{
+                            Valid.MyReportqry("rptProyeksi.jasper","report","::[ Proyeksi Keuntungan Penjualan ]::",
+                                    "select penjualan.tgl_jual,penjualan.nota_jual,detailjual.kode_brng,databarang.nama_brng,kodesatuan.satuan,detailjual.h_jual,detailjual.jumlah, "+
+                                    "detailjual.subtotal,detailjual.dis,detailjual.bsr_dis,detailjual.tambahan,detailjual.total, detailjual.h_beli,(detailjual.h_beli * detailjual.jumlah) as total_asal, "+
+                                    "(detailjual.total-(detailjual.h_beli * detailjual.jumlah)) as keuntungan "+
+                                    "from penjualan inner join detailjual on penjualan.nota_jual=detailjual.nota_jual "+
+                                    "inner join databarang on detailjual.kode_brng=databarang.kode_brng "+
+                                    "inner join kodesatuan on detailjual.kode_sat=kodesatuan.kode_sat "+
+                                    "inner join bangsal on penjualan.kd_bangsal=bangsal.kd_bangsal "+
+                                    "inner join jenis on databarang.kdjns=jenis.kdjns "+
+                                    "inner join kategori_barang on kategori_barang.kode=databarang.kode_kategori "+
+                                    "inner join golongan_barang on golongan_barang.kode=databarang.kode_golongan "+
+                                    "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and penjualan.nota_jual like '%"+TCari.getText().trim()+"%' or "+
+                                    "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and detailjual.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                                    "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                                    "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
+                                    " order by penjualan.tgl_jual,penjualan.nota_jual",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

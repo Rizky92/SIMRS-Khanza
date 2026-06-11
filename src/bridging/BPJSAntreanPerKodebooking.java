@@ -237,11 +237,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.deleteTemporary();
             for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
-                Sequel.temporary(String.valueOf(i + 1),
-                    (String) tabMode.getValueAt(i, 0),
-                    (String) tabMode.getValueAt(i, 1),
-                    (String) tabMode.getValueAt(i, 2)
-                );
+                Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2));
             }
 
             Map<String, Object> param = new HashMap<>();

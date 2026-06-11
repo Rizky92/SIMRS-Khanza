@@ -1640,7 +1640,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                 param.put("dokter",NmDokter.getText());
                 param.put("bulan",Tanggal.getSelectedItem().toString().substring(3,10));
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptSlipBayarJMDokter.jasper","report","[ Slip J.M. Dokter  ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                Valid.MyReportqry("rptSlipBayarJMDokter.jasper","report","::[ Slip J.M. Dokter  ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }

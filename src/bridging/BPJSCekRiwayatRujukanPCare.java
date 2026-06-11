@@ -299,6 +299,10 @@ public final class BPJSCekRiwayatRujukanPCare extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
@@ -312,7 +316,6 @@ public final class BPJSCekRiwayatRujukanPCare extends javax.swing.JDialog {
                                 tabMode.getValueAt(r,1).toString()+"','"+
                                 tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -322,7 +325,7 @@ public final class BPJSCekRiwayatRujukanPCare extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptCariBPJS10RiwayatPeserta.jasper","report","[ Pencarian Riwayat Rujukan Peserta ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            Valid.MyReportqry("rptCariBPJS10RiwayatPeserta.jasper","report","::[ Pencarian Riwayat Rujukan Peserta ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

@@ -22,6 +22,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -652,57 +655,100 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Map<String, Object> param = new HashMap<>();
-        param.put("namars",akses.getnamars());
-        param.put("alamatrs",akses.getalamatrs());
-        param.put("kotars",akses.getkabupatenrs());
-        param.put("propinsirs",akses.getpropinsirs());
-        param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs());
-        param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
-        if(TabRawat.getSelectedIndex()==0){
-            if(tabmode.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabmode.getRowCount()!=0){
-
-                Sequel.queryu("delete from temporary_sensus_harian");
-                for(int r=0;r<tabmode.getRowCount();r++){
-                    Sequel.menyimpan("temporary_sensus_harian","'0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','',''",21,new String[]{
-                            tabmode.getValueAt(r,0).toString(),tabmode.getValueAt(r,1).toString(),tabmode.getValueAt(r,2).toString(),
-                            tabmode.getValueAt(r,3).toString(),tabmode.getValueAt(r,4).toString(),tabmode.getValueAt(r,5).toString(),
-                            tabmode.getValueAt(r,6).toString(),tabmode.getValueAt(r,7).toString(),tabmode.getValueAt(r,8).toString(),
-                            tabmode.getValueAt(r,9).toString(),tabmode.getValueAt(r,10).toString(),tabmode.getValueAt(r,11).toString(),
-                            tabmode.getValueAt(r,12).toString(),tabmode.getValueAt(r,13).toString(),tabmode.getValueAt(r,14).toString(),
-                            tabmode.getValueAt(r,15).toString(),tabmode.getValueAt(r,16).toString(),tabmode.getValueAt(r,17).toString(),
-                            tabmode.getValueAt(r,18).toString(),tabmode.getValueAt(r,19).toString(),tabmode.getValueAt(r,20).toString()
-                    });
-                }
-
-                Valid.MyReport("rptSensusHarianRalan.jasper","report","::[ Laporan Sensus Harian Ralan ]::",param);
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
             }
-        }else if(TabRawat.getSelectedIndex()==1){
-            if(tabmode2.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                //TCari.requestFocus();
-            }else if(tabmode2.getRowCount()!=0){
-
-                Sequel.queryu("delete from temporary_sensus_harian");
-                for(int r=0;r<tabmode2.getRowCount();r++){
-                    Sequel.menyimpan("temporary_sensus_harian","'0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','',''",21,new String[]{
-                            tabmode2.getValueAt(r,0).toString(),tabmode2.getValueAt(r,1).toString(),tabmode2.getValueAt(r,2).toString(),
-                            tabmode2.getValueAt(r,3).toString(),tabmode2.getValueAt(r,4).toString(),tabmode2.getValueAt(r,5).toString(),
-                            tabmode2.getValueAt(r,6).toString(),tabmode2.getValueAt(r,7).toString(),tabmode2.getValueAt(r,8).toString(),
-                            tabmode2.getValueAt(r,9).toString(),tabmode2.getValueAt(r,10).toString(),tabmode2.getValueAt(r,11).toString(),
-                            tabmode2.getValueAt(r,12).toString(),tabmode2.getValueAt(r,13).toString(),tabmode2.getValueAt(r,14).toString(),
-                            tabmode2.getValueAt(r,15).toString(),tabmode2.getValueAt(r,16).toString(),tabmode2.getValueAt(r,17).toString(),
-                            tabmode2.getValueAt(r,18).toString(),tabmode2.getValueAt(r,19).toString(),tabmode2.getValueAt(r,20).toString()
-                    });
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            if(TabRawat.getSelectedIndex()==0){
+                if(tabmode.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                    //TCari.requestFocus();
+                }else if(tabmode.getRowCount()!=0){
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("SensusHarianRalan.html", "Laporan Sensus Harian Ralan", table);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("SensusHarianRalan.wps", "Laporan Sensus Harian Ralan", table);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("SensusHarianRalan.csv", table);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("SensusHarianRalan.xlsx", table);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Sequel.queryu("delete from temporary_sensus_harian");
+                            for(int r=0;r<tabmode.getRowCount();r++){
+                                Sequel.menyimpan("temporary_sensus_harian","'0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','',''",21,new String[]{
+                                        tabmode.getValueAt(r,0).toString(),tabmode.getValueAt(r,1).toString(),tabmode.getValueAt(r,2).toString(),
+                                        tabmode.getValueAt(r,3).toString(),tabmode.getValueAt(r,4).toString(),tabmode.getValueAt(r,5).toString(),
+                                        tabmode.getValueAt(r,6).toString(),tabmode.getValueAt(r,7).toString(),tabmode.getValueAt(r,8).toString(),
+                                        tabmode.getValueAt(r,9).toString(),tabmode.getValueAt(r,10).toString(),tabmode.getValueAt(r,11).toString(),
+                                        tabmode.getValueAt(r,12).toString(),tabmode.getValueAt(r,13).toString(),tabmode.getValueAt(r,14).toString(),
+                                        tabmode.getValueAt(r,15).toString(),tabmode.getValueAt(r,16).toString(),tabmode.getValueAt(r,17).toString(),
+                                        tabmode.getValueAt(r,18).toString(),tabmode.getValueAt(r,19).toString(),tabmode.getValueAt(r,20).toString()
+                                });
+                            }
+                            Valid.MyReport("rptSensusHarianRalan.jasper","report","::[ Laporan Sensus Harian Ralan ]::",param);
+                            break;
+                    }
                 }
-
-                Valid.MyReport("rptSensusHarianRalan.jasper","report","::[ Laporan Sensus Harian Ralan ]::",param);
+            }else if(TabRawat.getSelectedIndex()==1){
+                if(tabmode2.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                    //TCari.requestFocus();
+                }else if(tabmode2.getRowCount()!=0){
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("SensusHarianRalan.html", "Laporan Sensus Harian Ralan", table2);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("SensusHarianRalan.wps", "Laporan Sensus Harian Ralan", table2);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("SensusHarianRalan.csv", table2);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("SensusHarianRalan.xlsx", table2);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Sequel.queryu("delete from temporary_sensus_harian");
+                            for(int r=0;r<tabmode2.getRowCount();r++){
+                                Sequel.menyimpan("temporary_sensus_harian","'0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','',''",21,new String[]{
+                                        tabmode2.getValueAt(r,0).toString(),tabmode2.getValueAt(r,1).toString(),tabmode2.getValueAt(r,2).toString(),
+                                        tabmode2.getValueAt(r,3).toString(),tabmode2.getValueAt(r,4).toString(),tabmode2.getValueAt(r,5).toString(),
+                                        tabmode2.getValueAt(r,6).toString(),tabmode2.getValueAt(r,7).toString(),tabmode2.getValueAt(r,8).toString(),
+                                        tabmode2.getValueAt(r,9).toString(),tabmode2.getValueAt(r,10).toString(),tabmode2.getValueAt(r,11).toString(),
+                                        tabmode2.getValueAt(r,12).toString(),tabmode2.getValueAt(r,13).toString(),tabmode2.getValueAt(r,14).toString(),
+                                        tabmode2.getValueAt(r,15).toString(),tabmode2.getValueAt(r,16).toString(),tabmode2.getValueAt(r,17).toString(),
+                                        tabmode2.getValueAt(r,18).toString(),tabmode2.getValueAt(r,19).toString(),tabmode2.getValueAt(r,20).toString()
+                                });
+                            }
+                            Valid.MyReport("rptSensusHarianRalan.jasper","report","::[ Laporan Sensus Harian Ralan ]::",param);
+                            break;
+                    }
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

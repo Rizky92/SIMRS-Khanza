@@ -1283,197 +1283,42 @@ public final class RMPenilaianTambahanGeriatri extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                if(TCari.getText().trim().equals("")){
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_tambahan_geriatri.tanggal,"+
-                            "penilaian_tambahan_geriatri.nik,pegawai.nama,penilaian_tambahan_geriatri.asal_masuk,penilaian_tambahan_geriatri.kondisi_masuk,penilaian_tambahan_geriatri.keterangan_kondisi_masuk,"+
-                            "penilaian_tambahan_geriatri.anamnesis,penilaian_tambahan_geriatri.diagnosa_medis,penilaian_tambahan_geriatri.riwayat_immuno_telinga,penilaian_tambahan_geriatri.riwayat_immuno_sinus,"+
-                            "penilaian_tambahan_geriatri.riwayat_immuno_antibiotik,penilaian_tambahan_geriatri.riwayat_immuno_pneumonia,penilaian_tambahan_geriatri.riwayat_immuno_abses,"+
-                            "penilaian_tambahan_geriatri.riwayat_immuno_sariawan,penilaian_tambahan_geriatri.riwayat_immuno_memerlukan_antibiotik,penilaian_tambahan_geriatri.riwayat_immuno_infeksi_dalam,"+
-                            "penilaian_tambahan_geriatri.riwayat_immuno_immunodefisiensi_primer,penilaian_tambahan_geriatri.riwayat_immuno_jenis_kangker,penilaian_tambahan_geriatri.riwayat_immuno_infeksi_oportunistik,"+
-                            "penilaian_tambahan_geriatri.pola_aktifitas_tidur,penilaian_tambahan_geriatri.keterangan_pola_aktifitas_tidur,penilaian_tambahan_geriatri.pola_aktifitas_obat_tidur,"+
-                            "penilaian_tambahan_geriatri.keterangan_pola_aktifitas_obat_tidur,penilaian_tambahan_geriatri.pola_aktifitas_olahraga,penilaian_tambahan_geriatri.keterangan_pola_aktifitas_olahraga,"+
-                            "penilaian_tambahan_geriatri.kualitas_hidup_mobilitas,penilaian_tambahan_geriatri.kualitas_hidup_perawatan_diri,penilaian_tambahan_geriatri.kualitas_hidup_aktifitas_seharihari,"+
-                            "penilaian_tambahan_geriatri.kualitas_hidup_rasa_nyeri,penilaian_tambahan_geriatri.skala_nyeri "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_tambahan_geriatri on reg_periksa.no_rawat=penilaian_tambahan_geriatri.no_rawat "+
-                            "inner join pegawai on penilaian_tambahan_geriatri.nik=pegawai.nik where "+
-                            "penilaian_tambahan_geriatri.tanggal between ? and ? order by penilaian_tambahan_geriatri.tanggal");
-                }else{
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_tambahan_geriatri.tanggal,"+
-                            "penilaian_tambahan_geriatri.nik,pegawai.nama,penilaian_tambahan_geriatri.asal_masuk,penilaian_tambahan_geriatri.kondisi_masuk,penilaian_tambahan_geriatri.keterangan_kondisi_masuk,"+
-                            "penilaian_tambahan_geriatri.anamnesis,penilaian_tambahan_geriatri.diagnosa_medis,penilaian_tambahan_geriatri.riwayat_immuno_telinga,penilaian_tambahan_geriatri.riwayat_immuno_sinus,"+
-                            "penilaian_tambahan_geriatri.riwayat_immuno_antibiotik,penilaian_tambahan_geriatri.riwayat_immuno_pneumonia,penilaian_tambahan_geriatri.riwayat_immuno_abses,"+
-                            "penilaian_tambahan_geriatri.riwayat_immuno_sariawan,penilaian_tambahan_geriatri.riwayat_immuno_memerlukan_antibiotik,penilaian_tambahan_geriatri.riwayat_immuno_infeksi_dalam,"+
-                            "penilaian_tambahan_geriatri.riwayat_immuno_immunodefisiensi_primer,penilaian_tambahan_geriatri.riwayat_immuno_jenis_kangker,penilaian_tambahan_geriatri.riwayat_immuno_infeksi_oportunistik,"+
-                            "penilaian_tambahan_geriatri.pola_aktifitas_tidur,penilaian_tambahan_geriatri.keterangan_pola_aktifitas_tidur,penilaian_tambahan_geriatri.pola_aktifitas_obat_tidur,"+
-                            "penilaian_tambahan_geriatri.keterangan_pola_aktifitas_obat_tidur,penilaian_tambahan_geriatri.pola_aktifitas_olahraga,penilaian_tambahan_geriatri.keterangan_pola_aktifitas_olahraga,"+
-                            "penilaian_tambahan_geriatri.kualitas_hidup_mobilitas,penilaian_tambahan_geriatri.kualitas_hidup_perawatan_diri,penilaian_tambahan_geriatri.kualitas_hidup_aktifitas_seharihari,"+
-                            "penilaian_tambahan_geriatri.kualitas_hidup_rasa_nyeri,penilaian_tambahan_geriatri.skala_nyeri "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_tambahan_geriatri on reg_periksa.no_rawat=penilaian_tambahan_geriatri.no_rawat "+
-                            "inner join pegawai on penilaian_tambahan_geriatri.nik=pegawai.nik where "+
-                            "penilaian_tambahan_geriatri.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                            "penilaian_tambahan_geriatri.nik like ? or pegawai.nama like ?) order by penilaian_tambahan_geriatri.tanggal");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-
-                try {
-                    if(TCari.getText().trim().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    htmlContent = new StringBuilder();
-                    htmlContent.append(
-                        "<tr class='isi'>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.RM</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Pasien</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tgl.Lahir</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>J.K.</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Kode Petugas</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Dokter/Petugas</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tanggal</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Kondisi Masuk</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Keterangan Kondisi Saat Masuk</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Anamnesis</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Diagnosa Masuk</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Asal Masuk</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Infeksi Telinga Baru</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Infeksi Berat Sinus</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Antibiotik Tanpa Dampak</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Pneumonia Sebanyak 2</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Abses Berulang</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Sariawan Yang Menetap</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Antibiotika Intravena</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Infeksi Dalam</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Immunodefisiensi Primer</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Jenis Kanker</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Infeksi Oportunistik</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Perawatan Diri Sendiri</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Mobilitas</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Aktivitas Sehari-hari</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nyeri/Tidak Nyaman</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Skala Nyeri Dengan FPS-hv</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Istirahat/Tidur</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Keterangan Istirahat/Tidur</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Penggunaan Obat Tidur</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Keterangan Penggunaan Obat Tidur</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Olahraga</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Keterangan Olahraga</b></td>"+
-                        "</tr>"
-                    );
-                    while(rs.next()){
-                        htmlContent.append(
-                            "<tr class='isi'>"+
-                               "<td valign='top'>"+rs.getString("no_rawat")+"</td>"+
-                               "<td valign='top'>"+rs.getString("no_rkm_medis")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nm_pasien")+"</td>"+
-                               "<td valign='top'>"+rs.getString("tgl_lahir")+"</td>"+
-                               "<td valign='top'>"+rs.getString("jk")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nik")+"</td>"+
-                               "<td valign='top'>"+rs.getString("nama")+"</td>"+
-                               "<td valign='top'>"+rs.getString("tanggal")+"</td>"+
-                               "<td valign='top'>"+rs.getString("kondisi_masuk")+"</td>"+
-                               "<td valign='top'>"+rs.getString("keterangan_kondisi_masuk")+"</td>"+
-                               "<td valign='top'>"+rs.getString("anamnesis")+"</td>"+
-                               "<td valign='top'>"+rs.getString("diagnosa_medis")+"</td>"+
-                               "<td valign='top'>"+rs.getString("asal_masuk")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_telinga")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_sinus")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_antibiotik")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_pneumonia")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_abses")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_sariawan")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_memerlukan_antibiotik")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_infeksi_dalam")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_immunodefisiensi_primer")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_jenis_kangker")+"</td>"+
-                               "<td valign='top'>"+rs.getString("riwayat_immuno_infeksi_oportunistik")+"</td>"+
-                               "<td valign='top'>"+rs.getString("kualitas_hidup_perawatan_diri")+"</td>"+
-                               "<td valign='top'>"+rs.getString("kualitas_hidup_mobilitas")+"</td>"+
-                               "<td valign='top'>"+rs.getString("kualitas_hidup_aktifitas_seharihari")+"</td>"+
-                               "<td valign='top'>"+rs.getString("kualitas_hidup_rasa_nyeri")+"</td>"+
-                               "<td valign='top'>"+rs.getString("skala_nyeri")+"</td>"+
-                               "<td valign='top'>"+rs.getString("pola_aktifitas_tidur")+"</td>"+
-                               "<td valign='top'>"+rs.getString("keterangan_pola_aktifitas_tidur")+"</td>"+
-                               "<td valign='top'>"+rs.getString("pola_aktifitas_obat_tidur")+"</td>"+
-                               "<td valign='top'>"+rs.getString("keterangan_pola_aktifitas_obat_tidur")+"</td>"+
-                               "<td valign='top'>"+rs.getString("pola_aktifitas_olahraga")+"</td>"+
-                               "<td valign='top'>"+rs.getString("keterangan_pola_aktifitas_olahraga")+"</td>"+
-                            "</tr>");
-                    }
-                    LoadHTML.setText(
-                        "<html>"+
-                          "<table width='4500px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                           htmlContent.toString()+
-                          "</table>"+
-                        "</html>"
-                    );
-
-                    File g = new File("file2.css");
-                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                    bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                        ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                        ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                        ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                        ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                    );
-                    bg.close();
-
-                    File f = new File("DataPenilaianAwalMedisRalan.html");
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                "<table width='4500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr class='isi2'>"+
-                                        "<td valign='top' align='center'>"+
-                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA PENGKAJIAN TAMBAHAN PASIEN GERIATRI<br><br></font>"+
-                                        "</td>"+
-                                   "</tr>"+
-                                "</table>")
-                    );
-                    bw.close();
-                    Desktop.getDesktop().browse(f.toURI());
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataPenilaianTambahanGeriatri.html", "DATA PENGKAJIAN TAMBAHAN PASIEN GERIATRI", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataPenilaianTambahanGeriatri.wps", "DATA PENGKAJIAN TAMBAHAN PASIEN GERIATRI", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataPenilaianTambahanGeriatri.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPenilaianTambahanGeriatri.xlsx", tbObat);
+                        break;
                 }
-
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
