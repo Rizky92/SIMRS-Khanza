@@ -600,7 +600,7 @@ public final class validasi {
 
     public void exportHtmlSmc(String filename, String judul, JTable table, int... columnIndexes) {
         TableModel tabMode = table.getModel();
-        judul = judul.replaceAll("\n", "<br>");
+        judul = judul.trim().toUpperCase().replaceAll("\n", "<br>");
 
         if (columnIndexes.length == 0) {
             columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
@@ -621,7 +621,7 @@ public final class validasi {
 
             StringJoiner sj = new StringJoiner("");
             for (int i = 0; i < columnIndexes.length; i++) {
-                sj.add("<td valign=\"middle\" bgcolor=\"#FFFAFA\" align=\"center\">" + table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue() + "</td>");
+                sj.add("<td valign=\"middle\" bgcolor=\"#FFFAFA\" align=\"center\"><b>" + table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue() + "</b></td>");
             }
             b.write("<tr class=\"isi\">" + sj.toString() + "</tr>");
 
@@ -655,59 +655,7 @@ public final class validasi {
     }
 
     public void exportWPSSmc(String filename, String judul, JTable table, int... columnIndexes) {
-        TableModel tabMode = table.getModel();
-        judul = judul.replaceAll("\n", "<br>");
-
-        if (columnIndexes.length == 0) {
-            columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
-                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
-                .toArray();
-        } else {
-            columnIndexes = Arrays.stream(columnIndexes)
-                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
-                .toArray();
-        }
-
-        File file = new File(filename);
-        try (BufferedWriter b = new BufferedWriter(new FileWriter(file), 65536)) {
-            b.write("<html><head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><table border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\"><tr class=\"isi2\">");
-            b.write("<td valign=\"top\" align=\"center\"><font size=\"4\" face=\"Tahoma\">" + akses.getnamars() + "</font><br>" + akses.getalamatrs() + ", " + akses.getkabupatenrs() + ", ");
-            b.write(akses.getpropinsirs() + "<br>" + akses.getkontakrs() + ", E-mail : " + akses.getemailrs() + "<br><br><font size=\"2\" face=\"Tahoma\">" + judul);
-            b.write("<br><br></font></td></tr></table><table border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">");
-
-            StringJoiner sj = new StringJoiner("");
-            for (int i = 0; i < columnIndexes.length; i++) {
-                sj.add("<td valign=\"middle\" bgcolor=\"#FFFAFA\" align=\"center\">" + table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue() + "</td>");
-            }
-            b.write("<tr class=\"isi\">" + sj.toString() + "</tr>");
-
-            for (int i = 0; i < tabMode.getRowCount(); i++) {
-                sj = new StringJoiner("");
-                for (int j = 0; j < columnIndexes.length; j++) {
-                    if (tabMode.getValueAt(i, columnIndexes[j]) == null) {
-                        sj.add("<td valign=\"top\"></td>");
-                    } else {
-                        try {
-                            if (tabMode.getColumnClass(columnIndexes[j]).equals(Double.class)) {
-                                sj.add("<td valign=\"top\" align=\"right\">" + new BigDecimal((Double) tabMode.getValueAt(i, columnIndexes[j])).setScale(2, RoundingMode.HALF_UP).toPlainString().replace(".", ",") + "</td>");
-                            } else if (tabMode.getColumnClass(columnIndexes[j]).equals(Integer.class)) {
-                                sj.add("<td valign=\"top\" align=\"right\">" + ((Integer) tabMode.getValueAt(i, columnIndexes[j])) + "</td>");
-                            } else {
-                                sj.add("<td valign=\"top\">" + ((String) tabMode.getValueAt(i, columnIndexes[j])) + "</td>");
-                            }
-                        } catch (ClassCastException e) {
-                            sj.add("<td valign=\"top\" align=\"right\">" + tabMode.getValueAt(i, columnIndexes[j]) + "</td>");
-                        }
-                    }
-                }
-                b.write("<tr class=\"isi\">" + sj.toString() + "</tr>");
-            }
-            b.write("</table></body></html>");
-            b.flush();
-            Desktop.getDesktop().browse(file.toURI());
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
+        exportHtmlSmc(filename, judul, table, columnIndexes);
     }
 
     public void exportCSVSmc(String filename, JTable table, int... columnIndexes) {

@@ -5824,21 +5824,29 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        switch (TabRawat.getSelectedIndex()) {
-            case 0:
-                if(tabModeDr.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(tabModeDr.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            switch (TabRawat.getSelectedIndex()) {
+                case 0:
+                    if(tabModeDr.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(tabModeDr.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("JalanDr.html", "Data Rawat Jalan Yang Ditangani Dokter", tbRawatDr);
@@ -5853,14 +5861,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("JalanDr.xlsx", tbRawatDr);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" rawat_jl_dr.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptJalanDr.jasper","report","::[ Data Rawat Jalan Yang Ditangani Dokter ]::",
@@ -5877,26 +5877,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     "(rawat_jl_dr.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or jns_perawatan.nm_perawatan like '%"+TCari.getText().trim()+"%' or rawat_jl_dr.kd_dokter like '%"+TCari.getText().trim()+"%' or dokter.nm_dokter like '%"+TCari.getText().trim()+"%') order by rawat_jl_dr.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            case 1:
-                if(tabModePr.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(tabModePr.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    break;
+                case 1:
+                    if(tabModePr.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(tabModePr.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("JalanPr.html", "Data Rawat Jalan Yang Ditangani Perawat", tbRawatPr);
@@ -5911,14 +5898,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("JalanPr.xlsx", tbRawatPr);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" rawat_jl_pr.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptJalanPr.jasper","report","::[ Data Rawat Jalan Yang Ditangani Perawat ]::",
@@ -5941,26 +5920,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     "order by rawat_jl_pr.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            case 2:
-                if(tabModeDrPr.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(tabModeDrPr.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    break;
+                case 2:
+                    if(tabModeDrPr.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(tabModeDrPr.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("JalanDrPr.html", "Data Rawat Jalan Yang Ditangani Dokter dan Perawat", tbRawatDrPr);
@@ -5975,14 +5941,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("JalanDrPr.xlsx", tbRawatDrPr);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" rawat_jl_drpr.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptJalanDrPr.jasper","report","::[ Data Rawat Jalan Yang Ditangani Dokter ]::",
@@ -6008,26 +5966,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     " order by rawat_jl_drpr.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            case 3:
-                if(tabModePemeriksaan.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(tabModePemeriksaan.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    break;
+                case 3:
+                    if(tabModePemeriksaan.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(tabModePemeriksaan.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("JalanPemeriksaan.html", "Data Pemeriksaan Rawat Jalan", tbPemeriksaan);
@@ -6042,14 +5987,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("JalanPemeriksaan.xlsx", tbPemeriksaan);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" pemeriksaan_ralan.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptJalanPemeriksaan.jasper","report","::[ Data Pemeriksaan Rawat Jalan ]::",
@@ -6069,26 +6006,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     "order by pemeriksaan_ralan.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            case 4:
-                if(tabModeObstetri.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(tabModeObstetri.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    break;
+                case 4:
+                    if(tabModeObstetri.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(tabModeObstetri.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("JalanObstetri.html", "Data Pemeriksaan Obstetri Rawat Jalan", tbPemeriksaanObstetri);
@@ -6103,14 +6027,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("JalanObstetri.xlsx", tbPemeriksaanObstetri);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" pemeriksaan_obstetri_ralan.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptJalanObstetri.jasper","report","::[ Data Pemeriksaan Obstetri Rawat Jalan ]::",
@@ -6130,26 +6046,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     "order by pemeriksaan_obstetri_ralan.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            case 5:
-                if(tabModeGinekologi.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(tabModeGinekologi.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    break;
+                case 5:
+                    if(tabModeGinekologi.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(tabModeGinekologi.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("JalanGinekologi.html", "Data Pemeriksaan Ginekologi Rawat Jalan", tbPemeriksaanGinekologi);
@@ -6164,14 +6067,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("JalanGinekologi.xlsx", tbPemeriksaanGinekologi);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" pemeriksaan_ginekologi_ralan.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptJalanGinekologi.jasper","report","::[ Data Pemeriksaan Ginekologi Rawat Jalan ]::",
@@ -6192,31 +6087,18 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     "order by pemeriksaan_ginekologi_ralan.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            case 6:
-                if(akses.getdiagnosa_pasien()==true){
-                    panelDiagnosa1.cetak();
-                }
-                break;
-            case 7:
-                if(TabModeCatatan.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    BtnBatal.requestFocus();
-                }else if(TabModeCatatan.getRowCount()!=0){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    try {
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                            bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                            bw.flush();
-                        }
-                        String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                    break;
+                case 6:
+                    if(akses.getdiagnosa_pasien()==true){
+                        panelDiagnosa1.cetak();
+                    }
+                    break;
+                case 7:
+                    if(TabModeCatatan.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        BtnBatal.requestFocus();
+                    }else if(TabModeCatatan.getRowCount()!=0){
                         switch (pilihan) {
                             case "Laporan 1 (HTML)":
                                 Valid.exportHtmlSmc("CatatanDokter.html", "Data Catatan Dokter", tbCatatan);
@@ -6231,14 +6113,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 Valid.exportXlsxSmc("CatatanDokter.xlsx", tbCatatan);
                                 break;
                             case "Laporan 5 (Jasper)":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                 String pas=" and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' ";
                                 String tgl=" catatan_perawatan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
                                 Valid.MyReportqry("rptCatatanDokter.jasper","report","::[ Data Catatan Dokter ]::",
@@ -6256,15 +6130,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                     "order by catatan_perawatan.no_rawat desc",param);
                                 break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-                break;
-            default:
-                break;
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
