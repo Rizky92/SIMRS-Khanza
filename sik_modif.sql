@@ -2172,7 +2172,10 @@ CREATE TABLE IF NOT EXISTS `penilaian_tindakan_invasif_non_bedah` (
   `skor_resiko_jatuh` varchar(10) DEFAULT NULL,
   `hasil_echo` text DEFAULT NULL,
   `rencana` text DEFAULT NULL,
-  PRIMARY KEY (`no_rawat`, `tanggal`)
+  PRIMARY KEY (`no_rawat`),
+  KEY `nip` (`nip`),
+  CONSTRAINT `penilaian_tindakan_invasif_non_bedah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `penilaian_tindakan_invasif_non_bedah_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=Dynamic;
 
 CREATE TABLE IF NOT EXISTS `penilaian_tindakan_invasif_non_bedah_masalah` (

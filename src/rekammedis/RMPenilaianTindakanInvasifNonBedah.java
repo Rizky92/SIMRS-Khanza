@@ -736,7 +736,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
 
-        label14.setText("Dokter :");
+        label14.setText("Petugas :");
         label14.setName("label14"); // NOI18N
         label14.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label14);
@@ -1309,7 +1309,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         KetPsiko.setFocusTraversalPolicyProvider(true);
         KetPsiko.setName("KetPsiko"); // NOI18N
         FormInput.add(KetPsiko);
-        KetPsiko.setBounds(350, 220, 142, 23);
+        KetPsiko.setBounds(350, 225, 142, 23);
 
         Urine24Jam.setFocusTraversalPolicyProvider(true);
         Urine24Jam.setName("Urine24Jam"); // NOI18N
@@ -1821,7 +1821,6 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
-        scrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane1.setName("scrollPane1"); // NOI18N
         getContentPane().add(scrollPane1, java.awt.BorderLayout.PAGE_START);
 
