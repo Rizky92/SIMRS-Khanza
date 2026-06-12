@@ -2120,7 +2120,7 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_invasif_non_bedah` enum(
 CREATE TABLE IF NOT EXISTS `penilaian_tindakan_invasif_non_bedah` (
   `no_rawat` varchar(17) NOT NULL,
   `tanggal` datetime NOT NULL,
-  `kd_dokter` varchar(20) DEFAULT NULL,
+  `nip` varchar(20) DEFAULT NULL,
   `diagnosa` varchar(200) DEFAULT NULL,
   `rencana_tindakan` varchar(200) DEFAULT NULL,
   `keluhan_utama` text DEFAULT NULL,
@@ -2180,8 +2180,17 @@ CREATE TABLE IF NOT EXISTS `penilaian_tindakan_invasif_non_bedah_masalah` (
   `kode_masalah` varchar(3) NOT NULL,
   PRIMARY KEY (`no_rawat`,`kode_masalah`),
   KEY `kode_masalah` (`kode_masalah`),
-  CONSTRAINT `penilaian_tindakan_invasif_non_bedah_masalah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `penilaian_awal_keperawatan_ranap` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `penilaian_tindakan_invasif_non_bedah_masalah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `penilaian_tindakan_invasif_non_bedah` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `penilaian_tindakan_invasif_non_bedah_masalah_ibfk_2` FOREIGN KEY (`kode_masalah`) REFERENCES `master_masalah_keperawatan` (`kode_masalah`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `penilaian_tindakan_invasif_non_bedah_rencana` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_rencana` varchar(3) NOT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_rencana`) USING BTREE,
+  KEY `kode_rencana` (`kode_rencana`) USING BTREE,
+  CONSTRAINT `penilaian_tindakan_invasif_non_bedah_rencana_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `penilaian_tindakan_invasif_non_bedah` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `penilaian_tindakan_invasif_non_bedah_rencana_ibfk_2` FOREIGN KEY (`kode_rencana`) REFERENCES `master_rencana_keperawatan` (`kode_rencana`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS=1;

@@ -42,7 +42,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPetugas;
 
 
 /**
@@ -57,7 +57,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0,jml=0,index=0;
-    private DlgCariDokter dokter;
+    private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private boolean[] pilih;
@@ -80,7 +80,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Kode Dokter","Nama Dokter","Tanggal","Diagnosa","Rencana Tindakan",
+            "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","NIP","Nama Petugas","Tanggal","Diagnosa","Rencana Tindakan",
             "Keluhan Utama","Status Psikologis","Ket. Psikologis","RPD","Sistem Pernapasan","Ket. Pernapasan","Muntah Darah","BAB","Urine","Antiplatelet",
             "Lama Antiplatelet","Beta Blocker","Lama Beta Blocker","Simarc","Lama Simarc","Riwayat Alergi","TB (cm)","BB (Kg)","TD (mmHg)","Saturasi O2 (%)",
             "Nadi (x/menit)","Suhu (°C)","Pernapasan (x/menit)","Radialis Kanan","Radialis Kiri","Pedis Kanan","Pedis Kiri","Nyeri","Pencetus Nyeri",
@@ -1840,7 +1840,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
         }else if(NmDokter.getText().trim().equals("")){
-            Valid.textKosong(BtnDokter,"Dokter");
+            Valid.textKosong(BtnDokter,"Petugas");
         }else if(Diagnosa.getText().trim().equals("")){
             Valid.textKosong(Diagnosa,"Diagnosa");
         }else if(RencanaTindakan.getText().trim().equals("")){
@@ -1888,7 +1888,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                         hapus();
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter yang bersangkutan..!!");
+                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
                 }
             }
         }else{
@@ -1909,7 +1909,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
         }else if(NmDokter.getText().trim().equals("")){
-            Valid.textKosong(BtnDokter,"Dokter");
+            Valid.textKosong(BtnDokter,"Petugas");
         }else if(Diagnosa.getText().trim().equals("")){
             Valid.textKosong(Diagnosa,"Diagnosa");
         }else if(RencanaTindakan.getText().trim().equals("")){
@@ -1926,7 +1926,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                             }
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
+                        JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
                     }
                 }
             }else{
@@ -1968,8 +1968,8 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Pasien</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tgl.Lahir</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>J.K.</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Kode Dokter</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Dokter</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>NIP</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Nama Petugas</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tanggal</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Tgl.Operasi</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>Diagnosa</b></td>"+
@@ -2190,30 +2190,30 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     }//GEN-LAST:event_tbObatKeyPressed
 
     private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
-        if (dokter == null || !dokter.isDisplayable()) {
-            dokter=new DlgCariDokter(null,false);
-            dokter.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            dokter.addWindowListener(new WindowAdapter() {
+        if (petugas == null || !petugas.isDisplayable()) {
+            petugas=new DlgCariPetugas(null,false);
+            petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){
-                         KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                         NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                    if(petugas.getTable().getSelectedRow()!= -1){
+                         KdDokter.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
+                         NmDokter.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     }
                     BtnDokter.requestFocus();
-                    dokter=null;
+                    petugas=null;
                 }
             });
-            dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            dokter.setLocationRelativeTo(internalFrame1);
+            petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            petugas.setLocationRelativeTo(internalFrame1);
         }
-        if (dokter == null) return;
-        dokter.isCek();
-        if (dokter.isVisible()) {
-            dokter.toFront();
+        if (petugas == null) return;
+        petugas.isCek();
+        if (petugas.isVisible()) {
+            petugas.toFront();
             return;
         }
-        dokter.setVisible(true);
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
@@ -2251,15 +2251,15 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
 
             Valid.MyReportqry("rptCetakPenilaianTindakanInvasifNonBedah.jasper","report","::[ Laporan Penilaian Tindakan Invasif Non Bedah ]::",
-                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,rm_penilaian_tindakan_invasif_non_bedah.tanggal,"+
-                "rm_penilaian_tindakan_invasif_non_bedah.kd_dokter,rm_penilaian_tindakan_invasif_non_bedah.diagnosa,"+
-                "rm_penilaian_tindakan_invasif_non_bedah.rencana_tindakan,rm_penilaian_tindakan_invasif_non_bedah.tb,rm_penilaian_tindakan_invasif_non_bedah.bb,rm_penilaian_tindakan_invasif_non_bedah.td,"+
-                "rm_penilaian_tindakan_invasif_non_bedah.nadi,rm_penilaian_tindakan_invasif_non_bedah.suhu,"+
-                "rm_penilaian_tindakan_invasif_non_bedah.pernapasan,rm_penilaian_tindakan_invasif_non_bedah.keluhan_utama,dokter.nm_dokter "+
+                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_tindakan_invasif_non_bedah.tanggal,"+
+                "penilaian_tindakan_invasif_non_bedah.nip,penilaian_tindakan_invasif_non_bedah.diagnosa,"+
+                "penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,"+
+                "penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,"+
+                "penilaian_tindakan_invasif_non_bedah.pernapasan,penilaian_tindakan_invasif_non_bedah.keluhan_utama,petugas.nama "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "inner join rm_penilaian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=rm_penilaian_tindakan_invasif_non_bedah.no_rawat "+
-                "inner join dokter on rm_penilaian_tindakan_invasif_non_bedah.kd_dokter=dokter.kd_dokter where rm_penilaian_tindakan_invasif_non_bedah.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' "+
-                "and rm_penilaian_tindakan_invasif_non_bedah.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"'",param);
+                "inner join penilaian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=penilaian_tindakan_invasif_non_bedah.no_rawat "+
+                "inner join petugas on penilaian_tindakan_invasif_non_bedah.nip=petugas.nip where penilaian_tindakan_invasif_non_bedah.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' "+
+                "and penilaian_tindakan_invasif_non_bedah.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"'",param);
         }
     }//GEN-LAST:event_MnPenilaianMedisActionPerformed
 
@@ -2702,15 +2702,15 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                "select penilaian_tindakan_invasif_non_bedah.no_rawat,penilaian_tindakan_invasif_non_bedah.tanggal,penilaian_tindakan_invasif_non_bedah.kd_dokter,penilaian_tindakan_invasif_non_bedah.diagnosa,penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.keluhan_utama,penilaian_tindakan_invasif_non_bedah.status_psiko,penilaian_tindakan_invasif_non_bedah.ket_psiko,penilaian_tindakan_invasif_non_bedah.rpd,penilaian_tindakan_invasif_non_bedah.sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.ket_sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.muntah_darah,penilaian_tindakan_invasif_non_bedah.bab,penilaian_tindakan_invasif_non_bedah.urine,penilaian_tindakan_invasif_non_bedah.antiplatelet,penilaian_tindakan_invasif_non_bedah.lama_antiplatelet,penilaian_tindakan_invasif_non_bedah.beta_blocker,penilaian_tindakan_invasif_non_bedah.lama_beta_blocker,penilaian_tindakan_invasif_non_bedah.simarc,penilaian_tindakan_invasif_non_bedah.lama_simarc,penilaian_tindakan_invasif_non_bedah.riwayat_alergi,penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,penilaian_tindakan_invasif_non_bedah.io2,penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,penilaian_tindakan_invasif_non_bedah.pernapasan,penilaian_tindakan_invasif_non_bedah.radialis_kanan,penilaian_tindakan_invasif_non_bedah.radialis_kiri,penilaian_tindakan_invasif_non_bedah.pedis_kanan,penilaian_tindakan_invasif_non_bedah.pedis_kiri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_skala,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,penilaian_tindakan_invasif_non_bedah.hematokrit,penilaian_tindakan_invasif_non_bedah.hemoglobin,penilaian_tindakan_invasif_non_bedah.leukosit,penilaian_tindakan_invasif_non_bedah.pt_ir,penilaian_tindakan_invasif_non_bedah.kalium,penilaian_tindakan_invasif_non_bedah.natrium,penilaian_tindakan_invasif_non_bedah.hbsag,penilaian_tindakan_invasif_non_bedah.anti_hcv,penilaian_tindakan_invasif_non_bedah.gds,penilaian_tindakan_invasif_non_bedah.pt_aptt,penilaian_tindakan_invasif_non_bedah.kreatinin,penilaian_tindakan_invasif_non_bedah.skrining_jatuh,penilaian_tindakan_invasif_non_bedah.skor_resiko_jatuh,penilaian_tindakan_invasif_non_bedah.hasil_echo,penilaian_tindakan_invasif_non_bedah.rencana,pasien.tgl_lahir,pasien.jk,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.agama,pasien.pnd,penjab.png_jawab,bahasa_pasien.nama_bahasa "+
+                "select penilaian_tindakan_invasif_non_bedah.no_rawat,penilaian_tindakan_invasif_non_bedah.tanggal,penilaian_tindakan_invasif_non_bedah.nip,penilaian_tindakan_invasif_non_bedah.diagnosa,penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.keluhan_utama,penilaian_tindakan_invasif_non_bedah.status_psiko,penilaian_tindakan_invasif_non_bedah.ket_psiko,penilaian_tindakan_invasif_non_bedah.rpd,penilaian_tindakan_invasif_non_bedah.sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.ket_sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.muntah_darah,penilaian_tindakan_invasif_non_bedah.bab,penilaian_tindakan_invasif_non_bedah.urine,penilaian_tindakan_invasif_non_bedah.antiplatelet,penilaian_tindakan_invasif_non_bedah.lama_antiplatelet,penilaian_tindakan_invasif_non_bedah.beta_blocker,penilaian_tindakan_invasif_non_bedah.lama_beta_blocker,penilaian_tindakan_invasif_non_bedah.simarc,penilaian_tindakan_invasif_non_bedah.lama_simarc,penilaian_tindakan_invasif_non_bedah.riwayat_alergi,penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,penilaian_tindakan_invasif_non_bedah.io2,penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,penilaian_tindakan_invasif_non_bedah.pernapasan,penilaian_tindakan_invasif_non_bedah.radialis_kanan,penilaian_tindakan_invasif_non_bedah.radialis_kiri,penilaian_tindakan_invasif_non_bedah.pedis_kanan,penilaian_tindakan_invasif_non_bedah.pedis_kiri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_skala,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,penilaian_tindakan_invasif_non_bedah.hematokrit,penilaian_tindakan_invasif_non_bedah.hemoglobin,penilaian_tindakan_invasif_non_bedah.leukosit,penilaian_tindakan_invasif_non_bedah.pt_ir,penilaian_tindakan_invasif_non_bedah.kalium,penilaian_tindakan_invasif_non_bedah.natrium,penilaian_tindakan_invasif_non_bedah.hbsag,penilaian_tindakan_invasif_non_bedah.anti_hcv,penilaian_tindakan_invasif_non_bedah.gds,penilaian_tindakan_invasif_non_bedah.pt_aptt,penilaian_tindakan_invasif_non_bedah.kreatinin,penilaian_tindakan_invasif_non_bedah.skrining_jatuh,penilaian_tindakan_invasif_non_bedah.skor_resiko_jatuh,penilaian_tindakan_invasif_non_bedah.hasil_echo,penilaian_tindakan_invasif_non_bedah.rencana,pasien.tgl_lahir,pasien.jk,petugas.nama,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.agama,pasien.pnd,penjab.png_jawab,bahasa_pasien.nama_bahasa "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join penilaian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=penilaian_tindakan_invasif_non_bedah.no_rawat "+
-                "inner join dokter on penilaian_tindakan_invasif_non_bedah.kd_dokter=dokter.kd_dokter "+
+                "inner join petugas on penilaian_tindakan_invasif_non_bedah.nip=petugas.nip "+
                 "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
                 "inner join penjab on penjab.kd_pj=reg_periksa.kd_pj where "+
                 "penilaian_tindakan_invasif_non_bedah.tanggal between ? and ? "+
-                (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penilaian_tindakan_invasif_non_bedah.kd_dokter like ? or "+
-                "dokter.nm_dokter like ?)")+
+                (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penilaian_tindakan_invasif_non_bedah.nip like ? or "+
+                "petugas.nama like ?)")+
                 " order by penilaian_tindakan_invasif_non_bedah.tanggal");
                 
             try {
@@ -2726,8 +2726,8 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("kd_dokter"),
-                        rs.getString("nm_dokter"),rs.getString("tanggal"),rs.getString("diagnosa"),rs.getString("rencana_tindakan"),rs.getString("keluhan_utama"),
+                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("nip"),
+                        rs.getString("nama"),rs.getString("tanggal"),rs.getString("diagnosa"),rs.getString("rencana_tindakan"),rs.getString("keluhan_utama"),
                         rs.getString("status_psiko"),rs.getString("ket_psiko"),rs.getString("rpd"),rs.getString("sistem_pernapasan"),rs.getString("ket_sistem_pernapasan"),
                         rs.getString("muntah_darah"),rs.getString("bab"),rs.getString("urine"),rs.getString("antiplatelet"),rs.getString("lama_antiplatelet"),rs.getString("beta_blocker"),
                         rs.getString("lama_beta_blocker"),rs.getString("simarc"),rs.getString("lama_simarc"),rs.getString("riwayat_alergi"),
@@ -2920,10 +2920,10 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             KdDokter.setEditable(false);
             BtnDokter.setEnabled(false);
             KdDokter.setText(akses.getkode());
-            NmDokter.setText(Sequel.CariDokter(KdDokter.getText()));
+            NmDokter.setText(Sequel.CariPetugas(KdDokter.getText()));
             if(NmDokter.getText().equals("")){
                 KdDokter.setText("");
-                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
+                JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
         }
 
