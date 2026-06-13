@@ -14,7 +14,9 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import javax.print.PrintService;
@@ -23,10 +25,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 public class DlgPengaturanAPM extends widget.Dialog {
-    private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private DlgCariPoli2 poli = null;
     private String userLoginFP = "", passLoginFP = "";
+    private List<String> listPoli = null;
 
     /**
      * Creates new form DlgPengaturanAPM
@@ -63,7 +65,6 @@ public class DlgPengaturanAPM extends widget.Dialog {
         enableSEPBedaPoli = new widget.CekBox();
         enableMobileJKN = new widget.CekBox();
         enableSatuSehat = new widget.CekBox();
-        kodePoliEksekutif = new widget.TextField();
         pilihPoliEksekutif = new widget.Button();
         label1 = new widget.Label();
         label2 = new widget.Label();
@@ -75,7 +76,6 @@ public class DlgPengaturanAPM extends widget.Dialog {
         label9 = new widget.Label();
         label10 = new widget.Label();
         label11 = new widget.Label();
-        namaPoliEksekutif = new widget.TextField();
         pathFingerprint = new widget.TextField();
         pathFrista = new widget.TextField();
         cariLokasiFingerprint = new widget.Button();
@@ -88,6 +88,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
         batasRegistrasiSatuJam = new widget.CekBox();
         peekUserFP = new widget.Button();
         peekPasswordFP = new widget.Button();
+        labelPoliAktif = new widget.Label();
         panel2 = new widget.Panel();
         btnSimpan = new widget.Button();
         btnBatal = new widget.Button();
@@ -215,23 +216,12 @@ public class DlgPengaturanAPM extends widget.Dialog {
         panel1.add(enableSatuSehat);
         enableSatuSehat.setBounds(587, 394, 170, 30);
 
-        kodePoliEksekutif.setEditable(false);
-        kodePoliEksekutif.setMinimumSize(new java.awt.Dimension(75, 35));
-        kodePoliEksekutif.setPreferredSize(new java.awt.Dimension(75, 35));
-        kodePoliEksekutif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                kodePoliEksekutifKeyPressed(evt);
-            }
-        });
-        panel1.add(kodePoliEksekutif);
-        kodePoliEksekutif.setBounds(247, 130, 75, 35);
-
         pilihPoliEksekutif.setBackground(new java.awt.Color(240, 249, 255));
         pilihPoliEksekutif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pilih.png"))); // NOI18N
         pilihPoliEksekutif.setPreferredSize(new java.awt.Dimension(45, 35));
         pilihPoliEksekutif.addActionListener(this::pilihPoliEksekutifActionPerformed);
         panel1.add(pilihPoliEksekutif);
-        pilihPoliEksekutif.setBounds(652, 130, 45, 35);
+        pilihPoliEksekutif.setBounds(247, 130, 45, 35);
 
         label1.setText("Printer Registrasi/SEP :");
         panel1.add(label1);
@@ -272,17 +262,6 @@ public class DlgPengaturanAPM extends widget.Dialog {
         label11.setText("Jumlah :");
         panel1.add(label11);
         label11.setBounds(652, 50, 73, 35);
-
-        namaPoliEksekutif.setEditable(false);
-        namaPoliEksekutif.setMinimumSize(new java.awt.Dimension(75, 35));
-        namaPoliEksekutif.setPreferredSize(new java.awt.Dimension(320, 35));
-        namaPoliEksekutif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                namaPoliEksekutifKeyPressed(evt);
-            }
-        });
-        panel1.add(namaPoliEksekutif);
-        namaPoliEksekutif.setBounds(327, 130, 320, 35);
 
         pathFingerprint.setEditable(false);
         pathFingerprint.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -387,6 +366,13 @@ public class DlgPengaturanAPM extends widget.Dialog {
         panel1.add(peekPasswordFP);
         peekPasswordFP.setBounds(552, 290, 45, 35);
 
+        labelPoliAktif.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPoliAktif.setText("3 Poli Aktif");
+        labelPoliAktif.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        labelPoliAktif.setPreferredSize(new java.awt.Dimension(348, 30));
+        panel1.add(labelPoliAktif);
+        labelPoliAktif.setBounds(299, 135, 348, 30);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -443,18 +429,6 @@ public class DlgPengaturanAPM extends widget.Dialog {
         }
     }//GEN-LAST:event_printerAntrianKeyPressed
 
-    private void kodePoliEksekutifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodePoliEksekutifKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            evt.consume();
-            if (kodePoliEksekutif.getText().length() > 0) {
-                kodePoliEksekutif.setText("");
-            }
-            if (namaPoliEksekutif.getText().length() > 0) {
-                namaPoliEksekutif.setText("");
-            }
-        }
-    }//GEN-LAST:event_kodePoliEksekutifKeyPressed
-
     private void pilihPoliEksekutifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihPoliEksekutifActionPerformed
         if (poli == null) {
             poli = new DlgCariPoli2(null, false);
@@ -462,28 +436,18 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if (poli.hasSelection()) {
-                        kodePoliEksekutif.setText(poli.getSelectedRow(0).toString());
-                        namaPoliEksekutif.setText(poli.getSelectedRow(1).toString());
+                        listPoli = poli.getSelectedRows();
                     }
+                    labelPoliAktif.setText(listPoli.size() + " Poli Aktif");
                 }
             });
         }
+        poli.tampil();
+        poli.setSelectedRows(listPoli);
         poli.setSize(getContentPane().getSize());
         poli.setLocationRelativeTo(getContentPane());
         poli.setVisible(true);
     }//GEN-LAST:event_pilihPoliEksekutifActionPerformed
-
-    private void namaPoliEksekutifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaPoliEksekutifKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            evt.consume();
-            if (kodePoliEksekutif.getText().length() > 0) {
-                kodePoliEksekutif.setText("");
-            }
-            if (namaPoliEksekutif.getText().length() > 0) {
-                namaPoliEksekutif.setText("");
-            }
-        }
-    }//GEN-LAST:event_namaPoliEksekutifKeyPressed
 
     private void pathFingerprintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pathFingerprintKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
@@ -585,7 +549,6 @@ public class DlgPengaturanAPM extends widget.Dialog {
     private javax.swing.JFileChooser fc;
     private widget.TextField jumlahAntrianFarmasi;
     private widget.TextField jumlahBarcode;
-    private widget.TextField kodePoliEksekutif;
     private widget.Label label1;
     private widget.Label label10;
     private widget.Label label11;
@@ -598,7 +561,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
     private widget.Label label7;
     private widget.Label label8;
     private widget.Label label9;
-    private widget.TextField namaPoliEksekutif;
+    private widget.Label labelPoliAktif;
     private widget.Panel panel1;
     private widget.Panel panel2;
     private widget.PasswordField passFP;
@@ -640,8 +603,11 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 jumlahBarcode.setText(decrypted.path("printJumlahBarcode").asText(""));
                 jumlahAntrianFarmasi.setText(decrypted.path("printJumlahAntrianFarmasi").asText(""));
 
-                kodePoliEksekutif.setText(decrypted.path("kodePoliEksekutif").asText(""));
-                namaPoliEksekutif.setText(Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli = ?", kodePoliEksekutif.getText()));
+                listPoli = StreamSupport.stream(decrypted.withArray("kodePoliEksekutif").spliterator(), false)
+                    .map(JsonNode::asText)
+                    .collect(Collectors.toCollection(ArrayList::new));
+
+                labelPoliAktif.setText(listPoli.size() + " Poli Aktif");
 
                 pathFingerprint.setText(decrypted.path("fingerprint").path("path").asText(""));
                 enableVBFingerprint.setSelected(decrypted.path("fingerprint").path("aktifkan").asBoolean(false));
@@ -702,7 +668,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 root.withObject("frista").put("path", pathFrista.getText());
                 root.withObject("frista").put("aktifkan", enableVBFrista.isSelected());
 
-                root.put("kodePoliEksekutif", kodePoliEksekutif.getText());
+                root.set("kodePoliEksekutif", mapper.valueToTree(listPoli));
 
                 String user = new String(userFP.getPassword());
                 String pass = new String(passFP.getPassword());

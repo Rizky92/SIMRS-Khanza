@@ -1,16 +1,26 @@
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.validasi;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringJoiner;
 import javax.swing.table.DefaultTableModel;
 
 public final class DlgCariPoli extends widget.Dialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
+    private final Set<String> kodePoliEksekutif = new HashSet<>();
     private String hari = "";
 
     public DlgCariPoli(java.awt.Frame parent, boolean modal) {
@@ -34,11 +44,13 @@ public final class DlgCariPoli extends widget.Dialog {
         };
         tbPoli.setModel(tabMode);
         tbPoli.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
-        tbPoli.getColumnModel().getColumn(2).setMinWidth(500);
-        tbPoli.getColumnModel().getColumn(2).setMaxWidth(500);
-        tbPoli.getColumnModel().getColumn(3).setMinWidth(500);
-        tbPoli.getColumnModel().getColumn(3).setMaxWidth(500);
+        tbPoli.getColumnModel().getColumn(1).setPreferredWidth(700);
+        tbPoli.getColumnModel().getColumn(2).setMinWidth(0);
+        tbPoli.getColumnModel().getColumn(2).setMaxWidth(0);
+        tbPoli.getColumnModel().getColumn(3).setMinWidth(0);
+        tbPoli.getColumnModel().getColumn(3).setMaxWidth(0);
+
+        loadPengaturanAPM();
     }
 
     /**
@@ -99,11 +111,22 @@ public final class DlgCariPoli extends widget.Dialog {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Valid.tabelKosongSmc(tabMode);
+        StringJoiner sj = new StringJoiner(", ");
+        if (!kodePoliEksekutif.isEmpty()) {
+            kodePoliEksekutif.iterator().forEachRemaining(s -> sj.add("?"));
+        }
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select p.kd_poli, p.nm_poli, p.registrasi, p.registrasilama from poliklinik as p where p.status = '1' and " +
-            "exists(select * from jadwal as j where j.kd_poli = p.kd_poli and j.hari_kerja = ?) order by p.nm_poli"
+            "select p.kd_poli, p.nm_poli, p.registrasi, p.registrasilama from poliklinik as p where p.status = '1' " +
+            (kodePoliEksekutif.isEmpty() ? "" : "and p.kd_poli in (" + sj.toString() + ") ") +
+            "and exists(select * from jadwal as j where j.kd_poli = p.kd_poli and j.hari_kerja = ?) order by p.nm_poli"
         )) {
-            ps.setString(1, hari);
+            int p = 0;
+            if (!kodePoliEksekutif.isEmpty()) {
+                for (String s : kodePoliEksekutif) {
+                    ps.setString(++p, s);
+                }
+            }
+            ps.setString(++p, hari);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
@@ -134,5 +157,26 @@ public final class DlgCariPoli extends widget.Dialog {
 
     public Object getSelectedRow(int column) {
         return tbPoli.getValueAt(tbPoli.getSelectedRow(), column);
+    }
+
+    private void loadPengaturanAPM() {
+        if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final ObjectMapper mapper = new ObjectMapper();
+                final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+                final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
+
+                if (decrypted.hasNonNull("kodePoliEksekutif")) {
+                    for (JsonNode item : decrypted.withArray("kodePoliEksekutif")) {
+                        kodePoliEksekutif.add(item.asText(""));
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        } else {
+            kodePoliEksekutif.clear();
+            kodePoliEksekutif.addAll(Arrays.asList(koneksiDB.KODEPOLIEKSEKUTIF()));
+        }
     }
 }

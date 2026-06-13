@@ -13,8 +13,12 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
 import javax.swing.border.TitledBorder;
 
 public class DlgCekDataPasien extends widget.Dialog {
@@ -30,9 +34,9 @@ public class DlgCekDataPasien extends widget.Dialog {
     private final DlgRegistrasiMandiri mandiri;
 
     private int flag = -1;
-    private String kodePoliEksekutif = "";
     private String printerBarcode = "";
     private int printJumlahBarcode = 0;
+    private final Set<String> kodePoliEksekutif = new HashSet<>();
 
     public DlgCekDataPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -323,14 +327,23 @@ public class DlgCekDataPasien extends widget.Dialog {
     }
 
     private void cekBooking(String noRM) {
+        StringJoiner sj = new StringJoiner(", ");
+        if (!kodePoliEksekutif.isEmpty()) {
+            for (int i = 0; i < kodePoliEksekutif.size(); i++) {
+                sj.add("?");
+            }
+        }
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select b.no_rawat, b.status, r.stts, exists(select * from pemeriksaan_ralan as p where p.no_rawat = b.no_rawat) as ada_pemeriksaan from " +
             "booking_registrasi as b join reg_periksa as r on b.no_rawat = r.no_rawat where b.no_rkm_medis = ? and b.tanggal_periksa = current_date() " +
-            (kodePoliEksekutif.isBlank() ? "" : "and b.kd_poli = ?")
+            (sj.length() == 0 ? "" : "and b.kd_poli in (" + sj.toString() + ")")
         )) {
-            ps.setString(1, noRM);
-            if (!kodePoliEksekutif.isBlank()) {
-                ps.setString(2, kodePoliEksekutif);
+            int p = 0;
+            ps.setString(++p, noRM);
+            if (!kodePoliEksekutif.isEmpty()) {
+                for (String s : kodePoliEksekutif) {
+                    ps.setString(++p, s);
+                }
             }
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -375,7 +388,9 @@ public class DlgCekDataPasien extends widget.Dialog {
                 final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                 if (decrypted.hasNonNull("kodePoliEksekutif")) {
-                    kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText();
+                    for (JsonNode item : decrypted.withArray("kodePoliEksekutif")) {
+                        kodePoliEksekutif.add(item.asText(""));
+                    }
                 }
 
                 if (decrypted.hasNonNull("printerBarcode")) {
@@ -389,7 +404,8 @@ public class DlgCekDataPasien extends widget.Dialog {
                 System.out.println("Notif : " + e);
             }
         } else {
-            kodePoliEksekutif = koneksiDB.KODEPOLIEKSEKUTIF();
+            kodePoliEksekutif.clear();
+            kodePoliEksekutif.addAll(Arrays.asList(koneksiDB.KODEPOLIEKSEKUTIF()));
             printerBarcode = koneksiDB.PRINTER_BARCODE();
             printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
         }

@@ -186,8 +186,8 @@ public class koneksiDB {
         return rawAPM("TOMBOLDIMATIKAN").toLowerCase().replaceAll("\\s+", "").split(",");
     }
 
-    public static String KODEPOLIEKSEKUTIF() {
-        return rawAPM("KODEPOLIEKSEKUTIF");
+    public static String[] KODEPOLIEKSEKUTIF() {
+        return rawAPM("KODEPOLIEKSEKUTIF").split(",");
     }
 
     public static boolean JADIKANBOOKINGSURATKONTROL() {

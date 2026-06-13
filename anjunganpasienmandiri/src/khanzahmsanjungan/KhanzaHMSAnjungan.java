@@ -28,10 +28,6 @@ import javax.print.PrintServiceLookup;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-/**
- *
- * @author khanzasoft
- */
 public class KhanzaHMSAnjungan {
 
     /**
@@ -109,7 +105,7 @@ public class KhanzaHMSAnjungan {
                 final ObjectMapper mapper = new ObjectMapper();
                 try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
                     final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
-                    final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
+                    final ObjectNode decrypted = (ObjectNode) mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                     String printerBarcode = null, printerRegistrasi = null, printerAntrian = null;
 
@@ -139,6 +135,20 @@ public class KhanzaHMSAnjungan {
 
                     if (printerAntrian != null) {
                         System.out.println("Setting PRINTER_ANTRIAN menggunakan printer: " + printerAntrian);
+                    }
+
+                    final JsonNode kodePoliEksekutif = decrypted.path("kodePoliEksekutif");
+                    if (!kodePoliEksekutif.isArray()) {
+                        ArrayNode array = mapper.createArrayNode();
+                        array.add(kodePoliEksekutif.asText(""));
+                        decrypted.set("kodePoliEksekutif", array);
+
+                        iyem.createNewFile();
+                        String encrypted = EnkripsiAES.encrypt(mapper.writeValueAsString(decrypted));
+                        try (FileWriter fw = new FileWriter(iyem)) {
+                            fw.write(mapper.writeValueAsString(mapper.createObjectNode().put("pengaturanapmsmc", encrypted)));
+                            fw.flush();
+                        }
                     }
                 }
             } else {
@@ -188,7 +198,12 @@ public class KhanzaHMSAnjungan {
                     root.withObject("fingerprint").put("aktifkan", valbiomAktif.contains("fingerprint"));
                     root.withObject("frista").put("path", koneksiDB.URLAPLIKASIFRISTABPJS());
                     root.withObject("frista").put("aktifkan", valbiomAktif.contains("frista"));
-                    root.put("kodePoliEksekutif", koneksiDB.KODEPOLIEKSEKUTIF());
+
+                    ArrayNode kodePoliEksekutif = root.withArray("kodePoliEksekutif");
+                    for (String v : koneksiDB.KODEPOLIEKSEKUTIF()) {
+                        kodePoliEksekutif.add(v);
+                    }
+
                     root.put("userFP", EnkripsiAES.encrypt(koneksiDB.USERFINGERPRINTBPJS()));
                     root.put("passFP", EnkripsiAES.encrypt(koneksiDB.PASSWORDFINGERPRINTBPJS()));
 
