@@ -559,7 +559,6 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 if (decrypted.hasNonNull("kodePoliEksekutif")) {
                     if (decrypted.path("kodePoliEksekutif").isArray()) {
                         long count = StreamSupport.stream(decrypted.withArray("kodePoliEksekutif").spliterator(), false).count();
-                        System.out.println("Notif : " + count);
                         if (count == 1) {
                             kodePoliEksekutif = decrypted.withArray("kodePoliEksekutif").iterator().next().asText();
                         } else {

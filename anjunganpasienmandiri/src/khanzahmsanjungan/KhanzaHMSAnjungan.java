@@ -140,7 +140,9 @@ public class KhanzaHMSAnjungan {
                     final JsonNode kodePoliEksekutif = decrypted.path("kodePoliEksekutif");
                     if (!kodePoliEksekutif.isArray()) {
                         ArrayNode array = mapper.createArrayNode();
-                        array.add(kodePoliEksekutif.asText(""));
+                        if (!kodePoliEksekutif.isEmpty()) {
+                            array.add(kodePoliEksekutif.asText(""));
+                        }
                         decrypted.set("kodePoliEksekutif", array);
 
                         iyem.createNewFile();
