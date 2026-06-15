@@ -392,6 +392,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         jLabel50 = new widget.Label();
         scrollPane3 = new widget.ScrollPane();
         KeluhanUtama = new widget.TextArea();
+        jLabel1 = new widget.Label();
         jLabel9 = new widget.Label();
         scrollPane2 = new widget.ScrollPane();
         RPD = new widget.TextArea();
@@ -527,6 +528,10 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         FormMasalahRencana = new widget.PanelBiasa();
         FormMenu = new widget.PanelBiasa();
         Scroll9 = new widget.ScrollPane();
+        ScrollRencana = new widget.ScrollPane();
+        TNoRM1 = new widget.TextBox();
+        TPasien1 = new widget.TextBox();
+        BtnPrint1 = new widget.Button();
         TglAsuhan = new widget.Tanggal();
 
         LoadHTML.setBorder(null);
@@ -1230,6 +1235,40 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         FormInput.add(jLabel52);
         jLabel52.setBounds(0, 1420, 110, 23);
 
+        FormMenu.setBackground(new java.awt.Color(255, 255, 255));
+        FormMenu.setBorder(null);
+        FormMenu.setName("FormMenu"); // NOI18N
+        FormMenu.setPreferredSize(new java.awt.Dimension(115, 43));
+        FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
+
+        jLabel1.setText("Pasien :");
+        jLabel1.setName("jLabel1"); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(55, 23));
+        FormMenu.add(jLabel1);
+
+        TNoRM1.setEditable(false);
+        TNoRM1.setName("TNoRM1"); // NOI18N
+        TNoRM1.setPreferredSize(new java.awt.Dimension(100, 23));
+        FormMenu.add(TNoRM1);
+
+        TPasien1.setEditable(false);
+        TPasien1.setBackground(new java.awt.Color(245, 250, 240));
+        TPasien1.setName("TPasien1"); // NOI18N
+        TPasien1.setPreferredSize(new java.awt.Dimension(250, 23));
+        FormMenu.add(TPasien1);
+
+        BtnPrint1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item (copy).png"))); // NOI18N
+        BtnPrint1.setMnemonic('P');
+        BtnPrint1.setToolTipText("Alt+P");
+        BtnPrint1.setName("BtnPrint1"); // NOI18N
+        BtnPrint1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnPrint1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrint1ActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnPrint1);
+
         PanelAccor.add(FormMenu, java.awt.BorderLayout.NORTH);
 
         FormMasalahRencana.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 254)));
@@ -1254,8 +1293,16 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
 
         FormMasalahRencana.add(Scroll9);
 
-        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane6.setName("scrollPane6"); // NOI18N
+        PanelAccor.add(FormMasalahRencana, java.awt.BorderLayout.CENTER);
+
+        ScrollRencana.setBorder(javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 254)),
+                "Rencana Keperawatan Lainnya :",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.TOP,
+                new java.awt.Font("Tahoma", 0, 11),
+                new java.awt.Color(50, 50, 50)));
+        ScrollRencana.setName("ScrollRencana"); // NOI18N
 
         DetailRencana.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
         DetailRencana.setColumns(20);
@@ -1266,6 +1313,12 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                 DetailRencanaKeyPressed(evt);
             }
         });
+        ScrollRencana.setViewportView(DetailRencana);
+
+        FormMasalahRencana.add(ScrollRencana);
+
+        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane6.setName("scrollPane6"); // NOI18N
 
         EchoKesan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         EchoKesan.setColumns(20);
@@ -1813,6 +1866,11 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         });
         PanelAccor.add(ChkAccor, java.awt.BorderLayout.WEST);
 
+        PanelAccor.add(FormMenu, java.awt.BorderLayout.NORTH);
+        PanelAccor.add(FormMasalahRencana, java.awt.BorderLayout.CENTER);
+
+        internalFrame3.add(PanelAccor, java.awt.BorderLayout.EAST);
+
         internalFrame3.add(panelGlass9, java.awt.BorderLayout.PAGE_END);
 
         TabRawat.addTab("Data Pengkajian", internalFrame3);
@@ -2235,6 +2293,10 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data yang mau ditampilkan...!!!!");
         }
     }//GEN-LAST:event_ChkAccorActionPerformed
+
+    private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint1ActionPerformed
+        MnPenilaianMedisActionPerformed(evt);
+    }//GEN-LAST:event_BtnPrint1ActionPerformed
 
     private void MnPenilaianMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianMedisActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -2695,6 +2757,11 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private widget.Tanggal DTPCari2;
     private widget.Tanggal TglAsuhan;
     private widget.TextArea DetailRencana;
+    private widget.ScrollPane ScrollRencana;
+    private widget.TextBox TNoRM1;
+    private widget.TextBox TPasien1;
+    private widget.Button BtnPrint1;
+    private widget.Label jLabel1;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
@@ -2939,26 +3006,32 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     }
 
     private void isMenu(){
+        int h = internalFrame3.getHeight()>0 ? internalFrame3.getHeight() : 300;
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(470,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(470,h));
             FormMenu.setVisible(true);
             FormMasalahRencana.setVisible(true);
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(15,h));
             FormMenu.setVisible(false);
             FormMasalahRencana.setVisible(false);
             ChkAccor.setVisible(true);
         }
+        internalFrame3.invalidate();
+        internalFrame3.validate();
     }
 
     private void getMasalah() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),174).toString());
+            try {
+                TNoRM1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),1).toString():"");
+                TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),2).toString():"");
+                DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),58)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),58).toString():"");
+            } catch (Exception e) {
+            }
             try {
                 Valid.tabelKosong(tabModeDetailMasalah);
                 ps=koneksi.prepareStatement(
