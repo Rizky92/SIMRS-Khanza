@@ -4,6 +4,8 @@ import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public final class DlgCariPoli2 extends widget.Dialog {
@@ -15,20 +17,25 @@ public final class DlgCariPoli2 extends widget.Dialog {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new Object[] {"Kode Unit", "Nama Unit"}) {
+        tabMode = new DefaultTableModel(null, new Object[] {"P", "Kode Unit", "Nama Unit"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false;
+                return colIndex == 0;
             }
 
             @Override
             public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 0) {
+                    return Boolean.class;
+                }
+
                 return String.class;
             }
         };
         tbPoli.setModel(tabMode);
-        tbPoli.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tbPoli.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tbPoli.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tbPoli.getColumnModel().getColumn(2).setPreferredWidth(500);
     }
 
     /**
@@ -43,18 +50,7 @@ public final class DlgCariPoli2 extends widget.Dialog {
         panelBawah = new widget.Panel();
         btnKeluar = new widget.Button();
 
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
-
         tbPoli.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tbPoli.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tbPoliMouseReleased(evt);
-            }
-        });
         Scroll.setViewportView(tbPoli);
 
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
@@ -83,23 +79,6 @@ public final class DlgCariPoli2 extends widget.Dialog {
         dispose();
     }//GEN-LAST:event_btnKeluarActionPerformed
 
-    private void tbPoliMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPoliMouseReleased
-        dispose();
-    }//GEN-LAST:event_tbPoliMouseReleased
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Valid.tabelKosongSmc(tabMode);
-        try (ResultSet rs = koneksi.createStatement().executeQuery(
-            "select p.kd_poli, p.nm_poli from poliklinik as p where p.status = '1' order by p.nm_poli"
-        )) {
-            while (rs.next()) {
-                tabMode.addRow(new Object[] {rs.getString("kd_poli"), rs.getString("nm_poli")});
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }//GEN-LAST:event_formWindowActivated
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.ScrollPane Scroll;
     private widget.Button btnKeluar;
@@ -107,11 +86,55 @@ public final class DlgCariPoli2 extends widget.Dialog {
     private widget.Table tbPoli;
     // End of variables declaration//GEN-END:variables
 
+    public void tampil() {
+        Valid.tabelKosongSmc(tabMode);
+        try (ResultSet rs = koneksi.createStatement().executeQuery(
+            "select p.kd_poli, p.nm_poli from poliklinik as p where p.status = '1' order by p.nm_poli"
+        )) {
+            while (rs.next()) {
+                tabMode.addRow(new Object[] {false, rs.getString("kd_poli"), rs.getString("nm_poli")});
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    public void setSelectedRows(List<String> list) {
+        for (String poli : list) {
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (poli.equals((String) tabMode.getValueAt(i, 1))) {
+                    tabMode.setValueAt(true, i, 0);
+                    break;
+                }
+            }
+        }
+    }
+
     public boolean hasSelection() {
-        return tbPoli.getSelectedRow() >= 0;
+        return tbPoli.getSelectedRow() >= 0 || countSelected() > 0;
     }
 
     public Object getSelectedRow(int column) {
         return tbPoli.getValueAt(tbPoli.getSelectedRow(), column);
+    }
+
+    public ArrayList<String> getSelectedRows() {
+        ArrayList<String> obj = new ArrayList<>();
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            if ((Boolean) tbPoli.getValueAt(i, 0)) {
+                obj.add((String) tbPoli.getValueAt(i, 1));
+            }
+        }
+        return obj;
+    }
+
+    public long countSelected() {
+        int selected = 0;
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            if ((Boolean) tbPoli.getValueAt(i, 0)) {
+                selected++;
+            }
+        }
+        return selected;
     }
 }
