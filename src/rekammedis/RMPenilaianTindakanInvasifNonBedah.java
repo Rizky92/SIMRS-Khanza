@@ -328,8 +328,6 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private void initComponents() {
 
         LoadHTML = new widget.editorpane();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianMedis = new javax.swing.JMenuItem();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
@@ -536,22 +534,6 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
-
-        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
-
-        MnPenilaianMedis.setBackground(new java.awt.Color(255, 255, 254));
-        MnPenilaianMedis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnPenilaianMedis.setForeground(new java.awt.Color(50, 50, 50));
-        MnPenilaianMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnPenilaianMedis.setText("Laporan Penilaian Tindakan Invasif Non Bedah");
-        MnPenilaianMedis.setName("MnPenilaianMedis"); // NOI18N
-        MnPenilaianMedis.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnPenilaianMedis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnPenilaianMedisActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnPenilaianMedis);
 
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
@@ -1754,7 +1736,6 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2603,7 +2584,6 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private widget.TextBox LamaBetaBlocker;
     private widget.TextBox LamaSimarc;
     private widget.editorpane LoadHTML;
-    private javax.swing.JMenuItem MnPenilaianMedis;
     private widget.ComboBox MuntahDarah;
     private widget.TextBox Nadi;
     private widget.TextBox NmDokter;
@@ -2724,7 +2704,6 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private widget.Label jLabel92;
     private widget.Label jLabel93;
     private widget.Label jLabel96;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
