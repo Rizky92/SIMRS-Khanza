@@ -5,25 +5,19 @@ import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
+import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -36,91 +30,13 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final LinkedList<String> menu = new LinkedList<>();
     private final Map<String, String> setAkun = new HashMap<>(),
                                       setAkun2 = new HashMap<>(),
                                       setAkunRalan = new HashMap<>(),
                                       setAkunRanap = new HashMap<>(),
                                       setAkunRanap2 = new HashMap<>();
     private final Map<String, Rekening> akunRekening = new HashMap<>();
-    private volatile boolean ceksukses = false;
-    private int i = 0, barisdicopy = -1;
-    private String Tindakan_Ralan, Laborat_Ralan, Radiologi_Ralan, Obat_Ralan, Registrasi_Ralan,
-        Tambahan_Ralan, Potongan_Ralan, Tindakan_Ranap, Laborat_Ranap, Radiologi_Ranap,
-        Obat_Ranap, Registrasi_Ranap, Tambahan_Ranap, Potongan_Ranap, Retur_Obat_Ranap,
-        Resep_Pulang_Ranap, Kamar_Inap, Operasi_Ranap, Harian_Ranap, Pengadaan_Obat,
-        Pemesanan_Obat, Kontra_Pemesanan_Obat, Bayar_Pemesanan_Obat, Penjualan_Obat,
-        Piutang_Obat, Kontra_Piutang_Obat, Retur_Ke_Suplayer, Kontra_Retur_Ke_Suplayer,
-        Retur_Dari_pembeli, Kontra_Retur_Dari_Pembeli, Hibah_Obat, Kontra_Hibah_Obat,
-        Retur_Piutang_Obat, Kontra_Retur_Piutang_Obat, Pengadaan_Ipsrs, Stok_Keluar_Ipsrs,
-        Kontra_Stok_Keluar_Ipsrs, Uang_Muka_Ranap,
-        Piutang_Pasien_Ranap, Bayar_Piutang_Pasien, Service_Ranap, Pengambilan_Utd,
-        Kontra_Pengambilan_Utd, Pengambilan_Penunjang_Utd, Kontra_Pengambilan_Penunjang_Utd,
-        Operasi_Ralan, Penyerahan_Darah, Beban_Jasa_Medik_Dokter_Tindakan_Ralan,
-        Utang_Jasa_Medik_Dokter_Tindakan_Ralan, Beban_Jasa_Medik_Paramedis_Tindakan_Ralan,
-        Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, Beban_KSO_Tindakan_Ralan,
-        Utang_KSO_Tindakan_Ralan, Beban_Jasa_Medik_Dokter_Laborat_Ralan,
-        Utang_Jasa_Medik_Dokter_Laborat_Ralan, Beban_Jasa_Medik_Petugas_Laborat_Ralan,
-        Utang_Jasa_Medik_Petugas_Laborat_Ralan, Beban_Kso_Laborat_Ralan,
-        Utang_Kso_Laborat_Ralan, HPP_Persediaan_Laborat_Rawat_Jalan,
-        Persediaan_BHP_Laborat_Rawat_Jalan, Beban_Jasa_Medik_Dokter_Radiologi_Ralan,
-        Utang_Jasa_Medik_Dokter_Radiologi_Ralan, Beban_Jasa_Medik_Petugas_Radiologi_Ralan,
-        Utang_Jasa_Medik_Petugas_Radiologi_Ralan, Beban_Kso_Radiologi_Ralan, Utang_Kso_Radiologi_Ralan,
-        HPP_Persediaan_Radiologi_Rawat_Jalan, Persediaan_BHP_Radiologi_Rawat_Jalan,
-        HPP_Obat_Rawat_Jalan, Persediaan_Obat_Rawat_Jalan, Beban_Jasa_Medik_Dokter_Operasi_Ralan,
-        Utang_Jasa_Medik_Dokter_Operasi_Ralan, Beban_Jasa_Medik_Paramedis_Operasi_Ralan,
-        Utang_Jasa_Medik_Paramedis_Operasi_Ralan, HPP_Obat_Operasi_Ralan, Persediaan_Obat_Kamar_Operasi_Ralan,
-        Suspen_Piutang_Tindakan_Ranap, Beban_Jasa_Medik_Dokter_Tindakan_Ranap, Utang_Jasa_Medik_Dokter_Tindakan_Ranap,
-        Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, Beban_KSO_Tindakan_Ranap,
-        Utang_KSO_Tindakan_Ranap, Suspen_Piutang_Laborat_Ranap, Beban_Jasa_Medik_Dokter_Laborat_Ranap,
-        Utang_Jasa_Medik_Dokter_Laborat_Ranap, Beban_Jasa_Medik_Petugas_Laborat_Ranap,
-        Utang_Jasa_Medik_Petugas_Laborat_Ranap, Beban_Kso_Laborat_Ranap, Utang_Kso_Laborat_Ranap,
-        HPP_Persediaan_Laborat_Rawat_inap, Persediaan_BHP_Laborat_Rawat_Inap,
-        Suspen_Piutang_Radiologi_Ranap, Beban_Jasa_Medik_Dokter_Radiologi_Ranap,
-        Utang_Jasa_Medik_Dokter_Radiologi_Ranap, Beban_Jasa_Medik_Petugas_Radiologi_Ranap,
-        Utang_Jasa_Medik_Petugas_Radiologi_Ranap, Beban_Kso_Radiologi_Ranap, Utang_Kso_Radiologi_Ranap,
-        HPP_Persediaan_Radiologi_Rawat_Inap, Persediaan_BHP_Radiologi_Rawat_Inap, HPP_Obat_Rawat_Inap,
-        Persediaan_Obat_Rawat_Inap, Suspen_Piutang_Obat_Ranap, Suspen_Piutang_Operasi_Ranap,
-        Beban_Jasa_Medik_Dokter_Operasi_Ranap, Utang_Jasa_Medik_Dokter_Operasi_Ranap,
-        Beban_Jasa_Medik_Paramedis_Operasi_Ranap, Utang_Jasa_Medik_Paramedis_Operasi_Ranap,
-        HPP_Obat_Operasi_Ranap, Persediaan_Obat_Kamar_Operasi_Ranap, Stok_Keluar_Medis,
-        Kontra_Stok_Keluar_Medis, HPP_Obat_Jual_Bebas, Persediaan_Obat_Jual_Bebas,
-        Penerimaan_NonMedis, Kontra_Penerimaan_NonMedis, Bayar_Pemesanan_Non_Medis,
-        Penerimaan_Toko, Kontra_Penerimaan_Toko, Pengadaan_Toko, Bayar_Pemesanan_Toko,
-        Penjualan_Toko, HPP_Barang_Toko, Persediaan_Barang_Toko, Piutang_Toko, Kontra_Piutang_Toko,
-        Retur_Beli_Toko, Kontra_Retur_Beli_Toko, Retur_Beli_Non_Medis, Kontra_Retur_Beli_Non_Medis,
-        Retur_Jual_Toko, Kontra_Retur_Jual_Toko, Retur_Piutang_Toko, Kontra_Retur_Piutang_Toko,
-        kode_pendapatan_tindakan, nama_pendapatan_tindakan, kode_beban_jasa_dokter, nama_beban_jasa_dokter, kode_utang_jasa_dokter,
-        nama_utang_jasa_dokter, kode_beban_jasa_paramedis, nama_beban_jasa_paramedis, kode_utang_jasa_paramedis, nama_utang_jasa_paramedis,
-        kode_beban_kso, nama_beban_kso, kode_utang_kso, nama_utang_kso, kode_hpp_persediaan, nama_hpp_persediaan, kode_persediaan_bhp,
-        nama_persediaan_bhp, kode_beban_jasa_sarana, nama_beban_jasa_sarana, kode_utang_jasa_sarana, nama_utang_jasa_sarana,
-        kode_beban_menejemen, nama_beban_menejemen, kode_utang_menejemen, nama_utang_menejemen,
-        Suspen_Piutang_Tindakan_Ralan, Beban_Jasa_Sarana_Tindakan_Ralan, Utang_Jasa_Sarana_Tindakan_Ralan,
-        HPP_BHP_Tindakan_Ralan, Persediaan_BHP_Tindakan_Ralan, Beban_Jasa_Menejemen_Tindakan_Ralan,
-        Utang_Jasa_Menejemen_Tindakan_Ralan, Suspen_Piutang_Laborat_Ralan, Beban_Jasa_Sarana_Laborat_Ralan,
-        Utang_Jasa_Sarana_Laborat_Ralan, Beban_Jasa_Perujuk_Laborat_Ralan, Utang_Jasa_Perujuk_Laborat_Ralan,
-        Beban_Jasa_Menejemen_Laborat_Ralan, Utang_Jasa_Menejemen_Laborat_Ralan, Suspen_Piutang_Radiologi_Ralan,
-        Beban_Jasa_Sarana_Radiologi_Ralan, Utang_Jasa_Sarana_Radiologi_Ralan, Beban_Jasa_Perujuk_Radiologi_Ralan,
-        Utang_Jasa_Perujuk_Radiologi_Ralan, Beban_Jasa_Menejemen_Radiologi_Ralan, Utang_Jasa_Menejemen_Radiologi_Ralan,
-        Suspen_Piutang_Obat_Ralan, Suspen_Piutang_Operasi_Ralan, Beban_Jasa_Sarana_Tindakan_Ranap,
-        Utang_Jasa_Sarana_Tindakan_Ranap, Beban_Jasa_Menejemen_Tindakan_Ranap, Utang_Jasa_Menejemen_Tindakan_Ranap,
-        HPP_BHP_Tindakan_Ranap, Persediaan_BHP_Tindakan_Ranap, Beban_Jasa_Sarana_Laborat_Ranap,
-        Utang_Jasa_Sarana_Laborat_Ranap, Beban_Jasa_Perujuk_Laborat_Ranap, Utang_Jasa_Perujuk_Laborat_Ranap,
-        Beban_Jasa_Menejemen_Laborat_Ranap, Utang_Jasa_Menejemen_Laborat_Ranap, Beban_Jasa_Sarana_Radiologi_Ranap,
-        Utang_Jasa_Sarana_Radiologi_Ranap, Beban_Jasa_Perujuk_Radiologi_Ranap, Utang_Jasa_Perujuk_Radiologi_Ranap,
-        Beban_Jasa_Menejemen_Radiologi_Ranap, Utang_Jasa_Menejemen_Radiologi_Ranap, Kerugian_Klaim_BPJS_RVP,
-        Lebih_Bayar_Klaim_BPJS_RVP, Piutang_BPJS_RVP, Sisa_Uang_Muka_Ranap, Kontra_Penerimaan_AsetInventaris,
-        Kontra_Hibah_Aset, Hibah_Non_Medis, Kontra_Hibah_Non_Medis, Beban_Hutang_Lain, PPN_Masukan, Pengadaan_Dapur,
-        Stok_Keluar_Dapur, Kontra_Stok_Keluar_Dapur, PPN_Keluaran, Diskon_Piutang, Piutang_Tidak_Terbayar, Lebih_Bayar_Piutang,
-        Penerimaan_Dapur, Kontra_Penerimaan_Dapur, Bayar_Pemesanan_Dapur, Retur_Beli_Dapur, Kontra_Retur_Beli_Dapur,
-        Hibah_Dapur, Kontra_Hibah_Dapur, Piutang_Jasa_Perusahaan, Pendapatan_Piutang_Jasa_Perusahaan,
-        Suspen_Piutang_Pelayanan_Lab_Kesling, Pendapatan_Pelayanan_Lab_Kesling, Beban_Jasa_Sarana_Pelayanan_Lab_Kesling,
-        Utang_Jasa_sarana_Pelayanan_Lab_Kesling, HPP_BHP_Pelayanan_Lab_Kesling, Persediaan_BHP_Pelayanan_Lab_Kesling,
-        Beban_Jasa_PJLab_Pelayanan_Lab_Kesling, Utang_Jasa_PJLab_Pelayanan_Lab_Kesling, Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling,
-        Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling, Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling,
-        Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling, Beban_Jasa_Analis_Pelayanan_Lab_Kesling, Utang_Jasa_Analis_Pelayanan_Lab_Kesling,
-        Beban_KSO_Pelayanan_Lab_Kesling, Utang_KSO_Pelayanan_Lab_Kesling, Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling,
-        Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling;
+    private int barisdicopy = -1;
     private String copyakun = "";
     private DlgRekeningTahun rekening = new DlgRekeningTahun(null, false);
 
@@ -128,7 +44,7 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new String[] {"table", "Letak Akun Rekening", "Kode Akun", "Nama Akun", "Tipe", "Balance", "kolom"}) {
+        tabMode = new DefaultTableModel(null, new String[] {"Letak Akun Rekening", "Kode Akun", "Nama Akun", "Tipe", "Balance", "table", "kolom"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -142,19 +58,16 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
         for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbPengaturan.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            } else if (i == 1) {
                 column.setPreferredWidth(600);
-            } else if (i == 2) {
+            } else if (i == 1) {
                 column.setPreferredWidth(90);
-            } else if (i == 3) {
+            } else if (i == 2) {
                 column.setPreferredWidth(380);
-            } else if (i == 4) {
+            } else if (i == 3) {
                 column.setPreferredWidth(40);
-            } else if (i == 5) {
+            } else if (i == 4) {
                 column.setPreferredWidth(45);
-            } else if (i == 6) {
+            } else if (i == 5 || i == 6) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }
@@ -346,15 +259,13 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
             @Override
             public void componentHidden(ComponentEvent e) {
                 if (akses.getform().equals("DlgPengaturanRekening")) {
-                    if (rekening.getTabel().getSelectedRow() != -1) {
-                        if (tbPengaturan.getSelectedColumn() == 2 || tbPengaturan.getSelectedColumn() == 3) {
-                            setPengaturan(tbPengaturan.getSelectedRow(),
-                                rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(), 1).toString(),
-                                rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(), 2).toString(),
-                                rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(), 3).toString(),
-                                rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(), 4).toString()
-                            );
-                        }
+                    if (tbPengaturan.getSelectedRow() >= 0 && rekening.getTabel().getSelectedRow() >= 0) {
+                        setPengaturan(tbPengaturan.getSelectedRow(),
+                            rekening.getSelectedRow(1).toString(),
+                            rekening.getSelectedRow(2).toString(),
+                            rekening.getSelectedRow(3).toString(),
+                            rekening.getSelectedRow(4).toString()
+                        );
                     }
                     tbPengaturan.requestFocus();
                 } else if (akses.getform().equals("DlgPengaturanRekeningRalan")) {
@@ -640,362 +551,111 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if (TabRawat.getSelectedIndex() == 0) {
-            Suspen_Piutang_Tindakan_Ralan = tbPengaturan.getValueAt(0, 1).toString();
-            Tindakan_Ralan = tbPengaturan.getValueAt(1, 1).toString();
-            Beban_Jasa_Medik_Dokter_Tindakan_Ralan = tbPengaturan.getValueAt(2, 1).toString();
-            Utang_Jasa_Medik_Dokter_Tindakan_Ralan = tbPengaturan.getValueAt(3, 1).toString();
-            Beban_Jasa_Medik_Paramedis_Tindakan_Ralan = tbPengaturan.getValueAt(4, 1).toString();
-            Utang_Jasa_Medik_Paramedis_Tindakan_Ralan = tbPengaturan.getValueAt(5, 1).toString();
-            Beban_KSO_Tindakan_Ralan = tbPengaturan.getValueAt(6, 1).toString();
-            Utang_KSO_Tindakan_Ralan = tbPengaturan.getValueAt(7, 1).toString();
-            Beban_Jasa_Sarana_Tindakan_Ralan = tbPengaturan.getValueAt(8, 1).toString();
-            Utang_Jasa_Sarana_Tindakan_Ralan = tbPengaturan.getValueAt(9, 1).toString();
-            HPP_BHP_Tindakan_Ralan = tbPengaturan.getValueAt(10, 1).toString();
-            Persediaan_BHP_Tindakan_Ralan = tbPengaturan.getValueAt(11, 1).toString();
-            Beban_Jasa_Menejemen_Tindakan_Ralan = tbPengaturan.getValueAt(12, 1).toString();
-            Utang_Jasa_Menejemen_Tindakan_Ralan = tbPengaturan.getValueAt(13, 1).toString();
-            Suspen_Piutang_Laborat_Ralan = tbPengaturan.getValueAt(14, 1).toString();
-            Laborat_Ralan = tbPengaturan.getValueAt(15, 1).toString();
-            Beban_Jasa_Medik_Dokter_Laborat_Ralan = tbPengaturan.getValueAt(16, 1).toString();
-            Utang_Jasa_Medik_Dokter_Laborat_Ralan = tbPengaturan.getValueAt(17, 1).toString();
-            Beban_Jasa_Medik_Petugas_Laborat_Ralan = tbPengaturan.getValueAt(18, 1).toString();
-            Utang_Jasa_Medik_Petugas_Laborat_Ralan = tbPengaturan.getValueAt(19, 1).toString();
-            Beban_Kso_Laborat_Ralan = tbPengaturan.getValueAt(20, 1).toString();
-            Utang_Kso_Laborat_Ralan = tbPengaturan.getValueAt(21, 1).toString();
-            HPP_Persediaan_Laborat_Rawat_Jalan = tbPengaturan.getValueAt(22, 1).toString();
-            Persediaan_BHP_Laborat_Rawat_Jalan = tbPengaturan.getValueAt(23, 1).toString();
-            Beban_Jasa_Sarana_Laborat_Ralan = tbPengaturan.getValueAt(24, 1).toString();
-            Utang_Jasa_Sarana_Laborat_Ralan = tbPengaturan.getValueAt(25, 1).toString();
-            Beban_Jasa_Perujuk_Laborat_Ralan = tbPengaturan.getValueAt(26, 1).toString();
-            Utang_Jasa_Perujuk_Laborat_Ralan = tbPengaturan.getValueAt(27, 1).toString();
-            Beban_Jasa_Menejemen_Laborat_Ralan = tbPengaturan.getValueAt(28, 1).toString();
-            Utang_Jasa_Menejemen_Laborat_Ralan = tbPengaturan.getValueAt(29, 1).toString();
-            Suspen_Piutang_Radiologi_Ralan = tbPengaturan.getValueAt(30, 1).toString();
-            Radiologi_Ralan = tbPengaturan.getValueAt(31, 1).toString();
-            Beban_Jasa_Medik_Dokter_Radiologi_Ralan = tbPengaturan.getValueAt(32, 1).toString();
-            Utang_Jasa_Medik_Dokter_Radiologi_Ralan = tbPengaturan.getValueAt(33, 1).toString();
-            Beban_Jasa_Medik_Petugas_Radiologi_Ralan = tbPengaturan.getValueAt(34, 1).toString();
-            Utang_Jasa_Medik_Petugas_Radiologi_Ralan = tbPengaturan.getValueAt(35, 1).toString();
-            Beban_Kso_Radiologi_Ralan = tbPengaturan.getValueAt(36, 1).toString();
-            Utang_Kso_Radiologi_Ralan = tbPengaturan.getValueAt(37, 1).toString();
-            HPP_Persediaan_Radiologi_Rawat_Jalan = tbPengaturan.getValueAt(38, 1).toString();
-            Persediaan_BHP_Radiologi_Rawat_Jalan = tbPengaturan.getValueAt(39, 1).toString();
-            Beban_Jasa_Sarana_Radiologi_Ralan = tbPengaturan.getValueAt(40, 1).toString();
-            Utang_Jasa_Sarana_Radiologi_Ralan = tbPengaturan.getValueAt(41, 1).toString();
-            Beban_Jasa_Perujuk_Radiologi_Ralan = tbPengaturan.getValueAt(42, 1).toString();
-            Utang_Jasa_Perujuk_Radiologi_Ralan = tbPengaturan.getValueAt(43, 1).toString();
-            Beban_Jasa_Menejemen_Radiologi_Ralan = tbPengaturan.getValueAt(44, 1).toString();
-            Utang_Jasa_Menejemen_Radiologi_Ralan = tbPengaturan.getValueAt(45, 1).toString();
-            Suspen_Piutang_Obat_Ralan = tbPengaturan.getValueAt(46, 1).toString();
-            Obat_Ralan = tbPengaturan.getValueAt(47, 1).toString();
-            HPP_Obat_Rawat_Jalan = tbPengaturan.getValueAt(48, 1).toString();
-            Persediaan_Obat_Rawat_Jalan = tbPengaturan.getValueAt(49, 1).toString();
-            Registrasi_Ralan = tbPengaturan.getValueAt(50, 1).toString();
-            Suspen_Piutang_Operasi_Ralan = tbPengaturan.getValueAt(51, 1).toString();
-            Operasi_Ralan = tbPengaturan.getValueAt(52, 1).toString();
-            Beban_Jasa_Medik_Dokter_Operasi_Ralan = tbPengaturan.getValueAt(53, 1).toString();
-            Utang_Jasa_Medik_Dokter_Operasi_Ralan = tbPengaturan.getValueAt(54, 1).toString();
-            Beban_Jasa_Medik_Paramedis_Operasi_Ralan = tbPengaturan.getValueAt(55, 1).toString();
-            Utang_Jasa_Medik_Paramedis_Operasi_Ralan = tbPengaturan.getValueAt(56, 1).toString();
-            HPP_Obat_Operasi_Ralan = tbPengaturan.getValueAt(57, 1).toString();
-            Persediaan_Obat_Kamar_Operasi_Ralan = tbPengaturan.getValueAt(58, 1).toString();
-            Tambahan_Ralan = tbPengaturan.getValueAt(59, 1).toString();
-            Potongan_Ralan = tbPengaturan.getValueAt(60, 1).toString();
-            Suspen_Piutang_Tindakan_Ranap = tbPengaturan.getValueAt(61, 1).toString();
-            Tindakan_Ranap = tbPengaturan.getValueAt(62, 1).toString();
-            Beban_Jasa_Medik_Dokter_Tindakan_Ranap = tbPengaturan.getValueAt(63, 1).toString();
-            Utang_Jasa_Medik_Dokter_Tindakan_Ranap = tbPengaturan.getValueAt(64, 1).toString();
-            Beban_Jasa_Medik_Paramedis_Tindakan_Ranap = tbPengaturan.getValueAt(65, 1).toString();
-            Utang_Jasa_Medik_Paramedis_Tindakan_Ranap = tbPengaturan.getValueAt(66, 1).toString();
-            Beban_KSO_Tindakan_Ranap = tbPengaturan.getValueAt(67, 1).toString();
-            Utang_KSO_Tindakan_Ranap = tbPengaturan.getValueAt(68, 1).toString();
-            Beban_Jasa_Sarana_Tindakan_Ranap = tbPengaturan.getValueAt(69, 1).toString();
-            Utang_Jasa_Sarana_Tindakan_Ranap = tbPengaturan.getValueAt(70, 1).toString();
-            Beban_Jasa_Menejemen_Tindakan_Ranap = tbPengaturan.getValueAt(71, 1).toString();
-            Utang_Jasa_Menejemen_Tindakan_Ranap = tbPengaturan.getValueAt(72, 1).toString();
-            HPP_BHP_Tindakan_Ranap = tbPengaturan.getValueAt(73, 1).toString();
-            Persediaan_BHP_Tindakan_Ranap = tbPengaturan.getValueAt(74, 1).toString();
-            Suspen_Piutang_Laborat_Ranap = tbPengaturan.getValueAt(75, 1).toString();
-            Laborat_Ranap = tbPengaturan.getValueAt(76, 1).toString();
-            Beban_Jasa_Medik_Dokter_Laborat_Ranap = tbPengaturan.getValueAt(77, 1).toString();
-            Utang_Jasa_Medik_Dokter_Laborat_Ranap = tbPengaturan.getValueAt(78, 1).toString();
-            Beban_Jasa_Medik_Petugas_Laborat_Ranap = tbPengaturan.getValueAt(79, 1).toString();
-            Utang_Jasa_Medik_Petugas_Laborat_Ranap = tbPengaturan.getValueAt(80, 1).toString();
-            Beban_Kso_Laborat_Ranap = tbPengaturan.getValueAt(81, 1).toString();
-            Utang_Kso_Laborat_Ranap = tbPengaturan.getValueAt(82, 1).toString();
-            HPP_Persediaan_Laborat_Rawat_inap = tbPengaturan.getValueAt(83, 1).toString();
-            Persediaan_BHP_Laborat_Rawat_Inap = tbPengaturan.getValueAt(84, 1).toString();
-            Beban_Jasa_Sarana_Laborat_Ranap = tbPengaturan.getValueAt(85, 1).toString();
-            Utang_Jasa_Sarana_Laborat_Ranap = tbPengaturan.getValueAt(86, 1).toString();
-            Beban_Jasa_Perujuk_Laborat_Ranap = tbPengaturan.getValueAt(87, 1).toString();
-            Utang_Jasa_Perujuk_Laborat_Ranap = tbPengaturan.getValueAt(88, 1).toString();
-            Beban_Jasa_Menejemen_Laborat_Ranap = tbPengaturan.getValueAt(89, 1).toString();
-            Utang_Jasa_Menejemen_Laborat_Ranap = tbPengaturan.getValueAt(90, 1).toString();
-            Suspen_Piutang_Radiologi_Ranap = tbPengaturan.getValueAt(91, 1).toString();
-            Radiologi_Ranap = tbPengaturan.getValueAt(92, 1).toString();
-            Beban_Jasa_Medik_Dokter_Radiologi_Ranap = tbPengaturan.getValueAt(93, 1).toString();
-            Utang_Jasa_Medik_Dokter_Radiologi_Ranap = tbPengaturan.getValueAt(94, 1).toString();
-            Beban_Jasa_Medik_Petugas_Radiologi_Ranap = tbPengaturan.getValueAt(95, 1).toString();
-            Utang_Jasa_Medik_Petugas_Radiologi_Ranap = tbPengaturan.getValueAt(96, 1).toString();
-            Beban_Kso_Radiologi_Ranap = tbPengaturan.getValueAt(97, 1).toString();
-            Utang_Kso_Radiologi_Ranap = tbPengaturan.getValueAt(98, 1).toString();
-            HPP_Persediaan_Radiologi_Rawat_Inap = tbPengaturan.getValueAt(99, 1).toString();
-            Persediaan_BHP_Radiologi_Rawat_Inap = tbPengaturan.getValueAt(100, 1).toString();
-            Beban_Jasa_Sarana_Radiologi_Ranap = tbPengaturan.getValueAt(101, 1).toString();
-            Utang_Jasa_Sarana_Radiologi_Ranap = tbPengaturan.getValueAt(102, 1).toString();
-            Beban_Jasa_Perujuk_Radiologi_Ranap = tbPengaturan.getValueAt(103, 1).toString();
-            Utang_Jasa_Perujuk_Radiologi_Ranap = tbPengaturan.getValueAt(104, 1).toString();
-            Beban_Jasa_Menejemen_Radiologi_Ranap = tbPengaturan.getValueAt(105, 1).toString();
-            Utang_Jasa_Menejemen_Radiologi_Ranap = tbPengaturan.getValueAt(106, 1).toString();
-            Suspen_Piutang_Obat_Ranap = tbPengaturan.getValueAt(107, 1).toString();
-            Obat_Ranap = tbPengaturan.getValueAt(108, 1).toString();
-            HPP_Obat_Rawat_Inap = tbPengaturan.getValueAt(109, 1).toString();
-            Persediaan_Obat_Rawat_Inap = tbPengaturan.getValueAt(110, 1).toString();
-            Registrasi_Ranap = tbPengaturan.getValueAt(111, 1).toString();
-            Service_Ranap = tbPengaturan.getValueAt(112, 1).toString();
-            Tambahan_Ranap = tbPengaturan.getValueAt(113, 1).toString();
-            Potongan_Ranap = tbPengaturan.getValueAt(114, 1).toString();
-            Retur_Obat_Ranap = tbPengaturan.getValueAt(115, 1).toString();
-            Resep_Pulang_Ranap = tbPengaturan.getValueAt(116, 1).toString();
-            Kamar_Inap = tbPengaturan.getValueAt(117, 1).toString();
-            Suspen_Piutang_Operasi_Ranap = tbPengaturan.getValueAt(118, 1).toString();
-            Operasi_Ranap = tbPengaturan.getValueAt(119, 1).toString();
-            Beban_Jasa_Medik_Dokter_Operasi_Ranap = tbPengaturan.getValueAt(120, 1).toString();
-            Utang_Jasa_Medik_Dokter_Operasi_Ranap = tbPengaturan.getValueAt(121, 1).toString();
-            Beban_Jasa_Medik_Paramedis_Operasi_Ranap = tbPengaturan.getValueAt(122, 1).toString();
-            Utang_Jasa_Medik_Paramedis_Operasi_Ranap = tbPengaturan.getValueAt(123, 1).toString();
-            HPP_Obat_Operasi_Ranap = tbPengaturan.getValueAt(124, 1).toString();
-            Persediaan_Obat_Kamar_Operasi_Ranap = tbPengaturan.getValueAt(125, 1).toString();
-            Harian_Ranap = tbPengaturan.getValueAt(126, 1).toString();
-            Uang_Muka_Ranap = tbPengaturan.getValueAt(127, 1).toString();
-            Piutang_Pasien_Ranap = tbPengaturan.getValueAt(128, 1).toString();
-            Sisa_Uang_Muka_Ranap = tbPengaturan.getValueAt(129, 1).toString();
-            Pengadaan_Obat = tbPengaturan.getValueAt(130, 1).toString();
-            Pemesanan_Obat = tbPengaturan.getValueAt(131, 1).toString();
-            Kontra_Pemesanan_Obat = tbPengaturan.getValueAt(132, 1).toString();
-            Bayar_Pemesanan_Obat = tbPengaturan.getValueAt(133, 1).toString();
-            Penjualan_Obat = tbPengaturan.getValueAt(134, 1).toString();
-            Piutang_Obat = tbPengaturan.getValueAt(135, 1).toString();
-            Kontra_Piutang_Obat = tbPengaturan.getValueAt(136, 1).toString();
-            Retur_Ke_Suplayer = tbPengaturan.getValueAt(137, 1).toString();
-            Kontra_Retur_Ke_Suplayer = tbPengaturan.getValueAt(138, 1).toString();
-            Retur_Dari_pembeli = tbPengaturan.getValueAt(139, 1).toString();
-            Kontra_Retur_Dari_Pembeli = tbPengaturan.getValueAt(140, 1).toString();
-            Retur_Piutang_Obat = tbPengaturan.getValueAt(141, 1).toString();
-            Kontra_Retur_Piutang_Obat = tbPengaturan.getValueAt(142, 1).toString();
-            Pengadaan_Ipsrs = tbPengaturan.getValueAt(143, 1).toString();
-            Stok_Keluar_Ipsrs = tbPengaturan.getValueAt(144, 1).toString();
-            Kontra_Stok_Keluar_Ipsrs = tbPengaturan.getValueAt(145, 1).toString();
-            Bayar_Piutang_Pasien = tbPengaturan.getValueAt(146, 1).toString();
-            Pengambilan_Utd = tbPengaturan.getValueAt(147, 1).toString();
-            Kontra_Pengambilan_Utd = tbPengaturan.getValueAt(148, 1).toString();
-            Pengambilan_Penunjang_Utd = tbPengaturan.getValueAt(149, 1).toString();
-            Kontra_Pengambilan_Penunjang_Utd = tbPengaturan.getValueAt(150, 1).toString();
-            Penyerahan_Darah = tbPengaturan.getValueAt(151, 1).toString();
-            Stok_Keluar_Medis = tbPengaturan.getValueAt(152, 1).toString();
-            Kontra_Stok_Keluar_Medis = tbPengaturan.getValueAt(153, 1).toString();
-            HPP_Obat_Jual_Bebas = tbPengaturan.getValueAt(154, 1).toString();
-            Persediaan_Obat_Jual_Bebas = tbPengaturan.getValueAt(155, 1).toString();
-            Penerimaan_NonMedis = tbPengaturan.getValueAt(156, 1).toString();
-            Kontra_Penerimaan_NonMedis = tbPengaturan.getValueAt(157, 1).toString();
-            Bayar_Pemesanan_Non_Medis = tbPengaturan.getValueAt(158, 1).toString();
-            Hibah_Obat = tbPengaturan.getValueAt(159, 1).toString();
-            Kontra_Hibah_Obat = tbPengaturan.getValueAt(160, 1).toString();
-            Penerimaan_Toko = tbPengaturan.getValueAt(161, 1).toString();
-            Kontra_Penerimaan_Toko = tbPengaturan.getValueAt(162, 1).toString();
-            Pengadaan_Toko = tbPengaturan.getValueAt(163, 1).toString();
-            Bayar_Pemesanan_Toko = tbPengaturan.getValueAt(164, 1).toString();
-            Penjualan_Toko = tbPengaturan.getValueAt(165, 1).toString();
-            HPP_Barang_Toko = tbPengaturan.getValueAt(166, 1).toString();
-            Persediaan_Barang_Toko = tbPengaturan.getValueAt(167, 1).toString();
-            Piutang_Toko = tbPengaturan.getValueAt(168, 1).toString();
-            Kontra_Piutang_Toko = tbPengaturan.getValueAt(169, 1).toString();
-            Retur_Beli_Toko = tbPengaturan.getValueAt(170, 1).toString();
-            Kontra_Retur_Beli_Toko = tbPengaturan.getValueAt(171, 1).toString();
-            Retur_Beli_Non_Medis = tbPengaturan.getValueAt(172, 1).toString();
-            Kontra_Retur_Beli_Non_Medis = tbPengaturan.getValueAt(173, 1).toString();
-            Retur_Jual_Toko = tbPengaturan.getValueAt(174, 1).toString();
-            Kontra_Retur_Jual_Toko = tbPengaturan.getValueAt(175, 1).toString();
-            Retur_Piutang_Toko = tbPengaturan.getValueAt(176, 1).toString();
-            Kontra_Retur_Piutang_Toko = tbPengaturan.getValueAt(177, 1).toString();
-            Kerugian_Klaim_BPJS_RVP = tbPengaturan.getValueAt(178, 1).toString();
-            Lebih_Bayar_Klaim_BPJS_RVP = tbPengaturan.getValueAt(179, 1).toString();
-            Piutang_BPJS_RVP = tbPengaturan.getValueAt(180, 1).toString();
-            Kontra_Penerimaan_AsetInventaris = tbPengaturan.getValueAt(181, 1).toString();
-            Kontra_Hibah_Aset = tbPengaturan.getValueAt(182, 1).toString();
-            Hibah_Non_Medis = tbPengaturan.getValueAt(183, 1).toString();
-            Kontra_Hibah_Non_Medis = tbPengaturan.getValueAt(184, 1).toString();
-            Beban_Hutang_Lain = tbPengaturan.getValueAt(185, 1).toString();
-            PPN_Masukan = tbPengaturan.getValueAt(186, 1).toString();
-            Pengadaan_Dapur = tbPengaturan.getValueAt(187, 1).toString();
-            Stok_Keluar_Dapur = tbPengaturan.getValueAt(188, 1).toString();
-            Kontra_Stok_Keluar_Dapur = tbPengaturan.getValueAt(189, 1).toString();
-            PPN_Keluaran = tbPengaturan.getValueAt(190, 1).toString();
-            Diskon_Piutang = tbPengaturan.getValueAt(191, 1).toString();
-            Piutang_Tidak_Terbayar = tbPengaturan.getValueAt(192, 1).toString();
-            Lebih_Bayar_Piutang = tbPengaturan.getValueAt(193, 1).toString();
-            Penerimaan_Dapur = tbPengaturan.getValueAt(194, 1).toString();
-            Kontra_Penerimaan_Dapur = tbPengaturan.getValueAt(195, 1).toString();
-            Bayar_Pemesanan_Dapur = tbPengaturan.getValueAt(196, 1).toString();
-            Retur_Beli_Dapur = tbPengaturan.getValueAt(197, 1).toString();
-            Kontra_Retur_Beli_Dapur = tbPengaturan.getValueAt(198, 1).toString();
-            Hibah_Dapur = tbPengaturan.getValueAt(199, 1).toString();
-            Kontra_Hibah_Dapur = tbPengaturan.getValueAt(200, 1).toString();
-            Piutang_Jasa_Perusahaan = tbPengaturan.getValueAt(201, 1).toString();
-            Pendapatan_Piutang_Jasa_Perusahaan = tbPengaturan.getValueAt(202, 1).toString();
-            Suspen_Piutang_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(203, 1).toString();
-            Pendapatan_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(204, 1).toString();
-            Beban_Jasa_Sarana_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(205, 1).toString();
-            Utang_Jasa_sarana_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(206, 1).toString();
-            HPP_BHP_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(207, 1).toString();
-            Persediaan_BHP_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(208, 1).toString();
-            Beban_Jasa_PJLab_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(209, 1).toString();
-            Utang_Jasa_PJLab_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(210, 1).toString();
-            Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(211, 1).toString();
-            Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(212, 1).toString();
-            Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(213, 1).toString();
-            Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(214, 1).toString();
-            Beban_Jasa_Analis_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(215, 1).toString();
-            Utang_Jasa_Analis_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(216, 1).toString();
-            Beban_KSO_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(217, 1).toString();
-            Utang_KSO_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(218, 1).toString();
-            Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(219, 1).toString();
-            Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling = tbPengaturan.getValueAt(220, 1).toString();
+            try {
+                Sequel.AutoComitFalse();
+                StringJoiner sjk = new StringJoiner(", ");
+                final ArrayList<String> sjv = new ArrayList<>();
+                boolean sukses = true;
 
-            if (Pengadaan_Obat.equals("") || Pemesanan_Obat.equals("") || Kontra_Pemesanan_Obat.equals("") || Bayar_Pemesanan_Obat.equals("") || Penjualan_Obat.equals("") ||
-                Piutang_Obat.equals("") || Kontra_Piutang_Obat.equals("") || Retur_Ke_Suplayer.equals("") || Kontra_Retur_Ke_Suplayer.equals("") ||
-                Retur_Dari_pembeli.equals("") || Kontra_Retur_Dari_Pembeli.equals("") || Retur_Piutang_Obat.equals("") || Kontra_Retur_Piutang_Obat.equals("") ||
-                Pengadaan_Ipsrs.equals("") || Stok_Keluar_Ipsrs.equals("") || Kontra_Stok_Keluar_Ipsrs.equals("") || Bayar_Piutang_Pasien.equals("") ||
-                Pengambilan_Utd.equals("") || Kontra_Pengambilan_Utd.equals("") || Pengambilan_Penunjang_Utd.equals("") ||
-                Kontra_Pengambilan_Penunjang_Utd.equals("") || Penyerahan_Darah.equals("") || Stok_Keluar_Medis.equals("") || Kontra_Stok_Keluar_Medis.equals("") ||
-                HPP_Obat_Jual_Bebas.equals("") || Persediaan_Obat_Jual_Bebas.equals("") || Penerimaan_NonMedis.equals("") || Kontra_Penerimaan_NonMedis.equals("") ||
-                Bayar_Pemesanan_Non_Medis.equals("") || Hibah_Obat.equals("") || Kontra_Hibah_Obat.equals("") || Penerimaan_Toko.equals("") || Kontra_Penerimaan_Toko.equals("") ||
-                Pengadaan_Toko.equals("") || Bayar_Pemesanan_Toko.equals("") || Penjualan_Toko.equals("") || HPP_Barang_Toko.equals("") || Persediaan_Barang_Toko.equals("") ||
-                Piutang_Toko.equals("") || Kontra_Piutang_Toko.equals("") || Retur_Beli_Toko.equals("") || Kontra_Retur_Beli_Toko.equals("") || Retur_Beli_Non_Medis.equals("") ||
-                Kontra_Retur_Beli_Non_Medis.equals("") || Retur_Jual_Toko.equals("") || Kontra_Retur_Jual_Toko.equals("") || Retur_Piutang_Toko.equals("") ||
-                Kontra_Retur_Piutang_Toko.equals("") || Suspen_Piutang_Tindakan_Ralan.equals("") || Tindakan_Ralan.equals("") || Beban_Jasa_Medik_Dokter_Tindakan_Ralan.equals("") ||
-                Utang_Jasa_Medik_Dokter_Tindakan_Ralan.equals("") || Beban_Jasa_Medik_Paramedis_Tindakan_Ralan.equals("") || Utang_Jasa_Medik_Paramedis_Tindakan_Ralan.equals("") ||
-                Beban_KSO_Tindakan_Ralan.equals("") || Utang_KSO_Tindakan_Ralan.equals("") || Beban_Jasa_Sarana_Tindakan_Ralan.equals("") || Utang_Jasa_Sarana_Tindakan_Ralan.equals("") ||
-                HPP_BHP_Tindakan_Ralan.equals("") || Persediaan_BHP_Tindakan_Ralan.equals("") || Beban_Jasa_Menejemen_Tindakan_Ralan.equals("") ||
-                Utang_Jasa_Menejemen_Tindakan_Ralan.equals("") || Suspen_Piutang_Laborat_Ralan.equals("") || Laborat_Ralan.equals("") ||
-                Beban_Jasa_Medik_Dokter_Laborat_Ralan.equals("") || Utang_Jasa_Medik_Dokter_Laborat_Ralan.equals("") || Beban_Jasa_Medik_Petugas_Laborat_Ralan.equals("") ||
-                Utang_Jasa_Medik_Petugas_Laborat_Ralan.equals("") || Beban_Kso_Laborat_Ralan.equals("") || Utang_Kso_Laborat_Ralan.equals("") ||
-                HPP_Persediaan_Laborat_Rawat_Jalan.equals("") || Persediaan_BHP_Laborat_Rawat_Jalan.equals("") || Beban_Jasa_Sarana_Laborat_Ralan.equals("") ||
-                Utang_Jasa_Sarana_Laborat_Ralan.equals("") || Beban_Jasa_Perujuk_Laborat_Ralan.equals("") || Utang_Jasa_Perujuk_Laborat_Ralan.equals("") ||
-                Beban_Jasa_Menejemen_Laborat_Ralan.equals("") || Utang_Jasa_Menejemen_Laborat_Ralan.equals("") || Suspen_Piutang_Radiologi_Ralan.equals("") ||
-                Radiologi_Ralan.equals("") || Beban_Jasa_Medik_Dokter_Radiologi_Ralan.equals("") || Utang_Jasa_Medik_Dokter_Radiologi_Ralan.equals("") ||
-                Beban_Jasa_Medik_Petugas_Radiologi_Ralan.equals("") || Utang_Jasa_Medik_Petugas_Radiologi_Ralan.equals("") || Beban_Kso_Radiologi_Ralan.equals("") ||
-                Utang_Kso_Radiologi_Ralan.equals("") || HPP_Persediaan_Radiologi_Rawat_Jalan.equals("") || Persediaan_BHP_Radiologi_Rawat_Jalan.equals("") ||
-                Beban_Jasa_Sarana_Radiologi_Ralan.equals("") || Utang_Jasa_Sarana_Radiologi_Ralan.equals("") || Beban_Jasa_Perujuk_Radiologi_Ralan.equals("") ||
-                Utang_Jasa_Perujuk_Radiologi_Ralan.equals("") || Beban_Jasa_Menejemen_Radiologi_Ralan.equals("") || Utang_Jasa_Menejemen_Radiologi_Ralan.equals("") ||
-                Suspen_Piutang_Obat_Ralan.equals("") || Obat_Ralan.equals("") || HPP_Obat_Rawat_Jalan.equals("") || Persediaan_Obat_Rawat_Jalan.equals("") ||
-                Registrasi_Ralan.equals("") || Suspen_Piutang_Operasi_Ralan.equals("") || Operasi_Ralan.equals("") || Beban_Jasa_Medik_Dokter_Operasi_Ralan.equals("") ||
-                Utang_Jasa_Medik_Dokter_Operasi_Ralan.equals("") || Beban_Jasa_Medik_Paramedis_Operasi_Ralan.equals("") || Utang_Jasa_Medik_Paramedis_Operasi_Ralan.equals("") ||
-                HPP_Obat_Operasi_Ralan.equals("") || Persediaan_Obat_Kamar_Operasi_Ralan.equals("") || Tambahan_Ralan.equals("") || Potongan_Ralan.equals("") ||
-                Suspen_Piutang_Tindakan_Ranap.equals("") || Tindakan_Ranap.equals("") || Beban_Jasa_Medik_Dokter_Tindakan_Ranap.equals("") ||
-                Utang_Jasa_Medik_Dokter_Tindakan_Ranap.equals("") || Beban_Jasa_Medik_Paramedis_Tindakan_Ranap.equals("") || Utang_Jasa_Medik_Paramedis_Tindakan_Ranap.equals("") ||
-                Beban_KSO_Tindakan_Ranap.equals("") || Utang_KSO_Tindakan_Ranap.equals("") || Beban_Jasa_Sarana_Tindakan_Ranap.equals("") ||
-                Utang_Jasa_Sarana_Tindakan_Ranap.equals("") || Beban_Jasa_Menejemen_Tindakan_Ranap.equals("") || Utang_Jasa_Menejemen_Tindakan_Ranap.equals("") ||
-                HPP_BHP_Tindakan_Ranap.equals("") || Persediaan_BHP_Tindakan_Ranap.equals("") || Suspen_Piutang_Laborat_Ranap.equals("") || Laborat_Ranap.equals("") ||
-                Beban_Jasa_Medik_Dokter_Laborat_Ranap.equals("") || Utang_Jasa_Medik_Dokter_Laborat_Ranap.equals("") || Beban_Jasa_Medik_Petugas_Laborat_Ranap.equals("") ||
-                Utang_Jasa_Medik_Petugas_Laborat_Ranap.equals("") || Beban_Kso_Laborat_Ranap.equals("") || Utang_Kso_Laborat_Ranap.equals("") ||
-                HPP_Persediaan_Laborat_Rawat_inap.equals("") || Persediaan_BHP_Laborat_Rawat_Inap.equals("") || Beban_Jasa_Sarana_Laborat_Ranap.equals("") ||
-                Utang_Jasa_Sarana_Laborat_Ranap.equals("") || Beban_Jasa_Perujuk_Laborat_Ranap.equals("") || Utang_Jasa_Perujuk_Laborat_Ranap.equals("") ||
-                Beban_Jasa_Menejemen_Laborat_Ranap.equals("") || Utang_Jasa_Menejemen_Laborat_Ranap.equals("") || Suspen_Piutang_Radiologi_Ranap.equals("") ||
-                Radiologi_Ranap.equals("") || Beban_Jasa_Medik_Dokter_Radiologi_Ranap.equals("") || Utang_Jasa_Medik_Dokter_Radiologi_Ranap.equals("") ||
-                Beban_Jasa_Medik_Petugas_Radiologi_Ranap.equals("") || Utang_Jasa_Medik_Petugas_Radiologi_Ranap.equals("") || Beban_Kso_Radiologi_Ranap.equals("") ||
-                Utang_Kso_Radiologi_Ranap.equals("") || HPP_Persediaan_Radiologi_Rawat_Inap.equals("") || Persediaan_BHP_Radiologi_Rawat_Inap.equals("") ||
-                Beban_Jasa_Sarana_Radiologi_Ranap.equals("") || Utang_Jasa_Sarana_Radiologi_Ranap.equals("") || Beban_Jasa_Perujuk_Radiologi_Ranap.equals("") ||
-                Utang_Jasa_Perujuk_Radiologi_Ranap.equals("") || Beban_Jasa_Menejemen_Radiologi_Ranap.equals("") || Utang_Jasa_Menejemen_Radiologi_Ranap.equals("") ||
-                Suspen_Piutang_Obat_Ranap.equals("") || Obat_Ranap.equals("") || HPP_Obat_Rawat_Inap.equals("") || Persediaan_Obat_Rawat_Inap.equals("") ||
-                Registrasi_Ranap.equals("") || Service_Ranap.equals("") || Tambahan_Ranap.equals("") || Potongan_Ranap.equals("") || Retur_Obat_Ranap.equals("") ||
-                Resep_Pulang_Ranap.equals("") || Kamar_Inap.equals("") || Suspen_Piutang_Operasi_Ranap.equals("") || Operasi_Ranap.equals("") ||
-                Beban_Jasa_Medik_Dokter_Operasi_Ranap.equals("") || Utang_Jasa_Medik_Dokter_Operasi_Ranap.equals("") || Beban_Jasa_Medik_Paramedis_Operasi_Ranap.equals("") ||
-                Utang_Jasa_Medik_Paramedis_Operasi_Ranap.equals("") || HPP_Obat_Operasi_Ranap.equals("") || Persediaan_Obat_Kamar_Operasi_Ranap.equals("") ||
-                Harian_Ranap.equals("") || Uang_Muka_Ranap.equals("") || Piutang_Pasien_Ranap.equals("") || Kerugian_Klaim_BPJS_RVP.equals("") || Lebih_Bayar_Klaim_BPJS_RVP.equals("") ||
-                Piutang_BPJS_RVP.equals("") || Sisa_Uang_Muka_Ranap.equals("") || Kontra_Penerimaan_AsetInventaris.equals("") || Kontra_Hibah_Aset.equals("") ||
-                Hibah_Non_Medis.equals("") || Kontra_Hibah_Non_Medis.equals("") || Beban_Hutang_Lain.equals("") || PPN_Masukan.equals("") || Stok_Keluar_Dapur.equals("") ||
-                Kontra_Stok_Keluar_Dapur.equals("") || Pengadaan_Dapur.equals("") || PPN_Keluaran.equals("") || Diskon_Piutang.equals("") || Piutang_Tidak_Terbayar.equals("") ||
-                Lebih_Bayar_Piutang.equals("") || Penerimaan_Dapur.equals("") || Kontra_Penerimaan_Dapur.equals("") || Bayar_Pemesanan_Dapur.equals("") || Retur_Beli_Dapur.equals("") ||
-                Kontra_Retur_Beli_Dapur.equals("") || Hibah_Dapur.equals("") || Kontra_Hibah_Dapur.equals("") || Piutang_Jasa_Perusahaan.equals("") ||
-                Pendapatan_Piutang_Jasa_Perusahaan.equals("") || Suspen_Piutang_Pelayanan_Lab_Kesling.equals("") || Pendapatan_Pelayanan_Lab_Kesling.equals("") ||
-                Beban_Jasa_Sarana_Pelayanan_Lab_Kesling.equals("") || Utang_Jasa_sarana_Pelayanan_Lab_Kesling.equals("") || HPP_BHP_Pelayanan_Lab_Kesling.equals("") ||
-                Persediaan_BHP_Pelayanan_Lab_Kesling.equals("") || Beban_Jasa_PJLab_Pelayanan_Lab_Kesling.equals("") || Utang_Jasa_PJLab_Pelayanan_Lab_Kesling.equals("") ||
-                Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling.equals("") || Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling.equals("") || Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling.equals("") ||
-                Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling.equals("") || Beban_Jasa_Analis_Pelayanan_Lab_Kesling.equals("") || Utang_Jasa_Analis_Pelayanan_Lab_Kesling.equals("") ||
-                Beban_KSO_Pelayanan_Lab_Kesling.equals("") || Utang_KSO_Pelayanan_Lab_Kesling.equals("") || Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling.equals("") ||
-                Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling.equals("")) {
-                JOptionPane.showMessageDialog(null, "Silahkan lengkapi seluruh data Akun...!!!!");
-                tbPengaturan.requestFocus();
-            } else {
-                Sequel.queryu("delete from set_akun_ralan");
-                Sequel.menyimpan("set_akun_ralan", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 61, new String[] {
-                    Suspen_Piutang_Tindakan_Ralan, Tindakan_Ralan, Beban_Jasa_Medik_Dokter_Tindakan_Ralan, Utang_Jasa_Medik_Dokter_Tindakan_Ralan, Beban_Jasa_Medik_Paramedis_Tindakan_Ralan,
-                    Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, Beban_KSO_Tindakan_Ralan, Utang_KSO_Tindakan_Ralan, Beban_Jasa_Sarana_Tindakan_Ralan, Utang_Jasa_Sarana_Tindakan_Ralan,
-                    HPP_BHP_Tindakan_Ralan, Persediaan_BHP_Tindakan_Ralan, Beban_Jasa_Menejemen_Tindakan_Ralan, Utang_Jasa_Menejemen_Tindakan_Ralan, Suspen_Piutang_Laborat_Ralan, Laborat_Ralan,
-                    Beban_Jasa_Medik_Dokter_Laborat_Ralan, Utang_Jasa_Medik_Dokter_Laborat_Ralan, Beban_Jasa_Medik_Petugas_Laborat_Ralan, Utang_Jasa_Medik_Petugas_Laborat_Ralan,
-                    Beban_Kso_Laborat_Ralan, Utang_Kso_Laborat_Ralan, HPP_Persediaan_Laborat_Rawat_Jalan, Persediaan_BHP_Laborat_Rawat_Jalan, Beban_Jasa_Sarana_Laborat_Ralan,
-                    Utang_Jasa_Sarana_Laborat_Ralan, Beban_Jasa_Perujuk_Laborat_Ralan, Utang_Jasa_Perujuk_Laborat_Ralan, Beban_Jasa_Menejemen_Laborat_Ralan, Utang_Jasa_Menejemen_Laborat_Ralan,
-                    Suspen_Piutang_Radiologi_Ralan, Radiologi_Ralan, Beban_Jasa_Medik_Dokter_Radiologi_Ralan, Utang_Jasa_Medik_Dokter_Radiologi_Ralan, Beban_Jasa_Medik_Petugas_Radiologi_Ralan,
-                    Utang_Jasa_Medik_Petugas_Radiologi_Ralan, Beban_Kso_Radiologi_Ralan, Utang_Kso_Radiologi_Ralan, HPP_Persediaan_Radiologi_Rawat_Jalan, Persediaan_BHP_Radiologi_Rawat_Jalan,
-                    Beban_Jasa_Sarana_Radiologi_Ralan, Utang_Jasa_Sarana_Radiologi_Ralan, Beban_Jasa_Perujuk_Radiologi_Ralan, Utang_Jasa_Perujuk_Radiologi_Ralan, Beban_Jasa_Menejemen_Radiologi_Ralan,
-                    Utang_Jasa_Menejemen_Radiologi_Ralan, Suspen_Piutang_Obat_Ralan, Obat_Ralan, HPP_Obat_Rawat_Jalan, Persediaan_Obat_Rawat_Jalan, Registrasi_Ralan, Suspen_Piutang_Operasi_Ralan,
-                    Operasi_Ralan, Beban_Jasa_Medik_Dokter_Operasi_Ralan, Utang_Jasa_Medik_Dokter_Operasi_Ralan, Beban_Jasa_Medik_Paramedis_Operasi_Ralan, Utang_Jasa_Medik_Paramedis_Operasi_Ralan,
-                    HPP_Obat_Operasi_Ralan, Persediaan_Obat_Kamar_Operasi_Ralan, Tambahan_Ralan, Potongan_Ralan
-                });
-                Sequel.queryu("delete from set_akun_ranap");
-                Sequel.menyimpan("set_akun_ranap", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 64, new String[] {
-                    Suspen_Piutang_Tindakan_Ranap, Tindakan_Ranap, Beban_Jasa_Medik_Dokter_Tindakan_Ranap, Utang_Jasa_Medik_Dokter_Tindakan_Ranap, Beban_Jasa_Medik_Paramedis_Tindakan_Ranap,
-                    Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, Beban_KSO_Tindakan_Ranap, Utang_KSO_Tindakan_Ranap, Beban_Jasa_Sarana_Tindakan_Ranap, Utang_Jasa_Sarana_Tindakan_Ranap,
-                    Beban_Jasa_Menejemen_Tindakan_Ranap, Utang_Jasa_Menejemen_Tindakan_Ranap, HPP_BHP_Tindakan_Ranap, Persediaan_BHP_Tindakan_Ranap, Suspen_Piutang_Laborat_Ranap, Laborat_Ranap,
-                    Beban_Jasa_Medik_Dokter_Laborat_Ranap, Utang_Jasa_Medik_Dokter_Laborat_Ranap, Beban_Jasa_Medik_Petugas_Laborat_Ranap, Utang_Jasa_Medik_Petugas_Laborat_Ranap,
-                    Beban_Kso_Laborat_Ranap, Utang_Kso_Laborat_Ranap, HPP_Persediaan_Laborat_Rawat_inap, Persediaan_BHP_Laborat_Rawat_Inap, Beban_Jasa_Sarana_Laborat_Ranap,
-                    Utang_Jasa_Sarana_Laborat_Ranap, Beban_Jasa_Perujuk_Laborat_Ranap, Utang_Jasa_Perujuk_Laborat_Ranap, Beban_Jasa_Menejemen_Laborat_Ranap, Utang_Jasa_Menejemen_Laborat_Ranap,
-                    Suspen_Piutang_Radiologi_Ranap, Radiologi_Ranap, Beban_Jasa_Medik_Dokter_Radiologi_Ranap, Utang_Jasa_Medik_Dokter_Radiologi_Ranap, Beban_Jasa_Medik_Petugas_Radiologi_Ranap,
-                    Utang_Jasa_Medik_Petugas_Radiologi_Ranap, Beban_Kso_Radiologi_Ranap, Utang_Kso_Radiologi_Ranap, HPP_Persediaan_Radiologi_Rawat_Inap, Persediaan_BHP_Radiologi_Rawat_Inap,
-                    Beban_Jasa_Sarana_Radiologi_Ranap, Utang_Jasa_Sarana_Radiologi_Ranap, Beban_Jasa_Perujuk_Radiologi_Ranap, Utang_Jasa_Perujuk_Radiologi_Ranap, Beban_Jasa_Menejemen_Radiologi_Ranap,
-                    Utang_Jasa_Menejemen_Radiologi_Ranap, Suspen_Piutang_Obat_Ranap, Obat_Ranap, HPP_Obat_Rawat_Inap, Persediaan_Obat_Rawat_Inap, Registrasi_Ranap, Service_Ranap, Tambahan_Ranap,
-                    Potongan_Ranap, Retur_Obat_Ranap, Resep_Pulang_Ranap, Kamar_Inap, Suspen_Piutang_Operasi_Ranap, Operasi_Ranap, Beban_Jasa_Medik_Dokter_Operasi_Ranap, Utang_Jasa_Medik_Dokter_Operasi_Ranap,
-                    Beban_Jasa_Medik_Paramedis_Operasi_Ranap, Utang_Jasa_Medik_Paramedis_Operasi_Ranap, HPP_Obat_Operasi_Ranap
-                });
-                Sequel.queryu("delete from set_akun_ranap2");
-                Sequel.menyimpan("set_akun_ranap2", "?,?,?,?,?", 5, new String[] {
-                    Persediaan_Obat_Kamar_Operasi_Ranap, Harian_Ranap, Uang_Muka_Ranap, Piutang_Pasien_Ranap, Sisa_Uang_Muka_Ranap
-                });
-                Sequel.queryu("delete from set_akun");
-                Sequel.menyimpan("set_akun", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 64, new String[] {
-                    Pengadaan_Obat,
-                    Pemesanan_Obat, Kontra_Pemesanan_Obat, Bayar_Pemesanan_Obat, Penjualan_Obat, Piutang_Obat,
-                    Kontra_Piutang_Obat, Retur_Ke_Suplayer, Kontra_Retur_Ke_Suplayer, Retur_Dari_pembeli,
-                    Kontra_Retur_Dari_Pembeli, Retur_Piutang_Obat, Kontra_Retur_Piutang_Obat, Pengadaan_Ipsrs,
-                    Stok_Keluar_Ipsrs, Kontra_Stok_Keluar_Ipsrs, Bayar_Piutang_Pasien, Pengambilan_Utd,
-                    Kontra_Pengambilan_Utd, Pengambilan_Penunjang_Utd, Kontra_Pengambilan_Penunjang_Utd,
-                    Penyerahan_Darah, Stok_Keluar_Medis, Kontra_Stok_Keluar_Medis, HPP_Obat_Jual_Bebas,
-                    Persediaan_Obat_Jual_Bebas, Penerimaan_NonMedis, Kontra_Penerimaan_NonMedis,
-                    Bayar_Pemesanan_Non_Medis, Hibah_Obat, Kontra_Hibah_Obat, Penerimaan_Toko, Kontra_Penerimaan_Toko,
-                    Pengadaan_Toko, Bayar_Pemesanan_Toko, Penjualan_Toko, HPP_Barang_Toko, Persediaan_Barang_Toko,
-                    Piutang_Toko, Kontra_Piutang_Toko, Retur_Beli_Toko, Kontra_Retur_Beli_Toko, Retur_Beli_Non_Medis,
-                    Kontra_Retur_Beli_Non_Medis, Retur_Jual_Toko, Kontra_Retur_Jual_Toko, Retur_Piutang_Toko,
-                    Kontra_Retur_Piutang_Toko, Kerugian_Klaim_BPJS_RVP, Lebih_Bayar_Klaim_BPJS_RVP, Piutang_BPJS_RVP,
-                    Kontra_Penerimaan_AsetInventaris, Kontra_Hibah_Aset, Hibah_Non_Medis, Kontra_Hibah_Non_Medis,
-                    Beban_Hutang_Lain, PPN_Masukan, Pengadaan_Dapur, Stok_Keluar_Dapur, Kontra_Stok_Keluar_Dapur,
-                    PPN_Keluaran, Diskon_Piutang, Piutang_Tidak_Terbayar, Lebih_Bayar_Piutang
-                });
-                Sequel.queryu("delete from set_akun2");
-                Sequel.menyimpan("set_akun2", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", 27, new String[] {
-                    Penerimaan_Dapur, Kontra_Penerimaan_Dapur, Bayar_Pemesanan_Dapur, Retur_Beli_Dapur, Kontra_Retur_Beli_Dapur,
-                    Hibah_Dapur, Kontra_Hibah_Dapur, Piutang_Jasa_Perusahaan, Pendapatan_Piutang_Jasa_Perusahaan, Suspen_Piutang_Pelayanan_Lab_Kesling,
-                    Pendapatan_Pelayanan_Lab_Kesling, Beban_Jasa_Sarana_Pelayanan_Lab_Kesling, Utang_Jasa_sarana_Pelayanan_Lab_Kesling,
-                    HPP_BHP_Pelayanan_Lab_Kesling, Persediaan_BHP_Pelayanan_Lab_Kesling, Beban_Jasa_PJLab_Pelayanan_Lab_Kesling,
-                    Utang_Jasa_PJLab_Pelayanan_Lab_Kesling, Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling, Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling,
-                    Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling, Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling, Beban_Jasa_Analis_Pelayanan_Lab_Kesling,
-                    Utang_Jasa_Analis_Pelayanan_Lab_Kesling, Beban_KSO_Pelayanan_Lab_Kesling, Utang_KSO_Pelayanan_Lab_Kesling,
-                    Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling, Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling
-                });
-                JOptionPane.showMessageDialog(null, "Proses selesai...!!!!");
-                tampil();
+                for (Map.Entry<String, String> akun : setAkunRalan.entrySet()) {
+                    if (akun.getValue() == null || akun.getValue().isBlank()) {
+                        sukses = false;
+                    }
+                    sjk.add(akun.getKey());
+                    sjv.add(akun.getValue());
+                }
+                System.out.println(setAkunRalan.toString());
+                if (sukses) {
+                    Sequel.menghapustfSmc("set_akun_ralan");
+                    sukses = Sequel.menyimpantfSmc("set_akun_ralan", sjk.toString(), sjv.toArray(String[]::new));
+                }
+
+                if (sukses) {
+                    sjk = new StringJoiner(", ");
+                    sjv.clear();
+                    for (Map.Entry<String, String> akun : setAkunRanap.entrySet()) {
+                        if (akun.getValue() == null || akun.getValue().isBlank()) {
+                            sukses = false;
+                        }
+                        sjk.add(akun.getKey());
+                        sjv.add(akun.getValue());
+                    }
+                    System.out.println(setAkunRanap.toString());
+                    if (sukses) {
+                        Sequel.menghapustfSmc("set_akun_ranap");
+                        sukses = Sequel.menyimpantfSmc("set_akun_ranap", sjk.toString(), sjv.toArray(String[]::new));
+                    }
+                }
+
+                if (sukses) {
+                    sjk = new StringJoiner(", ");
+                    sjv.clear();
+                    for (Map.Entry<String, String> akun : setAkunRanap2.entrySet()) {
+                        if (akun.getValue() == null || akun.getValue().isBlank()) {
+                            sukses = false;
+                        }
+                        sjk.add(akun.getKey());
+                        sjv.add(akun.getValue());
+                    }
+                    System.out.println(setAkunRanap2.toString());
+                    if (sukses) {
+                        Sequel.menghapustfSmc("set_akun_ranap2");
+                        sukses = Sequel.menyimpantfSmc("set_akun_ranap2", sjk.toString(), sjv.toArray(String[]::new));
+                    }
+                }
+
+                if (sukses) {
+                    sjk = new StringJoiner(", ");
+                    sjv.clear();
+                    for (Map.Entry<String, String> akun : setAkun.entrySet()) {
+                        if (akun.getValue() == null || akun.getValue().isBlank()) {
+                            sukses = false;
+                        }
+                        sjk.add(akun.getKey());
+                        sjv.add(akun.getValue());
+                    }
+                    System.out.println(setAkun.toString());
+                    if (sukses) {
+                        Sequel.menghapustfSmc("set_akun");
+                        sukses = Sequel.menyimpantfSmc("set_akun", sjk.toString(), sjv.toArray(String[]::new));
+                    }
+                }
+
+                if (sukses) {
+                    sjk = new StringJoiner(", ");
+                    sjv.clear();
+                    for (Map.Entry<String, String> akun : setAkun2.entrySet()) {
+                        if (akun.getValue() == null || akun.getValue().isBlank()) {
+                            sukses = false;
+                        }
+                        sjk.add(akun.getKey());
+                        sjv.add(akun.getValue());
+                    }
+                    System.out.println(setAkun2.toString());
+                    if (sukses) {
+                        Sequel.menghapustfSmc("set_akun2");
+                        sukses = Sequel.menyimpantfSmc("set_akun2", sjk.toString(), sjv.toArray(String[]::new));
+                    }
+                }
+
+                if (sukses) {
+                    Sequel.Commit();
+                } else {
+                    Sequel.RollBack();
+                }
+
+                Sequel.AutoComitTrue();
+
+                if (!sukses) {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengupdate pengaturan akun,\nPastikan semua pengaturan telah terisi..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } else if (TabRawat.getSelectedIndex() == 1) {
+        }
+
+        /*
+        if (TabRawat.getSelectedIndex() == 1) {
             for (i = 0; i < tbPengaturanRalan.getRowCount(); i++) {
                 if ((!tbPengaturanRalan.getValueAt(i, 5).equals("")) && (!tbPengaturanRalan.getValueAt(i, 6).equals("")) && (!tbPengaturanRalan.getValueAt(i, 7).equals("")) &&
                     (!tbPengaturanRalan.getValueAt(i, 8).equals("")) && (!tbPengaturanRalan.getValueAt(i, 9).equals("")) && (!tbPengaturanRalan.getValueAt(i, 10).equals("")) &&
@@ -1044,6 +704,7 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
             }
             // runBackground(() -> tampilranap());
         }
+        */
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1076,9 +737,8 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
                 rekening.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                 rekening.setLocationRelativeTo(internalFrame1);
                 rekening.setVisible(true);
-            } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-                tabMode.setValueAt("", tbPengaturan.getSelectedRow(), 2);
-                tabMode.setValueAt("", tbPengaturan.getSelectedRow(), 3);
+            } else if (evt.getKeyCode() == KeyEvent.VK_DELETE || evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                setPengaturan(tbPengaturan.getSelectedRow(), "", "", "", "");
             }
         }
     }//GEN-LAST:event_tbPengaturanKeyPressed
@@ -1179,7 +839,7 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
     private void MnCopyRekeningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCopyRekeningActionPerformed
         if (TabRawat.getSelectedIndex() == 1) {
             if (tbPengaturanRalan.getSelectedRow() != -1) {
-                i = tbPengaturanRalan.getSelectedRow();
+                int i = tbPengaturanRalan.getSelectedRow();
                 if ((!tbPengaturanRalan.getValueAt(i, 5).equals("")) && (!tbPengaturanRalan.getValueAt(i, 6).equals("")) && (!tbPengaturanRalan.getValueAt(i, 7).equals("")) &&
                     (!tbPengaturanRalan.getValueAt(i, 8).equals("")) && (!tbPengaturanRalan.getValueAt(i, 9).equals("")) && (!tbPengaturanRalan.getValueAt(i, 10).equals("")) &&
                     (!tbPengaturanRalan.getValueAt(i, 11).equals("")) && (!tbPengaturanRalan.getValueAt(i, 12).equals("")) && (!tbPengaturanRalan.getValueAt(i, 13).equals("")) &&
@@ -1263,54 +923,56 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void setPengaturan(String table, String menu, String kodeRekening, String kolom) {
-        Rekening r = akunRekening.get(kodeRekening);
         switch (table) {
-            case "set_akun": setAkun.put(menu, kodeRekening); break;
-            case "set_akun2": setAkun2.put(menu, kodeRekening); break;
-            case "set_akun_ralan": setAkunRalan.put(menu, kodeRekening); break;
-            case "set_akun_ranap": setAkunRanap.put(menu, kodeRekening); break;
-            case "set_akun_ranap2": setAkunRanap2.put(menu, kodeRekening); break;
+            case "set_akun": setAkun.put(kolom, kodeRekening); break;
+            case "set_akun2": setAkun2.put(kolom, kodeRekening); break;
+            case "set_akun_ralan": setAkunRalan.put(kolom, kodeRekening); break;
+            case "set_akun_ranap": setAkunRanap.put(kolom, kodeRekening); break;
+            case "set_akun_ranap2": setAkunRanap2.put(kolom, kodeRekening); break;
         }
-        tabMode.addRow(new Object[] {table, menu, kodeRekening, r.namaRekening(), r.tipe(), r.balance(), kolom});
+        Rekening r = akunRekening.get(kodeRekening);
+        tabMode.addRow(new Object[] {menu, kodeRekening, r.namaRekening, r.tipe, r.balance, table, kolom});
     }
 
     private void setPengaturan(int row, String kodeRekening, String namaRekening, String tipe, String balance) {
-        String table = tbPengaturan.getValueAt(row, 0).toString();
-        String menu = tbPengaturan.getValueAt(row, 1).toString();
+        String table = tbPengaturan.getValueAt(row, 5).toString();
+        String kolom = tbPengaturan.getValueAt(row, 6).toString();
         switch (table) {
             case "set_akun":
-                setAkun.put(menu, kodeRekening);
+                setAkun.put(kolom, kodeRekening);
                 break;
             case "set_akun2":
-                setAkun2.put(menu, kodeRekening);
+                setAkun2.put(kolom, kodeRekening);
                 break;
             case "set_akun_ralan":
-                setAkunRalan.put(menu, kodeRekening);
+                setAkunRalan.put(kolom, kodeRekening);
                 break;
             case "set_akun_ranap":
-                setAkunRanap.put(menu, kodeRekening);
+                setAkunRanap.put(kolom, kodeRekening);
                 break;
             case "set_akun_ranap2":
-                setAkunRanap2.put(menu, kodeRekening);
+                setAkunRanap2.put(kolom, kodeRekening);
                 break;
         }
-        tabMode.setValueAt(kodeRekening, row, 2);
-        tabMode.setValueAt(namaRekening, row, 3);
-        tabMode.setValueAt(tipe, row, 4);
-        tabMode.setValueAt(balance, row, 5);
+        tabMode.setValueAt(kodeRekening, row, 1);
+        tabMode.setValueAt(namaRekening, row, 2);
+        tabMode.setValueAt(tipe, row, 3);
+        tabMode.setValueAt(balance, row, 4);
     }
 
     private void tampil() {
-        menu.clear();
+        Valid.tabelKosong(tabMode);
 
-        try (ResultSet rs = koneksi.createStatement().executeQuery("select rekening.kd_rek, rekening.nm_rek, rekening.tipe, rekening.balance from rekening")) {
-            akunRekening.clear();
-            akunRekening.put("", new Rekening("", "", "", ""));
-            while (rs.next()) {
-                akunRekening.put(rs.getString("kd_rek"), new Rekening(rs.getString("kd_rek"), rs.getString("nm_rek"), rs.getString("tipe"), rs.getString("balance")));
+        if (akunRekening.isEmpty()) {
+            try (ResultSet rs = koneksi.createStatement().executeQuery("select rekening.kd_rek, rekening.nm_rek, rekening.tipe, rekening.balance from rekening")) {
+                akunRekening.clear();
+                akunRekening.put("", new Rekening("", "", ""));
+                while (rs.next()) {
+                    akunRekening.put(rs.getString("kd_rek"), new Rekening(rs.getString("nm_rek"), rs.getString("tipe"), rs.getString("balance")));
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
         }
 
         try (ResultSet rs = koneksi.createStatement().executeQuery(
@@ -1689,32 +1351,14 @@ public class DlgPengaturanRekeningSMC extends javax.swing.JDialog {
     }
 
     static class Rekening {
-        private String kodeRekening;
         private String namaRekening;
         private String tipe;
         private String balance;
 
-        public Rekening(final String kodeRekening, final String namaRekening, final String tipe, final String balance) {
-            this.kodeRekening = kodeRekening;
+        public Rekening(final String namaRekening, final String tipe, final String balance) {
             this.namaRekening = namaRekening;
             this.tipe = tipe;
             this.balance = balance;
-        }
-
-        public String kodeRekening() {
-            return kodeRekening;
-        }
-
-        public String namaRekening() {
-            return namaRekening;
-        }
-
-        public String tipe() {
-            return tipe;
-        }
-
-        public String balance() {
-            return balance;
         }
     }
 }
