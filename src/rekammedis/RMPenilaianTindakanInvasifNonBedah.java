@@ -3142,19 +3142,57 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from penilaian_pre_anestesi where no_rawat=? and tanggal=?",2,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()
+        String noRawat = tbObat.getValueAt(tbObat.getSelectedRow(),0).toString();
+        String tanggal = tbObat.getValueAt(tbObat.getSelectedRow(),7).toString();
+        if(Sequel.queryu2tf("delete from penilaian_tindakan_invasif_non_bedah where no_rawat=? and tanggal=?",2,new String[]{
+            noRawat,tanggal
         })==true){
+            Sequel.queryu2tf("delete from penilaian_tindakan_invasif_non_bedah_masalah where no_rawat=?",1,new String[]{noRawat});
+            Sequel.queryu2tf("delete from penilaian_tindakan_invasif_non_bedah_rencana where no_rawat=?",1,new String[]{noRawat});
             tabMode.removeRow(tbObat.getSelectedRow());
             LCount.setText(""+tabMode.getRowCount());
             TabRawat.setSelectedIndex(1);
+            emptTeks();
         }else{
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
 
     private void ganti() {
-        //
+        if(Sequel.queryu2tf("update penilaian_tindakan_invasif_non_bedah set no_rawat=?,tanggal=?,nip=?,diagnosa=?,rencana_tindakan=?,status_fungsional=?,keluhan_utama=?,status_psiko=?,ket_psiko=?,rpd=?,sistem_pernapasan=?,ket_sistem_pernapasan=?,muntah_darah=?,bab=?,urine=?,antiplatelet=?,lama_antiplatelet=?,beta_blocker=?,lama_beta_blocker=?,simarc=?,lama_simarc=?,riwayat_alergi=?,tb=?,bb=?,td=?,io2=?,nadi=?,suhu=?,pernapasan=?,radialis_kanan=?,radialis_kiri=?,pedis_kanan=?,pedis_kiri=?,penilaian_nyeri=?,penilaian_nyeri_pencetus=?,penilaian_nyeri_kualitas=?,penilaian_nyeri_lokasi=?,penilaian_nyeri_penjalaran=?,penilaian_nyeri_skala=?,penilaian_nyeri_durasi=?,kebutuhan_edukasi=?,hematokrit=?,hemoglobin=?,leukosit=?,pt_ir=?,kalium=?,natrium=?,ureum=?,hbsag=?,anti_hcv=?,gds=?,pt_aptt=?,kreatinin=?,skrining_jatuh=?,skor_resiko_jatuh=?,hasil_echo=?,rencana=? where no_rawat=?",58,new String[]{
+            TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
+            KdDokter.getText(),Diagnosa.getText(),RencanaTindakan.getText(),StatusFungsional.getText(),KeluhanUtama.getText(),
+            StatusPsiko.getSelectedItem().toString(),KetPsiko.getText(),RPD.getText(),
+            SistemPernapasan.getSelectedItem().toString(),KetSistemPernapasan.getText(),MuntahDarah.getSelectedItem().toString(),
+            BAB.getSelectedItem().toString(),Urine24Jam.getText(),Antiplatelet.getSelectedItem().toString(),LamaAntiPlatelet.getText(),
+            BetaBlocker.getSelectedItem().toString(),LamaBetaBlocker.getText(),Simarc.getSelectedItem().toString(),LamaSimarc.getText(),
+            AlergiKeterangan.getText(),TB.getText(),BB.getText(),TD.getText(),IO2.getText(),Nadi.getText(),Suhu.getText(),Pernapasan.getText(),
+            RadialisKanan.getSelectedItem().toString(),RadialisKiri.getSelectedItem().toString(),PedisKanan.getSelectedItem().toString(),PedisKiri.getSelectedItem().toString(),
+            Nyeri.getSelectedItem().toString(),NyeriPencetus.getText(),NyeriKualitas.getText(),NyeriLokasi.getText(),NyeriPenjalaran.getText(),
+            NyeriSkala.getSelectedItem().toString(),NyeriLama.getText(),KebutuhanEdukasi.getText(),
+            LabHt.getText(),LabHb.getText(),LabLeukosit.getText(),LabPtIr.getText(),LabK.getText(),LabNa.getText(),LabUr.getText(),
+            LabHbsAg.getSelectedItem().toString(),LabAntiHCV.getSelectedItem().toString(),LabGds.getText(),LabPtAptt.getText(),LabCr.getText(),
+            SkriningJatuh.getSelectedItem().toString(),SkriningSkor.getText(),EchoKesan.getText(),Rencana.getText(),
+            gv(0)
+        })==true){
+            Sequel.queryu2tf("delete from penilaian_tindakan_invasif_non_bedah_masalah where no_rawat=?",1,new String[]{TNoRw.getText()});
+            for(i=0;i<tbMasalahKeperawatan.getRowCount();i++){
+                if(tbMasalahKeperawatan.getValueAt(i,0).toString().equals("true")){
+                    Sequel.menyimpantf2("penilaian_tindakan_invasif_non_bedah_masalah","?,?",2,new String[]{TNoRw.getText(),tbMasalahKeperawatan.getValueAt(i,1).toString()});
+    }
+            }
+            Sequel.queryu2tf("delete from penilaian_tindakan_invasif_non_bedah_rencana where no_rawat=?",1,new String[]{TNoRw.getText()});
+            for(i=0;i<tbRencanaKeperawatan.getRowCount();i++){
+                if(tbRencanaKeperawatan.getValueAt(i,0).toString().equals("true")){
+                    Sequel.menyimpantf2("penilaian_tindakan_invasif_non_bedah_rencana","?,?",2,new String[]{TNoRw.getText(),tbRencanaKeperawatan.getValueAt(i,1).toString()});
+                }
+            }
+            JOptionPane.showMessageDialog(null,"Data berhasil diganti..!!");
+            tampil();
+            emptTeks();
+        }else{
+            JOptionPane.showMessageDialog(null,"Gagal mengganti..!!");
+        }
     }
 
     private void tampilMasalah() {
