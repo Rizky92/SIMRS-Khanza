@@ -3041,7 +3041,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 case 8:
                     panggilLaporan(LoadHTMLRetensi.getText());
                     break;
-                case 6:
+                case 9:
                     panggilLaporan(LoadHTMLWearable.getText());
                     break;
                 default:
@@ -3095,7 +3095,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             case 8:
                 runBackground(() -> tampilRetensi());
                 break;
-            case 6:
+            case 9:
                 runBackground(() -> tampilWearable());
                 break;
             default:
