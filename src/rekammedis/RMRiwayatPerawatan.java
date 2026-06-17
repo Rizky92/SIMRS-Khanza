@@ -294,6 +294,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         BtnSimpanTandaTangan = new widget.Button();
         jLabel39 = new widget.Label();
         Phrase = new widget.PasswordBox();
+        ChkTampilPhrase = new widget.CekBox();
         Tanggal = new widget.Tanggal();
         WindowURLSertisign = new javax.swing.JDialog();
         internalFrame9 = new widget.InternalFrame();
@@ -671,12 +672,27 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         jLabel39.setText("Masukkan Passphrase :");
         jLabel39.setName("jLabel39"); // NOI18N
         panelisi5.add(jLabel39);
-        jLabel39.setBounds(0, 10, 130, 23);
+        jLabel39.setBounds(0, 10, 125, 23);
 
-        Phrase.setText("passwordBox1");
         Phrase.setName("Phrase"); // NOI18N
         panelisi5.add(Phrase);
-        Phrase.setBounds(134, 10, 160, 23);
+        Phrase.setBounds(129, 10, 146, 23);
+
+        ChkTampilPhrase.setBorder(null);
+        ChkTampilPhrase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/matatutup.png"))); // NOI18N
+        ChkTampilPhrase.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkTampilPhrase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkTampilPhrase.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkTampilPhrase.setIconTextGap(1);
+        ChkTampilPhrase.setName("ChkTampilPhrase"); // NOI18N
+        ChkTampilPhrase.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/matabuka.png"))); // NOI18N
+        ChkTampilPhrase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkTampilPhraseActionPerformed(evt);
+            }
+        });
+        panelisi5.add(ChkTampilPhrase);
+        ChkTampilPhrase.setBounds(275, 10, 23, 23);
 
         internalFrame8.add(panelisi5, java.awt.BorderLayout.CENTER);
 
@@ -4079,6 +4095,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private widget.TextBox CacatFisik;
     private widget.CekBox ChkAccor;
     private widget.CekBox ChkInput;
+    private widget.CekBox ChkTampilPhrase;
     private widget.panelisi FormInput;
     private widget.PanelBiasa FormMenu;
     private widget.TextBox GD;
@@ -4827,7 +4844,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 } else if (R5.isSelected()) {
                     ps.setString(1, NoRM.getText().trim());
                 }
-
                 urut=1;
                 rs=ps.executeQuery();
                 while(rs.next()){
