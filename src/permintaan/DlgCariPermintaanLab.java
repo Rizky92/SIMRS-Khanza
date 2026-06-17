@@ -1882,12 +1882,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else{
+                                boolean isSampled = Sequel.cariExistsSmc("select * from permintaan_lab where permintaan_lab.noorder = ? and permintaan_lab.tgl_sampel != '0000-00-00' and permintaan_lab.jam_sample != '00:00:00'", NoPermintaan);
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
                                 if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
-                                    try {
-                                        apiBioSysSmc.hapusOrder(NoPermintaan);
-                                    } catch (ApiBIOSYS.BiosysException e) {
-                                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    if (isSampled) {
+                                        if (JOptionPane.showConfirmDialog(null, "Apakah anda mau menghapus order lab di LIS Biosys juga?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                            try {
+                                                apiBioSysSmc.hapusOrder(NoPermintaan);
+                                            } catch (ApiBIOSYS.BiosysException e) {
+                                                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                            }
+                                        }
                                     }
                                 }
                                 TeksKosong();
@@ -1917,12 +1922,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else{
+                                boolean isSampled = Sequel.cariExistsSmc("select * from permintaan_lab where permintaan_lab.noorder = ? and permintaan_lab.tgl_sampel != '0000-00-00' and permintaan_lab.jam_sample != '00:00:00'", NoPermintaan);
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
                                 if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
-                                    try {
-                                        apiBioSysSmc.hapusOrder(NoPermintaan);
-                                    } catch (ApiBIOSYS.BiosysException e) {
-                                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    if (isSampled) {
+                                        if (JOptionPane.showConfirmDialog(null, "Apakah anda mau menghapus order lab di LIS Biosys juga?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                            try {
+                                                apiBioSysSmc.hapusOrder(NoPermintaan);
+                                            } catch (ApiBIOSYS.BiosysException e) {
+                                                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                            }
+                                        }
                                     }
                                 }
                                 TeksKosong();
