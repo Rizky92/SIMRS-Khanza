@@ -281,7 +281,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         BtnSimpanTandaTangan = new widget.Button();
         jLabel39 = new widget.Label();
         Phrase = new widget.PasswordBox();
-        ChkTampilPhrase = new widget.CekBox();
         Tanggal = new widget.Tanggal();
         WindowURLSertisign = new javax.swing.JDialog();
         internalFrame9 = new widget.InternalFrame();
@@ -520,11 +519,11 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkResepPulang = new widget.CekBox();
         chkTambahanBiaya = new widget.CekBox();
         chkPotonganBiaya = new widget.CekBox();
-        Scroll6 = new widget.ScrollPane();
+        ScrollTindakanLab = new widget.ScrollPane();
         LoadHTMLTindakanLab = new widget.editorpane();
-        Scroll7 = new widget.ScrollPane();
+        ScrollTindakanRadiologi = new widget.ScrollPane();
         LoadHTMLTindakanRadiologi = new widget.editorpane();
-        Scroll8 = new widget.ScrollPane();
+        ScrollBerkasDigital = new widget.ScrollPane();
         LoadHTMLBerkasDigital = new widget.editorpane();
         Scroll4 = new widget.ScrollPane();
         LoadHTMLPembelian = new widget.editorpane();
@@ -657,36 +656,19 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         jLabel39.setText("Masukkan Passphrase :");
         jLabel39.setName("jLabel39"); // NOI18N
         panelisi5.add(jLabel39);
-        jLabel39.setBounds(0, 10, 125, 23);
+        jLabel39.setBounds(0, 10, 130, 23);
 
-        Phrase.setForeground(new java.awt.Color(0, 0, 0));
+        Phrase.setText("passwordBox1");
         Phrase.setName("Phrase"); // NOI18N
-        Phrase.setOpaque(true);
         panelisi5.add(Phrase);
-        Phrase.setBounds(129, 10, 146, 23);
-
-        ChkTampilPhrase.setBorder(null);
-        ChkTampilPhrase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/matatutup.png"))); // NOI18N
-        ChkTampilPhrase.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkTampilPhrase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkTampilPhrase.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkTampilPhrase.setIconTextGap(1);
-        ChkTampilPhrase.setName("ChkTampilPhrase"); // NOI18N
-        ChkTampilPhrase.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/matabuka.png"))); // NOI18N
-        ChkTampilPhrase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkTampilPhraseActionPerformed(evt);
-            }
-        });
-        panelisi5.add(ChkTampilPhrase);
-        ChkTampilPhrase.setBounds(275, 10, 23, 23);
+        Phrase.setBounds(134, 10, 160, 23);
 
         internalFrame8.add(panelisi5, java.awt.BorderLayout.CENTER);
 
         WindowPhrase.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026 06:40:20" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-05-2026 11:41:18" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -2619,35 +2601,35 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         TabRawat.addTab("Riwayat Perawatan", internalFrame2);
 
-        Scroll6.setBorder(null);
-        Scroll6.setName("Scroll6"); // NOI18N
-        Scroll6.setOpaque(true);
+        ScrollTindakanLab.setBorder(null);
+        ScrollTindakanLab.setName("ScrollTindakanLab"); // NOI18N
+        ScrollTindakanLab.setOpaque(true);
 
         LoadHTMLTindakanLab.setBorder(null);
         LoadHTMLTindakanLab.setName("LoadHTMLTindakanLab"); // NOI18N
-        Scroll6.setViewportView(LoadHTMLTindakanLab);
+        ScrollTindakanLab.setViewportView(LoadHTMLTindakanLab);
 
-        TabRawat.addTab("Tindakan Lab", Scroll6);
+        TabRawat.addTab("Tindakan Lab", ScrollTindakanLab);
 
-        Scroll7.setBorder(null);
-        Scroll7.setName("Scroll7"); // NOI18N
-        Scroll7.setOpaque(true);
+        ScrollTindakanRadiologi.setBorder(null);
+        ScrollTindakanRadiologi.setName("ScrollTindakanRadiologi"); // NOI18N
+        ScrollTindakanRadiologi.setOpaque(true);
 
         LoadHTMLTindakanRadiologi.setBorder(null);
         LoadHTMLTindakanRadiologi.setName("LoadHTMLTindakanRadiologi"); // NOI18N
-        Scroll7.setViewportView(LoadHTMLTindakanRadiologi);
+        ScrollTindakanRadiologi.setViewportView(LoadHTMLTindakanRadiologi);
 
-        TabRawat.addTab("Tindakan Radiologi", Scroll7);
+        TabRawat.addTab("Tindakan Radiologi", ScrollTindakanRadiologi);
 
-        Scroll8.setBorder(null);
-        Scroll8.setName("Scroll8"); // NOI18N
-        Scroll8.setOpaque(true);
+        ScrollBerkasDigital.setBorder(null);
+        ScrollBerkasDigital.setName("ScrollBerkasDigital"); // NOI18N
+        ScrollBerkasDigital.setOpaque(true);
 
         LoadHTMLBerkasDigital.setBorder(null);
         LoadHTMLBerkasDigital.setName("LoadHTMLBerkasDigital"); // NOI18N
-        Scroll8.setViewportView(LoadHTMLBerkasDigital);
+        ScrollBerkasDigital.setViewportView(LoadHTMLBerkasDigital);
 
-        TabRawat.addTab("Berkas Digital Keperawatan", Scroll8);
+        TabRawat.addTab("Berkas Digital Keperawatan", ScrollBerkasDigital);
 
         Scroll4.setBorder(null);
         Scroll4.setName("Scroll4"); // NOI18N
@@ -4066,7 +4048,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private widget.TextBox CacatFisik;
     private widget.CekBox ChkAccor;
     private widget.CekBox ChkInput;
-    private widget.CekBox ChkTampilPhrase;
     private widget.panelisi FormInput;
     private widget.PanelBiasa FormMenu;
     private widget.TextBox GD;
@@ -4102,10 +4083,10 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private widget.ScrollPane Scroll3;
     private widget.ScrollPane Scroll4;
     private widget.ScrollPane Scroll5;
-    private widget.ScrollPane Scroll6;
-    private widget.ScrollPane Scroll7;
-    private widget.ScrollPane Scroll8;
+    private widget.ScrollPane ScrollBerkasDigital;
     private widget.ScrollPane ScrollMenu;
+    private widget.ScrollPane ScrollTindakanLab;
+    private widget.ScrollPane ScrollTindakanRadiologi;
     private widget.TextBox StatusNikah;
     private javax.swing.JTabbedPane TabRawat;
     private widget.Tanggal Tanggal;
