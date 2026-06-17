@@ -80,12 +80,12 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","NIP","Nama Petugas","Tanggal","Diagnosa","Rencana Tindakan",
+            "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","NIP","Nama Petugas","Tanggal","Diagnosa","Rencana Tindakan","Status Fungsional",
             "Keluhan Utama","Status Psikologis","Ket. Psikologis","RPD","Sistem Pernapasan","Ket. Pernapasan","Muntah Darah","BAB","Urine","Antiplatelet",
             "Lama Antiplatelet","Beta Blocker","Lama Beta Blocker","Simarc","Lama Simarc","Riwayat Alergi","TB (cm)","BB (Kg)","TD (mmHg)","Saturasi O2 (%)",
             "Nadi (x/menit)","Suhu (°C)","Pernapasan (x/menit)","Radialis Kanan","Radialis Kiri","Pedis Kanan","Pedis Kiri","Nyeri","Pencetus Nyeri",
-            "Kualitas Nyeri","Lokasi Nyeri","Nyeri Menyebar","Skala Nyeri","Durasi Nyeri","Hematokrit","Hemoglobin","Leukosit","PT/INR","Kalium",
-            "Natrium","HbsAg","Anti HCV","GDS","PT/APTT","Kreatinin","Skrining Jatuh","Skor Jatuh","Echo","Rencana Keperawatan"
+            "Kualitas Nyeri","Lokasi Nyeri","Nyeri Menyebar","Skala Nyeri","Durasi Nyeri","Kebutuhan Edukasi","Hematokrit","Hemoglobin","Leukosit","PT/INR","Kalium",
+            "Natrium","Ureum","HbsAg","Anti HCV","GDS","PT/APTT","Kreatinin","Skrining Jatuh","Skor Jatuh","Echo","Rencana Keperawatan"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -139,6 +139,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Diagnosa.setDocument(new batasInput((byte)100).getKata(Diagnosa));
         RencanaTindakan.setDocument(new batasInput((byte)100).getKata(RencanaTindakan));
+        StatusFungsional.setDocument(new batasInput((int)200).getKata(StatusFungsional));
         TB.setDocument(new batasInput((byte)5).getKata(TB));
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
@@ -156,7 +157,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         NyeriPencetus.setDocument(new batasInput((int)200).getKata(NyeriPencetus));
         NyeriKualitas.setDocument(new batasInput((int)200).getKata(NyeriKualitas));
         NyeriPenjalaran.setDocument(new batasInput((int)200).getKata(NyeriPenjalaran));
-        EdukasiLain.setDocument(new batasInput((int)200).getKata(EdukasiLain));
+        KebutuhanEdukasi.setDocument(new batasInput((int)200).getKata(KebutuhanEdukasi));
         LabHb.setDocument(new batasInput((int)10).getKata(LabHb));
         LabHt.setDocument(new batasInput((int)10).getKata(LabHt));
         LabLeukosit.setDocument(new batasInput((int)10).getKata(LabLeukosit));
@@ -362,6 +363,8 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         Diagnosa = new widget.TextBox();
         jLabel13 = new widget.Label();
         RencanaTindakan = new widget.TextBox();
+        StatusFungsional = new widget.TextBox();
+        jLabel14_StatusFungsional = new widget.Label();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel15 = new widget.Label();
         TB = new widget.TextBox();
@@ -485,7 +488,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         NyeriPenjalaran = new widget.TextBox();
         jLabel64 = new widget.Label();
         scrollPane4 = new widget.ScrollPane();
-        EdukasiLain = new widget.TextArea();
+        KebutuhanEdukasi = new widget.TextArea();
         Scroll6 = new widget.ScrollPane();
         tbMasalahKeperawatan = new widget.Table();
         label12 = new widget.Label();
@@ -838,6 +841,15 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         FormInput.add(RencanaTindakan);
         RencanaTindakan.setBounds(312, 80, 210, 23);
 
+        jLabel14_StatusFungsional.setText("Status Fungsional :");
+        jLabel14_StatusFungsional.setName("jLabel14_StatusFungsional"); // NOI18N
+        FormInput.add(jLabel14_StatusFungsional);
+        jLabel14_StatusFungsional.setBounds(525, 80, 110, 23);
+
+        StatusFungsional.setName("StatusFungsional"); // NOI18N
+        FormInput.add(StatusFungsional);
+        StatusFungsional.setBounds(640, 80, 200, 23);
+
         jSeparator2.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator2.setForeground(new java.awt.Color(239, 244, 234));
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
@@ -1018,127 +1030,127 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         jLabel30.setText("Hematokrit :");
         jLabel30.setName("jLabel30"); // NOI18N
         FormInput.add(jLabel30);
-        jLabel30.setBounds(0, 1250, 135, 23);
+        jLabel30.setBounds(0, 1240, 135, 23);
 
         LabHt.setFocusTraversalPolicyProvider(true);
         LabHt.setName("LabHt"); // NOI18N
         FormInput.add(LabHt);
-        LabHt.setBounds(140, 1250, 110, 23);
+        LabHt.setBounds(140, 1240, 110, 23);
 
         jLabel31.setText("Hemoglobin :");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(0, 1280, 135, 23);
+        jLabel31.setBounds(0, 1270, 135, 23);
 
         LabHb.setFocusTraversalPolicyProvider(true);
         LabHb.setName("LabHb"); // NOI18N
         FormInput.add(LabHb);
-        LabHb.setBounds(140, 1280, 110, 23);
+        LabHb.setBounds(140, 1270, 110, 23);
 
         jLabel32.setText("Leukosit :");
         jLabel32.setName("jLabel32"); // NOI18N
         FormInput.add(jLabel32);
-        jLabel32.setBounds(0, 1310, 135, 23);
+        jLabel32.setBounds(0, 1300, 135, 23);
 
         LabLeukosit.setFocusTraversalPolicyProvider(true);
         LabLeukosit.setName("LabLeukosit"); // NOI18N
         FormInput.add(LabLeukosit);
-        LabLeukosit.setBounds(140, 1310, 110, 23);
+        LabLeukosit.setBounds(140, 1300, 110, 23);
 
         LabPtIr.setFocusTraversalPolicyProvider(true);
         LabPtIr.setName("LabPtIr"); // NOI18N
         FormInput.add(LabPtIr);
-        LabPtIr.setBounds(330, 1340, 110, 23);
+        LabPtIr.setBounds(330, 1330, 110, 23);
 
         jLabel34.setText("PT/IR :");
         jLabel34.setName("jLabel34"); // NOI18N
         FormInput.add(jLabel34);
-        jLabel34.setBounds(250, 1340, 75, 23);
+        jLabel34.setBounds(250, 1330, 75, 23);
 
         jLabel33.setText("Kreatinin :");
         jLabel33.setName("jLabel33"); // NOI18N
         FormInput.add(jLabel33);
-        jLabel33.setBounds(250, 1280, 75, 23);
+        jLabel33.setBounds(250, 1270, 75, 23);
 
         LabK.setFocusTraversalPolicyProvider(true);
         LabK.setName("LabK"); // NOI18N
         FormInput.add(LabK);
-        LabK.setBounds(330, 1310, 110, 23);
+        LabK.setBounds(330, 1300, 110, 23);
 
         jLabel36.setText("Natrium :");
         jLabel36.setName("jLabel36"); // NOI18N
         FormInput.add(jLabel36);
-        jLabel36.setBounds(0, 1340, 135, 23);
+        jLabel36.setBounds(0, 1330, 135, 23);
 
         LabNa.setFocusTraversalPolicyProvider(true);
         LabNa.setName("LabNa"); // NOI18N
         FormInput.add(LabNa);
-        LabNa.setBounds(140, 1340, 110, 23);
+        LabNa.setBounds(140, 1330, 110, 23);
 
         jLabel37.setText("Ureum :");
         jLabel37.setName("jLabel37"); // NOI18N
         FormInput.add(jLabel37);
-        jLabel37.setBounds(250, 1250, 75, 23);
+        jLabel37.setBounds(250, 1240, 75, 23);
 
         jLabel84.setText("Kalium :");
         jLabel84.setName("jLabel84"); // NOI18N
         FormInput.add(jLabel84);
-        jLabel84.setBounds(250, 1310, 75, 23);
+        jLabel84.setBounds(250, 1300, 75, 23);
 
         LabUr.setFocusTraversalPolicyProvider(true);
         LabUr.setName("LabUr"); // NOI18N
         FormInput.add(LabUr);
-        LabUr.setBounds(330, 1250, 110, 23);
+        LabUr.setBounds(330, 1240, 110, 23);
 
         jLabel86.setText("HbsAg :");
         jLabel86.setName("jLabel86"); // NOI18N
         FormInput.add(jLabel86);
-        jLabel86.setBounds(430, 1310, 75, 23);
+        jLabel86.setBounds(430, 1300, 75, 23);
 
         LabHbsAg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Non Reaktif", "Reaktif" }));
         LabHbsAg.setName("LabHbsAg"); // NOI18N
         FormInput.add(LabHbsAg);
-        LabHbsAg.setBounds(510, 1310, 110, 23);
+        LabHbsAg.setBounds(510, 1300, 110, 23);
 
         jLabel43.setText("Anti HCV :");
         jLabel43.setName("jLabel43"); // NOI18N
         FormInput.add(jLabel43);
-        jLabel43.setBounds(430, 1340, 75, 23);
+        jLabel43.setBounds(430, 1330, 75, 23);
 
         LabAntiHCV.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Non Reaktif", "Reaktif" }));
         LabAntiHCV.setName("LabAntiHCV"); // NOI18N
         FormInput.add(LabAntiHCV);
-        LabAntiHCV.setBounds(510, 1340, 110, 23);
+        LabAntiHCV.setBounds(510, 1330, 110, 23);
 
         LabGds.setFocusTraversalPolicyProvider(true);
         LabGds.setName("LabGds"); // NOI18N
         FormInput.add(LabGds);
-        LabGds.setBounds(510, 1280, 110, 23);
+        LabGds.setBounds(510, 1270, 110, 23);
 
         LabPtAptt.setFocusTraversalPolicyProvider(true);
         LabPtAptt.setName("LabPtAptt"); // NOI18N
         FormInput.add(LabPtAptt);
-        LabPtAptt.setBounds(510, 1250, 110, 23);
+        LabPtAptt.setBounds(510, 1240, 110, 23);
 
         jLabel96.setText("14. Hasil Pemeriksaan Laboratorium :");
         jLabel96.setName("jLabel96"); // NOI18N
         FormInput.add(jLabel96);
-        jLabel96.setBounds(0, 1220, 210, 23);
+        jLabel96.setBounds(0, 1210, 210, 23);
 
         LabCr.setFocusTraversalPolicyProvider(true);
         LabCr.setName("LabCr"); // NOI18N
         FormInput.add(LabCr);
-        LabCr.setBounds(330, 1280, 110, 23);
+        LabCr.setBounds(330, 1270, 110, 23);
 
         jLabel83.setText("PT/APTT :");
         jLabel83.setName("jLabel83"); // NOI18N
         FormInput.add(jLabel83);
-        jLabel83.setBounds(430, 1250, 75, 23);
+        jLabel83.setBounds(430, 1240, 75, 23);
 
         jLabel39.setText("GDS :");
         jLabel39.setName("jLabel39"); // NOI18N
         FormInput.add(jLabel39);
-        jLabel39.setBounds(430, 1280, 75, 23);
+        jLabel39.setBounds(430, 1270, 75, 23);
 
         jLabel132.setText("Lainnya :");
         jLabel132.setName("jLabel132"); // NOI18N
@@ -1215,7 +1227,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         jLabel52.setText("16. Hasil Echo :");
         jLabel52.setName("jLabel52"); // NOI18N
         FormInput.add(jLabel52);
-        jLabel52.setBounds(0, 1420, 110, 23);
+        jLabel52.setBounds(0, 1410, 110, 23);
 
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
@@ -1309,27 +1321,27 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         scrollPane6.setViewportView(EchoKesan);
 
         FormInput.add(scrollPane6);
-        scrollPane6.setBounds(60, 1450, 750, 50);
+        scrollPane6.setBounds(60, 1440, 750, 50);
 
         jLabel41.setText("15. Skrining Jatuh :");
         jLabel41.setName("jLabel41"); // NOI18N
         FormInput.add(jLabel41);
-        jLabel41.setBounds(0, 1390, 130, 23);
+        jLabel41.setBounds(0, 1380, 130, 23);
 
         SkriningJatuh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Resiko Rendah", "Resiko Sedang", "Resiko Tinggi" }));
         SkriningJatuh.setName("SkriningJatuh"); // NOI18N
         FormInput.add(SkriningJatuh);
-        SkriningJatuh.setBounds(135, 1390, 135, 23);
+        SkriningJatuh.setBounds(135, 1380, 135, 23);
 
         SkriningSkor.setFocusTraversalPolicyProvider(true);
         SkriningSkor.setName("SkriningSkor"); // NOI18N
         FormInput.add(SkriningSkor);
-        SkriningSkor.setBounds(330, 1390, 50, 23);
+        SkriningSkor.setBounds(330, 1380, 50, 23);
 
         jLabel42.setText("Skor :");
         jLabel42.setName("jLabel42"); // NOI18N
         FormInput.add(jLabel42);
-        jLabel42.setBounds(275, 1390, 50, 23);
+        jLabel42.setBounds(275, 1380, 50, 23);
 
         jLabel134.setText("2. Status Psikologis :");
         jLabel134.setName("jLabel134"); // NOI18N
@@ -1430,42 +1442,42 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         PanelWall.setWarna(new java.awt.Color(110, 110, 110));
         PanelWall.setLayout(null);
         FormInput.add(PanelWall);
-        PanelWall.setBounds(40, 1010, 320, 115);
+        PanelWall.setBounds(40, 1000, 320, 115);
 
         Nyeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Ada Nyeri", "Nyeri Akut", "Nyeri Kronis" }));
         Nyeri.setName("Nyeri"); // NOI18N
         FormInput.add(Nyeri);
-        Nyeri.setBounds(380, 1010, 130, 23);
+        Nyeri.setBounds(380, 1000, 130, 23);
 
         jLabel87.setText("Durasi :");
         jLabel87.setName("jLabel87"); // NOI18N
         FormInput.add(jLabel87);
-        jLabel87.setBounds(370, 1040, 45, 23);
+        jLabel87.setBounds(370, 1030, 45, 23);
 
         jLabel85.setText("Skala Nyeri :");
         jLabel85.setName("jLabel85"); // NOI18N
         FormInput.add(jLabel85);
-        jLabel85.setBounds(510, 1010, 69, 23);
+        jLabel85.setBounds(510, 1000, 69, 23);
 
         NyeriLama.setFocusTraversalPolicyProvider(true);
         NyeriLama.setName("NyeriLama"); // NOI18N
         FormInput.add(NyeriLama);
-        NyeriLama.setBounds(420, 1040, 150, 23);
+        NyeriLama.setBounds(420, 1030, 150, 23);
 
         NyeriSkala.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         NyeriSkala.setName("NyeriSkala"); // NOI18N
         FormInput.add(NyeriSkala);
-        NyeriSkala.setBounds(580, 1010, 70, 23);
+        NyeriSkala.setBounds(580, 1000, 70, 23);
 
         jLabel90.setText("Lokasi :");
         jLabel90.setName("jLabel90"); // NOI18N
         FormInput.add(jLabel90);
-        jLabel90.setBounds(370, 1070, 46, 23);
+        jLabel90.setBounds(370, 1060, 46, 23);
 
         NyeriLokasi.setFocusTraversalPolicyProvider(true);
         NyeriLokasi.setName("NyeriLokasi"); // NOI18N
         FormInput.add(NyeriLokasi);
-        NyeriLokasi.setBounds(420, 1070, 150, 23);
+        NyeriLokasi.setBounds(420, 1060, 150, 23);
 
         KetSistemPernapasan.setFocusTraversalPolicyProvider(true);
         KetSistemPernapasan.setName("KetSistemPernapasan"); // NOI18N
@@ -1515,54 +1527,54 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         jLabel44.setText("12. Keluhan Nyeri :");
         jLabel44.setName("jLabel44"); // NOI18N
         FormInput.add(jLabel44);
-        jLabel44.setBounds(0, 980, 120, 23);
+        jLabel44.setBounds(0, 970, 120, 23);
 
         jLabel92.setText("Pencetus :");
         jLabel92.setName("jLabel92"); // NOI18N
         FormInput.add(jLabel92);
-        jLabel92.setBounds(600, 1040, 100, 23);
+        jLabel92.setBounds(600, 1030, 100, 23);
 
         NyeriPencetus.setFocusTraversalPolicyProvider(true);
         NyeriPencetus.setName("NyeriPencetus"); // NOI18N
         FormInput.add(NyeriPencetus);
-        NyeriPencetus.setBounds(710, 1040, 150, 23);
+        NyeriPencetus.setBounds(710, 1030, 150, 23);
 
         jLabel91.setText("Kualitas :");
         jLabel91.setName("jLabel91"); // NOI18N
         FormInput.add(jLabel91);
-        jLabel91.setBounds(370, 1100, 46, 23);
+        jLabel91.setBounds(370, 1090, 46, 23);
 
         NyeriKualitas.setFocusTraversalPolicyProvider(true);
         NyeriKualitas.setName("NyeriKualitas"); // NOI18N
         FormInput.add(NyeriKualitas);
-        NyeriKualitas.setBounds(420, 1100, 150, 23);
+        NyeriKualitas.setBounds(420, 1090, 150, 23);
 
         jLabel93.setText("Penjalaran :");
         jLabel93.setName("jLabel93"); // NOI18N
         FormInput.add(jLabel93);
-        jLabel93.setBounds(600, 1070, 100, 23);
+        jLabel93.setBounds(600, 1060, 100, 23);
 
         NyeriPenjalaran.setFocusTraversalPolicyProvider(true);
         NyeriPenjalaran.setName("NyeriPenjalaran"); // NOI18N
         FormInput.add(NyeriPenjalaran);
-        NyeriPenjalaran.setBounds(710, 1070, 150, 23);
+        NyeriPenjalaran.setBounds(710, 1060, 150, 23);
 
         jLabel64.setText("13. Kebutuhan Edukasi :");
         jLabel64.setName("jLabel64"); // NOI18N
         FormInput.add(jLabel64);
-        jLabel64.setBounds(0, 1135, 150, 23);
+        jLabel64.setBounds(0, 1125, 150, 23);
 
         scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane4.setName("scrollPane4"); // NOI18N
 
-        EdukasiLain.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        EdukasiLain.setColumns(20);
-        EdukasiLain.setRows(5);
-        EdukasiLain.setName("EdukasiLain"); // NOI18N
-        scrollPane4.setViewportView(EdukasiLain);
+        KebutuhanEdukasi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        KebutuhanEdukasi.setColumns(20);
+        KebutuhanEdukasi.setRows(5);
+        KebutuhanEdukasi.setName("KebutuhanEdukasi"); // NOI18N
+        scrollPane4.setViewportView(KebutuhanEdukasi);
 
         FormInput.add(scrollPane4);
-        scrollPane4.setBounds(50, 1160, 750, 50);
+        scrollPane4.setBounds(50, 1150, 750, 50);
 
         Scroll6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 253)));
         Scroll6.setName("Scroll6"); // NOI18N
@@ -1585,13 +1597,13 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         Scroll6.setViewportView(tbMasalahKeperawatan);
 
         FormInput.add(Scroll6);
-        Scroll6.setBounds(10, 1520, 400, 143);
+        Scroll6.setBounds(10, 1510, 400, 143);
 
         label12.setText("Key Word :");
         label12.setName("label12"); // NOI18N
         label12.setPreferredSize(new java.awt.Dimension(60, 23));
         FormInput.add(label12);
-        label12.setBounds(20, 1670, 60, 23);
+        label12.setBounds(20, 1660, 60, 23);
 
         BtnTambahMasalah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
         BtnTambahMasalah.setMnemonic('3');
@@ -1599,14 +1611,14 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         BtnTambahMasalah.setName("BtnTambahMasalah"); // NOI18N
         BtnTambahMasalah.setPreferredSize(new java.awt.Dimension(28, 23));
         FormInput.add(BtnTambahMasalah);
-        BtnTambahMasalah.setBounds(375, 1670, 28, 23);
+        BtnTambahMasalah.setBounds(375, 1660, 28, 23);
 
         jSeparator10.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator10.setForeground(new java.awt.Color(239, 244, 234));
         jSeparator10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
         jSeparator10.setName("jSeparator10"); // NOI18N
         FormInput.add(jSeparator10);
-        jSeparator10.setBounds(0, 1510, 880, 1);
+        jSeparator10.setBounds(0, 1500, 880, 1);
 
         BtnCariMasalah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCariMasalah.setMnemonic('1');
@@ -1624,7 +1636,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             }
         });
         FormInput.add(BtnCariMasalah);
-        BtnCariMasalah.setBounds(305, 1670, 28, 23);
+        BtnCariMasalah.setBounds(305, 1660, 28, 23);
 
         BtnAllMasalah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnAllMasalah.setMnemonic('2');
@@ -1637,7 +1649,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             }
         });
         FormInput.add(BtnAllMasalah);
-        BtnAllMasalah.setBounds(340, 1670, 28, 23);
+        BtnAllMasalah.setBounds(340, 1660, 28, 23);
 
         TCariMasalah.setToolTipText("Alt+C");
         TCariMasalah.setName("TCariMasalah"); // NOI18N
@@ -1648,7 +1660,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             }
         });
         FormInput.add(TCariMasalah);
-        TCariMasalah.setBounds(85, 1670, 215, 23);
+        TCariMasalah.setBounds(85, 1660, 215, 23);
 
         TabRencanaKeperawatan.setBackground(new java.awt.Color(255, 255, 254));
         TabRencanaKeperawatan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1683,7 +1695,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         TabRencanaKeperawatan.addTab("Rencana Keperawatan Lainnya", scrollPane5);
 
         FormInput.add(TabRencanaKeperawatan);
-        TabRencanaKeperawatan.setBounds(440, 1520, 420, 143);
+        TabRencanaKeperawatan.setBounds(440, 1510, 420, 143);
 
         BtnTambahRencana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
         BtnTambahRencana.setMnemonic('3');
@@ -1691,7 +1703,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         BtnTambahRencana.setName("BtnTambahRencana"); // NOI18N
         BtnTambahRencana.setPreferredSize(new java.awt.Dimension(28, 23));
         FormInput.add(BtnTambahRencana);
-        BtnTambahRencana.setBounds(815, 1670, 28, 23);
+        BtnTambahRencana.setBounds(815, 1660, 28, 23);
 
         BtnAllRencana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnAllRencana.setMnemonic('2');
@@ -1699,7 +1711,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         BtnAllRencana.setName("BtnAllRencana"); // NOI18N
         BtnAllRencana.setPreferredSize(new java.awt.Dimension(28, 23));
         FormInput.add(BtnAllRencana);
-        BtnAllRencana.setBounds(780, 1670, 28, 23);
+        BtnAllRencana.setBounds(780, 1660, 28, 23);
 
         BtnCariRencana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCariRencana.setMnemonic('1');
@@ -1707,19 +1719,19 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         BtnCariRencana.setName("BtnCariRencana"); // NOI18N
         BtnCariRencana.setPreferredSize(new java.awt.Dimension(28, 23));
         FormInput.add(BtnCariRencana);
-        BtnCariRencana.setBounds(745, 1670, 28, 23);
+        BtnCariRencana.setBounds(745, 1660, 28, 23);
 
         label13.setText("Key Word :");
         label13.setName("label13"); // NOI18N
         label13.setPreferredSize(new java.awt.Dimension(60, 23));
         FormInput.add(label13);
-        label13.setBounds(440, 1670, 60, 23);
+        label13.setBounds(440, 1660, 60, 23);
 
         TCariRencana.setToolTipText("Alt+C");
         TCariRencana.setName("TCariRencana"); // NOI18N
         TCariRencana.setPreferredSize(new java.awt.Dimension(215, 23));
         FormInput.add(TCariRencana);
-        TCariRencana.setBounds(505, 1670, 235, 23);
+        TCariRencana.setBounds(505, 1660, 235, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -2292,16 +2304,47 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
 
+            String no_rawat = tbObat.getValueAt(tbObat.getSelectedRow(),0).toString();
+            String tanggal = tbObat.getValueAt(tbObat.getSelectedRow(),7).toString();
+            String masalah = Sequel.cariIsi("select group_concat(master_masalah_keperawatan.nama_masalah separator '; ') from penilaian_tindakan_invasif_non_bedah_masalah inner join master_masalah_keperawatan on master_masalah_keperawatan.kode_masalah=penilaian_tindakan_invasif_non_bedah_masalah.kode_masalah where penilaian_tindakan_invasif_non_bedah_masalah.no_rawat=?",no_rawat);
+            String rencana_kep = Sequel.cariIsi("select group_concat(master_rencana_keperawatan.rencana_keperawatan separator '; ') from penilaian_tindakan_invasif_non_bedah_rencana inner join master_rencana_keperawatan on master_rencana_keperawatan.kode_rencana=penilaian_tindakan_invasif_non_bedah_rencana.kode_rencana where penilaian_tindakan_invasif_non_bedah_rencana.no_rawat=?",no_rawat);
+            param.put("masalah",masalah==null?"":masalah);
+            param.put("rencana_kep",rencana_kep==null?"":rencana_kep);
+            param.put("nyeri",Sequel.cariGambar("select gambar.nyeri from gambar"));
+
             Valid.MyReportqry("rptCetakPenilaianTindakanInvasifNonBedah.jasper","report","::[ Laporan Penilaian Tindakan Invasif Non Bedah ]::",
-                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_tindakan_invasif_non_bedah.tanggal,"+
-                "penilaian_tindakan_invasif_non_bedah.nip,penilaian_tindakan_invasif_non_bedah.diagnosa,"+
-                "penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,"+
-                "penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,"+
-                "penilaian_tindakan_invasif_non_bedah.pernapasan,penilaian_tindakan_invasif_non_bedah.keluhan_utama,petugas.nama "+
+                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,"+
+                "penilaian_tindakan_invasif_non_bedah.tanggal,penilaian_tindakan_invasif_non_bedah.nip,penilaian_tindakan_invasif_non_bedah.diagnosa,"+
+                "penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.status_fungsional,penilaian_tindakan_invasif_non_bedah.keluhan_utama,"+
+                "penilaian_tindakan_invasif_non_bedah.status_psiko,penilaian_tindakan_invasif_non_bedah.ket_psiko,"+
+                "penilaian_tindakan_invasif_non_bedah.rpd,"+
+                "penilaian_tindakan_invasif_non_bedah.sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.ket_sistem_pernapasan,"+
+                "penilaian_tindakan_invasif_non_bedah.muntah_darah,penilaian_tindakan_invasif_non_bedah.bab,"+
+                "penilaian_tindakan_invasif_non_bedah.urine,"+
+                "penilaian_tindakan_invasif_non_bedah.antiplatelet,penilaian_tindakan_invasif_non_bedah.lama_antiplatelet,"+
+                "penilaian_tindakan_invasif_non_bedah.beta_blocker,penilaian_tindakan_invasif_non_bedah.lama_beta_blocker,"+
+                "penilaian_tindakan_invasif_non_bedah.simarc,penilaian_tindakan_invasif_non_bedah.lama_simarc,"+
+                "penilaian_tindakan_invasif_non_bedah.riwayat_alergi,"+
+                "penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,"+
+                "penilaian_tindakan_invasif_non_bedah.io2,penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,"+
+                "penilaian_tindakan_invasif_non_bedah.pernapasan,"+
+                "penilaian_tindakan_invasif_non_bedah.radialis_kanan,penilaian_tindakan_invasif_non_bedah.radialis_kiri,"+
+                "penilaian_tindakan_invasif_non_bedah.pedis_kanan,penilaian_tindakan_invasif_non_bedah.pedis_kiri,"+
+                "penilaian_tindakan_invasif_non_bedah.penilaian_nyeri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus,"+
+                "penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi,"+
+                "penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_skala,"+
+                "penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,penilaian_tindakan_invasif_non_bedah.kebutuhan_edukasi,"+
+                "penilaian_tindakan_invasif_non_bedah.hematokrit,penilaian_tindakan_invasif_non_bedah.hemoglobin,penilaian_tindakan_invasif_non_bedah.leukosit,"+
+                "penilaian_tindakan_invasif_non_bedah.pt_ir,penilaian_tindakan_invasif_non_bedah.kalium,penilaian_tindakan_invasif_non_bedah.natrium,"+
+                "penilaian_tindakan_invasif_non_bedah.ureum,penilaian_tindakan_invasif_non_bedah.hbsag,penilaian_tindakan_invasif_non_bedah.anti_hcv,"+
+                "penilaian_tindakan_invasif_non_bedah.gds,penilaian_tindakan_invasif_non_bedah.pt_aptt,penilaian_tindakan_invasif_non_bedah.kreatinin,"+
+                "penilaian_tindakan_invasif_non_bedah.skrining_jatuh,penilaian_tindakan_invasif_non_bedah.skor_resiko_jatuh,"+
+                "penilaian_tindakan_invasif_non_bedah.hasil_echo,penilaian_tindakan_invasif_non_bedah.rencana,"+
+                "petugas.nama "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join penilaian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=penilaian_tindakan_invasif_non_bedah.no_rawat "+
-                "inner join petugas on penilaian_tindakan_invasif_non_bedah.nip=petugas.nip where penilaian_tindakan_invasif_non_bedah.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' "+
-                "and penilaian_tindakan_invasif_non_bedah.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"'",param);
+                "inner join petugas on penilaian_tindakan_invasif_non_bedah.nip=petugas.nip where penilaian_tindakan_invasif_non_bedah.no_rawat='"+no_rawat+"' "+
+                "and penilaian_tindakan_invasif_non_bedah.tanggal='"+tanggal+"'",param);
         }
     }//GEN-LAST:event_MnPenilaianMedisActionPerformed
 
@@ -2559,7 +2602,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private widget.Button BtnTambahRencana;
     private widget.TextBox Diagnosa;
     private widget.TextArea EchoKesan;
-    private widget.TextArea EdukasiLain;
+    private widget.TextArea KebutuhanEdukasi;
     private widget.PanelBiasa FormInput;
     private widget.TextBox IO2;
     private widget.TextBox Jk;
@@ -2610,6 +2653,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private widget.ComboBox SistemPernapasan;
     private widget.ComboBox SkriningJatuh;
     private widget.TextBox SkriningSkor;
+    private widget.TextBox StatusFungsional;
     private widget.ComboBox StatusPsiko;
     private widget.CekBox ChkAccor;
     private widget.TextBox Suhu;
@@ -2639,6 +2683,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     private widget.Label jLabel134;
     private widget.Label jLabel135;
     private widget.Label jLabel14;
+    private widget.Label jLabel14_StatusFungsional;
     private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -2747,7 +2792,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                "select penilaian_tindakan_invasif_non_bedah.no_rawat,penilaian_tindakan_invasif_non_bedah.tanggal,penilaian_tindakan_invasif_non_bedah.nip,penilaian_tindakan_invasif_non_bedah.diagnosa,penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.keluhan_utama,penilaian_tindakan_invasif_non_bedah.status_psiko,penilaian_tindakan_invasif_non_bedah.ket_psiko,penilaian_tindakan_invasif_non_bedah.rpd,penilaian_tindakan_invasif_non_bedah.sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.ket_sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.muntah_darah,penilaian_tindakan_invasif_non_bedah.bab,penilaian_tindakan_invasif_non_bedah.urine,penilaian_tindakan_invasif_non_bedah.antiplatelet,penilaian_tindakan_invasif_non_bedah.lama_antiplatelet,penilaian_tindakan_invasif_non_bedah.beta_blocker,penilaian_tindakan_invasif_non_bedah.lama_beta_blocker,penilaian_tindakan_invasif_non_bedah.simarc,penilaian_tindakan_invasif_non_bedah.lama_simarc,penilaian_tindakan_invasif_non_bedah.riwayat_alergi,penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,penilaian_tindakan_invasif_non_bedah.io2,penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,penilaian_tindakan_invasif_non_bedah.pernapasan,penilaian_tindakan_invasif_non_bedah.radialis_kanan,penilaian_tindakan_invasif_non_bedah.radialis_kiri,penilaian_tindakan_invasif_non_bedah.pedis_kanan,penilaian_tindakan_invasif_non_bedah.pedis_kiri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_skala,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,penilaian_tindakan_invasif_non_bedah.hematokrit,penilaian_tindakan_invasif_non_bedah.hemoglobin,penilaian_tindakan_invasif_non_bedah.leukosit,penilaian_tindakan_invasif_non_bedah.pt_ir,penilaian_tindakan_invasif_non_bedah.kalium,penilaian_tindakan_invasif_non_bedah.natrium,penilaian_tindakan_invasif_non_bedah.hbsag,penilaian_tindakan_invasif_non_bedah.anti_hcv,penilaian_tindakan_invasif_non_bedah.gds,penilaian_tindakan_invasif_non_bedah.pt_aptt,penilaian_tindakan_invasif_non_bedah.kreatinin,penilaian_tindakan_invasif_non_bedah.skrining_jatuh,penilaian_tindakan_invasif_non_bedah.skor_resiko_jatuh,penilaian_tindakan_invasif_non_bedah.hasil_echo,penilaian_tindakan_invasif_non_bedah.rencana,pasien.tgl_lahir,pasien.jk,petugas.nama,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.agama,pasien.pnd,penjab.png_jawab,bahasa_pasien.nama_bahasa "+
+                "select penilaian_tindakan_invasif_non_bedah.no_rawat,penilaian_tindakan_invasif_non_bedah.tanggal,penilaian_tindakan_invasif_non_bedah.nip,penilaian_tindakan_invasif_non_bedah.diagnosa,penilaian_tindakan_invasif_non_bedah.rencana_tindakan,penilaian_tindakan_invasif_non_bedah.status_fungsional,penilaian_tindakan_invasif_non_bedah.keluhan_utama,penilaian_tindakan_invasif_non_bedah.status_psiko,penilaian_tindakan_invasif_non_bedah.ket_psiko,penilaian_tindakan_invasif_non_bedah.rpd,penilaian_tindakan_invasif_non_bedah.sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.ket_sistem_pernapasan,penilaian_tindakan_invasif_non_bedah.muntah_darah,penilaian_tindakan_invasif_non_bedah.bab,penilaian_tindakan_invasif_non_bedah.urine,penilaian_tindakan_invasif_non_bedah.antiplatelet,penilaian_tindakan_invasif_non_bedah.lama_antiplatelet,penilaian_tindakan_invasif_non_bedah.beta_blocker,penilaian_tindakan_invasif_non_bedah.lama_beta_blocker,penilaian_tindakan_invasif_non_bedah.simarc,penilaian_tindakan_invasif_non_bedah.lama_simarc,penilaian_tindakan_invasif_non_bedah.riwayat_alergi,penilaian_tindakan_invasif_non_bedah.tb,penilaian_tindakan_invasif_non_bedah.bb,penilaian_tindakan_invasif_non_bedah.td,penilaian_tindakan_invasif_non_bedah.io2,penilaian_tindakan_invasif_non_bedah.nadi,penilaian_tindakan_invasif_non_bedah.suhu,penilaian_tindakan_invasif_non_bedah.pernapasan,penilaian_tindakan_invasif_non_bedah.radialis_kanan,penilaian_tindakan_invasif_non_bedah.radialis_kiri,penilaian_tindakan_invasif_non_bedah.pedis_kanan,penilaian_tindakan_invasif_non_bedah.pedis_kiri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_skala,penilaian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,penilaian_tindakan_invasif_non_bedah.kebutuhan_edukasi,penilaian_tindakan_invasif_non_bedah.hematokrit,penilaian_tindakan_invasif_non_bedah.hemoglobin,penilaian_tindakan_invasif_non_bedah.leukosit,penilaian_tindakan_invasif_non_bedah.pt_ir,penilaian_tindakan_invasif_non_bedah.kalium,penilaian_tindakan_invasif_non_bedah.natrium,penilaian_tindakan_invasif_non_bedah.ureum,penilaian_tindakan_invasif_non_bedah.hbsag,penilaian_tindakan_invasif_non_bedah.anti_hcv,penilaian_tindakan_invasif_non_bedah.gds,penilaian_tindakan_invasif_non_bedah.pt_aptt,penilaian_tindakan_invasif_non_bedah.kreatinin,penilaian_tindakan_invasif_non_bedah.skrining_jatuh,penilaian_tindakan_invasif_non_bedah.skor_resiko_jatuh,penilaian_tindakan_invasif_non_bedah.hasil_echo,penilaian_tindakan_invasif_non_bedah.rencana,pasien.tgl_lahir,pasien.jk,petugas.nama,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.agama,pasien.pnd,penjab.png_jawab,bahasa_pasien.nama_bahasa "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join penilaian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=penilaian_tindakan_invasif_non_bedah.no_rawat "+
                 "inner join petugas on penilaian_tindakan_invasif_non_bedah.nip=petugas.nip "+
@@ -2772,16 +2817,16 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("nip"),
-                        rs.getString("nama"),rs.getString("tanggal"),rs.getString("diagnosa"),rs.getString("rencana_tindakan"),rs.getString("keluhan_utama"),
+                        rs.getString("nama"),rs.getString("tanggal"),rs.getString("diagnosa"),rs.getString("rencana_tindakan"),rs.getString("status_fungsional"),rs.getString("keluhan_utama"),
                         rs.getString("status_psiko"),rs.getString("ket_psiko"),rs.getString("rpd"),rs.getString("sistem_pernapasan"),rs.getString("ket_sistem_pernapasan"),
                         rs.getString("muntah_darah"),rs.getString("bab"),rs.getString("urine"),rs.getString("antiplatelet"),rs.getString("lama_antiplatelet"),rs.getString("beta_blocker"),
                         rs.getString("lama_beta_blocker"),rs.getString("simarc"),rs.getString("lama_simarc"),rs.getString("riwayat_alergi"),
                         rs.getString("tb"),rs.getString("bb"),rs.getString("td"),rs.getString("io2"),rs.getString("nadi"),rs.getString("suhu"),rs.getString("pernapasan"),
                         rs.getString("radialis_kanan"),rs.getString("radialis_kiri"),rs.getString("pedis_kanan"),rs.getString("pedis_kiri"),
                         rs.getString("penilaian_nyeri"),rs.getString("penilaian_nyeri_pencetus"),rs.getString("penilaian_nyeri_kualitas"),rs.getString("penilaian_nyeri_lokasi"),
-                        rs.getString("penilaian_nyeri_penjalaran"),rs.getString("penilaian_nyeri_skala"),rs.getString("penilaian_nyeri_durasi"),
+                        rs.getString("penilaian_nyeri_penjalaran"),rs.getString("penilaian_nyeri_skala"),rs.getString("penilaian_nyeri_durasi"),rs.getString("kebutuhan_edukasi"),
                         rs.getString("hematokrit"),rs.getString("hemoglobin"),rs.getString("leukosit"),rs.getString("pt_ir"),rs.getString("kalium"),
-                        rs.getString("natrium"),rs.getString("hbsag"),rs.getString("anti_hcv"),rs.getString("gds"),rs.getString("pt_aptt"),rs.getString("kreatinin"),
+                        rs.getString("natrium"),rs.getString("ureum"),rs.getString("hbsag"),rs.getString("anti_hcv"),rs.getString("gds"),rs.getString("pt_aptt"),rs.getString("kreatinin"),
                         rs.getString("skrining_jatuh"),rs.getString("skor_resiko_jatuh"),rs.getString("hasil_echo"),rs.getString("rencana")
                     });
                 }
@@ -2806,100 +2851,131 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
         TglAsuhan.setDate(new Date());
         Diagnosa.setText("");
         RencanaTindakan.setText("");
+        StatusFungsional.setText("");
+        KeluhanUtama.setText("");
+        StatusPsiko.setSelectedIndex(0);
+        KetPsiko.setText("");
+        RPD.setText("");
+        SistemPernapasan.setSelectedIndex(0);
+        KetSistemPernapasan.setText("");
+        MuntahDarah.setSelectedIndex(0);
+        BAB.setSelectedIndex(0);
+        Urine24Jam.setText("");
+        Antiplatelet.setSelectedIndex(0);
+        LamaAntiPlatelet.setText("");
+        BetaBlocker.setSelectedIndex(0);
+        LamaBetaBlocker.setText("");
+        Simarc.setSelectedIndex(0);
+        LamaSimarc.setText("");
+        AlergiKeterangan.setText("");
         TB.setText("");
         BB.setText("");
         TD.setText("");
         IO2.setText("");
         Nadi.setText("");
         Suhu.setText("");
-        TabRawat.setSelectedIndex(0);
-        Diagnosa.requestFocus();
-        Urine24Jam.setText("");
-        LamaAntiPlatelet.setText("");
-        LamaBetaBlocker.setText("");
-        LamaSimarc.setText("");
-        AlergiKeterangan.setText("");
         Pernapasan.setText("");
-        NyeriLokasi.setText("");
-        NyeriLama.setText("");
+        RadialisKanan.setSelectedIndex(0);
+        RadialisKiri.setSelectedIndex(0);
+        PedisKanan.setSelectedIndex(0);
+        PedisKiri.setSelectedIndex(0);
+        Nyeri.setSelectedIndex(0);
         NyeriPencetus.setText("");
         NyeriKualitas.setText("");
+        NyeriLokasi.setText("");
         NyeriPenjalaran.setText("");
-        EdukasiLain.setText("");
+        NyeriSkala.setSelectedIndex(0);
+        NyeriLama.setText("");
+        KebutuhanEdukasi.setText("");
         LabHb.setText("");
         LabHt.setText("");
         LabLeukosit.setText("");
+        LabPtIr.setText("");
+        LabK.setText("");
         LabNa.setText("");
+        LabHbsAg.setSelectedIndex(0);
+        LabAntiHCV.setSelectedIndex(0);
+        LabGds.setText("");
+        LabPtAptt.setText("");
         LabUr.setText("");
         LabCr.setText("");
-        LabK.setText("");
-        LabPtIr.setText("");
-        LabPtAptt.setText("");
-        LabGds.setText("");
+        SkriningJatuh.setSelectedIndex(0);
         SkriningSkor.setText("");
         EchoKesan.setText("");
+        Rencana.setText("");
+        DetailRencana.setText("");
+        TabRawat.setSelectedIndex(0);
+        Diagnosa.requestFocus();
+    }
+
+    private String gv(int col) {
+        Object val = tbObat.getValueAt(tbObat.getSelectedRow(), col);
+        return val != null ? val.toString() : "";
     }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            RencanaTindakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            StatusPsiko.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            KetPsiko.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            RPD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            SistemPernapasan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            KetSistemPernapasan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            MuntahDarah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            BAB.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
-            Urine24Jam.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
-            Antiplatelet.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
-            LamaAntiPlatelet.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            BetaBlocker.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
-            LamaBetaBlocker.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
-            Simarc.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            LamaSimarc.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            AlergiKeterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            TB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            BB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            TD.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            IO2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            Nadi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            Pernapasan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            RadialisKanan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
-            RadialisKiri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
-            PedisKanan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
-            PedisKiri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
-            Nyeri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString());
-            NyeriPencetus.setText(tbObat.getValueAt(tbObat.getSelectedRow(),38).toString());
-            NyeriKualitas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),39).toString());
-            NyeriLokasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),40).toString());
-            NyeriPenjalaran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),41).toString());
-            NyeriSkala.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),42).toString());
-            NyeriLama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),43).toString());
-            LabHt.setText(tbObat.getValueAt(tbObat.getSelectedRow(),44).toString());
-            LabHb.setText(tbObat.getValueAt(tbObat.getSelectedRow(),45).toString());
-            LabLeukosit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),46).toString());
-            LabPtIr.setText(tbObat.getValueAt(tbObat.getSelectedRow(),47).toString());
-            LabK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),48).toString());
-            LabNa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),49).toString());
-            LabHbsAg.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),50).toString());
-            LabAntiHCV.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),51).toString());
-            LabGds.setText(tbObat.getValueAt(tbObat.getSelectedRow(),52).toString());
-            LabPtAptt.setText(tbObat.getValueAt(tbObat.getSelectedRow(),53).toString());
-            LabCr.setText(tbObat.getValueAt(tbObat.getSelectedRow(),54).toString());
-            SkriningJatuh.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),55).toString());
-            SkriningSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),56).toString());
-            EchoKesan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),57).toString());
-            Rencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),58).toString());
+            TNoRw.setText(gv(0));
+            TNoRM.setText(gv(1));
+            TPasien.setText(gv(2));
+            TglLahir.setText(gv(3));
+            Jk.setText(gv(4));
+            KdDokter.setText(gv(5));
+            NmDokter.setText(gv(6));
+            Diagnosa.setText(gv(8));
+            RencanaTindakan.setText(gv(9));
+            StatusFungsional.setText(gv(10));
+            KeluhanUtama.setText(gv(11));
+            StatusPsiko.setSelectedItem(gv(12));
+            KetPsiko.setText(gv(13));
+            RPD.setText(gv(14));
+            SistemPernapasan.setSelectedItem(gv(15));
+            KetSistemPernapasan.setText(gv(16));
+            MuntahDarah.setSelectedItem(gv(17));
+            BAB.setSelectedItem(gv(18));
+            Urine24Jam.setText(gv(19));
+            Antiplatelet.setSelectedItem(gv(20));
+            LamaAntiPlatelet.setText(gv(21));
+            BetaBlocker.setSelectedItem(gv(22));
+            LamaBetaBlocker.setText(gv(23));
+            Simarc.setSelectedItem(gv(24));
+            LamaSimarc.setText(gv(25));
+            AlergiKeterangan.setText(gv(26));
+            TB.setText(gv(27));
+            BB.setText(gv(28));
+            TD.setText(gv(29));
+            IO2.setText(gv(30));
+            Nadi.setText(gv(31));
+            Suhu.setText(gv(32));
+            Pernapasan.setText(gv(33));
+            RadialisKanan.setSelectedItem(gv(34));
+            RadialisKiri.setSelectedItem(gv(35));
+            PedisKanan.setSelectedItem(gv(36));
+            PedisKiri.setSelectedItem(gv(37));
+            Nyeri.setSelectedItem(gv(38));
+            NyeriPencetus.setText(gv(39));
+            NyeriKualitas.setText(gv(40));
+            NyeriLokasi.setText(gv(41));
+            NyeriPenjalaran.setText(gv(42));
+            NyeriSkala.setSelectedItem(gv(43));
+            NyeriLama.setText(gv(44));
+            KebutuhanEdukasi.setText(gv(45));
+            LabHt.setText(gv(46));
+            LabHb.setText(gv(47));
+            LabLeukosit.setText(gv(48));
+            LabPtIr.setText(gv(49));
+            LabK.setText(gv(50));
+            LabNa.setText(gv(51));
+            LabUr.setText(gv(52));
+            LabHbsAg.setSelectedItem(gv(53));
+            LabAntiHCV.setSelectedItem(gv(54));
+            LabGds.setText(gv(55));
+            LabPtAptt.setText(gv(56));
+            LabCr.setText(gv(57));
+            SkriningJatuh.setSelectedItem(gv(58));
+            SkriningSkor.setText(gv(59));
+            EchoKesan.setText(gv(60));
+            Rencana.setText(gv(61));
             Valid.tabelKosong(tabModeMasalah);
             Valid.tabelKosong(tabModeRencana);
             for (i = 0; i < tbMasalahDetail.getRowCount(); i++) {
@@ -2912,7 +2988,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
                     true,tbRencanaDetail.getValueAt(i,0).toString(),tbRencanaDetail.getValueAt(i,1).toString()
                 });
             }
-            Valid.SetTgl(TglAsuhan,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            Valid.SetTgl(TglAsuhan,gv(7));
         }
     }
 
@@ -3008,7 +3084,7 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
             try {
                 TNoRM1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),1).toString():"");
                 TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),2).toString():"");
-                DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),58)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),58).toString():"");
+                DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),61)!=null?tbObat.getValueAt(tbObat.getSelectedRow(),61).toString():"");
             } catch (Exception e) {
             }
             try {
@@ -3277,25 +3353,25 @@ public final class RMPenilaianTindakanInvasifNonBedah extends javax.swing.JDialo
     }
 
     private void simpan() {
-        if(Sequel.menyimpantf("penilaian_tindakan_invasif_non_bedah","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat, Tanggal & Jam",54,new String[]{
-                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Diagnosa.getText(),RencanaTindakan.getText(),KeluhanUtama.getText(),StatusPsiko.getSelectedItem().toString(),
+        if(Sequel.menyimpantf("penilaian_tindakan_invasif_non_bedah","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat, Tanggal & Jam",57,new String[]{
+                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Diagnosa.getText(),RencanaTindakan.getText(),StatusFungsional.getText(),KeluhanUtama.getText(),StatusPsiko.getSelectedItem().toString(),
                 KetPsiko.getText(),RPD.getText(),SistemPernapasan.getSelectedItem().toString(),KetSistemPernapasan.getText(),MuntahDarah.getSelectedItem().toString(),
                 BAB.getSelectedItem().toString(),Urine24Jam.getText(),Antiplatelet.getSelectedItem().toString(),LamaAntiPlatelet.getText(),BetaBlocker.getSelectedItem().toString(),
                 LamaBetaBlocker.getText(),Simarc.getSelectedItem().toString(),LamaSimarc.getText(),AlergiKeterangan.getText(),TB.getText(),BB.getText(),TD.getText(),IO2.getText(),Nadi.getText(),Suhu.getText(),Pernapasan.getText(),
                 RadialisKanan.getSelectedItem().toString(),RadialisKiri.getSelectedItem().toString(),PedisKanan.getSelectedItem().toString(),PedisKiri.getSelectedItem().toString(),
-                Nyeri.getSelectedItem().toString(),NyeriPencetus.getText(),NyeriKualitas.getText(),NyeriLokasi.getText(),NyeriPenjalaran.getText(),NyeriSkala.getSelectedItem().toString(),NyeriLama.getText(),
-                LabHt.getText(),LabHb.getText(),LabLeukosit.getText(),LabPtIr.getText(),LabK.getText(),LabNa.getText(),LabHbsAg.getSelectedItem().toString(),LabAntiHCV.getSelectedItem().toString(),LabGds.getText(),LabPtAptt.getText(),LabCr.getText(),
+                Nyeri.getSelectedItem().toString(),NyeriPencetus.getText(),NyeriKualitas.getText(),NyeriLokasi.getText(),NyeriPenjalaran.getText(),NyeriSkala.getSelectedItem().toString(),NyeriLama.getText(),KebutuhanEdukasi.getText(),
+                LabHt.getText(),LabHb.getText(),LabLeukosit.getText(),LabPtIr.getText(),LabK.getText(),LabNa.getText(),LabUr.getText(),LabHbsAg.getSelectedItem().toString(),LabAntiHCV.getSelectedItem().toString(),LabGds.getText(),LabPtAptt.getText(),LabCr.getText(),
                 SkriningJatuh.getSelectedItem().toString(),SkriningSkor.getText(),EchoKesan.getText(),Rencana.getText()
             })==true){
                 tabMode.addRow(new Object[]{
-                    TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdDokter.getText(),NmDokter.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),Diagnosa.getText(),RencanaTindakan.getText(),KeluhanUtama.getText(),StatusPsiko.getSelectedItem().toString(),
+                    TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdDokter.getText(),NmDokter.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),Diagnosa.getText(),RencanaTindakan.getText(),StatusFungsional.getText(),KeluhanUtama.getText(),StatusPsiko.getSelectedItem().toString(),
                     KetPsiko.getText(),RPD.getText(),SistemPernapasan.getSelectedItem().toString(),KetSistemPernapasan.getText(),MuntahDarah.getSelectedItem().toString(),
                     BAB.getSelectedItem().toString(),Urine24Jam.getText(),Antiplatelet.getSelectedItem().toString(),LamaAntiPlatelet.getText(),BetaBlocker.getSelectedItem().toString(),
-                    LamaBetaBlocker.getText(),Simarc.getSelectedItem().toString(),LamaSimarc.getText(),AlergiKeterangan.getText(),TB.getText(),BB.getText(),TD.getText(),IO2.getText(),Nadi.getText(),Pernapasan.getText(),Suhu.getText(),
+                    LamaBetaBlocker.getText(),Simarc.getSelectedItem().toString(),LamaSimarc.getText(),AlergiKeterangan.getText(),TB.getText(),BB.getText(),TD.getText(),IO2.getText(),Nadi.getText(),Suhu.getText(),Pernapasan.getText(),
                     RadialisKanan.getSelectedItem().toString(),RadialisKiri.getSelectedItem().toString(),PedisKanan.getSelectedItem().toString(),PedisKiri.getSelectedItem().toString(),
-                    Nyeri.getSelectedItem().toString(),NyeriSkala.getSelectedItem().toString(),NyeriLama.getText(),NyeriLokasi.getText(),NyeriKualitas.getText(),NyeriPencetus.getText(),NyeriPenjalaran.getText(),EdukasiLain.getText(),
-                    LabHt.getText(),LabHb.getText(),LabLeukosit.getText(),LabNa.getText(),LabUr.getText(),LabCr.getText(),LabK.getText(),LabPtIr.getText(),LabPtAptt.getText(),LabGds.getText(),LabHbsAg.getSelectedItem().toString(),LabAntiHCV.getSelectedItem().toString(),
-                    SkriningJatuh.getSelectedItem().toString(),SkriningSkor.getText(),EchoKesan.getText()
+                    Nyeri.getSelectedItem().toString(),NyeriPencetus.getText(),NyeriKualitas.getText(),NyeriLokasi.getText(),NyeriPenjalaran.getText(),NyeriSkala.getSelectedItem().toString(),NyeriLama.getText(),KebutuhanEdukasi.getText(),
+                    LabHt.getText(),LabHb.getText(),LabLeukosit.getText(),LabPtIr.getText(),LabK.getText(),LabNa.getText(),LabUr.getText(),LabHbsAg.getSelectedItem().toString(),LabAntiHCV.getSelectedItem().toString(),LabGds.getText(),LabPtAptt.getText(),LabCr.getText(),
+                    SkriningJatuh.getSelectedItem().toString(),SkriningSkor.getText(),EchoKesan.getText(),Rencana.getText()
                 });
                 for (i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
                     if(tbMasalahKeperawatan.getValueAt(i,0).toString().equals("true")){
