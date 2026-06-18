@@ -64,6 +64,7 @@ public class DlgPemesanan extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private final String DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -1794,6 +1795,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             btnPetugas.setEnabled(false);
             kdptg.setText(akses.getkode());
             nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
+        }
+        if (!DEPOAKTIFOBAT.isBlank()) {
+            btnGudang.setEnabled(false);
+            kdgudang.setText(DEPOAKTIFOBAT);
+            nmgudang.setText(Sequel.CariBangsal(DEPOAKTIFOBAT));
         }
     }
 
