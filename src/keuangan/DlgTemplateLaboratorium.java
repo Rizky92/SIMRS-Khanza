@@ -57,25 +57,22 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
 
         Object[] row={"Pemeriksaan","Satuan","N.Rujukan L.D.","N.Rujukan L.A.","N.Rujukan P.D.",
                       "N.Rujukan P.A.","J.S. Rmh Skt","Paket BHP","J.M. Perujuk","J.M. Dokter",
-                      "J.M. Laborat","K.S.O.","Menejemen","Biaya Item","",""};
+                      "J.M. Laborat","K.S.O.","Menejemen","Biaya Item","ID Template",""};
         tabMode=new DefaultTableModel(null,row){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = true;
-                if (colIndex==13) {
-                    a=false;
-                }
-                return a;
-             }
-             Class[] types = new Class[] {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return colIndex < 13;
+            }
+            Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Object.class,java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
@@ -85,7 +82,9 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(180);
-            }else if((i==14)||(i==15)){
+            } else if (i == 14) {
+                column.setPreferredWidth(100);
+            }else if(i==15){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else {
@@ -242,48 +241,48 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-    if(KdPeriksa.getText().equals("")||NmPeriksa.getText().equals("")){
-        Valid.textKosong(KdPeriksa,"Pemeriksaan");
-    }else{
-        int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-        if(reply == JOptionPane.YES_OPTION) {
-             int row=tbKamar.getRowCount();
-             if(row>-1){
-                 for(int i=0;i<row;i++){
-                     //System.out.println(tbKamar.getValueAt(i,0).toString());
-                    if(tbKamar.getValueAt(i,14).toString().equals("")){
-                         Sequel.menyimpan("template_laboratorium","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Id Hasil Periksa",17,new String[]{
-                               KdPeriksa.getText(),"0",tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),
-                               tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),tbKamar.getValueAt(i,4).toString(),
-                               tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
-                               tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),
-                               tbKamar.getValueAt(i,11).toString(),tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),
-                               tbKamar.getValueAt(i,15).toString()
-                         });
-                    }else if(!tbKamar.getValueAt(i,14).toString().equals("")){
-                         Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,"+
-                               "nilai_rujukan_pd=?,nilai_rujukan_pa=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",16,new String[]{
-                               tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
-                               tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
-                               tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,11).toString(),
-                               tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,15).toString(),tbKamar.getValueAt(i,14).toString()
-                         } );
-                    }
+        if(KdPeriksa.getText().equals("")||NmPeriksa.getText().equals("")){
+            Valid.textKosong(KdPeriksa,"Pemeriksaan");
+        }else{
+            int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+            if(reply == JOptionPane.YES_OPTION) {
+                 int row=tbKamar.getRowCount();
+                 if(row>-1){
+                     for(int i=0;i<row;i++){
+                         //System.out.println(tbKamar.getValueAt(i,0).toString());
+                        if(tbKamar.getValueAt(i,14).toString().equals("")){
+                             Sequel.menyimpan("template_laboratorium","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Id Hasil Periksa",17,new String[]{
+                                   KdPeriksa.getText(),"0",tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),
+                                   tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),tbKamar.getValueAt(i,4).toString(),
+                                   tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
+                                   tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),
+                                   tbKamar.getValueAt(i,11).toString(),tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),
+                                   tbKamar.getValueAt(i,15).toString()
+                             });
+                        }else if(!tbKamar.getValueAt(i,14).toString().equals("")){
+                             Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,"+
+                                   "nilai_rujukan_pd=?,nilai_rujukan_pa=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",16,new String[]{
+                                   tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
+                                   tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
+                                   tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,11).toString(),
+                                   tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,15).toString(),tbKamar.getValueAt(i,14).toString()
+                             } );
+                        }
+                     }
+                     tampil();
                  }
-                 tampil();
-             }
+            }
         }
-    }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-   try{
-       Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),14).toString());
-       tabMode.removeRow(tbKamar.getSelectedRow());
-       urut();
-   }catch(Exception ex){
-       JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
-   }
+        try{
+            Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),14).toString());
+            tabMode.removeRow(tbKamar.getSelectedRow());
+            urut();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
