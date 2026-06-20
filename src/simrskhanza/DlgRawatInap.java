@@ -101,6 +101,7 @@ import rekammedis.RMDataCatatanObservasiRanap;
 import rekammedis.RMDataCatatanObservasiRanapKebidanan;
 import rekammedis.RMDataCatatanObservasiRanapPostPartum;
 import rekammedis.RMDataCatatanObservasiRestrainNonFarmakologi;
+import rekammedis.RMDataCatatanObservasiRuangOperasi;
 import rekammedis.RMDataCatatanObservasiVentilator;
 import rekammedis.RMDataFollowUpDBD;
 import rekammedis.RMDataMonitoringAsuhanGizi;
@@ -9003,6 +9004,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
+    private void BtnCatatanObservasiRuangOperasiActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMDataCatatanObservasiRuangOperasi form=new RMDataCatatanObservasiRuangOperasi(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -9336,7 +9354,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                           BtnCatatanObservasiVentilator,BtnCatatanAnastesiSedasi,BtnChecklistPemberianFibrinolitik,BtnPenilaianPsikologKlinis,BtnAwalMedisNeonatus,BtnPenilaianDerajatDehidrasi,BtnHasilPemeriksaanECHO,BtnPenilaianBayiBaruLahir,BtnLaporanTindakan,
                           BtnPelaksanaanInformasiEdukasi,BtnCatatanObservasiHemodialisa,BtnCatatanCairanHemodialisa,BtnCatatanPengkajianPaskaOperasi,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaKeluarNICU,BtnAwalMedisPsikiatri,BtnChecklistKriteriaMasukPICU,BtnChecklistKriteriaKeluarPICU,BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnAwalMedisJantung,
-                          BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat;
+                          BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnCopySOAP,MnPasteSOAP;
 
@@ -10179,6 +10197,10 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         if(akses.getcatatan_cairan_hemodialisa()==true){
             tinggi=tinggi+24;
         }
+        BtnCatatanObservasiRuangOperasi.setVisible(akses.getcatatan_observasi_ruang_ok());
+        if(akses.getcatatan_observasi_ruang_ok()==true){
+            tinggi=tinggi+24;
+        }
         BtnChecklistPemberianFibrinolitik.setVisible(akses.getchecklist_pemberian_fibrinolitik());
         if(akses.getchecklist_pemberian_fibrinolitik()==true){
             tinggi=tinggi+24;
@@ -10885,6 +10907,19 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanObservasiHemodialisa.setRoundRect(false);
         BtnCatatanObservasiHemodialisa.addActionListener(this::BtnCatatanObservasiHemodialisaActionPerformed);
 
+        BtnCatatanObservasiRuangOperasi = new widget.Button();
+        BtnCatatanObservasiRuangOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnCatatanObservasiRuangOperasi.setText("Observasi Ruang Operasi");
+        BtnCatatanObservasiRuangOperasi.setFocusPainted(false);
+        BtnCatatanObservasiRuangOperasi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnCatatanObservasiRuangOperasi.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnCatatanObservasiRuangOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnCatatanObservasiRuangOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnCatatanObservasiRuangOperasi.setName("BtnCatatanObservasiRuangOperasi");
+        BtnCatatanObservasiRuangOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnCatatanObservasiRuangOperasi.setRoundRect(false);
+        BtnCatatanObservasiRuangOperasi.addActionListener(this::BtnCatatanObservasiRuangOperasiActionPerformed);
+
         BtnCatatanCairanHemodialisa = new widget.Button();
         BtnCatatanCairanHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnCatatanCairanHemodialisa.setText("Cairan Hemodialisa");
@@ -11320,6 +11355,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         FormMenu.add(BtnCatatanObservasiRestrainNonfarmakologi);
         FormMenu.add(BtnCatatanObservasiVentilator);
         FormMenu.add(BtnCatatanObservasiHemodialisa);
+        FormMenu.add(BtnCatatanObservasiRuangOperasi);
         FormMenu.add(BtnCatatanKeseimbanganCairan);
         FormMenu.add(BtnCatatanCairanHemodialisa);
         FormMenu.add(BtnChecklistPemberianFibrinolitik);
