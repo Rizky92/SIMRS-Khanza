@@ -7,7 +7,7 @@
     $db_username    = "root";
     $db_password    = "";
     $db_name        = "sik";
-    $db_port        = 3306;
+    $db_port        = 3307;
     define('USERHYBRIDWEB', 'yanghack');
     define('PASHYBRIDWEB', 'sialselamanya');
 
