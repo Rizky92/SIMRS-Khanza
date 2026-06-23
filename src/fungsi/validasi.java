@@ -551,6 +551,18 @@ public final class validasi {
         return 0;
     }
 
+    public String setAngkaSmc(Number value, int scale, String defaultValue) {
+        if (value == null) {
+            return defaultValue;
+        }
+
+        return new BigDecimal(value.doubleValue()).setScale(scale, RoundingMode.HALF_UP).toPlainString();
+    }
+
+    public String setAngkaSmc(Number value, int scale) {
+        return setAngkaSmc(value, scale, "");
+    }
+
     public String setAngkaSmc(Double value) {
         if (value == null || value.isNaN()) {
             return "0";
