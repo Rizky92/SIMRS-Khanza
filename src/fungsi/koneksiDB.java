@@ -1124,11 +1124,10 @@ public class koneksiDB {
     public static String KAMARAKTIFRANAP(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("KAMARAKTIFRANAP").replaceAll("'","");;
-        }catch(Exception e){
-            var="";
+            return prop.getProperty("KAMARAKTIFRANAP", "").replaceAll("'", "");
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
 
     public static String DOKTERAKTIFKASIRRALAN(){

@@ -280,7 +280,9 @@ public final class akses {
         bpjs_riwayat_pelayanan_resep_smc = false,
         set_pintu_poli = false,
         pintu_poli = false,
-        bpjs_riwayat_surat_smc = false;
+        bpjs_riwayat_surat_smc = false,
+        surat_pemesanan_inventaris_smc = false,
+        ringkasan_barang_belum_inventaris_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -311,7 +313,7 @@ public final class akses {
                         rs2.next();
                         if (columns.isEmpty()) {
                             ResultSetMetaData md = rs2.getMetaData();
-                            for (int i = 1; i < md.getColumnCount(); i++) {
+                            for (int i = 1; i <= md.getColumnCount(); i++) {
                                 if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
                                     continue;
                                 }
@@ -1519,6 +1521,7 @@ public final class akses {
                         akses.daftar_permintaan_resep_iterasi_bpjs=akses.getBoolean(rs2, "daftar_permintaan_resep_iterasi_bpjs");
                         akses.pcra_icra_pengkajian_risiko_prakonstruksi=akses.getBoolean(rs2, "pcra_icra_pengkajian_risiko_prakonstruksi");
                         akses.pcra_icra_persyaratan_harus_dipenuhi=akses.getBoolean(rs2, "pcra_icra_persyaratan_harus_dipenuhi");
+                        akses.surat_pemesanan_inventaris_smc=akses.getBoolean(rs2, "surat_pemesanan_inventaris_smc");
                         akses.satu_sehat_kirim_questionresponse_telaah_farmasi=akses.getBoolean(rs2, "satu_sehat_kirim_questionresponse_telaah_farmasi");
                         akses.satu_sehat_kirim_allergy_intolerance=akses.getBoolean(rs2, "satu_sehat_kirim_allergy_intolerance");
                         akses.konsultasi_perawat=akses.getBoolean(rs2, "konsultasi_perawat");
@@ -1532,6 +1535,7 @@ public final class akses {
                         akses.surat_permintaan_second_opinion=akses.getBoolean(rs2, "surat_permintaan_second_opinion");
                         akses.surat_keterangan_berobat=akses.getBoolean(rs2, "surat_keterangan_berobat");
                         akses.surat_penolakan_resusitasi=akses.getBoolean(rs2, "surat_penolakan_resusitasi");
+                        akses.ringkasan_barang_belum_inventaris_smc=akses.getBoolean(rs2, "ringkasan_barang_belum_inventaris_smc");
                         akses.catatan_observasi_ruang_ok=akses.getBoolean(rs2, "catatan_observasi_ruang_ok");
                         akses.hasil_pemeriksaan_usg_abdomen=akses.getBoolean(rs2, "hasil_pemeriksaan_usg_abdomen");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
@@ -2778,6 +2782,7 @@ public final class akses {
         akses.daftar_permintaan_resep_iterasi_bpjs=isadmin;
         akses.pcra_icra_pengkajian_risiko_prakonstruksi=isadmin;
         akses.pcra_icra_persyaratan_harus_dipenuhi=isadmin;
+        akses.surat_pemesanan_inventaris_smc=isadmin;
         akses.satu_sehat_kirim_questionresponse_telaah_farmasi=isadmin;
         akses.satu_sehat_kirim_allergy_intolerance=isadmin;
         akses.konsultasi_perawat=isadmin;
@@ -2791,6 +2796,7 @@ public final class akses {
         akses.surat_permintaan_second_opinion=isadmin;
         akses.surat_keterangan_berobat=isadmin;
         akses.surat_penolakan_resusitasi=isadmin;
+        akses.ringkasan_barang_belum_inventaris_smc=isadmin;
         akses.catatan_observasi_ruang_ok=isadmin;
         akses.hasil_pemeriksaan_usg_abdomen=isadmin;
         akses.edit=isadmin;
@@ -4039,6 +4045,7 @@ public final class akses {
     public static boolean getdaftar_permintaan_resep_iterasi_bpjs(){return akses.daftar_permintaan_resep_iterasi_bpjs;}
     public static boolean getpcra_icra_pengkajian_risiko_prakonstruksi(){return akses.pcra_icra_pengkajian_risiko_prakonstruksi;}
     public static boolean getpcra_icra_persyaratan_harus_dipenuhi(){return akses.pcra_icra_persyaratan_harus_dipenuhi;}
+    public static boolean getsurat_pemesanan_inventaris_smc(){return akses.surat_pemesanan_inventaris_smc;}
     public static boolean getsatu_sehat_kirim_questionresponse_telaah_farmasi(){return akses.satu_sehat_kirim_questionresponse_telaah_farmasi;}
     public static boolean getsatu_sehat_kirim_allergy_intolerance(){return akses.satu_sehat_kirim_allergy_intolerance;}
     public static boolean getkonsultasi_perawat(){return akses.konsultasi_perawat;}
@@ -4052,6 +4059,7 @@ public final class akses {
     public static boolean getsurat_permintaan_second_opinion(){return akses.surat_permintaan_second_opinion;}
     public static boolean getsurat_keterangan_berobat(){return akses.surat_keterangan_berobat;}
     public static boolean getsurat_penolakan_resusitasi(){return akses.surat_penolakan_resusitasi;}
+    public static boolean getringkasan_barang_belum_inventaris_smc(){return akses.ringkasan_barang_belum_inventaris_smc;}
     public static boolean getcatatan_observasi_ruang_ok(){return akses.catatan_observasi_ruang_ok;}
     public static boolean gethasil_pemeriksaan_usg_abdomen(){return akses.hasil_pemeriksaan_usg_abdomen;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
