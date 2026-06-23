@@ -64,11 +64,14 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -22093,9 +22096,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosongSmc(tabMode);
-            final boolean tampilkanDPJP = KUNCIDOKTERRANAP.trim().equals("yes") && !akses.getakses_dokter_lain_rawat_jalan();
+            final boolean kunciTampilDPJP = KUNCIDOKTERRANAP.trim().equals("yes") && !akses.getakses_dokter_lain_rawat_jalan();
 
-            final SwingWorker<Void, Object[]> baseTampil = new SwingWorker<>() {
+            new SwingWorker<List<String>, Object[]>() {
                 final boolean belumPulang = R1.isSelected();
                 final boolean tanggalMasuk = R2.isSelected();
                 final String tglMasuk1 = Valid.getTglSmc(DTPCari1);
@@ -22108,7 +22111,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 final String cari = TCari.getText().trim();
 
                 @Override
-                protected Void doInBackground() throws Exception {
+                protected List<String> doInBackground() throws Exception {
+                    final List<String> rows = new ArrayList<>();
                     StringJoiner sj = new StringJoiner(" and ");
 
                     if (belumPulang) {
@@ -22136,7 +22140,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     }
 
                     if (!cari.isBlank()) {
-                        if (tampilkanDPJP) {
+                        if (kunciTampilDPJP) {
                             sj.add("(kamar_inap.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) " +
                                 "like ? or kamar_inap.kd_kamar like ? or bangsal.nm_bangsal like ? or kamar_inap.diagnosa_awal like ? or kamar_inap.diagnosa_akhir like ? or kamar_inap.tgl_masuk like ? or " +
                                 "dokter_poli.nm_dokter like ? or kamar_inap.stts_pulang like ? or kamar_inap.tgl_keluar like ? or penjab.png_jawab like ? or pasien.agama like ?)");
@@ -22152,18 +22156,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         "select kamar_inap.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, " +
                         "reg_periksa.p_jawab, reg_periksa.hubunganpj, penjab.png_jawab, concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) as kamar, kamar_inap.trf_kamar, kamar_inap.diagnosa_awal, " +
                         "kamar_inap.diagnosa_akhir, kamar_inap.tgl_masuk, kamar_inap.jam_masuk, if(kamar_inap.tgl_keluar = '0000-00-00', '', kamar_inap.tgl_keluar) as tgl_keluar, " +
-                        "if(kamar_inap.jam_keluar = '00:00:00', '', kamar_inap.jam_keluar) as jam_keluar, kamar_inap.ttl_biaya, kamar_inap.stts_pulang, kamar_inap.lama, " + (tampilkanDPJP ?
+                        "if(kamar_inap.jam_keluar = '00:00:00', '', kamar_inap.jam_keluar) as jam_keluar, kamar_inap.ttl_biaya, kamar_inap.stts_pulang, kamar_inap.lama, " + (kunciTampilDPJP ?
                         "dokter.nm_dokter, " : "'' as nm_dokter, ") + "dokter_poli.nm_dokter as dokter_asal_poli, kamar_inap.kd_kamar, reg_periksa.kd_pj, concat(reg_periksa.umurdaftar, ' ', " +
                         "reg_periksa.sttsumur) as umur, reg_periksa.status_bayar, pasien.agama from kamar_inap inner join kamar on kamar_inap.kd_kamar = kamar.kd_kamar inner join bangsal on " +
                         "kamar.kd_bangsal = bangsal.kd_bangsal inner join reg_periksa on kamar_inap.no_rawat = reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                         "inner join kelurahan on pasien.kd_kel = kelurahan.kd_kel inner join kecamatan on pasien.kd_kec = kecamatan.kd_kec inner join kabupaten on pasien.kd_kab = kabupaten.kd_kab " +
-                        "inner join penjab on reg_periksa.kd_pj = penjab.kd_pj inner join dokter dokter_poli on reg_periksa.kd_dokter = dokter_poli.kd_dokter " + (tampilkanDPJP ? "inner join dpjp_ranap on " +
+                        "inner join penjab on reg_periksa.kd_pj = penjab.kd_pj inner join dokter dokter_poli on reg_periksa.kd_dokter = dokter_poli.kd_dokter " + (kunciTampilDPJP ? "inner join dpjp_ranap on " +
                         "kamar_inap.no_rawat = dpjp_ranap.no_rawat inner join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter " : "") + (sj.length() == 0 ? "" : "where " + sj.toString() + " ") + order
                     )) {
                         int p = 0;
-                        if (belumPulang) {
-
-                        } else if (tanggalMasuk) {
+                        if (tanggalMasuk) {
                             ps.setString(++p, tglMasuk1);
                             ps.setString(++p, tglMasuk2);
                         } else if (tanggalPulang) {
@@ -22194,7 +22196,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
-                            if (!tampilkanDPJP) {
+                            if (!kunciTampilDPJP) {
                                 ps.setString(++p, "%" + cari + "%");
                                 ps.setString(++p, "%" + cari + "%");
                             }
@@ -22202,6 +22204,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
+                                rows.add(rs.getString("no_rawat"));
                                 // "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","Kamar","Tarif Kamar",
                                 // "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
                                 // "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Dokter Asal Poli","Kamar","Status Bayar","Agama","no_rawat"
@@ -22209,12 +22212,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("alamat"), rs.getString("p_jawab"), rs.getString("hubunganpj"),
                                     rs.getString("png_jawab"), rs.getString("kamar"), rs.getString("trf_kamar"), rs.getString("diagnosa_awal"), rs.getString("diagnosa_akhir"), rs.getString("tgl_masuk"),
                                     rs.getString("jam_masuk"), rs.getString("tgl_keluar"), rs.getString("jam_keluar"), rs.getString("ttl_biaya"), rs.getString("stts_pulang"), rs.getString("lama"),
-                                    rs.getString("nm_dokter"), rs.getString("dokter_asal_poli"), rs.getString("kd_kamar"), rs.getString("status_bayar"), rs.getString("agama"), ""
+                                    rs.getString("nm_dokter"), rs.getString("dokter_asal_poli"), rs.getString("kd_kamar"), rs.getString("status_bayar"), rs.getString("agama"), rs.getString("no_rawat")
                                 });
                             }
                         }
                     }
-                    return null;
+                    return rows;
                 }
 
                 @Override
@@ -22225,67 +22228,105 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 @Override
                 protected void done() {
                     try {
-                        get();
+                        final List<String> rows = get();
+                        tampilBayi(rows);
+                        if (!kunciTampilDPJP) {
+                            tampilDPJP(rows);
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
                     DlgKamarInap.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
-            };
-
-            final SwingWorker<Void, Object[]> tampilBayi = new SwingWorker<>() {
-                @Override
-                protected Void doInBackground() throws Exception {
-
-                    return null;
-                }
-
-                @Override
-                protected void process(List<Object[]> chunks) {
-                    super.process(chunks); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-                }
-
-                @Override
-                protected void done() {
-                    try {
-                        get();
-                    } catch (Exception e) {
-                        System.out.println("Notif : " + e);
-                    }
-                }
-            };
-
-            if (!tampilkanDPJP) {
-                final SwingWorker<Void, Object[]> tampilDPJP = new SwingWorker<>() {
-                    @Override
-                    protected Void doInBackground() throws Exception {
-
-                        return null;
-                    }
-
-                    @Override
-                    protected void process(List<Object[]> chunks) {
-                        super.process(chunks); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-                    }
-
-                    @Override
-                    protected void done() {
-                        try {
-                            get();
-                        } catch (Exception e) {
-                            System.out.println("Notif : " + e);
-                        }
-                        tabMode.fireTableDataChanged();
-                    }
-                };
-            }
-
-            baseTampil.execute();
-            if (baseTampil.isDone()) {
-                
-            }
+            }.execute();
         }
+    }
+
+    private void tampilBayi(final List<String> rows) {
+        new SwingWorker<Map<String, List<Object[]>>, Void>() {
+            @Override
+            protected Map<String, List<Object[]>> doInBackground() throws Exception {
+                final Map<String, List<Object[]>> babyRows = new LinkedHashMap<>();
+                final String list = rows.stream().map(s -> "'" + s + "'").collect(Collectors.joining(", "));
+                try (ResultSet rs = koneksi.createStatement().executeQuery(
+                    "select reg_periksa.no_rkm_medis, pasien.nm_pasien, concat(reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur) as umur, concat_ws(', ', pasien.alamatpj, pasien.kelurahanpj, " +
+                    "pasien.kecamatanpj, pasien.kabupatenpj) as alamat, ranap_gabung.no_rawat, ranap_gabung.no_rawat2 from ranap_gabung inner join reg_periksa on ranap_gabung.no_rawat2 = reg_periksa.no_rawat " +
+                    "inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis where ranap_gabung.no_rawat in (" + list + ") order by ranap_gabung.no_rawat, ranap_gabung.no_rawat2"
+                )) {
+                    while (rs.next()) {
+                        babyRows.computeIfAbsent(rs.getString("no_rawat"), k -> new ArrayList<>())
+                            .add(new Object[] {rs.getString("no_rawat2"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("umur") + ")", rs.getString("alamat")});
+                    }
+                }
+                return babyRows;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    final Map<String, List<Object[]>> babyRows = get();
+                    for (int i = tabMode.getRowCount() - 1; i >= 0; i--) {
+                        String noRawat = tabMode.getValueAt(i, 0).toString();
+                        List<Object[]> rows = babyRows.get(noRawat);
+                        if (rows == null) {
+                            continue;
+                        }
+
+                        int j = 1;
+                        for (Object[] row : rows) {
+                            tabMode.insertRow(i + (j++), new Object[] {
+                                "", row[1], row[2], row[3], tabMode.getValueAt(i, 4), tabMode.getValueAt(i, 5), tabMode.getValueAt(i, 6), tabMode.getValueAt(i, 7),
+                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 8).toString()) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
+                                "", "", tabMode.getValueAt(i, 11), tabMode.getValueAt(i, 12), tabMode.getValueAt(i, 13), tabMode.getValueAt(i, 14),
+                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 15).toString()) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
+                                tabMode.getValueAt(i, 16), tabMode.getValueAt(i, 17), "", tabMode.getValueAt(i, 19), tabMode.getValueAt(i, 20), row[0]
+                            });
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+            }
+        }.execute();
+    }
+
+    private void tampilDPJP(List<String> rows) {
+        new SwingWorker<Map<String, String>, Void>() {
+            @Override
+            protected Map<String, String> doInBackground() throws Exception {
+                final Map<String, String> dpjp = new HashMap<>();
+                final String list = rows.stream().map(s -> "'" + s + "'").collect(Collectors.joining(", "));
+                try (ResultSet rs = koneksi.createStatement().executeQuery(
+                    "select dpjp_ranap.no_rawat, group_concat(dokter.nm_dokter separator ', ') as dpjp from dpjp_ranap inner join dokter on " +
+                    "dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat in (" + list + ") group by dpjp_ranap.no_rawat"
+                )) {
+                    while (rs.next()) {
+                        dpjp.put(rs.getString("no_rawat"), rs.getString("dpjp"));
+                    }
+                }
+                
+                return dpjp;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    final Map<String, String> dpjpRows = get();
+                    for (int i = 0; i < tabMode.getRowCount(); i++) {
+                        String dpjp = dpjpRows.get(tabMode.getValueAt(i, 23).toString());
+                        if (dpjp == null) {
+                            continue;
+                        }
+
+                        tabMode.setValueAt(dpjp, i, 18);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+            }
+        }.execute();
     }
 }
