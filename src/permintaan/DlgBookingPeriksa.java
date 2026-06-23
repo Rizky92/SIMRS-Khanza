@@ -24,6 +24,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1135,33 +1138,63 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
     }//GEN-LAST:event_tbObatKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            pilihtampil="";
-            if(R1.isSelected()==true){
-                pilihtampil="booking_periksa.status='Belum Dibalas'";
-            }else if(R2.isSelected()==true){
-                pilihtampil="booking_periksa.tanggal_booking between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-            }else if(R3.isSelected()==true){
-                pilihtampil="booking_periksa.tanggal between '"+Valid.SetTgl(DTPCari3.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari4.getSelectedItem()+"")+"' ";
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("BookingPeriksa.html", "Data Pasien Booking Periksa", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("BookingPeriksa.wps", "Data Pasien Booking Periksa", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("BookingPeriksa.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("BookingPeriksa.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        pilihtampil="";
+                        if(R1.isSelected()==true){
+                            pilihtampil="booking_periksa.status='Belum Dibalas'";
+                        }else if(R2.isSelected()==true){
+                            pilihtampil="booking_periksa.tanggal_booking between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+                        }else if(R3.isSelected()==true){
+                            pilihtampil="booking_periksa.tanggal between '"+Valid.SetTgl(DTPCari3.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari4.getSelectedItem()+"")+"' ";
+                        }
+                        Valid.MyReportqry("rptBookingPeriksa.jasper","report","::[ Data Pasien Booking Periksa ]::",
+                            "select booking_periksa.no_booking,booking_periksa.tanggal,booking_periksa.nama,booking_periksa.alamat,booking_periksa.no_telp,booking_periksa.email,booking_periksa.kd_poli,poliklinik.nm_poli,"+
+                            "booking_periksa.tambahan_pesan,booking_periksa.status,booking_periksa.tanggal_booking from booking_periksa inner join poliklinik on booking_periksa.kd_poli=poliklinik.kd_poli "+
+                            "where "+pilihtampil+(TCari.getText().trim().equals("")?"":" and (booking_periksa.no_booking like ? or booking_periksa.nama like ? or booking_periksa.alamat like ? or booking_periksa.no_telp like ? or "+
+                            "booking_periksa.email like ? or poliklinik.nm_poli like ? or booking_periksa.tambahan_pesan like ? or booking_periksa.status like ?)")+" order by booking_periksa.no_booking",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-
-            Valid.MyReportqry("rptBookingPeriksa.jasper","report","::[ Data Pasien Booking Periksa ]::",
-                    "select booking_periksa.no_booking,booking_periksa.tanggal,booking_periksa.nama,booking_periksa.alamat,booking_periksa.no_telp,booking_periksa.email,booking_periksa.kd_poli,poliklinik.nm_poli,"+
-                    "booking_periksa.tambahan_pesan,booking_periksa.status,booking_periksa.tanggal_booking from booking_periksa inner join poliklinik on booking_periksa.kd_poli=poliklinik.kd_poli "+
-                    "where "+pilihtampil+(TCari.getText().trim().equals("")?"":" and (booking_periksa.no_booking like ? or booking_periksa.nama like ? or booking_periksa.alamat like ? or booking_periksa.no_telp like ? or "+
-                    "booking_periksa.email like ? or poliklinik.nm_poli like ? or booking_periksa.tambahan_pesan like ? or booking_periksa.status like ?)")+" order by booking_periksa.no_booking",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1236,9 +1269,8 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         aktif=true;
-        runBackground(() ->tampil());
         try {
-            ps=koneksi.prepareStatement("select * from set_alamat_pasien");
+            ps=koneksi.prepareStatement("select set_alamat_pasien.kelurahan,set_alamat_pasien.kecamatan,set_alamat_pasien.kabupaten,set_alamat_pasien.propinsi from set_alamat_pasien");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -1258,10 +1290,16 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                 }
             }
 
-            ps=koneksi.prepareStatement("select * from set_kelengkapan_data_pasien");
+            ps=koneksi.prepareStatement(
+                "select set_kelengkapan_data_pasien.kelurahan,set_kelengkapan_data_pasien.p_kelurahan,"+
+                "set_kelengkapan_data_pasien.kecamatan,set_kelengkapan_data_pasien.p_kecamatan,"+
+                "set_kelengkapan_data_pasien.kabupaten,set_kelengkapan_data_pasien.p_kabupaten,"+
+                "set_kelengkapan_data_pasien.propinsi,set_kelengkapan_data_pasien.p_propinsi "+
+                "from set_kelengkapan_data_pasien"
+            );
             try {
                 rs=ps.executeQuery();
-                while(rs.next()){
+                if(rs.next()){
                     kelurahan=rs.getString("kelurahan");
                     p_kelurahan=rs.getInt("p_kelurahan");
                     kecamatan=rs.getString("kecamatan");
@@ -1282,10 +1320,10 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                 }
             }
 
-            ps=koneksi.prepareStatement("select * from set_urut_no_rkm_medis");
+            ps=koneksi.prepareStatement("select set_urut_no_rkm_medis.urutan,set_urut_no_rkm_medis.tahun,set_urut_no_rkm_medis.bulan,set_urut_no_rkm_medis.posisi_tahun_bulan from set_urut_no_rkm_medis");
             try {
                 rs=ps.executeQuery();
-                while(rs.next()){
+                if(rs.next()){
                     pengurutan=rs.getString("urutan");
                     tahun=rs.getString("tahun");
                     bulan=rs.getString("bulan");
@@ -1305,6 +1343,7 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
 
+        runBackground(() ->tampil());
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override

@@ -16,6 +16,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -875,7 +878,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -883,19 +886,19 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else{
             Valid.pindah(evt,AlamatPj,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
         isForm();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -912,7 +915,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
         }
 
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -920,7 +923,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -954,7 +957,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -962,63 +965,93 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-
-            if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptDataPermintaanPerlindunganDariKekerasan.jasper","report","::[ Data Permintaan Perlindungan Dari Kekerasan ]::",
-                    "select surat_perlindungan_dari_kekerasan.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
-                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_perlindungan_dari_kekerasan.tanggal,surat_perlindungan_dari_kekerasan.nama_pj,"+
-                    "surat_perlindungan_dari_kekerasan.no_ktppj,surat_perlindungan_dari_kekerasan.tempat_lahirpj,surat_perlindungan_dari_kekerasan.lahirpj,"+
-                    "surat_perlindungan_dari_kekerasan.jkpj,surat_perlindungan_dari_kekerasan.alamatpj,surat_perlindungan_dari_kekerasan.hubungan,"+
-                    "surat_perlindungan_dari_kekerasan.no_telp,surat_perlindungan_dari_kekerasan.nip,petugas.nama from surat_perlindungan_dari_kekerasan "+
-                    "inner join reg_periksa on surat_perlindungan_dari_kekerasan.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on surat_perlindungan_dari_kekerasan.nip=petugas.nip where "+
-                    "surat_perlindungan_dari_kekerasan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' order by surat_perlindungan_dari_kekerasan.tanggal",param);
-            }else{
-                Valid.MyReportqry("rptDataPermintaanPerlindunganDariKekerasan.jasper","report","::[ Data Permintaan Perlindungan Dari Kekerasan ]::",
-                    "select surat_perlindungan_dari_kekerasan.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
-                    "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_perlindungan_dari_kekerasan.tanggal,surat_perlindungan_dari_kekerasan.nama_pj,"+
-                    "surat_perlindungan_dari_kekerasan.no_ktppj,surat_perlindungan_dari_kekerasan.tempat_lahirpj,surat_perlindungan_dari_kekerasan.lahirpj,"+
-                    "surat_perlindungan_dari_kekerasan.jkpj,surat_perlindungan_dari_kekerasan.alamatpj,surat_perlindungan_dari_kekerasan.hubungan,"+
-                    "surat_perlindungan_dari_kekerasan.no_telp,surat_perlindungan_dari_kekerasan.nip,petugas.nama from surat_perlindungan_dari_kekerasan "+
-                    "inner join reg_periksa on surat_perlindungan_dari_kekerasan.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on surat_perlindungan_dari_kekerasan.nip=petugas.nip where "+
-                    "surat_perlindungan_dari_kekerasan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and "+
-                    "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
-                    "surat_perlindungan_dari_kekerasan.alamatpj like '%"+TCari.getText().trim()+"%' or surat_perlindungan_dari_kekerasan.nama_pj like '%"+TCari.getText().trim()+"%' or "+
-                    "surat_perlindungan_dari_kekerasan.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
-                    "order by surat_perlindungan_dari_kekerasan.tanggal",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataPermintaanPerlindunganDariKekerasan.html", "Data Permintaan Perlindungan Dari Kekerasan", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataPermintaanPerlindunganDariKekerasan.wps", "Data Permintaan Perlindungan Dari Kekerasan", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataPermintaanPerlindunganDariKekerasan.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPermintaanPerlindunganDariKekerasan.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptDataPermintaanPerlindunganDariKekerasan.jasper","report","::[ Data Permintaan Perlindungan Dari Kekerasan ]::",
+                                "select surat_perlindungan_dari_kekerasan.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
+                                "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_perlindungan_dari_kekerasan.tanggal,surat_perlindungan_dari_kekerasan.nama_pj,"+
+                                "surat_perlindungan_dari_kekerasan.no_ktppj,surat_perlindungan_dari_kekerasan.tempat_lahirpj,surat_perlindungan_dari_kekerasan.lahirpj,"+
+                                "surat_perlindungan_dari_kekerasan.jkpj,surat_perlindungan_dari_kekerasan.alamatpj,surat_perlindungan_dari_kekerasan.hubungan,"+
+                                "surat_perlindungan_dari_kekerasan.no_telp,surat_perlindungan_dari_kekerasan.nip,petugas.nama from surat_perlindungan_dari_kekerasan "+
+                                "inner join reg_periksa on surat_perlindungan_dari_kekerasan.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on surat_perlindungan_dari_kekerasan.nip=petugas.nip where "+
+                                "surat_perlindungan_dari_kekerasan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' order by surat_perlindungan_dari_kekerasan.tanggal",param);
+                        }else{
+                            Valid.MyReportqry("rptDataPermintaanPerlindunganDariKekerasan.jasper","report","::[ Data Permintaan Perlindungan Dari Kekerasan ]::",
+                                "select surat_perlindungan_dari_kekerasan.no_surat,reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,"+
+                                "reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,surat_perlindungan_dari_kekerasan.tanggal,surat_perlindungan_dari_kekerasan.nama_pj,"+
+                                "surat_perlindungan_dari_kekerasan.no_ktppj,surat_perlindungan_dari_kekerasan.tempat_lahirpj,surat_perlindungan_dari_kekerasan.lahirpj,"+
+                                "surat_perlindungan_dari_kekerasan.jkpj,surat_perlindungan_dari_kekerasan.alamatpj,surat_perlindungan_dari_kekerasan.hubungan,"+
+                                "surat_perlindungan_dari_kekerasan.no_telp,surat_perlindungan_dari_kekerasan.nip,petugas.nama from surat_perlindungan_dari_kekerasan "+
+                                "inner join reg_periksa on surat_perlindungan_dari_kekerasan.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on surat_perlindungan_dari_kekerasan.nip=petugas.nip where "+
+                                "surat_perlindungan_dari_kekerasan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and "+
+                                "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                                "surat_perlindungan_dari_kekerasan.alamatpj like '%"+TCari.getText().trim()+"%' or surat_perlindungan_dari_kekerasan.nama_pj like '%"+TCari.getText().trim()+"%' or "+
+                                "surat_perlindungan_dari_kekerasan.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
+                                "order by surat_perlindungan_dari_kekerasan.tanggal",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1026,7 +1059,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1036,11 +1069,11 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1048,12 +1081,12 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->tampil());
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1062,7 +1095,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
@@ -1077,7 +1110,7 @@ public final class SuratPermintaanPerlindunganDariKekerasan extends javax.swing.
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
        isForm();

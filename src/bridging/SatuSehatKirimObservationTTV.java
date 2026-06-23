@@ -13,7 +13,6 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
@@ -25,6 +24,7 @@ import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -1198,6 +1198,237 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
+        try {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)"
+            }, "Laporan 1 (HTML)");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            switch (TabRawat.getSelectedIndex()) {
+                case 0:
+                    if(tabModeSuhu.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeSuhu.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVSuhu.html", "Data Observation TTV Suhu Satu Sehat", tbSuhu);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVSuhu.wps", "Data Observation TTV Suhu Satu Sehat", tbSuhu);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVSuhu.csv", tbSuhu);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVSuhu.xlsx", tbSuhu);
+                                break;
+                        }
+                    }
+                    break;
+                case 1:
+                    if(tabModeRespirasi.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeRespirasi.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVRespirasi.html", "Data Observation TTV Respirasi Satu Sehat", tbRespirasi);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVRespirasi.wps", "Data Observation TTV Respirasi Satu Sehat", tbRespirasi);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVRespirasi.csv", tbRespirasi);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVRespirasi.xlsx", tbRespirasi);
+                                break;
+                        }
+                    }
+                    break;
+                case 2:
+                    if(tabModeNadi.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeNadi.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVNadi.html", "Data Observation TTV Nadi Satu Sehat", tbNadi);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVNadi.wps", "Data Observation TTV Nadi Satu Sehat", tbNadi);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVNadi.csv", tbNadi);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVNadi.xlsx", tbNadi);
+                                break;
+                        }
+                    }
+                    break;
+                case 3:
+                    if(tabModeSpO2.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeSpO2.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVSpO2.html", "Data Observation TTV SpO2 Satu Sehat", tbSpO2);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVSpO2.wps", "Data Observation TTV SpO2 Satu Sehat", tbSpO2);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVSpO2.csv", tbSpO2);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVSpO2.xlsx", tbSpO2);
+                                break;
+                        }
+                    }
+                    break;
+                case 4:
+                    if(tabModeGCS.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeGCS.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVGCS.html", "Data Observation TTV GCS Satu Sehat", tbGCS);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVGCS.wps", "Data Observation TTV GCS Satu Sehat", tbGCS);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVGCS.csv", tbGCS);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVGCS.xlsx", tbGCS);
+                                break;
+                        }
+                    }
+                    break;
+                case 5:
+                    if(tabModeKesadaran.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeKesadaran.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVKesadaran.html", "Data Observation TTV Kesadaran Satu Sehat", tbKesadaran);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVKesadaran.wps", "Data Observation TTV Kesadaran Satu Sehat", tbKesadaran);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVKesadaran.csv", tbKesadaran);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVKesadaran.xlsx", tbKesadaran);
+                                break;
+                        }
+                    }
+                    break;
+                case 6:
+                    if(tabModeTensi.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeTensi.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVTensi.html", "Data Observation TTV Tensi Satu Sehat", tbTensi);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVTensi.wps", "Data Observation TTV Tensi Satu Sehat", tbTensi);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVTensi.csv", tbTensi);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVTensi.xlsx", tbTensi);
+                                break;
+                        }
+                    }
+                    break;
+                case 7:
+                    if(tabModeTB.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeTB.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVTinggiBadan.html", "Data Observation TTV TB Satu Sehat", tbTB);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVTinggiBadan.wps", "Data Observation TTV TB Satu Sehat", tbTB);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVTinggiBadan.csv", tbTB);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVTinggiBadan.xlsx", tbTB);
+                                break;
+                        }
+                    }
+                    break;
+                case 8:
+                    if(tabModeBB.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeBB.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVBeratBadan.html", "Data Observation TTV BB Satu Sehat", tbBB);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVBeratBadan.wps", "Data Observation TTV BB Satu Sehat", tbBB);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVBeratBadan.csv", tbBB);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVBeratBadan.xlsx", tbBB);
+                                break;
+                        }
+                    }
+                    break;
+                case 9:
+                    if(tabModeLP.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        //TCari.requestFocus();
+                    }else if(tabModeLP.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataSatuSehatObservationTTVLingkarPerut.html", "Data Observation TTV LP Satu Sehat", tbLP);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataSatuSehatObservationTTVLingkarPerut.wps", "Data Observation TTV LP Satu Sehat", tbLP);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataSatuSehatObservationTTVLingkarPerut.csv", tbLP);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataSatuSehatObservationTTVLingkarPerut.xlsx", tbLP);
+                                break;
+                        }
+                    }
+                    break;
+            }
+            this.setCursor(Cursor.getDefaultCursor());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        /*
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         switch (TabRawat.getSelectedIndex()) {
             case 0:
@@ -2073,6 +2304,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                 break;
         }
         this.setCursor(Cursor.getDefaultCursor());
+        */
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed

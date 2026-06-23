@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -570,7 +573,7 @@ public class DlgCariPembelian extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -578,11 +581,12 @@ public class DlgCariPembelian extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuplierActionPerformed
         InventoryCariSuplier suplier=new InventoryCariSuplier(null,false);
@@ -842,45 +846,71 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            if(ceksukses==false){
-                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                int row=tabMode.getRowCount();
-                for(i=0;i<row;i++){
-                    Sequel.menyimpan("temporary","'"+i+"','"+
-                                    tabMode.getValueAt(i,0).toString()+"','"+
-                                    tabMode.getValueAt(i,1).toString()+"','"+
-                                    tabMode.getValueAt(i,2).toString()+"','"+
-                                    tabMode.getValueAt(i,3).toString()+"','"+
-                                    tabMode.getValueAt(i,4).toString()+"','"+
-                                    tabMode.getValueAt(i,5).toString()+"','"+
-                                    tabMode.getValueAt(i,6).toString()+"','"+
-                                    tabMode.getValueAt(i,9).toString()+"','"+
-                                    tabMode.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-                i++;
-                Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
-                i++;
-                Sequel.menyimpan("temporary","'"+i+"','Jml.Total :','','','','','','',' ','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptPembelian.jasper","report","::[ Transaksi Pembelian Obat/BHP/Alkes ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-            }else{
-                JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("Pembelian.html", "Transaksi Pembelian Obat/BHP/Alkes", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("Pembelian.wps", "Transaksi Pembelian Obat/BHP/Alkes", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("Pembelian.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("Pembelian.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(i=0;i<row;i++){
+                            Sequel.menyimpan("temporary","'"+i+"','"+
+                                            tabMode.getValueAt(i,0).toString()+"','"+
+                                            tabMode.getValueAt(i,1).toString()+"','"+
+                                            tabMode.getValueAt(i,2).toString()+"','"+
+                                            tabMode.getValueAt(i,3).toString()+"','"+
+                                            tabMode.getValueAt(i,4).toString()+"','"+
+                                            tabMode.getValueAt(i,5).toString()+"','"+
+                                            tabMode.getValueAt(i,6).toString()+"','"+
+                                            tabMode.getValueAt(i,9).toString()+"','"+
+                                            tabMode.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+                        }
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+                        i++;
+                        Sequel.menyimpan("temporary","'"+i+"','Jml.Total :','','','','','','',' ','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPembelian.jasper","report","::[ Transaksi Pembelian Obat/BHP/Alkes ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -896,99 +926,96 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()>-1){
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
-          Valid.textKosong(TCari,"No.Faktur");
-        }else{
-            try {
-                pscaribeli=koneksi.prepareStatement(
-                        "select pembelian.no_faktur,pembelian.tagihan,pembelian.kd_bangsal,pembelian.tgl_beli,pembelian.kd_rek,pembelian.total2,pembelian.ppn from pembelian where pembelian.no_faktur=?");
+        if(tbDokter.getSelectedRow()>-1){
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Faktur");
+            }else{
                 try {
-                   pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                   rs=pscaribeli.executeQuery();
-                   if(rs.next()){
-                       Sequel.AutoComitFalse();
-                       sukses=true;
-                       psdetailbeli=koneksi.prepareStatement("select detailbeli.kode_brng,detailbeli.jumlah2,detailbeli.no_batch,detailbeli.no_faktur from detailbeli where detailbeli.no_faktur=? ");
-                       try {
-                           psdetailbeli.setString(1,rs.getString(1));
-                           rs2=psdetailbeli.executeQuery();
-                           while(rs2.next()){
-                               if(aktifkanbatch.equals("yes")){
-                                   Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Pengadaan",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_faktur"),rs2.getString("no_faktur"));
-                                   Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_faktur")+"'",
-                                                          "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
-                                   Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
-                                       rs2.getString("kode_brng"),rs2.getString("no_batch"),rs2.getString("no_faktur")
-                                   });
-                               }else{
-                                   Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Pengadaan",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs2.getString("no_faktur"));
-                                   Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','',''",
-                                                          "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
-                                   Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
-                                       rs2.getString("kode_brng"),"",""
-                                   });
-                               }
-                           }
-                           sukses=true;
-                       } catch (Exception e) {
-                           sukses=false;
-                           System.out.println(e);
-                       } finally{
-                           if(rs2!=null){
-                               rs2.close();
-                           }
-                           if(psdetailbeli!=null){
-                               psdetailbeli.close();
-                           }
-                       }
-
-                       if(sukses==true){
-                            Sequel.deleteTampJurnal();
-                            if(Sequel.insertTampJurnal(akunpengadaan, "PENGADAAN OBAT", 0, rs.getDouble("total2"))==false){
+                    pscaribeli=koneksi.prepareStatement(
+                        "select pembelian.no_faktur,pembelian.tagihan,pembelian.kd_bangsal,pembelian.tgl_beli,pembelian.kd_rek,pembelian.total2,pembelian.ppn from pembelian where pembelian.no_faktur=?");
+                    try {
+                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        rs=pscaribeli.executeQuery();
+                        if(rs.next()){
+                            Sequel.AutoComitFalse();
+                            sukses=true;
+                            psdetailbeli=koneksi.prepareStatement("select detailbeli.kode_brng,detailbeli.jumlah2,detailbeli.no_batch,detailbeli.no_faktur from detailbeli where detailbeli.no_faktur=? ");
+                            try {
+                                psdetailbeli.setString(1,rs.getString(1));
+                                rs2=psdetailbeli.executeQuery();
+                                while(rs2.next()){
+                                    if(aktifkanbatch.equals("yes")){
+                                        Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Pengadaan",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_faktur"),rs2.getString("no_faktur"));
+                                        Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_faktur")+"'",
+                                                        "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
+                                        Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
+                                            rs2.getString("kode_brng"),rs2.getString("no_batch"),rs2.getString("no_faktur")
+                                        });
+                                    }else{
+                                        Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah2"),"Pengadaan",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs2.getString("no_faktur"));
+                                        Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jumlah2")+"','',''",
+                                                        "stok=stok-'"+rs2.getString("jumlah2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
+                                        Sequel.queryu3("delete from data_batch where kode_brng=? and no_batch=? and no_faktur=?",3,new String[]{
+                                            rs2.getString("kode_brng"),"",""
+                                        });
+                                    }
+                                }
+                                sukses=true;
+                            } catch (Exception e) {
                                 sukses=false;
+                                System.out.println(e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(psdetailbeli!=null){
+                                    psdetailbeli.close();
+                                }
                             }
-                           if(rs.getDouble("ppn")>0){
-                           }
-                           if(Sequel.insertTampJurnal(rs.getString("kd_rek"), "AKUN BAYAR", rs.getDouble("tagihan"), 0)==false){
-                               sukses=false;
-                           }
-                           if(sukses==true){
-                               sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PEMBELIAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
-                           }
-                       }
-
-                       if(sukses==true){
-                           Sequel.queryu2("delete from pembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
-                           Sequel.Commit();
-                       }else{
-                           sukses=false;
-                           JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                           Sequel.RollBack();
-                       }
-                       Sequel.AutoComitTrue();
-                   }
-
-                   if(sukses==true){
-                       runBackground(() ->tampil());
-                   }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
+                            if(sukses==true){
+                                Sequel.deleteTampJurnal();
+                                if(Sequel.insertTampJurnal(akunpengadaan, "PENGADAAN OBAT", 0, rs.getDouble("total2"))==false){
+                                    sukses=false;
+                                }
+                                if(rs.getDouble("ppn")>0){
+                                }
+                                if(Sequel.insertTampJurnal(rs.getString("kd_rek"), "AKUN BAYAR", rs.getDouble("tagihan"), 0)==false){
+                                    sukses=false;
+                                }
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PEMBELIAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
+                                }
+                            }
+                            if(sukses==true){
+                                Sequel.queryu2("delete from pembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                                Sequel.Commit();
+                            }else{
+                                sukses=false;
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                                Sequel.RollBack();
+                            }
+                            Sequel.AutoComitTrue();
+                        }
+                        if(sukses==true){
+                            runBackground(() ->tampil());
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally{
+                        if(rs!=null){
+                            rs.close();
+                        }
+                        if(pscaribeli!=null){
+                            pscaribeli.close();
+                        }
                     }
-                    if(pscaribeli!=null){
-                        pscaribeli.close();
-                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex);
                 }
-            } catch (SQLException ex) {
-                System.out.println(ex);
             }
+        }else{
+            JOptionPane.showMessageDialog(null,"Silahkan pilih faktur yang mau dihapus..!");
         }
-    }else{
-        JOptionPane.showMessageDialog(null,"Silahkan pilih faktur yang mau dihapus..!");
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void KdIFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdIFKeyPressed

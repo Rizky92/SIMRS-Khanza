@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -344,62 +347,92 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(nmbar.getText().trim().equals("")&&NmGudang.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptRiwayatBarangMedis.jasper","report","::[ Riwayat Obat, Alkes & BHP ]::",
-                    "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
-                    "riwayat_barang_medis.stok_awal,riwayat_barang_medis.masuk,"+
-                    "riwayat_barang_medis.keluar,riwayat_barang_medis.stok_akhir,"+
-                    "riwayat_barang_medis.posisi,riwayat_barang_medis.tanggal,"+
-                    "riwayat_barang_medis.jam,riwayat_barang_medis.petugas,"+
-                    "riwayat_barang_medis.kd_bangsal,bangsal.nm_bangsal,"+
-                    "riwayat_barang_medis.status,riwayat_barang_medis.no_batch,"+
-                    "riwayat_barang_medis.no_faktur,riwayat_barang_medis.keterangan from riwayat_barang_medis "+
-                    "inner join bangsal inner join databarang on "+
-                    "riwayat_barang_medis.kode_brng=databarang.kode_brng and "+
-                    "riwayat_barang_medis.kd_bangsal=bangsal.kd_bangsal where "+
-                    "riwayat_barang_medis.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ",param);
-            }else{
-                Valid.MyReportqry("rptRiwayatBarangMedis.jasper","report","::[ Riwayat Obat, Alkes & BHP ]::",
-                    "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
-                        "riwayat_barang_medis.stok_awal,riwayat_barang_medis.masuk,"+
-                        "riwayat_barang_medis.keluar,riwayat_barang_medis.stok_akhir,"+
-                        "riwayat_barang_medis.posisi,riwayat_barang_medis.tanggal,"+
-                        "riwayat_barang_medis.jam,riwayat_barang_medis.petugas,"+
-                        "riwayat_barang_medis.kd_bangsal,bangsal.nm_bangsal,"+
-                        "riwayat_barang_medis.status,riwayat_barang_medis.no_batch,"+
-                        "riwayat_barang_medis.no_faktur,riwayat_barang_medis.keterangan from riwayat_barang_medis "+
-                        "inner join bangsal inner join databarang on "+
-                        "riwayat_barang_medis.kode_brng=databarang.kode_brng and "+
-                        "riwayat_barang_medis.kd_bangsal=bangsal.kd_bangsal where "+
-                        "riwayat_barang_medis.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and databarang.nama_brng like '%"+nmbar.getText()+"%' and bangsal.nm_bangsal like '%"+NmGudang.getText()+"%' and "+
-                        "(riwayat_barang_medis.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.petugas like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.no_batch like '%"+TCari.getText().trim()+"%' or "+
-                        "riwayat_barang_medis.no_faktur like '%"+TCari.getText().trim()+"%' or bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.kd_bangsal like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.status like '%"+TCari.getText().trim()+"%' or "+
-                        "riwayat_barang_medis.keterangan like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.posisi like '%"+TCari.getText().trim()+"%') order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ",param);
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RiwayatBarangMedis.html", "Riwayat Obat, Alkes & BHP", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RiwayatBarangMedis.wps", "Riwayat Obat, Alkes & BHP", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RiwayatBarangMedis.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RiwayatBarangMedis.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(nmbar.getText().trim().equals("")&&NmGudang.getText().trim().equals("")&&TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptRiwayatBarangMedis.jasper","report","::[ Riwayat Obat, Alkes & BHP ]::",
+                                "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
+                                "riwayat_barang_medis.stok_awal,riwayat_barang_medis.masuk,"+
+                                "riwayat_barang_medis.keluar,riwayat_barang_medis.stok_akhir,"+
+                                "riwayat_barang_medis.posisi,riwayat_barang_medis.tanggal,"+
+                                "riwayat_barang_medis.jam,riwayat_barang_medis.petugas,"+
+                                "riwayat_barang_medis.kd_bangsal,bangsal.nm_bangsal,"+
+                                "riwayat_barang_medis.status,riwayat_barang_medis.no_batch,"+
+                                "riwayat_barang_medis.no_faktur,riwayat_barang_medis.keterangan from riwayat_barang_medis "+
+                                "inner join bangsal inner join databarang on "+
+                                "riwayat_barang_medis.kode_brng=databarang.kode_brng and "+
+                                "riwayat_barang_medis.kd_bangsal=bangsal.kd_bangsal where "+
+                                "riwayat_barang_medis.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ",param);
+                        }else{
+                            Valid.MyReportqry("rptRiwayatBarangMedis.jasper","report","::[ Riwayat Obat, Alkes & BHP ]::",
+                                "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
+                                    "riwayat_barang_medis.stok_awal,riwayat_barang_medis.masuk,"+
+                                    "riwayat_barang_medis.keluar,riwayat_barang_medis.stok_akhir,"+
+                                    "riwayat_barang_medis.posisi,riwayat_barang_medis.tanggal,"+
+                                    "riwayat_barang_medis.jam,riwayat_barang_medis.petugas,"+
+                                    "riwayat_barang_medis.kd_bangsal,bangsal.nm_bangsal,"+
+                                    "riwayat_barang_medis.status,riwayat_barang_medis.no_batch,"+
+                                    "riwayat_barang_medis.no_faktur,riwayat_barang_medis.keterangan from riwayat_barang_medis "+
+                                    "inner join bangsal inner join databarang on "+
+                                    "riwayat_barang_medis.kode_brng=databarang.kode_brng and "+
+                                    "riwayat_barang_medis.kd_bangsal=bangsal.kd_bangsal where "+
+                                    "riwayat_barang_medis.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and databarang.nama_brng like '%"+nmbar.getText()+"%' and bangsal.nm_bangsal like '%"+NmGudang.getText()+"%' and "+
+                                    "(riwayat_barang_medis.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.petugas like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.no_batch like '%"+TCari.getText().trim()+"%' or "+
+                                    "riwayat_barang_medis.no_faktur like '%"+TCari.getText().trim()+"%' or bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.kd_bangsal like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.status like '%"+TCari.getText().trim()+"%' or "+
+                                    "riwayat_barang_medis.keterangan like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.posisi like '%"+TCari.getText().trim()+"%') order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-
             this.setCursor(Cursor.getDefaultCursor());
         }
-
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

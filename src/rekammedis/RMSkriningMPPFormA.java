@@ -1269,220 +1269,227 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                if(TCari.getText().equals("")){
-                    ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
-                        "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
-                        "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
-                        "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
-                        "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
-                        "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                        "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                        "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                        "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
-                        "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
-                        "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
-                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel " +
-                        "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
-                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                        "mpp_evaluasi.tanggal between ? and ? group by reg_periksa.no_rawat order by mpp_evaluasi.tanggal");
-                }else{
-                    ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
-                        "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
-                        "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
-                        "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
-                        "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
-                        "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                        "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                        "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                        "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
-                        "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
-                        "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
-                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel " +
-                        "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
-                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                        "mpp_evaluasi.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
-                        "pasien.nm_pasien like ? or mpp_evaluasi.nip like ? or petugas.nama like ?) "+
-                        "group by reg_periksa.no_rawat order by mpp_evaluasi.tanggal");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi2 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#323232}.isi3 td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi5 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#AA0000}.isi6 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#FF0000}.isi7 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#C8C800}.isi8 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#00AA00}.isi9 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#969696}");
+                    bw.flush();
                 }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (HTML)", "Laporan 3 (WPS)", "Laporan 4 (CSV)", "Laporan 5 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        if(TCari.getText().equals("")){
+                            ps=koneksi.prepareStatement(
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
+                                "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
+                                "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
+                                "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
+                                "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
+                                "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
+                                "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
+                                "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                                "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                                "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
+                                "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
+                                "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
+                                "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel " +
+                                "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
+                                "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
+                                "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
+                                "mpp_evaluasi.tanggal between ? and ? group by reg_periksa.no_rawat order by mpp_evaluasi.tanggal");
+                        }else{
+                            ps=koneksi.prepareStatement(
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
+                                "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
+                                "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
+                                "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
+                                "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
+                                "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
+                                "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
+                                "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                                "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                                "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
+                                "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
+                                "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
+                                "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel " +
+                                "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
+                                "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
+                                "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
+                                "mpp_evaluasi.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
+                                "pasien.nm_pasien like ? or mpp_evaluasi.nip like ? or petugas.nama like ?) "+
+                                "group by reg_periksa.no_rawat order by mpp_evaluasi.tanggal");
+                        }
 
-                try {
-                    if(TCari.getText().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    StringBuilder htmlContent = new StringBuilder();
-                    htmlContent.append(
-                        "<tr class='isi'>").append(
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center' width='50%'><b>PASIEN & PETUGAS</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center' width='30%'><b>IDENTIFIKASI</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%'><b>EVALUASI</b></td>").append(
-                        "</tr>"
-                    );
-                    while(rs.next()){
-                        masalahidentifikasi="";
-                        ps2=koneksi.prepareStatement(
-                            "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
-                            "inner join mpp_evaluasi_masalah on mpp_evaluasi_masalah.kode_masalah=master_masalah_mpp.kode_masalah "+
-                            "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah");
                         try {
-                            ps2.setString(1,rs.getString("no_rawat"));
-                            ps2.setString(2,rs.getString("tanggal"));
-                            rs2=ps2.executeQuery();
-                            while(rs2.next()){
-                                masalahidentifikasi=rs2.getString("nama_masalah")+", "+masalahidentifikasi;
+                            if(TCari.getText().equals("")){
+                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                            }else{
+                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(3,"%"+TCari.getText()+"%");
+                                ps.setString(4,"%"+TCari.getText()+"%");
+                                ps.setString(5,"%"+TCari.getText()+"%");
+                                ps.setString(6,"%"+TCari.getText()+"%");
+                                ps.setString(7,"%"+TCari.getText()+"%");
                             }
-                        } catch (Exception e) {
-                            System.out.println("Notif : "+e);
+                            rs=ps.executeQuery();
+                            StringBuilder htmlContent = new StringBuilder();
+                            htmlContent.append(
+                                "<tr class='isi'>").append(
+                                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='50%'><b>PASIEN & PETUGAS</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='30%'><b>IDENTIFIKASI</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='20%'><b>EVALUASI</b></td>").append(
+                                "</tr>"
+                            );
+                            while(rs.next()){
+                                masalahidentifikasi="";
+                                ps2=koneksi.prepareStatement(
+                                    "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
+                                    "inner join mpp_evaluasi_masalah on mpp_evaluasi_masalah.kode_masalah=master_masalah_mpp.kode_masalah "+
+                                    "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah");
+                                try {
+                                    ps2.setString(1,rs.getString("no_rawat"));
+                                    ps2.setString(2,rs.getString("tanggal"));
+                                    rs2=ps2.executeQuery();
+                                    while(rs2.next()){
+                                        masalahidentifikasi=rs2.getString("nama_masalah")+", "+masalahidentifikasi;
+                                    }
+                                } finally{
+                                    if(rs2!=null){
+                                        rs2.close();
+                                    }
+                                    if(ps2!=null){
+                                        ps2.close();
+                                    }
+                                }
+                                htmlContent.append(
+                                    "<tr class='isi'>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>No.Rawat</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>No.R.M.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Nama Pasien</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>J.K.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("jk")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Tgl.Lahir</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Alamat</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("alamat")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Kamar</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("kamar")).append(" ").append(rs.getString("ruang")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Tgl.Masuk</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tgl_masuk")).append(" ").append(rs.getString("jam_masuk")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Dokter DPJP</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("dpjp")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Dokter Konsulan</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("konsulan")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Petugas</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nip")).append(" ").append(rs.getString("nama")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='32%' valign='top'>Tanggal Evaluasi</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top'>Diagnosis</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("diagnosis")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top'>Kelompok</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("kelompok")).append("</td>").append(
+                                                "</tr>").append(
+                                                "<tr class='isi2'>").append(
+                                                    "<td width='34%' valign='top'>Assesmen</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("assesmen")).append("</td>").append(
+                                                "</tr>").append(
+                                            "</table>").append(
+                                        "</td>").append(
+                                        "<td valign='top' cellpadding='0' cellspacing='0'>").append(
+                                            "Masalah MPP : ").append(masalahidentifikasi).append("<br><br>").append(
+                                            "Rencana MPP : ").append(rs.getString("rencana")).append(
+                                        "</td>").append(
+                                    "</tr>"
+                                );
+                            }
+                            LoadHTML.setText(
+                                "<html>"+
+                                  "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                                   htmlContent.toString()+
+                                  "</table>"+
+                                "</html>"
+                            );
+                            htmlContent=null;
+
+                            File f = new File("DataEvaluasiMPP.html");
+                            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                    "<font size='2' face='Tahoma'>DATA EVALUASI MANAJER PELAYANAN PASIEN<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>")
+                            );
+                            bw.close();
+                            Desktop.getDesktop().browse(f.toURI());
                         } finally{
-                            if(rs2!=null){
-                                rs2.close();
+                            if(rs!=null){
+                                rs.close();
                             }
-                            if(ps2!=null){
-                                ps2.close();
+                            if(ps!=null){
+                                ps.close();
                             }
                         }
-                        htmlContent.append(
-                            "<tr class='isi'>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>No.Rawat</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>No.R.M.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Nama Pasien</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>J.K.</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("jk")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Tgl.Lahir</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Alamat</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("alamat")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Kamar</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("kamar")).append(" ").append(rs.getString("ruang")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Tgl.Masuk</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("tgl_masuk")).append(" ").append(rs.getString("jam_masuk")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Dokter DPJP</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("dpjp")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Dokter Konsulan</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("konsulan")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Petugas</td><td valign='top'>:&nbsp;</td><td width='67%' valign='top'>").append(rs.getString("nip")).append(" ").append(rs.getString("nama")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "<table width='100%' border='0' cellpadding='0' cellspacing='0'align='center'>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='32%' valign='top'>Tanggal Evaluasi</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top'>Diagnosis</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("diagnosis")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top'>Kelompok</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("kelompok")).append("</td>").append(
-                                        "</tr>").append(
-                                        "<tr class='isi2'>").append(
-                                            "<td width='34%' valign='top'>Assesmen</td><td valign='top'>:&nbsp;</td><td width='65%' valign='top'>").append(rs.getString("assesmen")).append("</td>").append(
-                                        "</tr>").append(
-                                    "</table>").append(
-                                "</td>").append(
-                                "<td valign='top' cellpadding='0' cellspacing='0'>").append(
-                                    "Masalah MPP : ").append(masalahidentifikasi).append("<br><br>").append(
-                                    "Rencana MPP : ").append(rs.getString("rencana")).append(
-                                "</td>").append(
-                            "</tr>"
-                        );
-                    }
-                    LoadHTML.setText(
-                        "<html>"+
-                          "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                           htmlContent.toString()+
-                          "</table>"+
-                        "</html>"
-                    );
-                    htmlContent=null;
-
-                    File g = new File("file2.css");
-                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                    bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                        ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                        ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                        ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                        ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                    );
-                    bg.close();
-
-                    File f = new File("DataEvaluasiMPP.html");
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr class='isi2'>"+
-                                        "<td valign='top' align='center'>"+
-                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA EVALUASI MANAJER PELAYANAN PASIEN<br><br></font>"+
-                                        "</td>"+
-                                   "</tr>"+
-                                "</table>")
-                    );
-                    bw.close();
-                    Desktop.getDesktop().browse(f.toURI());
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                        break;
+                    case "Laporan 2 (HTML)":
+                        Valid.exportHtmlSmc("DataEvaluasiMPP.html", "DATA EVALUASI MANAJER PELAYANAN PASIEN", tbObat);
+                        break;
+                    case "Laporan 3 (WPS)":
+                        Valid.exportWPSSmc("DataEvaluasiMPP.wps", "DATA EVALUASI MANAJER PELAYANAN PASIEN", tbObat);
+                        break;
+                    case "Laporan 4 (CSV)":
+                        Valid.exportCSVSmc("DataEvaluasiMPP.csv", tbObat);
+                        break;
+                    case "Laporan 5 (XLSX)":
+                        Valid.exportXlsxSmc("DataEvaluasiMPP.xlsx", tbObat);
+                        break;
                 }
-
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

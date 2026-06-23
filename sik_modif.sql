@@ -514,6 +514,8 @@ ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `restriksi` varch
 
 ALTER TABLE `maping_obat_apotek_bpjs` MODIFY COLUMN IF EXISTS `nama_brng_apotek_bpjs` varchar(200) NULL DEFAULT NULL AFTER `kode_brng_apotek_bpjs`;
 
+ALTER TABLE `maping_poli_bpjs` DROP INDEX IF EXISTS `kd_poli_bpjs`;
+
 CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
   `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
   `id_template` int(11) NOT NULL,

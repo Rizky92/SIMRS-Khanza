@@ -25,7 +25,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -369,34 +372,61 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){
-                Sequel.menyimpan("temporary","'"+r+"','"+
-                    tabMode.getValueAt(r,0).toString()+"','"+
-                    tabMode.getValueAt(r,1).toString()+"','"+
-                    tabMode.getValueAt(r,2).toString()+"','"+
-                    tabMode.getValueAt(r,3).toString()+"','"+
-                    tabMode.getValueAt(r,4).toString()+"','"+
-                    tabMode.getValueAt(r,5).toString()+"','"+
-                    tabMode.getValueAt(r,6).toString()+"','"+
-                    tabMode.getValueAt(r,7).toString()+"','"+
-                    tabMode.getValueAt(r,8).toString()+"','"+
-                    tabMode.getValueAt(r,9).toString()+"','"+
-                    tabMode.getValueAt(r,10).toString()+"','"+
-                    tabMode.getValueAt(r,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
-            }
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("CariPCAREFaskesSubspesialis.html", "Pencarian Referensi Rujukan Subpesialis", tbKamar);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("CariPCAREFaskesSubspesialis.wps", "Pencarian Referensi Rujukan Subpesialis", tbKamar);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("CariPCAREFaskesSubspesialis.csv", tbKamar);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("CariPCAREFaskesSubspesialis.xlsx", tbKamar);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(int r=0;r<row;r++){
+                            Sequel.menyimpan("temporary","'"+r+"','"+
+                                tabMode.getValueAt(r,0).toString()+"','"+
+                                tabMode.getValueAt(r,1).toString()+"','"+
+                                tabMode.getValueAt(r,2).toString()+"','"+
+                                tabMode.getValueAt(r,3).toString()+"','"+
+                                tabMode.getValueAt(r,4).toString()+"','"+
+                                tabMode.getValueAt(r,5).toString()+"','"+
+                                tabMode.getValueAt(r,6).toString()+"','"+
+                                tabMode.getValueAt(r,7).toString()+"','"+
+                                tabMode.getValueAt(r,8).toString()+"','"+
+                                tabMode.getValueAt(r,9).toString()+"','"+
+                                tabMode.getValueAt(r,10).toString()+"','"+
+                                tabMode.getValueAt(r,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
+                        }
 
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptCariPCAREFaskesSubspesialis.jasper","report","[ Pencarian Referensi Rujukan Subpesialis ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptCariPCAREFaskesSubspesialis.jasper","report","::[ Pencarian Referensi Rujukan Subpesialis ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

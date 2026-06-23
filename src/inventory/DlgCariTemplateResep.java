@@ -280,11 +280,12 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
             Valid.pindah(evt, TCari, BtnTambah);
         }
     }//GEN-LAST:event_BtnKeluarKeyPressed
+
     /*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -303,15 +304,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-//        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//        DlgBarang barang=new DlgBarang(null,false);
-//        barang.emptTeks();
-//        barang.isCek();
-//        barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-//        barang.setLocationRelativeTo(internalFrame1);
-//        barang.setAlwaysOnTop(false);
-//        barang.setVisible(true);
-//        this.setCursor(Cursor.getDefaultCursor());
+        // this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        // DlgBarang barang=new DlgBarang(null,false);
+        // barang.emptTeks();
+        // barang.isCek();
+        // barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        // barang.setLocationRelativeTo(internalFrame1);
+        // barang.setAlwaysOnTop(false);
+        // barang.setVisible(true);
+        // this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed

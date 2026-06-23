@@ -19,6 +19,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -423,44 +426,60 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tbJnsPerawatan.getRowCount()!=0){
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){
-                Sequel.temporary(String.valueOf(r + 1),
-                    (String) tabMode.getValueAt(r, 1),
-                    (String) tabMode.getValueAt(r, 2),
-                    (String) tabMode.getValueAt(r, 3),
-                    (String) tabMode.getValueAt(r, 4),
-                    (String) tabMode.getValueAt(r, 5),
-                    (String) tabMode.getValueAt(r, 6),
-                    (String) tabMode.getValueAt(r, 7),
-                    (String) tabMode.getValueAt(r, 8),
-                    (String) tabMode.getValueAt(r, 9),
-                    (String) tabMode.getValueAt(r, 10),
-                    (String) tabMode.getValueAt(r, 11),
-                    (String) tabMode.getValueAt(r, 12),
-                    (String) tabMode.getValueAt(r, 13),
-                    (String) tabMode.getValueAt(r, 14),
-                    (String) tabMode.getValueAt(r, 15)
-                );
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("ReferensiPendaftaranMobileJKN.html", "Data Referensi Pendaftaran Mobile JKN", tbJnsPerawatan);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("ReferensiPendaftaranMobileJKN.wps", "Data Referensi Pendaftaran Mobile JKN", tbJnsPerawatan);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("ReferensiPendaftaranMobileJKN.csv", tbJnsPerawatan);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("ReferensiPendaftaranMobileJKN.xlsx", tbJnsPerawatan);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2), (String) tabMode.getValueAt(i, 3),
+                                (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6), (String) tabMode.getValueAt(i, 7),
+                                (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11),
+                                (String) tabMode.getValueAt(i, 12), (String) tabMode.getValueAt(i, 13), (String) tabMode.getValueAt(i, 14), (String) tabMode.getValueAt(i, 15));
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptReferensiPendaftaranMobileJKN.jasper", "report", "::[ Data Referensi Pendaftaran Mobile JKN ]::", param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptReferensiPendaftaranMobileJKN.jasper","report","::[ Data Referensi Pendaftaran Mobile JKN ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -683,7 +702,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                     "referensi_mobilejkn_bpjs inner join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis left join maping_dokter_dpjpvclaim on " +
                     "referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
                     "where referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? " + (TCari.getText().isBlank() ? "" : "and (referensi_mobilejkn_bpjs.no_rawat like ? or referensi_mobilejkn_bpjs.norm " +
-                    "like ? or referensi_mobilejkn_bpjs.pasien.nm_pasien like ? or referensi_mobilejkn_bpjs.nohp like ? or referensi_mobilejkn_bpjs.nomorkartu like ? or referensi_mobilejkn_bpjs.nik like ? " +
+                    "like ? or pasien.nm_pasien like ? or referensi_mobilejkn_bpjs.nohp like ? or referensi_mobilejkn_bpjs.nomorkartu like ? or referensi_mobilejkn_bpjs.nik like ? " +
                     "or referensi_mobilejkn_bpjs.jeniskunjungan like ? or referensi_mobilejkn_bpjs.nomorreferensi like ? or referensi_mobilejkn_bpjs.status like ? or referensi_mobilejkn_bpjs.kodedokter " +
                     "like ? or referensi_mobilejkn_bpjs.kodepoli like ? or ifnull(maping_dokter_dpjpvclaim.nm_dokter_bpjs, '') like ? or ifnull(maping_poli_bpjs.nm_poli_bpjs, '') like ?) ") +
                     "group by referensi_mobilejkn_bpjs.nobooking order by referensi_mobilejkn_bpjs.tanggalperiksa, referensi_mobilejkn_bpjs.nobooking");

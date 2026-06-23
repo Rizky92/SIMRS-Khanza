@@ -503,7 +503,7 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
                 BufferedWriter bw;
                 StringBuilder htmlContent;
 
-                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)", "Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
@@ -634,6 +634,9 @@ public final class ApotekBPJSDaftarPermintaanResepIterasi extends javax.swing.JD
                             bw.write(htmlContent.toString());
                             bw.close();
                             Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPermintaanResepIterasi.csv", tbResep);
                         break;
                 }
             }catch(Exception e){

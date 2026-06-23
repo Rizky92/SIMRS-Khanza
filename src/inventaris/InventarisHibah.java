@@ -467,20 +467,21 @@ public class InventarisHibah extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(0,i,7);
-                tbDokter.setValueAt(0,i,8);
-            }
-            sbttl=0;
-            LTotal.setText("0");
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,7);
+            tbDokter.setValueAt(0,i,8);
+        }
+        sbttl=0;
+        LTotal.setText("0");
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

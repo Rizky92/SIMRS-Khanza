@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.StreamSupport;
 
 public class DlgRegistrasiMandiri extends widget.Dialog {
 
@@ -70,29 +71,6 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
             }
         } catch (SQLException e) {
             System.out.println("Notif : " + e);
-        }
-
-        if (kodePoliEksekutif.isBlank()) {
-            buttonCariPoli.setVisible(true);
-            poli.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if (poli.hasSelection()) {
-                        namaDokter.setText("");
-                        kdDokter = "";
-                        kdPoli = poli.getSelectedRow(0).toString();
-                        namaPoli.setText(poli.getSelectedRow(1).toString());
-                        poliBiaya = poli.getSelectedRow(2).toString();
-                        poliBiayaLama = poli.getSelectedRow(3).toString();
-                    }
-                }
-            });
-        } else {
-            buttonCariPoli.setVisible(false);
-            kdPoli = kodePoliEksekutif;
-            namaPoli.setText(Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli = ?", kdPoli));
-            poliBiaya = Sequel.cariIsiSmc("select poliklinik.registrasi from poliklinik where poliklinik.kd_poli = ?", kdPoli);
-            poliBiayaLama = Sequel.cariIsiSmc("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli = ?", kdPoli);
         }
 
         dokter.addWindowListener(new WindowAdapter() {
@@ -579,7 +557,16 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                 if (decrypted.hasNonNull("kodePoliEksekutif")) {
-                    kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText();
+                    if (decrypted.path("kodePoliEksekutif").isArray()) {
+                        long count = StreamSupport.stream(decrypted.withArray("kodePoliEksekutif").spliterator(), false).count();
+                        if (count == 1) {
+                            kodePoliEksekutif = decrypted.withArray("kodePoliEksekutif").iterator().next().asText();
+                        } else {
+                            kodePoliEksekutif = "";
+                        }
+                    } else {
+                        kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText();
+                    }
                 }
 
                 if (decrypted.hasNonNull("printerBarcode")) {
@@ -593,9 +580,32 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 System.out.println("Notif : " + e);
             }
         } else {
-            kodePoliEksekutif = koneksiDB.KODEPOLIEKSEKUTIF();
+            kodePoliEksekutif = koneksiDB.KODEPOLIEKSEKUTIF().length > 0 ? koneksiDB.KODEPOLIEKSEKUTIF()[0] : "";
             printerBarcode = koneksiDB.PRINTER_BARCODE();
             printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
+        }
+
+        if (kodePoliEksekutif.isBlank()) {
+            buttonCariPoli.setVisible(true);
+            poli.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (poli.hasSelection()) {
+                        namaDokter.setText("");
+                        kdDokter = "";
+                        kdPoli = poli.getSelectedRow(0).toString();
+                        namaPoli.setText(poli.getSelectedRow(1).toString());
+                        poliBiaya = poli.getSelectedRow(2).toString();
+                        poliBiayaLama = poli.getSelectedRow(3).toString();
+                    }
+                }
+            });
+        } else {
+            buttonCariPoli.setVisible(false);
+            kdPoli = kodePoliEksekutif;
+            namaPoli.setText(Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli = ?", kdPoli));
+            poliBiaya = Sequel.cariIsiSmc("select poliklinik.registrasi from poliklinik where poliklinik.kd_poli = ?", kdPoli);
+            poliBiayaLama = Sequel.cariIsiSmc("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli = ?", kdPoli);
         }
     }
 }

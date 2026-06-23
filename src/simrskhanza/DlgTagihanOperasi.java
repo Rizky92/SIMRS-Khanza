@@ -1750,11 +1750,12 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,TCariPaket,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){

@@ -3734,417 +3734,427 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            try{
-                if(TCari.getText().equals("")){
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_psikiatri.tanggal,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.informasi,penilaian_awal_keperawatan_ralan_psikiatri.keluhan_utama,penilaian_awal_keperawatan_ralan_psikiatri.rkd_sakit_sejak,penilaian_awal_keperawatan_ralan_psikiatri.rkd_keluhan,penilaian_awal_keperawatan_ralan_psikiatri.rkd_berobat,penilaian_awal_keperawatan_ralan_psikiatri.rkd_hasil_pengobatan,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.fp_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.fp_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_fisik,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.ket_rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.resiko_bunuh_diri,penilaian_awal_keperawatan_ralan_psikiatri.rbd_ide,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_ide,penilaian_awal_keperawatan_ralan_psikiatri.rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.rbd_percobaan,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_percobaan,penilaian_awal_keperawatan_ralan_psikiatri.rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_efek_samping,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_efek_samping,penilaian_awal_keperawatan_ralan_psikiatri.rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_lama_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_cara_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_latar_belakang_pemakaian,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_alasan_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_alergi_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_alergi_obat,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.rpo_merokok,penilaian_awal_keperawatan_ralan_psikiatri.ket_merokok,penilaian_awal_keperawatan_ralan_psikiatri.rpo_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.ket_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.td,penilaian_awal_keperawatan_ralan_psikiatri.nadi,penilaian_awal_keperawatan_ralan_psikiatri.gcs,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.rr,penilaian_awal_keperawatan_ralan_psikiatri.suhu,penilaian_awal_keperawatan_ralan_psikiatri.pf_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.skala_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.durasi,penilaian_awal_keperawatan_ralan_psikiatri.nyeri,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.provokes,penilaian_awal_keperawatan_ralan_psikiatri.ket_provokes,penilaian_awal_keperawatan_ralan_psikiatri.quality,penilaian_awal_keperawatan_ralan_psikiatri.ket_quality,penilaian_awal_keperawatan_ralan_psikiatri.lokasi,penilaian_awal_keperawatan_ralan_psikiatri.menyebar,penilaian_awal_keperawatan_ralan_psikiatri.pada_dokter,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_dokter,penilaian_awal_keperawatan_ralan_psikiatri.nyeri_hilang,penilaian_awal_keperawatan_ralan_psikiatri.ket_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.bb,penilaian_awal_keperawatan_ralan_psikiatri.tb,penilaian_awal_keperawatan_ralan_psikiatri.bmi,penilaian_awal_keperawatan_ralan_psikiatri.lapor_status_nutrisi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor_status_nutrisi,penilaian_awal_keperawatan_ralan_psikiatri.sg1,penilaian_awal_keperawatan_ralan_psikiatri.nilai1,penilaian_awal_keperawatan_ralan_psikiatri.sg2,penilaian_awal_keperawatan_ralan_psikiatri.nilai2,penilaian_awal_keperawatan_ralan_psikiatri.total_hasil,penilaian_awal_keperawatan_ralan_psikiatri.resikojatuh,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.bjm,penilaian_awal_keperawatan_ralan_psikiatri.msa,penilaian_awal_keperawatan_ralan_psikiatri.hasil,penilaian_awal_keperawatan_ralan_psikiatri.lapor,penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor,penilaian_awal_keperawatan_ralan_psikiatri.adl_mandi,penilaian_awal_keperawatan_ralan_psikiatri.adl_berpakaian,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.adl_makan,penilaian_awal_keperawatan_ralan_psikiatri.adl_bak,penilaian_awal_keperawatan_ralan_psikiatri.adl_bab,penilaian_awal_keperawatan_ralan_psikiatri.adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.adl_sosialisasi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_awal_keperawatan_ralan_psikiatri on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_psikiatri.no_rawat "+
-                            "inner join petugas on penilaian_awal_keperawatan_ralan_psikiatri.nip=petugas.nip "+
-                            "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
-                            "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.tanggal between ? and ? order by penilaian_awal_keperawatan_ralan_psikiatri.tanggal");
-                }else{
-                    ps=koneksi.prepareStatement(
-                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_psikiatri.tanggal,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.informasi,penilaian_awal_keperawatan_ralan_psikiatri.keluhan_utama,penilaian_awal_keperawatan_ralan_psikiatri.rkd_sakit_sejak,penilaian_awal_keperawatan_ralan_psikiatri.rkd_keluhan,penilaian_awal_keperawatan_ralan_psikiatri.rkd_berobat,penilaian_awal_keperawatan_ralan_psikiatri.rkd_hasil_pengobatan,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.fp_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.fp_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_fisik,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.ket_rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.resiko_bunuh_diri,penilaian_awal_keperawatan_ralan_psikiatri.rbd_ide,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_ide,penilaian_awal_keperawatan_ralan_psikiatri.rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.rbd_percobaan,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_percobaan,penilaian_awal_keperawatan_ralan_psikiatri.rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_efek_samping,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_efek_samping,penilaian_awal_keperawatan_ralan_psikiatri.rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_lama_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_cara_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_latar_belakang_pemakaian,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_alasan_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_alergi_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_alergi_obat,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.rpo_merokok,penilaian_awal_keperawatan_ralan_psikiatri.ket_merokok,penilaian_awal_keperawatan_ralan_psikiatri.rpo_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.ket_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.td,penilaian_awal_keperawatan_ralan_psikiatri.nadi,penilaian_awal_keperawatan_ralan_psikiatri.gcs,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.rr,penilaian_awal_keperawatan_ralan_psikiatri.suhu,penilaian_awal_keperawatan_ralan_psikiatri.pf_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.skala_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.durasi,penilaian_awal_keperawatan_ralan_psikiatri.nyeri,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.provokes,penilaian_awal_keperawatan_ralan_psikiatri.ket_provokes,penilaian_awal_keperawatan_ralan_psikiatri.quality,penilaian_awal_keperawatan_ralan_psikiatri.ket_quality,penilaian_awal_keperawatan_ralan_psikiatri.lokasi,penilaian_awal_keperawatan_ralan_psikiatri.menyebar,penilaian_awal_keperawatan_ralan_psikiatri.pada_dokter,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_dokter,penilaian_awal_keperawatan_ralan_psikiatri.nyeri_hilang,penilaian_awal_keperawatan_ralan_psikiatri.ket_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.bb,penilaian_awal_keperawatan_ralan_psikiatri.tb,penilaian_awal_keperawatan_ralan_psikiatri.bmi,penilaian_awal_keperawatan_ralan_psikiatri.lapor_status_nutrisi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor_status_nutrisi,penilaian_awal_keperawatan_ralan_psikiatri.sg1,penilaian_awal_keperawatan_ralan_psikiatri.nilai1,penilaian_awal_keperawatan_ralan_psikiatri.sg2,penilaian_awal_keperawatan_ralan_psikiatri.nilai2,penilaian_awal_keperawatan_ralan_psikiatri.total_hasil,penilaian_awal_keperawatan_ralan_psikiatri.resikojatuh,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.bjm,penilaian_awal_keperawatan_ralan_psikiatri.msa,penilaian_awal_keperawatan_ralan_psikiatri.hasil,penilaian_awal_keperawatan_ralan_psikiatri.lapor,penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor,penilaian_awal_keperawatan_ralan_psikiatri.adl_mandi,penilaian_awal_keperawatan_ralan_psikiatri.adl_berpakaian,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.adl_makan,penilaian_awal_keperawatan_ralan_psikiatri.adl_bak,penilaian_awal_keperawatan_ralan_psikiatri.adl_bab,penilaian_awal_keperawatan_ralan_psikiatri.adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.adl_sosialisasi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
-                            "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "inner join penilaian_awal_keperawatan_ralan_psikiatri on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_psikiatri.no_rawat "+
-                            "inner join petugas on penilaian_awal_keperawatan_ralan_psikiatri.nip=petugas.nip "+
-                            "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
-                            "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.tanggal between ? and ? and "+
-                            "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.nip like ? or petugas.nama like ?) "+
-                            "order by penilaian_awal_keperawatan_ralan_psikiatri.tanggal");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi2 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#323232}.isi3 td{border-right:1px solid #e2e7dd;font:8.5px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}.isi5 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#AA0000}.isi6 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#FF0000}.isi7 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#C8C800}.isi8 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#00AA00}.isi9 td{font:8.5px tahoma;border:none;height:12px;background:#ffffff;color:#969696}");
+                    bw.flush();
                 }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (HTML)", "Laporan 3 (WPS)", "Laporan 4 (CSV)", "Laporan 5 (XLSX)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        if(TCari.getText().equals("")){
+                            ps=koneksi.prepareStatement(
+                                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_psikiatri.tanggal,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.informasi,penilaian_awal_keperawatan_ralan_psikiatri.keluhan_utama,penilaian_awal_keperawatan_ralan_psikiatri.rkd_sakit_sejak,penilaian_awal_keperawatan_ralan_psikiatri.rkd_keluhan,penilaian_awal_keperawatan_ralan_psikiatri.rkd_berobat,penilaian_awal_keperawatan_ralan_psikiatri.rkd_hasil_pengobatan,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.fp_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.fp_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_fisik,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.ket_rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.resiko_bunuh_diri,penilaian_awal_keperawatan_ralan_psikiatri.rbd_ide,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_ide,penilaian_awal_keperawatan_ralan_psikiatri.rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.rbd_percobaan,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_percobaan,penilaian_awal_keperawatan_ralan_psikiatri.rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_efek_samping,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_efek_samping,penilaian_awal_keperawatan_ralan_psikiatri.rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_lama_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_cara_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_latar_belakang_pemakaian,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_alasan_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_alergi_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_alergi_obat,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.rpo_merokok,penilaian_awal_keperawatan_ralan_psikiatri.ket_merokok,penilaian_awal_keperawatan_ralan_psikiatri.rpo_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.ket_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.td,penilaian_awal_keperawatan_ralan_psikiatri.nadi,penilaian_awal_keperawatan_ralan_psikiatri.gcs,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.rr,penilaian_awal_keperawatan_ralan_psikiatri.suhu,penilaian_awal_keperawatan_ralan_psikiatri.pf_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.skala_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.durasi,penilaian_awal_keperawatan_ralan_psikiatri.nyeri,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.provokes,penilaian_awal_keperawatan_ralan_psikiatri.ket_provokes,penilaian_awal_keperawatan_ralan_psikiatri.quality,penilaian_awal_keperawatan_ralan_psikiatri.ket_quality,penilaian_awal_keperawatan_ralan_psikiatri.lokasi,penilaian_awal_keperawatan_ralan_psikiatri.menyebar,penilaian_awal_keperawatan_ralan_psikiatri.pada_dokter,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_dokter,penilaian_awal_keperawatan_ralan_psikiatri.nyeri_hilang,penilaian_awal_keperawatan_ralan_psikiatri.ket_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.bb,penilaian_awal_keperawatan_ralan_psikiatri.tb,penilaian_awal_keperawatan_ralan_psikiatri.bmi,penilaian_awal_keperawatan_ralan_psikiatri.lapor_status_nutrisi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor_status_nutrisi,penilaian_awal_keperawatan_ralan_psikiatri.sg1,penilaian_awal_keperawatan_ralan_psikiatri.nilai1,penilaian_awal_keperawatan_ralan_psikiatri.sg2,penilaian_awal_keperawatan_ralan_psikiatri.nilai2,penilaian_awal_keperawatan_ralan_psikiatri.total_hasil,penilaian_awal_keperawatan_ralan_psikiatri.resikojatuh,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.bjm,penilaian_awal_keperawatan_ralan_psikiatri.msa,penilaian_awal_keperawatan_ralan_psikiatri.hasil,penilaian_awal_keperawatan_ralan_psikiatri.lapor,penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor,penilaian_awal_keperawatan_ralan_psikiatri.adl_mandi,penilaian_awal_keperawatan_ralan_psikiatri.adl_berpakaian,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.adl_makan,penilaian_awal_keperawatan_ralan_psikiatri.adl_bak,penilaian_awal_keperawatan_ralan_psikiatri.adl_bab,penilaian_awal_keperawatan_ralan_psikiatri.adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.adl_sosialisasi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
+                                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                    "inner join penilaian_awal_keperawatan_ralan_psikiatri on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_psikiatri.no_rawat "+
+                                    "inner join petugas on penilaian_awal_keperawatan_ralan_psikiatri.nip=petugas.nip "+
+                                    "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
+                                    "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.tanggal between ? and ? order by penilaian_awal_keperawatan_ralan_psikiatri.tanggal");
+                        }else{
+                            ps=koneksi.prepareStatement(
+                                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_psikiatri.tanggal,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.informasi,penilaian_awal_keperawatan_ralan_psikiatri.keluhan_utama,penilaian_awal_keperawatan_ralan_psikiatri.rkd_sakit_sejak,penilaian_awal_keperawatan_ralan_psikiatri.rkd_keluhan,penilaian_awal_keperawatan_ralan_psikiatri.rkd_berobat,penilaian_awal_keperawatan_ralan_psikiatri.rkd_hasil_pengobatan,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.fp_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_putus_obat,penilaian_awal_keperawatan_ralan_psikiatri.fp_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_ekonomi,penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_fisik,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.fp_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.ket_masalah_psikososial,penilaian_awal_keperawatan_ralan_psikiatri.rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.ket_rh_keluarga,penilaian_awal_keperawatan_ralan_psikiatri.resiko_bunuh_diri,penilaian_awal_keperawatan_ralan_psikiatri.rbd_ide,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_ide,penilaian_awal_keperawatan_ralan_psikiatri.rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_rencana,penilaian_awal_keperawatan_ralan_psikiatri.rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_alat,penilaian_awal_keperawatan_ralan_psikiatri.rbd_percobaan,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_percobaan,penilaian_awal_keperawatan_ralan_psikiatri.rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rbd_keinginan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_efek_samping,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_efek_samping,penilaian_awal_keperawatan_ralan_psikiatri.rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_rpo_napza,penilaian_awal_keperawatan_ralan_psikiatri.ket_lama_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_cara_pemakaian,penilaian_awal_keperawatan_ralan_psikiatri.ket_latar_belakang_pemakaian,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.rpo_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_penggunaan_obat_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.ket_alasan_penggunaan,penilaian_awal_keperawatan_ralan_psikiatri.rpo_alergi_obat,penilaian_awal_keperawatan_ralan_psikiatri.ket_alergi_obat,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.rpo_merokok,penilaian_awal_keperawatan_ralan_psikiatri.ket_merokok,penilaian_awal_keperawatan_ralan_psikiatri.rpo_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.ket_minum_kopi,penilaian_awal_keperawatan_ralan_psikiatri.td,penilaian_awal_keperawatan_ralan_psikiatri.nadi,penilaian_awal_keperawatan_ralan_psikiatri.gcs,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.rr,penilaian_awal_keperawatan_ralan_psikiatri.suhu,penilaian_awal_keperawatan_ralan_psikiatri.pf_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.ket_keluhan_fisik,penilaian_awal_keperawatan_ralan_psikiatri.skala_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.durasi,penilaian_awal_keperawatan_ralan_psikiatri.nyeri,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.provokes,penilaian_awal_keperawatan_ralan_psikiatri.ket_provokes,penilaian_awal_keperawatan_ralan_psikiatri.quality,penilaian_awal_keperawatan_ralan_psikiatri.ket_quality,penilaian_awal_keperawatan_ralan_psikiatri.lokasi,penilaian_awal_keperawatan_ralan_psikiatri.menyebar,penilaian_awal_keperawatan_ralan_psikiatri.pada_dokter,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_dokter,penilaian_awal_keperawatan_ralan_psikiatri.nyeri_hilang,penilaian_awal_keperawatan_ralan_psikiatri.ket_nyeri,penilaian_awal_keperawatan_ralan_psikiatri.bb,penilaian_awal_keperawatan_ralan_psikiatri.tb,penilaian_awal_keperawatan_ralan_psikiatri.bmi,penilaian_awal_keperawatan_ralan_psikiatri.lapor_status_nutrisi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor_status_nutrisi,penilaian_awal_keperawatan_ralan_psikiatri.sg1,penilaian_awal_keperawatan_ralan_psikiatri.nilai1,penilaian_awal_keperawatan_ralan_psikiatri.sg2,penilaian_awal_keperawatan_ralan_psikiatri.nilai2,penilaian_awal_keperawatan_ralan_psikiatri.total_hasil,penilaian_awal_keperawatan_ralan_psikiatri.resikojatuh,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.bjm,penilaian_awal_keperawatan_ralan_psikiatri.msa,penilaian_awal_keperawatan_ralan_psikiatri.hasil,penilaian_awal_keperawatan_ralan_psikiatri.lapor,penilaian_awal_keperawatan_ralan_psikiatri.ket_lapor,penilaian_awal_keperawatan_ralan_psikiatri.adl_mandi,penilaian_awal_keperawatan_ralan_psikiatri.adl_berpakaian,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.adl_makan,penilaian_awal_keperawatan_ralan_psikiatri.adl_bak,penilaian_awal_keperawatan_ralan_psikiatri.adl_bab,penilaian_awal_keperawatan_ralan_psikiatri.adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_hobi,penilaian_awal_keperawatan_ralan_psikiatri.adl_sosialisasi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
+                                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                    "inner join penilaian_awal_keperawatan_ralan_psikiatri on reg_periksa.no_rawat=penilaian_awal_keperawatan_ralan_psikiatri.no_rawat "+
+                                    "inner join petugas on penilaian_awal_keperawatan_ralan_psikiatri.nip=petugas.nip "+
+                                    "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien "+
+                                    "inner join cacat_fisik on cacat_fisik.id=pasien.cacat_fisik where "+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.tanggal between ? and ? and "+
+                                    "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
+                                    "penilaian_awal_keperawatan_ralan_psikiatri.nip like ? or petugas.nama like ?) "+
+                                    "order by penilaian_awal_keperawatan_ralan_psikiatri.tanggal");
+                        }
 
-                try {
-                    if(TCari.getText().equals("")){
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    }else{
-                        ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                        ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                        ps.setString(3,"%"+TCari.getText()+"%");
-                        ps.setString(4,"%"+TCari.getText()+"%");
-                        ps.setString(5,"%"+TCari.getText()+"%");
-                        ps.setString(6,"%"+TCari.getText()+"%");
-                        ps.setString(7,"%"+TCari.getText()+"%");
-                    }
-                    rs=ps.executeQuery();
-                    StringBuilder htmlContent = new StringBuilder();
-                    htmlContent.append(
-                        "<tr class='isi'>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Agama</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Bahasa</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cacat Fisik</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Asuhan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Informasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keluhan Utama</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sakit Sejak</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Riwayat Penyakit Dahulu</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Berobat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Pengobatan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Putus Obat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Putus Obat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Masalah Ekonomi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Masalah Ekonomi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Masalah Fisik</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Masalah Fisik</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Masalah Psikososial</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Masalah Psikososial</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Resiko Herediter</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Resiko Herediter</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Res Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ide Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Ide Bunuh DIri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rencana Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Rencana Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alat Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Alat Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Percobaan Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Percobaan Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keinginan Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Keinginan Bunuh Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penggunaan Obat Psikiatri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penggunaan Obat Psikiatri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Efek Samping Obat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Efek samping Obat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Napza</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penggunaan Napza</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lama Napza</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Pemakaian Napza</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Latar Belakang Pemakaian Napza</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat Lainnya</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penggunaan Obat Lainnya</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alasan Penggunaan Obat Lainnya</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alergi Obat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Alergi Obat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Merokok</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Merokok</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Minum Kopi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Minum Kopi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>TD</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nadi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>GCS</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>RR</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Suhu</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keluhan Fisik</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Keluhan Fisik</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Skala Nyeri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Durasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nyeri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Provokes</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Provokes</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kualitas</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kualitas</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lokasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Menyebar</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lapor Dokter</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Lapor Nyeri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nyeri Hilang</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Hilang Nyeri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>BB</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>TB</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>BMI</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lapor Status Nutrisi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Lapor Status Nutrisi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Skrining Gizi 1</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai 1</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Skrining Gizi 2</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai 2</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Total Skor</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Berjalan A</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Berjalan B</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Berjalan C</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Pengkajian Resiko Jatuh</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lapor Dokter</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Dilapor</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Mandi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Berpakaian</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Makan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL BAK</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL BAB</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Hobi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan ADL Hobi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Sosialisasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan ADL Sosialisasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Kegiatan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan ADL. Kegiatan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penampilan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alam Perasaan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pembicaraan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Afek</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Aktifitas Motorik</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gangguan Ringan</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Proses Pikir</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Orientasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kesadaran</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Memori</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Interaksi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Konsentrasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Persepsi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Persepsi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Isi Pikir</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Waham</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Waham</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Daya Tilik Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Daya Tilik Diri</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pembelajaran</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Pembelajaran</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Pembelajaran Lainnya</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penerjamah</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penerjamah Lainnya</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Bahasa Isyarat</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kebutuhan Edukasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kebutuhan Edukasi</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rencana Keperawatan Lainnya</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>").append(
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Perawat</b></td>").append(
-                        "</tr>"
-                    );
-                    while(rs.next()){
-                        htmlContent.append(
-                            "<tr class='isi'>").append(
-                               "<td valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("jk")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("agama")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nama_bahasa")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nama_cacat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("informasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("keluhan_utama")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rkd_sakit_sejak")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rkd_keluhan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rkd_berobat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rkd_hasil_pengobatan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("fp_putus_obat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_putus_obat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("fp_ekonomi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_masalah_ekonomi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("fp_masalah_fisik")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_masalah_fisik")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("fp_masalah_psikososial")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_masalah_psikososial")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rh_keluarga")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rh_keluarga")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("resiko_bunuh_diri")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rbd_ide")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rbd_ide")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rbd_rencana")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rbd_rencana")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rbd_alat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rbd_alat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rbd_percobaan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rbd_percobaan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rbd_keinginan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rbd_keinginan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_penggunaan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rpo_penggunaan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_efek_samping")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rpo_efek_samping")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_napza")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_rpo_napza")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_lama_pemakaian")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_cara_pemakaian")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_latar_belakang_pemakaian")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_penggunaan_obat_lainnya")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_penggunaan_obat_lainnya")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_alasan_penggunaan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_alergi_obat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_alergi_obat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_merokok")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_merokok")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rpo_minum_kopi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_minum_kopi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("td")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nadi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("gcs")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rr")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("suhu")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("pf_keluhan_fisik")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_keluhan_fisik")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("skala_nyeri")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("durasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nyeri")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("provokes")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_provokes")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("quality")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_quality")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("lokasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("menyebar")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("pada_dokter")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_dokter")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nyeri_hilang")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_nyeri")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("bb")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("tb")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("bmi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("lapor_status_nutrisi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_lapor_status_nutrisi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sg1")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nilai1")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sg2")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nilai2")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("total_hasil")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("resikojatuh")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("bjm")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("msa")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("hasil")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("lapor")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_lapor")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_mandi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_berpakaian")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_makan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_bak")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_bab")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_hobi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_adl_hobi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_sosialisasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_adl_sosialisasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("adl_kegiatan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_adl_kegiatan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_penampilan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_alam_perasaan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_pembicaraan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_afek")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_aktifitas_motorik")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_gangguan_ringan")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_proses_pikir")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_orientasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_tingkat_kesadaran_orientasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_memori")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_interaksi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_konsentrasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_persepsi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_sk_persepsi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_isi_pikir")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_waham")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_sk_waham")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("sk_daya_tilik_diri")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_sk_daya_tilik_diri")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("kk_pembelajaran")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_kk_pembelajaran")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_kk_pembelajaran_lainnya")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("kk_Penerjamah")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_kk_penerjamah_Lainnya")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("kk_bahasa_isyarat")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("kk_kebutuhan_edukasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("ket_kk_kebutuhan_edukasi")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("rencana")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nip")).append("</td>").append(
-                               "<td valign='top'>").append(rs.getString("nama")).append("</td>").append(
-                            "</tr>");
-                    }
-                    LoadHTML.setText(
-                        "<html>"+
-                          "<table width='14000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                           htmlContent.toString()+
-                          "</table>"+
-                        "</html>"
-                    );
-                    htmlContent=null;
+                        try {
+                            if(TCari.getText().equals("")){
+                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                            }else{
+                                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                                ps.setString(3,"%"+TCari.getText()+"%");
+                                ps.setString(4,"%"+TCari.getText()+"%");
+                                ps.setString(5,"%"+TCari.getText()+"%");
+                                ps.setString(6,"%"+TCari.getText()+"%");
+                                ps.setString(7,"%"+TCari.getText()+"%");
+                            }
+                            rs=ps.executeQuery();
+                            StringBuilder htmlContent = new StringBuilder();
+                            htmlContent.append(
+                                "<tr class='isi'>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Agama</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Bahasa</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cacat Fisik</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Asuhan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Informasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keluhan Utama</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sakit Sejak</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Riwayat Penyakit Dahulu</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Berobat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Pengobatan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Putus Obat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Putus Obat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Masalah Ekonomi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Masalah Ekonomi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Masalah Fisik</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Masalah Fisik</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Masalah Psikososial</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Masalah Psikososial</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Resiko Herediter</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Resiko Herediter</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Res Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ide Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Ide Bunuh DIri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rencana Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Rencana Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alat Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Alat Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Percobaan Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Percobaan Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keinginan Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Keinginan Bunuh Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penggunaan Obat Psikiatri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penggunaan Obat Psikiatri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Efek Samping Obat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Efek samping Obat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Napza</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penggunaan Napza</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lama Napza</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Pemakaian Napza</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Latar Belakang Pemakaian Napza</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat Lainnya</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penggunaan Obat Lainnya</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alasan Penggunaan Obat Lainnya</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alergi Obat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Alergi Obat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Merokok</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Merokok</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Minum Kopi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Minum Kopi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>TD</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nadi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>GCS</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>RR</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Suhu</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keluhan Fisik</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Keluhan Fisik</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Skala Nyeri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Durasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nyeri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Provokes</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Provokes</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kualitas</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kualitas</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lokasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Menyebar</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lapor Dokter</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Lapor Nyeri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nyeri Hilang</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Hilang Nyeri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>BB</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>TB</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>BMI</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lapor Status Nutrisi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Lapor Status Nutrisi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Skrining Gizi 1</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai 1</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Skrining Gizi 2</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nilai 2</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Total Skor</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Berjalan A</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Berjalan B</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Berjalan C</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Pengkajian Resiko Jatuh</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lapor Dokter</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Dilapor</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Mandi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Berpakaian</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Makan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL BAK</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL BAB</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Hobi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan ADL Hobi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Sosialisasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan ADL Sosialisasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ADL Kegiatan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan ADL. Kegiatan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penampilan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alam Perasaan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pembicaraan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Afek</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Aktifitas Motorik</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Gangguan Ringan</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Proses Pikir</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Orientasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kesadaran</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Memori</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Interaksi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Konsentrasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Persepsi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Persepsi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Isi Pikir</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Waham</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Waham</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Daya Tilik Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Daya Tilik Diri</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pembelajaran</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Pembelajaran</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Pembelajaran Lainnya</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penerjamah</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penerjamah Lainnya</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Bahasa Isyarat</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kebutuhan Edukasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kebutuhan Edukasi</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rencana Keperawatan Lainnya</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>").append(
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Perawat</b></td>").append(
+                                "</tr>"
+                            );
+                            while(rs.next()){
+                                htmlContent.append(
+                                    "<tr class='isi'>").append(
+                                       "<td valign='top'>").append(rs.getString("no_rawat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("no_rkm_medis")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nm_pasien")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("jk")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("agama")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nama_bahasa")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nama_cacat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("tgl_lahir")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("tanggal")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("informasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("keluhan_utama")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rkd_sakit_sejak")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rkd_keluhan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rkd_berobat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rkd_hasil_pengobatan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("fp_putus_obat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_putus_obat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("fp_ekonomi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_masalah_ekonomi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("fp_masalah_fisik")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_masalah_fisik")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("fp_masalah_psikososial")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_masalah_psikososial")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rh_keluarga")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rh_keluarga")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("resiko_bunuh_diri")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rbd_ide")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rbd_ide")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rbd_rencana")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rbd_rencana")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rbd_alat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rbd_alat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rbd_percobaan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rbd_percobaan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rbd_keinginan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rbd_keinginan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_penggunaan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rpo_penggunaan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_efek_samping")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rpo_efek_samping")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_napza")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_rpo_napza")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_lama_pemakaian")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_cara_pemakaian")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_latar_belakang_pemakaian")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_penggunaan_obat_lainnya")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_penggunaan_obat_lainnya")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_alasan_penggunaan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_alergi_obat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_alergi_obat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_merokok")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_merokok")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rpo_minum_kopi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_minum_kopi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("td")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nadi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("gcs")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rr")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("suhu")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("pf_keluhan_fisik")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_keluhan_fisik")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("skala_nyeri")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("durasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nyeri")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("provokes")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_provokes")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("quality")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_quality")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("lokasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("menyebar")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("pada_dokter")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_dokter")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nyeri_hilang")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_nyeri")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("bb")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("tb")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("bmi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("lapor_status_nutrisi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_lapor_status_nutrisi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sg1")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nilai1")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sg2")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nilai2")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("total_hasil")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("resikojatuh")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("bjm")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("msa")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("hasil")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("lapor")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_lapor")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_mandi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_berpakaian")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_makan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_bak")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_bab")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_hobi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_adl_hobi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_sosialisasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_adl_sosialisasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("adl_kegiatan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_adl_kegiatan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_penampilan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_alam_perasaan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_pembicaraan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_afek")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_aktifitas_motorik")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_gangguan_ringan")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_proses_pikir")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_orientasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_tingkat_kesadaran_orientasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_memori")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_interaksi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_konsentrasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_persepsi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_sk_persepsi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_isi_pikir")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_waham")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_sk_waham")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("sk_daya_tilik_diri")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_sk_daya_tilik_diri")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("kk_pembelajaran")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_kk_pembelajaran")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_kk_pembelajaran_lainnya")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("kk_Penerjamah")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_kk_penerjamah_Lainnya")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("kk_bahasa_isyarat")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("kk_kebutuhan_edukasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("ket_kk_kebutuhan_edukasi")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("rencana")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nip")).append("</td>").append(
+                                       "<td valign='top'>").append(rs.getString("nama")).append("</td>").append(
+                                    "</tr>");
+                            }
+                            LoadHTML.setText(
+                                "<html>"+
+                                  "<table width='14000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                                   htmlContent.toString()+
+                                  "</table>"+
+                                "</html>"
+                            );
+                            htmlContent=null;
 
-                    File g = new File("file2.css");
-                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                    bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                        ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                        ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                        ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                        ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                    );
-                    bg.close();
-
-                    File f = new File("DataPenilaianAwalKeperawatanRalan.html");
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                    bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                "<table width='14000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr class='isi2'>"+
-                                        "<td valign='top' align='center'>"+
-                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN<br><br></font>"+
-                                        "</td>"+
-                                   "</tr>"+
-                                "</table>")
-                    );
-                    bw.close();
-                    Desktop.getDesktop().browse(f.toURI());
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
+                            File f = new File("DataPenilaianAwalKeperawatanRalanPsikiatri.html");
+                            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                        "<table width='14000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                    "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN PSIKIATRI<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>")
+                            );
+                            bw.close();
+                            Desktop.getDesktop().browse(f.toURI());
+                        } finally{
+                            if(rs!=null){
+                                rs.close();
+                            }
+                            if(ps!=null){
+                                ps.close();
+                            }
+                        }
+                        break;
+                    case "Laporan 2 (HTML)":
+                        Valid.exportHtmlSmc("DataPenilaianAwalKeperawatanRalanPsikiatri.html", "DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN PSIKIATRI", tbObat);
+                        break;
+                    case "Laporan 3 (WPS)":
+                        Valid.exportWPSSmc("DataPenilaianAwalKeperawatanRalanPsikiatri.wps", "DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN PSIKIATRI", tbObat);
+                        break;
+                    case "Laporan 4 (CSV)":
+                        Valid.exportCSVSmc("DataPenilaianAwalKeperawatanRalanPsikiatri.csv", tbObat);
+                        break;
+                    case "Laporan 5 (XLSX)":
+                        Valid.exportXlsxSmc("DataPenilaianAwalKeperawatanRalanPsikiatri.xlsx", tbObat);
+                        break;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

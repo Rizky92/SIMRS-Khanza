@@ -663,7 +663,7 @@ public class DapurPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -671,11 +671,12 @@ public class DapurPemesanan extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
-*/
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
+    }//GEN-LAST:event_TKdKeyPressed
+    */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(NoFaktur.getText().trim().equals("")){
@@ -813,14 +814,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(false,i,4);
-                tbDokter.setValueAt(0,i,6);
-                tbDokter.setValueAt(0,i,7);
-                tbDokter.setValueAt(0,i,8);
-                tbDokter.setValueAt(0,i,9);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(false,i,4);
+            tbDokter.setValueAt(0,i,6);
+            tbDokter.setValueAt(0,i,7);
+            tbDokter.setValueAt(0,i,8);
+            tbDokter.setValueAt(0,i,9);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
@@ -1063,7 +1064,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbDokterPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDokterPropertyChange
         if(this.isVisible()==true){
-              getData();
+            getData();
         }
     }//GEN-LAST:event_tbDokterPropertyChange
 

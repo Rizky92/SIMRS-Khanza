@@ -640,7 +640,7 @@ public class DlgPermintaanStokPasien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -648,11 +648,12 @@ public class DlgPermintaanStokPasien extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnCari,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -677,20 +678,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         sukses=true;
                         if(ubah==false){
                             if(Sequel.menyimpantf2("permintaan_stok_obat_pasien","?,?,?,?,?,?,'0000-00-00','00:00:00'","Nomer Permintaan",6,new String[]{
-                                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
-                                })==true){
+                                NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
+                            })==true){
                                 simpandata();
                             }else{
                                 emptTeksobat();
                                 if(Sequel.menyimpantf2("permintaan_stok_obat_pasien","?,?,?,?,?,?,'0000-00-00','00:00:00'","Nomer Permintaan",6,new String[]{
-                                        NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
-                                    })==true){
+                                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
+                                })==true){
                                     simpandata();
                                 }else{
                                     emptTeksobat();
                                     if(Sequel.menyimpantf2("permintaan_stok_obat_pasien","?,?,?,?,?,?,'0000-00-00','00:00:00'","Nomer Permintaan",6,new String[]{
-                                            NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
-                                        })==true){
+                                        NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),KdDokter.getText(),"Belum"
+                                    })==true){
                                         simpandata();
                                     }else{
                                         emptTeksobat();
@@ -794,14 +795,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tbDokter.getRowCount();
-            for(int r=0;r<row2;r++){
-                tbDokter.setValueAt("",r,0);
-                tbDokter.setValueAt("",r,10);
-            }
+        int row2=tbDokter.getRowCount();
+        for(int r=0;r<row2;r++){
+            tbDokter.setValueAt("",r,0);
+            tbDokter.setValueAt("",r,10);
+        }
 
-            LTotal.setText("0");
-            LTotalTagihan.setText("0");
+        LTotal.setText("0");
+        LTotalTagihan.setText("0");
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -976,7 +977,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             emptTeksobat();
         } catch (Exception e) {
         }
-
     }//GEN-LAST:event_DTPBeriItemStateChanged
 
     private void DTPBeriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPBeriKeyPressed

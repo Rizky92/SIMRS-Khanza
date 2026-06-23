@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fungsi;
 
 import com.formdev.flatlaf.extras.components.FlatLabel;
@@ -40,10 +36,6 @@ import net.sf.jasperreports.view.JasperViewer;
 import widget.Button;
 import widget.Tanggal;
 
-/**
- *
- * @author Owner
- */
 public final class validasi {
     public static final int POPUPTYPE_KONFIRM = 1;
     public static final int POPUPTYPE_INFORMASI = 2;

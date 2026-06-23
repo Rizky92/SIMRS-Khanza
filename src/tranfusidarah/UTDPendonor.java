@@ -10,6 +10,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -915,64 +918,95 @@ public class UTDPendonor extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            sql="";
-            if(cmbHlm.getSelectedItem().toString().equals("Semua")){
-                if(TCari.getText().equals("")&&GDCari.getSelectedItem().toString().equals("Semua")&&ResusCari.getSelectedItem().toString().equals("Semua")){
-                    sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
-                        "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
-                        "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
-                        "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
-                        "order by utd_pendonor.no_pendonor desc";
-                }else{
-                    sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
-                        "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
-                        "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
-                        "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
-                        "where utd_pendonor.golongan_darah like '%"+GDCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and utd_pendonor.resus like '%"+ResusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+
-                        "(utd_pendonor.no_pendonor like '%"+TCari.getText()+"%' or utd_pendonor.nama like '%"+TCari.getText()+"%' or utd_pendonor.no_ktp like '%"+TCari.getText()+"%' or "+
-                        "utd_pendonor.alamat like '%"+TCari.getText()+"%' or utd_pendonor.no_telp like '%"+TCari.getText()+"%' or kelurahan.nm_kel like '%"+TCari.getText()+"%' or "+
-                        "kecamatan.nm_kec like '%"+TCari.getText()+"%' or kabupaten.nm_kab like '%"+TCari.getText()+"%' or propinsi.nm_prop like '%"+TCari.getText()+"%') "+
-                        "order by utd_pendonor.no_pendonor desc";
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-            }else{
-                if(TCari.getText().equals("")&&GDCari.getSelectedItem().toString().equals("Semua")&&ResusCari.getSelectedItem().toString().equals("Semua")){
-                    sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
-                        "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
-                        "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
-                        "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
-                        "order by utd_pendonor.no_pendonor desc limit "+cmbHlm.getSelectedItem().toString();
-                }else{
-                    sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
-                        "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
-                        "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
-                        "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
-                        "where utd_pendonor.golongan_darah like '%"+GDCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and utd_pendonor.resus like '%"+ResusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+
-                        "(utd_pendonor.no_pendonor like '%"+TCari.getText()+"%' or utd_pendonor.nama like '%"+TCari.getText()+"%' or utd_pendonor.no_ktp like '%"+TCari.getText()+"%' or "+
-                        "utd_pendonor.alamat like '%"+TCari.getText()+"%' or utd_pendonor.no_telp like '%"+TCari.getText()+"%' or kelurahan.nm_kel like '%"+TCari.getText()+"%' or "+
-                        "kecamatan.nm_kec like '%"+TCari.getText()+"%' or kabupaten.nm_kab like '%"+TCari.getText()+"%' or propinsi.nm_prop like '%"+TCari.getText()+"%') "+
-                        "order by utd_pendonor.no_pendonor desc limit "+cmbHlm.getSelectedItem().toString();
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataPendonorDarah.html", "Data Pendonor Darah", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataPendonorDarah.wps", "Data Pendonor Darah", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataPendonorDarah.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPendonorDarah.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        sql="";
+                        if(cmbHlm.getSelectedItem().toString().equals("Semua")){
+                            if(TCari.getText().equals("")&&GDCari.getSelectedItem().toString().equals("Semua")&&ResusCari.getSelectedItem().toString().equals("Semua")){
+                                sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
+                                    "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
+                                    "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
+                                    "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
+                                    "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
+                                    "order by utd_pendonor.no_pendonor desc";
+                            }else{
+                                sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
+                                    "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
+                                    "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
+                                    "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
+                                    "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
+                                    "where utd_pendonor.golongan_darah like '%"+GDCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and utd_pendonor.resus like '%"+ResusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+
+                                    "(utd_pendonor.no_pendonor like '%"+TCari.getText()+"%' or utd_pendonor.nama like '%"+TCari.getText()+"%' or utd_pendonor.no_ktp like '%"+TCari.getText()+"%' or "+
+                                    "utd_pendonor.alamat like '%"+TCari.getText()+"%' or utd_pendonor.no_telp like '%"+TCari.getText()+"%' or kelurahan.nm_kel like '%"+TCari.getText()+"%' or "+
+                                    "kecamatan.nm_kec like '%"+TCari.getText()+"%' or kabupaten.nm_kab like '%"+TCari.getText()+"%' or propinsi.nm_prop like '%"+TCari.getText()+"%') "+
+                                    "order by utd_pendonor.no_pendonor desc";
+                            }
+                        }else{
+                            if(TCari.getText().equals("")&&GDCari.getSelectedItem().toString().equals("Semua")&&ResusCari.getSelectedItem().toString().equals("Semua")){
+                                sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
+                                    "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
+                                    "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
+                                    "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
+                                    "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
+                                    "order by utd_pendonor.no_pendonor desc limit "+cmbHlm.getSelectedItem().toString();
+                            }else{
+                                sql="select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,"+
+                                    "utd_pendonor.alamat,utd_pendonor.kd_kel,utd_pendonor.kd_kec,utd_pendonor.kd_kab,utd_pendonor.kd_prop,utd_pendonor.golongan_darah,"+
+                                    "utd_pendonor.resus,utd_pendonor.no_telp,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop "+
+                                    "from utd_pendonor inner join kelurahan on utd_pendonor.kd_kel=kelurahan.kd_kel inner join kecamatan on utd_pendonor.kd_kec=kecamatan.kd_kec "+
+                                    "inner join kabupaten on utd_pendonor.kd_kab=kabupaten.kd_kab inner join propinsi on utd_pendonor.kd_prop=propinsi.kd_prop "+
+                                    "where utd_pendonor.golongan_darah like '%"+GDCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and utd_pendonor.resus like '%"+ResusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+
+                                    "(utd_pendonor.no_pendonor like '%"+TCari.getText()+"%' or utd_pendonor.nama like '%"+TCari.getText()+"%' or utd_pendonor.no_ktp like '%"+TCari.getText()+"%' or "+
+                                    "utd_pendonor.alamat like '%"+TCari.getText()+"%' or utd_pendonor.no_telp like '%"+TCari.getText()+"%' or kelurahan.nm_kel like '%"+TCari.getText()+"%' or "+
+                                    "kecamatan.nm_kec like '%"+TCari.getText()+"%' or kabupaten.nm_kab like '%"+TCari.getText()+"%' or propinsi.nm_prop like '%"+TCari.getText()+"%') "+
+                                    "order by utd_pendonor.no_pendonor desc limit "+cmbHlm.getSelectedItem().toString();
+                            }
+                        }
+                        Valid.MyReportqry("rptDataPendonorDarah.jasper","report","::[ Data Pendonor Darah ]::",sql,param);
+                        break;
                 }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-            Valid.MyReportqry("rptDataPendonorDarah.jasper","report","::[ Data Pendonor Darah ]::",sql,param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -1065,11 +1099,12 @@ public class UTDPendonor extends javax.swing.JDialog {
     private void KTPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KTPKeyPressed
         Valid.pindah(evt,Nama,JK);
     }//GEN-LAST:event_KTPKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void NoIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoIdKeyPressed
         Valid.pindah(evt,Alamat,Telp,TCari);

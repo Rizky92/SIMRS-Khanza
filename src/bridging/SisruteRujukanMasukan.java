@@ -27,6 +27,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -713,56 +716,82 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){
-                Sequel.menyimpan("temporary","'"+r+"','"+
-                    tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,23).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,24).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,25).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,26).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,27).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,28).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,29).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,30).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("CariSisruteRujukanMasuk.html", "Pencarian Rujukan Masuk Sisrute", tbBangsal);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("CariSisruteRujukanMasuk.wps", "Pencarian Rujukan Masuk Sisrute", tbBangsal);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("CariSisruteRujukanMasuk.csv", tbBangsal);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("CariSisruteRujukanMasuk.xlsx", tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        int row=tabMode.getRowCount();
+                        for(int r=0;r<row;r++){
+                            Sequel.menyimpan("temporary","'"+r+"','"+
+                                tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,23).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,24).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,25).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,26).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,27).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,28).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,29).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,30).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptCariSisruteRujukanMasuk.jasper","report","::[ Pencarian Rujukan Masuk Sisrute ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptCariSisruteRujukanMasuk.jasper","report","[ Pencarian Rujukan Masuk Sisrute ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

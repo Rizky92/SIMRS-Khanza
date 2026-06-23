@@ -18,6 +18,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -402,7 +405,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -416,7 +419,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -510,7 +513,7 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -671,7 +674,6 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         Skor1.setText("0");
         Skor1.setFocusTraversalPolicyProvider(true);
         Skor1.setName("Skor1"); // NOI18N
-        Skor1.setOpaque(true);
         FormInput.add(Skor1);
         Skor1.setBounds(745, 80, 44, 23);
 
@@ -691,7 +693,6 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         Skor2.setText("0");
         Skor2.setFocusTraversalPolicyProvider(true);
         Skor2.setName("Skor2"); // NOI18N
-        Skor2.setOpaque(true);
         FormInput.add(Skor2);
         Skor2.setBounds(745, 110, 44, 23);
 
@@ -727,7 +728,6 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
         Skor3.setText("0");
         Skor3.setFocusTraversalPolicyProvider(true);
         Skor3.setName("Skor3"); // NOI18N
-        Skor3.setOpaque(true);
         FormInput.add(Skor3);
         Skor3.setBounds(745, 140, 44, 23);
 
@@ -878,44 +878,75 @@ public final class RMPemantauanPEWS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(TCari.getText().trim().equals("")){
-              Valid.MyReportqry("rptDataPemantauanPEWS.jasper","report","::[ Data Pemantauan PEWS ]::",
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
-                    "pasien.jk,pemantauan_pews_anak.tanggal,pemantauan_pews_anak.parameter_perilaku,pemantauan_pews_anak.skor_perilaku,pemantauan_pews_anak.parameter_crt_atau_warna_kulit,pemantauan_pews_anak.skor_crt_atau_warna_kulit,pemantauan_pews_anak.parameter_perespirasi,pemantauan_pews_anak.skor_perespirasi,"+
-                    "pemantauan_pews_anak.skor_total,pemantauan_pews_anak.parameter_total,pemantauan_pews_anak.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir "+
-                    "from pemantauan_pews_anak inner join reg_periksa on pemantauan_pews_anak.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on pemantauan_pews_anak.nip=petugas.nip where "+
-                    "pemantauan_pews_anak.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by pemantauan_pews_anak.tanggal ",param);
-            }else{
-                Valid.MyReportqry("rptDataPemantauanPEWS.jasper","report","::[ Data Pemantauan PEWS ]::",
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
-                    "pasien.jk,pemantauan_pews_anak.tanggal,pemantauan_pews_anak.parameter_perilaku,pemantauan_pews_anak.skor_perilaku,pemantauan_pews_anak.parameter_crt_atau_warna_kulit,pemantauan_pews_anak.skor_crt_atau_warna_kulit,pemantauan_pews_anak.parameter_perespirasi,pemantauan_pews_anak.skor_perespirasi,"+
-                    "pemantauan_pews_anak.skor_total,pemantauan_pews_anak.parameter_total,pemantauan_pews_anak.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir "+
-                    "from pemantauan_pews_anak inner join reg_periksa on pemantauan_pews_anak.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on pemantauan_pews_anak.nip=petugas.nip "+
-                    "where pemantauan_pews_anak.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
-                    "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%'  or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' "+
-                    "or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
-                    "or pemantauan_pews_anak.parameter_total like '%"+TCari.getText().trim()+"%' or pemantauan_pews_anak.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like ?) "+
-                    "order by pemantauan_pews_anak.tanggal ",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataPemantauanPEWS.html", "Data Pemantauan PEWS", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataPemantauanPEWS.wps", "Data Pemantauan PEWS", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataPemantauanPEWS.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPemantauanPEWS.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(TCari.getText().trim().equals("")){
+                          Valid.MyReportqry("rptDataPemantauanPEWS.jasper","report","::[ Data Pemantauan PEWS ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
+                                "pasien.jk,pemantauan_pews_anak.tanggal,pemantauan_pews_anak.parameter_perilaku,pemantauan_pews_anak.skor_perilaku,pemantauan_pews_anak.parameter_crt_atau_warna_kulit,pemantauan_pews_anak.skor_crt_atau_warna_kulit,pemantauan_pews_anak.parameter_perespirasi,pemantauan_pews_anak.skor_perespirasi,"+
+                                "pemantauan_pews_anak.skor_total,pemantauan_pews_anak.parameter_total,pemantauan_pews_anak.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir "+
+                                "from pemantauan_pews_anak inner join reg_periksa on pemantauan_pews_anak.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on pemantauan_pews_anak.nip=petugas.nip where "+
+                                "pemantauan_pews_anak.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by pemantauan_pews_anak.tanggal ",param);
+                        }else{
+                            Valid.MyReportqry("rptDataPemantauanPEWS.jasper","report","::[ Data Pemantauan PEWS ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
+                                "pasien.jk,pemantauan_pews_anak.tanggal,pemantauan_pews_anak.parameter_perilaku,pemantauan_pews_anak.skor_perilaku,pemantauan_pews_anak.parameter_crt_atau_warna_kulit,pemantauan_pews_anak.skor_crt_atau_warna_kulit,pemantauan_pews_anak.parameter_perespirasi,pemantauan_pews_anak.skor_perespirasi,"+
+                                "pemantauan_pews_anak.skor_total,pemantauan_pews_anak.parameter_total,pemantauan_pews_anak.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir "+
+                                "from pemantauan_pews_anak inner join reg_periksa on pemantauan_pews_anak.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on pemantauan_pews_anak.nip=petugas.nip "+
+                                "where pemantauan_pews_anak.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
+                                "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%'  or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' "+
+                                "or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
+                                "or pemantauan_pews_anak.parameter_total like '%"+TCari.getText().trim()+"%' or pemantauan_pews_anak.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like ?) "+
+                                "order by pemantauan_pews_anak.tanggal ",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

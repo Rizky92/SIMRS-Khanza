@@ -23,6 +23,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1255,62 +1258,100 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDendaLainKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(TabRawat.getSelectedIndex()==0){
-            if(tabMode.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                BtnBatal.requestFocus();
-            }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptDendaTrlmbt.jasper","report","::[ Data Inventaris Perpustakaan ]::",
-                    "select perpustakaan_bayar_denda_harian.tgl_denda,perpustakaan_bayar_denda_harian.no_anggota,perpustakaan_anggota.nama_anggota,"+
-                    "perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
-                    "perpustakaan_bayar_denda_harian.keterlambatan,perpustakaan_bayar_denda_harian.besar_denda from perpustakaan_inventaris "+
-                    "inner join perpustakaan_buku inner join perpustakaan_bayar_denda_harian inner join perpustakaan_anggota on "+
-                    "perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_bayar_denda_harian.no_anggota=perpustakaan_anggota.no_anggota "+
-                    "and perpustakaan_inventaris.no_inventaris=perpustakaan_bayar_denda_harian.no_inventaris where "+
-                    "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_bayar_denda_harian.no_anggota like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_anggota.nama_anggota like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.kode_buku like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.judul_buku like '%"+TCari.getText().trim()+"%' order by perpustakaan_bayar_denda_harian.tgl_denda desc",param);
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
             }
-
-        }else if(TabRawat.getSelectedIndex()==1){
-            if(tabMode2.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                BtnBatal.requestFocus();
-            }else if(tabMode2.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptDendaLain.jasper","report","::[ Data Pembayaran Denda Lain-lain ]::",
-                    "select perpustakaan_bayar_denda.tgl_denda,perpustakaan_bayar_denda.no_anggota,perpustakaan_anggota.nama_anggota,"+
-                    "perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
-                    "perpustakaan_denda.kode_denda,perpustakaan_denda.jenis_denda,perpustakaan_bayar_denda.besar_denda,"+
-                    "perpustakaan_bayar_denda.keterangan_denda from perpustakaan_inventaris "+
-                    "inner join perpustakaan_buku inner join perpustakaan_bayar_denda inner join perpustakaan_anggota inner join perpustakaan_denda on "+
-                    "perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_bayar_denda.no_anggota=perpustakaan_anggota.no_anggota "+
-                    "and perpustakaan_inventaris.no_inventaris=perpustakaan_bayar_denda.no_inventaris and perpustakaan_bayar_denda.kode_denda=perpustakaan_denda.kode_denda where "+
-                    "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_bayar_denda.no_anggota like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_anggota.nama_anggota like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_denda.jenis_denda like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.kode_buku like '%"+TCari.getText().trim()+"%' or "+
-                    "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.judul_buku like '%"+TCari.getText().trim()+"%' order by perpustakaan_bayar_denda.tgl_denda desc",param);
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            if(TabRawat.getSelectedIndex()==0){
+                if(tabMode.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                    BtnBatal.requestFocus();
+                }else if(tabMode.getRowCount()!=0){
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("DendaTrlmbt.html", "Data Inventaris Perpustakaan", tbBayarDenda);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("DendaTrlmbt.wps", "Data Inventaris Perpustakaan", tbBayarDenda);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("DendaTrlmbt.csv", tbBayarDenda);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("DendaTrlmbt.xlsx", tbBayarDenda);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Valid.MyReportqry("rptDendaTrlmbt.jasper","report","::[ Data Inventaris Perpustakaan ]::",
+                                "select perpustakaan_bayar_denda_harian.tgl_denda,perpustakaan_bayar_denda_harian.no_anggota,perpustakaan_anggota.nama_anggota,"+
+                                "perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
+                                "perpustakaan_bayar_denda_harian.keterlambatan,perpustakaan_bayar_denda_harian.besar_denda from perpustakaan_inventaris "+
+                                "inner join perpustakaan_buku inner join perpustakaan_bayar_denda_harian inner join perpustakaan_anggota on "+
+                                "perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_bayar_denda_harian.no_anggota=perpustakaan_anggota.no_anggota "+
+                                "and perpustakaan_inventaris.no_inventaris=perpustakaan_bayar_denda_harian.no_inventaris where "+
+                                "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_bayar_denda_harian.no_anggota like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_anggota.nama_anggota like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.kode_buku like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda_harian.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.judul_buku like '%"+TCari.getText().trim()+"%' order by perpustakaan_bayar_denda_harian.tgl_denda desc",param);
+                            break;
+                    }
+                }
+            }else if(TabRawat.getSelectedIndex()==1){
+                if(tabMode2.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                    BtnBatal.requestFocus();
+                }else if(tabMode2.getRowCount()!=0){
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("DendaLain.html", "Data Pembayaran Denda Lain-lain", tbDendaLain);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("DendaLain.wps", "Data Pembayaran Denda Lain-lain", tbDendaLain);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("DendaLain.csv", tbDendaLain);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("DendaLain.xlsx", tbDendaLain);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Valid.MyReportqry("rptDendaLain.jasper","report","::[ Data Pembayaran Denda Lain-lain ]::",
+                                "select perpustakaan_bayar_denda.tgl_denda,perpustakaan_bayar_denda.no_anggota,perpustakaan_anggota.nama_anggota,"+
+                                "perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
+                                "perpustakaan_denda.kode_denda,perpustakaan_denda.jenis_denda,perpustakaan_bayar_denda.besar_denda,"+
+                                "perpustakaan_bayar_denda.keterangan_denda from perpustakaan_inventaris "+
+                                "inner join perpustakaan_buku inner join perpustakaan_bayar_denda inner join perpustakaan_anggota inner join perpustakaan_denda on "+
+                                "perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_bayar_denda.no_anggota=perpustakaan_anggota.no_anggota "+
+                                "and perpustakaan_inventaris.no_inventaris=perpustakaan_bayar_denda.no_inventaris and perpustakaan_bayar_denda.kode_denda=perpustakaan_denda.kode_denda where "+
+                                "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_bayar_denda.no_anggota like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_anggota.nama_anggota like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_denda.jenis_denda like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.kode_buku like '%"+TCari.getText().trim()+"%' or "+
+                                "perpustakaan_bayar_denda.tgl_denda between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and perpustakaan_buku.judul_buku like '%"+TCari.getText().trim()+"%' order by perpustakaan_bayar_denda.tgl_denda desc",param);
+                            break;
+                    }
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

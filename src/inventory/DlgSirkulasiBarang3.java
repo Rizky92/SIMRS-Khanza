@@ -18,6 +18,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -598,54 +601,81 @@ public class DlgSirkulasiBarang3 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            if(ceksukses==false){
-                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");int row=tabMode.getRowCount();
-                for(int i=0;i<row;i++){
-                    Sequel.menyimpan("temporary","'"+i+"',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','"+akses.getalamatip()+"'",33,new String[]{
-                        tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
-                        tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),
-                        tabMode.getValueAt(i,6).toString(),tabMode.getValueAt(i,7).toString(),tabMode.getValueAt(i,8).toString(),
-                        tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),
-                        tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),tabMode.getValueAt(i,14).toString(),
-                        tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),tabMode.getValueAt(i,17).toString(),
-                        tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),tabMode.getValueAt(i,20).toString(),
-                        tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),tabMode.getValueAt(i,23).toString(),
-                        tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),tabMode.getValueAt(i,26).toString(),
-                        tabMode.getValueAt(i,27).toString(),tabMode.getValueAt(i,28).toString(),tabMode.getValueAt(i,29).toString(),
-                        tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),tabMode.getValueAt(i,32).toString()
-                    });
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                if(lokasi.equals("")){
-                    Valid.MyReportqry("rptSirkulasi5.jasper","report","::[ Sirkulasi Barang ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-                }else if(!lokasi.equals("")){
-                    param.put("bangsal",lokasi);
-                    Valid.MyReportqry("rptSirkulasi6.jasper","report","::[ Sirkulasi Barang ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("Sirkulasi5.html", "Sirkulasi Barang", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("Sirkulasi5.wps", "Sirkulasi Barang", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("Sirkulasi5.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("Sirkulasi5.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");int row=tabMode.getRowCount();
+                        for(int i=0;i<row;i++){
+                            Sequel.menyimpan("temporary","'"+i+"',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','"+akses.getalamatip()+"'",33,new String[]{
+                                tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
+                                tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),
+                                tabMode.getValueAt(i,6).toString(),tabMode.getValueAt(i,7).toString(),tabMode.getValueAt(i,8).toString(),
+                                tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),
+                                tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),tabMode.getValueAt(i,14).toString(),
+                                tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),tabMode.getValueAt(i,17).toString(),
+                                tabMode.getValueAt(i,18).toString(),tabMode.getValueAt(i,19).toString(),tabMode.getValueAt(i,20).toString(),
+                                tabMode.getValueAt(i,21).toString(),tabMode.getValueAt(i,22).toString(),tabMode.getValueAt(i,23).toString(),
+                                tabMode.getValueAt(i,24).toString(),tabMode.getValueAt(i,25).toString(),tabMode.getValueAt(i,26).toString(),
+                                tabMode.getValueAt(i,27).toString(),tabMode.getValueAt(i,28).toString(),tabMode.getValueAt(i,29).toString(),
+                                tabMode.getValueAt(i,30).toString(),tabMode.getValueAt(i,31).toString(),tabMode.getValueAt(i,32).toString()
+                            });
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(lokasi.equals("")){
+                            Valid.MyReportqry("rptSirkulasi5.jasper","report","::[ Sirkulasi Barang ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        }else if(!lokasi.equals("")){
+                            param.put("bangsal",lokasi);
+                            Valid.MyReportqry("rptSirkulasi6.jasper","report","::[ Sirkulasi Barang ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        }
+                        break;
                 }
-                this.setCursor(Cursor.getDefaultCursor());
-            }else{
-                JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -714,55 +744,55 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void ppGrafikJualBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikJualBanyakActionPerformed
         grafikpenjualanterbanyak grafik=new grafikpenjualanterbanyak("Grafik 10 Barang Penjualan Terbanyak"," penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikJualBanyakActionPerformed
 
     private void ppGrafikJualDikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikJualDikitActionPerformed
         grafikpenjualantersedikit grafik=new grafikpenjualantersedikit("Grafik 10 Barang Penjualan Tersedikit"," penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikJualDikitActionPerformed
 
     private void ppGrafikbeliBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikbeliBanyakActionPerformed
         grafikpembelianterbanyak grafik=new grafikpembelianterbanyak("Grafik 10 Barang Pembelian Terbanyak"," pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikbeliBanyakActionPerformed
 
     private void ppGrafikbelidikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikbelidikitActionPerformed
         grafikpembeliantersedikit grafik=new grafikpembeliantersedikit("Grafik 10 Barang Pembelian Tersedikit"," pembelian.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikbelidikitActionPerformed
 
     private void ppGrafikPiutangBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiutangBanyakActionPerformed
         grafikpiutangterbanyak grafik=new grafikpiutangterbanyak("Grafik 10 Barang Piutang Terbanyak"," piutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiutangBanyakActionPerformed
 
     private void ppGrafikPiutangDikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiutangDikitActionPerformed
         grafikpiutangtersedikit grafik=new grafikpiutangtersedikit("Grafik 10 Barang Piutang Tersedikit"," piutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiutangDikitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -793,19 +823,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void ppGrafikResepPaliingBanyakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikResepPaliingBanyakActionPerformed
         grafikresepterbanyak grafik=new grafikresepterbanyak("Grafik 10 Barang Resep Ke Pasien Terbanyak"," tgl_perawatan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikResepPaliingBanyakActionPerformed
 
     private void ppGrafikResepPaliingSedikitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikResepPaliingSedikitActionPerformed
         grafikreseptersedikit grafik=new grafikreseptersedikit("Grafik 10 Barang Resep Ke Pasien Tersedikit"," tgl_perawatan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' "+
                        "and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ");
-                    grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                    grafik.setLocationRelativeTo(internalFrame1);
-                    grafik.setAlwaysOnTop(false);
-                    grafik.setVisible(true);
+        grafik.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        grafik.setLocationRelativeTo(internalFrame1);
+        grafik.setAlwaysOnTop(false);
+        grafik.setVisible(true);
     }//GEN-LAST:event_ppGrafikResepPaliingSedikitActionPerformed
 
     private void ppLokasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLokasiBtnPrintActionPerformed

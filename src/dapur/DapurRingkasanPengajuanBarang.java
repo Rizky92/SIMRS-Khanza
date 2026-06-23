@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -654,11 +657,12 @@ public class DapurRingkasanPengajuanBarang extends javax.swing.JDialog {
             dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
-*/
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
+    }//GEN-LAST:event_TKdKeyPressed
+    */
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
         DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
@@ -814,38 +818,68 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("tanggal1",Valid.SetTgl(Tanggal1.getSelectedItem()+""));
-            param.put("tanggal2",Valid.SetTgl(Tanggal2.getSelectedItem()+""));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptRingkasanPengajuanDapur.jasper","report","::[ Laporan Ringkasan Pengajuan Barang Dapur ]::",
-                    "select detail_pengajuan_barang_dapur.kode_brng,dapurbarang.nama_brng,detail_pengajuan_barang_dapur.kode_sat,kodesatuan.satuan,dapurbarang.jenis as namajenis,"+
-                    "sum(detail_pengajuan_barang_dapur.jumlah) as jumlah,sum(detail_pengajuan_barang_dapur.total) as total "+
-                    "from pengajuan_barang_dapur inner join pegawai on pengajuan_barang_dapur.nip=pegawai.nik "+
-                    "inner join detail_pengajuan_barang_dapur on pengajuan_barang_dapur.no_pengajuan=detail_pengajuan_barang_dapur.no_pengajuan "+
-                    "inner join dapurbarang on detail_pengajuan_barang_dapur.kode_brng=dapurbarang.kode_brng "+
-                    "inner join kodesatuan on dapurbarang.kode_sat=kodesatuan.kode_sat where pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and pengajuan_barang_dapur.no_pengajuan like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and pengajuan_barang_dapur.nip like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and pegawai.nama like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.jenis like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_pengajuan_barang_dapur.kode_brng like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.nama_brng like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_pengajuan_barang_dapur.kode_sat like '%"+TCari.getText()+"%' or "+
-                    " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText()+"%' "+
-                    " group by detail_pengajuan_barang_dapur.kode_brng "+order,param);
-
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RingkasanPengajuanDapur.html", "Laporan Ringkasan Pengajuan Barang Dapur", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RingkasanPengajuanDapur.wps", "Laporan Ringkasan Pengajuan Barang Dapur", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RingkasanPengajuanDapur.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RingkasanPengajuanDapur.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("tanggal1",Valid.SetTgl(Tanggal1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(Tanggal2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptRingkasanPengajuanDapur.jasper","report","::[ Laporan Ringkasan Pengajuan Barang Dapur ]::",
+                                "select detail_pengajuan_barang_dapur.kode_brng,dapurbarang.nama_brng,detail_pengajuan_barang_dapur.kode_sat,kodesatuan.satuan,dapurbarang.jenis as namajenis,"+
+                                "sum(detail_pengajuan_barang_dapur.jumlah) as jumlah,sum(detail_pengajuan_barang_dapur.total) as total "+
+                                "from pengajuan_barang_dapur inner join pegawai on pengajuan_barang_dapur.nip=pegawai.nik "+
+                                "inner join detail_pengajuan_barang_dapur on pengajuan_barang_dapur.no_pengajuan=detail_pengajuan_barang_dapur.no_pengajuan "+
+                                "inner join dapurbarang on detail_pengajuan_barang_dapur.kode_brng=dapurbarang.kode_brng "+
+                                "inner join kodesatuan on dapurbarang.kode_sat=kodesatuan.kode_sat where pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and pengajuan_barang_dapur.no_pengajuan like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and pengajuan_barang_dapur.nip like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and pegawai.nama like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.jenis like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_pengajuan_barang_dapur.kode_brng like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.nama_brng like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_pengajuan_barang_dapur.kode_sat like '%"+TCari.getText()+"%' or "+
+                                " pengajuan_barang_dapur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and pengajuan_barang_dapur.no_pengajuan like '%"+NoPermintaan.getText()+"%' and pengajuan_barang_dapur.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nama like '%"+NmPeg.getText()+"%'  and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText()+"%' "+
+                                " group by detail_pengajuan_barang_dapur.kode_brng "+order,param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

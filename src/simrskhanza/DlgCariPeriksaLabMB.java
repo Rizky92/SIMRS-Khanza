@@ -824,11 +824,12 @@ public class DlgCariPeriksaLabMB extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void btnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienActionPerformed
         if (member == null || !member.isDisplayable()) {
@@ -985,93 +986,110 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        switch (TabRawat.getSelectedIndex()) {
-            case 0:
-                if(tabMode.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
-
-                    Sequel.queryu("delete from temporary_lab where temp36 = '"+akses.getkode()+"' and temp37 = '"+akses.getalamatip()+"'");
-                    int row=tabMode.getRowCount();
-                    for(i=0;i<row;i++){
-                        Sequel.temporaryLab(String.valueOf(i+1),
-                            tabMode.getValueAt(i, 0).toString(),
-                            tabMode.getValueAt(i, 1).toString(),
-                            tabMode.getValueAt(i, 2).toString(),
-                            tabMode.getValueAt(i, 3).toString(),
-                            tabMode.getValueAt(i, 4).toString(),
-                            tabMode.getValueAt(i, 5).toString(),
-                            tabMode.getValueAt(i, 6).toString());
+        try {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("userid", akses.getkode());
+            param.put("ipaddress", akses.getalamatip());
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 5 (Jasper)");
+            switch (TabRawat.getSelectedIndex()) {
+                case 0:
+                    if(tabMode.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        TCari.requestFocus();
+                    }else if(tabMode.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataLabMB.html", "Data Pemeriksaan Laboratorium", tbDokter);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataLabMB.wps", "Data Pemeriksaan Laboratorium", tbDokter);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataLabMB.csv", tbDokter);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataLabMB.xlsx", tbDokter);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary_lab where temp36 = '"+akses.getkode()+"' and temp37 = '"+akses.getalamatip()+"'");
+                                int row=tabMode.getRowCount();
+                                for(i=0;i<row;i++){
+                                    Sequel.temporaryLab(String.valueOf(i+1),
+                                        tabMode.getValueAt(i, 0).toString(),
+                                        tabMode.getValueAt(i, 1).toString(),
+                                        tabMode.getValueAt(i, 2).toString(),
+                                        tabMode.getValueAt(i, 3).toString(),
+                                        tabMode.getValueAt(i, 4).toString(),
+                                        tabMode.getValueAt(i, 5).toString(),
+                                        tabMode.getValueAt(i, 6).toString());
+                                }
+                                Valid.MyReport("rptDataLabMB.jasper","report","::[ Data Pemeriksaan Laboratorium ]::",param);
+                                break;
+                        }
                     }
-
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    param.put("userid", akses.getkode());
-                    param.put("ipaddress", akses.getalamatip());
-                    Valid.MyReport("rptDataLabMB.jasper","report","::[ Data Pemeriksaan Laboratorium ]::",param);
-                }   break;
-            case 1:
-                if(tabMode2.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode2.getRowCount()!=0){
-
-                    Sequel.queryu("delete from temporary_lab where temp36 = '"+akses.getkode()+"' and temp37 = '"+akses.getalamatip()+"'");
-                    int row=tabMode2.getRowCount();
-                    for(i=0;i<row;i++){
-                        Sequel.temporaryLab(String.valueOf(i+1),
-                            tabMode2.getValueAt(i, 0).toString(),
-                            tabMode2.getValueAt(i, 1).toString(),
-                            tabMode2.getValueAt(i, 2).toString(),
-                            tabMode2.getValueAt(i, 3).toString(),
-                            tabMode2.getValueAt(i, 4).toString(),
-                            tabMode2.getValueAt(i, 5).toString(),
-                            tabMode2.getValueAt(i, 6).toString(),
-                            tabMode2.getValueAt(i, 7).toString(),
-                            tabMode2.getValueAt(i, 8).toString(),
-                            tabMode2.getValueAt(i, 9).toString(),
-                            tabMode2.getValueAt(i, 10).toString(),
-                            tabMode2.getValueAt(i, 11).toString(),
-                            tabMode2.getValueAt(i, 12).toString(),
-                            tabMode2.getValueAt(i, 13).toString());
+                    break;
+                case 1:
+                    if(tabMode2.getRowCount()==0){
+                        JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                        TCari.requestFocus();
+                    }else if(tabMode2.getRowCount()!=0){
+                        switch (pilihan) {
+                            case "Laporan 1 (HTML)":
+                                Valid.exportHtmlSmc("DataLabItemMB.html", "Data Item Pemeriksaan Laboratorium", tbDokter2);
+                                break;
+                            case "Laporan 2 (WPS)":
+                                Valid.exportWPSSmc("DataLabItemMB.wps", "Data Item Pemeriksaan Laboratorium", tbDokter2);
+                                break;
+                            case "Laporan 3 (CSV)":
+                                Valid.exportCSVSmc("DataLabItemMB.csv", tbDokter2);
+                                break;
+                            case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("DataLabItemMB.xlsx", tbDokter2);
+                                break;
+                            case "Laporan 5 (Jasper)":
+                                Sequel.queryu("delete from temporary_lab where temp36 = '"+akses.getkode()+"' and temp37 = '"+akses.getalamatip()+"'");
+                                int row=tabMode2.getRowCount();
+                                for(i=0;i<row;i++){
+                                    Sequel.temporaryLab(String.valueOf(i+1),
+                                        tabMode2.getValueAt(i, 0).toString(),
+                                        tabMode2.getValueAt(i, 1).toString(),
+                                        tabMode2.getValueAt(i, 2).toString(),
+                                        tabMode2.getValueAt(i, 3).toString(),
+                                        tabMode2.getValueAt(i, 4).toString(),
+                                        tabMode2.getValueAt(i, 5).toString(),
+                                        tabMode2.getValueAt(i, 6).toString(),
+                                        tabMode2.getValueAt(i, 7).toString(),
+                                        tabMode2.getValueAt(i, 8).toString(),
+                                        tabMode2.getValueAt(i, 9).toString(),
+                                        tabMode2.getValueAt(i, 10).toString(),
+                                        tabMode2.getValueAt(i, 11).toString(),
+                                        tabMode2.getValueAt(i, 12).toString(),
+                                        tabMode2.getValueAt(i, 13).toString());
+                                }
+                                Valid.MyReport("rptDataLab2MB.jasper","report","::[ Data Item Pemeriksaan Laboratorium ]::",param);
+                                break;
+                        }
                     }
-
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    param.put("userid", akses.getkode());
-                    param.put("ipaddress", akses.getalamatip());
-                    Valid.MyReport("rptDataLab2MB.jasper","report","::[ Data Item Pemeriksaan Laboratorium ]::",param);
-                }   break;
-            case 2:
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                try {
-
-                    File g = new File("file2.css");
-                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                    bg.write(
-                        ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}"+
-                        ".isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                        ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-                    );
-                    bg.close();
-
+                    break;
+                case 2:
                     File f = new File("DetailKunjunganLab.html");
                     BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML1.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -1088,13 +1106,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bw.close();
                     Desktop.getDesktop().browse(f.toURI());
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                this.setCursor(Cursor.getDefaultCursor());
-                break;
-            default:
-                break;
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

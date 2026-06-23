@@ -48,6 +48,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.CancellationException;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
@@ -260,6 +261,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
+        BtnPrint = new widget.Button();
         BtnPengaturan = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass10 = new widget.panelisi();
@@ -785,6 +787,23 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         LCount.setName("LCount"); // NOI18N
         LCount.setPreferredSize(new java.awt.Dimension(50, 23));
         panelGlass8.add(LCount);
+
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+T");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPrintKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnPrint);
 
         BtnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EDIT2.png"))); // NOI18N
         BtnPengaturan.setMnemonic('T');
@@ -2987,6 +3006,69 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbKompilasiMouseReleased
 
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (isLoading) {
+            JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            //TCari.requestFocus();
+        } else if (tabMode.getRowCount() != 0) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DataKompilasiBerkasKlaimSMC.html", "Data Kompilasi Berkas Klaim", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DataKompilasiBerkasKlaimSMC.wps", "Data Kompilasi Berkas Klaim", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DataKompilasiBerkasKlaimSMC.csv", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataKompilasiBerkasKlaimSMC.xlsx", tbKompilasi, IntStream.rangeClosed(1, tabMode.getColumnCount() - 2).toArray());
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2), (String) tabMode.getValueAt(i, 3),
+                                (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6), (String) tabMode.getValueAt(i, 7),
+                                (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11)
+                            );
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptDataKompilasiBerkasKlaimSMC.jasper", "report", "::[ Data Kompilasi Berkas Klaim ]::", param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
+    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnPrintActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnPrintKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
     private widget.Button BtnBukaFolderExport;
@@ -2998,6 +3080,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private widget.Button BtnPengaturan;
     private widget.Button BtnPenjamin;
     private widget.Button BtnPilihAplikasiPDF;
+    private widget.Button BtnPrint;
     private widget.Button BtnResetPengaturan;
     private widget.Button BtnSimpan8;
     private widget.Button BtnSimpanKoding;

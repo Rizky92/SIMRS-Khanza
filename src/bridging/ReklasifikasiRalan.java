@@ -23,6 +23,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -393,119 +396,149 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Sequel.queryu("delete from temporary2 where temp37='"+akses.getalamatip()+"'");
-            for(int r=0;r<tabMode.getRowCount();r++){
-                    Sequel.menyimpan("temporary2","'"+r+"','"+
-                                    tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                    tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,23).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,24).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,25).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,26).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,27).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,28).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,29).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,30).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,35).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,36).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,37).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,38).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,39).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,40).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,41).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,42).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,43).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,44).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,45).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,46).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,47).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,48).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,49).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,50).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,51).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,52).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,53).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,54).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,55).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,56).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,57).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,58).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,59).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,60).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,61).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,62).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,63).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,64).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,65).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,67).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,68).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,69).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,70).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,71).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,72).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,73).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,74).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,75).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,76).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,77).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,78).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,79).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,80).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,81).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,82).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,83).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,84).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,85).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,86).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,87).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,88).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,89).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,90).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,91).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,92).toString().replaceAll("'","`")+"','','','','','','','','"+akses.getalamatip()+"'","data");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("ReklasifikasiRalan.html", "Reklasifikasi Ralan", tbBangsal);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("ReklasifikasiRalan.wps", "Reklasifikasi Ralan", tbBangsal);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("ReklasifikasiRalan.csv", tbBangsal);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("ReklasifikasiRalan.xlsx", tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.queryu("delete from temporary2 where temp100='"+akses.getalamatip()+"'");
+                        for(int r=0;r<tabMode.getRowCount();r++){
+                                Sequel.menyimpan("temporary2","'"+r+"','"+
+                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,20).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,21).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,22).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,23).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,24).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,25).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,26).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,27).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,28).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,29).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,30).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,35).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,36).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,37).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,38).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,39).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,40).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,41).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,42).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,43).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,44).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,45).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,46).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,47).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,48).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,49).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,50).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,51).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,52).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,53).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,54).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,55).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,56).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,57).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,58).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,59).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,60).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,61).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,62).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,63).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,64).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,65).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,67).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,68).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,69).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,70).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,71).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,72).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,73).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,74).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,75).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,76).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,77).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,78).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,79).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,80).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,81).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,82).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,83).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,84).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,85).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,86).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,87).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,88).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,89).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,90).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,91).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,92).toString().replaceAll("'","`")+"','','','','','','','','"+akses.getalamatip()+"'","data");
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptReklasifikasiRalan.jasper","report","::[ Reklasifikasi Ralan ]::","select * from temporary2 where temporary2.temp100='"+akses.getalamatip()+"' order by temporary2.no",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptReklasifikasiRalan.jasper","report","::[ Reklasifikasi Ralan ]::","select * from temporary2 where temporary2.temp100='"+akses.getalamatip()+"' order by temporary2.no",param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

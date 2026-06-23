@@ -64,18 +64,22 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row={"No.","Nama Dokter","Nama Pasien","Ruang","Jenis Bayar","Nama Tindakan","Tarif","Jml","Biaya","Paket BHP/Obat","J.M.Dokter","J.S.Rmh Skt"};
-        tabMode=new DefaultTableModel(null,row){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
-             Class[] types = new Class[] {
+        tabMode=new DefaultTableModel(null, new Object[] {
+            "No.","Nama Dokter","Nama Pasien","Ruang","Jenis Bayar","Nama Tindakan","Tarif","Jml","Biaya","Paket BHP/Obat","J.M.Dokter","J.S.Rmh Skt"
+        }){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+            Class[] types = new Class[] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbDokter.setModel(tabMode);
 
@@ -528,77 +532,111 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(TabRawat.getSelectedIndex()==0){
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode.getRowCount()!=0){
-                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                for(i=0;i<tabMode.getRowCount();i++){
-                    try {
-                        uangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
-                    } catch (Exception e) {
-                        uangrs="";
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                        bw.flush();
                     }
-                    try {
-                        jm=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
-                    } catch (Exception e) {
-                        jm="";
-                    }
-                    try {
-                        bhp=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
-                    } catch (Exception e) {
-                        bhp="";
-                    }
-                    try {
-                        biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
-                    } catch (Exception e) {
-                        biaya="";
-                    }
-                    try {
-                        jml=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
-                    } catch (Exception e) {
-                        jml="";
-                    }
-                    try {
-                        tarif=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
-                    } catch (Exception e) {
-                        tarif="";
-                    }
-                    Sequel.menyimpan("temporary","'"+i+"','"+
-                                    tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
-                                    tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
-                                    tarif+"','"+
-                                    jml+"','"+
-                                    biaya+"','"+
-                                    bhp+"','"+
-                                    jm+"','"+
-                                    uangrs+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
-                }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("JMRanapDokter.html", "Detail J.M. Dokter ", tbDokter);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("JMRanapDokter.wps", "Detail J.M. Dokter ", tbDokter);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("JMRanapDokter.csv", tbDokter);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("JMRanapDokter.xlsx", tbDokter);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                            for(i=0;i<tabMode.getRowCount();i++){
+                                try {
+                                    uangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
+                                } catch (Exception e) {
+                                    uangrs="";
+                                }
+                                try {
+                                    jm=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
+                                } catch (Exception e) {
+                                    jm="";
+                                }
+                                try {
+                                    bhp=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
+                                } catch (Exception e) {
+                                    bhp="";
+                                }
+                                try {
+                                    biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
+                                } catch (Exception e) {
+                                    biaya="";
+                                }
+                                try {
+                                    jml=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
+                                } catch (Exception e) {
+                                    jml="";
+                                }
+                                try {
+                                    tarif=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                                } catch (Exception e) {
+                                    tarif="";
+                                }
+                                Sequel.menyimpan("temporary","'"+i+"','"+
+                                                tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
+                                                tarif+"','"+
+                                                jml+"','"+
+                                                biaya+"','"+
+                                                bhp+"','"+
+                                                jm+"','"+
+                                                uangrs+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
+                            }
 
-                Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptJMRanapDokter.jasper","report","[ Detail J.M. Dokter  ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReportqry("rptJMRanapDokter.jasper","report","::[ Detail J.M. Dokter ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==1){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 File g = new File("detailjmdokter.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -630,7 +668,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==2){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
                 File g = new File("detailjmdokter.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -662,8 +702,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -876,7 +916,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("dokter",nmdokter.getText());
                     param.put("bulan",Tgl1.getSelectedItem().toString().substring(3,10));
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReportqry("rptSlipJMDokter.jasper","report","[ Slip J.M. Dokter  ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                    Valid.MyReportqry("rptSlipJMDokter.jasper","report","::[ Slip J.M. Dokter  ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                 }
             }else if(TabRawat.getSelectedIndex()==1){
                 jasamedis();
@@ -1033,7 +1073,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("dokter",nmdokter.getText());
                     param.put("bulan",Tgl1.getSelectedItem().toString().substring(3,10));
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReportqry("rptSlipJMDokter.jasper","report","[ Slip J.M. Dokter  ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                    Valid.MyReportqry("rptSlipJMDokter.jasper","report","::[ Slip J.M. Dokter  ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                 }
             }else if(TabRawat.getSelectedIndex()==1){
                 jasamedis();

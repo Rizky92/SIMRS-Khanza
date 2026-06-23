@@ -755,23 +755,24 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-    for(i=0;i<tbDokter.getRowCount();i++){
-        tbDokter.setValueAt("",i,0);
-        tbDokter.setValueAt(0,i,6);
-        tbDokter.setValueAt(0,i,7);
-        tbDokter.setValueAt(0,i,8);
-        tbDokter.setValueAt(0,i,9);
-        tbDokter.setValueAt(0,i,10);
-    }
-    Meterai.setText("0");
-    getData();
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,6);
+            tbDokter.setValueAt(0,i,7);
+            tbDokter.setValueAt(0,i,8);
+            tbDokter.setValueAt(0,i,9);
+            tbDokter.setValueAt(0,i,10);
+        }
+        Meterai.setText("0");
+        getData();
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void NoPemesananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoPemesananKeyPressed
@@ -990,7 +991,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         barang.setLocationRelativeTo(internalFrame1);
         barang.setAlwaysOnTop(false);
         barang.setVisible(true);
-
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tppnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tppnKeyPressed
@@ -1015,17 +1015,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getRowCount()!=0){
             try {
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)){
-                        getData();
-                   }else if(tbDokter.getSelectedColumn()==7){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
-                       }
-                       getData();
-                   }
+                if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)){
+                    getData();
+                }else if(tbDokter.getSelectedColumn()==7){
+                    try {
+                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
+                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
+                    } catch (Exception e) {
+                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
+                    }
+                    getData();
+                }
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -1041,23 +1041,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==9)){
+                    if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==9)){
                         getData();
                         TCari.setText("");
                         TCari.requestFocus();
-                   }else if(tbDokter.getSelectedColumn()==7){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
-                       }
-
-                       getData();
-                   }else if((tbDokter.getSelectedColumn()==9)||(tbDokter.getSelectedColumn()==10)){
-                       TCari.setText("");
-                       TCari.requestFocus();
-                   }
+                    }else if(tbDokter.getSelectedColumn()==7){
+                        try {
+                            tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
+                                (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
+                        } catch (Exception e) {
+                            tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
+                        }
+                        getData();
+                    }else if((tbDokter.getSelectedColumn()==9)||(tbDokter.getSelectedColumn()==10)){
+                        TCari.setText("");
+                        TCari.requestFocus();
+                    }
                 } catch (Exception e) {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_DELETE){
@@ -1077,19 +1076,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.setText("");
                 TCari.requestFocus();
             }else if((evt.getKeyCode()==KeyEvent.VK_RIGHT)||(evt.getKeyCode()==KeyEvent.VK_LEFT)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==9)){
-                       getData();
-                   }else if(tbDokter.getSelectedColumn()==7){
-                       try {
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
-                       } catch (Exception e) {
-                           tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
-                       }
-                       getData();
-                   }else if(tbDokter.getSelectedColumn()==1){
-                       getData();
-                   }
+                if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==9)){
+                    getData();
+                }else if(tbDokter.getSelectedColumn()==7){
+                    try {
+                        tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString())*
+                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())/100)),tbDokter.getSelectedRow(),8);
+                    } catch (Exception e) {
+                        tbDokter.setValueAt(0,tbDokter.getSelectedRow(),8);
+                    }
+                    getData();
+                }else if(tbDokter.getSelectedColumn()==1){
+                    getData();
+                }
             }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 if(tbDokter.getSelectedColumn()==1){
                     y=0;

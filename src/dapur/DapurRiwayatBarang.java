@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -305,50 +308,81 @@ public class DapurRiwayatBarang extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
-*/
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
+    }//GEN-LAST:event_TKdKeyPressed
+    */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptRiwayatBarangDapur.jasper","report","::[ Riwayat Barang Dapur Kering & Basah ]::",
-                    "select dapur_riwayat_barang.kode_brng,dapurbarang.nama_brng,"+
-                    "dapur_riwayat_barang.stok_awal,dapur_riwayat_barang.masuk,"+
-                    "dapur_riwayat_barang.keluar,dapur_riwayat_barang.stok_akhir,"+
-                    "dapur_riwayat_barang.posisi,dapur_riwayat_barang.tanggal,"+
-                    "dapur_riwayat_barang.jam,dapur_riwayat_barang.petugas,"+
-                    "dapur_riwayat_barang.status from dapur_riwayat_barang "+
-                    "inner join dapurbarang on dapur_riwayat_barang.kode_brng=dapurbarang.kode_brng where "+
-                    "dapur_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by dapur_riwayat_barang.tanggal,dapur_riwayat_barang.jam ",param);
-            }else{
-                Valid.MyReportqry("rptRiwayatBarangDapur.jasper","report","::[ Riwayat Barang Dapur Kering & Basah ]::",
-                    "select dapur_riwayat_barang.kode_brng,dapurbarang.nama_brng,"+
-                    "dapur_riwayat_barang.stok_awal,dapur_riwayat_barang.masuk,"+
-                    "dapur_riwayat_barang.keluar,dapur_riwayat_barang.stok_akhir,"+
-                    "dapur_riwayat_barang.posisi,dapur_riwayat_barang.tanggal,"+
-                    "dapur_riwayat_barang.jam,dapur_riwayat_barang.petugas,"+
-                    "dapur_riwayat_barang.status from dapur_riwayat_barang "+
-                    "inner join dapurbarang on dapur_riwayat_barang.kode_brng=dapurbarang.kode_brng where "+
-                    "dapur_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and "+
-                    "(dapur_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or dapurbarang.nama_brng like '%"+TCari.getText().trim()+"%' or dapur_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
-                    "dapur_riwayat_barang.status like '%"+TCari.getText().trim()+"%') order by dapur_riwayat_barang.tanggal,dapur_riwayat_barang.jam ",param);
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RiwayatBarangDapur.html", "Riwayat Barang Dapur Kering & Basah", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RiwayatBarangDapur.wps", "Riwayat Barang Dapur Kering & Basah", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RiwayatBarangDapur.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RiwayatBarangDapur.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptRiwayatBarangDapur.jasper","report","::[ Riwayat Barang Dapur Kering & Basah ]::",
+                                "select dapur_riwayat_barang.kode_brng,dapurbarang.nama_brng,"+
+                                "dapur_riwayat_barang.stok_awal,dapur_riwayat_barang.masuk,"+
+                                "dapur_riwayat_barang.keluar,dapur_riwayat_barang.stok_akhir,"+
+                                "dapur_riwayat_barang.posisi,dapur_riwayat_barang.tanggal,"+
+                                "dapur_riwayat_barang.jam,dapur_riwayat_barang.petugas,"+
+                                "dapur_riwayat_barang.status from dapur_riwayat_barang "+
+                                "inner join dapurbarang on dapur_riwayat_barang.kode_brng=dapurbarang.kode_brng where "+
+                                "dapur_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by dapur_riwayat_barang.tanggal,dapur_riwayat_barang.jam ",param);
+                        }else{
+                            Valid.MyReportqry("rptRiwayatBarangDapur.jasper","report","::[ Riwayat Barang Dapur Kering & Basah ]::",
+                                "select dapur_riwayat_barang.kode_brng,dapurbarang.nama_brng,"+
+                                "dapur_riwayat_barang.stok_awal,dapur_riwayat_barang.masuk,"+
+                                "dapur_riwayat_barang.keluar,dapur_riwayat_barang.stok_akhir,"+
+                                "dapur_riwayat_barang.posisi,dapur_riwayat_barang.tanggal,"+
+                                "dapur_riwayat_barang.jam,dapur_riwayat_barang.petugas,"+
+                                "dapur_riwayat_barang.status from dapur_riwayat_barang "+
+                                "inner join dapurbarang on dapur_riwayat_barang.kode_brng=dapurbarang.kode_brng where "+
+                                "dapur_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and "+
+                                "(dapur_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or dapurbarang.nama_brng like '%"+TCari.getText().trim()+"%' or dapur_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
+                                "dapur_riwayat_barang.status like '%"+TCari.getText().trim()+"%') order by dapur_riwayat_barang.tanggal,dapur_riwayat_barang.jam ",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-
             this.setCursor(Cursor.getDefaultCursor());
         }
 

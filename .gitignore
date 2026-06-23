@@ -16,7 +16,9 @@
 *.jar
 *.log
 *.pdf
+*.py
 *.sql
+*.txt
 *.wps
 *.xls
 *.xlsx
@@ -24,6 +26,7 @@
 *.txt
 
 # Don't ignore these
+!lisensi.txt
 !README.TXT
 !sik_bersih.sql
 !sik_bridging_eklaim.sql

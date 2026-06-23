@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -305,55 +308,85 @@ public class TokoRiwayatBarang extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-    Valid.pindah(evt,BtnCari,Nm);
+
+    /*
+    private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnCari,Nm);
     }//GEN-LAST:event_TKdKeyPressed
-*/
+    */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptRiwayatBarangToko.jasper","report","::[ Riwayat Barang Toko / Minimarket / Koperasi ]::",
-                    "select toko_riwayat_barang.kode_brng,tokobarang.nama_brng,"+
-                    "toko_riwayat_barang.stok_awal,toko_riwayat_barang.masuk,"+
-                    "toko_riwayat_barang.keluar,toko_riwayat_barang.stok_akhir,"+
-                    "toko_riwayat_barang.posisi,toko_riwayat_barang.tanggal,"+
-                    "toko_riwayat_barang.jam,toko_riwayat_barang.petugas,"+
-                    "toko_riwayat_barang.status from toko_riwayat_barang "+
-                    "inner join tokobarang on toko_riwayat_barang.kode_brng=tokobarang.kode_brng where "+
-                    "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by toko_riwayat_barang.tanggal,toko_riwayat_barang.jam ",param);
-            }else{
-                Valid.MyReportqry("rptRiwayatBarangToko.jasper","report","::[ Riwayat Barang Toko / Minimarket / Koperasi ]::",
-                    "select toko_riwayat_barang.kode_brng,tokobarang.nama_brng,"+
-                    "toko_riwayat_barang.stok_awal,toko_riwayat_barang.masuk,"+
-                    "toko_riwayat_barang.keluar,toko_riwayat_barang.stok_akhir,"+
-                    "toko_riwayat_barang.posisi,toko_riwayat_barang.tanggal,"+
-                    "toko_riwayat_barang.jam,toko_riwayat_barang.petugas,"+
-                    "toko_riwayat_barang.status from toko_riwayat_barang "+
-                    "inner join tokobarang on toko_riwayat_barang.kode_brng=tokobarang.kode_brng where "+
-                    "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and toko_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                    "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and tokobarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
-                    "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and toko_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
-                    "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and toko_riwayat_barang.status like '%"+TCari.getText().trim()+"%' "+
-                    "order by toko_riwayat_barang.tanggal,toko_riwayat_barang.jam ",param);
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RiwayatBarangToko.html", "Riwayat Barang Toko / Minimarket / Koperasi", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RiwayatBarangToko.wps", "Riwayat Barang Toko / Minimarket / Koperasi", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RiwayatBarangToko.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RiwayatBarangToko.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptRiwayatBarangToko.jasper","report","::[ Riwayat Barang Toko / Minimarket / Koperasi ]::",
+                                "select toko_riwayat_barang.kode_brng,tokobarang.nama_brng,"+
+                                "toko_riwayat_barang.stok_awal,toko_riwayat_barang.masuk,"+
+                                "toko_riwayat_barang.keluar,toko_riwayat_barang.stok_akhir,"+
+                                "toko_riwayat_barang.posisi,toko_riwayat_barang.tanggal,"+
+                                "toko_riwayat_barang.jam,toko_riwayat_barang.petugas,"+
+                                "toko_riwayat_barang.status from toko_riwayat_barang "+
+                                "inner join tokobarang on toko_riwayat_barang.kode_brng=tokobarang.kode_brng where "+
+                                "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by toko_riwayat_barang.tanggal,toko_riwayat_barang.jam ",param);
+                        }else{
+                            Valid.MyReportqry("rptRiwayatBarangToko.jasper","report","::[ Riwayat Barang Toko / Minimarket / Koperasi ]::",
+                                "select toko_riwayat_barang.kode_brng,tokobarang.nama_brng,"+
+                                "toko_riwayat_barang.stok_awal,toko_riwayat_barang.masuk,"+
+                                "toko_riwayat_barang.keluar,toko_riwayat_barang.stok_akhir,"+
+                                "toko_riwayat_barang.posisi,toko_riwayat_barang.tanggal,"+
+                                "toko_riwayat_barang.jam,toko_riwayat_barang.petugas,"+
+                                "toko_riwayat_barang.status from toko_riwayat_barang "+
+                                "inner join tokobarang on toko_riwayat_barang.kode_brng=tokobarang.kode_brng where "+
+                                "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and toko_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                                "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and tokobarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                                "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and toko_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
+                                "toko_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and tokobarang.nama_brng like '%"+nmbar.getText()+"%' and toko_riwayat_barang.status like '%"+TCari.getText().trim()+"%' "+
+                                "order by toko_riwayat_barang.tanggal,toko_riwayat_barang.jam ",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-
             this.setCursor(Cursor.getDefaultCursor());
         }
-
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

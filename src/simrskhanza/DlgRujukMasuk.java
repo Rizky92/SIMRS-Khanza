@@ -12,6 +12,8 @@
 
 package simrskhanza;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -23,6 +25,10 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +63,12 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private File file;
+    private FileWriter fileWriter;
+    private ObjectMapper mapper = new ObjectMapper();
+    private JsonNode root;
+    private JsonNode response;
+    private FileReader myObj;
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -960,6 +972,8 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
+        ChkInput.setSelected(true);
+        isForm();
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1035,14 +1049,40 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int i=0;i<tabMode.getRowCount();i++){
-                Sequel.menyimpan("temporary","'"+i+"','"+
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RujukMasuk.html", "Data Rujukan Yang Masuk", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RujukMasuk.wps", "Data Rujukan Yang Masuk", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RujukMasuk.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RujukMasuk.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                        for(int i=0;i<tabMode.getRowCount();i++){
+                            Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
                                 tabMode.getValueAt(i,2).toString()+"','"+
                                 tabMode.getValueAt(i,3).toString()+"','"+
@@ -1060,19 +1100,24 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                                 tabMode.getValueAt(i,17).toString()+"','"+
                                 tabMode.getValueAt(i,18).toString()+"','"+
                                 tabMode.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rujukan Masuk");
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptRujukMasuk.jasper","report","::[ Data Rujukan Yang Masuk ]::",
+                           "select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptRujukMasuk.jasper","report","::[ Data Rujukan Yang Masuk ]::",
-               "select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -1147,7 +1192,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariPerujukKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-        runBackground(() ->tampil2());
+        runBackground(() ->tampil5());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
@@ -1177,7 +1222,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 
     private void btnCariRujukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariRujukActionPerformed
         akses.setform("DlgRujukMasuk");
-        runBackground(() ->tampil2());
+        runBackground(() ->tampil5());
         TCariPerujuk.requestFocus();
         WindowPerujuk.setSize(this.getWidth()-20,this.getHeight()-20);
         WindowPerujuk.setLocationRelativeTo(internalFrame1);
@@ -1925,15 +1970,16 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     private void tampil2() {
         Valid.tabelKosong(tabMode2);
         try{
-            psperujuk=koneksi.prepareStatement("select rujuk_masuk.perujuk,rujuk_masuk.alamat from rujuk_masuk "+(TCariPerujuk.getText().trim().equals("")?"":"where rujuk_masuk.perujuk like ? or rujuk_masuk.alamat like ? ")+"group by rujuk_masuk.perujuk order by rujuk_masuk.perujuk");
+            file=new File("./cache/perujuk.iyem");
+            file.createNewFile();
+            fileWriter = new FileWriter(file);
+            StringBuilder iyembuilder = new StringBuilder();
+            psperujuk=koneksi.prepareStatement("select rujuk_masuk.perujuk,rujuk_masuk.alamat from rujuk_masuk group by rujuk_masuk.perujuk order by rujuk_masuk.perujuk");
             try {
-                if(!TCariPerujuk.getText().trim().equals("")){
-                    psperujuk.setString(1,"%"+TCariPerujuk.getText()+"%");
-                    psperujuk.setString(2,"%"+TCariPerujuk.getText()+"%");
-                }
                 rs=psperujuk.executeQuery();
                 while(rs.next()){
                     tabMode2.addRow(new Object[]{rs.getString(1),rs.getString(2)});
+                    iyembuilder.append("{\"Perujuk\":\"").append(rs.getString(1)).append("\",\"Alamat\":\"").append(rs.getString(2)).append("\"},");
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -1945,14 +1991,63 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                     psperujuk.close();
                 }
             }
-        }catch(Exception e){
+
+            if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"perujuk\":["+iyembuilder+"]}");
+                fileWriter.flush();
+            }
+
+            fileWriter.close();
+            iyembuilder=null;
+        } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount1.setText(""+tabMode2.getRowCount());
     }
 
     public void tampil4() {
-        runBackground(() ->tampil2());
+        runBackground(() ->tampil5());
+    }
+
+    private void tampil5() {
+        try {
+            myObj = new FileReader("./cache/perujuk.iyem");
+            root = mapper.readTree(myObj);
+            Valid.tabelKosong(tabMode2);
+            response = root.path("perujuk");
+            if(response.isArray()){
+                if(TCariPerujuk.getText().trim().equals("")){
+                    for(JsonNode list:response){
+                        tabMode2.addRow(new Object[]{
+                            list.path("Perujuk").asText(),list.path("Alamat").asText()
+                        });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("Perujuk").asText().toLowerCase().contains(TCariPerujuk.getText().toLowerCase())||list.path("Alamat").asText().toLowerCase().contains(TCariPerujuk.getText().toLowerCase())){
+                            tabMode2.addRow(new Object[]{
+                                list.path("Perujuk").asText(),list.path("Alamat").asText()
+                            });
+                        }
+                    }
+                }
+            }
+            myObj.close();
+        } catch (Exception ex) {
+            if(ex.toString().contains("java.io.FileNotFoundException")){
+                tampil2();
+            }else{
+                System.out.println("Notifikasi : "+ex);
+            }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
+        }
+        LCount1.setText(""+tabMode2.getRowCount());
     }
 
     private void getData2() {
