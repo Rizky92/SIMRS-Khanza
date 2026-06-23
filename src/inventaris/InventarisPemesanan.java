@@ -21,12 +21,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -770,6 +772,7 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                             }
                         }
                     }
+                    Sequel.mengupdatetfSmc("surat_pemesanan_inventaris_smc", "status = 'Sudah Datang'", "no_pemesanan = ?", NoOrder.getText());
                 }else{
                     sukses=false;
                 }
@@ -806,10 +809,12 @@ public class InventarisPemesanan extends javax.swing.JDialog {
                     Meterai.setText("0");
                     getData();
                 }else{
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
+                if (!sukses) {
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                }
                 autoNomor();
             }
         }
@@ -991,13 +996,15 @@ public class InventarisPemesanan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void AkunAsetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AkunAsetItemStateChanged
-        Valid.tabelKosong(tabMode);
-        runBackground(() ->tampil());
-        LSubtotal.setText("0");
-        LPotongan.setText("0");
-        LTotal2.setText("0");
-        LPpn.setText("0");
-        LTagiha.setText("0");
+        if (tampikan) {
+            Valid.tabelKosong(tabMode);
+            runBackground(() ->tampil());
+            LSubtotal.setText("0");
+            LPotongan.setText("0");
+            LTotal2.setText("0");
+            LPpn.setText("0");
+            LTagiha.setText("0");
+        }
     }//GEN-LAST:event_AkunAsetItemStateChanged
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
@@ -1403,7 +1410,7 @@ public class InventarisPemesanan extends javax.swing.JDialog {
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(inventaris_pemesanan.no_faktur,3),signed)),0) from inventaris_pemesanan where inventaris_pemesanan.tgl_pesan='"+Valid.SetTgl(TglPesan.getSelectedItem()+"")+"'","PAI"+TglPesan.getSelectedItem().toString().substring(6,10)+TglPesan.getSelectedItem().toString().substring(3,5)+TglPesan.getSelectedItem().toString().substring(0,2),3,NoFaktur);
+        Valid.autonomor1Smc(NoFaktur, "PAI", "inventaris_pemesanan", "no_faktur", 3, "0", TglPesan);
     }
 
     public void tampil(String noorder) {
@@ -1448,6 +1455,50 @@ public class InventarisPemesanan extends javax.swing.JDialog {
         }
     }
 
+    public void tampil2(String noPemesanan) {
+        NoOrder.setText(noPemesanan);
+        kdsup.setText(Sequel.cariIsi("select kode_suplier from surat_pemesanan_inventaris_smc where no_pemesanan=?", noPemesanan));
+        nmsup.setText(Sequel.cariIsi("select inventaris_suplier.nama_suplier from inventaris_suplier where inventaris_suplier.kode_suplier=?", kdsup.getText()));
+        meterai = Sequel.cariIsiAngka("select meterai from surat_pemesanan_inventaris_smc where no_pemesanan=?", noPemesanan);
+        ppn = Sequel.cariIsiAngka("select ppn from surat_pemesanan_inventaris_smc where no_pemesanan=?", noPemesanan);
+        Meterai.setText(Valid.SetAngka2(meterai));
+        try {
+            Valid.tabelKosong(tabMode);
+            ps = koneksi.prepareStatement(
+                "select dspi.kode_barang, ib.nama_barang," +
+                " ifnull(ip.nama_produsen,'') as nama_produsen, ifnull(im.nama_merk,'') as nama_merk," +
+                " ifnull(ik.nama_kategori,'') as nama_kategori, ifnull(ij.nama_jenis,'') as nama_jenis," +
+                " dspi.jumlah, dspi.h_pesan, dspi.subtotal, dspi.dis, dspi.besardis, dspi.total" +
+                " from detail_surat_pemesanan_inventaris_smc dspi" +
+                " inner join inventaris_barang ib on dspi.kode_barang = ib.kode_barang" +
+                " left join inventaris_produsen ip on ib.kode_produsen = ip.kode_produsen" +
+                " left join inventaris_merk im on ib.id_merk = im.id_merk" +
+                " left join inventaris_kategori ik on ib.id_kategori = ik.id_kategori" +
+                " left join inventaris_jenis ij on ib.id_jenis = ij.id_jenis" +
+                " where dspi.no_pemesanan=? order by ib.nama_barang");
+            try {
+                ps.setString(1, noPemesanan);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    tabMode.addRow(new Object[]{
+                        rs.getDouble("jumlah"), rs.getString("kode_barang"), rs.getString("nama_barang"),
+                        rs.getString("nama_produsen"), rs.getString("nama_merk"), rs.getString("nama_kategori"),
+                        rs.getString("nama_jenis"), rs.getDouble("h_pesan"), rs.getDouble("subtotal"),
+                        rs.getDouble("dis"), rs.getDouble("besardis"), rs.getDouble("total")
+                    });
+                }
+                getData();
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) { rs.close(); }
+                if (ps != null) { ps.close(); }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+    }
+
     private void tampilAkun() {
         try{
              file=new File("./cache/akunaset.iyem");
@@ -1489,6 +1540,109 @@ public class InventarisPemesanan extends javax.swing.JDialog {
             }
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
+        }
+    }
+
+    private void tampilAkun2Smc() {
+        if (new File("./cache/akunaset.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/akunaset.iyem")) {
+                AkunAset.removeAllItems();
+                mapper.readTree(fr).withArray("akunaset").forEach(node -> AkunAset.addItem(node.path("NamaAkun").asText("")));
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        } else {
+            tampilAkun();
+        }
+    }
+
+    public void setTampilSmc(String nopemesanan) {
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select surat_pemesanan_inventaris_smc.kode_suplier, inventaris_suplier.nama_suplier, rekening.nm_rek from surat_pemesanan_inventaris_smc " +
+            "join inventaris_suplier on surat_pemesanan_inventaris_smc.kode_suplier = inventaris_suplier.kode_suplier join akun_aset_inventaris on " +
+            "surat_pemesanan_inventaris_smc.kd_rek = akun_aset_inventaris.kd_rek join rekening on akun_aset_inventaris.kd_rek = rekening.kd_rek where " +
+            "surat_pemesanan_inventaris_smc.no_pemesanan = ?"
+        )) {
+            ps.setString(1, nopemesanan);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    NoOrder.setText(nopemesanan);
+                    kdsup.setText(rs.getString("kode_suplier"));
+                    nmsup.setText(rs.getString("nama_suplier"));
+                    AkunAset.removeAllItems();
+                    AkunAset.addItem(rs.getString("nm_rek"));
+                    AkunAset.setSelectedItem(rs.getString("nm_rek"));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data surat pemesanan inventaris tidak ditemukan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    public void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            new SwingWorker<Void, Object[]>() {
+                final String nopemesanan = NoOrder.getText().trim();
+                double ttl1 = 0;
+                double potongan = 0;
+                double ttl2 = 0;
+                double ppn = 0;
+                double total = 0;
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select d.kode_barang, b.nama_barang, p.nama_produsen, m.nama_merk, k.nama_kategori, j.nama_jenis, d.jumlah, d.h_pesan, d.subtotal, d.dis, " +
+                        "d.besardis, d.total from detail_surat_pemesanan_inventaris_smc d inner join inventaris_barang b on d.kode_barang = b.kode_barang inner join " +
+                        "inventaris_produsen p on b.kode_produsen = p.kode_produsen inner join inventaris_merk m on b.id_merk = m.id_merk inner join " +
+                        "inventaris_kategori k on b.id_kategori = k.id_kategori inner join inventaris_jenis j on b.id_jenis = j.id_jenis where " +
+                        "d.no_pemesanan = ? order by d.kode_barang"
+                    )) {
+                        ps.setString(1, nopemesanan);
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                ttl1 += rs.getDouble("subtotal");
+                                potongan += rs.getDouble("besardis");
+                                ttl2 += rs.getDouble("total");
+                                publish(new Object[] {
+                                    rs.getString("jumlah"), rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_produsen"),
+                                    rs.getString("nama_merk"), rs.getString("nama_kategori"), rs.getString("nama_jenis"), rs.getDouble("h_pesan"),
+                                    rs.getDouble("subtotal"), rs.getDouble("dis"), rs.getDouble("besardis"), rs.getDouble("total")
+                                });
+                            }
+                            ppn = (Valid.SetAngka(tppn.getText()) / 100) * ttl2;
+                            total = ttl2 + ppn;
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LSubtotal.setText(Valid.SetAngka(ttl1));
+                    LPotongan.setText(Valid.SetAngka(potongan));
+                    LTotal2.setText(Valid.SetAngka(ttl2));
+                    LPpn.setText(Valid.SetAngka(ppn));
+                    LTagiha.setText(Valid.SetAngka(total));
+                    InventarisPemesanan.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
     }
 
