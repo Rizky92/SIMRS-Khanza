@@ -68,7 +68,18 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         Object[] row={"Kode Barang","Nama Barang","Harga Beli","Satuan","Tanggal","Stok","Real",
                       "Selisih","Lebih","Total Real","Nominal Hilang(Rp)","Nominal Lebih(Rp)","Keterangan"};
         tabMode=new DefaultTableModel(null,row){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 2 || (columnIndex >= 5 && columnIndex <= 11)) {
+                    return Double.class;
+                }
+                return String.class;
+            }
         };
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
@@ -828,31 +839,36 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         totalreal=0;
         totallebih=0;
         try{
-            pstampil=koneksi.prepareStatement("select dapuropname.kode_brng, dapurbarang.nama_brng,dapuropname.h_beli, dapurbarang.kode_sat, dapuropname.tanggal, dapuropname.stok, "+
-                     "dapuropname.real, dapuropname.selisih,dapuropname.lebih, (dapuropname.real*dapuropname.h_beli) as totalreal,dapuropname.nomihilang,dapuropname.nomilebih,dapuropname.keterangan "+
-                     "from dapuropname inner join dapurbarang on dapuropname.kode_brng=dapurbarang.kode_brng where dapurbarang.jenis like ? and dapuropname.tanggal between ? and ? and "+
-                     "(dapuropname.kode_brng like ? or dapurbarang.nama_brng like ? or dapuropname.kode_brng like ? or dapurbarang.kode_sat like ? or dapuropname.keterangan like ?) order by dapuropname.tanggal");
+            pstampil=koneksi.prepareStatement(
+                "select dapuropname.kode_brng, dapurbarang.nama_brng, dapuropname.h_beli, dapurbarang.kode_sat, dapuropname.tanggal, dapuropname.stok, " +
+                "dapuropname.real, dapuropname.selisih, dapuropname.lebih, (dapuropname.real * dapuropname.h_beli) as totalreal, dapuropname.nomihilang, " +
+                "dapuropname.nomilebih, dapuropname.keterangan from dapuropname inner join dapurbarang on dapuropname.kode_brng = dapurbarang.kode_brng " +
+                "where dapuropname.tanggal between ? and ? and dapurbarang.jenis like ? " + (TCari.getText().isBlank() ? "" : "and (dapuropname.kode_brng " +
+                "like ? or dapurbarang.nama_brng like ? or dapuropname.kode_brng like ? or dapurbarang.kode_sat like ? or dapuropname.keterangan like ?) ") +
+                "order by dapuropname.tanggal, dapurbarang.nama_brng"
+            );
             try {
-                pstampil.setString(1,"%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pstampil.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                pstampil.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                pstampil.setString(4,"%"+TCari.getText().trim()+"%");
-                pstampil.setString(5,"%"+TCari.getText().trim()+"%");
-                pstampil.setString(6,"%"+TCari.getText().trim()+"%");
-                pstampil.setString(7,"%"+TCari.getText().trim()+"%");
-                pstampil.setString(8,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(3,Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                if (!TCari.getText().isBlank()) {
+                    pstampil.setString(4,"%"+TCari.getText().trim()+"%");
+                    pstampil.setString(5,"%"+TCari.getText().trim()+"%");
+                    pstampil.setString(6,"%"+TCari.getText().trim()+"%");
+                    pstampil.setString(7,"%"+TCari.getText().trim()+"%");
+                    pstampil.setString(8,"%"+TCari.getText().trim()+"%");
+                }
                 rstampil=pstampil.executeQuery();
                 total=0;
                 while(rstampil.next()){
-                    totalreal=totalreal+rstampil.getDouble(10);
-                    total=total+rstampil.getDouble(11);
-                    totallebih=totallebih+rstampil.getDouble(12);
-                    tabMode.addRow(new Object[]{rstampil.getString(1),
-                        rstampil.getString(2),df2.format(rstampil.getDouble(3)),
-                        rstampil.getString(4),rstampil.getString(5),rstampil.getString(6),
-                        rstampil.getString(7),rstampil.getString(8),rstampil.getString(9),
-                        df2.format(rstampil.getDouble(10)),df2.format(rstampil.getDouble(11)),
-                        df2.format(rstampil.getDouble(12)),rstampil.getString(13)
+                    totalreal+=rstampil.getDouble(10);
+                    total+=rstampil.getDouble(11);
+                    totallebih+=rstampil.getDouble(12);
+                    tabMode.addRow(new Object[]{
+                        rstampil.getString(1), rstampil.getString(2), rstampil.getDouble(3), rstampil.getString(4),
+                        rstampil.getString(5), rstampil.getDouble(6), rstampil.getDouble(7), rstampil.getDouble(8),
+                        rstampil.getDouble(9), rstampil.getDouble(10), rstampil.getDouble(11), rstampil.getDouble(12),
+                        rstampil.getString(13)
                     });
                 }
             } catch (Exception e) {
@@ -869,9 +885,9 @@ public final class DapurStokOpname extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
-        LTotalBeli.setText(df2.format(totalreal));
-        LTotal.setText(df2.format(total));
-        LTotal2.setText(df2.format(totallebih));
+        LTotalBeli.setText(Valid.SetAngka(totalreal));
+        LTotal.setText(Valid.SetAngka(total));
+        LTotal2.setText(Valid.SetAngka(totallebih));
     }
 
     public void emptTeks() {
