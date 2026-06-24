@@ -21063,6 +21063,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaKeluarNICU.setEnabled(akses.getkriteria_keluar_nicu());
         MnCheckListKriteriaKeluarPICU.setEnabled(akses.getkriteria_keluar_picu());
         MnSkriningGiziKehamilan.setEnabled(akses.getskrining_gizi_kehamilan());
+        MnDPJPRanap.setEnabled(false);
 
         if(akses.getkode().equals("Admin Utama")){
             MnHapusDataSalah.setEnabled(true);
