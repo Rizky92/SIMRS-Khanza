@@ -22230,10 +22230,39 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 protected void done() {
                     try {
                         final List<String> rows = get();
+
                         if (!rows.isEmpty()) {
-                            tampilBayi(rows);
+                            Map<String, List<Object[]>> babyRows = tampilBayi(rows);
+                            for (int i = tabMode.getRowCount() - 1; i >= 0; i--) {
+                                String noRawat = tabMode.getValueAt(i, 0).toString();
+                                List<Object[]> babyRow = babyRows.get(noRawat);
+                                if (babyRow == null) {
+                                    continue;
+                                }
+
+                                int j = 1;
+                                for (Object[] row : babyRow) {
+                                    tabMode.insertRow(i + (j++), new Object[] {
+                                        "", row[1], row[2], row[3], tabMode.getValueAt(i, 4), tabMode.getValueAt(i, 5), tabMode.getValueAt(i, 6), tabMode.getValueAt(i, 7),
+                                        Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 8).toString().replaceAll(",", "")) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
+                                        "", "", tabMode.getValueAt(i, 11), tabMode.getValueAt(i, 12), tabMode.getValueAt(i, 13), tabMode.getValueAt(i, 14),
+                                        Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 15).toString().replaceAll(",", "")) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
+                                        tabMode.getValueAt(i, 16), tabMode.getValueAt(i, 17), "", tabMode.getValueAt(i, 19), tabMode.getValueAt(i, 20),
+                                        tabMode.getValueAt(i, 21), tabMode.getValueAt(i, 22), row[0]
+                                    });
+                                }
+                            }
+
                             if (!kunciTampilDPJP) {
-                                tampilDPJP(rows);
+                                final Map<String, String> dpjpRows = tampilDPJP(rows);
+                                for (int i = 0; i < tabMode.getRowCount(); i++) {
+                                    String dpjp = dpjpRows.get(tabMode.getValueAt(i, 0).toString());
+                                    if (dpjp == null) {
+                                        continue;
+                                    }
+
+                                    tabMode.setValueAt(dpjp, i, 18);
+                                }
                             }
                         }
                     } catch (Exception e) {
@@ -22248,8 +22277,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
     }
 
-    private void tampilBayi(final List<String> rows) {
-        new SwingWorker<Map<String, List<Object[]>>, Void>() {
+    private Map<String, List<Object[]>> tampilBayi(final List<String> rows) throws Exception {
+        SwingWorker<Map<String, List<Object[]>>, Void> worker = new SwingWorker<>() {
             @Override
             protected Map<String, List<Object[]>> doInBackground() throws Exception {
                 final Map<String, List<Object[]>> babyRows = new LinkedHashMap<>();
@@ -22266,39 +22295,14 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 }
                 return babyRows;
             }
+        };
+        worker.execute();
 
-            @Override
-            protected void done() {
-                try {
-                    final Map<String, List<Object[]>> babyRows = get();
-                    for (int i = tabMode.getRowCount() - 1; i >= 0; i--) {
-                        String noRawat = tabMode.getValueAt(i, 0).toString();
-                        List<Object[]> rows = babyRows.get(noRawat);
-                        if (rows == null) {
-                            continue;
-                        }
-
-                        int j = 1;
-                        for (Object[] row : rows) {
-                            tabMode.insertRow(i + (j++), new Object[] {
-                                "", row[1], row[2], row[3], tabMode.getValueAt(i, 4), tabMode.getValueAt(i, 5), tabMode.getValueAt(i, 6), tabMode.getValueAt(i, 7),
-                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 8).toString().replaceAll(",", "")) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
-                                "", "", tabMode.getValueAt(i, 11), tabMode.getValueAt(i, 12), tabMode.getValueAt(i, 13), tabMode.getValueAt(i, 14),
-                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 15).toString().replaceAll(",", "")) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
-                                tabMode.getValueAt(i, 16), tabMode.getValueAt(i, 17), "", tabMode.getValueAt(i, 19), tabMode.getValueAt(i, 20),
-                                tabMode.getValueAt(i, 21), tabMode.getValueAt(i, 22), row[0]
-                            });
-                        }
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                }
-            }
-        }.execute();
+        return worker.get();
     }
 
-    private void tampilDPJP(List<String> rows) {
-        new SwingWorker<Map<String, String>, Void>() {
+    private Map<String, String> tampilDPJP(List<String> rows) throws Exception {
+        SwingWorker<Map<String, String>, Void> worker = new SwingWorker<>() {
             @Override
             protected Map<String, String> doInBackground() throws Exception {
                 final Map<String, String> dpjp = new HashMap<>();
@@ -22314,23 +22318,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
                 return dpjp;
             }
+        };
+        worker.execute();
 
-            @Override
-            protected void done() {
-                try {
-                    final Map<String, String> dpjpRows = get();
-                    for (int i = 0; i < tabMode.getRowCount(); i++) {
-                        String dpjp = dpjpRows.get(tabMode.getValueAt(i, 23).toString());
-                        if (dpjp == null) {
-                            continue;
-                        }
-
-                        tabMode.setValueAt(dpjp, i, 18);
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                }
-            }
-        }.execute();
+        return worker.get();
     }
 }
