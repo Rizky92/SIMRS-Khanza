@@ -422,7 +422,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
 
         if(pengaturankamarinap.getAktifkanDiagnosaAkhir().equals("")){
-            System.out.println("asdf");
             pengaturankamarinap.SetKamarInap();
         }
 
