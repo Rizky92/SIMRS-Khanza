@@ -1131,7 +1131,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        order="order by opname.tanggal";
+        order="order by opname.tanggal, bangsal.nm_bangsal, databarang.nama_brng";
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 

@@ -166,6 +166,14 @@ ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `rr` varcha
 
 ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `ufv` varchar(10) NULL DEFAULT NULL AFTER `rr`;
 
+ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
+
+ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
+
+ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `selisih` double NOT NULL AFTER `real`;
+
+ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `lebih` double NOT NULL AFTER `nomihilang`;
+
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) NULL DEFAULT NULL AFTER `nama_suplier`;
 
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `kota` varchar(50) NULL DEFAULT NULL AFTER `alamat`;
@@ -470,6 +478,14 @@ CREATE TABLE IF NOT EXISTS `inacbg_referensi_icd10_smc`  (
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL DEFAULT NULL AFTER `nama_industri`;
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `kota` varchar(30) NULL DEFAULT NULL AFTER `alamat`;
+
+ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
+
+ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
+
+ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `selisih` double NOT NULL AFTER `real`;
+
+ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `lebih` double NOT NULL AFTER `nomihilang`;
 
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) NULL DEFAULT NULL AFTER `nama_suplier`;
 
