@@ -22139,6 +22139,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         sj.add(perJenisAsuransi);
                     }
 
+                    if (kunciTampilDPJP) {
+                        sj.add("dpjp_ranap.kd_dokter = ?");
+                    }
+
                     if (!cari.isBlank()) {
                         if (kunciTampilDPJP) {
                             sj.add("(kamar_inap.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) " +
@@ -22179,6 +22183,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
                         if (!unitKamar.isBlank()) {
                             ps.setString(++p, "%" + unitKamar + "%");
+                        }
+
+                        if (kunciTampilDPJP) {
+                            ps.setString(++p, namadokter);
                         }
 
                         if (!cari.isBlank()) {
