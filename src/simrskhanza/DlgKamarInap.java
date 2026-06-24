@@ -269,7 +269,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","Kamar","Tarif Kamar",
             "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
-            "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Dokter Asal Poli","Kamar","Status Bayar","Agama","no_rawat"
+            "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Dokter Pengirim","Kamar","Status Bayar","Agama","no_rawat"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -318,9 +318,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }else if(i==17){
                 column.setPreferredWidth(40);
             }else if(i==18){
-                column.setPreferredWidth(130);
+                column.setPreferredWidth(160);
             }else if(i==19){
-                column.setPreferredWidth(130);
+                column.setPreferredWidth(120);
             }else if(i==20){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -422,6 +422,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
 
         if(pengaturankamarinap.getAktifkanDiagnosaAkhir().equals("")){
+            System.out.println("asdf");
             pengaturankamarinap.SetKamarInap();
         }
 
@@ -7174,11 +7175,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 rawatinap.emptTeks();
                                 rawatinap.isCek();
                                 if(R1.isSelected()==true){
-                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,19).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),new Date(),new Date());
+                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),new Date(),new Date());
                                 }else if(R2.isSelected()==true){
-                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,19).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
+                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
                                 }else if(R3.isSelected()==true){
-                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,19).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
+                                    rawatinap.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
                                 }
                                 rawatinap.setVisible(true);
                             }else{
@@ -7205,11 +7206,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     rawatinap.emptTeks();
                     rawatinap.isCek();
                     if(R1.isSelected()==true){
-                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),new Date(),new Date());
+                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),new Date(),new Date());
                     }else if(R2.isSelected()==true){
-                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
+                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),DTPCari1.getDate(),DTPCari2.getDate());
                     }else if(R3.isSelected()==true){
-                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
+                        rawatinap.setNoRm(TNoRwCari.getText(),TNoRMCari.getText()+" "+TPasienCari.getText(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString(),DTPCari3.getDate(),DTPCari4.getDate());
                     }
                     rawatinap.setVisible(true);
                 }
@@ -7518,7 +7519,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             norawatpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString());
             TNoRMpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 1).toString());
             TPasienpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 2).toString());
-            kdkamarasal.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 19).toString());
+            kdkamarasal.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 20).toString());
             tglmasuk = tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 11).toString();
             jammasuk = tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 12).toString();
             TKdBngsalasal.setText(Sequel.cariIsiSmc("select kd_bangsal from kamar where kd_kamar = ?", kdkamarasal.getText()));
@@ -8028,7 +8029,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Sehat'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("Sehat",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8050,7 +8051,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Rujuk'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("Rujuk",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8072,7 +8073,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='APS'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("APS",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8094,7 +8095,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='+'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("+",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8116,7 +8117,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Meninggal'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("Meninggal",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8138,7 +8139,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Sembuh'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("Sembuh",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8160,7 +8161,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Membaik'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("Membaik",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -8182,7 +8183,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                      tbKamIn.requestFocus();
                 }else{
                     Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","stts_pulang='Pulang Paksa'");
-                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()+"'","status='KOSONG'");
+                    Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()+"'","status='KOSONG'");
                     tbKamIn.setValueAt("Pulang Paksa",tbKamIn.getSelectedRow(),16);
                 }
             }
@@ -12516,7 +12517,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 param.put("lahir",Sequel.cariIsi("select DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') from pasien where pasien.no_rkm_medis=?",rs2.getString("no_rkm_medis")));
                                 param.put("norm",rs2.getString("no_rkm_medis"));
                                 param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString().replaceAll("  "," "));
-                                param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()));
+                                param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()));
                                 param.put("tanggaldaftar",Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
                                 param.put("jamdaftar",Sequel.cariIsi("select reg_periksa.jam_reg from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
                                 param.put("noreg",Sequel.cariIsi("select reg_periksa.no_reg from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
@@ -12591,7 +12592,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         param.put("lahir",Sequel.cariIsi("select DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()));
                         param.put("norm",TNoRMCari.getText());
                         param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString().replaceAll("  "," "));
-                        param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString()));
+                        param.put("kelas", Sequel.cariIsi("select kamar.kelas from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString()));
                         param.put("tanggaldaftar",Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRwCari.getText()));
                         param.put("jamdaftar",Sequel.cariIsi("select reg_periksa.jam_reg from reg_periksa where reg_periksa.no_rawat=?",TNoRwCari.getText()));
                         param.put("noreg",Sequel.cariIsi("select reg_periksa.no_reg from reg_periksa where reg_periksa.no_rawat=?",TNoRwCari.getText()));
@@ -20631,7 +20632,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             // norawatpindah.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
             // TNoRMpindah.setText(TNoRM.getText());
             // TPasienpindah.setText(TPasien.getText());
-            kdkamar.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),19).toString());
+            kdkamar.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),20).toString());
             diagnosaawal.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString());
             diagnosaakhir.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString());
             TIn.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString());
@@ -22209,10 +22210,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 // "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
                                 // "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Dokter Asal Poli","Kamar","Status Bayar","Agama","no_rawat"
                                 publish(new Object[] {
-                                    rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("alamat"), rs.getString("p_jawab"), rs.getString("hubunganpj"),
-                                    rs.getString("png_jawab"), rs.getString("kamar"), rs.getString("trf_kamar"), rs.getString("diagnosa_awal"), rs.getString("diagnosa_akhir"), rs.getString("tgl_masuk"),
-                                    rs.getString("jam_masuk"), rs.getString("tgl_keluar"), rs.getString("jam_keluar"), rs.getString("ttl_biaya"), rs.getString("stts_pulang"), rs.getString("lama"),
-                                    rs.getString("nm_dokter"), rs.getString("dokter_asal_poli"), rs.getString("kd_kamar"), rs.getString("status_bayar"), rs.getString("agama"), rs.getString("no_rawat")
+                                    rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("alamat"), rs.getString("p_jawab"), rs.getString("hubunganpj"), rs.getString("png_jawab"),
+                                    rs.getString("kamar"), Valid.SetAngka(rs.getDouble("trf_kamar")), rs.getString("diagnosa_awal"), rs.getString("diagnosa_akhir"), rs.getString("tgl_masuk"), rs.getString("jam_masuk"),
+                                    rs.getString("tgl_keluar"), rs.getString("jam_keluar"), Valid.SetAngka(rs.getDouble("ttl_biaya")), rs.getString("stts_pulang"), rs.getString("lama"), rs.getString("nm_dokter"),
+                                    rs.getString("dokter_asal_poli"), rs.getString("kd_kamar"), rs.getString("status_bayar"), rs.getString("agama"), rs.getString("no_rawat")
                                 });
                             }
                         }
@@ -22229,9 +22230,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 protected void done() {
                     try {
                         final List<String> rows = get();
-                        tampilBayi(rows);
-                        if (!kunciTampilDPJP) {
-                            tampilDPJP(rows);
+                        if (!rows.isEmpty()) {
+                            tampilBayi(rows);
+                            if (!kunciTampilDPJP) {
+                                tampilDPJP(rows);
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
@@ -22279,10 +22282,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         for (Object[] row : rows) {
                             tabMode.insertRow(i + (j++), new Object[] {
                                 "", row[1], row[2], row[3], tabMode.getValueAt(i, 4), tabMode.getValueAt(i, 5), tabMode.getValueAt(i, 6), tabMode.getValueAt(i, 7),
-                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 8).toString()) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
+                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 8).toString().replaceAll(",", "")) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
                                 "", "", tabMode.getValueAt(i, 11), tabMode.getValueAt(i, 12), tabMode.getValueAt(i, 13), tabMode.getValueAt(i, 14),
-                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 15).toString()) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
-                                tabMode.getValueAt(i, 16), tabMode.getValueAt(i, 17), "", tabMode.getValueAt(i, 19), tabMode.getValueAt(i, 20), row[0]
+                                Valid.SetAngka(Valid.SetAngka(tabMode.getValueAt(i, 15).toString().replaceAll(",", "")) * (pengaturankamarinap.getPersenHargaKamarBayi() / 100)),
+                                tabMode.getValueAt(i, 16), tabMode.getValueAt(i, 17), "", tabMode.getValueAt(i, 19), tabMode.getValueAt(i, 20),
+                                tabMode.getValueAt(i, 21), tabMode.getValueAt(i, 22), row[0]
                             });
                         }
                     }
@@ -22307,7 +22311,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         dpjp.put(rs.getString("no_rawat"), rs.getString("dpjp"));
                     }
                 }
-                
+
                 return dpjp;
             }
 
