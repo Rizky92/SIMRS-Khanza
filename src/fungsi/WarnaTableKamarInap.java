@@ -35,7 +35,7 @@ public class WarnaTableKamarInap extends DefaultTableCellRenderer {
             component.setFont(component.getFont().deriveFont(Font.PLAIN));
         }
 
-        if (table.getValueAt(row, 20).toString().equals("Sudah Bayar")) {
+        if (table.getValueAt(row, 21).toString().equals("Sudah Bayar")) {
             component.setBackground(new Color(50, 50, 50));
             component.setForeground(new Color(255, 255, 255));
         }
