@@ -38,12 +38,6 @@ public class pengaturankamarinap {
         } catch (Exception e) {
             System.out.println("Notif Pengaturan Kamar Inap: "+e);
         }
-        System.out.println("JamMinimalKamar=" + JamMinimalKamar);
-        System.out.println("PersenHargaKamarBayi=" + PersenHargaKamarBayi);
-        System.out.println("AktifkanDiagnosaAkhir=" + AktifkanDiagnosaAkhir);
-        System.out.println("HitungHariAwal=" + HitungHariAwal);
-        System.out.println("AktifkanHapusDataSalah=" + AktifkanHapusDataSalah);
-        System.out.println("UbahStatusKamar=" + UbahStatusKamar);
     }
 
     public static Double getJamMinimalKamar(){return pengaturankamarinap.JamMinimalKamar;}
