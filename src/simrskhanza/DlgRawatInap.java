@@ -10169,8 +10169,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         if(akses.getpenilaian_pre_induksi()==true){
             tinggi=tinggi+24;
         }
-        BtnPengkajianInvasifNonBedah.setVisible(akses.getpengkajian_invasif_non_bedah());
-        if(akses.getpengkajian_invasif_non_bedah()==true){
+        BtnPengkajianInvasifNonBedah.setVisible(akses.getpengkajian_invasif_non_bedah_smc());
+        if(akses.getpengkajian_invasif_non_bedah_smc()==true){
             tinggi=tinggi+24;
         }
         BtnHasilPemeriksaanUSGUrologi.setVisible(akses.gethasil_usg_urologi());

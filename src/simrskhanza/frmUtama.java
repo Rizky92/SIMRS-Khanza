@@ -21299,20 +21299,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnPengkajianInvasifNonBedahActionPerformed(java.awt.event.ActionEvent evt) {
-        isTutup();
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        RMPenilaianTindakanInvasifNonBedah form=new RMPenilaianTindakanInvasifNonBedah(this,false);
-        form.isCek();
-        form.emptTeks();
-        form.setTampil();
-        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-        form.setLocationRelativeTo(PanelUtama);
-        form.setVisible(true);
-        DlgHome.dispose();
-        this.setCursor(Cursor.getDefaultCursor());
-    }
-
     private void btnHasilUSGUrologiActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -24530,7 +24516,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnPenilaianAwalMedisRalanIGDPsikiatri,btnBPJSReferensiSettingPPKApotek,btnBPJSReferensiObatApotek,btnPembayaranBankMandiri,btnBPJSMapingObatApotek,
             btnPenilaianUlangNyeri,btnPenilaianTerapiWicara,btnPengkajianRestrain,btnBPJSKunjunganSEPApotek,btnBPJSMonitoringKlaimApotek,btnPenilaianAwalMedisRalanParu,
             btnBPJSDaftarPelayananObatApotek,btnCatatanKeperawatanRalan,btnCatatanPersalinan,btnSkorAldrettePascaAnestesi,btnSkorStewardPascaAnestesi,
-            btnSkorBromagePascaAnestesi,btnPenilaianPreInduksi,btnPengkajianInvasifNonBedah,btnHasilUSGUrologi,btnHasilUSGGynecologi,btnHasilPemeriksaanEKG,btnKirimDietSatuSehat,btnMappingObatSatuSehat,
+            btnSkorBromagePascaAnestesi,btnPenilaianPreInduksi,btnHasilUSGUrologi,btnHasilUSGGynecologi,btnHasilPemeriksaanEKG,btnKirimDietSatuSehat,btnMappingObatSatuSehat,
             btnRingkasanPengadaanDapur,btnKirimMedicationSatuSehat,btnKirimMedicationRequestSatuSehat,btnPenatalaksanaanTerapiOkupasi,btnKirimMedicationDispenseSatuSehat,
             btnHasilUSGNeonatus,btnHasilEndoskopiFaringLaring,btnMappingRadiologiSatuSehat,btnKirimServiceRequestRadiologiSatuSehat,btnHasilEndoskopiHidung,btnKirimSpecimenRadiologiSatuSehat,
             btnMasterMasalahKeperawatanNeonatus,btnMasterRencanaKeperawatanNeonatus,btnPenilaianAwalKeperawatanRanapNeonatus,btnKirimObservationRadiologiSatuSehat,
@@ -28966,11 +28952,6 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getpenilaian_pre_induksi()==true){
                 Panelmenu.add(btnPenilaianPreInduksi);
-                jmlmenu++;
-            }
-
-            if(akses.getpengkajian_invasif_non_bedah()==true){
-                Panelmenu.add(btnPengkajianInvasifNonBedah);
                 jmlmenu++;
             }
 
@@ -34943,11 +34924,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getpenilaian_pre_induksi()==true){
             Panelmenu.add(btnPenilaianPreInduksi);
-            jmlmenu++;
-        }
-
-        if(akses.getpengkajian_invasif_non_bedah()==true){
-            Panelmenu.add(btnPengkajianInvasifNonBedah);
             jmlmenu++;
         }
 
@@ -42615,13 +42591,6 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getpenilaian_pre_induksi()==true){
             if(btnPenilaianPreInduksi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianPreInduksi);
-                jmlmenu++;
-            }
-        }
-
-        if(akses.getpengkajian_invasif_non_bedah()==true){
-            if(btnPengkajianInvasifNonBedah.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
-                Panelmenu.add(btnPengkajianInvasifNonBedah);
                 jmlmenu++;
             }
         }
@@ -50936,7 +50905,8 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
-                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc;
+                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
+                             btnPengkajianInvasifNonBedah;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51085,6 +51055,11 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
+        } else if (cmbMenu.getSelectedIndex() == 19) {
+            if (akses.getpengkajian_invasif_non_bedah_smc()) {
+                Panelmenu.add(btnPengkajianInvasifNonBedah);
+                jmlmenu++;
+            }
         } else if (cmbMenu.getSelectedIndex() == 20) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
@@ -51161,6 +51136,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getbpjs_riwayat_surat_smc()) {
             Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getpengkajian_invasif_non_bedah_smc()) {
+            Panelmenu.add(btnPengkajianInvasifNonBedah);
             jmlmenu++;
         }
     }
@@ -51246,6 +51226,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getbpjs_riwayat_surat_smc()) {
             if (btnBPJSRiwayatSuratKontrolSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getpengkajian_invasif_non_bedah_smc()) {
+            if (btnPengkajianInvasifNonBedah.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPengkajianInvasifNonBedah);
                 jmlmenu++;
             }
         }
@@ -51404,6 +51391,20 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPengkajianInvasifNonBedahActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMPenilaianTindakanInvasifNonBedah form = new RMPenilaianTindakanInvasifNonBedah(this, false);
+        form.isCek();
+        form.emptTeks();
+        form.setTampil();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }

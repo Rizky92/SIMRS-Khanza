@@ -1815,6 +1815,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NU
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_surat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_rekap_peserta_prb_apotek`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_invasif_non_bedah` enum('true','false') DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
@@ -2116,8 +2118,6 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjam_piutang` enum('true','false
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression` enum('true','false') NULL DEFAULT NULL AFTER `konfirmasi_rekonsiliasi_obat`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
-
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_invasif_non_bedah` enum('true','false') DEFAULT NULL AFTER `penilaian_pre_induksi`;
 
 CREATE TABLE IF NOT EXISTS `penilaian_tindakan_invasif_non_bedah` (
   `no_rawat` varchar(17) NOT NULL,
