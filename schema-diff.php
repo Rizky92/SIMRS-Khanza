@@ -17,9 +17,9 @@
  *   --tables=<list>     Compare only these tables (comma-separated)
  *   --exclude=<list>    Exclude these tables (comma-separated)
  *   --migrate           Execute DDL directly against the current database
- *   --with-drop         Allow all DROP statements when using --migrate
- *   --with-drop-table   Allow DROP TABLE statements only when using --migrate
- *   --with-drop-column  Allow DROP COLUMN/INDEX/FK statements only when using --migrate
+ *   --with-drop         Allow all DROP statements
+ *   --with-drop-table   Allow DROP TABLE statements
+ *   --with-drop-column  Allow DROP COLUMN/INDEX/FK statements
  *   --yes               Skip confirmation prompt when using --migrate
  *
  * First positional arg  = latest/updated database
@@ -44,8 +44,8 @@ $user = $opts['user'] ?? 'root';
 $pass = $opts['pass'] ?? '';
 $doMigrate = isset($opts['migrate']);
 $withDropAll = isset($opts['with-drop']);
-$noDropTable = $doMigrate && !$withDropAll && !isset($opts['with-drop-table']);
-$noDropColumn = $doMigrate && !$withDropAll && !isset($opts['with-drop-column']);
+$noDropTable = !$withDropAll && !isset($opts['with-drop-table']);
+$noDropColumn = !$withDropAll && !isset($opts['with-drop-column']);
 $skipConfirm = isset($opts['yes']);
 $onlyTables = !empty($opts['tables']) ? array_map('trim', explode(',', $opts['tables'])) : [];
 $excludeTables = !empty($opts['exclude']) ? array_map('trim', explode(',', $opts['exclude'])) : [];

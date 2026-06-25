@@ -174,6 +174,14 @@ ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `selisih` double NOT NULL AFTE
 
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `lebih` double NOT NULL AFTER `nomihilang`;
 
+ALTER TABLE `dapursuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) NULL DEFAULT NULL AFTER `nama_suplier`;
+
+ALTER TABLE `dapursuplier` MODIFY COLUMN IF EXISTS `kota` varchar(50) NULL DEFAULT NULL AFTER `alamat`;
+
+ALTER TABLE `dapursuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DEFAULT NULL AFTER `kota`;
+
+ALTER TABLE `dapursuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
+
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) NULL DEFAULT NULL AFTER `nama_suplier`;
 
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `kota` varchar(50) NULL DEFAULT NULL AFTER `alamat`;
@@ -209,6 +217,10 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double NULL DEFAULT NULL AFTER `sisapiutang`;
+
+ALTER TABLE `detail_pengeluaran_obat_bhp` DROP FOREIGN KEY IF EXISTS `detail_pengeluaran_obat_bhp_ibfk_3`;
+
+ALTER TABLE `detail_pengeluaran_obat_bhp` ADD CONSTRAINT `detail_pengeluaran_obat_bhp_ibfk_3` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `databarang` (`kode_brng`) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE `detail_periksa_lab` DROP INDEX IF EXISTS `nilai`;
 
@@ -1530,6 +1542,14 @@ ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `saran` varchar(1000) NULL
 
 ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `kesan` varchar(1000) NULL DEFAULT NULL AFTER `saran`;
 
+ALTER TABLE `satu_sehat_mapping_radiologi` MODIFY COLUMN IF EXISTS `code` varchar(20) NOT NULL AFTER `kd_jenis_prw`;
+
+ALTER TABLE `satu_sehat_mapping_radiologi` MODIFY COLUMN IF EXISTS `display` varchar(200) NOT NULL AFTER `system`;
+
+ALTER TABLE `satu_sehat_mapping_radiologi` MODIFY COLUMN IF EXISTS `sampel_code` varchar(20) NOT NULL AFTER `display`;
+
+ALTER TABLE `satu_sehat_mapping_radiologi` MODIFY COLUMN IF EXISTS `sampel_display` varchar(200) NOT NULL AFTER `sampel_system`;
+
 ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(500) NULL DEFAULT NULL AFTER `obat_system`;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_denominator`  (
@@ -1608,6 +1628,10 @@ CREATE TABLE IF NOT EXISTS `set_akses_edit_sementara`  (
   `tgl_selesai` datetime NOT NULL,
   PRIMARY KEY (`id_user`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Piutang_Jasa_Perusahaan` varchar(15) NULL DEFAULT NULL AFTER `Kontra_Hibah_Dapur`;
+
+ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Pendapatan_Piutang_Jasa_Perusahaan` varchar(15) NULL DEFAULT NULL AFTER `Piutang_Jasa_Perusahaan`;
 
 CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ralan`  (
   `kd_poli` char(5) NOT NULL,
