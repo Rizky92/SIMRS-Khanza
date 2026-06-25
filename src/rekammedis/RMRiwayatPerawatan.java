@@ -41,8 +41,11 @@ import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -86,6 +89,22 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private double biayaperawatan=0;
     private String kddpjp="",dpjp="",json,dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="", TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
     private StringBuilder htmlContent;
+    // Search bar components for "Riwayat Perawatan" tab
+    private widget.PanelBiasa PanelCariPerawatan;
+    private widget.Label LabelCariPerawatan;
+    private widget.TextBox TxtCariPerawatan;
+    private widget.Button BtnCariPerawatan;
+    private widget.Button BtnPrevPerawatan;
+    private widget.Button BtnNextPerawatan;
+    private widget.Label LabelHasilCariPerawatan;
+    // Search state (plain-text document positions, no raw HTML copy needed)
+    private List<int[]> plainRangesPerawatan = new ArrayList<>();
+    private int currentMatchPerawatan = -1;
+    private String lastSearchedKeyword = "";
+    private static final javax.swing.text.Highlighter.HighlightPainter PAINT_YELLOW =
+        new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(new java.awt.Color(255, 215, 0));
+    private static final javax.swing.text.Highlighter.HighlightPainter PAINT_ORANGE =
+        new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(new java.awt.Color(255, 165, 0));
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private boolean esign=false,sertisign=false;
@@ -267,8 +286,210 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
 
+        setupCariPerawatan();
         ChkAccor.setSelected(false);
         isMenu();
+    }
+
+    private void setupCariPerawatan() {
+        PanelCariPerawatan = new widget.PanelBiasa();
+        PanelCariPerawatan.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 3));
+        PanelCariPerawatan.setBackground(new java.awt.Color(245, 250, 245));
+        PanelCariPerawatan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(180, 210, 180)));
+
+        LabelCariPerawatan = new widget.Label();
+        LabelCariPerawatan.setText("Temukan:");
+
+        TxtCariPerawatan = new widget.TextBox();
+        TxtCariPerawatan.setPreferredSize(new java.awt.Dimension(200, 22));
+        TxtCariPerawatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    String keyword = TxtCariPerawatan.getText().trim();
+                    boolean hasResults = !plainRangesPerawatan.isEmpty() && keyword.equals(lastSearchedKeyword);
+                    if (hasResults) {
+                        navCariPerawatan(evt.isShiftDown() ? -1 : 1);
+                    } else {
+                        cariTeksPerawatan();
+                    }
+                }
+            }
+        });
+
+        BtnCariPerawatan = new widget.Button();
+        BtnCariPerawatan.setText("Cari");
+        BtnCariPerawatan.addActionListener(e -> cariTeksPerawatan());
+
+        BtnPrevPerawatan = new widget.Button();
+        BtnPrevPerawatan.setText("< Prev");
+        BtnPrevPerawatan.setEnabled(false);
+        BtnPrevPerawatan.addActionListener(e -> navCariPerawatan(-1));
+
+        BtnNextPerawatan = new widget.Button();
+        BtnNextPerawatan.setText("Next >");
+        BtnNextPerawatan.setEnabled(false);
+        BtnNextPerawatan.addActionListener(e -> navCariPerawatan(1));
+
+        LabelHasilCariPerawatan = new widget.Label();
+        LabelHasilCariPerawatan.setText("");
+        LabelHasilCariPerawatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LabelHasilCariPerawatan.setPreferredSize(new java.awt.Dimension(130, 22));
+
+        PanelCariPerawatan.add(LabelCariPerawatan);
+        PanelCariPerawatan.add(TxtCariPerawatan);
+        PanelCariPerawatan.add(BtnCariPerawatan);
+        PanelCariPerawatan.add(BtnPrevPerawatan);
+        PanelCariPerawatan.add(BtnNextPerawatan);
+        PanelCariPerawatan.add(LabelHasilCariPerawatan);
+
+        internalFrame2.add(PanelCariPerawatan, java.awt.BorderLayout.PAGE_START);
+    }
+
+    private void cariTeksPerawatan() {
+        String keyword = TxtCariPerawatan.getText().trim();
+        LoadHTMLRiwayatPerawatan.getHighlighter().removeAllHighlights();
+        plainRangesPerawatan.clear();
+        currentMatchPerawatan = -1;
+        lastSearchedKeyword = "";
+        LabelHasilCariPerawatan.setText("Mencari...");
+        BtnCariPerawatan.setEnabled(false);
+        BtnPrevPerawatan.setEnabled(false);
+        BtnNextPerawatan.setEnabled(false);
+
+        if (keyword.isEmpty()) {
+            LabelHasilCariPerawatan.setText("");
+            BtnCariPerawatan.setEnabled(true);
+            return;
+        }
+
+        // Snapshot document text on EDT before handing off to background thread
+        final String docText;
+        try {
+            javax.swing.text.Document doc = LoadHTMLRiwayatPerawatan.getDocument();
+            docText = doc.getText(0, doc.getLength());
+        } catch (Exception ex) {
+            BtnCariPerawatan.setEnabled(true);
+            LabelHasilCariPerawatan.setText("");
+            return;
+        }
+
+        new javax.swing.SwingWorker<List<int[]>, Void>() {
+            @Override
+            protected List<int[]> doInBackground() {
+                return findAllMatches(keyword, docText);
+            }
+            @Override
+            protected void done() {
+                try {
+                    List<int[]> ranges = get();
+                    BtnCariPerawatan.setEnabled(true);
+                    plainRangesPerawatan = ranges;
+                    if (ranges.isEmpty()) {
+                        lastSearchedKeyword = "";
+                        LabelHasilCariPerawatan.setText("Tidak ditemukan");
+                        return;
+                    }
+                    lastSearchedKeyword = keyword;
+                    currentMatchPerawatan = 0;
+                    applyHighlightsPerawatan(0);
+                    int total = ranges.size();
+                    LabelHasilCariPerawatan.setText("1 dari " + total + " temuan");
+                    BtnPrevPerawatan.setEnabled(total > 1);
+                    BtnNextPerawatan.setEnabled(total > 1);
+                    scrollToMatchPerawatan(0);
+                } catch (Exception ex) {
+                    BtnCariPerawatan.setEnabled(true);
+                    LabelHasilCariPerawatan.setText("");
+                }
+            }
+        }.execute();
+    }
+
+    /**
+     * Finds all keyword matches in docText using position-preserving normalization.
+     * Each char in normDoc maps 1:1 to docText, so match positions are usable directly
+     * as Highlighter (document model) positions. Runs on background thread.
+     */
+    private List<int[]> findAllMatches(String keyword, String docText) {
+        List<int[]> ranges = new ArrayList<>();
+        if (keyword.isEmpty() || docText.isEmpty()) return ranges;
+
+        // Build position-preserving normalized doc: ASCII fast-path, NFD only for non-ASCII
+        char[] normBuf = new char[docText.length()];
+        for (int i = 0; i < docText.length(); i++) {
+            normBuf[i] = normalizeChar(docText.charAt(i));
+        }
+        String normDoc = new String(normBuf);
+        String normKeyword = normalizeText(keyword);
+        int kLen = normKeyword.length();
+
+        int pos = 0;
+        while (pos <= normDoc.length() - kLen) {
+            if (normDoc.startsWith(normKeyword, pos)) {
+                ranges.add(new int[]{pos, pos + kLen});
+                pos += kLen;
+            } else {
+                pos++;
+            }
+        }
+        return ranges;
+    }
+
+    private void applyHighlightsPerawatan(int currentIdx) {
+        javax.swing.text.Highlighter highlighter = LoadHTMLRiwayatPerawatan.getHighlighter();
+        highlighter.removeAllHighlights();
+        try {
+            for (int i = 0; i < plainRangesPerawatan.size(); i++) {
+                int[] range = plainRangesPerawatan.get(i);
+                highlighter.addHighlight(range[0], range[1], (i == currentIdx) ? PAINT_ORANGE : PAINT_YELLOW);
+            }
+        } catch (Exception ex) {
+            // ignore highlight errors
+        }
+    }
+
+    private void navCariPerawatan(int delta) {
+        int size = plainRangesPerawatan.size();
+        if (size == 0) return;
+        currentMatchPerawatan = (currentMatchPerawatan + delta + size) % size;
+        // Highlighter update is instant — no setText(), no SwingWorker needed
+        applyHighlightsPerawatan(currentMatchPerawatan);
+        LabelHasilCariPerawatan.setText((currentMatchPerawatan + 1) + " dari " + size + " temuan");
+        scrollToMatchPerawatan(currentMatchPerawatan);
+    }
+
+    private void scrollToMatchPerawatan(int matchIndex) {
+        if (matchIndex < 0 || matchIndex >= plainRangesPerawatan.size()) return;
+        int pos = plainRangesPerawatan.get(matchIndex)[0];
+        // Use invokeLater so the highlight repaint completes before scroll
+        SwingUtilities.invokeLater(() -> {
+            try {
+                LoadHTMLRiwayatPerawatan.setCaretPosition(pos);
+                java.awt.Rectangle rect = LoadHTMLRiwayatPerawatan.modelToView(pos);
+                if (rect != null) {
+                    LoadHTMLRiwayatPerawatan.scrollRectToVisible(rect);
+                }
+            } catch (Exception ex) {
+                // ignore scroll errors
+            }
+        });
+    }
+
+    private String normalizeText(String input) {
+        return Normalizer.normalize(input, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}", "").toLowerCase();
+    }
+
+    /** Normalizes a single char while preserving its position (1:1 char mapping). */
+    private char normalizeChar(char c) {
+        if (c < 128) return (char) Character.toLowerCase(c);
+        String nfd = Normalizer.normalize(String.valueOf(c), Normalizer.Form.NFD);
+        for (char nc : nfd.toCharArray()) {
+            if (Character.getType(nc) != Character.NON_SPACING_MARK) {
+                return Character.toLowerCase(nc);
+            }
+        }
+        return Character.toLowerCase(c);
     }
 
     /** This method is called from within the constructor to
@@ -6896,13 +7117,18 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     );
                 }
 
-                LoadHTMLRiwayatPerawatan.setText(
-                    "<html>"+
-                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                       htmlContent.toString()+
-                      "</table>"+
-                    "</html>");
+                final String builtHtml = "<html><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" + htmlContent.toString() + "</table></html>";
                 htmlContent=null;
+                SwingUtilities.invokeLater(() -> {
+                    LoadHTMLRiwayatPerawatan.setText(builtHtml);
+                    LoadHTMLRiwayatPerawatan.getHighlighter().removeAllHighlights();
+                    plainRangesPerawatan.clear();
+                    currentMatchPerawatan = -1;
+                    lastSearchedKeyword = "";
+                    LabelHasilCariPerawatan.setText("");
+                    BtnPrevPerawatan.setEnabled(false);
+                    BtnNextPerawatan.setEnabled(false);
+                });
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
