@@ -112,7 +112,6 @@
             </table>
             </div>
             <div align="center">
-
                 <input name="BtnSimpan" type="submit" style="padding: 0.5rem 1rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN">
                 <span>&nbsp;</span>
                 <input name="BtnKosong" type="reset" style="padding: 0.5rem 1rem; font-family: Tahoma; font-size: 0.75rem; cursor: pointer"  value="Reset">
@@ -200,11 +199,11 @@
         </form>
         <?php
             if ($action=="HAPUS") {
-try {
+                try {
                     unlink($norawat["lokasi_file"]);
                     Hapus(" berkas_digital_perawatan "," no_rawat ='".validTeks($norawat["no_rawat"])."' and kode ='".validTeks($norawat["kode"])."' and lokasi_file='".validTeks($norawat["lokasi_file"])."' ",$urlDetail);
                 } catch(mysqli_sql_exception $e) {
-            echo "<b style='color:red'>Gagal menghapus</b>";
+                    echo "<b style='color:red'>Gagal menghapus</b>";
                 }
             }
 

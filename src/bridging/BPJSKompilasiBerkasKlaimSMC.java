@@ -419,7 +419,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 15:21:42" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2026 16:05:23" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -459,7 +459,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2026" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -711,11 +711,21 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         kodePJ.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         kodePJ.setName("kodePJ"); // NOI18N
         kodePJ.setPreferredSize(new java.awt.Dimension(41, 23));
+        kodePJ.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                kodePJKeyPressed(evt);
+            }
+        });
         panelGlass8.add(kodePJ);
 
         namaPJ.setEditable(false);
         namaPJ.setName("namaPJ"); // NOI18N
         namaPJ.setPreferredSize(new java.awt.Dimension(170, 23));
+        namaPJ.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                namaPJKeyPressed(evt);
+            }
+        });
         panelGlass8.add(namaPJ);
 
         BtnPenjamin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
@@ -789,6 +799,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass8.add(LCount);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -851,7 +862,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -865,7 +876,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3069,6 +3080,20 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
+    private void kodePJKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodePJKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            kodePJ.setText("");
+            namaPJ.setText("");
+        }
+    }//GEN-LAST:event_kodePJKeyPressed
+
+    private void namaPJKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaPJKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            kodePJ.setText("");
+            namaPJ.setText("");
+        }
+    }//GEN-LAST:event_namaPJKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
     private widget.Button BtnBukaFolderExport;
@@ -3284,8 +3309,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                         ps.setString(++p, tglakhir);
                         if (!kodePJ.getText().isBlank()) {
                             ps.setString(++p, kodePJ.getText());
-                        } else {
-                            ps.setString(++p, "%");
                         }
                         if (!cari.isBlank()) {
                             ps.setString(++p, "%" + cari + "%");

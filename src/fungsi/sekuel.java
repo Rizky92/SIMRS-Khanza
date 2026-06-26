@@ -550,10 +550,11 @@ public final class sekuel {
         }
 
         try (PreparedStatement ps = connect.prepareStatement(sql.concat("?)"))) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
+            int p = 0;
+            for (String value : values) {
+                ps.setString(++p, value);
             }
-            ps.setString(values.length + 1, akses.getalamatip());
+            ps.setString(++p, akses.getalamatip());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -582,11 +583,12 @@ public final class sekuel {
         }
 
         try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
-            ps.setString(1, akses.getkode());
-            ps.setString(2, akses.getalamatip());
-            ps.setInt(3, no);
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 4, values[i]);
+            int p = 0;
+            ps.setString(++p, akses.getkode());
+            ps.setString(++p, akses.getalamatip());
+            ps.setInt(++p, no);
+            for (String value : values) {
+                ps.setString(++p, value == null ? "" : value);
             }
             ps.executeUpdate();
         } catch (Exception e) {
@@ -615,11 +617,12 @@ public final class sekuel {
 
         try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
             for (int r = 0; r < rows; r++) {
-                ps.setString(1, akses.getkode());
-                ps.setString(2, akses.getalamatip());
-                ps.setInt(3, r + 1);
+                int p = 0;
+                ps.setString(++p, akses.getkode());
+                ps.setString(++p, akses.getalamatip());
+                ps.setInt(++p, r + 1);
                 for (int c = 0; c < columns; c++) {
-                    ps.setString(c + 4, tabMode.getValueAt(r, c).toString());
+                    ps.setString(++p, (tabMode.getValueAt(r, c) == null ? "" : tabMode.getValueAt(r, c).toString()));
                 }
                 if (r != 0 && r % batches == 0) {
                     ps.executeLargeBatch();
@@ -654,12 +657,12 @@ public final class sekuel {
         }
 
         try (PreparedStatement ps = connect.prepareStatement(sql.concat("?, ?)"))) {
-            int i = 0;
-            for (; i < values.length; ++i) {
-                ps.setString(i + 1, values[i]);
+            int p = 0;
+            for (String value : values) {
+                ps.setString(++p, value == null ? "" : value);
             }
-            ps.setString(++i, akses.getkode());
-            ps.setString(++i, akses.getalamatip());
+            ps.setString(++p, akses.getkode());
+            ps.setString(++p, akses.getalamatip());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
