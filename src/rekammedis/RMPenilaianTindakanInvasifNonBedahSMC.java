@@ -26,7 +26,6 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,10 +35,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -55,25 +53,14 @@ import kepegawaian.DlgCariPetugas;
  */
 public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode, tabModeMasalah, tabModeDetailMasalah, tabModeRencana, tabModeDetailRencana;
-    private Connection koneksi = koneksiDB.condb();
-    private sekuel Sequel = new sekuel();
-    private validasi Valid = new validasi();
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private int i = 0, jml = 0, index = 0;
+    private final Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
     private DlgCariPetugas petugas;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private boolean[] pilih;
-    private String[] kode, masalah;
     private StringBuilder htmlContent;
-    private String masalahkeperawatan = "", finger = "";
-    private File file;
-    private FileWriter fileWriter;
+    private String finger = "";
     private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode response;
-    private FileReader myObj;
     private String TANGGALMUNDUR = "yes";
 
     /**
@@ -104,7 +91,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         tbObat.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 59; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(105);
@@ -187,27 +174,22 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
+                return colIndex == 0;
             }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
-            };
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                if (columnIndex == 0) {
+                    return Boolean.class;
+                }
+
+                return String.class;
             }
         };
         tbMasalahKeperawatan.setModel(tabModeMasalah);
-
         tbMasalahKeperawatan.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbMasalahKeperawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (i = 0; i < 3; i++) {
+        for (int i = 0; i < tabModeMasalah.getColumnCount(); i++) {
             TableColumn column = tbMasalahKeperawatan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -225,11 +207,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
+                return colIndex == 0;
             }
             Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
@@ -237,16 +215,16 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                if (columnIndex == 0) {
+                    return Boolean.class;
+                }
+                return String.class;
             }
         };
         tbRencanaKeperawatan.setModel(tabModeRencana);
-
-        //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbRencanaKeperawatan.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbRencanaKeperawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             TableColumn column = tbRencanaKeperawatan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -259,22 +237,16 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         }
         tbRencanaKeperawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabModeDetailMasalah = new DefaultTableModel(null, new Object[] {
-            "Kode", "Masalah Keperawatan"
-        }) {
+        tabModeDetailMasalah = new DefaultTableModel(null, new Object[] {"Kode", "Masalah Keperawatan"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
-
         tbMasalahDetail.setModel(tabModeDetailMasalah);
-
-        //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbMasalahDetail.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbMasalahDetail.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) {
             TableColumn column = tbMasalahDetail.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setMinWidth(0);
@@ -285,21 +257,16 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         }
         tbMasalahDetail.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabModeDetailRencana = new DefaultTableModel(null, new Object[] {
-            "Kode", "Rencana Keperawatan"
-        }) {
+        tabModeDetailRencana = new DefaultTableModel(null, new Object[] {"Kode", "Rencana Keperawatan"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
         tbRencanaDetail.setModel(tabModeDetailRencana);
-
-        //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbRencanaDetail.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbRencanaDetail.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) {
             TableColumn column = tbRencanaDetail.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setMinWidth(0);
@@ -1913,7 +1880,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tbObat.getSelectedRow() > -1) {
+        if (tbObat.getSelectedRow() >= 0) {
             if (akses.getkode().equals("Admin Utama")) {
                 hapus();
             } else {
@@ -1949,15 +1916,13 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         } else if (RencanaTindakan.getText().trim().equals("")) {
             Valid.textKosong(RencanaTindakan, "Rencana Tindakan");
         } else {
-            if (tbObat.getSelectedRow() > -1) {
+            if (tbObat.getSelectedRow() >= 0) {
                 if (akses.getkode().equals("Admin Utama")) {
                     ganti();
                 } else {
                     if (kdptg.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString())) {
-                        if (Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString(), Sequel.ambiltanggalsekarang()) == true) {
-                            if (TanggalRegistrasi.getText().equals("")) {
-                                TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?", TNoRw.getText()));
-                            }
+                        if (Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString(), Sequel.ambiltanggalsekarang())) {
+                            ganti();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Hanya bisa diganti oleh petugas yang bersangkutan..!!");
@@ -2047,7 +2012,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
                     "</tr>"
                 );
 
-                for (i = 0; i < tabMode.getRowCount(); i++) {
+                for (int i = 0; i < tabMode.getRowCount(); i++) {
                     htmlContent.append(
                         "<tr class='isi'>" +
                         "<td valign='top'>" + tbObat.getValueAt(i, 0).toString() + "</td>" +
@@ -2165,7 +2130,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() -> tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -2178,13 +2143,13 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() -> tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             TCari.setText("");
-            runBackground(() -> tampil());
+            tampilSmc();
         } else {
             Valid.pindah(evt, BtnCari, TPasien);
         }
@@ -2280,7 +2245,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }//GEN-LAST:event_BtnPrint1ActionPerformed
 
     private void MnPenilaianMedisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianMedisActionPerformed
-        if (tbObat.getSelectedRow() > -1) {
+        if (tbObat.getSelectedRow() >= 0) {
             Map<String, Object> param = new HashMap<>();
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
@@ -2347,7 +2312,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     private void tbMasalahKeperawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMasalahKeperawatanMouseClicked
         if (tabModeMasalah.getRowCount() != 0) {
             try {
-                runBackground(() -> tampilRencana());
+                tampilRencana();
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -2366,7 +2331,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         if (tabModeMasalah.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
-                    runBackground(() -> tampilRencana());
+                    tampilRencana();
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -2385,7 +2350,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
 
     private void BtnAllMasalahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllMasalahActionPerformed
         TCari.setText("");
-        runBackground(() -> tampilMasalah());
+        tampilMasalah();
     }//GEN-LAST:event_BtnAllMasalahActionPerformed
 
     private void BtnAllMasalahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllMasalahKeyPressed
@@ -2397,12 +2362,12 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }//GEN-LAST:event_BtnAllMasalahKeyPressed
 
     private void BtnCariMasalahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariMasalahActionPerformed
-        runBackground(() -> tampilMasalah());
+        tampilMasalah();
     }//GEN-LAST:event_BtnCariMasalahActionPerformed
 
     private void BtnCariMasalahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariMasalahKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            runBackground(() -> tampilMasalah());
+            tampilMasalah();
         } else if ((evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) || (evt.getKeyCode() == KeyEvent.VK_TAB)) {
             Rencana.requestFocus();
         }
@@ -2410,7 +2375,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
 
     private void TCariMasalahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariMasalahKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            runBackground(() -> tampilMasalah());
+            tampilMasalah();
         } else if ((evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) || (evt.getKeyCode() == KeyEvent.VK_TAB)) {
             Rencana.requestFocus();
         }
@@ -2428,7 +2393,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
 
     private void BtnAllRencanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllRencanaActionPerformed
         TCariRencana.setText("");
-        runBackground(() -> LoadRencana());
+        tampilRencana();
     }//GEN-LAST:event_BtnAllRencanaActionPerformed
 
     private void BtnAllRencanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllRencanaKeyPressed
@@ -2440,12 +2405,12 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }//GEN-LAST:event_BtnAllRencanaKeyPressed
 
     private void BtnCariRencanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariRencanaActionPerformed
-        runBackground(() -> tampilRencana());
+        tampilRencana();
     }//GEN-LAST:event_BtnCariRencanaActionPerformed
 
     private void BtnCariRencanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariRencanaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            runBackground(() -> tampilRencana());
+            tampilRencana();
         } else if ((evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) || (evt.getKeyCode() == KeyEvent.VK_TAB)) {
             BtnSimpan.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
@@ -2455,7 +2420,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
 
     private void TCariRencanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariRencanaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            runBackground(() -> tampilRencana());
+            tampilRencana();
         } else if ((evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) || (evt.getKeyCode() == KeyEvent.VK_TAB)) {
             BtnCariRencana.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
@@ -2464,47 +2429,28 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }//GEN-LAST:event_TCariRencanaKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if (Valid.daysOld("./cache/masalahkeperawatan.iyem") < 30) {
-                runBackground(() -> tampilMasalah());
-            } else {
-                runBackground(() -> tampilMasalah());
-            }
-
-            if (Valid.daysOld("./cache/rencanakeperawatan.iyem") < 30) {
-                runBackground(() -> tampilRencana());
-            } else {
-                runBackground(() -> tampilRencana());
-            }
-
-            if (Valid.daysOld("./cache/rencanakeperawatan.iyem") < 30) {
-                runBackground(() -> tampilRencana());
-            } else {
-                runBackground(() -> tampilRencana());
-            }
-        } catch (Exception e) {
-        }
-
+        tampilMasalah();
+        tampilRencana();
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil());
+                        tampilSmc();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil());
+                        tampilSmc();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil());
+                        tampilSmc();
                     }
                 }
             });
@@ -2513,44 +2459,44 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCariMasalah.getText().length() > 2) {
-                        runBackground(() -> tampilMasalah());
+                        tampilMasalah();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCariMasalah.getText().length() > 2) {
-                        runBackground(() -> tampilMasalah());
+                        tampilMasalah();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCariMasalah.getText().length() > 2) {
-                        runBackground(() -> tampilMasalah());
+                        tampilMasalah();
                     }
                 }
-            });;
+            });
 
             TCariRencana.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCariRencana.getText().length() > 2) {
-                        runBackground(() -> tampilRencana());
+                        tampilRencana();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCariRencana.getText().length() > 2) {
-                        runBackground(() -> tampilRencana());
+                        tampilRencana();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCariRencana.getText().length() > 2) {
-                        runBackground(() -> tampilRencana());
+                        tampilRencana();
                     }
                 }
             });
@@ -2781,63 +2727,78 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     private widget.Table tbRencanaKeperawatan;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {
-        Valid.tabelKosong(tabMode);
-        try {
-            ps = koneksi.prepareStatement(
-                "select smc_pengkajian_tindakan_invasif_non_bedah.no_rawat,smc_pengkajian_tindakan_invasif_non_bedah.tanggal,smc_pengkajian_tindakan_invasif_non_bedah.nip,smc_pengkajian_tindakan_invasif_non_bedah.diagnosa,smc_pengkajian_tindakan_invasif_non_bedah.rencana_tindakan,smc_pengkajian_tindakan_invasif_non_bedah.status_fungsional,smc_pengkajian_tindakan_invasif_non_bedah.keluhan_utama,smc_pengkajian_tindakan_invasif_non_bedah.status_psiko,smc_pengkajian_tindakan_invasif_non_bedah.ket_psiko,smc_pengkajian_tindakan_invasif_non_bedah.rpd,smc_pengkajian_tindakan_invasif_non_bedah.sistem_pernapasan,smc_pengkajian_tindakan_invasif_non_bedah.ket_sistem_pernapasan,smc_pengkajian_tindakan_invasif_non_bedah.muntah_darah,smc_pengkajian_tindakan_invasif_non_bedah.bab,smc_pengkajian_tindakan_invasif_non_bedah.urine,smc_pengkajian_tindakan_invasif_non_bedah.antiplatelet,smc_pengkajian_tindakan_invasif_non_bedah.lama_antiplatelet,smc_pengkajian_tindakan_invasif_non_bedah.beta_blocker,smc_pengkajian_tindakan_invasif_non_bedah.lama_beta_blocker,smc_pengkajian_tindakan_invasif_non_bedah.simarc,smc_pengkajian_tindakan_invasif_non_bedah.lama_simarc,smc_pengkajian_tindakan_invasif_non_bedah.riwayat_alergi,smc_pengkajian_tindakan_invasif_non_bedah.tb,smc_pengkajian_tindakan_invasif_non_bedah.bb,smc_pengkajian_tindakan_invasif_non_bedah.td,smc_pengkajian_tindakan_invasif_non_bedah.io2,smc_pengkajian_tindakan_invasif_non_bedah.nadi,smc_pengkajian_tindakan_invasif_non_bedah.suhu,smc_pengkajian_tindakan_invasif_non_bedah.pernapasan,smc_pengkajian_tindakan_invasif_non_bedah.radialis_kanan,smc_pengkajian_tindakan_invasif_non_bedah.radialis_kiri,smc_pengkajian_tindakan_invasif_non_bedah.pedis_kanan,smc_pengkajian_tindakan_invasif_non_bedah.pedis_kiri,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_skala,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,smc_pengkajian_tindakan_invasif_non_bedah.kebutuhan_edukasi,smc_pengkajian_tindakan_invasif_non_bedah.hematokrit,smc_pengkajian_tindakan_invasif_non_bedah.hemoglobin,smc_pengkajian_tindakan_invasif_non_bedah.leukosit,smc_pengkajian_tindakan_invasif_non_bedah.pt_ir,smc_pengkajian_tindakan_invasif_non_bedah.kalium,smc_pengkajian_tindakan_invasif_non_bedah.natrium,smc_pengkajian_tindakan_invasif_non_bedah.ureum,smc_pengkajian_tindakan_invasif_non_bedah.hbsag,smc_pengkajian_tindakan_invasif_non_bedah.anti_hcv,smc_pengkajian_tindakan_invasif_non_bedah.gds,smc_pengkajian_tindakan_invasif_non_bedah.pt_aptt,smc_pengkajian_tindakan_invasif_non_bedah.kreatinin,smc_pengkajian_tindakan_invasif_non_bedah.skrining_jatuh,smc_pengkajian_tindakan_invasif_non_bedah.skor_resiko_jatuh,smc_pengkajian_tindakan_invasif_non_bedah.hasil_echo,smc_pengkajian_tindakan_invasif_non_bedah.rencana,pasien.tgl_lahir,pasien.jk,petugas.nama,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.agama,pasien.pnd,penjab.png_jawab,bahasa_pasien.nama_bahasa " +
-                "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-                "inner join smc_pengkajian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=smc_pengkajian_tindakan_invasif_non_bedah.no_rawat " +
-                "inner join petugas on smc_pengkajian_tindakan_invasif_non_bedah.nip=petugas.nip " +
-                "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien " +
-                "inner join penjab on penjab.kd_pj=reg_periksa.kd_pj where " +
-                "smc_pengkajian_tindakan_invasif_non_bedah.tanggal between ? and ? " +
-                (TCari.getText().trim().equals("") ? "" : "and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or smc_pengkajian_tindakan_invasif_non_bedah.nip like ? or " +
-                "petugas.nama like ?)") +
-                " order by smc_pengkajian_tindakan_invasif_non_bedah.tanggal");
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+                final String tgl1 = Valid.getTglSmc(DTPCari1);
+                final String tgl2 = Valid.getTglSmc(DTPCari2);
 
-            try {
-                ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + "") + " 00:00:00");
-                ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + "") + " 23:59:59");
-                if (!TCari.getText().equals("")) {
-                    ps.setString(3, "%" + TCari.getText() + "%");
-                    ps.setString(4, "%" + TCari.getText() + "%");
-                    ps.setString(5, "%" + TCari.getText() + "%");
-                    ps.setString(6, "%" + TCari.getText() + "%");
-                    ps.setString(7, "%" + TCari.getText() + "%");
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select s.no_rawat, s.tanggal, s.nip, s.diagnosa, s.rencana_tindakan, s.status_fungsional, s.keluhan_utama, s.status_psiko, s.ket_psiko, s.rpd, s.sistem_pernapasan, " +
+                        "s.ket_sistem_pernapasan, s.muntah_darah, s.bab, s.urine, s.antiplatelet, s.lama_antiplatelet, s.beta_blocker, s.lama_beta_blocker, s.simarc, s.lama_simarc, s.riwayat_alergi, " +
+                        "s.tb, s.bb, s.td, s.io2, s.nadi, s.suhu, s.pernapasan, s.radialis_kanan, s.radialis_kiri, s.pedis_kanan, s.pedis_kiri, s.penilaian_nyeri, s.penilaian_nyeri_pencetus, " +
+                        "s.penilaian_nyeri_kualitas, s.penilaian_nyeri_lokasi, s.penilaian_nyeri_penjalaran, s.penilaian_nyeri_skala, s.penilaian_nyeri_durasi, s.kebutuhan_edukasi, s.hematokrit, " +
+                        "s.hemoglobin, s.leukosit, s.pt_ir, s.kalium, s.natrium, s.ureum, s.hbsag, s.anti_hcv, s.gds, s.pt_aptt, s.kreatinin, s.skrining_jatuh, s.skor_resiko_jatuh, s.hasil_echo, " +
+                        "s.rencana, px.tgl_lahir, px.jk, petugas.nama, r.no_rkm_medis, px.nm_pasien, px.agama, px.pnd, pj.png_jawab, b.nama_bahasa from reg_periksa r inner join pasien px on " +
+                        "r.no_rkm_medis = px.no_rkm_medis inner join smc_pengkajian_tindakan_invasif_non_bedah s on r.no_rawat = s.no_rawat inner join petugas p on s.nip = petugas.nip " +
+                        "inner join bahasa_pasien b on px.bahasa_pasien = b.id inner join penjab pj on r.kd_pj = pj.kd_pj where s.tanggal between ? and ? " + (cari.isBlank() ? "" :
+                        "and (r.no_rawat like ? or px.no_rkm_medis like ? or px.nm_pasien like ? or s.nip like ? or petugas.nama like ?) ") + "order by s.tanggal"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, tgl1);
+                        ps.setString(++p, tgl2);
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("tgl_lahir"), rs.getString("jk"), rs.getString("nip"), rs.getString("nama"),
+                                    rs.getString("tanggal"), rs.getString("diagnosa"), rs.getString("rencana_tindakan"), rs.getString("status_fungsional"), rs.getString("keluhan_utama"), rs.getString("status_psiko"),
+                                    rs.getString("ket_psiko"), rs.getString("rpd"), rs.getString("sistem_pernapasan"), rs.getString("ket_sistem_pernapasan"), rs.getString("muntah_darah"), rs.getString("bab"),
+                                    rs.getString("urine"), rs.getString("antiplatelet"), rs.getString("lama_antiplatelet"), rs.getString("beta_blocker"), rs.getString("lama_beta_blocker"), rs.getString("simarc"),
+                                    rs.getString("lama_simarc"), rs.getString("riwayat_alergi"), rs.getString("tb"), rs.getString("bb"), rs.getString("td"), rs.getString("io2"), rs.getString("nadi"), rs.getString("suhu"),
+                                    rs.getString("pernapasan"), rs.getString("radialis_kanan"), rs.getString("radialis_kiri"), rs.getString("pedis_kanan"), rs.getString("pedis_kiri"), rs.getString("penilaian_nyeri"),
+                                    rs.getString("penilaian_nyeri_pencetus"), rs.getString("penilaian_nyeri_kualitas"), rs.getString("penilaian_nyeri_lokasi"), rs.getString("penilaian_nyeri_penjalaran"),
+                                    rs.getString("penilaian_nyeri_skala"), rs.getString("penilaian_nyeri_durasi"), rs.getString("kebutuhan_edukasi"), rs.getString("hematokrit"), rs.getString("hemoglobin"),
+                                    rs.getString("leukosit"), rs.getString("pt_ir"), rs.getString("kalium"), rs.getString("natrium"), rs.getString("ureum"), rs.getString("hbsag"), rs.getString("anti_hcv"),
+                                    rs.getString("gds"), rs.getString("pt_aptt"), rs.getString("kreatinin"), rs.getString("skrining_jatuh"), rs.getString("skor_resiko_jatuh"), rs.getString("hasil_echo"),
+                                    rs.getString("rencana")
+                                });
+                            }
+                        }
+                    }
+                    return null;
                 }
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {
-                        rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("tgl_lahir"), rs.getString("jk"), rs.getString("nip"),
-                        rs.getString("nama"), rs.getString("tanggal"), rs.getString("diagnosa"), rs.getString("rencana_tindakan"), rs.getString("status_fungsional"), rs.getString("keluhan_utama"),
-                        rs.getString("status_psiko"), rs.getString("ket_psiko"), rs.getString("rpd"), rs.getString("sistem_pernapasan"), rs.getString("ket_sistem_pernapasan"),
-                        rs.getString("muntah_darah"), rs.getString("bab"), rs.getString("urine"), rs.getString("antiplatelet"), rs.getString("lama_antiplatelet"), rs.getString("beta_blocker"),
-                        rs.getString("lama_beta_blocker"), rs.getString("simarc"), rs.getString("lama_simarc"), rs.getString("riwayat_alergi"),
-                        rs.getString("tb"), rs.getString("bb"), rs.getString("td"), rs.getString("io2"), rs.getString("nadi"), rs.getString("suhu"), rs.getString("pernapasan"),
-                        rs.getString("radialis_kanan"), rs.getString("radialis_kiri"), rs.getString("pedis_kanan"), rs.getString("pedis_kiri"),
-                        rs.getString("penilaian_nyeri"), rs.getString("penilaian_nyeri_pencetus"), rs.getString("penilaian_nyeri_kualitas"), rs.getString("penilaian_nyeri_lokasi"),
-                        rs.getString("penilaian_nyeri_penjalaran"), rs.getString("penilaian_nyeri_skala"), rs.getString("penilaian_nyeri_durasi"), rs.getString("kebutuhan_edukasi"),
-                        rs.getString("hematokrit"), rs.getString("hemoglobin"), rs.getString("leukosit"), rs.getString("pt_ir"), rs.getString("kalium"),
-                        rs.getString("natrium"), rs.getString("ureum"), rs.getString("hbsag"), rs.getString("anti_hcv"), rs.getString("gds"), rs.getString("pt_aptt"), rs.getString("kreatinin"),
-                        rs.getString("skrining_jatuh"), rs.getString("skor_resiko_jatuh"), rs.getString("hasil_echo"), rs.getString("rencana")
-                    });
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-            }
 
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    RMPenilaianTindakanInvasifNonBedahSMC.this.setCursor(Cursor.getDefaultCursor());
+                }
+            }.execute();
         }
-        LCount.setText("" + tabMode.getRowCount());
     }
 
     public void emptTeks() {
@@ -2901,99 +2862,92 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         Diagnosa.requestFocus();
     }
 
-    private String gv(int col) {
-        Object val = tbObat.getValueAt(tbObat.getSelectedRow(), col);
-        return val != null ? val.toString() : "";
-    }
-
     private void getData() {
         if (tbObat.getSelectedRow() >= 0) {
-            TNoRw.setText(gv(0));
-            TNoRM.setText(gv(1));
-            TPasien.setText(gv(2));
-            TglLahir.setText(gv(3));
-            Jk.setText(gv(4));
-            kdptg.setText(gv(5));
-            nmptg.setText(gv(6));
-            Diagnosa.setText(gv(8));
-            RencanaTindakan.setText(gv(9));
-            StatusFungsional.setText(gv(10));
-            KeluhanUtama.setText(gv(11));
-            StatusPsiko.setSelectedItem(gv(12));
-            KetPsiko.setText(gv(13));
-            RPD.setText(gv(14));
-            SistemPernapasan.setSelectedItem(gv(15));
-            KetSistemPernapasan.setText(gv(16));
-            MuntahDarah.setSelectedItem(gv(17));
-            BAB.setSelectedItem(gv(18));
-            Urine24Jam.setText(gv(19));
-            Antiplatelet.setSelectedItem(gv(20));
-            LamaAntiPlatelet.setText(gv(21));
-            BetaBlocker.setSelectedItem(gv(22));
-            LamaBetaBlocker.setText(gv(23));
-            Simarc.setSelectedItem(gv(24));
-            LamaSimarc.setText(gv(25));
-            AlergiKeterangan.setText(gv(26));
-            TB.setText(gv(27));
-            BB.setText(gv(28));
-            TD.setText(gv(29));
-            IO2.setText(gv(30));
-            Nadi.setText(gv(31));
-            Suhu.setText(gv(32));
-            Pernapasan.setText(gv(33));
-            RadialisKanan.setSelectedItem(gv(34));
-            RadialisKiri.setSelectedItem(gv(35));
-            PedisKanan.setSelectedItem(gv(36));
-            PedisKiri.setSelectedItem(gv(37));
-            Nyeri.setSelectedItem(gv(38));
-            NyeriPencetus.setText(gv(39));
-            NyeriKualitas.setText(gv(40));
-            NyeriLokasi.setText(gv(41));
-            NyeriPenjalaran.setText(gv(42));
-            NyeriSkala.setSelectedItem(gv(43));
-            NyeriLama.setText(gv(44));
-            KebutuhanEdukasi.setText(gv(45));
-            LabHt.setText(gv(46));
-            LabHb.setText(gv(47));
-            LabLeukosit.setText(gv(48));
-            LabPtIr.setText(gv(49));
-            LabK.setText(gv(50));
-            LabNa.setText(gv(51));
-            LabUr.setText(gv(52));
-            LabHbsAg.setSelectedItem(gv(53));
-            LabAntiHCV.setSelectedItem(gv(54));
-            LabGds.setText(gv(55));
-            LabPtAptt.setText(gv(56));
-            LabCr.setText(gv(57));
-            SkriningJatuh.setSelectedItem(gv(58));
-            SkriningSkor.setText(gv(59));
-            EchoKesan.setText(gv(60));
-            Rencana.setText(gv(61));
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
+            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
+            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString());
+            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString());
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 4).toString());
+            kdptg.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString());
+            nmptg.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
+            Valid.SetTgl(TglAsuhan, tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString());
+            Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString());
+            RencanaTindakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString());
+            StatusFungsional.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString());
+            KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString());
+            StatusPsiko.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString());
+            KetPsiko.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 13).toString());
+            RPD.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 14).toString());
+            SistemPernapasan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 15).toString());
+            KetSistemPernapasan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString());
+            MuntahDarah.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString());
+            BAB.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString());
+            Urine24Jam.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 19).toString());
+            Antiplatelet.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 20).toString());
+            LamaAntiPlatelet.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 21).toString());
+            BetaBlocker.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 22).toString());
+            LamaBetaBlocker.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 23).toString());
+            Simarc.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 24).toString());
+            LamaSimarc.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 25).toString());
+            AlergiKeterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 26).toString());
+            TB.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 27).toString());
+            BB.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 28).toString());
+            TD.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 29).toString());
+            IO2.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 30).toString());
+            Nadi.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 31).toString());
+            Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 32).toString());
+            Pernapasan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 33).toString());
+            RadialisKanan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 34).toString());
+            RadialisKiri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 35).toString());
+            PedisKanan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 36).toString());
+            PedisKiri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 37).toString());
+            Nyeri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 38).toString());
+            NyeriPencetus.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 39).toString());
+            NyeriKualitas.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 40).toString());
+            NyeriLokasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 41).toString());
+            NyeriPenjalaran.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 42).toString());
+            NyeriSkala.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 43).toString());
+            NyeriLama.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 44).toString());
+            KebutuhanEdukasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 45).toString());
+            LabHt.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 46).toString());
+            LabHb.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 47).toString());
+            LabLeukosit.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 48).toString());
+            LabPtIr.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 49).toString());
+            LabK.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 50).toString());
+            LabNa.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 51).toString());
+            LabUr.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 52).toString());
+            LabHbsAg.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 53).toString());
+            LabAntiHCV.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 54).toString());
+            LabGds.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 55).toString());
+            LabPtAptt.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 56).toString());
+            LabCr.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 57).toString());
+            SkriningJatuh.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 58).toString());
+            SkriningSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 59).toString());
+            EchoKesan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 60).toString());
+            Rencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 61).toString());
             Valid.tabelKosong(tabModeMasalah);
             Valid.tabelKosong(tabModeRencana);
-            for (i = 0; i < tbMasalahDetail.getRowCount(); i++) {
+            for (int i = 0; i < tbMasalahDetail.getRowCount(); i++) {
                 tabModeMasalah.addRow(new Object[] {
                     true, tbMasalahDetail.getValueAt(i, 0).toString(), tbMasalahDetail.getValueAt(i, 1).toString()
                 });
             }
-            for (i = 0; i < tbRencanaDetail.getRowCount(); i++) {
+            for (int i = 0; i < tbRencanaDetail.getRowCount(); i++) {
                 tabModeRencana.addRow(new Object[] {
                     true, tbRencanaDetail.getValueAt(i, 0).toString(), tbRencanaDetail.getValueAt(i, 1).toString()
                 });
             }
-            Valid.SetTgl(TglAsuhan, gv(7));
         }
     }
 
     private void isRawat() {
-        try {
-            ps = koneksi.prepareStatement(
-                "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi, " +
-                "reg_periksa.tgl_registrasi,reg_periksa.jam_reg from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-                "where reg_periksa.no_rawat=?");
-            try {
-                ps.setString(1, TNoRw.getText());
-                rs = ps.executeQuery();
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select reg_periksa.no_rkm_medis, pasien.nm_pasien, if(pasien.jk = 'L', 'Laki-Laki', 'Perempuan') as jk, pasien.tgl_lahir, reg_periksa.tgl_registrasi, " +
+            "reg_periksa.jam_reg from reg_periksa inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis where reg_periksa.no_rawat = ?"
+        )) {
+            ps.setString(1, TNoRw.getText());
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     DTPCari1.setDate(rs.getDate("tgl_registrasi"));
                     TNoRM.setText(rs.getString("no_rkm_medis"));
@@ -3001,15 +2955,6 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
                     Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
                     TanggalRegistrasi.setText(rs.getString("tgl_registrasi") + " " + rs.getString("jam_reg"));
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
                 }
             }
         } catch (Exception e) {
@@ -3022,7 +2967,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         TCari.setText(norwt);
         DTPCari2.setDate(tgl2);
         isRawat();
-        runBackground(() -> tampil());
+        tampilSmc();
     }
 
     public void isCek() {
@@ -3072,59 +3017,37 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }
 
     private void getMasalah() {
-        if (tbObat.getSelectedRow() != -1) {
+        if (tbObat.getSelectedRow() >= 0) {
             try {
-                TNoRM1.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 1) != null ? tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString() : "");
-                TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 2) != null ? tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString() : "");
-                DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 61) != null ? tbObat.getValueAt(tbObat.getSelectedRow(), 61).toString() : "");
-            } catch (Exception e) {
-            }
-            try {
+                TNoRM1.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
+                TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString());
+                DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 61).toString());
                 Valid.tabelKosong(tabModeDetailMasalah);
-                ps = koneksi.prepareStatement(
-                    "select smc_master_masalah_keperawatan.kode_masalah,smc_master_masalah_keperawatan.nama_masalah from smc_master_masalah_keperawatan " +
-                    "inner join smc_pengkajian_tindakan_invasif_non_bedah_masalah on smc_pengkajian_tindakan_invasif_non_bedah_masalah.kode_masalah=smc_master_masalah_keperawatan.kode_masalah " +
-                    "where smc_pengkajian_tindakan_invasif_non_bedah_masalah.no_rawat=? order by smc_pengkajian_tindakan_invasif_non_bedah_masalah.kode_masalah");
-                try {
+                Valid.tabelKosong(tabModeDetailRencana);
+
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select m.kode_masalah, m.nama_masalah from smc_master_masalah_keperawatan m inner join " +
+                    "smc_pengkajian_tindakan_invasif_non_bedah_masalah s on m.kode_masalah = s.kode_masalah " +
+                    "where s.no_rawat = ? order by s.kode_masalah"
+                )) {
                     ps.setString(1, tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        tabModeDetailMasalah.addRow(new Object[] {rs.getString(1), rs.getString(2)});
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                } finally {
-                    if (rs != null) {
-                        rs.close();
-                    }
-                    if (ps != null) {
-                        ps.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            tabModeDetailMasalah.addRow(new Object[] {rs.getString(1), rs.getString(2)});
+                        }
                     }
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            }
 
-            try {
-                Valid.tabelKosong(tabModeDetailRencana);
-                ps = koneksi.prepareStatement(
-                    "select smc_master_rencana_keperawatan.kode_rencana,smc_master_rencana_keperawatan.rencana_keperawatan from smc_master_rencana_keperawatan " +
-                    "inner join smc_pengkajian_tindakan_invasif_non_bedah_rencana on smc_pengkajian_tindakan_invasif_non_bedah_rencana.kode_rencana=smc_master_rencana_keperawatan.kode_rencana " +
-                    "where smc_pengkajian_tindakan_invasif_non_bedah_rencana.no_rawat=? order by smc_pengkajian_tindakan_invasif_non_bedah_rencana.kode_rencana");
-                try {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select m.kode_rencana, m.rencana_keperawatan from smc_master_rencana_keperawatan m inner join " +
+                    "smc_pengkajian_tindakan_invasif_non_bedah_rencana s on m.kode_rencana = s.kode_rencana where " +
+                    "s.no_rawat = ? order by s.kode_rencana"
+                )) {
                     ps.setString(1, tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        tabModeDetailRencana.addRow(new Object[] {rs.getString(1), rs.getString(2)});
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                } finally {
-                    if (rs != null) {
-                        rs.close();
-                    }
-                    if (ps != null) {
-                        ps.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            tabModeDetailRencana.addRow(new Object[] {rs.getString(1), rs.getString(2)});
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -3137,6 +3060,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         try {
             final String cari = TCariMasalah.getText().toLowerCase().trim();
             File file = new File("./cache/masalahkeperawatansmc.iyem");
+
             Map<String, String> dipilih = new LinkedHashMap<>();
             for (int i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
                 if ((Boolean) tbMasalahKeperawatan.getValueAt(i, 0)) {
@@ -3200,9 +3124,9 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         try {
             final String cari = TCariRencana.getText().toLowerCase().trim();
             File file = new File("./cache/rencanakeperawatansmc.iyem");
+
             Set<String> masalah = new HashSet<>();
             Map<String, Object[]> dipilih = new LinkedHashMap<>();
-
             for (int i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
                 if ((Boolean) tbMasalahKeperawatan.getValueAt(i, 0)) {
                     masalah.add(tbMasalahKeperawatan.getValueAt(i, 1).toString());
@@ -3319,13 +3243,9 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     }
 
     private void hapus() {
-        String noRawat = tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString();
-        String tanggal = tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString();
-        if (Sequel.queryu2tf("delete from smc_pengkajian_tindakan_invasif_non_bedah where no_rawat=? and tanggal=?", 2, new String[] {
-            noRawat, tanggal
-        }) == true) {
-            Sequel.queryu2tf("delete from smc_pengkajian_tindakan_invasif_non_bedah_masalah where no_rawat=?", 1, new String[] {noRawat});
-            Sequel.queryu2tf("delete from smc_pengkajian_tindakan_invasif_non_bedah_rencana where no_rawat=?", 1, new String[] {noRawat});
+        if (Sequel.menghapustfSmc("smc_pengkajian_tindakan_invasif_non_bedah", "no_rawat = ? and tanggal = ?",
+            tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString()
+        )) {
             tabMode.removeRow(tbObat.getSelectedRow());
             LCount.setText("" + tabMode.getRowCount());
             TabRawat.setSelectedIndex(1);
@@ -3349,7 +3269,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
             RadialisKiri.getSelectedItem().toString(), PedisKanan.getSelectedItem().toString(), PedisKiri.getSelectedItem().toString(), Nyeri.getSelectedItem().toString(), NyeriPencetus.getText(), NyeriKualitas.getText(),
             NyeriLokasi.getText(), NyeriPenjalaran.getText(), NyeriSkala.getSelectedItem().toString(), NyeriLama.getText(), KebutuhanEdukasi.getText(), LabHt.getText(), LabHb.getText(), LabLeukosit.getText(),
             LabPtIr.getText(), LabK.getText(), LabNa.getText(), LabUr.getText(), LabHbsAg.getSelectedItem().toString(), LabAntiHCV.getSelectedItem().toString(), LabGds.getText(), LabPtAptt.getText(), LabCr.getText(),
-            SkriningJatuh.getSelectedItem().toString(), SkriningSkor.getText(), EchoKesan.getText(), Rencana.getText(), tabMode.getValueAt(i, 0).toString()
+            SkriningJatuh.getSelectedItem().toString(), SkriningSkor.getText(), EchoKesan.getText(), Rencana.getText(), tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString()
         )) {
             Sequel.menghapusSmc("smc_pengkajian_tindakan_invasif_non_bedah_masalah", "no_rawat = ?", TNoRw.getText());
             for (int i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
@@ -3432,9 +3352,5 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
             tabMode.setValueAt(Rencana.getText(), tbObat.getSelectedRow(), 61);
             emptTeks();
         }
-    }
-
-    private void LoadRencana() {
-        tampilRencana();
     }
 }

@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
- /*
- * DlgSpesialis.java
- *
- * Created on May 23, 2010, 1:25:13 AM
- */
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -25,19 +15,17 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-/**
- *
- * @author dosen
- */
 public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi = koneksiDB.condb();
@@ -58,7 +46,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"Kode Masalah", "Masalah Keperawatan", "Kode", "Rencana Keperawatan"};
+        Object[] row = {"Kode Masalah", "Masalah Keperawatan", "Kode", "Rencana Keperawatan", "menu"};
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -67,12 +55,10 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
         };
 
         tbSpesialis.setModel(tabMode);
-        //runBackground(() ->tampil());
-        //tbJabatan.setDefaultRenderer(Object.class, new WarnaTable(Scroll.getBackground(),Color.GREEN));
         tbSpesialis.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbSpesialis.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbSpesialis.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setMinWidth(0);
@@ -420,6 +406,7 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
         panelGlass7.add(jLabel8);
         jLabel8.setBounds(0, 10, 62, 23);
 
+        cmbMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pengkajian_tindakan_invasif_non_bedah", " " }));
         cmbMenu.setName("cmbMenu"); // NOI18N
         cmbMenu.setPreferredSize(new java.awt.Dimension(467, 23));
         panelGlass7.add(cmbMenu);
@@ -750,6 +737,58 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select r.menu, r.kode_masalah, r.kode_rencana, r.rencana_keperawatan, m.nama_masalah from smc_master_rencana_keperawatan r inner join " +
+                        "smc_master_masalah_keperawatan m on r.menu = m.menu and r.kode_masalah = m.kode_masalah " + (cari.isBlank() ? "" : "where (r.menu like ? or " +
+                        "r.kode_masalah like ? or m.nama_masalah like ? or r.kode_rencana like ? or r.rencana_keperawatan like ?) ") + "order by r.menu, r.kode_masalah, r.kode_rencana"
+                    )) {
+                        int p = 0;
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+
+                                });
+                            }
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    MasterRencanaKeperawatanSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
         Valid.tabelKosong(tabMode);
         try {
             ps = koneksi.prepareStatement(
@@ -808,43 +847,5 @@ public class MasterRencanaKeperawatanSMC extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getmaster_rencana_keperawatan());
         BtnHapus.setEnabled(akses.getmaster_rencana_keperawatan());
         BtnEdit.setEnabled(akses.getmaster_rencana_keperawatan());
-    }
-
-    private void runBackground(Runnable task) {
-        if (ceksukses) {
-            return;
-        }
-        if (executor.isShutdown() || executor.isTerminated()) {
-            return;
-        }
-        if (!isDisplayable()) {
-            return;
-        }
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        try {
-            executor.submit(() -> {
-                try {
-                    task.run();
-                } finally {
-                    ceksukses = false;
-                    SwingUtilities.invokeLater(() -> {
-                        if (isDisplayable()) {
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    });
-                }
-            });
-        } catch (RejectedExecutionException ex) {
-            ceksukses = false;
-        }
-    }
-
-    @Override
-    public void dispose() {
-        executor.shutdownNow();
-        super.dispose();
     }
 }
