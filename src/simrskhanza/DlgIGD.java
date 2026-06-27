@@ -121,6 +121,7 @@ import rekammedis.RMDataCatatanObservasiHemodialisa;
 import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataCatatanObservasiRuangOperasi;
+import rekammedis.RMDataIntervensiNyeriFarmakologi;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
 import rekammedis.RMDataResumePasien;
@@ -12496,6 +12497,28 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
         }
     }
+    
+    private void MnIntervensiNyeriFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianUlangNyeriActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataIntervensiNyeriFarmakologi form=new RMDataIntervensiNyeriFarmakologi(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
 
     /**
     * @data args the command line arguments
@@ -12833,7 +12856,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                                   MnSkriningInstrumenACRS,MnPernyataanMemilihDPJP,MnSkriningInstrumenMentalEmosional,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaMasukPICU,MnSkriningInstrumenAMT,MnSkriningPneumoniaSeverityIndex,
                                   MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiMedik,
                                   MnPermintaanKonsultasiPerawat,MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnCetakSuratKeteranganBerobat,
-                                  MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi;
+                                  MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,MnIntervensiNyeriFarmakologi;
     private javax.swing.JMenu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
     /*
@@ -13304,6 +13327,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPenilaianLanjutanSkriningFungsional.setEnabled(akses.getpenilaian_lanjutan_skrining_fungsional());
         MnPeniliaianAwalMedisIGDPsikiatri.setEnabled(akses.getpenilaian_medis_ralan_gawat_darurat_psikiatri());
         MnPenilaianUlangNyeri.setEnabled(akses.getpenilaian_ulang_nyeri());
+        MnIntervensiNyeriFarmakologi.setEnabled(akses.getintervensi_nyeri_farmakologi());
         MnPengkajianRestrain.setEnabled(akses.getpengkajian_restrain());
         MnCatatanKeperawatan.setEnabled(akses.getcatatan_keperawatan_ralan());
         MnCatatanPersalinan.setEnabled(akses.getcatatan_persalinan());
@@ -14407,6 +14431,18 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPermintaanKonsultasiPerawat.setName("MnPermintaanKonsultasiPerawat");
         MnPermintaanKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPermintaanKonsultasiPerawat.addActionListener(this::MnPermintaanKonsultasiPerawatActionPerformed);
+        
+        MnIntervensiNyeriFarmakologi = new javax.swing.JMenuItem();
+        MnIntervensiNyeriFarmakologi.setBackground(new java.awt.Color(255, 255, 254));
+        MnIntervensiNyeriFarmakologi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnIntervensiNyeriFarmakologi.setForeground(new java.awt.Color(50, 50, 50));
+        MnIntervensiNyeriFarmakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnIntervensiNyeriFarmakologi.setText("Intervensi Nyeri Farmakologi");
+        MnIntervensiNyeriFarmakologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnIntervensiNyeriFarmakologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnIntervensiNyeriFarmakologi.setName("MnIntervensiNyeriFarmakologi");
+        MnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnIntervensiNyeriFarmakologi.addActionListener(this::MnIntervensiNyeriFarmakologiActionPerformed);
 
         MnRMSkriningRisikoKanker = new javax.swing.JMenu();
         MnRMSkriningRisikoKanker.setBackground(new java.awt.Color(255, 255, 254));
@@ -14546,6 +14582,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnRMCatatanMonitoring.add(MnCatatanCekGDS);
         MnRMCatatanMonitoring.add(MnMonitoringReaksiTranfusi);
         MnRMCatatanMonitoring.add(MnPenilaianUlangNyeri);
+        MnRMCatatanMonitoring.add(MnIntervensiNyeriFarmakologi);
         MnRMCatatanMonitoring.add(MnCatatanKeperawatan);
         MnRMCatatanMonitoring.add(MnCatatanPersalinan);
         MnRMCatatanMonitoring.add(MnCatatanKeseimbanganCairan);
