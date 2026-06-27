@@ -5111,7 +5111,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[M]Hasil USG Abdomen".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Hasil USG Abdomen",hasil_pemeriksaan_usg_abdomen});
         }
-    
+
         if("[M]Intervensi Nyeri Farmakologi".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Intervensi Nyeri Farmakologi",intervensi_nyeri_farmakologi});
         }
@@ -9930,7 +9930,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             if("[M]Hasil USG Abdomen".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","hasil_pemeriksaan_usg_abdomen='"+tbUser.getValueAt(i,2).toString()+"'");
             }
-            
+
             if("[M]Intervensi Nyeri Farmakologi".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","intervensi_nyeri_farmakologi='"+tbUser.getValueAt(i,2).toString()+"'");
             }

@@ -23829,7 +23829,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnIntervensiNyeriFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -29117,7 +29117,7 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnPenilaianUlangNyeri);
                 jmlmenu++;
             }
-            
+
             if(akses.getintervensi_nyeri_farmakologi()==true){
                 Panelmenu.add(btnIntervensiNyeriFarmakologi);
                 jmlmenu++;
@@ -35094,7 +35094,7 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnPenilaianUlangNyeri);
             jmlmenu++;
         }
-        
+
         if(akses.getintervensi_nyeri_farmakologi()==true){
             Panelmenu.add(btnIntervensiNyeriFarmakologi);
             jmlmenu++;
@@ -42825,9 +42825,9 @@ public class frmUtama extends javax.swing.JFrame {
             if(btnPenilaianUlangNyeri.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianUlangNyeri);
                 jmlmenu++;
-            }                
+            }
         }
-        
+
         if(akses.getintervensi_nyeri_farmakologi()==true){
             if(btnIntervensiNyeriFarmakologi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnIntervensiNyeriFarmakologi);
@@ -50937,7 +50937,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnIntervensiNyeriFarmakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vitamin_17348719.png")));
         btnIntervensiNyeriFarmakologi.setText("Intervensi Nyeri Farmakologi");
         btnIntervensiNyeriFarmakologi.setIconTextGap(0);
-        btnIntervensiNyeriFarmakologi.setName("btnIntervensiNyeriFarmakologi"); 
+        btnIntervensiNyeriFarmakologi.setName("btnIntervensiNyeriFarmakologi");
         btnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIntervensiNyeriFarmakologi.addActionListener(this::btnIntervensiNyeriFarmakologiActionPerformed);
     }
