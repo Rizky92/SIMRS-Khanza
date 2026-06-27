@@ -932,6 +932,7 @@ import rekammedis.RMDataCatatanObservasiRestrainNonFarmakologi;
 import rekammedis.RMDataCatatanObservasiRuangOperasi;
 import rekammedis.RMDataCatatanObservasiVentilator;
 import rekammedis.RMDataFollowUpDBD;
+import rekammedis.RMDataIntervensiNyeriFarmakologi;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
 import rekammedis.RMDataResumePasien;
@@ -23828,6 +23829,19 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnIntervensiNyeriFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMDataIntervensiNyeriFarmakologi aplikasi=new RMDataIntervensiNyeriFarmakologi(this,false);
+        aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
 
     /**
     * @param args the command line arguments
@@ -24551,7 +24565,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnPCRAICRAIdentifikasiRisikoKebakaran,btnPCRAICRAIdentifikasiRisikoUtilitas,btnBPJSResepObatApotek,btnObatApolApotekBPJS,btnPermintaanResepIterasiApotekBPJS,btnPCRAICRAPengkajianRisikoPraKonstruksi,
             btnPCRAICRAPersyaratanHarusDipenuhi,btnKirimQRTelaahFarmasiSatuSehat,btnKirimAllergiSatuSehat,btnKonsultasiPerawat,btnMappingProsedurSmartKlaimBPJS,btnMappingPenyakitSmartKlaimBPJS,btnKirimFHIRSmartKlaimBPJS,
             btnSuratPermintaanBinrohtal,btnSuratPermintaanPerlindunganDariKekerasan,btnSuratPermohonanPrivasi,btnSuratPermintaanSecondOpinion,btnSuratKeteranganBerobat,btnSuratPenolakanResusitasi,btnCatatanObservasiRuangOperasi,
-            btnHasilUSGAbdomen;
+            btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi;
 
     public void isWall(){
         try{
@@ -29101,6 +29115,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getpenilaian_ulang_nyeri()==true){
                 Panelmenu.add(btnPenilaianUlangNyeri);
+                jmlmenu++;
+            }
+            
+            if(akses.getintervensi_nyeri_farmakologi()==true){
+                Panelmenu.add(btnIntervensiNyeriFarmakologi);
                 jmlmenu++;
             }
 
@@ -35073,6 +35092,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getpenilaian_ulang_nyeri()==true){
             Panelmenu.add(btnPenilaianUlangNyeri);
+            jmlmenu++;
+        }
+        
+        if(akses.getintervensi_nyeri_farmakologi()==true){
+            Panelmenu.add(btnIntervensiNyeriFarmakologi);
             jmlmenu++;
         }
 
@@ -42800,6 +42824,13 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getpenilaian_ulang_nyeri()==true){
             if(btnPenilaianUlangNyeri.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianUlangNyeri);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getintervensi_nyeri_farmakologi()==true){
+            if(btnIntervensiNyeriFarmakologi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnIntervensiNyeriFarmakologi);
                 jmlmenu++;
             }
         }
@@ -50901,6 +50932,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilUSGAbdomen.setName("btnHasilUSGAbdomen");
         btnHasilUSGAbdomen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilUSGAbdomen.addActionListener(this::btnHasilUSGAbdomenActionPerformed);
+
+        btnIntervensiNyeriFarmakologi = new widget.ButtonBig();
+        btnIntervensiNyeriFarmakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vitamin_17348719.png")));
+        btnIntervensiNyeriFarmakologi.setText("Intervensi Nyeri Farmakologi");
+        btnIntervensiNyeriFarmakologi.setIconTextGap(0);
+        btnIntervensiNyeriFarmakologi.setName("btnIntervensiNyeriFarmakologi"); 
+        btnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnIntervensiNyeriFarmakologi.addActionListener(this::btnIntervensiNyeriFarmakologiActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
