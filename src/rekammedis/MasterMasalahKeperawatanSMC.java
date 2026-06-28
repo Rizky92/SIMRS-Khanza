@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
- /*
- * DlgSpesialis.java
- *
- * Created on May 23, 2010, 1:25:13 AM
- */
 package rekammedis;
 
 import fungsi.WarnaTable;
@@ -22,27 +12,20 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-/**
- *
- * @author dosen
- */
 public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private Connection koneksi = koneksiDB.condb();
-    private sekuel Sequel = new sekuel();
-    private validasi Valid = new validasi();
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
     private volatile boolean ceksukses = false;
 
     /**
@@ -55,8 +38,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"Kode", "Masalah Keperawatan"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {"Menu", "Kode", "Masalah Keperawatan"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -64,24 +46,23 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         };
 
         tbSpesialis.setModel(tabMode);
-        //runBackground(() ->tampil());
-        //tbJabatan.setDefaultRenderer(Object.class, new WarnaTable(Scroll.getBackground(),Color.GREEN));
         tbSpesialis.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbSpesialis.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbSpesialis.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(70);
             } else if (i == 1) {
+                column.setPreferredWidth(50);
+            } else if (i == 2) {
                 column.setPreferredWidth(470);
             }
         }
 
         tbSpesialis.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TKd.setDocument(new batasInput((byte) 3).getKata(TKd));
-        TNm.setDocument(new batasInput((int) 100).getKata(TNm));
+        kode.setDocument(new batasInput((byte) 3).getKata(kode));
+        masalah.setDocument(new batasInput((int) 100).getKata(masalah));
         TCari.setDocument(new batasInput((int) 100).getKata(TCari));
     }
 
@@ -112,10 +93,10 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         panelGlass7 = new widget.panelisi();
         jLabel3 = new widget.Label();
         jLabel4 = new widget.Label();
-        TKd = new widget.TextBox();
-        TNm = new widget.TextBox();
+        kode = new widget.TextBox();
+        masalah = new widget.TextBox();
         jLabel5 = new widget.Label();
-        cmbMenu = new widget.ComboBox();
+        menu = new widget.ComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -343,33 +324,34 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(122, 40, 130, 23);
 
-        TKd.setName("TKd"); // NOI18N
-        TKd.addKeyListener(new java.awt.event.KeyAdapter() {
+        kode.setName("kode"); // NOI18N
+        kode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TKdKeyPressed(evt);
+                kodeKeyPressed(evt);
             }
         });
-        panelGlass7.add(TKd);
-        TKd.setBounds(48, 40, 70, 23);
+        panelGlass7.add(kode);
+        kode.setBounds(48, 40, 70, 23);
 
-        TNm.setName("TNm"); // NOI18N
-        TNm.addKeyListener(new java.awt.event.KeyAdapter() {
+        masalah.setName("masalah"); // NOI18N
+        masalah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNmKeyPressed(evt);
+                masalahKeyPressed(evt);
             }
         });
-        panelGlass7.add(TNm);
-        TNm.setBounds(255, 40, 260, 23);
+        panelGlass7.add(masalah);
+        masalah.setBounds(255, 40, 260, 23);
 
         jLabel5.setText("Menu :");
         jLabel5.setName("jLabel5"); // NOI18N
         panelGlass7.add(jLabel5);
         jLabel5.setBounds(2, 10, 43, 23);
 
-        cmbMenu.setName("cmbMenu"); // NOI18N
-        cmbMenu.setPreferredSize(new java.awt.Dimension(467, 23));
-        panelGlass7.add(cmbMenu);
-        cmbMenu.setBounds(48, 10, 467, 23);
+        menu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "pengkajian_tindakan_invasif_non_bedah" }));
+        menu.setName("menu"); // NOI18N
+        menu.setPreferredSize(new java.awt.Dimension(467, 23));
+        panelGlass7.add(menu);
+        menu.setBounds(48, 10, 467, 23);
 
         internalFrame1.add(panelGlass7, java.awt.BorderLayout.PAGE_START);
 
@@ -378,22 +360,22 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-        Valid.pindah(evt, TCari, TNm);
-    }//GEN-LAST:event_TKdKeyPressed
+    private void kodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeKeyPressed
+        Valid.pindah(evt, TCari, masalah);
+    }//GEN-LAST:event_kodeKeyPressed
 
-    private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
-        Valid.pindah(evt, TKd, BtnSimpan);
-    }//GEN-LAST:event_TNmKeyPressed
+    private void masalahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_masalahKeyPressed
+        Valid.pindah(evt, kode, BtnSimpan);
+    }//GEN-LAST:event_masalahKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if (TKd.getText().trim().equals("")) {
-            Valid.textKosong(TKd, "Kode");
-        } else if (TNm.getText().trim().equals("")) {
-            Valid.textKosong(TNm, "Masalah");
+        if (kode.getText().trim().equals("")) {
+            Valid.textKosong(kode, "Kode");
+        } else if (masalah.getText().trim().equals("")) {
+            Valid.textKosong(masalah, "Masalah");
         } else {
-            if (Sequel.menyimpantf("master_masalah_keperawatan", "'" + TKd.getText() + "','" + TNm.getText() + "'", "Kode") == true) {
-                tabMode.addRow(new Object[] {TKd.getText(), TNm.getText()});
+            if (Sequel.menyimpantfSmc("smc_master_masalah_keperawatan", "", menu.getSelectedItem().toString(), kode.getText(), masalah.getText())) {
+                tabMode.addRow(new Object[] {menu.getSelectedItem().toString(), kode.getText(), masalah.getText()});
                 emptTeks();
                 LCount.setText("" + tabMode.getRowCount());
             }
@@ -404,7 +386,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnSimpanActionPerformed(null);
         } else {
-            Valid.pindah(evt, TNm, BtnBatal);
+            Valid.pindah(evt, masalah, BtnBatal);
         }
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -421,8 +403,10 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (Valid.hapusTabletf(tabMode, TKd, "master_masalah_keperawatan", "kode_masalah") == true) {
-            if (tbSpesialis.getSelectedRow() != -1) {
+        if (tbSpesialis.getSelectedRow() >= 0) {
+            if (Sequel.menghapustfSmc("smc_master_masalah_keperawatan", "menu = ? and kode_masalah = ?",
+                tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
+            )) {
                 tabMode.removeRow(tbSpesialis.getSelectedRow());
                 emptTeks();
                 LCount.setText("" + tabMode.getRowCount());
@@ -439,17 +423,19 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if (TKd.getText().trim().equals("")) {
-            Valid.textKosong(TKd, "Kode");
-        } else if (TNm.getText().trim().equals("")) {
-            Valid.textKosong(TNm, "Masalah");
+        if (kode.getText().trim().equals("")) {
+            Valid.textKosong(kode, "Kode");
+        } else if (masalah.getText().trim().equals("")) {
+            Valid.textKosong(masalah, "Masalah");
         } else {
-            if (tbSpesialis.getSelectedRow() > -1) {
-                if (Sequel.mengedittf("master_masalah_keperawatan", "kode_masalah=?", "kode_masalah=?,nama_masalah=?", 3, new String[] {
-                    TKd.getText(), TNm.getText(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString()
-                }) == true) {
-                    tbSpesialis.setValueAt(TKd.getText(), tbSpesialis.getSelectedRow(), 0);
-                    tbSpesialis.setValueAt(TNm.getText(), tbSpesialis.getSelectedRow(), 1);
+            if (tbSpesialis.getSelectedRow() >= 0) {
+                if (Sequel.mengupdatetfSmc("smc_master_masalah_keperawatan", "menu = ?, kode_masalah = ?, nama_masalah = ?", "menu = ? and kode_masalah = ?",
+                    menu.getSelectedItem().toString(), kode.getText(), masalah.getText(), tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString(),
+                    tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString()
+                )) {
+                    tabMode.setValueAt(menu.getSelectedItem().toString(), tbSpesialis.getSelectedRow(), 0);
+                    tabMode.setValueAt(kode.getText(), tbSpesialis.getSelectedRow(), 1);
+                    tabMode.setValueAt(masalah.getText(), tbSpesialis.getSelectedRow(), 2);
                     emptTeks();
                 }
             }
@@ -489,7 +475,7 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() -> tampil());
+        tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -506,14 +492,14 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         emptTeks();
-        runBackground(() -> tampil());
+        tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnAllActionPerformed(null);
         } else {
-            Valid.pindah(evt, BtnCari, TKd);
+            Valid.pindah(evt, BtnCari, kode);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -540,28 +526,27 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() -> tampil());
-        emptTeks();
+        tampil();
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil());
+                        tampil();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil());
+                        tampil();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil());
+                        tampil();
                     }
                 }
             });
@@ -606,9 +591,6 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
-    private widget.TextBox TKd;
-    private widget.TextBox TNm;
-    private widget.ComboBox cmbMenu;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
@@ -616,6 +598,9 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel3;
+    private widget.TextBox kode;
+    private widget.TextBox masalah;
+    private widget.ComboBox menu;
     private widget.panelisi panelGlass7;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
@@ -623,45 +608,73 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
-        try {
-            ps = koneksi.prepareStatement("select * from master_masalah_keperawatan where master_masalah_keperawatan.kode_masalah like ? or master_masalah_keperawatan.nama_masalah like ? order by master_masalah_keperawatan.kode_masalah");
-            try {
-                ps.setString(1, "%" + TCari.getText().trim() + "%");
-                ps.setString(2, "%" + TCari.getText().trim() + "%");
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2)});
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            LCount.setText("0");
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select s.menu, s.kode_masalah, s.nama_masalah from smc_master_masalah_keperawatan s " +
+                        (cari.isBlank() ? "" : "where s.menu like ? or s.kode_masalah like ? or s.nama_masalah like ? ") +
+                        "order by s.menu, s.kode_masalah"
+                    )) {
+                        int p = 0;
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {rs.getString("menu"), rs.getString("kode_masalah"), rs.getString("nama_masalah")});
+                            }
+                        }
+                    }
+
+                    return null;
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
                 }
-                if (ps != null) {
-                    ps.close();
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    MasterMasalahKeperawatanSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
                 }
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            }.execute();
         }
-        LCount.setText("" + tabMode.getRowCount());
     }
 
     private void emptTeks() {
-        TKd.setText("");
-        TNm.setText("");
+        menu.setSelectedIndex(0);
+        kode.setText("");
+        masalah.setText("");
         TCari.setText("");
-        TKd.requestFocus();
-        Valid.autoNomer(tabMode, "", 3, TKd);
-        TKd.requestFocus();
+        kode.requestFocus();
+        Valid.autoNomer(tabMode, "", 3, kode);
+        kode.requestFocus();
     }
 
     private void getData() {
         if (tbSpesialis.getSelectedRow() != -1) {
-            TKd.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString());
-            TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString());
+            menu.setSelectedItem(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 0).toString());
+            kode.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 1).toString());
+            masalah.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(), 2).toString());
         }
     }
 
@@ -673,43 +686,5 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getmaster_masalah_keperawatan());
         BtnHapus.setEnabled(akses.getmaster_masalah_keperawatan());
         BtnEdit.setEnabled(akses.getmaster_masalah_keperawatan());
-    }
-
-    private void runBackground(Runnable task) {
-        if (ceksukses) {
-            return;
-        }
-        if (executor.isShutdown() || executor.isTerminated()) {
-            return;
-        }
-        if (!isDisplayable()) {
-            return;
-        }
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        try {
-            executor.submit(() -> {
-                try {
-                    task.run();
-                } finally {
-                    ceksukses = false;
-                    SwingUtilities.invokeLater(() -> {
-                        if (isDisplayable()) {
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    });
-                }
-            });
-        } catch (RejectedExecutionException ex) {
-            ceksukses = false;
-        }
-    }
-
-    @Override
-    public void dispose() {
-        executor.shutdownNow();
-        super.dispose();
     }
 }

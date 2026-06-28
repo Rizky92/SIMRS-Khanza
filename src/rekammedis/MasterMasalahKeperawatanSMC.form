@@ -355,12 +355,12 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="widget.TextBox" name="TKd">
+            <Component class="widget.TextBox" name="kode">
               <Properties>
-                <Property name="name" type="java.lang.String" value="TKd" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="kode" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TKdKeyPressed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="kodeKeyPressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -368,12 +368,12 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="widget.TextBox" name="TNm">
+            <Component class="widget.TextBox" name="masalah">
               <Properties>
-                <Property name="name" type="java.lang.String" value="TNm" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="masalah" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNmKeyPressed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="masalahKeyPressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -392,9 +392,15 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="widget.ComboBox" name="cmbMenu">
+            <Component class="widget.ComboBox" name="menu">
               <Properties>
-                <Property name="name" type="java.lang.String" value="cmbMenu" noResource="true"/>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value=""/>
+                    <StringItem index="1" value="pengkajian_tindakan_invasif_non_bedah"/>
+                  </StringArray>
+                </Property>
+                <Property name="name" type="java.lang.String" value="menu" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[467, 23]"/>
                 </Property>
