@@ -1634,8 +1634,22 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(this.isVisible()==true){
             try {
                 if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
+                    // P1/P2 -> Kandungan calculation
+                    try {
+                        if(!tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),11).toString().equals(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString())){
+                            if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())!=0){
+                                tbDetailResepObatRacikan.setValueAt(Valid.SetAngka8(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())*
+                                    (Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString())/Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),11).toString())),1),
+                                        tbDetailResepObatRacikan.getSelectedRow(),12);
+                            }
+                        }
+                    } catch (Exception e) {
+                        tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),12);
+                    }
                     if(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),12).toString().contains("%")){
                         getDatadetailresepracikan2();
+                    }else{
+                        getDatadetailresepracikan();
                     }
                 }else{
                     getDatadetailresepracikan();
@@ -1729,7 +1743,32 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_checkboxSimpanTemplateResepItemStateChanged
 
     private void tbObatResepRacikanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbObatResepRacikanPropertyChange
-        // TODO add your handling code here:
+        if(this.isVisible()==true){
+            try {
+                if(tbObatResepRacikan.getSelectedRow()!= -1){
+                    String noRacik=tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString();
+                    double jmlRacik=Double.parseDouble(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),4).toString());
+                    for(int r=0;r<tbDetailResepObatRacikan.getRowCount();r++){
+                        if(noRacik.equals(tbDetailResepObatRacikan.getValueAt(r,0).toString())){
+                            try {
+                                if(tbDetailResepObatRacikan.getValueAt(r,12).toString().contains("%")){
+                                    // percentage rows handled separately via getDatadetailresepracikan2
+                                }else{
+                                    if(!tbDetailResepObatRacikan.getValueAt(r,12).toString().equals("")){
+                                        tbDetailResepObatRacikan.setValueAt(
+                                                Valid.SetAngka8((jmlRacik*Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,12).toString()))
+                                                /Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,8).toString()),1),r,13);
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                    hitungResep();
+                }
+            } catch (Exception e) {
+            }
+        }
     }//GEN-LAST:event_tbObatResepRacikanPropertyChange
 
     /**
