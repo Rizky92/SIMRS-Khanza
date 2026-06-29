@@ -38,7 +38,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,7,108,0,0,3,-109"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-120,0,0,3,-109"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -104,6 +104,9 @@
                 <Property name="text" type="java.lang.String" value="Simpan"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alt+S"/>
                 <Property name="name" type="java.lang.String" value="BtnSimpan" noResource="true"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="BtnEdit"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 30]"/>
                 </Property>
@@ -122,6 +125,9 @@
                 <Property name="text" type="java.lang.String" value="Baru"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alt+B"/>
                 <Property name="name" type="java.lang.String" value="BtnBatal" noResource="true"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="BtnHapus"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 30]"/>
                 </Property>
@@ -140,6 +146,9 @@
                 <Property name="text" type="java.lang.String" value="Hapus"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alt+H"/>
                 <Property name="name" type="java.lang.String" value="BtnHapus" noResource="true"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="BtnKeluar"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 30]"/>
                 </Property>
@@ -158,6 +167,9 @@
                 <Property name="text" type="java.lang.String" value="Ganti"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alt+G"/>
                 <Property name="name" type="java.lang.String" value="BtnEdit" noResource="true"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="BtnBatal"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 30]"/>
                 </Property>
@@ -176,6 +188,9 @@
                 <Property name="text" type="java.lang.String" value="Cetak"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alt+T"/>
                 <Property name="name" type="java.lang.String" value="BtnPrint" noResource="true"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="BtnKeluar"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 30]"/>
                 </Property>
@@ -194,6 +209,9 @@
                 <Property name="text" type="java.lang.String" value="Semua"/>
                 <Property name="toolTipText" type="java.lang.String" value="Alt+M"/>
                 <Property name="name" type="java.lang.String" value="BtnAll" noResource="true"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="BtnPrint"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 30]"/>
                 </Property>
@@ -309,6 +327,9 @@
                         <Component class="widget.TextBox" name="TNoRw">
                           <Properties>
                             <Property name="name" type="java.lang.String" value="TNoRw" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNoRwKeyPressed"/>
@@ -323,10 +344,16 @@
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="name" type="java.lang.String" value="TPasien" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TPasienKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="309" y="10" width="260" height="23"/>
+                              <AbsoluteConstraints x="309" y="10" width="312" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -334,7 +361,13 @@
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNoRMKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="207" y="10" width="100" height="23"/>
@@ -351,35 +384,47 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="166" y="40" width="50" height="23"/>
+                              <AbsoluteConstraints x="170" y="40" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="widget.TextBox" name="KdDokter">
+                        <Component class="widget.TextBox" name="kdptg">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="name" type="java.lang.String" value="KdDokter" noResource="true"/>
+                            <Property name="name" type="java.lang.String" value="kdptg" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnDokter"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[80, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="kdptgKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="220" y="40" width="90" height="23"/>
+                              <AbsoluteConstraints x="228" y="40" width="90" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="widget.TextBox" name="NmDokter">
+                        <Component class="widget.TextBox" name="nmptg">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="name" type="java.lang.String" value="NmDokter" noResource="true"/>
+                            <Property name="name" type="java.lang.String" value="nmptg" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnDokter"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[207, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nmptgKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="312" y="40" width="180" height="23"/>
+                              <AbsoluteConstraints x="321" y="40" width="230" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -391,6 +436,9 @@
                             <Property name="mnemonic" type="int" value="50"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
                             <Property name="name" type="java.lang.String" value="BtnDokter" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
@@ -401,18 +449,18 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="494" y="40" width="28" height="23"/>
+                              <AbsoluteConstraints x="554" y="40" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel8">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Tgl.Lahir :"/>
+                            <Property name="text" type="java.lang.String" value="Tgl. Lahir :"/>
                             <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="580" y="10" width="60" height="23"/>
+                              <AbsoluteConstraints x="624" y="10" width="62" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -420,10 +468,16 @@
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="name" type="java.lang.String" value="TglLahir" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TglLahirKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="644" y="10" width="80" height="23"/>
+                              <AbsoluteConstraints x="689" y="10" width="80" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -431,10 +485,16 @@
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="name" type="java.lang.String" value="Jk" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JkKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="74" y="40" width="80" height="23"/>
+                              <AbsoluteConstraints x="74" y="40" width="93" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -493,7 +553,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="538" y="40" width="52" height="23"/>
+                              <AbsoluteConstraints x="585" y="40" width="52" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -504,20 +564,23 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="80" width="62" height="23"/>
+                              <AbsoluteConstraints x="0" y="80" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.TextBox" name="Diagnosa">
                           <Properties>
                             <Property name="name" type="java.lang.String" value="Diagnosa" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="RencanaTindakan"/>
+                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DiagnosaKeyPressed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="66" y="80" width="139" height="23"/>
+                              <AbsoluteConstraints x="74" y="80" width="139" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -528,20 +591,23 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="208" y="80" width="100" height="23"/>
+                              <AbsoluteConstraints x="216" y="80" width="105" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.TextBox" name="RencanaTindakan">
                           <Properties>
                             <Property name="name" type="java.lang.String" value="RencanaTindakan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="StatusFungsional"/>
+                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RencanaTindakanKeyPressed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="312" y="80" width="210" height="23"/>
+                              <AbsoluteConstraints x="324" y="80" width="168" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -552,40 +618,23 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="525" y="80" width="110" height="23"/>
+                              <AbsoluteConstraints x="495" y="80" width="103" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.TextBox" name="StatusFungsional">
                           <Properties>
                             <Property name="name" type="java.lang.String" value="StatusFungsional" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="KeluhanUtama"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="StatusFungsionalKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="640" y="80" width="200" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="javax.swing.JSeparator" name="jSeparator2">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                                <LineBorder>
-                                  <Color PropertyName="color" blue="ea" green="f4" red="ef" type="rgb"/>
-                                </LineBorder>
-                              </Border>
-                            </Property>
-                            <Property name="name" type="java.lang.String" value="jSeparator2" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="70" width="750" height="1"/>
+                              <AbsoluteConstraints x="601" y="80" width="168" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -596,7 +645,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="710" width="70" height="23"/>
+                              <AbsoluteConstraints x="290" y="650" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -604,22 +653,28 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="TB" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BB"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TBKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="75" y="710" width="55" height="23"/>
+                              <AbsoluteConstraints x="363" y="650" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel24">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value=" Cm"/>
+                            <Property name="text" type="java.lang.String" value="cm"/>
                             <Property name="name" type="java.lang.String" value="jLabel24" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="135" y="710" width="30" height="23"/>
+                              <AbsoluteConstraints x="424" y="650" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -630,7 +685,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="180" y="710" width="40" height="23"/>
+                              <AbsoluteConstraints x="290" y="680" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -638,10 +693,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="BB" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="RadialisKiri"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BBKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="225" y="710" width="55" height="23"/>
+                              <AbsoluteConstraints x="363" y="680" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -653,7 +714,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="285" y="710" width="30" height="23"/>
+                              <AbsoluteConstraints x="424" y="680" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -664,7 +725,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="315" y="710" width="40" height="23"/>
+                              <AbsoluteConstraints x="60" y="650" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -672,10 +733,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="TD" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="IO2"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TDKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="360" y="710" width="76" height="23"/>
+                              <AbsoluteConstraints x="103" y="650" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -687,7 +754,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="440" y="710" width="50" height="23"/>
+                              <AbsoluteConstraints x="169" y="650" width="38" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -698,7 +765,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="740" width="70" height="23"/>
+                              <AbsoluteConstraints x="60" y="710" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -706,10 +773,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="Nadi" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Pernapasan"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NadiKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="75" y="740" width="55" height="23"/>
+                              <AbsoluteConstraints x="103" y="710" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -721,7 +794,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="135" y="740" width="50" height="23"/>
+                              <AbsoluteConstraints x="169" y="710" width="38" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -732,7 +805,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="180" y="740" width="40" height="23"/>
+                              <AbsoluteConstraints x="60" y="620" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -740,10 +813,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="Suhu" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="TD"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SuhuKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="225" y="740" width="55" height="23"/>
+                              <AbsoluteConstraints x="103" y="620" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -755,18 +834,18 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="285" y="740" width="30" height="23"/>
+                              <AbsoluteConstraints x="169" y="620" width="38" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel29">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="IO2 :"/>
+                            <Property name="text" type="java.lang.String" value="SpO2 :"/>
                             <Property name="name" type="java.lang.String" value="jLabel29" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="520" y="710" width="40" height="23"/>
+                              <AbsoluteConstraints x="60" y="680" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -774,10 +853,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="IO2" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Nadi"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="IO2KeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="565" y="710" width="55" height="23"/>
+                              <AbsoluteConstraints x="103" y="680" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -789,7 +874,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="625" y="710" width="30" height="23"/>
+                              <AbsoluteConstraints x="169" y="680" width="38" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -800,7 +885,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="310" y="740" width="90" height="23"/>
+                              <AbsoluteConstraints x="290" y="620" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -808,10 +893,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="Pernapasan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="TB"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PernapasanKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="405" y="740" width="55" height="23"/>
+                              <AbsoluteConstraints x="363" y="620" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -823,64 +914,32 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="465" y="740" width="50" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="javax.swing.JSeparator" name="jSeparator3">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                                <LineBorder>
-                                  <Color PropertyName="color" blue="ea" green="f4" red="ef" type="rgb"/>
-                                </LineBorder>
-                              </Border>
-                            </Property>
-                            <Property name="name" type="java.lang.String" value="jSeparator3" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="110" width="880" height="1"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="widget.Label" name="jLabel112">
-                          <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="A. ASSESMEN PRA TINDAKAN"/>
-                            <Property name="name" type="java.lang.String" value="jLabel112" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="10" y="110" width="150" height="23"/>
+                              <AbsoluteConstraints x="424" y="620" width="40" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel49">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="1. Keluhan Utama :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         1. Keluhan Utama :"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="name" type="java.lang.String" value="jLabel49" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="140" width="120" height="20"/>
+                              <AbsoluteConstraints x="0" y="110" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel50">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="3. Riwayat Penyakit Dahulu :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         3. Riwayat Penyakit Dahulu :"/>
                             <Property name="name" type="java.lang.String" value="jLabel50" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="250" width="170" height="23"/>
+                              <AbsoluteConstraints x="0" y="230" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -895,7 +954,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="60" y="165" width="750" height="50"/>
+                              <AbsoluteConstraints x="40" y="130" width="729" height="63"/>
                             </Constraint>
                           </Constraints>
 
@@ -911,19 +970,24 @@
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
                                 <Property name="name" type="java.lang.String" value="KeluhanUtama" noResource="true"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="StatusPsiko"/>
+                                </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KeluhanUtamaKeyPressed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
                         <Component class="widget.Label" name="jLabel9">
                           <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="c. Simarc                      :"/>
+                            <Property name="text" type="java.lang.String" value="Simarc :"/>
                             <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="50" y="600" width="120" height="23"/>
+                              <AbsoluteConstraints x="60" y="540" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -938,7 +1002,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="60" y="275" width="750" height="50"/>
+                              <AbsoluteConstraints x="40" y="250" width="729" height="63"/>
                             </Constraint>
                           </Constraints>
 
@@ -954,18 +1018,24 @@
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
                                 <Property name="name" type="java.lang.String" value="RPD" noResource="true"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="SistemPernapasan"/>
+                                </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RPDKeyPressed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
                         <Component class="widget.Label" name="jLabel51">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="a. Muntah Darah :"/>
+                            <Property name="text" type="java.lang.String" value="Muntah Darah :"/>
                             <Property name="name" type="java.lang.String" value="jLabel51" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="390" width="160" height="23"/>
+                              <AbsoluteConstraints x="60" y="370" width="90" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -976,7 +1046,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1250" width="135" height="23"/>
+                              <AbsoluteConstraints x="60" y="1090" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -984,10 +1054,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabHt" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabHb"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabHtKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="140" y="1250" width="110" height="23"/>
+                              <AbsoluteConstraints x="133" y="1090" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -998,7 +1074,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1280" width="135" height="23"/>
+                              <AbsoluteConstraints x="60" y="1120" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1006,10 +1082,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabHb" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabLeukosit"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabHbKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="140" y="1280" width="110" height="23"/>
+                              <AbsoluteConstraints x="133" y="1120" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1020,7 +1102,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1310" width="135" height="23"/>
+                              <AbsoluteConstraints x="60" y="1150" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1028,10 +1110,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabLeukosit" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabNa"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabLeukositKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="140" y="1310" width="110" height="23"/>
+                              <AbsoluteConstraints x="133" y="1150" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1039,10 +1127,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabPtIr" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabPtAptt"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabPtIrKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="330" y="1340" width="110" height="23"/>
+                              <AbsoluteConstraints x="323" y="1180" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1053,7 +1147,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="250" y="1340" width="75" height="23"/>
+                              <AbsoluteConstraints x="260" y="1180" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1064,7 +1158,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="250" y="1280" width="75" height="23"/>
+                              <AbsoluteConstraints x="260" y="1120" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1072,10 +1166,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabK" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabPtIr"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabKKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="330" y="1310" width="110" height="23"/>
+                              <AbsoluteConstraints x="323" y="1150" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1086,7 +1186,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1340" width="135" height="23"/>
+                              <AbsoluteConstraints x="60" y="1180" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1094,10 +1194,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabNa" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabUr"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabNaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="140" y="1340" width="110" height="23"/>
+                              <AbsoluteConstraints x="133" y="1180" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1108,7 +1214,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="250" y="1250" width="75" height="23"/>
+                              <AbsoluteConstraints x="260" y="1090" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1119,7 +1225,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="250" y="1310" width="75" height="23"/>
+                              <AbsoluteConstraints x="260" y="1150" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1127,10 +1233,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabUr" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabCr"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabUrKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="330" y="1250" width="110" height="23"/>
+                              <AbsoluteConstraints x="323" y="1090" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1141,7 +1253,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="430" y="1310" width="75" height="23"/>
+                              <AbsoluteConstraints x="450" y="1150" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1154,10 +1266,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="LabHbsAg" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabAntiHCV"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabHbsAgKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="510" y="1310" width="110" height="23"/>
+                              <AbsoluteConstraints x="513" y="1150" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1168,7 +1286,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="430" y="1340" width="75" height="23"/>
+                              <AbsoluteConstraints x="450" y="1180" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1181,21 +1299,33 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="LabAntiHCV" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="SkriningJatuh"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabAntiHCVKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="510" y="1340" width="110" height="23"/>
+                              <AbsoluteConstraints x="513" y="1180" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="widget.TextBox" name="LabGds">
+                        <Component class="widget.TextBox" name="LabGDS">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
-                            <Property name="name" type="java.lang.String" value="LabGds" noResource="true"/>
+                            <Property name="name" type="java.lang.String" value="LabGDS" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabHbsAg"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabGDSKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="510" y="1280" width="110" height="23"/>
+                              <AbsoluteConstraints x="513" y="1120" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1203,21 +1333,28 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabPtAptt" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabGDS"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabPtApttKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="510" y="1250" width="110" height="23"/>
+                              <AbsoluteConstraints x="513" y="1090" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel96">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="14. Hasil Pemeriksaan Laboratorium :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         14. Hasil Pemeriksaan Laboratorium :"/>
                             <Property name="name" type="java.lang.String" value="jLabel96" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1220" width="210" height="23"/>
+                              <AbsoluteConstraints x="0" y="1070" width="210" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1225,10 +1362,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LabCr" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LabK"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LabCrKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="330" y="1280" width="110" height="23"/>
+                              <AbsoluteConstraints x="323" y="1120" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1239,7 +1382,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="430" y="1250" width="75" height="23"/>
+                              <AbsoluteConstraints x="450" y="1090" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1250,7 +1393,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="430" y="1280" width="75" height="23"/>
+                              <AbsoluteConstraints x="450" y="1120" width="60" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1261,7 +1404,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="300" y="335" width="50" height="23"/>
+                              <AbsoluteConstraints x="273" y="320" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1278,10 +1421,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="StatusPsiko" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="KetPsiko"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="StatusPsikoKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="140" y="225" width="140" height="23"/>
+                              <AbsoluteConstraints x="130" y="200" width="140" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1289,21 +1438,28 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="AlergiKeterangan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Suhu"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AlergiKeteranganKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="130" y="640" width="250" height="23"/>
+                              <AbsoluteConstraints x="119" y="570" width="444" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel133">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="4. Sistem Pernapasan :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         4. Sistem Pernapasan :"/>
                             <Property name="name" type="java.lang.String" value="jLabel133" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="335" width="140" height="23"/>
+                              <AbsoluteConstraints x="0" y="320" width="138" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1317,45 +1473,50 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="BAB" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Urine24Jam"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BABKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="165" y="420" width="140" height="23"/>
+                              <AbsoluteConstraints x="153" y="400" width="140" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel14">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="11. Arteri Dorsalis Pedis :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         11. Arteri Dorsalis Pedis :"/>
                             <Property name="name" type="java.lang.String" value="jLabel14" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="880" width="150" height="23"/>
+                              <AbsoluteConstraints x="0" y="790" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel38">
                           <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="a. Double Antiplatelet :"/>
+                            <Property name="text" type="java.lang.String" value="Double Antiplatelet :"/>
                             <Property name="name" type="java.lang.String" value="jLabel38" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="50" y="540" width="120" height="23"/>
+                              <AbsoluteConstraints x="60" y="480" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel40">
                           <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="b. Beta Blocker            :"/>
+                            <Property name="text" type="java.lang.String" value="Beta Blocker :"/>
                             <Property name="name" type="java.lang.String" value="jLabel40" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="50" y="570" width="120" height="23"/>
+                              <AbsoluteConstraints x="60" y="510" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1368,10 +1529,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="Antiplatelet" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LamaAntiPlatelet"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AntiplateletKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="170" y="540" width="80" height="23"/>
+                              <AbsoluteConstraints x="173" y="480" width="80" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1379,10 +1546,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LamaAntiPlatelet" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BetaBlocker"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LamaAntiPlateletKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="370" y="540" width="200" height="23"/>
+                              <AbsoluteConstraints x="363" y="480" width="200" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1395,10 +1568,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="BetaBlocker" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LamaBetaBlocker"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BetaBlockerKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="170" y="570" width="80" height="23"/>
+                              <AbsoluteConstraints x="173" y="510" width="80" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1406,10 +1585,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LamaBetaBlocker" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Simarc"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LamaBetaBlockerKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="370" y="570" width="200" height="23"/>
+                              <AbsoluteConstraints x="363" y="510" width="200" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1422,10 +1607,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="Simarc" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="LamaSimarc"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SimarcKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="170" y="600" width="80" height="23"/>
+                              <AbsoluteConstraints x="173" y="540" width="80" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1433,21 +1624,28 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="LamaSimarc" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="AlergiKeterangan"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LamaSimarcKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="370" y="600" width="200" height="23"/>
+                              <AbsoluteConstraints x="363" y="540" width="200" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel52">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="16. Hasil Echo :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         16. Hasil Echo :"/>
                             <Property name="name" type="java.lang.String" value="jLabel52" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1420" width="110" height="23"/>
+                              <AbsoluteConstraints x="0" y="1240" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1462,7 +1660,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="60" y="1450" width="750" height="50"/>
+                              <AbsoluteConstraints x="40" y="1260" width="729" height="63"/>
                             </Constraint>
                           </Constraints>
 
@@ -1478,18 +1676,25 @@
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
                                 <Property name="name" type="java.lang.String" value="EchoKesan" noResource="true"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="tbMasalahKeperawatan"/>
+                                </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="EchoKesanKeyPressed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
                         <Component class="widget.Label" name="jLabel41">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="15. Skrining Jatuh :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         15. Skrining Jatuh :"/>
                             <Property name="name" type="java.lang.String" value="jLabel41" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1390" width="130" height="23"/>
+                              <AbsoluteConstraints x="0" y="1210" width="120" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1503,10 +1708,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="SkriningJatuh" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="SkriningSkor"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SkriningJatuhKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="135" y="1390" width="135" height="23"/>
+                              <AbsoluteConstraints x="133" y="1210" width="135" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1514,10 +1725,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="SkriningSkor" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="EchoKesan"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SkriningSkorKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="330" y="1390" width="50" height="23"/>
+                              <AbsoluteConstraints x="330" y="1210" width="50" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1528,18 +1745,19 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="275" y="1390" width="50" height="23"/>
+                              <AbsoluteConstraints x="275" y="1210" width="50" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel134">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="2. Status Psikologis :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         2. Status Psikologis :"/>
                             <Property name="name" type="java.lang.String" value="jLabel134" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="10" y="225" width="120" height="23"/>
+                              <AbsoluteConstraints x="0" y="200" width="126" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1550,7 +1768,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="290" y="225" width="50" height="23"/>
+                              <AbsoluteConstraints x="273" y="200" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1558,10 +1776,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="KetPsiko" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="RPD"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KetPsikoKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="350" y="225" width="142" height="23"/>
+                              <AbsoluteConstraints x="331" y="200" width="142" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1569,22 +1793,28 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="Urine24Jam" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Antiplatelet"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Urine24JamKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="165" y="480" width="55" height="23"/>
+                              <AbsoluteConstraints x="224" y="430" width="55" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel45">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="Cc"/>
+                            <Property name="text" type="java.lang.String" value="cc"/>
                             <Property name="name" type="java.lang.String" value="jLabel45" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="225" y="480" width="50" height="23"/>
+                              <AbsoluteConstraints x="285" y="430" width="20" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1595,7 +1825,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="255" y="540" width="110" height="23"/>
+                              <AbsoluteConstraints x="256" y="480" width="104" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1606,7 +1836,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="255" y="570" width="110" height="23"/>
+                              <AbsoluteConstraints x="256" y="510" width="104" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1617,18 +1847,19 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="255" y="600" width="110" height="23"/>
+                              <AbsoluteConstraints x="256" y="540" width="104" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel53">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="7. Riwayat Pengobatan :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         7. Riwayat Pengobatan :"/>
                             <Property name="name" type="java.lang.String" value="jLabel53" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="510" width="150" height="23"/>
+                              <AbsoluteConstraints x="0" y="460" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1639,7 +1870,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="810" width="150" height="23"/>
+                              <AbsoluteConstraints x="270" y="760" width="90" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1652,10 +1883,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="RadialisKanan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="PedisKiri"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RadialisKananKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="160" y="810" width="110" height="23"/>
+                              <AbsoluteConstraints x="363" y="760" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1666,7 +1903,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="840" width="150" height="23"/>
+                              <AbsoluteConstraints x="60" y="760" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1679,21 +1916,28 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="RadialisKiri" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="RadialisKanan"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RadialisKiriKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="160" y="840" width="110" height="23"/>
+                              <AbsoluteConstraints x="133" y="760" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel56">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="10. Tes Allen :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         10. Tes Allen :"/>
                             <Property name="name" type="java.lang.String" value="jLabel56" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="780" width="100" height="23"/>
+                              <AbsoluteConstraints x="0" y="740" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1704,7 +1948,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="910" width="150" height="23"/>
+                              <AbsoluteConstraints x="270" y="810" width="90" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1715,7 +1959,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="940" width="150" height="23"/>
+                              <AbsoluteConstraints x="60" y="810" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1728,15 +1972,19 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="PedisKiri" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="PedisKanan"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PedisKiriKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="160" y="940" width="110" height="23"/>
+                              <AbsoluteConstraints x="133" y="810" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
-
-
                         <Component class="widget.ComboBox" name="PedisKanan">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -1746,10 +1994,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="PedisKanan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Nyeri"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PedisKananKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="160" y="910" width="110" height="23"/>
+                              <AbsoluteConstraints x="363" y="810" width="110" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1772,7 +2026,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="40" y="1010" width="320" height="115"/>
+                              <AbsoluteConstraints x="40" y="860" width="320" height="113"/>
                             </Constraint>
                           </Constraints>
 
@@ -1790,10 +2044,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="Nyeri" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="NyeriSkala"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="380" y="1010" width="130" height="23"/>
+                              <AbsoluteConstraints x="370" y="860" width="140" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1804,7 +2064,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="370" y="1040" width="45" height="23"/>
+                              <AbsoluteConstraints x="370" y="890" width="45" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1815,7 +2075,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="510" y="1010" width="69" height="23"/>
+                              <AbsoluteConstraints x="510" y="860" width="69" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1823,10 +2083,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="NyeriLama" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="NyeriLokasi"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriLamaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="420" y="1040" width="150" height="23"/>
+                              <AbsoluteConstraints x="420" y="890" width="120" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1848,10 +2114,16 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="NyeriSkala" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="NyeriLama"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriSkalaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="580" y="1010" width="70" height="23"/>
+                              <AbsoluteConstraints x="580" y="860" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1862,7 +2134,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="370" y="1070" width="46" height="23"/>
+                              <AbsoluteConstraints x="370" y="920" width="46" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1870,10 +2142,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="NyeriLokasi" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="NyeriKualitas"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriLokasiKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="420" y="1070" width="150" height="23"/>
+                              <AbsoluteConstraints x="420" y="920" width="120" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1881,43 +2159,51 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="KetSistemPernapasan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="MuntahDarah"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KetSistemPernapasanKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="360" y="335" width="142" height="23"/>
+                              <AbsoluteConstraints x="331" y="320" width="142" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel59">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="8. Riwayat Alergi :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         8. Riwayat Alergi :"/>
                             <Property name="name" type="java.lang.String" value="jLabel59" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="640" width="120" height="23"/>
+                              <AbsoluteConstraints x="0" y="570" width="116" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel60">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="5. Sistem Pencernaan :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         5. Sistem Pencernaan :"/>
                             <Property name="name" type="java.lang.String" value="jLabel60" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="365" width="140" height="23"/>
+                              <AbsoluteConstraints x="0" y="350" width="138" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel61">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="b. BAB                 :"/>
+                            <Property name="text" type="java.lang.String" value="BAB :"/>
                             <Property name="name" type="java.lang.String" value="jLabel61" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="420" width="160" height="23"/>
+                              <AbsoluteConstraints x="60" y="400" width="90" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1930,11 +2216,18 @@
                                 <StringItem index="2" value="Normal"/>
                               </StringArray>
                             </Property>
+                            <Property name="selectedIndex" type="int" value="1"/>
                             <Property name="name" type="java.lang.String" value="SistemPernapasan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="KetSistemPernapasan"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SistemPernapasanKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="150" y="335" width="140" height="23"/>
+                              <AbsoluteConstraints x="141" y="320" width="129" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1947,54 +2240,63 @@
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="MuntahDarah" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BAB"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="MuntahDarahKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="165" y="390" width="140" height="23"/>
+                              <AbsoluteConstraints x="153" y="370" width="140" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel62">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="6. Sistem Perkemihan :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         6. Sistem Perkemihan :"/>
                             <Property name="name" type="java.lang.String" value="jLabel62" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="455" width="140" height="23"/>
+                              <AbsoluteConstraints x="0" y="430" width="136" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel63">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="a. Urine /24 Jam :"/>
+                            <Property name="text" type="java.lang.String" value="Urine /24 Jam :"/>
                             <Property name="name" type="java.lang.String" value="jLabel63" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="480" width="160" height="23"/>
+                              <AbsoluteConstraints x="139" y="430" width="82" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel65">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="9. Tanda - tanda vital :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         9. Tanda - tanda vital :"/>
                             <Property name="name" type="java.lang.String" value="jLabel65" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="675" width="140" height="23"/>
+                              <AbsoluteConstraints x="0" y="600" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel44">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="12. Keluhan Nyeri :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         12. Keluhan Nyeri :"/>
                             <Property name="name" type="java.lang.String" value="jLabel44" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="980" width="120" height="23"/>
+                              <AbsoluteConstraints x="0" y="840" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2005,7 +2307,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="600" y="1040" width="100" height="23"/>
+                              <AbsoluteConstraints x="576" y="890" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2013,10 +2315,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="NyeriPencetus" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="NyeriPenjalaran"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriPencetusKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="710" y="1040" width="150" height="23"/>
+                              <AbsoluteConstraints x="649" y="890" width="120" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2027,7 +2335,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="370" y="1100" width="46" height="23"/>
+                              <AbsoluteConstraints x="370" y="950" width="46" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2035,10 +2343,16 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="NyeriKualitas" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="NyeriPencetus"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriKualitasKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="420" y="1100" width="150" height="23"/>
+                              <AbsoluteConstraints x="420" y="950" width="120" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2049,7 +2363,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="600" y="1070" width="100" height="23"/>
+                              <AbsoluteConstraints x="576" y="920" width="70" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2057,21 +2371,28 @@
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="NyeriPenjalaran" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="KebutuhanEdukasi"/>
+                            </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NyeriPenjalaranKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="710" y="1070" width="150" height="23"/>
+                              <AbsoluteConstraints x="649" y="920" width="120" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel64">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="13. Kebutuhan Edukasi :"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="         13. Kebutuhan Edukasi :"/>
                             <Property name="name" type="java.lang.String" value="jLabel64" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1135" width="150" height="23"/>
+                              <AbsoluteConstraints x="0" y="980" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2086,7 +2407,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="50" y="1160" width="750" height="50"/>
+                              <AbsoluteConstraints x="40" y="1000" width="729" height="63"/>
                             </Constraint>
                           </Constraints>
 
@@ -2102,7 +2423,13 @@
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
                                 <Property name="name" type="java.lang.String" value="KebutuhanEdukasi" noResource="true"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="LabHt"/>
+                                </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KebutuhanEdukasiKeyPressed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -2120,7 +2447,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="10" y="1520" width="400" height="143"/>
+                              <AbsoluteConstraints x="10" y="1340" width="420" height="163"/>
                             </Constraint>
                           </Constraints>
 
@@ -2129,11 +2456,13 @@
                             <Component class="widget.Table" name="tbMasalahKeperawatan">
                               <Properties>
                                 <Property name="name" type="java.lang.String" value="tbMasalahKeperawatan" noResource="true"/>
+                                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="TCariMasalah"/>
+                                </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbMasalahKeperawatanMouseClicked"/>
+                                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="tbMasalahKeperawatanPropertyChange"/>
                                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbMasalahKeperawatanKeyPressed"/>
-                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbMasalahKeperawatanKeyReleased"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -2148,7 +2477,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="20" y="1670" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="20" y="1510" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2160,13 +2489,20 @@
                             <Property name="mnemonic" type="int" value="51"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+3"/>
                             <Property name="name" type="java.lang.String" value="BtnTambahMasalah" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="TabRencanaKeperawatan"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTambahMasalahActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnTambahMasalahKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="375" y="1670" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="375" y="1510" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2189,7 +2525,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="1510" width="880" height="1"/>
+                              <AbsoluteConstraints x="0" y="1330" width="880" height="1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2201,6 +2537,9 @@
                             <Property name="mnemonic" type="int" value="49"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+1"/>
                             <Property name="name" type="java.lang.String" value="BtnCariMasalah" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnAllMasalah"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
@@ -2211,7 +2550,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="305" y="1670" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="305" y="1510" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2223,13 +2562,20 @@
                             <Property name="mnemonic" type="int" value="50"/>
                             <Property name="toolTipText" type="java.lang.String" value="2Alt+2"/>
                             <Property name="name" type="java.lang.String" value="BtnAllMasalah" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnTambahMasalah"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAllMasalahActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnAllMasalahKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="340" y="1670" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="340" y="1510" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2237,6 +2583,9 @@
                           <Properties>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+C"/>
                             <Property name="name" type="java.lang.String" value="TCariMasalah" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnCariMasalah"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[140, 23]"/>
                             </Property>
@@ -2246,7 +2595,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="85" y="1670" width="215" height="-1"/>
+                              <AbsoluteConstraints x="85" y="1510" width="215" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2267,10 +2616,13 @@
                               <Font name="Tahoma" size="11" style="0"/>
                             </Property>
                             <Property name="name" type="java.lang.String" value="TabRencanaKeperawatan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="TCariRencana"/>
+                            </Property>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="440" y="1520" width="420" height="143"/>
+                              <AbsoluteConstraints x="440" y="1340" width="420" height="163"/>
                             </Constraint>
                           </Constraints>
 
@@ -2314,10 +2666,13 @@
                                       <Properties>
                                         <Property name="name" type="java.lang.String" value="tbRencanaKeperawatan" noResource="true"/>
                                       </Properties>
+                                      <Events>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbRencanaKeperawatanKeyPressed"/>
+                                      </Events>
                                     </Component>
                                   </SubComponents>
-                </Container>
-              </SubComponents>
+                                </Container>
+                              </SubComponents>
                             </Container>
                             <Container class="widget.ScrollPane" name="scrollPane5">
                               <Properties>
@@ -2348,6 +2703,9 @@
                                     <Property name="columns" type="int" value="20"/>
                                     <Property name="rows" type="int" value="5"/>
                                     <Property name="name" type="java.lang.String" value="Rencana" noResource="true"/>
+                                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                      <ComponentRef name="BtnSimpan"/>
+                                    </Property>
                                     <Property name="opaque" type="boolean" value="true"/>
                                   </Properties>
                                 </Component>
@@ -2363,13 +2721,20 @@
                             <Property name="mnemonic" type="int" value="51"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+3"/>
                             <Property name="name" type="java.lang.String" value="BtnTambahRencana" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnSimpan"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTambahRencanaActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnTambahRencanaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="815" y="1670" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="815" y="1510" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2381,13 +2746,20 @@
                             <Property name="mnemonic" type="int" value="50"/>
                             <Property name="toolTipText" type="java.lang.String" value="2Alt+2"/>
                             <Property name="name" type="java.lang.String" value="BtnAllRencana" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnTambahRencana"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAllRencanaActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnAllRencanaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="780" y="1670" width="-1" height="23"/>
+                              <AbsoluteConstraints x="780" y="1510" width="-1" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2399,13 +2771,20 @@
                             <Property name="mnemonic" type="int" value="49"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+1"/>
                             <Property name="name" type="java.lang.String" value="BtnCariRencana" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnAllRencana"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCariRencanaActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnCariRencanaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="745" y="1670" width="-1" height="23"/>
+                              <AbsoluteConstraints x="745" y="1510" width="-1" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2419,7 +2798,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="440" y="1670" width="-1" height="23"/>
+                              <AbsoluteConstraints x="440" y="1510" width="-1" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2427,13 +2806,36 @@
                           <Properties>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+C"/>
                             <Property name="name" type="java.lang.String" value="TCariRencana" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnCariRencana"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[215, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TCariRencanaKeyPressed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="505" y="1670" width="235" height="23"/>
+                              <AbsoluteConstraints x="505" y="1510" width="235" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.Tanggal" name="TglAsuhan">
+                          <Properties>
+                            <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
+                            <Property name="name" type="java.lang.String" value="TglAsuhan" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="Diagnosa"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TglAsuhanKeyPressed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="640" y="40" width="129" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2483,6 +2885,9 @@
                       <Properties>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbObat" noResource="true"/>
+                        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="DTPCari1"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbObatMouseClicked"/>
@@ -2518,6 +2923,21 @@
                         </Property>
                       </Properties>
                     </Component>
+                    <Component class="widget.Tanggal" name="DTPCari1">
+                      <Properties>
+                        <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
+                        <Property name="name" type="java.lang.String" value="DTPCari1" noResource="true"/>
+                        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="DTPCari2"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[90, 23]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DTPCari1KeyPressed"/>
+                      </Events>
+                    </Component>
                     <Component class="widget.Label" name="jLabel21">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
@@ -2527,6 +2947,21 @@
                           <Dimension value="[23, 23]"/>
                         </Property>
                       </Properties>
+                    </Component>
+                    <Component class="widget.Tanggal" name="DTPCari2">
+                      <Properties>
+                        <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
+                        <Property name="name" type="java.lang.String" value="DTPCari2" noResource="true"/>
+                        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="TCari"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[90, 23]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DTPCari2KeyPressed"/>
+                      </Events>
                     </Component>
                     <Component class="widget.Label" name="jLabel6">
                       <Properties>
@@ -2540,6 +2975,9 @@
                     <Component class="widget.TextBox" name="TCari">
                       <Properties>
                         <Property name="name" type="java.lang.String" value="TCari" noResource="true"/>
+                        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="BtnCari"/>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[195, 23]"/>
                         </Property>
@@ -2556,6 +2994,9 @@
                         <Property name="mnemonic" type="int" value="51"/>
                         <Property name="toolTipText" type="java.lang.String" value="Alt+3"/>
                         <Property name="name" type="java.lang.String" value="BtnCari" noResource="true"/>
+                        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="BtnAll"/>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[28, 23]"/>
                         </Property>
@@ -2601,6 +3042,7 @@
                       <BorderConstraints direction="East"/>
                     </Constraint>
                   </Constraints>
+
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
                     <Property name="horizontalGap" type="int" value="1"/>
                     <Property name="verticalGap" type="int" value="1"/>
@@ -2619,6 +3061,9 @@
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                         <Property name="name" type="java.lang.String" value="ChkAccor" noResource="true"/>
+                        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="BtnPrint1"/>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[15, 20]"/>
                         </Property>
@@ -2634,6 +3079,7 @@
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChkAccorActionPerformed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ChkAccorKeyPressed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -2659,6 +3105,7 @@
                           <BorderConstraints direction="North"/>
                         </Constraint>
                       </Constraints>
+
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
                         <Property name="alignment" type="int" value="0"/>
                         <Property name="horizontalGap" type="int" value="4"/>
@@ -2678,10 +3125,16 @@
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="name" type="java.lang.String" value="TNoRM1" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnPrint1"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[100, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNoRM1KeyPressed"/>
+                          </Events>
                         </Component>
                         <Component class="widget.TextBox" name="TPasien1">
                           <Properties>
@@ -2690,10 +3143,16 @@
                               <Color blue="f0" green="fa" red="f5" type="rgb"/>
                             </Property>
                             <Property name="name" type="java.lang.String" value="TPasien1" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="BtnPrint1"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[250, 23]"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TPasien1KeyPressed"/>
+                          </Events>
                         </Component>
                         <Component class="widget.Button" name="BtnPrint1">
                           <Properties>
@@ -2703,12 +3162,16 @@
                             <Property name="mnemonic" type="int" value="80"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+P"/>
                             <Property name="name" type="java.lang.String" value="BtnPrint1" noResource="true"/>
+                            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                              <ComponentRef name="ChkAccor"/>
+                            </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[28, 23]"/>
                             </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPrint1ActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnPrint1KeyPressed"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -2729,6 +3192,7 @@
                           <BorderConstraints direction="Center"/>
                         </Constraint>
                       </Constraints>
+
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                         <Property name="columns" type="int" value="0"/>
                         <Property name="horizontalGap" type="int" value="1"/>
@@ -2748,6 +3212,7 @@
                             <Property name="name" type="java.lang.String" value="Scroll7" noResource="true"/>
                             <Property name="opaque" type="boolean" value="true"/>
                           </Properties>
+
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
                             <Component class="widget.Table" name="tbMasalahDetail">
@@ -2769,6 +3234,7 @@
                             <Property name="name" type="java.lang.String" value="Scroll9" noResource="true"/>
                             <Property name="opaque" type="boolean" value="true"/>
                           </Properties>
+
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
                             <Component class="widget.Table" name="tbRencanaDetail">
@@ -2795,6 +3261,7 @@
                             </Property>
                             <Property name="name" type="java.lang.String" value="ScrollRencana" noResource="true"/>
                           </Properties>
+
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
                             <Component class="widget.TextArea" name="DetailRencana">
@@ -2820,23 +3287,6 @@
           </SubComponents>
         </Container>
       </SubComponents>
-    </Container>
-    <Container class="widget.ScrollPane" name="scrollPane1">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
-        </Property>
-        <Property name="name" type="java.lang.String" value="scrollPane1" noResource="true"/>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="First"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
     </Container>
   </SubComponents>
 </Form>
