@@ -13,8 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
@@ -686,5 +684,9 @@ public class MasterMasalahKeperawatanSMC extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getmaster_masalah_keperawatan());
         BtnHapus.setEnabled(akses.getmaster_masalah_keperawatan());
         BtnEdit.setEnabled(akses.getmaster_masalah_keperawatan());
+    }
+
+    public void setCari(String cari) {
+        TCari.setText(cari);
     }
 }

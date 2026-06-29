@@ -598,6 +598,14 @@ public final class validasi {
         }
     }
 
+    public void pindahEnterSmc(KeyEvent e, JComponent previous, JComponent next) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            next.requestFocus();
+        } else if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            previous.requestFocus();
+        }
+    }
+
     public int clamp(int current, int min, int max) {
         if (current > max) {
             return max;

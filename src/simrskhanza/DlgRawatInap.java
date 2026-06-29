@@ -10274,8 +10274,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             tinggi=tinggi+24;
         }
 
-        BtnPengkajianInvasifNonBedahSMC.setVisible(akses.getpengkajian_invasif_non_bedah_smc());
-        if(akses.getpengkajian_invasif_non_bedah_smc()==true){
+        BtnPengkajianInvasifNonBedahSMC.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
+        if(akses.getpengkajian_tindakan_invasif_non_bedah_smc()==true){
             tinggi=tinggi+24;
         }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));

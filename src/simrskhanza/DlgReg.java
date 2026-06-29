@@ -17950,7 +17950,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratKeteranganLayakTerbang.setEnabled(akses.getsurat_keterangan_layak_terbang());
         MnCetakSuratKeteranganBerobat.setEnabled(akses.getsurat_keterangan_berobat());
 
-        MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_invasif_non_bedah_smc());
+        MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
 
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){

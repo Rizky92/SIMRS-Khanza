@@ -13382,7 +13382,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
         MnPermintaanKonsultasiPerawat.setEnabled(akses.getkonsultasi_perawat());
 
-        MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_invasif_non_bedah_smc());
+        MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
     }
 
     private void isNumber(){

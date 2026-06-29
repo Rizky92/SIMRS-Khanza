@@ -51056,7 +51056,7 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 19) {
-            if (akses.getpengkajian_invasif_non_bedah_smc()) {
+            if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
                 jmlmenu++;
             }
@@ -51139,7 +51139,7 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
-        if (akses.getpengkajian_invasif_non_bedah_smc()) {
+        if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
             jmlmenu++;
         }
@@ -51230,7 +51230,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if (akses.getpengkajian_invasif_non_bedah_smc()) {
+        if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             if (btnPengkajianInvasifNonBedahSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
                 jmlmenu++;

@@ -21068,7 +21068,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkriningGiziKehamilan.setEnabled(akses.getskrining_gizi_kehamilan());
         MnDPJPRanap.setEnabled(false);
 
-        MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_invasif_non_bedah_smc());
+        MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
 
         if(akses.getkode().equals("Admin Utama")){
             MnHapusDataSalah.setEnabled(true);

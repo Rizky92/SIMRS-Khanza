@@ -1676,14 +1676,14 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','I
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `sistem_import_koding`;
 
 CREATE TABLE IF NOT EXISTS `smc_master_masalah_keperawatan`  (
-  `menu` varchar(30) NOT NULL,
+  `menu` varchar(50) NOT NULL,
   `kode_masalah` varchar(3) NOT NULL,
   `nama_masalah` varchar(100) NULL DEFAULT NULL,
   PRIMARY KEY (`menu`,`kode_masalah`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE `smc_master_rencana_keperawatan`  (
-  `menu` varchar(30) NOT NULL,
+  `menu` varchar(50) NOT NULL,
   `kode_masalah` varchar(3) NOT NULL,
   `kode_rencana` varchar(3) NOT NULL,
   `rencana_keperawatan` varchar(1000) NOT NULL,
@@ -1757,17 +1757,17 @@ CREATE TABLE IF NOT EXISTS `smc_pengkajian_tindakan_invasif_non_bedah`  (
 
 CREATE TABLE IF NOT EXISTS `smc_pengkajian_tindakan_invasif_non_bedah_masalah` (
   `no_rawat` varchar(17) NOT NULL,
-  `menu` varchar(30) not null,
+  `menu` varchar(50) not null,
   `kode_masalah` varchar(3) NOT NULL,
   PRIMARY KEY (`no_rawat`,`menu`,`kode_masalah`) USING BTREE,
   INDEX `menu`(`menu`,`kode_masalah`) USING BTREE,
-  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_masalah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `pengkajian_tindakan_invasif_non_bedah` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_masalah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `smc_pengkajian_tindakan_invasif_non_bedah` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_masalah_ibfk_2` FOREIGN KEY (`menu`,`kode_masalah`) REFERENCES `smc_master_masalah_keperawatan` (`menu`,`kode_masalah`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `smc_pengkajian_tindakan_invasif_non_bedah_rencana` (
   `no_rawat` varchar(17) NOT NULL,
-  `menu` varchar(30) not null,
+  `menu` varchar(50) not null,
   `kode_masalah` varchar(3) NOT NULL,
   `kode_rencana` varchar(3) NOT NULL,
   PRIMARY KEY (`no_rawat`,`menu`,`kode_masalah`,`kode_rencana`) USING BTREE,
@@ -1956,7 +1956,7 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NU
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_surat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_rekap_peserta_prb_apotek`;
 
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_invasif_non_bedah` enum('true','false') DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_tindakan_invasif_non_bedah_smc` enum('true','false') DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
