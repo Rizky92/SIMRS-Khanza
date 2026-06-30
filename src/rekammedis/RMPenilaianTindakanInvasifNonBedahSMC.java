@@ -2591,50 +2591,21 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
             param.put("kontakrs", akses.getkontakrs());
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?", tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString());
+            finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString());
             param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString() + "\nID " + (finger.equals("") ? tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString() : finger) + "\n" + Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString()));
-
-            String no_rawat = tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString();
-            String tanggal = tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString();
-            String masalah = Sequel.cariIsi("select group_concat(smc_master_masalah_keperawatan.nama_masalah separator '; ') from smc_pengkajian_tindakan_invasif_non_bedah_masalah inner join smc_master_masalah_keperawatan on smc_master_masalah_keperawatan.kode_masalah=smc_pengkajian_tindakan_invasif_non_bedah_masalah.kode_masalah where smc_pengkajian_tindakan_invasif_non_bedah_masalah.no_rawat=?", no_rawat);
-            String rencana_kep = Sequel.cariIsi("select group_concat(smc_master_rencana_keperawatan.rencana_keperawatan separator '; ') from smc_pengkajian_tindakan_invasif_non_bedah_rencana inner join smc_master_rencana_keperawatan on smc_master_rencana_keperawatan.kode_rencana=smc_pengkajian_tindakan_invasif_non_bedah_rencana.kode_rencana where smc_pengkajian_tindakan_invasif_non_bedah_rencana.no_rawat=?", no_rawat);
-            param.put("masalah", masalah == null ? "" : masalah);
-            param.put("rencana_kep", rencana_kep == null ? "" : rencana_kep);
             param.put("nyeri", Sequel.cariGambar("select gambar.nyeri from gambar"));
+            param.put("masalah", Sequel.cariIsiSmc("select group_concat(smc_master_masalah_keperawatan.nama_masalah order by smc_master_masalah_keperawatan.kode_masalah separator '\\n') from smc_pengkajian_tindakan_invasif_non_bedah_masalah inner join smc_master_masalah_keperawatan on smc_master_masalah_keperawatan.menu = smc_pengkajian_tindakan_invasif_non_bedah_masalah.menu and smc_master_masalah_keperawatan.kode_masalah = smc_pengkajian_tindakan_invasif_non_bedah_masalah.kode_masalah where smc_pengkajian_tindakan_invasif_non_bedah_masalah.no_rawat = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()));
+            param.put("rencana_kep", Sequel.cariIsiSmc("select group_concat(smc_master_rencana_keperawatan.rencana_keperawatan order by smc_master_rencana_keperawatan.kode_rencana separator '\\n') from smc_pengkajian_tindakan_invasif_non_bedah_rencana inner join smc_master_rencana_keperawatan on smc_master_rencana_keperawatan.menu = smc_pengkajian_tindakan_invasif_non_bedah_rencana.menu and smc_master_rencana_keperawatan.kode_masalah = smc_pengkajian_tindakan_invasif_non_bedah_rencana.kode_masalah and smc_master_rencana_keperawatan.kode_rencana = smc_pengkajian_tindakan_invasif_non_bedah_rencana.kode_rencana where smc_pengkajian_tindakan_invasif_non_bedah_rencana.no_rawat = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()));
 
-            Valid.MyReportqry("rptCetakPenilaianTindakanInvasifNonBedah.jasper", "report", "::[ Laporan Penilaian Tindakan Invasif Non Bedah ]::",
-                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.tanggal,smc_pengkajian_tindakan_invasif_non_bedah.nip,smc_pengkajian_tindakan_invasif_non_bedah.diagnosa," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.rencana_tindakan,smc_pengkajian_tindakan_invasif_non_bedah.status_fungsional,smc_pengkajian_tindakan_invasif_non_bedah.keluhan_utama," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.status_psiko,smc_pengkajian_tindakan_invasif_non_bedah.ket_psiko," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.rpd," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.sistem_pernapasan,smc_pengkajian_tindakan_invasif_non_bedah.ket_sistem_pernapasan," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.muntah_darah,smc_pengkajian_tindakan_invasif_non_bedah.bab," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.urine," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.antiplatelet,smc_pengkajian_tindakan_invasif_non_bedah.lama_antiplatelet," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.beta_blocker,smc_pengkajian_tindakan_invasif_non_bedah.lama_beta_blocker," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.simarc,smc_pengkajian_tindakan_invasif_non_bedah.lama_simarc," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.riwayat_alergi," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.tb,smc_pengkajian_tindakan_invasif_non_bedah.bb,smc_pengkajian_tindakan_invasif_non_bedah.td," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.io2,smc_pengkajian_tindakan_invasif_non_bedah.nadi,smc_pengkajian_tindakan_invasif_non_bedah.suhu," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.pernapasan," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.radialis_kanan,smc_pengkajian_tindakan_invasif_non_bedah.radialis_kiri," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.pedis_kanan,smc_pengkajian_tindakan_invasif_non_bedah.pedis_kiri," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_pencetus," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_kualitas,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_lokasi," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_penjalaran,smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_skala," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.penilaian_nyeri_durasi,smc_pengkajian_tindakan_invasif_non_bedah.kebutuhan_edukasi," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.hematokrit,smc_pengkajian_tindakan_invasif_non_bedah.hemoglobin,smc_pengkajian_tindakan_invasif_non_bedah.leukosit," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.pt_ir,smc_pengkajian_tindakan_invasif_non_bedah.kalium,smc_pengkajian_tindakan_invasif_non_bedah.natrium," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.ureum,smc_pengkajian_tindakan_invasif_non_bedah.hbsag,smc_pengkajian_tindakan_invasif_non_bedah.anti_hcv," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.gds,smc_pengkajian_tindakan_invasif_non_bedah.pt_aptt,smc_pengkajian_tindakan_invasif_non_bedah.kreatinin," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.skrining_jatuh,smc_pengkajian_tindakan_invasif_non_bedah.skor_resiko_jatuh," +
-                "smc_pengkajian_tindakan_invasif_non_bedah.hasil_echo,smc_pengkajian_tindakan_invasif_non_bedah.rencana," +
-                "petugas.nama " +
-                "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-                "inner join smc_pengkajian_tindakan_invasif_non_bedah on reg_periksa.no_rawat=smc_pengkajian_tindakan_invasif_non_bedah.no_rawat " +
-                "inner join petugas on smc_pengkajian_tindakan_invasif_non_bedah.nip=petugas.nip where smc_pengkajian_tindakan_invasif_non_bedah.no_rawat='" + no_rawat + "' " +
-                "and smc_pengkajian_tindakan_invasif_non_bedah.tanggal='" + tanggal + "'", param);
+            Valid.reportSmc("rptCetakPenilaianTindakanInvasifNonBedahSMC.jasper", "report", "::[ Laporan Pengkajian Tindakan Invasif Non Bedah ]::", param,
+                "select s.no_rawat, s.tanggal, s.nip, s.diagnosa, s.rencana_tindakan, s.status_fungsional, s.keluhan_utama, s.status_psiko, s.ket_psiko, s.rpd, s.sistem_pernapasan, " +
+                "s.ket_sistem_pernapasan, s.muntah_darah, s.bab, s.urine, s.antiplatelet, s.lama_antiplatelet, s.beta_blocker, s.lama_beta_blocker, s.simarc, s.lama_simarc, s.riwayat_alergi, " +
+                "s.tb, s.bb, s.td, s.io2, s.nadi, s.suhu, s.pernapasan, s.radialis_kanan, s.radialis_kiri, s.pedis_kanan, s.pedis_kiri, s.penilaian_nyeri, s.penilaian_nyeri_pencetus, " +
+                "s.penilaian_nyeri_kualitas, s.penilaian_nyeri_lokasi, s.penilaian_nyeri_penjalaran, s.penilaian_nyeri_skala, s.penilaian_nyeri_durasi, s.kebutuhan_edukasi, s.hematokrit, " +
+                "s.hemoglobin, s.leukosit, s.pt_ir, s.kalium, s.natrium, s.ureum, s.hbsag, s.anti_hcv, s.gds, s.pt_aptt, s.kreatinin, s.skrining_jatuh, s.skor_resiko_jatuh, s.hasil_echo, " +
+                "s.rencana, px.tgl_lahir, px.jk, p.nama, r.no_rkm_medis, px.nm_pasien, px.agama, px.pnd, pj.png_jawab, b.nama_bahasa from reg_periksa r inner join pasien px on " +
+                "r.no_rkm_medis = px.no_rkm_medis inner join smc_pengkajian_tindakan_invasif_non_bedah s on r.no_rawat = s.no_rawat inner join petugas p on s.nip = p.nip " +
+                "inner join bahasa_pasien b on px.bahasa_pasien = b.id inner join penjab pj on r.kd_pj = pj.kd_pj where r.no_rawat = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
         }
     }//GEN-LAST:event_MnPenilaianMedisActionPerformed
 
@@ -3617,7 +3588,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
             SkriningSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 59).toString());
             EchoKesan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 60).toString());
             Rencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 61).toString());
-            Valid.tabelKosong(tabModeMasalah); 
+            Valid.tabelKosong(tabModeMasalah);
             Valid.tabelKosong(tabModeRencana);
             for (int i = 0; i < tbMasalahDetail.getRowCount(); i++) {
                 tabModeMasalah.addRow(new Object[] {
@@ -3807,7 +3778,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
             for (Map.Entry<String, String> item : dipilih.entrySet()) {
                 tabModeMasalah.addRow(new Object[] {true, item.getKey(), item.getValue()});
             }
-            
+
             Map<String, ArrayNode> menu = new HashMap<>();
             while (rs.next()) {
                 ObjectNode item = mapper.createObjectNode();
