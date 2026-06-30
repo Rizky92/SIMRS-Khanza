@@ -16003,6 +16003,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
                 form.emptTeks();
+                if(R1.isSelected()==true){
+                    form.setNoRm(norawat.getText(),new Date());
+                }else if(R2.isSelected()==true){
+                    form.setNoRm(norawat.getText(),DTPCari2.getDate());
+                }else if(R3.isSelected()==true){
+                    form.setNoRm(norawat.getText(),DTPCari4.getDate());
+                }
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -22232,9 +22239,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 rows.add(rs.getString("no_rawat"));
-                                // "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","Kamar","Tarif Kamar",
-                                // "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
-                                // "Ttl.Biaya","Stts.Pulang","Lama","Dokter P.J.","Dokter Asal Poli","Kamar","Status Bayar","Agama","no_rawat"
                                 publish(new Object[] {
                                     rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("alamat"), rs.getString("p_jawab"), rs.getString("hubunganpj"), rs.getString("png_jawab"),
                                     rs.getString("kamar"), Valid.SetAngka(rs.getDouble("trf_kamar")), rs.getString("diagnosa_awal"), rs.getString("diagnosa_akhir"), rs.getString("tgl_masuk"), rs.getString("jam_masuk"),
@@ -22341,7 +22345,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         dpjp.put(rs.getString("no_rawat"), rs.getString("dpjp"));
                     }
                 }
-
                 return dpjp;
             }
         };
