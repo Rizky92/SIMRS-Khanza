@@ -59,7 +59,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private String tglTMTAwal = "", tglTMTAkhir = "";
+    private String tglTMTKerja = "", tglTATkerja = "";
     private long hakCuti = 0;
 
     /** Creates new form DlgRujuk
@@ -944,9 +944,13 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             Valid.textKosong(KdPetugasPJ,"P.J. terkait pengajuan");
         } else if (Integer.parseInt(Jumlah.getText().trim()) >= Integer.parseInt(Sisa.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Maaf, sisa cuti anda sudah habis..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else if (Local) {
+            JOptionPane.showMessageDialog(null, "Maaf, tanggal awal cuti sebelum tanggal TMT masa kerja (" + tglTMTkerja + ")!!");
+        } else if () {
+            JOptionPane.showMessageDialog(null, "Maaf, tanggal akhir cuti melewati tanggal TAT masa kerja (" + tglTATkerja + ")!!");
         }else{
             if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText().trim(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
-                Valid.getTglSmc(Tgl2), tglTMTAwal, tglTMTAkhir, KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
+                Valid.getTglSmc(Tgl2), tglTMTKerja, tglTATkerja, KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
                 Jumlah.getText(), Sisa.getText(), Kepentingan.getText().trim(), KdPetugasPJ.getText(), "Proses Pengajuan"
             )) {
                 TabRawat.setSelectedIndex(0);
@@ -1179,8 +1183,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
-     Valid.pindah(evt,TCari,Tanggal);
-
+        Valid.pindah(evt,TCari,Tanggal);
     }//GEN-LAST:event_KdPetugasKeyPressed
 
     private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmPetugasKeyPressed
@@ -1261,6 +1264,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
+        petugas.setDepartemen(akses.getkode());
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
@@ -1757,8 +1761,8 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             }
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    tglTMTAwal = rs.getString("tmt_awal");
-                    tglTMTAkhir = rs.getString("tmt_akhir");
+                    tglTMTKerja = rs.getString("tmt_awal");
+                    tglTATkerja = rs.getString("tmt_akhir");
                     hakCuti = rs.getLong("hakcuti") - rs.getLong("diambil");
                     Sisa.setText(String.valueOf(hakCuti));
                 }
@@ -1792,6 +1796,11 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         } catch (RejectedExecutionException ex) {
             ceksukses = false;
         }
+    }
+
+    private void cekCutoffTAT() {
+        LocalDate awal = LocalDate.ofInstant(Tgl1.getDate().toInstant(), ZoneId.systemDefault());
+        LocalDate tat = LocalDate.parse(tglTATkerja);
     }
 
     public void hitungHari() {
