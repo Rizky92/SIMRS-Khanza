@@ -22389,12 +22389,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         } catch(Exception ex){
                             System.out.println("Notifikasi : "+ex);
                         }finally{
-                              if(rs2 != null){
-                                  rs2.close();
-                              }
-                              if(psanak != null){
-                                  psanak.close();
-                              }
+                            if(rs2 != null){
+                                rs2.close();
+                            }
+                            if(psanak != null){
+                                psanak.close();
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println(e);

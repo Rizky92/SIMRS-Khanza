@@ -31,6 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
@@ -58,6 +59,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
     private String finger = "";
     private ObjectMapper mapper = new ObjectMapper();
     private String TANGGALMUNDUR = "yes";
+    private boolean adaDipilih = false;
 
     /**
      * Creates new form DlgRujuk
@@ -3478,16 +3480,14 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
         if (TNoRw.getText().equals("") && TNoRM.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Pasien masih kosong...!!!");
         } else {
+            StringJoiner sj = new StringJoiner(", ");
+            adaDipilih = false;
             RMCariHasilLaborat carilaborat = new RMCariHasilLaborat(null, false);
             carilaborat.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                        for (int i = 0; i < carilaborat.getTable().getRowCount(); i++) {
-                            if (carilaborat.getTable().getValueAt(i, 0).toString().equals("true") || carilaborat.getTable().getSelectedRow() == i) {
-                                HasilPeriksaLab.append(carilaborat.getTable().getValueAt(i, 3).toString() + ", ");
-                            }
-                        }
+                        carilaborat.dispose();
                     }
                 }
             });
@@ -3496,10 +3496,15 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
                 @Override
                 public void windowClosed(WindowEvent e) {
                     for (int i = 0; i < carilaborat.getTable().getRowCount(); i++) {
-                        if (carilaborat.getTable().getValueAt(i, 0).toString().equals("true")) {
-                            HasilPeriksaLab.append(carilaborat.getTable().getValueAt(i, 3).toString() + ", ");
+                        if (carilaborat.getTable().getValueAt(i, 0).toString().equals("true") || carilaborat.getTable().getSelectedRow() == i) {
+                            sj.add(carilaborat.getTable().getValueAt(i, 3).toString());
+                            adaDipilih = true;
                         }
                     }
+                    if (!HasilPeriksaLab.getText().isBlank() && adaDipilih) {
+                        HasilPeriksaLab.append(", ");
+                    }
+                    HasilPeriksaLab.append(sj.toString());
                     HasilPeriksaLab.requestFocus();
                 }
             });
@@ -4496,7 +4501,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
             NilaiResiko6.getText(), SkalaResiko7.getSelectedItem().toString(), NilaiResiko7.getText(), SkalaResiko8.getSelectedItem().toString(), NilaiResiko8.getText(), SkalaResiko9.getSelectedItem().toString(),
             NilaiResiko9.getText(), SkalaResiko10.getSelectedItem().toString(), NilaiResiko10.getText(), NilaiResikoTotal.getText(), EchoKesan.getText(), Rencana.getText(), tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString()
         )) {
-            Sequel.menghapusSmc("smc_pengkajian_tindakan_invasif_non_bedah_masalah", "no_rawat = ?", TNoRw.getText());
+            Sequel.menghapusSmc("smc_pengkajian_tindakan_invasif_non_bedah_masalah", "no_rawat = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString());
             for (int i = 0; i < tbMasalahKeperawatan.getRowCount(); i++) {
                 if ((Boolean) tbMasalahKeperawatan.getValueAt(i, 0)) {
                     Sequel.menyimpanSmc("smc_pengkajian_tindakan_invasif_non_bedah_masalah", "", TNoRw.getText(),
@@ -4505,7 +4510,7 @@ public final class RMPenilaianTindakanInvasifNonBedahSMC extends javax.swing.JDi
                 }
             }
 
-            Sequel.menghapusSmc("smc_pengkajian_tindakan_invasif_non_bedah_rencana", "no_rawat = ?", TNoRw.getText());
+            Sequel.menghapusSmc("smc_pengkajian_tindakan_invasif_non_bedah_rencana", "no_rawat = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString());
             for (int i = 0; i < tbRencanaKeperawatan.getRowCount(); i++) {
                 if ((Boolean) tbRencanaKeperawatan.getValueAt(i, 0)) {
                     Sequel.menyimpanSmc("smc_pengkajian_tindakan_invasif_non_bedah_rencana", "", TNoRw.getText(),
