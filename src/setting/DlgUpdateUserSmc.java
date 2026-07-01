@@ -999,6 +999,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("satu_sehat_kirim_diagnosticreport_radiologi", "[L] Kirim Diagnostic Report Radiologi Satu Sehat");
         namaakses.put("satu_sehat_kirim_diet", "[L] Kirim Diet Satu Sehat");
         namaakses.put("satu_sehat_kirim_encounter", "[L] Kirim Encounter Satu Sehat");
+        namaakses.put("bridging_smart_klaim_bpjs", "[L] Kirim FHIR Smart Klaim BPJS");
         namaakses.put("satu_sehat_kirim_medicationdispense", "[L] Kirim Medication Dispense Satu Sehat");
         namaakses.put("satu_sehat_kirim_medicationrequest", "[L] Kirim Medication Request Satu Sehat");
         namaakses.put("satu_sehat_kirim_medication", "[L] Kirim Medication Satu Sehat");
@@ -1031,9 +1032,11 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pcare_mapping_obat", "[L] Mapping Obat PCare");
         namaakses.put("satu_sehat_mapping_obat", "[L] Mapping Obat/Alkes/BHP Satu Sehat");
         namaakses.put("satu_sehat_mapping_departemen", "[L] Mapping Organisasi Satu Sehat");
+        namaakses.put("mapping_penyakit_smart_klaim_bpjs", "[L] Mapping Penyakit Smart Klaim BPJS");
         namaakses.put("inhealth_mapping_poli", "[L] Mapping Poli Inhealth");
         namaakses.put("pcare_mapping_poli", "[L] Mapping Poli PCare");
         namaakses.put("mapping_poli_bpjs", "[L] Mapping Poli VClaim");
+        namaakses.put("mapping_prosedur_smart_klaim_bpjs", "[L] Mapping Prosedur Smart Klaim BPJS");
         namaakses.put("satu_sehat_mapping_lab", "[L] Mapping Tindakan Lab PK & MB Satu Sehat");
         namaakses.put("satu_sehat_mapping_radiologi", "[L] Mapping Tindakan Radiologi Satu Sehat");
         namaakses.put("satu_sehat_mapping_vaksin", "[L] Mapping Vaksin Satu Sehat");
@@ -1150,6 +1153,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("catatan_observasi_ranap_kebidanan", "[M] Catatan Observasi Ranap Kebidanan");
         namaakses.put("catatan_observasi_ranap_postpartum", "[M] Catatan Observasi Ranap Post Partum");
         namaakses.put("catatan_observasi_restrain_nonfarma", "[M] Catatan Observasi Restrain Nonfarmakologi");
+        namaakses.put("catatan_observasi_ruang_ok", "[M] Catatan Observasi Ruang Operasi");
         namaakses.put("catatan_observasi_ventilator", "[M] Catatan Observasi Ventilator");
         namaakses.put("catatan_pasien", "[M] Catatan Pasien");
         namaakses.put("catatan_pengkajian_paska_operasi", "[M] Catatan Pengkajian Paska Operasi");
@@ -1185,6 +1189,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("hasil_pemeriksaan_oct", "[M] Hasil Pemeriksaan OCT");
         namaakses.put("hasil_pemeriksaan_slit_lamp", "[M] Hasil Pemeriksaan Slit Lamp");
         namaakses.put("hasil_pemeriksaan_treadmill", "[M] Hasil Pemeriksaan Treadmill");
+        namaakses.put("hasil_pemeriksaan_usg_abdomen", "[M] Hasil USG Abdomen");
         namaakses.put("hasil_usg_gynecologi", "[M] Hasil USG Gynecologi");
         namaakses.put("hasil_pemeriksaan_usg", "[M] Hasil USG Kandungan");
         namaakses.put("hasil_usg_neonatus", "[M] Hasil USG Neonatus");
@@ -1195,6 +1200,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("jabatan_polri", "[M] Jabatan POLRI");
         namaakses.put("jabatan_tni", "[M] Jabatan TNI");
         namaakses.put("jawaban_konsultasi_medik", "[M] Jawaban Konsultasi Medik");
+        namaakses.put("jawaban_konsultasi_perawat", "[M] Jawaban Konsultasi Perawat");
         namaakses.put("jawaban_pio_apoteker", "[M] Jawaban PIO Apoteker");
         namaakses.put("kelahiran_bayi", "[M] Kelahiran Bayi");
         namaakses.put("balance_cairan", "[M] Keseimbangan Cairan");
@@ -1508,6 +1514,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pengumuman_epasien", "[P] Pengumuman E-Pasien");
         namaakses.put("penolakan_anjuran_medis", "[P] Penolakan Anjuran Medis");
         namaakses.put("surat_pernyataan_pasien_umum", "[P] Pernyataan Pasien Umum");
+        namaakses.put("permintaan_binrohtal", "[P] Persetujuan Bimbingan Rohani & Mental");
         namaakses.put("persetujuan_penundaan_pelayanan", "[P] Persetujuan Penundaan Pelayanan");
         namaakses.put("surat_persetujuan_rawat_inap", "[P] Persetujuan Rawat Inap");
         namaakses.put("surat_persetujuan_umum", "[P] Persetujuan Umum");
@@ -1525,6 +1532,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("surat_cuti_hamil", "[P] Surat Cuti Hamil");
         namaakses.put("surat_hamil", "[P] Surat Hamil");
         namaakses.put("surat_keluar", "[P] Surat Keluar");
+        namaakses.put("surat_keterangan_berobat", "[P] Surat Keterangan Berobat");
         namaakses.put("surat_buta_warna", "[P] Surat Keterangan Buta Warna");
         namaakses.put("surat_keterangan_covid", "[P] Surat Keterangan Covid");
         namaakses.put("surat_keterangan_layak_terbang", "[P] Surat Keterangan Layak Terbang");
@@ -1535,6 +1543,10 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("surat_kewaspadaan_kesehatan", "[P] Surat Kewaspadaan Kesehatan");
         namaakses.put("skdp_bpjs", "[P] Surat Kontrol");
         namaakses.put("surat_masuk", "[P] Surat Masuk");
+        namaakses.put("surat_penolakan_resusitasi", "[P] Surat Penolakan Resusitasi");
+        namaakses.put("surat_permintaan_perlindungan_dari_kekerasan", "[P] Surat Permintaan Perlindungan Diri Dari Kekerasan");
+        namaakses.put("surat_permintaan_second_opinion", "[P] Surat Permintaan Second Opinion");
+        namaakses.put("surat_permohonan_privasi", "[P] Surat Permohonan Privasi");
         namaakses.put("surat_pernyataan_memilih_dpjp", "[P] Surat Pernyataan Memilih DPJP");
         namaakses.put("surat_persetujuan_pemeriksaan_hiv", "[P] Surat Persetujuan Pemeriksaan HIV");
         namaakses.put("template_persetujuan_penolakan_tindakan", "[P] Template Persetujuan Penolakan Tindakan");

@@ -2042,8 +2042,8 @@ public class DlgPiutang extends javax.swing.JDialog {
         if(lokasidepoutama.getDepoDefault().equals("")){
             lokasidepoutama.SetLokasiDepoUtama();
         }
-        kdgudang.setText(lokasidepoutama.getDepoDefault());
-        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
+        // kdgudang.setText(lokasidepoutama.getDepoDefault());
+        // nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         if(akses.getjml2()>=1){
             kdptg.setEditable(false);
             BtnPtg.setEnabled(false);
