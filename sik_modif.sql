@@ -615,11 +615,9 @@ CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk_kategori`  (
   INDEX `urut_idx`(`urut`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_awal` date NOT NULL AFTER `tanggal_akhir`;
+ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_kerja` date NOT NULL AFTER `tanggal_akhir`;
 
-ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_akhir` date NOT NULL AFTER `tmt_awal`;
-
-ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `sisa_cuti` int(11) NOT NULL AFTER `jumlah`;
+ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL AFTER `tmt_awal`;
 
 ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya') NOT NULL AFTER `nik`;
 
@@ -1688,6 +1686,10 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','I
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `sistem_import_koding`;
 
 ALTER TABLE `spesialis` MODIFY COLUMN IF EXISTS `nm_sps` varchar(60) NULL DEFAULT NULL AFTER `kd_sps`;
+
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `cuti_besar` enum('','Tidak Ada','10 Tahun Dari TMT') NOT NULL DEFAULT '' AFTER `hakcuti`;
+
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakcuti_besar` int NOT NULL DEFAULT 0 AFTER `cuti_besar`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 
