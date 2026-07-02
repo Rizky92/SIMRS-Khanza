@@ -187,6 +187,7 @@ import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTerapiWicara;
+import rekammedis.RMPenilaianTindakanInvasifNonBedahSMC;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMRiwayatPerawatan;
@@ -10685,6 +10686,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
+    private void BtnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianTindakanInvasifNonBedahSMC form=new RMPenilaianTindakanInvasifNonBedahSMC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.emptTeks();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -11057,6 +11075,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                           BtnHasilPemeriksaanUSGAbdomen;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
+
+    private widget.Button BtnPengkajianInvasifNonBedahSMC;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -12043,6 +12063,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
         BtnChecklistKriteriaMasukPICU.setVisible(akses.getkriteria_masuk_picu());
         if(akses.getkriteria_masuk_picu()==true){
+            tinggi=tinggi+24;
+        }
+
+        BtnPengkajianInvasifNonBedahSMC.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
+        if(akses.getpengkajian_tindakan_invasif_non_bedah_smc()==true){
             tinggi=tinggi+24;
         }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
@@ -14336,6 +14361,18 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnPasteSOAP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPasteSOAP.addActionListener(this::MnPasteSOAPActionPerformed);
 
+        BtnPengkajianInvasifNonBedahSMC = new widget.Button();
+        BtnPengkajianInvasifNonBedahSMC.setBackground(new java.awt.Color(255, 255, 254));
+        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPengkajianInvasifNonBedahSMC.setForeground(new java.awt.Color(50, 50, 50));
+        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        BtnPengkajianInvasifNonBedahSMC.setText("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPengkajianInvasifNonBedahSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnPengkajianInvasifNonBedahSMC.setName("BtnPengkajianInvasifNonBedahSMC");
+        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(210, 26));
+        BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
+
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");
 
@@ -14431,6 +14468,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         FormMenu.add(BtnSkorStewardPascaAnestesi);
         FormMenu.add(BtnSkorBromagePascaAnestesi);
         FormMenu.add(BtnCatatanPengkajianPaskaOperasi);
+        FormMenu.add(BtnPengkajianInvasifNonBedahSMC);
         FormMenu.add(BtnMedicalCheckUp);
         FormMenu.add(BtnPenilaianPsikolog);
         FormMenu.add(BtnPenilaianPsikologKlinis);

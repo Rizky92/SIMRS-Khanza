@@ -3,7 +3,7 @@ SET FOREIGN_KEY_CHECKS=0;
 CREATE TABLE IF NOT EXISTS `antrifotokelahiranbayismc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE
-) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
@@ -578,7 +578,7 @@ CREATE TABLE IF NOT EXISTS `pasien_bayi_gambar_smc`  (
   `photo` varchar(500) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE,
   CONSTRAINT `pasien_bayi_gambar_smc_ibfk_1` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien_bayi` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
@@ -1675,6 +1675,115 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','I
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `sistem_import_koding`;
 
+CREATE TABLE IF NOT EXISTS `smc_master_masalah_keperawatan`  (
+  `menu` varchar(50) NOT NULL,
+  `kode_masalah` varchar(3) NOT NULL,
+  `nama_masalah` varchar(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`menu`,`kode_masalah`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE `smc_master_rencana_keperawatan`  (
+  `menu` varchar(50) NOT NULL,
+  `kode_masalah` varchar(3) NOT NULL,
+  `kode_rencana` varchar(3) NOT NULL,
+  `rencana_keperawatan` varchar(1000) NOT NULL,
+  PRIMARY KEY (`menu`,`kode_masalah`,`kode_rencana`) USING BTREE,
+  CONSTRAINT `smc_master_rencana_keperawatan_ibfk_1` FOREIGN KEY (`menu`,`kode_masalah`) REFERENCES `smc_master_masalah_keperawatan` (`menu`,`kode_masalah`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `smc_pengkajian_tindakan_invasif_non_bedah`  (
+  `no_rawat` varchar(17) NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `nip` varchar(20) DEFAULT NULL,
+  `diagnosa` varchar(200) DEFAULT NULL,
+  `rencana_tindakan` varchar(200) DEFAULT NULL,
+  `status_fungsional` varchar(200) DEFAULT NULL,
+  `keluhan_utama` text DEFAULT NULL,
+  `status_psiko` varchar(50) DEFAULT NULL,
+  `ket_psiko` varchar(200) DEFAULT NULL,
+  `rpd` text DEFAULT NULL,
+  `sistem_pernapasan` varchar(50) DEFAULT NULL,
+  `ket_sistem_pernapasan` varchar(200) DEFAULT NULL,
+  `muntah_darah` varchar(50) DEFAULT NULL,
+  `bab` varchar(50) DEFAULT NULL,
+  `urine` varchar(10) DEFAULT NULL,
+  `antiplatelet` enum('Tidak','Ya') NOT NULL,
+  `lama_antiplatelet` varchar(50) DEFAULT NULL,
+  `beta_blocker` enum('Tidak','Ya') NOT NULL,
+  `lama_beta_blocker` varchar(50) DEFAULT NULL,
+  `simarc` enum('Tidak','Ya') NOT NULL,
+  `lama_simarc` varchar(50) DEFAULT NULL,
+  `riwayat_alergi` varchar(40) DEFAULT NULL,
+  `tb` varchar(10) DEFAULT NULL,
+  `bb` varchar(10) DEFAULT NULL,
+  `td` varchar(15) DEFAULT NULL,
+  `io2` varchar(10) DEFAULT NULL,
+  `nadi` varchar(10) DEFAULT NULL,
+  `suhu` varchar(10) DEFAULT NULL,
+  `pernapasan` varchar(10) DEFAULT NULL,
+  `radialis_kanan` enum('Adekuat','Tidak Adekuat') NOT NULL,
+  `radialis_kiri` enum('Adekuat','Tidak Adekuat') DEFAULT NULL,
+  `pedis_kanan` enum('Adekuat','Tidak Adekuat') DEFAULT NULL,
+  `pedis_kiri` enum('Adekuat','Tidak Adekuat') DEFAULT NULL,
+  `penilaian_nyeri` enum('Tidak Ada Nyeri','Nyeri Akut','Nyeri Kronis') NOT NULL,
+  `penilaian_nyeri_pencetus` varchar(50) NOT NULL,
+  `penilaian_nyeri_kualitas` varchar(50) NOT NULL,
+  `penilaian_nyeri_lokasi` varchar(50) NOT NULL,
+  `penilaian_nyeri_penjalaran` varchar(50) NOT NULL,
+  `penilaian_nyeri_skala` enum('0','1','2','3','4','5','6','7','8','9','10') NOT NULL,
+  `penilaian_nyeri_durasi` varchar(50) NOT NULL,
+  `kebutuhan_edukasi` varchar(200) DEFAULT NULL,
+  `pemeriksaan_lab` varchar(1000) NOT NULL DEFAULT '',
+  `skrining_fungsi_skala1` enum('Tak Terkendali/Tak Teratur (Perlu Pencahar)','Kadang-kadang Tak Terkendali (1x Seminggu)','Terkendali Teratur') DEFAULT NULL,
+  `skrining_fungsi_nilai1` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala2` enum('Tak Terkendali/Pakai Kateter','Kadang-kadang Tak Terkendali (Hanya 1x/24 Jam )','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai2` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala3` enum('Butuh Pertolongan Orang Lain','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai3` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala4` enum('Tergantung Pertolongan Orang Lain','Perlu Pertolongan Pada Beberapa Kegiatan Tetapi Dapat Mengerjakan Sendiri Beberapa Kegiatan Yang Lain','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai4` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala5` enum('Tidak Mampu','Perlu Ditolong Memotong Makanan','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai5` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala6` enum('Tidak Mampu','Perlu Banyak Bantuan Untuk Bisa Duduk (2 Orang)','Bantuan Minimal 1 Orang','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai6` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala7` enum('Tidak Mampu','Bisa (Pindah) Dengan Kursi Roda','Berjalan Dengan Bantuan 1 Orang','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai7` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala8` enum('Tergantung Orang Lain','Sebagian Dibantu (Misal Mengancing Baju)','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai8` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala9` enum('Tidak Mampu','Butuh Pertolongan','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai9` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_skala10` enum('Tergantung Orang Lain','Mandiri') DEFAULT NULL,
+  `skrining_fungsi_nilai10` tinyint(4) DEFAULT NULL,
+  `skrining_fungsi_totalnilai` tinyint(4) DEFAULT NULL,
+  `hasil_echo` text DEFAULT NULL,
+  `rencana` text DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`) USING BTREE,
+  INDEX `nip`(`nip`) USING BTREE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `smc_pengkajian_tindakan_invasif_non_bedah_masalah` (
+  `no_rawat` varchar(17) NOT NULL,
+  `menu` varchar(50) not null,
+  `kode_masalah` varchar(3) NOT NULL,
+  PRIMARY KEY (`no_rawat`,`menu`,`kode_masalah`) USING BTREE,
+  INDEX `menu`(`menu`,`kode_masalah`) USING BTREE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_masalah_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `smc_pengkajian_tindakan_invasif_non_bedah` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_masalah_ibfk_2` FOREIGN KEY (`menu`,`kode_masalah`) REFERENCES `smc_master_masalah_keperawatan` (`menu`,`kode_masalah`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `smc_pengkajian_tindakan_invasif_non_bedah_rencana` (
+  `no_rawat` varchar(17) NOT NULL,
+  `menu` varchar(50) not null,
+  `kode_masalah` varchar(3) NOT NULL,
+  `kode_rencana` varchar(3) NOT NULL,
+  PRIMARY KEY (`no_rawat`,`menu`,`kode_masalah`,`kode_rencana`) USING BTREE,
+  index `menu`(`menu`,`kode_masalah`,`kode_rencana`) USING BTREE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_rencana_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `smc_pengkajian_tindakan_invasif_non_bedah` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `smc_pengkajian_tindakan_invasif_non_bedah_rencana_ibfk_2` FOREIGN KEY (`menu`, `kode_masalah`, `kode_rencana`) REFERENCES `smc_master_rencana_keperawatan` (`menu`, `kode_masalah`, `kode_rencana`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `spesialis` MODIFY COLUMN IF EXISTS `nm_sps` varchar(60) NULL DEFAULT NULL AFTER `kd_sps`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
@@ -1854,6 +1963,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` e
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_potensi_prb`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_surat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_rekap_peserta_prb_apotek`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_tindakan_invasif_non_bedah_smc` enum('true','false') DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
