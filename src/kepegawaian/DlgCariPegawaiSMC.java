@@ -17,11 +17,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
+import java.util.List;
+import java.util.stream.StreamSupport;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -36,9 +35,8 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final ObjectMapper mapper = new ObjectMapper();
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private String departemen = "";
+    private int indexJenjang = -1;
 
     /**
      * Creates new form DlgPenyakit
@@ -52,21 +50,29 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
         this.setLocation(10, 2);
         setSize(656, 250);
 
-        Object[] row = {"NIP", "Nama", "J.K.", "Jabatan", "Kode Jenjang", "Departemen", "Bidang", "Status", "Status Karyawan",
-            "NPWP", "Pendidikan", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja",
-            "Kode Index", "BPD", "Rekening", "Stts Aktif", "Wajib Masuk", "Mulai Kontrak", "No.KTP"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {
+            "NIP", "Nama", "J.K.", "Jabatan", "Kode Jenjang", "Index Jenjang", "Departemen", "Bidang", "Status", "Status Karyawan", "NPWP",
+            "Pendidikan", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja", "Kode Index", "BPD", "Rekening",
+            "Stts Aktif", "Wajib Masuk", "Mulai Kontrak", "No.KTP"
+        }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 5) {
+                    return Integer.class;
+                }
+                return String.class;
+            }
         };
         tbKamar.setModel(tabMode);
-        //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(90);
@@ -79,42 +85,45 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
             } else if (i == 4) {
                 column.setPreferredWidth(90);
             } else if (i == 5) {
-                column.setPreferredWidth(90);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             } else if (i == 6) {
                 column.setPreferredWidth(90);
             } else if (i == 7) {
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(90);
             } else if (i == 8) {
-                column.setPreferredWidth(100);
-            } else if (i == 9) {
-                column.setPreferredWidth(110);
-            } else if (i == 10) {
-                column.setPreferredWidth(130);
-            } else if (i == 11) {
-                column.setPreferredWidth(110);
-            } else if (i == 12) {
-                column.setPreferredWidth(65);
-            } else if (i == 13) {
-                column.setPreferredWidth(150);
-            } else if (i == 14) {
-                column.setPreferredWidth(90);
-            } else if (i == 15) {
-                column.setPreferredWidth(65);
-            } else if (i == 16) {
-                column.setPreferredWidth(80);
-            } else if (i == 17) {
-                column.setPreferredWidth(70);
-            } else if (i == 18) {
-                column.setPreferredWidth(90);
-            } else if (i == 19) {
-                column.setPreferredWidth(100);
-            } else if (i == 20) {
                 column.setPreferredWidth(60);
-            } else if (i == 21) {
-                column.setPreferredWidth(70);
-            } else if (i == 22) {
+            } else if (i == 9) {
+                column.setPreferredWidth(100);
+            } else if (i == 10) {
+                column.setPreferredWidth(110);
+            } else if (i == 11) {
+                column.setPreferredWidth(130);
+            } else if (i == 12) {
+                column.setPreferredWidth(110);
+            } else if (i == 13) {
+                column.setPreferredWidth(65);
+            } else if (i == 14) {
+                column.setPreferredWidth(150);
+            } else if (i == 15) {
+                column.setPreferredWidth(90);
+            } else if (i == 16) {
+                column.setPreferredWidth(65);
+            } else if (i == 17) {
                 column.setPreferredWidth(80);
+            } else if (i == 18) {
+                column.setPreferredWidth(70);
+            } else if (i == 19) {
+                column.setPreferredWidth(90);
+            } else if (i == 20) {
+                column.setPreferredWidth(100);
+            } else if (i == 21) {
+                column.setPreferredWidth(60);
+            } else if (i == 22) {
+                column.setPreferredWidth(70);
             } else if (i == 23) {
+                column.setPreferredWidth(80);
+            } else if (i == 24) {
                 column.setPreferredWidth(120);
             }
         }
@@ -258,30 +267,26 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnCari.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            BtnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            tbKamar.requestFocus();
+        } else {
+            Valid.pindahSmc(evt, tbKamar, BtnCari);
         }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() -> tampil2());
+        tampil2Smc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindah(evt, TCari, BtnAll);
+            Valid.pindahSmc(evt, TCari, BtnAll);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         emptTeks();
-        runBackground(() -> tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -301,10 +306,10 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (Valid.umurcacheSmc("./cache/petugas.iyem", 30)) {
-            tampil();
+        if (Valid.umurcacheSmc("./cache/pegawaismc.iyem", 30)) {
+            tampilSmc();
         } else {
-            tampil2();
+            tampil2Smc();
         }
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
@@ -312,21 +317,21 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil2());
+                        tampil2Smc();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil2());
+                        tampil2Smc();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil2());
+                        tampil2Smc();
                     }
                 }
             });
@@ -374,80 +379,202 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
     public widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {
-        Valid.tabelKosong(tabMode);
-        try {
-            File file = new File("./cache/pegawai.iyem");
-            file.createNewFile();
-            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
-                "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, pegawai.departemen, departemen.nama as nama_departemen, pegawai.bidang, " +
-                "pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, pegawai.mulai_kerja, " +
-                "pegawai.ms_kerja, pegawai.indexins, pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, pegawai.no_ktp, pegawai.kode_kelompok, " +
-                "kelompok_jabatan.indek as index_kelompok_jabatan from pegawai inner join kelompok_jabatan on pegawai.kode_kelompok = kelompok_jabatan.kode_kelompok inner join departemen on " +
-                "pegawai.departemen = departemen.dep_id order by pegawai.nik"
-            )) {
-                if (rs.next()) {
-                    ObjectNode root = mapper.createObjectNode();
-                    ArrayNode array = mapper.createArrayNode();
-                    do {
-                        ObjectNode pegawai = mapper.createObjectNode();
-                        pegawai.put("nip", rs.getString(1));
-                        pegawai.put("nama", rs.getString(2));
-                        pegawai.put("jk", rs.getString(3));
-                        pegawai.put("jabatan", rs.getString(4));
-                        pegawai.put("kodeJenjang", rs.getString(5));
-                        pegawai.put("kodeDepartemen", rs.getString(6));
-                        pegawai.put("namaDepartemen", rs.getString(7));
-                        pegawai.put("bidang", rs.getString(8));
-                        pegawai.put("status", rs.getString(9));
-                        pegawai.put("statusKaryawan", rs.getString(10));
-                        pegawai.put("npwp", rs.getString(11));
-                        pegawai.put("pendidikan", rs.getString(12));
-                        pegawai.put("tempatLahir", rs.getString(13));
-                        pegawai.put("tglLahir", rs.getString(14));
-                        pegawai.put("alamat", rs.getString(15));
-                        pegawai.put("kota", rs.getString(16));
-                        pegawai.put("mulaiKerja", rs.getString(17));
-                        pegawai.put("kodeMsKerja", rs.getString(18));
-                        pegawai.put("kodeIndex", rs.getString(19));
-                        pegawai.put("bpd", rs.getString(20));
-                        pegawai.put("rekening", rs.getString(21));
-                        pegawai.put("statusAktif", rs.getString(22));
-                        pegawai.put("wajibMasuk", rs.getString(23));
-                        pegawai.put("mulaiKontrak", rs.getString(24));
-                        pegawai.put("ktp", rs.getString(25));
-                        pegawai.put("kodeKelompok", rs.getString(26));
-                        pegawai.put("indexKelompok", rs.getInt(27));
-                        if (!"KELUAR".equals(rs.getString(23))) {
-                            if (!departemen.isBlank()) {
-                                if (departemen.equals(rs.getString(6))) {
-                                    tabMode.addRow(new Object[] {
-                                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-                                        rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12),
-                                        rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18),
-                                        rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24)
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim().toLowerCase();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    File file = new File("./cache/pegawaismc.iyem");
+                    file.createNewFile();
+                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                        "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, jnj_jabatan.indek, pegawai.departemen, pegawai.bidang, " +
+                        "pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, " +
+                        "pegawai.mulai_kerja, pegawai.ms_kerja, pegawai.indexins, pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, " +
+                        "pegawai.no_ktp from pegawai inner join jnj_jabatan on pegawai.jnj_jabatan = jnj_jabatan.kode where pegawai.stts_aktif <> 'KELUAR' order by pegawai.nik"
+                    )) {
+                        ObjectNode root = mapper.createObjectNode();
+                        ArrayNode array = mapper.createArrayNode();
+                        if (cari.isBlank()) {
+                            while (rs.next()) {
+                                ObjectNode item = mapper.createObjectNode();
+                                item.put("NIP", rs.getString(1));
+                                item.put("Nama", rs.getString(2));
+                                item.put("JK", rs.getString(3));
+                                item.put("Jabatan", rs.getString(4));
+                                item.put("KodeJenjang", rs.getString(5));
+                                item.put("IndexJenjang", rs.getInt(6));
+                                item.put("Departemen", rs.getString(7));
+                                item.put("Bidang", rs.getString(8));
+                                item.put("Status", rs.getString(9));
+                                item.put("StatusKaryawan", rs.getString(10));
+                                item.put("NPWP", rs.getString(11));
+                                item.put("Pendidikan", rs.getString(12));
+                                item.put("TmpLahir", rs.getString(13));
+                                item.put("TglLahir", rs.getString(14));
+                                item.put("Alamat", rs.getString(15));
+                                item.put("Kota", rs.getString(16));
+                                item.put("MulaiKerja", rs.getString(17));
+                                item.put("KodeMsKerja", rs.getString(18));
+                                item.put("KodeIndex", rs.getString(19));
+                                item.put("BPD", rs.getString(20));
+                                item.put("Rekening", rs.getString(21));
+                                item.put("SttsAktif", rs.getString(23));
+                                item.put("WajibMasuk", rs.getString(23));
+                                item.put("MulaiKontrak", rs.getString(24));
+                                item.put("NoKTP", rs.getString(25));
+                                array.add(item);
+                                if (rs.getInt(6) > indexJenjang) {
+                                    publish(new Object[] {
+                                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),
+                                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
+                                        rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
+                                        rs.getString(25)
                                     });
                                 }
-                            } else {
-                                tabMode.addRow(new Object[] {
-                                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-                                    rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12),
-                                    rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18),
-                                    rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24)
-                                });
+                            }
+                        } else {
+                            while (rs.next()) {
+                                ObjectNode item = mapper.createObjectNode();
+                                item.put("NIP", rs.getString(1));
+                                item.put("Nama", rs.getString(2));
+                                item.put("JK", rs.getString(3));
+                                item.put("Jabatan", rs.getString(4));
+                                item.put("KodeJenjang", rs.getString(5));
+                                item.put("IndexJenjang", rs.getInt(6));
+                                item.put("Departemen", rs.getString(7));
+                                item.put("Bidang", rs.getString(8));
+                                item.put("Status", rs.getString(9));
+                                item.put("StatusKaryawan", rs.getString(10));
+                                item.put("NPWP", rs.getString(11));
+                                item.put("Pendidikan", rs.getString(12));
+                                item.put("TmpLahir", rs.getString(13));
+                                item.put("TglLahir", rs.getString(14));
+                                item.put("Alamat", rs.getString(15));
+                                item.put("Kota", rs.getString(16));
+                                item.put("MulaiKerja", rs.getString(17));
+                                item.put("KodeMsKerja", rs.getString(18));
+                                item.put("KodeIndex", rs.getString(19));
+                                item.put("BPD", rs.getString(20));
+                                item.put("Rekening", rs.getString(21));
+                                item.put("SttsAktif", rs.getString(23));
+                                item.put("WajibMasuk", rs.getString(23));
+                                item.put("MulaiKontrak", rs.getString(24));
+                                item.put("NoKTP", rs.getString(25));
+                                array.add(item);
+                                if (rs.getString(1).trim().toLowerCase().contains(cari)
+                                    || rs.getString(2).trim().toLowerCase().contains(cari)
+                                    || rs.getString(4).trim().toLowerCase().contains(cari)
+                                    || rs.getString(7).trim().toLowerCase().contains(cari)
+                                    || rs.getString(8).trim().toLowerCase().contains(cari)
+                                ) {
+                                    if (rs.getInt(6) > indexJenjang) {
+                                        publish(new Object[] {
+                                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),
+                                            rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
+                                            rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
+                                            rs.getString(25)
+                                        });
+                                    }
+                                }
                             }
                         }
-                        array.add(pegawai);
-                    } while (rs.next());
-                    root.set("pegawai", array);
-                    fw.write(mapper.writeValueAsString(root));
-                    fw.flush();
+                        root.set("pegawai", array);
+                        fw.write(mapper.writeValueAsString(root));
+                        fw.flush();
+                    }
+                    return null;
                 }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
-        LCount.setText("" + tabMode.getRowCount());
+    }
+
+    private void tampil2Smc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            SwingWorker<Void, Object[]> worker = new SwingWorker<>() {
+                final String cari = TCari.getText().trim().toLowerCase();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    if (!isCancelled()) {
+                        File file = new File("./cache/pegawaismc.iyem");
+                        if (file.isFile()) {
+                            try (FileReader fr = new FileReader(file)) {
+                                ArrayNode array = mapper.readTree(fr).withArray("pegawai");
+                                StreamSupport.stream(array.spliterator(), false)
+                                    .filter(item -> item.path("indexJenjang").asInt(0) > indexJenjang && (
+                                        item.path("NIP").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Nama").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Jabatan").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Departemen").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Bidang").asText("").trim().toLowerCase().contains(cari)
+                                    ))
+                                    .map(item -> new Object[] {
+                                        item.path("NIP").asText(""), item.path("Nama").asText(""), item.path("JK").asText(""), item.path("Jabatan").asText(""), item.path("KodeJenjang").asText(""),
+                                        item.path("IndexJenjang").asInt(0), item.path("Departemen").asText(""), item.path("Bidang").asText(""), item.path("Status").asText(""), item.path("StatusKaryawan").asText(""),
+                                        item.path("NPWP").asText(""), item.path("Pendidikan").asText(""), item.path("TmpLahir").asText(""), item.path("TglLahir").asText(""), item.path("Alamat").asText(""),
+                                        item.path("Kota").asText(""), item.path("MulaiKerja").asText(""), item.path("KodeMsKerja").asText(""), item.path("KodeIndex").asText(""), item.path("BPD").asText(""),
+                                        item.path("Rekening").asText(""), item.path("SttsAktif").asText(""), item.path("WajibMasuk").asText(""), item.path("MulaiKontrak").asText(""),
+                                        item.path("NoKTP").asText("")
+                                    })
+                                    .forEach(item -> publish(item));
+                            }
+                        } else {
+                            cancel(false);
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            };
+
+            worker.execute();
+            if (worker.isCancelled()) {
+                tampilSmc();
+            }
+        }
     }
 
     public void emptTeks() {
@@ -459,177 +586,11 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
         return tbKamar;
     }
 
-    private void tampil2() {
-        Valid.tabelKosong(tabMode);
-        try (FileReader fr = new FileReader("./cache/pegawai.iyem")) {
-            JsonNode response = mapper.readTree(fr).path("pegawai");
-            if (response.isArray()) {
-                if (TCari.getText().isBlank()) {
-                    for (JsonNode list : response) {
-                        if (!departemen.isBlank()) {
-                            if (departemen.equals(list.path("Departemen").asText(""))) {
-                                tabMode.addRow(new Object[] {
-                                    list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
-                                    list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                    list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
-                                    list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
-                                    list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
-                                    list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
-                                });
-                            }
-                        } else {
-                            tabMode.addRow(new Object[] {
-                                list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
-                                list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
-                                list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
-                                list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
-                                list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
-                            });
-                        }
-                    }
-                } else {
-                    for (JsonNode list : response) {
-                        if (list.path("NIP").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                            list.path("Nama").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                            list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                            list.path("Bidang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                            list.path("Departemen").asText().toLowerCase().contains(TCari.getText().toLowerCase())
-                        ) {
-                            if (!departemen.isBlank()) {
-                                if (departemen.equals(list.path("Departemen").asText(""))) {
-                                    tabMode.addRow(new Object[] {
-                                        list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
-                                        list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                        list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
-                                        list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
-                                        list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
-                                        list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
-                                    });
-                                }
-                            } else {
-                                tabMode.addRow(new Object[] {
-                                    list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
-                                    list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                    list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
-                                    list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
-                                    list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
-                                    list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            tampil();
+    public void setIndexJenjang(String nik) {
+        if (nik != null && !nik.isBlank()) {
+            indexJenjang = Sequel.cariIntegerSmc("select jnj_jabatan.indek from pegawai inner join jnj_jabatan on pegawai.jnj_jabatan = jnj_jabatan.kode where pegawai.nik = ?", nik);
+        } else {
+            indexJenjang = -1;
         }
-        LCount.setText("" + tabMode.getRowCount());
-    }
-
-    public String tampil3(String kode) {
-        if (Valid.umurcacheSmc("./cache/pegawai.iyem", 7)) {
-            tampil();
-        }
-
-        try (FileReader fr = new FileReader("./cache/pegawai.iyem")) {
-            JsonNode response = mapper.readTree(fr).path("pegawai");
-            if (response.isArray()) {
-                for (JsonNode list : response) {
-                    if (list.path("NIP").asText().equalsIgnoreCase(kode)) {
-                        return list.path("Nama").asText();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-
-        return Sequel.cariIsiSmc("select pegawai.nama from pegawai where pegawai.nik = ?", kode);
-    }
-
-    public String tampilJbatan(String kode) {
-        if (Valid.umurcacheSmc("./cache/pegawai.iyem", 7)) {
-            tampil();
-        }
-
-        try (FileReader fr = new FileReader("./cache/pegawai.iyem")) {
-            JsonNode response = mapper.readTree(fr).path("pegawai");
-            if (response.isArray()) {
-                for (JsonNode list : response) {
-                    if (list.path("NIP").asText().equalsIgnoreCase(kode)) {
-                        return list.path("Jabatan").asText();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-
-        return Sequel.cariIsiSmc("select pegawai.jbtn from pegawai where pegawai.nik = ?", kode);
-    }
-
-    public String tampilDepartemen(String kode) {
-        if (Valid.umurcacheSmc("./cache/pegawai.iyem", 7)) {
-            tampil();
-        }
-
-        try (FileReader fr = new FileReader("./cache/pegawai.iyem")) {
-            JsonNode response = mapper.readTree(fr).path("pegawai");
-            if (response.isArray()) {
-                for (JsonNode list : response) {
-                    if (list.path("NIP").asText().equalsIgnoreCase(kode)) {
-                        return list.path("Departemen").asText();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-
-        return Sequel.cariIsiSmc("select pegawai.departemen from pegawai where pegawai.nik = ?", kode);
-    }
-
-    public void setDepartemen(String pegawai) {
-        this.departemen = tampilDepartemen(pegawai);
-    }
-
-    private void runBackground(Runnable task) {
-        if (ceksukses) {
-            return;
-        }
-        if (executor.isShutdown() || executor.isTerminated()) {
-            return;
-        }
-        if (!isDisplayable()) {
-            return;
-        }
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        try {
-            executor.submit(() -> {
-                try {
-                    task.run();
-                } finally {
-                    ceksukses = false;
-                    SwingUtilities.invokeLater(() -> {
-                        if (isDisplayable()) {
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    });
-                }
-            });
-        } catch (RejectedExecutionException ex) {
-            ceksukses = false;
-        }
-    }
-
-    @Override
-    public void dispose() {
-        executor.shutdownNow();
-        super.dispose();
     }
 }

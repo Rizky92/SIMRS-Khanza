@@ -38,6 +38,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
     private final ObjectMapper mapper = new ObjectMapper();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private String kodeJenjang = "";
 
     /**
      * Creates new form DlgPenyakit
@@ -412,14 +413,12 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                         pegawai.put("WajibMasuk", rs.getString(22));
                         pegawai.put("MulaiKontrak", rs.getString(23));
                         pegawai.put("NoKTP", rs.getString(24));
-                        // if (!"-".equals(rs.getString(5))) {
-                            tabMode.addRow(new Object[] {
-                                rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-                                rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12),
-                                rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18),
-                                rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24)
-                            });
-                        // }
+                        tabMode.addRow(new Object[] {
+                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
+                            rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12),
+                            rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18),
+                            rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24)
+                        });
                         array.add(pegawai);
                     } while (rs.next());
                     root.set("pegawai", array);
@@ -449,16 +448,14 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
             if (response.isArray()) {
                 if (TCari.getText().isBlank()) {
                     for (JsonNode list : response) {
-                        // if (!"-".equals(list.path("KodeJenjang").asText(""))) {
-                            tabMode.addRow(new Object[] {
-                                list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
-                                list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
-                                list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
-                                list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
-                                list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
-                            });
-                        // }
+                        tabMode.addRow(new Object[] {
+                            list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
+                            list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
+                            list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
+                            list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
+                            list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
+                            list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
+                        });
                     }
                 } else {
                     for (JsonNode list : response) {
@@ -468,16 +465,14 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                             list.path("Bidang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
                             list.path("Departemen").asText().toLowerCase().contains(TCari.getText().toLowerCase()
                         )) {
-                            // if (!"-".equals(list.path("KodeJenjang").asText(""))) {
-                                tabMode.addRow(new Object[] {
-                                    list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
-                                    list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                    list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
-                                    list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
-                                    list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
-                                    list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
-                                });
-                            // }
+                            tabMode.addRow(new Object[] {
+                                list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
+                                list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
+                                list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
+                                list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
+                                list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
+                                list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
+                            });
                         }
                     }
                 }
