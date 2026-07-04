@@ -170,6 +170,7 @@ import rekammedis.RMPenilaianTambahanBunuhDiri;
 import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
+import rekammedis.RMPenilaianTindakanInvasifNonBedahSMC;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMPerencanaanPemulangan;
 import rekammedis.RMRekonsiliasiObat;
@@ -9039,6 +9040,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
+    private void BtnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianTindakanInvasifNonBedahSMC form=new RMPenilaianTindakanInvasifNonBedahSMC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.emptTeks();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -9372,7 +9390,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                           BtnCatatanObservasiVentilator,BtnCatatanAnastesiSedasi,BtnChecklistPemberianFibrinolitik,BtnPenilaianPsikologKlinis,BtnAwalMedisNeonatus,BtnPenilaianDerajatDehidrasi,BtnHasilPemeriksaanECHO,BtnPenilaianBayiBaruLahir,BtnLaporanTindakan,
                           BtnPelaksanaanInformasiEdukasi,BtnCatatanObservasiHemodialisa,BtnCatatanCairanHemodialisa,BtnCatatanPengkajianPaskaOperasi,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaKeluarNICU,BtnAwalMedisPsikiatri,BtnChecklistKriteriaMasukPICU,BtnChecklistKriteriaKeluarPICU,BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnAwalMedisJantung,
-                          BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,BtnHasilPemeriksaanUSGAbdomen;
+                           BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,BtnHasilPemeriksaanUSGAbdomen,BtnPengkajianInvasifNonBedahSMC;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnCopySOAP,MnPasteSOAP;
 
@@ -10255,6 +10273,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         if(akses.getchecklist_kesiapan_anestesi()==true){
             tinggi=tinggi+24;
         }
+
+        BtnPengkajianInvasifNonBedahSMC.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
+        if(akses.getpengkajian_tindakan_invasif_non_bedah_smc()==true){
+            tinggi=tinggi+24;
+        }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
 
         if(akses.getjml2()>=1){
@@ -10694,6 +10717,19 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnPenilaianPreInduksi.setRoundRect(false);
         BtnPenilaianPreInduksi.addActionListener(this::BtnPenilaianPreInduksiActionPerformed);
+
+        BtnPengkajianInvasifNonBedahSMC = new widget.Button();
+        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPengkajianInvasifNonBedahSMC.setText("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSMC.setFocusPainted(false);
+        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPengkajianInvasifNonBedahSMC.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPengkajianInvasifNonBedahSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPengkajianInvasifNonBedahSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPengkajianInvasifNonBedahSMC.setName("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPengkajianInvasifNonBedahSMC.setRoundRect(false);
+        BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
 
         BtnHasilPemeriksaanUSGUrologi = new widget.Button();
         BtnHasilPemeriksaanUSGUrologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
@@ -11340,6 +11376,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         FormMenu.add(BtnAwalMedisHemodialisa);
         FormMenu.add(BtnAwalMedisJantung);
         FormMenu.add(BtnPenilaianPreInduksi);
+        FormMenu.add(BtnPengkajianInvasifNonBedahSMC);
         FormMenu.add(BtnChecklistPreOperasi);
         FormMenu.add(BtnSignInSebelumAnestesi);
         FormMenu.add(BtnTimeOutSebelumInsisi);
