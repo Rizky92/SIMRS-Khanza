@@ -985,7 +985,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                     }
                     break;
                 case "Besar":
-                    if (Integer.parseInt(Jumlah.getText().trim()) >= Integer.parseInt(Sisa.getText().trim())) {
+                    if (Integer.parseInt(Jumlah.getText().trim()) > Integer.parseInt(Sisa.getText().trim())) {
                         JOptionPane.showMessageDialog(null, "Maaf, sisa cuti anda sudah habis..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     } else {
                         if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
