@@ -617,7 +617,7 @@ CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk_kategori`  (
 
 ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_kerja` date NOT NULL AFTER `tanggal_akhir`;
 
-ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL AFTER `tmt_awal`;
+ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL AFTER `tmt_kerja`;
 
 ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `sisa` int NOT NULL DEFAULT 0 AFTER `jumlah`;
 
