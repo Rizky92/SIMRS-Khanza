@@ -132,6 +132,8 @@ ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_5`(`tglsep`, `no_sep`) USING BTREE;
 
+ALTER TABLE `bridging_surat_kontrol_bpjs` MODIFY COLUMN IF EXISTS `nm_dokter_bpjs` varchar(100) NULL DEFAULT NULL AFTER `kd_dokter_bpjs`;
+
 CREATE TABLE IF NOT EXISTS `bridging_sep_manual`  (
   `no_sep` varchar(40) NOT NULL,
   `tgl_simpan` datetime NOT NULL,
@@ -506,10 +508,6 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `kota` varchar(50) NULL DEFAU
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DEFAULT NULL AFTER `kota`;
 
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
-
-ALTER TABLE `jam_jaga` ADD COLUMN IF NOT EXISTS `nama_shift` varchar(100) NOT NULL AFTER `shift`;
-
-ALTER TABLE `jam_jaga` MODIFY COLUMN IF EXISTS `shift` varchar(15) NOT NULL AFTER `dep_id`;
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
