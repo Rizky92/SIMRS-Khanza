@@ -25,8 +25,10 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -740,27 +742,26 @@ public class DlgUserSmc extends javax.swing.JDialog {
                     int reply = JOptionPane.showConfirmDialog(null, new Object[] {"Eeiiiiiits, udah bener belum data copy hak aksesnya..??", checkbox}, "Konfirmasi", JOptionPane.YES_NO_OPTION);
                     boolean copyHakAksesAktif = checkbox.isSelected();
                     if (reply == JOptionPane.YES_OPTION) {
-                        String sqlupdate = "";
+                        StringJoiner sj = new StringJoiner(", ");
                         try (PreparedStatement ps = koneksi.prepareStatement("select * from user where aes_decrypt(id_user, 'nur') = ?")) {
                             ps.setString(1, userdicopy);
                             try (ResultSet rs = ps.executeQuery()) {
                                 if (rs.next()) {
-                                    try (PreparedStatement ps2 = koneksi.prepareStatement("select column_name as `column_name` from information_schema.columns where table_schema = ? and table_name = 'user' and column_name not in ('id_user', 'password')")) {
-                                        ps2.setString(1, koneksiDB.DATABASE());
-                                        try (ResultSet rs2 = ps2.executeQuery()) {
-                                            while (rs2.next()) {
-                                                rs.getString(rs2.getString("column_name"));
-                                                if (rs.wasNull()) {
-                                                    sqlupdate = sqlupdate + rs2.getString("column_name") + " = 'false', ";
-                                                } else {
-                                                    if (copyHakAksesAktif) {
-                                                        if (rs.getString(rs2.getString("column_name")).equals("true")) {
-                                                            sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
-                                                        }
-                                                    } else {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
-                                                    }
+                                    ResultSetMetaData md = rs.getMetaData();
+                                    for (int i = 1; i <= md.getColumnCount(); i++) {
+                                        if ("id_user".equals(md.getColumnName(i)) || "password".equals(md.getColumnName(i))) continue;
+
+                                        rs.getString(md.getColumnName(i));
+
+                                        if (rs.wasNull()) {
+                                            sj.add(md.getColumnName(i) + " = 'false'");
+                                        } else {
+                                            if (copyHakAksesAktif) {
+                                                if ("true".equals(rs.getString(md.getColumnName(i)))) {
+                                                    sj.add(md.getColumnName(i) + " = 'true'");
                                                 }
+                                            } else {
+                                                sj.add(md.getColumnName(i) + " = '" + rs.getString(md.getColumnName(i)) + "'");
                                             }
                                         }
                                     }
@@ -773,17 +774,17 @@ public class DlgUserSmc extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengcopy hak akses user..!!");
                             return;
                         }
-                        if (sqlupdate.isBlank()) {
+                        if (sj.length() == 0) {
                             userdicopy = "";
                             copyhakakses = "";
                             JOptionPane.showMessageDialog(null, "Tidak ada hak akses yang bisa dicopy..!!");
                             return;
-                        }
-                        sqlupdate = sqlupdate.substring(0, sqlupdate.length() - 2);
-                        if (Sequel.mengupdatetfSmc("user", sqlupdate, "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-                            userdicopy = "";
-                            copyhakakses = "";
-                            JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
+                        } else {
+                            if (Sequel.mengupdatetfSmc("user", sj.toString(), "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+                                userdicopy = "";
+                                copyhakakses = "";
+                                JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
+                            }
                         }
                     } else {
                         userdicopy = "";
