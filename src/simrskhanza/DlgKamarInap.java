@@ -22240,10 +22240,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             while (rs.next()) {
                                 rows.add(rs.getString("no_rawat"));
                                 publish(new Object[] {
-                                    rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("alamat"), rs.getString("p_jawab"), rs.getString("hubunganpj"), rs.getString("png_jawab"),
-                                    rs.getString("kamar"), Valid.SetAngka(rs.getDouble("trf_kamar")), rs.getString("diagnosa_awal"), rs.getString("diagnosa_akhir"), rs.getString("tgl_masuk"), rs.getString("jam_masuk"),
-                                    rs.getString("tgl_keluar"), rs.getString("jam_keluar"), Valid.SetAngka(rs.getDouble("ttl_biaya")), rs.getString("stts_pulang"), rs.getString("lama"), rs.getString("nm_dokter"),
-                                    rs.getString("dokter_asal_poli"), rs.getString("kd_kamar"), rs.getString("status_bayar"), rs.getString("agama"), rs.getString("no_rawat")
+                                    rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("umur") + ")", rs.getString("alamat"), rs.getString("p_jawab"), rs.getString("hubunganpj"),
+                                    rs.getString("png_jawab"), rs.getString("kamar"), Valid.SetAngka(rs.getDouble("trf_kamar")), rs.getString("diagnosa_awal"), rs.getString("diagnosa_akhir"), rs.getString("tgl_masuk"),
+                                    rs.getString("jam_masuk"), rs.getString("tgl_keluar"), rs.getString("jam_keluar"), Valid.SetAngka(rs.getDouble("ttl_biaya")), rs.getString("stts_pulang"), rs.getString("lama"),
+                                    rs.getString("nm_dokter"), rs.getString("dokter_asal_poli"), rs.getString("kd_kamar"), rs.getString("status_bayar"), rs.getString("agama"), rs.getString("no_rawat")
                                 });
                             }
                         }
