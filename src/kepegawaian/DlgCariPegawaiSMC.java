@@ -527,7 +527,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                             try (FileReader fr = new FileReader(file)) {
                                 ArrayNode array = mapper.readTree(fr).withArray("pegawai");
                                 StreamSupport.stream(array.spliterator(), false)
-                                    .filter(item -> item.path("indexJenjang").asInt(0) > indexJenjang && (
+                                    .filter(item -> item.path("indexJenjang").asInt(-1) > indexJenjang && (
                                         item.path("NIP").asText("").trim().toLowerCase().contains(cari)
                                         || item.path("Nama").asText("").trim().toLowerCase().contains(cari)
                                         || item.path("Jabatan").asText("").trim().toLowerCase().contains(cari)
@@ -542,7 +542,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                                         item.path("Rekening").asText(""), item.path("SttsAktif").asText(""), item.path("WajibMasuk").asText(""), item.path("MulaiKontrak").asText(""),
                                         item.path("NoKTP").asText("")
                                     })
-                                    .forEach(item -> publish(item));
+                                    .forEach(this::publish);
                             }
                         } else {
                             cancel(false);

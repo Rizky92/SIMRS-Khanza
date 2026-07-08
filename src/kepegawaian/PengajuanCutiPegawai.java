@@ -1100,7 +1100,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         if(tbObat.getSelectedRow()> -1){
             if("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())){
                 if (Sequel.menghapustfSmc("pengajuan_cuti", "no_pengajuan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
-                    tampilSmc();
+                    tabMode.removeRow(tbObat.getSelectedRow());
                     emptTeks();
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus pengajuan cuti..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -1854,8 +1854,8 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                                 jumlahCuti += rs.getInt("jumlah");
                                 publish(new Object[] {
                                     rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("tanggal_awal"), rs.getString("tanggal_akhir"),
-                                    ("0000-00-00".equals(rs.getString("tmt_kerja")) ? "" : rs.getString("tmt_kerja")), ("0000-00-00".equals(rs.getString("tat_kerja")) ? "" :
-                                    rs.getString("tat_kerja")), rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"), ("Ditolak".equals(rs.getString("status")) ? "" : rs.getString("sisa")),
+                                    ("0000-00-00".equals(rs.getString("tmt_kerja")) ? "" : rs.getString("tmt_kerja")), ("0000-00-00".equals(rs.getString("tat_kerja")) ? "" : rs.getString("tat_kerja")),
+                                    rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"), ("Ditolak".equals(rs.getString("status")) ? "" : rs.getString("sisa")),
                                     rs.getString("kepentingan"), rs.getString("nik_pj"), rs.getString("nama"), rs.getString("status")
                                 });
                             }
@@ -1925,9 +1925,9 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                                 jumlahCuti += rs.getInt("jumlah");
                                 publish(new Object[] {
                                     rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("tanggal_awal"), rs.getString("tanggal_akhir"),
-                                    ("0000-00-00".equals(rs.getString("tmt_kerja")) ? "" : rs.getString("tmt_kerja")), ("0000-00-00".equals(rs.getString("tat_kerja")) ? "" :
-                                    rs.getString("tat_kerja")), rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"), rs.getString("sisa"),
-                                    rs.getString("kepentingan"), rs.getString("nik"), rs.getString("nama"), rs.getString("status")
+                                    ("0000-00-00".equals(rs.getString("tmt_kerja")) ? "" : rs.getString("tmt_kerja")), ("0000-00-00".equals(rs.getString("tat_kerja")) ? "" : rs.getString("tat_kerja")),
+                                    rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"), rs.getString("sisa"), rs.getString("kepentingan"),
+                                    rs.getString("nik"), rs.getString("nama"), rs.getString("status")
                                 });
                             }
                         }
@@ -1998,7 +1998,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                 if (rs.next()) {
                     tglTMTKerja = rs.getString("tmt_kerja");
                     tglTATKerja = rs.getString("tat_kerja");
-                    Sisa.setText(String.valueOf(rs.getLong("hakcuti") - rs.getLong("diambil")));
+                    Sisa.setText(String.valueOf(rs.getInt("hakcuti") - rs.getInt("diambil")));
                 }
             }
         } catch (Exception e) {
@@ -2066,7 +2066,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         LocalDate akhir = LocalDate.ofInstant(Tgl2.getDate().toInstant(), ZoneId.systemDefault());
 
         if (tbObat.getSelectedRow() >= 0) {
-            return Sequel.cariExistsSmc("select * from pengajuan_cuti where pengajuan_cuti.nik = ? and pengajuan_cuti.no_pengajuan = ? and pengajuan_cuti.tanggal_awal <= ? " +
+            return Sequel.cariExistsSmc("select * from pengajuan_cuti where pengajuan_cuti.nik = ? and pengajuan_cuti.no_pengajuan != ? and pengajuan_cuti.tanggal_awal <= ? " +
                 "and pengajuan_cuti.tanggal_akhir >= ?", KdPetugas.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), akhir.toString(), awal.toString());
         }
 
