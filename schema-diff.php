@@ -423,12 +423,10 @@ function columnDef(array $col): string
     $def = "`{$col['COLUMN_NAME']}` {$col['COLUMN_TYPE']}";
     $def .= $col['IS_NULLABLE'] === 'NO' ? ' NOT NULL' : ' NULL';
     if ($col['COLUMN_DEFAULT'] !== null) {
-        $default = $col['COLUMN_DEFAULT'];
-        if (is_numeric($default) || in_array(strtoupper($default), ['CURRENT_TIMESTAMP', 'NULL'])) {
-            $def .= " DEFAULT {$default}";
-        } else {
-            $def .= " DEFAULT '" . str_replace("'", "''", $default) . "'";
-        }
+        // MariaDB 10.2.7+ already returns COLUMN_DEFAULT correctly quoted/unquoted
+        // (e.g. '' for empty string, 'abc' for string literals, 5 for numbers,
+        // current_timestamp() for expressions), so emit it verbatim.
+        $def .= " DEFAULT {$col['COLUMN_DEFAULT']}";
     } elseif ($col['IS_NULLABLE'] === 'YES') {
         $def .= " DEFAULT NULL";
     }
