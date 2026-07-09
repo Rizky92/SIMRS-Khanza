@@ -21,16 +21,21 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.function.BiPredicate;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -428,6 +433,22 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     }
 
     private void setTampilSmc() {
+        // untuk pre-populate nama akses yang belum tersedia.
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select * from user limit 1")) {
+            if (rs.next()) {
+                ResultSetMetaData md = rs.getMetaData();
+                for (int i = 1; i <= md.getColumnCount(); i++) {
+                    if ("id_user".equals(md.getColumnName(i)) || "password".equals(md.getColumnName(i))) {
+                        continue;
+                    }
+
+                    namaakses.put(md.getColumnName(i), md.getColumnName(i));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
         namaakses.put("akses_depo_obat", "[A] Akses Depo Obat/BHP");
         namaakses.put("akses_dokter_lain_rawat_jalan", "[A] Akses Ke Dokter Lain Rawat Jalan");
         namaakses.put("pengkajian_askep", "[A] Asesmen Awal Rawat Inap");
@@ -1324,6 +1345,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("penilaian_tambahan_pasien_geriatri", "[M] Pengkajian Tambahan Pasien Geriatri");
         namaakses.put("penilaian_tambahan_perilaku_kekerasan", "[M] Pengkajian Tambahan Perilaku Kekerasan");
         namaakses.put("penilaian_terapi_wicara", "[M] Pengkajian Terapi Wicara");
+        namaakses.put("pengkajian_tindakan_invasif_non_bedah_smc", "[M] Pengkajian Tindakan Invasif Non Bedah");
         namaakses.put("penilaian_ulang_nyeri", "[M] Pengkajian Ulang Nyeri");
         namaakses.put("perencanaan_pemulangan", "[M] Perencanaan Pemulangan");
         namaakses.put("rekonsiliasi_obat", "[M] Rekonsiliasi Obat");
@@ -1647,26 +1669,17 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
             ps.setString(1, TNmUser.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    if (TCari.getText().isBlank()) {
-                        for (Map.Entry<String, String> entry : namaakses.entrySet()) {
-                            try {
-                                tabMode.addRow(new Object[] {rs.getBoolean(entry.getKey()), entry.getValue(), entry.getKey()});
-                            } catch (SQLException e) {
-                                if (!e.getMessage().toLowerCase().contains("column") && !e.getMessage().toLowerCase().contains("not found")) {
-                                    throw e;
-                                }
-                            }
-                        }
-                    } else {
-                        for (Map.Entry<String, String> entry : namaakses.entrySet()) {
-                            if (entry.getValue().trim().toLowerCase().contains(TCari.getText().trim().toLowerCase())) {
-                                try {
-                                    tabMode.addRow(new Object[] {rs.getBoolean(entry.getKey()), entry.getValue(), entry.getKey()});
-                                } catch (SQLException e) {
-                                    if (!e.getMessage().toLowerCase().contains("column") && !e.getMessage().toLowerCase().contains("not found")) {
-                                        throw e;
-                                    }
-                                }
+                    List<String> kata = Arrays.asList(StringUtils.split(TCari.getText().trim().toLowerCase()));
+                    BiPredicate<String, String> cari = (k, v) -> kata.isEmpty() || kata.stream().allMatch(w -> k.contains(w) || v.contains(w));
+
+                    for (Map.Entry<String, String> entry : namaakses.entrySet()) {
+                        try {
+                            if (!cari.test(entry.getKey().toLowerCase(), entry.getValue().toLowerCase())) continue;
+
+                            tabMode.addRow(new Object[] {rs.getBoolean(entry.getKey()), entry.getValue(), entry.getKey()});
+                        } catch (SQLException e) {
+                            if (!e.getMessage().toLowerCase().contains("column") && !e.getMessage().toLowerCase().contains("not found")) {
+                                throw e;
                             }
                         }
                     }
