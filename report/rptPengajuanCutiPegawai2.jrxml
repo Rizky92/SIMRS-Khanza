@@ -24,7 +24,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, pengajuan_cuti.tmt_kerja, pengajuan_cuti.tat_kerja, pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, pengajuan_cuti.sisa, pengajuan_cuti.kepentingan, pengajuan_cuti.nik_pj, pegawai.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik_pj = pegawai.nik order by pengajuan_cuti.tanggal]]>
+		<![CDATA[select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, pengajuan_cuti.tmt_kerja, pengajuan_cuti.tat_kerja, pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, pengajuan_cuti.sisa, pengajuan_cuti.kepentingan, pengajuan_cuti.nik, pegawai.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik = pegawai.nik order by pengajuan_cuti.tanggal]]>
 	</queryString>
 	<field name="no_pengajuan" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="no_pengajuan"/>
@@ -70,8 +70,8 @@
 		<property name="com.jaspersoft.studio.field.label" value="kepentingan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
 	</field>
-	<field name="nik_pj" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nik_pj"/>
+	<field name="nik" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nik"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
 	</field>
 	<field name="nama" class="java.lang.String">
@@ -395,7 +395,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[P.J. Terkait]]></text>
+				<text><![CDATA[Yang Mengajukan]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="17" width="802" height="1" uuid="faf4be47-df92-45d7-b8df-9456f569364b">
@@ -581,7 +581,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nik_pj}+" "+$F{nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nik}+" "+$F{nama}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="Float" x="0" y="11" width="802" height="1" uuid="37bfd407-51ae-4b9d-8874-b03111628829">

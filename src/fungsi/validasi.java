@@ -576,22 +576,30 @@ public final class validasi {
         }
     }
 
+    public boolean umurcacheSmc(File file, int hari) {
+        if (!file.isFile()) return true;
+
+        return TimeUnit.DAYS.convert(System.currentTimeMillis() - file.lastModified(), TimeUnit.MILLISECONDS) > hari;
+    }
+
     public boolean umurcacheSmc(String path, int hari) {
         try {
-            File file = new File(path);
-
-            if (!file.isFile()) return true;
-
-            return TimeUnit.DAYS.convert(System.currentTimeMillis() - file.lastModified(), TimeUnit.MILLISECONDS) > hari;
+            return umurcacheSmc(new File(path), hari);
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
+            return true;
         }
-
-        return true;
     }
 
     public void pindahSmc(KeyEvent e, JComponent previous, JComponent next) {
         if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            next.requestFocus();
+        } else if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            previous.requestFocus();
+        }
+    }
+
+    public void pindahEnterSmc(KeyEvent e, JComponent previous, JComponent next) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             next.requestFocus();
         } else if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             previous.requestFocus();

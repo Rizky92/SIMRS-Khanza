@@ -1036,6 +1036,7 @@ import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTerapiWicara;
+import rekammedis.RMPenilaianTindakanInvasifNonBedahSMC;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMPerencanaanPemulangan;
 import rekammedis.RMRiwayatKamarPasien;
@@ -50943,7 +50944,8 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
-                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc;
+                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
+                             btnPengkajianInvasifNonBedahSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51041,6 +51043,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatSuratKontrolSmc.setName("btnBPJSRiwayatSuratKontrolSmc");
         btnBPJSRiwayatSuratKontrolSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmc);
+
+        btnPengkajianInvasifNonBedahSMC = new widget.ButtonBig();
+        btnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088726_bed_hospital_icu_medical_treatment_icon.png")));
+        btnPengkajianInvasifNonBedahSMC.setText("Pengkajian Tindakan Invasif Non Bedah");
+        btnPengkajianInvasifNonBedahSMC.setIconTextGap(0);
+        btnPengkajianInvasifNonBedahSMC.setName("btnPengkajianInvasifNonBedahSMC");
+        btnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPengkajianInvasifNonBedahSMC.addActionListener(this::btnPengkajianInvasifNonBedahSMCActionPerformed);
     }
 
     private void isComboSMC() {
@@ -51082,6 +51092,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if (akses.getbpjs_riwayat_surat_smc()) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 19) {
+            if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
+                Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 20) {
@@ -51160,6 +51175,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getbpjs_riwayat_surat_smc()) {
             Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
+            Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
             jmlmenu++;
         }
     }
@@ -51245,6 +51265,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getbpjs_riwayat_surat_smc()) {
             if (btnBPJSRiwayatSuratKontrolSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
+            if (btnPengkajianInvasifNonBedahSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
                 jmlmenu++;
             }
         }
@@ -51403,6 +51430,20 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMPenilaianTindakanInvasifNonBedahSMC form = new RMPenilaianTindakanInvasifNonBedahSMC(this, false);
+        form.isCek();
+        form.emptTeks();
+        form.setTampil();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }

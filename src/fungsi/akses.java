@@ -280,7 +280,8 @@ public final class akses {
         bpjs_riwayat_pelayanan_resep_smc = false,
         set_pintu_poli = false,
         pintu_poli = false,
-        bpjs_riwayat_surat_smc = false;
+        bpjs_riwayat_surat_smc = false,
+        pengkajian_tindakan_invasif_non_bedah_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1534,6 +1535,7 @@ public final class akses {
                         akses.surat_penolakan_resusitasi=akses.getBoolean(rs2, "surat_penolakan_resusitasi");
                         akses.catatan_observasi_ruang_ok=akses.getBoolean(rs2, "catatan_observasi_ruang_ok");
                         akses.hasil_pemeriksaan_usg_abdomen=akses.getBoolean(rs2, "hasil_pemeriksaan_usg_abdomen");
+                        akses.pengkajian_tindakan_invasif_non_bedah_smc=akses.getBoolean(rs2, "pengkajian_tindakan_invasif_non_bedah_smc");
                         akses.intervensi_nyeri_farmakologi=akses.getBoolean(rs2, "intervensi_nyeri_farmakologi");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
@@ -2794,6 +2796,7 @@ public final class akses {
         akses.surat_penolakan_resusitasi=isadmin;
         akses.catatan_observasi_ruang_ok=isadmin;
         akses.hasil_pemeriksaan_usg_abdomen=isadmin;
+        akses.pengkajian_tindakan_invasif_non_bedah_smc=isadmin;
         akses.intervensi_nyeri_farmakologi=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
@@ -4056,6 +4059,7 @@ public final class akses {
     public static boolean getsurat_penolakan_resusitasi(){return akses.surat_penolakan_resusitasi;}
     public static boolean getcatatan_observasi_ruang_ok(){return akses.catatan_observasi_ruang_ok;}
     public static boolean gethasil_pemeriksaan_usg_abdomen(){return akses.hasil_pemeriksaan_usg_abdomen;}
+    public static boolean getpengkajian_tindakan_invasif_non_bedah_smc(){return akses.pengkajian_tindakan_invasif_non_bedah_smc;}
     public static boolean getintervensi_nyeri_farmakologi(){return akses.intervensi_nyeri_farmakologi;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}

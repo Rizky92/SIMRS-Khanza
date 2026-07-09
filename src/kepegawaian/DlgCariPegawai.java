@@ -38,6 +38,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
     private final ObjectMapper mapper = new ObjectMapper();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private String kodeJenjang = "";
 
     /**
      * Creates new form DlgPenyakit
@@ -459,10 +460,11 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                 } else {
                     for (JsonNode list : response) {
                         if (list.path("NIP").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                             list.path("Nama").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                             list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                             list.path("Bidang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                             list.path("Departemen").asText().toLowerCase().contains(TCari.getText().toLowerCase())) {
+                            list.path("Nama").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                            list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                            list.path("Bidang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                            list.path("Departemen").asText().toLowerCase().contains(TCari.getText().toLowerCase()
+                        )) {
                             tabMode.addRow(new Object[] {
                                 list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
                                 list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
