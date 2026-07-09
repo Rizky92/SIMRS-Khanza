@@ -79,6 +79,61 @@
                 "where penilaian_mcu.no_rawat='".$rsquerynorawat["no_rawat"]."'"
             );
             if($rsquerydatamcu = mysqli_fetch_array($querydatamcu)){
+		$kesimpulan_list          = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $rsquerydatamcu["kesimpulan"])), function($v){ return $v !== ""; }));
+                $anjuran_list             = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $rsquerydatamcu["anjuran"])), function($v){ return $v !== ""; }));
+                $anjuran_terpakai         = array();
+                $master_anjuran_cache     = array();
+                $baris_kesimpulan_anjuran = "";
+                if(!empty($kesimpulan_list)){
+                    foreach($kesimpulan_list as $idx => $kesimpulan_item){
+                        if(!array_key_exists($kesimpulan_item, $master_anjuran_cache)){
+                            $kesimpulan_item_aman = validTeks($kesimpulan_item);
+                            $querymasterkesimpulananjuran = bukaquery(
+                                "select master_kesimpulan_anjuran_mcu.anjuran from master_kesimpulan_anjuran_mcu where master_kesimpulan_anjuran_mcu.kesimpulan='".$kesimpulan_item_aman."'"
+                            );
+                            $opsi_anjuran = array();
+                            while($rsquerymasterkesimpulananjuran = mysqli_fetch_array($querymasterkesimpulananjuran)){
+                                $opsi_anjuran[] = trim($rsquerymasterkesimpulananjuran["anjuran"]);
+                            }
+                            $master_anjuran_cache[$kesimpulan_item] = $opsi_anjuran;
+                        }
+                        $opsi_anjuran = $master_anjuran_cache[$kesimpulan_item];
+
+                        $anjuran_teks = null;
+                        if(isset($anjuran_list[$idx]) && !in_array($idx, $anjuran_terpakai) && in_array($anjuran_list[$idx], $opsi_anjuran)){
+                            $anjuran_teks       = $anjuran_list[$idx];
+                            $anjuran_terpakai[] = $idx;
+                        }
+
+                        if($anjuran_teks === null){
+                            foreach($anjuran_list as $a_idx => $a_val){
+                                if(in_array($a_idx, $anjuran_terpakai)){
+                                    continue;
+                                }
+                                if(in_array($a_val, $opsi_anjuran)){
+                                    $anjuran_teks       = $a_val;
+                                    $anjuran_terpakai[] = $a_idx;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if($anjuran_teks === null || $anjuran_teks === ""){
+                            $anjuran_teks = "-";
+                        }
+
+                        $baris_kesimpulan_anjuran.= "<tr>
+                                                       <td width='50%' valign='top'>".nl2br(htmlspecialchars($kesimpulan_item))."</td>
+                                                       <td width='50%' valign='top'>".nl2br(htmlspecialchars($anjuran_teks))."</td>
+                                                     </tr>";
+                    }
+                }else{
+                    $baris_kesimpulan_anjuran = "<tr>
+                                                   <td width='50%' valign='top'>-</td>
+                                                   <td width='50%' valign='top'>-</td>
+                                                 </tr>";
+                }
+
                 echo "          <table width='100%' class='table table-hover js-basic-example dataTable' align='right' cellpadding='3px' cellspacing='0'>
                                     <caption><b>PENILAIAN AWAL MEDICAL CHECK UP</b></caption>
                                     <tr>
@@ -500,21 +555,13 @@
                                      </tr>
                                      <tr>
                                         <td valign='top'>
-                                           KESIMPULAN
-                                           <table width='100%' align='right'>
-                                              <tr>
-                                                  <td width='100%' align='justify'>".$rsquerydatamcu["kesimpulan"]."</td>
+                                           KESIMPULAN & ANJURAN
+                                           <table width='100%' align='right' class='table table-bordered'>
+                                              <tr align='center'>
+                                                  <td width='50%' bgcolor='#FCFCFC'><b>Kesimpulan</b></td>
+                                                  <td width='50%' bgcolor='#FCFCFC'><b>Anjuran</b></td>
                                               </tr>
-                                           </table>
-                                        </td>
-                                     </tr>
-                                     <tr>
-                                        <td valign='top'>
-                                           ANJURAN
-                                           <table width='100%' align='right'>
-                                              <tr>
-                                                  <td width='100%' align='justify'>".$rsquerydatamcu["anjuran"]."</td>
-                                              </tr>
+                                              ".$baris_kesimpulan_anjuran."
                                            </table>
                                         </td>
                                      </tr>
@@ -738,7 +785,6 @@
                                 }
                             }
                         }
-
                         $s++;
                     }
 
@@ -757,10 +803,8 @@
                                         <td valign='top' colspan='3'>: ".$querysarankesanperiksalab["saran"]."</td>
                                     </tr>";
                     }
-
                     $w++;
                 }
-
                 echo "          </table>";
             }
 

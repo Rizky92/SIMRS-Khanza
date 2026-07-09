@@ -115,6 +115,7 @@ import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataCatatanObservasiRuangOperasi;
 import rekammedis.RMDataIntervensiNyeriFarmakologi;
+import rekammedis.RMDataIntervensiNyeriNonFarmakologi;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
 import rekammedis.RMDataResumePasien;
@@ -257,6 +258,7 @@ import surat.SuratKeteranganLayakTerbang;
 import surat.SuratKeteranganSehat;
 import surat.SuratKewaspadaanKesehatan;
 import surat.SuratKontrol;
+import surat.SuratPengajuanCutiPerawatan;
 import surat.SuratPenolakanAnjuranMedis;
 import surat.SuratPenolakanResusitasi;
 import surat.SuratPermintaanBinrohtal;
@@ -9088,6 +9090,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Dirujuk'");
+            if(tbKasirRalan.getSelectedRow()>-1){
+                tabModekasir.setValueAt("Dirujuk",tbKasirRalan.getSelectedRow(),10);
+            }
             DlgRujuk dlgrjk=new DlgRujuk(null,false);
             dlgrjk.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgrjk.setLocationRelativeTo(internalFrame1);
@@ -9123,20 +9128,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
-            if (tbKasirRalan.getSelectedRow() > -1) {
-                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
-                    String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
-                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirujuk', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
-                        tabModekasir.setValueAt("Dirujuk", tbKasirRalan.getSelectedRow(), 10);
-                        tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
-                    }
-                } else {
-                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirujuk'", "no_rawat = ?", TNoRw.getText())) {
-                        tabModekasir.setValueAt("Dirujuk", tbKasirRalan.getSelectedRow(), 10);
-                    }
-                }
-                tabModekasir.fireTableRowsUpdated(tbKasirRalan.getSelectedRow(), tbKasirRalan.getSelectedRow());
-                MnRujukActionPerformed(null);
+            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
+                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            }else {
+                MnRujukActionPerformed(evt);
             }
         }
     }//GEN-LAST:event_MnDirujukActionPerformed
@@ -16103,6 +16098,50 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
+    private void MnIntervensiNyeriNonFarmakologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianUlangNyeriActionPerformed
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataIntervensiNyeriNonFarmakologi form=new RMDataIntervensiNyeriNonFarmakologi(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnPengajuanCutiPerawatanPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPersetujuanUmumActionPerformed
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                SuratPengajuanCutiPerawatan form=new SuratPengajuanCutiPerawatan(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -16556,7 +16595,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                   MnSkriningInstrumenMentalEmosional,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaMasukPICU,MnSkriningInstrumenAMT,MnSkriningPneumoniaSeverityIndex,MnPenilaianAwalMedisRalanJantung,MnPenilaianAwalMedisRalanUrologi,
                                   MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiPerawat,
                                   MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnCetakSuratKeteranganBerobat,MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,
-                                  MnHasilPemeriksaanUSGAbdomen,MnIntervensiNyeriFarmakologi;
+                                  MnHasilPemeriksaanUSGAbdomen,MnIntervensiNyeriFarmakologi,MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
     private javax.swing.JMenuItem MnPengkajianInvasifNonBedahSMC;
@@ -16948,6 +16987,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPenilaianAwalMedisIGDPsikiatri.setEnabled(akses.getpenilaian_medis_ralan_gawat_darurat_psikiatri());
         MnPenilaianUlangNyeri.setEnabled(akses.getpenilaian_ulang_nyeri());
         MnIntervensiNyeriFarmakologi.setEnabled(akses.getintervensi_nyeri_farmakologi());
+        MnIntervensiNyeriNonFarmakologi.setEnabled(akses.getintervensi_nyeri_nonfarmakologi());
         MnPenilaianTerapiWicara.setEnabled(akses.getpenilaian_terapi_wicara());
         MnPengkajianRestrain.setEnabled(akses.getpengkajian_restrain());
         MnPenilaianAwalMedisRalanParu.setEnabled(akses.getpenilaian_awal_medis_ralan_paru());
@@ -17022,6 +17062,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSuratPermohonanPrivasi.setEnabled(akses.getsurat_permohonan_privasi());
         MnSuratPermintaanSecondOpinion.setEnabled(akses.getsurat_permintaan_second_opinion());
         MnSuratPenolakanResusitasi.setEnabled(akses.getsurat_penolakan_resusitasi());
+        MnPengajuanCutiPerawatanPasien.setEnabled(akses.getsurat_pengajuan_cuti_pasien());
         MnCheckListKriteriaMasukNICU.setEnabled(akses.getkriteria_masuk_nicu());
         MnCheckListKriteriaMasukPICU.setEnabled(akses.getkriteria_masuk_picu());
         MnPenilaianAwalMedisRalanJantung.setEnabled(akses.getpenilaian_awal_medis_ralan_jantung());
@@ -18652,6 +18693,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSuratPenolakanResusitasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSuratPenolakanResusitasi.addActionListener(this::MnSuratPenolakanResusitasiActionPerformed);
 
+        MnPengajuanCutiPerawatanPasien = new javax.swing.JMenuItem();
+        MnPengajuanCutiPerawatanPasien.setBackground(new java.awt.Color(255, 255, 254));
+        MnPengajuanCutiPerawatanPasien.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPengajuanCutiPerawatanPasien.setForeground(new java.awt.Color(50, 50, 50));
+        MnPengajuanCutiPerawatanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPengajuanCutiPerawatanPasien.setText("Pengajuan Cuti Perawatan");
+        MnPengajuanCutiPerawatanPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPengajuanCutiPerawatanPasien.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPengajuanCutiPerawatanPasien.setName("MnPengajuanCutiPerawatanPasien");
+        MnPengajuanCutiPerawatanPasien.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnPengajuanCutiPerawatanPasien.addActionListener(this::MnPengajuanCutiPerawatanPasienActionPerformed);
+
         MnCheckListKriteriaMasukNICU = new javax.swing.JMenuItem();
         MnCheckListKriteriaMasukNICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaMasukNICU.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -18735,6 +18788,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnIntervensiNyeriFarmakologi.setName("MnIntervensiNyeriFarmakologi");
         MnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnIntervensiNyeriFarmakologi.addActionListener(this::MnIntervensiNyeriFarmakologiActionPerformed);
+
+        MnIntervensiNyeriNonFarmakologi = new javax.swing.JMenuItem();
+        MnIntervensiNyeriNonFarmakologi.setBackground(new java.awt.Color(255, 255, 254));
+        MnIntervensiNyeriNonFarmakologi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnIntervensiNyeriNonFarmakologi.setForeground(new java.awt.Color(50, 50, 50));
+        MnIntervensiNyeriNonFarmakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnIntervensiNyeriNonFarmakologi.setText("Intervensi Nyeri Non Farmakologi");
+        MnIntervensiNyeriNonFarmakologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnIntervensiNyeriNonFarmakologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnIntervensiNyeriNonFarmakologi.setName("MnIntervensiNyeriNonFarmakologi");
+        MnIntervensiNyeriNonFarmakologi.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnIntervensiNyeriNonFarmakologi.addActionListener(this::MnIntervensiNyeriNonFarmakologiActionPerformed);
 
         MnHasilUSG = new javax.swing.JMenu();
         MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
@@ -18947,6 +19012,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnRMCatatanMonitoring.add(MnMonitoringReaksiTranfusi);
         MnRMCatatanMonitoring.add(MnPenilaianUlangNyeri);
         MnRMCatatanMonitoring.add(MnIntervensiNyeriFarmakologi);
+        MnRMCatatanMonitoring.add(MnIntervensiNyeriNonFarmakologi);
         MnRMCatatanMonitoring.add(MnCatatanKeperawatan);
         MnRMCatatanMonitoring.add(MnCatatanPersalinan);
         MnRMCatatanMonitoring.add(MnCatatanKeseimbanganCairan);
@@ -19059,6 +19125,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSuratPersetujuan.add(MnSuratPermohonanPrivasi);
         MnSuratPersetujuan.add(MnSuratPermintaanSecondOpinion);
         MnSuratPersetujuan.add(MnSuratPenolakanResusitasi);
+        MnSuratPersetujuan.add(MnPengajuanCutiPerawatanPasien);
     }
 
     private void tampilkasirSmc() {

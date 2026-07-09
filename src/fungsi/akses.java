@@ -268,7 +268,8 @@ public final class akses {
             daftar_permintaan_resep_iterasi_bpjs=false,pcra_icra_pengkajian_risiko_prakonstruksi=false,pcra_icra_persyaratan_harus_dipenuhi=false,satu_sehat_kirim_questionresponse_telaah_farmasi=false,
             satu_sehat_kirim_allergy_intolerance=false,konsultasi_perawat=false,jawaban_konsultasi_perawat=false,bridging_smart_klaim_bpjs=false,mapping_prosedur_smart_klaim_bpjs=false,
             mapping_penyakit_smart_klaim_bpjs=false,permintaan_binrohtal=false,surat_permintaan_perlindungan_dari_kekerasan=false,surat_permohonan_privasi=false,surat_permintaan_second_opinion=false,
-            surat_keterangan_berobat=false,surat_penolakan_resusitasi=false,catatan_observasi_ruang_ok=false,hasil_pemeriksaan_usg_abdomen=false,intervensi_nyeri_farmakologi=false;
+            surat_keterangan_berobat=false,surat_penolakan_resusitasi=false,catatan_observasi_ruang_ok=false,hasil_pemeriksaan_usg_abdomen=false,intervensi_nyeri_farmakologi=false,
+            intervensi_nyeri_nonfarmakologi=false,surat_pengajuan_cuti_pasien=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1537,6 +1538,8 @@ public final class akses {
                         akses.hasil_pemeriksaan_usg_abdomen=akses.getBoolean(rs2, "hasil_pemeriksaan_usg_abdomen");
                         akses.pengkajian_tindakan_invasif_non_bedah_smc=akses.getBoolean(rs2, "pengkajian_tindakan_invasif_non_bedah_smc");
                         akses.intervensi_nyeri_farmakologi=akses.getBoolean(rs2, "intervensi_nyeri_farmakologi");
+                        akses.intervensi_nyeri_nonfarmakologi=akses.getBoolean(rs2, "intervensi_nyeri_nonfarmakologi");
+                        akses.surat_pengajuan_cuti_pasien=akses.getBoolean(rs2, "surat_pengajuan_cuti_pasien");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2798,6 +2801,8 @@ public final class akses {
         akses.hasil_pemeriksaan_usg_abdomen=isadmin;
         akses.pengkajian_tindakan_invasif_non_bedah_smc=isadmin;
         akses.intervensi_nyeri_farmakologi=isadmin;
+        akses.intervensi_nyeri_nonfarmakologi=isadmin;
+        akses.surat_pengajuan_cuti_pasien=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4061,6 +4066,8 @@ public final class akses {
     public static boolean gethasil_pemeriksaan_usg_abdomen(){return akses.hasil_pemeriksaan_usg_abdomen;}
     public static boolean getpengkajian_tindakan_invasif_non_bedah_smc(){return akses.pengkajian_tindakan_invasif_non_bedah_smc;}
     public static boolean getintervensi_nyeri_farmakologi(){return akses.intervensi_nyeri_farmakologi;}
+    public static boolean getintervensi_nyeri_nonfarmakologi(){return akses.intervensi_nyeri_nonfarmakologi;}
+    public static boolean getsurat_pengajuan_cuti_pasien(){return akses.surat_pengajuan_cuti_pasien;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
