@@ -207,8 +207,8 @@ $(function() {
             return [item.label, item.data];
         });
 
-        $.plot("#bar_chart_penyakit", [ 
-            { data: barData, color: "#007bff", bars: { show: true, barWidth: 0.5, align: "center" } } 
+        $.plot("#bar_chart_penyakit", [
+            { data: barData, color: "#007bff", bars: { show: true, barWidth: 0.5, align: "center" } }
         ], {
             xaxis: { mode: "categories", tickLength: 0, font: { size: 11, color: "#333" } },
             yaxis: { min: 0, tickDecimals: 0 },

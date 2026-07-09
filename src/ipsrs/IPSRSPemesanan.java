@@ -1305,7 +1305,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             root = null;
         }
     }
-    
+
     private void LoadData(){
         tampil();
         tampil2();

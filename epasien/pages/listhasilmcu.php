@@ -63,7 +63,7 @@
                             $anjuran_teks       = $anjuran_list[$idx];
                             $anjuran_terpakai[] = $idx;
                         }
-                      
+
                         if($anjuran_teks === null){
                             foreach($anjuran_list as $a_idx => $a_val){
                                 if(in_array($a_idx, $anjuran_terpakai)){

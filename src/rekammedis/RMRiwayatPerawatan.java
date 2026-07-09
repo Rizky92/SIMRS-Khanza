@@ -13777,7 +13777,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     }
                 }
             }
-            
+
             //Intervensi Ulang Nyeri
             if(chkIntervensiNyeriFarmakologi.isSelected()==true){
                 try {
@@ -13788,8 +13788,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         "where intervensi_nyeri_farmakologi.no_rawat='"+norawat+"' order by intervensi_nyeri_farmakologi.tgl_perawatan,intervensi_nyeri_farmakologi.jam_rawat").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
-                          "<tr class='isi'>").append( 
-                            "<td valign='top' width='2%'></td>").append(        
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
                             "<td valign='top' width='18%'>Intervensi Nyeri Farmakologi</td>").append(
                             "<td valign='top' width='1%' align='center'>:</td>").append(
                             "<td valign='top' width='79%'>").append(
@@ -13816,7 +13816,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     "<td valign='top' align='center'>").append(rs2.getString("dosis_efek")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("rute")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
-                                 "</tr>");                                        
+                                 "</tr>");
                             w++;
                         }while(rs2.next());
                         htmlContent.append(
@@ -13832,7 +13832,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     }
                 }
             }
-            
+
             //Intervensi Ulang Nyeri Non Farmakologi
             if(chkIntervensiNyeriNonFarmakologi.isSelected()==true){
                 try {
@@ -13842,8 +13842,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         "where intervensi_nyeri_nonfarmakologi.no_rawat='"+norawat+"' order by intervensi_nyeri_nonfarmakologi.tgl_perawatan,intervensi_nyeri_nonfarmakologi.jam_rawat").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
-                          "<tr class='isi'>").append( 
-                            "<td valign='top' width='2%'></td>").append(        
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
                             "<td valign='top' width='18%'>Intervensi Nyeri Non Farmakologi</td>").append(
                             "<td valign='top' width='1%' align='center'>:</td>").append(
                             "<td valign='top' width='79%'>").append(
@@ -13863,7 +13863,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     "<td valign='top'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("intervensi")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
-                                 "</tr>");                                        
+                                 "</tr>");
                             w++;
                         }while(rs2.next());
                         htmlContent.append(
