@@ -570,6 +570,7 @@ import kepegawaian.K3RSPenyebabPerTahun;
 import kepegawaian.K3RSPeristiwa;
 import kepegawaian.PengajuanCutiAdmin;
 import kepegawaian.PengajuanCutiPegawai;
+import kepegawaian.PengajuanIzinPegawaiSMC;
 import kepegawaian.SKPKategoriPenilaian;
 import kepegawaian.SKPKriteriaPenilaian;
 import kepegawaian.SKPPenilaianPegawai;
@@ -1838,6 +1839,7 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapBulanan = new javax.swing.JMenuItem();
         MnRekapHadir = new javax.swing.JMenuItem();
         MnPengajuanCutiPegawai = new javax.swing.JMenuItem();
+        MnPengajuanIzinPegawai = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         MnRekapBulanan1 = new javax.swing.JMenuItem();
         MnRekapBulanan3 = new javax.swing.JMenuItem();
@@ -2090,7 +2092,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14/05/2026" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24/06/2026" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7740,6 +7742,21 @@ public class frmUtama extends javax.swing.JFrame {
         });
         jMenu5.add(MnPengajuanCutiPegawai);
 
+        MnPengajuanIzinPegawai.setBackground(new java.awt.Color(255, 255, 254));
+        MnPengajuanIzinPegawai.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPengajuanIzinPegawai.setForeground(new java.awt.Color(50, 90, 40));
+        MnPengajuanIzinPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/addressbook-edit24.png"))); // NOI18N
+        MnPengajuanIzinPegawai.setText("Pengajuan Izin");
+        MnPengajuanIzinPegawai.setEnabled(false);
+        MnPengajuanIzinPegawai.setName("MnPengajuanIzinPegawai"); // NOI18N
+        MnPengajuanIzinPegawai.setPreferredSize(new java.awt.Dimension(170, 30));
+        MnPengajuanIzinPegawai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPengajuanIzinPegawaiActionPerformed(evt);
+            }
+        });
+        jMenu5.add(MnPengajuanIzinPegawai);
+
         MenuBar.add(jMenu5);
 
         jMenu6.setBackground(new java.awt.Color(20, 0, 20));
@@ -8466,6 +8483,7 @@ public class frmUtama extends javax.swing.JFrame {
                     lblUser.setText(akses.getkode());
                     MnGantiPassword.setEnabled(true);
                     MnPengajuanCutiPegawai.setEnabled(true);
+                    MnPengajuanIzinPegawai.setEnabled(true);
                     BtnToolReg.setEnabled(akses.getregistrasi());
                     if((akses.getkamar_inap()==true)||(akses.getbilling_ranap()==true)||(akses.gettindakan_ranap()==true)){
                         BtnToolKamnap.setEnabled(true);
@@ -14944,6 +14962,17 @@ public class frmUtama extends javax.swing.JFrame {
 
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MenuRevalidateCacheActionPerformed
+
+    private void MnPengajuanIzinPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPengajuanIzinPegawaiActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        isTutup();
+        PengajuanIzinPegawaiSMC hadir=new PengajuanIzinPegawaiSMC(this,false);
+        hadir.isCek();
+        hadir.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        hadir.setLocationRelativeTo(PanelUtama);
+        hadir.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnPengajuanIzinPegawaiActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -23881,6 +23910,7 @@ public class frmUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem MnKoleksiPenelitian;
     private javax.swing.JMenuItem MnLogin;
     private javax.swing.JMenuItem MnPengajuanCutiPegawai;
+    private javax.swing.JMenuItem MnPengajuanIzinPegawai;
     private javax.swing.JMenuItem MnRekapBulanan;
     private javax.swing.JMenuItem MnRekapBulanan1;
     private javax.swing.JMenuItem MnRekapBulanan2;

@@ -1812,7 +1812,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pengajuan_cuti.no_pengajuan,3),signed)),0) from pengajuan_cuti where pengajuan_cuti.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
                 "PC"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan);
         */
-        Valid.autonomor1Smc(NoPengajuan, "PC", "pengajuan_cuti", "no_pengajuan", 3, "0", Tanggal);
+        Valid.autonomor1Smc(NoPengajuan, "KPC", "pengajuan_cuti", "no_pengajuan", 3, "0", Tanggal);
     }
 
     private void tampilSmc() {

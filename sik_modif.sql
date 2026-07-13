@@ -168,6 +168,13 @@ ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `rr` varcha
 
 ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `ufv` varchar(10) NULL DEFAULT NULL AFTER `rr`;
 
+CREATE TABLE IF NOT EXISTS `cuti_stts_kerja_smc`  (
+  `stts` char(3) NOT NULL,
+  `jenis_cuti` varchar(20) NOT NULL,
+  `hakcuti` tinyint(4) NOT NULL,
+  PRIMARY KEY (`stts`,`jenis_cuti`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
 
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
@@ -509,6 +516,14 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DE
 
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
+CREATE TABLE IF NOT EXISTS `izin_stts_kerja_smc`  (
+  `stts` char(3) NOT NULL,
+  `jenis_izin` varchar(20) NOT NULL,
+  `hakizin` tinyint(4) NOT NULL,
+  `max_menit` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`stts`,`jenis_izin`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
@@ -617,7 +632,25 @@ ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_kerja` date NOT NULL 
 
 ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL AFTER `tmt_kerja`;
 
-ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya') NOT NULL AFTER `nik`;
+ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya','Panjang (10 Tahun)') NOT NULL AFTER `nik`;
+
+CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
+  `no_pengajuan` varchar(17) NOT NULL,
+  `tanggal` date NOT NULL,
+  `tanggal_izin` date NOT NULL,
+  `jam_mulai` time NOT NULL DEFAULT '00:00:00',
+  `jam_akhir` time NOT NULL DEFAULT '00:00:00',
+  `nik` varchar(20) NOT NULL,
+  `urgensi` enum('Terlambat','Meninggalkan Kerja','Pulang Cepat','Lainnya') NOT NULL,
+  `kepentingan` varchar(70) NOT NULL,
+  `nik_pj` varchar(20) NOT NULL,
+  `status` enum('Proses Pengajuan','Disetujui','Ditolak') NOT NULL,
+  PRIMARY KEY (`no_pengajuan`) USING BTREE,
+  INDEX `nik` (`nik`) USING BTREE,
+  INDEX `nik_pj` (`nik_pj`) USING BTREE,
+  CONSTRAINT `pengajuan_izin_smc_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `pegawai` (`nik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pengajuan_izin_smc_ibfk_2` FOREIGN KEY (`nik_pj`) REFERENCES `pegawai` (`nik`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
 
