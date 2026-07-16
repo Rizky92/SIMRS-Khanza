@@ -1319,7 +1319,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     }
 
     private void autoNomor() {
-        Valid.autonomor1Smc(NoPengajuan, "KPI", "pengajuan_izin_smc", "no_pengajuan", 3, "0", Tanggal);
+        Valid.autonomor1Smc(NoPengajuan, "PI", "pengajuan_izin_smc", "no_pengajuan", 3, "0", Tanggal);
     }
 
     private void tampilSmc() {
