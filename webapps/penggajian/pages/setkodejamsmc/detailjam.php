@@ -9,15 +9,23 @@ if (strpos($_SERVER['REQUEST_URI'], "pages")) {
         <div align="center" class="link">
             <a href=?act=HomeAdmin>| Menu Utama |</a>
         </div>
-        <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" enctype="multipart/form-data">
+        <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" enctype="application/x-www-form-urlencoded">
             <?php
             $action = isset($_GET['action']) ? $_GET['action'] : null;
-            $no_id  = validTeks(isset($_GET['no_id']) ? $_GET['no_id'] : null);
+            $shift  = validTeks(isset($_GET['shift']) ? $_GET['shift'] : null);
             ?>
-            <input type="hidden" name="no_id" value="<?= $no_id ?>">
-            <input type="hidden" name="no_id" value="<?= $action ?>">
+            <input type="hidden" name="shift" value="<?= $shift ?>">
+            <input type="hidden" name="action" value="<?= $action ?>">
 
             <table width="100%" align="center">
+                <tr class="head">
+                    <td width="25%">Kode Shift</td>
+                    <td>:</td>
+                    <td width="75%">
+                        <input name="kode_shift" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type="text" id="TxtIsi1" size="10" maxlength="5" pattern="[a-zA-Z 0-9-]{1,5}" title=" a-z A-Z 0-9 (Maksimal 5 karakter)" autocomplete="off" required autofocus />
+                        <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
                 <tr class="head">
                     <td width="25%">Jam Shift</td>
                     <td>:</td>
@@ -87,46 +95,43 @@ if (strpos($_SERVER['REQUEST_URI'], "pages")) {
                         <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
-                <tr class="head">
-                    <td width="25%">Kode Shift</td>
-                    <td>:</td>
-                    <td width="75%">
-                        <input name="stts" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type="text" id="TxtIsi1" value="<?= $stts ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required autofocus />
-                        <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
-                    </td>
-                </tr>
             </table>
-            <div align="center"><input name=BtnSimpan type=submit class="button" value="SIMPAN">&nbsp;<input name=BtnKosong type=reset class="button" value="KOSONG"></div><br>
+            <div align="center">
+                <button type="submit" name="BtnSimpan" class="button"><span>&nbsp;&nbsp;SIMPAN&nbsp;&nbsp;</span></button>
+                <button type="reset" class="button"><span>KOSONG</span></button>
+            </div><br>
             <?php
-            $BtnSimpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : null;
-            if (isset($BtnSimpan)) {
-                $no_id              = validTeks(trim($_POST['no_id']));
-                $dep_id             = validTeks(trim($_POST['dep_id']));
-                $shift              = validTeks(trim($_POST['shift']));
-                $jam_masuk          = validTeks(trim($_POST['jam_masuk']));
-                $menit_masuk        = validTeks(trim($_POST['menit_masuk']));
-                $jam_pulang         = validTeks(trim($_POST['jam_pulang']));
-                $menit_pulang       = validTeks(trim($_POST['menit_pulang']));
-
-                if (!empty($dep_id)) {
-                    switch ($action) {
-                        case "TAMBAH":
+            switch ($action) {
+                case 'TAMBAH':
+                    $BtnSimpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : null;
+                    if (isset($BtnSimpan)) {
+                        $shift      = validTeks(trim($_POST['shift']));
+                        $kode_shift = validTeks(trim($_POST['kode_shift']));
+                        if ($shift !== '' && $kode_shift !== '') {
                             try {
-                                Tambah(" jam_jaga ", " '0','$dep_id','$shift','$jam_masuk:$menit_masuk:00',
-                                        '$jam_pulang:$menit_pulang:00' ", " Jam Jaga ");
-                                echo "<meta http-equiv='refresh' content='1;URL=?act=ListJam&action=TAMBAH'>";
+                                bukaquery2(sprintf("insert into set_kode_shift_smc values ('%s', '%s')", $shift, $kode_shift));
+                                echo <<<HTML
+                                    <meta http-equiv="refresh" content="1;URL=?act=ListKodeShiftSmc&action=TAMBAH">
+                                    HTML;
                             } catch (mysqli_sql_exception $e) {
                                 if ($e->getCode() == 1062) {
-                                    echo "<b style='color:red'>Data jam jaga sudah ada..!!!</b>";
+                                    echo "<b style='color:red'>Data kode jam shift sudah ada..!!!</b>";
                                 } else {
                                     echo "<b style='color:red'>Gagal menyimpan</b>";
                                 }
                             }
-                            break;
+                        } else {
+                            echo 'Semua field harus isi..!!!';
+                        }
                     }
-                } else if (empty($dep_id)) {
-                    echo 'Semua field harus isi..!!!';
-                }
+                    break;
+                case 'HAPUS':
+                    try {
+                        bukaquery2(sprintf("delete from set_kode_shift_smc where shift = '%s'", $shift));
+                    } catch (mysqli_sql_exception $e) {
+                        echo "<b style='color:red'>Gagal menghapus</b>";
+                    }
+                    break;
             }
             ?>
             <div style="width: 100%; height: 57%; overflow: auto">
@@ -134,68 +139,32 @@ if (strpos($_SERVER['REQUEST_URI'], "pages")) {
                     <?php
                     $hasil  = bukaquery('select set_kode_shift_smc.shift, set_kode_shift_smc.kode_shift from set_kode_shift_smc order by set_kode_shift_smc.shift');
                     $jumlah = mysqli_num_rows($hasil);
-
-                    if (mysqli_num_rows($hasil) !== 0):
                     ?>
+
+                    <?php if (mysqli_num_rows($hasil) !== 0): ?>
+                        <tr class="head">
+                            <td width="5%" align="center" valign="center">Aksi</td>
+                            <td width="15%" align="center" valign="center">Kode Shift</td>
+                            <td width="80%" align="center" valign="center">Jam Jaga Shift</td>
+                        </tr>
+                        <?php while ($baris = mysqli_fetch_array($hasil)): ?>
+                            <tr class="isi">
+                                <td width="5%" align="center">
+                                    <a href="?act=ListKodeShiftSmc&action=HAPUS&shift=<?=  str_replace(' ', '_', $baris[1]) ?>"><span>[hapus]</span></a>
+                                </td>
+                                <td width="15%"><?= $baris[0] ?></td>
+                                <td width="80%"><?= $baris[1] ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+                </table>
+                <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
                     <tr class="head">
-                        <td width="20%" align="center" valign="center">Proses</td>
-                        <td width="80%" align="center" valign="center">Departemen</td>
+                        <td align="left">
+                            <Data : <?= $jumlah ?>
+                        </td>
                     </tr>
                 </table>
-                <?php
-
-                if (mysqli_num_rows($hasil) != 0) {
-
-
-                    echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                            <tr class='head'>
-                                <td width='10%'><div align='center'>Proses</div></td>
-                                <td width='20%'><div align='center'>Departemen</div></td>
-                                <td width='24%'><div align='center'>Shift</div></td>
-                                <td width='23%'><div align='center'>Jam Datang</div></td>
-                                <td width='23%'><div align='center'>Jam Pulang</div></td>
-                            </tr>";
-                    while ($baris = mysqli_fetch_array($hasil)) {
-                        echo "<tr class='isi'>
-                                <td>
-                                    <center>"; ?>
-                        <a href="?act=ListJam&action=HAPUS&no_id=<?php print $baris[0] ?>">[hapus]</a>
-                <?php
-                        echo "</center>
-                                </td>
-                                <td>$baris[1]</td>
-                                <td>$baris[2]</td>
-                                <td>$baris[3]</td>
-                                <td>$baris[4]</td>
-                           </tr>";
-                    }
-                    echo "</table>";
-                } else {
-                    echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                                <tr class='head'>
-                                    <td width='10%'><div align='center'>Proses</div></td>
-                                    <td width='20%'><div align='center'>Departemen</div></td>
-                                    <td width='24%'><div align='center'>Shift</div></td>
-                                    <td width='23%'><div align='center'>Jam Datang</div></td>
-                                    <td width='23%'><div align='center'>Jam Pulang</div></td>
-                                </tr>
-                         </table>";
-                }
-
-                if ($action == "HAPUS") {
-                    try {
-                        Hapus("  jam_jaga ", " no_id ='" . $no_id . "' ", "?act=ListJam&action=TAMBAH");
-                    } catch (mysqli_sql_exception $e) {
-                        echo "<b style='color:red'>Gagal menghapus</b>";
-                    }
-                }
-
-                echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                        <tr class='head'>
-                            <td><div align='left'>Data : $jumlah</div></td>
-                        </tr>
-                     </table>";
-                ?>
             </div>
         </form>
     </div>

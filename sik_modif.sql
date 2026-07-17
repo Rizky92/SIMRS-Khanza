@@ -642,6 +642,8 @@ CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
   `jam_akhir` time NOT NULL DEFAULT '00:00:00',
   `nik` varchar(20) NOT NULL,
   `urgensi` enum('Terlambat','Meninggalkan Kerja','Pulang Cepat','Lainnya') NOT NULL,
+  `tmt` date NOT NULL DEFAULT '0000-00-00',
+  `tat` date NOT NULL DEFAULT '0000-00-00',
   `kepentingan` varchar(70) NOT NULL,
   `nik_pj` varchar(20) NOT NULL,
   `status` enum('Proses Pengajuan','Disetujui','Ditolak') NOT NULL,

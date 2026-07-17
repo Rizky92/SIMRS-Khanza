@@ -100,9 +100,9 @@
                     <tr class="isi">
                         <td>
                             <center>
-                                <a href="?act=InputSttskerja&action=UBAH&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[edit]</span>
+                                <a href="?act=InputSttskerja&action=UBAH&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[edit]</span></a>
                                 <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <a href="?act=ListSttskerja&action=HAPUS&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[hapus]</span>
+                                <a href="?act=ListSttskerja&action=HAPUS&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[hapus]</span></a>
                             </center>
                         </td>
                         <td><?= $baris[0] ?></td>

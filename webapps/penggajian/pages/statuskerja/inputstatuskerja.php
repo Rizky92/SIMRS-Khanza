@@ -179,14 +179,14 @@
                         <select name="izin" class="text3" style="width: 95%">
                             <option value=""></option>
                             <option value="Tidak Ada" <?= $cuti_besar === 'Tidak Ada' ? 'selected' : '' ?>>Tidak Ada</option>
-                            <option value="1 Bulan TMT" <?= $cuti_besar === '1 Bulan TMT' ? 'selected' : '' ?>>1 Bulan TMT Kerja</option>
+                            <?php /* <option value="1 Bulan TMT" <?= $cuti_besar === '1 Bulan TMT' ? 'selected' : '' ?>>1 Bulan TMT Kerja</option> */ ?>
                             <option value="3 Bulan TMT" <?= $cuti_besar === '3 Bulan TMT' ? 'selected' : '' ?>>3 Bulan TMT Kerja</option>
-                            <option value="6 Bulan TMT" <?= $cuti_besar === '6 Bulan TMT' ? 'selected' : '' ?>>6 Bulan TMT Kerja</option>
-                            <option value="12 Bulan TMT" <?= $cuti_besar === '12 Bulan TMT' ? 'selected' : '' ?>>12 Bulan TMT Kerja</option>
-                            <option value="1 Bulan per Tahun" <?= $cuti_besar === '1 Bulan per Tahun' ? 'selected' : '' ?>>1 Bulan per Tahun Kerja</option>
+                            <?php /* <option value="6 Bulan TMT" <?= $cuti_besar === '6 Bulan TMT' ? 'selected' : '' ?>>6 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan TMT" <?= $cuti_besar === '12 Bulan TMT' ? 'selected' : '' ?>>12 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="1 Bulan per Tahun" <?= $cuti_besar === '1 Bulan per Tahun' ? 'selected' : '' ?>>1 Bulan per Tahun Kerja</option> */ ?>
                             <option value="3 Bulan per Tahun" <?= $cuti_besar === '3 Bulan per Tahun' ? 'selected' : '' ?>>3 Bulan per Tahun Kerja</option>
-                            <option value="6 Bulan per Tahun" <?= $cuti_besar === '6 Bulan per Tahun' ? 'selected' : '' ?>>6 Bulan per Tahun Kerja</option>
-                            <option value="12 Bulan per Tahun" <?= $cuti_besar === '12 Bulan per Tahun' ? 'selected' : '' ?>>12 Bulan per Tahun Kerja</option>
+                            <?php /* <option value="6 Bulan per Tahun" <?= $cuti_besar === '6 Bulan per Tahun' ? 'selected' : '' ?>>6 Bulan per Tahun Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan per Tahun" <?= $cuti_besar === '12 Bulan per Tahun' ? 'selected' : '' ?>>12 Bulan per Tahun Kerja</option> */ ?>
                         </select>
                     </td>
                 </tr>

@@ -30,14 +30,14 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
+public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode, tabMode2;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private volatile boolean ceksukses = false;
 
-    public PengajuanIzinPegawaiSMC(java.awt.Frame parent, boolean modal) {
+    public PengajuanIzinAdminSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -1220,7 +1220,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            PengajuanIzinPegawaiSMC dialog = new PengajuanIzinPegawaiSMC(new javax.swing.JFrame(), true);
+            PengajuanIzinAdminSMC dialog = new PengajuanIzinAdminSMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1407,7 +1407,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                     }
                     tabMode.fireTableDataChanged();
                     LCount1.setText(tabMode.getRowCount() + "");
-                    PengajuanIzinPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    PengajuanIzinAdminSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
             }.execute();
@@ -1467,7 +1467,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                     }
                     tabMode2.fireTableDataChanged();
                     LCount2.setText(tabMode2.getRowCount() + "");
-                    PengajuanIzinPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    PengajuanIzinAdminSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
             }.execute();
