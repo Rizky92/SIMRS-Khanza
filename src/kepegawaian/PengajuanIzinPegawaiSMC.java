@@ -667,7 +667,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         FormInput.add(Menit2);
         Menit2.setBounds(717, 40, 62, 23);
 
-        Keterangan.setText("(23 jam 59 menit)");
+        Keterangan.setText("(0 jam 0 menit)");
         Keterangan.setName("Keterangan"); // NOI18N
         FormInput.add(Keterangan);
         Keterangan.setBounds(689, 70, 90, 23);
@@ -1186,6 +1186,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 jLabel22.setVisible(true);
                 Jam2.setVisible(true);
                 Menit2.setVisible(true);
+                Keterangan.setText("(0 jam 0 menit)");
                 break;
             case "Tidak Masuk Kerja":
                 jLabel16.setVisible(false);
@@ -1196,6 +1197,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 Jam2.setVisible(false);
                 Menit2.setVisible(false);
                 Valid.setJamSmc(Jam2, Menit2, Detik2, "00:00:00");
+                Keterangan.setText("(1 hari)");
                 break;
             default:
                 break;
@@ -1499,8 +1501,6 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-        } else {
-            Keterangan.setText("(1 hari)");
         }
     }
 

@@ -11,35 +11,16 @@ if (strpos($_SERVER['REQUEST_URI'], "pages")) {
         </div>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" enctype="multipart/form-data">
             <?php
-            echo "";
-            $action = isset($_GET['action']) ? $_GET['action'] : NULL;
-            $no_id  = validTeks(isset($_GET['no_id']) ? $_GET['no_id'] : NULL);
-            echo "<input type=hidden name=no_id  value=$no_id><input type=hidden name=action value=$action>";
+            $action = isset($_GET['action']) ? $_GET['action'] : null;
+            $no_id  = validTeks(isset($_GET['no_id']) ? $_GET['no_id'] : null);
             ?>
             <input type="hidden" name="no_id" value="<?= $no_id ?>">
             <input type="hidden" name="no_id" value="<?= $action ?>">
 
             <table width="100%" align="center">
                 <tr class="head">
-                    <td width="25%">Departemen</td>
-                    <td width="">:</td>
-                    <td width="75%">
-                        <select name="dep_id" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1" autofocus>
-                            <!--<option id='TxtIsi12' value='null'>- Ruang -</option>-->
-                            <?php
-                            $_sql = "SELECT departemen.dep_id,departemen.nama FROM departemen ORDER BY departemen.dep_id";
-                            $hasil = bukaquery($_sql);
-                            while ($baris = mysqli_fetch_array($hasil)) {
-                                echo "<option id='TxtIsi1' value='$baris[0]'>$baris[0] $baris[1]</option>";
-                            }
-                            ?>
-                        </select>
-                        <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
-                    </td>
-                </tr>
-                <tr class="head">
                     <td width="25%">Jam Shift</td>
-                    <td width="">:</td>
+                    <td>:</td>
                     <td width="75%">
                         <select name="shift" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2">
                             <option id='TxtIsi2' value='Pagi'>Pagi</option>
@@ -107,43 +88,17 @@ if (strpos($_SERVER['REQUEST_URI'], "pages")) {
                     </td>
                 </tr>
                 <tr class="head">
-                    <td width="25%">Jam Masuk</td>
-                    <td width="">:</td>
+                    <td width="25%">Kode Shift</td>
+                    <td>:</td>
                     <td width="75%">
-                        <select name="jam_masuk" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" id="TxtIsi3">
-                            <?php
-                            loadJam();
-                            ?>
-                        </select>
-                        <select name="menit_masuk" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" id="TxtIsi3">
-                            <?php
-                            loadMenit();
-                            ?>
-                        </select>
-                        <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
-                    </td>
-                </tr>
-                <tr class="head">
-                    <td width="25%">Jam Pulang</td>
-                    <td width="">:</td>
-                    <td width="75%">
-                        <select name="jam_pulang" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" id="TxtIsi4">
-                            <?php
-                            loadJam();
-                            ?>
-                        </select>
-                        <select name="menit_pulang" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" id="TxtIsi4">
-                            <?php
-                            loadMenit();
-                            ?>
-                        </select>
-                        <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
+                        <input name="stts" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type="text" id="TxtIsi1" value="<?= $stts ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required autofocus />
+                        <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
             </table>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="SIMPAN">&nbsp;<input name=BtnKosong type=reset class="button" value="KOSONG"></div><br>
             <?php
-            $BtnSimpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : NULL;
+            $BtnSimpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : null;
             if (isset($BtnSimpan)) {
                 $no_id              = validTeks(trim($_POST['no_id']));
                 $dep_id             = validTeks(trim($_POST['dep_id']));
@@ -174,14 +129,24 @@ if (strpos($_SERVER['REQUEST_URI'], "pages")) {
                 }
             }
             ?>
-            <div style="width: 100%; height: 57%; overflow: auto;">
+            <div style="width: 100%; height: 57%; overflow: auto">
+                <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
+                    <?php
+                    $hasil  = bukaquery('select set_kode_shift_smc.shift, set_kode_shift_smc.kode_shift from set_kode_shift_smc order by set_kode_shift_smc.shift');
+                    $jumlah = mysqli_num_rows($hasil);
+
+                    if (mysqli_num_rows($hasil) !== 0):
+                    ?>
+                    <tr class="head">
+                        <td width="20%" align="center" valign="center">Proses</td>
+                        <td width="80%" align="center" valign="center">Departemen</td>
+                    </tr>
+                </table>
                 <?php
-                $_sql = "SELECT jam_jaga.no_id,jam_jaga.dep_id,jam_jaga.shift,
-                        jam_jaga.jam_masuk,jam_jaga.jam_pulang from jam_jaga
-                        ORDER BY jam_jaga.dep_id ";
-                $hasil = bukaquery($_sql);
-                $jumlah = mysqli_num_rows($hasil);
+
                 if (mysqli_num_rows($hasil) != 0) {
+
+
                     echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                             <tr class='head'>
                                 <td width='10%'><div align='center'>Proses</div></td>

@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
@@ -46,7 +47,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final Map<String, String> namaakses = new LinkedHashMap<>();
+    private Map<String, String> namaakses = new LinkedHashMap<>();
     private Map<String, Boolean> aksesdiubah = new HashMap<>();
 
     /**
@@ -1661,6 +1662,15 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("set_penggunaan_tarif", "[U] Set Penggunaan Tarif");
         namaakses.put("set_no_rm", "[U] Set RM");
         namaakses.put("tracer_login", "[U] Tracer Login");
+
+        namaakses = namaakses.entrySet()
+            .stream()
+            .sorted(Map.Entry.comparingByValue())
+            .collect(Collectors.toMap(
+                Map.Entry::getKey, Map.Entry::getValue,
+                (e1, e2) -> e1,
+                LinkedHashMap::new
+            ));
     }
 
     private void tampilSmc() {

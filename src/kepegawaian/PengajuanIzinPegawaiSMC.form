@@ -1183,7 +1183,7 @@
                 </Component>
                 <Component class="widget.Label" name="Keterangan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="(23 jam 59 menit)"/>
+                    <Property name="text" type="java.lang.String" value="(0 jam 0 menit)"/>
                     <Property name="name" type="java.lang.String" value="Keterangan" noResource="true"/>
                   </Properties>
                   <Constraints>
