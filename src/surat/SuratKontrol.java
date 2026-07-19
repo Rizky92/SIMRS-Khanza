@@ -8,6 +8,7 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -1449,6 +1450,14 @@ public class SuratKontrol extends javax.swing.JDialog {
     private void NoAntrianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoAntrianKeyPressed
         Valid.pindah(evt,TanggalPeriksa,NoReg);
     }//GEN-LAST:event_NoAntrianKeyPressed
+
+    private void TanggalPeriksaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalPeriksaItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(TanggalPeriksa.getSelectedItem()!=null){
+                isNomer();
+            }
+        }
+    }//GEN-LAST:event_TanggalPeriksaItemStateChanged
 
     private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
         Valid.pindah(evt,Status,Terapi);

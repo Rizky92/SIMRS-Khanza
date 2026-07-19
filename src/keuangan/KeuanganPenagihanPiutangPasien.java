@@ -10,6 +10,7 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -1452,12 +1453,20 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbStatusKeyPressed
 
     private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
-        Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(TanggalTempo.getSelectedItem().toString()), Valid.SetTgl(evt.getItem().toString())));
-        Valid.autonomorSmc(NoPenagihan, "PP", "", "penagihan_piutang", "no_tagihan", 3, "0", Tanggal);
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(Tanggal.getSelectedItem()!=null){
+                Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(TanggalTempo.getSelectedItem().toString()), Valid.SetTgl(evt.getItem().toString())));
+                Valid.autonomorSmc(NoPenagihan, "PP", "", "penagihan_piutang", "no_tagihan", 3, "0", Tanggal);
+            }
+        }
     }//GEN-LAST:event_TanggalItemStateChanged
 
     private void TanggalTempoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalTempoItemStateChanged
-        Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(evt.getItem().toString()), Valid.SetTgl(Tanggal.getSelectedItem().toString())));
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(Tanggal.getSelectedItem()!=null){
+                Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(evt.getItem().toString()), Valid.SetTgl(Tanggal.getSelectedItem().toString())));
+            }
+        }
     }//GEN-LAST:event_TanggalTempoItemStateChanged
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked

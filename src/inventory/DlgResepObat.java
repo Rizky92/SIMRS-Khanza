@@ -19,6 +19,7 @@ import fungsi.validasi;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -2036,11 +2037,17 @@ public final class DlgResepObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppLembarObat1ActionPerformed
 
     private void DTPBeriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPBeriItemStateChanged
-        try {
-            if(getno==0){
-                autoresep();
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(DTPBeri.getSelectedItem()!=null){
+                if(this.isActive()==true){
+                    try {
+                        if(getno==0){
+                            autoresep();
+                        }
+                    } catch (Exception e) {
+                    }
+                }
             }
-        } catch (Exception e) {
         }
     }//GEN-LAST:event_DTPBeriItemStateChanged
 
