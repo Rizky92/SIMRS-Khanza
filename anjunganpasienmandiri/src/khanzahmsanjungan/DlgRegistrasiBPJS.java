@@ -187,6 +187,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     namaDiagnosa.setText(riwayatRujukan.getSelectedRow(1).toString());
                     kodePoli = riwayatRujukan.getSelectedRow(3).toString();
                     namaPoli.setText(riwayatRujukan.getSelectedRow(4).toString());
+                    kodePoliReg = Sequel.cariIsiSmc("select maping_poli_bpjs.kd_poli_rs from maping_poli_bpjs where maping_poli_bpjs.kd_poli_bpjs = ?", kodePoli);
                     tglRujukan.setText(riwayatRujukan.getSelectedRow(5).toString());
                 }
                 catatan.requestFocus();
