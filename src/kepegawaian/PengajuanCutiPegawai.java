@@ -1505,18 +1505,22 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl1ItemStateChanged
 
     private void ppSetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSetujuiActionPerformed
-        if (!"Disetujui".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
+        if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
             if (Sequel.mengupdatetfSmc("pengajuan_cuti", "status = 'Disetujui'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
                 tabMode2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 13);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, status pengajuan tidak boleh dirubah..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ppSetujuiActionPerformed
 
     private void ppTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTolakActionPerformed
-        if (!"Ditolak".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
+        if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
             if (Sequel.mengupdatetfSmc("pengajuan_cuti", "status = 'Ditolak'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
                 tabMode2.setValueAt("Ditolak", tbObat2.getSelectedRow(), 13);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, status pengajuan tidak boleh dirubah..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ppTolakActionPerformed
 
@@ -1897,7 +1901,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosongSmc(tabMode2);
             new SwingWorker<Void, Object[]>() {
-                final String cari = TCari.getText().trim();
+                final String cari = TCari2.getText().trim();
                 int jumlahCuti = 0;
 
                 @Override
@@ -1981,7 +1985,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     }
 
     private void hitungSisaCutiTahunan() {
-        try (PreparedStatement ps = koneksi.prepareStatement(                                                                                     //
+        try (PreparedStatement ps = koneksi.prepareStatement(
             "with datapegawai as (select pegawai.nik, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 1 year)) >= 0, stts_kerja.hakcuti, 0) " +
             "as hakcuti, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 year), makedate(year(?), " +
             "dayofyear(pegawai.mulai_kerja))) as tmt_kerja, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), " +

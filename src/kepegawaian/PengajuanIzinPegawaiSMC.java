@@ -36,13 +36,20 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private volatile boolean ceksukses = false;
+    private String izin = "";
+    private String tglTMTKerja = "0000-00-00";
+    private String tglTATKerja = "0000-00-00";
+    private int hakIzin = 0;
+    private int diambil = 0;
+    private String bidang;
+    private String departemen;
 
     public PengajuanIzinPegawaiSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
         tabMode = new DefaultTableModel(null, new Object[] {
-            "No.Pengajuan", "Pengajuan", "Tgl. Izin", "Jam Mulai", "Jam Selesai", "Jenis Izin", "Kepentingan Izin", "NIK P.J.", "P.J. Terkait", "Status"
+            "No.Pengajuan", "Pengajuan", "Jenis Izin", "Tgl. Izin", "Jam Mulai", "Jam Selesai", "Kepentingan Izin", "Sisa Izin", "Periode Awal", "Periode Akhir", "NIK P.J.", "P.J. Terkait", "Departemen", "Bidang", "Status"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -82,7 +89,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabMode2 = new DefaultTableModel(null, new Object[] {
-            "No.Pengajuan", "Pengajuan", "Tgl. Izin", "Jam Mulai", "Jam Selesai", "Jenis Izin", "Kepentingan Izin", "NIK Mengajukan", "Pegawai Mengajukan", "Status"
+            "No.Pengajuan", "Pengajuan", "Jenis Izin", "Tgl. Izin", "Jam Mulai", "Jam Selesai", "Kepentingan Izin", "Sisa Izin", "Periode Awal", "Periode Akhir", "NIK Mengajukan", "Pegawai Mengajukan", "Departemen", "Bidang", "Status"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -193,6 +200,8 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         Jam2 = new widget.ComboBox();
         Menit2 = new widget.ComboBox();
         Keterangan = new widget.Label();
+        jLabel12 = new widget.Label();
+        Sisa = new widget.TextBox();
         ChkInput = new widget.CekBox();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -655,10 +664,25 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         FormInput.add(Menit2);
         Menit2.setBounds(717, 40, 62, 23);
 
-        Keterangan.setText("(0 jam 0 menit)");
+        Keterangan.setText("(23 jam 59 menit)");
         Keterangan.setName("Keterangan"); // NOI18N
         FormInput.add(Keterangan);
-        Keterangan.setBounds(689, 70, 90, 23);
+        Keterangan.setBounds(784, 40, 85, 23);
+
+        jLabel12.setText("Sisa izin");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(691, 70, 40, 23);
+
+        Sisa.setEditable(false);
+        Sisa.setName("Sisa"); // NOI18N
+        Sisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SisaKeyPressed(evt);
+            }
+        });
+        FormInput.add(Sisa);
+        Sisa.setBounds(734, 70, 45, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -799,27 +823,50 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
             KdPetugasPJ.setText("");
             NmPetugasPJ.setText("");
         } else {
-            switch (Urgensi.getSelectedItem().toString()) {
-                case "Tidak Masuk Kerja":
-                    if (Sequel.menyimpantfSmc("pengajuan_izin_smc", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(TglIzin), "00:00:00", "00:00:00",
-                        KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Kepentingan.getText(), KdPetugasPJ.getText(), "Proses Pengajuan"
+            if ((Integer.parseInt(Sisa.getText()) - 1) < 0) {
+                if (JOptionPane.showConfirmDialog(null, "Eeiittss... hak izin anda telah habis, apakah anda yakin tetap ingin mengambil izin?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (Sequel.menyimpantfSmc("pengajuan_izin_smc", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), KdPetugas.getText(), tglTMTKerja, tglTATKerja, izin,
+                        Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
+                        Sisa.getText(), String.valueOf(Integer.parseInt(Sisa.getText()) - 1), Kepentingan.getText(), KdPetugasPJ.getText(), "Proses Pengajuan"
                     )) {
-                        tabMode.addRow(new Object[] {
-                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(TglIzin), "", "", Urgensi.getSelectedItem().toString(),
-                            Kepentingan.getText(), KdPetugasPJ.getText(), NmPetugasPJ.getText(), "Proses Pengajuan"
-                        });
+                        switch (Urgensi.getSelectedItem().toString()) {
+                            case "Tidak Masuk Kerja":
+                                tabMode.addRow(new Object[] {
+                                    NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), "", "", Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja,
+                                    KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan"
+                                });
+                                break;
+                            default:
+                                tabMode.addRow(new Object[] {
+                                    NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
+                                    Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja, KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan"
+                                });
+                                break;
+                        }
+                        emptTeks();
                     }
-                    break;
-                default:
-                    if (Sequel.menyimpantfSmc("pengajuan_izin_smc", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1),
-                        Valid.getJamSmc(Jam2, Menit2, Detik2), KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Kepentingan.getText(), KdPetugasPJ.getText(), "Proses Pengajuan"
-                    )) {
-                        tabMode.addRow(new Object[] {
-                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
-                            Urgensi.getSelectedItem().toString(), Kepentingan.getText(), KdPetugasPJ.getText(), NmPetugasPJ.getText(), "Proses Pengajuan"
-                        });
+                }
+            } else {
+                if (Sequel.menyimpantfSmc("pengajuan_izin_smc", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), KdPetugas.getText(), tglTMTKerja, tglTATKerja, izin,
+                    Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
+                    Sisa.getText(), String.valueOf(Integer.parseInt(Sisa.getText()) - 1), Kepentingan.getText(), KdPetugasPJ.getText(), "Proses Pengajuan"
+                )) {
+                    switch (Urgensi.getSelectedItem().toString()) {
+                        case "Tidak Masuk Kerja":
+                            tabMode.addRow(new Object[] {
+                                NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), "", "", Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja,
+                                KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan"
+                            });
+                            break;
+                        default:
+                            tabMode.addRow(new Object[] {
+                                NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
+                                Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja, KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan"
+                            });
+                            break;
                     }
-                    break;
+                    emptTeks();
+                }
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -854,8 +901,6 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
             Valid.textKosong(Kepentingan, "Kepentingan Cuti");
         } else if (NmPetugasPJ.getText().trim().equals("")) {
             Valid.textKosong(KdPetugasPJ, "P.J. terkait pengajuan");
-            // } else if (Integer.parseInt(Jumlah.getText().trim()) >= Integer.parseInt(Sisa.getText().trim())) {
-            //     JOptionPane.showMessageDialog(null, "Maaf, jumlah cuti melebihi sisa cuti..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else if (KdPetugas.getText().equals(KdPetugasPJ.getText())) {
             JOptionPane.showMessageDialog(null, "Maaf, PJ tidak bisa untuk anda sendiri..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             KdPetugasPJ.setText("");
@@ -863,41 +908,31 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         } else {
             if (tbObat.getSelectedRow() > -1) {
                 if ("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString())) {
-                    switch (Urgensi.getSelectedItem().toString()) {
-                        case "Tidak Masuk Kerja":
-                            if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "no_pengajuan = ?, tanggal = ?, tanggal_izin = ?, jam_mulai = '00:00:00', jam_akhir = '00:00:00', urgensi = ?, " +
-                                "kepentingan = ?, nik_pj = ?", "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(TglIzin), Urgensi.getSelectedItem().toString(),
-                                Kepentingan.getText(), KdPetugasPJ.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
-                            )) {
-                                tabMode.setValueAt(NoPengajuan.getText(), tbObat.getSelectedRow(), 0);
-                                tabMode.setValueAt(Valid.getTglSmc(Tanggal), tbObat.getSelectedRow(), 1);
-                                tabMode.setValueAt(Valid.getTglSmc(TglIzin), tbObat.getSelectedRow(), 2);
-                                tabMode.setValueAt("", tbObat.getSelectedRow(), 3);
-                                tabMode.setValueAt("", tbObat.getSelectedRow(), 4);
-                                tabMode.setValueAt(Urgensi.getSelectedItem().toString(), tbObat.getSelectedRow(), 5);
-                                tabMode.setValueAt(Kepentingan.getText(), tbObat.getSelectedRow(), 6);
-                                tabMode.setValueAt(KdPetugasPJ.getText(), tbObat.getSelectedRow(), 7);
-                                tabMode.setValueAt(NmPetugasPJ.getText(), tbObat.getSelectedRow(), 8);
-                                emptTeks();
-                            }
-                            break;
-                        default:
-                            if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "no_pengajuan = ?, tanggal = ?, tanggal_izin = ?, jam_mulai = ?, jam_akhir = ?, urgensi = ?, kepentingan = ?, nik_pj = ?",
-                                "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
-                                Urgensi.getSelectedItem().toString(), Kepentingan.getText(), KdPetugasPJ.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
-                            )) {
-                                tabMode.setValueAt(NoPengajuan.getText(), tbObat.getSelectedRow(), 0);
-                                tabMode.setValueAt(Valid.getTglSmc(Tanggal), tbObat.getSelectedRow(), 1);
-                                tabMode.setValueAt(Valid.getTglSmc(TglIzin), tbObat.getSelectedRow(), 2);
-                                tabMode.setValueAt(Valid.getJamSmc(Jam1, Menit1, Detik1), tbObat.getSelectedRow(), 3);
-                                tabMode.setValueAt(Valid.getJamSmc(Jam2, Menit2, Detik2), tbObat.getSelectedRow(), 4);
-                                tabMode.setValueAt(Urgensi.getSelectedItem().toString(), tbObat.getSelectedRow(), 5);
-                                tabMode.setValueAt(Kepentingan.getText(), tbObat.getSelectedRow(), 6);
-                                tabMode.setValueAt(KdPetugasPJ.getText(), tbObat.getSelectedRow(), 7);
-                                tabMode.setValueAt(NmPetugasPJ.getText(), tbObat.getSelectedRow(), 8);
-                                emptTeks();
-                            }
-                            break;
+                    if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "no_pengajuan = ?, tanggal = ?, tmt = ?, tat = ?, izin = ?, urgensi = ?, tanggal_izin = ?, jam_mulai = ?, jam_akhir = ?, awal = ?, sisa = ?, kepentingan = ?, " +
+                        "nik_pj = ?", "no_pengajuan = ? and status = 'Proses Pengajuan'", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), tglTMTKerja, tglTATKerja, izin, Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin),
+                        Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2), Sisa.getText(), String.valueOf(Integer.parseInt(Sisa.getText()) - 1), Kepentingan.getText(), KdPetugasPJ.getText(),
+                        tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
+                    )) {
+                        tbObat.setValueAt(NoPengajuan.getText(), tbObat.getSelectedRow(), 0);
+                        tbObat.setValueAt(Valid.getTglSmc(Tanggal), tbObat.getSelectedRow(), 1);
+                        tbObat.setValueAt(Urgensi.getSelectedItem().toString(), tbObat.getSelectedRow(), 2);
+                        tbObat.setValueAt(Valid.getTglSmc(TglIzin), tbObat.getSelectedRow(), 3);
+                        if (Urgensi.getSelectedItem().toString().equals("Tidak Masuk Kerja")) {
+                            tbObat.setValueAt("", tbObat.getSelectedRow(), 4);
+                            tbObat.setValueAt("", tbObat.getSelectedRow(), 5);
+                        } else {
+                            tbObat.setValueAt(Valid.getJamSmc(Jam1, Menit1, Detik1), tbObat.getSelectedRow(), 4);
+                            tbObat.setValueAt(Valid.getJamSmc(Jam2, Menit2, Detik2), tbObat.getSelectedRow(), 5);
+                        }
+                        tbObat.setValueAt(Kepentingan.getText(), tbObat.getSelectedRow(), 6);
+                        tbObat.setValueAt(String.valueOf(Integer.parseInt(Sisa.getText()) - 1), tbObat.getSelectedRow(), 7);
+                        tbObat.setValueAt(tglTMTKerja, tbObat.getSelectedRow(), 8);
+                        tbObat.setValueAt(tglTATKerja, tbObat.getSelectedRow(), 9);
+                        tbObat.setValueAt(KdPetugasPJ.getText(), tbObat.getSelectedRow(), 10);
+                        tbObat.setValueAt(NmPetugasPJ.getText(), tbObat.getSelectedRow(), 11);
+                        tbObat.setValueAt(departemen, tbObat.getSelectedRow(), 12);
+                        tbObat.setValueAt(bidang, tbObat.getSelectedRow(), 13);
+                        emptTeks();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Maaf, sudah divalidasi. Tidak boleh dihapus/dirubah... !");
@@ -1084,6 +1119,8 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 if (petugas.getTable().getSelectedRow() != -1) {
                     KdPetugasPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 0).toString());
                     NmPetugasPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 1).toString());
+                    departemen = petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 6).toString();
+                    bidang = petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 7).toString();
                 }
             }
 
@@ -1114,7 +1151,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_KepentinganKeyPressed
 
     private void TglIzinItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TglIzinItemStateChanged
-
+        hitungSisaIzin();
     }//GEN-LAST:event_TglIzinItemStateChanged
 
     private void ppSetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSetujuiActionPerformed
@@ -1190,6 +1227,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
             default:
                 break;
         }
+        hitungSisaIzin();
     }//GEN-LAST:event_UrgensiItemStateChanged
 
     private void ChkInputItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkInputItemStateChanged
@@ -1214,6 +1252,10 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private void Menit2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Menit2ItemStateChanged
         hitungLamaIzin();
     }//GEN-LAST:event_Menit2ItemStateChanged
+
+    private void SisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SisaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SisaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -1267,6 +1309,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll2;
+    private widget.TextBox Sisa;
     private widget.TextBox TCari;
     private widget.TextBox TCari2;
     private widget.TabPane TabRawat;
@@ -1276,6 +1319,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private widget.Button btnPetugasPJ;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
+    private widget.Label jLabel12;
     private widget.Label jLabel14;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -1365,10 +1409,12 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select pengajuan_izin_smc.no_pengajuan, pengajuan_izin_smc.tanggal, pengajuan_izin_smc.tanggal_izin, pengajuan_izin_smc.jam_mulai, pengajuan_izin_smc.jam_akhir, pengajuan_izin_smc.urgensi, " +
-                        "pengajuan_izin_smc.kepentingan, pengajuan_izin_smc.nik_pj, pegawai.nama, pengajuan_izin_smc.status from pengajuan_izin_smc join pegawai on pengajuan_izin_smc.nik_pj = pegawai.nik where " +
-                        "pengajuan_izin_smc.nik = ? and pengajuan_izin_smc.tanggal between ? and ? " + (cari.isBlank() ? "" : "and (pengajuan_izin_smc.no_pengajuan like ? or pengajuan_izin_smc.urgensi like ? or " +
-                        "pengajuan_izin_smc.kepentingan like ? or pengajuan_izin_smc.nik_pj like ? or pegawai.nama like ?) ") + "order by pengajuan_izin_smc.tanggal_izin"
+                        "select pengajuan_izin_smc.no_pengajuan, pengajuan_izin_smc.tanggal, pengajuan_izin_smc.urgensi, pengajuan_izin_smc.tanggal_izin, if(pengajuan_izin_smc.jam_mulai = '00:00:00', '', " +
+                        "pengajuan_izin_smc.jam_mulai) as jam_mulai, if(pengajuan_izin_smc.jam_akhir = '00:00:00', '', pengajuan_izin_smc.jam_akhir) as jam_akhir, pengajuan_izin_smc.kepentingan, " +
+                        "pengajuan_izin_smc.sisa, pengajuan_izin_smc.tmt, pengajuan_izin_smc.tat, pengajuan_izin_smc.nik_pj, pegawai.nama, pegawai.departemen, pegawai.bidang, pengajuan_izin_smc.status " +
+                        "from pengajuan_izin_smc join pegawai on pengajuan_izin_smc.nik_pj = pegawai.nik where pengajuan_izin_smc.nik = ? and pengajuan_izin_smc.tanggal between ? and ? " + (cari.isBlank() ? "" :
+                        "and (pengajuan_izin_smc.no_pengajuan like ? or pengajuan_izin_smc.urgensi like ? or pengajuan_izin_smc.kepentingan like ? or pengajuan_izin_smc.nik_pj like ? or pegawai.nama like ? or " +
+                        "pegawai.departemen like ? or pegawai.bidang like ?) ") + "order by pengajuan_izin_smc.tanggal_izin"
                     )) {
                         int p = 0;
                         ps.setString(++p, KdPetugas.getText());
@@ -1380,12 +1426,15 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
                         }
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 publish(new Object[] {
-                                    rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("tanggal_izin"), rs.getString("jam_mulai"), rs.getString("jam_akhir"),
-                                    rs.getString("urgensi"), rs.getString("kepentingan"), rs.getString("nik_pj"), rs.getString("nama"), rs.getString("status")
+                                    rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("urgensi"), rs.getString("tanggal_izin"), rs.getString("jam_mulai"), rs.getString("jam_akhir"),
+                                    rs.getString("kepentingan"), rs.getString("sisa"), rs.getString("tmt"), rs.getString("tat"), rs.getString("nik_pj"), rs.getString("nama"),
+                                    rs.getString("departemen"), rs.getString("bidang"), rs.getString("status")
                                 });
                             }
                         }
@@ -1420,15 +1469,17 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosongSmc(tabMode2);
             new SwingWorker<Void, Object[]>() {
-                final String cari = TCari.getText().trim();
+                final String cari = TCari2.getText().trim();
 
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select pengajuan_izin_smc.no_pengajuan, pengajuan_izin_smc.tanggal, pengajuan_izin_smc.tanggal_izin, pengajuan_izin_smc.jam_mulai, pengajuan_izin_smc.jam_akhir, pengajuan_izin_smc.urgensi, " +
-                        "pengajuan_izin_smc.kepentingan, pengajuan_izin_smc.nik, pegawai.nama, pengajuan_izin_smc.status from pengajuan_izin_smc join pegawai on pengajuan_izin_smc.nik = pegawai.nik where " +
-                        "pengajuan_izin_smc.nik_pj = ? and pengajuan_izin_smc.tanggal between ? and ? " + (cari.isBlank() ? "" : "and (pengajuan_izin_smc.no_pengajuan like ? or pengajuan_izin_smc.urgensi like ? " +
-                        "or pengajuan_izin_smc.kepentingan like ? or pengajuan_izin_smc.nik_pj like ? or pegawai.nama like ?) ") + "order by pengajuan_izin_smc.tanggal_izin"
+                        "select pengajuan_izin_smc.no_pengajuan, pengajuan_izin_smc.tanggal, pengajuan_izin_smc.urgensi, pengajuan_izin_smc.tanggal_izin, if(pengajuan_izin_smc.jam_mulai = '00:00:00', '', " +
+                        "pengajuan_izin_smc.jam_mulai) as jam_mulai, if(pengajuan_izin_smc.jam_akhir = '00:00:00', '', pengajuan_izin_smc.jam_akhir) as jam_akhir, pengajuan_izin_smc.kepentingan, " +
+                        "pengajuan_izin_smc.sisa, pengajuan_izin_smc.tmt, pengajuan_izin_smc.tat, pengajuan_izin_smc.nik, pegawai.nama, pegawai.departemen, pegawai.bidang, pengajuan_izin_smc.status " +
+                        "from pengajuan_izin_smc join pegawai on pengajuan_izin_smc.nik_pj = pegawai.nik where pengajuan_izin_smc.nik_pj = ? and pengajuan_izin_smc.tanggal between ? and ? " + (cari.isBlank() ? "" :
+                        "and (pengajuan_izin_smc.no_pengajuan like ? or pengajuan_izin_smc.urgensi like ? or pengajuan_izin_smc.kepentingan like ? or pengajuan_izin_smc.nik_pj like ? or pegawai.nama like ? or " +
+                        "pegawai.departemen like ? or pegawai.bidang like ?) ") + "order by pengajuan_izin_smc.tanggal_izin"
                     )) {
                         int p = 0;
                         ps.setString(++p, KdPetugas.getText());
@@ -1440,12 +1491,15 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
                         }
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 publish(new Object[] {
-                                    rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("tanggal_izin"), rs.getString("jam_mulai"), rs.getString("jam_akhir"),
-                                    rs.getString("urgensi"), rs.getString("kepentingan"), rs.getString("nik_pj"), rs.getString("nama"), rs.getString("status")
+                                    rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("urgensi"), rs.getString("tanggal_izin"), rs.getString("jam_mulai"), rs.getString("jam_akhir"),
+                                    rs.getString("kepentingan"), rs.getString("sisa"), rs.getString("tmt"), rs.getString("tat"), rs.getString("nik"), rs.getString("nama"),
+                                    rs.getString("departemen"), rs.getString("bidang"), rs.getString("status")
                                 });
                             }
                         }
@@ -1493,10 +1547,31 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     }
 
     private void hitungSisaIzin() {
-        try (PreparedStatement ps = koneksi.prepareStatement("")) {
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "with datapegawai_base as (select pegawai.nik, pegawai.mulai_kerja, ? as tgl_sekarang, stts_kerja.izin, case when stts_kerja.izin like '1 Bulan%' then 1 when stts_kerja.izin " +
+            "like '3 Bulan%' then 3 when stts_kerja.izin like '6 Bulan%' then 6 when stts_kerja.izin like '12 Bulan%' then 12 end as interval_bulan, stts_kerja.hakizin, stts_kerja.max_menit " +
+            "from pegawai inner join stts_kerja on pegawai.stts_kerja = stts_kerja.stts where pegawai.nik = ?), datapegawai_anniversary as (select datapegawai_base.*, if(datediff(makedate(" +
+            "year(datapegawai_base.tgl_sekarang), dayofyear(datapegawai_base.mulai_kerja)), datapegawai_base.tgl_sekarang) >= 0, date_sub(makedate(year(datapegawai_base.tgl_sekarang), " +
+            "dayofyear(datapegawai_base.mulai_kerja)), interval 1 year), makedate(year(datapegawai_base.tgl_sekarang), dayofyear(datapegawai_base.mulai_kerja))) as tgl_anniversary from " +
+            "datapegawai_base), datapegawai_tmt as (select datapegawai_anniversary.*, case when datapegawai_anniversary.izin like '%tmt%' then date_add(datapegawai_anniversary.tgl_anniversary, " +
+            "interval (timestampdiff(month, datapegawai_anniversary.tgl_anniversary, datapegawai_anniversary.tgl_sekarang) div datapegawai_anniversary.interval_bulan) * " +
+            "datapegawai_anniversary.interval_bulan month) else date_add(makedate(year(datapegawai_anniversary.tgl_sekarang), 1), interval ((month(datapegawai_anniversary.tgl_sekarang) - 1) " +
+            "div datapegawai_anniversary.interval_bulan) * datapegawai_anniversary.interval_bulan month) end as tmt from datapegawai_anniversary), datapegawai as (select datapegawai_tmt.*, " +
+            "case when datapegawai_tmt.izin like '%tmt%' then date_sub(date_add(datapegawai_tmt.tmt, interval datapegawai_tmt.interval_bulan month), interval 1 day) else last_day(date_add(" +
+            "datapegawai_tmt.tmt, interval (datapegawai_tmt.interval_bulan - 1) month)) end as tat from datapegawai_tmt) select datapegawai.nik, datapegawai.izin, datapegawai.hakizin, " +
+            "datapegawai.tmt, datapegawai.tat, count(*) as diambil from datapegawai inner join pengajuan_izin_smc on datapegawai.nik = pengajuan_izin_smc.nik and datapegawai.tmt = " +
+            "pengajuan_izin_smc.tmt and datapegawai.tat = pengajuan_izin_smc.tat and pengajuan_izin_smc.status != 'Ditolak' group by datapegawai.nik, datapegawai.tmt, datapegawai.tat"
+        )) {
+            ps.setString(1, Valid.getTglSmc(Tanggal));
+            ps.setString(2, KdPetugas.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-
+                    izin = rs.getString("izin");
+                    tglTMTKerja = rs.getString("tmt");
+                    tglTATKerja = rs.getString("tat");
+                    hakIzin = rs.getInt("hakizin");
+                    diambil = rs.getInt("diambil");
+                    Sisa.setText(String.valueOf(hakIzin - diambil));
                 }
             }
         } catch (Exception e) {
