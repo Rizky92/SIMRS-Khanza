@@ -24,7 +24,45 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pengajuan_izin_smc.no_pengajuan, pengajuan_izin_smc.tanggal, pengajuan_izin_smc.tanggal_izin, pengajuan_izin_smc.jam_mulai, pengajuan_izin_smc.jam_akhir, pengajuan_izin_smc.urgensi, pengajuan_izin_smc.kepentingan, pengajuan_izin_smc.nik_pj, pegawai.nama, pengajuan_izin_smc.status from pengajuan_izin_smc join pegawai on pengajuan_izin_smc.nik_pj = pegawai.nik]]>
+		<![CDATA[with datapengajuan as (
+    select pengajuan_izin_smc.no_pengajuan,
+        pengajuan_izin_smc.tanggal,
+        pengajuan_izin_smc.urgensi,
+        pengajuan_izin_smc.tanggal_izin,
+        if(
+            pengajuan_izin_smc.jam_mulai = '00:00:00',
+            '',
+            pengajuan_izin_smc.jam_mulai
+        ) as jam_mulai,
+        if(
+            pengajuan_izin_smc.jam_akhir = '00:00:00',
+            '',
+            pengajuan_izin_smc.jam_akhir
+        ) as jam_akhir,
+        pengajuan_izin_smc.kepentingan,
+        pengajuan_izin_smc.tmt,
+        pengajuan_izin_smc.tat,
+        pengajuan_izin_smc.nik_pj,
+        pegawai_pj.nama,
+        pegawai_pj.departemen,
+        pegawai_pj.bidang,
+        (
+            stts_kerja.hakizin - count(*) over (
+                partition by pengajuan_izin_smc.nik,
+                pengajuan_izin_smc.tmt,
+                pengajuan_izin_smc.tat,
+                pengajuan_izin_smc.izin
+            )
+        ) as sisa,
+        pengajuan_izin_smc.status
+    from pengajuan_izin_smc
+        join pegawai on pengajuan_izin_smc.nik = pegawai.nik
+        join pegawai as pegawai_pj on pengajuan_izin_smc.nik_pj = pegawai_pj.nik
+        join stts_kerja on pegawai.stts_kerja = stts_kerja.stts
+    order by pengajuan_izin_smc.tanggal_izin
+)
+select *
+from datapengajuan]]>
 	</queryString>
 	<field name="no_pengajuan" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="no_pengajuan"/>
@@ -34,24 +72,32 @@
 		<property name="com.jaspersoft.studio.field.label" value="tanggal"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
-	<field name="tanggal_izin" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tanggal_izin"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
-	</field>
-	<field name="jam_mulai" class="java.sql.Time">
-		<property name="com.jaspersoft.studio.field.label" value="jam_mulai"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
-	</field>
-	<field name="jam_akhir" class="java.sql.Time">
-		<property name="com.jaspersoft.studio.field.label" value="jam_akhir"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
-	</field>
 	<field name="urgensi" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="urgensi"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
+	<field name="tanggal_izin" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tanggal_izin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
+	<field name="jam_mulai" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jam_mulai"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
+	<field name="jam_akhir" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jam_akhir"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
 	<field name="kepentingan" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="kepentingan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
+	<field name="tmt" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tmt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
+	<field name="tat" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tat"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
 	<field name="nik_pj" class="java.lang.String">
@@ -61,6 +107,17 @@
 	<field name="nama" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
+	</field>
+	<field name="departemen" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="departemen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
+	</field>
+	<field name="bidang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bidang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
+	</field>
+	<field name="sisa" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="sisa"/>
 	</field>
 	<field name="status" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="status"/>
@@ -271,7 +328,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Jenis Cuti]]></text>
+				<text><![CDATA[Jenis Izin]]></text>
 			</staticText>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="198" y="1" width="47" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="42a7bf98-638a-4d23-98d4-859eced672a0">
