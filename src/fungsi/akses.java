@@ -312,7 +312,7 @@ public final class akses {
                         rs2.next();
                         if (columns.isEmpty()) {
                             ResultSetMetaData md = rs2.getMetaData();
-                            for (int i = 1; i < md.getColumnCount(); i++) {
+                            for (int i = 1; i <= md.getColumnCount(); i++) {
                                 if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
                                     continue;
                                 }
