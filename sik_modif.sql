@@ -617,7 +617,7 @@ ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_kerja` date NOT NULL 
 
 ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL AFTER `tmt_kerja`;
 
-ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya') NOT NULL AFTER `nik`;
+ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya','Panjang (10 Tahun)') NOT NULL AFTER `nik`;
 
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
 
