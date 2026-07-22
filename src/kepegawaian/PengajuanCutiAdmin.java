@@ -382,7 +382,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -396,7 +396,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -482,7 +482,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -681,7 +681,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         jLabel14.setBounds(0, 70, 87, 23);
 
         Tgl1.setForeground(new java.awt.Color(50, 70, 50));
-        Tgl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2026" }));
+        Tgl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2026" }));
         Tgl1.setDisplayFormat("dd-MM-yyyy");
         Tgl1.setName("Tgl1"); // NOI18N
         Tgl1.setOpaque(false);
@@ -705,7 +705,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         jLabel22.setBounds(184, 70, 25, 23);
 
         Tgl2.setForeground(new java.awt.Color(50, 70, 50));
-        Tgl2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-07-2026" }));
+        Tgl2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2026" }));
         Tgl2.setDisplayFormat("dd-MM-yyyy");
         Tgl2.setName("Tgl2"); // NOI18N
         Tgl2.setOpaque(false);
@@ -722,7 +722,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         FormInput.add(Tgl2);
         Tgl2.setBounds(211, 70, 90, 23);
 
-        jLabel12.setText("Tersedia :");
+        jLabel12.setText("Dari :");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
         jLabel12.setBounds(304, 100, 37, 23);
@@ -1515,7 +1515,10 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            Valid.SetTgl(Tgl1,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+            Valid.SetTgl(Tgl2,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             tglTMTKerja.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
@@ -1529,9 +1532,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
             KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
             NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
             Status.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            Valid.SetTgl(Tgl1,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            Valid.SetTgl(Tgl2,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
         }
     }
 
@@ -1659,7 +1659,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
     }
 
     private void hitungSisaCutiTahunan() {
-        try (PreparedStatement ps = koneksi.prepareStatement(                                                                                     //
+        try (PreparedStatement ps = koneksi.prepareStatement(
             "with datapegawai as (select pegawai.nik, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 1 year)) >= 0, stts_kerja.hakcuti, 0) " +
             "as hakcuti, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 year), makedate(year(?), " +
             "dayofyear(pegawai.mulai_kerja))) as tmt_kerja, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), " +

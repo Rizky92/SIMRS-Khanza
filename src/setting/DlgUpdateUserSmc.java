@@ -1663,8 +1663,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("set_no_rm", "[U] Set RM");
         namaakses.put("tracer_login", "[U] Tracer Login");
 
-        namaakses = namaakses.entrySet()
-            .stream()
+        namaakses = namaakses.entrySet().stream()
             .sorted(Map.Entry.comparingByValue())
             .collect(Collectors.toMap(
                 Map.Entry::getKey, Map.Entry::getValue,
