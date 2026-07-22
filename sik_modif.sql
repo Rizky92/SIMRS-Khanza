@@ -1688,13 +1688,6 @@ CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ranap`  (
   CONSTRAINT `set_filter_jenis_resep_obat_ranap_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis` (`kdjns`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `set_kode_shift_smc`  (
-  `shift` enum('Pagi','Pagi2','Pagi3','Pagi4','Pagi5','Pagi6','Pagi7','Pagi8','Pagi9','Pagi10','Siang','Siang2','Siang3','Siang4','Siang5','Siang6','Siang7','Siang8','Siang9','Siang10','Malam','Malam2','Malam3','Malam4','Malam5','Malam6','Malam7','Malam8','Malam9','Malam10','Midle Pagi1','Midle Pagi2','Midle Pagi3','Midle Pagi4','Midle Pagi5','Midle Pagi6','Midle Pagi7','Midle Pagi8','Midle Pagi9','Midle Pagi10','Midle Siang1','Midle Siang2','Midle Siang3','Midle Siang4','Midle Siang5','Midle Siang6','Midle Siang7','Midle Siang8','Midle Siang9','Midle Siang10','Midle Malam1','Midle Malam2','Midle Malam3','Midle Malam4','Midle Malam5','Midle Malam6','Midle Malam7','Midle Malam8','Midle Malam9','Midle Malam10') NOT NULL,
-  `kode_shift` varchar(5) NOT NULL,
-  PRIMARY KEY (`shift`) USING BTREE,
-  UNIQUE KEY `kode_shift` (`kode_shift`)
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 CREATE TABLE IF NOT EXISTS `set_pintu_smc`  (
   `kd_pintu` varchar(20) NOT NULL DEFAULT '',
   `kd_dokter` varchar(20) NOT NULL,
