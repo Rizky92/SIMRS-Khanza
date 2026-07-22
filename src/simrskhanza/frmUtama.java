@@ -494,6 +494,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
@@ -570,6 +571,7 @@ import kepegawaian.K3RSPenyebabPerTahun;
 import kepegawaian.K3RSPeristiwa;
 import kepegawaian.PengajuanCutiAdmin;
 import kepegawaian.PengajuanCutiPegawai;
+import kepegawaian.PengajuanIzinAdminSMC;
 import kepegawaian.PengajuanIzinPegawaiSMC;
 import kepegawaian.SKPKategoriPenilaian;
 import kepegawaian.SKPKriteriaPenilaian;
@@ -50936,7 +50938,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSMC;
+                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51042,6 +51044,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengkajianInvasifNonBedahSMC.setName("btnPengkajianInvasifNonBedahSMC");
         btnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengkajianInvasifNonBedahSMC.addActionListener(this::btnPengkajianInvasifNonBedahSMCActionPerformed);
+
+        btnPengajuanIzinAdminSMC = new widget.ButtonBig();
+        btnPengajuanIzinAdminSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
+        btnPengajuanIzinAdminSMC.setText("Pengajuan Izin Kerja");
+        btnPengajuanIzinAdminSMC.setIconTextGap(0);
+        btnPengajuanIzinAdminSMC.setName("btnPengajuanIzinAdminSMC");
+        btnPengajuanIzinAdminSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPengajuanIzinAdminSMC.addActionListener(this::btnPengajuanIzinAdminSMCActionPerformed);
     }
 
     private void isComboSMC() {
@@ -51053,6 +51063,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if (akses.getpintu_poli_smc()) {
                 Panelmenu.add(btnPintuPoliSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 2) {
+            if (akses.getpengajuan_izin_smc()) {
+                Panelmenu.add(btnPengajuanIzinAdminSMC);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 11) {
@@ -51173,6 +51188,11 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
             jmlmenu++;
         }
+
+        if (akses.getpengajuan_izin_smc()) {
+            Panelmenu.add(btnPengajuanIzinAdminSMC);
+            jmlmenu++;
+        }
     }
 
     private void isCariIsiSMC() {
@@ -51263,6 +51283,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             if (btnPengkajianInvasifNonBedahSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getpengajuan_izin_smc()) {
+            if (btnPengajuanIzinAdminSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPengajuanIzinAdminSMC);
                 jmlmenu++;
             }
         }
@@ -51432,6 +51459,18 @@ public class frmUtama extends javax.swing.JFrame {
         form.isCek();
         form.emptTeks();
         form.setTampil();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPengajuanIzinAdminSMCActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        PengajuanIzinAdminSMC form = new PengajuanIzinAdminSMC(this, false);
+        form.isCek();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
