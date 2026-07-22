@@ -168,13 +168,6 @@ ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `rr` varcha
 
 ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `ufv` varchar(10) NULL DEFAULT NULL AFTER `rr`;
 
-CREATE TABLE IF NOT EXISTS `cuti_stts_kerja_smc`  (
-  `stts` char(3) NOT NULL,
-  `jenis_cuti` varchar(20) NOT NULL,
-  `hakcuti` tinyint(4) NOT NULL,
-  PRIMARY KEY (`stts`,`jenis_cuti`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
 
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
@@ -515,14 +508,6 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `kota` varchar(50) NULL DEFAU
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DEFAULT NULL AFTER `kota`;
 
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
-
-CREATE TABLE IF NOT EXISTS `izin_stts_kerja_smc`  (
-  `stts` char(3) NOT NULL,
-  `jenis_izin` varchar(20) NOT NULL,
-  `hakizin` tinyint(4) NOT NULL,
-  `max_menit` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`stts`,`jenis_izin`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 

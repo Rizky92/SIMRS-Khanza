@@ -52,7 +52,7 @@
                                   'InputKelompokJabatan','InputResikoKerja','ListResikoKerja','InputEmergencyIndex','ListEmergencyIndex',
                                   'InputPencapaianKinerja','ListPencapaianKinerja','InputEvaluasiKinerja','ListEvaluasiKinerja',
                                   'DetailEvaluasiKinerja','DetailPencapaianKinerja','ListCariRiwayatKinerja','InputRiwayatSuratPeringatan',
-                                  'ListRiwayatSuratPeringatan','ListKodeShiftSmc'
+                                  'ListRiwayatSuratPeringatan'
                              );
 
                             foreach ($form as $page) {
@@ -191,7 +191,6 @@
                 case 'ListCariRiwayatPencapaian'        : include_once('pages/riwayatpencapaian/listpencapaian.php'); break;
                 case 'InputRiwayatPencapaian'           : include_once('pages/riwayatpencapaian/detailpencapaian.php'); break;
                 case 'DetailBerkasPegawai'              : include_once('pages/berkaspegawai/detail.php'); break;
-                case 'ListKodeShiftSmc'                 : include_once('pages/setkodejamsmc/detailjam.php'); break;
                 default                                 : include_once('pages/kontak.php');
 
             }
