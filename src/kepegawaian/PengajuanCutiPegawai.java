@@ -1845,9 +1845,9 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                         "order by pengajuan_cuti.tanggal_awal"
                     )) {
                         int p = 0;
+                        ps.setString(++p, KdPetugas.getText());
                         ps.setString(++p, Valid.getTglSmc(DTPCari1));
                         ps.setString(++p, Valid.getTglSmc(DTPCari2));
-                        ps.setString(++p, KdPetugas.getText());
                         if (!cari.isBlank()) {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");

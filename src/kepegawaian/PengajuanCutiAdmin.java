@@ -759,7 +759,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(395, 100, 25, 23);
 
-        jLabel24.setText("TMT Kerja :");
+        jLabel24.setText("Masa Kerja :");
         jLabel24.setName("jLabel24"); // NOI18N
         FormInput.add(jLabel24);
         jLabel24.setBounds(0, 100, 87, 23);
@@ -1528,7 +1528,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
             Urgensi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Alamat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             Jumlah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Sisa.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 13).toString());
             Kepentingan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
             KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
             NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
@@ -1607,7 +1606,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                             ps.setString(++p, "%" + cari + "%");
                         }
                         try (ResultSet rs = ps.executeQuery()) {
-                            System.out.println(ps.toString());
                             while (rs.next()) {
                                 jumlahCuti += rs.getInt("jumlah");
                                 publish(new Object[] {
