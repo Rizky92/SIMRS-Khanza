@@ -1,4 +1,4 @@
-package smc.Events;
+package smc.events;
 
 @FunctionalInterface
 public interface SimpanListener {

@@ -29,7 +29,7 @@ import org.springframework.http.MediaType;
  *
  * @author dosen
  */
-public final class SatuSehatReferensiObatKFASMC extends javax.swing.JDialog {
+public final class SatuSehatReferensiKFASMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final ObjectMapper mapper = new ObjectMapper();
@@ -48,7 +48,7 @@ public final class SatuSehatReferensiObatKFASMC extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public SatuSehatReferensiObatKFASMC(java.awt.Frame parent, boolean modal) {
+    public SatuSehatReferensiKFASMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10, 2);
@@ -345,7 +345,7 @@ public final class SatuSehatReferensiObatKFASMC extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            SatuSehatReferensiObatKFASMC dialog = new SatuSehatReferensiObatKFASMC(new javax.swing.JFrame(), true);
+            SatuSehatReferensiKFASMC dialog = new SatuSehatReferensiKFASMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {

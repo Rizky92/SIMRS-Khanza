@@ -37,17 +37,17 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
+public final class SatuSehatReferensiDenominatorSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
     private volatile boolean ceksukses = false;
 
-    public SatuSehatReferensiNumerator(java.awt.Frame parent, boolean modal) {
+    public SatuSehatReferensiDenominatorSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new Object[] {"Code", "Name", "System"}) {
+        tabMode = new DefaultTableModel(null, new Object[] {"Code", "Display", "Definition", "Status", "System"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -60,16 +60,19 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
         for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(70);
             } else if (i == 1) {
-                column.setPreferredWidth(300);
+                column.setPreferredWidth(260);
             } else if (i == 2) {
-                column.setPreferredWidth(170);
+                column.setPreferredWidth(560);
+            } else if (i == 3) {
+                column.setPreferredWidth(70);
+            } else if (i == 4) {
+                column.setPreferredWidth(240);
             }
         }
-
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput(100).getKata(TCari));
+        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
     }
 
     /**
@@ -103,7 +106,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Referensi Data Numerator Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Referensi Data Denominator Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -307,7 +310,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            SatuSehatReferensiNumerator dialog = new SatuSehatReferensiNumerator(new javax.swing.JFrame(), true);
+            SatuSehatReferensiDenominatorSMC dialog = new SatuSehatReferensiDenominatorSMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -337,29 +340,32 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosongSmc(tabMode);
+
             new SwingWorker<Void, String[]>() {
                 final String cari = TCari.getText().trim().toLowerCase();
 
                 @Override
                 protected Void doInBackground() throws Exception {
-                    File file = new File("./cache/satusehatnumerator.iyem");
+                    File file = new File("./cache/satusehatdenominator.iyem");
                     file.createNewFile();
 
-                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_numerator")) {
+                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_denominator")) {
                         final ObjectMapper mapper = new ObjectMapper();
-                        ArrayNode array = mapper.createArrayNode();
+                        final ArrayNode array = mapper.createArrayNode();
 
                         while (rs.next()) {
-                            publish(new String[] {rs.getString(1), rs.getString(2), rs.getString(3)});
+                            publish(new String[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
 
                             ObjectNode node = mapper.createObjectNode();
                             node.put("code", rs.getString(1));
-                            node.put("name", rs.getString(2));
-                            node.put("system", rs.getString(3));
+                            node.put("display", rs.getString(2));
+                            node.put("definition", rs.getString(3));
+                            node.put("status", rs.getString(4));
+                            node.put("system", rs.getString(5));
                             array.add(node);
                         }
 
-                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("satusehatnumerator", array)));
+                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("satusehatdenominator", array)));
                     }
 
                     return null;
@@ -371,7 +377,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
                         chunks.forEach(tabMode::addRow);
                     } else {
                         for (String[] obj : chunks) {
-                            if (obj[0].toLowerCase().contains(cari) || obj[1].toLowerCase().contains(cari)) {
+                            if (obj[0].toLowerCase().contains(cari) || obj[1].toLowerCase().contains(cari) || obj[2].toLowerCase().contains(cari)) {
                                 tabMode.addRow(obj);
                             }
                         }
@@ -388,7 +394,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
 
                     tabMode.fireTableDataChanged();
                     LCount.setText("" + tabMode.getRowCount());
-                    SatuSehatReferensiNumerator.this.setCursor(Cursor.getDefaultCursor());
+                    SatuSehatReferensiDenominatorSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
             }.execute();
@@ -396,36 +402,42 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
     }
 
     private void tampil2() {
-        if (new File("./cache/satusehatnumerator.iyem").isFile()) {
+        if (new File("./cache/satusehatdenominator.iyem").isFile()) {
             if (!ceksukses) {
                 ceksukses = true;
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Valid.tabelKosongSmc(tabMode);
 
-                new SwingWorker<Void, Object[]>() {
+                new SwingWorker<Void, String[]>() {
                     final String cari = TCari.getText().trim().toLowerCase();
 
                     @Override
                     protected Void doInBackground() throws Exception {
-                        try (FileReader fr = new FileReader("./cache/satusehatnumerator.iyem")) {
-                            ArrayNode array = new ObjectMapper().readTree(fr).withArray("satusehatnumerator");
+                        try (FileReader fr = new FileReader(new File("./cache/satusehatdenominator.iyem"))) {
+                            ArrayNode array = new ObjectMapper().readTree(fr).withArray("satusehatdenominator");
 
                             if (cari.isBlank()) {
                                 for (JsonNode obj : array) {
                                     publish(new String[] {
-                                        obj.path("code").asText(),
-                                        obj.path("name").asText(),
-                                        obj.path("system").asText()
+                                        obj.path("code").asText(""),
+                                        obj.path("display").asText(""),
+                                        obj.path("definition").asText(""),
+                                        obj.path("status").asText(""),
+                                        obj.path("system").asText("")
                                     });
                                 }
                             } else {
                                 for (JsonNode obj : array) {
-                                    if (obj.path("code").asText().toLowerCase().contains(cari) ||
-                                        obj.path("name").asText().toLowerCase().contains(cari)) {
+                                    if (obj.path("code").asText().toLowerCase().contains(cari)
+                                        || obj.path("display").asText().toLowerCase().contains(cari)
+                                        || obj.path("definition").asText().toLowerCase().contains(cari)
+                                    ) {
                                         publish(new String[] {
-                                            obj.path("code").asText(),
-                                            obj.path("name").asText(),
-                                            obj.path("system").asText()
+                                            obj.path("code").asText(""),
+                                            obj.path("display").asText(""),
+                                            obj.path("definition").asText(""),
+                                            obj.path("status").asText(""),
+                                            obj.path("system").asText("")
                                         });
                                     }
                                 }
@@ -436,7 +448,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
                     }
 
                     @Override
-                    protected void process(List<Object[]> chunks) {
+                    protected void process(List<String[]> chunks) {
                         chunks.forEach(tabMode::addRow);
                     }
 
@@ -450,7 +462,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
 
                         tabMode.fireTableDataChanged();
                         LCount.setText("" + tabMode.getRowCount());
-                        SatuSehatReferensiNumerator.this.setCursor(Cursor.getDefaultCursor());
+                        SatuSehatReferensiDenominatorSMC.this.setCursor(Cursor.getDefaultCursor());
                         ceksukses = false;
                     }
                 }.execute();

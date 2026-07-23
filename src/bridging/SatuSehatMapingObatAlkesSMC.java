@@ -47,9 +47,9 @@ public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final DlgBarang barang = new DlgBarang(null, false);
-    private final SatuSehatReferensiObatKFASMC referensi = new SatuSehatReferensiObatKFASMC(null, false);
-    private final SatuSehatReferensiNumerator numerator = new SatuSehatReferensiNumerator(null, false);
-    private final SatuSehatReferensiDenominator denom = new SatuSehatReferensiDenominator(null, false);
+    private final SatuSehatReferensiKFASMC referensi = new SatuSehatReferensiKFASMC(null, false);
+    private final SatuSehatReferensiNumeratorSMC numerator = new SatuSehatReferensiNumeratorSMC(null, false);
+    private final SatuSehatReferensiDenominatorSMC denom = new SatuSehatReferensiDenominatorSMC(null, false);
     private final SatuSehatReferensiRoute route = new SatuSehatReferensiRoute(null, false);
     private final ApiSatuSehat api = new ApiSatuSehat();
     private final ObjectMapper mapper = new ObjectMapper();
