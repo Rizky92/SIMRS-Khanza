@@ -338,6 +338,26 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat, pemeriksaan_ralan.keluhan from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ? and " +
+                "exists(select * from dokter where dokter.kd_dokter = pemeriksaan_ralan.nip) " + (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ralan.tgl_perawatan like ? or " +
+                "pemeriksaan_ralan.keluhan like ?) ") + "order by pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat"
+            )) {
+                int p = 0;
+                ps.setString(++p, norawat);
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new String[] {
+                            rs.getString(1),rs.getString(2),rs.getString(3)
+                        });
+                    }
+                }
+            }
+
             ps=koneksi.prepareStatement(
                     "select pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.keluhan "+
                     "from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=? and "+
