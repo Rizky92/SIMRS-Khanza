@@ -76,7 +76,7 @@
                 }
                 */
 
-            $_sql = 'select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar from stts_kerja';
+            $_sql = 'select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar, stts_kerja.hakizin, stts_kerja.max_menit from stts_kerja';
             if (!empty($keyword)) {
                 $_sql .= sprintf(" where stts_kerja.stts like '%s' or stts_kerja.ktg like '%s'", $keyword, $keyword);
             }
@@ -86,21 +86,23 @@
             ?>
             <table width="99%" border="0" align="center" cellpading="0" cellspacing="0" class="tbl_form">
                 <tr class="head">
-                    <td width="8%" align="center">Proses</td>
-                    <td width="19%" align="center">Status</td>
+                    <td width="9%" align="center">Proses</td>
+                    <td width="6%" align="center">Status</td>
                     <td width="29%" align="center">Keterangan</td>
-                    <td width="8%" align="center">Index</td>
+                    <td width="4%" align="center">Index</td>
                     <td width="8%" align="center">Hak Cuti Tahunan</td>
-                    <td width="20%" align="center">Cuti Besar</td>
-                    <td width="8%" align="center">Hak Cuti Besar</td>
+                    <td width="22%" align="center">Cuti Besar</td>
+                    <td width="6%" align="center">Hak Cuti Besar</td>
+                    <td width="6%" align="center">Hak Izin Kerja</td>
+                    <td width="12%" align="center">Maksimal Lama Izin Kerja (menit)</td>
                 </tr>
                 <?php while ($baris = mysqli_fetch_array($hasil)): ?>
                     <tr class="isi">
                         <td>
                             <center>
-                                <a href="?act=InputSttskerja&action=UBAH&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[edit]</span>
+                                <a href="?act=InputSttskerja&action=UBAH&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[edit]</span></a>
                                 <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <a href="?act=ListSttskerja&action=HAPUS&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[hapus]</span>
+                                <a href="?act=ListSttskerja&action=HAPUS&stts=<?=  str_replace(' ', '_', $baris[0]) ?>"><span>[hapus]</span></a>
                             </center>
                         </td>
                         <td><?= $baris[0] ?></td>
@@ -109,6 +111,8 @@
                         <td><?= $baris[3] ?></td>
                         <td><?= $baris[4] ?></td>
                         <td><?= $baris[5] ?></td>
+                        <td><?= $baris[6] ?></td>
+                        <td><?= $baris[7] ?></td>
                     </tr>
                 <?php endwhile; ?>
             </table>

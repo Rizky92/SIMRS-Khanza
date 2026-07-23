@@ -100,9 +100,12 @@
             $hakcuti       = '';
             $cuti_besar    = '';
             $hakcuti_besar = '';
+            $izin          = '';
+            $hakizin       = '';
+            $max_menit     = '';
 
             if ($action === 'UBAH') {
-                $_sql          = sprintf("select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar from stts_kerja where stts_kerja.stts = '%s'", $stts);
+                $_sql          = sprintf("select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar, stts_kerja.izin, stts_kerja.hakizin, stts_kerja.max_menit from stts_kerja where stts_kerja.stts = '%s'", $stts);
                 $hasil         = bukaquery($_sql);
                 $baris         = mysqli_fetch_row($hasil);
                 $stts          = $baris[0];
@@ -111,6 +114,9 @@
                 $hakcuti       = $baris[3];
                 $cuti_besar    = $baris[4];
                 $hakcuti_besar = $baris[5];
+                $izin          = $baris[6];
+                $hakizin       = $baris[7];
+                $max_menit     = $baris[8];
             }
             ?>
             <input type="hidden" name="stts" value="<?= $stts ?>">
@@ -166,6 +172,40 @@
                         <span id="MsgIsi5" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
+                <tr class="head">
+                    <td width="31%">Izin Kerja</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <select name="izin" class="text3" style="width: 95%">
+                            <option value=""></option>
+                            <option value="Tidak Ada" <?= $cuti_besar === 'Tidak Ada' ? 'selected' : '' ?>>Tidak Ada</option>
+                            <?php /* <option value="1 Bulan TMT" <?= $cuti_besar === '1 Bulan TMT' ? 'selected' : '' ?>>1 Bulan TMT Kerja</option> */ ?>
+                            <option value="3 Bulan TMT" <?= $cuti_besar === '3 Bulan TMT' ? 'selected' : '' ?>>3 Bulan TMT Kerja</option>
+                            <?php /* <option value="6 Bulan TMT" <?= $cuti_besar === '6 Bulan TMT' ? 'selected' : '' ?>>6 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan TMT" <?= $cuti_besar === '12 Bulan TMT' ? 'selected' : '' ?>>12 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="1 Bulan per Tahun" <?= $cuti_besar === '1 Bulan per Tahun' ? 'selected' : '' ?>>1 Bulan per Tahun Kerja</option> */ ?>
+                            <option value="3 Bulan per Tahun" <?= $cuti_besar === '3 Bulan per Tahun' ? 'selected' : '' ?>>3 Bulan per Tahun Kerja</option>
+                            <?php /* <option value="6 Bulan per Tahun" <?= $cuti_besar === '6 Bulan per Tahun' ? 'selected' : '' ?>>6 Bulan per Tahun Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan per Tahun" <?= $cuti_besar === '12 Bulan per Tahun' ? 'selected' : '' ?>>12 Bulan per Tahun Kerja</option> */ ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Hak Izin Kerja</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="hakizin" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi7'));" type="text" id="TxtIsi5" value="<?= $hakizin ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi7" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Maksimal Lama Izin Kerja (menit)</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="max_menit" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi8'));" type="text" id="TxtIsi5" value="<?= $max_menit ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,4}" title=" a-z A-Z 0-9 (Maksimal 4 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi8" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
             </table>
 
             <div>
@@ -179,17 +219,20 @@
             <?php
             $simpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : null;
             if ($simpan !== null) {
-                $stts             = validTeks(trim($_POST['stts']));
-                $ktg              = validTeks(trim($_POST['ktg']));
-                $indek            = validTeks(trim($_POST['indek']));
-                $hakcuti          = validTeks(trim($_POST['hakcuti']));
+                $stts          = validTeks(trim($_POST['stts']));
+                $ktg           = validTeks(trim($_POST['ktg']));
+                $indek         = validTeks(trim($_POST['indek']));
+                $hakcuti       = validTeks(trim($_POST['hakcuti']));
                 $cuti_besar    = validTeks(trim($_POST['cuti_besar']));
                 $hakcuti_besar = validTeks(trim($_POST['hakcuti_besar']));
-                if (!empty($stts) && !empty($ktg) && !empty($indek) && !empty($hakcuti) && !empty($cuti_besar) && !empty($hakcuti_besar)) {
+                $izin          = validTeks(trim($_POST['izin']));
+                $hakizin       = validTeks(trim($_POST['hakizin']));
+                $max_menit     = validTeks(trim($_POST['max_menit']));
+                if ($stts !== '' && $ktg !== '' && $indek !== '' && $hakcuti !== '' && $cuti_besar !== '' && $hakcuti_besar !== '' && $izin !== '' && $hakizin !== '' && $max_menit !== '') {
                     switch ($action) {
                         case 'TAMBAH':
                             try {
-                                bukaquery2(sprintf("insert into stts_kerja values ('%s', '%s', %s, %s, '%s', %s)", $stts, $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar));
+                                bukaquery2(sprintf("insert into stts_kerja values ('%s', '%s', %s, %s, '%s', %s, '%s', %s, %s)", $stts, $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit));
                                 echo <<<'HTML'
                                     <meta http-equiv="refresh" content="1;URL=?act=InputSttskerja&action=TAMBAH">
                                     HTML;
@@ -207,7 +250,9 @@
                             break;
                         case 'UBAH':
                             try {
-                                bukaquery2(sprintf("update stts_kerja set ktg = '%s', indek = %s, hakcuti = %s, cuti_besar = '%s', hakcuti_besar = %s where stts = '%s'", $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $stts));
+                                bukaquery2(sprintf("update stts_kerja set ktg = '%s', indek = %s, hakcuti = %s, cuti_besar = '%s', hakcuti_besar = %s, izin = '%s', hakizin = %s, max_menit = %s where stts = '%s'",
+                                    $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit, $stts
+                                ));
                                 echo <<<'HTML'
                                     <meta http-equiv="refresh" content="1;URL=?act=ListSttskerja&action=UBAH">
                                     HTML;
