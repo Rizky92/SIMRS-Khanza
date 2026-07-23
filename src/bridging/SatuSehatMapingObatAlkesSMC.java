@@ -41,13 +41,13 @@ import org.springframework.http.MediaType;
  *
  * @author dosen
  */
-public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
+public final class SatuSehatMapingObatAlkesSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final DlgBarang barang = new DlgBarang(null, false);
-    private final SatuSehatReferensiObatKFA referensi = new SatuSehatReferensiObatKFA(null, false);
+    private final SatuSehatReferensiObatKFASMC referensi = new SatuSehatReferensiObatKFASMC(null, false);
     private final SatuSehatReferensiNumerator numerator = new SatuSehatReferensiNumerator(null, false);
     private final SatuSehatReferensiDenominator denom = new SatuSehatReferensiDenominator(null, false);
     private final SatuSehatReferensiRoute route = new SatuSehatReferensiRoute(null, false);
@@ -65,7 +65,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public SatuSehatMapingObatAlkes2(java.awt.Frame parent, boolean modal) {
+    public SatuSehatMapingObatAlkesSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -1367,7 +1367,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            SatuSehatMapingObatAlkes2 dialog = new SatuSehatMapingObatAlkes2(new javax.swing.JFrame(), true);
+            SatuSehatMapingObatAlkesSMC dialog = new SatuSehatMapingObatAlkesSMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
