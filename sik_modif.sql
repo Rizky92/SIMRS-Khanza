@@ -1490,7 +1490,7 @@ CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
   INDEX `referensi_mobilejkn_bpjs_taskid_response_code_IDX`(`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `stts` enum('Belum','Sudah','Batal','Berkas Diterima','Dirujuk','Meninggal','Dirawat','Pulang Paksa','TTV') NULL DEFAULT NULL AFTER `biaya_reg`;
+ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `stts` enum('Belum','Sudah','Batal','Berkas Diterima','Dirujuk','Meninggal','Dirawat','Pulang Paksa','TTV','Rujuk Internal') NULL DEFAULT NULL AFTER `biaya_reg`;
 
 ALTER TABLE `reg_periksa` ADD INDEX IF NOT EXISTS `tgl_registrasi`(`tgl_registrasi`) USING BTREE;
 

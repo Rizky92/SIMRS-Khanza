@@ -61,7 +61,7 @@ import rekammedis.RMRiwayatPerawatan;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgInputResepPulang;
-import support.kirimwa.DlgKirimWA;
+import smc.kirimwa.DlgKirimWA;
 
 public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4,tabMode5,tabMode6,tabMode7,tabMode8;
