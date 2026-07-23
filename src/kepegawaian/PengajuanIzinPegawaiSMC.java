@@ -1617,7 +1617,13 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 }
 
                 menit = diff.toMinutes();
-                Keterangan.setText("(" + diff.toHours() + " jam " + (diff.toMinutes() % 60) + " menit)");
+                String pesan = menit + " menit";
+
+                if (diff.toHours() > 0) {
+                    pesan = diff.toHours() + " jam " + (diff.toMinutes() % 60) + " menit";
+                }
+
+                Keterangan.setText("(" + pesan + ")");
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
@@ -1625,52 +1631,54 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     }
 
     private void hitungSisaIzin() {
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "with dpbase as (select pegawai.nik, pegawai.mulai_kerja, ? as tgl_sekarang, stts_kerja.izin, case when stts_kerja.izin like '1 Bulan%' then 1 when stts_kerja.izin like '3 Bulan%' then 3 " +
-            "when stts_kerja.izin like '6 Bulan%' then 6 when stts_kerja.izin like '12 Bulan%' then 12 end as periode, stts_kerja.hakizin, stts_kerja.max_menit from pegawai inner join stts_kerja on " +
-            "pegawai.stts_kerja = stts_kerja.stts where pegawai.nik = ?), dpaniv as (select dpbase.*, if(datediff(makedate(year(dpbase.tgl_sekarang), dayofyear(dpbase.mulai_kerja)), dpbase.tgl_sekarang) >= 0, " +
-            "date_sub(makedate(year(dpbase.tgl_sekarang), dayofyear(dpbase.mulai_kerja)), interval 1 year), makedate(year(dpbase.tgl_sekarang), dayofyear(dpbase.mulai_kerja))) as tgl_aniv from dpbase), " +
-            "dptmt as (select dpaniv.*, case when dpaniv.izin like '%tmt%' then date_add(dpaniv.tgl_aniv, interval (timestampdiff(month, dpaniv.tgl_aniv, dpaniv.tgl_sekarang) div dpaniv.periode) * " +
-            "dpaniv.periode month) else date_add(makedate(year(dpaniv.tgl_sekarang), 1), interval ((month(dpaniv.tgl_sekarang) - 1) div dpaniv.periode) * dpaniv.periode month) end as tmt from dpaniv), " +
-            "datapegawai as (select dptmt.*, case when dptmt.izin like '%tmt%' then date_sub(date_add(dptmt.tmt, interval dptmt.periode month), interval 1 day) else last_day(date_add(dptmt.tmt, interval " +
-            "(dptmt.periode - 1) month)) end as tat from dptmt) select datapegawai.nik, datapegawai.izin, datapegawai.hakizin, datapegawai.tmt, datapegawai.tat, datapegawai.max_menit, ifnull((select count(*) " +
-            "from pengajuan_izin_smc s where s.nik = datapegawai.nik and s.tmt = datapegawai.tmt and s.tat = datapegawai.tat and s.status != 'Ditolak' " + (NoPengajuan.getText().isBlank() ? "" :
-            "and s.no_pengajuan != ? ") + "), 0) as diambil from datapegawai"
-        )) {
-            int p = 0;
-            ps.setString(++p, Valid.getTglSmc(Tanggal));
-            ps.setString(++p, KdPetugas.getText());
-            if (NoPengajuan.getText().isBlank()) {
-                ps.setString(++p, NoPengajuan.getText());
-            }
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    izin = rs.getString("izin");
-                    tglTMTKerja = rs.getString("tmt");
-                    tglTATKerja = rs.getString("tat");
-                    hakIzin = rs.getInt("hakizin");
-                    maxmenit = rs.getLong("max_menit");
-                    diambil = rs.getInt("diambil");
-                    Sisa.setText(String.valueOf(hakIzin - diambil));
-                } else {
-                    izin = "";
-                    tglTMTKerja = "0000-00-00";
-                    tglTATKerja = "0000-00-00";
-                    hakIzin = 0;
-                    maxmenit = 0;
-                    diambil = 0;
-                    Sisa.setText("0");
+        if (!KdPetugas.getText().isBlank()) {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "with dpbase as (select pegawai.nik, pegawai.mulai_kerja, ? as tgl_sekarang, stts_kerja.izin, case when stts_kerja.izin like '1 Bulan%' then 1 when stts_kerja.izin like '3 Bulan%' then 3 " +
+                "when stts_kerja.izin like '6 Bulan%' then 6 when stts_kerja.izin like '12 Bulan%' then 12 end as periode, stts_kerja.hakizin, stts_kerja.max_menit from pegawai inner join stts_kerja on " +
+                "pegawai.stts_kerja = stts_kerja.stts where pegawai.nik = ?), dpaniv as (select dpbase.*, if(datediff(makedate(year(dpbase.tgl_sekarang), dayofyear(dpbase.mulai_kerja)), dpbase.tgl_sekarang) >= 0, " +
+                "date_sub(makedate(year(dpbase.tgl_sekarang), dayofyear(dpbase.mulai_kerja)), interval 1 year), makedate(year(dpbase.tgl_sekarang), dayofyear(dpbase.mulai_kerja))) as tgl_aniv from dpbase), " +
+                "dptmt as (select dpaniv.*, case when dpaniv.izin like '%tmt%' then date_add(dpaniv.tgl_aniv, interval (timestampdiff(month, dpaniv.tgl_aniv, dpaniv.tgl_sekarang) div dpaniv.periode) * " +
+                "dpaniv.periode month) else date_add(makedate(year(dpaniv.tgl_sekarang), 1), interval ((month(dpaniv.tgl_sekarang) - 1) div dpaniv.periode) * dpaniv.periode month) end as tmt from dpaniv), " +
+                "datapegawai as (select dptmt.*, case when dptmt.izin like '%tmt%' then date_sub(date_add(dptmt.tmt, interval dptmt.periode month), interval 1 day) else last_day(date_add(dptmt.tmt, interval " +
+                "(dptmt.periode - 1) month)) end as tat from dptmt) select datapegawai.nik, datapegawai.izin, datapegawai.hakizin, datapegawai.tmt, datapegawai.tat, datapegawai.max_menit, ifnull((select count(*) " +
+                "from pengajuan_izin_smc s where s.nik = datapegawai.nik and s.tmt = datapegawai.tmt and s.tat = datapegawai.tat and s.status != 'Ditolak' " + (NoPengajuan.getText().isBlank() ? "" :
+                "and s.no_pengajuan != ? ") + "), 0) as diambil from datapegawai"
+            )) {
+                int p = 0;
+                ps.setString(++p, Valid.getTglSmc(Tanggal));
+                ps.setString(++p, KdPetugas.getText());
+                if (!NoPengajuan.getText().isBlank()) {
+                    ps.setString(++p, NoPengajuan.getText());
                 }
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        izin = rs.getString("izin");
+                        tglTMTKerja = rs.getString("tmt");
+                        tglTATKerja = rs.getString("tat");
+                        hakIzin = rs.getInt("hakizin");
+                        maxmenit = rs.getLong("max_menit");
+                        diambil = rs.getInt("diambil");
+                        Sisa.setText(String.valueOf(hakIzin - diambil));
+                    } else {
+                        izin = "";
+                        tglTMTKerja = "0000-00-00";
+                        tglTATKerja = "0000-00-00";
+                        hakIzin = 0;
+                        maxmenit = 0;
+                        diambil = 0;
+                        Sisa.setText("0");
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                izin = "";
+                tglTMTKerja = "0000-00-00";
+                tglTATKerja = "0000-00-00";
+                hakIzin = 0;
+                maxmenit = 0;
+                diambil = 0;
+                Sisa.setText("0");
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            izin = "";
-            tglTMTKerja = "0000-00-00";
-            tglTATKerja = "0000-00-00";
-            hakIzin = 0;
-            maxmenit = 0;
-            diambil = 0;
-            Sisa.setText("0");
         }
     }
 
