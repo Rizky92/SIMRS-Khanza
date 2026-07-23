@@ -7076,19 +7076,19 @@ public class DlgPasien extends javax.swing.JDialog {
             Sequel.mengedit("diagnosa_corona","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
-            Sequel.mengedit("pasien_bayi","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+            Sequel.mengedit4("pasien_bayi","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
-            Sequel.mengedit("pasien_corona","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+            Sequel.mengedit4("pasien_corona","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
-            Sequel.mengedit("pasien_mati","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+            Sequel.mengedit4("pasien_mati","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
-            Sequel.mengedit("pasien_polri","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+            Sequel.mengedit4("pasien_polri","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
-            Sequel.mengedit("pasien_tni","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+            Sequel.mengedit4("pasien_tni","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
             Sequel.mengedit("pcare_peserta_kegiatan_kelompok","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
@@ -7103,7 +7103,7 @@ public class DlgPasien extends javax.swing.JDialog {
             Sequel.mengedit("penjualan","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
-            Sequel.mengedit("personal_pasien","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+            Sequel.mengedit4("personal_pasien","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
             Sequel.mengedit("piutang","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
@@ -7146,6 +7146,9 @@ public class DlgPasien extends javax.swing.JDialog {
                 NoRmTujuan.getText(),TNo.getText()
             });
             Sequel.mengedit("tagihan_bpd_jateng","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
+                NoRmTujuan.getText(),TNo.getText()
+            });
+            Sequel.mengedit("tagihan_mandiri","no_rkm_medis=?","no_rkm_medis=?",2,new String[]{
                 NoRmTujuan.getText(),TNo.getText()
             });
             if(Sequel.meghapustf("pasien","no_rkm_medis",TNo.getText())==true){

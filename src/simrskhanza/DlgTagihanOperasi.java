@@ -2890,6 +2890,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }else if(jml==0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih operasi...!!!!");
             TCari.requestFocus();
+        }else if(tgl.getSelectedItem().toString().equals(tgl2.getSelectedItem().toString())){
+            JOptionPane.showMessageDialog(rootPane,"Kamu operasi apa bersin..? Cepat sekali...!!");
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");

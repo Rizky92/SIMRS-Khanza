@@ -536,7 +536,7 @@ public final class KeuanganRingkasanHutangVendorFarmasi extends javax.swing.JDia
             }
             ps=koneksi.prepareStatement(
                     "select pemesanan.kode_suplier,datasuplier.nama_suplier,(pemesanan.tagihan-"+
-                    "(SELECT ifnull(SUM(besar_bayar),0) FROM bayar_pemesanan where bayar_pemesanan.no_faktur=pemesanan.no_faktur)) as sisahutang "+
+                    "(SELECT ifnull(SUM(bayar_pemesanan.besar_bayar),0) FROM bayar_pemesanan where bayar_pemesanan.no_faktur=pemesanan.no_faktur)) as sisahutang "+
                     "from pemesanan inner join datasuplier on pemesanan.kode_suplier=datasuplier.kode_suplier "+
                     "where "+tanggaldatang+tanggaltempo+"(pemesanan.status='Belum Dibayar' or pemesanan.status='Belum Lunas') "+
                     (TCari.getText().trim().equals("")?"":"and (datasuplier.nama_suplier like ? or pemesanan.kode_suplier like ?) ")+

@@ -535,7 +535,7 @@ public final class KeuanganRingkasanHutangVendorDapur extends javax.swing.JDialo
             }
             ps=koneksi.prepareStatement(
                     "select dapurpemesanan.kode_suplier,dapursuplier.nama_suplier,(dapurpemesanan.tagihan-"+
-                    "(SELECT ifnull(SUM(besar_bayar),0) FROM bayar_pemesanan_dapur where bayar_pemesanan_dapur.no_faktur=dapurpemesanan.no_faktur)) as sisahutang "+
+                    "(SELECT ifnull(SUM(bayar_pemesanan_dapur.besar_bayar),0) FROM bayar_pemesanan_dapur where bayar_pemesanan_dapur.no_faktur=dapurpemesanan.no_faktur)) as sisahutang "+
                     "from dapurpemesanan inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier "+
                     "where "+tanggaldatang+tanggaltempo+"(dapurpemesanan.status='Belum Dibayar' or dapurpemesanan.status='Belum Lunas') "+
                     (TCari.getText().trim().equals("")?"":"and (dapursuplier.nama_suplier like ? or dapurpemesanan.kode_suplier like ?) ")+

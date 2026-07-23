@@ -535,7 +535,7 @@ public final class KeuanganRingkasanHutangVendorNonMedis extends javax.swing.JDi
             }
             ps=koneksi.prepareStatement(
                     "select ipsrspemesanan.kode_suplier,ipsrssuplier.nama_suplier,(ipsrspemesanan.tagihan-"+
-                    "(SELECT ifnull(SUM(besar_bayar),0) FROM bayar_pemesanan_non_medis where bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur)) as sisahutang "+
+                    "(SELECT ifnull(SUM(bayar_pemesanan_non_medis.besar_bayar),0) FROM bayar_pemesanan_non_medis where bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur)) as sisahutang "+
                     "from ipsrspemesanan inner join ipsrssuplier on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier "+
                     "where "+tanggaldatang+tanggaltempo+"(ipsrspemesanan.status='Belum Dibayar' or ipsrspemesanan.status='Belum Lunas') "+
                     (TCari.getText().trim().equals("")?"":"and (ipsrssuplier.nama_suplier like ? or ipsrspemesanan.kode_suplier like ?) ")+
