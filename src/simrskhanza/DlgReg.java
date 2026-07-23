@@ -966,7 +966,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSudah = new javax.swing.JMenuItem();
         MnBelum = new javax.swing.JMenuItem();
         MnBatal = new javax.swing.JMenuItem();
-        MnRujukInternal = new javax.swing.JMenuItem();
+        MnRujukInternalSMC = new javax.swing.JMenuItem();
         MnDirujuk = new javax.swing.JMenuItem();
         MnDIrawat = new javax.swing.JMenuItem();
         MnMeninggal = new javax.swing.JMenuItem();
@@ -5089,21 +5089,21 @@ public final class DlgReg extends javax.swing.JDialog {
         });
         MnStatus.add(MnBatal);
 
-        MnRujukInternal.setBackground(new java.awt.Color(255, 255, 254));
-        MnRujukInternal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnRujukInternal.setForeground(new java.awt.Color(50, 50, 50));
-        MnRujukInternal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnRujukInternal.setText("Rujuk Internal");
-        MnRujukInternal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnRujukInternal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnRujukInternal.setName("MnRujukInternal"); // NOI18N
-        MnRujukInternal.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnRujukInternal.addActionListener(new java.awt.event.ActionListener() {
+        MnRujukInternalSMC.setBackground(new java.awt.Color(255, 255, 254));
+        MnRujukInternalSMC.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnRujukInternalSMC.setForeground(new java.awt.Color(50, 50, 50));
+        MnRujukInternalSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnRujukInternalSMC.setText("Rujuk Internal");
+        MnRujukInternalSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnRujukInternalSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnRujukInternalSMC.setName("MnRujukInternalSMC"); // NOI18N
+        MnRujukInternalSMC.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnRujukInternalSMC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnRujukInternalActionPerformed(evt);
+                MnRujukInternalSMCActionPerformed(evt);
             }
         });
-        MnStatus.add(MnRujukInternal);
+        MnStatus.add(MnRujukInternalSMC);
 
         MnDirujuk.setBackground(new java.awt.Color(255, 255, 254));
         MnDirujuk.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -14975,7 +14975,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_buttonSimpanAntrianKeyPressed
 
-    private void MnRujukInternalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukInternalActionPerformed
+    private void MnRujukInternalSMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukInternalSMCActionPerformed
         if (tabMode.getRowCount() <= 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data registrasi sudah habis...!!!!");
         } else {
@@ -15000,7 +15000,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 }
             }
         }
-    }//GEN-LAST:event_MnRujukInternalActionPerformed
+    }//GEN-LAST:event_MnRujukInternalSMCActionPerformed
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
@@ -17124,7 +17124,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnRiwayatPerawatanICareNoKartu;
     private javax.swing.JMenuItem MnRiwayatPerawatanICareNoKartu1;
     private javax.swing.JMenuItem MnRujuk;
-    private javax.swing.JMenuItem MnRujukInternal;
+    private javax.swing.JMenuItem MnRujukInternalSMC;
     private javax.swing.JMenuItem MnRujukMasuk;
     private javax.swing.JMenuItem MnRujukSisrute;
     private javax.swing.JMenu MnRujukan;
