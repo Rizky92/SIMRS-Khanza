@@ -2344,7 +2344,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnEdukasiPasienKeluarga.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnEdukasiPasienKeluarga.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnEdukasiPasienKeluarga.setName("MnEdukasiPasienKeluarga"); // NOI18N
-        MnEdukasiPasienKeluarga.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnEdukasiPasienKeluarga.setPreferredSize(new java.awt.Dimension(230, 26));
         MnEdukasiPasienKeluarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnEdukasiPasienKeluargaActionPerformed(evt);
@@ -6363,6 +6363,11 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Pasien Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -6616,7 +6621,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbKasirRalan2.setToolTipText("Klik 2X Kd.Dokter= Jendela Tindakan, Dokter Dituju=Jendela Obat, Nomer RM=Jendela Billing, Pasien=Jendela Total Obat, Poliklinik=Set Sudah Periksa, Penanggung Jawab=Masukan tindakan otomatis");
+        tbKasirRalan2.setToolTipText("Klik 2X Kode Dokter= Jendela Tindakan, Dokter Dituju=Jendela Obat, Nomer RM=Jendela Billing, Pasien=Jendela Total Obat, Poliklinik=Set Sudah Periksa, Penanggung Jawab=Masukan tindakan otomatis");
         tbKasirRalan2.setComponentPopupMenu(jPopupMenu2);
         tbKasirRalan2.setName("tbKasirRalan2"); // NOI18N
         tbKasirRalan2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -9324,7 +9329,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
             akuntindakanralan.SetAkunTindakanRalan();
         }
@@ -9357,7 +9362,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         } else if (TabRawat.getSelectedIndex() == 1) {
             tampilkasir2Smc();
         }
-    }
+    }//GEN-LAST:event_formWindowOpened
 
     private void tbKasirRalan2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKasirRalan2MousePressed
         int r = tbKasirRalan2.rowAtPoint(evt.getPoint());
