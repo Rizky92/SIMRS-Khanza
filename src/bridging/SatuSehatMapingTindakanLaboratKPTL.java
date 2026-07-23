@@ -5,11 +5,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -42,7 +42,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -83,12 +83,12 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        KodeTindakan.setDocument(new batasInput((byte)15).getKata(KodeTindakan)); 
-        Code.setDocument(new batasInput((byte)20).getKata(Code)); 
-        TindakanSystem.setDocument(new batasInput((byte)100).getKata(TindakanSystem)); 
-        Display.setDocument(new batasInput((byte)80).getKata(Display)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
-        
+        KodeTindakan.setDocument(new batasInput((byte)15).getKata(KodeTindakan));
+        Code.setDocument(new batasInput((byte)20).getKata(Code));
+        TindakanSystem.setDocument(new batasInput((byte)100).getKata(TindakanSystem));
+        Display.setDocument(new batasInput((byte)80).getKata(Display));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -490,7 +490,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pemeriksaan.getTable().getSelectedRow()!= -1){                    
+                if(pemeriksaan.getTable().getSelectedRow()!= -1){
                     KodeTindakan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),1).toString());
                     NamaTindakan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),2).toString());
                 }
@@ -504,8 +504,8 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         pemeriksaan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -513,7 +513,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pemeriksaan.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -546,7 +546,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -603,7 +603,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
                     tabMode.setValueAt(Display.getText(),tbJnsPerawatan.getSelectedRow(),4);
                     emptTeks();
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -630,17 +630,17 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("parameter","%"+TCari.getText().trim()+"%");
-            Valid.MyReport("rptMapingTindakanLabKPTLSatuSehat.jasper","report","::[ Mapping Tindakan Laboratorium KPTL Satu Sehat Kemenkes ]::",param);            
+            Valid.MyReport("rptMapingTindakanLabKPTLSatuSehat.jasper","report","::[ Mapping Tindakan Laboratorium KPTL Satu Sehat Kemenkes ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -751,7 +751,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(referensi.getTable().getSelectedRow()!= -1){                    
+                if(referensi.getTable().getSelectedRow()!= -1){
                     Code.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),0).toString());
                     Display.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),1).toString());
                     TindakanSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),2).toString());
@@ -766,8 +766,8 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         referensi.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -775,7 +775,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     referensi.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -905,18 +905,18 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
            Display.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_laborat());
         BtnHapus.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_laborat());
         BtnEdit.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_laborat());
         BtnPrint.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_laborat());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }  
-    
+    }
+
     private void isForm() {
         if (ChkInput.isSelected() == true) {
             ChkInput.setVisible(false);
@@ -930,7 +930,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -956,7 +956,7 @@ public final class SatuSehatMapingTindakanLaboratKPTL extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

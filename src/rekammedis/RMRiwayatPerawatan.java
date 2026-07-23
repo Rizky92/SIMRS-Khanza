@@ -38788,7 +38788,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("Notif Konsultasi Perawat : "+e);
         }
     }
-    
+
     private void menampilkanChecklistKriteriaMasukIsolasi(String norawat) {
         try {
             if(chkChecklistKriteriaMasukIsolasi.isSelected()==true){

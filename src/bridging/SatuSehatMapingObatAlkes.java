@@ -1078,7 +1078,7 @@ public final class SatuSehatMapingObatAlkes extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(referensi.getTable().getSelectedRow()!= -1){                    
+                if(referensi.getTable().getSelectedRow()!= -1){
                     KFACode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),0).toString());
                     KFADisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),1).toString());
                     KFASystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),2).toString());
@@ -1093,8 +1093,8 @@ public final class SatuSehatMapingObatAlkes extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         referensi.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1102,7 +1102,7 @@ public final class SatuSehatMapingObatAlkes extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     referensi.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}

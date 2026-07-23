@@ -1,13 +1,13 @@
 <?php
     function bacaRekening($kdRekParent, $isRoot, $tipe, $balanceFilter, $formula, $indent, $tahuncari, &$totalAccum) {
         $balanceCond = $balanceFilter !== '' ? " and rekening.balance='".$balanceFilter."'" : '';
-        
+
         if ($isRoot) {
             $query = "select rekening.kd_rek,rekening.nm_rek from rekening where rekening.level='0' and rekening.tipe='".$tipe."'".$balanceCond." order by rekening.kd_rek asc";
         } else {
             $query = "select rekening.kd_rek,rekening.nm_rek from rekening inner join subrekening on rekening.kd_rek=subrekening.kd_rek2 where subrekening.kd_rek='".$kdRekParent."' and rekening.level='1' and rekening.tipe='".$tipe."'".$balanceCond." order by rekening.kd_rek asc";
         }
-        
+
         $html      = '';
         $queryRek  = bukaquery($query);
         while ($rowRek = mysqli_fetch_array($queryRek)) {
@@ -21,7 +21,7 @@
                     "select (sum(detailjurnal.debet)-sum(detailjurnal.kredit)) from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where detailjurnal.kd_rek='".$rowRek['kd_rek']."' and jurnal.tgl_jurnal between '".$tahuncari."-01-01' and '".$tahuncari."-12-31'"
                 );
             }
-            
+
             $saldoAkhir     = $saldoAwal + $debkret;
             $totalAccum    += $saldoAkhir;
             $html .= "<tr>
