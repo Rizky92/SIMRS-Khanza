@@ -282,7 +282,8 @@ public final class akses {
         set_pintu_poli = false,
         pintu_poli = false,
         bpjs_riwayat_surat_smc = false,
-        pengkajian_tindakan_invasif_non_bedah_smc = false;
+        pengkajian_tindakan_invasif_non_bedah_smc = false,
+        pengajuan_izin_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -313,7 +314,7 @@ public final class akses {
                         rs2.next();
                         if (columns.isEmpty()) {
                             ResultSetMetaData md = rs2.getMetaData();
-                            for (int i = 1; i < md.getColumnCount(); i++) {
+                            for (int i = 1; i <= md.getColumnCount(); i++) {
                                 if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
                                     continue;
                                 }
@@ -1537,6 +1538,7 @@ public final class akses {
                         akses.catatan_observasi_ruang_ok=akses.getBoolean(rs2, "catatan_observasi_ruang_ok");
                         akses.hasil_pemeriksaan_usg_abdomen=akses.getBoolean(rs2, "hasil_pemeriksaan_usg_abdomen");
                         akses.pengkajian_tindakan_invasif_non_bedah_smc=akses.getBoolean(rs2, "pengkajian_tindakan_invasif_non_bedah_smc");
+                        akses.pengajuan_izin_smc=akses.getBoolean(rs2, "pengajuan_izin_smc");
                         akses.intervensi_nyeri_farmakologi=akses.getBoolean(rs2, "intervensi_nyeri_farmakologi");
                         akses.intervensi_nyeri_nonfarmakologi=akses.getBoolean(rs2, "intervensi_nyeri_nonfarmakologi");
                         akses.surat_pengajuan_cuti_pasien=akses.getBoolean(rs2, "surat_pengajuan_cuti_pasien");
@@ -2801,6 +2803,7 @@ public final class akses {
         akses.catatan_observasi_ruang_ok=isadmin;
         akses.hasil_pemeriksaan_usg_abdomen=isadmin;
         akses.pengkajian_tindakan_invasif_non_bedah_smc=isadmin;
+        akses.pengajuan_izin_smc=isadmin;
         akses.intervensi_nyeri_farmakologi=isadmin;
         akses.intervensi_nyeri_nonfarmakologi=isadmin;
         akses.surat_pengajuan_cuti_pasien=isadmin;
@@ -4067,6 +4070,7 @@ public final class akses {
     public static boolean getcatatan_observasi_ruang_ok(){return akses.catatan_observasi_ruang_ok;}
     public static boolean gethasil_pemeriksaan_usg_abdomen(){return akses.hasil_pemeriksaan_usg_abdomen;}
     public static boolean getpengkajian_tindakan_invasif_non_bedah_smc(){return akses.pengkajian_tindakan_invasif_non_bedah_smc;}
+    public static boolean getpengajuan_izin_smc(){return akses.pengajuan_izin_smc;}
     public static boolean getintervensi_nyeri_farmakologi(){return akses.intervensi_nyeri_farmakologi;}
     public static boolean getintervensi_nyeri_nonfarmakologi(){return akses.intervensi_nyeri_nonfarmakologi;}
     public static boolean getsurat_pengajuan_cuti_pasien(){return akses.surat_pengajuan_cuti_pasien;}

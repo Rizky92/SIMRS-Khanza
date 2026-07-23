@@ -4,8 +4,8 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="25"/>
-	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="964"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="34"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="966"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -24,66 +24,108 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, pengajuan_cuti.tmt_kerja, pengajuan_cuti.tat_kerja, pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, pengajuan_cuti.sisa, pengajuan_cuti.kepentingan, pengajuan_cuti.nik_pj, pegawai.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik_pj = pegawai.nik order by pengajuan_cuti.tanggal]]>
+		<![CDATA[with datapengajuan as (
+    select pengajuan_izin_smc.no_pengajuan,
+        pengajuan_izin_smc.tanggal,
+        pengajuan_izin_smc.urgensi,
+        pengajuan_izin_smc.tanggal_izin,
+        if(
+            pengajuan_izin_smc.jam_mulai = '00:00:00',
+            '',
+            pengajuan_izin_smc.jam_mulai
+        ) as jam_mulai,
+        if(
+            pengajuan_izin_smc.jam_akhir = '00:00:00',
+            '',
+            pengajuan_izin_smc.jam_akhir
+        ) as jam_akhir,
+        pengajuan_izin_smc.kepentingan,
+        pengajuan_izin_smc.tmt,
+        pengajuan_izin_smc.tat,
+        pengajuan_izin_smc.nik,
+        pegawai.nama,
+        pegawai.departemen,
+        pegawai.bidang,
+        (
+            stts_kerja.hakizin - count(*) over (
+                partition by pengajuan_izin_smc.nik,
+                pengajuan_izin_smc.tmt,
+                pengajuan_izin_smc.tat,
+                pengajuan_izin_smc.izin
+            )
+        ) as sisa,
+        pengajuan_izin_smc.status
+    from pengajuan_izin_smc
+        join pegawai on pengajuan_izin_smc.nik = pegawai.nik
+        join pegawai as pegawai_pj on pengajuan_izin_smc.nik_pj = pegawai_pj.nik
+        join stts_kerja on pegawai.stts_kerja = stts_kerja.stts
+    order by pengajuan_izin_smc.tanggal_izin
+)
+select *
+from datapengajuan]]>
 	</queryString>
 	<field name="no_pengajuan" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="no_pengajuan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
 	<field name="tanggal" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="tanggal"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
-	</field>
-	<field name="tanggal_awal" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tanggal_awal"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
-	</field>
-	<field name="tanggal_akhir" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tanggal_akhir"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
-	</field>
-	<field name="tmt_kerja" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tmt_kerja"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
-	</field>
-	<field name="tat_kerja" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tat_kerja"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
 	<field name="urgensi" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="urgensi"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
-	<field name="alamat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+	<field name="tanggal_izin" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tanggal_izin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
-	<field name="jumlah" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="jumlah"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+	<field name="jam_mulai" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jam_mulai"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
-	<field name="sisa" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="sisa"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+	<field name="jam_akhir" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jam_akhir"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
 	<field name="kepentingan" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="kepentingan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
-	<field name="nik_pj" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nik_pj"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+	<field name="tmt" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tmt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
+	<field name="tat" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
+	<field name="nik" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nik"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
 	<field name="nama" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
 	</field>
+	<field name="departemen" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="departemen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
+	</field>
+	<field name="bidang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bidang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
+	</field>
+	<field name="sisa" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="sisa"/>
+	</field>
 	<field name="status" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="status"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
-	<variable name="total" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{jumlah}]]></variableExpression>
+	<variable name="total" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{no_pengajuan}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<background>
 		<band/>
@@ -107,7 +149,7 @@
 					<font fontName="Tahoma" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[DATA PENGAJUAN CUTI PEGAWAI]]></text>
+				<text><![CDATA[DATA PENGAJUAN IZIN PEGAWAI]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="49" width="802" height="1" uuid="d8354b09-547b-49d5-97f6-ae36ccb9bae2">
@@ -271,7 +313,7 @@
 				<text><![CDATA[Tanggal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="111" y="1" width="76" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="bbac6bfa-bbee-497c-9aa9-6b9fa33f9735">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="111" y="1" width="87" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="bbac6bfa-bbee-497c-9aa9-6b9fa33f9735">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
@@ -286,10 +328,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Jenis Cuti]]></text>
+				<text><![CDATA[Jenis Izin]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="187" y="1" width="47" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="42a7bf98-638a-4d23-98d4-859eced672a0">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="198" y="1" width="47" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="42a7bf98-638a-4d23-98d4-859eced672a0">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
@@ -304,10 +346,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Tgl. Awal]]></text>
+				<text><![CDATA[Tgl. Izin]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="234" y="1" width="47" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="03e3649b-b105-4382-9462-a08f3f644322">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="245" y="1" width="78" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="03e3649b-b105-4382-9462-a08f3f644322">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="4"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
@@ -322,10 +364,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Tgl. Akhir]]></text>
+				<text><![CDATA[Jam]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="281" y="1" width="168" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="cec749e2-b662-4547-8899-68c2baa21d10">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="323" y="1" width="268" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="cec749e2-b662-4547-8899-68c2baa21d10">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="5"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
@@ -340,46 +382,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Alamat]]></text>
+				<text><![CDATA[Keperluan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="449" y="1" width="25" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="a56edf2f-b2ae-46e9-85dd-b4087b1d295a">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="6"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Jml]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="474" y="1" width="160" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="07ee3852-a03a-4e36-aa2b-101e2cab3c45">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="7"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box leftPadding="2" rightPadding="2"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Alasan/Kepentingan Cuti]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="634" y="1" width="168" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="abd986bd-e94a-4b0b-b6d7-524857226695">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="591" y="1" width="211" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="abd986bd-e94a-4b0b-b6d7-524857226695">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="8"/>
@@ -395,7 +401,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[P.J. Terkait]]></text>
+				<text><![CDATA[Yang Mengajukan]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="17" width="802" height="1" uuid="faf4be47-df92-45d7-b8df-9456f569364b">
@@ -458,7 +464,7 @@
 				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="111" y="0" width="76" height="11" uuid="a2381e91-e54f-4490-a6d7-be1b5cc47626">
+				<reportElement positionType="Float" x="111" y="0" width="87" height="11" uuid="a2381e91-e54f-4490-a6d7-be1b5cc47626">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
@@ -476,7 +482,7 @@
 				<textFieldExpression><![CDATA[$F{urgensi}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="MM-dd-yyyy" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="187" y="0" width="47" height="11" uuid="8db009ed-ba7b-4ebd-9b2f-fbc6c033eb23">
+				<reportElement positionType="Float" x="198" y="0" width="47" height="11" uuid="8db009ed-ba7b-4ebd-9b2f-fbc6c033eb23">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
@@ -491,10 +497,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tanggal_akhir}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tanggal_izin}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="MM-dd-yyyy" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="234" y="0" width="47" height="11" uuid="26056d24-d332-4190-8e81-cc4c5aad89d1">
+				<reportElement positionType="Float" x="245" y="0" width="78" height="11" uuid="26056d24-d332-4190-8e81-cc4c5aad89d1">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="4"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
@@ -509,10 +515,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tanggal_awal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jam_mulai}.toString().equals("00:00:00") ? "" : ($F{jam_mulai}.toString().substring(0, 5) + " - " + $F{jam_akhir}.toString().substring(0, 5))]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="281" y="0" width="168" height="11" uuid="059db4e9-8d5b-4bff-9802-4612730819fb">
+				<reportElement positionType="Float" x="323" y="0" width="268" height="11" uuid="059db4e9-8d5b-4bff-9802-4612730819fb">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="5"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
@@ -527,45 +533,10 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="449" y="0" width="25" height="11" uuid="aa373ce9-63e8-4b66-8ce1-d58a0445ecca">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="6"/>
-					<property name="com.jaspersoft.layout.grid.y" value="0"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="474" y="0" width="160" height="11" uuid="144a1c4f-1cce-407e-80b5-38fcc40e6e0d">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="7"/>
-					<property name="com.jaspersoft.layout.grid.y" value="0"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<box leftPadding="2" rightPadding="2"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
-				</textElement>
 				<textFieldExpression><![CDATA[$F{kepentingan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="634" y="0" width="168" height="11" uuid="763b8c8e-3b7a-4e92-af82-3641450383fc">
+				<reportElement positionType="Float" x="642" y="0" width="160" height="11" uuid="763b8c8e-3b7a-4e92-af82-3641450383fc">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="8"/>
@@ -581,7 +552,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nik_pj}+" "+$F{nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="Float" x="0" y="11" width="802" height="1" uuid="37bfd407-51ae-4b9d-8874-b03111628829">
@@ -600,6 +571,24 @@
 					<pen lineWidth="0.25" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="591" y="0" width="51" height="11" uuid="4910f48c-d24a-4d47-8a05-2cb62d13f80f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.layout.grid.x" value="5"/>
+					<property name="com.jaspersoft.layout.grid.y" value="0"/>
+					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+				</reportElement>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle" rotation="None">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nik}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -750,7 +739,7 @@
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Total Cuti : " + $V{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Total izin : " + $V{total}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

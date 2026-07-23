@@ -972,6 +972,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSudah = new javax.swing.JMenuItem();
         MnBelum = new javax.swing.JMenuItem();
         MnBatal = new javax.swing.JMenuItem();
+        MnRujukInternalSMC = new javax.swing.JMenuItem();
         MnDirujuk = new javax.swing.JMenuItem();
         MnDIrawat = new javax.swing.JMenuItem();
         MnMeninggal = new javax.swing.JMenuItem();
@@ -3727,6 +3728,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSPBK1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnSPBK1.setForeground(new java.awt.Color(50, 50, 50));
         MnSPBK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSPBK1.setMnemonic('z');
         MnSPBK1.setText("Surat Bukti Pelayanan Kesehatan (SBPK) 2");
         MnSPBK1.setToolTipText("Z");
         MnSPBK1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -3744,6 +3746,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSBT.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnSBT.setForeground(new java.awt.Color(50, 50, 50));
         MnSBT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSBT.setMnemonic('z');
         MnSBT.setText("Surat Bukti Tindakan");
         MnSBT.setToolTipText("Z");
         MnSBT.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -3777,6 +3780,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarRalan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnLembarRalan.setForeground(new java.awt.Color(50, 50, 50));
         MnLembarRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnLembarRalan.setMnemonic('w');
         MnLembarRalan.setText("Lembar Rawat Jalan");
         MnLembarRalan.setToolTipText("W");
         MnLembarRalan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -3794,6 +3798,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBlangkoResep.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnBlangkoResep.setForeground(new java.awt.Color(50, 50, 50));
         MnBlangkoResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnBlangkoResep.setMnemonic('w');
         MnBlangkoResep.setText("Blanko Resep");
         MnBlangkoResep.setToolTipText("W");
         MnBlangkoResep.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -4155,6 +4160,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBarcodeRM9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnBarcodeRM9.setForeground(new java.awt.Color(50, 50, 50));
         MnBarcodeRM9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnBarcodeRM9.setMnemonic('L');
         MnBarcodeRM9.setText("Label Rekam Medis 10");
         MnBarcodeRM9.setToolTipText("L");
         MnBarcodeRM9.setName("MnBarcodeRM9"); // NOI18N
@@ -5089,6 +5095,22 @@ public final class DlgReg extends javax.swing.JDialog {
         });
         MnStatus.add(MnBatal);
 
+        MnRujukInternalSMC.setBackground(new java.awt.Color(255, 255, 254));
+        MnRujukInternalSMC.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnRujukInternalSMC.setForeground(new java.awt.Color(50, 50, 50));
+        MnRujukInternalSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnRujukInternalSMC.setText("Rujuk Internal");
+        MnRujukInternalSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnRujukInternalSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnRujukInternalSMC.setName("MnRujukInternalSMC"); // NOI18N
+        MnRujukInternalSMC.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnRujukInternalSMC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnRujukInternalSMCActionPerformed(evt);
+            }
+        });
+        MnStatus.add(MnRujukInternalSMC);
+
         MnDirujuk.setBackground(new java.awt.Color(255, 255, 254));
         MnDirujuk.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnDirujuk.setForeground(new java.awt.Color(50, 50, 50));
@@ -5217,6 +5239,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelBiasa3.setLayout(null);
 
         BtnPrint3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint3.setMnemonic('G');
         BtnPrint3.setText("Grafik");
         BtnPrint3.setToolTipText("Alt+G");
         BtnPrint3.setName("BtnPrint3"); // NOI18N
@@ -5235,6 +5258,7 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint3.setBounds(110, 110, 100, 30);
 
         BtnKeluar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnKeluar3.setMnemonic('U');
         BtnKeluar3.setText("Tutup");
         BtnKeluar3.setToolTipText("Alt+U");
         BtnKeluar3.setName("BtnKeluar3"); // NOI18N
@@ -5262,6 +5286,7 @@ public final class DlgReg extends javax.swing.JDialog {
         Kelurahan2.setBounds(105, 70, 350, 23);
 
         btnKel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnKel.setMnemonic('1');
         btnKel.setToolTipText("ALt+1");
         btnKel.setName("btnKel"); // NOI18N
         btnKel.addActionListener(new java.awt.event.ActionListener() {
@@ -5282,6 +5307,7 @@ public final class DlgReg extends javax.swing.JDialog {
         Kecamatan2.setBounds(105, 40, 350, 23);
 
         btnKec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnKec.setMnemonic('1');
         btnKec.setToolTipText("ALt+1");
         btnKec.setName("btnKec"); // NOI18N
         btnKec.addActionListener(new java.awt.event.ActionListener() {
@@ -5302,6 +5328,7 @@ public final class DlgReg extends javax.swing.JDialog {
         Kabupaten2.setBounds(105, 10, 350, 23);
 
         btnKab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnKab.setMnemonic('1');
         btnKab.setToolTipText("ALt+1");
         btnKab.setName("btnKab"); // NOI18N
         btnKab.addActionListener(new java.awt.event.ActionListener() {
@@ -5328,6 +5355,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel36.setBounds(0, 40, 100, 23);
 
         BtnPrint4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint4.setMnemonic('T');
         BtnPrint4.setText("Cetak");
         BtnPrint4.setToolTipText("Alt+T");
         BtnPrint4.setName("BtnPrint4"); // NOI18N
@@ -5367,6 +5395,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel37.setBounds(7, 10, 140, 23);
 
         BtnPrint5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint5.setMnemonic('T');
         BtnPrint5.setText("Cetak");
         BtnPrint5.setToolTipText("Alt+T");
         BtnPrint5.setName("BtnPrint5"); // NOI18N
@@ -5380,6 +5409,7 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint5.setBounds(10, 80, 100, 30);
 
         BtnKeluar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnKeluar4.setMnemonic('U');
         BtnKeluar4.setText("Tutup");
         BtnKeluar4.setToolTipText("Alt+U");
         BtnKeluar4.setName("BtnKeluar4"); // NOI18N
@@ -5397,6 +5427,7 @@ public final class DlgReg extends javax.swing.JDialog {
         NomorSurat.setBounds(150, 10, 370, 23);
 
         BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSeek5.setMnemonic('6');
         BtnSeek5.setToolTipText("ALt+6");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -6076,6 +6107,7 @@ public final class DlgReg extends javax.swing.JDialog {
         internalFrame8.setLayout(null);
 
         buttonTutupDialogAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        buttonTutupDialogAntrian.setMnemonic('P');
         buttonTutupDialogAntrian.setText("Tutup");
         buttonTutupDialogAntrian.setToolTipText("Alt+P");
         buttonTutupDialogAntrian.setName("buttonTutupDialogAntrian"); // NOI18N
@@ -6088,6 +6120,7 @@ public final class DlgReg extends javax.swing.JDialog {
         buttonTutupDialogAntrian.setBounds(36, 63, 100, 30);
 
         buttonSimpanAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        buttonSimpanAntrian.setMnemonic('S');
         buttonSimpanAntrian.setText("Simpan");
         buttonSimpanAntrian.setToolTipText("Alt+S");
         buttonSimpanAntrian.setName("buttonSimpanAntrian"); // NOI18N
@@ -6154,6 +6187,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -6171,6 +6205,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
+        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -6188,6 +6223,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.add(BtnBatal);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -6205,6 +6241,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.add(BtnEdit);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -6222,6 +6259,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.add(BtnHapus);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -6239,6 +6277,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.add(BtnPrint);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
@@ -6267,6 +6306,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass6.add(LCount);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -6294,7 +6334,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-01-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6307,7 +6347,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-01-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6329,6 +6369,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass7.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('7');
         BtnCari.setToolTipText("Alt+7");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -6361,6 +6402,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass8.add(CrDokter);
 
         BtnSeek3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSeek3.setMnemonic('6');
         BtnSeek3.setToolTipText("ALt+6");
         BtnSeek3.setName("BtnSeek3"); // NOI18N
         BtnSeek3.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -6382,6 +6424,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass8.add(CrPoli);
 
         BtnSeek4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSeek4.setMnemonic('5');
         BtnSeek4.setToolTipText("ALt+5");
         BtnSeek4.setName("BtnSeek4"); // NOI18N
         BtnSeek4.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -6444,7 +6487,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-01-2026" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2026" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -6543,6 +6586,7 @@ public final class DlgReg extends javax.swing.JDialog {
         TAlmt.setBounds(520, 72, 170, 23);
 
         BtnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPasien.setMnemonic('1');
         BtnPasien.setToolTipText("ALt+1");
         BtnPasien.setName("BtnPasien"); // NOI18N
         BtnPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -6610,6 +6654,7 @@ public final class DlgReg extends javax.swing.JDialog {
         KdDokter.setBounds(74, 102, 107, 23);
 
         BtnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter.setMnemonic('3');
         BtnDokter.setToolTipText("ALt+3");
         BtnDokter.setName("BtnDokter"); // NOI18N
         BtnDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -6630,6 +6675,7 @@ public final class DlgReg extends javax.swing.JDialog {
         kdpoli.setBounds(74, 132, 66, 23);
 
         BtnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnUnit.setMnemonic('4');
         BtnUnit.setToolTipText("ALt+4");
         BtnUnit.setName("BtnUnit"); // NOI18N
         BtnUnit.addActionListener(new java.awt.event.ActionListener() {
@@ -6661,6 +6707,7 @@ public final class DlgReg extends javax.swing.JDialog {
         nmpnj.setBounds(520, 102, 140, 23);
 
         btnPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnPenjab.setMnemonic('2');
         btnPenjab.setToolTipText("ALt+2");
         btnPenjab.setName("btnPenjab"); // NOI18N
         btnPenjab.addActionListener(new java.awt.event.ActionListener() {
@@ -6686,6 +6733,7 @@ public final class DlgReg extends javax.swing.JDialog {
         AsalRujukan.setBounds(520, 132, 330, 23);
 
         btnPenjab1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnPenjab1.setMnemonic('2');
         btnPenjab1.setToolTipText("ALt+2");
         btnPenjab1.setName("btnPenjab1"); // NOI18N
         btnPenjab1.addActionListener(new java.awt.event.ActionListener() {
@@ -6719,6 +6767,7 @@ public final class DlgReg extends javax.swing.JDialog {
         NoKa.setBounds(738, 102, 112, 23);
 
         btnCekBridging.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnCekBridging.setMnemonic('2');
         btnCekBridging.setToolTipText("ALt+2");
         btnCekBridging.setName("btnCekBridging"); // NOI18N
         btnCekBridging.addActionListener(new java.awt.event.ActionListener() {
@@ -6752,6 +6801,7 @@ public final class DlgReg extends javax.swing.JDialog {
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setMnemonic('I');
         ChkInput.setText(".: Input Data");
         ChkInput.setToolTipText("Alt+I");
         ChkInput.setBorderPainted(true);
@@ -10541,7 +10591,6 @@ public final class DlgReg extends javax.swing.JDialog {
                     tabMode.setValueAt("Dirujuk",tbPetugas.getSelectedRow(),19);
                 }
             }
-
         }
     }//GEN-LAST:event_MnDirujukActionPerformed
 
@@ -10687,7 +10736,7 @@ public final class DlgReg extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
-        }else if(TPasien.getText().trim().equals("")){
+        }else if (tbPetugas.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbPetugas.requestFocus();
         }else{
@@ -10696,6 +10745,13 @@ public final class DlgReg extends javax.swing.JDialog {
             dlgrjk.setLocationRelativeTo(internalFrame1);
             dlgrjk.isCek();
             dlgrjk.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),internalFrame1.getWidth(),internalFrame1.getHeight());
+            dlgrjk.addOnSimpanListener(e -> {
+                if (e.berhasilDisimpan()) {
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Rujuk Internal'", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString())) {
+                        tbPetugas.setValueAt("Rujuk Internal", tbPetugas.getSelectedRow(), 17);
+                    }
+                }
+            });
             dlgrjk.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -14929,6 +14985,33 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_buttonSimpanAntrianKeyPressed
 
+    private void MnRujukInternalSMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRujukInternalSMCActionPerformed
+        if (tabMode.getRowCount() <= 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data registrasi sudah habis...!!!!");
+        } else {
+            if (tbPetugas.getSelectedRow() >= 0) {
+                if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString())) {
+                    JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan Billing Ranap..!!!");
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgRujukanPoliInternal dlgrjk = new DlgRujukanPoliInternal(null, false);
+                    dlgrjk.setLocationRelativeTo(internalFrame1);
+                    dlgrjk.isCek();
+                    dlgrjk.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), internalFrame1.getWidth(), internalFrame1.getHeight());
+                    dlgrjk.setVisible(true);
+                    dlgrjk.addOnSimpanListener(e -> {
+                        if (e.berhasilDisimpan()) {
+                            if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Rujuk Internal'", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString())) {
+                                tbPetugas.setValueAt("Rujuk Internal", tbPetugas.getSelectedRow(), 17);
+                            }
+                        }
+                    });
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        }
+    }//GEN-LAST:event_MnRujukInternalSMCActionPerformed
+
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -17139,6 +17222,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnRiwayatPerawatanICareNoKartu;
     private javax.swing.JMenuItem MnRiwayatPerawatanICareNoKartu1;
     private javax.swing.JMenuItem MnRujuk;
+    private javax.swing.JMenuItem MnRujukInternalSMC;
     private javax.swing.JMenuItem MnRujukMasuk;
     private javax.swing.JMenuItem MnRujukSisrute;
     private javax.swing.JMenu MnRujukan;

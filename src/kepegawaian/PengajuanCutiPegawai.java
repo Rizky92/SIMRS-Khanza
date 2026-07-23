@@ -170,6 +170,8 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         Jumlah.setDocument(new batasInput((byte)3).getOnlyAngka(Jumlah));
         ChkInput.setSelected(false);
         isForm();
+
+        TabRawat.addChangeListener(e -> tampil());
     }
 
     /** This method is called from within the constructor to
@@ -1008,69 +1010,21 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                         }
                     }
                     break;
-                case "Sakit":
-                    if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
-                        Valid.getTglSmc(Tgl2), "0000-00-00", "0000-00-00", KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
-                        Jumlah.getText(), "0", Kepentingan.getText().trim(), KdPetugasPJ.getText(), "Proses Pengajuan"
-                    )) {
-                        TabRawat.setSelectedIndex(0);
-                        tabMode.addRow(new Object[] {
-                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), "", "",
-                            Urgensi.getSelectedItem().toString(), Alamat.getText(), Jumlah.getText(), "0", Kepentingan.getText(), KdPetugasPJ.getText(),
-                            NmPetugasPJ.getText(), "Proses Pengajuan"
-                        });
-                        emptTeks();
-                    }
-                    break;
-                case "Bersalin":
-                    if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
-                        Valid.getTglSmc(Tgl2), "0000-00-00", "0000-00-00", KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
-                        Jumlah.getText(), "0", Kepentingan.getText().trim(), KdPetugasPJ.getText(), "Proses Pengajuan"
-                    )) {
-                        TabRawat.setSelectedIndex(0);
-                        tabMode.addRow(new Object[] {
-                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), "", "",
-                            Urgensi.getSelectedItem().toString(), Alamat.getText(), Jumlah.getText(), "0", Kepentingan.getText(), KdPetugasPJ.getText(),
-                            NmPetugasPJ.getText(), "Proses Pengajuan"
-                        });
-                        emptTeks();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Tidak dapat menyimpan pengajuan cuti..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-                    }
-                    break;
-                case "Alasan Penting":
-                    if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
-                        Valid.getTglSmc(Tgl2), "0000-00-00", "0000-00-00", KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
-                        Jumlah.getText(), "0", Kepentingan.getText().trim(), KdPetugasPJ.getText(), "Proses Pengajuan"
-                    )) {
-                        TabRawat.setSelectedIndex(0);
-                        tabMode.addRow(new Object[] {
-                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), "", "",
-                            Urgensi.getSelectedItem().toString(), Alamat.getText(), Jumlah.getText(), "0", Kepentingan.getText(), KdPetugasPJ.getText(),
-                            NmPetugasPJ.getText(), "Proses Pengajuan"
-                        });
-                        emptTeks();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Tidak dapat menyimpan pengajuan cuti..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-                    }
-                    break;
-                case "Lainnya":
-                    if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
-                        Valid.getTglSmc(Tgl2), "0000-00-00", "0000-00-00", KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
-                        Jumlah.getText(), "0", Kepentingan.getText().trim(), KdPetugasPJ.getText(), "Proses Pengajuan"
-                    )) {
-                        TabRawat.setSelectedIndex(0);
-                        tabMode.addRow(new Object[] {
-                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), "", "",
-                            Urgensi.getSelectedItem().toString(), Alamat.getText(), Jumlah.getText(), "0", Kepentingan.getText(), KdPetugasPJ.getText(),
-                            NmPetugasPJ.getText(), "Proses Pengajuan"
-                        });
-                        emptTeks();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Tidak dapat menyimpan pengajuan cuti..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-                    }
-                    break;
                 default:
+                    if (Sequel.menyimpantfSmc("pengajuan_cuti", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1),
+                        Valid.getTglSmc(Tgl2), "0000-00-00", "0000-00-00", KdPetugas.getText(), Urgensi.getSelectedItem().toString(), Alamat.getText(),
+                        Jumlah.getText(), Kepentingan.getText().trim(), KdPetugasPJ.getText(), "Proses Pengajuan"
+                    )) {
+                        TabRawat.setSelectedIndex(0);
+                        tabMode.addRow(new Object[] {
+                            NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), "", "",
+                            Urgensi.getSelectedItem().toString(), Alamat.getText(), Jumlah.getText(), "0", Kepentingan.getText(), KdPetugasPJ.getText(),
+                            NmPetugasPJ.getText(), "Proses Pengajuan"
+                        });
+                        emptTeks();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tidak dapat menyimpan pengajuan cuti..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
             }
         }
@@ -1138,6 +1092,10 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, PJ tidak bisa untuk anda sendiri..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             KdPetugasPJ.setText("");
             NmPetugasPJ.setText("");
+        } else if (cekTanggal()) {
+            JOptionPane.showMessageDialog(null, "Maaf, tanggal akhir pengambilan cuti tidak boleh maju dari tanggal awal cuti..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else if (cekCutoffPengajuanCutiLain()) {
+            JOptionPane.showMessageDialog(null, "Maaf, sudah ada pengajuan cuti yang berada pada tanggal terkait..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }else{
             if(tbObat.getSelectedRow()> -1){
                 if("Proses Pengajuan".equals(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString())){
@@ -1176,6 +1134,31 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                             }
                             break;
                         case "Besar":
+                            if (Integer.parseInt(Jumlah.getText().trim()) > Integer.parseInt(Sisa.getText().trim())) {
+                                JOptionPane.showMessageDialog(null, "Maaf, sisa cuti anda sudah habis..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                if (Sequel.mengupdatetfSmc("pengajuan_cuti", "no_pengajuan = ?, tanggal = ?, tanggal_awal = ?, tanggal_akhir = ?, tmt_kerja = '0000-00-00', tat_kerja = '0000-00-00', nik = ?, urgensi = ?, " +
+                                    "alamat = ?, jumlah = ?, kepentingan = ?, nik_pj = ?", "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), KdPetugas.getText(),
+                                    Urgensi.getSelectedItem().toString(), Alamat.getText().trim(), Jumlah.getText(), Kepentingan.getText().trim(), KdPetugasPJ.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
+                                )) {
+                                    tabMode.setValueAt(NoPengajuan.getText(), tbObat.getSelectedRow(), 0);
+                                    tabMode.setValueAt(Valid.getTglSmc(Tanggal), tbObat.getSelectedRow(), 1);
+                                    tabMode.setValueAt(Valid.getTglSmc(Tgl1), tbObat.getSelectedRow(), 2);
+                                    tabMode.setValueAt(Valid.getTglSmc(Tgl2), tbObat.getSelectedRow(), 3);
+                                    tabMode.setValueAt("", tbObat.getSelectedRow(), 4);
+                                    tabMode.setValueAt("", tbObat.getSelectedRow(), 5);
+                                    tabMode.setValueAt(Urgensi.getSelectedItem().toString(), tbObat.getSelectedRow(), 6);
+                                    tabMode.setValueAt(Alamat.getText(), tbObat.getSelectedRow(), 7);
+                                    tabMode.setValueAt(Jumlah.getText(), tbObat.getSelectedRow(), 8);
+                                    tabMode.setValueAt(String.valueOf(Integer.parseInt(Sisa.getText()) - Integer.parseInt(Jumlah.getText())), tbObat.getSelectedRow(), 9);
+                                    tabMode.setValueAt(Kepentingan.getText(), tbObat.getSelectedRow(), 10);
+                                    tabMode.setValueAt(KdPetugasPJ.getText(), tbObat.getSelectedRow(), 11);
+                                    tabMode.setValueAt(NmPetugasPJ.getText(), tbObat.getSelectedRow(), 12);
+                                    emptTeks();
+                                }
+                            }
+                            break;
+                        default:
                             if (Sequel.mengupdatetfSmc("pengajuan_cuti", "no_pengajuan = ?, tanggal = ?, tanggal_awal = ?, tanggal_akhir = ?, tmt_kerja = '0000-00-00', tat_kerja = '0000-00-00', nik = ?, urgensi = ?, " +
                                 "alamat = ?, jumlah = ?, kepentingan = ?, nik_pj = ?", "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Valid.getTglSmc(Tgl1), Valid.getTglSmc(Tgl2), KdPetugas.getText(),
                                 Urgensi.getSelectedItem().toString(), Alamat.getText().trim(), Jumlah.getText(), Kepentingan.getText().trim(), KdPetugasPJ.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
@@ -1195,8 +1178,6 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                                 tabMode.setValueAt(NmPetugasPJ.getText(), tbObat.getSelectedRow(), 12);
                                 emptTeks();
                             }
-                            break;
-                        case "Bersalin":
                             break;
                     }
                 }else{
@@ -1405,7 +1386,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         emptTeks();
         hitungHari();
-        tampilSmc();
+        tampil();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -1424,6 +1405,27 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
                         tampilSmc();
+                    }
+                }
+            });
+
+            TCari2.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil2Smc();
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil2Smc();
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil2Smc();
                     }
                 }
             });
@@ -1505,18 +1507,22 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl1ItemStateChanged
 
     private void ppSetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSetujuiActionPerformed
-        if (!"Disetujui".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
+        if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
             if (Sequel.mengupdatetfSmc("pengajuan_cuti", "status = 'Disetujui'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
                 tabMode2.setValueAt("Disetujui", tbObat2.getSelectedRow(), 13);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, status pengajuan tidak boleh dirubah..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ppSetujuiActionPerformed
 
     private void ppTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTolakActionPerformed
-        if (!"Ditolak".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
+        if ("Proses Pengajuan".equals(tbObat2.getValueAt(tbObat2.getSelectedRow(), 13).toString())) {
             if (Sequel.mengupdatetfSmc("pengajuan_cuti", "status = 'Ditolak'", "no_pengajuan = ?", tbObat2.getValueAt(tbObat2.getSelectedRow(), 0).toString())) {
                 tabMode2.setValueAt("Ditolak", tbObat2.getSelectedRow(), 13);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, status pengajuan tidak boleh dirubah..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ppTolakActionPerformed
 
@@ -1663,8 +1669,13 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     private widget.Table tbObat2;
     // End of variables declaration//GEN-END:variables
 
-    /*
     private void tampil() {
+        if (TabRawat.getSelectedIndex() == 0) {
+            tampilSmc();
+        } else if (TabRawat.getSelectedIndex() == 1) {
+            tampil2Smc();
+        }
+        /*
         int i = 0;
         Valid.tabelKosong(tabMode);
         try{
@@ -1752,8 +1763,8 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
         LCount1.setText(Valid.SetAngka(i));
+        */
     }
-    */
 
     private void emptTeks() {
         Tanggal.setDate(new Date());
@@ -1781,7 +1792,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             Kepentingan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             KdPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             NmPetugasPJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            // hitungSisaCuti();
+            hitungSisaCuti();
         }
     }
 
@@ -1802,7 +1813,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     public void isCek(){
         if (!akses.getadmin()) {
             KdPetugas.setText(akses.getkode());
-            NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
+            NmPetugas.setText(Sequel.CariPegawai(KdPetugas.getText()));
             hitungSisaCuti();
         }
     }
@@ -1827,17 +1838,21 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "with data_cuti as (select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, pengajuan_cuti.tmt_kerja, pengajuan_cuti.tat_kerja, " +
-                        "pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, ((case when pengajuan_cuti.urgensi = 'Tahunan' then stts_kerja.hakcuti when pengajuan_cuti.urgensi = 'Besar' and " +
-                        "stts_kerja.cuti_besar = '10 Tahun Dari TMT' and datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 10 year)) >= 0 then " +
-                        "stts_kerja.hakcuti_besar else 0 end) - sum(if(pengajuan_cuti.status != 'Ditolak', pengajuan_cuti.jumlah, 0)) over (partition by pengajuan_cuti.nik, pengajuan_cuti.urgensi, pengajuan_cuti.tmt_kerja, " +
-                        "pengajuan_cuti.tat_kerja order by pengajuan_cuti.tanggal_awal)) as sisa, pengajuan_cuti.kepentingan, pengajuan_cuti.nik_pj, pegawai_pj.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai " +
-                        "on pengajuan_cuti.nik = pegawai.nik inner join pegawai as pegawai_pj on pengajuan_cuti.nik_pj = pegawai_pj.nik inner join stts_kerja on pegawai.stts_kerja = stts_kerja.stts where pengajuan_cuti.nik = ? " +
-                        (cari.isBlank() ? "" : "and (pengajuan_cuti.no_pengajuan like ? or pengajuan_cuti.nik_pj like ? or pegawai_pj.nama like ? or pengajuan_cuti.urgensi like ? or pengajuan_cuti.alamat like ? or " +
-                        "pengajuan_cuti.kepentingan like ? or pengajuan_cuti.status like ?) ") + "order by pengajuan_cuti.tanggal_awal) select * from data_cuti where data_cuti.tanggal between ? and ?"
+                        "select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, if(pengajuan_cuti.tmt_kerja = '0000-00-00', '', pengajuan_cuti.tmt_kerja) as tmt_kerja, " +
+                        "if(pengajuan_cuti.tat_kerja = '0000-00-00', '', pengajuan_cuti.tat_kerja) as tat_kerja, pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, ((case when pengajuan_cuti.urgensi = 'Tahunan' and " +
+                        "datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 1 year)) >= 0 then stts_kerja.hakcuti when pengajuan_cuti.urgensi = 'Besar' " +
+                        "and stts_kerja.cuti_besar = '10 Tahun Dari TMT' and datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 10 year)) >= 0 then " +
+                        "stts_kerja.hakcuti_besar else 0 end) - if(pengajuan_cuti.urgensi not in ('Tahunan', 'Besar'), 0, ifnull((select sum(p2.jumlah) from pengajuan_cuti p2 where p2.nik = pengajuan_cuti.nik and p2.tmt_kerja " +
+                        "= pengajuan_cuti.tmt_kerja and p2.tat_kerja = pengajuan_cuti.tat_kerja and p2.urgensi = pengajuan_cuti.urgensi and p2.tanggal_akhir <= pengajuan_cuti.tanggal_akhir), 0))) as sisa, pengajuan_cuti.kepentingan, " +
+                        "pengajuan_cuti.nik_pj, pegawai_pj.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik = pegawai.nik inner join stts_kerja on pegawai.stts_kerja = stts_kerja.stts inner join " +
+                        "pegawai as pegawai_pj on pengajuan_cuti.nik_pj = pegawai_pj.nik where pengajuan_cuti.nik = ? and pengajuan_cuti.tanggal between ? and ? " + (cari.isBlank() ? "" : "and (pengajuan_cuti.no_pengajuan like ? or " +
+                        "pengajuan_cuti.tanggal_awal like ? or pengajuan_cuti.tanggal_akhir like ? or pengajuan_cuti.tmt_kerja like ? or pengajuan_cuti.tat_kerja like ? or pengajuan_cuti.urgensi like ? or pengajuan_cuti.alamat like ? " +
+                        "or pengajuan_cuti.kepentingan like ? or pengajuan_cuti.nik_pj like ? or pegawai_pj.nama like ?) ") + "order by pengajuan_cuti.tanggal_awal"
                     )) {
                         int p = 0;
                         ps.setString(++p, KdPetugas.getText());
+                        ps.setString(++p, Valid.getTglSmc(DTPCari1));
+                        ps.setString(++p, Valid.getTglSmc(DTPCari2));
                         if (!cari.isBlank()) {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
@@ -1846,17 +1861,17 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
                         }
-                        ps.setString(++p, Valid.getTglSmc(DTPCari1));
-                        ps.setString(++p, Valid.getTglSmc(DTPCari2));
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 jumlahCuti += rs.getInt("jumlah");
                                 publish(new Object[] {
                                     rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("tanggal_awal"), rs.getString("tanggal_akhir"),
-                                    ("0000-00-00".equals(rs.getString("tmt_kerja")) ? "" : rs.getString("tmt_kerja")), ("0000-00-00".equals(rs.getString("tat_kerja")) ? "" : rs.getString("tat_kerja")),
-                                    rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"), ("Ditolak".equals(rs.getString("status")) ? "" : rs.getString("sisa")),
-                                    rs.getString("kepentingan"), rs.getString("nik_pj"), rs.getString("nama"), rs.getString("status")
+                                    rs.getString("tmt_kerja"), rs.getString("tat_kerja"), rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"),
+                                    rs.getString("sisa"), rs.getString("kepentingan"), rs.getString("nik_pj"), rs.getString("nama"), rs.getString("status")
                                 });
                             }
                         }
@@ -1891,23 +1906,27 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosongSmc(tabMode2);
             new SwingWorker<Void, Object[]>() {
-                final String cari = TCari.getText().trim();
+                final String cari = TCari2.getText().trim();
                 int jumlahCuti = 0;
 
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "with data_cuti as (select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, pengajuan_cuti.tmt_kerja, pengajuan_cuti.tat_kerja, " +
-                        "pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, ((case when pengajuan_cuti.urgensi = 'Tahunan' then stts_kerja.hakcuti when pengajuan_cuti.urgensi = 'Besar' and " +
-                        "stts_kerja.cuti_besar = '10 Tahun Dari TMT' and datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 10 year)) >= 0 then " +
-                        "stts_kerja.hakcuti_besar else 0 end) - sum(if(pengajuan_cuti.status != 'Ditolak', pengajuan_cuti.jumlah, 0)) over (partition by pengajuan_cuti.nik, pengajuan_cuti.urgensi, pengajuan_cuti.tmt_kerja, " +
-                        "pengajuan_cuti.tat_kerja order by pengajuan_cuti.tanggal_awal)) as sisa, pengajuan_cuti.kepentingan, pengajuan_cuti.nik, pegawai.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai " +
-                        "on pengajuan_cuti.nik = pegawai.nik inner join pegawai as pegawai_pj on pengajuan_cuti.nik_pj = pegawai_pj.nik inner join stts_kerja on pegawai.stts_kerja = stts_kerja.stts where pengajuan_cuti.nik_pj = ? " +
-                        (cari.isBlank() ? "" : "and (pengajuan_cuti.no_pengajuan like ? or pengajuan_cuti.nik like ? or pegawai.nama like ? or pengajuan_cuti.urgensi like ? or pengajuan_cuti.alamat like ? or " +
-                        "pengajuan_cuti.kepentingan like ? or pengajuan_cuti.status like ?) ") + "order by pengajuan_cuti.tanggal_awal) select * from data_cuti where data_cuti.tanggal between ? and ?"
+                        "select pengajuan_cuti.no_pengajuan, pengajuan_cuti.tanggal, pengajuan_cuti.tanggal_awal, pengajuan_cuti.tanggal_akhir, if(pengajuan_cuti.tmt_kerja = '0000-00-00', '', pengajuan_cuti.tmt_kerja) as tmt_kerja, " +
+                        "if(pengajuan_cuti.tat_kerja = '0000-00-00', '', pengajuan_cuti.tat_kerja) as tat_kerja, pengajuan_cuti.urgensi, pengajuan_cuti.alamat, pengajuan_cuti.jumlah, ((case when pengajuan_cuti.urgensi = 'Tahunan' and " +
+                        "datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 1 year)) >= 0 then stts_kerja.hakcuti when pengajuan_cuti.urgensi = 'Besar' " +
+                        "and stts_kerja.cuti_besar = '10 Tahun Dari TMT' and datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 10 year)) >= 0 then " +
+                        "stts_kerja.hakcuti_besar else 0 end) - if(pengajuan_cuti.urgensi not in ('Tahunan', 'Besar'), 0, ifnull((select sum(p2.jumlah) from pengajuan_cuti p2 where p2.nik = pengajuan_cuti.nik and p2.tmt_kerja " +
+                        "= pengajuan_cuti.tmt_kerja and p2.tat_kerja = pengajuan_cuti.tat_kerja and p2.urgensi = pengajuan_cuti.urgensi and p2.tanggal_akhir <= pengajuan_cuti.tanggal_akhir), 0))) as sisa, pengajuan_cuti.kepentingan, " +
+                        "pengajuan_cuti.nik, pegawai.nama, pengajuan_cuti.status from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik = pegawai.nik inner join stts_kerja on pegawai.stts_kerja = stts_kerja.stts where " +
+                        "pengajuan_cuti.nik_pj = ? and pengajuan_cuti.tanggal between ? and ? " + (cari.isBlank() ? "" : "and (pengajuan_cuti.no_pengajuan like ? or pengajuan_cuti.tanggal_awal like ? or pengajuan_cuti.tanggal_akhir " +
+                        "like ? or pengajuan_cuti.tmt_kerja like ? or pengajuan_cuti.tat_kerja like ? or pengajuan_cuti.urgensi like ? or pengajuan_cuti.alamat like ? or pengajuan_cuti.kepentingan like ? or pengajuan_cuti.nik like ? " +
+                        "or pegawai.nama like ?) ") + "order by pengajuan_cuti.tanggal_awal"
                     )) {
                         int p = 0;
                         ps.setString(++p, KdPetugas.getText());
+                        ps.setString(++p, Valid.getTglSmc(DTPCari3));
+                        ps.setString(++p, Valid.getTglSmc(DTPCari4));
                         if (!cari.isBlank()) {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
@@ -1916,17 +1935,17 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
                             ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
                         }
-                        ps.setString(++p, Valid.getTglSmc(DTPCari3));
-                        ps.setString(++p, Valid.getTglSmc(DTPCari4));
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 jumlahCuti += rs.getInt("jumlah");
                                 publish(new Object[] {
                                     rs.getString("no_pengajuan"), rs.getString("tanggal"), rs.getString("tanggal_awal"), rs.getString("tanggal_akhir"),
-                                    ("0000-00-00".equals(rs.getString("tmt_kerja")) ? "" : rs.getString("tmt_kerja")), ("0000-00-00".equals(rs.getString("tat_kerja")) ? "" : rs.getString("tat_kerja")),
-                                    rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"), rs.getString("sisa"), rs.getString("kepentingan"),
-                                    rs.getString("nik"), rs.getString("nama"), rs.getString("status")
+                                    rs.getString("tmt_kerja"), rs.getString("tat_kerja"), rs.getString("urgensi"), rs.getString("alamat"), rs.getString("jumlah"),
+                                    rs.getString("sisa"), rs.getString("kepentingan"), rs.getString("nik"), rs.getString("nama"), rs.getString("status")
                                 });
                             }
                         }
@@ -1971,16 +1990,16 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
 
     private void hitungSisaCutiTahunan() {
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "with datapegawai as (select pegawai.nik, stts_kerja.hakcuti, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, " +
-            "date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 year), makedate(year(?), dayofyear(pegawai.mulai_kerja))) as tmt_kerja, " +
-            "if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 day), " +
-            "date_sub(date_add(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 year), interval 1 day)) as tat_kerja from pegawai inner join " +
-            "stts_kerja on pegawai.stts_kerja = stts_kerja.stts where pegawai.nik = ?) select datapegawai.*, ifnull(sum(pengajuan_cuti.jumlah), 0) as diambil " +
-            "from datapegawai left join pengajuan_cuti on pengajuan_cuti.nik = datapegawai.nik and pengajuan_cuti.tmt_kerja = datapegawai.tmt_kerja and " +
-            "pengajuan_cuti.tat_kerja = datapegawai.tat_kerja and pengajuan_cuti.status != 'Ditolak' " + (tbObat.getSelectedRow() < 0 ? "" :
-            "and pengajuan_cuti.no_pengajuan != ?")
+            "with datapegawai as (select pegawai.nik, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 1 year)) >= 0, stts_kerja.hakcuti, 0) " +
+            "as hakcuti, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 year), makedate(year(?), " +
+            "dayofyear(pegawai.mulai_kerja))) as tmt_kerja, if(datediff(makedate(year(?), dayofyear(pegawai.mulai_kerja)), ?) >= 0, date_sub(makedate(year(?), dayofyear(pegawai.mulai_kerja)), " +
+            "interval 1 day), date_sub(date_add(makedate(year(?), dayofyear(pegawai.mulai_kerja)), interval 1 year), interval 1 day)) as tat_kerja from pegawai inner join stts_kerja on " +
+            "pegawai.stts_kerja = stts_kerja.stts where pegawai.nik = ?) select datapegawai.*, ifnull(sum(pengajuan_cuti.jumlah), 0) as diambil from datapegawai left join pengajuan_cuti on " +
+            "pengajuan_cuti.nik = datapegawai.nik and pengajuan_cuti.tmt_kerja = datapegawai.tmt_kerja and pengajuan_cuti.tat_kerja = datapegawai.tat_kerja and pengajuan_cuti.status != 'Ditolak' " +
+            (tbObat.getSelectedRow() < 0 ? "" : "and pengajuan_cuti.no_pengajuan != ?")
         )) {
             int p = 0;
+            ps.setString(++p, Valid.getTglSmc(Tgl1));
             ps.setString(++p, Valid.getTglSmc(Tgl1));
             ps.setString(++p, Valid.getTglSmc(Tgl1));
             ps.setString(++p, Valid.getTglSmc(Tgl1));
