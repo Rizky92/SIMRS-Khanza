@@ -342,7 +342,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         label1.setBounds(210, 20, 55, 23);
 
         TanggalJawab.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalJawab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026 17:59:09" }));
+        TanggalJawab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 07:09:48" }));
         TanggalJawab.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalJawab.setName("TanggalJawab"); // NOI18N
         TanggalJawab.setOpaque(false);
@@ -665,7 +665,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(170, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -683,7 +683,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -773,10 +773,15 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         NoPermintaan.setBounds(92, 40, 120, 23);
 
         TanggalPermintaan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPermintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026 17:59:09" }));
+        TanggalPermintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 07:09:48" }));
         TanggalPermintaan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPermintaan.setName("TanggalPermintaan"); // NOI18N
         TanggalPermintaan.setOpaque(false);
+        TanggalPermintaan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalPermintaanItemStateChanged(evt);
+            }
+        });
         TanggalPermintaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalPermintaanKeyPressed(evt);
@@ -1705,6 +1710,10 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         Valid.pindah2(evt,Instruksi,BtnSimpanJawaban);
     }//GEN-LAST:event_RencanaKeyPressed
 
+    private void TanggalPermintaanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalPermintaanItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_TanggalPermintaanItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -2006,7 +2015,8 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(konsultasi_perawat.no_permintaan,4),signed)),0) from konsultasi_perawat where left(konsultasi_perawat.tanggal,10)='"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"")+"' ","KP"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"").replaceAll("-",""),4,NoPermintaan);
+        /* Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(konsultasi_perawat.no_permintaan,4),signed)),0) from konsultasi_perawat where left(konsultasi_perawat.tanggal,10)='"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"")+"' ","KP"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"").replaceAll("-",""),4,NoPermintaan); */
+        Valid.autonomor1Smc(NoPermintaan, "KP", "konsultasi_perawat", "no_permintaan", 4, "0", TanggalPermintaan);
     }
 
     private void ganti() {
