@@ -342,7 +342,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         label1.setBounds(210, 20, 55, 23);
 
         TanggalJawab.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalJawab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026 17:59:09" }));
+        TanggalJawab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026 10:07:59" }));
         TanggalJawab.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalJawab.setName("TanggalJawab"); // NOI18N
         TanggalJawab.setOpaque(false);
@@ -665,7 +665,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(170, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -683,7 +683,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -773,10 +773,15 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         NoPermintaan.setBounds(92, 40, 120, 23);
 
         TanggalPermintaan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPermintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2026 17:59:09" }));
+        TanggalPermintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026 10:07:58" }));
         TanggalPermintaan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPermintaan.setName("TanggalPermintaan"); // NOI18N
         TanggalPermintaan.setOpaque(false);
+        TanggalPermintaan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalPermintaanItemStateChanged(evt);
+            }
+        });
         TanggalPermintaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalPermintaanKeyPressed(evt);
@@ -1705,6 +1710,10 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         Valid.pindah2(evt,Instruksi,BtnSimpanJawaban);
     }//GEN-LAST:event_RencanaKeyPressed
 
+    private void TanggalPermintaanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalPermintaanItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_TanggalPermintaanItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -1816,8 +1825,8 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             sql="";
-            if(akses.getjml2()>=1){
-                sql="(konsultasi_perawat.nip='"+akses.getkode()+"' or konsultasi_perawat.kd_dokter_dikonsuli='"+akses.getkode()+"') and ";
+            if(/* akses.getjml2()>=1 */ !Sequel.CariDokter(akses.getkode()).isBlank()){
+                sql="(konsultasi_perawat.kd_dokter_dikonsuli='"+akses.getkode()+"') and ";
             }
             if(R1.isSelected()==true){
                ps=koneksi.prepareStatement(
@@ -1829,7 +1838,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
                     "inner join petugas on konsultasi_perawat.nip=petugas.nip inner join dokter on konsultasi_perawat.kd_dokter_dikonsuli=dokter.kd_dokter "+
                     "where "+sql+"konsultasi_perawat.no_permintaan not in (select jawaban_konsultasi_perawat.no_permintaan from jawaban_konsultasi_perawat) "+
                     (TCari.getText().equals("")?"":"and (konsultasi_perawat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? "+
-                    "or penjab.png_jawab like ? or konsultasi_perawat.no_permintaan like ?)")+" order by konsultasi_perawat.tanggal");
+                    "or penjab.png_jawab like ? or konsultasi_perawat.no_permintaan like ? or konsultasi_perawat.tanggal like ?)")+" order by konsultasi_perawat.tanggal");
                 try {
                     if(!TCari.getText().equals("")){
                         ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -1837,6 +1846,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
                         ps.setString(3,"%"+TCari.getText().trim()+"%");
                         ps.setString(4,"%"+TCari.getText().trim()+"%");
                         ps.setString(5,"%"+TCari.getText().trim()+"%");
+                        ps.setString(6,"%"+TCari.getText().trim()+"%");
                     }
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -1869,7 +1879,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
                     "inner join jawaban_konsultasi_perawat on jawaban_konsultasi_perawat.no_permintaan=konsultasi_perawat.no_permintaan "+
                     "where "+sql+"jawaban_konsultasi_perawat.tanggal between ? and ? "+
                     (TCari.getText().equals("")?"":"and (konsultasi_perawat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? "+
-                    "or penjab.png_jawab like ? or konsultasi_perawat.no_permintaan like ?)")+" order by konsultasi_perawat.tanggal");
+                    "or penjab.png_jawab like ? or konsultasi_perawat.no_permintaan like ? or konsultasi_perawat.tanggal like ?)")+" order by konsultasi_perawat.tanggal");
                 try {
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
@@ -1879,6 +1889,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
                         ps.setString(5,"%"+TCari.getText().trim()+"%");
                         ps.setString(6,"%"+TCari.getText().trim()+"%");
                         ps.setString(7,"%"+TCari.getText().trim()+"%");
+                        ps.setString(8,"%"+TCari.getText().trim()+"%");
                     }
                     rs=ps.executeQuery();
                     while(rs.next()){
@@ -1930,12 +1941,14 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-           NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             NoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            KdPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            NmPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            if (akses.getadmin()) {
+                KdPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+                NmPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            }
             KdDokterDikonsuli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             NmDokterDikonsuli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             Situation.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
@@ -2006,7 +2019,8 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(konsultasi_perawat.no_permintaan,4),signed)),0) from konsultasi_perawat where left(konsultasi_perawat.tanggal,10)='"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"")+"' ","KP"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"").replaceAll("-",""),4,NoPermintaan);
+        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(konsultasi_perawat.no_permintaan,4),signed)),0) from konsultasi_perawat where left(konsultasi_perawat.tanggal,10)='"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"")+"' ","KP"+Valid.SetTgl(TanggalPermintaan.getSelectedItem()+"").replaceAll("-",""),4,NoPermintaan);
+        Valid.autonomor1Smc(NoPermintaan, "KP", "konsultasi_perawat", "no_permintaan", 4, "0", TanggalPermintaan);
     }
 
     private void ganti() {
