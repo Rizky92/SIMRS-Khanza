@@ -1825,8 +1825,8 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             sql="";
-            if(akses.getjml2()>=1){
-                sql="(/*konsultasi_perawat.nip='"+akses.getkode()+"' or */konsultasi_perawat.kd_dokter_dikonsuli='"+akses.getkode()+"') and ";
+            if(/* akses.getjml2()>=1 */ !Sequel.CariDokter(akses.getkode()).isBlank()){
+                sql="(konsultasi_perawat.kd_dokter_dikonsuli='"+akses.getkode()+"') and ";
             }
             if(R1.isSelected()==true){
                ps=koneksi.prepareStatement(
@@ -1939,12 +1939,14 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-           NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             NoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            KdPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            NmPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            if (akses.getadmin()) {
+                KdPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+                NmPerawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            }
             KdDokterDikonsuli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             NmDokterDikonsuli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             Situation.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
