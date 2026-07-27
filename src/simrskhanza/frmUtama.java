@@ -51055,6 +51055,8 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
+
+            
         } else if (cmbMenu.getSelectedIndex() == 19) {
             if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
