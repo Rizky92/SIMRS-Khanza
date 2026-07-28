@@ -53,7 +53,7 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Tanggal","Jam","Keluhan"};
+        Object[] row={"Tanggal","Jam","Keluhan","Asal"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -61,7 +61,7 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (z= 0; z < 3; z++) {
+        for (z= 0; z < 4; z++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(z);
             if(z==0){
                 column.setPreferredWidth(65);
@@ -69,6 +69,8 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
                 column.setPreferredWidth(50);
             }else if(z==2){
                 column.setPreferredWidth(750);
+            }else if(z==3){
+                column.setPreferredWidth(200);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -338,6 +340,65 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select date(penilaian_medis_igd.tanggal) as tanggal, time(penilaian_medis_igd.tanggal) as jam, penilaian_medis_igd.keluhan_utama from penilaian_medis_igd " +
+                "where penilaian_medis_igd.no_rawat = ? " + (TCari.getText().isBlank() ? "" : "and (penilaian_medis_igd.tanggal like ? or penilaian_medis_igd.keluhan_utama like ?) ") +
+                "order by penilaian_medis_igd.tanggal"
+            )) {
+                int p = 0;
+                ps.setString(++p, norawat);
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new String[] {
+                            rs.getString(1), rs.getString(2), rs.getString(3), "Awal Medis IGD"
+                        });
+                    }
+                }
+            }
+
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat, pemeriksaan_ralan.keluhan from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ? " +
+                (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ralan.tgl_perawatan like ? or pemeriksaan_ralan.keluhan like ?) ") + "order by pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat"
+            )) {
+                int p = 0;
+                ps.setString(++p, norawat);
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new String[] {
+                            rs.getString(1), rs.getString(2), rs.getString(3), "Pemeriksaan Ralan"
+                        });
+                    }
+                }
+            }
+
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat, pemeriksaan_ranap.keluhan from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat = ? " +
+                (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ranap.tgl_perawatan like ? or pemeriksaan_ranap.keluhan like ?) ") + "order by pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat"
+            )) {
+                int p = 0;
+                ps.setString(++p, norawat);
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new String[] {
+                            rs.getString(1), rs.getString(2), rs.getString(3), "Pemeriksaan Ranap"
+                        });
+                    }
+                }
+            }
+
+            /*
             ps=koneksi.prepareStatement(
                     "select pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.keluhan "+
                     "from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=? and "+
@@ -393,6 +454,7 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
+            */
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
