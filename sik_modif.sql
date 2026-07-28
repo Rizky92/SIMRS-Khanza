@@ -632,7 +632,7 @@ CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
   `jam_akhir` time NOT NULL DEFAULT '00:00:00',
   `kepentingan` varchar(70) NOT NULL,
   `nik_pj` varchar(20) NOT NULL,
-  `status` enum('Proses Pengajuan','Disetujui','Ditolak') NOT NULL
+  `status` enum('Proses Pengajuan','Disetujui','Ditolak') NOT NULL,
   PRIMARY KEY (`no_pengajuan`) USING BTREE,
   INDEX `nik` (`nik`) USING BTREE,
   INDEX `nik_pj` (`nik_pj`) USING BTREE,
