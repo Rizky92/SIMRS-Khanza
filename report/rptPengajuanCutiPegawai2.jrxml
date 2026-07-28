@@ -82,7 +82,7 @@
 		<property name="com.jaspersoft.studio.field.label" value="status"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_cuti"/>
 	</field>
-	<variable name="total" class="java.lang.Double" calculation="Sum">
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{jumlah}]]></variableExpression>
 	</variable>
 	<background>

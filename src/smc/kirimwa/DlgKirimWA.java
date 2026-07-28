@@ -1,4 +1,4 @@
-package support.kirimwa;
+package smc.kirimwa;
 
 import fungsi.batasInput;
 import fungsi.sekuel;

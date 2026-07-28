@@ -619,6 +619,29 @@ ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL 
 
 ALTER TABLE `pengajuan_cuti` MODIFY COLUMN IF EXISTS `urgensi` enum('Tahunan','Besar','Sakit','Bersalin','Alasan Penting','Keterangan Lainnya','Lainnya','Panjang (10 Tahun)') NOT NULL AFTER `nik`;
 
+CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
+  `no_pengajuan` varchar(17) NOT NULL,
+  `tanggal` date NOT NULL,
+  `nik` varchar(20) NOT NULL,
+  `tmt` date NOT NULL DEFAULT '0000-00-00',
+  `tat` date NOT NULL DEFAULT '0000-00-00',
+  `izin` enum('','Tidak Ada','1 Bulan TMT','3 Bulan TMT','6 Bulan TMT','12 Bulan TMT','1 Bulan per Tahun','3 Bulan per Tahun','6 Bulan per Tahun','12 Bulan per Tahun') NOT NULL DEFAULT '',
+  `urgensi` enum('Terlambat','Meninggalkan Kerja','Pulang Cepat','Tidak Masuk Kerja','Lainnya') NOT NULL,
+  `tanggal_izin` date NOT NULL,
+  `jam_mulai` time NOT NULL DEFAULT '00:00:00',
+  `jam_akhir` time NOT NULL DEFAULT '00:00:00',
+  `kepentingan` varchar(70) NOT NULL,
+  `nik_pj` varchar(20) NOT NULL,
+  `status` enum('Proses Pengajuan','Disetujui','Ditolak') NOT NULL,
+  PRIMARY KEY (`no_pengajuan`) USING BTREE,
+  INDEX `nik` (`nik`) USING BTREE,
+  INDEX `nik_pj` (`nik_pj`) USING BTREE,
+  INDEX `nik_2` (`nik`,`tmt`,`tat`) USING BTREE,
+  INDEX `nik_3` (`nik`,`tanggal_izin`) USING BTREE,
+  CONSTRAINT `pengajuan_izin_smc_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `pegawai` (`nik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pengajuan_izin_smc_ibfk_2` FOREIGN KEY (`nik_pj`) REFERENCES `pegawai` (`nik`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
 
 ALTER TABLE `pengkajian_restrain` MODIFY COLUMN IF EXISTS `restrain_farmakologi` text NULL DEFAULT NULL AFTER `restrain_non_farmakologi_keterangan`;
@@ -1490,7 +1513,7 @@ CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
   INDEX `referensi_mobilejkn_bpjs_taskid_response_code_IDX`(`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `stts` enum('Belum','Sudah','Batal','Berkas Diterima','Dirujuk','Meninggal','Dirawat','Pulang Paksa','TTV') NULL DEFAULT NULL AFTER `biaya_reg`;
+ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `stts` enum('Belum','Sudah','Batal','Berkas Diterima','Dirujuk','Meninggal','Dirawat','Pulang Paksa','TTV','Rujuk Internal') NULL DEFAULT NULL AFTER `biaya_reg`;
 
 ALTER TABLE `reg_periksa` ADD INDEX IF NOT EXISTS `tgl_registrasi`(`tgl_registrasi`) USING BTREE;
 
@@ -1797,6 +1820,10 @@ ALTER TABLE `spesialis` MODIFY COLUMN IF EXISTS `nm_sps` varchar(60) NULL DEFAUL
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `cuti_besar` enum('','Tidak Ada','10 Tahun Dari TMT') NOT NULL DEFAULT '' AFTER `hakcuti`;
 
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakcuti_besar` int NOT NULL DEFAULT 0 AFTER `cuti_besar`;
+
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakizin` int NOT NULL DEFAULT 0 AFTER `hakcuti_besar`;
+
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `max_menit` int NOT NULL DEFAULT 0 AFTER `hakizin`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 
