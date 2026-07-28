@@ -124,7 +124,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private boolean autocetak = false, previewLembarObat = false, previewAturanPakai = false;
-    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
+    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "", noantrian = null;
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1611,7 +1611,17 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     }
 
                     if(!noresep.equals("")){
-                        Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"'");
+                        Sequel.mengupdatetfSmc("resep_obat", "tgl_perawatan = ?, jam = ?", "no_resep = ?", Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), noresep);
+                        // Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"'");
+                        JTextField asdf = new JTextField("");
+                        asdf.setDocument(new batasInput((int) 5).getOnlyAngka(asdf));
+                        JOptionPane.showConfirmDialog(null, new Object[]{"Masukkan no. antrian :", asdf}, "No. Antrian", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                        if (!asdf.getText().isBlank()) {
+                            noantrian = Valid.padleftSmc(String.valueOf(Integer.parseInt(asdf.getText().trim())), 4, '0');
+
+                            Sequel.mengupdatetfSmc("antriloketfarmasi_smc", "no_resep = ?", "tanggal = ? and nomor = ? and no_resep is null", noresep, Valid.getTglSmc(DTPTgl), noantrian.trim().toLowerCase());
+                        }
                     }
 
                     if(sukses){
@@ -1711,6 +1721,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             cetakAturanPakai();
                             cetakLembarObat();
                         }
+
                         if(ChkNoResep.isSelected()==true){
                             if (ResepObat == null || !ResepObat.isDisplayable()) {
                                 ResepObat=new DlgResepObat(null,false);
@@ -4608,6 +4619,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         if (!previewLembarObat) return;
 
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
         Map<String, Object> param = new HashMap<>();
         String kddokter = Sequel.cariIsiSmc("select resep_obat.kd_dokter from resep_obat where resep_obat.no_resep = ?", noresep),
                nmdokter = Sequel.cariIsiSmc("select dokter.nm_dokter from dokter where dokter.kd_dokter = ?", kddokter),
@@ -4628,6 +4640,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 param.put("norm", TNoRM.getText());
                 param.put("peresep", nmdokter);
                 param.put("noresep", noresep);
+                param.put("noantrian", Sequel.cariIsiSmc("select antriloketfarmasi_smc.nomor from antriloketfarmasi_smc where antriloketfarmasi_smc.tanggal = ? and antriloketfarmasi_smc.no_resep = ?", Valid.getTglSmc(DTPTgl), noresep));
                 param.put("jam", Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk));
                 param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
                 param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + nmdokter + "\nID " + (finger.equals("") ? kddokter : finger) + "\n" + DTPTgl.getSelectedItem().toString());
