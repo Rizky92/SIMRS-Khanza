@@ -361,9 +361,8 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
             }
 
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat, pemeriksaan_ralan.keluhan from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ? /*and " +
-                "exists(select * from dokter where dokter.kd_dokter = pemeriksaan_ralan.nip)*/ " + (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ralan.tgl_perawatan like ? or " +
-                "pemeriksaan_ralan.keluhan like ?) ") + "order by pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat"
+                "select pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat, pemeriksaan_ralan.keluhan from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ? " +
+                (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ralan.tgl_perawatan like ? or pemeriksaan_ralan.keluhan like ?) ") + "order by pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat"
             )) {
                 int p = 0;
                 ps.setString(++p, norawat);
@@ -381,9 +380,8 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
             }
 
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat, pemeriksaan_ranap.keluhan from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat = ? /*and " +
-                "exists(select * from dokter where dokter.kd_dokter = pemeriksaan_ranap.nip)*/ " + (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ranap.tgl_perawatan like ? or " +
-                "pemeriksaan_ranap.keluhan like ?) ") + "order by pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat"
+                "select pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat, pemeriksaan_ranap.keluhan from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat = ? " +
+                (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ranap.tgl_perawatan like ? or pemeriksaan_ranap.keluhan like ?) ") + "order by pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat"
             )) {
                 int p = 0;
                 ps.setString(++p, norawat);

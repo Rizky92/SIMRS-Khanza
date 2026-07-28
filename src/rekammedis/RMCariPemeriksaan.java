@@ -401,8 +401,7 @@ public final class RMCariPemeriksaan extends javax.swing.JDialog {
                 "if(trim(pemeriksaan_ralan.spo2) = '', '', pemeriksaan_ralan.spo2) as spo2, " +
                 "if(trim(pemeriksaan_ralan.gcs) = '', '', pemeriksaan_ralan.gcs) as gcs, " +
                 "if(trim(pemeriksaan_ralan.kesadaran) = '', '', pemeriksaan_ralan.kesadaran) as kesadaran, " +
-                "trim(pemeriksaan_ralan.pemeriksaan) as pemeriksaan from pemeriksaan_ralan where " +
-                "pemeriksaan_ralan.no_rawat = ? /*and exists(select * from dokter where dokter.kd_dokter = pemeriksaan_ralan.nip)*/ " +
+                "trim(pemeriksaan_ralan.pemeriksaan) as pemeriksaan from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ? " +
                 (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ralan.tgl_perawatan like ? or pemeriksaan_ralan.pemeriksaan like ?) ") +
                 "order by pemeriksaan_ralan.tgl_perawatan, pemeriksaan_ralan.jam_rawat"
             )) {
@@ -450,8 +449,7 @@ public final class RMCariPemeriksaan extends javax.swing.JDialog {
                 "if(trim(pemeriksaan_ranap.spo2) = '', '', pemeriksaan_ranap.spo2) as spo2, " +
                 "if(trim(pemeriksaan_ranap.gcs) = '', '', pemeriksaan_ranap.gcs) as gcs, " +
                 "if(trim(pemeriksaan_ranap.kesadaran) = '', '', pemeriksaan_ranap.kesadaran) as kesadaran, " +
-                "trim(pemeriksaan_ranap.pemeriksaan) as pemeriksaan from pemeriksaan_ranap where " +
-                "pemeriksaan_ranap.no_rawat = ? /*and exists(select * from dokter where dokter.kd_dokter = pemeriksaan_ranap.nip)*/ " +
+                "trim(pemeriksaan_ranap.pemeriksaan) as pemeriksaan from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat = ? " +
                 (TCari.getText().isBlank() ? "" : "and (pemeriksaan_ranap.tgl_perawatan like ? or pemeriksaan_ranap.pemeriksaan like ?) ") +
                 "order by pemeriksaan_ranap.tgl_perawatan, pemeriksaan_ranap.jam_rawat"
             )) {
