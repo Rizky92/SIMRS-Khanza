@@ -84,7 +84,7 @@ public final class SatuSehatMapingTindakanOperasiKPTL extends javax.swing.JDialo
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
         KodeTindakan.setDocument(new batasInput((byte)15).getKata(KodeTindakan));
-        Code.setDocument(new batasInput((byte)20).getKata(Code));
+        Code.setDocument(new batasInput((byte)30).getKata(Code));
         TindakanSystem.setDocument(new batasInput((byte)100).getKata(TindakanSystem));
         Display.setDocument(new batasInput((byte)80).getKata(Display));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -519,6 +519,7 @@ public final class SatuSehatMapingTindakanOperasiKPTL extends javax.swing.JDialo
             public void keyReleased(KeyEvent e) {}
         });
         pemeriksaan.isCek();
+        pemeriksaan.setTabData();
         pemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pemeriksaan.setLocationRelativeTo(internalFrame1);
         pemeriksaan.setVisible(true);
@@ -640,7 +641,7 @@ public final class SatuSehatMapingTindakanOperasiKPTL extends javax.swing.JDialo
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingTindakanRanapKPTLSatuSehat.jasper","report","::[ Mapping Tindakan Rawat Inap KPTL Satu Sehat Kemenkes ]::",param);
+                Valid.MyReport("rptMapingTindakanOperasiKPTLSatuSehat.jasper","report","::[ Mapping Tindakan Operasi KPTL Satu Sehat Kemenkes ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -870,7 +871,7 @@ public final class SatuSehatMapingTindakanOperasiKPTL extends javax.swing.JDialo
                     });
                 }
             } catch (Exception e) {
-                System.out.println("Notif Ketersediaan : "+e);
+                System.out.println("Notif : "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -907,10 +908,10 @@ public final class SatuSehatMapingTindakanOperasiKPTL extends javax.swing.JDialo
     }
 
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_ranap());
-        BtnHapus.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_ranap());
-        BtnEdit.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_ranap());
-        BtnPrint.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_ranap());
+        BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_operasi());
+        BtnHapus.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_operasi());
+        BtnEdit.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_operasi());
+        BtnPrint.setEnabled(akses.getsatu_sehat_mapping_kptl_tindakan_operasi());
     }
 
     public JTable getTable(){
