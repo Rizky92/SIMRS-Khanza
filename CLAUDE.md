@@ -66,6 +66,8 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - No hard line wrap. Soft line wrap is around 200-300 characters.
 - Trim trailing whitespaces.
 - Package imports are sorted alphabetically, case sensitive.
+- Uses Yoda-style for object equality check.
+- Don't add comments in the code.
 
 #### Workflow guideline
 - If you're iterating a plan, ensure current branch is in `custom` branch. After you start editing, then switch to a new branch. Branch name must starts with `c/` and followed by the title, styled as `kebab-case` with at-most 4 words in length. DO NOT force create a branch name if the branch of the same name already exist.
