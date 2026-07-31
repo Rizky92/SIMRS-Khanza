@@ -175,20 +175,24 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
     // End of variables declaration//GEN-END:variables
 
     private void cetakAntrian() {
-        if (Sequel.executeRawSmc("insert into antriloketfarmasi_smc (nomor, tanggal, jam) values (lpad(?, greatest(length(nomor), 4), '0'), current_date(), current_time())",
-            String.valueOf(Integer.parseInt(AmbilAntrian.getText().substring(AmbilAntrian.getText().indexOf("(") + 1, AmbilAntrian.getText().indexOf(")"))))
-        )) {
+        int nomor = Sequel.cariIntegerSmc("select ifnull(max(convert(antriloketfarmasi_smc.nomor, unsigned)), 0) + 1 from antriloketfarmasi_smc where antriloketfarmasi_smc.tanggal = current_date()", 0);
+
+        if (nomor > 0 && Sequel.executeRawSmc("insert into antriloketfarmasi_smc (nomor, tanggal, jam) values (lpad(?, 4, '0'), current_date(), current_time())", String.valueOf(nomor))) {
             Valid.printReportSmc("rptAntriFarmasiAPM.jasper", "report", "::[ Antrian Farmasi ]::", param, printerAntrian, printJumlahAntrianFarmasi,
-                "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketfarmasi_smc where tanggal = current_date() order by nomor desc limit 1");
+                "select date_format(antriloketfarmasi_smc.tanggal, '%d-%m-%Y') as tanggal, antriloketfarmasi_smc.nomor, antriloketfarmasi_smc.jam from antriloketfarmasi_smc " +
+                "where antriloketfarmasi_smc.tanggal = current_date() and antriloketfarmasi_smc.nomor = lpad(?, 4, '0')", String.valueOf(nomor));
             Valid.popupInfoDialog("Silahkan ambil antrian anda..!!", 3);
+        } else {
+            Valid.popupInfoDialog("Maaf, nomor antrian gagal dibuat. Silahkan coba lagi..!!", 3);
         }
+
         tampil();
     }
 
     private void tampil() {
         tanggal.setText("Tanggal " + LocalDate.now());
         AmbilAntrian.setText(String.format(templateAntrian,
-            Sequel.cariIsiSmc("select lpad(ifnull(max(convert(nomor, unsigned)), 0) + 1, greatest(length(ifnull(nomor, 0)), 4), '0') from antriloketfarmasi_smc where tanggal = current_date()")
+            Sequel.cariIsiSmc("select lpad(ifnull(max(convert(antriloketfarmasi_smc.nomor, unsigned)), 0) + 1, 4, '0') from antriloketfarmasi_smc where antriloketfarmasi_smc.tanggal = current_date()")
         ));
     }
 

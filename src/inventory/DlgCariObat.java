@@ -124,7 +124,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private boolean autocetak = false, previewLembarObat = false, previewAturanPakai = false;
-    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "", noantrian = null;
+    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1613,15 +1613,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     if(!noresep.equals("")){
                         Sequel.mengupdatetfSmc("resep_obat", "tgl_perawatan = ?, jam = ?", "no_resep = ?", Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), noresep);
                         // Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"'");
-                        JTextField asdf = new JTextField("");
-                        asdf.setDocument(new batasInput((int) 5).getOnlyAngka(asdf));
-                        JOptionPane.showConfirmDialog(null, new Object[]{"Masukkan no. antrian :", asdf}, "No. Antrian", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-
-                        if (!asdf.getText().isBlank()) {
-                            noantrian = Valid.padleftSmc(String.valueOf(Integer.parseInt(asdf.getText().trim())), 4, '0');
-
-                            Sequel.mengupdatetfSmc("antriloketfarmasi_smc", "no_resep = ?", "tanggal = ? and nomor = ? and no_resep is null", noresep, Valid.getTglSmc(DTPTgl), noantrian.trim().toLowerCase());
-                        }
                     }
 
                     if(sukses){
@@ -1694,6 +1685,22 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     ChkJln.setSelected(true);
 
                     if(sukses==true){
+                        if (!noresep.isBlank()) {
+                            JTextField asdf = new JTextField("");
+                            asdf.setDocument(new batasInput(5).getOnlyAngka(asdf));
+
+                            if (JOptionPane.showConfirmDialog(null, new Object[] {"Masukkan no. antrian :", asdf}, "No. Antrian",
+                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION
+                            ) {
+                                int nomor = Valid.SetInteger(asdf.getText().trim());
+
+                                if (nomor > 0) {
+                                    Sequel.mengupdatetfSmc("antriloketfarmasi_smc", "no_resep = ?", "tanggal = ? and nomor = ? and (no_resep is null or no_resep = ?)",
+                                        noresep, Valid.getTglSmc(DTPTgl), Valid.padleftSmc(String.valueOf(nomor), 4, '0'), noresep);
+                                }
+                            }
+                        }
+
                         if (koneksiDB.NOTIFWAFARMASIKEPASIEN()) {
                             String pilihan = (String) JOptionPane.showInputDialog(null,
                                 "Validasi obat selesai, silahkan pilih aksi selanjutnya..?", "Konfirmasi",

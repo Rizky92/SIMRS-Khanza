@@ -335,6 +335,14 @@ public class DlgAntrian extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
 
+        try (PreparedStatement ps = koneksi.prepareStatement("update antriloketfarmasi_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date() and ifnull(no_resep, '') != ''")) {
+            int p = 0;
+            ps.setString(++p, padleftSmc(nomor, 4, '0'));
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
         Antrian.setText(String.valueOf(nomor));
         Antrian.selectAll();
     }//GEN-LAST:event_BtnAntri1ActionPerformed
