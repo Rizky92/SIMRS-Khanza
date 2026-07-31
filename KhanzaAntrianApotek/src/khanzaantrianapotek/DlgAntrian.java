@@ -1,41 +1,37 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * DlgBiling.java
- *
- * Created on 07 Jun 10, 19:07:06
- */
-
 package khanzaantrianapotek;
 
 import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.File;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Objects;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
  * @author perpustakaan
  */
-public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
-    private final Connection koneksi=koneksiDB.condb();
+public class DlgAntrian extends javax.swing.JDialog {
+    private Connection koneksi=koneksiDB.condb();
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     private static final Properties prop = new Properties();
-    private String antri="0",loket="0",nol_detik,detik ;
+    private String antri="",loket="",nol_detik,detik ;
     private PreparedStatement pshapus,pssimpan,pscari;
     private ResultSet rs;
     private BackgroundMusic music;
@@ -43,6 +39,20 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     String[] urut={"","./suaraapotek/satu.mp3","./suaraapotek/dua.mp3","./suaraapotek/tiga.mp3","./suaraapotek/empat.mp3",
                        "./suaraapotek/lima.mp3","./suaraapotek/enam.mp3","./suaraapotek/tujuh.mp3","./suaraapotek/delapan.mp3",
                        "./suaraapotek/sembilan.mp3","./suaraapotek/sepuluh.mp3","./suaraapotek/sebelas.mp3"};
+
+    private final String ANTRIAN = koneksiDB.ANTRIAN();
+    private volatile boolean isPlaying = false;
+    private int nomorSmc = 0;
+    private final ExecutorService pemanggilSmc = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "pemanggil-apotek-smc");
+        t.setDaemon(true);
+        return t;
+    });
+    private static String[] urutSmc = {
+        "./suarasmc/apotek/0.wav", "./suarasmc/apotek/1.wav", "./suarasmc/apotek/2.wav", "./suarasmc/apotek/3.wav", "./suarasmc/apotek/4.wav",
+        "./suarasmc/apotek/5.wav", "./suarasmc/apotek/6.wav", "./suarasmc/apotek/7.wav", "./suarasmc/apotek/8.wav", "./suarasmc/apotek/9.wav",
+    };
+
     /** Creates new form DlgBiling
      * @param parent
      * @param modal */
@@ -52,20 +62,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
 
         this.setSize(350,400);
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
 
-
-        jam();
-        javax.swing.Timer timer = new javax.swing.Timer(100, this);
-        timer.start();
+        Antrian.addActionListener(evt -> BtnAntri1ActionPerformed(evt));
     }
     int i;
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -84,6 +84,8 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         form1 = new widget.InternalFrame();
         labelantri1 = new widget.Label();
         labelLoket = new widget.Label();
+        cmbloket = new widget.ComboBox();
+        label2 = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         BtnDisplay = new widget.Button();
@@ -92,8 +94,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         BtnAntri1 = new widget.Button();
         BtnBatal1 = new widget.Button();
         label1 = new widget.Label();
-        cmbloket = new widget.ComboBox();
-        label2 = new widget.Label();
         Antrian = new widget.TextBox();
         BtnBatal2 = new widget.Button();
 
@@ -163,6 +163,12 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         form1.add(labelLoket);
 
         DlgDisplay.getContentPane().add(form1, java.awt.BorderLayout.LINE_END);
+
+        cmbloket.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        cmbloket.setName("cmbloket"); // NOI18N
+
+        label2.setText("Loket :");
+        label2.setName("label2"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -253,22 +259,12 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         label1.setText("Antrian :");
         label1.setName("label1"); // NOI18N
         panelisi5.add(label1);
-        label1.setBounds(145, 12, 60, 23);
-
-        cmbloket.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cmbloket.setName("cmbloket"); // NOI18N
-        panelisi5.add(cmbloket);
-        cmbloket.setBounds(65, 12, 60, 23);
-
-        label2.setText("Loket :");
-        label2.setName("label2"); // NOI18N
-        panelisi5.add(label2);
-        label2.setBounds(0, 12, 60, 23);
+        label1.setBounds(0, 12, 60, 23);
 
         Antrian.setText("1");
         Antrian.setName("Antrian"); // NOI18N
         panelisi5.add(Antrian);
-        Antrian.setBounds(210, 12, 60, 24);
+        Antrian.setBounds(65, 12, 60, 24);
 
         BtnBatal2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
         BtnBatal2.setMnemonic('8');
@@ -294,12 +290,16 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDisplayActionPerformed
-        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-        isTampil();
-        DlgDisplay.setSize(screen.width,screen.height);
-        DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        DlgDisplay.setAlwaysOnTop(false);
-        DlgDisplay.setVisible(true);
+        if (DlgDisplay.isVisible()) {
+            DlgDisplay.setVisible(false);
+        } else {
+            Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+            isTampil();
+            DlgDisplay.setSize(screen.width,screen.height);
+            DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
+            DlgDisplay.setAlwaysOnTop(false);
+            DlgDisplay.setVisible(true);
+        }
     }//GEN-LAST:event_BtnDisplayActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -307,35 +307,36 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri1ActionPerformed
+        int nomor;
         try {
-            pshapus=koneksi.prepareStatement("delete from antriapotek");
-            try {
-                pshapus.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(pshapus!=null){
-                    pshapus.close();
-                }
-            }
-
-            pssimpan=koneksi.prepareStatement("insert into antriapotek values(?,?)");
-            try{
-                pssimpan.setString(1,cmbloket.getSelectedItem().toString());
-                pssimpan.setString(2,Antrian.getText());
-                pssimpan.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(pssimpan!=null){
-                    pssimpan.close();
-                }
-            }
-
-            System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
-        } catch (Exception e) {
-            System.out.println(e);
+            nomor = Integer.parseInt(Antrian.getText().trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Maaf, nomor antrian harus berupa angka..!!");
+            Antrian.requestFocus();
+            Antrian.selectAll();
+            return;
         }
+
+        if (nomor <= 0) {
+            JOptionPane.showMessageDialog(this, "Maaf, nomor antrian harus lebih besar dari nol..!!");
+            Antrian.requestFocus();
+            Antrian.selectAll();
+            return;
+        }
+
+        BtnBatal2ActionPerformed(null);
+
+        try (PreparedStatement ps = koneksi.prepareStatement("insert into antriapotek values(?, ?)")) {
+            int p = 0;
+            ps.setString(++p, cmbloket.getSelectedItem().toString());
+            ps.setInt(++p, nomor);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        Antrian.setText(String.valueOf(nomor));
+        Antrian.selectAll();
     }//GEN-LAST:event_BtnAntri1ActionPerformed
 
     private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal1ActionPerformed
@@ -351,10 +352,14 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        BtnDisplayActionPerformed(null);
+        jam();
+        if ("player".equals(ANTRIAN)) {
+            BtnDisplayActionPerformed(null);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnBatal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal2ActionPerformed
+        /*
         try {
             pshapus=koneksi.prepareStatement("delete from antriapotek");
             try {
@@ -369,6 +374,12 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         } catch (Exception e) {
             System.out.println(e);
         }
+        */
+        try (Statement s = koneksi.createStatement()) {
+            s.executeUpdate("delete from antriapotek");
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }//GEN-LAST:event_BtnBatal2ActionPerformed
 
 
@@ -377,18 +388,15 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     * @param args the command line arguments
     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DlgAntrian dialog = new DlgAntrian(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            DlgAntrian dialog = new DlgAntrian(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
@@ -415,7 +423,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private javax.swing.JPanel panelruntext;
     // End of variables declaration//GEN-END:variables
 
-
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         paneliklan.repaint();
@@ -423,8 +431,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         String newText = oldText.substring(1) + oldText.substring(0, 1);
         labelruntext.setText( newText );
     }
+    */
 
-    private  void isTampil(){
+    private void isTampil() {
+        /*
         try{
             rs=koneksi.createStatement().executeQuery("select teks, aktifkan, gambar from runtextapotek");
             while(rs.next()){
@@ -440,9 +450,22 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         }catch(SQLException e){
             System.out.println(e+"Error : Silahkan Set Aplikasi");
         }
+        */
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select runtextapotek.teks, runtextapotek.aktifkan, runtextapotek.gambar from runtextapotek limit 1")) {
+            if (rs.next()) {
+                labelruntext.setText(rs.getString("teks"));
+                if ("Yes".equals(rs.getString("aktifkan"))) {
+                    Blob blob = rs.getBlob("gambar");
+                    paneliklan.setBackgroundImage(new ImageIcon(blob.getBytes(1, (int) blob.length())));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
-    private void panggil(int antrian){
+    private void panggil(int antrian) {
+        /*
         if (antrian < 12){
             try {
                 music = new BackgroundMusic(urut[antrian]);
@@ -508,9 +531,120 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
             panggil(antrian%100);
         }
+        */
+
+        if (!isPlaying) {
+            isPlaying = true;
+            String nomor = padleftSmc(antrian, 4, '0');
+            pemanggilSmc.execute(() -> {
+                Object lock = new Object();
+                try {
+                    Clip clip = AudioSystem.getClip();
+
+                    clip.addLineListener(evt -> {
+                        if (evt.getType() == LineEvent.Type.STOP) {
+                            synchronized (lock) {
+                                lock.notifyAll();
+                            }
+                        }
+                    });
+
+                    try (AudioInputStream is = AudioSystem.getAudioInputStream(new File("./suarasmc/apotek/nomor-urut.wav"))) {
+                        clip.open(is);
+                        synchronized (lock) {
+                            clip.start();
+                            lock.wait(10000);
+                        }
+                    } finally {
+                        clip.close();
+                    }
+
+                    for (int i = 0; i < nomor.length(); i++) {
+                        int angka = Character.digit(nomor.charAt(i), 10);
+                        if (angka < 0) {
+                            continue;
+                        }
+
+                        pauseSmc(100);
+                        try (AudioInputStream is = AudioSystem.getAudioInputStream(new File(urutSmc[angka]))) {
+                            clip.open(is);
+                            synchronized (lock) {
+                                clip.start();
+                                lock.wait(10000);
+                            }
+                        } finally {
+                            clip.close();
+                        }
+                    }
+
+                    pauseSmc(100);
+                    try (AudioInputStream is = AudioSystem.getAudioInputStream(new File("./suarasmc/apotek/loket-farmasi.wav"))) {
+                        clip.open(is);
+                        synchronized (lock) {
+                            clip.start();
+                            lock.wait(10000);
+                        }
+                    } finally {
+                        clip.close();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                    synchronized (lock) {
+                        lock.notifyAll();
+                    }
+                } finally {
+                    isPlaying = false;
+                }
+            });
+        }
     }
 
-    private void jam(){
+    private void jam() {
+        new Timer(100, evt -> {
+            paneliklan.repaint();
+            String oldText = labelruntext.getText();
+            if (oldText.isEmpty()) {
+                return;
+            }
+
+            labelruntext.setText(oldText.substring(1) + oldText.substring(0, 1));
+        }).start();
+
+        new Timer(1000, evt -> {
+            int detik = Calendar.getInstance().get(Calendar.SECOND);
+            if (detik % 5 == 0) {
+                antri = "";
+                loket = "";
+                nomorSmc = 0;
+                try (ResultSet rs = koneksi.createStatement().executeQuery("select antriapotek.antrian, antriapotek.loket from antriapotek")) {
+                    if (rs.next()) {
+                        antri = Objects.requireNonNullElse(rs.getString("antrian"), "");
+                        loket = Objects.requireNonNullElse(rs.getString("loket"), "");
+                        nomorSmc = rs.getInt("antrian");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                    if (String.valueOf(e.getMessage()).contains("connection closed.")) {
+                        koneksi = koneksiDB.condb();
+                    }
+                }
+
+                if (!antri.isBlank()) {
+                    if (!Antrian.isFocusOwner()) {
+                        Antrian.setText(String.valueOf(nomorSmc + 1));
+                    }
+
+                    labelLoket.setText(loket);
+                    labelantri1.setText(antri);
+                }
+            }
+
+            if (!antri.isBlank() && !loket.isBlank() && "player".equals(ANTRIAN) && detik % 5 == 1) {
+                panggil(nomorSmc);
+            }
+        }).start();
+
+        /*
         ActionListener taskPerformer = new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 nol_detik = "";
@@ -571,8 +705,26 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                 }
             }
         };
+
         // Timer
         new Timer(1000, taskPerformer).start();
+        */
     }
 
+    private void pauseSmc(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private String padleftSmc(int nomor, int length, char c) {
+        String nilai = String.valueOf(nomor);
+        if (nilai.length() >= length) {
+            return nilai;
+        }
+
+        return String.valueOf(c).repeat(length).concat(nilai).substring(nilai.length());
+    }
 }

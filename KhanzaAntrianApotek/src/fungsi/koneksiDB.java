@@ -100,5 +100,12 @@ public final class koneksiDB {
         return var;
     }
 
-
+    public static String ANTRIAN() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("ANTRIAN", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
 }
