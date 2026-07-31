@@ -44,7 +44,7 @@ Important root directories are listed below
 - `src/restore`: Modules for restoring deleted records from various menu.
 - `src/setting`: Modules for administrator to control the settings for application uses.
 - `src/simrskhanza`: Modules for main modules of SIMRS Khanza.
-- `src/support`: Another helper functions, this was used for developer's need which may destruct changes from upstream repository if placed inside `src/fungsi`.
+- `src/smc`: SMC specific modules, either for replacing existing forms or additional helpers.
 - `src/surat`: Modules for managing letter and administrations.
 - `src/toko`: Modules for managing internal shop.
 - `src/tranfusidarah`: Modules for blood transfusion management.
@@ -57,7 +57,7 @@ The following files are SENSITIVE, but they are still needed in order to run.
 - `webapps/conf/conf.php`: Contains database connection configuration and security login for non-user interaction. Needed for reference in repo but highly sensitive.
 - `webapps/inacbg/conf/wsinacbg(2).php`: Contains API Key for bridging claim. Although the connection to eklaim server is within local environment, this is still sensitive information. Needed for reference in repo.
 
-Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. Inside the `.java` files, each have `initComponents()`. Changes in this method should be reflected to their `.form` counterpart.
+Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. These `.form` files are the design file used by Netbeans using XML structure with XML-like formatting. The design must synchronize their java counterpart from a method called `initComponents()`. Changes in this method should be reflected to their `.form` counterpart and vice versa.
 If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
 
 ### General coding guidelines
@@ -68,12 +68,36 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - Package imports are sorted alphabetically, case sensitive.
 
 #### Workflow guideline
-- Before starting the changes, ensure current branch is in `custom` branch. Then switch to new branch. Branch format name must begin with `claude/` and styled as `kebab-case` with at-most 4 words in length.
-- Changes related to database structure change MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes are either follow upstream repository or contains referenced data dump.
+- If you're iterating a plan, ensure current branch is in `custom` branch. After you start editing, then switch to a new branch. Branch name must starts with `c/` and followed by the title, styled as `kebab-case` with at-most 4 words in length. DO NOT force create a branch name if the branch of the same name already exist.
+- Changes related to database structure change MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes are either follow upstream repository or contains referenced data dump. Ensure any addition is sorted alphabetically, in snake_case by table name, with exception of foreign keys that are dependant of other tables where current table name is BEFORE the related table name. For example:
+    ```sql
+    CREATE TABLE IF NOT EXISTS `current_table`  (
+        -- ...
+        `column_from_related_table` varchar(255) NOT NULL,
+        -- ...
+        INDEX `column_from_related_table`(`column_from_related_table`) USING BTREE,
+        -- ...
+    ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+    -- ...
+
+    CREATE TABLE IF NOT EXISTS `related_table`  (
+        `column_from_related_table` varchar(255) NOT NULL,
+        -- ...
+        PRIMARY KEY (`column_from_related_table`),
+        -- ...
+    ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+    -- foreign key constraints are added and sorted alphabetically by table names
+    ALTER TABLE `current_table` ADD CONSTRAINT `<constraint name>` FOREIGN KEY IF NOT EXISTS (`column_of_related_table`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+    -- ...
+    ```
 - When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirements.
-- In addition, adding new features must affix the name with SMC, where method name is styled "Smc", permission name is styled "_smc", and file/menu title is styled "SMC". Main menu name does not require affixes.
-- Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, reading the value from java counterpart requires decryption.
-- Whenever you finish the task, make a draft PR and assign `rizky92` as assignee. Title PR must be translated into Indonesian language, but the body/description doesn't have to. If the PR is a fix for current issues or supersedes other PR, attach the issue/PR number in PR body. The PR title doesn't need to include standard prefix such as "fix" or "chore". A simple title is enough.
+- In addition, adding new features must affix the name with SMC, where method name is styled "Smc", permission and table name is styled "_smc", and file/class name is styled "SMC". Menu or form title does not require affixes.
+- Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, reading the value from java counterpart requires decryption first.
+- Acronyms (e.g. SEP, KFA, INACBG, IDRG, or API) must be in ALL UPPERCASE. Exceptions for Smc-affixed methods, as a name in column or table, or as named keys.
+- After finishing the task. DO NOT make a PR.
 
 #### Building the UI
 When building UI components, use primary components from `src/widget`. Following is the list of used components.
