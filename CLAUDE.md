@@ -59,6 +59,8 @@ The following files are SENSITIVE, but they are still needed in order to run.
 
 Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. These `.form` files are the design file used by Netbeans using XML structure with XML-like formatting. The design must synchronize their java counterpart from a method called `initComponents()`. Changes in this method should be reflected to their `.form` counterpart and vice versa.
 If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
+> [!NOTE]  
+> If you have access to Netbeans MCP, you can edit the .form files first if you understand its code, then request Netbeans to open the file for you using openFile tool. This way you don't have to mingle with re-syncing to `initComponents()` and any other generated event methods.
 
 ### General coding guidelines
 The coding guidelines should cater to users' netbeans configuration, which as follows.
@@ -67,7 +69,7 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - Trim trailing whitespaces.
 - Package imports are sorted alphabetically, case sensitive.
 - Uses Yoda-style for object equality check.
-- Don't add comments in the code.
+- Don't add line comments in the code. Existing comments are unaffected by this rule.
 
 #### Workflow guideline
 - If you're iterating a plan, ensure current branch is in `custom` branch. After you start editing, then switch to a new branch. Branch name must starts with `c/` and followed by the title, styled as `kebab-case` with at-most 4 words in length. DO NOT force create a branch name if the branch of the same name already exist.
