@@ -30,18 +30,32 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
  *
  * @author dosen
  */
 public class DlgJamMasukSMC extends javax.swing.JDialog {
+    private static final int KOLOM_KODE = 1;
+    private static final int KOLOM_NAMA = 2;
+    private static final int KOLOM_JAM_MASUK = 8;
+    private static final int KOLOM_JAM_PULANG = 11;
+    private static final String TANPA_SHIFT = "-";
+
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -50,6 +64,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private String kodeLama = "";
 
     /** Creates new form DlgJadwal
      * @param parent
@@ -59,9 +74,9 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(8,1);
-        setSize(628,674);
+        setSize(700,674);
 
-        Object[] row={"P","Shift","Jam Masuk","Jam Pulang"};
+        Object[] row={"P","Kode","Nama Shift","Jam Masuk","Jam Pulang","Shift Legacy"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -71,7 +86,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -83,17 +98,23 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         tbJadwal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJadwal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
+            }else if(i==1){
+                column.setPreferredWidth(60);
+            }else if(i==2){
+                column.setPreferredWidth(230);
             }else{
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(120);
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        TKode.setDocument(new batasInput((byte)5).getKata(TKode));
+        TNama.setDocument(new batasInput((byte)50).getKata(TNama));
     }
 
 
@@ -115,6 +136,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
+        BtnImpor = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
@@ -126,8 +148,12 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         LCount = new widget.Label();
         panelBiasa1 = new widget.PanelBiasa();
         jLabel4 = new widget.Label();
-        jLabel9 = new widget.Label();
+        TKode = new widget.TextBox();
+        jLabel12 = new widget.Label();
+        TNama = new widget.TextBox();
+        jLabel13 = new widget.Label();
         cmbShift = new widget.ComboBox();
+        jLabel9 = new widget.Label();
         cmbJam1 = new widget.ComboBox();
         cmbMnt1 = new widget.ComboBox();
         cmbDtk1 = new widget.ComboBox();
@@ -145,7 +171,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Jam Masuk Pegawai Via Finger Print ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Jadwal Dinas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -194,7 +220,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnSimpan);
-        BtnSimpan.setBounds(6, 10, 100, 30);
+        BtnSimpan.setBounds(6, 10, 95, 30);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
         BtnBatal.setMnemonic('B');
@@ -212,7 +238,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnBatal);
-        BtnBatal.setBounds(108, 10, 100, 30);
+        BtnBatal.setBounds(103, 10, 95, 30);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapus.setMnemonic('H');
@@ -230,7 +256,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnHapus);
-        BtnHapus.setBounds(210, 10, 100, 30);
+        BtnHapus.setBounds(200, 10, 95, 30);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
         BtnEdit.setMnemonic('G');
@@ -248,7 +274,25 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnEdit);
-        BtnEdit.setBounds(312, 10, 100, 30);
+        BtnEdit.setBounds(297, 10, 95, 30);
+
+        BtnImpor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/file-edit-16x16.png"))); // NOI18N
+        BtnImpor.setMnemonic('I');
+        BtnImpor.setText("Impor");
+        BtnImpor.setToolTipText("Alt+I");
+        BtnImpor.setName("BtnImpor"); // NOI18N
+        BtnImpor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnImporActionPerformed(evt);
+            }
+        });
+        BtnImpor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnImporKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnImpor);
+        BtnImpor.setBounds(394, 10, 95, 30);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setMnemonic('T');
@@ -266,7 +310,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnPrint);
-        BtnPrint.setBounds(414, 10, 100, 30);
+        BtnPrint.setBounds(491, 10, 95, 30);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -284,7 +328,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnKeluar);
-        BtnKeluar.setBounds(518, 10, 100, 30);
+        BtnKeluar.setBounds(588, 10, 95, 30);
 
         jPanel3.add(panelGlass8, java.awt.BorderLayout.CENTER);
 
@@ -356,20 +400,43 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
         panelBiasa1.setName("panelBiasa1"); // NOI18N
-        panelBiasa1.setPreferredSize(new java.awt.Dimension(1023, 47));
+        panelBiasa1.setPreferredSize(new java.awt.Dimension(1023, 78));
         panelBiasa1.setLayout(null);
 
-        jLabel4.setText("Shift :");
+        jLabel4.setText("Kode :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelBiasa1.add(jLabel4);
-        jLabel4.setBounds(0, 12, 40, 23);
+        jLabel4.setBounds(0, 8, 40, 23);
 
-        jLabel9.setText("Jam :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        panelBiasa1.add(jLabel9);
-        jLabel9.setBounds(186, 12, 40, 23);
+        TKode.setName("TKode"); // NOI18N
+        TKode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TKodeKeyPressed(evt);
+            }
+        });
+        panelBiasa1.add(TKode);
+        TKode.setBounds(44, 8, 70, 23);
 
-        cmbShift.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pagi", "Pagi2", "Pagi3", "Pagi4", "Pagi5", "Pagi6", "Pagi7", "Pagi8", "Pagi9", "Pagi10", "Siang", "Siang2", "Siang3", "Siang4", "Siang5", "Siang6", "Siang7", "Siang8", "Siang9", "Siang10", "Malam", "Malam2", "Malam3", "Malam4", "Malam5", "Malam6", "Malam7", "Malam8", "Malam9", "Malam10", "Midle Pagi1", "Midle Pagi2", "Midle Pagi3", "Midle Pagi4", "Midle Pagi5", "Midle Pagi6", "Midle Pagi7", "Midle Pagi8", "Midle Pagi9", "Midle Pagi10", "Midle Siang1", "Midle Siang2", "Midle Siang3", "Midle Siang4", "Midle Siang5", "Midle Siang6", "Midle Siang7", "Midle Siang8", "Midle Siang9", "Midle Siang10", "Midle Malam1", "Midle Malam2", "Midle Malam3", "Midle Malam4", "Midle Malam5", "Midle Malam6", "Midle Malam7", "Midle Malam8", "Midle Malam9", "Midle Malam10" }));
+        jLabel12.setText("Nama :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        panelBiasa1.add(jLabel12);
+        jLabel12.setBounds(120, 8, 45, 23);
+
+        TNama.setName("TNama"); // NOI18N
+        TNama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNamaKeyPressed(evt);
+            }
+        });
+        panelBiasa1.add(TNama);
+        TNama.setBounds(169, 8, 220, 23);
+
+        jLabel13.setText("Legacy :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        panelBiasa1.add(jLabel13);
+        jLabel13.setBounds(395, 8, 50, 23);
+
+        cmbShift.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Pagi", "Pagi2", "Pagi3", "Pagi4", "Pagi5", "Pagi6", "Pagi7", "Pagi8", "Pagi9", "Pagi10", "Pagi11", "Pagi12", "Pagi13", "Pagi14", "Pagi15", "Pagi16", "Pagi17", "Pagi18", "Pagi19", "Pagi20", "Pagi21", "Pagi22", "Pagi23", "Pagi24", "Pagi25", "Pagi26", "Pagi27", "Pagi28", "Pagi29", "Pagi30", "Pagi31", "Pagi32", "Pagi33", "Pagi34", "Pagi35", "Pagi36", "Pagi37", "Pagi38", "Pagi39", "Pagi40", "Siang", "Siang2", "Siang3", "Siang4", "Siang5", "Siang6", "Siang7", "Siang8", "Siang9", "Siang10", "Siang11", "Siang12", "Siang13", "Siang14", "Siang15", "Siang16", "Siang17", "Siang18", "Siang19", "Siang20", "Siang21", "Siang22", "Siang23", "Siang24", "Siang25", "Siang26", "Siang27", "Siang28", "Siang29", "Siang30", "Siang31", "Siang32", "Siang33", "Siang34", "Siang35", "Siang36", "Siang37", "Siang38", "Siang39", "Siang40", "Malam", "Malam2", "Malam3", "Malam4", "Malam5", "Malam6", "Malam7", "Malam8", "Malam9", "Malam10", "Malam11", "Malam12", "Malam13", "Malam14", "Malam15", "Malam16", "Malam17", "Malam18", "Malam19", "Malam20", "Malam21", "Malam22", "Malam23", "Malam24", "Malam25", "Malam26", "Malam27", "Malam28", "Malam29", "Malam30", "Malam31", "Malam32", "Malam33", "Malam34", "Malam35", "Malam36", "Malam37", "Malam38", "Malam39", "Malam40", "Midle Pagi1", "Midle Pagi2", "Midle Pagi3", "Midle Pagi4", "Midle Pagi5", "Midle Pagi6", "Midle Pagi7", "Midle Pagi8", "Midle Pagi9", "Midle Pagi10", "Midle Pagi11", "Midle Pagi12", "Midle Pagi13", "Midle Pagi14", "Midle Pagi15", "Midle Pagi16", "Midle Pagi17", "Midle Pagi18", "Midle Pagi19", "Midle Pagi20", "Midle Pagi21", "Midle Pagi22", "Midle Pagi23", "Midle Pagi24", "Midle Pagi25", "Midle Pagi26", "Midle Pagi27", "Midle Pagi28", "Midle Pagi29", "Midle Pagi30", "Midle Pagi31", "Midle Pagi32", "Midle Pagi33", "Midle Pagi34", "Midle Pagi35", "Midle Pagi36", "Midle Pagi37", "Midle Pagi38", "Midle Pagi39", "Midle Pagi40", "Midle Siang1", "Midle Siang2", "Midle Siang3", "Midle Siang4", "Midle Siang5", "Midle Siang6", "Midle Siang7", "Midle Siang8", "Midle Siang9", "Midle Siang10", "Midle Siang11", "Midle Siang12", "Midle Siang13", "Midle Siang14", "Midle Siang15", "Midle Siang16", "Midle Siang17", "Midle Siang18", "Midle Siang19", "Midle Siang20", "Midle Siang21", "Midle Siang22", "Midle Siang23", "Midle Siang24", "Midle Siang25", "Midle Siang26", "Midle Siang27", "Midle Siang28", "Midle Siang29", "Midle Siang30", "Midle Siang31", "Midle Siang32", "Midle Siang33", "Midle Siang34", "Midle Siang35", "Midle Siang36", "Midle Siang37", "Midle Siang38", "Midle Siang39", "Midle Siang40", "Midle Malam1", "Midle Malam2", "Midle Malam3", "Midle Malam4", "Midle Malam5", "Midle Malam6", "Midle Malam7", "Midle Malam8", "Midle Malam9", "Midle Malam10", "Midle Malam11", "Midle Malam12", "Midle Malam13", "Midle Malam14", "Midle Malam15", "Midle Malam16", "Midle Malam17", "Midle Malam18", "Midle Malam19", "Midle Malam20", "Midle Malam21", "Midle Malam22", "Midle Malam23", "Midle Malam24", "Midle Malam25", "Midle Malam26", "Midle Malam27", "Midle Malam28", "Midle Malam29", "Midle Malam30", "Midle Malam31", "Midle Malam32", "Midle Malam33", "Midle Malam34", "Midle Malam35", "Midle Malam36", "Midle Malam37", "Midle Malam38", "Midle Malam39", "Midle Malam40" }));
         cmbShift.setName("cmbShift"); // NOI18N
         cmbShift.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -377,7 +444,12 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbShift);
-        cmbShift.setBounds(44, 12, 140, 23);
+        cmbShift.setBounds(449, 8, 140, 23);
+
+        jLabel9.setText("Jam :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        panelBiasa1.add(jLabel9);
+        jLabel9.setBounds(0, 41, 40, 23);
 
         cmbJam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam1.setName("cmbJam1"); // NOI18N
@@ -387,7 +459,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbJam1);
-        cmbJam1.setBounds(230, 12, 62, 23);
+        cmbJam1.setBounds(44, 41, 62, 23);
 
         cmbMnt1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt1.setName("cmbMnt1"); // NOI18N
@@ -397,7 +469,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbMnt1);
-        cmbMnt1.setBounds(295, 12, 62, 23);
+        cmbMnt1.setBounds(109, 41, 62, 23);
 
         cmbDtk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk1.setName("cmbDtk1"); // NOI18N
@@ -407,13 +479,13 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbDtk1);
-        cmbDtk1.setBounds(360, 12, 62, 23);
+        cmbDtk1.setBounds(174, 41, 62, 23);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("s.d.");
         jLabel11.setName("jLabel11"); // NOI18N
         panelBiasa1.add(jLabel11);
-        jLabel11.setBounds(425, 12, 25, 23);
+        jLabel11.setBounds(239, 41, 25, 23);
 
         cmbJam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam2.setName("cmbJam2"); // NOI18N
@@ -423,7 +495,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbJam2);
-        cmbJam2.setBounds(453, 12, 62, 23);
+        cmbJam2.setBounds(267, 41, 62, 23);
 
         cmbMnt2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt2.setName("cmbMnt2"); // NOI18N
@@ -433,7 +505,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbMnt2);
-        cmbMnt2.setBounds(518, 12, 62, 23);
+        cmbMnt2.setBounds(332, 41, 62, 23);
 
         cmbDtk2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk2.setName("cmbDtk2"); // NOI18N
@@ -443,7 +515,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(cmbDtk2);
-        cmbDtk2.setBounds(583, 12, 62, 23);
+        cmbDtk2.setBounds(397, 41, 62, 23);
 
         internalFrame1.add(panelBiasa1, java.awt.BorderLayout.PAGE_START);
 
@@ -452,11 +524,19 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbShiftKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbShiftKeyPressed
-        Valid.pindah(evt,cmbShift,cmbJam1);
+    private void TKodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKodeKeyPressed
+        Valid.pindah(evt,BtnAll,TNama);
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             tbJadwal.requestFocus();
         }
+    }//GEN-LAST:event_TKodeKeyPressed
+
+    private void TNamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNamaKeyPressed
+        Valid.pindah(evt,TKode,cmbShift);
+    }//GEN-LAST:event_TNamaKeyPressed
+
+    private void cmbShiftKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbShiftKeyPressed
+        Valid.pindah(evt,TNama,cmbJam1);
     }//GEN-LAST:event_cmbShiftKeyPressed
 
     private void cmbJam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam1KeyPressed
@@ -484,13 +564,19 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbDtk2KeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        Sequel.menyimpan("jam_masuk","?,?,?","Shift",3,new String[]{
-            cmbShift.getSelectedItem().toString(),
-            cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),
-            cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem()
-        });
-        runBackground(() ->tampil());
-        emptTeks();
+        if(TKode.getText().trim().isEmpty()||TNama.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Kode dan nama shift harus diisi...!!!!");
+            TKode.requestFocus();
+            return;
+        }
+
+        String kode=TKode.getText().trim().toUpperCase();
+        if(Sequel.menyimpantfNotifSmc("kode shift","jam_masuk_smc","kode_shift, nama_shift, jam_masuk, jam_pulang",
+            kode,TNama.getText().trim(),getJamMasuk(),getJamPulang())){
+            simpanShiftLegacy(kode);
+            runBackground(() ->tampil());
+            emptTeks();
+        }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -512,10 +598,16 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        int gagal=0;
         for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
-                Sequel.queryu("delete from jam_masuk where shift='"+tbJadwal.getValueAt(i,1).toString()+"'");
+                if(!Sequel.menghapustfSmc("jam_masuk_smc","kode_shift=?",tbJadwal.getValueAt(i,1).toString())){
+                    gagal++;
+                }
             }
+        }
+        if(gagal>0){
+            JOptionPane.showMessageDialog(null,gagal+" shift gagal dihapus, kemungkinan masih dipakai di jadwal pegawai...!!!!");
         }
         runBackground(() ->tampil());
         emptTeks();
@@ -530,22 +622,85 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        Sequel.mengedit("jam_masuk","shift=?","jam_masuk=?,jam_pulang=?",3,new String[]{
-            cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),
-            cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem(),
-            cmbShift.getSelectedItem().toString()
-        });
-        runBackground(() ->tampil());
-        emptTeks();
+        if(kodeLama.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih dulu data yang mau diganti...!!!!");
+            return;
+        }
+        if(TKode.getText().trim().isEmpty()||TNama.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Kode dan nama shift harus diisi...!!!!");
+            TKode.requestFocus();
+            return;
+        }
+
+        String kode=TKode.getText().trim().toUpperCase();
+        if(Sequel.mengupdatetfSmc("jam_masuk_smc","kode_shift=?, nama_shift=?, jam_masuk=?, jam_pulang=?","kode_shift=?",
+            kode,TNama.getText().trim(),getJamMasuk(),getJamPulang(),kodeLama)){
+            simpanShiftLegacy(kode);
+            runBackground(() ->tampil());
+            emptTeks();
+        }else{
+            JOptionPane.showMessageDialog(null,"Gagal mengganti data, kemungkinan kode shift sudah dipakai...!!!!");
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
-            Valid.pindah(evt, BtnHapus, BtnPrint);
+            Valid.pindah(evt, BtnHapus, BtnImpor);
         }
     }//GEN-LAST:event_BtnEditKeyPressed
+
+    private void BtnImporActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImporActionPerformed
+        JFileChooser chooser=new JFileChooser();
+        chooser.setDialogTitle("Pilih berkas jadwal dinas");
+        chooser.setFileFilter(new FileNameExtensionFilter("Berkas Excel (*.xlsx)","xlsx"));
+        if(chooser.showOpenDialog(this)!=JFileChooser.APPROVE_OPTION){
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        int diproses=0,dilewati=0;
+        try(Workbook workbook=WorkbookFactory.create(chooser.getSelectedFile())){
+            Sheet sheet=workbook.getSheetAt(0);
+            for(int i=1;i<=sheet.getLastRowNum();i++){
+                Row baris=sheet.getRow(i);
+                if(baris==null){
+                    continue;
+                }
+
+                String kode=bacaTeks(baris,KOLOM_KODE).toUpperCase();
+                String nama=bacaTeks(baris,KOLOM_NAMA);
+                if(kode.isEmpty()||nama.isEmpty()){
+                    dilewati++;
+                    continue;
+                }
+
+                Sequel.executeRawSmc("insert into jam_masuk_smc (kode_shift, nama_shift, jam_masuk, jam_pulang) values (?, ?, ?, ?) "+
+                    "on duplicate key update nama_shift=values(nama_shift), jam_masuk=values(jam_masuk), jam_pulang=values(jam_pulang)",
+                    kode,nama,bacaJam(baris,KOLOM_JAM_MASUK),bacaJam(baris,KOLOM_JAM_PULANG));
+                diproses++;
+            }
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+            JOptionPane.showMessageDialog(null,"Gagal membaca berkas, pastikan formatnya sesuai jadwal dinas...!!!!");
+            this.setCursor(Cursor.getDefaultCursor());
+            return;
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+
+        JOptionPane.showMessageDialog(null,"Impor selesai. Diproses "+diproses+" baris, dilewati "+dilewati+" baris.");
+        runBackground(() ->tampil());
+        emptTeks();
+    }//GEN-LAST:event_BtnImporActionPerformed
+
+    private void BtnImporKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnImporKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnImporActionPerformed(null);
+        }else{
+            Valid.pindah(evt, BtnEdit, BtnPrint);
+        }
+    }//GEN-LAST:event_BtnImporKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -574,19 +729,19 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
                 }
                 String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                     "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                }, "Laporan 4 (XLSX)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("Jammasuk.html", "Jadwal Pegawai", tbJadwal);
+                        Valid.exportHtmlSmc("JadwalDinas.html", "Jadwal Dinas", tbJadwal);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("Jammasuk.wps", "Jadwal Pegawai", tbJadwal);
+                        Valid.exportWPSSmc("JadwalDinas.wps", "Jadwal Dinas", tbJadwal);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("Jammasuk.csv", tbJadwal);
+                        Valid.exportCSVSmc("JadwalDinas.csv", tbJadwal);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("Jammasuk.xlsx", tbJadwal);
+                        Valid.exportXlsxSmc("JadwalDinas.xlsx", tbJadwal);
                         break;
                     case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
@@ -597,8 +752,8 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.MyReportqry("rptJammasuk.jasper","report","::[ Jadwal Pegawai ]::",
-                                "select * from jam_masuk where shift like '%"+TCari.getText().trim()+"%'  order by shift",param);
+                        Valid.MyReportqry("rptJammasuk.jasper","report","::[ Jadwal Dinas ]::",
+                                "select * from jam_masuk_smc where kode_shift like '%"+TCari.getText().trim()+"%' or nama_shift like '%"+TCari.getText().trim()+"%' order by kode_shift",param);
                         break;
                 }
             } catch (Exception e) {
@@ -612,7 +767,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
-            Valid.pindah(evt, BtnEdit, BtnKeluar);
+            Valid.pindah(evt, BtnImpor, BtnKeluar);
         }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
@@ -650,7 +805,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
             runBackground(() ->tampil());
             TCari.setText("");
         }else{
-            Valid.pindah(evt, BtnCari,cmbShift);
+            Valid.pindah(evt, BtnCari,TKode);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -722,12 +877,15 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
+    private widget.Button BtnImpor;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
+    private widget.TextBox TKode;
+    private widget.TextBox TNama;
     private widget.ComboBox cmbDtk1;
     private widget.ComboBox cmbDtk2;
     private widget.ComboBox cmbJam1;
@@ -737,6 +895,8 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private widget.ComboBox cmbShift;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel11;
+    private widget.Label jLabel12;
+    private widget.Label jLabel13;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -749,16 +909,23 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
+        Valid.tabelKosongSmc(tabMode);
         try{
-            ps=koneksi.prepareStatement("select * from jam_masuk "+(TCari.getText().trim().equals("")?"":"where jam_masuk.shift like ? ")+"order by jam_masuk.shift");
+            ps=koneksi.prepareStatement(
+                "select jam_masuk_smc.kode_shift, jam_masuk_smc.nama_shift, jam_masuk_smc.jam_masuk, jam_masuk_smc.jam_pulang, "+
+                "ifnull(set_kode_shift_smc.shift, '') as shift from jam_masuk_smc left join set_kode_shift_smc on "+
+                "jam_masuk_smc.kode_shift = set_kode_shift_smc.kode_shift "+
+                (TCari.getText().trim().equals("")?"":"where jam_masuk_smc.kode_shift like ? or jam_masuk_smc.nama_shift like ? ")+
+                "order by jam_masuk_smc.kode_shift");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
+                    ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new Object[]{false,rs.getString(1),rs.getString(2),rs.getString(3)});
+                    tabMode.addRow(new Object[]{false,rs.getString("kode_shift"),rs.getString("nama_shift"),
+                        rs.getString("jam_masuk"),rs.getString("jam_pulang"),rs.getString("shift")});
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -779,6 +946,10 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
 
 
     public void emptTeks() {
+        kodeLama="";
+        TKode.setText("");
+        TNama.setText("");
+        cmbShift.setSelectedItem(TANPA_SHIFT);
         cmbJam1.setSelectedItem("00");
         cmbJam2.setSelectedItem("00");
         cmbMnt1.setSelectedItem("00");
@@ -786,26 +957,77 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         cmbDtk1.setSelectedItem("00");
         cmbDtk2.setSelectedItem("00");
 
-        cmbShift.requestFocus();
+        TKode.requestFocus();
     }
 
     private void getData() {
         int row=tbJadwal.getSelectedRow();
         if(row!= -1){
-            cmbShift.setSelectedItem(tabMode.getValueAt(row,1).toString());
-            cmbJam1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(0,2));
-            cmbMnt1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(3,5));
-            cmbDtk1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(6,8));
-            cmbJam2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(0,2));
-            cmbMnt2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(3,5));
-            cmbDtk2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(6,8));
+            kodeLama=tabMode.getValueAt(row,1).toString();
+            TKode.setText(kodeLama);
+            TNama.setText(tabMode.getValueAt(row,2).toString());
+            cmbJam1.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(0,2));
+            cmbMnt1.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(3,5));
+            cmbDtk1.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(6,8));
+            cmbJam2.setSelectedItem(tabMode.getValueAt(row,4).toString().substring(0,2));
+            cmbMnt2.setSelectedItem(tabMode.getValueAt(row,4).toString().substring(3,5));
+            cmbDtk2.setSelectedItem(tabMode.getValueAt(row,4).toString().substring(6,8));
+            if(tabMode.getValueAt(row,5).toString().isEmpty()){
+                cmbShift.setSelectedItem(TANPA_SHIFT);
+            }else{
+                cmbShift.setSelectedItem(tabMode.getValueAt(row,5).toString());
+            }
         }
     }
 
+    private void simpanShiftLegacy(String kode) {
+        String shift=cmbShift.getSelectedItem().toString();
+        if(TANPA_SHIFT.equals(shift)){
+            Sequel.menghapustfSmc("set_kode_shift_smc","kode_shift=?",kode);
+            return;
+        }
+
+        Sequel.menghapustfSmc("set_kode_shift_smc","shift=? and kode_shift<>?",shift,kode);
+        Sequel.executeRawSmc("insert into set_kode_shift_smc (shift, kode_shift) values (?, ?) on duplicate key update shift=values(shift)",shift,kode);
+    }
+
+    private String getJamMasuk() {
+        return cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem();
+    }
+
+    private String getJamPulang() {
+        return cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem();
+    }
+
+    private String bacaTeks(Row baris, int kolom) {
+        Cell sel=baris.getCell(kolom);
+        if(sel==null){
+            return "";
+        }
+        if(CellType.NUMERIC.equals(sel.getCellType())){
+            return String.valueOf((long) sel.getNumericCellValue());
+        }
+        return sel.getStringCellValue().trim();
+    }
+
+    private String bacaJam(Row baris, int kolom) {
+        Cell sel=baris.getCell(kolom);
+        if(sel==null||!CellType.NUMERIC.equals(sel.getCellType())){
+            return "00:00:00";
+        }
+
+        int menit=(int) Math.round(sel.getNumericCellValue()*1440d)%1440;
+        if(menit<0){
+            menit=menit+1440;
+        }
+        return String.format("%02d:%02d:00",menit/60,menit%60);
+    }
+
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getjam_masuk());
-        BtnHapus.setEnabled(akses.getjam_masuk());
-        BtnEdit.setEnabled(akses.getjam_masuk());
+        BtnSimpan.setEnabled(akses.getjam_masuk_smc());
+        BtnHapus.setEnabled(akses.getjam_masuk_smc());
+        BtnEdit.setEnabled(akses.getjam_masuk_smc());
+        BtnImpor.setEnabled(akses.getjam_masuk_smc());
     }
 
     public JTable getTable(){

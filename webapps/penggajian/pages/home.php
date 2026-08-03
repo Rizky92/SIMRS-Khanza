@@ -204,6 +204,12 @@
                         </a>
                     </td>
                     <td width='16%' align='center'>
+                        <a href='index.php?act=ListMappingPinSmc'>
+                                <img src='images/users.png'/><br>
+                                PIN Mesin Presensi
+                        </a>
+                    </td>
+                    <td width='16%' align='center'>
                         <a href='index.php?act=ListJam&action=TAMBAH'>
                                 <img src='images/Time.png'/><br>
                                 Jam Jaga Departemen
