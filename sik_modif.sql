@@ -1868,6 +1868,8 @@ ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `cuti_besar` enum('','Tidak Ad
 
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakcuti_besar` int NOT NULL DEFAULT 0 AFTER `cuti_besar`;
 
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `izin` enum('','1 Bulan TMT','3 Bulan TMT','6 Bulan TMT','12 Bulan TMT','1 Bulan per Tahun','3 Bulan per Tahun','6 Bulan per Tahun','12 Bulan per Tahun') NOT NULL DEFAULT '' AFTER `hakcuti_besar`;
+
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakizin` int NOT NULL DEFAULT 0 AFTER `hakcuti_besar`;
 
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `max_menit` int NOT NULL DEFAULT 0 AFTER `hakizin`;

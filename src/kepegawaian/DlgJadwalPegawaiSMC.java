@@ -60,6 +60,7 @@ import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.apache.poi.ss.usermodel.Cell;
@@ -1074,6 +1075,13 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     private void pindahHari(int langkah) {
         if (0 == tbJadwal.getRowCount()) {
             return;
+        }
+
+        if (tbJadwal.isEditing()) {
+            TableCellEditor editor = tbJadwal.getCellEditor();
+            if (null != editor && !editor.stopCellEditing()) {
+                return;
+            }
         }
 
         int baris = tbJadwal.getSelectedRow();
