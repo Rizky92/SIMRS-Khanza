@@ -67,6 +67,7 @@
     <entry key="FORMALARMLAB">ralan + ranap</entry>
     <entry key="ALARMRADIOLOGI">no</entry>
     <entry key="FORMALARMRADIOLOGI">ralan + ranap</entry>
+    <entry key="TAMPILTARIFOPERASI">yes</entry>
     <entry key="ALARMRSISRUTE">no</entry>
     <entry key="ALARMBOOKINGPERIKSA">no</entry>
     <entry key="ALARMPENGADUANPASIEN">no</entry>

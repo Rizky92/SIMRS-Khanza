@@ -2132,4 +2132,14 @@ public class koneksiDB {
         }
         return var;
     }
+
+    public static String TAMPILTARIFOPERASI(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("TAMPILTARIFOPERASI");
+        }catch(Exception e){
+            var="no";
+        }
+        return var;
+    }
 }
