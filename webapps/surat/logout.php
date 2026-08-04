@@ -4,7 +4,7 @@
 	require_once "conf/command.php";
 	if (cekSessiAdmin())
 	{
-	    session_unregister("ses_admin_suratsurat");
+	    unset($_SESSION["ses_admin_suratsurat"]);
 	}
 
 	header("Location:index.php");

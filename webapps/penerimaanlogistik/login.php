@@ -15,7 +15,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin_penerimaanlogistik");
+                unset($_SESSION["ses_admin_penerimaanlogistik"]);
             }
             $url = "index.php?act=Home";
         }
