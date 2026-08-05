@@ -1,0 +1,64 @@
+# Reusable build for the SIMRS Khanza desktop application.
+# Called by ant.yml and ant-report.yml; not dispatchable on its own.
+
+name: Reusable Ant Build
+
+on:
+  workflow_call:
+    inputs:
+      targets:
+        description: Ant targets to run against build-ci.xml.
+        type: string
+        default: jar
+      artifact-name:
+        description: Name of the uploaded artifact.
+        type: string
+        default: Package
+
+env:
+  # Identifies the library bundle. Uploading a new bundle yields a new ID, which
+  # invalidates the cache on its own. Replacing a bundle in place keeps the ID
+  # and would leave a stale cache, so upload rather than replace.
+  LIB_BUNDLE_ID: 1xiXssd0B1wQN9yWcL8_dRsIEGuSiD9oe
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+      with:
+        java-version: '17'
+        distribution: 'liberica'
+
+    - name: Cache libraries
+      id: cache-libs
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+      with:
+        path: ${{ github.workspace }}/lib
+        key: simrs-lib-${{ env.LIB_BUNDLE_ID }}
+
+    - name: Download libraries from Google Drive
+      if: steps.cache-libs.outputs.cache-hit != 'true'
+      run: |
+        pip install gdown
+        gdown "$LIB_BUNDLE_ID" -O /tmp/lib-bundle.zip
+        unzip -q /tmp/lib-bundle.zip -d ${{ github.workspace }}/lib
+
+    - name: Save cached libraries
+      if: steps.cache-libs.outputs.cache-hit != 'true'
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+      with:
+        path: ${{ github.workspace }}/lib
+        key: ${{ steps.cache-libs.outputs.cache-primary-key }}
+
+    - name: Build with Ant
+      run: ant ${{ inputs.targets }} -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ github.workspace }}/dist
