@@ -43,7 +43,7 @@ jobs:
       run: curl -sSL --retry 3 -o ${{ github.workspace }}/lib/ecj-4.6.1.jar https://repo1.maven.org/maven2/org/eclipse/jdt/core/compiler/ecj/4.6.1/ecj-4.6.1.jar
 
     - name: Build with Ant
-      run: ant jar compile-reports -silent -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
+      run: ant jar compile-reports -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
 
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
