@@ -1,4 +1,4 @@
-# SIMRS Khanza Agent Instruction
+# SIMRS Khanza Claude Instruction
 
 ## Project Overview
 This is a home repository for modified SIMRS Khanza, a fork of original [SIMRS Khanza](https://github.com/mas-elkhanza/SIMRS-Khanza) developed by Yayasan Asosiasi SIMRS Khanza Indonesia (YASKI). This fork is designed to cater the needs for RS Samarinda Medika Citra should the origin doesn't have the feature it needed. The project mainly uses Java 17 as programming langauge but targets Java 11 for build and compiling, Jasper Report as reporting framework, NetBeans as primary IDE, and Java Swing as its main UI. It also uses PHP ^8.2 for specific web/API services.
@@ -59,15 +59,16 @@ Important root directories are listed below:
 
 The following files are SENSITIVE, but they are still needed in order to run:  
 | file | description |
-| --- | ---
+| --- | --- |
 |`setting/database.xml` | An origin copy of `setting/database.xml.example`. Not needed in the repo. |
 |`webapps/conf/conf.php` | Contains database connection configuration and security login for non-user interaction. Needed for reference in repo but highly sensitive. |
 |`webapps/inacbg/conf/wsinacbg(2).php` | Contains API Key for bridging claim. Although the connection to eklaim server is within local environment, this is still sensitive information. Needed for reference in repo. |
 
-Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. These `.form` files are the design file used by Netbeans using XML structure with XML-like formatting. The design must synchronize their java counterpart from a method called `initComponents()`, as well as any events must synchronized to its method marked with `//GEN-FIRST:event_<event method name>` after opening curly brace and `//GEN-LAST:event<event method name>` after closing curly brace. Changes in this method should be reflected to their `.form` counterpart and vice versa.  
+Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. These `.form` files are the design file used by Netbeans using XML structure with XML-like formatting. The design must synchronize their java counterpart from a method called `initComponents()`, as well as any events must synchronized to its method marked with `//GEN-FIRST:event_<event method name>` after opening curly brace and `//GEN-LAST:event<event method name>` after closing curly brace. Changes in this method should be reflected to their `.form` counterpart and vice versa.
+
 If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
 > [!NOTE]  
-> If you have access to Netbeans MCP, you can edit the `.form` files first if you understand its code, then request Netbeans to open the file for you using `openFile` tool. This way you don't have to mingle with re-syncing to `initComponents()` and any other generated event methods.
+> If you have access to Netbeans MCP, you can edit the `.form` files first if you understand its code, then request Netbeans to open the java counterpart for you using `openFile` tool. This way you don't have to mingle with re-syncing to `initComponents()` and any other generated event methods.
 
 ### General coding guidelines
 The coding guidelines should cater to users' Netbeans configuration, which as follows.
