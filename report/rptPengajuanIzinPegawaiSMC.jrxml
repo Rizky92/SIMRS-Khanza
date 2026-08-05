@@ -123,6 +123,10 @@ from datapengajuan]]>
 		<property name="com.jaspersoft.studio.field.label" value="status"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
 	</field>
+	<field name="normatif" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="normatif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pengajuan_izin_smc"/>
+	</field>
 	<variable name="total" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{no_pengajuan}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
@@ -479,7 +483,7 @@ from datapengajuan]]>
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{urgensi}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{urgensi} + ("Ya".equals($F{normatif}) ? " (Normatif)" : "")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="MM-dd-yyyy" isBlankWhenNull="true">
 				<reportElement positionType="Float" x="198" y="0" width="47" height="11" uuid="8db009ed-ba7b-4ebd-9b2f-fbc6c033eb23">
