@@ -1,5 +1,6 @@
-# This workflow mirrors ant.yml and additionally compiles the Jasper report
-# designs, shipping the resulting .jasper files alongside the application.
+# Builds the application and compiles the Jasper report designs, shipping the
+# resulting .jasper files alongside it. Requires ecj-4.6.1.jar in the library
+# bundle; build-ci.xml fails with an explanatory message if it is absent.
 
 name: Java CI with Reports
 
@@ -8,46 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
-      with:
-        java-version: '17'
-        distribution: 'liberica'
-
-    - name: Cache libraries
-      id: cache-libs
-      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-      with:
-        path: ${{ github.workspace }}/lib
-        key: simrs-lib-${{ hashFiles('nbproject/project.properties') }}
-
-    - name: Download libraries from Google Drive
-      if: steps.cache-libs.outputs.cache-hit != 'true'
-      run: |
-        pip install gdown
-        gdown "1ZPzgwFljlbF2XgR1LvO63XSAiJ09L6GH" -O /tmp/libactions.zip
-        unzip -q /tmp/libactions.zip -d ${{ github.workspace }}/lib
-
-    - name: Save cached libraries
-      if: steps.cache-libs.outputs.cache-hit != 'true'
-      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-      with:
-        path: ${{ github.workspace }}/lib
-        key: ${{ steps.cache-libs.outputs.cache-primary-key }}
-
-    - name: Download Eclipse compiler for Jasper report designs
-      run: curl -sSL --retry 3 -o ${{ github.workspace }}/lib/ecj-4.6.1.jar https://repo1.maven.org/maven2/org/eclipse/jdt/core/compiler/ecj/4.6.1/ecj-4.6.1.jar
-
-    - name: Build with Ant
-      run: ant jar compile-reports -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-      with:
-        name: Package with Reports
-        path: ${{ github.workspace }}/dist
-        compression-level: 9
+    uses: ./.github/workflows/build.yml
+    with:
+      targets: jar compile-reports
+      artifact-name: Package with Reports
