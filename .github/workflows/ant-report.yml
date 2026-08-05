@@ -1,7 +1,7 @@
-# This workflow will build a Java project with Ant
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-ant
+# This workflow mirrors ant.yml and additionally compiles the Jasper report
+# designs, shipping the resulting .jasper files alongside the application.
 
-name: Java CI
+name: Java CI with Reports
 
 on:
   workflow_dispatch:
@@ -39,12 +39,15 @@ jobs:
         path: ${{ github.workspace }}/lib
         key: ${{ steps.cache-libs.outputs.cache-primary-key }}
 
+    - name: Download Eclipse compiler for Jasper report designs
+      run: curl -sSL --retry 3 -o ${{ github.workspace }}/lib/ecj-4.6.1.jar https://repo1.maven.org/maven2/org/eclipse/jdt/core/compiler/ecj/4.6.1/ecj-4.6.1.jar
+
     - name: Build with Ant
-      run: ant jar -silent -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
+      run: ant jar compile-reports -silent -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
 
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
       with:
-        name: Package
+        name: Package with Reports
         path: ${{ github.workspace }}/dist
         compression-level: 9
