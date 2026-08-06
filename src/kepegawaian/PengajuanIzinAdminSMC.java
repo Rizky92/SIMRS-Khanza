@@ -870,29 +870,27 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
             } else if (tabMode.getRowCount() != 0) {
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("PengajuanIzinPegawaiSMC.html", "Data Pengajuan Izin", tbObat);
+                        Valid.exportHtmlSmc("PengajuanIzinAdminSMC.html", "Data Pengajuan Izin", tbObat);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("PengajuanIzinPegawaiSMC.wps", "Data Pengajuan Izin", tbObat);
+                        Valid.exportWPSSmc("PengajuanIzinAdminSMC.wps", "Data Pengajuan Izin", tbObat);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("PengajuanIzinPegawaiSMC.csv", tbObat);
+                        Valid.exportCSVSmc("PengajuanIzinAdminSMC.csv", tbObat);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("PengajuanIzinPegawaiSMC.xlsx", tbObat);
+                        Valid.exportXlsxSmc("PengajuanIzinAdminSMC.xlsx", tbObat);
                         break;
                     case "Laporan 5 (Jasper)":
-                        Valid.reportSmc("rptPengajuanIzinPegawaiSMC.jasper", "report", "::[ Data Pengajuan Izin ]::", param, "with datapengajuan as (select pengajuan_izin_smc.no_pengajuan, pengajuan_izin_smc.tanggal, " +
-                            "pengajuan_izin_smc.urgensi, pengajuan_izin_smc.tanggal_izin, if(pengajuan_izin_smc.jam_mulai = '00:00:00', '', pengajuan_izin_smc.jam_mulai) as jam_mulai, if(pengajuan_izin_smc.jam_akhir = " +
-                            "'00:00:00', '', pengajuan_izin_smc.jam_akhir) as jam_akhir, pengajuan_izin_smc.kepentingan, pengajuan_izin_smc.tmt, pengajuan_izin_smc.tat, pengajuan_izin_smc.nik_pj, pegawai_pj.nama, " +
-                            "pegawai_pj.departemen, pegawai_pj.bidang, (stts_kerja.hakizin - sum(if(pengajuan_izin_smc.status != 'Ditolak' and pengajuan_izin_smc.normatif = 'Tidak', 1, 0)) over (partition by " +
-                            "pengajuan_izin_smc.nik, pengajuan_izin_smc.tmt, pengajuan_izin_smc.tat, pengajuan_izin_smc.izin, pengajuan_izin_smc.urgensi order by pengajuan_izin_smc.tanggal_izin rows between unbounded " +
-                            "preceding and current row)) as sisa, pengajuan_izin_smc.status, pengajuan_izin_smc.normatif " +
-                            "from pengajuan_izin_smc join pegawai on pengajuan_izin_smc.nik = pegawai.nik join pegawai as pegawai_pj on pengajuan_izin_smc.nik_pj = pegawai_pj.nik join " +
-                            "stts_kerja on pegawai.stts_kerja = stts_kerja.stts where pengajuan_izin_smc.nik = ? order by pengajuan_izin_smc.tanggal_izin) select * from datapengajuan where datapengajuan.tanggal between " +
-                            "? and ? and (if(? is null or trim(?) = '', 1 = 1, (datapengajuan.no_pengajuan like ? or datapengajuan.urgensi like ? or datapengajuan.kepentingan like ? or datapengajuan.nik_pj like ? or " +
-                            "datapengajuan.nama like ? or datapengajuan.departemen like ? or datapengajuan.bidang like ?)))", KdPetugas.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), TCari.getText().trim(),
-                            TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim());
+                        Valid.reportSmc("rptPengajuanIzinAdminSMC.jasper", "report", "::[ Data Pengajuan Izin ]::", param, "with datapengajuan as (select pis.no_pengajuan, pis.tanggal, pis.urgensi, pis.tanggal_izin, " +
+                            "if(pis.jam_mulai = '00:00:00', '', pis.jam_mulai) as jam_mulai, if(pis.jam_akhir = '00:00:00', '', pis.jam_akhir) as jam_akhir, pis.nik, p.nama, p.departemen, p.bidang, pis.kepentingan, pis.tmt, " +
+                            "pis.tat, pis.nik_pj, pj.nama as nama_pj, (s.hakizin - sum(if(pis.status != 'Ditolak' and pis.normatif = 'Tidak', 1, 0)) over (partition by pis.nik, pis.tmt, pis.tat, pis.izin, pis.urgensi order " +
+                            "by pis.tanggal_izin rows between unbounded preceding and current row)) as sisa, pis.status, pis.normatif from pengajuan_izin_smc pis inner join pegawai p on pis.nik = p.nik inner join pegawai as " +
+                            "pj on pis.nik_pj = pj.nik inner join stts_kerja s on p.stts_kerja = s.stts order by pis.tanggal_izin) select * from datapengajuan where datapengajuan.tanggal between ? and ? and (if(? is null or " +
+                            "trim(?) = '', 1 = 1, (datapengajuan.no_pengajuan like ? or datapengajuan.urgensi like ? or datapengajuan.kepentingan like ? or datapengajuan.nik like ? or datapengajuan.nama like ? or " +
+                            "datapengajuan.departemen like ? or datapengajuan.bidang like ? or datapengajuan.nik_pj like ? or datapengajuan.nama_pj like ? or datapengajuan.status like ?)))", Valid.getTglSmc(DTPCari1),
+                            Valid.getTglSmc(DTPCari2), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(),
+                            TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim(), TCari.getText().trim());
                         break;
                 }
             }
@@ -1291,11 +1289,10 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "with datapengajuan as (select pis.no_pengajuan, pis.tanggal, pis.urgensi, pis.tanggal_izin, if(pis.jam_mulai = '00:00:00', '', pis.jam_mulai) as jam_mulai, if(pis.jam_akhir = '00:00:00', '', pis.jam_akhir) " +
                         "as jam_akhir, pis.nik, p.nama, p.departemen, p.bidang, pis.kepentingan, pis.tmt, pis.tat, pis.nik_pj, pj.nama as nama_pj, (s.hakizin - sum(if(pis.status != 'Ditolak' and pis.normatif = 'Tidak', 1, 0)) " +
-                        "over (partition by pis.nik, pis.tmt, pis.tat, pis.izin, pis.urgensi order by pis.tanggal_izin rows between unbounded preceding and current row)) as sisa, pis.status, pis.normatif " +
-                        "from pengajuan_izin_smc pis join pegawai p on pis.nik = p.nik join pegawai as pj " +
-                        "on pis.nik_pj = pj.nik join stts_kerja s on p.stts_kerja = s.stts order by pis.tanggal_izin) select * from datapengajuan where datapengajuan.tanggal between ? and ? " + (cari.isBlank() ? ""
-                        : "and (datapengajuan.no_pengajuan like ? or datapengajuan.urgensi like ? or datapengajuan.kepentingan like ? or datapengajuan.nik like ? or datapengajuan.nama like ? or datapengajuan.departemen " +
-                        "like ? or datapengajuan.bidang like ? or datapengajuan.nik_pj like ? or datapengajuan.nama_pj like ? or datapengajuan.status like ?)")
+                        "over (partition by pis.nik, pis.tmt, pis.tat, pis.izin, pis.urgensi order by pis.tanggal_izin rows between unbounded preceding and current row)) as sisa, pis.status, pis.normatif from pengajuan_izin_smc " +
+                        "pis join pegawai p on pis.nik = p.nik join pegawai as pj on pis.nik_pj = pj.nik join stts_kerja s on p.stts_kerja = s.stts order by pis.tanggal_izin) select * from datapengajuan where datapengajuan.tanggal " +
+                        "between ? and ? " + (cari.isBlank() ? "" : "and (datapengajuan.no_pengajuan like ? or datapengajuan.urgensi like ? or datapengajuan.kepentingan like ? or datapengajuan.nik like ? or datapengajuan.nama like ? " +
+                        "or datapengajuan.departemen like ? or datapengajuan.bidang like ? or datapengajuan.nik_pj like ? or datapengajuan.nama_pj like ? or datapengajuan.status like ?)")
                     )) {
                         int p = 0;
                         ps.setString(++p, Valid.getTglSmc(DTPCari1));
