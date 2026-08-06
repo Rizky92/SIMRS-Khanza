@@ -816,18 +816,18 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
                         }
                         JOptionPane.showMessageDialog(null, "Maaf, durasi pengambilan izin per hari tidak boleh lebih dari " + pesan + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     } else {
-                        int konfirmasi = JOptionPane.YES_OPTION;
+                        String pesan = "";
                         if (Normatif.isSelected() && "Tidak".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString())) {
-                            konfirmasi = JOptionPane.showConfirmDialog(null, "Eeiittss... perizinan ini akan diubah menjadi normatif. Apakah anda yakin?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                            pesan = "Eeiittss... perizinan ini akan diubah menjadi normatif. Apakah anda yakin?";
                         } else if (!Normatif.isSelected() && "Ya".equals(tbObat.getValueAt(tbObat.getSelectedRow(), 17).toString())) {
                             if (!tanpaHakIzin() && (Integer.parseInt(Sisa.getText()) - 1) < 0) {
-                                konfirmasi = JOptionPane.showConfirmDialog(null, "Eeiittss... hak izin pegawai telah habis, dan perizinan ini akan diubah menjadi non-normatif. Apakah anda yakin?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                                pesan = "Eeiittss... hak izin pegawai telah habis, dan perizinan ini akan diubah menjadi non-normatif. Apakah anda yakin?";
                             } else {
-                                konfirmasi = JOptionPane.showConfirmDialog(null, "Eeiittss... perizinan ini akan diubah menjadi non-normatif. Apakah anda yakin?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                                pesan = "Eeiittss... perizinan ini akan diubah menjadi non-normatif. Apakah anda yakin?";
                             }
                         }
 
-                        if (konfirmasi == JOptionPane.YES_OPTION) {
+                        if (JOptionPane.showConfirmDialog(null, pesan, "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             ganti();
                         }
                     }
@@ -836,7 +836,6 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu data yang mau diubah..!!");
         }
-
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -1294,8 +1293,8 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
                         "as jam_akhir, pis.nik, p.nama, p.departemen, p.bidang, pis.kepentingan, pis.tmt, pis.tat, pis.nik_pj, pj.nama as nama_pj, (s.hakizin - sum(if(pis.status != 'Ditolak' and pis.normatif = 'Tidak', 1, 0)) " +
                         "over (partition by pis.nik, pis.tmt, pis.tat, pis.izin, pis.urgensi order by pis.tanggal_izin rows between unbounded preceding and current row)) as sisa, pis.status, pis.normatif " +
                         "from pengajuan_izin_smc pis join pegawai p on pis.nik = p.nik join pegawai as pj " +
-                        "on pis.nik_pj = pj.nik join stts_kerja s on p.stts_kerja = s.stts order by pis.tanggal_izin) select * from datapengajuan where datapengajuan.tanggal between ? and ? " + (cari.isBlank() ? "" :
-                        "and (datapengajuan.no_pengajuan like ? or datapengajuan.urgensi like ? or datapengajuan.kepentingan like ? or datapengajuan.nik like ? or datapengajuan.nama like ? or datapengajuan.departemen " +
+                        "on pis.nik_pj = pj.nik join stts_kerja s on p.stts_kerja = s.stts order by pis.tanggal_izin) select * from datapengajuan where datapengajuan.tanggal between ? and ? " + (cari.isBlank() ? ""
+                        : "and (datapengajuan.no_pengajuan like ? or datapengajuan.urgensi like ? or datapengajuan.kepentingan like ? or datapengajuan.nik like ? or datapengajuan.nama like ? or datapengajuan.departemen " +
                         "like ? or datapengajuan.bidang like ? or datapengajuan.nik_pj like ? or datapengajuan.nama_pj like ? or datapengajuan.status like ?)")
                     )) {
                         int p = 0;
@@ -1378,14 +1377,14 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
                 "datapegawai as (select dptmt.*, case when dptmt.izin like '%tmt%' then date_sub(date_add(dptmt.tmt, interval dptmt.periode month), interval 1 day) else last_day(date_add(dptmt.tmt, interval " +
                 "(dptmt.periode - 1) month)) end as tat from dptmt) select datapegawai.nik, datapegawai.izin, datapegawai.hakizin, datapegawai.tmt, datapegawai.tat, datapegawai.max_menit, ifnull((select count(*) " +
                 "from pengajuan_izin_smc s where s.nik = datapegawai.nik and s.tmt = datapegawai.tmt and s.tat = datapegawai.tat and s.urgensi = ? and s.status != 'Ditolak' and s.normatif = 'Tidak' " +
-                (NoPengajuan.getText().isBlank() ? "" : "and s.no_pengajuan != ? ") + "), 0) as diambil from datapegawai"
+                (tbObat.getSelectedRow() < 0 ? "" : "and s.no_pengajuan != ? ") + "), 0) as diambil from datapegawai"
             )) {
                 int p = 0;
                 ps.setString(++p, Valid.getTglSmc(Tanggal));
                 ps.setString(++p, KdPetugas.getText());
                 ps.setString(++p, Urgensi.getSelectedItem().toString());
-                if (!NoPengajuan.getText().isBlank()) {
-                    ps.setString(++p, NoPengajuan.getText());
+                if (tbObat.getSelectedRow() >= 0) {
+                    ps.setString(++p, tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
@@ -1463,8 +1462,8 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
         String normatif = Normatif.isSelected() ? "Ya" : "Tidak";
         String sisa = Normatif.isSelected() ? Sisa.getText() : String.valueOf(Integer.parseInt(Sisa.getText()) - 1);
 
-        if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "no_pengajuan = ?, tanggal = ?, tmt = ?, tat = ?, izin = ?, urgensi = ?, tanggal_izin = ?, jam_mulai = ?, jam_akhir = ?, kepentingan = ?, nik_pj = ?, status = ?, normatif = ?",
-            "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), tglTMTKerja, tglTATKerja, izin, Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1),
+        if (Sequel.mengupdatetfSmc("pengajuan_izin_smc", "no_pengajuan = ?, tanggal = ?, nik = ?, tmt = ?, tat = ?, izin = ?, urgensi = ?, tanggal_izin = ?, jam_mulai = ?, jam_akhir = ?, kepentingan = ?, nik_pj = ?, status = ?, normatif = ?",
+            "no_pengajuan = ?", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), KdPetugas.getText(), tglTMTKerja, tglTATKerja, izin, Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1),
             Valid.getJamSmc(Jam2, Menit2, Detik2), Kepentingan.getText(), KdPetugasPJ.getText(), Status.getSelectedItem().toString(), normatif,
             tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString()
         )) {
