@@ -493,6 +493,14 @@ ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `kota` varchar(30) NULL DEFAULT NULL AFTER `alamat`;
 
+ALTER TABLE `ipsrsdetailpengeluaran` ADD PRIMARY KEY IF NOT EXISTS (`no_keluar`, `kode_brng`) USING BTREE;
+
+ALTER TABLE `ipsrsdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `ipsrsdetailpengeluaran_ibfk_2`;
+
+ALTER TABLE `ipsrsdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `ipsrsdetailpengeluaran_ibfk_4`;
+
+ALTER TABLE `ipsrsdetailpengeluaran` ADD CONSTRAINT `ipsrsdetailpengeluaran_ibfk_4` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `ipsrsbarang` (`kode_brng`) ON UPDATE CASCADE ON DELETE RESTRICT;
+
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
 
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
