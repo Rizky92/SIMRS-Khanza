@@ -1,5 +1,6 @@
 # Root level ignore
 /.vscode/
+/.idea/
 /*.css
 /*.html
 /*.html_files
