@@ -282,6 +282,22 @@ public class ApiBIOSYS {
         }
     }
 
+    public JsonNode ambilOrder(String noorder) throws BiosysException {
+        try {
+            String request = Sequel.cariIsiSmc(
+                "select lis_request_response.request from lis_request_response where lis_request_response.vendor = 'biosys' and lis_request_response.noorder = ? " +
+                "and lis_request_response.method = 'POST' and lis_request_response.url like '%lab_order.php' order by lis_request_response.id desc limit 1", noorder);
+
+            if (request == null || request.isBlank()) {
+                return mapper.createObjectNode();
+            }
+
+            return mapper.readTree(request);
+        } catch (Exception e) {
+            throw new BiosysException("Gagal mengambil order terkirim ke LIS BIOSYS: " + e.getMessage(), e);
+        }
+    }
+
     public JsonNode ambilHasil(String noorder) throws BiosysException {
         try {
             String url = APIURL + "/lab_result.php?OrderNumber=" + noorder;

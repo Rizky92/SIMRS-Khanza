@@ -43,8 +43,10 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -3584,10 +3586,38 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                 belumFinal = false;
 
+                Map<String, String> iditem = new HashMap<>();
+                biosys.ambilOrder(noorder).path("OrderedItems").forEach(header -> header.withArray("Items").forEach(item -> {
+                    String namaitem = item.path("ItemName").asText("").trim().toUpperCase();
+                    String iditemplate = item.path("ItemCode").asText("").trim();
+                    if (!namaitem.isEmpty() && !iditemplate.isEmpty()) {
+                        iditem.put(namaitem, iditemplate);
+                    }
+                }));
+
+                Set<String> namasub = new HashSet<>();
+                Set<String> namajudul = new HashSet<>();
+                for (JsonNode result : sortedResults) {
+                    namasub.add(result.path("TestNameSub").asText("").trim().toUpperCase());
+                    namajudul.add(result.path("TestNameHeader").asText("").trim().toUpperCase());
+                }
+                namajudul.removeAll(namasub);
+
+                Set<String> idjudul = new HashSet<>();
+                for (String namaheader : namajudul) {
+                    if (iditem.containsKey(namaheader)) {
+                        idjudul.add(iditem.get(namaheader));
+                    }
+                }
+
                 Map<String, Integer> map = new HashMap<>();
                 for (int row = 0; row < tabMode.getRowCount(); row++) {
-                    tabMode.setValueAt(tabMode.getValueAt(row, 1).toString().startsWith("   " + LABORATORIUMSUBHEADERPREFIX), row, 0);
-                    map.put(tabMode.getValueAt(row, 6).toString(), row);
+                    String pemeriksaan = tabMode.getValueAt(row, 1).toString();
+                    String idtemplate = tabMode.getValueAt(row, 6).toString();
+                    boolean judul = (!LABORATORIUMSUBHEADERPREFIX.isEmpty() && pemeriksaan.startsWith("   " + LABORATORIUMSUBHEADERPREFIX))
+                        || idjudul.contains(idtemplate);
+                    tabMode.setValueAt(judul, row, 0);
+                    map.put(idtemplate, row);
                 }
 
                 for (JsonNode result : sortedResults) {
