@@ -5,12 +5,12 @@
 
 package rekammedis;
 import fungsi.WarnaTableMEOWS;
-import java.awt.Color;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -58,7 +57,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -74,7 +73,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         setSize(628,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tanggal","Pernapasan","Skor 1","Saturasi","Skor 2","Temperatur","Skor 3", 
+            "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tanggal","Pernapasan","Skor 1","Saturasi","Skor 2","Temperatur","Skor 3",
             "TD Sistole","Skor 4","TD Diastole","Skor 5","Denyut Jantung","Skor 6","Kesadaran","Skor 7","Ketuban","Skor 8",
             "Discharge","Skor 9","Proteinuria","Skor 10","Total Skor","Parameter Total","Code Blue","NIP","Petugas","Tgl.Lahir"
         }){
@@ -125,19 +124,19 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             }else if(i==17){
                  column.setPreferredWidth(39);
             }else if(i==18){
-                 column.setPreferredWidth(90);     
+                 column.setPreferredWidth(90);
             }else if(i==19){
                  column.setPreferredWidth(39);
             }else if(i==20){
-                 column.setPreferredWidth(90);     
+                 column.setPreferredWidth(90);
             }else if(i==21){
                  column.setPreferredWidth(39);
             }else if(i==22){
-                 column.setPreferredWidth(90);     
+                 column.setPreferredWidth(90);
             }else if(i==23){
                  column.setPreferredWidth(39);
             }else if(i==24){
-                 column.setPreferredWidth(90);     
+                 column.setPreferredWidth(90);
             }else if(i==25){
                  column.setPreferredWidth(45);
             }else if(i==26){
@@ -156,11 +155,11 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTableMEOWS());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -178,11 +177,11 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -1131,7 +1130,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1158,13 +1157,13 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }else if(Skor6.getText().trim().equals("")){
             Valid.textKosong(Skor6,"Skor 6");
         }else if(Skor7.getText().trim().equals("")){
-            Valid.textKosong(Skor7,"Skor 7");    
+            Valid.textKosong(Skor7,"Skor 7");
         }else if(Skor8.getText().trim().equals("")){
-            Valid.textKosong(Skor8,"Skor 8");    
+            Valid.textKosong(Skor8,"Skor 8");
         }else if(Skor9.getText().trim().equals("")){
-            Valid.textKosong(Skor9,"Skor 9");    
+            Valid.textKosong(Skor9,"Skor 9");
         }else if(Skor10.getText().trim().equals("")){
-            Valid.textKosong(Skor10,"Skor 10");    
+            Valid.textKosong(Skor10,"Skor 10");
         }else{
             if(akses.getkode().equals("Admin Utama")){
                 simpan();
@@ -1189,7 +1188,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1214,7 +1213,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }          
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1243,7 +1242,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.R.M.</b></td>"+
@@ -1301,7 +1300,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
@@ -1322,7 +1321,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1337,8 +1336,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataPenilaianMEOWS.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataPenilaianMEOWS.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1347,12 +1346,12 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN MEOWS<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN MEOWS<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1456,10 +1455,10 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1470,15 +1469,15 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1493,8 +1492,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("diagnosa",Sequel.cariIsi("select kamar_inap.diagnosa_awal from kamar_inap where kamar_inap.diagnosa_awal<>'' and kamar_inap.no_rawat=? ",TNoRw.getText()));
             Valid.MyReportqry("rptFormulirPemantauanMEOWS.jasper","report","::[ Pemantauan MEOWS Obstetri ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
@@ -1569,13 +1568,13 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }else if(Skor6.getText().trim().equals("")){
             Valid.textKosong(Skor6,"Skor 6");
         }else if(Skor7.getText().trim().equals("")){
-            Valid.textKosong(Skor7,"Skor 7");    
+            Valid.textKosong(Skor7,"Skor 7");
         }else if(Skor8.getText().trim().equals("")){
-            Valid.textKosong(Skor8,"Skor 8");    
+            Valid.textKosong(Skor8,"Skor 8");
         }else if(Skor9.getText().trim().equals("")){
-            Valid.textKosong(Skor9,"Skor 9");    
+            Valid.textKosong(Skor9,"Skor 9");
         }else if(Skor10.getText().trim().equals("")){
-            Valid.textKosong(Skor10,"Skor 10");    
+            Valid.textKosong(Skor10,"Skor 10");
         }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
@@ -1596,8 +1595,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
-        } 
+            }
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1615,7 +1614,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
     private void cmbSkor4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSkor4ItemStateChanged
         isCombo4();
         isjml();
-        isHitung();    
+        isHitung();
     }//GEN-LAST:event_cmbSkor4ItemStateChanged
 
     private void cmbSkor4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbSkor4KeyPressed
@@ -1625,11 +1624,11 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
     private void cmbSkor5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSkor5ItemStateChanged
         isCombo5();
         isjml();
-        isHitung();    
+        isHitung();
     }//GEN-LAST:event_cmbSkor5ItemStateChanged
 
     private void cmbSkor5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbSkor5KeyPressed
-        Valid.pindah(evt, cmbSkor4,cmbSkor6);   
+        Valid.pindah(evt, cmbSkor4,cmbSkor6);
     }//GEN-LAST:event_cmbSkor5KeyPressed
 
     private void cmbSkor6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSkor6ItemStateChanged
@@ -1818,7 +1817,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1857,7 +1856,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                     "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or pemantauan_meows_obstetri.nip like ? or petugas.nama like ?) "+
                     "order by pemantauan_meows_obstetri.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1871,7 +1870,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1899,7 +1898,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void isCombo1(){
         if(cmbSkor1.getSelectedItem().equals(">= 30")){
             Skor1.setBackground(Color.RED);
@@ -1916,10 +1915,10 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }else if(cmbSkor1.getSelectedItem().equals("< 12")){
             Skor1.setBackground(Color.RED);
             Skor1.setForeground(Color.WHITE);
-            Skor1.setText("2");    
+            Skor1.setText("2");
         }
     }
-    
+
     private void isCombo2(){
         if(cmbSkor2.getSelectedItem().equals("> 95")){
             Skor2.setBackground(Color.WHITE);
@@ -1931,15 +1930,15 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor2.setText("1");
         }else if(cmbSkor2.getSelectedItem().equals("< 90")){
             Skor2.setBackground(Color.RED);
-            Skor2.setForeground(Color.WHITE); 
-            Skor2.setText("2");    
+            Skor2.setForeground(Color.WHITE);
+            Skor2.setText("2");
         }
     }
-    
+
     private void isCombo3(){
         if(cmbSkor3.getSelectedItem().equals("> 38")){
             Skor3.setBackground(Color.RED);
-            Skor3.setForeground(Color.WHITE); 
+            Skor3.setForeground(Color.WHITE);
             Skor3.setText("2");
         }else if(cmbSkor3.getSelectedItem().equals("35 - 35.9")){
             Skor3.setBackground(Color.YELLOW);
@@ -1948,14 +1947,14 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }else if(cmbSkor3.getSelectedItem().equals("36 - 37.9")){
             Skor3.setBackground(Color.WHITE);
             Skor3.setForeground(new Color(50,50,50));
-            Skor3.setText("0");    
+            Skor3.setText("0");
         }else if(cmbSkor3.getSelectedItem().equals("< 35")){
             Skor3.setBackground(Color.RED);
-            Skor3.setForeground(Color.WHITE); 
-            Skor3.setText("2");    
+            Skor3.setForeground(Color.WHITE);
+            Skor3.setText("2");
         }
     }
-    
+
     private void isCombo4(){
         if(cmbSkor4.getSelectedItem().equals("> 160")){
             Skor4.setBackground(Color.RED);
@@ -1979,7 +1978,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor4.setText("2");
         }
     }
-    
+
     private void isCombo5(){
         if(cmbSkor5.getSelectedItem().equals("> 110")){
             Skor5.setBackground(Color.RED);
@@ -1995,7 +1994,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor5.setText("0");
         }
     }
-    
+
     private void isCombo6(){
         if(cmbSkor6.getSelectedItem().equals("> 120")){
             Skor6.setBackground(Color.RED);
@@ -2004,21 +2003,21 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         }else if(cmbSkor6.getSelectedItem().equals("100 - 120")){
             Skor6.setBackground(Color.YELLOW);
             Skor6.setForeground(Color.GREEN);
-            Skor6.setText("1");    
+            Skor6.setText("1");
         }else if(cmbSkor6.getSelectedItem().equals("51 - 99")){
             Skor6.setBackground(Color.WHITE);
             Skor6.setForeground(new Color(50,50,50));
-            Skor6.setText("0");    
+            Skor6.setText("0");
         }else if(cmbSkor6.getSelectedItem().equals("40 - 50")){
             Skor6.setBackground(Color.YELLOW);
             Skor6.setForeground(Color.GREEN);
-            Skor6.setText("1");    
+            Skor6.setText("1");
         }else if(cmbSkor6.getSelectedItem().equals("< 40")){
             Skor6.setBackground(Color.RED);
             Skor6.setForeground(Color.WHITE);
-            Skor6.setText("2");    
+            Skor6.setText("2");
         }
-    } 
+    }
     private void isCombo7(){
         if(cmbSkor7.getSelectedItem().equals("Alert")){
             Skor7.setBackground(Color.WHITE);
@@ -2037,8 +2036,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor7.setForeground(Color.WHITE);
             Skor7.setText("2");
         }
-    }   
-    
+    }
+
     private void isCombo8(){
         if(cmbSkor8.getSelectedItem().equals("Khas")){
             Skor8.setBackground(Color.WHITE);
@@ -2049,8 +2048,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor8.setForeground(Color.WHITE);
             Skor8.setText("2");
         }
-    } 
-    
+    }
+
     private void isCombo9(){
         if(cmbSkor9.getSelectedItem().equals("Normal")){
             Skor9.setBackground(Color.WHITE);
@@ -2062,7 +2061,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor9.setText("2");
         }
     }
-    
+
     private void isCombo10(){
         if(cmbSkor10.getSelectedItem().equals("Negatif")){
             Skor10.setBackground(Color.WHITE);
@@ -2077,8 +2076,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor10.setForeground(Color.WHITE);
             Skor10.setText("2");
         }
-    } 
-    
+    }
+
     private void isjml(){
         if((!Skor1.getText().equals(""))&&(!Skor2.getText().equals(""))&&(!Skor3.getText().equals(""))&&(!Skor4.getText().equals(""))&&(!Skor5.getText().equals(""))&&(!Skor6.getText().equals(""))&&(!Skor7.getText().equals(""))&&(!Skor8.getText().equals(""))&&(!Skor9.getText().equals(""))&&(!Skor10.getText().equals(""))){
             TotalSkor.setText(Valid.SetAngka2(
@@ -2095,7 +2094,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             ));
         }
     }
-    
+
     private void isHitung(){
         if(Integer.parseInt(TotalSkor.getText())>=7){
             ParameterSkor.setText("Monitoring secara kontinyu oleh dokter jaga & Bidan/Katim/PJ Shift, Informasikan & konsultasikan ke DPJP untuk menentukan rencana perawatan pasien selanjutnya/rawat intensive. Aktifasi Code Blue jika pasien Henti Nafas & Henti jantung.");
@@ -2107,7 +2106,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             ParameterSkor.setText("Berisiko rendah, observasi setiap 7 jam atau Setiap Shift");
         }
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         cmbSkor1.setSelectedIndex(2);
@@ -2154,7 +2153,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         cmbCodeBlue.setSelectedIndex(0);
         ParameterSkor.setText("Berisiko rendah, observasi setiap 7 jam atau Setiap Shift");
         cmbSkor1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -2162,9 +2161,9 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             cmbSkor1.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            Skor1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Skor1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             cmbSkor2.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Skor2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());  
+            Skor2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             cmbSkor3.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Skor3.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             cmbSkor4.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
@@ -2181,17 +2180,17 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             Skor9.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
             cmbSkor10.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
             Skor10.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
-            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());  
-            ParameterSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString()); 
-            cmbCodeBlue.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());  
+            TotalSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
+            ParameterSkor.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
+            cmbCodeBlue.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(14,16));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(17,19));
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -2223,36 +2222,36 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,295));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpemantauan_meows_obstetri());
         BtnHapus.setEnabled(akses.getpemantauan_meows_obstetri());
         BtnEdit.setEnabled(akses.getpemantauan_meows_obstetri());
-        BtnPrint.setEnabled(akses.getpemantauan_meows_obstetri()); 
+        BtnPrint.setEnabled(akses.getpemantauan_meows_obstetri());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -2262,8 +2261,8 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
-    
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -2284,7 +2283,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -2327,7 +2326,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
 
     private void ganti() {
         isCombo1();
@@ -2390,7 +2389,7 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void hapus() {
         if(Sequel.queryu2tf("delete from pemantauan_meows_obstetri where tanggal=? and no_rawat=?",2,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -2434,9 +2433,9 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        }   
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2462,11 +2461,10 @@ public final class RMPemantauanMEOWS extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-

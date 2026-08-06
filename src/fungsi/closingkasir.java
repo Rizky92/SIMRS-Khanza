@@ -27,6 +27,6 @@ public class closingkasir {
             System.out.println("Notif Pengaturan Wajib Closing Kasir : "+e);
         }
     }
-    
+
     public static String getWajibClosingKasir(){return closingkasir.WajibClosingKasir;}
 }

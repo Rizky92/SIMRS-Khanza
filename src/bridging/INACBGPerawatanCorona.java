@@ -1,11 +1,11 @@
 package bridging;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -32,7 +32,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-    
+
 
     /** Creates new form DlgPemberianInfus
      * @param parent
@@ -130,13 +130,13 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
-        
+
     }
- 
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -800,7 +800,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
             Valid.textKosong(Episodes6,"Jumlah Hari");
         }else{
             if(Sequel.menyimpantf("perawatan_corona","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,new String[]{
-                NoRawat.getText(),PemulasaranJenazah.getSelectedItem().toString(),KantongJenazah.getSelectedItem().toString(),PetiJenazah.getSelectedItem().toString(), 
+                NoRawat.getText(),PemulasaranJenazah.getSelectedItem().toString(),KantongJenazah.getSelectedItem().toString(),PetiJenazah.getSelectedItem().toString(),
                 PlastikErat.getSelectedItem().toString(),DesinfektanJenazah.getSelectedItem().toString(),MobilJenazah.getSelectedItem().toString(),
                 DesinFektanMobilJenazah.getSelectedItem().toString(),StatusCovid.getSelectedItem().toString(),NoJaminan.getText(),Episodes1.getText(),
                 Episodes2.getText(),Episodes3.getText(),Episodes4.getText(),Episodes5.getText(),Episodes6.getText(),Comorbid.getSelectedItem().toString()
@@ -821,7 +821,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -832,7 +832,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tbObat.getSelectedRow()> -1){ 
+        if(tbObat.getSelectedRow()> -1){
             Sequel.meghapus("perawatan_corona","no_rawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             tampil();
         }else{
@@ -864,14 +864,14 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPerawatanCorona.jasper","report","::[ Kebutuhan Perawatan Pasien Corona Untuk Penagihan INACBG ]::",
                     "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,reg_periksa.tgl_registrasi,perawatan_corona.pemulasaraan_jenazah,"+
                     "perawatan_corona.kantong_jenazah,perawatan_corona.peti_jenazah,perawatan_corona.plastik_erat,perawatan_corona.desinfektan_jenazah,"+
@@ -930,7 +930,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -973,9 +973,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(Episodes6.getText().trim().equals("")){
             Valid.textKosong(Episodes6,"Jumlah Hari");
         }else{
-            if(tbObat.getSelectedRow()> -1){ 
+            if(tbObat.getSelectedRow()> -1){
                 if(Sequel.mengedittf("perawatan_corona","no_rawat=?","no_rawat=?,pemulasaraan_jenazah=?,kantong_jenazah=?,peti_jenazah=?,plastik_erat=?,desinfektan_jenazah=?,mobil_jenazah=?,desinfektan_mobil_jenazah=?,covid19_status_cd=?,nomor_kartu_t=?,episodes1=?,episodes2=?,episodes3=?,episodes4=?,episodes5=?,episodes6=?,covid19_cc_ind=?",18,new String[]{
-                    NoRawat.getText(),PemulasaranJenazah.getSelectedItem().toString(),KantongJenazah.getSelectedItem().toString(),PetiJenazah.getSelectedItem().toString(), 
+                    NoRawat.getText(),PemulasaranJenazah.getSelectedItem().toString(),KantongJenazah.getSelectedItem().toString(),PetiJenazah.getSelectedItem().toString(),
                     PlastikErat.getSelectedItem().toString(),DesinfektanJenazah.getSelectedItem().toString(),MobilJenazah.getSelectedItem().toString(),
                     DesinFektanMobilJenazah.getSelectedItem().toString(),StatusCovid.getSelectedItem().toString(),NoJaminan.getText(),Episodes1.getText(),
                     Episodes2.getText(),Episodes3.getText(),Episodes4.getText(),Episodes5.getText(),Episodes6.getText(),Comorbid.getSelectedItem().toString(),
@@ -1002,7 +1002,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else{
             Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?",NoJaminan,NoRM.getText());
         }
-            
+
     }//GEN-LAST:event_MnNIKActionPerformed
 
     private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
@@ -1160,9 +1160,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {     
+    public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,reg_periksa.tgl_registrasi,perawatan_corona.pemulasaraan_jenazah,"+
                     "perawatan_corona.kantong_jenazah,perawatan_corona.peti_jenazah,perawatan_corona.plastik_erat,perawatan_corona.desinfektan_jenazah,"+
@@ -1184,7 +1184,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
                 rs=ps.executeQuery();
-                while(rs.next()){    
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_registrasi"),rs.getString("pemulasaraan_jenazah"),
                         rs.getString("kantong_jenazah"),rs.getString("peti_jenazah"),rs.getString("plastik_erat"),rs.getString("desinfektan_jenazah"),
@@ -1233,7 +1233,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void getData() {
-        if(tbObat.getSelectedRow()!= -1){      
+        if(tbObat.getSelectedRow()!= -1){
             NoRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NamaPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -1255,27 +1255,27 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Comorbid.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,306));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getperawatan_pasien_corona());
         BtnHapus.setEnabled(akses.getperawatan_pasien_corona());
         BtnEdit.setEnabled(akses.getperawatan_pasien_corona());
     }
-    
+
     public void setPasien(String norawat,String norm,String namapasien){
         NoRawat.setText(norawat);
         NoRM.setText(norm);
@@ -1284,9 +1284,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Sequel.cariIsi("select reg_periksa.tgl_registrasi from reg_periksa where reg_periksa.no_rawat='"+norawat+"'", DTPCari1);
         TCari.setText(norawat);
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
     }
-    
+
     public JTable getTable(){
         return tbObat;
     }

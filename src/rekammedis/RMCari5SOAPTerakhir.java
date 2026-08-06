@@ -84,7 +84,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable4());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -420,10 +420,10 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    private void emptTeks() {   
+    private void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRM(String norm,String nip,String status){
         this.norm=norm;
         this.nip=nip;
@@ -434,7 +434,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -460,7 +460,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

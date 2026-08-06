@@ -273,41 +273,41 @@ public class GrafikPorsiDietPerRuang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select bangsal.nm_bangsal,count(bangsal.nm_bangsal) as jumlah from detail_beri_diet inner join kamar inner join bangsal "+
                "on detail_beri_diet.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where detail_beri_diet.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' "+
                "group by bangsal.nm_bangsal").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Porsi Diet Per Ruang Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Ruang","Jumlah Pasien", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Porsi Diet Per Ruang Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Ruang","Jumlah Pasien", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Porsi Diet Per Ruang",freeChart);
-        cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+        cf.setSize(Scroll.getWidth(),Scroll.getHeight());
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(Scroll);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint3ActionPerformed
 
     private void BtnPrint3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint3KeyPressed
-        
+
     }//GEN-LAST:event_BtnPrint3KeyPressed
 
     private void BtnKeluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar3ActionPerformed
@@ -315,7 +315,7 @@ public class GrafikPorsiDietPerRuang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3ActionPerformed
 
     private void BtnKeluar3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar3KeyPressed
-        
+
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint4ActionPerformed
@@ -323,7 +323,7 @@ public class GrafikPorsiDietPerRuang extends javax.swing.JDialog {
                "select bangsal.nm_bangsal,count(bangsal.nm_bangsal) as jumlah from detail_beri_diet inner join kamar inner join bangsal "+
                "on detail_beri_diet.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where detail_beri_diet.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' "+
                "group by bangsal.nm_bangsal","Ruang");
-       kas.setSize(Scroll.getWidth(),Scroll.getHeight());  
+       kas.setSize(Scroll.getWidth(),Scroll.getHeight());
        kas.setModal(true);
        kas.setAlwaysOnTop(true);
        kas.setLocationRelativeTo(Scroll);
@@ -336,29 +336,29 @@ public class GrafikPorsiDietPerRuang extends javax.swing.JDialog {
 
     private void BtnPrint5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint5ActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select bangsal.nm_bangsal,count(bangsal.nm_bangsal) as jumlah from detail_beri_diet inner join kamar inner join bangsal "+
                "on detail_beri_diet.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal where detail_beri_diet.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' "+
                "group by bangsal.nm_bangsal").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Porsi Diet Per Ruang Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Porsi Diet Per Ruang Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Porsi Diet Per Ruang",freeChart);
-        cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+        cf.setSize(Scroll.getWidth(),Scroll.getHeight());
         cf.setLocationRelativeTo(Scroll);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint5ActionPerformed
 
     private void BtnPrint5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint5KeyPressed
@@ -446,7 +446,7 @@ public class GrafikPorsiDietPerRuang extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});
                 }
                 tabMode.addRow(new Object[]{"Jumlah : ",total+"","100 %"});
-                for(i=0;i<tbBangsal.getRowCount();i++){ 
+                for(i=0;i<tbBangsal.getRowCount();i++){
                     tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);
                 }
             } catch (Exception e) {
@@ -458,7 +458,7 @@ public class GrafikPorsiDietPerRuang extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }

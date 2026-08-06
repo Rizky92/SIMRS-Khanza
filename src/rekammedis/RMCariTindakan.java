@@ -74,7 +74,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -366,7 +366,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                     "select rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, jns_perawatan_inap.nm_perawatan "+
@@ -396,7 +396,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                     "select DATE_FORMAT(operasi.tgl_operasi,'%Y-%m-%d') as tgl_operasi,DATE_FORMAT(operasi.tgl_operasi,'%H:%i:%s') as jamoperasi, "+
@@ -429,10 +429,10 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRawat(String norawat){
         this.norawat=norawat;
     }
@@ -440,7 +440,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -466,7 +466,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

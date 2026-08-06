@@ -11,11 +11,11 @@
 
 package inventaris;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -117,9 +117,9 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
         Keterangan.setDocument(new batasInput((int)255).getKata(Keterangan));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
-        
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -699,7 +699,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
                 }
                 runBackground(() ->tampil());
                 emptTeks();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -789,14 +789,14 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();   
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 semua=nm_ruangcari.getText().equals("")&&TCari.getText().equals("");
                 Valid.MyReportqry("rptPerbaikanInventaris.jasper","report","::[ Data Perbaikan Inventaris ]::",
                     "select perbaikan_inventaris.no_permintaan,permintaan_perbaikan_inventaris.no_inventaris,"+
@@ -870,7 +870,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
@@ -884,7 +884,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
 }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void NoPermintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoPermintaanKeyPressed
@@ -929,10 +929,10 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){ 
+                if(ruang.getTable().getSelectedRow()!= -1){
                     nm_ruangcari.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                     TCari.requestFocus();
-                }                   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -944,7 +944,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         ruang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -952,7 +952,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ruang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -984,12 +984,12 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(inventaris.getTable().getSelectedRow()!= -1){     
+                if(inventaris.getTable().getSelectedRow()!= -1){
                    NoPermintaan.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
                    NoInventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString());
                    NamaBarang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),3).toString());
                    UraianKegiatan.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1000,7 +1000,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         inventaris.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1031,10 +1031,10 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    } 
+                    }
                     petugas=null;
                 }
             });
@@ -1042,16 +1042,16 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_btnPtgActionPerformed
 
@@ -1172,7 +1172,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
                     "or petugas.nama like ?)")+
                     "order by perbaikan_inventaris.no_permintaan"
             );
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
@@ -1214,7 +1214,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             LCount.setText(tabMode.getRowCount()+"");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
@@ -1234,9 +1234,9 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-             NoPermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());   
-             NoInventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());   
-             NamaBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString()); 
+             NoPermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+             NoInventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+             NamaBarang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
              NIP.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
              NamaPetugas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
              UraianKegiatan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
@@ -1251,21 +1251,21 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,155));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         if(akses.getjml2()>=1){
             NIP.setEditable(false);
@@ -1276,10 +1276,10 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             BtnPrint.setEnabled(akses.getperbaikan_inventaris());
             NIP.setText(akses.getkode());
             NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
-        } 
+        }
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1305,7 +1305,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -13,11 +13,11 @@
 package toko;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -104,11 +104,11 @@ public final class TokoMember extends javax.swing.JDialog {
         Alamat.setDocument(new batasInput((byte)60).getKata(Alamat));
         NoTelp.setDocument(new batasInput((byte)40).getOnlyAngka(NoTelp));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -603,7 +603,7 @@ public final class TokoMember extends javax.swing.JDialog {
             })==true){
                 emptTeks();
                 runBackground(() ->tampil());
-            }         
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -617,8 +617,8 @@ public final class TokoMember extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
-        emptTeks();        
+        isForm();
+        emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -647,14 +647,14 @@ public final class TokoMember extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();  
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptMemberToko.jasper","report","::[ Data Member Toko ]::",
                     "select no_member, nama, jk, tmp_lahir, tgl_lahir, alamat, no_telp, email from tokomember "+
                     "where no_member like '%"+TCari.getText().trim()+"%' or nama like '%"+TCari.getText().trim()+"%' "+
@@ -662,7 +662,7 @@ public final class TokoMember extends javax.swing.JDialog {
                     "or tgl_lahir like '%"+TCari.getText().trim()+"%' order by no_member",param);
                 this.setCursor(Cursor.getDefaultCursor());
         }
-        
+
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -712,8 +712,8 @@ public final class TokoMember extends javax.swing.JDialog {
                 })==true){
                     emptTeks();
                     runBackground(() ->tampil());
-                }  
-            }       
+                }
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -761,7 +761,7 @@ private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ema
 }//GEN-LAST:event_EmailKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -787,7 +787,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbPetugasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyReleased
@@ -797,7 +797,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }            
+            }
         }
     }//GEN-LAST:event_tbPetugasKeyReleased
 
@@ -903,7 +903,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -963,28 +963,28 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbPetugas;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,128));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettoko_member());
         BtnHapus.setEnabled(akses.gettoko_member());
         BtnEdit.setEnabled(akses.gettoko_member());
         BtnPrint.setEnabled(akses.gettoko_member());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1010,7 +1010,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

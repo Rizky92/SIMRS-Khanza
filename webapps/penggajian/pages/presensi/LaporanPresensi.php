@@ -63,7 +63,7 @@
                         <td width='100px'><div align='center'>Index Lembur HR</div></td>
                     </tr>
                  </table>";
-        }       
+        }
     ?>
     </body>
 </html>

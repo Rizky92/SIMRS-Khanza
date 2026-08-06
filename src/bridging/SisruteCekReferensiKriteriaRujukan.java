@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -17,15 +17,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -77,7 +77,7 @@ public final class SisruteCekReferensiKriteriaRujukan extends javax.swing.JDialo
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         Pelayanan.setDocument(new batasInput((byte)100).getKata(Pelayanan));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             Pelayanan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -99,7 +99,7 @@ public final class SisruteCekReferensiKriteriaRujukan extends javax.swing.JDialo
                     }
                 }
             });
-        }   
+        }
         try {
             link=koneksiDB.URLAPISISRUTE();
             idrs=koneksiDB.IDSISRUTE();
@@ -107,8 +107,8 @@ public final class SisruteCekReferensiKriteriaRujukan extends javax.swing.JDialo
             System.out.println("E : "+e);
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -282,9 +282,9 @@ public final class SisruteCekReferensiKriteriaRujukan extends javax.swing.JDialo
             URL = link+"/referensi/kriteria/rujukan?DIAGNOSA=";
             headers = new HttpHeaders();
 	   headers.add("X-cons-id",idrs);
-	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-	   headers.add("X-signature",api.getHmac()); 
-	   headers.add("Content-type","application/json");   
+	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+	   headers.add("X-signature",api.getHmac());
+	   headers.add("Content-type","application/json");
 	   requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("status");
@@ -299,14 +299,14 @@ public final class SisruteCekReferensiKriteriaRujukan extends javax.swing.JDialo
                                 list.path("DESKRIPSI").asText().toLowerCase().contains(faskes.toLowerCase())){
                             tabMode.addRow(new Object[]{
                                 i+".",list.path("KODE").asText(),list.path("DESKRIPSI").asText()
-                            });                        
+                            });
                             i++;
                         }
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,root.path("detail").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,root.path("detail").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -317,11 +317,11 @@ public final class SisruteCekReferensiKriteriaRujukan extends javax.swing.JDialo
                 JOptionPane.showMessageDialog(rootPane,"Server interenal error....!");
             }
         }
-    }    
-    
- 
+    }
+
+
     public JTable getTable(){
         return tbKamar;
     }
-    
+
 }

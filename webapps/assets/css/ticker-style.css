@@ -41,11 +41,11 @@
 	none;
 }
 .ticker-content a {
-	text-decoration: none;	
+	text-decoration: none;
 	color: #1F527B;
 }
 .ticker-content a:hover {
-	text-decoration: underline;	
+	text-decoration: underline;
 	color: #0D3059;
 }
 .ticker-swipe {
@@ -55,7 +55,7 @@
 	background-color: #f8f0db;
 	display: block;
 	width: 800px;
-	height: 23px; 
+	height: 23px;
 }
 .ticker-swipe span {
 	margin-left: 1px;
@@ -90,7 +90,7 @@
 	background-position: 32px 0px;
 }
 .ticker-controls li.jnt-play-pause.paused {
-	background-image: url('../images/controls.png');	
+	background-image: url('../images/controls.png');
 	background-position: 48px 16px;
 }
 .ticker-controls li.jnt-play-pause.paused.over {
@@ -101,29 +101,29 @@
 }
 .ticker-controls li.jnt-prev {
 	background-image: url('../images/controls.png');
-	background-position: 0px 16px;		
+	background-position: 0px 16px;
 }
 .ticker-controls li.jnt-prev.over {
-	background-position: 0px 32px;		
+	background-position: 0px 32px;
 }
 .ticker-controls li.jnt-prev.down {
-	background-position: 0px 0px;		
+	background-position: 0px 0px;
 }
 .ticker-controls li.jnt-next {
-	background-image: url('../images/controls.png');	
-	background-position: 16px 16px;	
+	background-image: url('../images/controls.png');
+	background-position: 16px 16px;
 }
 .ticker-controls li.jnt-next.over {
-	background-position: 16px 32px;	
+	background-position: 16px 32px;
 }
-.ticker-controls li.jnt-next.down {	
-	background-position: 16px 0px;	
+.ticker-controls li.jnt-next.down {
+	background-position: 16px 0px;
 }
 .js-hidden {
 	display: none;
 }
 .no-js-news {
-	padding: 10px 0px 0px 45px; 
+	padding: 10px 0px 0px 45px;
 	color: #F8F0DB;
 }
 .left .ticker-swipe {

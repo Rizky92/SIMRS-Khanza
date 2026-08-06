@@ -14,10 +14,10 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
-import fungsi.sekuel;
-import fungsi.validasi;
 import fungsi.akses;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -183,7 +183,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new String[]{
                 "No.","Kode Diag","Nama Diagnosa","Keluhan","No.Rujuk/Kunjungan",
                 "Kode Pelayanan","Pelayanan","Nama COB Asuransi","No.COB",
@@ -299,14 +299,14 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
         tbBangsal2.setDefaultRenderer(Object.class, new WarnaTable());
 
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml")); 
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             link=prop.getProperty("URLAPIBPJS");
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
-        jam(); 
-    }    
+
+        jam();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -572,11 +572,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, SEP telah terbit...!!!!");
                     BtnCari.requestFocus();
-                }                    
-            }else{            
+                }
+            }else{
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data rujukan...!!!!");
                 BtnCari.requestFocus();
-            }                 
+            }
         }else if(TabRawat.getSelectedIndex()==1){
             if(tbBangsal2.getSelectedRow()!= -1){
                 if(tbBangsal2.getValueAt(tbBangsal2.getSelectedRow(),41).toString().equals("")){
@@ -592,10 +592,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     JOptionPane.showMessageDialog(null,"Maaf, SEP telah terbit...!!!!");
                     BtnCari.requestFocus();
                 }
-            }else{            
+            }else{
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data rujukan...!!!!");
                 BtnCari.requestFocus();
-            } 
+            }
         }
     }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -665,7 +665,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal2;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
+    public void tampil(){
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -674,7 +674,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 	    headers.add("X-Timestamp",utc);
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-            URL = link+"/Rujukan/List/TglRujukan/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");	
+            URL = link+"/Rujukan/List/TglRujukan/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             requestEntity = new HttpEntity(headers);
 	    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -784,10 +784,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 break;
                         }
                     }
-                }                                       
+                }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -796,7 +796,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
-    public void tampil2(){        
+    public void tampil2(){
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -805,7 +805,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 	    headers.add("X-Timestamp",utc);
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-            URL = link+"/Rujukan/RS/List/TglRujukan/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");	
+            URL = link+"/Rujukan/RS/List/TglRujukan/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
 	    requestEntity = new HttpEntity(headers);
 	    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -916,10 +916,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                                       
+
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -927,11 +927,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }
         }
     }
-    
+
     public void isCek(){
         BtnCari1.setEnabled(akses.getbpjs_sep());
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -974,7 +974,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             TabRawatMouseClicked(null);
                         }
                     }
-                }                    
+                }
             }
         };
         // Timer
@@ -1006,7 +1006,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,10 +1,10 @@
 package ipsrs;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -30,13 +30,13 @@ public class IPSRSRiwayatBarang extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();   
+    private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-    /** 
+    /**
      * @param parent
      * @param modal */
     public IPSRSRiwayatBarang(java.awt.Frame parent, boolean modal) {
@@ -77,10 +77,10 @@ public class IPSRSRiwayatBarang extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());         
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -317,14 +317,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptRiwayatBarangIPSRS.jasper","report","::[ Riwayat Barang Non Medis dan Penunjang ( Lab & RO ) ]::",
                     "select ipsrs_riwayat_barang.kode_brng,ipsrsbarang.nama_brng,"+
@@ -348,10 +348,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "(ipsrs_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or ipsrsbarang.nama_brng like '%"+TCari.getText().trim()+"%' or ipsrs_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
                     "ipsrs_riwayat_barang.status like '%"+TCari.getText().trim()+"%') order by ipsrs_riwayat_barang.tanggal,ipsrs_riwayat_barang.jam ",param);
             }
-                
+
             this.setCursor(Cursor.getDefaultCursor());
         }
-        
+
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -383,7 +383,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         runBackground(() ->prosesCari());
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
@@ -419,12 +419,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdbar.requestFocus();
-                
+
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -435,14 +435,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    barang.dispose();                    
+                    barang.dispose();
                 }
             }
             @Override
@@ -460,7 +460,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         TCari.setText("");
         kdbar.setText("");
         nmbar.setText("");
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         runBackground(() ->prosesCari());
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -539,8 +539,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);      
-       try{   
+       Valid.tabelKosong(tabMode);
+       try{
             if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
                     "select ipsrs_riwayat_barang.kode_brng,ipsrsbarang.nama_brng,"+
@@ -565,7 +565,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "ipsrs_riwayat_barang.petugas like ? or ipsrs_riwayat_barang.status like ?)"+
                     "order by ipsrs_riwayat_barang.tanggal,ipsrs_riwayat_barang.jam ");
             }
-                
+
             try {
                 if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -579,7 +579,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("kode_brng")+" "+rs.getString("nama_brng"),
@@ -587,8 +587,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("keluar"),rs.getString("stok_akhir"),
                         rs.getString("posisi"),rs.getString("tanggal"),
                         rs.getString("jam"),rs.getString("petugas"),rs.getString("status")
-                    });                    
-                }    
+                    });
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi Data Barang : "+e);
             } finally{
@@ -598,17 +598,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
+
     public void isCek(){
          BtnPrint.setEnabled(akses.getipsrs_riwayat_barang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -634,7 +634,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

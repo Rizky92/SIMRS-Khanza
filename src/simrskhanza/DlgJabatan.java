@@ -54,7 +54,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode Jabatan","Nama Jabatan"};
         tabMode=new DefaultTableModel(null,row){
@@ -409,7 +409,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -436,7 +436,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -594,7 +594,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -607,11 +607,11 @@ public final class DlgJabatan extends javax.swing.JDialog {
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -632,7 +632,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
         TKd.requestFocus();
         Valid.autoNomer(" jabatan ","J",3,TKd);
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -640,7 +640,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -666,7 +666,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

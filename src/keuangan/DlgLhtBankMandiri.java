@@ -3,11 +3,11 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -115,7 +115,7 @@ public final class DlgLhtBankMandiri extends javax.swing.JDialog {
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -296,14 +296,14 @@ public final class DlgLhtBankMandiri extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptHtHBankMandiri.jasper","report","::[ Data Pembayaran Bank Mandiri ]::",
                "select * from tagihan_mandiri where tagihan_mandiri.tgl_closing between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:01' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59' "+
                (TCari.getText().equals("")?"":"and (tagihan_mandiri.no_rkm_medis like '%"+TCari.getText().trim()+"%' or tagihan_mandiri.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
@@ -391,7 +391,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -452,7 +452,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(11,"%"+TCari.getText().trim()+"%");
                     ps.setString(12,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 total=0;
                 while(rs.next()){
@@ -510,7 +510,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

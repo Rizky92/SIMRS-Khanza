@@ -13,10 +13,10 @@ package inventaris;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -123,12 +123,12 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }
         }
-        
+
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -147,7 +147,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"+
                 ".head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
         );
-        
+
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
@@ -407,7 +407,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 isPhoto();
                 panggilPhoto();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
@@ -429,7 +429,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -455,7 +455,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnRuang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuang1ActionPerformed
-        InventarisRuang ruang=new InventarisRuang(null,false); 
+        InventarisRuang ruang=new InventarisRuang(null,false);
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -463,10 +463,10 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){ 
+                if(ruang.getTable().getSelectedRow()!= -1){
                     NmRuangan.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                    TCari.requestFocus();                   
-                }                   
+                    TCari.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -478,7 +478,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         ruang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -486,7 +486,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ruang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -594,7 +594,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                         "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
                         "order by inventaris_barang.kode_barang,inventaris.no_inventaris");
              Valid.tabelKosong(tabMode);
-             try{            
+             try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -627,7 +627,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 fileWriter.write("{\"inventariskoleksi\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
             LCount.setText(tabMode.getRowCount()+"");
@@ -635,9 +635,9 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         } finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
-        }        
+        }
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/inventariskoleksi.iyem");
@@ -715,14 +715,14 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     public void isCek(){
         try {
             namaruang=koneksiDB.KAMARAKTIFRANAP();
         } catch (Exception ex) {
             namaruang="";
         }
-        
+
         if(!namaruang.equals("")){
             if(akses.getkode().equals("Admin Utama")){
                 NmRuangan.setText("");
@@ -732,7 +732,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 NmRuangan.setText(namaruang);
                 btnRuang1.setEnabled(false);
                 NmRuangan.setEditable(false);
-            }                
+            }
         }else{
             btnRuang1.setEnabled(true);
             NmRuangan.setEditable(true);
@@ -740,21 +740,21 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.getinventaris_inventaris());
         TCari.requestFocus();
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-300,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
-    
+
     private void panggilPhoto() {
         if(FormPhoto.isVisible()==true){
             try {
@@ -767,7 +767,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                             LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                         }else{
                             LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/inventaris/"+rs.getString("photo")+"' alt='photo' width='"+(internalFrame1.getWidth()-330)+"' height='"+(internalFrame1.getHeight()-260)+"'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                     }
@@ -783,10 +783,10 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
-            } 
+            }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -812,7 +812,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

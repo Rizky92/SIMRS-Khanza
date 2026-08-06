@@ -104,7 +104,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         BrivaNo.setDocument(new batasInput((byte)15).getKata(BrivaNo));
         UrlApi.setDocument(new batasInput((int)100).getKata(UrlApi));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -406,17 +406,17 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("BRIApiIntegrasi")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
-                                                                      
+
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -428,7 +428,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -442,7 +442,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -555,7 +555,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             ConsumerKey.requestFocus();
         }
-        
+
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
@@ -650,10 +650,10 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement(
                    "select set_akun_bankbri.kd_rek,rekening.nm_rek,aes_decrypt(consumer_key,'nur'),aes_decrypt(consumer_secret,'windi'),aes_decrypt(institution_code,'nur'),aes_decrypt(briva_no,'windi'),aes_decrypt(urlapi,'dewi') "+
-                   "from set_akun_bankbri inner join rekening on set_akun_bankbri.kd_rek=rekening.kd_rek"); 
+                   "from set_akun_bankbri inner join rekening on set_akun_bankbri.kd_rek=rekening.kd_rek");
             try{
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)
                     });
@@ -670,7 +670,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     public void emptTeks() {
@@ -696,7 +696,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             UrlApi.setText(tabMode.getValueAt(row,6).toString());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -722,7 +722,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

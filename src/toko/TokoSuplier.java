@@ -1,10 +1,10 @@
 package toko;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -71,15 +71,15 @@ public class TokoSuplier extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         Kd.setDocument(new batasInput((byte)5).getKata(Kd));
-        Nm.setDocument(new batasInput((byte)50).getKata(Nm));      
-        Alamat.setDocument(new batasInput((byte)50).getKata(Alamat));  
-        Kota.setDocument(new batasInput((byte)20).getKata(Kota));    
-        Telp.setDocument(new batasInput((byte)13).getOnlyAngka(Telp)); 
-        NoRek.setDocument(new batasInput((byte)20).getKata(NoRek));   
-        Bank.setDocument(new batasInput((byte)30).getKata(Bank));  
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
+        Nm.setDocument(new batasInput((byte)50).getKata(Nm));
+        Alamat.setDocument(new batasInput((byte)50).getKata(Alamat));
+        Kota.setDocument(new batasInput((byte)20).getKata(Kota));
+        Telp.setDocument(new batasInput((byte)13).getOnlyAngka(Telp));
+        NoRek.setDocument(new batasInput((byte)20).getKata(NoRek));
+        Bank.setDocument(new batasInput((byte)30).getKata(Bank));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
-        isForm();           
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -623,14 +623,14 @@ public class TokoSuplier extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptSuplier.jasper","report","::[ Data Suplier ]::","select tokosuplier.kode_suplier, tokosuplier.nama_suplier, "+
                     " tokosuplier.alamat,tokosuplier.kota, tokosuplier.no_telp,tokosuplier.nama_bank,tokosuplier.rekening from tokosuplier "+
                     " where tokosuplier.kode_suplier like '%"+TCari.getText().trim()+"%' or "+
@@ -638,7 +638,7 @@ public class TokoSuplier extends javax.swing.JDialog {
                     " tokosuplier.alamat like '%"+TCari.getText().trim()+"%' or "+
                     " tokosuplier.kota like '%"+TCari.getText().trim()+"%' or "+
                     " tokosuplier.nama_bank like '%"+TCari.getText().trim()+"%' or "+
-                    " tokosuplier.no_telp like '%"+TCari.getText().trim()+"%' order by tokosuplier.kode_suplier",param);            
+                    " tokosuplier.no_telp like '%"+TCari.getText().trim()+"%' order by tokosuplier.kode_suplier",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -665,12 +665,12 @@ public class TokoSuplier extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
+            dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -691,11 +691,11 @@ public class TokoSuplier extends javax.swing.JDialog {
             Valid.textKosong(NoRek,"Nomer Rekening");
         }else{
             if(Sequel.menyimpantf("tokosuplier","?,?,?,?,?,?,?","Kode Supplier",7,new String[]{
-                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText()        
+                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Bank.getText(),NoRek.getText()
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -709,7 +709,7 @@ public class TokoSuplier extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -725,7 +725,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -751,7 +751,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKeyPressed
@@ -865,7 +865,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -897,7 +897,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Telp.setText("0");
         Bank.setText("");
         NoRek.setText("");
-        
+
         Kd.requestFocus();
         Valid.autoNomer("tokosuplier","S",4,Kd);
     }
@@ -917,28 +917,28 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbDokter;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettoko_suplier());
         BtnHapus.setEnabled(akses.gettoko_suplier());
         BtnEdit.setEnabled(akses.gettoko_suplier());
         BtnPrint.setEnabled(akses.gettoko_suplier());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,128));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    }    
- 
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -964,7 +964,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

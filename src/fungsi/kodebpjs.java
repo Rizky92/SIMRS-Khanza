@@ -25,6 +25,6 @@ public class kodebpjs {
             System.out.println("Notif Kode BPJS : "+e);
         }
     }
-    
+
     public static String getKodeBPJS(){return kodebpjs.KodeBPJS;}
 }

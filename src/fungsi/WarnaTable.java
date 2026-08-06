@@ -22,7 +22,7 @@ public class WarnaTable extends DefaultTableCellRenderer {
             component.setBackground(new Color(255,244,244));
         }else{
             component.setBackground(new Color(255,255,255));
-        } 
+        }
         return component;
     }
 

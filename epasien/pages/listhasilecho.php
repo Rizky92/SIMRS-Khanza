@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat  = validTeks3($iyem["norawat"],20);
         $queryecho = bukaquery(
@@ -34,42 +34,42 @@
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Fungsi Diastolik LV</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["diastolic"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kontaktilitas RV</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["kontraktilitas"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Dimensi Ruang Jantung</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["dimensi_ruang"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Katup-Katup</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["katup"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Analisa Segmental</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["analisa_segmental"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>eRAP</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["erap"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Lain-lain</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["lain_lain"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kesimpulan</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryecho["kesimpulan"]."</td>
                                     </tr>";
             $querygambarecho= bukaquery(

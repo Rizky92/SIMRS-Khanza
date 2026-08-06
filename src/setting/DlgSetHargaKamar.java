@@ -59,13 +59,13 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"No.Bed/Kamar","Kode Bangsal","Nama Bangsal/Kamar","Kode Bayar","Cara Bayar","Tarif Kamar"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
              };
              @Override
@@ -630,11 +630,11 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){                   
+                if(kamar.getTable().getSelectedRow()!= -1){
                     kdkamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                     TKdBngsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),2).toString());
                     TBangsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),3).toString());
-                }  
+                }
                 kdkamar.requestFocus();
             }
             @Override
@@ -646,7 +646,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -658,7 +658,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         kamar.load();
         kamar.isCek();
         kamar.emptTeks();
@@ -720,7 +720,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -732,7 +732,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -740,7 +740,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -811,7 +811,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                    "inner join penjab on set_harga_kamar.kd_pj=penjab.kd_pj "+
                    (TCari.getText().trim().equals("")?"":"where set_harga_kamar.kd_kamar like ? "+
                    "or bangsal.nm_bangsal like ? or penjab.png_jawab like ? ")+"order by set_harga_kamar.kd_pj"
-            ); 
+            );
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -819,7 +819,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                 }
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),
                         rs.getString(4),rs.getString(5),rs.getDouble(6)
@@ -834,7 +834,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -861,8 +861,8 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Tarif.setText(tabMode.getValueAt(row,5).toString());
         }
     }
-    
-    
+
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -888,7 +888,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

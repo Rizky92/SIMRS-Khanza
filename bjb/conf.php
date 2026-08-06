@@ -16,10 +16,10 @@
         $konektor = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("" . json_encode($response, true) . "");
         return $konektor;
     }
-    
+
     function cleankar($dirty){
         $konektor=bukakoneksi();
-	$clean = mysqli_real_escape_string($konektor,$dirty);	
+	$clean = mysqli_real_escape_string($konektor,$dirty);
 	mysqli_close($konektor);
 	return preg_replace('/[^a-zA-Z0-9\s_,@. ]/', '',$clean);
     }
@@ -56,7 +56,7 @@
         mysqli_query($konektor,$sql);
         mysqli_close($konektor);
     }
-    
+
     function getOne2($sql) {
         $hasil = bukaquery2($sql);
         list($result) = mysqli_fetch_array($hasil);
@@ -76,18 +76,18 @@
         mysqli_close($konektor);
         return $result;
     }
-    
+
     function JumlahBaris($result) {
         return mysqli_num_rows($result);
     }
-    
+
     function bukainput($sql) {
         $konektor = bukakoneksi();
         $result = mysqli_query($konektor, $sql) or die("Gagal menjalankan query !");
         mysqli_close($konektor);
         return $result;
     }
-    
+
     function getOne($sql){
         $hasil = bukaquery($sql);
         list($result) = fetch_array($hasil);
@@ -147,7 +147,7 @@
         $options = ['cost' => $int];
         return password_hash($pass, PASSWORD_DEFAULT, $options);
     }
-    
+
     function query($sql) {
         global $connection;
         $query = mysqli_query($connection, $sql);
@@ -207,7 +207,7 @@
         $save=str_replace("value","",$save);
         return $save;
     }
-    
+
     function validTeks2($data){
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);
@@ -259,7 +259,7 @@
         $save=str_replace("value","",$save);
         return $save;
     }
-    
+
     function validTeks3($data,$panjang){
         $save="";
         if(strlen($data)>$panjang){
@@ -317,7 +317,7 @@
         }
         return $save;
     }
-    
+
     function validTeks4($data,$panjang){
         $save="";
         if(strlen($data)>$panjang){
@@ -374,7 +374,7 @@
         }
         return $save;
     }
-    
+
     date_default_timezone_set('Asia/Jakarta');
     $month      = date('Y-m');
     $date       = date('Y-m-d');

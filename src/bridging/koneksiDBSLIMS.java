@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class koneksiDBSLIMS {
     private static Connection connection=null;
-    private static final Properties prop = new Properties();  
+    private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource=new MysqlDataSource();
-    
-    public koneksiDBSLIMS(){} 
-    public static Connection condb(){ 
+
+    public koneksiDBSLIMS(){}
+    public static Connection condb(){
         if(connection == null){
             try{
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -33,13 +33,13 @@ public class koneksiDBSLIMS {
                 dataSource.setUseCompression(true);
                 dataSource.setUseLocalSessionState(true);
                 dataSource.setUseLocalTransactionState(true);
-                connection=dataSource.getConnection();       
+                connection=dataSource.getConnection();
                 System.out.println("  Koneksi Berhasil. Menyambungkan ke database bridging SLIMS...!!!");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Koneksi ke server bridging SLIMS terputus : "+e);
             }
         }
-        return connection;        
+        return connection;
     }
-    
+
 }

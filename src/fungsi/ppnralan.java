@@ -27,6 +27,6 @@ public class ppnralan {
             System.out.println("Notif Tampil PPN Ralan : "+e);
         }
     }
-    
+
     public static String getTampilPPNRalan(){return ppnralan.TampilPPNRalan;}
 }

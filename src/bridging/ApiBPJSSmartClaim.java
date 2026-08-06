@@ -64,7 +64,7 @@ public class ApiBPJSSmartClaim {
         }
         return generateHmacSHA256Signature;
     }
-    
+
     public String generateHmacSHA256Signature(String data, String key) throws GeneralSecurityException {
         hmacData = null;
         try {
@@ -102,7 +102,7 @@ public class ApiBPJSSmartClaim {
         try (GZIPOutputStream gzip = new GZIPOutputStream(out)) {
             gzip.write(str.getBytes(StandardCharsets.UTF_8));
         }
-        
+
         return Base64.getEncoder().encodeToString(out.toByteArray());
     }
 
@@ -113,16 +113,16 @@ public class ApiBPJSSmartClaim {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] keyHashHex = digest.digest(encryptKey.getBytes(StandardCharsets.UTF_8));
             String keyHashHexString = bytesToHex(keyHashHex);
-            
+
             byte[] keyHash = hexStringToByteArray(keyHashHexString);
             byte[] iv = new byte[16];
             System.arraycopy(keyHash, 0, iv, 0, 16);
-            
+
             Cipher cipher = Cipher.getInstance(encryptMethod);
             SecretKeySpec key = new SecretKeySpec(keyHash, "AES");
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
-            
+
             byte[] encryptedBytes = cipher.doFinal(compressedBase64Data.getBytes(StandardCharsets.UTF_8));
             String finalEncrypted = Base64.getEncoder().encodeToString(encryptedBytes);
 
@@ -184,7 +184,7 @@ public class ApiBPJSSmartClaim {
         sslFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         scheme = new Scheme("https", 443, sslFactory);
         factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setReadTimeout(60000); 
+        factory.setReadTimeout(60000);
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
@@ -201,7 +201,7 @@ public class ApiBPJSSmartClaim {
 
         return out.toByteArray();
     }
-    
+
     public String EncryptCompressedData(String kodefaskes, byte[] compressedBytes) {
         String encryptMethod = "AES/CBC/PKCS5Padding";
         String encryptKey = Consid + Key + kodefaskes;
@@ -225,7 +225,7 @@ public class ApiBPJSSmartClaim {
             return null;
         }
     }
-    
+
     public String encryptSmartClaimData(String jsonData, String kodefaskes) throws IOException {
         byte[] compressedBytes = compressSmartClaimRaw(jsonData);
         String encrypted = EncryptCompressedData(kodefaskes, compressedBytes);

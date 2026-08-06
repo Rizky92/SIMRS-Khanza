@@ -6,11 +6,11 @@
 package kepegawaian;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -28,9 +28,9 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -50,7 +50,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private volatile boolean ceksukses = false;    
+    private volatile boolean ceksukses = false;
     private double pemisahan_limbah_oleh_penghasil_limbah=0,limbah_infeksius_dimasukkan_kantong_kuning=0,limbah_noninfeksius_dimasukkan_kantong_hitam=0,
                 limbah_tigaperempat_diikat=0,limbah_segera_dibawa_kepembuangan_sementara=0,kotak_sampah_dalam_kondisi_bersih=0,
                 pembersihan_tempat_sampah_dengan_desinfekten=0,pembersihan_penampungan_sementara_dengan_desinfekten=0,napemisahan_limbah_oleh_penghasil_limbah=0,
@@ -58,7 +58,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
                 nakotak_sampah_dalam_kondisi_bersih=0,napembersihan_tempat_sampah_dengan_desinfekten=0,napembersihan_penampungan_sementara_dengan_desinfekten=0,ttllimbah_infeksius_dimasukkan_kantong_kuning=0,
                 ttllimbah_noninfeksius_dimasukkan_kantong_hitam=0,ttllimbah_tigaperempat_diikat=0,ttllimbah_segera_dibawa_kepembuangan_sementara=0,ttlpemisahan_limbah_oleh_penghasil_limbah=0,
                 ttlkotak_sampah_dalam_kondisi_bersih=0,ttlpembersihan_tempat_sampah_dengan_desinfekten=0,ttlpembersihan_penampungan_sementara_dengan_desinfekten=0,ttlpenilaian=0;
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -114,10 +114,10 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
 
         KdRuang.setDocument(new batasInput((byte)20).getKata(KdRuang));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         jam();
     }
 
@@ -706,7 +706,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
-            }  
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -720,7 +720,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -740,8 +740,8 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -755,7 +755,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(KdRuang.getText().trim().equals("")||NmRuang.getText().trim().equals("")){
             Valid.textKosong(btnPetugas,"Ruang/Unit");
-        }else{    
+        }else{
             Sequel.mengedit("audit_pembuangan_limbah","id_ruang=? and tanggal=?","tanggal=?,id_ruang=?,pemisahan_limbah_oleh_penghasil_limbah=?,limbah_infeksius_dimasukkan_kantong_kuning=?,limbah_noninfeksius_dimasukkan_kantong_hitam=?,"+
                 "limbah_tigaperempat_diikat=?,limbah_segera_dibawa_kepembuangan_sementara=?,kotak_sampah_dalam_kondisi_bersih=?,pembersihan_tempat_sampah_dengan_desinfekten=?,pembersihan_penampungan_sementara_dengan_desinfekten=?",12,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),PemisahanLimbahOlehPenghasilLimbah.getSelectedItem().toString(),
@@ -792,15 +792,15 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptAuditPembuanganLimbah.jasper","report","::[ Data Audit Pembuangan Limbah ]::",
                     "select audit_pembuangan_limbah.id_ruang,ruang_audit_kepatuhan.nama_ruang,audit_pembuangan_limbah.tanggal,audit_pembuangan_limbah.pemisahan_limbah_oleh_penghasil_limbah,"+
@@ -820,7 +820,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
                     "inner join ruang_audit_kepatuhan on audit_pembuangan_limbah.id_ruang=ruang_audit_kepatuhan.id_ruang where audit_pembuangan_limbah.tanggal between "+
                     "'"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
                     "and (audit_pembuangan_limbah.id_ruang like '%"+TCari.getText().trim()+"%' or ruang_audit_kepatuhan.nama_ruang like '%"+TCari.getText().trim()+"%') order by audit_pembuangan_limbah.tanggal",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -928,10 +928,10 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){                   
+                if(ruang.getTable().getSelectedRow()!= -1){
                     KdRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
                     NmRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdRuang.requestFocus();
             }
             @Override
@@ -1079,7 +1079,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1246,7 +1246,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
         }
         LCount.setText(""+i);
     }
-    
+
     public void emptTeks() {
         KdRuang.setText("");
         NmRuang.setText("");
@@ -1260,7 +1260,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
         PembersihanTempatSampahDenganDesinfekten.setSelectedIndex(0);
         PembersihanPenampunganSementaraDenganDesinfekten.setSelectedIndex(0);
         PemisahanLimbahOlehPenghasilLimbah.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1279,26 +1279,26 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,184));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getaudit_pembuangan_limbah());
         BtnHapus.setEnabled(akses.getaudit_pembuangan_limbah());
         BtnEdit.setEnabled(akses.getaudit_pembuangan_limbah());
-        BtnPrint.setEnabled(akses.getaudit_pembuangan_limbah());         
+        BtnPrint.setEnabled(akses.getaudit_pembuangan_limbah());
     }
 
     private void jam(){
@@ -1310,7 +1310,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1353,7 +1353,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1379,7 +1379,7 @@ public final class DlgAuditPembuanganLimbah extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

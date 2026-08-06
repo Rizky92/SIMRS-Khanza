@@ -38,7 +38,7 @@
             nojumpsThreshold: 1,
             onBeforeMask: function(value, opts) {
                 var processedValue = value.replace(/^0{1,2}/, "").replace(/[\s]/g, "");
-                return (processedValue.indexOf(opts.countrycode) > 1 || -1 === processedValue.indexOf(opts.countrycode)) && (processedValue = "+" + opts.countrycode + processedValue), 
+                return (processedValue.indexOf(opts.countrycode) > 1 || -1 === processedValue.indexOf(opts.countrycode)) && (processedValue = "+" + opts.countrycode + processedValue),
                 processedValue;
             }
         },

@@ -114,7 +114,7 @@
                                 <td width='30%'><div align='center'>Besar Jasa</div></td>
                                 <td width='60%'><div align='center'>Keterangan</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>
@@ -143,8 +143,8 @@
 
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah</div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah</div></td>
+                </tr>
              </table>");
         ?>
     </div>

@@ -12,10 +12,10 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -36,9 +36,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
-import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgCariCaraBayar;
 import simrskhanza.DlgCariPerusahaan;
+import simrskhanza.DlgCariPoli;
 
 /**
  *
@@ -104,9 +104,9 @@ public final class KeuanganKlaimRalan extends javax.swing.JDialog {
 
         ChkInput.setSelected(false);
         isForm();
-    }    
-    
-     
+    }
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -460,14 +460,14 @@ public final class KeuanganKlaimRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             try {
                 pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih format cetakan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","Model 2"},"Model 1");
                 switch (pilihan) {
@@ -513,9 +513,9 @@ public final class KeuanganKlaimRalan extends javax.swing.JDialog {
                             "group by reg_periksa.no_rawat order by reg_periksa.tgl_registrasi,rawat_jl_dr.tgl_perawatan,rawat_jl_dr.jam_rawat",param);
                         this.setCursor(Cursor.getDefaultCursor());
                         break;
-                }  
+                }
             } catch (Exception e) {
-            }       
+            }
         }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -543,7 +543,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             runBackground(() ->tampil());
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -582,7 +582,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             billing.isRawat();
             billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             billing.setLocationRelativeTo(internalFrame1);
-            billing.setVisible(true);         
+            billing.setVisible(true);
         }
     }//GEN-LAST:event_MnBillingActionPerformed
 
@@ -603,7 +603,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     BtnDokter.requestFocus();
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -613,8 +613,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -647,7 +647,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     KdCaraBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     NmCaraBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     BtnCaraBayar.requestFocus();
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -657,8 +657,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -690,7 +690,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(poli.getTable().getSelectedRow()!= -1){
                     KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 BtnCaraBayar.requestFocus();
             }
             @Override
@@ -702,7 +702,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -734,7 +734,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(perusahaan.getTable().getSelectedRow()!= -1){
                     KdPerusahaan.setText(perusahaan.getTable().getValueAt(perusahaan.getTable().getSelectedRow(),0).toString());
                     NmPerusahaan.setText(perusahaan.getTable().getValueAt(perusahaan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdPerusahaan.requestFocus();
             }
             @Override
@@ -746,7 +746,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         perusahaan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -754,7 +754,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     perusahaan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -820,9 +820,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Valid.tabelKosong(tabMode);
-        try{       
+        try{
             semua=NmCaraBayar.getText().trim().equals("")&&NmPoli.getText().trim().equals("")&&NmDokter.getText().trim().equals("")&&NmPerusahaan.getText().trim().equals("");
             ps= koneksi.prepareStatement(
                         "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.tgl_registrasi, "+
@@ -849,7 +849,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(4,"%"+KdPoli.getText()+NmPoli.getText()+"%");
                     ps.setString(5,"%"+KdDokter.getText()+NmDokter.getText()+"%");
                     ps.setString(6,"%"+KdPerusahaan.getText()+NmPerusahaan.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 totalpiutang=0;
                 i=1;
@@ -878,18 +878,18 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    
-    
+
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,95));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
@@ -919,7 +919,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

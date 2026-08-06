@@ -2,16 +2,16 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $tglperiksa = validTeks3($iyem["tglperiksa"],10);
         $jam        = validTeks4($iyem["jam"],10);
         $querytanggalperiksalab = bukaquery(
             "select periksa_lab.tgl_periksa,periksa_lab.jam from periksa_lab where periksa_lab.kategori='PA' and periksa_lab.no_rawat='".$norawat."' and periksa_lab.tgl_periksa='".$tglperiksa."' ".
-            "and periksa_lab.jam='".$jam."' group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa,periksa_lab.jam" 
+            "and periksa_lab.jam='".$jam."' group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa,periksa_lab.jam"
         );
         if(mysqli_num_rows($querytanggalperiksalab)!=0) {
             echo "<div class='row clearfix'>
@@ -45,14 +45,14 @@
                                     <td valign='top'>".$rsqueryperiksalab["nm_perawatan"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nm_dokter"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nama"]."</td>
-                                </tr>"; 
+                                </tr>";
                     }else{
                         echo"   <tr>
                                     <td valign='top' align='center'></td>
                                     <td valign='top'>".$rsqueryperiksalab["nm_perawatan"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nm_dokter"]."</td>
                                     <td valign='top'>".$rsqueryperiksalab["nama"]."</td>
-                                </tr>"; 
+                                </tr>";
                     }
 
                     $querydetailperiksalab = bukaquery(
@@ -86,7 +86,7 @@
                                   <tr>
                                     <td valign='top' align='center'></td>
                                     <td valign='top' colspan='3'>Kesan : ".$rsquerydetailperiksalab["kesan"]."</td>
-                                  </tr>"; 
+                                  </tr>";
                             $querygambarlabpa = bukaquery(
                                 "select detail_periksa_labpa_gambar.tgl_periksa,detail_periksa_labpa_gambar.jam,detail_periksa_labpa_gambar.photo from detail_periksa_labpa_gambar ".
                                 "where detail_periksa_labpa_gambar.no_rawat='".$norawat."' and detail_periksa_labpa_gambar.kd_jenis_prw='".$rsqueryperiksalab["kd_jenis_prw"]."' and ".

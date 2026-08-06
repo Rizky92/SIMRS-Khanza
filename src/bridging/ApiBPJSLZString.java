@@ -53,7 +53,7 @@ public class ApiBPJSLZString {
                     return getBaseValue(keyStrBase64, inputStr.charAt(index));
             }
         });
-    }	
+    }
 
     public static String compressToUTF16(String input) {
         if (input == null) return "";
@@ -331,7 +331,7 @@ public class ApiBPJSLZString {
     protected static class DecData {
         public char val;
         public int position;
-        public int index;		
+        public int index;
     }
 
     public static String f(int i) {
@@ -353,7 +353,7 @@ public class ApiBPJSLZString {
             }
         });
     }
-        
+
     private static String _decompress(int length, int resetValue, DecompressFunctionWrapper getNextValue) {
         List<String> dictionary = new ArrayList<String>();
         // TODO: is next an unused variable in original lz-string?

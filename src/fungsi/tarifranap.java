@@ -31,7 +31,7 @@ public class tarifranap {
             System.out.println("Notif Pengaturan Tarif Ranap : "+e);
         }
     }
-    
+
     public static String getRuangRanap(){return tarifranap.RuangRanap;}
     public static String getCaraBayarRanap(){return tarifranap.CaraBayarRanap;}
     public static String getKelasRanap(){return tarifranap.KelasRanap;}

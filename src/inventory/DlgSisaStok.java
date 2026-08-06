@@ -1,9 +1,9 @@
 package inventory;
+import fungsi.akses;
+import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.batasInput;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -37,20 +37,20 @@ public class DlgSisaStok extends javax.swing.JDialog {
     private String qrystok="",aktifkanbatch="no",hppfarmasi="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgSisaStok(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
         } catch (Exception e) {
             aktifkanbatch = "no";
         }
-        
+
         LoadHTML.setEditable(false);
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditorKit(kit);
@@ -63,9 +63,9 @@ public class DlgSisaStok extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             hppfarmasi=koneksiDB.HPPFARMASI();
         } catch (Exception e) {
@@ -510,7 +510,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if (golongan.getTable().getSelectedRow() != -1) {
                     nmgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 1).toString());
                 }
-                
+
                 TCari.requestFocus();
             }
 
@@ -560,7 +560,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -668,7 +668,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 (nmgolongan.getText().trim().equals("")?"":"and golongan_barang.nama=? ")+(TCari.getText().trim().equals("")?"":"and (databarang.kode_brng like ? or databarang.nama_brng like ?)")+
                 " order by databarang.kode_brng"
             );
-            
+
             filterBatch = null;
             kolomSubStok = null;
             kolomSelectStok = null;
@@ -753,11 +753,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         this.setCursor(Cursor.getDefaultCursor());
 
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getsisa_stok());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -783,7 +783,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

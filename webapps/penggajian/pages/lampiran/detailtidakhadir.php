@@ -178,8 +178,8 @@
             }
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, A : ".$ttla." , S : ".$ttls.", C : ".$ttlc.", I : ".$ttli."</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, A : ".$ttla." , S : ".$ttls.", C : ".$ttlc.", I : ".$ttli."</div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

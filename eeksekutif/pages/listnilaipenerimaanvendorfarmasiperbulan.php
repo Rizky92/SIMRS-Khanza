@@ -73,7 +73,7 @@
                             while($rsperbulan = mysqli_fetch_array($queryPerBulan)) {
                                 $rekapPerBulan[$rsperbulan["kode_suplier"]][$rsperbulan["bulantahun"]] = (float) $rsperbulan["total"];
                             }
-                            
+
                             while($rssuplier = mysqli_fetch_array($querySuplier)) {
                                 $nilaiBulan     = [];
                                 $tagihanSuplier = 0;

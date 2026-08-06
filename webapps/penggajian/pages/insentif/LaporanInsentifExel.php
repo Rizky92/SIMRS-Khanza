@@ -38,12 +38,12 @@
                                     <td width='34%'><div align='center'>Total Insentif</div></td>
                                 </tr>";
                                 while($baris = mysqli_fetch_array($hasil)) {
-                                    $total_insentif=$baris[2];				
+                                    $total_insentif=$baris[2];
                                     echo "<tr class='isi'>
-                                            <td>$no</td>  
+                                            <td>$no</td>
                                             <td>".formatDuit($baris[0])."</td>
                                             <td>$baris[1]%</td>
-                                            <td>".formatDuit($baris[2])."</td>                                
+                                            <td>".formatDuit($baris[2])."</td>
                                          </tr>";$no++;
                                 }
                         echo "</table>";
@@ -56,7 +56,7 @@
                                     <td width='34%'><div align='center'>Total Insentif</div></td>
                                 </tr>
                                </table>";
-                    } 
+                    }
 
                     echo "<br>&nbsp;Insentif :";
                     $keyword 	= validTeks(trim(isset($cari["keyword"]))?trim($cari["keyword"]):NULL);
@@ -73,25 +73,25 @@
                                     <td width='20%'><div align='center'>Kode Index</div></td>
                                     <td width='30%'><div align='center'>Porsi Insentif</div></td>
                                     <td width='38%'><div align='center'>Total Insentif</div></td>
-                                </tr>";                    
+                                </tr>";
                                 $insentifindex=0;
                                 while($baris = mysqli_fetch_array($hasil)) {
                                     $insentifindex=($baris[1]/100)*$total_insentif;
                                     $ttl=$ttl+$insentifindex;
                                     $prosen=$prosen+$baris[1];
                                     echo "<tr class='isi'>
-                                            <td>$no</td>  
+                                            <td>$no</td>
                                             <td>$baris[0]</td>
                                             <td>$baris[1]%</td>
-                                            <td>".formatDuit($insentifindex)."</td>                            
+                                            <td>".formatDuit($insentifindex)."</td>
                                          </tr>";
                                     $no++;
                                 }
                         echo "</table>
                              <table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                                 <tr class='head'>
-                                    <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Insentif : ".formatDuit($ttl)." </div></td>                        
-                                </tr>     
+                                    <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Insentif : ".formatDuit($ttl)." </div></td>
+                                </tr>
                              </table>";
                     }else{
                         echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
@@ -101,7 +101,7 @@
                                     <td width='30%'><div align='center'>Porsi Insentif</div></td>
                                     <td width='38%'><div align='center'>Total Insentif</div></td>
                                 </tr>
-                              </table>";  
+                              </table>";
                     }
                 }else{
                     exit(header("Location:../index.php"));

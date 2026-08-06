@@ -42,7 +42,7 @@ public class pengaturanbillingralan {
             System.out.println("Notif Pengaturan Billing Ralan : "+e);
         }
     }
-    
+
     public static String getCetakNotaSimpanRalan(){return pengaturanbillingralan.CetakNotaSimpanRalan;}
     public static String getCentangDokterRalan(){return pengaturanbillingralan.CentangDokterRalan;}
     public static String getRincianDokterRalan(){return pengaturanbillingralan.RincianDokterRalan;}

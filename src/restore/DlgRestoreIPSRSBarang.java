@@ -51,7 +51,7 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
     public DlgRestoreIPSRSBarang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row = {
             "P","Kode Barang","Nama Barang","Satuan","Jenis","Stok","Harga"
         };
@@ -99,7 +99,7 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -274,11 +274,11 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){ 
+        for(i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("ipsrsbarang","kode_brng='"+tbObat.getValueAt(i,1).toString()+"'","status='1'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -291,11 +291,11 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){ 
+        for(i=0;i<tbObat.getRowCount();i++){
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("ipsrsbarang","kode_brng",tbObat.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -440,7 +440,7 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -449,7 +449,7 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
             System.out.println("Notifikasi : " + e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -475,7 +475,7 @@ public final class DlgRestoreIPSRSBarang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

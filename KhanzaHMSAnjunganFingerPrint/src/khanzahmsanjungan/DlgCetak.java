@@ -46,7 +46,7 @@ public class DlgCetak extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
             rs=ps.executeQuery();
-            while(rs.next()){                
+            while(rs.next()){
                 nama_instansi=rs.getString("nama_instansi");
                 alamat_instansi=rs.getString("alamat_instansi");
                 kabupaten=rs.getString("kabupaten");
@@ -279,7 +279,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 if (win instanceof JDialog) {
                     win.dispose();
                 }
-            }           
+            }
         }
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
@@ -290,7 +290,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("poli",poli);
                 param.put("antrian",antrian);
                 param.put("nama",nama);
-                param.put("norm",norm);                
+                param.put("norm",norm);
                 param.put("dokter",dokter);
                 param.put("no_rawat",no_rawat);
                 param.put("bayar",bayar);
@@ -303,7 +303,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("emailrs",email);
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptLembarPeriksa.jasper","report","::[ Lembar Periksa ]::",
-                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
             }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAbout1ActionPerformed
@@ -314,17 +314,17 @@ public class DlgCetak extends javax.swing.JDialog {
                 Map<String, Object> param = new HashMap<>();
                 param.put("nama",nama);
                 param.put("alamat",Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?",norm));
-                param.put("norm",norm);   
+                param.put("norm",norm);
                 param.put("namars",nama_instansi);
                 param.put("alamatrs",alamat_instansi);
                 param.put("kotars",kabupaten);
                 param.put("propinsirs",propinsi);
                 param.put("kontakrs",kontak);
-                param.put("emailrs",email);   
+                param.put("emailrs",email);
                 Valid.MyReportqry("rptBarcodeRawat.jasper","report","::[ Barcode No.Rawat ]::",
-                        "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+LblNoRw.getText()+"'",param); 
+                        "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+LblNoRw.getText()+"'",param);
                 this.setCursor(Cursor.getDefaultCursor());
-            }  
+            }
     }//GEN-LAST:event_BtnAbout2ActionPerformed
 
     private void BtnAbout3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAbout3ActionPerformed
@@ -334,7 +334,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("poli",poli);
                 param.put("antrian",antrian);
                 param.put("nama",nama);
-                param.put("norm",norm);                
+                param.put("norm",norm);
                 param.put("dokter",dokter);
                 param.put("no_rawat",no_rawat);
                 param.put("bayar",bayar);
@@ -347,13 +347,13 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("emailrs",email);
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptLembarPeriksa2.jasper","report","::[ Lembar Periksa ]::",
-                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param);
             }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAbout3ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+
     }//GEN-LAST:event_formWindowClosing
 
     private void BtnAbout4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAbout4ActionPerformed
@@ -406,7 +406,7 @@ public class DlgCetak extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             DlgCetak dialog = new DlgCetak(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -428,8 +428,8 @@ public class DlgCetak extends javax.swing.JDialog {
     private component.Panel jPanel1;
     private component.Panel jPanel4;
     // End of variables declaration//GEN-END:variables
-    
-    
+
+
     public void setPasien(String norawat,String Poli,String Antrian,String Nama, String NoRM,
             String Dokter,String Bayar, String Penjab){
         LblNoRw.setText(norawat);

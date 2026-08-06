@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -50,7 +50,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -123,11 +123,11 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
         DJJ.setDocument(new batasInput((byte)5).getKata(DJJ));
         Keterangan.setDocument(new batasInput((byte)50).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -753,7 +753,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -792,7 +792,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -816,7 +816,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -832,7 +832,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             Valid.textKosong(TNoRw,"pasien");
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Petugas");
-        }else{ 
+        }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
@@ -880,15 +880,15 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptDataCatatanObservasiInduksiPersalinan.jasper","report","::[ Data Catatan Observasi Induksi Persalinan ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
@@ -910,7 +910,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
                     "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
                     "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or catatan_observasi_induksi_persalinan.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
                     "order by catatan_observasi_induksi_persalinan.tgl_perawatan,catatan_observasi_induksi_persalinan.jam_rawat ",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1025,8 +1025,8 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
                     if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KdPetugas.requestFocus(); 
+                    }
+                    KdPetugas.requestFocus();
                     petugas=null;
                 }
             });
@@ -1034,16 +1034,16 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_btnPetugasActionPerformed
 
@@ -1059,8 +1059,8 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptFormulirCatatanObservasiInduksiPersalinan.jasper","report","::[ Formulir Catatan Observasi Induksi Persalinan ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                     "pasien.jk,pasien.tgl_lahir,catatan_observasi_induksi_persalinan.tgl_perawatan,catatan_observasi_induksi_persalinan.jam_rawat,catatan_observasi_induksi_persalinan.obat,"+
@@ -1197,7 +1197,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1221,7 +1221,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
                     "catatan_observasi_induksi_persalinan.tgl_perawatan between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or catatan_observasi_induksi_persalinan.nip like ? or petugas.nama like ?) "+
                     "order by catatan_observasi_induksi_persalinan.tgl_perawatan,catatan_observasi_induksi_persalinan.jam_rawat ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1235,7 +1235,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1261,7 +1261,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Obat.setText("");
         Cairan.setText("");
@@ -1271,7 +1271,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
         Keterangan.setText("");
         Tanggal.setDate(new Date());
         Obat.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1290,10 +1290,10 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             HIS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             DJJ.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -1325,7 +1325,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1334,26 +1334,26 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,154));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getcatatan_observasi_induksi_persalinan());
         BtnHapus.setEnabled(akses.getcatatan_observasi_induksi_persalinan());
         BtnEdit.setEnabled(akses.getcatatan_observasi_induksi_persalinan());
-        BtnPrint.setEnabled(akses.getcatatan_observasi_induksi_persalinan()); 
+        BtnPrint.setEnabled(akses.getcatatan_observasi_induksi_persalinan());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1363,8 +1363,8 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        } 
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -1386,7 +1386,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1481,9 +1481,9 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1509,7 +1509,7 @@ public final class RMDataCatatanObservasiInduksiPersalinan extends javax.swing.J
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

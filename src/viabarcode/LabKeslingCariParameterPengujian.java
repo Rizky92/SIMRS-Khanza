@@ -14,10 +14,10 @@ package viabarcode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -54,7 +54,7 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -301,8 +301,8 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
         form.setLocationRelativeTo(internalFrame1);
         form.setAlwaysOnTop(false);
         form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -329,7 +329,7 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -393,7 +393,7 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement("select labkesling_parameter_pengujian.kode_parameter,labkesling_parameter_pengujian.nama_parameter,labkesling_parameter_pengujian.metode_pengujian,labkesling_parameter_pengujian.satuan,labkesling_parameter_pengujian.kategori from labkesling_parameter_pengujian");
-            try{           
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
@@ -405,7 +405,7 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -416,7 +416,7 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
                 fileWriter.write("{\"parameterpengujianlabkesling\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -427,18 +427,18 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getparameter_pengujian_lab_kesehatan_lingkungan());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/parameterpengujianlabkesling.iyem");
@@ -475,8 +475,8 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -502,7 +502,7 @@ public final class LabKeslingCariParameterPengujian extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -406,7 +406,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -433,7 +433,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -604,11 +604,11 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -629,7 +629,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
         KodeArea.requestFocus();
         Valid.autoNomer(" pcra_icra_lokasi_kelompok_risiko_area ","A",3,KodeArea);
     }
-    
+
     public JTextField getTextField(){
         return KodeArea;
     }
@@ -637,7 +637,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -663,7 +663,7 @@ public final class PCRAICRALokasiKelompokRisikoArea extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

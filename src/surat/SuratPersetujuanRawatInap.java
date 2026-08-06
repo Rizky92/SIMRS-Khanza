@@ -6,11 +6,11 @@
 package surat;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -43,7 +43,7 @@ import kepegawaian.DlgCariPetugas;
 
 
 /**
- * 
+ *
  * @author windiartohugroho
  */
 public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
@@ -59,15 +59,15 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private StringBuilder htmlContent;
     private String finger="",lokasifile="";
-    
+
     public SuratPersetujuanRawatInap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Persetujuan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","Nama Pembuat Persetujuan", 
+            "No.Persetujuan","No.Rawat","No.R.M.","Nama Pasien","Umur","J.K.","Tgl.Lahir","Tanggal","Nama Pembuat Persetujuan",
             "No.KTP P.P.","Pendidikan P.P.","Alamat Pembuat Persetujuan","No.Telp P.P.","Ruang Dipilih","Kelas Ruang",
             "Persetujuan Terhadap","Hak Kelas","Nama & Alamat Keluarga Terdekat","Pembayaran/Pembiayaan","NIP","Nama Petugas"
         }){
@@ -126,25 +126,25 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));    
-        KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));  
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         NoSurat.setDocument(new batasInput((byte)20).getKata(NoSurat));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         NamaPJ.setDocument(new batasInput((byte)50).getKata(NamaPJ));
         NoKTP.setDocument(new batasInput((byte)20).getKata(NoKTP));
         RuangDipilih.setDocument(new batasInput((byte)40).getKata(RuangDipilih));
         NamaKeluarga.setDocument(new batasInput((int)130).getKata(NamaKeluarga));
-        AlamatPj.setDocument(new batasInput((int)100).getKata(AlamatPj));  
-        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));     
-        Pembiayaan.setDocument(new batasInput((byte)30).getKata(Pembiayaan));    
-        
+        AlamatPj.setDocument(new batasInput((int)100).getKata(AlamatPj));
+        NoTelp.setDocument(new batasInput((byte)30).getKata(NoTelp));
+        Pembiayaan.setDocument(new batasInput((byte)30).getKata(Pembiayaan));
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
@@ -165,13 +165,13 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML2.setDocument(doc);
         LoadHTML.setDocument(doc);
-        
+
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -937,7 +937,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
@@ -983,7 +983,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm();  
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1005,7 +1005,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1075,7 +1075,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Persetujuan</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
@@ -1124,7 +1124,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                            "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                            "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                            "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                           "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                           "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                         "</tr>");
                 }
                 LoadHTML.setText(
@@ -1135,7 +1135,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1150,8 +1150,8 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataPersetujuanRawatInap.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataPersetujuanRawatInap.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2200px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1160,12 +1160,12 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PERSETUJUAN RAWAT INAP<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PERSETUJUAN RAWAT INAP<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1218,8 +1218,8 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             Valid.pindah(evt, BtnCari, TPasien);
         }
 }//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -1260,10 +1260,10 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1274,10 +1274,10 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1563,7 +1563,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                     "surat_persetujuan_rawat_inap.nip like ? or petugas.nama like ?) "+
                     "order by surat_persetujuan_rawat_inap.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -1579,7 +1579,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                     ps.setString(8,"%"+TCari.getText()+"%");
                     ps.setString(9,"%"+TCari.getText()+"%");
                 }
-                  
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1588,7 +1588,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                         rs.getString("tanggal"),rs.getString("nama_pj"),rs.getString("no_ktppj"),rs.getString("pendidikan_pj"),
                         rs.getString("alamatpj"),rs.getString("no_telppj"),rs.getString("ruang"),rs.getString("kelas"),
                         rs.getString("hubungan"),rs.getString("hak_kelas"),rs.getString("nama_alamat_keluarga_terdekat"),
-                        rs.getString("bayar_secara"),rs.getString("nip"),rs.getString("nama") 
+                        rs.getString("bayar_secara"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1624,7 +1624,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         NamaPJ.requestFocus();
     }
 
- 
+
     private void getData() {
          if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1680,7 +1680,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1690,27 +1690,27 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,265));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-       
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_persetujuan_rawat_inap());
         BtnHapus.setEnabled(akses.getsurat_persetujuan_rawat_inap());
         BtnEdit.setEnabled(akses.getsurat_persetujuan_rawat_inap());
-        BtnPrint.setEnabled(akses.getsurat_persetujuan_rawat_inap()); 
+        BtnPrint.setEnabled(akses.getsurat_persetujuan_rawat_inap());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -1720,9 +1720,9 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
+        }
     }
-  
+
     private void ganti() {
         if(Sequel.mengedittf("surat_persetujuan_rawat_inap","no_surat=?","no_surat=?,no_rawat=?,tanggal=?,nama_pj=?,no_ktppj=?,pendidikan_pj=?,alamatpj=?,"+
             "no_telppj=?,ruang=?,kelas=?,hubungan=?,hak_kelas=?,nama_alamat_keluarga_terdekat=?,bayar_secara=?,nip=?",16,new String[]{
@@ -1767,17 +1767,17 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(480,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -1797,7 +1797,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
                         }else{
                             lokasifile=rs.getString("photo");
                             LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/persetujuanrawatinap/"+rs.getString("photo")+"' alt='photo' width='500' height='500'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         lokasifile="";
                         LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
@@ -1818,7 +1818,7 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1844,13 +1844,10 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
 }
-
-
-

@@ -80,9 +80,9 @@ public final class InformasiStokDarah extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -317,7 +317,7 @@ public final class InformasiStokDarah extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select utd_komponen_darah.nama,utd_stok_darah.golongan_darah,utd_stok_darah.resus,count(utd_stok_darah.kode_komponen) as jumlah from utd_komponen_darah inner join utd_stok_darah on utd_stok_darah.kode_komponen=utd_komponen_darah.kode where utd_stok_darah.status='Ada' and utd_komponen_darah.nama like ? group by utd_stok_darah.kode_komponen,utd_stok_darah.golongan_darah,utd_stok_darah.resus order by utd_stok_darah.golongan_darah");
             try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -336,13 +336,13 @@ public final class InformasiStokDarah extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
- 
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -368,7 +368,7 @@ public final class InformasiStokDarah extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

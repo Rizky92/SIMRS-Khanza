@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -12,15 +12,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.concurrent.RejectedExecutionException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -28,11 +33,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import javax.swing.SwingUtilities;
 
 public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog {
     private final DefaultTableModel tabModeVerifikasi,tabModeDetailVerifikasi,tabModeRekapVerifikasi;
@@ -95,7 +95,7 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
             }
         }
         tbVerifikasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailVerifikasi=new DefaultTableModel(null,new Object[]{
                 "Kode","Nama Parameter","Satuan","Hasil Pemeriksaan","Keterangan","Nilai Normal","Metode Pengujian","Kategori","No.Penugasan","NIP Analis","Nama Analis","NIP PJ","Nama PJ Pengujian",
                 "Jasa Sarana","Paket BHP","Jasa PJ Lab","Jasa PJ Pengujian","Jasa Verifikator","Jasa Petugas","KSO","Jasa Menejemen","Total"
@@ -139,7 +139,7 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
             }
         }
         tbDetailVerifikasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRekapVerifikasi=new DefaultTableModel(null,new Object[]{
                 "Tgl.Verifikasi","No.Verifikasi","NIP PJ","Nama PJ Verifikasi","No.Permintaan","No.Pelanggan","Nama Pelanggan","Kode Sampel","Nama Sampel","Status Validasi","Catatan","Mulai Pengujian",
                 "Selesai Pengujian","Kode","Nama Parameter","Satuan","Hasil Pemeriksaan","Keterangan","Nilai Normal","Metode Pengujian","Kategori","No.Penugasan","NIP Analis","Nama Analis","NIP PJ","Nama PJ Pengujian"
@@ -208,14 +208,14 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
             }
         }
         tbRekapVerifikasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoPermintaan.setDocument(new batasInput((byte)20).getKata(NoPermintaan));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkAccor.setSelected(false);
         PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-        scrollPaneDetail.setVisible(false); 
-        
+        scrollPaneDetail.setVisible(false);
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -731,12 +731,12 @@ public class LabKeslingCariVerifikasiPengujianSampel extends javax.swing.JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,KodePelanggan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -754,10 +754,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KodePetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPetugas.requestFocus();
             }
             @Override
@@ -768,7 +768,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -792,7 +792,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(pelanggan.getTable().getSelectedRow()!= -1){
                     KodePelanggan.setText(pelanggan.getTable().getValueAt(pelanggan.getTable().getSelectedRow(),0).toString());
                     NamaPelanggan.setText(pelanggan.getTable().getValueAt(pelanggan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPelanggan.requestFocus();
             }
             @Override
@@ -804,7 +804,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pelanggan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -812,7 +812,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pelanggan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -884,7 +884,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }else if(tabModeVerifikasi.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -899,7 +899,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -947,8 +947,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataVerifikasiPengujianSampel.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataVerifikasiPengujianSampel.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -957,12 +957,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -1007,8 +1007,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataVerifikasiPengujianSampel.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataVerifikasiPengujianSampel.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1017,29 +1017,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"Tgl.Verifikasi\";\"No.Verifikasi\";\"NIP PJ\";\"Nama PJ Verifikasi\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Validasi\";\"Catatan\";\"Mulai Pengujian\";\"Selesai Pengujian\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModeVerifikasi.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbVerifikasi.getValueAt(i,0).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,1).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,2).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,3).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,4).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,5).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,6).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,7).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,8).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,9).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,10).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,11).toString()).append("\";\"").append(tbVerifikasi.getValueAt(i,12).toString()).append("\"\n");
                                 }
-                                f = new File("DataVerifikasiPengujianSampel.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataVerifikasiPengujianSampel.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -1052,7 +1052,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }else if(tabModeRekapVerifikasi.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1067,7 +1067,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -1141,8 +1141,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapVerifikasiPengujianSampel.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapVerifikasiPengujianSampel.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1151,12 +1151,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -1227,8 +1227,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapVerifikasiPengujianSampel.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapVerifikasiPengujianSampel.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1237,29 +1237,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP VERIFIKASI PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"Tgl.Verifikasi\";\"No.Verifikasi\";\"NIP PJ\";\"Nama PJ Verifikasi\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Validasi\";\"Catatan\";\"Mulai Pengujian\";\"Selesai Pengujian\";\"Kode\";\"Nama Parameter\";\"Satuan\";\"Hasil Pemeriksaan\";\"Keterangan\";\"Nilai Normal\";\"Metode Pengujian\";\"Kategori\";\"No.Penugasan\";\"NIP Analis\";\"Nama Analis\";\"NIP PJ Pengujian\";\"Nama PJ Pengujian\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModeRekapVerifikasi.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapVerifikasi.getValueAt(i,0).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,1).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,2).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,3).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,4).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,5).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,6).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,7).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,8).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,9).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,10).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,11).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,12).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,13).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,14).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,15).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,16).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,17).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,18).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,19).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,20).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,21).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,22).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,23).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,24).toString()).append("\";\"").append(tbRekapVerifikasi.getValueAt(i,25).toString()).append("\"\n");
                                 }
-                                f = new File("DataRekapVerifikasiPengujianSampel.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapVerifikasiPengujianSampel.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -1288,7 +1288,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(sampel.getTable().getSelectedRow()!= -1){
                     KodeSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),0).toString());
                     NamaSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnSampel.requestFocus();
             }
             @Override
@@ -1300,7 +1300,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         sampel.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1308,7 +1308,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     sampel.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -1325,7 +1325,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 JOptionPane.showMessageDialog(null,"Silahkan tampilkan data detail verifikasi terlebih dahulu...!!!");
             }else{
                 if(tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),9).toString().equals("Belum Divalidasi")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         file=new File("./cache/validasipengujiansampellabkesling.iyem");
                         file.createNewFile();
@@ -1398,7 +1398,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(ChkAccor.isSelected()==true){
                 ChkAccor.setVisible(false);
                 PanelAccor.setPreferredSize(new Dimension(670,HEIGHT));
-                scrollPaneDetail.setVisible(true);  
+                scrollPaneDetail.setVisible(true);
                 ChkAccor.setVisible(true);
                 Valid.tabelKosong(tabModeDetailVerifikasi);
                 try {
@@ -1424,7 +1424,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 rs.getString("jasa_sarana"),rs.getString("paket_bhp"),rs.getString("jasa_pj_lab"),rs.getString("jasa_pj_pengujian"),rs.getString("jasa_verifikator"),rs.getString("jasa_petugas"),
                                 rs.getString("kso"),rs.getString("jasa_menejemen"),rs.getString("total")
                             });
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println(e);
                     } finally{
@@ -1438,10 +1438,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
                 }
-            }else if(ChkAccor.isSelected()==false){    
+            }else if(ChkAccor.isSelected()==false){
                 ChkAccor.setVisible(false);
                 PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-                scrollPaneDetail.setVisible(false);  
+                scrollPaneDetail.setVisible(false);
                 ChkAccor.setVisible(true);
             }
         }else{
@@ -1462,10 +1462,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(tbDetailVerifikasi.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Sequel.queryu("delete from temporary");
-                    for(i=0;i<tbDetailVerifikasi.getRowCount();i++){ 
+                    for(i=0;i<tbDetailVerifikasi.getRowCount();i++){
                         Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
                             "0",tbDetailVerifikasi.getValueAt(i,0).toString(),tbDetailVerifikasi.getValueAt(i,1).toString(),tbDetailVerifikasi.getValueAt(i,2).toString(),tbDetailVerifikasi.getValueAt(i,6).toString(),tbDetailVerifikasi.getValueAt(i,3).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
-                        });               
+                        });
                     }
 
                     Map<String, Object> param = new HashMap<>();
@@ -1483,11 +1483,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),2).toString());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),3).toString()+"\nID "+(finger.equals("")?tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),2).toString():finger)+"\n"+Valid.SetTgl5(tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),0).toString())); 
-                    Valid.MyReport("rptVerifikasiPengujianSampelLaboratKesling.jasper","report","::[ Laporan Hasil Uji Sementara ]::",param);      
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),3).toString()+"\nID "+(finger.equals("")?tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),2).toString():finger)+"\n"+Valid.SetTgl5(tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),0).toString()));
+                    Valid.MyReport("rptVerifikasiPengujianSampelLaboratKesling.jasper","report","::[ Laporan Hasil Uji Sementara ]::",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
                     JOptionPane.showMessageDialog(null,"Silahkan tampilkan data detail verifikasi terlebih dahulu...!!!");
@@ -1506,8 +1506,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),9).toString().equals("Belum Divalidasi")){
                     if(Sequel.queryutf("delete from labkesling_verifikasi_pengujian_sampel where no_verifikasi='"+tbVerifikasi.getValueAt(tbVerifikasi.getSelectedRow(),1).toString()+"'")==true){
                         for(i=0;i<tbDetailVerifikasi.getRowCount();i++){
-                            Sequel.queryu("update labkesling_hasil_pengujian_sampel set status='Belum Diverifikasi' where no_penugasan='"+tbDetailVerifikasi.getValueAt(i,8).toString()+"' and kode_parameter='"+tbDetailVerifikasi.getValueAt(i,0).toString()+"'");               
-                        } 
+                            Sequel.queryu("update labkesling_hasil_pengujian_sampel set status='Belum Diverifikasi' where no_penugasan='"+tbDetailVerifikasi.getValueAt(i,8).toString()+"' and kode_parameter='"+tbDetailVerifikasi.getValueAt(i,0).toString()+"'");
+                        }
                         tabModeVerifikasi.removeRow(tbVerifikasi.getSelectedRow());
                         Valid.tabelKosong(tabModeDetailVerifikasi);
                         LTotal.setText(tbVerifikasi.getRowCount()+"");
@@ -1615,7 +1615,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabModeVerifikasi);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                         "select labkesling_verifikasi_pengujian_sampel.tanggal,labkesling_verifikasi_pengujian_sampel.no_verifikasi,labkesling_verifikasi_pengujian_sampel.nip_pj,petugas.nama,"+
                         "labkesling_verifikasi_pengujian_sampel.no_permintaan,labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_permintaan_pengujian_sampel.kode_sampel,"+
@@ -1633,7 +1633,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         (TCari.getText().trim().equals("")?"":" and (labkesling_verifikasi_pengujian_sampel.no_verifikasi like ? or labkesling_verifikasi_pengujian_sampel.catatan like ? or "+
                         "labkesling_verifikasi_pengujian_sampel.mulai_pengujian like ?) ")+
                         "order by labkesling_verifikasi_pengujian_sampel.tanggal,labkesling_verifikasi_pengujian_sampel.no_verifikasi,labkesling_verifikasi_pengujian_sampel.no_permintaan");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -1642,14 +1642,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(4,"%"+TCari.getText()+"%");
                     ps.setString(5,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeVerifikasi.addRow(new Object[]{
                         rs.getString("tanggal"),rs.getString("no_verifikasi"),rs.getString("nip_pj"),rs.getString("nama"),rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),rs.getString("catatan"),rs.getString("mulai_pengujian"),rs.getString("selesai_pengujian")
-                    }); 
-                }        
+                    });
+                }
                 LTotal.setText(tabModeVerifikasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
@@ -1660,15 +1660,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabModeRekapVerifikasi);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                 "select labkesling_verifikasi_pengujian_sampel.tanggal,labkesling_verifikasi_pengujian_sampel.no_verifikasi,labkesling_verifikasi_pengujian_sampel.nip_pj,petugas.nama,"+
                 "labkesling_verifikasi_pengujian_sampel.no_permintaan,labkesling_permintaan_pengujian_sampel.kode_pelanggan,labkesling_pelanggan.nama_pelanggan,labkesling_permintaan_pengujian_sampel.kode_sampel,"+
@@ -1697,7 +1697,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 "labkesling_detail_verifikasi_pengujian_sampel.no_penugasan like ? or labkesling_penugasan_pengujian_sampel.nip_pelaksana like ? or analis.nama like ?) ")+
                 "order by labkesling_verifikasi_pengujian_sampel.tanggal,labkesling_verifikasi_pengujian_sampel.no_verifikasi,labkesling_verifikasi_pengujian_sampel.no_permintaan"
             );
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -1713,7 +1713,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(11,"%"+TCari.getText()+"%");
                     ps.setString(12,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeRekapVerifikasi.addRow(new Object[]{
@@ -1721,8 +1721,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),rs.getString("catatan"),rs.getString("mulai_pengujian"),rs.getString("selesai_pengujian"),rs.getString("kode_parameter"),
                         rs.getString("nama_parameter"),rs.getString("satuan"),rs.getString("hasil_pengujian"),rs.getString("keterangan"),rs.getString("nilai_normal"),rs.getString("metode_pengujian"),rs.getString("kategori"),
                         rs.getString("no_penugasan"),rs.getString("nip_pelaksana"),rs.getString("analis"),rs.getString("nippengujian"),rs.getString("pjpengujian")
-                    }); 
-                }        
+                    });
+                }
                 LTotal.setText(tabModeRekapVerifikasi.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
@@ -1733,12 +1733,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         BtnPrint.setEnabled(akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan());
@@ -1746,7 +1746,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         ppSuratVerifikasi.setEnabled(akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan());
         ppHapusVerifikasiPengujian.setEnabled(akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1772,7 +1772,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

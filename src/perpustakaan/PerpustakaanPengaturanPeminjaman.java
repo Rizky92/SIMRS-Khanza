@@ -480,7 +480,7 @@ private void MakBukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_M
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{ 
+        try{
             ps=koneksi.prepareStatement("select * from perpustakaan_set_peminjaman ");
             try {
                 rs=ps.executeQuery();
@@ -519,7 +519,7 @@ private void MakBukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_M
         Denda.setText("0");
         MakBuku.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -545,7 +545,7 @@ private void MakBukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_M
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -51,7 +51,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
     private String hadir="0",siang="0",malam="0",tepatwaktu="0",toleransi="0",
             terlambat1="0",terlambat2="0",terlambat3="0",pagi="0",keterlambatan="0",durasi="0";
     private int liburhariraya=0,liburakhad=0,jumlahhari=0,wajibmasuk=0;
-    
+
     /** Creates new form DlgBangsal
      * @param parent
      * @param modal */
@@ -104,7 +104,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-         
+
         loadTahun();
         Valid.loadCombo(Departemen,"nama","departemen");
         Departemen.addItem("Semua");
@@ -114,9 +114,9 @@ public final class DlgKehadiran extends javax.swing.JDialog {
         StatusKerja.setSelectedItem("Semua");
     }
 
-    
-    
-    
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -383,7 +383,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int r=0;r<tbBangsal.getRowCount();r++){  
+            for(int r=0;r<tbBangsal.getRowCount();r++){
                     Sequel.menyimpan("temporary","'"+r+"','"+
                                     tbBangsal.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
                                     tbBangsal.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
@@ -401,16 +401,16 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                                     tbBangsal.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
                                     tbBangsal.getValueAt(r,14).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("tahun","BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("tahun","BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptHadir.jasper","report","::[ Rekap Kehadiran Pegawai ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -446,7 +446,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -495,7 +495,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                    "select pegawai.nik,pegawai.nama,departemen.nama,pegawai.id,pegawai.wajibmasuk from pegawai inner join departemen on pegawai.departemen=departemen.dep_id "+
                    "inner join stts_kerja on stts_kerja.stts=pegawai.stts_kerja where pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and stts_kerja.ktg like ? "+
-                   (TCari.getText().trim().equals("")?"":" and (pegawai.nik like ? or pegawai.nama like ?) ")+"order by pegawai.nik ");    
+                   (TCari.getText().trim().equals("")?"":" and (pegawai.nik like ? or pegawai.nama like ?) ")+"order by pegawai.nik ");
             try {
                 ps.setString(1,"%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%");
                 ps.setString(2,"%"+StatusKerja.getSelectedItem().toString().replaceAll("Semua","")+"%");
@@ -507,9 +507,9 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                 liburhariraya=Sequel.cariInteger("select count(set_hari_libur.tanggal) from set_hari_libur where left(set_hari_libur.tanggal,7)=?",ThnCari.getSelectedItem().toString()+"-"+BlnCari.getSelectedItem().toString());
                 liburakhad=Valid.hariAkhad(Integer.parseInt(BlnCari.getSelectedItem().toString()),Integer.parseInt(ThnCari.getSelectedItem().toString()));
                 jumlahhari=Valid.jumlahHari(Integer.parseInt(BlnCari.getSelectedItem().toString()),Integer.parseInt(ThnCari.getSelectedItem().toString()));
-                
+
                 while(rs.next()){
-                    hadir="0";pagi="0";siang="0";malam="0";tepatwaktu="0";toleransi="0";terlambat1="0";terlambat2="0";keterlambatan="0";durasi="0"; 
+                    hadir="0";pagi="0";siang="0";malam="0";tepatwaktu="0";toleransi="0";terlambat1="0";terlambat2="0";keterlambatan="0";durasi="0";
                     wajibmasuk=0;
                     if(rs.getString("wajibmasuk").equals("-1")){
                         wajibmasuk=0;
@@ -544,7 +544,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         rs2.last();
                         if(rs2.getRow()>0){
                             hadir=rs2.getString(1);
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif 2 : "+e);
                     } finally{
@@ -555,7 +555,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                                       
+
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.shift like '%Siang%' "+
                         "and rekap_presensi.jam_datang like ?");
@@ -588,7 +588,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         rs2.last();
                         if(rs2.getRow()>0){
                             pagi=rs2.getString(1);
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif 2 : "+e);
                     } finally{
@@ -598,7 +598,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }    
+                    }
 
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.shift like '%Malam%' "+
@@ -610,7 +610,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         rs2.last();
                         if(rs2.getRow()>0){
                             malam=rs2.getString(1);
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif 2 : "+e);
                     } finally{
@@ -621,14 +621,14 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                                       
+
 
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.status like '%Tepat Waktu%' "+
                         "and rekap_presensi.jam_datang like ?");
                     try {
                         ps2.setString(1,rs.getString(4));
-                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");                
+                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");
                         rs2=ps2.executeQuery();
                         rs2.last();
                         if(rs2.getRow()>0){
@@ -644,14 +644,14 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                        
+
 
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.status like '%Terlambat Toleransi%' "+
                         "and rekap_presensi.jam_datang like ?");
                     try {
                         ps2.setString(1,rs.getString(4));
-                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");                
+                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");
                         rs2=ps2.executeQuery();
                         rs2.last();
                         if(rs2.getRow()>0){
@@ -667,13 +667,13 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                        
+
                     ps2=koneksi.prepareStatement(
                         "select count(rekap_presensi.id) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.status like '%Terlambat I%' "+
                         "and rekap_presensi.jam_datang like ?");
                     try {
                         ps2.setString(1,rs.getString(4));
-                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");                
+                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");
                         rs2=ps2.executeQuery();
                         rs2.last();
                         if(rs2.getRow()>0){
@@ -695,7 +695,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         "and rekap_presensi.jam_datang like ?");
                     try {
                         ps2.setString(1,rs.getString(4));
-                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");                
+                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");
                         rs2=ps2.executeQuery();
                         rs2.last();
                         if(rs2.getRow()>0){
@@ -710,19 +710,19 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }   
-                    
+                    }
+
                     ps2=koneksi.prepareStatement(
                         "select concat(round((sum(TIME_TO_SEC(rekap_presensi.keterlambatan))-mod(sum(TIME_TO_SEC(rekap_presensi.keterlambatan)),3600))/3600),':',round((mod(sum(TIME_TO_SEC(rekap_presensi.keterlambatan)),3600)-mod(mod(sum(TIME_TO_SEC(rekap_presensi.keterlambatan)),3600),60))/60),':',round(mod(mod(sum(TIME_TO_SEC(rekap_presensi.keterlambatan)),3600),60))) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.jam_datang like ?");
                     try {
                         ps2.setString(1,rs.getString(4));
-                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");                
+                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");
                         rs2=ps2.executeQuery();
                         rs2.last();
                         if(rs2.getRow()>0){
                             keterlambatan=rs2.getString(1);
                         }
-                        
+
                         if(keterlambatan==null){
                             keterlambatan="00:00:00";
                         }
@@ -741,13 +741,13 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                         "select concat(round((sum(TIME_TO_SEC(rekap_presensi.durasi))-mod(sum(TIME_TO_SEC(rekap_presensi.durasi)),3600))/3600),':',round((mod(sum(TIME_TO_SEC(rekap_presensi.durasi)),3600)-mod(mod(sum(TIME_TO_SEC(rekap_presensi.durasi)),3600),60))/60),':',round(mod(mod(sum(TIME_TO_SEC(rekap_presensi.durasi)),3600),60))) from rekap_presensi where rekap_presensi.id=? and rekap_presensi.jam_datang like ?");
                     try {
                         ps2.setString(1,rs.getString(4));
-                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");                
+                        ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"%");
                         rs2=ps2.executeQuery();
                         rs2.last();
                         if(rs2.getRow()>0){
                             durasi=rs2.getString(1);
                         }
-                        
+
                         if(durasi==null){
                             durasi="00:00:00";
                         }
@@ -761,7 +761,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     terlambat3=Valid.SetAngka2(Double.parseDouble(terlambat1)-Double.parseDouble(terlambat2));
 
                     tabMode.addRow(new Object[]{
@@ -783,7 +783,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private  void loadTahun(){
         Valid.LoadTahun(ThnCari);
     }
@@ -813,7 +813,7 @@ public final class DlgKehadiran extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

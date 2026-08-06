@@ -43,7 +43,7 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
 
         Valid.loadCombo(kdsat1,"kode_sat","kodesatuan");
         Valid.loadCombo(kdsat2,"kode_sat","kodesatuan");
-        
+
     }
 
 
@@ -260,13 +260,13 @@ private void kdsat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                             form.setVisible(true);
                             this.setCursor(Cursor.getDefaultCursor());
                             dispose();
-                        }                            
-                    }                    
+                        }
+                    }
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
             }
-        }        
+        }
     }
 
 

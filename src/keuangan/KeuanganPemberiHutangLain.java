@@ -12,11 +12,11 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -53,7 +53,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -89,16 +89,16 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         KdPemberi.setDocument(new batasInput((byte)5).getKata(KdPemberi));
         NmPemberi.setDocument(new batasInput((byte)50).getKata(NmPemberi));
         AlamatPemberiHutang.setDocument(new batasInput((int)150).getKata(AlamatPemberiHutang));
         NoTelp.setDocument(new batasInput((byte)13).getKata(NoTelp));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
-        isForm();  
-        
+        isForm();
+
     }
 
 
@@ -591,7 +591,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
             tbKamar.requestFocus();
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -629,7 +629,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
                 tbKamar.requestFocus();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -656,14 +656,14 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){       
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());       
+            param.put("emailrs",akses.getemailrs());
             Valid.MyReportqry("rptPemberiHutangLain.jasper","report","::[ Data Pemberi Hutang Lain ]::",
                     "select pemberi_hutang_lain.kode_pemberi_hutang,pemberi_hutang_lain.nama_pemberi_hutang,pemberi_hutang_lain.alamat,pemberi_hutang_lain.no_telp, "+
                     "pemberi_hutang_lain.kd_rek,rekening.nm_rek from pemberi_hutang_lain inner join rekening on pemberi_hutang_lain.kd_rek=rekening.kd_rek "+
@@ -767,7 +767,7 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
@@ -804,17 +804,17 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("KeuanganPemberiHutangLain")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                             rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("K")){
                             KodeRekening.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            NamaRekening.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            NamaRekening.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance K..!!");
                         }
-                                                                      
+
                         KodeRekening.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -826,7 +826,7 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -840,7 +840,7 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -856,7 +856,7 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void KodeRekeningKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeRekeningKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnAkunActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,NoTelp,BtnSimpan);
         }
     }//GEN-LAST:event_KodeRekeningKeyPressed
@@ -928,7 +928,7 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
@@ -955,9 +955,9 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         AlamatPemberiHutang.setText("");
         NoTelp.setText("0");
         KodeRekening.setText("");
-        NamaRekening.setText("");   
+        NamaRekening.setText("");
         Valid.autoNomer("pemberi_hutang_lain","PH",3,KdPemberi);
-        KdPemberi.requestFocus();     
+        KdPemberi.requestFocus();
     }
 
     private void getData() {
@@ -974,11 +974,11 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void onCari(){        
+
+    public void onCari(){
         TCari.requestFocus();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpemberi_hutang_lain());
         BtnHapus.setEnabled(akses.getpemberi_hutang_lain());
@@ -990,21 +990,21 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             MnRestore.setEnabled(false);
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,125));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1030,7 +1030,7 @@ private void NmPemberiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

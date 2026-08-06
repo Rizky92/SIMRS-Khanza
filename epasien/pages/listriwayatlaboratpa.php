@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select periksa_lab.no_rawat,date_format(periksa_lab.tgl_periksa,'%d/%m/%Y') as tanggal,periksa_lab.tgl_periksa,periksa_lab.jam,dokter.nm_dokter,penjab.png_jawab from periksa_lab inner join reg_periksa on periksa_lab.no_rawat=reg_periksa.no_rawat inner join penjab on reg_periksa.kd_pj=penjab.kd_pj ".
                                 "inner join dokter on periksa_lab.dokter_perujuk=dokter.kd_dokter where periksa_lab.kategori='PA' and reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam) order by periksa_lab.tgl_periksa desc,periksa_lab.jam desc"

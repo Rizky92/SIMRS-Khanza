@@ -4,7 +4,7 @@
 
     // PRE LOADER
     $(window).load(function(){
-      $('.preloader').fadeOut(1000); // set duration in brackets    
+      $('.preloader').fadeOut(1000); // set duration in brackets
     });
 
 
@@ -24,7 +24,7 @@
 
 
     // PARALLAX EFFECT
-    $.stellar();  
+    $.stellar();
 
 
     // SMOOTHSCROLL
@@ -36,7 +36,7 @@
           }, 1000);
             event.preventDefault();
       });
-    });  
+    });
 
 
     // WOW ANIMATION

@@ -4,12 +4,12 @@
     }
 ?>
 <div id="post">
-<div class="entry"> 
+<div class="entry">
     <div align="center" class="link">
         <a href=?act=InputBidang&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListBidang>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -32,7 +32,7 @@
         $_sql   = "SELECT nama FROM bidang where nama like '%".$keyword."%' ORDER BY nama ASC ";
         $hasil  = bukaquery($_sql);
         $jumlah = mysqli_num_rows($hasil);
-        if(mysqli_num_rows($hasil)!=0) {              
+        if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
                         <td width='10%'><div align='center'>Proses</strong></div></td>
@@ -46,11 +46,11 @@
                             <?php
                             echo "</center>
                                 </td>
-                                <td>$baris[0]</td>                                
+                                <td>$baris[0]</td>
                              </tr>";
                     }
             echo "</table>";
-            
+
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -59,7 +59,7 @@
                     </tr>
                   </table>";
         }
-         
+
         $hapus = isset($_GET['action'])?$_GET['action']:NULL;
         if ($hapus=="HAPUS") {
             try {
@@ -74,8 +74,8 @@
         if(mysqli_num_rows($hasil)!=0) {
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/bidang/LaporanBidang.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/bidang/LaporanBidangExel.php?&keyword=iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/bidang/LaporanBidang.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/bidang/LaporanBidangExel.php?&keyword=iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
+                    </tr>
                  </table>");
         }
     ?>

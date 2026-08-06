@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -32,11 +32,11 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -163,11 +163,11 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         HasilSkrining.setDocument(new batasInput((int)200).getKata(HasilSkrining));
         Saran.setDocument(new batasInput((int)200).getKata(Saran));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1353,7 +1353,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1375,7 +1375,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             if(Sequel.menyimpantf("penilaian_lanjutan_resiko_jatuh_geriatri","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",28,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 SkalaResiko1.getSelectedItem().toString(),NilaiResiko1.getText(),SkalaResiko2.getSelectedItem().toString(),NilaiResiko2.getText(),
-                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(), 
+                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(),
                 SkalaResiko5.getSelectedItem().toString(),NilaiResiko5.getText(),SkalaResiko6.getSelectedItem().toString(),NilaiResiko6.getText(),
                 SkalaResiko7.getSelectedItem().toString(),NilaiResiko7.getText(),SkalaResiko8.getSelectedItem().toString(),NilaiResiko8.getText(),
                 SkalaResiko9.getSelectedItem().toString(),NilaiResiko9.getText(),SkalaResiko10.getSelectedItem().toString(),NilaiResiko10.getText(),
@@ -1391,7 +1391,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }  
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1406,7 +1406,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1428,7 +1428,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1491,7 +1491,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.R.M.</b></td>"+
@@ -1551,7 +1551,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                             "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
@@ -1574,7 +1574,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1589,8 +1589,8 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                 );
                 bg.close();
 
-                File f = new File("PenilaianRisikoJatuhGeriatri.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("PenilaianRisikoJatuhGeriatri.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1599,12 +1599,12 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN LANJUTAN RISIKO JATUH GERIATRI<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN LANJUTAN RISIKO JATUH GERIATRI<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1709,10 +1709,10 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1723,15 +1723,15 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1746,8 +1746,8 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),32).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),31).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirPenilaianLanjutanRisikoJatuhGeriatri.jasper","report","::[ Formulir Pengkajian Lanjutan Risiko Jatuh Geriatri ]::",
@@ -2091,7 +2091,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
     private widget.ScrollPane scrollPane2;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -2137,7 +2137,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                     "penilaian_lanjutan_resiko_jatuh_geriatri.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penilaian_lanjutan_resiko_jatuh_geriatri.nip like ? or petugas.nama like ?) "+
                     "order by penilaian_lanjutan_resiko_jatuh_geriatri.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -2151,7 +2151,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2180,7 +2180,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         SkalaResiko1.setSelectedIndex(0);
@@ -2209,11 +2209,11 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         Saran.setText("");
         HasilSkrining.setText("");
         SkalaResiko1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
@@ -2249,7 +2249,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
         }
     }
-    
+
     private void isRawat() {
          Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TNoRM);
     }
@@ -2279,7 +2279,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -2291,26 +2291,26 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_geriatri());
         BtnHapus.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_geriatri());
         BtnEdit.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_geriatri());
-        BtnPrint.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_geriatri()); 
+        BtnPrint.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_geriatri());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -2320,7 +2320,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
+        }
     }
 
     private void jam(){
@@ -2332,7 +2332,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -2385,7 +2385,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
                 "penilaian_jatuh_totalnilai=?,hasil_skrining=?,saran=?,nip=?",30,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 SkalaResiko1.getSelectedItem().toString(),NilaiResiko1.getText(),SkalaResiko2.getSelectedItem().toString(),NilaiResiko2.getText(),
-                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(), 
+                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(),
                 SkalaResiko5.getSelectedItem().toString(),NilaiResiko5.getText(),SkalaResiko6.getSelectedItem().toString(),NilaiResiko6.getText(),
                 SkalaResiko7.getSelectedItem().toString(),NilaiResiko7.getText(),SkalaResiko8.getSelectedItem().toString(),NilaiResiko8.getText(),
                 SkalaResiko9.getSelectedItem().toString(),NilaiResiko9.getText(),SkalaResiko10.getSelectedItem().toString(),NilaiResiko10.getText(),
@@ -2440,7 +2440,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isTotalResikoJatuh(){
         try {
             NilaiResikoTotal.setText(
@@ -2457,8 +2457,8 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             NilaiResikoTotal.setText("0");
             TingkatResiko.setText("Tingkat Resiko : Risiko Rendah (0 - 3), Tindakan : Intervensi pencegahan risiko jatuh standar");
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2484,7 +2484,7 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

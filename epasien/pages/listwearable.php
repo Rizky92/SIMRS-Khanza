@@ -13,12 +13,12 @@
 
     $PNG_TEMP_DIR           = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
     $PNG_WEB_DIR            = 'temp/';
-    include "plugins/phpqrcode/qrlib.php"; 
+    include "plugins/phpqrcode/qrlib.php";
     if (!file_exists($PNG_TEMP_DIR)) mkdir($PNG_TEMP_DIR);
     $filename               = $PNG_TEMP_DIR.encrypt_decrypt($_SESSION["ses_pasien"],"d").'.png';
     $errorCorrectionLevel   = 'L';
     $matrixPointSize        = 4;
-    QRcode::png(encrypt_decrypt($_SESSION["ses_pasien"],"d"), $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
+    QRcode::png(encrypt_decrypt($_SESSION["ses_pasien"],"d"), $filename, $errorCorrectionLevel, $matrixPointSize, 2);
 ?>
 <div class="block-header">
     <h2><center>KONEKSI WEARABLE</center></h2>
@@ -202,7 +202,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php 
+                                <?php
                                     $queryriwayat = bukaquery("select pasien_wearable.tanggal,pasien_wearable.item,pasien_wearable.nilai,pasien_wearable.satuan,pasien_wearable.status from pasien_wearable where pasien_wearable.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' order by pasien_wearable.tanggal desc limit 1000");
                                     while($rsqueryriwayat = mysqli_fetch_array($queryriwayat)) {
                                         $keterangan = $rsqueryriwayat["status"];

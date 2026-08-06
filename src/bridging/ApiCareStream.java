@@ -42,7 +42,7 @@ public class ApiCareStream {
     private JsonNode root;
     private JsonNode response;
     private ObjectMapper mapper = new ObjectMapper();
-    
+
     public ApiCareStream(){
         super();
         try {
@@ -51,7 +51,7 @@ public class ApiCareStream {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void kirimRalan(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -103,10 +103,10 @@ public class ApiCareStream {
                                             "\"clinicalDiagnosis\": \""+rs.getString("diagnosa_klinis")+"\"" +
                                         "}" +
                                     "}"+
-                                "}"; 
+                                "}";
                     System.out.println("JSON : "+requestJson);
                     System.out.println("URL : "+URL+"/putOrder/");
-                    requestEntity = new HttpEntity(requestJson,headers);	    
+                    requestEntity = new HttpEntity(requestJson,headers);
                     stringbalik=getRest().exchange(URL+"/putOrder/", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }
@@ -130,7 +130,7 @@ public class ApiCareStream {
             }
         }
     }
-    
+
     public void kirimRanap(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -184,10 +184,10 @@ public class ApiCareStream {
                                             "\"clinicalDiagnosis\": \""+rs.getString("diagnosa_klinis")+"\"" +
                                         "}" +
                                     "}"+
-                                "}"; 
+                                "}";
                     System.out.println("JSON : "+requestJson);
                     System.out.println("URL : "+URL+"/putOrder/");
-                    requestEntity = new HttpEntity(requestJson,headers);	    
+                    requestEntity = new HttpEntity(requestJson,headers);
                     stringbalik=getRest().exchange(URL+"/putOrder/", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }
@@ -211,7 +211,7 @@ public class ApiCareStream {
             }
         }
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {
@@ -228,5 +228,5 @@ public class ApiCareStream {
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
-    
+
 }

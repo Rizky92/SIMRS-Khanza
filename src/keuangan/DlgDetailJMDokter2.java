@@ -1,19 +1,17 @@
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -38,10 +36,10 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
     private final Connection koneksi=koneksiDB.condb();
     private DlgCariCaraBayar carabayar;
     private int i=0;
-    private String pilihancarabayar="",tglkeluar="",namaruangan="",dpjp="";    
+    private String pilihancarabayar="",tglkeluar="",namaruangan="",dpjp="";
     private PreparedStatement psreg,pskamar,pstindakan;
     private ResultSet rsreg,rskamar,rstindakan;
-    private double totalsarana=0,totaljm=0,totalbayar=0;   
+    private double totalsarana=0,totaljm=0,totalbayar=0;
     private String totalsaranas="",totaljms="",totalbayars="",js="",jm="",tarif="",pilihan="";
     private final DefaultTableModel tabMode;
     private StringBuilder htmlContent;
@@ -54,7 +52,7 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
     public DlgDetailJMDokter2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","Nomor RM","Nama Pasien","Tgl.Masuk","Tgl.Keluar","DPJP",
                 "Penindak","Dokter Anestesi","Dokter Anak","Kode","Kategori",
@@ -130,8 +128,8 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                 column.setPreferredWidth(65);
             }
         }
-        tbDetail.setDefaultRenderer(Object.class, new WarnaTable());   
-        
+        tbDetail.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -428,25 +426,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try {            
-            File g = new File("file2.css");            
+        try {
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f;            
-            BufferedWriter bw; 
-            
+
+            File f;
+            BufferedWriter bw;
+
             pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Laporan Jasa Medis",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (HTML)","Laporan 3 (WPS)","Laporan 4 (WPS)","Laporan 5 (CSV)","Laporan 6 (CSV)"},"Laporan 1 (HTML)");
             switch (pilihan) {
                 case "Laporan 1 (HTML)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>No.Rawat</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Nomor RM</td>"+
@@ -471,8 +469,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>Total</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
-                        ); 
-                        for(i=0;i<tabMode.getRowCount();i++){  
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 js=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()));
                             } catch (Exception e) {
@@ -504,7 +502,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 totalbayars="";
                             }
 
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
@@ -529,11 +527,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
                                     "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
-                            ); 
-                        }            
+                            );
+                        }
 
-                        f = new File("DetailJMDokter1.html");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("DetailJMDokter1.html");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write("<html>"+
                                     "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                     "<body>"+
@@ -543,23 +541,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                             htmlContent.toString()+
                                         "</table>"+
-                                    "</body>"+                   
+                                    "</body>"+
                                  "</html>"
                         );
 
-                        bw.close();                         
+                        bw.close();
                         Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 2 (HTML)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>"+
                                 "<tr class='isi'>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>No.Rawat</td>"+
@@ -585,8 +583,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>Total</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
-                        ); 
-                        for(i=0;i<tabMode.getRowCount();i++){  
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
@@ -618,7 +616,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 totalbayars="";
                             }
 
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
@@ -643,11 +641,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
                                     "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
-                            ); 
-                        }            
+                            );
+                        }
 
-                        f = new File("DetailJMDokter2.html");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("DetailJMDokter2.html");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write("<html>"+
                                     "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                     "<body>"+
@@ -657,23 +655,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                             htmlContent.toString()+
                                         "</table>"+
-                                    "</body>"+                   
+                                    "</body>"+
                                  "</html>"
                         );
 
-                        bw.close();                         
+                        bw.close();
                         Desktop.getDesktop().browse(f.toURI());
-                    break;  
+                    break;
                 case "Laporan 3 (WPS)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>No.Rawat</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Nomor RM</td>"+
@@ -698,8 +696,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>Total</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
-                        ); 
-                        for(i=0;i<tabMode.getRowCount();i++){  
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 js=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()));
                             } catch (Exception e) {
@@ -731,7 +729,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 totalbayars="";
                             }
 
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
@@ -756,11 +754,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
                                     "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
-                            ); 
-                        }            
+                            );
+                        }
 
-                        f = new File("DetailJMDokter.wps");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("DetailJMDokter.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write("<html>"+
                                     "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                     "<body>"+
@@ -770,23 +768,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                             htmlContent.toString()+
                                         "</table>"+
-                                    "</body>"+                   
+                                    "</body>"+
                                  "</html>"
                         );
 
-                        bw.close();                         
+                        bw.close();
                         Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 4 (WPS)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>No.Rawat</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Nomor RM</td>"+
@@ -811,8 +809,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='3%'>Total</td>"+
                                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%'>Tgl.Transaksi</td>"+
                             "</tr>"
-                        ); 
-                        for(i=0;i<tabMode.getRowCount();i++){  
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
@@ -844,7 +842,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 totalbayars="";
                             }
 
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"</td>"+
                                     "<td valign='top'>"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"</td>"+
@@ -869,11 +867,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td valign='top' align='right'>"+totalbayars+"</td>"+
                                     "<td valign='top' align='center'>"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"</td>"+
                                 "</tr>"
-                            ); 
-                        }            
+                            );
+                        }
 
-                        f = new File("DetailJMDokter2.wps");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("DetailJMDokter2.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write("<html>"+
                                     "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                     "<body>"+
@@ -883,26 +881,26 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                             htmlContent.toString()+
                                         "</table>"+
-                                    "</body>"+                   
+                                    "</body>"+
                                  "</html>"
                         );
 
-                        bw.close();                         
+                        bw.close();
                         Desktop.getDesktop().browse(f.toURI());
-                    break;  
+                    break;
                 case "Laporan 5 (CSV)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "\"No.Rawat\";\"Nomor RM\";\"Nama Pasien\";\"Tgl.Masuk\";\"Tgl.Keluar\";\"DPJP\";\"Penindak\";\"Dokter Anestesi\";\"Dokter Anak\";\"Kode\";\"Kategori\";\"Nama Unit\";\"Ruangan\";\"Nama Tindakan\";\"Frekuensi (Jumlah)\";\"Jasa Sarana\";\"Jasa Pelayanan\";\"Tarif\";\"Total Jasa Sarana\";\"Total Jasa Pelayanan\";\"Total\";\"Tgl.Transaksi\"\n"
-                        ); 
-                        for(i=0;i<tabMode.getRowCount();i++){  
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
@@ -934,24 +932,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 totalbayars="";
                             }
 
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\""+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+"\";\""+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+"\";\""+js+"\";\""+jm+"\";\""+tarif+"\";\""+totalsaranas+"\";\""+totaljms+"\";\""+totalbayars+"\";\""+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"\"\n"
-                            ); 
-                        }            
+                            );
+                        }
 
-                        f = new File("DetailJMDokter.csv");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("DetailJMDokter.csv");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write(htmlContent.toString());
 
-                        bw.close();                         
+                        bw.close();
                         Desktop.getDesktop().browse(f.toURI());
-                    break; 
+                    break;
                 case "Laporan 6 (CSV)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "No.Rawat;Nomor RM;Nama Pasien;Tgl.Masuk;Tgl.Keluar;DPJP;Penindak;Dokter Anestesi;Dokter Anak;Kode;Kategori;Nama Unit;Ruangan;Nama Tindakan;Frekuensi (Jumlah);Jasa Sarana;Jasa Pelayanan;Tarif;Total Jasa Sarana;Total Jasa Pelayanan;Total;Tgl.Transaksi\n"
-                        ); 
-                        for(i=0;i<tabMode.getRowCount();i++){  
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             try {
                                 js=tabMode.getValueAt(i,15).toString();
                             } catch (Exception e) {
@@ -983,25 +981,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 totalbayars="";
                             }
 
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 ""+tabMode.getValueAt(i,0).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,1).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,3).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,4).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,5).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,6).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,7).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,8).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,9).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,10).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,11).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,12).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,13).toString().replaceAll("'","`")+";"+tabMode.getValueAt(i,14).toString().replaceAll("'","`")+";"+js+";"+jm+";"+tarif+";"+totalsaranas+";"+totaljms+";"+totalbayars+";"+tabMode.getValueAt(i,21).toString().replaceAll("'","`")+"\n"
-                            ); 
-                        }            
+                            );
+                        }
 
-                        f = new File("DetailJMDokter2.csv");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("DetailJMDokter2.csv");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write(htmlContent.toString());
 
-                        bw.close();                         
+                        bw.close();
                         Desktop.getDesktop().browse(f.toURI());
-                    break; 
-            }                 
+                    break;
+            }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
-               
+
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -1031,20 +1029,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     pilihancarabayar="";
-    runBackground(() ->prosesCari());       
+    runBackground(() ->prosesCari());
 }//GEN-LAST:event_BtnCariActionPerformed
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
-            
+
         }
 }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -1053,7 +1051,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_Tgl1KeyPressed
 
     private void Tgl2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl2KeyPressed
-        
+
     }//GEN-LAST:event_Tgl2KeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1080,7 +1078,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void chkRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRalanActionPerformed
@@ -1112,38 +1110,38 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 public void windowClosed(WindowEvent e) {
                     if(carabayar.getTable().getSelectedRow()!= -1){
                         pilihancarabayar=carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString();
-                    }     
+                    }
                     runBackground(() ->prosesCari());
                     carabayar=null;
                 }
-            }); 
+            });
 
             carabayar.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         carabayar.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             carabayar.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (carabayar == null) return;
         if (!carabayar.isVisible()) {
             carabayar.emptTeks();
             carabayar.isCek();
-        }  
+        }
         if (carabayar.isVisible()) {
             carabayar.toFront();
             return;
-        }    
+        }
         carabayar.setVisible(true);
     }//GEN-LAST:event_ppTampilkanSeleksiBtnPrintActionPerformed
 
     private void TCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyTyped
-       
+
     }//GEN-LAST:event_TCariKeyTyped
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1154,7 +1152,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            
+
         }
     }//GEN-LAST:event_TCariKeyPressed
 
@@ -1202,7 +1200,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void prosesCari() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            Valid.tabelKosong(tabMode); 
+            Valid.tabelKosong(tabMode);
             psreg=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis,dokter.nm_dokter,"+
                     "pasien.nm_pasien,penjab.png_jawab,reg_periksa.kd_poli,poliklinik.nm_poli,reg_periksa.status_lanjut,reg_periksa.kd_pj "+
@@ -1225,7 +1223,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psreg.setString(7,"%"+TCari.getText().trim()+"%");
                     psreg.setString(8,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rsreg=psreg.executeQuery();
                 totalsarana=0;totaljm=0;totalbayar=0;
                 while(rsreg.next()){
@@ -1246,7 +1244,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         try {
                             pskamar.setString(1,rsreg.getString("no_rawat"));
                             rskamar=pskamar.executeQuery();
-                            if(rskamar.next()){ 
+                            if(rskamar.next()){
                                 namaruangan=rskamar.getString("nm_bangsal")+"("+rskamar.getString("kelas")+")";
                                 tglkeluar=rskamar.getString("tgl_keluar");
                             }
@@ -1255,10 +1253,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         } finally{
                             if(rskamar!=null){
                                 rskamar.close();
-                            } 
+                            }
                             if(pskamar!=null){
                                 pskamar.close();
-                            } 
+                            }
                         }
                         dpjp=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=?",rsreg.getString("no_rawat"));
                         if(dpjp.equals("")){
@@ -1295,9 +1293,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("sarana")+rstindakan.getDouble("tarif_tindakandr")),
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
-                                    rstindakan.getString("tgl_perawatan")                                    
+                                    rstindakan.getString("tgl_perawatan")
                                 });
-                            }                           
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Ralan dr : "+e);
                         } finally{
@@ -1308,7 +1306,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 pstindakan.close();
                             }
                         }
-                        
+
                         //tindakan drpr
                         pstindakan=koneksi.prepareStatement(
                                 "select jns_perawatan.nm_perawatan,dokter.nm_dokter, "+
@@ -1338,9 +1336,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("sarana")+rstindakan.getDouble("tarif_tindakandr")),
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
-                                    rstindakan.getString("tgl_perawatan")                                    
+                                    rstindakan.getString("tgl_perawatan")
                                 });
-                            }                           
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Ralan dr pr : "+e);
                         } finally{
@@ -1351,7 +1349,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 pstindakan.close();
                             }
                         }
-                        
+
                         //tindakan perawat
                         pstindakan=koneksi.prepareStatement(
                                 "select jns_perawatan.nm_perawatan,petugas.nama, "+
@@ -1381,9 +1379,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("sarana")+rstindakan.getDouble("tarif_tindakanpr")),
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
-                                    rstindakan.getString("tgl_perawatan")                                    
+                                    rstindakan.getString("tgl_perawatan")
                                 });
-                            }                           
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Ralan dr : "+e);
                         } finally{
@@ -1395,7 +1393,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                     }
-                    
+
                     if(chkRanap.isSelected()==true){
                         //tindakan dr
                         pstindakan=koneksi.prepareStatement(
@@ -1426,9 +1424,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("sarana")+rstindakan.getDouble("tarif_tindakandr")),
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
-                                    rstindakan.getString("tgl_perawatan")                                    
+                                    rstindakan.getString("tgl_perawatan")
                                 });
-                            }                           
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Inap dr : "+e);
                         } finally{
@@ -1439,7 +1437,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 pstindakan.close();
                             }
                         }
-                        
+
                         //tindakan drpr
                         pstindakan=koneksi.prepareStatement(
                                 "select jns_perawatan_inap.nm_perawatan,dokter.nm_dokter, "+
@@ -1469,10 +1467,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("sarana")+rstindakan.getDouble("tarif_tindakandr")),
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
-                                    rstindakan.getString("tgl_perawatan")                                    
+                                    rstindakan.getString("tgl_perawatan")
                                 });
-                            }   
-                            
+                            }
+
                         } catch (Exception e) {
                             System.out.println("Notif Inap dr pr : "+e);
                         } finally{
@@ -1483,7 +1481,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 pstindakan.close();
                             }
                         }
-                        
+
                         pstindakan=koneksi.prepareStatement(
                                 "select jns_perawatan_inap.nm_perawatan,petugas.nama, "+
                                 "rawat_inap_pr.tgl_perawatan,count(rawat_inap_pr.no_rawat) as jumlah, "+
@@ -1512,9 +1510,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("sarana")+rstindakan.getDouble("tarif_tindakanpr")),
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
-                                    rstindakan.getString("tgl_perawatan")                                    
+                                    rstindakan.getString("tgl_perawatan")
                                 });
-                            }                           
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Inap dr : "+e);
                         } finally{
@@ -1526,7 +1524,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                     }
-                    
+
                     if(chkRadiologi.isSelected()==true){
                         //tindakan radiologi
                         pstindakan=koneksi.prepareStatement(
@@ -1558,8 +1556,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
                                     rstindakan.getString("tgl_periksa")
-                                });            
-                            }                           
+                                });
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Ralan dr : "+e);
                         } finally{
@@ -1571,7 +1569,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                     }
-                    
+
                     //operasi
                     if(chkOperasi.isSelected()==true){
                         pstindakan=koneksi.prepareStatement(
@@ -1606,7 +1604,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                         (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
                                         rstindakan.getString("tgl_operasi")
-                                    });   
+                                    });
                                 }else{
                                     tabMode.addRow(new Object[]{
                                         rsreg.getString("no_rawat"),rsreg.getString("no_rkm_medis"),rsreg.getString("nm_pasien"),
@@ -1622,9 +1620,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         rstindakan.getDouble("totalsarana"),rstindakan.getDouble("totaljm"),
                                         (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
                                         rstindakan.getString("tgl_operasi")
-                                    });   
-                                }                                     
-                            }                           
+                                    });
+                                }
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Ralan dr : "+e);
                         } finally{
@@ -1636,7 +1634,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                     }
-                    
+
                     if(chkLaborat.isSelected()==true){
                         //tindakan lab
                         pstindakan=koneksi.prepareStatement(
@@ -1669,7 +1667,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
                                     rstindakan.getString("tgl_periksa")
                                 });
-                            }                        
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Ralan dr : "+e);
                         } finally{
@@ -1680,7 +1678,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 pstindakan.close();
                             }
                         }
-                        
+
                         pstindakan=koneksi.prepareStatement(
                                 "select template_laboratorium.Pemeriksaan,dokter.nm_dokter, "+
                                 "detail_periksa_lab.tgl_periksa,count(detail_periksa_lab.no_rawat) as jumlah, "+
@@ -1714,7 +1712,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     (rstindakan.getDouble("totaljm")+rstindakan.getDouble("totalsarana")),
                                     rstindakan.getString("tgl_periksa")
                                 });
-                            }                           
+                            }
                         } catch (Exception e) {
                             System.out.println("Notif Detail Laborat : "+e);
                         } finally{
@@ -1726,13 +1724,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                     }
-                }      
+                }
                 if(totalbayar>0){
                     tabMode.addRow(new Object[]{
                         "","","Total :","","","","","","","","","","","","",null,
                         null,null,totalsarana,totaljm,totalbayar,""
                     });
-                }                    
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi preg : "+e);
             } finally{
@@ -1742,18 +1740,18 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(psreg!=null){
                     psreg.close();
                 }
-            }           
+            }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        } 
+        }
        this.setCursor(Cursor.getDefaultCursor());
-        
-    }    
-    
+
+    }
+
     public void isCek(){
         //BtnPrint.setEnabled(var.getjm_ranap_dokter());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1779,7 +1777,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

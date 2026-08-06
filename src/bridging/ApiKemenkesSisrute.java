@@ -20,10 +20,10 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiKemenkesSisrute {        
+public class ApiKemenkesSisrute {
     private String Key,Consid,pass;
     public ApiKemenkesSisrute(){
-        try {                    
+        try {
             pass = koneksiDB.PASSSISRUTE();
             Consid = koneksiDB.IDSISRUTE();
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -33,13 +33,13 @@ public class ApiKemenkesSisrute {
             for (byte b : hashInBytes) {
                 sb.append(String.format("%02x", b));
             }
-            Key=sb.toString();            
+            Key=sb.toString();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
     }
-    public String getHmac() {        
-        long GetUTCdatetimeAsString = GetUTCdatetimeAsString();        
+    public String getHmac() {
+        long GetUTCdatetimeAsString = GetUTCdatetimeAsString();
         String salt = Consid +"&"+String.valueOf(GetUTCdatetimeAsString);
 	String generateHmacSHA256Signature = null;
 	try {
@@ -66,12 +66,12 @@ public class ApiKemenkesSisrute {
 	    throw new GeneralSecurityException(e);
 	}
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        long millis = System.currentTimeMillis();   
+
+    public long GetUTCdatetimeAsString(){
+        long millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

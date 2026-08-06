@@ -4,7 +4,7 @@
         $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
         $judul = str_replace(array('.','-','/',',')," ",$judul);
         $judul = trim($judul);
-        echo "$judul";	
+        echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -34,7 +34,7 @@
         if (!cekSessiAdmin()) {
             $form = array (
                 'HomeUser','Pasien','KonsultasiDokter','KonsultasiPerawat','BalasKonsultasiDokter','BalasKonsultasiPerawat',
-                'HasilRadiologi','BacaanRadiologi'            
+                'HasilRadiologi','BacaanRadiologi'
             );
             foreach ($form as $page) {
                 if ($aksi==$page) {
@@ -43,7 +43,7 @@
                     break;
                 }
             }
-        }	
+        }
     }
 
     function actionPages() {
@@ -59,7 +59,7 @@
             case "HasilRadiologi"           : include_once("pages/listhasilradiologi.php"); break;
             case "BacaanRadiologi"          : include_once("pages/listbacaanradiologi.php"); break;
             default                         : include_once("pages/listhome.php");
-        }   
+        }
     }
- 
+
 ?>

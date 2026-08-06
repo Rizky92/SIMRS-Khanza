@@ -9,7 +9,7 @@
         <a href=?act=InputEvaluasiKinerja&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListEvaluasiKinerja>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php

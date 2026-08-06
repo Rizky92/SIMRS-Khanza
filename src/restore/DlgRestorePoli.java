@@ -51,7 +51,7 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
     public DlgRestorePoli(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"P","Kode Unit","Nama Unit","Registrasi Baru","Registrasi Lama"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -263,11 +263,11 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("poliklinik","kd_poli='"+tbKamar.getValueAt(i,1).toString()+"'","status='1'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -280,11 +280,11 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("poliklinik","kd_poli",tbKamar.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -406,7 +406,7 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
             ps=koneksi.prepareStatement("select kd_poli, nm_poli, registrasi, registrasilama "+
                 " from poliklinik where status='0' and kd_poli like ? or "+
                 " status='0' and nm_poli like ? order by nm_poli");
-            try{            
+            try{
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
@@ -422,7 +422,7 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -432,7 +432,7 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
- 
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -458,7 +458,7 @@ public final class DlgRestorePoli extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -23,8 +23,8 @@ public class WarnaTablePEWS extends DefaultTableCellRenderer {
         }else{
             component.setBackground(new Color(255,255,255));
             component.setForeground(new Color(50,50,50));
-        } 
-        
+        }
+
         if ((column == 6)||(column == 7)){
             if(Integer.parseInt(table.getValueAt(row,7).toString())==0){
                 component.setBackground(Color.GREEN);
@@ -40,7 +40,7 @@ public class WarnaTablePEWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 8)||(column == 9)){
             if(Integer.parseInt(table.getValueAt(row,9).toString())==0){
                 component.setBackground(Color.GREEN);
@@ -56,7 +56,7 @@ public class WarnaTablePEWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 10)||(column == 11)){
             if(Integer.parseInt(table.getValueAt(row,11).toString())==0){
                 component.setBackground(Color.GREEN);
@@ -72,13 +72,13 @@ public class WarnaTablePEWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 12)||(column == 13)){
             if(Integer.parseInt(table.getValueAt(row,12).toString())>7){
                 component.setBackground(Color.BLUE);
                 component.setForeground(Color.WHITE);
             }
-        }   
+        }
         return component;
     }
 

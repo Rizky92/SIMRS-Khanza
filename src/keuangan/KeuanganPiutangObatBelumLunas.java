@@ -5,11 +5,11 @@ package keuangan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgCariPiutang;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -129,7 +129,7 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -482,10 +482,10 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                     Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
                                 tabMode.getValueAt(i,2).toString()+"','"+
@@ -496,22 +496,22 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
-                                tabMode.getValueAt(i,10).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Pasien"); 
+                                tabMode.getValueAt(i,10).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Pasien");
             }
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter"); 
+            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','TOTAL PIUTANG :','','','','','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter"); 
-            
-            
-            Map<String, Object> param = new HashMap<>();                 
+            Sequel.menyimpan("temporary","'"+i+"','TOTAL PIUTANG :','','','','','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter");
+
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPiutangObatBelumLunas.jasper","report","::[ Rekap Piutang Obat Belum lunas ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -587,7 +587,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
          if(tbBangsal.getSelectedRow()!= -1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgCariPiutang form=new DlgCariPiutang(null,false);
-            form.emptTeks();   
+            form.emptTeks();
             form.cariNoTagihan(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString(),Valid.SetTgl2(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString()));
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
@@ -596,8 +596,8 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             this.setCursor(Cursor.getDefaultCursor());
          }else{
              JOptionPane.showMessageDialog(null,"Silahkan pilih data terlebih dahulu...!!");
-         }                   
-    } 
+         }
+    }
 }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
@@ -610,7 +610,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         }else if(tabMode.getRowCount()!=0){
             Sequel.AutoComitFalse();
             sukses=true;
-            
+
             koderekening="";
             try {
                 myObj = new FileReader("./cache/akunbayar.iyem");
@@ -619,7 +619,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 if(response.isArray()){
                    for(JsonNode list:response){
                        if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
-                            koderekening=list.path("KodeRek").asText();  
+                            koderekening=list.path("KodeRek").asText();
                        }
                    }
                 }
@@ -631,9 +631,9 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 response = null;
                 root = null;
             }
-            
+
             row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 if(tabMode.getValueAt(i,0).toString().equals("true")){
                     if(Double.parseDouble(tabMode.getValueAt(i,9).toString())<0){
                         JOptionPane.showMessageDialog(null,"Nilai pelunasan lebih besar dari sisa piutang...!!");
@@ -645,14 +645,14 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             tabMode.getValueAt(i,11).toString(),"diverifikasi oleh "+akses.getkode(),tabMode.getValueAt(i,1).toString(),koderekening,akunpiutang,tabMode.getValueAt(i,12).toString(),
                             Diskon_Piutang,tabMode.getValueAt(i,13).toString(),Piutang_Tidak_Terbayar
                         })==true){
-                            Sequel.queryu("delete from tampjurnal");                    
+                            Sequel.queryu("delete from tampjurnal");
                             if(Sequel.menyimpantf2("tampjurnal","'"+akunpiutang+"','BAYAR PIUTANG','0','"+(Double.parseDouble(tabMode.getValueAt(i,11).toString())+Double.parseDouble(tabMode.getValueAt(i,12).toString())+Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"'","Rekening")==false){
                                 sukses=false;
-                            }    
+                            }
                             if(Double.parseDouble(tabMode.getValueAt(i,11).toString())>0){
                                 if(Sequel.menyimpantf2("tampjurnal","'"+koderekening+"','"+AkunBayar.getSelectedItem()+"','"+tabMode.getValueAt(i,11).toString()+"','0'","Rekening")==false){
                                     sukses=false;
-                                } 
+                                }
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,12).toString())>0){
                                if(Sequel.menyimpantf2("tampjurnal","'"+Diskon_Piutang+"','DISKON BAYAR','"+tabMode.getValueAt(i,12).toString()+"','0'","Rekening")==false){
@@ -662,18 +662,18 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             if(Double.parseDouble(tabMode.getValueAt(i,13).toString())>0){
                                 if(Sequel.menyimpantf2("tampjurnal","'"+Piutang_Tidak_Terbayar+"','PIUTANG TIDAK TERBAYAR','"+tabMode.getValueAt(i,13).toString()+"','0'","Rekening")==false){
                                     sukses=false;
-                                } 
+                                }
                             }
                             if(sukses==true){
                                 sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
-                            }                   
+                            }
                         }else{
                             sukses=false;
                         }
                     }
                 }
             }
-            
+
             if(sukses==true){
                 Sequel.Commit();
             }else{
@@ -682,13 +682,13 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 Sequel.RollBack();
             }
             Sequel.AutoComitTrue();
-            
+
             if(sukses==true){
                 sisapiutang=0;
                 total=0;
                 LCount.setText("0");
                 LCount1.setText("0");
-                for(i=0;i<tbBangsal.getRowCount();i++){  
+                for(i=0;i<tbBangsal.getRowCount();i++){
                     if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                         tabMode.removeRow(i);
                         i--;
@@ -759,16 +759,16 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),12);
                         tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),13);
                     }
-                } 
+                }
             } catch (Exception e) {
             }
             row=tbBangsal.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                     total=total+(Double.parseDouble(tbBangsal.getValueAt(i,5).toString())+
                          Double.parseDouble(tbBangsal.getValueAt(i,7).toString()))-
                         (Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+
-                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));     
+                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));
                 }
             }
             LCount1.setText(Valid.SetAngka(total));
@@ -784,7 +784,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         } catch (Exception e) {
         }
-        
+
         try {
             ps=koneksi.prepareStatement(
                     "select set_akun.Diskon_Piutang,set_akun.Piutang_Tidak_Terbayar,set_akun.Piutang_Obat from set_akun");
@@ -808,7 +808,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -845,12 +845,12 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             getdata(i);
         }
         row=tbBangsal.getRowCount();
-        for(i=0;i<row;i++){  
+        for(i=0;i<row;i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                  total=total+(Double.parseDouble(tbBangsal.getValueAt(i,5).toString())+
                          Double.parseDouble(tbBangsal.getValueAt(i,7).toString()))-
                         (Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+
-                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));     
+                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));
             }
         }
         LCount1.setText(Valid.SetAngka(total));
@@ -865,12 +865,12 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             getdata(i);
         }
         row=tbBangsal.getRowCount();
-        for(i=0;i<row;i++){  
+        for(i=0;i<row;i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                  total=total+(Double.parseDouble(tbBangsal.getValueAt(i,5).toString())+
                          Double.parseDouble(tbBangsal.getValueAt(i,7).toString()))-
                         (Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+
-                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));     
+                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));
             }
         }
         LCount1.setText(Valid.SetAngka(total));
@@ -942,7 +942,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -962,7 +962,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     ps.close();
                 }
             }
-            
+
             LCount.setText(Valid.SetAngka(sisapiutang));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
@@ -1004,21 +1004,21 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),12);
                     tbBangsal.setValueAt(0,tbBangsal.getSelectedRow(),13);
                 }
-            }  
+            }
         } catch (Exception e) {
         }
         row=tbBangsal.getRowCount();
-        for(i=0;i<row;i++){  
+        for(i=0;i<row;i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                  total=total+(Double.parseDouble(tbBangsal.getValueAt(i,5).toString())+
                          Double.parseDouble(tbBangsal.getValueAt(i,7).toString()))-
                         (Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+
-                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));     
+                        Double.parseDouble(tbBangsal.getValueAt(i,8).toString()));
             }
         }
         LCount1.setText(Valid.SetAngka(total));
     }
-    
+
     private void getdata(int pilih) {
         try {
             if(pilih!= -1){
@@ -1053,18 +1053,18 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     tbBangsal.setValueAt(0,pilih,12);
                     tbBangsal.setValueAt(0,pilih,13);
                 }
-            }  
+            }
         } catch (Exception e) {
         }
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         BtnBayar.setEnabled(akses.getbayar_piutang());
     }
-    
-    private void tampilAkunBayar() {         
-         try{      
+
+    private void tampilAkunBayar() {
+         try{
              file=new File("./cache/akunbayar.iyem");
              file.createNewFile();
              fileWriter = new FileWriter(file);
@@ -1073,7 +1073,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
              try{
                  rs=ps.executeQuery();
                  AkunBayar.removeAllItems();
-                 while(rs.next()){    
+                 while(rs.next()){
                      AkunBayar.addItem(rs.getString(1).replaceAll("\"",""));
                      iyembuilder.append("{\"NamaAkun\":\"").append(rs.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rs.getString(2)).append("\",\"PPN\":\"").append(rs.getDouble(3)).append("\"},");
                  }
@@ -1082,18 +1082,18 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
              } finally{
                  if(rs != null){
                      rs.close();
-                 } 
+                 }
                  if(ps != null){
                      ps.close();
-                 } 
+                 }
              }
-             
+
              if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"akunbayar\":["+iyembuilder+"]}");
                 fileWriter.flush();
              }
-            
+
              fileWriter.close();
              iyembuilder=null;
         } catch (Exception e) {
@@ -1102,7 +1102,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
-    
+
     private void tampilAkunBayar2() {
         try {
             myObj = new FileReader("./cache/akunbayar.iyem");
@@ -1125,8 +1125,8 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             response = null;
             root = null;
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1152,7 +1152,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

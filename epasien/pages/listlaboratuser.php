@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $querylaborat = bukaquery("select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,jns_perawatan_lab.total_byr,jns_perawatan_lab.kelas from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where jns_perawatan_lab.status='1' and penjab.png_jawab like '%umum%' order by jns_perawatan_lab.kelas");
                            while($rsquerylaborat = mysqli_fetch_array($querylaborat)) {
                                if($rsquerylaborat["total_byr"]>0){
@@ -30,7 +30,7 @@
                                             <td align='center'>".formatDuit($rsquerylaborat["total_byr"])."</td>
                                           </tr>";
                                }
-                                    
+
                                $querydetaillaborat= bukaquery("select Pemeriksaan,biaya_item from template_laboratorium where kd_jenis_prw='$rsquerylaborat[0]' and biaya_item>0 order by urut");
                                while($rsquerydetaillaborat=mysqli_fetch_array($querydetaillaborat)){
                                     echo "<tr>

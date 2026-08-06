@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -49,7 +49,7 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private int i=0,limabelas=0,tigapuluh=0,satujam=0,duajam=0,lebihduajam=0;
-    private double totaljam=0;   
+    private double totaljam=0;
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -92,7 +92,7 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -280,23 +280,23 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();         
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            param.put("tanggal1",Valid.SetTgl(Tgl1.getSelectedItem()+""));   
-            param.put("tanggal2",Valid.SetTgl(Tgl2.getSelectedItem()+""));   
-            param.put("parameter","%"+TCari.getText().trim()+"%");    
-            param.put("limabelas",""+limabelas);  
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("tanggal1",Valid.SetTgl(Tgl1.getSelectedItem()+""));
+            param.put("tanggal2",Valid.SetTgl(Tgl2.getSelectedItem()+""));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
+            param.put("limabelas",""+limabelas);
             param.put("rata",""+Valid.SetAngka6(totaljam/(i-1)));
-            param.put("tigapuluh",""+tigapuluh);  
-            param.put("satujam",""+satujam);  
-            param.put("duajam",""+duajam);    
-            param.put("lebihduajam",""+lebihduajam);  
+            param.put("tigapuluh",""+tigapuluh);
+            param.put("satujam",""+satujam);
+            param.put("duajam",""+duajam);
+            param.put("lebihduajam",""+lebihduajam);
             Valid.MyReport("rptPelayananOperasi.jasper",param,"::[ Laporan Data Lama Operasi ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -346,7 +346,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             runBackground(() ->tampil());
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -373,7 +373,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -399,7 +399,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -437,10 +437,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode);   
+    public void tampil(){
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode);
             limabelas=0;
             tigapuluh=0;
             satujam=0;
@@ -466,9 +466,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
-                i=1;  
+                i=1;
                 totaljam=0;
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -488,7 +488,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }else if(rs.getDouble("durasi")>120){
                         lebihduajam++;
                     }
-                }               
+                }
                 if(totaljam>0){
                     tabMode.addRow(new Object[]{
                         "","","Rata-rata (Menit)",": ","","","",""+Valid.SetAngka6(totaljam/(i-1))
@@ -508,7 +508,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     tabMode.addRow(new Object[]{
                         "","",">120 Menit",": ","","","",""+lebihduajam
                     });
-                }                    
+                }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -557,7 +557,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

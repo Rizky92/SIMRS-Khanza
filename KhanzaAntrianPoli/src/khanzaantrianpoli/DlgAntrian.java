@@ -30,9 +30,9 @@ import java.sql.Connection;
  *
  * @author perpustakaan
  */
-public class DlgAntrian extends javax.swing.JDialog implements ActionListener{    
+public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private Connection koneksi=koneksiDB.condb();
-    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
+    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     /** Creates new form DlgBiling
      * @param parent
      * @param modal */
@@ -40,9 +40,9 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         super(parent, modal);
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        
+
         this.setSize(screen.width,screen.height);
-        
+
         Object[] row={"No.Reg",
             "Nomer RM",
             "Pasien",
@@ -66,7 +66,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }else if(i==2){
                 column.setPreferredWidth(200);
             }else if(i==3){
-                column.setPreferredWidth(100);   
+                column.setPreferredWidth(100);
             }else if(i==4){
                 column.setPreferredWidth(200);
             }else if(i==5){
@@ -74,7 +74,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         }
         Table1.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -92,7 +92,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }else if(i==2){
                 column.setPreferredWidth(200);
             }else if(i==3){
-                column.setPreferredWidth(100);   
+                column.setPreferredWidth(100);
             }else if(i==4){
                 column.setPreferredWidth(200);
             }else if(i==5){
@@ -100,7 +100,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         }
         Table2.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode3=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -118,7 +118,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }else if(i==2){
                 column.setPreferredWidth(200);
             }else if(i==3){
-                column.setPreferredWidth(100);   
+                column.setPreferredWidth(100);
             }else if(i==4){
                 column.setPreferredWidth(200);
             }else if(i==5){
@@ -126,12 +126,12 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         }
         Table3.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        
+
+
         javax.swing.Timer timer = new javax.swing.Timer(100, this);
         timer.start();
     }
-    
+
     private final DefaultTableModel tabMode1;
     private final DefaultTableModel tabMode2;
     private final DefaultTableModel tabMode3;
@@ -990,11 +990,11 @@ private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
        if(!Unit1.getText().equals("")){
            form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), Unit1.getText()+" :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 36), new java.awt.Color(100, 150, 100)));
        }
-       
+
        if(!Unit2.getText().equals("")){
            form2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), Unit2.getText()+" :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 36), new java.awt.Color(100, 150, 100)));
        }
-       
+
        if(!Unit3.getText().equals("")){
            form3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), Unit3.getText()+" :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 36), new java.awt.Color(100, 150, 100)));
        }
@@ -1005,7 +1005,7 @@ private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_BtnDisplayActionPerformed
 
 private void ppAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppAntri1ActionPerformed
-        
+
         if(tabMode1.getRowCount()!=0){
             try {
                 BackgroundMusic bm = new BackgroundMusic("./suara/nomor-urut.mp3");
@@ -1014,7 +1014,7 @@ private void ppAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            } 
+            }
             panggil(Integer.parseInt(tabMode1.getValueAt(0,0).toString()));
                 labelantri1.setText(tabMode1.getValueAt(0,0).toString());
                 labelpas1.setText(tabMode1.getValueAt(0,2).toString());
@@ -1026,7 +1026,7 @@ private void ppAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_ppAntri1ActionPerformed
 
 private void ppAntri2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppAntri2ActionPerformed
-       
+
        if(tabMode2.getRowCount()!=0){
            try {
                 BackgroundMusic bm = new BackgroundMusic("./suara/nomor-urut.mp3");
@@ -1035,7 +1035,7 @@ private void ppAntri2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            } 
+            }
             panggil(Integer.parseInt(tabMode2.getValueAt(0,0).toString()));
                 labelantri2.setText(tabMode2.getValueAt(0,0).toString());
                 labelpas2.setText(tabMode2.getValueAt(0,2).toString());
@@ -1047,7 +1047,7 @@ private void ppAntri2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_ppAntri2ActionPerformed
 
 private void ppAntri3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppAntri3ActionPerformed
-       
+
        if(tabMode3.getRowCount()!=0){
            try {
                 BackgroundMusic bm = new BackgroundMusic("./suara/nomor-urut.mp3");
@@ -1056,7 +1056,7 @@ private void ppAntri3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            } 
+            }
             panggil(Integer.parseInt(tabMode3.getValueAt(0,0).toString()));
                 labelantri3.setText(tabMode3.getValueAt(0,0).toString());
                 labelpas3.setText(tabMode3.getValueAt(0,2).toString());
@@ -1073,7 +1073,7 @@ private void ppCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_ppCloseActionPerformed
 
 private void ppUndo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUndo1ActionPerformed
-       if(tabMode1.getRowCount()>=5){                
+       if(tabMode1.getRowCount()>=5){
                 Sequel.queryu("update reg_periksa set stts='Belum',jam_reg='"+tabMode1.getValueAt(4,5).toString()+"' where no_rawat='"+norawat1.getText()+"'");
                 labelantri1.setText(tabMode1.getValueAt(0,0).toString());
                 labelpas1.setText(tabMode1.getValueAt(0,2).toString());
@@ -1081,10 +1081,10 @@ private void ppUndo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 labeldokter1.setText(tabMode1.getValueAt(0,4).toString());
                 Sequel.queryu("update reg_periksa set stts='Sudah' where no_rawat='"+tabMode1.getValueAt(0,3).toString()+"'");
                 tampil1();
-        }else if(tabMode1.getRowCount()<=5){  
+        }else if(tabMode1.getRowCount()<=5){
                 Sequel.queryu("update reg_periksa set stts='Belum',jam_reg=current_time() where no_rawat='"+norawat1.getText()+"'");
                 labelantri1.setText(tabMode1.getValueAt(0,0).toString());
-                labelpas1.setText(tabMode1.getValueAt(0,2).toString());                
+                labelpas1.setText(tabMode1.getValueAt(0,2).toString());
                 norawat1.setText(tabMode1.getValueAt(0,3).toString());
                 labeldokter1.setText(tabMode1.getValueAt(0,4).toString());
                 Sequel.queryu("update reg_periksa set stts='Sudah' where no_rawat='"+tabMode1.getValueAt(0,3).toString()+"'");
@@ -1093,7 +1093,7 @@ private void ppUndo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_ppUndo1ActionPerformed
 
 private void ppUndo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUndo2ActionPerformed
-       if(tabMode2.getRowCount()>=5){                
+       if(tabMode2.getRowCount()>=5){
                 Sequel.queryu("update reg_periksa set stts='Belum',jam_reg='"+tabMode2.getValueAt(4,5).toString()+"' where no_rawat='"+norawat2.getText()+"'");
                 labelantri2.setText(tabMode2.getValueAt(0,0).toString());
                 labelpas2.setText(tabMode2.getValueAt(0,2).toString());
@@ -1101,10 +1101,10 @@ private void ppUndo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 labeldokter2.setText(tabMode2.getValueAt(0,4).toString());
                 Sequel.queryu("update reg_periksa set stts='Sudah' where no_rawat='"+tabMode2.getValueAt(0,3).toString()+"'");
                 tampil2();
-        }else if(tabMode2.getRowCount()<=5){  
+        }else if(tabMode2.getRowCount()<=5){
                 Sequel.queryu("update reg_periksa set stts='Belum',jam_reg=current_time() where no_rawat='"+norawat2.getText()+"'");
                 labelantri2.setText(tabMode2.getValueAt(0,0).toString());
-                labelpas2.setText(tabMode2.getValueAt(0,2).toString());                
+                labelpas2.setText(tabMode2.getValueAt(0,2).toString());
                 norawat2.setText(tabMode2.getValueAt(0,3).toString());
                 labeldokter2.setText(tabMode2.getValueAt(0,4).toString());
                 Sequel.queryu("update reg_periksa set stts='Sudah' where no_rawat='"+tabMode2.getValueAt(0,3).toString()+"'");
@@ -1113,7 +1113,7 @@ private void ppUndo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_ppUndo2ActionPerformed
 
 private void ppUndo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUndo3ActionPerformed
-       if(tabMode3.getRowCount()>=5){                
+       if(tabMode3.getRowCount()>=5){
                 Sequel.queryu("update reg_periksa set stts='Belum',jam_reg='"+tabMode3.getValueAt(4,5).toString()+"' where no_rawat='"+norawat3.getText()+"'");
                 labelantri3.setText(tabMode3.getValueAt(0,0).toString());
                 labelpas3.setText(tabMode3.getValueAt(0,2).toString());
@@ -1121,10 +1121,10 @@ private void ppUndo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 labeldokter3.setText(tabMode3.getValueAt(0,4).toString());
                 Sequel.queryu("update reg_periksa set stts='Sudah' where no_rawat='"+tabMode3.getValueAt(0,3).toString()+"'");
                 tampil3();
-        }else if(tabMode3.getRowCount()<=5){  
+        }else if(tabMode3.getRowCount()<=5){
                 Sequel.queryu("update reg_periksa set stts='Belum',jam_reg=current_time() where no_rawat='"+norawat3.getText()+"'");
                 labelantri3.setText(tabMode3.getValueAt(0,0).toString());
-                labelpas3.setText(tabMode3.getValueAt(0,2).toString());                
+                labelpas3.setText(tabMode3.getValueAt(0,2).toString());
                 norawat3.setText(tabMode3.getValueAt(0,3).toString());
                 labeldokter3.setText(tabMode3.getValueAt(0,4).toString());
                 Sequel.queryu("update reg_periksa set stts='Sudah' where no_rawat='"+tabMode3.getValueAt(0,3).toString()+"'");
@@ -1169,7 +1169,7 @@ private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnAntri1ActionPerformed
 
 private void BtnAntri2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri2ActionPerformed
-      
+
         ppAntri2ActionPerformed(evt);
 }//GEN-LAST:event_BtnAntri2ActionPerformed
 
@@ -1206,8 +1206,8 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         Unit3.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                         tampil3();
                         Unit3.requestFocus();
-                    }  
-                }                
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1217,8 +1217,8 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });        
-        
+        });
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -1227,7 +1227,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             @Override
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){
-                    if(pilihan==1){                    
+                    if(pilihan==1){
                         Dokter1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         tampil1();
                         Dokter1.requestFocus();
@@ -1240,7 +1240,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         tampil3();
                         Dokter3.requestFocus();
                     }
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1251,11 +1251,11 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        poli.removeWindowListener(null);        
+        poli.removeWindowListener(null);
         dokter.removeWindowListener(null);
         System.exit(0);
     }//GEN-LAST:event_formWindowClosed
@@ -1275,9 +1275,9 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            } 
+            }
             panggil(Integer.parseInt(labelantri1.getText()));
-        }            
+        }
     }//GEN-LAST:event_BtnBatal4ActionPerformed
 
     private void BtnBatal5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal5ActionPerformed
@@ -1289,7 +1289,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            } 
+            }
             panggil(Integer.parseInt(labelantri2.getText()));
         }
     }//GEN-LAST:event_BtnBatal5ActionPerformed
@@ -1303,7 +1303,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            } 
+            }
             panggil(Integer.parseInt(labelantri3.getText()));
         }
     }//GEN-LAST:event_BtnBatal6ActionPerformed
@@ -1407,10 +1407,10 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JMenuItem ppUndo2;
     private javax.swing.JMenuItem ppUndo3;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil1(){
         Valid.tabelKosong(tabMode1);
-        try{     
+        try{
             ResultSet rs=koneksi.createStatement().executeQuery("select reg_periksa.no_reg,reg_periksa.no_rkm_medis, "+
                    "pasien.nm_pasien,reg_periksa.no_rawat,dokter.nm_dokter,reg_periksa.jam_reg "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik "+
@@ -1435,10 +1435,10 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Error : "+e);
         }
     }
-    
+
     private void tampil2(){
         Valid.tabelKosong(tabMode2);
-        try{     
+        try{
             ResultSet rs=koneksi.createStatement().executeQuery("select reg_periksa.no_reg,reg_periksa.no_rkm_medis, "+
                    "pasien.nm_pasien,reg_periksa.no_rawat,dokter.nm_dokter,reg_periksa.jam_reg "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik "+
@@ -1463,7 +1463,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Error : "+e);
         }
     }
-    
+
     private void tampil3(){
         Valid.tabelKosong(tabMode3);
         try{
@@ -1491,7 +1491,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Error : "+e);
         }
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         paneliklan.repaint();
@@ -1499,7 +1499,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         String newText = oldText.substring(1) + oldText.substring(0, 1);
         labelruntext.setText( newText );
     }
-    
+
     private  void isTampil(){
         try{
             ResultSet rs=koneksi.createStatement().executeQuery("select teks, aktifkan, gambar from runtext");
@@ -1508,19 +1508,19 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if(rs.getString(2).equals("Yes")){
                     Blob blob = rs.getBlob(3);
                     paneliklan.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));
-                    
+
                 }
             }
         }catch(SQLException e){
             System.out.println(e+"Error : Silahkan Set Aplikasi");
         }
-    } 
-    
+    }
+
     private void panggil(int antrian){
         String[] urut={"","./suara/satu.mp3","./suara/dua.mp3","./suara/tiga.mp3","./suara/empat.mp3",
                        "./suara/lima.mp3","./suara/enam.mp3","./suara/tujuh.mp3","./suara/delapan.mp3",
                        "./suara/sembilan.mp3","./suara/sepuluh.mp3","./suara/sebelas.mp3"};
-        
+
         if (antrian < 12){
             try {
                 BackgroundMusic bm = new BackgroundMusic(urut[antrian]);
@@ -1529,7 +1529,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 bm.stop();
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            }            
+            }
         }else if (antrian < 20){
             try {
                 BackgroundMusic bm = new BackgroundMusic(urut[antrian-10]);
@@ -1539,7 +1539,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             try {
                 BackgroundMusic bm = new BackgroundMusic("./suara/belas.mp3");
                 bm.start();
@@ -1557,7 +1557,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             try {
                 BackgroundMusic bm = new BackgroundMusic("./suara/puluh.mp3");
                 bm.start();
@@ -1566,7 +1566,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             panggil(antrian%10);
         }else if (antrian < 200){
             try {
@@ -1577,11 +1577,11 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             panggil(antrian-100);
         }else if (antrian < 1000){
             panggil(antrian/100);
-            
+
             try {
                 BackgroundMusic bm = new BackgroundMusic("./suara/ratus.mp3");
                 bm.start();
@@ -1590,7 +1590,7 @@ private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             panggil(antrian%100);
         }
     }

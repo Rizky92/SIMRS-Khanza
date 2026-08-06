@@ -12,11 +12,12 @@
 package kepegawaian;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -24,13 +25,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
-import java.util.concurrent.RejectedExecutionException;
-import java.awt.Cursor;
 
 /**
  *
@@ -506,7 +506,7 @@ public class K3RSJenisPekerjaan extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -548,7 +548,7 @@ public class K3RSJenisPekerjaan extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -635,17 +635,17 @@ public class K3RSJenisPekerjaan extends javax.swing.JDialog {
             TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getjenis_pekerjaan_k3rs());
        BtnHapus.setEnabled(akses.getjenis_pekerjaan_k3rs());
        BtnEdit.setEnabled(akses.getjenis_pekerjaan_k3rs());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -671,7 +671,7 @@ public class K3RSJenisPekerjaan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

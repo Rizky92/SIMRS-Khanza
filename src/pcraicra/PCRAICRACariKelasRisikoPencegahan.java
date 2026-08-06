@@ -8,10 +8,10 @@ package pcraicra;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -61,7 +61,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
@@ -77,7 +77,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -268,15 +268,15 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         PCRAICRAKelasRisikoPencegahan pcraicrakelasrisikopencegahan=new PCRAICRAKelasRisikoPencegahan(null,false);
         pcraicrakelasrisikopencegahan.emptTeks();
         pcraicrakelasrisikopencegahan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pcraicrakelasrisikopencegahan.setLocationRelativeTo(internalFrame1);
         pcraicrakelasrisikopencegahan.setAlwaysOnTop(false);
         pcraicrakelasrisikopencegahan.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -313,7 +313,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -365,7 +365,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
             file.createNewFile();
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select pcra_icra_kelas_risiko_pencegahan.kode_kelas,pcra_icra_kelas_risiko_pencegahan.nama_kelas from pcra_icra_kelas_risiko_pencegahan");   
+            ps=koneksi.prepareStatement("select pcra_icra_kelas_risiko_pencegahan.kode_kelas,pcra_icra_kelas_risiko_pencegahan.nama_kelas from pcra_icra_kelas_risiko_pencegahan");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -382,23 +382,23 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
                     ps.close();
                 }
             }
-            
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"pcraicrakelasrisikopencegahan\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
-        }  
+        }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/pcraicrakelasrisikopencegahan.iyem");
@@ -410,7 +410,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
                     for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("Kode").asText(),list.path("Nama").asText()
-                        }); 
+                        });
                     }
                 }else{
                     String cari=TCari.getText().toLowerCase();
@@ -418,7 +418,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
                         if(list.path("Kode").asText().toLowerCase().contains(cari)||list.path("Nama").asText().toLowerCase().contains(cari)){
                             tabMode.addRow(new Object[]{
                                 list.path("Kode").asText(),list.path("Nama").asText()
-                            });                    
+                            });
                         }
                     }
                 }
@@ -446,11 +446,11 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getpcra_icra_kelas_risiko_pencegahan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -476,7 +476,7 @@ public final class PCRAICRACariKelasRisikoPencegahan extends javax.swing.JDialog
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

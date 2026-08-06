@@ -1,8 +1,8 @@
 package rekammedis;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -40,14 +40,14 @@ public class DlgSOAPRalanAggotaTNI extends javax.swing.JDialog {
     private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgSOAPRalanAggotaTNI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -63,7 +63,7 @@ public class DlgSOAPRalanAggotaTNI extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         LoadHTML.setDocument(doc);
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -453,35 +453,35 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            File g = new File("file2.css");            
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("SOAPRalanAnggotaTni.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("SOAPRalanAnggotaTni.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
                                 "<td valign='top' align='center'>"+
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+       
+                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -580,7 +580,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosed(WindowEvent e) {
                 if(satuantni.getTable().getSelectedRow()!= -1){
                     Satuan.setText(satuantni.getTable().getValueAt(satuantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Satuan.requestFocus();
             }
             @Override
@@ -592,7 +592,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         satuantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -600,7 +600,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         satuantni.dispose();
-                    }                
+                    }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -622,7 +622,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosed(WindowEvent e) {
                 if(golongantni.getTable().getSelectedRow()!= -1){
                     Golongan.setText(golongantni.getTable().getValueAt(golongantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Golongan.requestFocus();
             }
             @Override
@@ -634,7 +634,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golongantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -642,7 +642,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     golongantni.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -664,7 +664,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosed(WindowEvent e) {
                 if(jabatantni.getTable().getSelectedRow()!= -1){
                     Jabatan.setText(jabatantni.getTable().getValueAt(jabatantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Jabatan.requestFocus();
             }
             @Override
@@ -676,7 +676,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jabatantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -684,7 +684,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jabatantni.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -706,7 +706,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosed(WindowEvent e) {
                 if(pangkattni.getTable().getSelectedRow()!= -1){
                     Pangkat.setText(pangkattni.getTable().getValueAt(pangkattni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Pangkat.requestFocus();
             }
             @Override
@@ -718,7 +718,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pangkattni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -726,7 +726,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pangkattni.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -748,7 +748,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     Dokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -758,8 +758,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -789,7 +789,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosed(WindowEvent e) {
                 if(poli.getTable().getSelectedRow()!= -1){
                     Poli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -866,7 +866,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='65px'>Registrasi</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>NRP/NIP</td>"+
@@ -887,7 +887,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFFF8' align='center' width='200px'>Instruksi</td>"+
                     "<td valign='middle' bgcolor='#FFFFF8' align='center' width='200px'>Evaluasi</td>"+
                 "</tr>"
-            );     
+            );
             if(Pangkat.getText().trim().equals("")&&Satuan.getText().trim().equals("")&&Golongan.getText().trim().equals("")&&
                     Jabatan.getText().trim().equals("")&&Poli.getText().trim().equals("")&&Dokter.getText().trim().equals("")
                        &&TCari.getText().trim().equals("")){
@@ -930,7 +930,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "reg_periksa.tgl_registrasi between ? and ? and pangkat_tni.nama_pangkat like ? and satuan_tni.nama_satuan like ? and golongan_tni.nama_golongan like ? and jabatan_tni.nama_jabatan like ? and "+
                     "poliklinik.nm_poli like ? and dokter.nm_dokter like ? and reg_periksa.status_lanjut='Ralan' and (pasien.nm_pasien like ? or pasien.nip like ?) order by reg_periksa.tgl_registrasi");
             }
-                
+
             try {
                 if(Pangkat.getText().trim().equals("")&&Satuan.getText().trim().equals("")&&Golongan.getText().trim().equals("")&&
                     Jabatan.getText().trim().equals("")&&Poli.getText().trim().equals("")&&Dokter.getText().trim().equals("")
@@ -949,7 +949,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.setString(9,"%"+TCari.getText().trim()+"%");
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     htmlContent.append(
@@ -996,7 +996,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='2000px' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1005,29 +1005,29 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getsoap_ralan_tni());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,125));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1053,7 +1053,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

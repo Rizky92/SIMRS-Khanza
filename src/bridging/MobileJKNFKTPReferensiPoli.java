@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -15,21 +15,21 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -87,9 +87,9 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-         
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             otorisasi=koneksiDB.USERMOBILEJKNFKTP()+":"+koneksiDB.PASSMOBILEJKNFKTP()+":095";
             link=koneksiDB.URLMOBILEJKNFKTP();
@@ -97,8 +97,8 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
             System.out.println("E : "+e);
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -254,27 +254,27 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString()+"','"+
                                 tabMode.getValueAt(r,2).toString()+"','"+
                                 tabMode.getValueAt(r,3).toString()+"','"+
-                                tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariMobileJKNFKTPReferensiPoli.jasper","report","[ Pencarian Referensi Unit/Poli ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -333,7 +333,7 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -369,12 +369,12 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
 
     public void tampil() {
         try {
-            URL = link+"/ref/poli/tanggal/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");	
+            URL = link+"/ref/poli/tanggal/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDMOBILEJKNFKTP());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-timestamp",utc);            
+	    headers.add("X-timestamp",utc);
 	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYMOBILEJKNFKTP());
@@ -401,8 +401,8 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }  
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -421,10 +421,10 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         }
-    }   
-    
+    }
+
     public JTable getTable(){
         return tbKamar;
     }
- 
+
 }

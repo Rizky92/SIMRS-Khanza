@@ -31,7 +31,7 @@
             echo "<input type=hidden name=action value=$action><input type=hidden name=tgl value=$tgl><input type=hidden name=tnd value=$tnd><input type=hidden name=nm_pasien value=$nm_pasien><input type=hidden name=id value=$id>";
             $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil              = bukaquery($_sql);
-            $baris              = mysqli_fetch_row($hasil); 
+            $baris              = mysqli_fetch_row($hasil);
             $_sqlnext         	= "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' and pegawai.jbtn like '%dokter spesialis%' order by pegawai.id asc limit 1";
             $hasilnext        	= bukaquery($_sqlnext);
             $barisnext        	= mysqli_fetch_row($hasilnext);
@@ -107,7 +107,7 @@
             </tr>
             <tr class="head">
                 <td width="31%" >Jumlah Tindakan</td><td width="">:</td>
-                <td width="67%"><input name="jmlh" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type=text id="TxtIsi4" class="inputbox" value="<?php echo $jmlh;?>" size="10" maxlength="10" />  
+                <td width="67%"><input name="jmlh" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type=text id="TxtIsi4" class="inputbox" value="<?php echo $jmlh;?>" size="10" maxlength="10" />
                 <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
                 </td>
             </tr>
@@ -168,7 +168,7 @@
         <?php
             $_sql   = "select tindakan.tgl,tindakan.id,tindakan.tnd,master_tindakan.nama,tindakan.jm,tindakan.nm_pasien,tindakan.kamar,tindakan.diagnosa,tindakan.jmlh from tindakan inner join master_tindakan where tindakan.tnd=master_tindakan.id and tindakan.id='$id' and tindakan.tgl like '%".$tahun."-".$bulan."%' ORDER BY tindakan.tgl ASC";
             $hasil  = bukaquery($_sql);
-            $jumlah = mysqli_num_rows($hasil);  
+            $jumlah = mysqli_num_rows($hasil);
             $ttljms = 0;
             if(mysqli_num_rows($hasil)!=0) {
                 echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
@@ -222,8 +222,8 @@
 
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljms)." <a target=_blank href=../penggajian/pages/tindakan/laporandetailtindakandokter.php?&id=$id>| Laporan |</a></div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljms)." <a target=_blank href=../penggajian/pages/tindakan/laporandetailtindakandokter.php?&id=$id>| Laporan |</a></div></td>
+                </tr>
              </table>");
     ?>
 </div>

@@ -14,6 +14,7 @@ import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -27,7 +28,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.Cursor;
 
 /**
  *
@@ -72,10 +72,10 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                 column.setPreferredWidth(130);
             }
         }
-        tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());        
+        tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -250,7 +250,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -307,7 +307,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             pstampil=koneksi.prepareStatement("select paket_operasi.kode_paket, paket_operasi.nm_perawatan,(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+"+
                            "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.instrumen+"+
                            "paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+"+
@@ -320,7 +320,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                            "where paket_operasi.status='1' and paket_operasi.kode_paket like ? or "+
                            "paket_operasi.status='1' and paket_operasi.nm_perawatan like ? or "+
                            "paket_operasi.status='1' and penjab.png_jawab like ? order by paket_operasi.kode_paket ");
-            try{                
+            try{
                 pstampil.setString(1,"%"+TCari.getText()+"%");
                 pstampil.setString(2,"%"+TCari.getText()+"%");
                 pstampil.setString(3,"%"+TCari.getText()+"%");
@@ -341,7 +341,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                 if(pstampil!=null){
                     pstampil.close();
                 }
-            }  
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -373,11 +373,11 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    
+
 }

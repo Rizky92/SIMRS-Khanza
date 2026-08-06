@@ -12,26 +12,26 @@
 package surat;
 
 import fungsi.WarnaTable4;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import javax.swing.WindowConstants;
-import java.awt.event.WindowEvent;
 
 /**
  *
@@ -77,7 +77,7 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable4());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }   
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -288,16 +288,16 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
             formtemplate.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             formtemplate.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (formtemplate == null) return;
         if (!formtemplate.isVisible()) {
-            formtemplate.isCek();    
+            formtemplate.isCek();
             formtemplate.emptTeks();
-        }  
+        }
         if (formtemplate.isVisible()) {
             formtemplate.toFront();
             return;
-        }    
+        }
         formtemplate.setVisible(true);
 
     }//GEN-LAST:event_BtnTambahActionPerformed
@@ -348,7 +348,7 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -421,7 +421,7 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         TCari.requestFocus();
     }
@@ -429,11 +429,11 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.gettemplate_persetujuan_penolakan_tindakan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;

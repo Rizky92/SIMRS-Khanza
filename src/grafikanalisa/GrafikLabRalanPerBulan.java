@@ -12,7 +12,6 @@
 package grafikanalisa;
 
 import fungsi.koneksiDB;
-import fungsi.sekuel;
 import fungsi.validasi;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,7 +39,7 @@ public class GrafikLabRalanPerBulan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -201,16 +200,16 @@ public class GrafikLabRalanPerBulan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select DATE_FORMAT(reg_periksa.tgl_registrasi, '%y-%m'),count(distinct reg_periksa.no_rawat) as jumlah "+
                 "from reg_periksa inner join periksa_lab on reg_periksa.no_rawat=periksa_lab.no_rawat where "+
                 "tgl_registrasi between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and "+
@@ -218,25 +217,25 @@ public class GrafikLabRalanPerBulan extends javax.swing.JDialog {
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Kunjungan Lab Rawat Jalan Per Bulan Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Bulan","Jumlah Pasien", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Kunjungan Lab Rawat Jalan Per Bulan Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Bulan","Jumlah Pasien", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Kunjungan Lab Rawat Jalan Per Bulan",freeChart);
-        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());   
+        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(panelBiasa3);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint3ActionPerformed
 
     private void BtnPrint3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint3KeyPressed
-        
+
     }//GEN-LAST:event_BtnPrint3KeyPressed
 
     private void BtnKeluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar3ActionPerformed
@@ -244,7 +243,7 @@ public class GrafikLabRalanPerBulan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3ActionPerformed
 
     private void BtnKeluar3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar3KeyPressed
-        
+
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint4ActionPerformed
@@ -252,7 +251,7 @@ public class GrafikLabRalanPerBulan extends javax.swing.JDialog {
                "select DATE_FORMAT(reg_periksa.tgl_registrasi, '%y-%m'),count(distinct reg_periksa.no_rawat) as jumlah from reg_periksa inner join periksa_lab on reg_periksa.no_rawat=periksa_lab.no_rawat "+
                "where tgl_registrasi between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and reg_periksa.status_lanjut='Ralan' "+
                "group by DATE_FORMAT(reg_periksa.tgl_registrasi, '%y-%m')","Bulan");
-       kas.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());  
+       kas.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());
        kas.setModal(true);
        kas.setAlwaysOnTop(true);
        kas.setLocationRelativeTo(panelBiasa3);
@@ -265,29 +264,29 @@ public class GrafikLabRalanPerBulan extends javax.swing.JDialog {
 
     private void BtnPrint5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint5ActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select DATE_FORMAT(reg_periksa.tgl_registrasi, '%y-%m'),count(distinct reg_periksa.no_rawat) as jumlah "+
                 "from reg_periksa inner join periksa_lab on reg_periksa.no_rawat=periksa_lab.no_rawat where "+
                 "tgl_registrasi between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' and reg_periksa.status_lanjut='Ralan' group by DATE_FORMAT(reg_periksa.tgl_registrasi, '%y-%m')").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Kunjungan Lab Rawat Jalan Per Bulan Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Kunjungan Lab Rawat Jalan Per Bulan Tanggal "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Kunjungan Lab Rawat Jalan Per Bulan",freeChart);
-        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());   
+        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());
         cf.setLocationRelativeTo(panelBiasa3);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint5ActionPerformed
 
     private void BtnPrint5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint5KeyPressed

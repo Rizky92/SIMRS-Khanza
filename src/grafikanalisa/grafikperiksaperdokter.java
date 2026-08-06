@@ -18,17 +18,15 @@ package grafikanalisa;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Font;
-
-import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -36,7 +34,6 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.CombinedDomainCategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
@@ -54,10 +51,10 @@ public class grafikperiksaperdokter extends JDialog {
         // super(title);
           setTitle(title);
          JPanel chartPanel = createDemoPanel(symbol);
-         
+
          chartPanel.setSize(screen.width,screen.height);
-         setContentPane(chartPanel);       
-         
+         setContentPane(chartPanel);
+
          //setSize(screen.width,screen.height);
          setModal(true);
          //setUndecorated(true);
@@ -204,4 +201,3 @@ public class grafikperiksaperdokter extends JDialog {
 //
 //         }
 }
-

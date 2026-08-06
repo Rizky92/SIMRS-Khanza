@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -59,7 +58,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -155,10 +154,10 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Keterangan.setDocument(new batasInput((byte)50).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -176,13 +175,13 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         jam();
     }
 
@@ -1218,7 +1217,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1256,7 +1255,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1281,7 +1280,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }  
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1347,7 +1346,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 StringBuilder htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Umur</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode Petugas</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jenis Kelamin</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.1</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Usia/Umur</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.2</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pernah Didiagnosis Kanker</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.3</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ada Keluarga Kanker</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.4</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Riwayat Merokok</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.5</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Riwayat Bekerja Karsinogenik</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.6</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lingkungan Tinggal Berpolusi</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.7</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Rumah Tidak Sehat</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.8</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pernah Paru Kronis</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.A.9</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Total Skor</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hasil Skrining</b></td><td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td></tr>"
                 );
                 for (i = 0; i < tabMode.getRowCount(); i++) {
@@ -1362,7 +1361,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                 );
                 htmlContent=null;
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1377,8 +1376,8 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataSkriningRisikoKankerParu.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataSkriningRisikoKankerParu.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1387,12 +1386,12 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SEKRINING RISIKO KANKER PARU<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA SEKRINING RISIKO KANKER PARU<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1489,10 +1488,10 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1503,15 +1502,15 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1526,10 +1525,10 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningRisikoKankerParu.jasper","report","::[ Formulir Skrining Risiko Kanker Paru ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,reg_periksa.umurdaftar,reg_periksa.sttsumur,skrining_risiko_kanker_paru.nip,"+
                     "petugas.nama,skrining_risiko_kanker_paru.tanggal,skrining_risiko_kanker_paru.jenis_kelamin,skrining_risiko_kanker_paru.nilai_jenis_kelamin,skrining_risiko_kanker_paru.umur,"+
@@ -1663,7 +1662,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1792,7 +1791,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1823,7 +1822,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                     "pasien.nm_pasien like ? or skrining_risiko_kanker_paru.nip like ? or petugas.nama like ?) "+
                     "order by skrining_risiko_kanker_paru.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1837,7 +1836,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1865,7 +1864,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         JenisKelamin.setSelectedIndex(1);
@@ -1889,7 +1888,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
         TotalHasil.setText("9");
         HasilSkrining.setText("Risiko Ringan");
         JenisKelamin.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1922,10 +1921,10 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             TotalHasil.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
             HasilSkrining.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
             Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -1948,7 +1947,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                     }else{
                         JenisKelamin.setSelectedIndex(1);
                     }
-                    
+
                     if(rs.getInt("umurdaftar")>65){
                         Usia.setSelectedIndex(0);
                     }else if((rs.getInt("umurdaftar")>44)&&(rs.getInt("umurdaftar")<=65)){
@@ -1971,43 +1970,43 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             if(internalFrame1.getHeight()>608){
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,436));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }else{
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_risiko_kanker_paru());
         BtnHapus.setEnabled(akses.getskrining_risiko_kanker_paru());
         BtnEdit.setEnabled(akses.getskrining_risiko_kanker_paru());
-        BtnPrint.setEnabled(akses.getskrining_risiko_kanker_paru()); 
+        BtnPrint.setEnabled(akses.getskrining_risiko_kanker_paru());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -2017,8 +2016,8 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }  
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -2040,7 +2039,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -2090,10 +2089,10 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
                 "lingkungan_tinggal_polusi_tinggi=?,nilai_lingkungan_tinggal_polusi_tinggi=?,lingkungan_rumah_tidak_sehat=?,nilai_lingkungan_rumah_tidak_sehat=?,pernah_paru_kronik=?,"+
                 "nilai_pernah_paru_kronik=?,total_skor=?,hasil_skrining=?,keterangan=?,nip=?",25,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-            JenisKelamin.getSelectedItem().toString(),NilaiJenisKelamin.getText(),Usia.getSelectedItem().toString(),NilaiUsia.getText(), 
-            PernahMenderitaKanker.getSelectedItem().toString(),NilaiPernahMenderitaKanker.getText(),KeluargaKanker.getSelectedItem().toString(),NilaiKeluargaKanker.getText(), 
-            RiwayatMerokok.getSelectedItem().toString(),NilaiRiwayatMerokok.getText(),RiwayatBekerja.getSelectedItem().toString(),NilaiRiwayatBekerja.getText(), 
-            LingkunganTinggal.getSelectedItem().toString(),NilaiLingkunganTinggal.getText(),DalamRumah.getSelectedItem().toString(),NilaiDalamRumah.getText(), 
+            JenisKelamin.getSelectedItem().toString(),NilaiJenisKelamin.getText(),Usia.getSelectedItem().toString(),NilaiUsia.getText(),
+            PernahMenderitaKanker.getSelectedItem().toString(),NilaiPernahMenderitaKanker.getText(),KeluargaKanker.getSelectedItem().toString(),NilaiKeluargaKanker.getText(),
+            RiwayatMerokok.getSelectedItem().toString(),NilaiRiwayatMerokok.getText(),RiwayatBekerja.getSelectedItem().toString(),NilaiRiwayatBekerja.getText(),
+            LingkunganTinggal.getSelectedItem().toString(),NilaiLingkunganTinggal.getText(),DalamRumah.getSelectedItem().toString(),NilaiDalamRumah.getText(),
             PernahParu.getSelectedItem().toString(),NilaiPernahParu.getText(),TotalHasil.getText(),HasilSkrining.getText(),Keterangan.getText(),KdPetugas.getText(),
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
@@ -2160,10 +2159,10 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
     private void simpan() {
         if(Sequel.menyimpantf("skrining_risiko_kanker_paru","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",24,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-            JenisKelamin.getSelectedItem().toString(),NilaiJenisKelamin.getText(),Usia.getSelectedItem().toString(),NilaiUsia.getText(), 
-            PernahMenderitaKanker.getSelectedItem().toString(),NilaiPernahMenderitaKanker.getText(),KeluargaKanker.getSelectedItem().toString(),NilaiKeluargaKanker.getText(), 
-            RiwayatMerokok.getSelectedItem().toString(),NilaiRiwayatMerokok.getText(),RiwayatBekerja.getSelectedItem().toString(),NilaiRiwayatBekerja.getText(), 
-            LingkunganTinggal.getSelectedItem().toString(),NilaiLingkunganTinggal.getText(),DalamRumah.getSelectedItem().toString(),NilaiDalamRumah.getText(), 
+            JenisKelamin.getSelectedItem().toString(),NilaiJenisKelamin.getText(),Usia.getSelectedItem().toString(),NilaiUsia.getText(),
+            PernahMenderitaKanker.getSelectedItem().toString(),NilaiPernahMenderitaKanker.getText(),KeluargaKanker.getSelectedItem().toString(),NilaiKeluargaKanker.getText(),
+            RiwayatMerokok.getSelectedItem().toString(),NilaiRiwayatMerokok.getText(),RiwayatBekerja.getSelectedItem().toString(),NilaiRiwayatBekerja.getText(),
+            LingkunganTinggal.getSelectedItem().toString(),NilaiLingkunganTinggal.getText(),DalamRumah.getSelectedItem().toString(),NilaiDalamRumah.getText(),
             PernahParu.getSelectedItem().toString(),NilaiPernahParu.getText(),TotalHasil.getText(),HasilSkrining.getText(),Keterangan.getText(),KdPetugas.getText()
         })==true){
             tabMode.addRow(new Object[]{
@@ -2174,9 +2173,9 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2202,7 +2201,7 @@ public final class RMSkriningRisikoKankerParu extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

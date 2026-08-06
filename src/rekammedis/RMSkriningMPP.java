@@ -12,11 +12,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -51,18 +51,18 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private String param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16,finger="";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMSkriningMPP(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Alamat","Tgl.Skrining","Parameter 1","Parameter 2","Parameter 3","Parameter 4",
             "Parameter 5","Parameter 6","Parameter 7","Parameter 8","Parameter 9","Parameter 10","Parameter 11","Parameter 12","Parameter 13","Parameter 14",
@@ -103,7 +103,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -1126,7 +1126,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,TglSkrining);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1137,14 +1137,14 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         }else if(NmPetugas.getText().trim().equals("")){
             Valid.textKosong(BtnPetugas,"Petugas");
         }else{
-            param1="Tidak"; 
+            param1="Tidak";
             param2="Tidak";
             param3="Tidak";
             param4="Tidak";
             param5="Tidak";
             param6="Tidak";
             param7="Tidak";
-            param8="Tidak"; 
+            param8="Tidak";
             param9="Tidak";
             param10="Tidak";
             param11="Tidak";
@@ -1226,7 +1226,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1248,8 +1248,8 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1304,14 +1304,14 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select logo from setting"));
                 if(TCari.getText().equals("")){
                     Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
@@ -1344,7 +1344,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
                         "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
                         "mpp_skrining.nip like '%"+TCari.getText().trim()+"%' or pegawai.nama like '%"+TCari.getText().trim()+"%') order by mpp_skrining.tanggal",param);
-                }   
+                }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1412,7 +1412,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     ChkInput.setSelected(true);
-                    isForm(); 
+                    isForm();
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -1425,7 +1425,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
-        
+
     }//GEN-LAST:event_KdPetugasKeyPressed
 
     private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPetugasActionPerformed
@@ -1437,10 +1437,10 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){ 
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
-                    NmPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());   
-                }              
+                    NmPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1463,17 +1463,17 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
 
     private void MnCetakLembarSkriningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakLembarSkriningActionPerformed
         if(tbObat.getSelectedRow()>-1){
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("alamat",AlamatLengkap.getText());   
+            param.put("emailrs",akses.getemailrs());
+            param.put("alamat",AlamatLengkap.getText());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdPetugas.getText());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPetugas.getText()+"\nID "+(finger.equals("")?TPasien.getText():finger)+"\n"+TglSkrining.getSelectedItem());  
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPetugas.getText()+"\nID "+(finger.equals("")?TPasien.getText():finger)+"\n"+TglSkrining.getSelectedItem());
             Valid.MyReportqry("rptCetakSkriningMPP.jasper","report","::[ Laporan Skrining Manager Pelayanan Pasien ]::",
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
                         "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
@@ -1740,7 +1740,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "mpp_skrining.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
                         "pasien.nm_pasien like ? or mpp_skrining.nip like ? or pegawai.nama like ?) order by mpp_skrining.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1753,7 +1753,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1773,7 +1773,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1799,17 +1799,17 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         Param15Tidak.setSelected(true);
         Param16Tidak.setSelected(true);
         TNoRw.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());  
+            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));    
+            JK.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
-            AlamatLengkap.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()); 
-            Valid.SetTgl(TglSkrining,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()); 
+            AlamatLengkap.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            Valid.SetTgl(TglSkrining,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             if(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().equals("Ya")){
                 Param1Ya.setSelected(true);
             }else{
@@ -1891,7 +1891,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                 Param16Tidak.setSelected(true);
             }
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());  
+            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
         }
     }
 
@@ -1930,7 +1930,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1941,32 +1941,32 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,this.getHeight()-262));
-            scrollInput.setVisible(true);      
+            scrollInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            scrollInput.setVisible(false);      
+            scrollInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmpp_skrining());
         BtnHapus.setEnabled(akses.getmpp_skrining());
         BtnEdit.setEnabled(akses.getmpp_skrining());
-        BtnPrint.setEnabled(akses.getmpp_skrining());   
+        BtnPrint.setEnabled(akses.getmpp_skrining());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             NmPetugas.setText(Sequel.CariPegawai(KdPetugas.getText()));
-        }         
+        }
     }
 
     private void hapus() {
@@ -1982,14 +1982,14 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        param1="Tidak"; 
+        param1="Tidak";
         param2="Tidak";
         param3="Tidak";
         param4="Tidak";
         param5="Tidak";
         param6="Tidak";
         param7="Tidak";
-        param8="Tidak"; 
+        param8="Tidak";
         param9="Tidak";
         param10="Tidak";
         param11="Tidak";
@@ -2045,7 +2045,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         }
         if(Param16Ya.isSelected()==true){
             param16="Ya";
-        }  
+        }
         if(Sequel.mengedittf("mpp_skrining","no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,param1=?,param2=?,param3=?,param4=?,param5=?,param6=?,param7=?,param8=?,param9=?,param10=?,param11=?,param12=?,param13=?,param14=?,param15=?,param16=?,nip=?",21,new String[]{
                 TNoRw.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""), param1, param2, param3, param4, param5, param6, param7,param8, param9, param10, param11, param12, param13, param14, param15, param16,
                 KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
@@ -2078,7 +2078,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                 emptTeks();
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2104,7 +2104,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -22,14 +22,14 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  *
@@ -54,7 +54,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"P","Kode Kategori","Nama Kategori"};
         tabMode=new DefaultTableModel(null,row){
@@ -414,14 +414,14 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKategori.getRowCount();i++){ 
+        for(i=0;i<tbKategori.getRowCount();i++){
             if(tbKategori.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tbKategori.getValueAt(i,1).toString())==true){
                     tabMode.removeRow(i);
                     i--;
                 }
             }
-        } 
+        }
         LCount.setText(""+tabMode.getRowCount());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -557,7 +557,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -623,7 +623,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -648,7 +648,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKategori;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -674,7 +674,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -15,7 +15,7 @@
                 echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
 	        $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
                 $hasil              = bukaquery($_sql);
-                $baris              = mysqli_fetch_row($hasil);   
+                $baris              = mysqli_fetch_row($hasil);
                 $_sqlnext           = "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
                 $hasilnext          = bukaquery($_sqlnext);
                 $barisnext          = mysqli_fetch_row($hasilnext);
@@ -121,9 +121,9 @@
             ?>
             <div style="width: 100%; height: 58%; overflow: auto;">
             <?php
-                $_sql       = "Select evaluasi_kinerja_pegawai.tahun,evaluasi_kinerja_pegawai.bulan,evaluasi_kinerja_pegawai.id,evaluasi_kinerja_pegawai.kode_evaluasi, 
+                $_sql       = "Select evaluasi_kinerja_pegawai.tahun,evaluasi_kinerja_pegawai.bulan,evaluasi_kinerja_pegawai.id,evaluasi_kinerja_pegawai.kode_evaluasi,
                                 evaluasi_kinerja.nama_evaluasi,evaluasi_kinerja_pegawai.keterangan from evaluasi_kinerja_pegawai inner join evaluasi_kinerja on
-                                evaluasi_kinerja_pegawai.kode_evaluasi=evaluasi_kinerja.kode_evaluasi where evaluasi_kinerja_pegawai.id='$id' order by 
+                                evaluasi_kinerja_pegawai.kode_evaluasi=evaluasi_kinerja.kode_evaluasi where evaluasi_kinerja_pegawai.id='$id' order by
                                 evaluasi_kinerja_pegawai.tahun,evaluasi_kinerja_pegawai.bulan ASC ";
                 $hasil      = bukaquery($_sql);
                 $jumlah     = mysqli_num_rows($hasil);
@@ -138,7 +138,7 @@
                                 <td width='50%' align='center'>Hasil Evaluasi</td>
                                 <td width='35%' align='center'>Keterangan</td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td>
                                     <center>
@@ -176,8 +176,8 @@
             }
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

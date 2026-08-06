@@ -1,8 +1,8 @@
 package bridging;
-import fungsi.validasi;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -29,7 +29,7 @@ public class DutaParkingRekapKeluar extends javax.swing.JDialog {
     private final validasi Valid=new validasi();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -225,7 +225,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -240,14 +240,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 );
                 bg.close();
 
-                File f;            
+                File f;
                 BufferedWriter bw;
-                
+
                 String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (XLS)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        f = new File("RekapParkir.html");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("RekapParkir.html");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                     "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                         "<tr class='isi2'>"+
@@ -255,17 +255,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                 "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                 akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                 akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                             "</td>"+
                                        "</tr>"+
                                     "</table>")
                         );
-                        bw.close();                         
-                        Desktop.getDesktop().browse(f.toURI());    
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
-                        f = new File("RekapParkir.wps");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("RekapParkir.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                     "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                         "<tr class='isi2'>"+
@@ -273,17 +273,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                 "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                 akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                 akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                             "</td>"+
                                        "</tr>"+
                                     "</table>")
                         );
-                        bw.close();                         
-                        Desktop.getDesktop().browse(f.toURI()); 
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (XLS)":
-                        f = new File("RekapParkir.xls");            
-                        bw = new BufferedWriter(new FileWriter(f));            
+                        f = new File("RekapParkir.xls");
+                        bw = new BufferedWriter(new FileWriter(f));
                         bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                     "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                         "<tr class='isi2'>"+
@@ -291,15 +291,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                 "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                 akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                 akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                             "</td>"+
                                        "</tr>"+
                                     "</table>")
                         );
-                        bw.close();                         
-                        Desktop.getDesktop().browse(f.toURI()); 
-                        break; 
-                }   
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
+                        break;
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -443,7 +443,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'>Waktu Login</td>").
                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'>Waktu Logout</td>").
                             append("<td valign='middle' bgcolor='#FFFAFA' align='center'>Tipe</td>").
-                        append("</tr>");  
+                        append("</tr>");
             koneksi=koneksiDBDutaParking.condb();
             ps=koneksi.prepareStatement(
                     "select keluar.kode,keluar.nopol,keluar.masuk,keluar.keluar,keluar.durasi,keluar.pintum,keluar.pintuk,keluar.jenisk,keluar.tarif,"+
@@ -515,7 +515,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -525,15 +525,15 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getduta_parkir_rekap_keluar());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -559,7 +559,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

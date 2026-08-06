@@ -23,7 +23,7 @@
                                     <div class='col-md-12 col-sm-12'>
                                         <div class='about-info wow fadeInUp' data-wow-delay='0.1s'>
                                             <h3>Booking tidak ditemukan</h3><br/>
-                                            Silahkan masukkan No. Booking dan No. Hp/Telp dengan benar... !!! 
+                                            Silahkan masukkan No. Booking dan No. Hp/Telp dengan benar... !!!
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                         <div class='col-md-12 col-sm-12'>
                                             <div class='about-info wow fadeInUp' data-wow-delay='0.1s'>
                                                 <h3>Booking kadaluarsa</h3><br/>
-                                                Silahkan melakukan booking ulang... !!! 
+                                                Silahkan melakukan booking ulang... !!!
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                             <div class='col-md-12 col-sm-12'>
                                                 <div class='about-info wow fadeInUp' data-wow-delay='0.1s'>
                                                     <h3>No. Booking $nobooking</h3><br/>
-                                                    Mohon maaf, booking Anda masih menunggu peninjauan dari admin Kami. Silahkan cek kembali beberapa saat lagi   
+                                                    Mohon maaf, booking Anda masih menunggu peninjauan dari admin Kami. Silahkan cek kembali beberapa saat lagi
                                                 </div>
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@
                                   </section>";
                             JSRedirect2("index.php?act=Home#appointment",14);
                         }else if($rsquerycekbooking["status"]=="Diterima"){
-                            $querycekbookingperiksa = bukaquery("select booking_registrasi.tanggal_booking,booking_registrasi.jam_booking,booking_registrasi.no_rkm_medis,booking_periksa.nama,booking_periksa.alamat,booking_periksa.no_telp,booking_periksa.email,booking_registrasi.tanggal_periksa,dokter.nm_dokter,poliklinik.nm_poli,booking_registrasi.no_reg,aes_decrypt(personal_pasien.password,'windi') as pass from booking_registrasi inner join dokter on booking_registrasi.kd_dokter=dokter.kd_dokter inner join poliklinik on booking_registrasi.kd_poli=poliklinik.kd_poli inner join booking_periksa_diterima on booking_periksa_diterima.no_rkm_medis=booking_registrasi.no_rkm_medis inner join booking_periksa on booking_periksa_diterima.no_booking=booking_periksa.no_booking inner join personal_pasien on booking_registrasi.no_rkm_medis=personal_pasien.no_rkm_medis where booking_periksa.no_booking='$nobooking'"); 
+                            $querycekbookingperiksa = bukaquery("select booking_registrasi.tanggal_booking,booking_registrasi.jam_booking,booking_registrasi.no_rkm_medis,booking_periksa.nama,booking_periksa.alamat,booking_periksa.no_telp,booking_periksa.email,booking_registrasi.tanggal_periksa,dokter.nm_dokter,poliklinik.nm_poli,booking_registrasi.no_reg,aes_decrypt(personal_pasien.password,'windi') as pass from booking_registrasi inner join dokter on booking_registrasi.kd_dokter=dokter.kd_dokter inner join poliklinik on booking_registrasi.kd_poli=poliklinik.kd_poli inner join booking_periksa_diterima on booking_periksa_diterima.no_rkm_medis=booking_registrasi.no_rkm_medis inner join booking_periksa on booking_periksa_diterima.no_booking=booking_periksa.no_booking inner join personal_pasien on booking_registrasi.no_rkm_medis=personal_pasien.no_rkm_medis where booking_periksa.no_booking='$nobooking'");
                             if($rsquerycekbookingperiksa = mysqli_fetch_array($querycekbookingperiksa)) {
                                 $balasan = getOne2("select balasan from booking_periksa_balasan where no_booking='$nobooking'");
                                 echo "<section id='news' data-stellar-background-ratio='2.5'>
@@ -104,8 +104,8 @@
                                                                </table>
                                                             </b>
                                                             <br/>
-                                                        </div>                
-                                                        <br/>Silahkan hapalkan nomor rekam medis dan password Anda, dan Anda wajib menjaga kerahasiaannya. Klik <a href='index.php?act=LoginPasien' class='btn btn-success' >Log In</a> dan gunakan nomor rekam medis serta password Anda untuk masuk ke aplikasi EPasien kami. Untuk menjaga keamanan data, silahkan ubah password default yang sudah kami berikan di aplikasi EPasien setelah anda login.                     
+                                                        </div>
+                                                        <br/>Silahkan hapalkan nomor rekam medis dan password Anda, dan Anda wajib menjaga kerahasiaannya. Klik <a href='index.php?act=LoginPasien' class='btn btn-success' >Log In</a> dan gunakan nomor rekam medis serta password Anda untuk masuk ke aplikasi EPasien kami. Untuk menjaga keamanan data, silahkan ubah password default yang sudah kami berikan di aplikasi EPasien setelah anda login.
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,7 +117,7 @@
                                             <div class='row'>
                                                 <div class='col-md-12 col-sm-12'>
                                                     <div class='about-info wow fadeInUp' data-wow-delay='0.1s'>
-                                                        <h3>Gagal</h3><br/> 
+                                                        <h3>Gagal</h3><br/>
                                                         Terjadi kesalahan saat pengecekan booking
                                                     </div>
                                                 </div>
@@ -135,7 +135,7 @@
                             <div class='row'>
                                 <div class='col-md-12 col-sm-12'>
                                     <div class='about-info wow fadeInUp' data-wow-delay='0.1s'>
-                                        <h3>Gagal</h3><br/> 
+                                        <h3>Gagal</h3><br/>
                                         Terjadi kesalahan saat pengecekan booking
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                       </section>";
                 JSRedirect2("index.php?act=CekBooking",4);
             }
-        }   
+        }
     }else{
         echo "<section id=\"appointment\" data-stellar-background-ratio=\"3\">
                 <div class=\"container\">
@@ -164,7 +164,7 @@
                                         <label for=\"nohp\">Nomor HP/Telp</label>
                                         <input type=\"tel\" class=\"form-control\" onkeydown=\"setDefault(this, document.getElementById('MsgIsi2'));\" id=\"TxtIsi2\" pattern=\"[0-9]{1,65}\" title=\" 0-9 (Maksimal 65 karakter)\" required name=\"nohp\" placeholder=\"Nomor HP/Telp\" autocomplete=\"off\" />
                                         <span id=\"MsgIsi2\" style=\"color:#CC0000; font-size:10px;\"></span>
-                                    </div>     
+                                    </div>
                                     <div class=\"col-md-12 col-sm-12\">
                                         <button type=\"submit\" class=\"form-control\" id=\"cf-submit\" name=\"btnCekBooking\">Cek Status</button>
                                     </div>
@@ -176,5 +176,3 @@
               </section>";
     }
 ?>
-
-        

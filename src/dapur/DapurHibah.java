@@ -3,11 +3,11 @@ package dapur;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventaris.InventarisAsalHibah;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -25,8 +25,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -56,7 +56,7 @@ public class DapurHibah extends javax.swing.JDialog {
     private riwayatdapur Trackbarang=new riwayatdapur();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -108,8 +108,8 @@ public class DapurHibah extends javax.swing.JDialog {
 
         NoFaktur.setDocument(new batasInput((byte)15).getKata(NoFaktur));
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
-        kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));       
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));      
+        kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         Keterangan.setDocument(new batasInput((byte)100).getKata(Keterangan));
     }
 
@@ -487,7 +487,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
 private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){ 
+            for(i=0;i<tbDokter.getRowCount();i++){
                 tbDokter.setValueAt("",i,0);
                 tbDokter.setValueAt(0,i,5);
             }
@@ -525,7 +525,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                 }
             });
-        }  
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
@@ -618,12 +618,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if (reply == JOptionPane.YES_OPTION) {
                 Sequel.AutoComitFalse();
                 sukses=true;
-                
+
                 if(Sequel.menyimpantf2("dapur_hibah","?,?,?,?,?,?","No.Hibah",6,new String[]{
                     NoFaktur.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglBeli.getSelectedItem()+""),sbttl+"",Keterangan.getText()
                 })==true){
                     jml=tbDokter.getRowCount();
-                    for(i=0;i<jml;i++){  
+                    for(i=0;i<jml;i++){
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                             if(Sequel.menyimpantf2("dapur_detail_hibah","?,?,?,?,?,?","Transaksi Hibah",6,new String[]{
                                 NoFaktur.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
@@ -635,13 +635,13 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 });
                             }else{
                                 sukses=false;
-                            }                                  
-                        }                
+                            }
+                        }
                     }
                 }else{
                     sukses=false;
-                }                        
-                   
+                }
+
                 if(sukses==true){
                     Sequel.queryu("delete from tampjurnal");
                     if(Sequel.menyimpantf2("tampjurnal","?,?,?,?",4,new String[]{Sequel.cariIsi("select Hibah_Dapur from set_akun2"),"PERSEDIAAN BARANG DAPUR",""+(sbttl),"0"})==false){
@@ -651,14 +651,14 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         sukses=false;
                     }
                     if(sukses==true){
-                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG DAPUR, OLEH "+akses.getkode()); 
-                    } 
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG DAPUR, OLEH "+akses.getkode());
+                    }
                 }
-                
+
                 if(sukses==true){
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
-                    for(i=0;i<jml;i++){ 
+                    for(i=0;i<jml;i++){
                         tbDokter.setValueAt("",i,0);
                         tbDokter.setValueAt(0,i,5);
                     }
@@ -667,10 +667,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
                 }
-                Sequel.AutoComitTrue();  
+                Sequel.AutoComitTrue();
                 autoNomor();
             }
-        }   
+        }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
@@ -734,10 +734,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(asalhibah.getTable().getSelectedRow()!= -1){                   
-                    kdsup.setText(asalhibah.getTable().getValueAt(asalhibah.getTable().getSelectedRow(),0).toString());                    
+                if(asalhibah.getTable().getSelectedRow()!= -1){
+                    kdsup.setText(asalhibah.getTable().getValueAt(asalhibah.getTable().getSelectedRow(),0).toString());
                     nmsup.setText(asalhibah.getTable().getValueAt(asalhibah.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdsup.requestFocus();
             }
             @Override
@@ -749,7 +749,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         asalhibah.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -757,7 +757,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     asalhibah.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -779,10 +779,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }            
+                }
                 kdptg.requestFocus();
             }
             @Override
@@ -881,12 +881,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             ps=koneksi.prepareStatement(
                     "select dapurbarang.kode_brng, dapurbarang.nama_brng,dapurbarang.kode_sat,dapurbarang.harga "+
                     " from dapurbarang where dapurbarang.status='1' order by dapurbarang.nama_brng");
-            try{   
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{"",rs.getString(1),rs.getString(2),rs.getString(3),rs.getDouble(4),0});
                     iyembuilder.append("{\"KodeBarang\":\"").append(rs.getString(1)).append("\",\"NamaBarang\":\"").append(rs.getString(2).replaceAll("\"","")).append("\",\"Satuan\":\"").append(rs.getString(3)).append("\",\"Harga\":\"").append(rs.getString(4)).append("\"},");
-                }   
+                }
             }catch(Exception e){
                 System.out.println(e);
             }finally{
@@ -896,14 +896,14 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-            
+            }
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"hibahdapur\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -912,7 +912,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
-    
+
     private void tampil2() {
         try{
             row=tbDokter.getRowCount();
@@ -924,7 +924,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                 } catch (Exception e) {
                     jml=jml+0;
-                } 
+                }
             }
 
             kodebarang=new String[jml];
@@ -933,7 +933,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             harga=new double[jml];
             jumlah=new double[jml];
             subtotal=new double[jml];
-            index=0;        
+            index=0;
             for(i=0;i<row;i++){
                 try {
                     if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
@@ -958,7 +958,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             harga=null;
             jumlah=null;
             subtotal=null;
-            
+
             myObj = new FileReader("./cache/hibahdapur.iyem");
             root = mapper.readTree(myObj);
             response = root.path("hibahdapur");
@@ -995,33 +995,33 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if(!tbDokter.getValueAt(row,0).toString().equals("")){
                 try {
                     if(Double.parseDouble(tbDokter.getValueAt(row,0).toString())>0){
-                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,4).toString()), row,5);             
+                        tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,4).toString()), row,5);
                     }
                 } catch (Exception e) {
                     tbDokter.setValueAt("",row,0);
-                    tbDokter.setValueAt(0,row,5);     
-                } 
+                    tbDokter.setValueAt(0,row,5);
+                }
             }else{
-                tbDokter.setValueAt(0,row,5);    
-            }               
+                tbDokter.setValueAt(0,row,5);
+            }
         }
-        
+
         ;sbttl=0;
         w=0;
-        
+
         jml=tbDokter.getRowCount();
-        for(i=0;i<jml;i++){                 
+        for(i=0;i<jml;i++){
             try {
-                w=Double.parseDouble(tbDokter.getValueAt(i,5).toString());                
+                w=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
             }catch (Exception e) {
-                w=0;                
+                w=0;
             }
-            sbttl=sbttl+w;       
+            sbttl=sbttl+w;
         }
         LTotal.setText(Valid.SetAngka(sbttl));
     }
-   
-    
+
+
     public void isCek(){
         autoNomor();
         TCari.requestFocus();
@@ -1032,14 +1032,14 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             BtnSimpan.setEnabled(akses.gethibah_dapur());
             BtnTambah.setEnabled(akses.getdapur_barang());
             nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
-        }        
+        }
     }
-    
+
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(dapur_hibah.no_hibah,3),signed)),0) from dapur_hibah where dapur_hibah.tgl_hibah='"+Valid.SetTgl(TglBeli.getSelectedItem()+"")+"' ",
-                "HD"+TglBeli.getSelectedItem().toString().substring(6,10)+TglBeli.getSelectedItem().toString().substring(3,5)+TglBeli.getSelectedItem().toString().substring(0,2),3,NoFaktur); 
+                "HD"+TglBeli.getSelectedItem().toString().substring(6,10)+TglBeli.getSelectedItem().toString().substring(3,5)+TglBeli.getSelectedItem().toString().substring(0,2),3,NoFaktur);
     }
- 
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1065,7 +1065,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

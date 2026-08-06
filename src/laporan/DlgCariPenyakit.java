@@ -12,10 +12,10 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -26,8 +26,8 @@ import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -40,11 +40,11 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private String[] hlm;   
+    private String[] hlm;
     private String awal="0";
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
-    private double jumlah=0,x=0,i=0; 
+    private double jumlah=0,x=0,i=0;
     private int z=0,j=0,mulai=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -84,7 +84,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -308,7 +308,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        
+
         //nm_dokter.setModal(true);
         DlgPenyakit penyakit=new DlgPenyakit(null,false);
         penyakit.emptTeks();
@@ -317,7 +317,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setAlwaysOnTop(false);
         penyakit.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());           
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -387,7 +387,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                 (TCari.getText().trim().equals("")?"":"where penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or "+
                 "penyakit.ciri_ciri like ? or penyakit.keterangan like ? or kategori_penyakit.nm_kategori like ? or "+
                 "kategori_penyakit.ciri_umum like ? ")+"order by penyakit.kd_penyakit  LIMIT ?,500"
-            );  
+            );
             try{
                 awal="0";
                 if(cmbHlm.getItemCount()>0){
@@ -408,7 +408,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     ps.setString(j,"%"+TCari.getText().trim()+"%");
                     j++;
                 }
-                    
+
                 ps.setInt(j,Integer.parseInt(awal));
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -426,8 +426,8 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
-            
+
+
             ps2=koneksi.prepareStatement(
                 "select count(penyakit.kd_penyakit) as jumlah from kategori_penyakit inner join penyakit on penyakit.kd_ktg=kategori_penyakit.kd_ktg  "+
                 (TCari.getText().trim().equals("")?"":"where penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or penyakit.ciri_ciri like ? or "+
@@ -448,11 +448,11 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     j++;
                     ps2.setString(j,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs2=ps2.executeQuery();
                 jumlah=0;
                 if(rs2.next()){
-                   jumlah=rs2.getDouble("jumlah");   
+                   jumlah=rs2.getDouble("jumlah");
                 }
                 x=jumlah/499;
                 i=Math.ceil(x);
@@ -473,25 +473,25 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                 if(ps2!=null){
                     ps2.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnTambah.setEnabled(akses.getpenyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -517,7 +517,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -32,10 +32,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
 
 
 /**
@@ -143,7 +143,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         Antibiotik.setDocument(new batasInput((int)200).getKata(Antibiotik));
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -861,7 +861,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             //Valid.pindah(evt,TTmpRujuk,TDiagnosa);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -906,7 +906,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
                 })==true){
                     runBackground(() ->tampil());
                     emptTeks();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -921,7 +921,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -940,8 +940,8 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -979,7 +979,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             Valid.textKosong(Tania,"Tania");
         }else if(Scabies.getText().trim().equals("")){
             Valid.textKosong(Scabies,"Scabies");
-        }else{         
+        }else{
             Sequel.mengedit("data_HAIs","tanggal=? and no_rawat=?","tanggal=?,no_rawat=?,ETT=?,CVL=?,IVL=?,UC=?,VAP=?,IAD=?,PLEB=?,ISK=?,ILO=?,DEKU=?,SPUTUM=?,DARAH=?,URINE=?,ANTIBIOTIK=?,HAP=?,Tinea=?,Scabies=?",21,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),ETT.getText(),CVL.getText(),
                 IVL.getText(),UC.getText(),VAP.getText(),IAD.getText(),PLEB.getText(),ISK.getText(),ILO.getText(),
@@ -1019,17 +1019,17 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));   
-                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));   
-                param.put("parameter","%"+TCari.getText().trim()+"%");   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptDataHAIs.jasper",param,"::[ Data HAIs Pasien ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -1366,7 +1366,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         Tanggal.setDate(new Date());
     }
 
-   
+
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1402,14 +1402,14 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
-    
+
     public void setNoRm(String norwt, Date tgl1, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         isRawat();
-        isPsien();              
+        isPsien();
         ChkInput.setSelected(true);
         isForm();
         norawatibu=Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?",TNoRw.getText());
@@ -1419,21 +1419,21 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText()));
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,216));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdata_HAIs());
         BtnHapus.setEnabled(akses.getdata_HAIs());
@@ -1465,7 +1465,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

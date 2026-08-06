@@ -1,8 +1,8 @@
 package laporan;
-import fungsi.koneksiDB;
-import fungsi.validasi;
 import fungsi.akses;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -40,15 +40,15 @@ public class DlgKIPPasienRalan extends javax.swing.JDialog {
                 stth5s14l="",stth5s14p="",stth15s24l="",stth15s24p="",stth25s44l="",stth25s44p="",stth45s64l="",stth45s64p="",
                 stlbth65l="",stlbth65p="",diagnosa="",stpulang="",strawat="",strujuk="",
                 stkbl="",stkbp="",stkll="",stklp="";
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgKIPPasienRalan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -252,19 +252,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("kipralan.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("kipralan.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='"+(1750+(70*kolom))+"' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
@@ -273,17 +273,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                     "<font size='2' face='Tahoma'>KARTU INDEKS PENYAKIT PASIEN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem()+"<br>"+
-                                    "Diagnosa : "+nmpenyakit.getText()+"<br>Kode ICD X : "+kdpenyakit.getText()+"<br><br></font>"+        
+                                    "Diagnosa : "+nmpenyakit.getText()+"<br>Kode ICD X : "+kdpenyakit.getText()+"<br><br></font>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -330,10 +330,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -412,7 +412,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             carabayar=new String[kolom];
             kodebayar=new String[kolom];
             jumlahcarabayar=new int[kolom];
-            
+
             htmlContent.append("<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' width='10px' rowspan='3'>NO.</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='40px' rowspan='3'>NO.R.M.</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='150px' rowspan='3'>Nama Pasien</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='90px' rowspan='3'>NIK</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='3'>TGL.MASUK</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='200px' colspan='18'>GOLONGAN UMUR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='60px' rowspan='3'>DIAGNOSA KOMPILASI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='70px' rowspan='2' colspan='3'>TINDAK LANJUT PERAWATAN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='2' colspan='2'>KASUS BARU</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='50px' rowspan='2' colspan='2'>KASUS LAMA</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='").append(70*kolom).append("px' rowspan='2' colspan='").append(kolom).append("'>KETERANGAN</td></tr><tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-6 hr</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>7-27hr</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>28hr-&lsaquo;1th</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-4th</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>5-14th</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>15-24th</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>25-44th</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>45-64th</td><td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>&rsaquo;&nbsp;64</td></tr><tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>PULANG</td><td valign='middle' bgcolor='#FFFAFA' align='center'>RAWAT</td><td valign='middle' bgcolor='#FFFAFA' align='center'>RUJUK</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td><td valign='middle' bgcolor='#FFFAFA' align='center'>L</td><td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>");
             i=0;
             ps2=koneksi.prepareStatement("select kd_pj,png_jawab from penjab order by png_jawab");
@@ -436,8 +436,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             }
             htmlContent.append(
                 "</tr>"
-            );    
-            
+            );
+
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.tgl_registrasi,reg_periksa.no_rawat,"+
                     "reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,reg_periksa.stts,diagnosa_pasien.status_penyakit, "+
@@ -545,7 +545,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         default:
                             break;
                     }
-                    
+
                     switch (rs.getString("stts")) {
                         case "Belum":
                             pulang++;
@@ -582,7 +582,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         default:
                             break;
                     }
-                    
+
                     if(rs.getString("status_penyakit").equals("Lama")){
                         if(rs.getString("jk").equals("L")){
                             kll++;
@@ -600,9 +600,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             stkbp="V";
                         }
                     }
-                    
+
                     diagnosa="";
-                    ps2=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.status='Ralan' and diagnosa_pasien.prioritas>1 and diagnosa_pasien.no_rawat=?");    
+                    ps2=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.status='Ralan' and diagnosa_pasien.prioritas>1 and diagnosa_pasien.no_rawat=?");
                     try {
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
@@ -622,11 +622,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }  
+                    }
                     if(diagnosa.endsWith(",")){
                         diagnosa = diagnosa.substring(0,diagnosa.length() - 1);
                     }
-                    
+
                     htmlContent.append("<tr class='isi'><td valign='middle' align='center'>").append(i).append("</td><td valign='middle' align='center'>").append(rs.getString("no_rkm_medis")).append("</td><td valign='middle' align='left'>").append(rs.getString("nm_pasien")).append("</td><td valign='middle' align='center'>").append(rs.getString("no_ktp")).append("</td><td valign='middle' align='center'>").append(rs.getString("tgl_registrasi")).append("</td><td valign='middle' align='center'>").append(sthr0s6l).append("</td><td valign='middle' align='center'>").append(sthr0s6p).append("</td><td valign='middle' align='center'>").append(sthr7s28l).append("</td><td valign='middle' align='center'>").append(sthr7s28p).append("</td><td valign='middle' align='center'>").append(sthr28s1thl).append("</td><td valign='middle' align='center'>").append(sthr28s1thp).append("</td><td valign='middle' align='center'>").append(stth1s4l).append("</td><td valign='middle' align='center'>").append(stth1s4p).append("</td><td valign='middle' align='center'>").append(stth5s14l).append("</td><td valign='middle' align='center'>").append(stth5s14p).append("</td><td valign='middle' align='center'>").append(stth15s24l).append("</td><td valign='middle' align='center'>").append(stth15s24p).append("</td><td valign='middle' align='center'>").append(stth25s44l).append("</td><td valign='middle' align='center'>").append(stth25s44p).append("</td><td valign='middle' align='center'>").append(stth45s64l).append("</td><td valign='middle' align='center'>").append(stth45s64p).append("</td><td valign='middle' align='center'>").append(stlbth65l).append("</td><td valign='middle' align='center'>").append(stlbth65p).append("</td><td valign='middle' align='center'>").append(diagnosa).append("</td><td valign='middle' align='center'>").append(stpulang).append("</td><td valign='middle' align='center'>").append(strawat).append("</td><td valign='middle' align='center'>").append(strujuk).append("</td><td valign='middle' align='center'>").append(stkbl).append("</td><td valign='middle' align='center'>").append(stkbp).append("</td><td valign='middle' align='center'>").append(stkll).append("</td><td valign='middle' align='center'>").append(stklp).append("</td>");
                     for(z=0;z<kolom;z++){
                         carabayar[z]="";
@@ -651,7 +651,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             if((i-1)>0){
                 htmlContent.append("<tr class='isi'><td valign='middle' align='right' colspan='5'>Total : </td><td valign='middle' align='center'>").append(hr0s6l).append("</td><td valign='middle' align='center'>").append(hr0s6p).append("</td><td valign='middle' align='center'>").append(hr7s28l).append("</td><td valign='middle' align='center'>").append(hr7s28p).append("</td><td valign='middle' align='center'>").append(hr28s1thl).append("</td><td valign='middle' align='center'>").append(hr28s1thp).append("</td><td valign='middle' align='center'>").append(th1s4l).append("</td><td valign='middle' align='center'>").append(th1s4p).append("</td><td valign='middle' align='center'>").append(th5s14l).append("</td><td valign='middle' align='center'>").append(th5s14p).append("</td><td valign='middle' align='center'>").append(th15s24l).append("</td><td valign='middle' align='center'>").append(th15s24p).append("</td><td valign='middle' align='center'>").append(th25s44l).append("</td><td valign='middle' align='center'>").append(th25s44p).append("</td><td valign='middle' align='center'>").append(th45s64l).append("</td><td valign='middle' align='center'>").append(th45s64p).append("</td><td valign='middle' align='center'>").append(lbth65l).append("</td><td valign='middle' align='center'>").append(lbth65p).append("</td><td valign='middle' align='center'></td><td valign='middle' align='center'>").append(pulang).append("</td><td valign='middle' align='center'>").append(rawat).append("</td><td valign='middle' align='center'>").append(rujuk).append("</td><td valign='middle' align='center'>").append(kbl).append("</td><td valign='middle' align='center'>").append(kbp).append("</td><td valign='middle' align='center'>").append(kll).append("</td><td valign='middle' align='center'>").append(klp).append("</td>");
                 for(z=0;z<kolom;z++){
@@ -670,13 +670,13 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getkip_pasien_ralan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -702,7 +702,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

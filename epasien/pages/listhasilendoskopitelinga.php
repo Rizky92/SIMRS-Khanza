@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $queryendoskopi = bukaquery(
@@ -43,21 +43,21 @@
                                             <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                 <tr width='100%'>
                                                     <td valign='middle' width='30%'>- Liang Telinga</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["kondisi_liang_telinga_kanan"].($rsqueryendoskopi["keterangan_kondisi_liang_telinga_kanan"]?"":",".$rsqueryendoskopi["keterangan_kondisi_liang_telinga_kanan"])."</td>
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' colspan='3'>
-                                                        - Membran Timpani 
+                                                        - Membran Timpani
                                                         <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Perforasi</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["membran_timpani_perforasi_kanan"].($rsqueryendoskopi["keterangan_membran_timpani_perforasi_kanan"]?"":",".$rsqueryendoskopi["keterangan_membran_timpani_perforasi_kanan"])."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Intak</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["membran_timpani_intak_kanan"]."</td>
                                                             </tr>
                                                         </table>
@@ -69,27 +69,27 @@
                                                         <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Mukosa</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_mukosa_kanan"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Osikel</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_osikel_kanan"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Isthmus</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_isthmus_kanan"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Anterior</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_anterior_kanan"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Posterior</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_posterior_kanan"]."</td>
                                                             </tr>
                                                         </table>
@@ -97,7 +97,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Lain-lain</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["lainlain_kanan"]."</td>
                                                 </tr>
                                             </table>
@@ -109,7 +109,7 @@
                                             <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                 <tr width='100%'>
                                                     <td valign='middle' width='30%'>- Liang Telinga</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["kondisi_liang_telinga_kiri"].($rsqueryendoskopi["keterangan_kondisi_liang_telinga_kiri"]?"":",".$rsqueryendoskopi["keterangan_kondisi_liang_telinga_kiri"])."</td>
                                                 </tr>
                                                 <tr>
@@ -118,12 +118,12 @@
                                                         <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Perforasi</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["membran_timpani_perforasi_kiri"].($rsqueryendoskopi["keterangan_membran_timpani_perforasi_kiri"]?"":",".$rsqueryendoskopi["keterangan_membran_timpani_perforasi_kiri"])."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Intak</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["membran_timpani_intak_kiri"]."</td>
                                                             </tr>
                                                         </table>
@@ -135,27 +135,27 @@
                                                         <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Mukosa</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_mukosa_kiri"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Osikel</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_osikel_kiri"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Isthmus</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_isthmus_kiri"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Anterior</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_anterior_kiri"]."</td>
                                                             </tr>
                                                             <tr>
                                                                 <td valign='middle' width='30%'>Posterior</td>
-                                                                <td valign='middle' width='1%'>:</td>                                        
+                                                                <td valign='middle' width='1%'>:</td>
                                                                 <td valign='middle' width='69%'>".$rsqueryendoskopi["kavum_timpani_posterior_kiri"]."</td>
                                                             </tr>
                                                         </table>
@@ -163,7 +163,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td valign='middle' width='30%'>- Lain-lain</td>
-                                                    <td valign='middle' width='1%'>:</td>                                        
+                                                    <td valign='middle' width='1%'>:</td>
                                                     <td valign='middle' width='69%'>".$rsqueryendoskopi["lainlain_kiri"]."</td>
                                                 </tr>
                                             </table>

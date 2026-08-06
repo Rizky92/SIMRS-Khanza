@@ -45,7 +45,7 @@ public class akunbillingranap {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
             PreparedStatement ps = koneksi.prepareStatement(
                 "select set_akun_ranap2.Harian_Ranap,set_akun_ranap2.Uang_Muka_Ranap,set_akun_ranap2.Sisa_Uang_Muka_Ranap from set_akun_ranap2"
@@ -60,7 +60,7 @@ public class akunbillingranap {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
             PreparedStatement ps = koneksi.prepareStatement(
                 "select set_akun.PPN_Keluaran from set_akun"
@@ -76,7 +76,7 @@ public class akunbillingranap {
             System.out.println("Notif Pengaturan Akun PPN Keluaran Ralan : "+e);
         }
     }
-    
+
     public static String getTindakan_Ranap(){return akunbillingranap.Tindakan_Ranap;}
     public static String getLaborat_Ranap(){return akunbillingranap.Laborat_Ranap;}
     public static String getRadiologi_Ranap(){return akunbillingranap.Radiologi_Ranap;}

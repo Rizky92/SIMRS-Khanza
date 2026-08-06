@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select layanan_kedokteran_fisik_rehabilitasi.no_rawat,date_format(layanan_kedokteran_fisik_rehabilitasi.tanggal,'%d/%m/%Y %H:%i:%s') as tanggal,layanan_kedokteran_fisik_rehabilitasi.diagnosa_medis,layanan_kedokteran_fisik_rehabilitasi.kd_dokter,".
                                 "dokter.nm_dokter from layanan_kedokteran_fisik_rehabilitasi inner join dokter on layanan_kedokteran_fisik_rehabilitasi.kd_dokter=dokter.kd_dokter inner join reg_periksa on reg_periksa.no_rawat=layanan_kedokteran_fisik_rehabilitasi.no_rawat ".

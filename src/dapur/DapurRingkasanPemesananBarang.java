@@ -1,10 +1,10 @@
 package dapur;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -51,7 +51,7 @@ public class DapurRingkasanPemesananBarang extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Double.class, java.lang.Double.class,java.lang.Object.class
              };
              /*Class[] types = new Class[] {
@@ -92,7 +92,7 @@ public class DapurRingkasanPemesananBarang extends javax.swing.JDialog {
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
         kdbar.setDocument(new batasInput((byte)15).getKata(kdbar));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
     /** This method is called from within the constructor to
@@ -672,12 +672,12 @@ public class DapurRingkasanPemesananBarang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -695,10 +695,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(suplier.getTable().getSelectedRow()!= -1){                   
-                    kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());                    
+                if(suplier.getTable().getSelectedRow()!= -1){
+                    kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                     nmsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdsup.requestFocus();
             }
             @Override
@@ -710,7 +710,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -718,11 +718,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     suplier.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         suplier.emptTeks();
         suplier.isCek();
         suplier.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -740,7 +740,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){ 
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     kdptg.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     nmptg.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     kdptg.requestFocus();
@@ -754,7 +754,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         pegawai.emptTeks();
         pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pegawai.setLocationRelativeTo(internalFrame1);
@@ -775,10 +775,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }   
+                }
                 kdbar.requestFocus();
             }
             @Override
@@ -790,7 +790,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -798,11 +798,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }                               
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         barang.emptTeks();
         barang.isCek();
         barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -813,7 +813,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdsupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdsupKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select dapursuplier.nama_suplier from dapursuplier where dapursuplier.kode_suplier=?", nmsup,kdsup.getText());            
+            Sequel.cariIsi("select dapursuplier.nama_suplier from dapursuplier where dapursuplier.kode_suplier=?", nmsup,kdsup.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select dapursuplier.nama_suplier from dapursuplier where dapursuplier.kode_suplier=?", nmsup,kdsup.getText());
             NoFaktur.requestFocus();
@@ -831,22 +831,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama from pegawai where nip=?",nmptg,kdptg.getText());     
+            Sequel.cariIsi("select nama from pegawai where nip=?",nmptg,kdptg.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from pegawai where nip=?",nmptg,kdptg.getText());
             kdsup.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from pegawai where nip=?",nmptg,kdptg.getText());
-            kdbar.requestFocus();       
+            kdbar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }
     }//GEN-LAST:event_kdptgKeyPressed
 
     private void kdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){            
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Jenis.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select dapurbarang.nama_brng from dapurbarang where dapurbarang.kode_brng=?", nmbar,kdbar.getText());
             TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -908,17 +908,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());  
-            param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));  
-            param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));  
-            param.put("parameter","%"+TCari.getText().trim()+"%");   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
+            param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRingkasanPemesananDapur.jasper","report","::[ Laporan Ringkasan Pemesanan Barang Dapur ]::",
                     "select detail_surat_pemesanan_dapur.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+
                     "detail_surat_pemesanan_dapur.kode_sat,kodesatuan.satuan,sum(detail_surat_pemesanan_dapur.jumlah) as jumlah,"+
@@ -937,10 +937,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " surat_pemesanan_dapur.tanggal between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and surat_pemesanan_dapur.no_pemesanan like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and pegawai.nama like '%"+nmptg.getText()+"%' and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.nama_brng like '%"+TCari.getText()+"%' or "+
                     " surat_pemesanan_dapur.tanggal between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and surat_pemesanan_dapur.no_pemesanan like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and pegawai.nama like '%"+nmptg.getText()+"%' and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and detail_surat_pemesanan_dapur.kode_sat like '%"+TCari.getText()+"%' or "+
                     " surat_pemesanan_dapur.tanggal between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' and surat_pemesanan_dapur.no_pemesanan like '%"+NoFaktur.getText()+"%' and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' and pegawai.nama like '%"+nmptg.getText()+"%' and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' and dapurbarang.jenis like '%"+TCari.getText()+"%' "+
-                    " group by detail_surat_pemesanan_dapur.kode_brng "+order,param); 
-            
+                    " group by detail_surat_pemesanan_dapur.kode_brng "+order,param);
+
             this.setCursor(Cursor.getDefaultCursor());
-        } 
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -1105,7 +1105,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
        Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "select detail_surat_pemesanan_dapur.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+
                     "detail_surat_pemesanan_dapur.kode_sat,kodesatuan.satuan,sum(detail_surat_pemesanan_dapur.jumlah) as jumlah,"+
@@ -1139,14 +1139,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(15,"%"+TCari.getText()+"%");
                     ps.setString(16,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 tagihan=0;
                 while(rs.next()){
                     tagihan=tagihan+rs.getDouble("total");
                     tabMode.addRow(new Object[]{
                         rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("satuan"),rs.getString("namajenis"),rs.getDouble("jumlah"),rs.getDouble("total"),rs.getString("kode_sat")
-                    }); 
+                    });
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1157,23 +1157,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }                                
+            }
             LTotal.setText(Valid.SetAngka(tagihan));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
         kdbar.setText("");
         nmbar.setText("");
-        kdbar.requestFocus();        
+        kdbar.requestFocus();
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getringkasan_pemesanan_dapur());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1199,7 +1199,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

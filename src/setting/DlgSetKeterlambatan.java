@@ -16,6 +16,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -30,7 +31,6 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.Cursor;
 
 /**
  *
@@ -477,7 +477,7 @@ private void ToleransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement("select * from set_keterlambatan ");
             try {
                 rs=ps.executeQuery();
@@ -493,7 +493,7 @@ private void ToleransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -514,7 +514,7 @@ private void ToleransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         Terlambat2.setText("");
         Toleransi.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -540,7 +540,7 @@ private void ToleransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

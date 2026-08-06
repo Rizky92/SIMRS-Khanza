@@ -12,11 +12,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -565,7 +565,7 @@ public class MasterTriaseSkala5 extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -607,7 +607,7 @@ public class MasterTriaseSkala5 extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -761,17 +761,17 @@ public class MasterTriaseSkala5 extends javax.swing.JDialog {
             namaskala.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getmaster_triase_skala5());
        BtnHapus.setEnabled(akses.getmaster_triase_skala5());
        BtnEdit.setEnabled(akses.getmaster_triase_skala5());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -797,7 +797,7 @@ public class MasterTriaseSkala5 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

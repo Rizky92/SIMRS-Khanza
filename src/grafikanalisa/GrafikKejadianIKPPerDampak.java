@@ -39,7 +39,7 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -200,16 +200,16 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select insiden_keselamatan.dampak,count(insiden_keselamatan.dampak) as jumlah "+
                    "from insiden_keselamatan_pasien inner join insiden_keselamatan on insiden_keselamatan_pasien.kode_insiden=insiden_keselamatan.kode_insiden "+
                    "where tgl_kejadian between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' group by insiden_keselamatan.dampak").executeQuery();
@@ -219,19 +219,19 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        
-       JFreeChart freeChart = ChartFactory.createBarChart("Grafik Kejadian IKP Per Dampak Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Dampak IKP","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+
+       JFreeChart freeChart = ChartFactory.createBarChart("Grafik Kejadian IKP Per Dampak Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Dampak IKP","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Kejadian IKP Per Dampak",freeChart);
-        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());   
+        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());
         cf.setLocationRelativeTo(panelBiasa3);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);         
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint3ActionPerformed
 
     private void BtnPrint3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint3KeyPressed
-        
+
     }//GEN-LAST:event_BtnPrint3KeyPressed
 
     private void BtnKeluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar3ActionPerformed
@@ -239,7 +239,7 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3ActionPerformed
 
     private void BtnKeluar3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar3KeyPressed
-        
+
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint4ActionPerformed
@@ -248,7 +248,7 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
                    "from insiden_keselamatan_pasien inner join insiden_keselamatan on insiden_keselamatan_pasien.kode_insiden=insiden_keselamatan.kode_insiden "+
                    "where tgl_kejadian between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' group by insiden_keselamatan.dampak",
                   "Dampak IKP");
-       kas.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());  
+       kas.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());
        kas.setModal(true);
        kas.setAlwaysOnTop(true);
        kas.setLocationRelativeTo(panelBiasa3);
@@ -260,9 +260,9 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrint4KeyPressed
 
     private void BtnPrint5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint5ActionPerformed
-        
+
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select insiden_keselamatan.dampak,count(insiden_keselamatan.dampak) as jumlah "+
                    "from insiden_keselamatan_pasien inner join insiden_keselamatan on insiden_keselamatan_pasien.kode_insiden=insiden_keselamatan.kode_insiden "+
                    "where tgl_kejadian between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' group by insiden_keselamatan.dampak").executeQuery();
@@ -272,10 +272,10 @@ public class GrafikKejadianIKPPerDampak extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        
+
         JFreeChart freeChart = ChartFactory.createPieChart("Grafik Kejadian IKP Per Dampak Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" S.D. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false);
         ChartFrame cf = new ChartFrame("Grafik Kejadian IKP Per Dampak",freeChart);
-        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());   
+        cf.setSize(panelBiasa3.getWidth(),panelBiasa3.getHeight());
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(panelBiasa3);
         cf.setAlwaysOnTop(true);

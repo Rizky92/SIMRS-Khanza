@@ -637,11 +637,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){  
+                if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     kddokter.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -678,11 +678,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){   
+                if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     kddokter2.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -719,11 +719,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){     
+                if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     kddokter3.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -760,11 +760,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){   
+                if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     kddokter4.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -801,11 +801,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){ 
+                if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter5.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter5.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     kddokter5.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -842,11 +842,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){ 
+                if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter6.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter6.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     kddokter6.requestFocus();
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -981,7 +981,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         TDokter6.setText("");
         kddokter.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1007,7 +1007,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

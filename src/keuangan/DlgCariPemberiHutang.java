@@ -14,10 +14,10 @@ package keuangan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -90,7 +90,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -304,8 +304,8 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
         pemberihutang.setLocationRelativeTo(internalFrame1);
         pemberihutang.setAlwaysOnTop(false);
         pemberihutang.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -397,7 +397,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
             ps=koneksi.prepareStatement("select pemberi_hutang_lain.kode_pemberi_hutang,pemberi_hutang_lain.nama_pemberi_hutang,pemberi_hutang_lain.alamat,pemberi_hutang_lain.no_telp, "+
                     "pemberi_hutang_lain.kd_rek,rekening.nm_rek from pemberi_hutang_lain inner join rekening on pemberi_hutang_lain.kd_rek=rekening.kd_rek "+
                     "where pemberi_hutang_lain.status='1' order by nama_pemberi_hutang");
-            try{           
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
@@ -409,7 +409,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -420,7 +420,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
                 fileWriter.write("{\"pemberihutang\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -431,18 +431,18 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getpemberi_hutang_lain());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/pemberihutang.iyem");
@@ -467,12 +467,12 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
-    public void onCari(){        
+    }
+
+    public void onCari(){
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -498,7 +498,7 @@ public final class DlgCariPemberiHutang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

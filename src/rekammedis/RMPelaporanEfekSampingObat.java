@@ -2,11 +2,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -54,14 +54,14 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
     private RMCariJumlahObatMeso cariobatdosis=new RMCariJumlahObatMeso(null,false);
     private StringBuilder htmlContent;
     private String finger="";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMPelaporanEfekSampingObat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Umur","Pekerjaan","Suku","No Laporan","Tanggal Laporan","Profesi Pelapor","Kode Pelapor","Nama Pelapor","Kode Ruangan","Nama Ruangan","BB(Kg)",
             "Kehamilan Passien","Kesudahan","Penyakit Lain","Penyakit Utama","Tanggal Mulai Terjadi","Bentuk Manifestasi E.S.O yang terjadi ","Masalah Pada Mutu/ Kualitas Produk Obat","Riwayat E.S.O yang pernah dialami ","Tanggal Kesudahan ESO","Kesudahan ESO","Obat 1","Sedian 1","Jkn 1","Batch 1","Cara 1","Dosis 1","Tanggal Mulai 1","Tanggal Akhir 1 ","Indikasi 1",
@@ -74,7 +74,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -133,7 +133,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }else if(i==25){
                 column.setPreferredWidth(100);
-            }else if(i==26){ 
+            }else if(i==26){
                 column.setPreferredWidth(80);
             }else if(i==27){
                 column.setPreferredWidth(80);
@@ -360,7 +360,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         Pekerjaan.setDocument(new batasInput((int)30).getKata(Pekerjaan));
@@ -370,7 +370,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         Riwayat_eso.setDocument(new batasInput((int)1000).getKata(Riwayat_eso));
         Penyakit_Utama.setDocument(new batasInput((int)5000).getKata(Penyakit_Utama));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -393,7 +393,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -401,10 +401,10 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KdPegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     NmPegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                }            
+                }
                 KdPegawai.requestFocus();
             }
             @Override
@@ -416,7 +416,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -424,10 +424,10 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
-                    kdRuangan.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());                    
+                if(bangsal.getTable().getSelectedRow()!= -1){
+                    kdRuangan.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     nmruangan.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdRuangan.requestFocus();
             }
             @Override
@@ -439,7 +439,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bangsal.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -447,12 +447,12 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     bangsal.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         cariobatdosis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -460,7 +460,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(cariobatdosis.getTable().getSelectedRow()!= -1){ 
+                if(cariobatdosis.getTable().getSelectedRow()!= -1){
                     if(i==1){
                         Obat1.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
                         Dosis1.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());
@@ -486,30 +486,30 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                     }
                     else if(i==6){
                         Obat6.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
-                        Dosis6.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString()); 
+                        Dosis6.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());
                         Sedian6.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),4).toString());
                     }
                     else if(i==7){
                         Obat7.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
-                        Dosis7.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+                        Dosis7.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());
                         Sedian7.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),4).toString());
                     }
                     else if(i==8){
                         Obat8.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
-                        Dosis8.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString()); 
+                        Dosis8.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());
                         Sedian8.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),4).toString());
                     }
                     else if(i==9){
                         Obat9.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
-                        Dosis9.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString()); 
+                        Dosis9.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());
                         Sedian9.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),4).toString());
                     }
                     else if(i==10){
                         Obat10.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
-                        Dosis10.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString()); 
+                        Dosis10.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());
                         Sedian10.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),4).toString());
                     }
-                }              
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -520,7 +520,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -3256,7 +3256,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                     Obat10.getText(),Sedian10.getText(),Jkn10.getSelectedItem().toString(),Batch10.getText(),Cara10.getText(),Dosis10.getText(),Valid.SetTgl(TanggalMulai10.getSelectedItem()+""),Valid.SetTgl(TanggalAkhir10.getSelectedItem()+""),Indikasi10.getText(),
                     ReaksiSetelah.getSelectedItem().toString(),ReaksiSama.getSelectedItem().toString(),Naranjo1.getSelectedItem().toString(),NilaiNaranjo1.getText(),Naranjo2.getSelectedItem().toString(),NilaiNaranjo2.getText(),Naranjo3.getSelectedItem().toString(),NilaiNaranjo3.getText(),
                     Naranjo4.getSelectedItem().toString(),NilaiNaranjo4.getText(),Naranjo5.getSelectedItem().toString(),NilaiNaranjo5.getText(),Naranjo6.getSelectedItem().toString(),NilaiNaranjo6.getText(),Naranjo7.getSelectedItem().toString(),NilaiNaranjo7.getText(),
-                    Naranjo8.getSelectedItem().toString(),NilaiNaranjo8.getText(),Naranjo9.getSelectedItem().toString(),NilaiNaranjo9.getText(),Naranjo10.getSelectedItem().toString(),NilaiNaranjo10.getText(),NilaiNaranjoTotal.getText(),KategoriNaranjo.getText() 
+                    Naranjo8.getSelectedItem().toString(),NilaiNaranjo8.getText(),Naranjo9.getSelectedItem().toString(),NilaiNaranjo9.getText(),Naranjo10.getSelectedItem().toString(),NilaiNaranjo10.getText(),NilaiNaranjoTotal.getText(),KategoriNaranjo.getText()
                 })==true){
                     tampil();
                     emptTeks();
@@ -3294,7 +3294,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }                          
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -3377,7 +3377,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='105px'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='70px'><b>No.RM</b></td>"+
@@ -3542,7 +3542,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
@@ -3562,7 +3562,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,37).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,38).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,39).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,40).toString()+"</td>"+      
+                            "<td valign='top'>"+tbObat.getValueAt(i,40).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,41).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,42).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,43).toString()+"</td>"+
@@ -3582,7 +3582,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,57).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,58).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,59).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,60).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,60).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,61).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,62).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,63).toString()+"</td>"+
@@ -3602,7 +3602,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,77).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,78).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,79).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,80).toString()+"</td>"+       
+                            "<td valign='top'>"+tbObat.getValueAt(i,80).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,81).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,82).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,83).toString()+"</td>"+
@@ -3622,7 +3622,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,97).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,98).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,99).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,100).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,100).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,101).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,102).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,103).toString()+"</td>"+
@@ -3642,7 +3642,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,117).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,118).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,119).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,120).toString()+"</td>"+   
+                            "<td valign='top'>"+tbObat.getValueAt(i,120).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,121).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,122).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,123).toString()+"</td>"+
@@ -3670,7 +3670,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -3685,8 +3685,8 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataMonitoringEfekSampingObat.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataMonitoringEfekSampingObat.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='4600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -3695,12 +3695,12 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA MONITORING EFEK SAMPING OBAT<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA MONITORING EFEK SAMPING OBAT<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -3790,17 +3790,17 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),11).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString())); 
-            
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),11).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()));
+
             Valid.MyReportqry("rptCetakMonitoringEfekSampingObat.jasper","report","::[ Laporan Monitoring Efek Samping Obat ]::",
                         "select monitoring_efek_samping_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,pasien.umur,pasien.pekerjaan,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,monitoring_efek_samping_obat.no_laporan,monitoring_efek_samping_obat.tanggal,monitoring_efek_samping_obat.profesi,monitoring_efek_samping_obat.nik,pegawai.nama,monitoring_efek_samping_obat.kd_bangsal,"+
-                        "bangsal.nm_bangsal,monitoring_efek_samping_obat.berat_badan,monitoring_efek_samping_obat.pasien_hamil,monitoring_efek_samping_obat.kesudahan,monitoring_efek_samping_obat.penyakit_lain,monitoring_efek_samping_obat.penyakit_utama,monitoring_efek_samping_obat.tanggal_kejadian,monitoring_efek_samping_obat.manifestasi,monitoring_efek_samping_obat.masalah_kualitas,"+       
+                        "bangsal.nm_bangsal,monitoring_efek_samping_obat.berat_badan,monitoring_efek_samping_obat.pasien_hamil,monitoring_efek_samping_obat.kesudahan,monitoring_efek_samping_obat.penyakit_lain,monitoring_efek_samping_obat.penyakit_utama,monitoring_efek_samping_obat.tanggal_kejadian,monitoring_efek_samping_obat.manifestasi,monitoring_efek_samping_obat.masalah_kualitas,"+
                         "monitoring_efek_samping_obat.riwayat_eso,monitoring_efek_samping_obat.tanggal_kesudahan,monitoring_efek_samping_obat.hasil_kesudahan,"+
                         "monitoring_efek_samping_obat.obat1,monitoring_efek_samping_obat.sedian1,monitoring_efek_samping_obat.obat_jkn1,monitoring_efek_samping_obat.batch1,monitoring_efek_samping_obat.cara1,monitoring_efek_samping_obat.dosis1,monitoring_efek_samping_obat.tanggal_mulai1,monitoring_efek_samping_obat.tanggal_akhir1,monitoring_efek_samping_obat.indikasi1,"+
-                        "monitoring_efek_samping_obat.obat2,monitoring_efek_samping_obat.sedian2,monitoring_efek_samping_obat.obat_jkn2,monitoring_efek_samping_obat.batch2,monitoring_efek_samping_obat.cara2,monitoring_efek_samping_obat.dosis2,monitoring_efek_samping_obat.tanggal_mulai2,monitoring_efek_samping_obat.tanggal_akhir2,monitoring_efek_samping_obat.indikasi2,"+  
+                        "monitoring_efek_samping_obat.obat2,monitoring_efek_samping_obat.sedian2,monitoring_efek_samping_obat.obat_jkn2,monitoring_efek_samping_obat.batch2,monitoring_efek_samping_obat.cara2,monitoring_efek_samping_obat.dosis2,monitoring_efek_samping_obat.tanggal_mulai2,monitoring_efek_samping_obat.tanggal_akhir2,monitoring_efek_samping_obat.indikasi2,"+
                         "monitoring_efek_samping_obat.obat3,monitoring_efek_samping_obat.sedian3,monitoring_efek_samping_obat.obat_jkn3,monitoring_efek_samping_obat.batch3,monitoring_efek_samping_obat.cara3,monitoring_efek_samping_obat.dosis3,monitoring_efek_samping_obat.tanggal_mulai3,monitoring_efek_samping_obat.tanggal_akhir3,monitoring_efek_samping_obat.indikasi3,"+
                         "monitoring_efek_samping_obat.obat4,monitoring_efek_samping_obat.sedian4,monitoring_efek_samping_obat.obat_jkn4,monitoring_efek_samping_obat.batch4,monitoring_efek_samping_obat.cara4,monitoring_efek_samping_obat.dosis4,monitoring_efek_samping_obat.tanggal_mulai4,monitoring_efek_samping_obat.tanggal_akhir4,monitoring_efek_samping_obat.indikasi4,"+
                         "monitoring_efek_samping_obat.obat5,monitoring_efek_samping_obat.sedian5,monitoring_efek_samping_obat.obat_jkn5,monitoring_efek_samping_obat.batch5,monitoring_efek_samping_obat.cara5,monitoring_efek_samping_obat.dosis5,monitoring_efek_samping_obat.tanggal_mulai5,monitoring_efek_samping_obat.tanggal_akhir5,monitoring_efek_samping_obat.indikasi5,"+
@@ -3810,8 +3810,8 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                         "monitoring_efek_samping_obat.obat9,monitoring_efek_samping_obat.sedian9,monitoring_efek_samping_obat.obat_jkn9,monitoring_efek_samping_obat.batch9,monitoring_efek_samping_obat.cara9,monitoring_efek_samping_obat.dosis9,monitoring_efek_samping_obat.tanggal_mulai9,monitoring_efek_samping_obat.tanggal_akhir9,monitoring_efek_samping_obat.indikasi9,"+
                         "monitoring_efek_samping_obat.obat10,monitoring_efek_samping_obat.sedian10,monitoring_efek_samping_obat.obat_jkn10,monitoring_efek_samping_obat.batch10,monitoring_efek_samping_obat.cara10,monitoring_efek_samping_obat.dosis10,monitoring_efek_samping_obat.tanggal_mulai10,monitoring_efek_samping_obat.tanggal_akhir10,monitoring_efek_samping_obat.indikasi10,"+
                         "monitoring_efek_samping_obat.reaksi_setelah,monitoring_efek_samping_obat.reaksi_sama,monitoring_efek_samping_obat.naranjo1,monitoring_efek_samping_obat.nilai_naranjo1,monitoring_efek_samping_obat.naranjo2,monitoring_efek_samping_obat.nilai_naranjo2,monitoring_efek_samping_obat.naranjo3,monitoring_efek_samping_obat.nilai_naranjo3,monitoring_efek_samping_obat.naranjo4,"+
-                        "monitoring_efek_samping_obat.nilai_naranjo4,monitoring_efek_samping_obat.naranjo5,monitoring_efek_samping_obat.nilai_naranjo5,monitoring_efek_samping_obat.naranjo6,monitoring_efek_samping_obat.nilai_naranjo6,monitoring_efek_samping_obat.naranjo7,monitoring_efek_samping_obat.nilai_naranjo7,monitoring_efek_samping_obat.naranjo8,monitoring_efek_samping_obat.nilai_naranjo8,"+        
-                        "monitoring_efek_samping_obat.naranjo9,monitoring_efek_samping_obat.nilai_naranjo9,monitoring_efek_samping_obat.naranjo10,monitoring_efek_samping_obat.nilai_naranjo10,monitoring_efek_samping_obat.total_nilai_naranjo,monitoring_efek_samping_obat.kategori_naranjo "+     
+                        "monitoring_efek_samping_obat.nilai_naranjo4,monitoring_efek_samping_obat.naranjo5,monitoring_efek_samping_obat.nilai_naranjo5,monitoring_efek_samping_obat.naranjo6,monitoring_efek_samping_obat.nilai_naranjo6,monitoring_efek_samping_obat.naranjo7,monitoring_efek_samping_obat.nilai_naranjo7,monitoring_efek_samping_obat.naranjo8,monitoring_efek_samping_obat.nilai_naranjo8,"+
+                        "monitoring_efek_samping_obat.naranjo9,monitoring_efek_samping_obat.nilai_naranjo9,monitoring_efek_samping_obat.naranjo10,monitoring_efek_samping_obat.nilai_naranjo10,monitoring_efek_samping_obat.total_nilai_naranjo,monitoring_efek_samping_obat.kategori_naranjo "+
                         "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join monitoring_efek_samping_obat on reg_periksa.no_rawat=monitoring_efek_samping_obat.no_rawat "+
                         "inner join pegawai on monitoring_efek_samping_obat.nik=pegawai.nik "+
@@ -3819,7 +3819,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                         "inner join suku_bangsa on suku_bangsa.id=pasien.suku_bangsa "+
                         "where monitoring_efek_samping_obat.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
         }
-        
+
     }//GEN-LAST:event_MnMonitoringEsoActionPerformed
 
     private void ProfesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProfesiKeyPressed
@@ -4937,10 +4937,10 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             if(TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
                         "select monitoring_efek_samping_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,pasien.umur,pasien.pekerjaan,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,monitoring_efek_samping_obat.no_laporan,monitoring_efek_samping_obat.tanggal,monitoring_efek_samping_obat.profesi,monitoring_efek_samping_obat.nik,pegawai.nama,monitoring_efek_samping_obat.kd_bangsal,"+
-                        "bangsal.nm_bangsal,monitoring_efek_samping_obat.berat_badan,monitoring_efek_samping_obat.pasien_hamil,monitoring_efek_samping_obat.kesudahan,monitoring_efek_samping_obat.penyakit_lain,monitoring_efek_samping_obat.penyakit_utama,monitoring_efek_samping_obat.tanggal_kejadian,monitoring_efek_samping_obat.manifestasi,monitoring_efek_samping_obat.masalah_kualitas,"+       
+                        "bangsal.nm_bangsal,monitoring_efek_samping_obat.berat_badan,monitoring_efek_samping_obat.pasien_hamil,monitoring_efek_samping_obat.kesudahan,monitoring_efek_samping_obat.penyakit_lain,monitoring_efek_samping_obat.penyakit_utama,monitoring_efek_samping_obat.tanggal_kejadian,monitoring_efek_samping_obat.manifestasi,monitoring_efek_samping_obat.masalah_kualitas,"+
                         "monitoring_efek_samping_obat.riwayat_eso,monitoring_efek_samping_obat.tanggal_kesudahan,monitoring_efek_samping_obat.hasil_kesudahan,"+
                         "monitoring_efek_samping_obat.obat1,monitoring_efek_samping_obat.sedian1,monitoring_efek_samping_obat.obat_jkn1,monitoring_efek_samping_obat.batch1,monitoring_efek_samping_obat.cara1,monitoring_efek_samping_obat.dosis1,monitoring_efek_samping_obat.tanggal_mulai1,monitoring_efek_samping_obat.tanggal_akhir1,monitoring_efek_samping_obat.indikasi1,"+
-                        "monitoring_efek_samping_obat.obat2,monitoring_efek_samping_obat.sedian2,monitoring_efek_samping_obat.obat_jkn2,monitoring_efek_samping_obat.batch2,monitoring_efek_samping_obat.cara2,monitoring_efek_samping_obat.dosis2,monitoring_efek_samping_obat.tanggal_mulai2,monitoring_efek_samping_obat.tanggal_akhir2,monitoring_efek_samping_obat.indikasi2,"+  
+                        "monitoring_efek_samping_obat.obat2,monitoring_efek_samping_obat.sedian2,monitoring_efek_samping_obat.obat_jkn2,monitoring_efek_samping_obat.batch2,monitoring_efek_samping_obat.cara2,monitoring_efek_samping_obat.dosis2,monitoring_efek_samping_obat.tanggal_mulai2,monitoring_efek_samping_obat.tanggal_akhir2,monitoring_efek_samping_obat.indikasi2,"+
                         "monitoring_efek_samping_obat.obat3,monitoring_efek_samping_obat.sedian3,monitoring_efek_samping_obat.obat_jkn3,monitoring_efek_samping_obat.batch3,monitoring_efek_samping_obat.cara3,monitoring_efek_samping_obat.dosis3,monitoring_efek_samping_obat.tanggal_mulai3,monitoring_efek_samping_obat.tanggal_akhir3,monitoring_efek_samping_obat.indikasi3,"+
                         "monitoring_efek_samping_obat.obat4,monitoring_efek_samping_obat.sedian4,monitoring_efek_samping_obat.obat_jkn4,monitoring_efek_samping_obat.batch4,monitoring_efek_samping_obat.cara4,monitoring_efek_samping_obat.dosis4,monitoring_efek_samping_obat.tanggal_mulai4,monitoring_efek_samping_obat.tanggal_akhir4,monitoring_efek_samping_obat.indikasi4,"+
                         "monitoring_efek_samping_obat.obat5,monitoring_efek_samping_obat.sedian5,monitoring_efek_samping_obat.obat_jkn5,monitoring_efek_samping_obat.batch5,monitoring_efek_samping_obat.cara5,monitoring_efek_samping_obat.dosis5,monitoring_efek_samping_obat.tanggal_mulai5,monitoring_efek_samping_obat.tanggal_akhir5,monitoring_efek_samping_obat.indikasi5,"+
@@ -4950,8 +4950,8 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                         "monitoring_efek_samping_obat.obat9,monitoring_efek_samping_obat.sedian9,monitoring_efek_samping_obat.obat_jkn9,monitoring_efek_samping_obat.batch9,monitoring_efek_samping_obat.cara9,monitoring_efek_samping_obat.dosis9,monitoring_efek_samping_obat.tanggal_mulai9,monitoring_efek_samping_obat.tanggal_akhir9,monitoring_efek_samping_obat.indikasi9,"+
                         "monitoring_efek_samping_obat.obat10,monitoring_efek_samping_obat.sedian10,monitoring_efek_samping_obat.obat_jkn10,monitoring_efek_samping_obat.batch10,monitoring_efek_samping_obat.cara10,monitoring_efek_samping_obat.dosis10,monitoring_efek_samping_obat.tanggal_mulai10,monitoring_efek_samping_obat.tanggal_akhir10,monitoring_efek_samping_obat.indikasi10,"+
                         "monitoring_efek_samping_obat.reaksi_setelah,monitoring_efek_samping_obat.reaksi_sama,monitoring_efek_samping_obat.naranjo1,monitoring_efek_samping_obat.nilai_naranjo1,monitoring_efek_samping_obat.naranjo2,monitoring_efek_samping_obat.nilai_naranjo2,monitoring_efek_samping_obat.naranjo3,monitoring_efek_samping_obat.nilai_naranjo3,monitoring_efek_samping_obat.naranjo4,"+
-                        "monitoring_efek_samping_obat.nilai_naranjo4,monitoring_efek_samping_obat.naranjo5,monitoring_efek_samping_obat.nilai_naranjo5,monitoring_efek_samping_obat.naranjo6,monitoring_efek_samping_obat.nilai_naranjo6,monitoring_efek_samping_obat.naranjo7,monitoring_efek_samping_obat.nilai_naranjo7,monitoring_efek_samping_obat.naranjo8,monitoring_efek_samping_obat.nilai_naranjo8,"+        
-                        "monitoring_efek_samping_obat.naranjo9,monitoring_efek_samping_obat.nilai_naranjo9,monitoring_efek_samping_obat.naranjo10,monitoring_efek_samping_obat.nilai_naranjo10,monitoring_efek_samping_obat.total_nilai_naranjo,monitoring_efek_samping_obat.kategori_naranjo "+     
+                        "monitoring_efek_samping_obat.nilai_naranjo4,monitoring_efek_samping_obat.naranjo5,monitoring_efek_samping_obat.nilai_naranjo5,monitoring_efek_samping_obat.naranjo6,monitoring_efek_samping_obat.nilai_naranjo6,monitoring_efek_samping_obat.naranjo7,monitoring_efek_samping_obat.nilai_naranjo7,monitoring_efek_samping_obat.naranjo8,monitoring_efek_samping_obat.nilai_naranjo8,"+
+                        "monitoring_efek_samping_obat.naranjo9,monitoring_efek_samping_obat.nilai_naranjo9,monitoring_efek_samping_obat.naranjo10,monitoring_efek_samping_obat.nilai_naranjo10,monitoring_efek_samping_obat.total_nilai_naranjo,monitoring_efek_samping_obat.kategori_naranjo "+
                         "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join monitoring_efek_samping_obat on reg_periksa.no_rawat=monitoring_efek_samping_obat.no_rawat "+
                         "inner join pegawai on monitoring_efek_samping_obat.nik=pegawai.nik "+
@@ -4961,10 +4961,10 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             }else{
                 ps=koneksi.prepareStatement(
                         "select monitoring_efek_samping_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,pasien.umur,pasien.pekerjaan,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,monitoring_efek_samping_obat.no_laporan,monitoring_efek_samping_obat.tanggal,monitoring_efek_samping_obat.profesi,monitoring_efek_samping_obat.nik,pegawai.nama,monitoring_efek_samping_obat.kd_bangsal,"+
-                        "bangsal.nm_bangsal,monitoring_efek_samping_obat.berat_badan,monitoring_efek_samping_obat.pasien_hamil,monitoring_efek_samping_obat.kesudahan,monitoring_efek_samping_obat.penyakit_lain,monitoring_efek_samping_obat.penyakit_utama,monitoring_efek_samping_obat.tanggal_kejadian,monitoring_efek_samping_obat.manifestasi,monitoring_efek_samping_obat.masalah_kualitas,"+       
+                        "bangsal.nm_bangsal,monitoring_efek_samping_obat.berat_badan,monitoring_efek_samping_obat.pasien_hamil,monitoring_efek_samping_obat.kesudahan,monitoring_efek_samping_obat.penyakit_lain,monitoring_efek_samping_obat.penyakit_utama,monitoring_efek_samping_obat.tanggal_kejadian,monitoring_efek_samping_obat.manifestasi,monitoring_efek_samping_obat.masalah_kualitas,"+
                         "monitoring_efek_samping_obat.riwayat_eso,monitoring_efek_samping_obat.tanggal_kesudahan,monitoring_efek_samping_obat.hasil_kesudahan,"+
                         "monitoring_efek_samping_obat.obat1,monitoring_efek_samping_obat.sedian1,monitoring_efek_samping_obat.obat_jkn1,monitoring_efek_samping_obat.batch1,monitoring_efek_samping_obat.cara1,monitoring_efek_samping_obat.dosis1,monitoring_efek_samping_obat.tanggal_mulai1,monitoring_efek_samping_obat.tanggal_akhir1,monitoring_efek_samping_obat.indikasi1,"+
-                        "monitoring_efek_samping_obat.obat2,monitoring_efek_samping_obat.sedian2,monitoring_efek_samping_obat.obat_jkn2,monitoring_efek_samping_obat.batch2,monitoring_efek_samping_obat.cara2,monitoring_efek_samping_obat.dosis2,monitoring_efek_samping_obat.tanggal_mulai2,monitoring_efek_samping_obat.tanggal_akhir2,monitoring_efek_samping_obat.indikasi2,"+  
+                        "monitoring_efek_samping_obat.obat2,monitoring_efek_samping_obat.sedian2,monitoring_efek_samping_obat.obat_jkn2,monitoring_efek_samping_obat.batch2,monitoring_efek_samping_obat.cara2,monitoring_efek_samping_obat.dosis2,monitoring_efek_samping_obat.tanggal_mulai2,monitoring_efek_samping_obat.tanggal_akhir2,monitoring_efek_samping_obat.indikasi2,"+
                         "monitoring_efek_samping_obat.obat3,monitoring_efek_samping_obat.sedian3,monitoring_efek_samping_obat.obat_jkn3,monitoring_efek_samping_obat.batch3,monitoring_efek_samping_obat.cara3,monitoring_efek_samping_obat.dosis3,monitoring_efek_samping_obat.tanggal_mulai3,monitoring_efek_samping_obat.tanggal_akhir3,monitoring_efek_samping_obat.indikasi3,"+
                         "monitoring_efek_samping_obat.obat4,monitoring_efek_samping_obat.sedian4,monitoring_efek_samping_obat.obat_jkn4,monitoring_efek_samping_obat.batch4,monitoring_efek_samping_obat.cara4,monitoring_efek_samping_obat.dosis4,monitoring_efek_samping_obat.tanggal_mulai4,monitoring_efek_samping_obat.tanggal_akhir4,monitoring_efek_samping_obat.indikasi4,"+
                         "monitoring_efek_samping_obat.obat5,monitoring_efek_samping_obat.sedian5,monitoring_efek_samping_obat.obat_jkn5,monitoring_efek_samping_obat.batch5,monitoring_efek_samping_obat.cara5,monitoring_efek_samping_obat.dosis5,monitoring_efek_samping_obat.tanggal_mulai5,monitoring_efek_samping_obat.tanggal_akhir5,monitoring_efek_samping_obat.indikasi5,"+
@@ -4974,8 +4974,8 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                         "monitoring_efek_samping_obat.obat9,monitoring_efek_samping_obat.sedian9,monitoring_efek_samping_obat.obat_jkn9,monitoring_efek_samping_obat.batch9,monitoring_efek_samping_obat.cara9,monitoring_efek_samping_obat.dosis9,monitoring_efek_samping_obat.tanggal_mulai9,monitoring_efek_samping_obat.tanggal_akhir9,monitoring_efek_samping_obat.indikasi9,"+
                         "monitoring_efek_samping_obat.obat10,monitoring_efek_samping_obat.sedian10,monitoring_efek_samping_obat.obat_jkn10,monitoring_efek_samping_obat.batch10,monitoring_efek_samping_obat.cara10,monitoring_efek_samping_obat.dosis10,monitoring_efek_samping_obat.tanggal_mulai10,monitoring_efek_samping_obat.tanggal_akhir10,monitoring_efek_samping_obat.indikasi10,"+
                         "monitoring_efek_samping_obat.reaksi_setelah,monitoring_efek_samping_obat.reaksi_sama,monitoring_efek_samping_obat.naranjo1,monitoring_efek_samping_obat.nilai_naranjo1,monitoring_efek_samping_obat.naranjo2,monitoring_efek_samping_obat.nilai_naranjo2,monitoring_efek_samping_obat.naranjo3,monitoring_efek_samping_obat.nilai_naranjo3,monitoring_efek_samping_obat.naranjo4,"+
-                        "monitoring_efek_samping_obat.nilai_naranjo4,monitoring_efek_samping_obat.naranjo5,monitoring_efek_samping_obat.nilai_naranjo5,monitoring_efek_samping_obat.naranjo6,monitoring_efek_samping_obat.nilai_naranjo6,monitoring_efek_samping_obat.naranjo7,monitoring_efek_samping_obat.nilai_naranjo7,monitoring_efek_samping_obat.naranjo8,monitoring_efek_samping_obat.nilai_naranjo8,"+        
-                        "monitoring_efek_samping_obat.naranjo9,monitoring_efek_samping_obat.nilai_naranjo9,monitoring_efek_samping_obat.naranjo10,monitoring_efek_samping_obat.nilai_naranjo10,monitoring_efek_samping_obat.total_nilai_naranjo,monitoring_efek_samping_obat.kategori_naranjo "+     
+                        "monitoring_efek_samping_obat.nilai_naranjo4,monitoring_efek_samping_obat.naranjo5,monitoring_efek_samping_obat.nilai_naranjo5,monitoring_efek_samping_obat.naranjo6,monitoring_efek_samping_obat.nilai_naranjo6,monitoring_efek_samping_obat.naranjo7,monitoring_efek_samping_obat.nilai_naranjo7,monitoring_efek_samping_obat.naranjo8,monitoring_efek_samping_obat.nilai_naranjo8,"+
+                        "monitoring_efek_samping_obat.naranjo9,monitoring_efek_samping_obat.nilai_naranjo9,monitoring_efek_samping_obat.naranjo10,monitoring_efek_samping_obat.nilai_naranjo10,monitoring_efek_samping_obat.total_nilai_naranjo,monitoring_efek_samping_obat.kategori_naranjo "+
                         "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join monitoring_efek_samping_obat on reg_periksa.no_rawat=monitoring_efek_samping_obat.no_rawat "+
                         "inner join pegawai on monitoring_efek_samping_obat.nik=pegawai.nik "+
@@ -4991,9 +4991,9 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                         "monitoring_efek_samping_obat.tanggal between ? and ? and monitoring_efek_samping_obat.obat3 like ? or "+
                         "monitoring_efek_samping_obat.tanggal between ? and ? and monitoring_efek_samping_obat.obat4 like ? or "+
                         "monitoring_efek_samping_obat.tanggal between ? and ? and monitoring_efek_samping_obat.no_rawat like ? "+
-                        "order by monitoring_efek_samping_obat.tanggal");  
+                        "order by monitoring_efek_samping_obat.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -5029,7 +5029,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                     ps.setString(28,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                     ps.setString(29,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                     ps.setString(30,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[]{
@@ -5060,7 +5060,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -5200,28 +5200,28 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_laporan,3),signed)),0) from monitoring_efek_samping_obat where tanggal='"+Valid.SetTgl(TglLaporan.getSelectedItem()+"")+"' ",
                 "MESO"+TglLaporan.getSelectedItem().toString().substring(6,10)+TglLaporan.getSelectedItem().toString().substring(3,5)+TglLaporan.getSelectedItem().toString().substring(0,2),4,NoSurat);
         TglLaporan.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
-            Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
+            Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             Pekerjaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             Suku.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Valid.SetTgl2(TglLaporan,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             Profesi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
-            KdPegawai.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()); 
-            NmPegawai.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()); 
-            kdRuangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()); 
-            nmruangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString()); 
+            KdPegawai.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            NmPegawai.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            kdRuangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            nmruangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
             BB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
             Hamil.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
-            Kesudahan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());   
+            Kesudahan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             PenyakitLain.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
             Penyakit_Utama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
             Valid.SetTgl2(TanngalMulaiTerjadi,tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
@@ -5382,14 +5382,14 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         //BtnSimpan.setEnabled(akses.getmonitoringefeksampingobat());
         //BtnHapus.setEnabled(akses.getmonitoringefeksampingobat());
@@ -5401,9 +5401,9 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             btnPegawai.setEnabled(false);
             KdPegawai.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NmPegawai,KdPegawai.getText());
-        }   
+        }
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
@@ -5419,7 +5419,7 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void calculateTotalNaranjo() {
     int totalNaranjo = 0;
 
@@ -5438,11 +5438,11 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
     // Set hasil ke label total
     NilaiNaranjoTotal.setText(String.valueOf(totalNaranjo));
 }
-    
+
     // Fungsi untuk memperbarui kategori Naranjo
     private void updateKategoriNaranjo() {
         int total = Integer.parseInt(NilaiNaranjoTotal.getText());
-        
+
         if (total >= 9) {
             KategoriNaranjo.setText("Highly probable");
         } else if (total >= 5) {

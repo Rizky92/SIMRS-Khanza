@@ -351,7 +351,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                     "SELECT template_laboratorium.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan "+
                     "FROM template_laboratorium inner join jns_perawatan_lab on jns_perawatan_lab.kd_jenis_prw=template_laboratorium.kd_jenis_prw where jns_perawatan_lab.status='1' "+
                     "order by template_laboratorium.kd_jenis_prw,template_laboratorium.id_template,template_laboratorium.urut");
-            try{         
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
@@ -363,7 +363,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -374,7 +374,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
                 fileWriter.write("{\"template\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -385,14 +385,14 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/templatelaborat.iyem");
@@ -425,8 +425,8 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -452,7 +452,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

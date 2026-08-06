@@ -12,11 +12,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -581,7 +581,7 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -623,7 +623,7 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -732,17 +732,17 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
             Metode.setSelectedItem(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.gettemplate_pelaksanaan_informasi_edukasi());
        BtnHapus.setEnabled(akses.gettemplate_pelaksanaan_informasi_edukasi());
        BtnEdit.setEnabled(akses.gettemplate_pelaksanaan_informasi_edukasi());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -768,7 +768,7 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -50,7 +50,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
     public DlgRestoreTarifRadiologi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"P","Kode Periksa","Nama Pemeriksaan","J.S.Rumah Sakit","Paket BHP",
             "J.M.Perujuk","J.M. Dokter","J.M. Petugas","K.S.O.","Menejemen",
             "Total Tarif","Jenis Bayar","Kelas"};
@@ -63,9 +63,9 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, 
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
                 java.lang.Object.class
              };
              @Override
@@ -96,7 +96,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -271,11 +271,11 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("jns_perawatan_radiologi","kd_jenis_prw='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","status='1'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -288,11 +288,11 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("jns_perawatan_radiologi","kd_jenis_prw",tbJnsPerawatan.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -373,7 +373,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -421,7 +421,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
                         " jns_perawatan_radiologi.status='0' and jns_perawatan_radiologi.kelas like ? or "+
                         " jns_perawatan_radiologi.status='0' and penjab.png_jawab like ? "+
                         "order by jns_perawatan_radiologi.kd_jenis_prw");
-            try {            
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -450,13 +450,13 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -482,7 +482,7 @@ public final class DlgRestoreTarifRadiologi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

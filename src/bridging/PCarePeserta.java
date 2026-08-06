@@ -14,19 +14,19 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import fungsi.sekuel;
-import fungsi.validasi;
 import fungsi.akses;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -79,7 +79,7 @@ public final class PCarePeserta extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         try {
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
             URL=koneksiDB.URLAPIPCARE()+"/peserta/";
@@ -87,8 +87,8 @@ public final class PCarePeserta extends javax.swing.JDialog {
             System.out.println("E : "+e);
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -186,23 +186,23 @@ public final class PCarePeserta extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
-                                tabMode.getValueAt(r,1).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,1).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJSNoPeserta.jasper","report","[ Pencarian Peserta BPJS Berdasarkan Nomor Kepesertaan ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     /**
@@ -230,13 +230,13 @@ public final class PCarePeserta extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String nopeserta) {        
+    public void tampil(String nopeserta) {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-timestamp",utc);            
+	    headers.add("X-timestamp",utc);
 	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -276,7 +276,7 @@ public final class PCarePeserta extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Kode Provider",": "+response.path("kdProviderPst").path("kdProvider").asText()
-                });                
+                });
                 tabMode.addRow(new Object[]{
                     "       Nama Provider",": "+response.path("kdProviderPst").path("nmProvider").asText()
                 });
@@ -285,7 +285,7 @@ public final class PCarePeserta extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Kode Provider",": "+response.path("kdProviderGigi").path("kdProvider").asText()
-                });                
+                });
                 tabMode.addRow(new Object[]{
                     "       Nama Provider",": "+response.path("kdProviderGigi").path("nmProvider").asText()
                 });
@@ -294,7 +294,7 @@ public final class PCarePeserta extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Kode Kelas",": "+response.path("jnsKelas").path("kode").asText()
-                });                
+                });
                 tabMode.addRow(new Object[]{
                     "       Nama Kelas",": "+response.path("jnsKelas").path("nama").asText()
                 });
@@ -303,7 +303,7 @@ public final class PCarePeserta extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Kode Jenis",": "+response.path("jnsPeserta").path("kode").asText()
-                });                
+                });
                 tabMode.addRow(new Object[]{
                     "       Nama Jenis",": "+response.path("jnsPeserta").path("nama").asText()
                 });
@@ -330,13 +330,13 @@ public final class PCarePeserta extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Kode Asuransi",": "+response.path("asuransi").path("kdAsuransi").asText()
-                });                
+                });
                 tabMode.addRow(new Object[]{
                     "       Nama Asuransi",": "+response.path("asuransi").path("nmAsuransi").asText()
-                });              
+                });
                 tabMode.addRow(new Object[]{
                     "       Nomer Asuransi",": "+response.path("asuransi").path("noAsuransi").asText()
-                });              
+                });
                 tabMode.addRow(new Object[]{
                     "       COB",": "+response.path("asuransi").path("cob").asText()
                 });
@@ -344,8 +344,8 @@ public final class PCarePeserta extends javax.swing.JDialog {
                     "Tunggakan",": "+response.path("tunggakan").asText()
                 });
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }  
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -364,6 +364,6 @@ public final class PCarePeserta extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         }
-    }   
- 
+    }
+
 }

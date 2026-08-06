@@ -4,9 +4,9 @@
 		$judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
 		$judul = str_replace(array('.','-','/',',')," ",$judul);
 		$judul = trim($judul);
-		echo "$judul";	
- 	}      
-         
+		echo "$judul";
+ 	}
+
 
  	function cekSessiKunjung() {
 		if (session_is_registered('ses_kunjung'))
@@ -28,7 +28,7 @@
 		else
 			return false;
 	}
-        
+
         function cekUser() {
 		if (session_is_registered('ses_admin'))
 			return true;
@@ -37,7 +37,7 @@
 		else
 			return false;
 	}
-	
+
 	function kunjungAktif() {
 		if (cekSessiPakar()) return $_SESSION['ses_kunjung'];
 	}
@@ -49,16 +49,16 @@
         function billingAktif() {
 		if (cekSessiKelas()) return $_SESSION['ses_billing'];
 	}
-	
+
 	function isGuest() {
 		if (cekSessiKunjung()|| cekSessiAdmin()) return false;
 		else return true;
 	}
-	
-	
+
+
 	function samping()
 	{
-            
+
 		if (cekSessiAdmin()):
 			echo "<br/>  <h2><>> Billing </h2>
                                  <p>
@@ -72,27 +72,27 @@
                                   </p>
                                ";
                 elseif (cekSessiKelas()):
-                        
-                         
-                            echo" 
+
+
+                            echo"
                                         <li class=\"even\"><a href='index.php?act=ListKepribadian'>Kepribadian</a></li>
                                   </ul>
                                   </p>
-                               "; 
+                               ";
 		elseif(isGuest()):
 			menuLogin();
 			//calender();
                         //kategori();
 
-		endif;	
+		endif;
 	}
-	
-	function bawah() 
+
+	function bawah()
 	{
 	  echo	"<p id=\"legal\">Copyright &copy; 2012, RS Kharisma Paramedika Kulon Progo. All Rights Reserved. Design by Khanza.Soft Media</p>
                 ";
 	}
- 
+
  	function tampilMenu() {
 		if (cekSessiKunjung()) {
 			$menu = array(
@@ -113,12 +113,12 @@
 			$menu = array(
 				'Informasi'             => 'index.php?act=Home',
 	                        'About Program'		=> 'index.php?act=Kontak');
-		}		
+		}
 		echo "<ul id=\"navlist\">";
 		$i=0;
 		foreach ($menu as $key => $val) {
 			$i++;
-			if ($key=='Sign Out')	$klik = "onclick=\"return confirm('Yakinkah anda akan logout.?');\""; 
+			if ($key=='Sign Out')	$klik = "onclick=\"return confirm('Yakinkah anda akan logout.?');\"";
 			if (isGuest()) {
 				if ($i == 1) $last = "class='current_page_item'";
 			} else {
@@ -127,9 +127,9 @@
 			echo "<li title='$key'><a href='$val' >$key</a></li>";
 		}
 		echo "</ul>";
-	} 	
-	
-	
+	}
+
+
 	function ListArtikel()
 	{
 		$x= bukaquery("SELECT * FROM artikel where page='artikel' ORDER BY id DESC LIMIT 4");
@@ -137,20 +137,20 @@
 		{
 		  $judul=$row['1'];
 		  $isi  = substr($row['1'],0,160);
-		  $post =konversiTanggal((substr($row[4],0,10)));  	
+		  $post =konversiTanggal((substr($row[4],0,10)));
 		  echo "<ul><li><b>$judul</b><br />
 					<small>posted on $post</small><br/>";
-		  echo	"$isi<a href=\"index.php?act=News&id=$row[0]\">...detail</a>";	  	
-		  echo "</li></ul>";	
-		} 
+		  echo	"$isi<a href=\"index.php?act=News&id=$row[0]\">...detail</a>";
+		  echo "</li></ul>";
+		}
 	}
-		
+
 	function calender() {
-		echo "  
-                        <h2>.: KALENDER :.</h2>                     
+		echo "
+                        <h2>.: KALENDER :.</h2>
                         <p>";
 		include_once "include/calender.php";
-		echo "    
+		echo "
                         </p>
                         <br>
                       ";
@@ -159,15 +159,15 @@
         function kategori() {
 		echo "
                         <h2>.: KATEGORI :.</h2>
-                      
+
                       <p>
                           ";
 		include_once "pages/subside.php";
-		echo "    
+		echo "
                        </p>";
 	}
-	
-	
+
+
 	function formProtek() {
 		if (!cekUser()) {
 			$form = array ('HomeAdmin','ListBilling','ListBillingBayi','ListBillingIbu','ListPasien',
@@ -180,43 +180,43 @@
 					}
 				}
 			}
-			
-		
+
+
 	}
-	
+
 	function actionPages() {
 		formProtek();
 		switch ($_REQUEST['act']) {
 			case 'Kontak'		  	: include_once('pages/kontak.php'); break;
-                        
+
                         case 'ListBilling'		: include_once('pages/billing/listbilling.php'); break;
-			case 'InputBilling'		: include_once('pages/billing/inputbilling.php'); break;                       
-                        case 'ListBillingIbu'		: include_once('pages/billing/listbillingibu.php'); break;                  
-                        case 'ListBillingBayi'		: include_once('pages/billing/listbillingbayi.php'); break;                
-                        case 'ListPasien'		: include_once('pages/pasien/listpasien.php'); break;               
-                        case 'InputPasien'		: include_once('pages/pasien/inputpasien.php'); break;              
-                        case 'ListReg'  		: include_once('pages/registrasi/listreg.php'); break;             
+			case 'InputBilling'		: include_once('pages/billing/inputbilling.php'); break;
+                        case 'ListBillingIbu'		: include_once('pages/billing/listbillingibu.php'); break;
+                        case 'ListBillingBayi'		: include_once('pages/billing/listbillingbayi.php'); break;
+                        case 'ListPasien'		: include_once('pages/pasien/listpasien.php'); break;
+                        case 'InputPasien'		: include_once('pages/pasien/inputpasien.php'); break;
+                        case 'ListReg'  		: include_once('pages/registrasi/listreg.php'); break;
                         case 'DetailReg'  		: include_once('pages/registrasi/detailreg.php'); break;
-                        
-                        case 'HomeAdmin'		: include_once('pages/admin.php'); break;			
+
+                        case 'HomeAdmin'		: include_once('pages/admin.php'); break;
 			case 'InputArtikel'		: include_once('pages/inputartikel.php'); break;
-			case 'InputDataAdmin'		: include_once('pages/aturadmin.php'); break;	
+			case 'InputDataAdmin'		: include_once('pages/aturadmin.php'); break;
 			case 'ListArtikel'		: include_once('pages/listartikel.php'); break;
 
                         default			          : include_once('pages/home.php');
-			
+
 		}
 	}
-	
-	
-	 
+
+
+
  function menuLogin(){
- 
+
  	echo "  <br>
                 <h2>.: Login Admin :.</h2>
-              
+
               <p>
-              
+
 	     <form name=\"form\" action=\"login.php?act=login\"  method='post'  onSubmit=\"return validasiLogin();\">
 		<table width='100%' align='center' cellpadding='0' cellspacing='0'>
 			<tr class=head2>
@@ -242,5 +242,5 @@
             </p>
             <br>
             ";
- }	
+ }
 ?>

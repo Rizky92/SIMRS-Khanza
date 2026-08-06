@@ -7,7 +7,7 @@
 	font-style: normal;
 }
 
-/* 
+/*
   html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
   v1.4 2009-07-27 | Authors: Eric Meyer & Richard Clark
   html5doctor.com/html-5-reset-stylesheet/
@@ -22,7 +22,7 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
+article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
   margin:0;
@@ -32,10 +32,10 @@ time, mark, audio, video {
   font-size:100%;
   vertical-align:baseline;
   background:transparent;
-}                  
+}
 
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section { 
+footer, header, hgroup, menu, nav, section {
     display:block;
 }
 
@@ -65,7 +65,7 @@ input, select { vertical-align:middle; }
 
 /* END RESET CSS */
 
-/* Site styling */ 
+/* Site styling */
 html {
 	/* always force a scrollbar in non-IE */
 	overflow-y: scroll;
@@ -80,11 +80,11 @@ body {
 	width: 820px;
 }
 h1 {
-	margin: 0px 0px 0px 20px;	
+	margin: 0px 0px 0px 20px;
 	padding: 20px 0px 0px 0px;
 	color: #a81213;
 	font-family: 'LeagueGothicRegular', arial, san-serif;
-	font-size: 4.5em;	
+	font-size: 4.5em;
 	font-weight: normal;
 	text-align: center;
 	text-transform: uppercase;
@@ -93,17 +93,17 @@ h1 {
 }
 h2, h3 {
 	padding-top: 10px;
-	font-family: 'LeagueGothicRegular', arial, san-serif;	
+	font-family: 'LeagueGothicRegular', arial, san-serif;
 	font-size: 2.25em;
 	font-weight: normal;
 	color: #a81213;
 	text-shadow: 1px 1px 2px #000000;
-	filter: dropshadow(color=#000000, offx=1, offy=1); 
+	filter: dropshadow(color=#000000, offx=1, offy=1);
 }
 #content a {
-	color: #a81213; 
+	color: #a81213;
 	text-shadow: 1px 1px 2px #000000;
-	filter: dropshadow(color=#000000, offx=1, offy=1); 
+	filter: dropshadow(color=#000000, offx=1, offy=1);
 }
 #content a:hover {
 	text-decoration: none;
@@ -114,8 +114,8 @@ h2, h3 {
 }
 #release-history p strong {
 	margin-right: 5px;
-	font-family: 'LeagueGothicRegular', arial, san-serif;	
-	font-size: 1.6em;	
+	font-family: 'LeagueGothicRegular', arial, san-serif;
+	font-size: 1.6em;
 	font-weight: normal;
 	display: block;
 	float: left;
@@ -185,10 +185,10 @@ div#content {
 	height: 96px;
 	-webkit-box-shadow: 5px 5px 15px black;
 	-moz-box-shadow: 5px 5px 15px black;
-	box-shadow: 5px 5px 15px black; 
+	box-shadow: 5px 5px 15px black;
 }
 #download a {
- 	font-family: 'LeagueGothicRegular', arial, san-serif;	
+ 	font-family: 'LeagueGothicRegular', arial, san-serif;
  	font-size: 1.875em;
  	background-color: #a81213;
 	-webkit-border-radius: 15px;
@@ -220,13 +220,13 @@ div#content {
 	color: #e0ac9e;
 }
 #github img {
-	position: absolute; 
-	top: 0; 
-	right: 0; 
-	border: 0;	
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
 }
 #paypal {
-	margin: 20px 0px 0px 0px;	
+	margin: 20px 0px 0px 0px;
 	padding: 22px 40px 22px 330px;
 	/*width: 100%;*/
 	background-color: #f8f0db;
@@ -235,10 +235,10 @@ div#content {
 	border-radius: 15px;
 }
 ::-moz-selection {
-    background-color: #a81213;	
+    background-color: #a81213;
 	color: #f8f0db;
 }
 ::selection {
 	background-color: #a81213;
-	color: #f8f0db;		
+	color: #f8f0db;
 }

@@ -76,7 +76,7 @@
                                 </tr>
                           </table>";
                 }
-                
+
                 if ($action=="HAPUS") {
                     try {
                         Hapus(" dansos "," dana ='".$dana."' ","?act=InputDansos&action=TAMBAH&dana=$dana");

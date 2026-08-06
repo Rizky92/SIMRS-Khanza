@@ -67,9 +67,9 @@ public class DlgVakum extends javax.swing.JDialog {
              }
         };
 
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         tbAdmin.setModel(tabMode);
         tbAdmin.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -322,12 +322,12 @@ public class DlgVakum extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbAdmin.getRowCount();i++){ 
+        for(i=0;i<tbAdmin.getRowCount();i++){
             if(tbAdmin.getValueAt(i,0).toString().equals("true")){
                 hapus(tbAdmin.getValueAt(i,1).toString());
             }
-        } 
-        for(i=0;i<tbAdmin.getRowCount();i++){ 
+        }
+        for(i=0;i<tbAdmin.getRowCount();i++){
             tbAdmin.setValueAt(false,i,0);
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -441,7 +441,7 @@ public class DlgVakum extends javax.swing.JDialog {
     private void hapus(String nm_table){
         int jawab=JOptionPane.showConfirmDialog(null, "Yakin anda mau menghapus isi tabel "+nm_table+" ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if(jawab==JOptionPane.YES_OPTION){
-            try{                    
+            try{
                 koneksi.prepareStatement("delete from "+nm_table).executeUpdate();
                 JOptionPane.showMessageDialog(null,"Proses hapus tabel "+nm_table+" selesai..!!!!");
             }catch(Exception e){
@@ -449,7 +449,7 @@ public class DlgVakum extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -471,13 +471,13 @@ public class DlgVakum extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-             
+
             LCount.setText(""+tabMode.getRowCount());
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -503,7 +503,7 @@ public class DlgVakum extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

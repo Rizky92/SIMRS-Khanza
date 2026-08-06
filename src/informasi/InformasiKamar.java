@@ -86,7 +86,7 @@ public final class InformasiKamar extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
     /** This method is called from within the constructor to
@@ -322,7 +322,7 @@ public final class InformasiKamar extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select kamar.kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal, "+
                    "kamar.kelas,kamar.trf_kamar,kamar.status from bangsal inner join kamar "+
                    "on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.statusdata='1' and kamar.kd_kamar like ? or "+
@@ -357,12 +357,12 @@ public final class InformasiKamar extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
-    }    
+    }
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
@@ -389,7 +389,7 @@ public final class InformasiKamar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

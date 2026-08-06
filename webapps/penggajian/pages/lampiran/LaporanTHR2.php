@@ -22,7 +22,7 @@
         <link href="../../css/default.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-	
+
    <?php
         $cari    = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
         $cari    = json_decode(encrypt_decrypt($cari,"d"),true);
@@ -32,7 +32,7 @@
                 $keyword = validTeks($cari["keyword"]);
                 $_sqlthnini  = "SELECT DAY(LAST_DAY('$tahun-$bulan-01')) ";
                 $hasilthnini = bukaquery($_sqlthnini);
-                $datathnini  = mysqli_fetch_array($hasilthnini);        
+                $datathnini  = mysqli_fetch_array($hasilthnini);
                 $thnini      = $tahun."-".$bulan."-".$datathnini[0];
                 $thnlalu     = ($tahun-1)."-".$bulan."-".$datathnini[0];
 
@@ -46,7 +46,7 @@
                                 departemen.nama,
                                 pegawai.id, pegawai.rekening
                                 FROM pegawai inner join stts_kerja
-                                inner join departemen 
+                                inner join departemen
                                on pegawai.stts_kerja=stts_kerja.stts
                                and pegawai.departemen=departemen.dep_id where pegawai.stts_aktif='AKTIF' and pegawai.bpd<>'T' order by pegawai.id ASC  ";
                 $hasil6       = bukaquery($_sql);
@@ -62,57 +62,57 @@
                                  <td width='10%'><div align='center'>Rekening</div></td>
                                  <td width='10%'><div align='center'><font color='green'>THR</font></div></td>
                             </tr>";
-                    while($data = mysqli_fetch_array($hasil6)) {   
+                    while($data = mysqli_fetch_array($hasil6)) {
                         $nik         = $data[0];
                         $nama        = $data[1];
-                        $status      = $data[2]; 
-                        $pendidikan  = $data[3]; 
-                        $masker      = $data[4];  
-                        $departemen  = $data[5]; 
+                        $status      = $data[2];
+                        $pendidikan  = $data[3];
+                        $masker      = $data[4];
+                        $departemen  = $data[5];
                         $id          = $data[8];
                         $rekening    = $data[9];
 
-                        $gapok=0;     
+                        $gapok=0;
                         $wajibmasuk=0;
                         $ttlgapok=0;
                         if($departemen=="POM"){
-                            $wajibmasuk=24; 
+                            $wajibmasuk=24;
                         }elseif($departemen=="RNP"){
-                            $wajibmasuk=22; 
+                            $wajibmasuk=22;
                         }elseif($departemen=="LAB"){
-                            $wajibmasuk=22; 
+                            $wajibmasuk=22;
                         }elseif($departemen=="PRK"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="SAT"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="KBY"){
-                            $wajibmasuk=22; 
+                            $wajibmasuk=22;
                         }elseif($departemen=="POG"){
-                            $wajibmasuk=24; 
+                            $wajibmasuk=24;
                         }elseif($departemen=="RWJ"){
-                            $wajibmasuk=24; 
+                            $wajibmasuk=24;
                         }elseif($departemen=="CST"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="DPR"){
-                            $wajibmasuk=23; 
+                            $wajibmasuk=23;
                         }elseif($departemen=="DRV"){
-                            $wajibmasuk=18; 
+                            $wajibmasuk=18;
                         }elseif($departemen=="FAR"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="KSR"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="LOG"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="MNJ"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="POD"){
-                            $wajibmasuk=24; 
+                            $wajibmasuk=24;
                         }elseif($departemen=="RM"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="ROS"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }elseif($departemen=="TAM"){
-                            $wajibmasuk=26; 
+                            $wajibmasuk=26;
                         }
 
                         $_sql3     = "SELECT sum(jml) FROM tambahjaga where id='$id' and tgl between '$thnlalu' and '$thnini' ";
@@ -177,7 +177,7 @@
                                  <td COLSPAN='5'><div align='right'>Total :&nbsp; </div></td>
                                  <TD><font size='2' color='green'><i>".formatDuit($ttlgapok)."</i></font>&nbsp;</TD>
                             </tr>
-                          </table>";           
+                          </table>";
                 }
             }else{
                 exit(header("Location:../index.php"));
@@ -185,7 +185,7 @@
         }else{
             exit(header("Location:../index.php"));
         }
-        
+
     ?>
     </body>
 </html>

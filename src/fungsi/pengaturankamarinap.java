@@ -39,7 +39,7 @@ public class pengaturankamarinap {
             System.out.println("Notif Pengaturan Kamar Inap: "+e);
         }
     }
-    
+
     public static Double getJamMinimalKamar(){return pengaturankamarinap.JamMinimalKamar;}
     public static Double getPersenHargaKamarBayi(){return pengaturankamarinap.PersenHargaKamarBayi;}
     public static String getAktifkanDiagnosaAkhir(){return pengaturankamarinap.AktifkanDiagnosaAkhir;}

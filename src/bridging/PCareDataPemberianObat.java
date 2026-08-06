@@ -2,13 +2,13 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
+import fungsi.akunobatralan;
+import fungsi.akunobatranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.akunobatralan;
-import fungsi.akunobatranap;
 import inventory.riwayatobat;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -55,7 +55,7 @@ public class PCareDataPemberianObat extends javax.swing.JDialog {
     private double ttlhpp=0,ttljual=0;
     private riwayatobat Trackobat=new riwayatobat();
     private boolean sukses=false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -68,7 +68,7 @@ public class PCareDataPemberianObat extends javax.swing.JDialog {
                 "Nama Pasien","Kd Obat SK","Kode Obat","Nama Obat/Alkes","Emb",
                 "Tsl","Jml","Biaya Obat","Total","Harga Beli","Gudang","No.Batch","No.Faktur","Status"
             }){
-            @Override 
+            @Override
             public boolean isCellEditable(int rowIndex, int colIndex){return false;}
             Class[] types = new Class[]{
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
@@ -135,9 +135,9 @@ public class PCareDataPemberianObat extends javax.swing.JDialog {
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
             link=koneksiDB.URLAPIPCARE();
@@ -445,19 +445,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                param.put("parameter","%"+TCari.getText()+"%"); 
-                Valid.MyReport("rptPCarePemberianObat.jasper","report","::[ Data Pemberian Obat PCare ]::",param);            
+                param.put("parameter","%"+TCari.getText()+"%");
+                Valid.MyReport("rptPCarePemberianObat.jasper","report","::[ Data Pemberian Obat PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -527,12 +527,12 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString()+"',"+
                         "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString()+"',"+
                         "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),16).toString()+"',"+
-                        "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString()+"'", 
+                        "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString()+"'",
                         "stok=stok+'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString()+"'",
                         "kode_brng='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' and "+
                         "kd_bangsal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString()+"' and "+
                         "no_batch='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),16).toString()+"' and "+
-                        "no_faktur='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString()+"'"); 
+                        "no_faktur='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString()+"'");
                 }else{
                     Trackobat.catatRiwayat(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString(),Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString()),
                         0,"Pemberian Obat",akses.getkode(),tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString(),"Hapus","","",
@@ -541,11 +541,11 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     Sequel.menyimpan("gudangbarang","'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"',"+
                         "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString()+"',"+
                         "'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString()+"',"+
-                        "'',''", 
+                        "'',''",
                         "stok=stok+'"+tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString()+"'",
                         "kode_brng='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' and "+
                         "kd_bangsal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString()+"' and "+
-                        "no_batch='' and no_faktur=''"); 
+                        "no_batch='' and no_faktur=''");
                 }
                 Sequel.queryu2("delete from pcare_obat_diberikan where "+
                     "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
@@ -557,50 +557,50 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }else{
                 sukses=false;
             }
-            
+
             if(sukses==true){
                 if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ranap")){
-                    Sequel.queryu("delete from tampjurnal");    
+                    Sequel.queryu("delete from tampjurnal");
                     if(ttljual>0){
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatranap.getSuspen_Piutang_Obat_Ranap()+"','Suspen Piutang Obat Ranap','0','"+ttljual+"'","Rekening")==false){
                             sukses=false;
-                        }    
+                        }
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatranap.getObat_Ranap()+"','Pendapatan Obat Rawat Inap','"+ttljual+"','0'","Rekening")==false){
                             sukses=false;
-                        }                              
+                        }
                     }
                     if(ttlhpp>0){
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatranap.getHPP_Obat_Rawat_Inap()+"','HPP Persediaan Obat Rawat Inap','0','"+ttlhpp+"'","Rekening")==false){
                             sukses=false;
-                        }    
+                        }
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatranap.getPersediaan_Obat_Rawat_Inap()+"','Persediaan Obat Rawat Inap','"+ttlhpp+"','0'","Rekening")==false){
                             sukses=false;
-                        }                              
+                        }
                     }
                     if(sukses==true){
                         sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());
-                    }     
+                    }
                 }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ralan")){
-                    Sequel.queryu("delete from tampjurnal");    
+                    Sequel.queryu("delete from tampjurnal");
                     if(ttljual>0){
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatralan.getSuspen_Piutang_Obat_Ralan()+"','Suspen Piutang Obat Ralan','0','"+ttljual+"'","Rekening")==false){
                             sukses=false;
-                        }    
+                        }
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatralan.getObat_Ralan()+"','Pendapatan Obat Rawat Jalan','"+ttljual+"','0'","Rekening")==false){
                             sukses=false;
-                        }                              
+                        }
                     }
                     if(ttlhpp>0){
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatralan.getHPP_Obat_Rawat_Jalan()+"','HPP Persediaan Obat Rawat Jalan','0','"+ttlhpp+"'","Rekening")==false){
                             sukses=false;
-                        }    
+                        }
                         if(Sequel.menyimpantf("tampjurnal","'"+akunobatralan.getPersediaan_Obat_Rawat_Jalan()+"','Persediaan Obat Rawat Jalan','"+ttlhpp+"','0'","Rekening")==false){
                             sukses=false;
-                        }                              
+                        }
                     }
                     if(sukses==true){
-                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode()); 
-                    }    
+                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode());
+                    }
                 }
             }
 
@@ -611,7 +611,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     headers.setContentType(MediaType.APPLICATION_JSON);
                     headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                     utc=String.valueOf(api.GetUTCdatetimeAsString());
-                    headers.add("X-timestamp",utc);            
+                    headers.add("X-timestamp",utc);
                     headers.add("X-signature",api.getHmac());
                     headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                     headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -644,7 +644,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             }
-            
+
             if(sukses==true){
                 Sequel.Commit();
                 runBackground(() ->tampil());
@@ -654,11 +654,11 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
 
             Sequel.AutoComitTrue();
-        }            
-    }else{            
+        }
+    }else{
         JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
         TCari.requestFocus();
-    }    
+    }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
 private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -698,7 +698,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
@@ -818,18 +818,18 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getpcare_pemberian_obat());
         BtnPrint.setEnabled(akses.getpcare_pemberian_obat());
     }
- 
+
     public void setNoRm(String norwt,Date tgl1,Date tgl2) {
         TCari.setText(norwt);
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -855,7 +855,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

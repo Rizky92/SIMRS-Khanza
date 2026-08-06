@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -16,17 +16,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -76,11 +76,11 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.Double.class
-             };  
+             };
              @Override
              public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             } 
+             }
         };
         tbKamar.setModel(tabMode);
 
@@ -131,18 +131,18 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));  
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             link=prop.getProperty("URLAPIPCARE");
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-              
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -290,7 +290,7 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         tampil(Tanggal.getSelectedItem().toString());
-        this.setCursor(Cursor.getDefaultCursor());        
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
@@ -299,7 +299,7 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(tbKamar.getRowCount()>0){
-            for(i=0;i<tbKamar.getRowCount();i++){ 
+            for(i=0;i<tbKamar.getRowCount();i++){
                 Sequel.menyimpan2("pcare_kegiatan_kelompok","?,?,?,?,?,?,?,?,?,?,?","Edu ID",11,new String[]{
                     tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,7).toString(),
                     Valid.SetTgl(tbKamar.getValueAt(i,11)+""),tbKamar.getValueAt(i,12).toString(),
@@ -310,7 +310,7 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
             }
             JOptionPane.showMessageDialog(rootPane,"Proses simpan selesai...!");
             dispose();
-        }            
+        }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -348,14 +348,14 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String tanggal) {        
+    public void tampil(String tanggal) {
         try {
             URL = link+"/kelompok/kegiatan/"+tanggal;
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-timestamp",utc);            
+	    headers.add("X-timestamp",utc);
 	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -395,8 +395,8 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }  
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -415,7 +415,7 @@ public final class PCareCariKegiatanKelompok extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         }
-    } 
+    }
 
     public JTable getTable(){
         return tbKamar;

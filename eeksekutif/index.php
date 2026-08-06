@@ -10,7 +10,7 @@
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-    
+
     if(!isset($_SESSION["nama_instansi"])){
         $querypengaturan                    = bukaquery("select * from setting");
         while($pengaturan = mysqli_fetch_array($querypengaturan)) {
@@ -26,7 +26,7 @@
             $_SESSION["photo"]              = base64_encode($pengaturan["logo"]);
         }
     }
-    
+
     if(!isset($_SESSION["ses_eksekutif"])){
         include_once "./pages/login.php";
     }else{

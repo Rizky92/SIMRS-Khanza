@@ -1,9 +1,9 @@
 package inventory;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -16,10 +16,10 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.SwingUtilities;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
@@ -50,8 +50,8 @@ public class InventoryVerifikasiPenerimaan extends javax.swing.JDialog {
         NoFaktur.setDocument(new batasInput((byte)25).getKata(NoFaktur));
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -67,7 +67,7 @@ public class InventoryVerifikasiPenerimaan extends javax.swing.JDialog {
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        
+
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
@@ -357,12 +357,12 @@ public class InventoryVerifikasiPenerimaan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -382,10 +382,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgCariPemesanan")){
-                    if(suplier.getTable().getSelectedRow()!= -1){                   
-                        kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());                    
+                    if(suplier.getTable().getSelectedRow()!= -1){
+                        kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                         nmsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdsup.requestFocus();
                 }
             }
@@ -398,7 +398,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -407,12 +407,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(akses.getform().equals("DlgCariPemesanan")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         suplier.dispose();
-                    }    
+                    }
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         suplier.emptTeks();
         suplier.isCek();
         suplier.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -432,10 +432,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgCariPemesanan")){
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }            
+                    }
                     kdptg.requestFocus();
                 }
             }
@@ -447,7 +447,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -462,7 +462,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdsupKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdsupKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select datasuplier.nama_suplier from datasuplier where datasuplier.kode_suplier=?", nmsup,kdsup.getText());            
+            Sequel.cariIsi("select datasuplier.nama_suplier from datasuplier where datasuplier.kode_suplier=?", nmsup,kdsup.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select datasuplier.nama_suplier from datasuplier where datasuplier.kode_suplier=?", nmsup,kdsup.getText());
             NoFaktur.requestFocus();
@@ -482,7 +482,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kdsup.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            TCari.requestFocus();       
+            TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }
@@ -537,18 +537,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            File g = new File("file2.css");            
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("VerifikasiFaktur.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));    
+
+            File f = new File("VerifikasiFaktur.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             if(internalFrame1.getWidth()>1370){
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -557,7 +557,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENERIMAAN OBAT/ALKES/BHP<br>PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENERIMAAN OBAT/ALKES/BHP<br>PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -571,19 +571,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENERIMAAN OBAT/ALKES/BHP<br>PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI PENERIMAAN OBAT/ALKES/BHP<br>PERIODE "+TglBeli1.getSelectedItem()+" s.d. "+TglBeli2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
                 bw.close();
             }
-                                         
+
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -669,13 +669,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50%' colspan='9'>Data Surat Pemesanan Obat, Alkes & BHP Medis</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='35%' colspan='7'>Data Penerimaan Obat, Alkes & BHP Medis</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>Keterangan</td>"+
                 "</tr>");
-            
+
             carifaktur="";carisuplier="";caripegawai="";carikeyword="";
             if(!NoFaktur.getText().trim().equals("")){
                 carifaktur=" and surat_pemesanan_medis.no_pemesanan='"+NoFaktur.getText()+"' ";
@@ -693,7 +693,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             " surat_pemesanan_medis.nip like '%"+TCari.getText().trim()+"%' or "+
                             " pegawai.nama like '%"+TCari.getText().trim()+"%') ";
             }
-            
+
             ps=koneksi.prepareStatement("select date_format(surat_pemesanan_medis.tanggal,'%d/%m/%Y') as tanggal,surat_pemesanan_medis.no_pemesanan, "+
                     "surat_pemesanan_medis.kode_suplier,datasuplier.nama_suplier,surat_pemesanan_medis.nip,pegawai.nama,surat_pemesanan_medis.total1,"+
                     "surat_pemesanan_medis.status,surat_pemesanan_medis.total2,surat_pemesanan_medis.ppn,surat_pemesanan_medis.meterai,"+
@@ -719,7 +719,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(rspenerimaan.next()){
                            indextotal=0;i=0;
                            jmlharikirim=jmlharikirim+rspenerimaan.getInt("lama");
-                           htmlContent.append(                             
+                           htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td valign='middle' bgcolor='#FFFFF8' align='left' colspan='2'>No.Pemesanan</td>"+
                                     "<td valign='middle' colspan='7'>: "+rs.getString("no_pemesanan")+"</td>"+
@@ -747,7 +747,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td valign='middle' bgcolor='#FFF8FF' align='left' colspan='3'>Penerima</td>"+
                                     "<td valign='middle' colspan='4'>: "+rspenerimaan.getString("nip")+" "+rspenerimaan.getString("nama")+"</td>"+
                                     "<td valign='middle' align='center'>Depo : "+rspenerimaan.getString("nm_bangsal")+"</td>"+
-                                "</tr>"+                          
+                                "</tr>"+
                                 "<tr class='isi'>"+
                                     "<td valign='middle' bgcolor='#FFFFF8' align='center' width='5%'>Kode Barang</td>"+
                                     "<td valign='middle' bgcolor='#FFFFF8' align='center' width='14%'>Nama Barang</td>"+
@@ -794,7 +794,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             total=rssubpenerimaan.getDouble("total");
                                             jumlah2=rssubpenerimaan.getDouble("jumlah2");
                                         }
-                                        
+
                                         if(jumlah2==rssub.getDouble("jumlah2")){
                                             status="Tepat";
                                             index=2;
@@ -839,7 +839,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                 "<td align='right'>"+Valid.SetAngka(besardis)+"</td>"+
                                                 "<td align='right'>"+Valid.SetAngka(total)+"</td>"+
                                                 "<td align='center'>"+index+" ("+status+")</td>"+
-                                            "</tr>");  
+                                            "</tr>");
                                     i++;
                                     jmli++;
                                 }
@@ -853,7 +853,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     pssub.close();
                                 }
                             }
-                            
+
                             sisipantotal1=0;sisipanpotongan=0;sisipantotal2=0;status="Tidak Ada";index=2;
                             pssisipan=koneksi.prepareStatement(
                                     "select sum(subtotal),sum(besardis),sum(total) from detailpesan where no_faktur='"+rspenerimaan.getString("no_faktur")+"' "+
@@ -875,19 +875,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     pssisipan.close();
                                 }
                             }
-                            
+
                             if(sisipantotal1>0){
                                 status="Ada";
                                 index=0;
                                 jmlsisipan=jmlsisipan+sisipantotal2;
                                 faktursisipan++;
                             }
-                            
+
                             indextotal=indextotal+index;
                             jmlindextotal=jmlindextotal+index;
                             i++;
                             jmli++;
-                            
+
                             htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td align='right' colspan='4'>Sisipan :</td>"+
@@ -899,7 +899,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td align='right' colspan='2'>"+Valid.SetAngka(sisipanpotongan)+"</td>"+
                                     "<td align='right'>"+Valid.SetAngka(sisipantotal2)+"</td>"+
                                     "<td align='center'>"+index+" ("+status+")</td>"+
-                                "</tr>"+ 
+                                "</tr>"+
                                 "<tr class='isi'>"+
                                     "<td align='right' colspan='4'>Total : </td>"+
                                     "<td align='right' colspan='2'>"+Valid.SetAngka(rs.getDouble("total1"))+"</td>"+
@@ -910,7 +910,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<td align='right' colspan='2'>"+Valid.SetAngka(rspenerimaan.getDouble("potongan"))+"</td>"+
                                     "<td align='right'>"+Valid.SetAngka(rspenerimaan.getDouble("total2"))+"</td>"+
                                     "<td align='center'>"+indextotal+"</td>"+
-                                "</tr>"+ 
+                                "</tr>"+
                                 "<tr class='isi'>"+
                                     "<td align='right' colspan='4'>PPN : </td>"+
                                     "<td align='right' colspan='4'></td>"+
@@ -963,7 +963,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.close();
                 }
             }
-            
+
             htmlContent.append(
                     "<tr class='isi'>"+
                         "<td align='center' valign='middle' bgcolor='#FFFAFA' colspan='4'>Jml.Total Tagihan : "+Valid.SetAngka(jmltotaltagihan)+"</td>"+
@@ -973,7 +973,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "<td align='center' valign='middle' bgcolor='#FFFAFA' colspan='2'>Kirim Rata-rata : "+(Math.round(jmlharikirim/jmlfaktur))+" Hari</td>"+
                         "<td align='center' valign='middle' bgcolor='#FFFAFA' colspan='2'>Ketepatan Kirim : "+(Math.round(((jmlindextotal/(jmli*2))*100)))+" %</td>"+
                     "</tr>");
-            
+
             if(internalFrame1.getWidth()>1370){
                 LoadHTML.setText(
                             "<html>"+
@@ -989,13 +989,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                               "</table>"+
                             "</html>");
             }
-                
+
         } catch (Exception e) {
             System.out.println("laporan.DlgRL4A.prosesCari() 5 : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1021,7 +1021,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

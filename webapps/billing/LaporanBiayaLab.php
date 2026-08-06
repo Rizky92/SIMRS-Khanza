@@ -7,7 +7,7 @@
     </head>
     <body>
     <?php
-        reportsqlinjection(); 
+        reportsqlinjection();
         $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
         $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
         if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
@@ -19,12 +19,12 @@
             $petugas    = validTeks4($_GET['petugas'],70);
             $kasir      = validTeks4($_GET['kasir'],70);
 
-            $_sql = "select * from temporary_lab where temporary_lab.temp4='Pemeriksaan' order by temporary_lab.no asc";   
+            $_sql = "select * from temporary_lab where temporary_lab.temp4='Pemeriksaan' order by temporary_lab.no asc";
             $hasil=bukaquery($_sql);
 
-            if(mysqli_num_rows($hasil)!=0) { 
+            if(mysqli_num_rows($hasil)!=0) {
                 $setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-                echo "   
+                echo "
                 <table width='".getOne("select set_nota.notalabrad from set_nota")."' bgcolor='#ffffff' align='left' border='0' padding='0' class='tbl_form' >
                 <tr class='isi12' padding='0'>
                     <td colspan='7' padding='0'>
@@ -61,17 +61,17 @@
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Nama Pasien</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $pasien)."</font></td>
-                         </tr>                 
+                         </tr>
                          <tr>
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Tanggal</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>$tanggal $jam</font></td>
-                         </tr>               
+                         </tr>
                          <tr>
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Penanggung Jawab</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $pjlab)."</font></td>
-                         </tr>                                 
+                         </tr>
                          <tr>
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Petugas</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
@@ -88,15 +88,15 @@
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>&nbsp;Nama Pemeriksaan</font></td>
                              <td width='30%'><font color='000000' size='1'  face='Tahoma'>&nbsp;Biaya</font></td>
                          </tr>
-                         "; 
+                         ";
                             $z=1;
                             while($item = mysqli_fetch_array($hasil)) {
                                  echo "<tr class='isi'>
                                            <td><font color='000000' size='1'  face='Tahoma'>&nbsp;$z</font></td>
                                            <td><font color='000000' size='1'  face='Tahoma'>&nbsp;$item[2]</font></td>
                                            <td><font color='000000' size='1'  face='Tahoma'>&nbsp;".formatDuit($item[3])."</font></td>
-                                       </tr>";  
-                                 $_sql2 = "select * from temporary_lab where temp4='Detail Pemeriksaan' and temp1='$item[1]' order by no asc";   
+                                       </tr>";
+                                 $_sql2 = "select * from temporary_lab where temp4='Detail Pemeriksaan' and temp1='$item[1]' order by no asc";
                                                              $hasil2=bukaquery($_sql2);
                                                              while($item2=mysqli_fetch_array($hasil2)){
                                                                      $z++;
@@ -104,15 +104,15 @@
                                            <td><font color='000000' size='1'  face='Tahoma'>&nbsp;$z</font></td>
                                            <td><font color='000000' size='1'  face='Tahoma'>&nbsp;$item2[2]</font></td>
                                            <td><font color='000000' size='1'  face='Tahoma'>&nbsp;".formatDuit($item2[3])."</font></td>
-                                       </tr>";  
-                                                             }							 
-                                 $z++;                                   
-                            } 
+                                       </tr>";
+                                                             }
+                                 $z++;
+                            }
                             echo "<tr>
                                       <td><font color='000000' size='1'  face='Tahoma'>&nbsp;</font></td>
                                       <td><font color='000000' size='1'  face='Tahoma'>&nbsp;<b>Total Biaya Pemeriksaan Lab</b></font></td>
                                       <td><font color='000000' size='1'  face='Tahoma'>&nbsp;<b>".formatDuit(getOne("select temp3 from temporary_lab where temp2='Total Biaya Pemeriksaan Lab'"))."</b></font></td>
-                                 </tr>"; 
+                                 </tr>";
 
                 echo "
                       </table>
@@ -141,13 +141,13 @@
                    </td>
                 </tr>
                 </table>
-                ";  
+                ";
             } else {echo "<font color='000000' size='1'  face='Times New Roman'><b>Data Pemeriksaan Lab masih kosong !</b>";}
         }else{
             exit(header("Location:../index.php"));
         }
 
-    ?>  
+    ?>
 
     </body>
 </html>

@@ -11,11 +11,11 @@
 
 package setting;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -90,9 +90,9 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -440,13 +440,13 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.queryutf2("delete from jam_diet_pasien where waktu='"+tbJadwal.getValueAt(i,1).toString()+"'")==false){
-                    JOptionPane.showMessageDialog(null,"Maaf, Tidak bisa dihapus karena data digunakan...!!!!");     
+                    JOptionPane.showMessageDialog(null,"Maaf, Tidak bisa dihapus karena data digunakan...!!!!");
                 }
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -460,7 +460,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        Sequel.mengedit("jam_diet_pasien","waktu=?","jam=?",2,new String[]{            
+        Sequel.mengedit("jam_diet_pasien","waktu=?","jam=?",2,new String[]{
             cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem(),cmbWaktu.getSelectedItem().toString()
         });
         runBackground(() ->tampil());
@@ -494,16 +494,16 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptJamDietPasien.jasper","report","::[ Jam Diet Pasien ]::",
-                        "select * from jam_diet_pasien where waktu like '%"+TCari.getText().trim()+"%' order by waktu",param);            
+                        "select * from jam_diet_pasien where waktu like '%"+TCari.getText().trim()+"%' order by waktu",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -597,7 +597,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -690,17 +690,17 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
             cmbMnt1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(3,5));
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getjam_diet_pasien());
         BtnHapus.setEnabled(akses.getjam_diet_pasien());
         BtnEdit.setEnabled(akses.getjam_diet_pasien());
     }
-    
+
     public JTable getTable(){
         return tbJadwal;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -726,7 +726,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

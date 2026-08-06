@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class koneksiDBSMARTLAB {
     private static Connection connection=null;
-    private static final Properties prop = new Properties();  
+    private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource=new MysqlDataSource();
-    
-    public koneksiDBSMARTLAB(){} 
-    public static Connection condb(){ 
+
+    public koneksiDBSMARTLAB(){}
+    public static Connection condb(){
         if(connection == null){
             try{
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -33,13 +33,13 @@ public class koneksiDBSMARTLAB {
                 dataSource.setUseCompression(true);
                 dataSource.setUseLocalSessionState(true);
                 dataSource.setUseLocalTransactionState(true);
-                connection=dataSource.getConnection();       
+                connection=dataSource.getConnection();
                 System.out.println("  Koneksi Berhasil. Menyambungkan ke database bridging SMARTLAB...!!!");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Koneksi ke server bridging SMARTLAB terputus : "+e);
             }
         }
-        return connection;        
+        return connection;
     }
-    
+
 }

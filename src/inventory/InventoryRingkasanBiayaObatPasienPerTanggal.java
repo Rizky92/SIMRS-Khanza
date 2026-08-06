@@ -1,10 +1,10 @@
 package inventory;
 import fungsi.WarnaTable;
+import fungsi.akses;
+import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.batasInput;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -38,15 +38,15 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs; 
+    private ResultSet rs;
     private int i=0;
     private double total=0;
     private String statusobat="",carabayar="",bangsal="",jenisbarang="",kategoribarang="",golonganbarang="",unit="",pilihan="";
     private StringBuilder htmlContent;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
-    /** 
+
+    /**
      * @param parent
      * @param modal */
     public InventoryRingkasanBiayaObatPasienPerTanggal(java.awt.Frame parent, boolean modal) {
@@ -56,7 +56,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.","Tanggal","No.Rawat","No.RM","Nama Pasien","Alamat","Cara Bayar","Unit/Layanan","Total"
             }){
-            @Override 
+            @Override
             public boolean isCellEditable(int rowIndex, int colIndex){return false;}
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
@@ -95,14 +95,14 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
                 column.setPreferredWidth(90);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());  
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
         isForm();
-     
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -595,7 +595,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -606,8 +606,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -640,10 +640,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(asalstok.getTable().getSelectedRow()!= -1){                   
-                    kdasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),0).toString());                    
+                if(asalstok.getTable().getSelectedRow()!= -1){
+                    kdasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),0).toString());
                     nmasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdasal.requestFocus();
             }
             @Override
@@ -655,7 +655,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         asalstok.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -663,11 +663,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     asalstok.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         asalstok.isCek();
         asalstok.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         asalstok.setLocationRelativeTo(internalFrame1);
@@ -944,7 +944,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             System.out.println("tesss");
                             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                             int row=tabMode.getRowCount();
-                            for(i=0;i<row;i++){  
+                            for(i=0;i<row;i++){
                                 Sequel.menyimpan("temporary","'"+i+"','"+
                                                 tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
                                                 tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
@@ -955,7 +955,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                                 tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
                                                 tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
                                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+
-                                        "','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data"); 
+                                        "','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
                             }
 
                             Map<String, Object> param = new HashMap<>();
@@ -964,8 +964,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             param.put("kotars",akses.getkabupatenrs());
                             param.put("propinsirs",akses.getpropinsirs());
                             param.put("kontakrs",akses.getkontakrs());
-                            param.put("emailrs",akses.getemailrs());   
-                            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                             Valid.MyReportqry("rptRingkasanBiayaObatPasienPertanggal.jasper","report","[ Ringkasan Biaya Obat Pasien Per Tanggal ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             break;
                     }
@@ -1008,7 +1008,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1071,9 +1071,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    private void prosesCari() {             
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+    private void prosesCari() {
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosong(tabMode);
             statusobat="";
             if(status.getSelectedIndex()==1){
@@ -1154,27 +1154,27 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }
-                
-            this.setCursor(Cursor.getDefaultCursor());             
+
+            this.setCursor(Cursor.getDefaultCursor());
         }catch(Exception e){
             System.out.println("Catatan  "+e);
-        }        
+        }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,96));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1200,7 +1200,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

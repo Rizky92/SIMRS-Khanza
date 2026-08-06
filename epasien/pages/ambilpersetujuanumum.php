@@ -9,9 +9,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["nopersetujuan"])) {
         $nopersetujuan    = validTeks3($iyem["nopersetujuan"],20);
         $querypersetujuan = bukaquery(
@@ -55,7 +55,7 @@
                                             <td width='100%'>
                                                 <b>B. Jumlah Tempat Tidur</b><br/>
                                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>";
-            $_sql="Select kamar.kelas,count(kamar.kelas) as jumlah from kamar group by kamar.kelas" ;  
+            $_sql="Select kamar.kelas,count(kamar.kelas) as jumlah from kamar group by kamar.kelas" ;
             $hasil=bukaquery($_sql);
             while ($data = mysqli_fetch_array ($hasil)){
                 echo "                             <tr>
@@ -394,7 +394,7 @@
                         </div>
                     </div>
                   </div>";
-            
+
             $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
             if (isset($BtnSimpan)) {
                 $nopersetujuan     = validTeks4($_POST["nopersetujuan"],20);

@@ -21,10 +21,10 @@
         $konektor = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("" . json_encode($response, true) . "");
         return $konektor;
     }
-    
+
     function cleankar($dirty){
         $konektor=bukakoneksi();
-	$clean = mysqli_real_escape_string($konektor,$dirty);	
+	$clean = mysqli_real_escape_string($konektor,$dirty);
 	mysqli_close($konektor);
 	return preg_replace('/[^a-zA-Z0-9\s_,@. ]/', '',$clean);
     }
@@ -61,7 +61,7 @@
         mysqli_query($konektor,$sql);
         mysqli_close($konektor);
     }
-    
+
     function getOne2($sql) {
         $hasil = bukaquery2($sql);
         list($result) = mysqli_fetch_array($hasil);
@@ -81,14 +81,14 @@
         mysqli_close($konektor);
         return $result;
     }
-    
+
     function bukainput($sql) {
         $konektor = bukakoneksi();
         $result = mysqli_query($konektor, $sql) or die("Gagal menjalankan query !");
         mysqli_close($konektor);
         return $result;
     }
-    
+
     function getOne($sql){
         $hasil = bukaquery($sql);
         list($result) = fetch_array($hasil);
@@ -148,7 +148,7 @@
         $options = ['cost' => $int];
         return password_hash($pass, PASSWORD_DEFAULT, $options);
     }
-    
+
     function query($sql) {
         global $connection;
         $query = mysqli_query($connection, $sql);
@@ -177,26 +177,26 @@
             'RS256' => array('openssl', 'SHA256'),
             'RS384' => array('openssl', 'SHA384'),
             'RS512' => array('openssl', 'SHA512'),
-        );  
+        );
         return $supported_algs[$alg];
     }
-    
+
     function urlsafeB64Encode($input){
         return str_replace(['+/', '='], ['-_', ''], base64_encode($input));
     }
-    
+
     function urlsafeB64Decode($input){
         return str_replace(['-_', ''],['+/',  '='], base64_decode($input));
     }
-    
+
     function signnature($msg, $key, $alg = 'HS256'){
         list($function, $algorithm)=algoritm($alg);
         switch ($function) {
             case 'hash_hmac':
                 return hash_hmac($algorithm, $msg, $key, true);
-        } 
+        }
     }
-    
+
     function verify($msg, $signature, $key, $alg){
         if (empty(algoritm($alg))) {
             throw new DomainException('Algorithm not supported');
@@ -238,54 +238,54 @@
         if (empty($key)) {
             throw new InvalidArgumentException('Key may not be empty');
         }
-        
+
         $tks = explode('.', $token);
         if (count($tks) != 3) {
              throw new UnexpectedValueException('Wrong number of segments');
         }
-        
+
         list($headb64, $bodyb64, $cryptob64) = $tks;
         $header =json_decode(urlsafeB64Decode($headb64));
-        $payload=json_decode(urlsafeB64Decode($bodyb64));   
+        $payload=json_decode(urlsafeB64Decode($bodyb64));
 
         if (null === ($header = json_decode(urlsafeB64Decode($headb64)))) {
             throw new UnexpectedValueException('Invalid header encoding');
         }
-        
+
         if (null === $payload = json_decode(urlsafeB64Decode($bodyb64))) {
             throw new UnexpectedValueException('Invalid claims encoding');
         }
-        
+
         if (false === ($sig = urlsafeB64Decode($cryptob64))) {
             throw new UnexpectedValueException('Invalid signature encoding');
         }
-        
+
         if (empty($header->alg)) {
             throw new UnexpectedValueException('Empty algorithm');
         }
-        
+
         if (empty(algoritm($header->alg))) {
             throw new UnexpectedValueException('Algorithm not supported');
         }
-        
+
         if (!in_array($header->alg, $allowed_algs)) {
             throw new UnexpectedValueException('Algorithm not allowed');
         }
-        
+
         // Check the signature
         if (!verify("$headb64.$bodyb64", $sig, $key, $header->alg)) {
             throw new UnexpectedValueException('Signature verification failed');
         }
-        
+
         // Check if this token has expired.
         if (isset($payload->exp) && (time()-$payload->iat) >= $payload->exp) {
             throw new UnexpectedValueException('Expired token');
         }
-        
+
         return $payload;
     }
-    
-    function cekuser($username,$password){   
+
+    function cekuser($username,$password){
         $cek=false;
         if((!empty($username)) && (!empty($password)) &&(USERNAME==$username) && (PASSWORD==$password)){
             $cek=true;
@@ -295,8 +295,8 @@
         return $cek;
     }
 
-    function createtoken($username,$password){   
-        if(cekuser($username,$password)==true){   
+    function createtoken($username,$password){
+        if(cekuser($username,$password)==true){
             $gtoken=encode_jwt(payloadtoken(),privateKey());
             $response = array(
                 'response' => array(
@@ -319,13 +319,13 @@
         }
         return $response;
     }
-    
+
     function cektoken($token){
         try{
             if (decode_jwt($token,privateKey(),['typ' => 'JWT', 'alg' => 'HS256'])) {
                 $response =TRUE;
                 return $response;
-            } 
+            }
         }catch(Exception $e){
             $response = array(
                 'metadata' => array(
@@ -337,7 +337,7 @@
             return $response;
         }
     }
-    
+
     function cekJadwal($tgl,$kdpoli) {
         $hari=hariindo($tgl);
         $cek=array();
@@ -358,14 +358,14 @@
         }
         return $cek;
     }
-        
+
     function cekpasien($nik,$nopeserta){
         $data=array();
         $data= fetch_array(bukaquery("SELECT pasien.no_rkm_medis, pasien.no_ktp, pasien.no_peserta,pasien.namakeluarga,pasien.alamatpj,pasien.kelurahanpj,pasien.tgl_daftar,pasien.kecamatanpj,pasien.kabupatenpj,pasien.propinsipj,pasien.keluarga,TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) as tahun,(TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12)) as bulan,
                                       TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(pasien.tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari FROM pasien where pasien.no_ktp='$nik' and pasien.no_peserta='$nopeserta'"));
         return $data;
     }
-    
+
     /* ---------------------- Configurasi TOKEN Information ----------------*/
     function privateKey(){
         $key = '123!!abc**';
@@ -377,14 +377,14 @@
             "iss" => "Khanza REST API", //Pembuat Token
             "aud" => "Client Khanza REST API", //Penrima Token
             "iat" => time(), //time create Token
-            "exp" => 3660, //5 menit {second time} 
-            "data" => array( 
+            "exp" => 3660, //5 menit {second time}
+            "data" => array(
                 "username" => USERNAME
             )
         );
         return $token;
     }
-    
+
     function validTeks($data){
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);
@@ -437,7 +437,7 @@
         $save=str_replace("value","",$save);
         return $save;
     }
-    
+
     function validTeks2($data){
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);
@@ -489,7 +489,7 @@
         $save=str_replace("value","",$save);
         return $save;
     }
-    
+
     function validTeks3($data,$panjang){
         $save="";
         if(strlen($data)>$panjang){
@@ -547,7 +547,7 @@
         }
         return $save;
     }
-    
+
     function validTeks4($data,$panjang){
         $save="";
         if(strlen($data)>$panjang){
@@ -604,7 +604,7 @@
         }
         return $save;
     }
-    
+
     date_default_timezone_set('Asia/Jakarta');
     $month      = date('Y-m');
     $date       = date('Y-m-d');

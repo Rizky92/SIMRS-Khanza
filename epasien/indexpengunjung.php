@@ -22,7 +22,7 @@
                <span class="spinner-rotate"></span>
           </div>
      </section>-->
-    
+
      <header>
           <div class="container">
                <div class="row">
@@ -37,7 +37,7 @@
                </div>
           </div>
      </header>
-    
+
      <section class="navbar navbar-default navbar-static-top" role="navigation">
           <div class="container">
                <div class="navbar-header">
@@ -56,7 +56,7 @@
                </div>
           </div>
      </section>
-    
+
      <?php actionPages();?>
 
      <!-- FOOTER -->
@@ -64,7 +64,7 @@
           <div class="container">
                <div class="row">
                     <div class="col-md-4 col-sm-4">
-                         <div class="footer-thumb"> 
+                         <div class="footer-thumb">
                               <h4 class="wow fadeInUp" data-wow-delay="0.4s">Informasi Kontak</h4>
                               <p>Jangan ragu untuk menghubungi kami, Anda bisa menghubungi kami melalui kontak di bawah ini :</p>
 
@@ -75,8 +75,8 @@
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-4"> 
-                         <div class="footer-thumb"> 
+                    <div class="col-md-4 col-sm-4">
+                         <div class="footer-thumb">
                               <h4 class="wow fadeInUp" data-wow-delay="0.4s">Pengumuman/Informasi</h4>
                               <div class="latest-stories">
                                    <div class="stories-info">
@@ -95,14 +95,14 @@
                          </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-4"> 
+                    <div class="col-md-4 col-sm-4">
                          <div class="footer-thumb">
                               <div class="opening-hours">
                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Jam Buka</h4>
                                    <p>Senin - Sabtu <span>06:00 - 22:00 </span></p>
                                    <p>Minggu<span>Tutup</span></p>
                                    <p>IGD<span>24 Jam</span></p>
-                              </div> 
+                              </div>
 
                               <ul class="social-icon">
                                    <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
@@ -114,12 +114,12 @@
 
                     <div class="col-md-12 col-sm-12 border-top">
                          <div class="col-md-4 col-sm-6">
-                              <div class="copyright-text"> 
+                              <div class="copyright-text">
                                    <p>Copyright &copy; 2020 <?=$_SESSION["nama_instansi"];?> | <a href="http://www.yaski.or.id">www.yaski.or.id</a></p>
                               </div>
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <div class="footer-link"> 
+                              <div class="footer-link">
                                   <center>
                                      <a href="index.php?act=CekPoli">Poli/Unit Tersedia</a>
                                      <a href="index.php?act=CekAsuransi">Kerja Sama Asuransi</a>
@@ -128,10 +128,10 @@
                               </div>
                          </div>
                          <div class="col-md-2 col-sm-2 text-align-center">
-                              <div class="angle-up-btn"> 
+                              <div class="angle-up-btn">
                                   <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                               </div>
-                         </div>   
+                         </div>
                     </div>
                </div>
           </div>

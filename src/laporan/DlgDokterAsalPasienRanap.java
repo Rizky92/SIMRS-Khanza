@@ -12,12 +12,12 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
+import fungsi.feeperujukranap;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.feeperujukranap;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -34,10 +34,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
 import simrskhanza.DlgCariCaraBayar;
 
 /**
@@ -85,11 +85,11 @@ public final class DlgDokterAsalPasienRanap extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-        
+
         if(feeperujukranap.getFeePerujukRanap()==null){
             feeperujukranap.SetFeeRujukan();
         }
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -314,26 +314,26 @@ public final class DlgDokterAsalPasienRanap extends javax.swing.JDialog {
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();         
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
-                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());  
-                param.put("tanggal",Tgl2.getDate());  
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+                param.put("tanggal",Tgl2.getDate());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                for(int r=0;r<tabMode.getRowCount();r++){ 
+                for(int r=0;r<tabMode.getRowCount();r++){
                     Sequel.menyimpan("temporary","'"+r+"','"+tabMode.getValueAt(r,0).toString()+"','"+tabMode.getValueAt(r,1).toString()+"','"+tabMode.getValueAt(r,2).toString()+"','"+tabMode.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                }  
+                }
                 Valid.MyReportqry("rptDokterAsalPasienRanap.jasper","report","::[ Laporan Dokter Asal Pasien Ranap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
-        } 
+        }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -377,7 +377,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -413,7 +413,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -424,8 +424,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -456,7 +456,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
                         runBackground(() ->tampil());
-                    }                        
+                    }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
@@ -514,7 +514,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
+    public void tampil(){
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -553,12 +553,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -584,7 +584,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

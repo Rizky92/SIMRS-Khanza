@@ -14,10 +14,10 @@ package simrskhanza;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -31,10 +31,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -295,8 +295,8 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
         bahasa.setLocationRelativeTo(internalFrame1);
         bahasa.setAlwaysOnTop(false);
         bahasa.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -386,7 +386,7 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement("select * from bahasa_pasien ");
-            try{           
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});
@@ -398,7 +398,7 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -409,7 +409,7 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
                 fileWriter.write("{\"bahasa\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -420,18 +420,18 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getbahasa_pasien());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/bahasa.iyem");
@@ -444,7 +444,7 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
                         tabMode.addRow(new Object[]{
                             list.path("ID").asText(),list.path("Bahasa").asText()
                         });
-                    } 
+                    }
                 }else{
                     for(JsonNode list:response){
                         if(list.path("Bahasa").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -468,8 +468,8 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -495,7 +495,7 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

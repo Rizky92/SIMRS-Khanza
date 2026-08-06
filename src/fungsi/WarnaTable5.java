@@ -20,8 +20,8 @@ public class WarnaTable5 extends JTextArea implements TableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         this.setText((String) value);
-        this.setWrapStyleWord(true);                    
-        this.setLineWrap(true);  
+        this.setWrapStyleWord(true);
+        this.setLineWrap(true);
         this.setBackground(new Color(255,255,255));
         this.setSelectionColor(new Color(255,255,255));
         this.setSelectedTextColor(new Color(255,0,0));

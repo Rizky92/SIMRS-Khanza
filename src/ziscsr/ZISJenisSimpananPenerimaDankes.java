@@ -12,11 +12,11 @@
 package ziscsr;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -50,7 +50,7 @@ public final class ZISJenisSimpananPenerimaDankes extends javax.swing.JDialog {
 
         Object[] row={"P","Kode","Keterangan"};
         tabMode=new DefaultTableModel(null,row){
-            @Override 
+            @Override
              public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
@@ -81,7 +81,7 @@ public final class ZISJenisSimpananPenerimaDankes extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)3).getKata(Kd));
         Nm.setDocument(new batasInput((byte)40).getKata(Nm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -106,8 +106,8 @@ public final class ZISJenisSimpananPenerimaDankes extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
     }
 
 
@@ -480,11 +480,11 @@ public final class ZISJenisSimpananPenerimaDankes extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("zis_keterangan_jenis_simpanan_penerima_dankes","kode",tbKamar.getValueAt(i,1).toString());
             }
-        } 
+        }
         BtnCariActionPerformed(evt);
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -641,7 +641,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             ps=koneksi.prepareStatement("select kode,keterangan  "+
                     " from zis_keterangan_jenis_simpanan_penerima_dankes where  kode like ? or "+
                     " keterangan like ? order by kode ");
@@ -662,7 +662,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                }
                if(ps!=null){
                    ps.close();
-               } 
+               }
             }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
@@ -673,7 +673,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public void emptTeks() {
         Kd.setText("");
         Nm.setText("");
-        Kd.requestFocus();        
+        Kd.requestFocus();
         Valid.autoNomer("zis_keterangan_jenis_simpanan_penerima_dankes","",3,Kd);
     }
 
@@ -688,15 +688,15 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());
         BtnHapus.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());
         BtnEdit.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());
-        
-        ppGanti.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());        
+
+        ppGanti.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());
         ppHapus.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());
         ppSimpan.setEnabled(akses.getzis_jenis_simpanan_penerima_dankes());
     }
-    
+
 }

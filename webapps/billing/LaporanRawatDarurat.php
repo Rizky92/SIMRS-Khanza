@@ -9,16 +9,16 @@
 <html>
     <body>
     <?php
-        reportsqlinjection();      
+        reportsqlinjection();
         $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
         $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
         if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-            $tanggal1      = validTeks4($_GET['tanggal1'],20); 
-            $tanggal2      = validTeks4($_GET['tanggal2'],20); 
-            $_sql = "select poliklinik.kd_poli,poliklinik.nm_poli from poliklinik ";            
+            $tanggal1      = validTeks4($_GET['tanggal1'],20);
+            $tanggal2      = validTeks4($_GET['tanggal2'],20);
+            $_sql = "select poliklinik.kd_poli,poliklinik.nm_poli from poliklinik ";
             $hasil=bukaquery($_sql);
 
-            if(mysqli_num_rows($hasil)!=0) { 
+            if(mysqli_num_rows($hasil)!=0) {
               echo "<table width='100%'  border='1' align='left' cellpadding='0' cellspacing='0' class='tbl_form'>
                      <caption><br/><center><font color='000000' size='4' face='Arial'>Laporan RL32 Rawat Darurat<br> Periode $tanggal1 s.d. $tanggal2 </font></center><br/></caption>
                      <tr class=isi15>
@@ -44,10 +44,10 @@
                      $totaldirujuk=0;
                      $totalpulang=0;
                      $totalmeninggal=0;
-                     while($baris = mysqli_fetch_array($hasil)) { 
+                     while($baris = mysqli_fetch_array($hasil)) {
                        $rujukan=getOne("select count(rujuk_masuk.no_rawat) from reg_periksa inner join rujuk_masuk on rujuk_masuk.no_rawat=reg_periksa.no_rawat
                                             where reg_periksa.kd_poli='$baris[0]' and reg_periksa.tgl_registrasi between '$tanggal1' and '$tanggal2'");
-                       $nonrujukan=getOne("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli='$baris[0]' and reg_periksa.tgl_registrasi between '$tanggal1' and '$tanggal2' 
+                       $nonrujukan=getOne("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli='$baris[0]' and reg_periksa.tgl_registrasi between '$tanggal1' and '$tanggal2'
                                              and reg_periksa.no_rawat not in(select rujuk_masuk.no_rawat from rujuk_masuk)");
                        $dirawat=getOne("select count(reg_periksa.no_rawat) from reg_periksa inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat
                                              where reg_periksa.kd_poli='$baris[0]' and reg_periksa.tgl_registrasi between '$tanggal1' and '$tanggal2' ");
@@ -59,7 +59,7 @@
                                        $totalrujukan=$totalrujukan+$rujukan;
                        $totalnonrujukan=$totalnonrujukan+$nonrujukan;
                        $totaldirawat=$totaldirawat+$dirawat;
-                       $totaldirujuk=$totaldirujuk+$dirujuk;                   
+                       $totaldirujuk=$totaldirujuk+$dirujuk;
                        $totalpulang=$totalpulang+$pulang;
                        $totalmeninggal=$totalmeninggal+$meninggal;
                        echo "<tr class='isi15'>
@@ -72,7 +72,7 @@
                                <td>".$pulang." &nbsp;</td>
                                <td>".$meninggal." &nbsp;</td>
                              </tr>";$i++;
-                     }    
+                     }
                        echo "
                        <tr class=isi15>
                          <td>&nbsp;</td>
@@ -83,7 +83,7 @@
                          <td>$totaldirujuk &nbsp;</td>
                          <td>$totalpulang &nbsp;</tdtd>
                          <td>$totalmeninggal&nbsp;</tdtd>
-                       </tr>    
+                       </tr>
                      </table>";
 
             } else {echo "<b>Data masih kosong !</b>";}

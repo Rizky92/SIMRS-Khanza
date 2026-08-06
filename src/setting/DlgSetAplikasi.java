@@ -11,11 +11,11 @@
 
 package setting;
 
-import fungsi.batasInput;
 import fungsi.WarnaTable;
-import fungsi.validasi;
-import fungsi.sekuel;
+import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Canvas;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -30,7 +30,6 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -100,7 +99,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         kdPPK2.setDocument(new batasInput((byte)15).getKata(kdPPK2));
     }
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-    private javax.swing.JFileChooser jfc = new JFileChooser();    
+    private javax.swing.JFileChooser jfc = new JFileChooser();
     private javax.swing.JFileChooser jfc2 = new JFileChooser();
     private FileFilter jpgFilter = new FileNameExtensionFilter("Gambar JPEG", "jpg");
     private FileFilter gifFilter = new FileNameExtensionFilter("Gambar GIF", "gif");
@@ -710,7 +709,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         }else if(ELogo.getText().trim().equals("")){
             YesNo.setSelectedItem("No");
             ELogo.setText("./setting/logo.jpg");
-        }else{  
+        }else{
             Sequel.queryu("delete from setting ");
             Sequel.menyimpan("setting","'"+Nm.getText()+"','"+Almt.getText()+"','"+Kota.getText()+
                              "','"+Propinsi.getText()+"','"+Kontak.getText()+"','"+Email.getText()+
@@ -821,7 +820,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -848,7 +847,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                     ((Painter) PhotoGambar).setImageIcon(new javax.swing.ImageIcon(
                         blob.getBytes(1, (int) (blob.length()))));
                     blob.free();
-                    
+
                     ((Painter) PhotoLogo).setImage(gambar(tabMode.getValueAt(row,0).toString()));
                     Blob blob2 = hasil.getBlob(2);
                     ((Painter) PhotoLogo).setImageIcon(new javax.swing.ImageIcon(
@@ -867,8 +866,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Almt.setText("");
         Kota.setText("");
         Propinsi.setText("");
-        kdPPK.setText("");        
-        kdPPK1.setText("");       
+        kdPPK.setText("");
+        kdPPK1.setText("");
         kdPPK2.setText("");
         ((Painter) PhotoGambar).setImage("");
         EGb.setText("");
@@ -877,8 +876,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         YesNo.setSelectedItem("No");
         Nm.requestFocus();
     }
-    
-    
+
+
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
     }
@@ -912,14 +911,14 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 double x = this.getWidth() / 2 - w / 2;
                 g.drawImage(image, (int) x, 0, (int) (w), this.getHeight(), this);
             } catch (Exception e) {
-            }            
+            }
         }
     }
-    
+
     private void cetak(String str) {
         System.out.println(str);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -945,7 +944,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

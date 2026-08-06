@@ -58,49 +58,49 @@ import simrskhanza.DlgPilihanCetakDokumen;
 public class DlgMutasiBerkas extends javax.swing.JDialog {
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
- 
+
     private final JPanel panel = new JPanel(new BorderLayout());
     private final JLabel lblStatus = new JLabel();
 
     private final JTextField txtURL = new JTextField();
     private final JProgressBar progressBar = new JProgressBar();
-    private final Properties prop = new Properties(); 
+    private final Properties prop = new Properties();
     private final validasi Valid=new validasi();
     private String halaman="";
     private PreparedStatement ps;
     private ResultSet rs;
     private final Connection koneksi=koneksiDB.condb();
     private final DlgPilihanCetakDokumen pilihan=new DlgPilihanCetakDokumen(null,false);
-    
+
     public DlgMutasiBerkas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         initComponents2();
     }
-    
-    private void initComponents2() {           
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             loadURL(txtURL.getText());
         });
-  
+
         progressBar.setPreferredSize(new Dimension(150, 18));
         progressBar.setStringPainted(true);
-        
+
         panel.add(jfxPanel, BorderLayout.CENTER);
-        
+
         internalFrame1.setLayout(new BorderLayout());
-        internalFrame1.add(panel);        
+        internalFrame1.add(panel);
     }
-    
-     private void createScene() {        
+
+     private void createScene() {
         Platform.runLater(new Runnable() {
 
             public void run() {
                 WebView view = new WebView();
-                
+
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
-                
+
                 engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -108,27 +108,27 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         DlgMutasiBerkas.this.setTitle(newValue);
                     });
                 });
-                
-                
+
+
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
+
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -142,14 +142,14 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
                         });
                     }
                 });
-                
-                
+
+
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 engine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
                     @Override
                     public void changed(ObservableValue ov, State oldState, State newState) {
@@ -162,7 +162,7 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
                                     engine.executeScript("history.back()");
                                     setCursor(Cursor.getDefaultCursor());
                                 }else if(engine.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("Keluar")){
-                                    dispose();    
+                                    dispose();
                                 }else if(engine.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("CetakBerkasRM")){
                                     try {
                                         ps=koneksi.prepareStatement("select * from temporary");
@@ -176,7 +176,7 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
                                                 pilihan.setSize(500,400);
                                                 pilihan.setLocationRelativeTo(internalFrame1);
                                                 pilihan.setVisible(true);
-                                            }                                                  
+                                            }
                                         } catch (Exception e) {
                                             System.out.println("Notif Cari Data : "+e);
                                         } finally{
@@ -189,39 +189,39 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif Cetak Data RM : "+e);
-                                    }  
+                                    }
                                 }
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
- 
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             try {
                 engine.load(url);
             }catch (Exception exception) {
                 engine.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
-    
+
     public void print(final Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
@@ -237,7 +237,7 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
             }
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -304,7 +304,7 @@ public class DlgMutasiBerkas extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void setJudul(String Judul,String Pages){
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); 
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50)));
         this.halaman=Pages;
     }
 }

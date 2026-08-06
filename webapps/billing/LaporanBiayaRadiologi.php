@@ -7,7 +7,7 @@
     </head>
     <body>
     <?php
-        reportsqlinjection();     
+        reportsqlinjection();
         $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
         $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
         if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
@@ -19,12 +19,12 @@
             $petugas    = validTeks4($_GET['petugas'],70);
             $kasir      = validTeks4($_GET['kasir'],70);
 
-            $_sql = "select temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14 from temporary_radiologi order by no asc";   
+            $_sql = "select temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14 from temporary_radiologi order by no asc";
             $hasil=bukaquery($_sql);
 
-            if(mysqli_num_rows($hasil)!=0) { 
+            if(mysqli_num_rows($hasil)!=0) {
                 $setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-                echo "   
+                echo "
                 <table width='".getOne("select notalabrad from set_nota")."' bgcolor='#ffffff' align='left' border='0' padding='0' class='tbl_form' >
                 <tr class='isi12' padding='0'>
                                     <td colspan='7' padding='0'>
@@ -61,17 +61,17 @@
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Nama Pasien</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $pasien)."</font></td>
-                         </tr>                 
+                         </tr>
                          <tr>
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Tanggal</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>$tanggal $jam</font></td>
-                         </tr>               
+                         </tr>
                          <tr>
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Penanggung Jawab</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $pjlab)."</font></td>
-                         </tr>                                 
+                         </tr>
                          <tr>
                              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Petugas</font></td>
                              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
@@ -88,7 +88,7 @@
                              <td width='65%'><font color='000000' size='1'  face='Tahoma'>&nbsp;Nama Pemeriksaan</font></td>
                              <td width='30%'><font color='000000' size='1'  face='Tahoma'>&nbsp;Biaya</font></td>
                          </tr>
-                         "; 
+                         ";
                             $z=1;
                             while($item = mysqli_fetch_array($hasil)) {
                                if($item[0]<>"Total Biaya Pemeriksaan Radiologi"){
@@ -96,16 +96,16 @@
                                             <td><font color='000000' size='1'  face='Tahoma'>&nbsp;$z</font></td>
                                             <td><font color='000000' size='1'  face='Tahoma'>&nbsp;$item[0]</font></td>
                                             <td><font color='000000' size='1'  face='Tahoma'>&nbsp;".formatDuit($item[1])."</font></td>
-                                        </tr>";  
+                                        </tr>";
                                }else if($item[0]=="Total Biaya Pemeriksaan Radiologi"){
                                    echo "<tr>
                                             <td><font color='000000' size='1'  face='Tahoma'></font></td>
                                             <td><font color='000000' size='1'  face='Tahoma'><b>&nbsp;$item[0]<b></font></td>
                                             <td><font color='000000' size='1'  face='Tahoma'><b>&nbsp;".formatDuit($item[1])."<b></font></td>
-                                        </tr>";  
+                                        </tr>";
                                }
-                               $z++;                                   
-                            } 
+                               $z++;
+                            }
 
                 echo "
                       </table>
@@ -134,12 +134,12 @@
                    </td>
                 </tr>
                 </table>
-                ";  
+                ";
             } else {echo "<font color='000000' size='1'  face='Times New Roman'><b>Data Pemeriksaan Radiologi masih kosong !</b>";}
         }else{
             exit(header("Location:../index.php"));
         }
-    ?>  
+    ?>
 
     </body>
 </html>

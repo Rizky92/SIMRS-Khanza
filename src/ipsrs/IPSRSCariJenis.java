@@ -14,10 +14,10 @@ package ipsrs;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -54,15 +54,15 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
     public IPSRSCariJenis(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        Object[] row={"Kode Jenis","Jenis Barang"};        
+
+        Object[] row={"Kode Jenis","Jenis Barang"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -80,7 +80,7 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
 
 
     /** This method is called from within the constructor to
@@ -281,7 +281,7 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
             if(evt.getClickCount()==2){
                 dispose();
             }
-        }         
+        }
 }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -307,8 +307,8 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
         nm_jenis.setLocationRelativeTo(internalFrame1);
         nm_jenis.setAlwaysOnTop(false);
         nm_jenis.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -381,12 +381,12 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
+        try{
             file=new File("./cache/jenisipsrs.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
-            
+
             ps=koneksi.prepareStatement("select * from ipsrsjenisbarang order by ipsrsjenisbarang.nm_jenis ");
             try {
                 rs=ps.executeQuery();
@@ -403,14 +403,14 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-                
+            }
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"jenisipsrs\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -420,7 +420,7 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/jenisipsrs.iyem");
@@ -466,11 +466,11 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getipsrs_jenis_barang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -496,7 +496,7 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

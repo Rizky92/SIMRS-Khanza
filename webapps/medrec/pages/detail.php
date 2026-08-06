@@ -6,7 +6,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
@@ -98,13 +98,13 @@
                         </select>
                         <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
                     </td>
-                </tr>                
+                </tr>
                 <tr class="head">
                     <td width="31%" >File Retensi</td><td width="">:</td>
                     <td width="67%"><input name="dokumen" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" type=file id="TxtIsi3" value="<?php echo $dokumen;?>" size="30" maxlength="255" accept="application/pdf,image/jpeg,image/jpg"/>
                     <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
                     </td>
-                </tr>        
+                </tr>
             </table>
             </div>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
@@ -165,7 +165,7 @@
                                 <td width='10%'><div align='center'>Tgl.Retensi</div></td>
                                 <td width='25%'><div align='center'>File Retensi</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>
@@ -201,13 +201,13 @@
                 }
             }
 
-        
+
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
-        
+
         ?>
     </div>
 

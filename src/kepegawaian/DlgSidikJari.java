@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -55,7 +55,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
     public DlgSidikJari(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"ID","NIP","Nama Pegawai","Template Sidik Jari"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -78,10 +78,10 @@ public final class DlgSidikJari extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -291,16 +291,16 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){              
+        }else if(tabMode.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptSidikJari.jasper","report","::[ Data Sidik Jari ]::",
                     "select  pegawai.id,pegawai.nik,pegawai.nama,sidikjari.sidikjari  from pegawai "+
                     "inner join sidikjari on pegawai.id=sidikjari.id where pegawai.nik like '%"+TCari.getText().trim()+"%' "+
@@ -413,7 +413,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                     "select  pegawai.id,pegawai.nik,pegawai.nama,sidikjari.sidikjari  from pegawai "+
                     "inner join sidikjari on pegawai.id=sidikjari.id where  pegawai.stts_aktif<>'KELUAR' and pegawai.nik like ? or  pegawai.stts_aktif<>'KELUAR' and pegawai.nama like ? "+
@@ -440,13 +440,13 @@ public final class DlgSidikJari extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-       
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getsidikjari());
         BtnPrint.setEnabled(akses.getsidikjari());
@@ -477,7 +477,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

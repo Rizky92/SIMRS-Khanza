@@ -6,13 +6,13 @@
    $bulan     = empty($baris[1])?date("m"):$baris[1];
 ?>
 
-<div id="post">    
+<div id="post">
     <div align="center" class="link">
         <a href=?act=InputWarung&action=TAMBAH>| Input Pendapatan Warung |</a>
         <a href=?act=InputPenerimaWarung&action=TAMBAH>| Input Bagian Warung |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
-    &nbsp;Pendapatan Warung : 
+    </div>
+    &nbsp;Pendapatan Warung :
     <div style="width: 100%; height: 65px;overflow: auto;">
     <?php
         $_sql         = "SELECT set_warung.pendapatan_warung,set_warung.persen_rs,set_warung.bagian_rs,set_warung.persen_kry,set_warung.bagian_kry FROM set_warung WHERE set_warung.tahun='$tahun' and set_warung.bulan='$bulan' ORDER BY set_warung.pendapatan_warung";
@@ -28,7 +28,7 @@
 		        <td width='25%'><div align='center'>Bagian RS</div></td>
                         <td width='7%'><div align='center'>% Kry</div></td>
                         <td width='25%'><div align='center'>Bagian Kry</div></td>
-                    </tr>";					
+                    </tr>";
             while($baris = mysqli_fetch_array($hasil)) {
                 $total_warung=$baris[0];
                 echo "<tr class='isi'>
@@ -58,10 +58,10 @@
                     </tr>
                   </table>";
         }
-    ?>      
+    ?>
     </div>
 
-    &nbsp;Penerima bagian Warung : 
+    &nbsp;Penerima bagian Warung :
     <div style="width: 100%; height: 75%; overflow: auto;">
     <?php
         $_sql   = "SELECT pembagian_warung.id,pegawai.nama,persen FROM pembagian_warung inner join pegawai on pembagian_warung.id=pegawai.id ORDER BY persen desc";
@@ -118,9 +118,9 @@
         }
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah </div></td>                        
-                </tr>     
-             </table>");   
+                    <td><div align='left'>Data : $jumlah </div></td>
+                </tr>
+             </table>");
     ?>
     </div>
 </div>

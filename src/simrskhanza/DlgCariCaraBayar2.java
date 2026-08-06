@@ -14,10 +14,10 @@ package simrskhanza;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -54,7 +54,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
     private JsonNode response;
     private FileReader myObj;
     private int i=0,jml=0,index=0;
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private String[] KodeAsuransi,NamaAsuransi,PerusahaanAsuransi,AlamatAsuransi,NoTelp,Attn;
     /** Creates new form DlgPenyakit
      * @param parent
@@ -74,12 +74,12 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                 }
                 return a;
              }
-            
+
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
-             
+
              @Override
              public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
@@ -127,7 +127,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        
+
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
@@ -463,8 +463,8 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setAlwaysOnTop(false);
         penjab.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -589,7 +589,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement("select * from penjab where penjab.status='1' order by penjab.png_jawab");
-            try{           
+            try{
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
@@ -601,7 +601,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -612,7 +612,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                 fileWriter.write("{\"penjab\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         } catch (Exception e) {
@@ -623,18 +623,18 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getadmin());
     }
-    
+
     private void tampil2() {
         try {
             jml=0;
@@ -658,8 +658,8 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
             AlamatAsuransi=new String[jml];
             NoTelp=new String[jml];
             Attn=new String[jml];
-            
-            index=0; 
+
+            index=0;
             for(i=0;i<tbKamar.getRowCount();i++){
                 if(tbKamar.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -672,12 +672,12 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                     index++;
                 }
             }
-            
+
             Valid.tabelKosong(tabMode);
-            for(i=0;i<jml;i++){                
+            for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],KodeAsuransi[i],NamaAsuransi[i],PerusahaanAsuransi[i],AlamatAsuransi[i],NoTelp[i],Attn[i]});
-            } 
-            
+            }
+
             myObj = new FileReader("./cache/penjab.iyem");
             root = mapper.readTree(myObj);
             response = root.path("penjab");
@@ -711,26 +711,26 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
-    public void onCari(){        
+    }
+
+    public void onCari(){
         TCari.requestFocus();
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(500,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
-    
+
     private void panggilPhoto() {
         if(FormPhoto.isVisible()==true){
             try {
@@ -745,7 +745,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                         }else{
                             Berakhir.setText("Kerjasama Berakhir Pada : "+rs.getString("tanggal"));
                             LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/dokumenasuransi/"+rs.getString("photo")+"' alt='photo' width='450' height='550'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         Berakhir.setText("");
                         LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
@@ -762,7 +762,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
-            } 
+            }
         }
     }
 }

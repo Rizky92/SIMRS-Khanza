@@ -26,7 +26,7 @@ public class lokasidepoutama {
             System.out.println("Notif Depo : "+e);
         }
     }
-    
+
     public static String getDepoDefault(){return lokasidepoutama.DepoDefault;}
     public static String getAsalStok(){return lokasidepoutama.AsalStok;}
 }

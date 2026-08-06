@@ -1,10 +1,10 @@
 package rekammedis;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -69,9 +69,9 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         Kd.setDocument(new batasInput((byte)5).getKata(Kd));
-        DiagnosisPreOp.setDocument(new batasInput((byte)50).getKata(DiagnosisPreOp));      
-        Template.setDocument(new batasInput((int)5000).getKata(Template));  
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                
+        DiagnosisPreOp.setDocument(new batasInput((byte)50).getKata(DiagnosisPreOp));
+        Template.setDocument(new batasInput((int)5000).getKata(Template));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
     /** This method is called from within the constructor to
@@ -631,12 +631,12 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-       dispose();  
+       dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -655,10 +655,10 @@ public class MasterTemplateLaporanOperasi extends javax.swing.JDialog {
             Valid.textKosong(Template,"Template Laporan Operasi");
         }else{
             if(Sequel.menyimpantf("template_laporan_operasi","?,?,?,?,?,?,?","No.Template",7,new String[]{
-                Kd.getText(),NamaOperasi.getText(),DiagnosisPreOp.getText(),DiagnosisPostOp.getText(),JaringanDieksisi.getText(),DikirimPA.getSelectedItem().toString(),Template.getText() 
+                Kd.getText(),NamaOperasi.getText(),DiagnosisPreOp.getText(),DiagnosisPostOp.getText(),JaringanDieksisi.getText(),DikirimPA.getSelectedItem().toString(),Template.getText()
             })==true){
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -741,7 +741,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -869,17 +869,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     public JTable getTable(){
         return tbDokter;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettemplate_laporan_operasi());
         BtnHapus.setEnabled(akses.gettemplate_laporan_operasi());
         BtnEdit.setEnabled(akses.gettemplate_laporan_operasi());
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -905,7 +905,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

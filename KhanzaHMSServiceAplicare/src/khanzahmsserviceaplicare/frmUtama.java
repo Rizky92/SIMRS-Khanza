@@ -47,9 +47,9 @@ public class frmUtama extends javax.swing.JFrame {
      */
     public frmUtama() {
         initComponents();
-        
+
         this.setSize(390,340);
-        
+
         jam();
     }
 
@@ -97,7 +97,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -166,7 +166,7 @@ public class frmUtama extends javax.swing.JFrame {
                 if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
                     TeksArea.setText("");
                 }
-                
+
                 if((detik.equals("01")&&menit.equals("01"))){
                     try {
                         koneksi=koneksiDB.condb();
@@ -181,7 +181,7 @@ public class frmUtama extends javax.swing.JFrame {
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 TeksArea.append("Mengirimkan kamar "+rs.getString("kode_kelas_aplicare")+" "+rs.getString("nm_bangsal")+"\n");
-                                try {     
+                                try {
                                     headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                     headers.add("X-Cons-ID",koneksiDB.CONSIDAPIAPLICARE());
@@ -190,12 +190,12 @@ public class frmUtama extends javax.swing.JFrame {
                                     headers.add("X-Signature",api.getHmac(utc));
                                     headers.add("user_key",koneksiDB.USERKEYAPIAPLICARE());
                                     requestJson ="{\"kodekelas\":\""+rs.getString("kode_kelas_aplicare")+"\", "+
-                                                  "\"koderuang\":\""+rs.getString("kd_bangsal")+"\","+ 
-                                                  "\"namaruang\":\""+rs.getString("nm_bangsal")+"\","+ 
-                                                  "\"kapasitas\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"'")+"\","+ 
+                                                  "\"koderuang\":\""+rs.getString("kd_bangsal")+"\","+
+                                                  "\"namaruang\":\""+rs.getString("nm_bangsal")+"\","+
+                                                  "\"kapasitas\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"'")+"\","+
                                                   "\"tersedia\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and status='KOSONG'")+"\","+
-                                                  "\"tersediapria\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and status='KOSONG'")+"\","+ 
-                                                  "\"tersediawanita\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and status='KOSONG'")+"\","+ 
+                                                  "\"tersediapria\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and status='KOSONG'")+"\","+
+                                                  "\"tersediawanita\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and status='KOSONG'")+"\","+
                                                   "\"tersediapriawanita\":\""+Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and status='KOSONG'")+"\""+
                                                   "}";
                                     TeksArea.append("JSON dikirim : "+requestJson+"\n");

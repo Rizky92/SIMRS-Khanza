@@ -12,11 +12,11 @@
 package parkir;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -48,7 +48,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"ID Jenis","Jenis Parkir","Biaya Parkir","Sistem"};
         tabMode=new DefaultTableModel(null,row){
@@ -101,7 +101,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try {
             ps=koneksi.prepareStatement("select * from parkir_jenis where kd_parkir like ? or jns_parkir like ? order by kd_parkir");
         } catch (Exception e) {
@@ -576,7 +576,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -647,7 +647,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
-            while(rs.next()){                
+            while(rs.next()){
                 tabMode.addRow(new Object[]{
                     rs.getString(1),rs.getString(2),Valid.SetAngka(rs.getDouble(3)),rs.getString(4)
                 });
@@ -680,7 +680,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getparkir_jenis());
        BtnHapus.setEnabled(akses.getparkir_jenis());

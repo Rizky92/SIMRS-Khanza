@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -13,17 +13,16 @@
 package ipsrs;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +49,7 @@ import javax.swing.table.TableColumn;
 public final class IPSRSStokOpname extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi();  
+    private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement pstampil;
     private ResultSet rstampil;
@@ -106,13 +105,13 @@ public final class IPSRSStokOpname extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kdbar.setDocument(new batasInput((byte)15).getKata(Kdbar));
         Stok.setDocument(new batasInput((byte)10).getKata(Stok));
         Real.setDocument(new batasInput((byte)10).getOnlyAngka(Real));
         Keterangan.setDocument(new batasInput((byte)60).getKata(Keterangan));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    } 
+    }
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     double total=0,totalreal=0,totallebih=0;
 
@@ -609,15 +608,15 @@ public final class IPSRSStokOpname extends javax.swing.JDialog {
         if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbKamar.getRowCount()!=0){   
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tbKamar.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptOpnameIPSRS.jasper","report","::[ Stok Opname Non Medis, Penunjang Lab & Radiologi ]::","select ipsrsopname.kode_brng, ipsrsbarang.nama_brng,ipsrsopname.h_beli, ipsrsbarang.kode_sat, ipsrsopname.tanggal, ipsrsopname.stok, "+
                   "ipsrsopname.real, ipsrsopname.selisih,ipsrsopname.lebih, (ipsrsopname.real*ipsrsopname.h_beli) as totalreal,ipsrsopname.nomihilang,ipsrsopname.nomilebih,ipsrsopname.keterangan "+
                   "from ipsrsopname inner join ipsrsbarang inner join ipsrsjenisbarang on ipsrsopname.kode_brng=ipsrsbarang.kode_brng and ipsrsjenisbarang.kd_jenis=ipsrsbarang.jenis "+
@@ -835,13 +834,13 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
         total=0;
         totalreal=0;
         totallebih=0;
-        try{     
+        try{
             pstampil=koneksi.prepareStatement("select ipsrsopname.kode_brng, ipsrsbarang.nama_brng,ipsrsopname.h_beli, ipsrsbarang.kode_sat, ipsrsopname.tanggal, ipsrsopname.stok, "+
                      "ipsrsopname.real, ipsrsopname.selisih,ipsrsopname.lebih, (ipsrsopname.real*ipsrsopname.h_beli) as totalreal,ipsrsopname.nomihilang,ipsrsopname.nomilebih,ipsrsopname.keterangan "+
                      "from ipsrsopname inner join ipsrsbarang inner join ipsrsjenisbarang on ipsrsopname.kode_brng=ipsrsbarang.kode_brng and ipsrsjenisbarang.kd_jenis=ipsrsbarang.jenis "+
                      "where concat(ipsrsbarang.jenis,ipsrsjenisbarang.nm_jenis) like ? and ipsrsopname.tanggal between ? and ? and "+
                      "(ipsrsopname.kode_brng like ? or ipsrsbarang.nama_brng like ? or ipsrsopname.kode_brng like ? or ipsrsbarang.kode_sat like ? or ipsrsopname.keterangan like ?) order by ipsrsopname.tanggal");
-            try {                
+            try {
                 pstampil.setString(1,"%"+kdjenis.getText()+nmjns.getText().trim()+"%");
                 pstampil.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 pstampil.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -852,8 +851,8 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
                 pstampil.setString(8,"%"+TCari.getText().trim()+"%");
                 rstampil=pstampil.executeQuery();
                 total=0;
-                while(rstampil.next()){                
-                    totalreal=totalreal+rstampil.getDouble(10); 
+                while(rstampil.next()){
+                    totalreal=totalreal+rstampil.getDouble(10);
                     total=total+rstampil.getDouble(11);
                     totallebih=totallebih+rstampil.getDouble(12);
                     tabMode.addRow(new Object[]{rstampil.getString(1),
@@ -889,7 +888,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
         Stok.setText("0");
         Harga.setText("0");
         Real.setText("0");
-        Selisih.setText("0");        
+        Selisih.setText("0");
         Keterangan.setText("");
         Tanggal.setDate(new Date());
         Nominal.setText("0");
@@ -903,10 +902,10 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
             Kd2.setText(tbKamar.getValueAt(row,0).toString());
             Nmbar.setText(tbKamar.getValueAt(row,1).toString());
             Stok.setText(tbKamar.getValueAt(row,5).toString());
-            Real.setText(tbKamar.getValueAt(row,6).toString());            
-            Selisih.setText(tbKamar.getValueAt(row,7).toString());        
-            Nominal.setText(tbKamar.getValueAt(row,8).toString());      
-            Keterangan.setText(tbKamar.getValueAt(row,9).toString());      
+            Real.setText(tbKamar.getValueAt(row,6).toString());
+            Selisih.setText(tbKamar.getValueAt(row,7).toString());
+            Nominal.setText(tbKamar.getValueAt(row,8).toString());
+            Keterangan.setText(tbKamar.getValueAt(row,9).toString());
             Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,4).toString());
         }
     }
@@ -918,13 +917,13 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
     public JButton getButton(){
         return BtnKeluar;
     }
-    
-        
+
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getstok_opname_logistik());
-        BtnPrint.setEnabled(akses.getstok_opname_logistik()); 
+        BtnPrint.setEnabled(akses.getstok_opname_logistik());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -950,7 +949,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -25,7 +25,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiSatuSehat {        
+public class ApiSatuSehat {
     private String key,clientid,urlauth,token;
     private long millis;
     private SSLContext sslContext;
@@ -37,7 +37,7 @@ public class ApiSatuSehat {
     private JsonNode root;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
-    
+
     public ApiSatuSehat(){
         try {
             key = koneksiDB.SECRETKEYSATUSEHAT();
@@ -49,7 +49,7 @@ public class ApiSatuSehat {
     }
 
     public String TokenSatuSehat(){
-        try {    
+        try {
             header = new HttpHeaders();
             header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             requestEntity = new HttpEntity("client_id="+clientid+"&client_secret="+key,header);
@@ -60,12 +60,12 @@ public class ApiSatuSehat {
         }
         return token;
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        millis = System.currentTimeMillis();   
+
+    public long GetUTCdatetimeAsString(){
+        millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         System.out.println(data);
         mykey = ApiBPJSEnc.generateKey(clientid+key+utc);
@@ -74,7 +74,7 @@ public class ApiSatuSehat {
         System.out.println(data);
         return data;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("TLSv1.2");
         TrustManager[] trustManagers= {

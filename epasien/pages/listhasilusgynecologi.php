@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["norawat"])) {
         $norawat    = validTeks3($iyem["norawat"],20);
         $queryusggynecologi = bukaquery(
@@ -32,27 +32,27 @@
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Uterus</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusggynecologi["uterus"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Parametrium</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusggynecologi["parametrium"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Ovarium</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusggynecologi["ovarium"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Doppler</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusggynecologi["doppler"]."</td>
                                     </tr>
                                     <tr>
                                         <td valign='middle' width='30%'>Kesimpulan</td>
-                                        <td valign='middle' width='1%'>:</td>                                        
+                                        <td valign='middle' width='1%'>:</td>
                                         <td valign='middle' width='69%'>".$rsqueryusggynecologi["kesimpulan"]."</td>
                                     </tr>";
             $querygambarusg= bukaquery(

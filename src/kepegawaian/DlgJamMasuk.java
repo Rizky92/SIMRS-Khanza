@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -90,9 +90,9 @@ public class DlgJamMasuk extends javax.swing.JDialog {
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));   
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -509,11 +509,11 @@ public class DlgJamMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 Sequel.queryu("delete from jam_masuk where shift='"+tbJadwal.getValueAt(i,1).toString()+"'");
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -527,7 +527,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        Sequel.mengedit("jam_masuk","shift=?","jam_masuk=?,jam_pulang=?",3,new String[]{            
+        Sequel.mengedit("jam_masuk","shift=?","jam_masuk=?,jam_pulang=?",3,new String[]{
             cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem()+":"+cmbDtk1.getSelectedItem(),
             cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem(),
             cmbShift.getSelectedItem().toString()
@@ -563,16 +563,16 @@ public class DlgJamMasuk extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptJammasuk.jasper","report","::[ Jadwal Pegawai ]::",
-                        "select * from jam_masuk where shift like '%"+TCari.getText().trim()+"%'  order by shift",param);            
+                        "select * from jam_masuk where shift like '%"+TCari.getText().trim()+"%'  order by shift",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -770,17 +770,17 @@ public class DlgJamMasuk extends javax.swing.JDialog {
             cmbDtk2.setSelectedItem(tabMode.getValueAt(row,3).toString().substring(6,8));
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getjam_masuk());
         BtnHapus.setEnabled(akses.getjam_masuk());
         BtnEdit.setEnabled(akses.getjam_masuk());
     }
-    
+
     public JTable getTable(){
         return tbJadwal;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -806,7 +806,7 @@ public class DlgJamMasuk extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

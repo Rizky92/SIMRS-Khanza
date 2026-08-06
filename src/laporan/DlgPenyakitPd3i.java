@@ -88,8 +88,8 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
 
         kdpenyakit.setDocument(new batasInput((byte)30).getKata(kdpenyakit));
-        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit)); 
-        
+        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit));
+
         try {
             ps=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
                 "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum from kategori_penyakit inner join penyakit inner join penyakit_pd3i "+
@@ -396,10 +396,10 @@ private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -459,7 +459,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             rs=ps.executeQuery();
             while(rs.next()){
                 tabMode.addRow(new Object[]{rs.getString(1),
@@ -487,7 +487,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         nmpenyakit.setText("");
         kdpenyakit.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -513,7 +513,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

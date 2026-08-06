@@ -23,7 +23,7 @@
                     <div>
                         <h7 class="text-success">
                             <center>
-                                Kerjasama Berakhir Pada : 
+                                Kerjasama Berakhir Pada :
                                 <select name="TglBerakhir" class="text-success">
                                     <?php
                                        loadTglnow();
@@ -76,4 +76,3 @@
     </script>
 </body>
 </html>
-

@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -44,7 +44,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private PreparedStatement ps;
-    private ResultSet rs; 
+    private ResultSet rs;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     int i=0;
@@ -64,8 +64,8 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  
-                java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  
+                java.lang.Boolean.class, java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,
+                java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,
                 java.lang.Object.class,  java.lang.Object.class, java.lang.Object.class,
              };
              @Override
@@ -104,13 +104,13 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
             }
         }
         tbTemporary.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
     }
 
-    
-    
-    
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -454,8 +454,8 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+
+        for(i=0;i<tbTemporary.getRowCount();i++){
             if(tbTemporary.getValueAt(i,0).toString().equals("true")){
                 Sequel.queryu2("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)", 9,new String[]{
                     tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,4).toString(),
@@ -468,7 +468,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                 });
             }
         }
-        
+
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
@@ -481,15 +481,15 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+
+        for(i=0;i<tbTemporary.getRowCount();i++){
             if(tbTemporary.getValueAt(i,0).toString().equals("true")){
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
                     tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
                 });
             }
         }
-        
+
         runBackground(() ->tampil());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -510,14 +510,14 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptTemporaryPresensi.jasper","report","::[ Temporary Presensi ]::",
                     "SELECT pegawai.id, pegawai.nik, pegawai.nama, temporary_presensi.shift, " +
                     "temporary_presensi.jam_datang, now() as jam_pulang, temporary_presensi.status,  " +
@@ -528,10 +528,10 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                     "temporary_presensi.shift like '%"+TCari.getText().trim()+"%' or " +
                     "temporary_presensi.jam_datang like '%"+TCari.getText().trim()+"%' or " +
                     "temporary_presensi.status like '%"+TCari.getText().trim()+"%' or " +
-                    "temporary_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' ",param);            
+                    "temporary_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' ",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -588,12 +588,12 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void ppVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifyActionPerformed
-        
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+
+        for(i=0;i<tbTemporary.getRowCount();i++){
             if(Double.parseDouble(tbTemporary.getValueAt(i,9).toString())>16){
                 Sequel.queryu2("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)", 9,new String[]{
                     tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,4).toString(),
@@ -606,13 +606,13 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                 });
             }
         }
-        
+
         runBackground(() ->tampil());
     }//GEN-LAST:event_ppVerifyActionPerformed
 
     private void ppVerifySemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifySemuaActionPerformed
-        
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+
+        for(i=0;i<tbTemporary.getRowCount();i++){
                 Sequel.queryu2("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)", 9,new String[]{
                     tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,4).toString(),
                     tbTemporary.getValueAt(i,5).toString(),tbTemporary.getValueAt(i,6).toString(),
@@ -623,25 +623,25 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                     tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
                 });
         }
-        
+
         runBackground(() ->tampil());
     }//GEN-LAST:event_ppVerifySemuaActionPerformed
 
     private void ppHapusSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusSemuaActionPerformed
-        
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+
+        for(i=0;i<tbTemporary.getRowCount();i++){
                 Sequel.queryu2("delete from temporary_presensi where id=? and jam_datang=?",2,new String[]{
                     tbTemporary.getValueAt(i,1).toString(),tbTemporary.getValueAt(i,5).toString()
                 });
         }
-        
+
         runBackground(() ->tampil());
     }//GEN-LAST:event_ppHapusSemuaActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+        for(i=0;i<tbTemporary.getRowCount();i++){
             tbTemporary.setValueAt(true,i,0);
-        }        
+        }
     }//GEN-LAST:event_ppPilihSemuaActionPerformed
 
     private void ppVerifyOtomatisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifyOtomatisActionPerformed
@@ -651,11 +651,11 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         } catch (Exception e) {
             System.out.print("Notifikasi : "+e);
-        } 
+        }
     }//GEN-LAST:event_ppVerifyOtomatisActionPerformed
 
     private void ppBersihkanSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanSemuaActionPerformed
-        for(i=0;i<tbTemporary.getRowCount();i++){ 
+        for(i=0;i<tbTemporary.getRowCount();i++){
             tbTemporary.setValueAt(false,i,0);
         }
     }//GEN-LAST:event_ppBersihkanSemuaActionPerformed
@@ -704,7 +704,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "SELECT pegawai.id, pegawai.nik, pegawai.nama, temporary_presensi.shift, " +
                     "temporary_presensi.jam_datang, now() as jam_pulang, temporary_presensi.status,  " +
@@ -723,7 +723,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
                 ps.setString(5,"%"+TCari.getText().trim()+"%");
                 ps.setString(6,"%"+TCari.getText().trim()+"%");
-                rs=ps.executeQuery(); 
+                rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
@@ -752,14 +752,14 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.gettemporary_presensi());
         BtnHapus.setEnabled(akses.gettemporary_presensi());
         BtnPrint.setEnabled(akses.gettemporary_presensi());
-        
+
         if(akses.getkode().equals("Admin Utama")){
             ppVerifyOtomatis.setEnabled(true);
         }else{
             ppVerifyOtomatis.setEnabled(false);
-        } 
+        }
      }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -785,7 +785,7 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

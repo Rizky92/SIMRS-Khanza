@@ -14,11 +14,11 @@ package simrskhanza;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.validasi;
-import fungsi.akses;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -299,7 +299,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //bangsal.setModal(true);
         DlgBangsal bangsal=new DlgBangsal(null,false);
         bangsal.emptTeks();
@@ -308,8 +308,8 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setAlwaysOnTop(false);
         bangsal.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -346,7 +346,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -382,7 +382,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             file=new File("./cache/bangsal.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -403,13 +403,13 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }    
+            }
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"bangsal\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder.setLength(0);
         }catch(Exception e){
@@ -427,11 +427,11 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.getkamar());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/bangsal.iyem");
@@ -469,7 +469,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public String tampil3(String kode) {
         try {
             if(Valid.daysOld("./cache/bangsal.iyem")>7){
@@ -480,7 +480,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
                 runBackground(() ->tampil());
             }
         }
-        
+
         iyem="";
         try {
             myObj = new FileReader("./cache/bangsal.iyem");
@@ -507,7 +507,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
         }
         return iyem;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -533,7 +533,7 @@ public final class DlgCariBangsal extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

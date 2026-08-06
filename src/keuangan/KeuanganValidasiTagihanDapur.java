@@ -2,13 +2,13 @@
 
 package keuangan;
 
+import dapur.DapurCariSuplier;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import dapur.DapurCariSuplier;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -82,7 +82,7 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
     /** This method is called from within the constructor to
@@ -348,26 +348,26 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            
+
             int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
                                 tabMode.getValueAt(i,2).toString()+"','"+
                                 tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien"); 
+                                tabMode.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien");
             }
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','TOTAL TAGIHAN :','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien"); 
-            Map<String, Object> param = new HashMap<>();    
+            Sequel.menyimpan("temporary","'"+i+"','TOTAL TAGIHAN :','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien");
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptValidasiTagihanDapur.jasper","report","::[ Data Pegajuan Titip Faktur/Tagihan Dapur ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -442,7 +442,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     kdsuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                     nmsuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdsuplier.requestFocus();
             }
             @Override
@@ -453,8 +453,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {suplier.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -498,7 +498,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_BtnBayarKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tbBangsal.getSelectedRow()!= -1){  
+        if(tbBangsal.getSelectedRow()!= -1){
             LCount1.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString());
         }
     }//GEN-LAST:event_tbBangsalMouseClicked
@@ -584,11 +584,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             if(!nmsuplier.getText().trim().equals("")){
                 carisuplier=" and dapurpemesanan.kode_suplier='"+kdsuplier.getText()+"' ";
             }
-            
+
             if(!TCari.getText().trim().equals("")){
                 cari=" and (dapur_titip_faktur.no_tagihan like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%' or dapur_titip_faktur.keterangan like '%"+TCari.getText()+"%' or dapur_detail_titip_faktur.no_faktur like '%"+TCari.getText()+"%' or dapursuplier.nama_suplier like '%"+TCari.getText()+"%' ) ";
             }
-            
+
             ps=koneksi.prepareStatement(
                      "select dapur_titip_faktur.no_tagihan,dapur_titip_faktur.tanggal,dapur_titip_faktur.nip,petugas.nama,"+
                      "dapur_titip_faktur.keterangan,dapur_titip_faktur.status,sum(dapurpemesanan.tagihan) as tagihan from dapur_titip_faktur "+
@@ -636,13 +636,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }
-            
+
             LCount.setText(Valid.SetAngka(sisahutang));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -668,7 +668,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

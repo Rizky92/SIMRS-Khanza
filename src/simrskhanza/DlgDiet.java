@@ -12,11 +12,11 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -58,7 +58,7 @@ public class DlgDiet extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode Diet","Nama Diet"};
         tabMode=new DefaultTableModel(null,row){
@@ -413,7 +413,7 @@ public class DlgDiet extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -440,7 +440,7 @@ public class DlgDiet extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -545,7 +545,7 @@ public class DlgDiet extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -633,7 +633,7 @@ public class DlgDiet extends javax.swing.JDialog {
             TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -641,13 +641,13 @@ public class DlgDiet extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdiet_pasien());
         BtnHapus.setEnabled(akses.getdiet_pasien());
         BtnEdit.setEnabled(akses.getdiet_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -673,7 +673,7 @@ public class DlgDiet extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

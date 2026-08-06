@@ -1,10 +1,10 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
-  nyab,tdpai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  nyab,tdpai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -16,12 +16,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -31,9 +28,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -80,11 +80,11 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kabupaten.setDocument(new batasInput((byte)100).getKata(Kabupaten));
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -252,7 +252,7 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             BtnPropinsi.requestFocus();
         }else{
             runBackground(() ->tampil(Kabupaten.getText()));
-        }            
+        }
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -270,22 +270,22 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
                 propinsi.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(propinsi.getTable().getSelectedRow()!= -1){   
+                        if(propinsi.getTable().getSelectedRow()!= -1){
                             KdProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),1).toString());
                             NmProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         propinsi=null;
                     }
-                }); 
+                });
 
                 propinsi.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             propinsi.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 propinsi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 propinsi.setLocationRelativeTo(internalFrame1);
             }
@@ -294,7 +294,7 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             if (propinsi.isVisible()) {
                 propinsi.toFront();
                 return;
-            }    
+            }
             propinsi.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -380,18 +380,18 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             response = null;
             root = null;
         }
-    }    
+    }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void setPropinsi(String KdProp,String NmProp){
         this.KdProp.setText(KdProp);
         this.NmProp.setText(NmProp);
         runBackground(() ->tampil(""));
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -417,7 +417,7 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

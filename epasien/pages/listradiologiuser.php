@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $queryradiologi = bukaquery("select jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.total_byr,jns_perawatan_radiologi.kelas from jns_perawatan_radiologi inner join penjab on penjab.kd_pj=jns_perawatan_radiologi.kd_pj where jns_perawatan_radiologi.status='1' and penjab.png_jawab like '%umum%' order by jns_perawatan_radiologi.kelas");
                            while($rsqueryradiologi = mysqli_fetch_array($queryradiologi)) {
                                echo "<tr>

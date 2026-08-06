@@ -53,7 +53,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Aturan Pakai"};
         tabMode=new DefaultTableModel(null,row){
@@ -505,7 +505,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{         
+        try{
             ps=koneksi.prepareStatement("select * from master_aturan_pakai where aturan like ? ");
             try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -540,15 +540,15 @@ public class DlgAturanPakai extends javax.swing.JDialog {
             Nama.setText(tbkabupaten.getValueAt(tbkabupaten.getSelectedRow(),0).toString());
         }
     }
-    
+
     public JTable getTable() {
         return tbkabupaten;
     }
-    
+
     public void onCari(){
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -574,7 +574,7 @@ public class DlgAturanPakai extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

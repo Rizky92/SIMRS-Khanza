@@ -1,10 +1,10 @@
 package inventory;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -68,14 +68,14 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         Kd.setDocument(new batasInput((byte)5).getKata(Kd));
-        Nm.setDocument(new batasInput((byte)50).getKata(Nm));      
-        Alamat.setDocument(new batasInput((byte)50).getKata(Alamat));  
-        Kota.setDocument(new batasInput((byte)20).getKata(Kota));    
-        Telp.setDocument(new batasInput((byte)13).getOnlyAngka(Telp)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
-          
+        Nm.setDocument(new batasInput((byte)50).getKata(Nm));
+        Alamat.setDocument(new batasInput((byte)50).getKata(Alamat));
+        Kota.setDocument(new batasInput((byte)20).getKata(Kota));
+        Telp.setDocument(new batasInput((byte)13).getOnlyAngka(Telp));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkInput.setSelected(false);
-        isForm();  
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -594,16 +594,16 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
                     " industrifarmasi.alamat like '%"+TCari.getText().trim()+"%' or "+
                     " industrifarmasi.kota like '%"+TCari.getText().trim()+"%' or "+
                     " industrifarmasi.no_telp like '%"+TCari.getText().trim()+"%' order by industrifarmasi.kode_industri";
-            } 
-            Map<String, Object> param = new HashMap<>(); 
+            }
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            Valid.MyReportqry("rptIndustriFarmasi.jasper","report","::[ Data Industri Farmasi ]::",sql,param);            
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptIndustriFarmasi.jasper","report","::[ Data Industri Farmasi ]::",sql,param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -630,12 +630,12 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
+            dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -652,7 +652,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
             Valid.textKosong(Kota,"Kota");
         }else{
             Sequel.menyimpan("industrifarmasi","?,?,?,?,?","Kode Industri Farmasi",5,new String[]{
-                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText()        
+                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText()
             });
             runBackground(() ->tampil());
             emptTeks();
@@ -669,7 +669,7 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -713,7 +713,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_KotaKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -739,7 +739,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
@@ -849,7 +849,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Alamat.setText("");
         Kota.setText("");
         Telp.setText("0");
-        
+
         Kd.requestFocus();
         Valid.autoNomer("industrifarmasi","I",4,Kd);
     }
@@ -867,28 +867,28 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbDokter;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getindustrifarmasi());
         BtnHapus.setEnabled(akses.getindustrifarmasi());
         BtnEdit.setEnabled(akses.getindustrifarmasi());
         BtnPrint.setEnabled(akses.getindustrifarmasi());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,128));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    }    
- 
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -914,7 +914,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

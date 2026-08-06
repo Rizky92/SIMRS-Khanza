@@ -47,13 +47,13 @@ public class frmUtama extends javax.swing.JFrame {
         initComponents();
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            URL = koneksiDB.URLAPISIRS();	
+            URL = koneksiDB.URLAPISIRS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
+
         this.setSize(390,340);
-        
+
         jam();
     }
 
@@ -101,7 +101,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -174,7 +174,7 @@ public class frmUtama extends javax.swing.JFrame {
                     if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
                         TeksArea.setText("");
                     }
-                        
+
                     try {
                         koneksi=koneksiDB.condb();
                         TeksArea.append("Memulai update Siranap\n");
@@ -188,17 +188,17 @@ public class frmUtama extends javax.swing.JFrame {
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 TeksArea.append("Mengirimkan kamar "+rs.getString("kode_ruang_siranap")+" "+rs.getString("nm_bangsal")+"\n");
-                                try {    
+                                try {
                                     totaltt=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
                                     tersedia=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='KOSONG' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
                                     terpakai=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='ISI' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
                                     menunggu=Sequel.cariInteger("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+rs.getString("kelas")+"' and status='DIBERSIHKAN' and kd_bangsal='"+rs.getString("kd_bangsal")+"'");
                                     headers = new HttpHeaders();
-                                    headers.add("X-rs-id",koneksiDB.IDSIRS()); 
-                                    headers.add("X-pass",api.getHmac()); 
+                                    headers.add("X-rs-id",koneksiDB.IDSIRS());
+                                    headers.add("X-pass",api.getHmac());
                                     headers.add("Content-Type","application/xml; charset=ISO-8859-1");
                                     requestXML ="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-                                    "<xml>\n"+    
+                                    "<xml>\n"+
                                         "<data>\n"+
                                             "<kode_ruang>"+rs.getString("kelas_ruang_siranap").substring(0,4)+"</kode_ruang>\n"+
                                             "<tipe_pasien>"+rs.getString("kode_ruang_siranap").substring(0,4)+"</tipe_pasien>\n"+
@@ -210,7 +210,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "<waiting>"+Integer.toString(menunggu)+"</waiting>\n"+
                                             "<tgl_update>"+dateFormat.format(date)+"</tgl_update>\n"+
                                         "</data>\n"+
-                                    "</xml>";              
+                                    "</xml>";
                                     TeksArea.append("JSON dikirim : "+requestXML+"\n");
                                     requestEntity = new HttpEntity(requestXML,headers);
                                     requestXML=api.getRest().exchange(URL+"/ranap", HttpMethod.POST, requestEntity, String.class).getBody();

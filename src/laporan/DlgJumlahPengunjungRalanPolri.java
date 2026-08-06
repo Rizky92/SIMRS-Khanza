@@ -1,8 +1,8 @@
 package laporan;
-import fungsi.koneksiDB;
-import fungsi.validasi;
 import fungsi.akses;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
@@ -31,15 +31,15 @@ public class DlgJumlahPengunjungRalanPolri extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private int kolom=0,jumlahcari=0,jumlahcarabayar=0,total=0,i=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgJumlahPengunjungRalanPolri(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -255,18 +255,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("LaporanJumlahPenngunjungRalanPolri.html");            
+
+            File f = new File("LaporanJumlahPenngunjungRalanPolri.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             if(TabRawat.getSelectedIndex()==0){
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -276,7 +276,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -290,7 +290,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -304,7 +304,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -318,18 +318,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>JENIS PENYAKIT DENGAN  JUMLAH PASIEN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
                 bw.close();
-            }                  
+            }
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -442,7 +442,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
             kolom=0;
             ps=koneksi.prepareStatement("select penjab.kd_pj,penjab.png_jawab from penjab where penjab.status='1' order by penjab.kd_pj");
             try {
@@ -461,13 +461,13 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
             htmlContent.append("</tr>");
-            
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>Pengunjung</td>"
-            );    
+            );
             total=0;
             for(i=0;i<jumlahcari;i++){
                 kolom=Sequel.cariInteger(
@@ -486,7 +486,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(kolom)).append("</td>");
             }
             htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(total)).append("</td></tr>");
-            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Kunjungan</td>");    
+            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Kunjungan</td>");
             total=0;
             for(i=0;i<jumlahcari;i++){
                 kolom=Sequel.cariInteger(
@@ -511,10 +511,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void tampil2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -543,7 +543,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
             kolom=0;
             ps=koneksi.prepareStatement("select penjab.kd_pj,penjab.png_jawab from penjab where penjab.status='1' order by penjab.kd_pj");
             try {
@@ -562,12 +562,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-            htmlContent.append(   
+            }
+            htmlContent.append(
                 "</tr>"
             );
-            
-            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Pengunjung</td>");    
+
+            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Pengunjung</td>");
             total=0;
             for(i=0;i<jumlahcari;i++){
                 kolom=Sequel.cariInteger(
@@ -584,7 +584,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(kolom)).append("</td>");
             }
             htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(total)).append("</td></tr>");
-            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Kunjungan</td>");    
+            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Kunjungan</td>");
             total=0;
             for(i=0;i<jumlahcari;i++){
                 kolom=Sequel.cariInteger(
@@ -609,10 +609,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void tampil3() {
          this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -641,7 +641,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
             kolom=0;
             ps=koneksi.prepareStatement("select penjab.kd_pj,penjab.png_jawab from penjab where penjab.status='1' order by penjab.kd_pj");
             try {
@@ -660,9 +660,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
             htmlContent.append("</tr>");
-            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Pengunjung</td>");    
+            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Pengunjung</td>");
             total=0;
             for(i=0;i<jumlahcari;i++){
                 kolom=Sequel.cariInteger(
@@ -679,8 +679,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(kolom)).append("</td>");
             }
             htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(total)).append("</td></tr>");
-            
-            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Kunjungan</td>");    
+
+            htmlContent.append("<tr class='isi'><td valign='middle' align='center'>Kunjungan</td>");
             total=0;
             for(i=0;i<jumlahcari;i++){
                 kolom=Sequel.cariInteger(
@@ -705,10 +705,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void tampil4() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -817,11 +817,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getjumlah_pengunjung_ralan_polri());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -847,7 +847,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

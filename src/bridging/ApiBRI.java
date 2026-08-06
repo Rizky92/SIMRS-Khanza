@@ -39,7 +39,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiBRI {        
+public class ApiBRI {
     private Connection koneksi=koneksiDB.condb();
     private long GetUTCdatetimeAsString;
     private String kd_rek,nm_rek, consumer_key, consumer_secret, institution_code, briva_no, urlapi,token,signature,timestamp,timestamp2,json="";
@@ -63,7 +63,7 @@ public class ApiBRI {
     private SimpleDateFormat sdf,sdf2;
     private boolean status=true;
     private validasi Valid=new validasi();
-    
+
     public ApiBRI(){
         try {
             ps=koneksi.prepareStatement(
@@ -110,12 +110,12 @@ public class ApiBRI {
 	    throw new GeneralSecurityException(e);
 	}
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        millis = System.currentTimeMillis();   
+
+    public long GetUTCdatetimeAsString(){
+        millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers= {
@@ -132,7 +132,7 @@ public class ApiBRI {
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
-    
+
     public String Token(){
         token="";
         try{
@@ -151,7 +151,7 @@ public class ApiBRI {
         }
         return token;
     }
-    
+
     public String Signature(String path,String verb,String token,String timestamp,String body){
         signature="";
         try {
@@ -162,7 +162,7 @@ public class ApiBRI {
         }
         return signature;
     }
-    
+
     public boolean buatVA(String norawat,String nama,String bayar,String keterangan){
         status=false;
         try {
@@ -170,7 +170,7 @@ public class ApiBRI {
         }catch (Exception ex) {
             System.out.println("Notifikasi Bridging Hapus : "+ex);
         }
-        
+
         try{
             token=Token();
             date = new Date(System.currentTimeMillis()-25200000);
@@ -192,12 +192,12 @@ public class ApiBRI {
                  "}";
             System.out.println("JSON : "+json);
             signature=Signature("/v1/briva","POST",token,timestamp,json);
-            
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("BRI-Timestamp",timestamp);
             headers.add("BRI-Signature",signature);
-            headers.add("Authorization","Bearer "+token); 
+            headers.add("Authorization","Bearer "+token);
             System.out.println("URL : "+urlapi+"/v1/briva");
             System.out.println("BRI-Timestamp : "+timestamp);
             System.out.println("BRI-Signature : "+signature);
@@ -221,7 +221,7 @@ public class ApiBRI {
         }
         return status;
     }
-    
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -248,7 +248,7 @@ public class ApiBRI {
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -260,7 +260,7 @@ public class ApiBRI {
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try{
             token=Token();
             date = new Date(System.currentTimeMillis()-25200000);
@@ -269,12 +269,12 @@ public class ApiBRI {
             System.out.println("consumer_key : "+consumer_key);
             System.out.println("consumer_secret : "+consumer_secret);
             signature=Signature("/v1/briva","DELETE",token,timestamp,"institutionCode="+institution_code+"&brivaNo="+briva_no+"&custCode="+norawat);
-            
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_PLAIN);
             headers.add("BRI-Timestamp",timestamp);
             headers.add("BRI-Signature",signature);
-            headers.add("Authorization","Bearer "+token); 
+            headers.add("Authorization","Bearer "+token);
             System.out.println("URL : "+urlapi+"/v1/briva");
             System.out.println("BRI-Timestamp : "+timestamp);
             System.out.println("BRI-Signature : "+signature);
@@ -300,12 +300,12 @@ public class ApiBRI {
             System.out.println("consumer_secret : "+consumer_secret);
             json="";
             signature=Signature("/v1/briva/report/"+institution_code+"/"+briva_no+"/"+tanggalawal.replaceAll("-","")+"/"+tanggalakhir.replaceAll("-",""),"GET",token,timestamp,json);
-            
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("BRI-Timestamp",timestamp);
             headers.add("BRI-Signature",signature);
-            headers.add("Authorization","Bearer "+token); 
+            headers.add("Authorization","Bearer "+token);
             System.out.println("URL : "+urlapi+"/v1/briva/report/"+institution_code+"/"+briva_no+"/"+tanggalawal.replaceAll("-","")+"/"+tanggalakhir.replaceAll("-",""));
             System.out.println("BRI-Timestamp : "+timestamp);
             System.out.println("BRI-Signature : "+signature);
@@ -322,7 +322,7 @@ public class ApiBRI {
         }
         return status;
     }
-    
+
     public boolean statusVA(String nomorcustomer){
         status=true;
         try{
@@ -334,12 +334,12 @@ public class ApiBRI {
             System.out.println("consumer_secret : "+consumer_secret);
             json="";
             signature=Signature("/v1/briva/status/"+institution_code+"/"+briva_no+"/"+nomorcustomer,"GET",token,timestamp,json);
-            
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("BRI-Timestamp",timestamp);
             headers.add("BRI-Signature",signature);
-            headers.add("Authorization","Bearer "+token); 
+            headers.add("Authorization","Bearer "+token);
             System.out.println("URL : "+urlapi+"/v1/briva/status/"+institution_code+"/"+briva_no+"/"+nomorcustomer);
             System.out.println("BRI-Timestamp : "+timestamp);
             System.out.println("BRI-Signature : "+signature);

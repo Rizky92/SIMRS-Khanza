@@ -14,11 +14,11 @@
     }
     $header = $newhead;
     $method = $_SERVER['REQUEST_METHOD'];
-    
+
     if ($method == 'GET') {
         if (!empty($url[0])) {
             $referensiid = validTeks3($url[0],20);
-            if (!preg_match("/^[0-9]{16}$/",$referensiid)){ 
+            if (!preg_match("/^[0-9]{16}$/",$referensiid)){
                 $response = array(
                     'reff_id' => $referensiid,
                     'reff_num' => '',
@@ -75,7 +75,7 @@
                                     http_response_code(200);
                                 }else{
                                     $referensinum = validTeks3($url[1],20);
-                                    if (!preg_match("/^[0-9]{16}$/",$referensinum)){ 
+                                    if (!preg_match("/^[0-9]{16}$/",$referensinum)){
                                         $response = array(
                                             'reff_id' => $referensiid,
                                             'reff_num' => $referensinum,
@@ -104,7 +104,7 @@
                                         }
                                     }
                                 }
-                            }   
+                            }
                         }
                     } else{
                         $response = array(
@@ -114,7 +114,7 @@
                             'msg' => 'Link Down'
                         );
                         http_response_code(200);
-                    }  
+                    }
                 } else {
                     $response = array(
                         'reff_id' => $referensiid,
@@ -133,7 +133,7 @@
         );
         http_response_code(200);
     }
-    
+
     if (!empty($response)) {
         echo json_encode($response);
     } else {

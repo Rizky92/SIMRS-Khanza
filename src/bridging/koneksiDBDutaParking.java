@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class koneksiDBDutaParking {
     private static Connection connection=null;
-    private static final Properties prop = new Properties();  
+    private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource=new MysqlDataSource();
-    
-    public koneksiDBDutaParking(){} 
-    public static Connection condb(){ 
+
+    public koneksiDBDutaParking(){}
+    public static Connection condb(){
         if(connection == null){
             try{
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -33,13 +33,13 @@ public class koneksiDBDutaParking {
                 dataSource.setUseCompression(true);
                 dataSource.setUseLocalSessionState(true);
                 dataSource.setUseLocalTransactionState(true);
-                connection=dataSource.getConnection();       
+                connection=dataSource.getConnection();
                 System.out.println("  Koneksi Berhasil. Menyambungkan ke database Duta Parking...!!!");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Koneksi ke server Duta Parking terputus : "+e);
             }
         }
-        return connection;        
+        return connection;
     }
-    
+
 }

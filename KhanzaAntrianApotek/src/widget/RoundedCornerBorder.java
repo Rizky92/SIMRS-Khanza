@@ -50,5 +50,5 @@ public class RoundedCornerBorder extends AbstractBorder{
     insets.top = insets.bottom = 4;
     return insets;
   }
-    
+
 }

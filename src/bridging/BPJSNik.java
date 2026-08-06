@@ -12,19 +12,19 @@
 package bridging;
 
 import fungsi.WarnaTable;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import fungsi.akses;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -67,8 +67,8 @@ public final class BPJSNik extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -166,23 +166,23 @@ public final class BPJSNik extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
-                                tabMode.getValueAt(r,1).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,1).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJSNik.jasper","report","[ Pencarian Peserta BPJS Berdasarkan NIK/No.KTP ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     /**
@@ -214,7 +214,7 @@ public final class BPJSNik extends javax.swing.JDialog {
         try {
             cekViaBPJS.tampil(nik);
             if(cekViaBPJS.informasi.equals("OK")){
-                Valid.tabelKosong(tabMode);          
+                Valid.tabelKosong(tabMode);
                 tabMode.addRow(new Object[]{
                     "Nama",": "+cekViaBPJS.nama
                 });
@@ -253,7 +253,7 @@ public final class BPJSNik extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Nama Jenis Peserta",": "+cekViaBPJS.jenisPesertaketerangan
-                });            
+                });
                 tabMode.addRow(new Object[]{
                     "Kelas Tanggungan",":"
                 });
@@ -268,7 +268,7 @@ public final class BPJSNik extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Kode Provider",": "+cekViaBPJS.provUmumkdProvider
-                });                
+                });
                 tabMode.addRow(new Object[]{
                     "       Nama Provider",": "+cekViaBPJS.provUmumnmProvider
                 });
@@ -319,13 +319,13 @@ public final class BPJSNik extends javax.swing.JDialog {
                 });
                 tabMode.addRow(new Object[]{
                     "       Tanggal TMT",": "+cekViaBPJS.cobtglTMT
-                });                
+                });
             }else {
-                JOptionPane.showMessageDialog(null,cekViaBPJS.informasi);                
-            }     
+                JOptionPane.showMessageDialog(null,cekViaBPJS.informasi);
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
         }
-    }    
- 
+    }
+
 }

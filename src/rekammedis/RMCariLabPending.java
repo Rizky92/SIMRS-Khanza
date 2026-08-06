@@ -74,7 +74,7 @@ public final class RMCariLabPending extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -370,10 +370,10 @@ public final class RMCariLabPending extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRawat(String norawat){
         this.norawat=norawat;
     }
@@ -381,7 +381,7 @@ public final class RMCariLabPending extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -407,7 +407,7 @@ public final class RMCariLabPending extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

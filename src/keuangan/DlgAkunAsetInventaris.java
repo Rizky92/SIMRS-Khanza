@@ -11,11 +11,11 @@
 
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventaris.InventarisJenis;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -67,7 +67,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class                
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -93,13 +93,13 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                 column.setPreferredWidth(220);
             }
         }
-        
+
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         kdrek.setDocument(new batasInput((byte)15).getKata(kdrek));
         kdjenis.setDocument(new batasInput((int)10).getKata(kdjenis));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -464,14 +464,14 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("akun_aset_inventaris","id_jenis",tbJadwal.getValueAt(i,1).toString())==true){
                     tabMode.removeRow(i);
                     i--;
                 }
             }
-        } 
+        }
         LCount.setText("" + tabMode.getRowCount());
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -503,7 +503,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
                 tbJadwal.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -596,11 +596,11 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgAkunAsetInventaris")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                        nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                        nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -612,7 +612,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -626,7 +626,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -658,7 +658,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void kdjenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjenisKeyPressed
@@ -677,7 +677,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 if(jenis.getTable().getSelectedRow()!= -1){
                     kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                     nmjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-                } 
+                }
                 kdjenis.requestFocus();
             }
             @Override
@@ -689,7 +689,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenis.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -809,18 +809,18 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             nmrek.setText(tabMode.getValueAt(row,4).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbJadwal;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getakun_aset_inventaris());
         BtnHapus.setEnabled(akses.getakun_aset_inventaris());
         BtnEdit.setEnabled(akses.getakun_aset_inventaris());
         BtnSemua.setEnabled(akses.getakun_aset_inventaris());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -846,7 +846,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

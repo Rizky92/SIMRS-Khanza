@@ -11,11 +11,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -27,13 +27,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -45,11 +45,11 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -82,9 +82,9 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        KdDokterInhealth.setDocument(new batasInput((byte)20).getKata(KdDokterInhealth));  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        KdDokterInhealth.setDocument(new batasInput((byte)20).getKata(KdDokterInhealth));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -106,7 +106,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -408,7 +408,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     KdDokterRS.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmDokterRS.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -422,8 +422,8 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -436,14 +436,14 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        poli.isCek();        
+        poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
+
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -457,7 +457,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -504,7 +504,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
                     emptTeks();
                     runBackground(() ->tampil());
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -677,17 +677,17 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
            KdDokterInhealth.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
         }
     }
-    
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_dokter());
         BtnHapus.setEnabled(akses.getinhealth_mapping_dokter());
         BtnEdit.setEnabled(akses.getinhealth_mapping_dokter());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
    private void runBackground(Runnable task) {
         if (ceksukses) return;
@@ -714,7 +714,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -1,7 +1,7 @@
 <?php
     include '../conf/conf.php';
-    include '../phpqrcode/qrlib.php'; 
-    
+    include '../phpqrcode/qrlib.php';
+
     $barcode = validTeks8($_GET['barcode'],50);
     if(isset($barcode)){
         $PNG_TEMP_DIR   = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
@@ -14,5 +14,5 @@
         $barcode=str_replace("garing","/",$barcode);
         $barcode=str_replace("cross","#",$barcode);
         QRcode::png($barcode, $filename, $errorCorrectionLevel, $matrixPointSize, 2);
-    }   
-?>  
+    }
+?>

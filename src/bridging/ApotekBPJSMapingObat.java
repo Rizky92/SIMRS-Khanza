@@ -11,11 +11,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgBarang;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -49,13 +49,13 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private DlgBarang barang;
     private ApotekBPJSCekReferensiDPHO barangbpjs;
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -90,9 +90,9 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        kdobat.setDocument(new batasInput((byte)5).getKata(kdobat)); 
-        KdObatBPJS.setDocument(new batasInput((byte)15).getKata(KdObatBPJS)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        kdobat.setDocument(new batasInput((byte)5).getKata(kdobat));
+        KdObatBPJS.setDocument(new batasInput((byte)15).getKata(KdObatBPJS));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
     /** This method is called from within the constructor to
@@ -432,14 +432,14 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             barang.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(barang.getTable().getSelectedRow()!= -1){                    
+                    if(barang.getTable().getSelectedRow()!= -1){
                         kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                         TObat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
                     }
                     kdobat.requestFocus();
                     barang=null;
                 }
-            }); 
+            });
 
             barang.getTable().addKeyListener(new KeyAdapter() {
                 @Override
@@ -448,25 +448,25 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                         barang.dispose();
                     }
                 }
-            });   
+            });
             barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             barang.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (barang == null) return;
         if (!barang.isVisible()) {
-            barang.isCek();    
+            barang.isCek();
             barang.emptTeks();
-        }  
+        }
         if (barang.isVisible()) {
             barang.toFront();
             return;
-        }    
+        }
         barang.setVisible(true);
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
+
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -483,7 +483,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -534,7 +534,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                     tabMode.setValueAt(NmObatBPJS.getText(),tbJnsPerawatan.getSelectedRow(),3);
                     emptTeks();
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -561,17 +561,17 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                param.put("parameter","%"+TCari.getText().trim()+"%");   
-                Valid.MyReport("rptMapingObatApotekBPJS.jasper","report","::[ Mapping Obat Apotek BPJS ]::",param);            
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptMapingObatApotekBPJS.jasper","report","::[ Mapping Obat Apotek BPJS ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -646,11 +646,11 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         barangbpjs.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barangbpjs.getTable().getSelectedRow()!= -1){                   
+                if(barangbpjs.getTable().getSelectedRow()!= -1){
                     KdObatBPJS.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),0).toString());
                     NmObatBPJS.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),1).toString());
                     KdObatBPJS.requestFocus();
-                }   
+                }
                 barangbpjs=null;
             }
         });
@@ -662,16 +662,16 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     barangbpjs.dispose();
                 }
             }
-        }); 
+        });
         barangbpjs.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         barangbpjs.setLocationRelativeTo(internalFrame1);
     }
-        
+
     if (barangbpjs == null) return;
     if (barangbpjs.isVisible()) {
         barangbpjs.toFront();
         return;
-    }    
+    }
     barangbpjs.setVisible(true);
 }//GEN-LAST:event_btnPoliBPJSActionPerformed
 
@@ -760,7 +760,7 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -799,17 +799,17 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
            NmObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getbpjs_mapping_obat_apotek());
         BtnHapus.setEnabled(akses.getbpjs_mapping_obat_apotek());
         BtnEdit.setEnabled(akses.getbpjs_mapping_obat_apotek());
         BtnPrint.setEnabled(akses.getbpjs_mapping_obat_apotek());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
@@ -836,7 +836,7 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

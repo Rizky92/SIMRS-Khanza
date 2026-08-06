@@ -12,11 +12,12 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -31,7 +32,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.Cursor;
 
 /**
  *
@@ -55,7 +55,7 @@ public class DlgBahasa extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         tabMode=new DefaultTableModel(null,new Object[]{"ID","Bahasa Pasien"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -345,9 +345,9 @@ public class DlgBahasa extends javax.swing.JDialog {
                     emptTeks();
                     LCount.setText(""+tabMode.getRowCount());
                 }
-            }  
+            }
         }
-            
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -410,7 +410,7 @@ public class DlgBahasa extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }   
+            }
             if(evt.getClickCount()==2){
                 dispose();
             }
@@ -454,7 +454,7 @@ public class DlgBahasa extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -518,7 +518,7 @@ public class DlgBahasa extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -536,20 +536,20 @@ public class DlgBahasa extends javax.swing.JDialog {
             Nama.setText(tbkecamatan.getValueAt(tbkecamatan.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTable getTable() {
         return tbkecamatan;
     }
-    
+
     public void onCari(){
         TCari.requestFocus();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getbahasa_pasien());
         BtnHapus.setEnabled(akses.getbahasa_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -575,7 +575,7 @@ public class DlgBahasa extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

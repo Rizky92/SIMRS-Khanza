@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(isset($_SESSION["ses_eksekutif"])){
         $halaman    = isset($_GET["hal"])?$_GET["hal"]:NULL;
         $subhalaman = isset($_GET["act"])?$_GET["act"]:NULL;
@@ -7,7 +7,7 @@
         }
         if($_SESSION["ses_eksekutif"]!=$_SESSION["userlogin"]){
             $_SESSION["ses_eksekutif"] = null;
-            unset($_SESSION["ses_eksekutif"]); 
+            unset($_SESSION["ses_eksekutif"]);
             $_SESSION["userlogin"] = null;
             unset($_SESSION["userlogin"]);
             exit(header("Location:../index.php"));
@@ -358,4 +358,3 @@
     <script src="conf/validator.js" type="text/javascript"></script>
 </body>
 </html>
-

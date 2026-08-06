@@ -7,7 +7,7 @@
 ?>
 
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
@@ -27,14 +27,14 @@
 	        <tr class="head">
                     <td width="31%">Pasien</td><td width="">:</td>
                     <td width="67%"><?php echo $no_rm." ".$nama_pasien;?></td>
-                </tr> 
+                </tr>
                 <tr class="head">
                     <td width="31%" >File Gambar USG</td><td width="">:</td>
                     <td width="67%">
                         <input name="gambar" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type=file id="TxtIsi1" value="<?php echo $gambar;?>" size="50" maxlength="500" accept="image/jpeg,image/jpg"/>
                         <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                     </td>
-                </tr>        
+                </tr>
             </table>
             </div>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
@@ -87,7 +87,7 @@
                                 <td width='5%'><div align='center'>Proses</div></td>
                                 <td width='95%'><div align='center'>Gambar USG</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td valign='Top' align='center'>
                                     <center>"; ?>
@@ -121,13 +121,13 @@
                 }
             }
 
-        
+
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
-        
+
         ?>
     </div>
 

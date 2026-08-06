@@ -9,9 +9,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["nopersetujuan"])) {
         $nopersetujuan    = validTeks3($iyem["nopersetujuan"],20);
         $querypersetujuan = bukaquery(
@@ -57,7 +57,7 @@
                                     </table>
                                     <br/>
                                     <h7>
-                                        Terhadap Pasien : 
+                                        Terhadap Pasien :
                                     </h7>
                                     <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                         <tr>
@@ -89,9 +89,9 @@
                                     <h7>
                                         Dengan ini menyatakan dengan sesungguhnya bahwa saya setuju untuk dilakukan Rawat Inap di ".$_SESSION["nama_instansi"]." di ruang : ".$rsquerypersetujuan["ruang"]." Kelas : ".$rsquerypersetujuan["kelas"]." Terhadap ".$rsquerypersetujuan["hubungan"]."
                                         <br/>
-                                        Hak kelas perawatan : ".$rsquerypersetujuan["hak_kelas"]." 
+                                        Hak kelas perawatan : ".$rsquerypersetujuan["hak_kelas"]."
                                         <br/>
-                                        Nama dan alamat keluarga terdekat : ".$rsquerypersetujuan["nama_alamat_keluarga_terdekat"]." 
+                                        Nama dan alamat keluarga terdekat : ".$rsquerypersetujuan["nama_alamat_keluarga_terdekat"]."
                                         <br/>
                                         Demi kelancaran pelayanan perawatan, pengobatan dan administrasi, dengan ini juga menyatakan :
                                     </h7>
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                   </div>";
-            
+
             $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
             if (isset($BtnSimpan)) {
                 $nopersetujuan     = validTeks4($_POST["nopersetujuan"],20);

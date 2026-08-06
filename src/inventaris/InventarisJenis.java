@@ -12,11 +12,12 @@
 package inventaris;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -24,13 +25,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
-import java.awt.Cursor;
 
 /**
  *
@@ -52,7 +52,7 @@ public class InventarisJenis extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"ID Jenis","Nama Jenis"};
         tabMode=new DefaultTableModel(null,row){
@@ -505,7 +505,7 @@ public class InventarisJenis extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -546,7 +546,7 @@ public class InventarisJenis extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }           
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -629,13 +629,13 @@ public class InventarisJenis extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getinventaris_jenis());
        BtnHapus.setEnabled(akses.getinventaris_jenis());
        BtnEdit.setEnabled(akses.getinventaris_jenis());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -661,7 +661,7 @@ public class InventarisJenis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

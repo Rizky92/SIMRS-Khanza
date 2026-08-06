@@ -51,7 +51,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -107,11 +107,11 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         Intervensi.setDocument(new batasInput((int)200).getKata(Intervensi));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -647,7 +647,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -688,7 +688,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -712,7 +712,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -778,15 +778,15 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptDataIntervensiNyeriNonFarmakologi.jasper","report","::[ Data Intervensi Nyeri Non Farmakologi ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
@@ -808,7 +808,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
                     "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
                     "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or intervensi_nyeri_nonfarmakologi.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
                     "order by intervensi_nyeri_nonfarmakologi.tgl_perawatan,intervensi_nyeri_nonfarmakologi.jam_rawat ",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -919,8 +919,8 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
                     if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KdPetugas.requestFocus(); 
+                    }
+                    KdPetugas.requestFocus();
                     petugas=null;
                 }
             });
@@ -928,16 +928,16 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_btnPetugasActionPerformed
 
@@ -953,8 +953,8 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptFormulirIntervensiNyeriNonFarmakologi.jasper","report","::[ Formulir Intervensi Nyeri Non Farmakologi ]::",
                     "select reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,pasien.tgl_lahir,intervensi_nyeri_nonfarmakologi.tgl_perawatan,intervensi_nyeri_nonfarmakologi.jam_rawat,intervensi_nyeri_nonfarmakologi.intervensi,"+
@@ -1059,7 +1059,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1084,7 +1084,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
                     "or pasien.nm_pasien like ? or intervensi_nyeri_nonfarmakologi.nip like ? or petugas.nama like ?) "+
                     "order by intervensi_nyeri_nonfarmakologi.tgl_perawatan,intervensi_nyeri_nonfarmakologi.jam_rawat ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1098,7 +1098,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1123,12 +1123,12 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Intervensi.setText("");
         Tanggal.setDate(new Date());
         Intervensi.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1142,7 +1142,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(3,5));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(6,8));
             Intervensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
         }
     }
     private void isRawat() {
@@ -1176,7 +1176,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1186,26 +1186,26 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
         isForm();
         runBackground(() ->tampil());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,124));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getintervensi_nyeri_nonfarmakologi());
         BtnHapus.setEnabled(akses.getintervensi_nyeri_nonfarmakologi());
         BtnEdit.setEnabled(akses.getintervensi_nyeri_nonfarmakologi());
-        BtnPrint.setEnabled(akses.getintervensi_nyeri_nonfarmakologi()); 
+        BtnPrint.setEnabled(akses.getintervensi_nyeri_nonfarmakologi());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1215,7 +1215,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        } 
+        }
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -1237,7 +1237,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1326,7 +1326,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             emptTeks();
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1352,7 +1352,7 @@ public final class RMDataIntervensiNyeriNonFarmakologi extends javax.swing.JDial
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

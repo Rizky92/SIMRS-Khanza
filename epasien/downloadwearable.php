@@ -5,7 +5,7 @@
         http_response_code(404);
         exit("File tidak ditemukan");
     }
-    
+
     while (ob_get_level()) {
         ob_end_clean();
     }

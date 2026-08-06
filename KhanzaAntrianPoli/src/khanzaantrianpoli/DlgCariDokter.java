@@ -91,7 +91,7 @@ public final class DlgCariDokter extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -129,7 +129,7 @@ public final class DlgCariDokter extends javax.swing.JDialog {
             System.out.println(e);
         }
     }
-    
+
 
 
     /** This method is called from within the constructor to
@@ -474,13 +474,13 @@ public final class DlgCariDokter extends javax.swing.JDialog {
         LCount.setText(""+b);
     }
 
-    public void emptTeks() { 
+    public void emptTeks() {
         TCari.requestFocus();
     }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
-    
+
+
 }

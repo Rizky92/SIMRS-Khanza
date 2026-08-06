@@ -1,10 +1,10 @@
 package dapur;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -23,8 +25,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class DapurSirkulasiBarang2 extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
@@ -40,7 +40,7 @@ public class DapurSirkulasiBarang2 extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
-    /** 
+    /**
      * @param parent
      * @param modal */
     public DapurSirkulasiBarang2(java.awt.Frame parent, boolean modal) {
@@ -94,10 +94,10 @@ public class DapurSirkulasiBarang2 extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());         
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -336,7 +336,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int i=0;i<row;i++){  
+            for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'",16,new String[]{
                     tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
                     tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),
@@ -344,21 +344,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),
                     tabMode.getValueAt(i,12).toString(),tabMode.getValueAt(i,13).toString(),tabMode.getValueAt(i,14).toString(),
                     tabMode.getValueAt(i,15).toString()
-                }); 
+                });
             }
-            
-            Map<String, Object> param = new HashMap<>(); 
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.MyReportqry("rptSirkulasiDapur2.jasper","report","::[ Sirkulasi Barang Dapur Kering & Basah ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -390,7 +390,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         runBackground(() ->prosesCari());
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
@@ -423,12 +423,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdbar.requestFocus();
-                
+
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -439,14 +439,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    barang.dispose();                    
+                    barang.dispose();
                 }
             }
             @Override
@@ -464,7 +464,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         TCari.setText("");
         kdbar.setText("");
         nmbar.setText("");
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         runBackground(() ->prosesCari());
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -499,7 +499,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -543,8 +543,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);      
-       try{   
+       Valid.tabelKosong(tabMode);
+       try{
             ps=koneksi.prepareStatement("select dapurbarang.kode_brng,dapurbarang.nama_brng, "+
                         "kodesatuan.satuan,dapurbarang.stok,(dapurbarang.stok*dapurbarang.harga) as aset "+
                         "from dapurbarang inner join kodesatuan on dapurbarang.kode_sat=kodesatuan.kode_sat "+
@@ -559,8 +559,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                 }
-                 
-                rs=ps.executeQuery();            
+
+                rs=ps.executeQuery();
                 while(rs.next()){
                     totalbeli=0;jumlahbeli=0;totalpesan=0;jumlahpesan=0;jumlahkeluar=0;totalkeluar=0;stok=0;totalstok=0;
                     stokakhir=0;tglopname="0000-00-00";totalstokawal=0;totalstokakhir=0;
@@ -573,7 +573,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                     stok=rs.getDouble("stok");
                     totalstok=rs.getDouble("aset");
-                    
+
                     ps2=koneksi.prepareStatement("select sum(dapurdetailbeli.jumlah), sum(dapurdetailbeli.subtotal) "+
                         " from dapurpembelian inner join dapurdetailbeli "+
                         " on dapurpembelian.no_faktur=dapurdetailbeli.no_faktur "+
@@ -584,7 +584,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ps2.setString(2,tglopname);
                         ps2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         rs2=ps2.executeQuery();
-                        if(rs2.next()){                    
+                        if(rs2.next()){
                             jumlahbeli=rs2.getDouble(1);
                             totalbeli=rs2.getDouble(2);
                         }
@@ -597,8 +597,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }          
-                    
+                    }
+
                     //dapurpemesanan
                     ps2=koneksi.prepareStatement("select sum(dapurdetailpesan.jumlah), sum(dapurdetailpesan.subtotal) "+
                         " from dapurpemesanan inner join dapurdetailpesan "+
@@ -610,7 +610,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ps2.setString(2,tglopname);
                         ps2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         rs2=ps2.executeQuery();
-                        if(rs2.next()){                    
+                        if(rs2.next()){
                             jumlahpesan=rs2.getDouble(1);
                             totalpesan=rs2.getDouble(2);
                         }
@@ -623,8 +623,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }  
-                    
+                    }
+
                     ps2=koneksi.prepareStatement("select sum(dapurdetailpengeluaran.jumlah), sum(dapurdetailpengeluaran.total) "+
                         " from dapurpengeluaran inner join dapurdetailpengeluaran "+
                         " on dapurpengeluaran.no_keluar=dapurdetailpengeluaran.no_keluar "+
@@ -635,7 +635,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ps2.setString(2,tglopname);
                         ps2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         rs2=ps2.executeQuery();
-                        if(rs2.next()){                    
+                        if(rs2.next()){
                             jumlahkeluar=rs2.getDouble(1);
                             totalkeluar=rs2.getDouble(2);
                         }
@@ -649,7 +649,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             ps2.close();
                         }
                     }
-                    
+
                     //dapurhibah
                     ps2=koneksi.prepareStatement("select sum(dapur_detail_hibah.jumlah), sum(dapur_detail_hibah.subtotalhibah) "+
                         " from dapur_hibah inner join dapur_detail_hibah "+
@@ -661,7 +661,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ps2.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                         ps2.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         rs2=ps2.executeQuery();
-                        if(rs2.next()){                    
+                        if(rs2.next()){
                             jumlahhibah=rs2.getDouble(1);
                             totalhibah=rs2.getDouble(2);
                         }
@@ -674,8 +674,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(ps2!=null){
                             ps2.close();
                         }
-                    } 
-                    
+                    }
+
                     ps2=koneksi.prepareStatement("select sum(dapuropname.real),(dapuropname.real*dapuropname.h_beli) from dapuropname where kode_brng=? and tanggal=?");
                     try {
                         ps2.setString(1,rs.getString(1));
@@ -695,7 +695,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             ps2.close();
                         }
                     }
-                    
+
                     if((jumlahbeli>0)||(jumlahpesan>0)||(jumlahkeluar>0)||(stok>0)||(jumlahhibah>0)){
                         if(stokawal<=0){
                             stokawal=stok-jumlahbeli-jumlahpesan+jumlahkeluar-jumlahhibah;
@@ -706,7 +706,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             stokakhir=stokawal+jumlahbeli+jumlahpesan-jumlahkeluar+jumlahhibah;
                             totalstokakhir=totalstokawal+totalbeli+totalpesan-totalkeluar+totalhibah;
                         }
-                        
+
                         tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),
                            rs.getString(3),tglopname,Valid.SetAngka(stokawal),Valid.SetAngka(totalstokawal),
                            Valid.SetAngka(jumlahbeli),Valid.SetAngka(totalbeli),
@@ -714,7 +714,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                            Valid.SetAngka(jumlahkeluar),Valid.SetAngka(totalkeluar),
                            Valid.SetAngka(jumlahhibah),Valid.SetAngka(totalhibah),
                            Valid.SetAngka(stokakhir),Valid.SetAngka(totalstokakhir)
-                        }); 
+                        });
                         ttltotalbeli=ttltotalbeli+totalbeli;
                         ttltotalpesan=ttltotalpesan+totalpesan;
                         ttltotalkeluar=ttltotalkeluar+totalkeluar;
@@ -722,12 +722,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ttltotalstokakhir=ttltotalstokakhir+totalstokakhir;
                         ttltotalhibah=ttltotalhibah+totalhibah;
                     }
-                }   
-                tabMode.addRow(new Object[]{"","","","","","","","","","","","","","","",""}); 
+                }
+                tabMode.addRow(new Object[]{"","","","","","","","","","","","","","","",""});
                 tabMode.addRow(new Object[]{"<>>","Total :","","","",Valid.SetAngka(ttltotalstokawal),"",
                    Valid.SetAngka(ttltotalbeli),"",Valid.SetAngka(ttltotalpesan),"",Valid.SetAngka(ttltotalkeluar),
                    "",Valid.SetAngka(ttltotalhibah),"",Valid.SetAngka(ttltotalstokakhir)
-                }); 
+                });
             } catch (Exception e) {
                 System.out.println("Notifikasi Data Barang : "+e);
             } finally{
@@ -737,17 +737,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
+
     public void isCek(){
          BtnPrint.setEnabled(akses.getsirkulasi_dapur());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -773,7 +773,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

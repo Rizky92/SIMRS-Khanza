@@ -16,7 +16,7 @@
         if (JumlahBaris($hasil)==0) {
             $sql2   = "SELECT pegawai.id,user.password FROM user inner join pegawai
                 on pegawai.id=user.id
-                where pegawai.nik='".validTeks($_POST['usere'])."' AND 
+                where pegawai.nik='".validTeks($_POST['usere'])."' AND
                 user.password=aes_encrypt('".validTeks($_POST['passwordte'])."','windi')";
             $hasil2  = bukaquery($sql2);
             $baris2  = mysqli_fetch_row($hasil2);
@@ -33,9 +33,9 @@
                 InsertData(" sesion ","'$nip'");
                 $ses_pegawai = $hasil2[0];
                 session_register("ses_pegawai");
-                $url = "index.php?act=HomeAdmin";                            
+                $url = "index.php?act=HomeAdmin";
                 header("Location:".$url);
-            }   
+            }
         } else {
              session_start();
              HapusAll(" sesion ");
@@ -49,5 +49,5 @@
         }
     }
 
-    
+
 ?>

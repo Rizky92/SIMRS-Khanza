@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $besok       = date("Y-m-d", strtotime("+1 day"));
     $thnbesok    = substr($besok,0,4);
     $blnbesok    = substr($besok,5,2);
@@ -99,7 +99,7 @@
                                     }
                                 ?>
                                 <tbody>
-                                <?php 
+                                <?php
                                     $querypasien = bukaquery("select pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur,pasien.no_ktp,pasien.nip,pasien.alamat from pasien where pasien.perusahaan_pasien='$perusahaan' and pasien.no_rkm_medis not in (select distinct booking_mcu_perusahaan.no_rkm_medis from booking_mcu_perusahaan where booking_mcu_perusahaan.status<>'Selesai')");
                                     while($rsquerypasien = mysqli_fetch_array($querypasien)) {
                                         echo "<tr>
@@ -210,10 +210,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php 
+                                <?php
                                     $querypasiencari = bukaquery(
                                        "select pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.no_ktp,pasien.nip,booking_mcu_perusahaan.tanggal_booking,booking_mcu_perusahaan.jam_booking,booking_mcu_perusahaan.tanggal_mcu,
-                                        booking_mcu_perusahaan.no_mcu,booking_mcu_perusahaan.status from pasien inner join booking_mcu_perusahaan on booking_mcu_perusahaan.no_rkm_medis=pasien.no_rkm_medis 
+                                        booking_mcu_perusahaan.no_mcu,booking_mcu_perusahaan.status from pasien inner join booking_mcu_perusahaan on booking_mcu_perusahaan.no_rkm_medis=pasien.no_rkm_medis
                                         where booking_mcu_perusahaan.kode_perusahaan='$perusahaan' and booking_mcu_perusahaan.tanggal_mcu between '$thncarimcu-$blncarimcu-$tglcarimcu' and '$thncarimcu2-$blncarimcu2-$tglcarimcu2'"
                                     );
                                     while($rsquerypasiencari = mysqli_fetch_array($querypasiencari)) {
@@ -241,7 +241,7 @@
                             </table>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>

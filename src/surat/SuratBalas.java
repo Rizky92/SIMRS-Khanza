@@ -11,11 +11,11 @@
 
 package surat;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -35,7 +35,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import restore.DlgRestoreBangsal;
 
 /**
  *
@@ -62,7 +61,7 @@ public final class SuratBalas extends javax.swing.JDialog {
         setSize(545,599);
 
         Object[] row={"P","Kode","Status Balas"};
-        
+
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -105,7 +104,7 @@ public final class SuratBalas extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TKd.requestFocus();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -423,7 +422,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                 emptTeks();
             }else{
                 TKd.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -446,11 +445,11 @@ public final class SuratBalas extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbBangsal.getRowCount();i++){ 
+        for(i=0;i<tbBangsal.getRowCount();i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("surat_balas","kd",tbBangsal.getValueAt(i,1).toString());
             }
-        } 
+        }
         runBackground(() ->tampil());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -473,7 +472,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                 Sequel.mengedit("surat_balas","kd=?","balas=?,kd=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 1).toString()});
                 if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -505,14 +504,14 @@ public final class SuratBalas extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptSuratStatusBalas.jasper",param,"::[ Laporan Status Balas Surat ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -570,7 +569,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-           
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -585,7 +584,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
 
@@ -613,7 +612,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -667,7 +666,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{false,rs.getString(1),rs.getString(2)});
@@ -682,7 +681,7 @@ public final class SuratBalas extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -703,7 +702,7 @@ public final class SuratBalas extends javax.swing.JDialog {
             TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -718,7 +717,7 @@ public final class SuratBalas extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getsurat_balas());
         BtnPrint.setEnabled(akses.getsurat_balas());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -744,7 +743,7 @@ public final class SuratBalas extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

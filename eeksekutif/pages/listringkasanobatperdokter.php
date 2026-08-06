@@ -93,7 +93,7 @@
                                 }
                                 $obatPerDokterSemua[$kdDokterSemua]['obat'][] = $rsobat;
                             }
-                            
+
                             foreach($obatPerDokterSemua as $rsdokter) {
                                 $a            = 0;
                                 $subBiaya     = 0;
@@ -131,7 +131,7 @@
                                     $subTuslah   += $rsobat["tuslah"];
                                     $subTotal    += $rsobat["total"];
                                 }
-                                
+
                                 if($subTotal>0) {
                                     $rowsHtml .= "<tr>
                                                     <td></td>
@@ -258,7 +258,7 @@
                                 }
                                 $obatPerDokterRalan[$kdDokterRalan]['obat'][] = $rsobat;
                             }
-                            
+
                             foreach($obatPerDokterRalan as $rsdokter) {
                                 $a            = 0;
                                 $subBiaya     = 0;

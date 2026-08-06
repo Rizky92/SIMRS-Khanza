@@ -13,11 +13,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -71,7 +71,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final Properties prop = new Properties();
     private String URL="",link="",requestJson="",otorisasi,utc="";
@@ -86,7 +86,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
     private double total=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -109,11 +109,11 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.Double.class
-             };  
+             };
              @Override
              public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             } 
+             }
         };
         tbJnsPerawatan.setModel(tabMode);
 
@@ -154,7 +154,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         Lokasi.setDocument(new batasInput((byte)50).getKata(Lokasi));
         Keterangan.setDocument(new batasInput((byte)100).getKata(Keterangan));
         Biaya.setDocument(new batasInput((byte)15).getKata(Biaya));
-        
+
         pasien.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -162,33 +162,33 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pasien.getTable().getSelectedRow()!= -1){                   
+                if(pasien.getTable().getSelectedRow()!= -1){
                     if(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),20).toString().equals("")){
                         JOptionPane.showMessageDialog(rootPane,"Maaf pasien tidak punya Nomor Kartu...!");
                     }else{
                         NoKartu.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),20).toString());
                         NoRM.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
                         NmPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),2).toString());
-                    }                     
-                }  
-                if(pasien.getTable2().getSelectedRow()!= -1){ 
+                    }
+                }
+                if(pasien.getTable2().getSelectedRow()!= -1){
                     if(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),20).toString().equals("")){
                         JOptionPane.showMessageDialog(rootPane,"Maaf pasien tidak punya Nomor Kartu...!");
                     }else{
                         NoKartu.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),20).toString());
                         NoRM.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),1).toString());
                         NmPasien.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),2).toString());
-                    } 
+                    }
                 }
-                if(pasien.getTable3().getSelectedRow()!= -1){ 
+                if(pasien.getTable3().getSelectedRow()!= -1){
                     if(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),20).toString().equals("")){
                         JOptionPane.showMessageDialog(rootPane,"Maaf pasien tidak punya Nomor Kartu...!");
                     }else{
                         NoKartu.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),20).toString());
                         NoRM.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),1).toString());
                         NmPasien.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),2).toString());
-                    } 
-                }                        
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -199,7 +199,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pasien.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -211,8 +211,8 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });   
-        
+        });
+
         pasien.getTable2().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -224,8 +224,8 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         pasien.getTable3().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -237,18 +237,18 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml")); 
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
             link=prop.getProperty("URLAPIPCARE");
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -919,7 +919,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                    
+                if(barang.getTable().getSelectedRow()!= -1){
                     kdClub.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     NmClub.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),7).toString());
                     Kelompok.setSelectedItem(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString()+" "+barang.getTable().getValueAt(barang.getTable().getSelectedRow(),3).toString());
@@ -934,8 +934,8 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -954,7 +954,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
+
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -977,7 +977,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 headers.setContentType(MediaType.TEXT_PLAIN);
                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                headers.add("X-timestamp",utc);            
+                headers.add("X-timestamp",utc);
                 headers.add("X-signature",api.getHmac());
                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1004,10 +1004,10 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                     if(Sequel.menyimpantf("pcare_kegiatan_kelompok","?,?,?,?,?,?,?,?,?,?,?","Edu ID",11,new String[]{
                         response.asText(),kdClub.getText(),NmClub.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Kegiatan.getSelectedItem().toString(),
                         Kelompok.getSelectedItem().toString(),Materi.getText(),Pembicara.getText(),Lokasi.getText(),Keterangan.getText(),Biaya.getText()
-                    })==true){                                                 
-                        emptTeks();                         
+                    })==true){
+                        emptTeks();
                         runBackground(() ->tampil());
-                    }                     
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
@@ -1028,7 +1028,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 }else if(ex.toString().contains("204")){
                     JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
                 }
-            }              
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1059,7 +1059,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 try {
                     bodyWithDeleteRequest();
                 }catch (Exception ex) {
-                    System.out.println("Notifikasi Bridging : "+ex);                    
+                    System.out.println("Notifikasi Bridging : "+ex);
                 }
             }
         }
@@ -1094,7 +1094,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                     headers.setContentType(MediaType.APPLICATION_JSON);
                     headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                     utc=String.valueOf(api.GetUTCdatetimeAsString());
-                    headers.add("X-timestamp",utc);            
+                    headers.add("X-timestamp",utc);
                     headers.add("X-signature",api.getHmac());
                     headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                     headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1115,7 +1115,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                     if(ex.toString().contains("UnknownHostException")){
                         JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                     }
-                }    
+                }
             }
             try {
                 URL = link+"/kelompok/kegiatan";
@@ -1123,7 +1123,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 headers.setContentType(MediaType.TEXT_PLAIN);
                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                headers.add("X-timestamp",utc);            
+                headers.add("X-timestamp",utc);
                 headers.add("X-signature",api.getHmac());
                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1150,10 +1150,10 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                     if(Sequel.menyimpantf("pcare_kegiatan_kelompok","?,?,?,?,?,?,?,?,?,?,?","Edu ID",11,new String[]{
                         response.asText(),kdClub.getText(),NmClub.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Kegiatan.getSelectedItem().toString(),
                         Kelompok.getSelectedItem().toString(),Materi.getText(),Pembicara.getText(),Lokasi.getText(),Keterangan.getText(),Biaya.getText()
-                    })==true){                                                 
-                        emptTeks();                         
+                    })==true){
+                        emptTeks();
                         runBackground(() ->tampil());
-                    }                     
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
@@ -1162,7 +1162,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
-            }              
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1191,19 +1191,19 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));   
-                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));   
-                param.put("parameter","%"+TCari.getText().trim()+"%");   
-                Valid.MyReport("rptPCareKegiatanKelompok.jasper","report","::[ Data Kegiatan Kelompok PCare ]::",param);            
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptPCareKegiatanKelompok.jasper","report","::[ Data Kegiatan Kelompok PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1330,7 +1330,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         form.setLocationRelativeTo(internalFrame1);
         form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor()); 
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnPoliRS1ActionPerformed
 
     private void btnPoliRS1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRS1KeyPressed
@@ -1366,7 +1366,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 headers.setContentType(MediaType.TEXT_PLAIN);
                 headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
                 utc=String.valueOf(api.GetUTCdatetimeAsString());
-                headers.add("X-timestamp",utc);            
+                headers.add("X-timestamp",utc);
                 headers.add("X-signature",api.getHmac());
                 headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
                 headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -1382,12 +1382,12 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 if(nameNode.path("code").asText().equals("201")){
                     if(Sequel.menyimpantf("pcare_peserta_kegiatan_kelompok","?,?","Edu ID",2,new String[]{
                         EduId.getText(),NoRM.getText()
-                    })==true){                                                 
+                    })==true){
                        JOptionPane.showMessageDialog(null,"Data peserta berhasil disimpan..!!");
                        NoKartu.setText("");
                        NoRM.setText("");
                        NmPasien.setText("");
-                    }                       
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
@@ -1396,7 +1396,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
-            }   
+            }
         }
     }//GEN-LAST:event_BtnSimpan6ActionPerformed
 
@@ -1612,7 +1612,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
            Valid.SetTgl(Tanggal,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpcare_kegiatan_kelompok());
         BtnHapus.setEnabled(akses.getpcare_kegiatan_kelompok());
@@ -1620,25 +1620,25 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         BtnPrint.setEnabled(akses.getpcare_kegiatan_kelompok());
         ppPeserta.setEnabled(akses.getpcare_peserta_kegiatan_kelompok());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,156));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -1665,7 +1665,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -1677,20 +1677,20 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try {
             URL = link+"/kelompok/kegiatan/"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString();
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-timestamp",utc);            
+            headers.add("X-timestamp",utc);
             headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
             requestEntity = new HttpEntity(headers);
             System.out.println("X-cons-id : "+koneksiDB.CONSIDAPIPCARE());
-            System.out.println("X-timestamp : "+utc);            
+            System.out.println("X-timestamp : "+utc);
             System.out.println("X-signature : "+api.getHmac());
             System.out.println("X-authorization : Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             System.out.println("user_key : "+koneksiDB.USERKEYAPIPCARE());
@@ -1723,9 +1723,9 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             }else if(ex.toString().contains("204")){
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
-        }  
+        }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1751,7 +1751,7 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

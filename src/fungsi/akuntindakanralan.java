@@ -14,7 +14,7 @@ public final class akuntindakanralan {
             Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",Beban_KSO_Tindakan_Ralan="",Utang_KSO_Tindakan_Ralan="",
             Beban_Jasa_Sarana_Tindakan_Ralan="",Utang_Jasa_Sarana_Tindakan_Ralan="",HPP_BHP_Tindakan_Ralan="",Persediaan_BHP_Tindakan_Ralan="",
             Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="";
-    
+
     public static void SetAkunTindakanRalan() {
         try (
             PreparedStatement ps = koneksi.prepareStatement(
@@ -47,7 +47,7 @@ public final class akuntindakanralan {
             System.out.println("Notif Rekening : "+e);
         }
     }
-    
+
     public static String getSuspen_Piutang_Tindakan_Ralan(){return akuntindakanralan.Suspen_Piutang_Tindakan_Ralan;}
     public static String getTindakan_Ralan(){return akuntindakanralan.Tindakan_Ralan;}
     public static String getBeban_Jasa_Medik_Dokter_Tindakan_Ralan(){return akuntindakanralan.Beban_Jasa_Medik_Dokter_Tindakan_Ralan;}

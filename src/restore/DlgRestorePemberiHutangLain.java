@@ -51,7 +51,7 @@ public final class DlgRestorePemberiHutangLain extends javax.swing.JDialog {
     public DlgRestorePemberiHutangLain(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"Kode","Pemberi Hutang","Alamat","No.Telp","Kode Rekening","Nama Rekening"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -78,7 +78,7 @@ public final class DlgRestorePemberiHutangLain extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
@@ -283,7 +283,7 @@ public final class DlgRestorePemberiHutangLain extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
             tbKamar.requestFocus();
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -363,7 +363,7 @@ public final class DlgRestorePemberiHutangLain extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -430,7 +430,7 @@ public final class DlgRestorePemberiHutangLain extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -456,7 +456,7 @@ public final class DlgRestorePemberiHutangLain extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

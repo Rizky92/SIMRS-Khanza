@@ -23,14 +23,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryperiksa = bukaquery(
                                 "select surat_persetujuan_rawat_inap.no_surat,date_format(surat_persetujuan_rawat_inap.tanggal,'%d/%m/%Y') as tanggalperiksa,surat_persetujuan_rawat_inap.nama_pj,surat_persetujuan_rawat_inap.no_ktppj,surat_persetujuan_rawat_inap.no_telppj,".
                                 "ifnull(surat_persetujuan_rawat_inap_pembuat_pernyataan.photo,'') as photo from surat_persetujuan_rawat_inap inner join reg_periksa on surat_persetujuan_rawat_inap.no_rawat=reg_periksa.no_rawat ".
                                 "left join surat_persetujuan_rawat_inap_pembuat_pernyataan on surat_persetujuan_rawat_inap_pembuat_pernyataan.no_surat=surat_persetujuan_rawat_inap.no_surat where reg_periksa.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' ".
                                 "order by surat_persetujuan_rawat_inap.tanggal desc"
                             );
-                            
+
                             while($rsqueryperiksa = mysqli_fetch_array($queryperiksa)) {
                                echo "<tr>
                                         <td align='center' valign='middle'>".$rsqueryperiksa["tanggalperiksa"]."</td>

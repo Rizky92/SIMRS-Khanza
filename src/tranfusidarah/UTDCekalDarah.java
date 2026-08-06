@@ -11,13 +11,12 @@
 
 package tranfusidarah;
 
-import kepegawaian.DlgCariPetugas;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -31,13 +30,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
+import kepegawaian.DlgCariPetugas;
 
 
 /**
@@ -104,7 +104,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
         KodePetugas.setDocument(new batasInput((byte)20).getKata(KodePetugas));
         ChkInput.setSelected(false);
         isForm();
-    } 
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -607,7 +607,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
                 });
                 runBackground(() ->tampil());
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -622,7 +622,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -655,7 +655,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
             Valid.textKosong(KodePetugas,"Petugas Pemeriksa");
         }else if(Keterangan.getText().trim().equals("")){
             Valid.textKosong(Keterangan,"Keterangan");
-        }else{       
+        }else{
             if(Sequel.mengedittf("utd_cekal_darah","no_donor=?","tanggal=?,dinas=?,petugas_pemusnahan=?,keterangan=?",5,new String[]{
                 Valid.SetTgl(TanggalCekal.getSelectedItem()+""),Dinas.getSelectedItem().toString(),
                 KodePetugas.getText(),Keterangan.getText(),NoDonor.getText()
@@ -693,14 +693,14 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().equals("")){
                 Valid.MyReportqry("rptCekalDonor.jasper","report","::[ Data Pencekalan Darah Donor ]::",
                         "select utd_cekal_darah.no_donor,utd_donor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_telp,"+
@@ -725,7 +725,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
                         "utd_cekal_darah.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and utd_cekal_darah.dinas like '%"+TCari.getText().trim()+"%' or "+
                         "utd_cekal_darah.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and utd_cekal_darah.keterangan like '%"+TCari.getText().trim()+"%' order by utd_cekal_darah.tanggal",param);
             }
-                
+
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -803,7 +803,7 @@ private void KodePetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
             NamaPetugas.setText(Sequel.CariDokter(KodePetugas.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnDokterActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,Keterangan,BtnSimpan);
         }
 }//GEN-LAST:event_KodePetugasKeyPressed
@@ -820,7 +820,7 @@ private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if(dokter.getTable().getSelectedRow()!= -1){
                     KodePetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KodePetugas.requestFocus();
             }
             @Override
@@ -843,7 +843,7 @@ private void NamaPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_NamaPetugasKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void DinasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DinasKeyPressed
@@ -872,7 +872,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void IDPendonorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDPendonorActionPerformed
@@ -939,7 +939,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {        
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().equals("")){
@@ -968,7 +968,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "utd_cekal_darah.tanggal between ? and ? and utd_cekal_darah.keterangan like ? order by utd_cekal_darah.tanggal"
                 );
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -993,7 +993,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(17,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                     ps.setString(18,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1044,7 +1044,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
         }
     }
-    
+
     public void setDarah(String nodonor,String nama,String alamat,String telp) {
         NoDonor.setText(nodonor);
         IDPendonor.setText(nama);
@@ -1054,21 +1054,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,158));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getutd_cekal_darah());
         BtnHapus.setEnabled(akses.getutd_cekal_darah());
@@ -1077,7 +1077,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if(akses.getjml2()>=1){
             KodePetugas.setText(akses.getkode());
             NamaPetugas.setText(Sequel.CariDokter(KodePetugas.getText()));
-        }    
+        }
     }
 
     private void runBackground(Runnable task) {
@@ -1105,7 +1105,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

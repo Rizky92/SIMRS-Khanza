@@ -11,11 +11,11 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -56,7 +56,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
     public DlgBarcode(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"ID","NIP","Nama Pegawai","Barcode"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -83,7 +83,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
         Bcd.setDocument(new batasInput((int)25).getKata(Bcd));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -457,7 +457,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
         Valid.hapusTable(tabMode,Id,"barcode","id");
         runBackground(() ->tampil());
         emptTeks();
-        
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -507,27 +507,27 @@ public final class DlgBarcode extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            if(TCari.getText().trim().equals("")){                
+            if(TCari.getText().trim().equals("")){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptBarcode.jasper","report","::[ Kartu Barcode ]::",param);
-            }else if(! TCari.getText().trim().equals("")){                
+            }else if(! TCari.getText().trim().equals("")){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptBarcode.jasper","report","::[ Kartu Barcode ]::","select pegawai.id, "+
                                 "pegawai.nik,"+
                                 "pegawai.nama,"+
@@ -597,7 +597,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -609,7 +609,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-            
+
 
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
@@ -653,7 +653,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -704,7 +704,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{ 
+        try{
             ps=koneksi.prepareStatement("select  pegawai.id,pegawai.nik,pegawai.nama,barcode.barcode  from pegawai "+
                     "left outer join barcode on pegawai.id=barcode.id where pegawai.stts_aktif<>'KELUAR' and pegawai.nik like ? or  pegawai.stts_aktif<>'KELUAR' and pegawai.nama like ? "+
                     "or  pegawai.stts_aktif<>'KELUAR' and barcode.barcode like ? ");
@@ -750,7 +750,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
             Nik.setText(tbBangsal.getValueAt(row,1).toString());
             Nm.setText(tbBangsal.getValueAt(row,2).toString());
             Bcd.setText(tbBangsal.getValueAt(row,3).toString());
-        }  
+        }
     }
 
     public JTextField getTextField(){
@@ -760,7 +760,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
     public JTable getTable(){
         return tbBangsal;
     }
-       
+
      public void isCek(){
         BtnSimpan.setEnabled(akses.getbarcode());
         BtnHapus.setEnabled(akses.getbarcode());
@@ -793,7 +793,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

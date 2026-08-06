@@ -14,11 +14,10 @@ package surat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.sekuel;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -297,15 +296,15 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         MasterMenolakAnjuranMedis masterMAM=new MasterMenolakAnjuranMedis(null,false);
         masterMAM.isCek();
         masterMAM.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         masterMAM.setLocationRelativeTo(internalFrame1);
         masterMAM.setAlwaysOnTop(false);
         masterMAM.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -342,7 +341,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -378,7 +377,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             file=new File("./cache/masterMAM.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -399,13 +398,13 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
                 if(ps!=null){
                     ps.close();
                 }
-            }    
+            }
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"masterMAM\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -423,11 +422,11 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.getkamar());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/masterMAM.iyem");
@@ -465,7 +464,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -491,7 +490,7 @@ public final class DlgCariMasterMenolakAnjuranMedis extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

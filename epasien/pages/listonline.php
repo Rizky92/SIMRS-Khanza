@@ -11,7 +11,7 @@
                           <h2>Konsultasi Online</h2>
                      </div>
                 </div>
-                       
+
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariOnline" method="post" action="" enctype=multipart/form-data>
@@ -31,7 +31,7 @@
                                    <th width="30%"><center>Unit/Poliklinik</center></th>
                                    <th width="20%"><center>Tarif</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   if(!isset($_SESSION["online"])){
                                       $dataonline  = "";
                                       $queryonline = bukaquery("select jns_perawatan.nm_perawatan,jns_perawatan.total_byrdr,poliklinik.nm_poli from jns_perawatan inner join penjab on penjab.kd_pj=jns_perawatan.kd_pj inner join poliklinik on poliklinik.kd_poli=jns_perawatan.kd_poli inner join set_tarif_online on set_tarif_online.kd_jenis_prw=jns_perawatan.kd_jenis_prw where jns_perawatan.status='1' and penjab.png_jawab like '%umum%' order by jns_perawatan.nm_perawatan");
@@ -63,9 +63,9 @@
                                       }
                                   }else{
                                       echo $_SESSION["online"];
-                                  }    
+                                  }
                               ?>
-                           </table> 
+                           </table>
                          </div>
                      </div>
                 </div>

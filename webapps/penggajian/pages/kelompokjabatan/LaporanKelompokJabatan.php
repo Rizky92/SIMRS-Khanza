@@ -28,10 +28,10 @@
                             </tr>";
                             while($baris = mysqli_fetch_array($hasil)) {
                                 echo "<tr class='isi'>
-                                        <td>$no</td>  
+                                        <td>$no</td>
                                         <td>$baris[0]</td>
                                         <td>$baris[1]</td>
-                                        <td>$baris[2]</td>   
+                                        <td>$baris[2]</td>
                                      </tr>";$no++;
                             }
                     echo "</table>";
@@ -44,7 +44,7 @@
                                 <td width='20%'><div align='center'>Index</div></td>
                             </tr>
                           </table>";
-                } 
+                }
             }else{
                 exit(header("Location:../index.php"));
             }
@@ -54,4 +54,3 @@
     ?>
     </body>
 </html>
-

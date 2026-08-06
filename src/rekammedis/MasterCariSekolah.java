@@ -66,7 +66,7 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
@@ -82,7 +82,7 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }   
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -314,7 +314,7 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -366,7 +366,7 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
             file.createNewFile();
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select master_sekolah.kd_sekolah, master_sekolah.nm_sekolah from master_sekolah order by master_sekolah.nm_sekolah");   
+            ps=koneksi.prepareStatement("select master_sekolah.kd_sekolah, master_sekolah.nm_sekolah from master_sekolah order by master_sekolah.nm_sekolah");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -388,17 +388,17 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
                 fileWriter.write("{\"master_sekolah\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }finally {
             if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
-        }  
+        }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/master_sekolah.iyem");
@@ -410,14 +410,14 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeSekolah").asText(),list.path("NamaSekolah").asText()
-                        });  
+                        });
                     }
                 }else{
                     for(JsonNode list:response){
                         if(list.path("KodeSekolah").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaSekolah").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabMode.addRow(new Object[]{
                                 list.path("KodeSekolah").asText(),list.path("NamaSekolah").asText()
-                            });                    
+                            });
                         }
                     }
                 }
@@ -444,7 +444,7 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -470,7 +470,7 @@ public final class MasterCariSekolah extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

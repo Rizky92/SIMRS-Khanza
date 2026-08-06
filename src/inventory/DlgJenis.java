@@ -12,11 +12,11 @@
 package inventory;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -28,15 +28,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
-import java.util.concurrent.RejectedExecutionException;
 
 /**
  *
@@ -52,7 +52,7 @@ public final class DlgJenis extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -64,7 +64,7 @@ public final class DlgJenis extends javax.swing.JDialog {
 
         Object[] row={"P","Kode Jenis","Nama Jenis","Keterangan"};
         tabMode=new DefaultTableModel(null,row){
-             @Override 
+             @Override
              public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
@@ -98,7 +98,7 @@ public final class DlgJenis extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)4).getKata(Kd));
         Nm.setDocument(new batasInput((byte)30).getKata(Nm));
         Keterangan.setDocument(new batasInput((byte)50).getKata(Keterangan));
@@ -541,11 +541,11 @@ public final class DlgJenis extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("jenis","kdjns",tbKamar.getValueAt(i,1).toString());
             }
-        } 
+        }
         BtnCariActionPerformed(evt);
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -598,15 +598,15 @@ public final class DlgJenis extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){    
-            Map<String, Object> param = new HashMap<>();   
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptJenis.jasper","report","::[ Data Jenis ]::","select kdjns, nama, keterangan "+
                 " from jenis where  kdjns like '%"+TCari.getText().trim()+"%' or "+
                 " nama like '%"+TCari.getText().trim()+"%' or "+
@@ -705,7 +705,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
@@ -770,7 +770,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select kdjns, nama, keterangan from jenis where  kdjns like ? or nama like ? or keterangan like ? order by nama ");
             try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -781,7 +781,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     tabMode.addRow(new Object[]{
                         false,rs.getString(1),rs.getString(2),rs.getString(3)
                     });
-                }                
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -791,7 +791,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -802,7 +802,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         Kd.setText("");
         Nm.setText("");
         Keterangan.setText("");
-        Kd.requestFocus();        
+        Kd.requestFocus();
         Valid.autoNomer("jenis","J",3,Kd);
     }
 
@@ -822,19 +822,19 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getjenis_barang());
         BtnHapus.setEnabled(akses.getjenis_barang());
         BtnEdit.setEnabled(akses.getjenis_barang());
         BtnPrint.setEnabled(akses.getjenis_barang());
-        
-        ppGanti.setEnabled(akses.getjenis_barang());        
+
+        ppGanti.setEnabled(akses.getjenis_barang());
         ppHapus.setEnabled(akses.getjenis_barang());
         ppCetak.setEnabled(akses.getjenis_barang());
         ppSimpan.setEnabled(akses.getjenis_barang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -860,7 +860,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -12,11 +12,11 @@
 package setting;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -78,7 +78,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{"Tanggal","User","SQL"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -102,7 +102,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
    }
-    
+
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     /** This method is called from within the constructor to
      * initialize the form.
@@ -375,7 +375,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                 }
             }
         }
-            
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -535,7 +535,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select tracker.nip,tracker.tgl_login,tracker.jam_login from tracker  "+
                     "where tracker.tgl_login between ? and ? "+(TCari.getText().trim().equals("")?"":"and tracker.nip like ? ")+" order by tracker.tgl_login");
@@ -557,7 +557,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
@@ -567,10 +567,10 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabMode2);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select trackersql.tanggal,trackersql.usere, replace(trackersql.sqle,'|','\\',\\'') as sqle from trackersql where trackersql.tanggal between ? and ? "+(TCari.getText().trim().equals("")?"":"and (trackersql.usere like ? or trackersql.sqle like ?) ")+"order by trackersql.tanggal");
             try {
@@ -595,14 +595,14 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
                             });
                         }
                     }
-                }   
+                }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
@@ -613,7 +613,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
         LCount.setText(""+tabMode2.getRowCount());
     }
 
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.gettracer_login());
     }
@@ -643,7 +643,7 @@ public class DlgPenelusuranLogin extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

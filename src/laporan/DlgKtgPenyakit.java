@@ -12,11 +12,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -102,7 +102,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
         TNm.setDocument(new batasInput((byte)30).getKata(TNm));
         TCiri.setDocument(new batasInput((int)200).getKata(TCiri));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         TKd.requestFocus();
     }
 
@@ -465,7 +465,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKtgPny.getRowCount();i++){ 
+        for(i=0;i<tbKtgPny.getRowCount();i++){
             if(tbKtgPny.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("kategori_penyakit","kd_ktg",tbKtgPny.getValueAt(i,1).toString());
             }
@@ -525,14 +525,14 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
                 Valid.MyReport("rptKtgPenyakit.jasper","report","::[ Data Kategori Penyakit ]::",param);
             }else if(! TCari.getText().trim().equals("")){
@@ -636,7 +636,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -692,7 +692,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -736,7 +736,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKtgPny;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -762,7 +762,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

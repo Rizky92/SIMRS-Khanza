@@ -1,11 +1,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -47,7 +47,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private String finger="";
-    
+
 
     /** Creates new form DlgPemberianInfus
      * @param parent
@@ -137,9 +137,9 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
 
         ChkInput.setSelected(false);
         isForm();
-        
+
     }
- 
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1138,7 +1138,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
             Valid.textKosong(BtnPtg,"Petugas");
         }else{
             if(Sequel.menyimpantf("deteksi_dini_corona","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,new String[]{
-                    NoRawat.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""),KdPetugas.getText(), A1.getSelectedItem().toString(),A2.getSelectedItem().toString(), 
+                    NoRawat.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""),KdPetugas.getText(), A1.getSelectedItem().toString(),A2.getSelectedItem().toString(),
                     A3.getSelectedItem().toString(),(A3.getSelectedIndex()==0?"0000-00-00":Valid.SetTgl(TglGejala.getSelectedItem()+"")),(A3.getSelectedIndex()==0?"":RiwayatSakitSebelumnya.getText()),
                     (A3.getSelectedIndex()==0?"":RiwayatPeriksaSebelumnya.getText()),B1.getSelectedItem().toString(),(B1.getSelectedIndex()==0?"":AsalDaerah.getText()),
                     (B1.getSelectedIndex()==0?"0000-00-00":Valid.SetTgl(TglKedatangan.getSelectedItem()+"")),B2a.getSelectedItem().toString(),B2b.getSelectedItem().toString(),
@@ -1162,7 +1162,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
                     dlgki.setLocationRelativeTo(internalFrame1);
                     dlgki.emptTeks();
                     dlgki.isCek();
-                    dlgki.setNoRm(NoRawat.getText(),NoRM.getText(),NamaPasien.getText());   
+                    dlgki.setNoRm(NoRawat.getText(),NoRM.getText(),NamaPasien.getText());
                     dlgki.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
@@ -1182,7 +1182,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1193,7 +1193,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tbObat.getSelectedRow()> -1){ 
+        if(tbObat.getSelectedRow()> -1){
             if(Sequel.meghapustf("deteksi_dini_corona","no_rawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString())==true){
                 tabMode.removeRow(tbObat.getSelectedRow());
                 LCount.setText(""+tabMode.getRowCount());
@@ -1227,14 +1227,14 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDeteksiDiniCorona.jasper","report","::[ Deteksi Dini Pasien Corona ]::",
                     "select deteksi_dini_corona.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"+
                     "pasien.no_ktp,pasien.no_tlp,pasien.pekerjaan,pasien.tgl_lahir,deteksi_dini_corona.tanggal,deteksi_dini_corona.nip,petugas.nama,deteksi_dini_corona.gejala_demam,deteksi_dini_corona.gejala_batuk,"+
@@ -1299,7 +1299,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -1330,9 +1330,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(BtnPtg,"Petugas");
         }else{
-            if(tbObat.getSelectedRow()> -1){ 
+            if(tbObat.getSelectedRow()> -1){
                 if(Sequel.mengedittf("deteksi_dini_corona","no_rawat=?","no_rawat=?,tanggal=?,nip=?,gejala_demam=?,gejala_batuk=?,gejala_sesak=?,gejala_tanggal_pertama=?,gejala_riwayat_sakit=?,gejala_riwayat_periksa=?,faktor_riwayat_perjalanan=?,faktor_asal_daerah=?,faktor_tanggal_kedatangan=?,faktor_paparan_kontakpositif=?,faktor_paparan_kontakpdp=?,faktor_paparan_faskespositif=?,faktor_paparan_perjalananln=?,faktor_paparan_pasarhewan=?,kesimpulan=?,tindak_lanjut=?",20,new String[]{
-                        NoRawat.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""),KdPetugas.getText(), A1.getSelectedItem().toString(),A2.getSelectedItem().toString(), 
+                        NoRawat.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""),KdPetugas.getText(), A1.getSelectedItem().toString(),A2.getSelectedItem().toString(),
                         A3.getSelectedItem().toString(),(A3.getSelectedIndex()==0?"0000-00-00":Valid.SetTgl(TglGejala.getSelectedItem()+"")),(A3.getSelectedIndex()==0?"":RiwayatSakitSebelumnya.getText()),
                         (A3.getSelectedIndex()==0?"":RiwayatPeriksaSebelumnya.getText()),B1.getSelectedItem().toString(),(B1.getSelectedIndex()==0?"":AsalDaerah.getText()),
                         (B1.getSelectedIndex()==0?"0000-00-00":Valid.SetTgl(TglKedatangan.getSelectedItem()+"")),B2a.getSelectedItem().toString(),B2b.getSelectedItem().toString(),
@@ -1438,8 +1438,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KdPetugas.requestFocus(); 
+                    }
+                    KdPetugas.requestFocus();
                     petugas=null;
                 }
             });
@@ -1447,16 +1447,16 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             petugas.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
-        }  
+        }
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
-        }    
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_BtnPtgActionPerformed
 
@@ -1513,7 +1513,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdPetugas.getText());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPetugas.getText()+"\nID "+(finger.equals("")?KdPetugas.getText():finger)+"\n"+TglSkrining.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPetugas.getText()+"\nID "+(finger.equals("")?KdPetugas.getText():finger)+"\n"+TglSkrining.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDeteksiCorona.jasper","report","::[ Form Deteksi Dini Corona ]::",
                 "select deteksi_dini_corona.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,pasien.umur,pasien.agama,"+
@@ -1679,9 +1679,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {     
+    private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                     "select deteksi_dini_corona.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"+
                     "pasien.no_ktp,pasien.no_tlp,pasien.pekerjaan,pasien.tgl_lahir,deteksi_dini_corona.tanggal,deteksi_dini_corona.nip,petugas.nama,deteksi_dini_corona.gejala_demam,deteksi_dini_corona.gejala_batuk,"+
@@ -1709,7 +1709,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(8,"%"+TCari.getText().trim()+"%");
                 }
                 rs=ps.executeQuery();
-                while(rs.next()){    
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("asal"),rs.getString("no_ktp"),rs.getString("no_tlp"),
                         rs.getString("pekerjaan"),rs.getDate("tgl_lahir"),rs.getString("tanggal"),rs.getString("nip"),rs.getString("nama"),rs.getString("gejala_demam"),
@@ -1764,12 +1764,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         HasilLaborat.setText("");
         HasilRadiologi.setText("");
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         A1.requestFocus();
     }
 
     private void getData() {
-        if(tbObat.getSelectedRow()!= -1){      
+        if(tbObat.getSelectedRow()!= -1){
             NoRawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NamaPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -1800,21 +1800,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.SetTgl(TglKedatangan,tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,this.getHeight()-122));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdeteksi_corona());
         BtnHapus.setEnabled(akses.getdeteksi_corona());
@@ -1826,7 +1826,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
         }
     }
-    
+
     public void setNoRm(String norawat,Date tgl1){
         NoRawat.setText(norawat);
         TCari.setText(norawat);
@@ -1838,7 +1838,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                     "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
                     "inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.no_rawat=?");
-            try {            
+            try {
                 ps.setString(1,norawat);
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -1856,7 +1856,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(rs != null ){
                     rs.close();
                 }
-                
+
                 if(ps != null ){
                     ps.close();
                 }
@@ -1864,11 +1864,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         } catch (Exception e) {
             System.out.println(e);
         }
-        DTPCari1.setDate(tgl1);  
+        DTPCari1.setDate(tgl1);
         isLabRad(norawat);
         runBackground(() ->tampil());
     }
-    
+
     private void isLabRad(String norawat){
         try{
             HasilRadiologi.setText("");
@@ -1894,7 +1894,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             HasilLaborat.setText("");
             ps=koneksi.prepareStatement(
@@ -1921,11 +1921,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public JTable getTable(){
         return tbObat;
     }
-    
+
     private void isHitung(){
         gejala1=0;gejala2=0;gejala3=0;resiko1=0;resiko2a=0;resiko2b=0;resiko2c=0;resiko2d=0;resiko2e=0;gejala=0;resiko=0;
         if(A1.getSelectedItem().toString().equals("Ya")){
@@ -1955,7 +1955,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if(B2e.getSelectedItem().toString().equals("Ya")){
             resiko2e=2;
         }
-        
+
         gejala=gejala1+gejala2+gejala3;
         resiko=resiko1+resiko2a+resiko2b+resiko2c+resiko2d+resiko2e;
         if((gejala==5)&&(resiko==1)){
@@ -2000,7 +2000,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -12,11 +12,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -565,7 +565,7 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -607,7 +607,7 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -631,7 +631,7 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
                 if(masalah.getTable().getSelectedRow()!= -1){
                     kdmasalah.setText(masalah.getTable().getValueAt(masalah.getTable().getSelectedRow(),0).toString());
                     nmmasalah.setText(masalah.getTable().getValueAt(masalah.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPemeriksaan.requestFocus();
             }
             @Override
@@ -643,7 +643,7 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         masalah.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -651,7 +651,7 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     masalah.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -761,17 +761,17 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
             namarencana.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getmaster_rencana_keperawatan_psikiatri());
        BtnHapus.setEnabled(akses.getmaster_rencana_keperawatan_psikiatri());
        BtnEdit.setEnabled(akses.getmaster_rencana_keperawatan_psikiatri());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -797,7 +797,7 @@ public class MasterRencanaKeperawatanPsikiatri extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

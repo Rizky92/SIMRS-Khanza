@@ -39,7 +39,7 @@
                         $dankes  = $baris[6];
                     }
                 }
-                
+
                 echo"<input type=hidden name=id value=$id><input type=hidden name=action value=$action>";
 
                 $_sqlnext         = "SELECT id FROM pegawai WHERE id>'$id' order by id asc limit 1";

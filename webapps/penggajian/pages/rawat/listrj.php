@@ -14,12 +14,12 @@
 ?>
 
 <div id="post">
-    <div class="entry"> 
+    <div class="entry">
         <div align="center" class="link">
             <a href=?act=DetailTindakanRj&action=TAMBAH>| Master Tindakan |</a>
             <a href=?act=ListRj>| Rawat Jalan Spesialis |</a>
             <a href=?act=HomeAdmin>| Menu Utama |</a>
-        </div>   
+        </div>
 	<form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
@@ -38,7 +38,7 @@
             </table><br>
             <div style="width: 100%; height: 78%; overflow: auto;">
             <?php
-                $_sql   = "SELECT pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen,sum(rawatjalan.jmlh),sum(rawatjalan.jm) FROM rawatjalan right OUTER JOIN pegawai ON rawatjalan.id=pegawai.id 
+                $_sql   = "SELECT pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen,sum(rawatjalan.jmlh),sum(rawatjalan.jm) FROM rawatjalan right OUTER JOIN pegawai ON rawatjalan.id=pegawai.id
                            where pegawai.stts_aktif='AKTIF' and pegawai.jbtn like '%dokter spesialis%' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%'
                            or pegawai.departemen like '%".$keyword."%') group by pegawai.id order by pegawai.id ASC";
                 $hasil  = bukaquery($_sql);
@@ -74,7 +74,7 @@
                                         <td><a href=?act=InputRj&action=TAMBAH&id=$baris[0]>".formatDuit($baris[5])."</a></td>
                                      </tr>";
                             }
-                    echo "</table>";           
+                    echo "</table>";
                 } else {
                     echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                             <tr class='head'>
@@ -92,8 +92,8 @@
         <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)."  <a target=_blank href=../penggajian/pages/rawat/laporanrj.php?&keyword=$keyword>| Laporan |</a></div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)."  <a target=_blank href=../penggajian/pages/rawat/laporanrj.php?&keyword=$keyword>| Laporan |</a></div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

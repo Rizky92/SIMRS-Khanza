@@ -11,17 +11,14 @@
 
 package kepegawaian;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -78,9 +75,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         Departemen.addItem("Semua");
         Departemen.setSelectedItem("Semua");
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -296,7 +293,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
@@ -331,19 +328,19 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                                 tabMode.getValueAt(r,32).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','"+
                                 tabMode.getValueAt(r,33).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','"+
                                 tabMode.getValueAt(r,34).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','"+
-                                tabMode.getValueAt(r,35).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','','','"+akses.getalamatip()+"'","Rekap Presensi"); 
+                                tabMode.getValueAt(r,35).toString().replaceAll("Midle ","").replaceAll("1","").replaceAll("2","").replaceAll("3","").replaceAll("4","").replaceAll("5","").replaceAll("6","").replaceAll("7","").replaceAll("8","").replaceAll("9","").replaceAll("0","").replaceAll("agi","").replaceAll("iang","").replaceAll("alam","").replaceAll(" ","")+"','','','"+akses.getalamatip()+"'","Rekap Presensi");
             }
-            
-            Map<String, Object> param = new HashMap<>();   
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
+                param.put("emailrs",akses.getemailrs());
                 param.put("departemen",Departemen.getSelectedItem().toString().replaceAll("Semua",""));
-                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("periode","01 - 31 BULAN "+BlnCari.getSelectedItem()+" TAHUN "+ThnCari.getSelectedItem());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("jd1","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")");
                 param.put("jd2","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")");
                 param.put("jd3","("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),3)+")");
@@ -380,18 +377,18 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                     switch (pilihan) {
                         case "Tampilkan Semua":
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            Valid.MyReportqry("rptRekapKehadiran.jasper","report","::[ Rekap Kehadiran Non Jadwal Tambahan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);            
+                            Valid.MyReportqry("rptRekapKehadiran.jasper","report","::[ Rekap Kehadiran Non Jadwal Tambahan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             this.setCursor(Cursor.getDefaultCursor());
                             break;
                         case "Tanpa departemen & jabatan":
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            Valid.MyReportqry("rptRekapKehadiran2.jasper","report","::[ Rekap Kehadiran Non Jadwal Tambahan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);            
+                            Valid.MyReportqry("rptRekapKehadiran2.jasper","report","::[ Rekap Kehadiran Non Jadwal Tambahan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                             this.setCursor(Cursor.getDefaultCursor());
                             break;
                     }
                 }catch(Exception e){
                     System.out.println(e);
-                }                 
+                }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -502,7 +499,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {        
+    private void tampil() {
         Object[] row={"No","ID","Nama","Pendidikan","Departemen",
             "1("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")",
             "2("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),2)+")",
@@ -551,7 +548,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -560,7 +557,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
              }
         };
         tbJadwal.setModel(tabMode);
-        
+
         for (int i = 0; i < 36; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
@@ -578,7 +575,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -592,9 +589,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 i=1;
-                while(rs.next()){   
+                while(rs.next()){
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h1="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-01%");
@@ -612,9 +609,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h2="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-02%");
@@ -632,9 +629,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     					ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h3="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-03%");
@@ -652,9 +649,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h4="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-04%");
@@ -672,9 +669,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h5="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-05%");
@@ -692,9 +689,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h6="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-06%");
@@ -712,9 +709,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h7="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-07%");
@@ -732,9 +729,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h8="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-08%");
@@ -752,9 +749,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h9="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-09%");
@@ -772,9 +769,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h10="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-10%");
@@ -792,9 +789,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h11="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-11%");
@@ -812,9 +809,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h12="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-12%");
@@ -832,9 +829,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h13="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-13%");
@@ -852,9 +849,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h14="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-14%");
@@ -872,9 +869,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h15="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-15%");
@@ -892,9 +889,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h16="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-16%");
@@ -912,9 +909,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h17="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-17%");
@@ -932,9 +929,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h18="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-18%");
@@ -952,9 +949,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h19="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-19%");
@@ -972,9 +969,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h20="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-20%");
@@ -992,9 +989,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h21="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-21%");
@@ -1012,9 +1009,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h22="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-22%");
@@ -1032,9 +1029,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h23="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-23%");
@@ -1052,9 +1049,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h24="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-24%");
@@ -1072,9 +1069,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h25="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-25%");
@@ -1092,9 +1089,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h26="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-26%");
@@ -1112,9 +1109,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h27="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-27%");
@@ -1132,9 +1129,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h28="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-28%");
@@ -1152,9 +1149,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h29="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-29%");
@@ -1172,9 +1169,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h30="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-30%");
@@ -1192,9 +1189,9 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(sqlps2);
-                    try {   
+                    try {
                         h31="";
                         ps2.setString(1,rs.getString("id"));
                         ps2.setString(2,"%"+ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-31%");
@@ -1215,7 +1212,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
 
                     tabMode.addRow(new Object[]{
                         " "+i+".",rs.getString("id"),rs.getString("nama"),rs.getString("pendidikan"),rs.getString("departemen"),
-                        h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31 
+                        h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31
                     });
                     i++;
                 }
@@ -1229,15 +1226,15 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     String konversi(int year, int month, int day){
-        dateString = String.format("%d-%d-%d", year, month, day);        
+        dateString = String.format("%d-%d-%d", year, month, day);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
         } catch (Exception ex) {
@@ -1272,7 +1269,7 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
         }
         return hari;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1298,11 +1295,11 @@ public class DlgKehadiran2 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    
+
 }

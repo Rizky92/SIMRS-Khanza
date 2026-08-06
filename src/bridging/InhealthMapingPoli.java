@@ -11,11 +11,11 @@
 
 package bridging;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -48,11 +48,11 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -87,10 +87,10 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        kdpoli.setDocument(new batasInput((byte)5).getKata(kdpoli)); 
-        KdPoliInhealth.setDocument(new batasInput((byte)15).getKata(KdPoliInhealth)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        kdpoli.setDocument(new batasInput((byte)5).getKata(kdpoli));
+        KdPoliInhealth.setDocument(new batasInput((byte)15).getKata(KdPoliInhealth));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -112,7 +112,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
     /** This method is called from within the constructor to
@@ -454,7 +454,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -468,15 +468,15 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        poli.isCek();        
+        });
+        poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
+
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -490,7 +490,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
             })==true){
                 runBackground(() ->tampil());
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -537,7 +537,7 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
                     emptTeks();
                     runBackground(() ->tampil());
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -564,17 +564,17 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingPoliInhealth.jasper","report","::[ Mapping Unit RS & Inhealth ]::",param);            
+                Valid.MyReport("rptMapingPoliInhealth.jasper","report","::[ Mapping Unit RS & Inhealth ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -641,11 +641,11 @@ private void btnPoliInhealthActionPerformed(java.awt.event.ActionEvent evt) {//G
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(poliinhealth.getTable().getSelectedRow()!= -1){                   
+            if(poliinhealth.getTable().getSelectedRow()!= -1){
                 KdPoliInhealth.setText(poliinhealth.getTable().getValueAt(poliinhealth.getTable().getSelectedRow(),1).toString());
                 NmPoliInhealth.setText(poliinhealth.getTable().getValueAt(poliinhealth.getTable().getSelectedRow(),2).toString());
                 KdPoliInhealth.requestFocus();
-            }                  
+            }
         }
         @Override
         public void windowIconified(WindowEvent e) {}
@@ -668,7 +668,7 @@ private void btnPoliInhealthActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
         @Override
         public void keyReleased(KeyEvent e) {}
-    });  
+    });
     poliinhealth.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     poliinhealth.setLocationRelativeTo(internalFrame1);
     poliinhealth.setVisible(true);
@@ -787,20 +787,20 @@ private void btnPoliInhealthActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
     }
 
-    
-   
-    
-    
+
+
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_poli());
         BtnHapus.setEnabled(akses.getinhealth_mapping_poli());
         BtnEdit.setEnabled(akses.getinhealth_mapping_poli());
         BtnPrint.setEnabled(akses.getinhealth_mapping_poli());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
@@ -827,7 +827,7 @@ private void btnPoliInhealthActionPerformed(java.awt.event.ActionEvent evt) {//G
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

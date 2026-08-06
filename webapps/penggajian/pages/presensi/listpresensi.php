@@ -14,7 +14,7 @@
 <div id="post">
     <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div> 
+    </div>
     <div class="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
@@ -29,7 +29,7 @@
                 </td>
             </tr>
         </table> <br>
-        <div style="width: 100%; height: 78%; overflow: auto;">	
+        <div style="width: 100%; height: 78%; overflow: auto;">
         <?php
             $_sql   = "SELECT pegawai.id,pegawai.nik,pegawai.nama FROM pegawai where pegawai.stts_aktif='AKTIF' and pegawai.nik like '%".$keyword."%' or pegawai.stts_aktif='AKTIF' and pegawai.nama like '%".$keyword."%' ORDER BY pegawai.id ASC";
             $hasil  = bukaquery($_sql);
@@ -86,8 +86,8 @@
     <?php
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/presensi/LaporanPresensi.php?&keyword=$keyword>| Laporan |</a></div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/presensi/LaporanPresensi.php?&keyword=$keyword>| Laporan |</a></div></td>
+                </tr>
               </table>");
     ?>
     </div>

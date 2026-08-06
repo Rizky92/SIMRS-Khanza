@@ -18,10 +18,10 @@
             $bulan = "0".$blnini;
         }else{
             $bulan = $blnini;
-        }	
+        }
         $keyword   = isset($_GET['keyword'])?$_GET['keyword']:NULL;
         $keyword   = validTeks($keyword);
-        $_sql      = "SELECT pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen,sum(rawatjalan.jmlh),sum(rawatjalan.jm) FROM rawatjalan right OUTER JOIN pegawai ON rawatjalan.id=pegawai.id 
+        $_sql      = "SELECT pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen,sum(rawatjalan.jmlh),sum(rawatjalan.jm) FROM rawatjalan right OUTER JOIN pegawai ON rawatjalan.id=pegawai.id
                       where pegawai.stts_aktif='AKTIF' and pegawai.jbtn like '%dokter spesialis%' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%'
                       or pegawai.departemen like '%".$keyword."%') group by pegawai.id order by pegawai.id ASC";
         $hasil     = bukaquery($_sql);
@@ -57,8 +57,8 @@
             echo "</table>";
             echo("<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Jumlah Total JM : ".formatDuit($ttljm)."</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Jumlah Total JM : ".formatDuit($ttljm)."</div></td>
+                    </tr>
                  </table>");
         }else{
             echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
@@ -71,7 +71,7 @@
                         <td width='150px'><div align='center'>Ttl.JM Tindakan</div></td>
                     </tr>
                 </table>";
-        } 
+        }
     ?>
     </body>
 </html>

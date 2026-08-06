@@ -23,7 +23,7 @@
         <tr class="head">
              <td width="31%">Nama</td><td width="">:</td>
              <td width="67%"><?php echo $baris2[1];?></td>
-        </tr>               
+        </tr>
     </table>
     <br><br>
     <?php

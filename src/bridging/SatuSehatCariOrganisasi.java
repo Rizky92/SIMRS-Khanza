@@ -63,7 +63,7 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
         setSize(656,250);
 
         Object[] row={"Kode Departemen","Nama Departemen","ID Organisasi"};
-        
+
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -365,13 +365,13 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"satu_sehat_mapping_departemen\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -393,7 +393,7 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
                     if(list.path("KodeDepartemen").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaDepartemen").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                         tabMode.addRow(new Object[]{
                             list.path("KodeDepartemen").asText(),list.path("NamaDepartemen").asText(),list.path("IdOrganisasi").asText()
-                        });                    
+                        });
                     }
                 }
             }
@@ -411,7 +411,7 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         TCari.requestFocus();
     }
@@ -420,7 +420,7 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -446,7 +446,7 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

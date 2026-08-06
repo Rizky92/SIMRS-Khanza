@@ -14,10 +14,10 @@ package setting;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -54,7 +54,7 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -304,7 +304,7 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
         ruangoperasi.setLocationRelativeTo(internalFrame1);
         ruangoperasi.setAlwaysOnTop(false);
         ruangoperasi.setVisible(true);
-        
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -341,7 +341,7 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -377,7 +377,7 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             file=new File("./cache/ruangoperasi.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -398,13 +398,13 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"ruangoperasi\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -422,11 +422,11 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.getruang_ok());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/ruangoperasi.iyem");
@@ -464,7 +464,7 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -490,7 +490,7 @@ public final class DlgCariRuangOperasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

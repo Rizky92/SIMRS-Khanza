@@ -42,7 +42,7 @@ public class ApiOrthanc {
     private String auth,authEncrypt,requestJson;
     private byte[] encodedBytes;
     private int i=1;
-    
+
     public ApiOrthanc(){
         try {
             auth=koneksiDB.USERORTHANC()+":"+koneksiDB.PASSORTHANC();
@@ -52,11 +52,11 @@ public class ApiOrthanc {
             System.out.println("Notifikasi : "+ex);
         }
     }
-    
+
     public String Auth(){
         return authEncrypt;
     }
-    
+
     public JsonNode AmbilSeries(String Norm,String Tanggal1,String Tanggal2){
         System.out.println("Percobaan Mengambil Photo Pasien : "+Norm);
         try{
@@ -82,7 +82,7 @@ public class ApiOrthanc {
         }
         return root;
     }
-    
+
     public JsonNode AmbilPng(String NoRawat,String Series){
         System.out.println("Percobaan Mengambil Gambar PNG : "+NoRawat+", Series : "+Series);
         try{
@@ -114,7 +114,7 @@ public class ApiOrthanc {
         }
         return root;
     }
-    
+
     public JsonNode AmbilJpg(String NoRawat,String Series){
         System.out.println("Percobaan Mengambil Gambar JPG : "+NoRawat+", Series : "+Series);
         try{
@@ -146,7 +146,7 @@ public class ApiOrthanc {
         }
         return root;
     }
-    
+
     public JsonNode AmbilBmp(String NoRawat,String Series){
         System.out.println("Percobaan Mengambil Gambar BMP : "+NoRawat+", Series : "+Series);
         try{
@@ -178,7 +178,7 @@ public class ApiOrthanc {
         }
         return root;
     }
-    
+
     public JsonNode AmbilDcm(String NoRawat,String Series){
         System.out.println("Percobaan Mengambil Gambar DCM : "+NoRawat+", Series : "+Series);
         try{
@@ -209,7 +209,7 @@ public class ApiOrthanc {
         }
         return root;
     }
-    
+
     public boolean UbahAccession(String studyId, String accessionBaru){
         System.out.println("Modify AccessionNumber Study : " + studyId);
         try{
@@ -234,7 +234,7 @@ public class ApiOrthanc {
             return false;
         }
     }
-    
+
     public boolean kirimKeModality(String studyId){
         System.out.println("Kirim Study ke Modality : " + studyId);
         try{
@@ -253,7 +253,7 @@ public class ApiOrthanc {
             return false;
         }
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers= {

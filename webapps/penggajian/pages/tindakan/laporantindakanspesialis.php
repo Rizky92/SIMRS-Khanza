@@ -18,7 +18,7 @@
             $bulan = "0".$blnini;
         }else{
             $bulan = $blnini;
-        }	
+        }
         $keyword   = $_GET['keyword'];
         $keyword   = validTeks($keyword);
         $_sql      = "SELECT pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen,sum(tindakan.jmlh),sum(tindakan.jm) FROM tindakan right OUTER JOIN pegawai ON tindakan.id=pegawai.id and tindakan.tgl like '%".$tahun."-".$bulan."%'
@@ -56,10 +56,10 @@
             echo "</table>
                   <table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Jumlah Total JM : ".formatDuit($ttljm)."</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Jumlah Total JM : ".formatDuit($ttljm)."</div></td>
+                    </tr>
                  </table>";
-        } 
+        }
     ?>
     </body>
 </html>

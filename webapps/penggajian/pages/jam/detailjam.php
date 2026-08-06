@@ -8,7 +8,7 @@
     <div class="entry">
     <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
@@ -36,7 +36,7 @@
                 <tr class="head">
                     <td width="25%" >Jam Shift</td><td width="">:</td>
                     <td width="75%">
-                        <select name="shift" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2">                             
+                        <select name="shift" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2">
                             	<option id='TxtIsi2' value='Pagi'>Pagi</option>
                                 <option id='TxtIsi2' value='Pagi2'>Pagi2</option>
                                 <option id='TxtIsi2' value='Pagi3'>Pagi3</option>
@@ -145,7 +145,7 @@
                     $menit_masuk        = validTeks(trim($_POST['menit_masuk']));
                     $jam_pulang         = validTeks(trim($_POST['jam_pulang']));
                     $menit_pulang       = validTeks(trim($_POST['menit_pulang']));
-                    
+
                     if (!empty($dep_id)) {
                         switch($action) {
                             case "TAMBAH":
@@ -209,7 +209,7 @@
                                 </tr>
                          </table>";
                 }
-                
+
                 if ($action=="HAPUS") {
                     try {
                         Hapus("  jam_jaga "," no_id ='".$no_id."' ","?act=ListJam&action=TAMBAH");
@@ -220,8 +220,8 @@
 
                 echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head'>
-                            <td><div align='left'>Data : $jumlah</div></td>                        
-                        </tr>     
+                            <td><div align='left'>Data : $jumlah</div></td>
+                        </tr>
                      </table>";
             ?>
             </div>

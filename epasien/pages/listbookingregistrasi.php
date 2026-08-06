@@ -7,7 +7,7 @@
     $thnbesok  = substr($besok,0,4);
     $blnbesok  = substr($besok,5,2);
     $tglbesok  = substr($besok,8,2);
-    
+
     $thncari   = cleankar(trim(isset($_POST['tgl_registrasi']))?substr($_POST['tgl_registrasi'],6,4):$thnbesok);
     $blncari   = cleankar(trim(isset($_POST['tgl_registrasi']))?substr($_POST['tgl_registrasi'],3,2):$blnbesok);
     $tglcari   = cleankar(trim(isset($_POST['tgl_registrasi']))?substr($_POST['tgl_registrasi'],0,2):$tglbesok);
@@ -36,7 +36,7 @@
                             </div>
                             <center><button class="btn btn-danger waves-effect" type="submit" name="pilihpoli">TAMPILKAN JADWAL TERSEDIA</button></center>
                         </form><br/>
-                        <?php 
+                        <?php
                             $hari = getOne("select DAYNAME('$thncari-$blncari-$tglcari')");
                             echo "<center>".konversiHari($hari).", $tglcari ".konversiBulan($blncari)." $thncari</center>";
                         ?>
@@ -55,10 +55,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php 
+                                <?php
                                     $queryjadwal = bukaquery("Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai,poliklinik.kd_poli,jadwal.kuota,dokter.kd_dokter from jadwal inner join dokter on dokter.kd_dokter=jadwal.kd_dokter inner join poliklinik on jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja like '%".konversiHari($hari)."%'");
                                     while($rsqueryjadwal = mysqli_fetch_array($queryjadwal)) {
-                                        $daftar     = getOne("select count(no_rkm_medis) from booking_registrasi where tanggal_periksa='$thncari-$blncari-$tglcari' and kd_dokter='".$rsqueryjadwal["kd_dokter"]."' and kd_poli='".$rsqueryjadwal["kd_poli"]."'" ); 
+                                        $daftar     = getOne("select count(no_rkm_medis) from booking_registrasi where tanggal_periksa='$thncari-$blncari-$tglcari' and kd_dokter='".$rsqueryjadwal["kd_dokter"]."' and kd_poli='".$rsqueryjadwal["kd_poli"]."'" );
                                         $terdaftar  = getOne("select count(no_rkm_medis) from booking_registrasi where tanggal_periksa='$thncari-$blncari-$tglcari' and kd_dokter='".$rsqueryjadwal["kd_dokter"]."' and kd_poli='".$rsqueryjadwal["kd_poli"]."' and no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."'" );
                                         if(($rsqueryjadwal["kuota"]>0)&&($daftar>=$rsqueryjadwal["kuota"])){
                                             if($terdaftar>0){
@@ -81,7 +81,7 @@
                                                         <td align='center'>".$daftar."</td>
                                                         <td align='center' valign='middle'><p class='col-pink'>Penuh</p></td>
                                                       </tr>";
-                                            }   
+                                            }
                                         }else{
                                             if($terdaftar>0){
                                                 echo "<tr>
@@ -127,7 +127,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php 
+                                <?php
                                    $queryriwayat = bukaquery("select booking_registrasi.tanggal_booking,booking_registrasi.jam_booking,booking_registrasi.tanggal_periksa,booking_registrasi.kd_dokter,dokter.nm_dokter,booking_registrasi.kd_poli,poliklinik.nm_poli,booking_registrasi.no_reg,booking_registrasi.kd_pj,penjab.png_jawab,booking_registrasi.status from booking_registrasi inner join dokter on booking_registrasi.kd_dokter=dokter.kd_dokter inner join poliklinik on booking_registrasi.kd_poli=poliklinik.kd_poli inner join penjab on booking_registrasi.kd_pj=penjab.kd_pj where booking_registrasi.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."' order by booking_registrasi.tanggal_periksa desc");
                                    while($rsqueryriwayat = mysqli_fetch_array($queryriwayat)) {
                                        if($rsqueryriwayat["status"]=="Belum"){
@@ -161,7 +161,7 @@
                                                      <td align='center' valign='middle'><p class='col-pink'>".$rsqueryriwayat["status"]."<p></td>
                                                   </tr>";
                                        }
-                                            
+
                                    }
                                 ?>
                                 </tbody>
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                        
+
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $_sql         = "SELECT * FROM set_tahun";
     $hasil        = bukaquery($_sql);
     $baris        = mysqli_fetch_row($hasil);
@@ -14,7 +14,7 @@
     <div align="center" class="link">
         <a href=?act=ListInsentif>| List Insentif |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -51,7 +51,7 @@
             </table>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="SIMPAN">&nbsp<input name=BtnKosong type=reset class="button" value="KOSONG"></div>
             <?php
-                $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;	
+                $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
                 if (isset($BtnSimpan)) {
                     $pendapatan = trim($_POST['pendapatan']);
                     $pendapatan = validangka($pendapatan);

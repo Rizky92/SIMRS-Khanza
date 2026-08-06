@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    
+
     function paging ( $sql , $item_per_page , $page_per_block , $url , $page , $block ) {
 
     /*The Simple Advanced Paging by Bimosaurus..
@@ -124,7 +124,7 @@
     paging('SELECT * FROM `table`',10,5,'?mod=namamodul&submod=namasubmodul',$page,$block);
     For bug and Consultation : bimosaurus@gmail.com
 
-    Models : 
+    Models :
 
     <<First <Previous 10 11 12 13 14 15 Next> End>>
 

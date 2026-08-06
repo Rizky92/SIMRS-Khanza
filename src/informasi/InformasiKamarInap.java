@@ -1,5 +1,4 @@
 package informasi;
-import simrskhanza.DlgCariBangsal;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -21,6 +20,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import simrskhanza.DlgCariBangsal;
 
 /**
  *
@@ -32,7 +32,7 @@ public class InformasiKamarInap extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     private String kmr="",key="";
     private PreparedStatement ps;
     private ResultSet rs;
@@ -513,8 +513,8 @@ public class InformasiKamarInap extends javax.swing.JDialog {
 
     private void DTPCari1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPCari1ItemStateChanged
          R2.setSelected(true);
-         runBackground(() ->tampil());          
-       
+         runBackground(() ->tampil());
+
 }//GEN-LAST:event_DTPCari1ItemStateChanged
 
     private void DTPCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari2KeyPressed
@@ -530,9 +530,9 @@ private void btnBangsalCariActionPerformed(java.awt.event.ActionEvent evt) {//GE
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     BangsalCari.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 BangsalCari.requestFocus();
             }
             @Override
@@ -545,7 +545,7 @@ private void btnBangsalCariActionPerformed(java.awt.event.ActionEvent evt) {//GE
             public void windowDeactivated(WindowEvent e) {}
         });
         bangsal.isCek();
-        bangsal.emptTeks();        
+        bangsal.emptTeks();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setAlwaysOnTop(false);
@@ -566,7 +566,7 @@ private void BangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 
 private void DTPCari3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPCari3ItemStateChanged
    R3.setSelected(true);
-   runBackground(() ->tampil()); 
+   runBackground(() ->tampil());
 }//GEN-LAST:event_DTPCari3ItemStateChanged
 
 private void DTPCari3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari3KeyPressed
@@ -579,19 +579,19 @@ private void cmbJam1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:
 }//GEN-LAST:event_cmbJam1ItemStateChanged
 
 private void cmbJam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam1KeyPressed
-  
+
 }//GEN-LAST:event_cmbJam1KeyPressed
 
 private void cmbMnt1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt1KeyPressed
- 
+
 }//GEN-LAST:event_cmbMnt1KeyPressed
 
 private void cmbDtk1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk1KeyPressed
-  
+
 }//GEN-LAST:event_cmbDtk1KeyPressed
 
 private void cmbDtk2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk2KeyPressed
-   
+
 }//GEN-LAST:event_cmbDtk2KeyPressed
 
 private void cmbMnt2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt2KeyPressed
@@ -760,7 +760,7 @@ private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event
                   cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem()+"' and bangsal.nm_bangsal='"+BangsalCari.getText()+"' ";
             }
         }
-        
+
         key=kmr+" ";
         if(!TCari.getText().equals("")){
             key= kmr+"and kamar_inap.no_rawat like '%"+TCari.getText().trim()+"%' or "+
@@ -778,7 +778,7 @@ private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event
                    kmr+"and kamar_inap.tgl_keluar like '%"+TCari.getText().trim()+"%' or "+
                    kmr+"and kamar_inap.ttl_biaya like '%"+TCari.getText().trim()+"%' ";
         }
-        
+
         Valid.tabelKosong(tabMode);
         try{
             rs=koneksi.prepareStatement(
@@ -846,7 +846,7 @@ private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

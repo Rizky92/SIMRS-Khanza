@@ -54,7 +54,7 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
         super(parent, modal);
         initComponents();
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode","Risiko Keselamatan"};
         tabMode=new DefaultTableModel(null,row){
@@ -409,7 +409,7 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -436,7 +436,7 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -607,11 +607,11 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -632,7 +632,7 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
         KodeRisiko.requestFocus();
         Valid.autoNomer(" pcra_icra_identifkasi_risiko_keselamatan ","RK",3,KodeRisiko);
     }
-    
+
     public JTextField getTextField(){
         return KodeRisiko;
     }
@@ -640,7 +640,7 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -666,7 +666,7 @@ public final class PCRAICRAIdentifikasiRisikoKeselamatan extends javax.swing.JDi
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

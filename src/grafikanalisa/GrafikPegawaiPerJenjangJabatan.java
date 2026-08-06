@@ -235,7 +235,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
@@ -244,7 +244,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
             switch (pilihan) {
                 case "Jumlah Pegawai":
                     DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select jnj_jabatan.kode,count(jnj_jabatan.kode) as jumlah,jnj_jabatan.nama from pegawai inner join jnj_jabatan "+
                            "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI' group by jnj_jabatan.kode").executeQuery();
                         while(rs.next()) {
@@ -257,18 +257,18 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
                     }
-                    JFreeChart freeChart = ChartFactory.createBarChart("Grafik Pegawai Per Jenjang Jabatan","Jenjang Jabatan","Jumlah Pegawai", dcd, PlotOrientation.VERTICAL,true, true,true); 
+                    JFreeChart freeChart = ChartFactory.createBarChart("Grafik Pegawai Per Jenjang Jabatan","Jenjang Jabatan","Jumlah Pegawai", dcd, PlotOrientation.VERTICAL,true, true,true);
                     ChartFrame cf = new ChartFrame("Grafik Pegawai Per Jenjang Jabatan",freeChart);
-                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf.setLocationRelativeTo(Scroll);
                     cf.setAlwaysOnTop(true);
                     cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf.setVisible(true);  
+                    cf.setVisible(true);
                     break;
                 case "Jumlah Pegawai Laki-Laki":
                     DefaultCategoryDataset dcd2 = new DefaultCategoryDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select jnj_jabatan.kode,count(jnj_jabatan.kode) as jumlah,jnj_jabatan.nama from pegawai inner join jnj_jabatan "+
                            "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.jk='Pria' and (pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI') group by jnj_jabatan.kode").executeQuery();
                         while(rs.next()) {
@@ -281,18 +281,18 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
                     }
-                    JFreeChart freeChart2 = ChartFactory.createBarChart("Grafik Pegawai Per Jenjang Jabatan","Jenjang Jabatan","Jumlah Pegawai", dcd2, PlotOrientation.VERTICAL,true, true,true); 
+                    JFreeChart freeChart2 = ChartFactory.createBarChart("Grafik Pegawai Per Jenjang Jabatan","Jenjang Jabatan","Jumlah Pegawai", dcd2, PlotOrientation.VERTICAL,true, true,true);
                     ChartFrame cf2 = new ChartFrame("Grafik Pegawai Per Jenjang Jabatan",freeChart2);
-                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf2.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf2.setLocationRelativeTo(Scroll);
                     cf2.setAlwaysOnTop(true);
                     cf2.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf2.setVisible(true);  
+                    cf2.setVisible(true);
                     break;
                 case "Jumlah Pegawai Perempuan":
                     DefaultCategoryDataset dcd3 = new DefaultCategoryDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select jnj_jabatan.kode,count(jnj_jabatan.kode) as jumlah,jnj_jabatan.nama from pegawai inner join jnj_jabatan "+
                            "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.jk='Wanita' and (pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI') group by jnj_jabatan.kode").executeQuery();
                         while(rs.next()) {
@@ -305,23 +305,23 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
                     }
-                    JFreeChart freeChart3 = ChartFactory.createBarChart("Grafik Pegawai Per Jenjang Jabatan","Jenjang Jabatan","Jumlah Pegawai", dcd3, PlotOrientation.VERTICAL,true, true,true); 
+                    JFreeChart freeChart3 = ChartFactory.createBarChart("Grafik Pegawai Per Jenjang Jabatan","Jenjang Jabatan","Jumlah Pegawai", dcd3, PlotOrientation.VERTICAL,true, true,true);
                     ChartFrame cf3 = new ChartFrame("Grafik Pegawai Per Jenjang Jabatan",freeChart3);
-                    cf3.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf3.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf3.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf3.setLocationRelativeTo(Scroll);
                     cf3.setAlwaysOnTop(true);
                     cf3.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf3.setVisible(true);  
+                    cf3.setVisible(true);
                     break;
             }
         } catch (Exception e) {
         }
-                    
+
     }//GEN-LAST:event_BtnPrint3ActionPerformed
 
     private void BtnPrint3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint3KeyPressed
-        
+
     }//GEN-LAST:event_BtnPrint3KeyPressed
 
     private void BtnKeluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar3ActionPerformed
@@ -329,7 +329,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3ActionPerformed
 
     private void BtnKeluar3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar3KeyPressed
-        
+
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint4ActionPerformed
@@ -340,7 +340,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     grafiksql2 kas=new grafiksql2("Grafik Pegawai Per Jenjang Jabatan",
                        "select concat(jnj_jabatan.nama,'(',jnj_jabatan.kode,')'),count(jnj_jabatan.kode) as jumlah from pegawai inner join jnj_jabatan "+
                        "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI' group by jnj_jabatan.kode","Jenjang Jabatan");
-                    kas.setSize(Scroll.getWidth(),Scroll.getHeight());  
+                    kas.setSize(Scroll.getWidth(),Scroll.getHeight());
                     kas.setModal(true);
                     kas.setAlwaysOnTop(true);
                     kas.setLocationRelativeTo(Scroll);
@@ -350,7 +350,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     grafiksql2 kas2=new grafiksql2("Grafik Pegawai Per Jenjang Jabatan",
                        "select concat(jnj_jabatan.nama,'(',jnj_jabatan.kode,')'),count(jnj_jabatan.kode) as jumlah from pegawai inner join jnj_jabatan "+
                        "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.jk='Pria' and (pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI') group by jnj_jabatan.kode","Jenjang Jabatan");
-                    kas2.setSize(Scroll.getWidth(),Scroll.getHeight());  
+                    kas2.setSize(Scroll.getWidth(),Scroll.getHeight());
                     kas2.setModal(true);
                     kas2.setAlwaysOnTop(true);
                     kas2.setLocationRelativeTo(Scroll);
@@ -360,7 +360,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     grafiksql2 kas3=new grafiksql2("Grafik Pegawai Per Jenjang Jabatan",
                        "select concat(jnj_jabatan.nama,'(',jnj_jabatan.kode,')'),count(jnj_jabatan.kode) as jumlah from pegawai inner join jnj_jabatan "+
                        "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.jk='Wanita' and (pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI') group by jnj_jabatan.kode","Jenjang Jabatan");
-                    kas3.setSize(Scroll.getWidth(),Scroll.getHeight());  
+                    kas3.setSize(Scroll.getWidth(),Scroll.getHeight());
                     kas3.setModal(true);
                     kas3.setAlwaysOnTop(true);
                     kas3.setLocationRelativeTo(Scroll);
@@ -368,7 +368,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                     break;
             }
         } catch (Exception e) {
-        }       
+        }
     }//GEN-LAST:event_BtnPrint4ActionPerformed
 
     private void BtnPrint4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint4KeyPressed
@@ -381,7 +381,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
             switch (pilihan) {
                 case "Jumlah Pegawai":
                     DefaultPieDataset dpd = new DefaultPieDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select jnj_jabatan.kode,count(jnj_jabatan.kode) as jumlah,jnj_jabatan.nama from pegawai inner join jnj_jabatan "+
                            "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI' group by jnj_jabatan.kode").executeQuery();
                         while(rs.next()) {
@@ -393,20 +393,20 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
-                    } 
+                    }
 
-                    JFreeChart freeChart = ChartFactory.createPieChart("Grafik Pegawai Per Jenjang Jabatan",dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+                    JFreeChart freeChart = ChartFactory.createPieChart("Grafik Pegawai Per Jenjang Jabatan",dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
                     ChartFrame cf = new ChartFrame("Grafik Pegawai Per Jenjang Jabatan",freeChart);
-                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf.setLocationRelativeTo(Scroll);
                     cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf.setAlwaysOnTop(true);
                     cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf.setVisible(true);  
+                    cf.setVisible(true);
                     break;
                 case "Jumlah Pegawai Laki-Laki":
                     DefaultPieDataset dpd2 = new DefaultPieDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select jnj_jabatan.kode,count(jnj_jabatan.kode) as jumlah,jnj_jabatan.nama from pegawai inner join jnj_jabatan "+
                            "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.jk='Pria' and (pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI') group by jnj_jabatan.kode").executeQuery();
                         while(rs.next()) {
@@ -418,20 +418,20 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
-                    } 
+                    }
 
-                    JFreeChart freeChart2 = ChartFactory.createPieChart("Grafik Pegawai Per Jenjang Jabatan",dpd2,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+                    JFreeChart freeChart2 = ChartFactory.createPieChart("Grafik Pegawai Per Jenjang Jabatan",dpd2,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
                     ChartFrame cf2 = new ChartFrame("Grafik Pegawai Per Jenjang Jabatan",freeChart2);
-                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf2.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf2.setLocationRelativeTo(Scroll);
                     cf2.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf2.setAlwaysOnTop(true);
                     cf2.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf2.setVisible(true);  
+                    cf2.setVisible(true);
                     break;
                 case "Jumlah Pegawai Perempuan":
                     DefaultPieDataset dpd3 = new DefaultPieDataset();
-                    try {                
+                    try {
                         rs = koneksi.prepareStatement("select jnj_jabatan.kode,count(jnj_jabatan.kode) as jumlah,jnj_jabatan.nama from pegawai inner join jnj_jabatan "+
                            "on jnj_jabatan.kode=pegawai.jnj_jabatan where pegawai.jk='Wanita' and (pegawai.stts_aktif='AKTIF' or pegawai.stts_aktif='CUTI') group by jnj_jabatan.kode").executeQuery();
                         while(rs.next()) {
@@ -443,16 +443,16 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : " + e);
-                    } 
+                    }
 
-                    JFreeChart freeChart3 = ChartFactory.createPieChart("Grafik Pegawai Per Jenjang Jabatan",dpd3,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+                    JFreeChart freeChart3 = ChartFactory.createPieChart("Grafik Pegawai Per Jenjang Jabatan",dpd3,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
                     ChartFrame cf3 = new ChartFrame("Grafik Pegawai Per Jenjang Jabatan",freeChart3);
-                    cf3.setSize(Scroll.getWidth(),Scroll.getHeight());   
+                    cf3.setSize(Scroll.getWidth(),Scroll.getHeight());
                     cf3.setLocationRelativeTo(Scroll);
                     cf3.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
                     cf3.setAlwaysOnTop(true);
                     cf3.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-                    cf3.setVisible(true);  
+                    cf3.setVisible(true);
                     break;
             }
         } catch (Exception e) {
@@ -548,7 +548,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                 }
                 if(tabMode.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total+"","100 %",totall+"","100 %",totalp+"","100 %"});
-                    for(i=0;i<tbBangsal.getRowCount();i++){ 
+                    for(i=0;i<tbBangsal.getRowCount();i++){
                         tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);
                         tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,3).toString())/totall)*100)+" %",i,4);
                         tbBangsal.setValueAt(Math.round((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())/totalp)*100)+" %",i,6);
@@ -563,7 +563,7 @@ public class GrafikPegawaiPerJenjangJabatan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }

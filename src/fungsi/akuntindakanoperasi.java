@@ -14,7 +14,7 @@ public final class akuntindakanoperasi {
             Beban_Jasa_Medik_Paramedis_Operasi_Ranap="",Utang_Jasa_Medik_Paramedis_Operasi_Ranap="",HPP_Obat_Operasi_Ranap="",Persediaan_Obat_Kamar_Operasi_Ranap="",
             Suspen_Piutang_Operasi_Ralan="",Operasi_Ralan="",Beban_Jasa_Medik_Dokter_Operasi_Ralan="",Utang_Jasa_Medik_Dokter_Operasi_Ralan="",
             Beban_Jasa_Medik_Paramedis_Operasi_Ralan="",Utang_Jasa_Medik_Paramedis_Operasi_Ralan="",HPP_Obat_Operasi_Ralan="",Persediaan_Obat_Kamar_Operasi_Ralan="";
-    
+
     public static void SetAkunTindakanOperasi() {
         try (
             PreparedStatement ps = koneksi.prepareStatement(
@@ -38,7 +38,7 @@ public final class akuntindakanoperasi {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
             PreparedStatement ps = koneksi.prepareStatement(
                 "select set_akun_ranap.Suspen_Piutang_Operasi_Ranap,set_akun_ranap.Operasi_Ranap,set_akun_ranap.Beban_Jasa_Medik_Dokter_Operasi_Ranap,"+
@@ -59,7 +59,7 @@ public final class akuntindakanoperasi {
         } catch (Exception e) {
             System.out.println("Notif Rekening : "+e);
         }
-        
+
         try (
                 PreparedStatement ps = koneksi.prepareStatement(
                     "select set_akun_ranap2.Persediaan_Obat_Kamar_Operasi_Ranap from set_akun_ranap2"
@@ -73,7 +73,7 @@ public final class akuntindakanoperasi {
             System.out.println("Notif Rekening : "+e);
         }
     }
-    
+
     public static String getSuspen_Piutang_Operasi_Ranap(){return akuntindakanoperasi.Suspen_Piutang_Operasi_Ranap;}
     public static String getOperasi_Ranap(){return akuntindakanoperasi.Operasi_Ranap;}
     public static String getBeban_Jasa_Medik_Dokter_Operasi_Ranap(){return akuntindakanoperasi.Beban_Jasa_Medik_Dokter_Operasi_Ranap;}

@@ -1,25 +1,25 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
 
 package bridging;
 
-import java.awt.Dimension;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.validasi;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.validasi;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.ExecutorService;
@@ -65,14 +65,14 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
     private JsonNode response;
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
- 
+
     private final JLabel lblStatus = new JLabel();
 
     private final JTextField txtURL = new JTextField();
     private final JProgressBar progressBar = new JProgressBar();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-        
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -80,35 +80,35 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         initComponents2();
-        
+
         this.setLocation(10,2);
         setSize(628,674);
 
-        
+
         NoKartu.setDocument(new batasInput((int)100).getKata(NoKartu));
         KdDPJPLayanan.setDocument(new batasInput((int)100).getKata(KdDPJPLayanan));
-        
+
         try {
             link=koneksiDB.URLAPIICARE();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
     }
-    
-    private void initComponents2() {           
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             loadURL(txtURL.getText());
         });
-  
+
         progressBar.setPreferredSize(new Dimension(150, 18));
         progressBar.setStringPainted(true);
-        
+
         PanelContent.add(jfxPanel, BorderLayout.CENTER);
-        
-        internalFrame1.add(PanelContent);        
+
+        internalFrame1.add(PanelContent);
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -322,31 +322,31 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                     System.out.println("Notifikasi : "+ex);
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex.getMessage());
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    } 
-    
+    }
+
     public void setPasien(String param,String kodedokter){
         NoKartu.setText(param);
         KdDPJPLayanan.setText(kodedokter);
         runBackground(() ->tampil());
     }
-    
-    private void createScene() {        
+
+    private void createScene() {
         Platform.runLater(new Runnable() {
 
             public void run() {
                 WebView view = new WebView();
-                
+
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
-                
+
                 engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -354,27 +354,27 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         ICareRiwayatPerawatan.this.setTitle(newValue);
                     });
                 });
-                
-                
+
+
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
+
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -388,14 +388,14 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                         });
                     }
                 });
-                
-                
+
+
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 engine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
                     @Override
                     public void changed(ObservableValue ov, State oldState, State newState) {
@@ -405,34 +405,34 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
- 
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             try {
                 engine.load(url);
             }catch (Exception exception) {
                 engine.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
- 
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -458,7 +458,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

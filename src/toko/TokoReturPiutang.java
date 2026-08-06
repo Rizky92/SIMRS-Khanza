@@ -2,11 +2,11 @@ package toko;
 
 
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -108,10 +108,10 @@ public class TokoReturPiutang extends javax.swing.JDialog {
 
         NoRetur.setDocument(new batasInput((byte)20).getKata(NoRetur));
         kdmem.setDocument(new batasInput((byte)5).getKata(kdmem));
-        kdptg.setDocument(new batasInput((byte)25).getKata(kdptg)); 
-        Catatan.setDocument(new batasInput((int)40).getKata(Catatan));         
+        kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
+        Catatan.setDocument(new batasInput((int)40).getKata(Catatan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         try {
             hpptoko=koneksiDB.HPPTOKO();
         } catch (Exception e) {
@@ -482,7 +482,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
 private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){ 
+            for(i=0;i<tbDokter.getRowCount();i++){
                 tbDokter.setValueAt("",i,0);
                 tbDokter.setValueAt(0,i,5);
             }
@@ -491,9 +491,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
         if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                try {                  
-                   if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)){                       
-                        getData();  
+                try {
+                   if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)){
+                        getData();
                         TCari.setText("");
                         TCari.requestFocus();
                    }
@@ -517,13 +517,13 @@ private void NoReturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_N
 
 private void kdmemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdmemKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama_member from tokomember where kode_member=?", nmmem,kdmem.getText());           
+            Sequel.cariIsi("select nama_member from tokomember where kode_member=?", nmmem,kdmem.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama_member from tokomember where kode_member=?", nmmem,kdmem.getText());
             NoRetur.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama_member from tokomember where kode_member=?", nmmem,kdmem.getText());
-            kdptg.requestFocus(); 
+            kdptg.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnSuplierActionPerformed(null);
         }
@@ -533,7 +533,7 @@ private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdp
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kdmem.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            BtnSimpan.requestFocus();  
+            BtnSimpan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }
@@ -548,10 +548,10 @@ private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(member.getTable().getSelectedRow()!= -1){                   
+                if(member.getTable().getSelectedRow()!= -1){
                     kdmem.setText(member.getTable().getValueAt(member.getTable().getSelectedRow(),0).toString());
                     nmmem.setText(member.getTable().getValueAt(member.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdmem.requestFocus();
             }
             @Override
@@ -563,7 +563,7 @@ private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         member.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -575,7 +575,7 @@ private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         member.emptTeks();
         member.isCek();
         member.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -593,10 +593,10 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdptg.requestFocus();
             }
             @Override
@@ -755,7 +755,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                     for(i=0;i<jml;i++){
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                             if(Sequel.menyimpantf2("toko_detail_returpiutang","?,?,?,?,?,?,?,?","Transaksi Retur Piutang",8,new String[]{
-                                NoRetur.getText(),tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(), 
+                                NoRetur.getText(),tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
                                 tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString()
                             })==true){
                                 Trackbarang.catatRiwayat(tbDokter.getValueAt(i,1).toString(),Valid.SetAngka(tbDokter.getValueAt(i,0).toString()),0,"Retur Piutang", akses.getkode(),"Simpan");
@@ -870,9 +870,9 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 }
             } catch (Exception e) {
                 jml=jml+0;
-            } 
+            }
         }
-        
+
         kodebarang=new String[jml];
         namabarang=new String[jml];
         satuan=new String[jml];
@@ -882,8 +882,8 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         jmltotal=new double[jml];
         dasar=new double[jml];
         stok=new double[jml];
-        
-        index=0;        
+
+        index=0;
         for(i=0;i<row;i++){
             try {
                 if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
@@ -910,17 +910,17 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                     "select tokobarang.kode_brng,tokobarang.nama_brng,tokobarang.kode_sat,tokobarang."+hpptoko+" as dasar,tokobarang.stok "+
                     " from tokobarang where tokobarang.status='1' "+(TCari.getText().trim().equals("")?"":" and (tokobarang.kode_brng like ? or "+
                     " tokobarang.nama_brng like ? or tokobarang.jenis like ?)")+" order by tokobarang.nama_brng");
-            try{   
+            try{
                 if(!TCari.getText().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{"",rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("kode_sat"),rs.getDouble("dasar"),0,"",rs.getDouble("stok"),rs.getDouble("dasar")});
-                }   
+                }
             }catch(Exception e){
                 System.out.println(e);
             }finally{
@@ -930,11 +930,11 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 if(ps!=null){
                     ps.close();
                 }
-            }              
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
 
     private void getData(){
@@ -951,31 +951,31 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                             tbDokter.requestFocus();
                         }else{
-                            tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,4).toString()), row,5);  
+                            tbDokter.setValueAt(Double.parseDouble(tbDokter.getValueAt(row,0).toString())*Double.parseDouble(tbDokter.getValueAt(row,4).toString()), row,5);
                         }
                     } catch (Exception e) {
-                        tbDokter.setValueAt(0,row,5); 
+                        tbDokter.setValueAt(0,row,5);
                     }
                 }
             }else{
-                tbDokter.setValueAt(0,row,5);   
-            }             
+                tbDokter.setValueAt(0,row,5);
+            }
         }
         ttl=0;
         y=0;
-        
+
         jml=tbDokter.getRowCount();
-        for(i=0;i<jml;i++){                    
+        for(i=0;i<jml;i++){
             try {
-                y=Double.parseDouble(tbDokter.getValueAt(i,5).toString());                
+                y=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
             }catch (Exception e) {
-                y=0;                
+                y=0;
             }
             ttl=ttl+y;
         }
         LTotal.setText(Valid.SetAngka(ttl));
     }
-    
+
     public void isCek(){
         autoNomor();
         TCari.requestFocus();
@@ -986,13 +986,13 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             BtnSimpan.setEnabled(akses.gettoko_retur_piutang());
             BtnTambah.setEnabled(akses.gettoko_barang());
             nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
-        }        
+        }
     }
-    
+
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_retur_piutang,3),signed)),0) from tokoreturpiutang where tgl_retur='"+Valid.SetTgl(TglRetur.getSelectedItem()+"")+"'","TRP"+TglRetur.getSelectedItem().toString().substring(6,10)+TglRetur.getSelectedItem().toString().substring(3,5)+TglRetur.getSelectedItem().toString().substring(0,2),3,NoRetur); 
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_retur_piutang,3),signed)),0) from tokoreturpiutang where tgl_retur='"+Valid.SetTgl(TglRetur.getSelectedItem()+"")+"'","TRP"+TglRetur.getSelectedItem().toString().substring(6,10)+TglRetur.getSelectedItem().toString().substring(3,5)+TglRetur.getSelectedItem().toString().substring(0,2),3,NoRetur);
     }
- 
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1018,7 +1018,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

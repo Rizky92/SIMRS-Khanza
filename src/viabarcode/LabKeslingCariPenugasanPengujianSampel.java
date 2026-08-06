@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -18,8 +18,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -27,12 +33,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 
 public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog {
     private final DefaultTableModel tabModePenugasan,tabModeDetailPenugasan,tabModeRekapPenugasan;
@@ -95,7 +95,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             }
         }
         tbPenugasan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailPenugasan=new DefaultTableModel(null,new Object[]{
                 "Kode","Nama Parameter","Metode Pengujian","Satuan","Kategori","Nilai Normal"
             }){
@@ -121,7 +121,7 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             }
         }
         tbDetailPenugasan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRekapPenugasan=new DefaultTableModel(null,new Object[]{
                 "Tgl.Penugasan","No.Penugasan","NIP PJ","Nama PJ","NIP Analis","Nama Analis","No.Permintaan","No.Pelanggan","Nama Pelanggan","Kode Sampel",
                 "Nama Sampel","Status Hasil","Catatan","Kode Param","Nama Parameter","Metode Pengujian","Satuan","Kategori","Nilai Normal"
@@ -176,14 +176,14 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
             }
         }
         tbRekapPenugasan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoPermintaan.setDocument(new batasInput((byte)20).getKata(NoPermintaan));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         ChkAccor.setSelected(false);
         PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-        scrollPaneDetail.setVisible(false); 
-        
+        scrollPaneDetail.setVisible(false);
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -701,12 +701,12 @@ public class LabKeslingCariPenugasanPengujianSampel extends javax.swing.JDialog 
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,KodePelanggan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -724,10 +724,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KodePetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPetugas.requestFocus();
             }
             @Override
@@ -738,7 +738,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -762,7 +762,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(pelanggan.getTable().getSelectedRow()!= -1){
                     KodePelanggan.setText(pelanggan.getTable().getValueAt(pelanggan.getTable().getSelectedRow(),0).toString());
                     NamaPelanggan.setText(pelanggan.getTable().getValueAt(pelanggan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPelanggan.requestFocus();
             }
             @Override
@@ -774,7 +774,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pelanggan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -782,7 +782,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pelanggan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -854,7 +854,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }else if(tabModePenugasan.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -869,7 +869,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -917,8 +917,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataPenugasanPengujianSampel.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataPenugasanPengujianSampel.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -927,12 +927,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -977,8 +977,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataPenugasanPengujianSampel.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataPenugasanPengujianSampel.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -987,29 +987,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModePenugasan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbPenugasan.getValueAt(i,12).toString()).append("\"\n");
                                 }
-                                f = new File("DataPenugasanPengujianSampel.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataPenugasanPengujianSampel.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -1022,7 +1022,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }else if(tabModeRekapPenugasan.getRowCount()!=0){
                 try{
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1037,7 +1037,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     );
                     bg.close();
 
-                    File f;            
+                    File f;
                     BufferedWriter bw;
                     StringBuilder htmlContent;
 
@@ -1097,8 +1097,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapPenugasanPengujianSampel.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapPenugasanPengujianSampel.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1107,12 +1107,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
@@ -1169,8 +1169,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "</html>"
                                 );
 
-                                f = new File("DataRekapPenugasanPengujianSampel.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapPenugasanPengujianSampel.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                             "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1179,29 +1179,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DATA REKAP PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+        
+                                                        "<font size='2' face='Tahoma'>DATA REKAP PENUGASAN PENGUJIAN SAMPEL<br><br></font>"+
                                                     "</td>"+
                                                "</tr>"+
                                             "</table>")
                                 );
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"Tgl.Penugasan\";\"No.Penugasan\";\"NIP PJ\";\"Nama PJ\";\"NIP Analis\";\"Nama Analis\";\"No.Permintaan\";\"No.Pelanggan\";\"Nama Pelanggan\";\"Kode Sampel\";\"Nama Sampel\";\"Status Hasil\";\"Catatan\";\"Kode Param\";\"Nama Parameter\";\"Metode Pengujian\";\"Satuan\";\"Kategori\";\"Nilai Normal\"\n"
-                                ); 
+                                );
                                 for (int i = 0; i < tabModeRekapPenugasan.getRowCount(); i++) {
                                     htmlContent.append("\"").append(tbRekapPenugasan.getValueAt(i,0).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,1).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,2).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,3).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,4).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,5).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,6).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,7).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,8).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,9).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,10).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,11).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,12).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,13).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,14).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,15).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,16).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,17).toString()).append("\";\"").append(tbRekapPenugasan.getValueAt(i,18).toString()).append("\"\n");
                                 }
-                                f = new File("DataRekapPenugasanPengujianSampel.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("DataRekapPenugasanPengujianSampel.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }   
+                            break;
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -1230,7 +1230,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(sampel.getTable().getSelectedRow()!= -1){
                     KodeSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),0).toString());
                     NamaSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnSampel.requestFocus();
             }
             @Override
@@ -1242,7 +1242,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         sampel.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1250,7 +1250,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     sampel.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -1265,7 +1265,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(tbPenugasan.getSelectedRow()!= -1){
             if(ChkAccor.isSelected()==true){
                 if(akses.getkode().equals("Admin Utama")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         file=new File("./cache/hasilpengujiansampellabkesling.iyem");
                         file.createNewFile();
@@ -1318,7 +1318,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
                     if(akses.getkode().equals(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),4).toString())){
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         try {
                             file=new File("./cache/hasilpengujiansampellabkesling.iyem");
                             file.createNewFile();
@@ -1394,7 +1394,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(ChkAccor.isSelected()==true){
                 ChkAccor.setVisible(false);
                 PanelAccor.setPreferredSize(new Dimension(670,HEIGHT));
-                scrollPaneDetail.setVisible(true);  
+                scrollPaneDetail.setVisible(true);
                 ChkAccor.setVisible(true);
                 Valid.tabelKosong(tabModeDetailPenugasan);
                 try {
@@ -1413,7 +1413,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             tabModeDetailPenugasan.addRow(new Object[]{
                                 rs.getString("kode_parameter"),rs.getString("nama_parameter"),rs.getString("metode_pengujian"),rs.getString("satuan"),rs.getString("kategori"),rs.getString("nilai_normal")
                             });
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println(e);
                     } finally{
@@ -1427,10 +1427,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
                 }
-            }else if(ChkAccor.isSelected()==false){    
+            }else if(ChkAccor.isSelected()==false){
                 ChkAccor.setVisible(false);
                 PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-                scrollPaneDetail.setVisible(false);  
+                scrollPaneDetail.setVisible(false);
                 ChkAccor.setVisible(true);
             }
         }else{
@@ -1451,10 +1451,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(tbDetailPenugasan.getRowCount()!=0){
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Sequel.queryu("delete from temporary");
-                    for(i=0;i<tbDetailPenugasan.getRowCount();i++){ 
+                    for(i=0;i<tbDetailPenugasan.getRowCount();i++){
                         Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
                             "0",tbDetailPenugasan.getValueAt(i,0).toString(),tbDetailPenugasan.getValueAt(i,1).toString(),tbDetailPenugasan.getValueAt(i,2).toString(),tbDetailPenugasan.getValueAt(i,4).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
-                        });               
+                        });
                     }
                     //"Tgl.Penugasan"0,"No.Penugasan"1,"NIP PJ"2,"Nama PJ"3,"NIP Analis"4,"Nama Analis"5,"No.Permintaan"6,"No.Pelanggan"7,"Nama Pelanggan"8,"Kode Sampel"9,"Nama Sampel"10,"Status Hasil"11,"Catatan"12
                     Map<String, Object> param = new HashMap<>();
@@ -1471,11 +1471,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),2).toString());
-                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),3).toString()+"\nID "+(finger.equals("")?tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),2).toString():finger)+"\n"+Valid.SetTgl3(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),0).toString())); 
-                    Valid.MyReport("rptPenugasanPengujianSampelLaboratKesling.jasper","report","::[ Penugasan Pengujian Sampel Laborat Kesehatan Lingkungan ]::",param);       
+                    param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),3).toString()+"\nID "+(finger.equals("")?tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),2).toString():finger)+"\n"+Valid.SetTgl3(tbPenugasan.getValueAt(tbPenugasan.getSelectedRow(),0).toString()));
+                    Valid.MyReport("rptPenugasanPengujianSampelLaboratKesling.jasper","report","::[ Penugasan Pengujian Sampel Laborat Kesehatan Lingkungan ]::",param);
                     this.setCursor(Cursor.getDefaultCursor());
                 }else{
                     JOptionPane.showMessageDialog(null,"Silahkan tampilkan data detail penugasan terlebih dahulu...!!!");
@@ -1549,7 +1549,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        }  
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1621,7 +1621,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabModePenugasan);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                         "select labkesling_penugasan_pengujian_sampel.tanggal,labkesling_penugasan_pengujian_sampel.no_penugasan,labkesling_penugasan_pengujian_sampel.nip_pj,"+
                         "pjlab.nama as namapj,labkesling_penugasan_pengujian_sampel.nip_pelaksana,pelaksana.nama as namapelaksana,labkesling_penugasan_pengujian_sampel.no_permintaan,"+
@@ -1640,7 +1640,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         (TCari.getText().trim().equals("")?"":" and (labkesling_penugasan_pengujian_sampel.no_penugasan like ? or labkesling_penugasan_pengujian_sampel.catatan like ? or "+
                         "labkesling_penugasan_pengujian_sampel.nip_pj like ? or pjlab.nama like ?) ")+
                         "order by labkesling_penugasan_pengujian_sampel.tanggal,labkesling_penugasan_pengujian_sampel.no_permintaan,labkesling_penugasan_pengujian_sampel.no_penugasan");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -1650,15 +1650,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModePenugasan.addRow(new Object[]{
                         rs.getString("tanggal"),rs.getString("no_penugasan"),rs.getString("nip_pj"),rs.getString("namapj"),rs.getString("nip_pelaksana"),rs.getString("namapelaksana"),
                         rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),
                         rs.getString("catatan")
-                    }); 
-                }        
+                    });
+                }
                 LTotal.setText(tabModePenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
@@ -1669,15 +1669,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabModeRekapPenugasan);
-        try{  
+        try{
             ps=koneksi.prepareStatement(
                         "select labkesling_penugasan_pengujian_sampel.tanggal,labkesling_penugasan_pengujian_sampel.no_penugasan,labkesling_penugasan_pengujian_sampel.nip_pj,"+
                         "pjlab.nama as namapj,labkesling_penugasan_pengujian_sampel.nip_pelaksana,pelaksana.nama as namapelaksana,labkesling_penugasan_pengujian_sampel.no_permintaan,"+
@@ -1703,7 +1703,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "labkesling_penugasan_pengujian_sampel.nip_pj like ? or pjlab.nama like ? or labkesling_detail_penugasan_pengujian_sampel.kode_parameter like ? or "+
                         "labkesling_parameter_pengujian.nama_parameter like ? or labkesling_parameter_pengujian.metode_pengujian like ? or labkesling_parameter_pengujian.kategori like ?) ")+
                         "order by labkesling_penugasan_pengujian_sampel.tanggal,labkesling_penugasan_pengujian_sampel.no_permintaan,labkesling_penugasan_pengujian_sampel.no_penugasan");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(Tanggal2.getSelectedItem()+"")+" 23:59:59");
@@ -1717,7 +1717,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeRekapPenugasan.addRow(new Object[]{
@@ -1725,8 +1725,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("status"),
                         rs.getString("catatan"),rs.getString("kode_parameter"),rs.getString("nama_parameter"),rs.getString("metode_pengujian"),rs.getString("satuan"),rs.getString("kategori"),
                         rs.getString("nilai_normal")
-                    }); 
-                }        
+                    });
+                }
                 LTotal.setText(tabModeRekapPenugasan.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
@@ -1737,12 +1737,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         BtnPrint.setEnabled(akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan());
@@ -1750,7 +1750,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         ppSuratPenugasan.setEnabled(akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan());
         BtnHapus.setEnabled(akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1776,7 +1776,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

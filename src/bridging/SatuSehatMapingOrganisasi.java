@@ -7,11 +7,11 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -47,7 +47,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private String link="",json="";
     private ApiSatuSehat api=new ApiSatuSehat();
@@ -90,15 +90,15 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        KodeDepartemen.setDocument(new batasInput((byte)5).getKata(KodeDepartemen)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));        
-        
+        KodeDepartemen.setDocument(new batasInput((byte)5).getKata(KodeDepartemen));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         try {
             link=koneksiDB.URLFHIRSATUSEHAT();
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }  
-    
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -407,7 +407,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     KodeDepartemen.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NamaDepartemen.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -421,14 +421,14 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
 }//GEN-LAST:event_btnDepartemenRSActionPerformed
 
     private void btnDepartemenRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDepartemenRSKeyPressed
-        
+
 }//GEN-LAST:event_btnDepartemenRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -536,11 +536,11 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                } 
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi Bridging : "+e);
                 JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-            }               
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -663,12 +663,12 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }  
-            }                
+                }
+            }
         }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -786,12 +786,12 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
-                }  
-            }                
+                }
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -818,17 +818,17 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingOrganisasiSatuSehat.jasper","report","::[ Mapping Departemen/Organisasi Satu Sehat Kemenkes ]::",param);            
+                Valid.MyReport("rptMapingOrganisasiSatuSehat.jasper","report","::[ Mapping Departemen/Organisasi Satu Sehat Kemenkes ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -910,7 +910,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
@@ -1014,18 +1014,18 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
            NamaDepartemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_departemen());
         BtnHapus.setEnabled(akses.getsatu_sehat_mapping_departemen());
         BtnEdit.setEnabled(akses.getsatu_sehat_mapping_departemen());
         BtnPrint.setEnabled(akses.getsatu_sehat_mapping_departemen());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }  
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1051,7 +1051,7 @@ public final class SatuSehatMapingOrganisasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

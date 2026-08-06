@@ -1,9 +1,9 @@
 <?php
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  $tanggal= mktime(date("m"),date("d"),date("Y"));
@@ -41,7 +41,7 @@
      </noscript>
      <?php
 		$setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-		echo "   
+		echo "
 		   <table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>
 			  <tr>
 				<td  width='10%' align='right' valign='center'>
@@ -51,20 +51,20 @@
 				   <center>
 					  <font size='7' color='#AA00AA' face='Tahoma'>".$setting["nama_instansi"]."</font><br>
 					  <font size='5' color='#AA00AA' face='Tahoma'>
-						  ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br>   
-					  </font> 
+						  ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br>
+					  </font>
 					  <font size='5' color='#AAAA00' face='Tahoma' >".date("d-M-Y", $tanggal)."  ". $jam."</font>
 					  <br><br>
 				   </center>
-				</td>   
+				</td>
 				<td  width='10%' align='left'>
 					&nbsp;
-				</td>  
+				</td>
 				<td  width='10%' align='left' valign='top'>
 					<img width='180' height='130' src='header-kanan.jpg'/>
-				</td>                                                          
+				</td>
 			 </tr>
-		  </table> "; 
+		  </table> ";
 	?>
 	<table width='100%' bgcolor='FFFFFF' border='0' align='center' cellpadding='0' cellspacing='0'>
 	     <tr class='head5'>
@@ -79,7 +79,7 @@
               <td width='15%'><div align='center'><font size='5'><b>JAM SELESAI</b></font></div></td>
          </tr>
 
-	<?php  
+	<?php
 	    $hari=getOne("select DAYNAME(current_date())");
 	    $namahari="";
 	    if($hari=="Sunday"){
@@ -97,9 +97,9 @@
 		}else if($hari=="Saturday"){
 			$namahari="SABTU";
 		}
-		$_sql="Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai 
-				from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter 
-				and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'" ;  
+		$_sql="Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai
+				from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter
+				and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'" ;
 		$hasil=bukaquery($_sql);
 
 		while ($data = mysqli_fetch_array ($hasil)){

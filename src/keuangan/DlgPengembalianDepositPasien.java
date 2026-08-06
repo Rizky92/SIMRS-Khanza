@@ -11,11 +11,11 @@
 
 package keuangan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -24,15 +24,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.event.DocumentEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -98,9 +98,9 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
         Tabel.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         User.setDocument(new batasInput((byte)100).getKata(User));
-    }    
-    
-     
+    }
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -381,24 +381,24 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary_payment");
-            for(int r=0;r<tabMode.getRowCount();r++){  
+            for(int r=0;r<tabMode.getRowCount();r++){
                 Sequel.menyimpan("temporary_payment","'0',?,?,?,?,?,?,?,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''",7,new String[]{
                     tabMode.getValueAt(r,0).toString(),tabMode.getValueAt(r,1).toString(),tabMode.getValueAt(r,2).toString(),tabMode.getValueAt(r,3).toString(),
-                    tabMode.getValueAt(r,4).toString(),Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString())),tabMode.getValueAt(r,6).toString()                    
+                    tabMode.getValueAt(r,4).toString(),Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString())),tabMode.getValueAt(r,6).toString()
                 });
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());  
-            param.put("periode",Tgl1.getSelectedItem()+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+" "+CmbJam2.getSelectedItem()+":"+CmbMenit2.getSelectedItem()+":"+CmbDetik2.getSelectedItem());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+" "+CmbJam2.getSelectedItem()+":"+CmbMenit2.getSelectedItem()+":"+CmbDetik2.getSelectedItem());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReport("rptPengembalianDepositPasien.jasper","report","::[ Pengembalian Deposit Pasien ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -516,7 +516,7 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
                     }
                 }
             });
-            
+
             User.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -537,7 +537,7 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -586,9 +586,9 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Valid.tabelKosong(tabMode);
-        try{        
+        try{
             ps= koneksi.prepareStatement(
                 "select pengembalian_deposit.tanggal,pengembalian_deposit.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pengembalian_deposit.besar_pengembalian,pengembalian_deposit.petugas from pengembalian_deposit "+
                 "inner join reg_periksa on reg_periksa.no_rawat=pengembalian_deposit.no_rawat inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
@@ -613,7 +613,7 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
                             i,rs.getString("tanggal"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDouble("besar_pengembalian"),petugas
                         });
                         i++;
-                    }                        
+                    }
                 }
                 if(all>0){
                     tabMode.addRow(new Object[]{
@@ -629,12 +629,12 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                       
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
-    }    
+    }
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
@@ -661,7 +661,7 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -12,11 +12,11 @@
 package inventory;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -46,11 +46,11 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;   
+    private int i=0;
     private double total,totalppn,totalsemua,obat,ppnobat,obatdibayar;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -96,7 +96,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
             }
         }
         tbPengadaan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new String[]{
                 "Tgl.Terima","No.Faktur","Suplier","Petugas","Total","PPN","Total+PPN"
             }){
@@ -170,7 +170,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
             }
         }
         tbRawatJalan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode4=new DefaultTableModel(null,new String[]{
                 "Tgl.Jual","No.Nota","Pasien","Petugas","Total","PPN","Total+PPN"
             }){
@@ -208,7 +208,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
             }
         }
         tbObatJualBebas.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode5=new DefaultTableModel(null,new String[]{
                 "Tgl.Nota","No.Nota","Nama Pasien","Total","PPN","Total+PPN"
             }){
@@ -244,7 +244,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
             }
         }
         tbRawatInap.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode6=new DefaultTableModel(null,new String[]{
                 "Tgl.Jual","No.Nota","Pasien","Petugas","Total","PPN","Total+PPN"
             }){
@@ -282,9 +282,9 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
             }
         }
         tbPiutangObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -533,15 +533,15 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(ceksukses==false){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
-            Map<String, Object> param = new HashMap<>();         
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem()); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem());
             if(TabRawat.getSelectedIndex()==0){
                 if(tabMode.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -578,7 +578,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                         " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
                         " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and pemesanan.nip like '%"+TCari.getText()+"%' or "+
                         " pemesanan.tgl_pesan between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and petugas.nama like '%"+TCari.getText()+"%' order by pemesanan.tgl_pesan,pemesanan.no_faktur ",param);
-                }                
+                }
             }else if(TabRawat.getSelectedIndex()==2){
                 if(tabMode3.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -586,7 +586,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                 }else if(tabMode3.getRowCount()!=0){
                     Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
 
-                    for(int r=0;r<tabMode3.getRowCount();r++){ 
+                    for(int r=0;r<tabMode3.getRowCount();r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
                                         tabMode3.getValueAt(r,0).toString()+"','"+
                                         tabMode3.getValueAt(r,1).toString()+"','"+
@@ -597,7 +597,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
 
                     Valid.MyReportqry("rptPPNRalan.jasper","report","::[ Laporan PPN Obat Ralan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-                }                
+                }
             }else if(TabRawat.getSelectedIndex()==3){
                 if(tabMode4.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -616,7 +616,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                         " penjualan.nip like '%"+TCari.getText()+"%' or "+
                         " petugas.nama like '%"+TCari.getText()+"%') ")+" group by penjualan.nota_jual "+
                         " order by penjualan.tgl_jual,penjualan.nota_jual ",param);
-                }                
+                }
             }else if(TabRawat.getSelectedIndex()==4){
                 if(tabMode5.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -624,7 +624,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                 }else if(tabMode5.getRowCount()!=0){
                     Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
 
-                    for(int r=0;r<tabMode5.getRowCount();r++){ 
+                    for(int r=0;r<tabMode5.getRowCount();r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+
                                         tabMode5.getValueAt(r,0).toString()+"','"+
                                         tabMode5.getValueAt(r,1).toString()+"','"+
@@ -635,7 +635,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     }
 
                     Valid.MyReportqry("rptPPNRanap.jasper","report","::[ Laporan PPN Obat Ranap ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-                }                
+                }
             }else if(TabRawat.getSelectedIndex()==5){
                 if(tabMode6.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -651,7 +651,7 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                         "piutang.no_rkm_medis like '%"+TCari.getText()+"%' or piutang.nm_pasien like '%"+TCari.getText()+"%' or "+
                         "piutang.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%') ")+
                         "group by piutang.nota_piutang order by piutang.tgl_piutang,piutang.nota_piutang ",param);
-                }                
+                }
             }
 
             this.setCursor(Cursor.getDefaultCursor());
@@ -696,7 +696,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             BtnCariActionPerformed(null);
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -890,7 +890,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbRawatJalan;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
+    public void tampil(){
         try {
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
@@ -938,13 +938,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
 
-    public void tampil2(){        
+    public void tampil2(){
         try {
             Valid.tabelKosong(tabMode2);
             ps=koneksi.prepareStatement(
@@ -992,13 +992,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
-    
-    public void tampil3(){        
+
+    public void tampil3(){
         try {
             Valid.tabelKosong(tabMode3);
             ps=koneksi.prepareStatement(
@@ -1045,13 +1045,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
-    
-    public void tampil4(){        
+
+    public void tampil4(){
         try {
             Valid.tabelKosong(tabMode4);
             ps=koneksi.prepareStatement(
@@ -1073,7 +1073,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 total=0;
                 totalppn=0;
@@ -1101,13 +1101,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
-    
-    public void tampil5(){        
+
+    public void tampil5(){
         try {
             Valid.tabelKosong(tabMode5);
             ps=koneksi.prepareStatement(
@@ -1154,13 +1154,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
-    
-    public void tampil6(){        
+
+    public void tampil6(){
         try {
             Valid.tabelKosong(tabMode6);
             ps=koneksi.prepareStatement(
@@ -1180,7 +1180,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 total=0;
                 totalppn=0;
@@ -1208,7 +1208,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
@@ -1239,7 +1239,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

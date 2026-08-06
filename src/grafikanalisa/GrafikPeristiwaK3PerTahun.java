@@ -56,7 +56,7 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
     public GrafikPeristiwaK3PerTahun(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{"Tahun Peristiwa","Jumlah Peristiwa K3 Per Tahun","Persentase K3 Per Tahun(%)"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -79,7 +79,7 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
         }
 
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -273,40 +273,40 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select year(k3rs_peristiwa.tgl_pelaporan),count(year(k3rs_peristiwa.tgl_pelaporan)) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' group by year(k3rs_peristiwa.tgl_pelaporan)").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Tahun","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),"Tahun","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Tahun",freeChart);
-        cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+        cf.setSize(Scroll.getWidth(),Scroll.getHeight());
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(Scroll);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint3ActionPerformed
 
     private void BtnPrint3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint3KeyPressed
-        
+
     }//GEN-LAST:event_BtnPrint3KeyPressed
 
     private void BtnKeluar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar3ActionPerformed
@@ -314,7 +314,7 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3ActionPerformed
 
     private void BtnKeluar3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar3KeyPressed
-        
+
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint4ActionPerformed
@@ -322,7 +322,7 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
                "select year(k3rs_peristiwa.tgl_pelaporan),count(year(k3rs_peristiwa.tgl_pelaporan)) as jumlah from k3rs_peristiwa "+
                "where tgl_pelaporan between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' "+
                "group by year(k3rs_peristiwa.tgl_pelaporan)","Tahun");
-       kas.setSize(Scroll.getWidth(),Scroll.getHeight());  
+       kas.setSize(Scroll.getWidth(),Scroll.getHeight());
        kas.setModal(true);
        kas.setAlwaysOnTop(true);
        kas.setLocationRelativeTo(Scroll);
@@ -335,28 +335,28 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
 
     private void BtnPrint5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint5ActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select year(k3rs_peristiwa.tgl_pelaporan),count(year(k3rs_peristiwa.tgl_pelaporan)) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' group by year(k3rs_peristiwa.tgl_pelaporan)").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(Tanggal2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Tahun",freeChart);
-        cf.setSize(Scroll.getWidth(),Scroll.getHeight());   
+        cf.setSize(Scroll.getWidth(),Scroll.getHeight());
         cf.setLocationRelativeTo(Scroll);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_BtnPrint5ActionPerformed
 
     private void BtnPrint5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint5KeyPressed
@@ -373,24 +373,24 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
-            Map<String, Object> param = new HashMap<>();         
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("periode","Periode "+Tanggal1.getSelectedItem()+" s.d. "+Tanggal2.getSelectedItem()); 
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));  
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode","Periode "+Tanggal1.getSelectedItem()+" s.d. "+Tanggal2.getSelectedItem());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.queryu("delete from temporary_grafik");
-            for(int r=0;r<tabMode.getRowCount();r++){ 
+            for(int r=0;r<tabMode.getRowCount();r++){
                     Sequel.menyimpan("temporary_grafik","'0','"+
                                     tabMode.getValueAt(r,0).toString()+"','"+
                                     tabMode.getValueAt(r,1).toString()+"','"+
                                     tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
             }
-               
+
             Valid.MyReport("rptPeristiwaK3PerTahun.jasper","report","::[ Laporan Jumlah Peristiwa K3 Per Tahun ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -444,7 +444,7 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
                 }
                 if(tabMode.getRowCount()>0){
                     tabMode.addRow(new Object[]{"Jumlah : ",total+"","100 %"});
-                    for(i=0;i<tbBangsal.getRowCount();i++){ 
+                    for(i=0;i<tbBangsal.getRowCount();i++){
                         tbBangsal.setValueAt(Valid.SetAngka6((Double.parseDouble(tbBangsal.getValueAt(i,1).toString())/total)*100)+" %",i,2);
                     }
                 }
@@ -457,7 +457,7 @@ public class GrafikPeristiwaK3PerTahun extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }

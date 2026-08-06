@@ -14,10 +14,10 @@ package laporan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -30,8 +30,8 @@ import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -91,7 +91,7 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -274,7 +274,7 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
         prosedur.setLocationRelativeTo(internalFrame1);
         prosedur.setAlwaysOnTop(false);
         prosedur.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());           
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -409,7 +409,7 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
                 fileWriter.write("{\"icd9\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -419,7 +419,7 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/icd9.iyem");
@@ -456,20 +456,20 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
+    }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnTambah.setEnabled(akses.geticd9());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -495,7 +495,7 @@ public final class DlgCariICD9 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -14,10 +14,10 @@ package inventory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -54,15 +54,15 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
     public DlgCariGolongan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        Object[] row={"Kode Golongan","Nama Golongan"};        
+
+        Object[] row={"Kode Golongan","Nama Golongan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -81,7 +81,7 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
 
 
     /** This method is called from within the constructor to
@@ -282,7 +282,7 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
             if(evt.getClickCount()==2){
                 dispose();
             }
-        }         
+        }
 }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -308,8 +308,8 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
         nama.setLocationRelativeTo(internalFrame1);
         nama.setAlwaysOnTop(false);
         nama.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -325,7 +325,7 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -383,12 +383,12 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
+        try{
             file=new File("./cache/golonganobat.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
-            
+
             ps=koneksi.prepareStatement("select * from golongan_barang order by golongan_barang.nama ");
             try {
                 rs=ps.executeQuery();
@@ -405,14 +405,14 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-            
+            }
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"golonganobat\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -422,7 +422,7 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/golonganobat.iyem");
@@ -468,11 +468,11 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getgolongan_barang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -498,7 +498,7 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

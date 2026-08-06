@@ -27,6 +27,6 @@ public class akseskamarinapralan {
             System.out.println("Notif Pengaturan Hak Akses Kamar Inap : "+e);
         }
     }
-    
+
     public static String getHakAksesDiRawatJalan(){return akseskamarinapralan.HakAksesDiRawatJalan;}
 }

@@ -11,11 +11,11 @@
 
 package setting;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -87,7 +87,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TKd.requestFocus();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -408,7 +408,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
                 emptTeks();
             }else{
                 TKd.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -456,7 +456,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
                 Sequel.mengedit("ruang_ok","kd_ruang_ok=?","nm_ruang_ok=?,kd_ruang_ok=?",3,new String[]{TNm.getText(),TKd.getText(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(), 0).toString()});
                 if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
                 emptTeks();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -488,14 +488,14 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptBangsal.jasper",param,"::[ Laporan Data Ruang Operasi ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -553,7 +553,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-           
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -563,7 +563,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
 
@@ -591,7 +591,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbBangsalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyReleased
@@ -669,7 +669,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -690,7 +690,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
             TNm.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -698,7 +698,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbBangsal;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getruang_ok());
         BtnEdit.setEnabled(akses.getruang_ok());
@@ -731,7 +731,7 @@ public final class DlgRuangOperasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
