@@ -271,7 +271,7 @@ public final class akses {
             surat_keterangan_berobat=false,surat_penolakan_resusitasi=false,catatan_observasi_ruang_ok=false,hasil_pemeriksaan_usg_abdomen=false,intervensi_nyeri_farmakologi=false,
             intervensi_nyeri_nonfarmakologi=false,surat_pengajuan_cuti_pasien=false,checklist_kriteria_masuk_isolasi=false,satu_sehat_mapping_kptl_tindakan_ralan=false,
             satu_sehat_mapping_kptl_tindakan_ranap=false,satu_sehat_mapping_kptl_tindakan_radiologi=false,satu_sehat_mapping_kptl_tindakan_laborat=false,satu_sehat_mapping_kptl_tindakan_operasi=false,
-            satu_sehat_mapping_kptl_tarif_kamar=false;
+            satu_sehat_mapping_kptl_tarif_kamar=false,checklist_kriteria_keluar_isolasi=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1551,6 +1551,7 @@ public final class akses {
                         akses.satu_sehat_mapping_kptl_tindakan_laborat=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_laborat");
                         akses.satu_sehat_mapping_kptl_tindakan_operasi=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_operasi");
                         akses.satu_sehat_mapping_kptl_tarif_kamar=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tarif_kamar");
+                        akses.checklist_kriteria_keluar_isolasi=akses.getBoolean(rs2, "checklist_kriteria_keluar_isolasi");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2822,6 +2823,7 @@ public final class akses {
         akses.satu_sehat_mapping_kptl_tindakan_laborat=isadmin;
         akses.satu_sehat_mapping_kptl_tindakan_operasi=isadmin;
         akses.satu_sehat_mapping_kptl_tarif_kamar=isadmin;
+        akses.checklist_kriteria_keluar_isolasi=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4095,6 +4097,7 @@ public final class akses {
     public static boolean getsatu_sehat_mapping_kptl_tindakan_laborat(){return akses.satu_sehat_mapping_kptl_tindakan_laborat;}
     public static boolean getsatu_sehat_mapping_kptl_tindakan_operasi(){return akses.satu_sehat_mapping_kptl_tindakan_operasi;}
     public static boolean getsatu_sehat_mapping_kptl_tarif_kamar(){return akses.satu_sehat_mapping_kptl_tarif_kamar;}
+    public static boolean getchecklist_kriteria_keluar_isolasi(){return akses.checklist_kriteria_keluar_isolasi;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
