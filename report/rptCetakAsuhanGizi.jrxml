@@ -1192,7 +1192,7 @@ inner join petugas on asuhan_gizi.nip=petugas.nip]]>
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Petugas Gizi]]></text>
+				<text><![CDATA[Nutrisionis/Dietisien]]></text>
 			</staticText>
 			<textField>
 				<reportElement mode="Transparent" x="380" y="789" width="174" height="11" uuid="dc0b10ac-e398-4706-954d-498f3412fae5">

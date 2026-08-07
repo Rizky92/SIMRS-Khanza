@@ -133,7 +133,7 @@
                     <td width="31%">Keterangan</td>
                     <td width="">:</td>
                     <td width="67%">
-                        <input name="ktg" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type="text" id="TxtIsi2" value="<?= $ktg ?>" size="40" maxlength="20" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <input name="ktg" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type="text" id="TxtIsi2" value="<?= $ktg ?>" size="40" maxlength="20" pattern="[a-zA-Z 0-9-]{1,20}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
                         <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
@@ -141,7 +141,7 @@
                     <td width="31%">Index Status</td>
                     <td width="">:</td>
                     <td width="67%">
-                        <input name="indek" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" type="text" id="TxtIsi3" value="<?= $indek ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <input name="indek" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" type="text" id="TxtIsi3" value="<?= $indek ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
                         <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
@@ -149,7 +149,7 @@
                     <td width="31%">Hak Cuti Tahunan</td>
                     <td width="">:</td>
                     <td width="67%">
-                        <input name="hakcuti" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type="text" id="TxtIsi4" value="<?= $hakcuti ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <input name="hakcuti" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type="text" id="TxtIsi4" value="<?= $hakcuti ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
                         <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
@@ -168,7 +168,7 @@
                     <td width="31%">Hak Cuti Besar</td>
                     <td width="">:</td>
                     <td width="67%">
-                        <input name="hakcuti_besar" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" type="text" id="TxtIsi5" value="<?= $hakcuti_besar ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <input name="hakcuti_besar" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" type="text" id="TxtIsi5" value="<?= $hakcuti_besar ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
                         <span id="MsgIsi5" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
@@ -178,23 +178,23 @@
                     <td width="67%">
                         <select name="izin" class="text3" style="width: 95%">
                             <option value=""></option>
-                            <option value="Tidak Ada" <?= $cuti_besar === 'Tidak Ada' ? 'selected' : '' ?>>Tidak Ada</option>
-                            <?php /* <option value="1 Bulan TMT" <?= $cuti_besar === '1 Bulan TMT' ? 'selected' : '' ?>>1 Bulan TMT Kerja</option> */ ?>
-                            <option value="3 Bulan TMT" <?= $cuti_besar === '3 Bulan TMT' ? 'selected' : '' ?>>3 Bulan TMT Kerja</option>
-                            <?php /* <option value="6 Bulan TMT" <?= $cuti_besar === '6 Bulan TMT' ? 'selected' : '' ?>>6 Bulan TMT Kerja</option> */ ?>
-                            <?php /* <option value="12 Bulan TMT" <?= $cuti_besar === '12 Bulan TMT' ? 'selected' : '' ?>>12 Bulan TMT Kerja</option> */ ?>
-                            <?php /* <option value="1 Bulan per Tahun" <?= $cuti_besar === '1 Bulan per Tahun' ? 'selected' : '' ?>>1 Bulan per Tahun Kerja</option> */ ?>
-                            <option value="3 Bulan per Tahun" <?= $cuti_besar === '3 Bulan per Tahun' ? 'selected' : '' ?>>3 Bulan per Tahun Kerja</option>
-                            <?php /* <option value="6 Bulan per Tahun" <?= $cuti_besar === '6 Bulan per Tahun' ? 'selected' : '' ?>>6 Bulan per Tahun Kerja</option> */ ?>
-                            <?php /* <option value="12 Bulan per Tahun" <?= $cuti_besar === '12 Bulan per Tahun' ? 'selected' : '' ?>>12 Bulan per Tahun Kerja</option> */ ?>
+                            <option value="Tidak Ada" <?= $izin === 'Tidak Ada' ? 'selected' : '' ?>>Tidak Ada</option>
+                            <?php /* <option value="1 Bulan TMT" <?= $izin === '1 Bulan TMT' ? 'selected' : '' ?>>1 Bulan TMT Kerja</option> */ ?>
+                            <option value="3 Bulan TMT" <?= $izin === '3 Bulan TMT' ? 'selected' : '' ?>>3 Bulan TMT Kerja</option>
+                            <?php /* <option value="6 Bulan TMT" <?= $izin === '6 Bulan TMT' ? 'selected' : '' ?>>6 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan TMT" <?= $izin === '12 Bulan TMT' ? 'selected' : '' ?>>12 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="1 Bulan per Tahun" <?= $izin === '1 Bulan per Tahun' ? 'selected' : '' ?>>1 Bulan per Tahun Kerja</option> */ ?>
+                            <option value="3 Bulan per Tahun" <?= $izin === '3 Bulan per Tahun' ? 'selected' : '' ?>>3 Bulan per Tahun Kerja</option>
+                            <?php /* <option value="6 Bulan per Tahun" <?= $izin === '6 Bulan per Tahun' ? 'selected' : '' ?>>6 Bulan per Tahun Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan per Tahun" <?= $izin === '12 Bulan per Tahun' ? 'selected' : '' ?>>12 Bulan per Tahun Kerja</option> */ ?>
                         </select>
                     </td>
                 </tr>
                 <tr class="head">
-                    <td width="31%">Hak Izin Kerja</td>
+                    <td width="31%">Hak Izin Kerja (per Kategori)</td>
                     <td width="">:</td>
                     <td width="67%">
-                        <input name="hakizin" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi7'));" type="text" id="TxtIsi5" value="<?= $hakizin ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <input name="hakizin" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi7'));" type="text" id="TxtIsi5" value="<?= $hakizin ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
                         <span id="MsgIsi7" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
@@ -202,7 +202,7 @@
                     <td width="31%">Maksimal Lama Izin Kerja (menit)</td>
                     <td width="">:</td>
                     <td width="67%">
-                        <input name="max_menit" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi8'));" type="text" id="TxtIsi5" value="<?= $max_menit ?>" size="10" maxlength="2" pattern="[a-zA-Z 0-9-]{1,4}" title=" a-z A-Z 0-9 (Maksimal 4 karakter)" autocomplete="off" required />
+                        <input name="max_menit" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi8'));" type="text" id="TxtIsi5" value="<?= $max_menit ?>" size="10" maxlength="4" pattern="[a-zA-Z 0-9-]{1,4}" title=" a-z A-Z 0-9 (Maksimal 4 karakter)" autocomplete="off" required />
                         <span id="MsgIsi8" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
