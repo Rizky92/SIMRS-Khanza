@@ -1253,7 +1253,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         "\"tglSep\": \"" + tglSEP.getText() + "\"," +
                         "\"jnsPelayanan\": \"2\"," +
                         "\"jnsPengajuan\": \"2\"," +
-                        "\"keterangan\": \"Pengajuan Validasi Biometrik SEP oleh Anjungan Pasien Mandiri " + instansiNama + ", Valbiom pasien error, sidik jari dan rekam wajah telah dilakukan tetapi tidak dapat terbaca oleh sistem, pasien berusia " + umurDaftar + " " + statusUmur + "\", " +
+                        "\"keterangan\": \"Pengajuan Validasi Biometrik SEP oleh Anjungan Pasien Mandiri " + instansiNama + ", validasi biometrik pasien error atau gagal, sidik jari dan rekam wajah telah dilakukan tetapi tidak dapat terbaca oleh sistem validasi biometrik menggunakan FRISTA atau Fingerprint, pasien berusia " + umurDaftar + " " + statusUmur + " dengan diagnosa kunjungan " + kodeDiagnosa.getText() + " " + namaDiagnosa.getText() + " \", " +
                         "\"user\": \"NoRM:" + noRM.getText() + "\"" +
                         "}" +
                         "}" +
