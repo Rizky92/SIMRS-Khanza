@@ -1235,6 +1235,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     headers.add("X-Timestamp", utc);
                     headers.add("X-Signature", api.getHmac(utc));
                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    isCekPasien();
                     payload = " {" +
                         "\"request\": {" +
                         "\"t_sep\": {" +
@@ -1242,7 +1243,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         "\"tglSep\": \"" + tglSEP.getText() + "\"," +
                         "\"jnsPelayanan\": \"2\"," +
                         "\"jnsPengajuan\": \"2\"," +
-                        "\"keterangan\": \"Pengajuan SEP Finger oleh Anjungan Pasien Mandiri " + instansiNama + "\"," +
+                        "\"keterangan\": \"Pengajuan Validasi Biometrik SEP oleh Anjungan Pasien Mandiri " + instansiNama + ", Valbiom pasien error, sidik jari dan rekam wajah telah dilakukan tetapi tidak dapat terbaca oleh sistem, pasien berusia " + umurDaftar + " " + statusUmur + "\", " +
                         "\"user\": \"NoRM:" + noRM.getText() + "\"" +
                         "}" +
                         "}" +
