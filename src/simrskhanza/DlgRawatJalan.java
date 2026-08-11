@@ -84,6 +84,7 @@ import rekammedis.RMCatatanPersalinan;
 import rekammedis.RMChecklistKesiapanAnestesi;
 import rekammedis.RMChecklistKriteriaMasukHCU;
 import rekammedis.RMChecklistKriteriaMasukICU;
+import rekammedis.RMChecklistKriteriaMasukIsolasi;
 import rekammedis.RMChecklistKriteriaMasukNICU;
 import rekammedis.RMChecklistKriteriaMasukPICU;
 import rekammedis.RMChecklistPemberianFibrinolitik;
@@ -10740,6 +10741,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
+    
+    private void BtnChecklistKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMChecklistKriteriaMasukIsolasi form=new RMChecklistKriteriaMasukIsolasi(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
 
     /**
     * @param args the command line arguments
@@ -11110,7 +11128,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                           BtnCatatanPengkajianPaskaOperasi,BtnSkriningFrailtySyndrome,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,BtnSkriningInstrumenACRS,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaMasukPICU,BtnSkriningInstrumenMentalEmosional,BtnSkriningInstrumenAMT,BtnSkriningPneumoniaSeverityIndex,BtnAwalMedisJantung,BtnAwalMedisUrologi,
                           BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnSkriningCURB65,BtnSkriningGiziKehamilan,BtnResepIterasiBPJS,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,
-                          BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi;
+                          BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
@@ -11787,6 +11805,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
         BtnChecklistKriteriaMasukICU.setVisible(akses.getchecklist_kriteria_masuk_icu());
         if(akses.getchecklist_kriteria_masuk_icu()==true){
+            tinggi=tinggi+24;
+        }
+        BtnChecklistKriteriaMasukIsolasi.setVisible(akses.getchecklist_kriteria_masuk_isolasi()); 
+        if(akses.getchecklist_kriteria_masuk_isolasi()==true){
             tinggi=tinggi+24;
         }
         BtnPenilaianLanjutanRisikoJatuhNeonatus.setVisible(akses.getpenilaian_risiko_jatuh_neonatus());
@@ -14381,6 +14403,19 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnResepIterasiBPJS.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnResepIterasiBPJS.setRoundRect(false);
         BtnResepIterasiBPJS.addActionListener(this::BtnResepIterasiBPJSActionPerformed);
+        
+        BtnChecklistKriteriaMasukIsolasi = new widget.Button();
+        BtnChecklistKriteriaMasukIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
+        BtnChecklistKriteriaMasukIsolasi.setText("Check List Masuk Isolasi");
+        BtnChecklistKriteriaMasukIsolasi.setFocusPainted(false);
+        BtnChecklistKriteriaMasukIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnChecklistKriteriaMasukIsolasi.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnChecklistKriteriaMasukIsolasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnChecklistKriteriaMasukIsolasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnChecklistKriteriaMasukIsolasi.setName("BtnChecklistKriteriaMasukIsolasi"); 
+        BtnChecklistKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnChecklistKriteriaMasukIsolasi.setRoundRect(false);
+        BtnChecklistKriteriaMasukIsolasi.addActionListener(this::BtnChecklistKriteriaMasukIsolasiActionPerformed);
 
         PopupSOAP = new javax.swing.JPopupMenu();
         PopupSOAP.setName("PopupSOAP");
@@ -14539,6 +14574,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         FormMenu.add(BtnChecklistKriteriaMasukICU);
         FormMenu.add(BtnChecklistKriteriaMasukNICU);
         FormMenu.add(BtnChecklistKriteriaMasukPICU);
+        FormMenu.add(BtnChecklistKriteriaMasukIsolasi);
         FormMenu.add(BtnPenilaianPreInduksi);
         FormMenu.add(BtnChecklistPreOperasi);
         FormMenu.add(BtnSignInSebelumAnestesi);
