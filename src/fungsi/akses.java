@@ -285,7 +285,8 @@ public final class akses {
         pintu_poli = false,
         bpjs_riwayat_surat_smc = false,
         pengkajian_tindakan_invasif_non_bedah_smc = false,
-        pengajuan_izin_smc = false;
+        pengajuan_izin_smc = false,
+        satu_sehat_tte_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1552,6 +1553,7 @@ public final class akses {
                         akses.satu_sehat_mapping_kptl_tindakan_operasi=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_operasi");
                         akses.satu_sehat_mapping_kptl_tarif_kamar=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tarif_kamar");
                         akses.checklist_kriteria_keluar_isolasi=akses.getBoolean(rs2, "checklist_kriteria_keluar_isolasi");
+                        akses.satu_sehat_tte_smc=akses.getBoolean(rs2, "satu_sehat_tte_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2824,6 +2826,7 @@ public final class akses {
         akses.satu_sehat_mapping_kptl_tindakan_operasi=isadmin;
         akses.satu_sehat_mapping_kptl_tarif_kamar=isadmin;
         akses.checklist_kriteria_keluar_isolasi=isadmin;
+        akses.satu_sehat_tte_smc=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4098,6 +4101,7 @@ public final class akses {
     public static boolean getsatu_sehat_mapping_kptl_tindakan_operasi(){return akses.satu_sehat_mapping_kptl_tindakan_operasi;}
     public static boolean getsatu_sehat_mapping_kptl_tarif_kamar(){return akses.satu_sehat_mapping_kptl_tarif_kamar;}
     public static boolean getchecklist_kriteria_keluar_isolasi(){return akses.checklist_kriteria_keluar_isolasi;}
+    public static boolean getsatu_sehat_tte_smc(){return akses.satu_sehat_tte_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {

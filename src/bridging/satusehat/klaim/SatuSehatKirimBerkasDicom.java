@@ -44,21 +44,21 @@ public class SatuSehatKirimBerkasDicom {
                 String kode = rs.getString("kode");
                 String accession = rs.getString("accession_number");
                 String lokasi = rs.getString("lokasi_file_dicom");
-//                boolean ok = orthanc.uploadAndSendToRouter(
-//                        lokasi, idEncounter,
-//                        koneksiDB.AETITLEDICOMROUTER(),
-//                        koneksiDB.URLDICOMROUTER(),
-//                        Integer.parseInt(koneksiDB.PORTDICOMROUTER()));
-//                if (ok) {
+                boolean ok = orthanc.uploadAndSendToRouter(
+                        lokasi, idEncounter,
+                        koneksiDB.AETITLEDICOMROUTER(),
+                        koneksiDB.URLDICOMROUTER(),
+                        Integer.parseInt(koneksiDB.PORTDICOMROUTER()));
+                if (ok) {
                     // Baca-balik ImagingStudy dari SATUSEHAT dengan retry (dibuat async oleh router).
                     // Bila tetap kosong dlm rentang retry -> terisi kiriman berikutnya (upsert tak menimpa id yg ada).
-//                    String idImaging = ambilIdImaging(accession);
-//                    simpanTracking(noRawat, kode, accession, idImaging);
-//                    System.out.println("Bundle: berkas DICOM " + noRawat + "/" + kode
-//                            + " terkirim (id_imaging=" + (idImaging.isEmpty() ? "(belum terindeks)" : idImaging) + ")");
-//                } else {
-//                    System.out.println("Bundle: berkas DICOM " + noRawat + "/" + kode + " GAGAL dikirim ke router.");
-//                }
+                    String idImaging = ambilIdImaging(accession);
+                    simpanTracking(noRawat, kode, accession, idImaging);
+                    System.out.println("Bundle: berkas DICOM " + noRawat + "/" + kode
+                            + " terkirim (id_imaging=" + (idImaging.isEmpty() ? "(belum terindeks)" : idImaging) + ")");
+                } else {
+                    System.out.println("Bundle: berkas DICOM " + noRawat + "/" + kode + " GAGAL dikirim ke router.");
+                }
             }
             rs.close();
             ps.close();

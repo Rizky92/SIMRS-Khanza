@@ -3,6 +3,8 @@
  */
 package bridging.satusehat.klaim;
 
+import bridging.satusehat.ApiSatuSehat;
+import bridging.satusehat.SatuSehatHttpLogger;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -948,7 +950,7 @@ public class SatuSehatBilling {
     private void catatPatch(String noRawat, String url, String body, Integer kode, String respon,
                             String status, String error, long mulai) {
         try {
-            bridging.satusehat.klaim.SatuSehatHttpLogger.catatManual("Billing PATCH", noRawat, url, body,
+            SatuSehatHttpLogger.catatManual("Billing PATCH", noRawat, url, body,
                     kode, respon, status, error, (int) (System.currentTimeMillis() - mulai));
         } catch (Throwable abaikan) {
             System.out.println("Notifikasi catat Billing PATCH : " + abaikan);
@@ -990,7 +992,7 @@ public class SatuSehatBilling {
                 System.out.println("Billing nama pasien (lokal dipakai) : '" + k.namaPasienSehat + "'");
                 k.idOrg = koneksiDB.IDSATUSEHAT();
                 k.namaRs = nz(fungsi.akses.getnamars());
-//                k.idOrgBpjs = nz(koneksiDB.IDORGBPJSSATUSEHAT()).trim();
+                k.idOrgBpjs = nz(koneksiDB.IDORGBPJSSATUSEHAT()).trim();
                 if (k.idOrgBpjs.equals("")) {
                     System.out.println("Notifikasi Billing : IDORGBPJSSATUSEHAT kosong di setting/database.xml "
                             + "=> data kepesertaan (Coverage) & SEP tidak dikirim. "

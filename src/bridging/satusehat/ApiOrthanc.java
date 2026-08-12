@@ -1,6 +1,5 @@
 package bridging.satusehat;
 
-import bridging.ApiBPJS;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -1015,88 +1014,87 @@ public class ApiOrthanc {
     }
      
      public boolean sendStudyByAccessionNumber(String accessionNumber, String targetAETitle, String host, int port) {
-//        try {
+        try {
             // 1. Find the study by accession number
-//            String studyId = getStudyID(accessionNumber);
-//            if (studyId == null || studyId.isEmpty()) {
-//                System.out.println("No study found with accession number: " + accessionNumber);
-//                return false;
-//            }
+            String studyId = getStudyID(accessionNumber);
+            if (studyId == null || studyId.isEmpty()) {
+                System.out.println("No study found with accession number: " + accessionNumber);
+                return false;
+            }
 
             // 2. Get all instances in the study
-//            headers = new HttpHeaders();
-//            headers.add("Authorization", "Basic " + authEncrypt);
-//            requestEntity = new HttpEntity(headers);
+            headers = new HttpHeaders();
+            headers.add("Authorization", "Basic " + authEncrypt);
+            requestEntity = new HttpEntity(headers);
 
-//            String studyUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/studies/" + studyId;
-//            ResponseEntity<String> studyResponse = getRest().exchange(studyUrl, HttpMethod.GET, requestEntity, String.class);
+            String studyUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/studies/" + studyId;
+            ResponseEntity<String> studyResponse = getRest().exchange(studyUrl, HttpMethod.GET, requestEntity, String.class);
 
-//            if (studyResponse.getStatusCode() != HttpStatus.OK) {
-//                System.out.println("Failed to retrieve study " + studyId + ": HTTP " + studyResponse.getStatusCode());
-//                return false;
-//            }
+            if (studyResponse.getStatusCode() != HttpStatus.OK) {
+                System.out.println("Failed to retrieve study " + studyId + ": HTTP " + studyResponse.getStatusCode());
+                return false;
+            }
 
-//            String studyJson = studyResponse.getBody();
-//            JsonNode studyNode = mapper.readTree(studyJson);
-//            JsonNode instances = studyNode.path("Instances");
+            String studyJson = studyResponse.getBody();
+            JsonNode studyNode = mapper.readTree(studyJson);
+            JsonNode instances = studyNode.path("Instances");
 
 
             // 3. First, ensure the modality is configured in Orthanc
-//            if (!ensureModalityConfigured(targetAETitle, host, port)) {
-//                System.out.println("Failed to configure modality: " + targetAETitle);
-//                return false;
-//            }
+            if (!ensureModalityConfigured(targetAETitle, host, port)) {
+                System.out.println("Failed to configure modality: " + targetAETitle);
+                return false;
+            }
 
             // 4. Send entire study at once (matches Orthanc GUI behavior)
-//            String orthancUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
+            String orthancUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
 
-//            try {
+            try {
                 // Send complete study (same as pressing Store button in Orthanc GUI)
-//                String requestBody = String.format(
-//                        "{\"Resources\": [\"%s\"], \"TargetAet\": \"%s\", \"LocalAet\": \"%s\", \"Timeout\": 30, \"StorageCommitment\": false}",
-//                        studyId, // Send entire study ID - matches GUI behavior
-//                        targetAETitle,
-//                        koneksiDB.AETITLEORTHANC()
-//                );
+                String requestBody = String.format(
+                        "{\"Resources\": [\"%s\"], \"TargetAet\": \"%s\", \"LocalAet\": \"%s\", \"Timeout\": 30, \"StorageCommitment\": false}",
+                        studyId, // Send entire study ID - matches GUI behavior
+                        targetAETitle,
+                        koneksiDB.AETITLEORTHANC()
+                );
 
-//                HttpHeaders storeHeaders = new HttpHeaders();
-//                storeHeaders.add("Authorization", "Basic " + authEncrypt);
-//                storeHeaders.setContentType(MediaType.APPLICATION_JSON);
-//                HttpEntity<String> storeEntity = new HttpEntity<>(requestBody, storeHeaders);
+                HttpHeaders storeHeaders = new HttpHeaders();
+                storeHeaders.add("Authorization", "Basic " + authEncrypt);
+                storeHeaders.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<String> storeEntity = new HttpEntity<>(requestBody, storeHeaders);
 
-//                String storeUrl = orthancUrl + "/modalities/" + targetAETitle + "/store";
-//                ResponseEntity<String> response = getRest().exchange(
-//                        storeUrl,
-//                        HttpMethod.POST,
-//                        storeEntity,
-//                        String.class
-//                );
+                String storeUrl = orthancUrl + "/modalities/" + targetAETitle + "/store";
+                ResponseEntity<String> response = getRest().exchange(
+                        storeUrl,
+                        HttpMethod.POST,
+                        storeEntity,
+                        String.class
+                );
 
-//                if (response.getStatusCode() == HttpStatus.OK) {
-//                    System.out.println("Successfully sent complete study " + studyId + " (accession: " + accessionNumber + ") with " + instances.size() + " instances to " + targetAETitle);
-//                    return true;
-//                } else {
-//                    System.out.println("Failed to send study " + studyId + ": HTTP " + response.getStatusCode() + " - " + response.getBody());
-//                    return false;
-//                }
+                if (response.getStatusCode() == HttpStatus.OK) {
+                    System.out.println("Successfully sent complete study " + studyId + " (accession: " + accessionNumber + ") with " + instances.size() + " instances to " + targetAETitle);
+                    return true;
+                } else {
+                    System.out.println("Failed to send study " + studyId + ": HTTP " + response.getStatusCode() + " - " + response.getBody());
+                    return false;
+                }
 
-//            } catch (HttpClientErrorException | HttpServerErrorException e) {
-//                System.out.println("HTTP error sending study " + studyId + ": " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
-//                return false;
-//            } catch (ResourceAccessException e) {
-//                System.out.println("Network error sending study " + studyId + " to " + host + ":" + port + " - " + e.getMessage());
-//                return false;
-//            }
+            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                System.out.println("HTTP error sending study " + studyId + ": " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
+                return false;
+            } catch (ResourceAccessException e) {
+                System.out.println("Network error sending study " + studyId + " to " + host + ":" + port + " - " + e.getMessage());
+                return false;
+            }
 
-//        } catch (JsonProcessingException e) {
-//            System.out.println("JSON parsing error for accession " + accessionNumber + ": " + e.getMessage());
-//            return false;
-//        } catch (Exception e) {
-//            System.out.println("Unexpected error in sendStudyByAccessionNumber for accession " + accessionNumber + ": " + e.getMessage());
-//            e.printStackTrace();
-//            return false;
-//        }
-        return false;
+        } catch (JsonProcessingException e) {
+            System.out.println("JSON parsing error for accession " + accessionNumber + ": " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error in sendStudyByAccessionNumber for accession " + accessionNumber + ": " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -1118,76 +1116,75 @@ public class ApiOrthanc {
      */
     public boolean sendStudyByAccessionNumber(String accessionNumber, String encounterId,
             String targetAETitle, String host, int port) {
-//        if (encounterId == null || encounterId.trim().isEmpty()) {
-//            System.out.println("Encounter ID kosong; kiriman DICOM accession " + accessionNumber
-//                    + " dibatalkan (router mewajibkan AdmissionID).");
-//            return false;
-//        }
-//        String orthancUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
-//        String studyTransient = "";   // salinan hasil modify: dikirim, lalu dibersihkan di finally
-//        try {
-//            String studyId = getStudyID(accessionNumber);
-//            if (studyId == null || studyId.isEmpty()) {
-//                System.out.println("Tidak ada study di Orthanc dgn AccessionNumber " + accessionNumber + ", dilewati.");
-//                return false;
-//            }
+        if (encounterId == null || encounterId.trim().isEmpty()) {
+            System.out.println("Encounter ID kosong; kiriman DICOM accession " + accessionNumber
+                    + " dibatalkan (router mewajibkan AdmissionID).");
+            return false;
+        }
+        String orthancUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
+        String studyTransient = "";   // salinan hasil modify: dikirim, lalu dibersihkan di finally
+        try {
+            String studyId = getStudyID(accessionNumber);
+            if (studyId == null || studyId.isEmpty()) {
+                System.out.println("Tidak ada study di Orthanc dgn AccessionNumber " + accessionNumber + ", dilewati.");
+                return false;
+            }
 
             // Jejak PatientID apa adanya. Bila router menolak karena identitas pasien (mis. menuntut
             // nomor IHS, bukan no.RM dari modality), penyebabnya langsung terbaca di log tanpa menebak.
-//            System.out.println("Study " + studyId + " accession=" + accessionNumber
-//                    + " PatientID=" + bacaTagStudy(orthancUrl, studyId, "PatientID"));
+            System.out.println("Study " + studyId + " accession=" + accessionNumber
+                    + " PatientID=" + bacaTagStudy(orthancUrl, studyId, "PatientID"));
 
-//            studyTransient = salinStudyDenganAdmissionID(orthancUrl, studyId, encounterId.trim());
-//            if (studyTransient.isEmpty()) {
-//                System.out.println("Gagal menyuntik AdmissionID pada study " + studyId
-//                        + "; kiriman dibatalkan (router pasti menolak tanpa tag itu).");
-//                return false;
-//            }
-//            String studyToSend = studyTransient;
-//            System.out.println("AdmissionID(Encounter)=" + encounterId.trim()
-//                    + " disuntikkan -> salinan study " + studyToSend);
+            studyTransient = salinStudyDenganAdmissionID(orthancUrl, studyId, encounterId.trim());
+            if (studyTransient.isEmpty()) {
+                System.out.println("Gagal menyuntik AdmissionID pada study " + studyId
+                        + "; kiriman dibatalkan (router pasti menolak tanpa tag itu).");
+                return false;
+            }
+            String studyToSend = studyTransient;
+            System.out.println("AdmissionID(Encounter)=" + encounterId.trim()
+                    + " disuntikkan -> salinan study " + studyToSend);
 
-//            if (!pastikanModalityRouter(targetAETitle, host, port)) {
-//                return false;
-//            }
+            if (!pastikanModalityRouter(targetAETitle, host, port)) {
+                return false;
+            }
 
-//            String requestBody = String.format(
-//                    "{\"Resources\": [\"%s\"], \"TargetAet\": \"%s\", \"LocalAet\": \"%s\", \"Timeout\": 30, \"StorageCommitment\": false}",
-//                    studyToSend, targetAETitle, koneksiDB.AETITLEORTHANC());
-//            HttpHeaders storeHeaders = new HttpHeaders();
-//            storeHeaders.add("Authorization", "Basic " + authEncrypt);
-//            storeHeaders.setContentType(MediaType.APPLICATION_JSON);
-//            HttpEntity<String> storeEntity = new HttpEntity<String>(requestBody, storeHeaders);
-//            ResponseEntity<String> response = getRest().exchange(
-//                    orthancUrl + "/modalities/" + targetAETitle + "/store",
-//                    HttpMethod.POST, storeEntity, String.class);
-//            if (response.getStatusCode() == HttpStatus.OK) {
-//                System.out.println("Study " + studyToSend + " (accession " + accessionNumber
-//                        + ") terkirim ke " + targetAETitle + ".");
-//                return true;
-//            }
-//            System.out.println("Gagal kirim study " + studyToSend + ": HTTP " + response.getStatusCode()
-//                    + " - " + response.getBody());
-//            return false;
+            String requestBody = String.format(
+                    "{\"Resources\": [\"%s\"], \"TargetAet\": \"%s\", \"LocalAet\": \"%s\", \"Timeout\": 30, \"StorageCommitment\": false}",
+                    studyToSend, targetAETitle, koneksiDB.AETITLEORTHANC());
+            HttpHeaders storeHeaders = new HttpHeaders();
+            storeHeaders.add("Authorization", "Basic " + authEncrypt);
+            storeHeaders.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> storeEntity = new HttpEntity<String>(requestBody, storeHeaders);
+            ResponseEntity<String> response = getRest().exchange(
+                    orthancUrl + "/modalities/" + targetAETitle + "/store",
+                    HttpMethod.POST, storeEntity, String.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println("Study " + studyToSend + " (accession " + accessionNumber
+                        + ") terkirim ke " + targetAETitle + ".");
+                return true;
+            }
+            System.out.println("Gagal kirim study " + studyToSend + ": HTTP " + response.getStatusCode()
+                    + " - " + response.getBody());
+            return false;
 
-//        } catch (HttpClientErrorException | HttpServerErrorException e) {
-//            System.out.println("HTTP error kirim study accession " + accessionNumber + ": "
-//                    + e.getStatusCode() + " - " + e.getResponseBodyAsString());
-//            return false;
-//        } catch (ResourceAccessException e) {
-//            System.out.println("Network error kirim study accession " + accessionNumber
-//                    + " ke " + host + ":" + port + " - " + e.getMessage());
-//            return false;
-//        } catch (Exception e) {
-//            System.out.println("Unexpected error kirim study accession " + accessionNumber + ": " + e.getMessage());
-//            return false;
-//        } finally {
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            System.out.println("HTTP error kirim study accession " + accessionNumber + ": "
+                    + e.getStatusCode() + " - " + e.getResponseBodyAsString());
+            return false;
+        } catch (ResourceAccessException e) {
+            System.out.println("Network error kirim study accession " + accessionNumber
+                    + " ke " + host + ":" + port + " - " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error kirim study accession " + accessionNumber + ": " + e.getMessage());
+            return false;
+        } finally {
             // Salinan hasil modify tidak boleh menumpuk di Orthanc tiap kali tombol Kirim ditekan.
-//            if (!studyTransient.isEmpty()) {
-//                hapusStudyTransient(orthancUrl, studyTransient);
-//            }
-//        }
-        return false;
+            if (!studyTransient.isEmpty()) {
+                hapusStudyTransient(orthancUrl, studyTransient);
+            }
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package bridging.satusehat.klaim;
+package bridging.satusehat;
 
 import fungsi.koneksiDB;
 import java.io.IOException;

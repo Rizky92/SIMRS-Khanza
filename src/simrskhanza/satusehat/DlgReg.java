@@ -7,30 +7,28 @@
  */
 package simrskhanza.satusehat;
 
-import simrskhanza.*;
 import bridging.BPJSCekDataIndukKecelakaan;
 import bridging.BPJSCekSuplesiJasaRaharja;
-import permintaan.DlgBookingOperasi;
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariDokter2;
-import inventory.DlgResepObat;
-import inventory.DlgPemberianObat;
 import bridging.BPJSDataSEP;
 import bridging.BPJSProgramPRB;
 import bridging.BPJSSPRI;
 import bridging.BPJSSuratKontrol;
 import bridging.CoronaPasien;
+import bridging.DlgDataTB;
+import bridging.ICareRiwayatPerawatan;
+import bridging.ICareRiwayatPerawatanFKTP;
+import bridging.INACBGPerawatanCorona;
 import bridging.InhealthDataSJP;
 import bridging.PCareDataPendaftaran;
-import bridging.satusehat.klaim.SatuSehatEncounterReg;
+import bridging.PilihanBridgingAsuransi;
 import bridging.SisruteRujukanKeluar;
-import laporan.DlgDiagnosaPenyakit;
-import laporan.DlgFrekuensiPenyakitRalan;
-import keuangan.DlgBilingRalan;
-// import surat.SuratPerintahRawatInap;
+import bridging.satusehat.SatuSehatEncounterReg;
 import fungsi.WarnaTable;
-// import fungsi.WarnaTableRegistrasi; // Tambahan Baru Update RSTHB
+import fungsi.akses;
 import fungsi.batasInput;
+import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import grafikanalisa.grafikperiksaperagama;
 import grafikanalisa.grafikperiksaperbulan;
 import grafikanalisa.grafikperiksaperdokter;
@@ -40,14 +38,12 @@ import grafikanalisa.grafikperiksaperpekerjaan;
 import grafikanalisa.grafikperiksaperpoli;
 import grafikanalisa.grafikperiksapertahun;
 import grafikanalisa.grafiksql;
-import fungsi.koneksiDB;
-// import fungsi.koneksiDBWA;
-import fungsi.sekuel;
-import fungsi.validasi;
-import fungsi.akses;
+import inventory.DlgPemberianObat;
 import inventory.DlgPeresepanDokter;
+import inventory.DlgResepObat;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -63,6 +59,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -72,6 +69,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
@@ -86,45 +84,37 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariDokter2;
 import keuangan.DlgBilingParsialRalan;
+import keuangan.DlgBilingRalan;
 import keuangan.DlgLhtPiutang;
 import laporan.DlgBerkasRawat;
 import laporan.DlgDataInsidenKeselamatan;
-import bridging.DlgDataTB;
-import bridging.ICareRiwayatPerawatan;
-import bridging.ICareRiwayatPerawatanFKTP;
-import bridging.INACBGPerawatanCorona;
-import bridging.PilihanBridgingAsuransi;
-// import fungsi.validasi2; // Tambahan Baru RSTHB
-import inventory.DlgCopyResep;
-import java.awt.Toolkit;
-import java.time.LocalDateTime;
-import rekammedis.RMDataResumePasien;
+import laporan.DlgDiagnosaPenyakit;
+import laporan.DlgFrekuensiPenyakitRalan;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.json.JSONObject;
+import permintaan.DlgBookingOperasi;
 import permintaan.DlgPermintaanLaboratorium;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
 import permintaan.DlgPermintaanRanap;
-import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMCatatanPersalinan;
 import rekammedis.RMChecklistKriteriaMasukHCU;
 import rekammedis.RMChecklistKriteriaMasukICU;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
-import rekammedis.RMDataAsuhanGizi;
 import rekammedis.RMDataCatatanCekGDS;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import rekammedis.RMDataCatatanObservasiIGD;
-import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
-import rekammedis.RMDataSkriningGiziLanjut;
-import rekammedis.RMPenilaianAwalMedisRalanDewasa;
-import rekammedis.RMHemodialisa;
+import rekammedis.RMDataResumePasien;
 import rekammedis.RMDeteksiDiniCorona;
 import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
 import rekammedis.RMHasilPemeriksaanEcho;
@@ -132,31 +122,32 @@ import rekammedis.RMHasilPemeriksaanUSG;
 import rekammedis.RMHasilPemeriksaanUSGGynecologi;
 import rekammedis.RMHasilPemeriksaanUSGUrologi;
 import rekammedis.RMHasilTindakanESWL;
+import rekammedis.RMHemodialisa;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMMCU;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
-import rekammedis.RMPemantauanMEOWS;
-import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPemantauanEWSD;
 import rekammedis.RMPemantauanEWSNeonatus;
+import rekammedis.RMPemantauanMEOWS;
+import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPengkajianRestrain;
 import rekammedis.RMPenilaianAwalKeperawatanBayiAnak;
 import rekammedis.RMPenilaianAwalKeperawatanGigi;
 import rekammedis.RMPenilaianAwalKeperawatanIGD;
 import rekammedis.RMPenilaianAwalKeperawatanKebidanan;
-import rekammedis.RMTriaseIGD;
 import rekammedis.RMPenilaianAwalKeperawatanRalan;
 import rekammedis.RMPenilaianAwalKeperawatanRalanGeriatri;
 import rekammedis.RMPenilaianAwalKeperawatanRalanPsikiatri;
+import rekammedis.RMPenilaianAwalMedisHemodialisa;
 import rekammedis.RMPenilaianAwalMedisIGD;
+import rekammedis.RMPenilaianAwalMedisIGDPsikiatri;
 import rekammedis.RMPenilaianAwalMedisRalanAnak;
 import rekammedis.RMPenilaianAwalMedisRalanBedah;
 import rekammedis.RMPenilaianAwalMedisRalanBedahMulut;
+import rekammedis.RMPenilaianAwalMedisRalanDewasa;
 import rekammedis.RMPenilaianAwalMedisRalanGeriatri;
-import rekammedis.RMPenilaianAwalMedisHemodialisa;
-import rekammedis.RMPenilaianAwalMedisIGDPsikiatri;
 import rekammedis.RMPenilaianAwalMedisRalanKandungan;
 import rekammedis.RMPenilaianAwalMedisRalanKulitDanKelamin;
 import rekammedis.RMPenilaianAwalMedisRalanMata;
@@ -193,24 +184,34 @@ import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMRiwayatPerawatan;
 import rekammedis.RMSignInSebelumAnastesi;
 import rekammedis.RMSignOutSebelumMenutupLuka;
-import rekammedis.RMSkriningNutrisiAnak;
-import rekammedis.RMSkriningNutrisiDewasa;
-import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
-import rekammedis.RMUjiFungsiKFR;
+import rekammedis.RMTriaseIGD;
+import simrskhanza.DlgCariPoli;
+import simrskhanza.DlgCariPoli2;
+import simrskhanza.DlgCatatan;
+import simrskhanza.DlgKamarInap;
+import simrskhanza.DlgPasienMati;
+import simrskhanza.DlgPeriksaLaboratorium;//Tambahan RSTHB
+import simrskhanza.DlgPeriksaLaboratoriumMB;
+import simrskhanza.DlgPeriksaLaboratoriumPA;//Tambahan RSTHB
+import simrskhanza.DlgPeriksaRadiologi;
+import simrskhanza.DlgRawatJalan;
+import simrskhanza.DlgRujuk;
+import simrskhanza.DlgRujukMasuk;
+import simrskhanza.DlgTagihanOperasi;
 import surat.SuratBebasNarkoba;
 import surat.SuratBebasTato;
 import surat.SuratButaWarna;
 import surat.SuratCutiHamil;
 import surat.SuratKeteranganBebasTBC;
-import surat.SuratKeteranganCovid;
+import surat.SuratKeteranganCovid;//Tambahan RSTHB
 import surat.SuratKeteranganSehat;
-// import surat.SuratKeteranganSehatMata;//Tambahan RSTHB
 import surat.SuratKewaspadaanKesehatan;
-// import surat.SuratKontrolUmumRj;//Tambahan RSTHB
 import surat.SuratPenolakanAnjuranMedis;
+import surat.SuratPernyataanMemilihDPJP;
 import surat.SuratPernyataanPasienUmum;
+import surat.SuratPersetujuanPemeriksaanHIV;
 import surat.SuratPersetujuanPenolakanTindakan;
 import surat.SuratPersetujuanPenundaanPelayanan;
 import surat.SuratPersetujuanRawatInap;
@@ -219,12 +220,6 @@ import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import surat.SuratTidakHamil;
-// import wa.WhatsappKirimFonnte;//Tambahan RSTHB
-import surat.SuratPernyataanMemilihDPJP;
-import surat.SuratPersetujuanPemeriksaanHIV;
-// import fungsi.webSocket;
-// import io.socket.client.Socket;
-import org.json.JSONObject;
 
 /**
  *
@@ -234,10 +229,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private final DefaultTableModel tabMode, tabMode2;
     private JSONObject jsonData; // Store JSON data
-    // private Socket socket;
+    private Socket socket;
     private sekuel Sequel = new sekuel();
     private validasi Valid = new validasi();
-    // private validasi2 Valid2 = new validasi2();
+    private validasi Valid2 = new validasi();
     private Connection koneksi = koneksiDB.condb();
     public DlgPasien pasien = new DlgPasien(null, false);
     public DlgCariDokter dokter = new DlgCariDokter(null, false);
@@ -1137,7 +1132,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
 
             try {
-                // notifwapasien = koneksiDB.NOTIFWAPASIEN();
+                notifwapasien = koneksiDB.NOTIFWAPASIEN();
             } catch (Exception e) {
                 notifwapasien = "no";
 
@@ -9683,7 +9678,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void btnPenjabActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPenjabActionPerformed
         akses.setform("DlgReg");
-//        pasien.penjab.onCari();
+        // pasien.penjab.onCari();
         pasien.penjab.isCek();
         pasien.penjab.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         pasien.penjab.setLocationRelativeTo(internalFrame1);
@@ -11250,7 +11245,8 @@ public final class DlgReg extends javax.swing.JDialog {
             // DRujukInternal dlgrjk = new DRujukInternal(null, false);
             // dlgrjk.setLocationRelativeTo(internalFrame1);
             // dlgrjk.isCek();
-            // dlgrjk.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), internalFrame1.getWidth(), internalFrame1.getHeight());
+            // dlgrjk.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), internalFrame1.getWidth(),
+            //         internalFrame1.getHeight());
             // dlgrjk.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -12182,7 +12178,8 @@ public final class DlgReg extends javax.swing.JDialog {
                     // form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                     // form.setLocationRelativeTo(internalFrame1);
                     // form.emptTeks();
-                    // form.setNoRm(TNoRM.getText(), TPasien.getText(), kdpoli.getText(), TPoli.getText(), KdDokter.getText(), TDokter.getText(), TNoRw.getText());
+                    // form.setNoRm(TNoRM.getText(), TPasien.getText(), kdpoli.getText(), TPoli.getText(),
+                    //         KdDokter.getText(), TDokter.getText(), TNoRw.getText());
                     // form.setVisible(true);
                 }
             }
@@ -12644,7 +12641,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 resume.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -12756,7 +12753,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setLocationRelativeTo(internalFrame1);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 form.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -12780,7 +12777,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), DTPCari1.getDate(),
                         DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 resume.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -12931,7 +12928,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 resume.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -12954,7 +12951,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 resume.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -13109,7 +13106,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 resume.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -13224,7 +13221,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setVisible(true);
                 resume.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), KdDokter.getText(),
                         TDokter.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13248,7 +13245,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setVisible(true);
                 resume.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), DTPCari1.getDate(),
                         DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13272,7 +13269,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setVisible(true);
                 resume.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), DTPCari1.getDate(),
                         DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13296,7 +13293,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setVisible(true);
                 resume.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), DTPCari1.getDate(),
                         DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13622,7 +13619,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13691,7 +13688,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setVisible(true);
                 resume.emptTeks();
                 resume.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13877,7 +13874,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14002,7 +13999,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setVisible(true);
                 resume.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                resume.tampil();
+                // resume.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14026,7 +14023,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14050,7 +14047,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14120,7 +14117,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14144,7 +14141,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14172,7 +14169,7 @@ public final class DlgReg extends javax.swing.JDialog {
                     form.setVisible(true);
                     form.emptTeks();
                     form.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText());
-//                    form.tampil();
+                    // form.tampil();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
@@ -14197,7 +14194,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14221,7 +14218,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14292,7 +14289,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14464,7 +14461,7 @@ public final class DlgReg extends javax.swing.JDialog {
                     form.setVisible(true);
                     form.emptTeks();
                     form.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText());
-//                    form.tampil();
+                    // form.tampil();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
@@ -14489,7 +14486,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14513,7 +14510,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14537,7 +14534,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14584,7 +14581,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14631,7 +14628,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14655,7 +14652,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14679,7 +14676,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14703,7 +14700,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14727,7 +14724,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14751,7 +14748,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14821,7 +14818,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14900,7 +14897,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14924,7 +14921,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14971,7 +14968,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14995,7 +14992,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15019,7 +15016,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15206,7 +15203,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15230,7 +15227,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15347,7 +15344,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15452,7 +15449,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15476,7 +15473,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15500,7 +15497,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15524,7 +15521,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15836,7 +15833,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15851,26 +15848,26 @@ public final class DlgReg extends javax.swing.JDialog {
     }// GEN-LAST:event_NoBpjsKeyPressed
 
     private void MnCetakSuratSehatMataActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_MnCetakSuratSehatMataActionPerformed
-//        if (tabMode.getRowCount() == 0) {
-//            JOptionPane.showMessageDialog(null, "Maaf, data pasien sudah habis...!!!!");
-//            TNoRw.requestFocus();
-//        } else if (TPasien.getText().trim().equals("")) {
-//            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
-//            TCari.requestFocus();
-//        } else {
-//            if (tbPetugas.getSelectedRow() != -1) {
-//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//                SuratKeteranganSehatMata resume = new SuratKeteranganSehatMata(null, false);
-//                resume.isCek();
-//                resume.emptTeks();
-//                resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-//                resume.setLocationRelativeTo(internalFrame1);
-//                resume.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-//                resume.tampil();
-//                resume.setVisible(true);
-//                this.setCursor(Cursor.getDefaultCursor());
-//            }
-//        }
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data pasien sudah habis...!!!!");
+            TNoRw.requestFocus();
+        } else if (TPasien.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            if (tbPetugas.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                // SuratKeteranganSehatMata resume = new SuratKeteranganSehatMata(null, false);
+                // resume.isCek();
+                // resume.emptTeks();
+                // resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                // resume.setLocationRelativeTo(internalFrame1);
+                // resume.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
+                // resume.tampil();
+                // resume.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
     }// GEN-LAST:event_MnCetakSuratSehatMataActionPerformed
 
     private void btnPanggilActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPanggilActionPerformed
@@ -15909,7 +15906,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15956,7 +15953,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15980,7 +15977,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -16901,7 +16898,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDataTriaseIGD.setEnabled(akses.getdata_triase_igd());
         ppResume.setEnabled(akses.getdata_resume_pasien());
         MnCetakSuratSakit.setEnabled(akses.getsurat_sakit());
-//        MnSuratPerintahRawatInap.setEnabled(akses.getsurat_perintah_rawat_inap());
+        // MnSuratPerintahRawatInap.setEnabled(akses.getsurat_perintah_rawat_inap());
         MnCetakSuratHamil.setEnabled(akses.getsurat_hamil());
         MnCetakSuratCutiHamil.setEnabled(akses.getsurat_cuti_hamil());
         MnCetakSuratCovid.setEnabled(akses.getsurat_keterangan_covid());
@@ -16998,7 +16995,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRiwayatPerawatanICareNoKartu1.setEnabled(akses.getriwayat_perawatan_icare_bpjs());
         MnRiwayatPerawatanICareNIK.setEnabled(akses.getriwayat_perawatan_icare_bpjs());
         MnRiwayatPerawatanICareNIK1.setEnabled(akses.getriwayat_perawatan_icare_bpjs());
-//        MnPenilaianAwalMedisHemodialisa.setEnabled(akses.getpenilaian_medis_ralan_hemodialisa());
+        // MnPenilaianAwalMedisHemodialisa.setEnabled(akses.getpenilaian_medis_ralan_hemodialisa());
         MnPenilaianRisikoJatuhPsikiatri.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_psikiatri());
         MnPenilaianLanjutanSkriningFungsional.setEnabled(akses.getpenilaian_lanjutan_skrining_fungsional());
         MnPenilaianAwalMedisRalanFisikRehabilitasi.setEnabled(akses.getpenilaian_medis_ralan_rehab_medik());
@@ -17982,7 +17979,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
-//                form.tampil();
+                // form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -18103,29 +18100,29 @@ public final class DlgReg extends javax.swing.JDialog {
     }
 
     private void autonomer() {
-//        Valid2.autoNomer(
-//                "select ifnull(MAX(CONVERT(antriloketcetak.nomor,signed)),0) from antriloketcetak where antriloketcetak.tanggal=current_date()",
-//                "", 4, LabelNomor);
+        // Valid2.autoNomer(
+        //         "select ifnull(MAX(CONVERT(antriloketcetak.nomor,signed)),0) from antriloketcetak where antriloketcetak.tanggal=current_date()",
+        //         "", 4, LabelNomor);
     }
 
     private void autonomer2() {
-//        Valid2.autoNomer2("select ifnull(MAX(CONVERT(antriloket.antrian,signed)),0) from antriloket", "", 4, Antrian);
+        Valid2.autoNomer2("select ifnull(MAX(CONVERT(antriloket.antrian,signed)),0) from antriloket", "", 4, Antrian);
 
     }
 
     private void BtnWaActionPerformed(java.awt.event.ActionEvent evt) {
-//        if (TPasien.getText().trim().equals("") && TPasien.getText().trim().equals("")) {
-//            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data pasien...!!!");
-//            TCari.requestFocus();
-//        } else {
-//            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//            WhatsappKirimFonnte kirim = new WhatsappKirimFonnte(null, false);
-//            kirim.setNoRm(TNoRM.getText(), TNoReg.getText(), TPoli.getText(), TDokter.getText(), DTPReg.getDate());
-//            kirim.setSize(720, 330);
-//            kirim.setLocationRelativeTo(internalFrame1);
-//            kirim.setVisible(true);
-//            this.setCursor(Cursor.getDefaultCursor());
-//        }
+        if (TPasien.getText().trim().equals("") && TPasien.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data pasien...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            // WhatsappKirimFonnte kirim = new WhatsappKirimFonnte(null, false);
+            // kirim.setNoRm(TNoRM.getText(), TNoReg.getText(), TPoli.getText(), TDokter.getText(), DTPReg.getDate());
+            // kirim.setSize(720, 330);
+            // kirim.setLocationRelativeTo(internalFrame1);
+            // kirim.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }
 
     private String normalisasiNoWa(String noWa) {
@@ -18248,97 +18245,97 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void kirimWaViaFonnte(String noRawat, String noRm, String namaPasien, String tipePesan, String noWa,
             String pesan, Long scheduleUnix) {
-//        String nomorTujuan = normalisasiNoWa(noWa);
-//        if (nomorTujuan.trim().isEmpty() || pesan == null || pesan.trim().isEmpty()) {
-//            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, scheduleUnix,
-//                    "Nomor WA kosong / format tidak valid atau pesan kosong", "", "FAILED");
-//            return;
-//        }
+        String nomorTujuan = normalisasiNoWa(noWa);
+        if (nomorTujuan.trim().isEmpty() || pesan == null || pesan.trim().isEmpty()) {
+            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, scheduleUnix,
+                    "Nomor WA kosong / format tidak valid atau pesan kosong", "", "FAILED");
+            return;
+        }
 
-//        String tokenWa = koneksiDBWA.TOKENWA();
-//        if (tokenWa == null || tokenWa.trim().isEmpty()) {
-//            System.out.println("Notif : Token Fonnte kosong. Pengiriman WA dibatalkan.");
-//            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix,
-//                    "Token Fonnte kosong", "", "FAILED");
-//            return;
-//        }
+        String tokenWa = koneksiDB.TOKENWA();
+        if (tokenWa == null || tokenWa.trim().isEmpty()) {
+            System.out.println("Notif : Token Fonnte kosong. Pengiriman WA dibatalkan.");
+            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix,
+                    "Token Fonnte kosong", "", "FAILED");
+            return;
+        }
 
-//        HttpURLConnection connection = null;
-//        try {
-//            StringBuilder postData = new StringBuilder();
-//            appendPostData(postData, "target", nomorTujuan);
-//            appendPostData(postData, "message", pesan);
-//            appendPostData(postData, "countryCode", "62");
-//            if (scheduleUnix != null && scheduleUnix.longValue() > 0L) {
-//                appendPostData(postData, "schedule", String.valueOf(scheduleUnix));
-//            }
+        HttpURLConnection connection = null;
+        try {
+            StringBuilder postData = new StringBuilder();
+            appendPostData(postData, "target", nomorTujuan);
+            appendPostData(postData, "message", pesan);
+            appendPostData(postData, "countryCode", "62");
+            if (scheduleUnix != null && scheduleUnix.longValue() > 0L) {
+                appendPostData(postData, "schedule", String.valueOf(scheduleUnix));
+            }
 
-//            URL url = new URL("https://api.fonnte.com/send");
-//            connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Authorization", tokenWa);
-//            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//            connection.setConnectTimeout(10000);
-//            connection.setReadTimeout(15000);
-//            connection.setDoOutput(true);
+            URL url = new URL("https://api.fonnte.com/send");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", tokenWa);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(15000);
+            connection.setDoOutput(true);
 
-//            try (OutputStream output = connection.getOutputStream()) {
-//                output.write(postData.toString().getBytes(StandardCharsets.UTF_8));
-//            }
+            try (OutputStream output = connection.getOutputStream()) {
+                output.write(postData.toString().getBytes(StandardCharsets.UTF_8));
+            }
 
-//            int statusCode = connection.getResponseCode();
-//            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
-//            StringBuilder responseBuilder = new StringBuilder();
-//            if (input != null) {
-//                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        responseBuilder.append(line);
-//                    }
-//                }
-//            }
+            int statusCode = connection.getResponseCode();
+            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
+            StringBuilder responseBuilder = new StringBuilder();
+            if (input != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                }
+            }
 
-//            String response = responseBuilder.toString();
-//            boolean sukses = false;
-//            String reason = "";
-//            if (!response.trim().isEmpty()) {
-//                try {
-//                    JSONObject jsonResponse = new JSONObject(response);
-//                    sukses = jsonResponse.optBoolean("status", false);
-//                    if (!sukses && "true".equalsIgnoreCase(String.valueOf(jsonResponse.opt("status")))) {
-//                        sukses = true;
-//                    }
-//                    reason = jsonResponse.optString("reason", "");
-//                } catch (Exception e) {
-//                    reason = "Format response Fonnte tidak valid";
-//                }
-//            } else {
-//                reason = "Respons Fonnte kosong";
-//            }
+            String response = responseBuilder.toString();
+            boolean sukses = false;
+            String reason = "";
+            if (!response.trim().isEmpty()) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    sukses = jsonResponse.optBoolean("status", false);
+                    if (!sukses && "true".equalsIgnoreCase(String.valueOf(jsonResponse.opt("status")))) {
+                        sukses = true;
+                    }
+                    reason = jsonResponse.optString("reason", "");
+                } catch (Exception e) {
+                    reason = "Format response Fonnte tidak valid";
+                }
+            } else {
+                reason = "Respons Fonnte kosong";
+            }
 
-//            if (!sukses || statusCode >= 400) {
-//                if (reason.trim().isEmpty()) {
-//                    reason = "HTTP " + statusCode;
-//                } else {
-//                    reason = "HTTP " + statusCode + " - " + reason;
-//                }
-//                System.out.println("Notif : Gagal kirim WA Fonnte, reason : " + reason);
-//                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix, reason,
-//                        response, "FAILED");
-//            } else {
-//                String statusLog = scheduleUnix == null ? "SENT" : "SCHEDULED";
-//                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix,
-//                        nilaiLogWaFonnte(reason, "OK"), response, statusLog);
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Notif : " + e);
-//            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix,
-//                    "Exception : " + e.getMessage(), "", "FAILED");
-//        } finally {
-//            if (connection != null) {
-//                connection.disconnect();
-//            }
-//        }
+            if (!sukses || statusCode >= 400) {
+                if (reason.trim().isEmpty()) {
+                    reason = "HTTP " + statusCode;
+                } else {
+                    reason = "HTTP " + statusCode + " - " + reason;
+                }
+                System.out.println("Notif : Gagal kirim WA Fonnte, reason : " + reason);
+                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix, reason,
+                        response, "FAILED");
+            } else {
+                String statusLog = scheduleUnix == null ? "SENT" : "SCHEDULED";
+                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix,
+                        nilaiLogWaFonnte(reason, "OK"), response, statusLog);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, nomorTujuan, pesan, scheduleUnix,
+                    "Exception : " + e.getMessage(), "", "FAILED");
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 
     private void kirimWaViaFonnteAsync(final String noRawat, final String noRm, final String namaPasien,
@@ -18368,77 +18365,77 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void kirimWaViaWaha(String noRawat, String noRm, String namaPasien, String tipePesan, String noWa,
             String pesan) {
-//        String chatId = chatIdWaha(noWa);
-//        if (chatId.isEmpty() || pesan == null || pesan.trim().isEmpty()) {
-//            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, null,
-//                    "Nomor WA kosong / format tidak valid atau pesan kosong", "", "FAILED");
-//            return;
-//        }
+        String chatId = chatIdWaha(noWa);
+        if (chatId.isEmpty() || pesan == null || pesan.trim().isEmpty()) {
+            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, null,
+                    "Nomor WA kosong / format tidak valid atau pesan kosong", "", "FAILED");
+            return;
+        }
 
-//        String urlWaha = koneksiDBWA.URLWAHAFOKASIR();
-//        if (urlWaha.isEmpty()) {
-//            System.out.println("Notif : URLWAHAFOKASIR kosong di setting/database.xml. Pengiriman WA dibatalkan.");
-//            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, null,
-//                    "URL WAHA kosong", "", "FAILED");
-//            return;
-//        }
+        String urlWaha = koneksiDB.URLWAHAFOKASIR();
+        if (urlWaha.isEmpty()) {
+            System.out.println("Notif : URLWAHAFOKASIR kosong di setting/database.xml. Pengiriman WA dibatalkan.");
+            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, null,
+                    "URL WAHA kosong", "", "FAILED");
+            return;
+        }
 
-//        HttpURLConnection connection = null;
-//        try {
-//            JSONObject body = new JSONObject();
-//            body.put("chatId", chatId);
-//            body.put("text", pesan);
-//            body.put("session", koneksiDBWA.SESSIONWAHAFOKASIR());
+        HttpURLConnection connection = null;
+        try {
+            JSONObject body = new JSONObject();
+            body.put("chatId", chatId);
+            body.put("text", pesan);
+            body.put("session", koneksiDB.SESSIONWAHAFOKASIR());
 
-//            URL url = new URL(urlWaha + "/api/sendText");
-//            connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-//            connection.setRequestProperty("Accept", "application/json");
-//            String apiKey = koneksiDBWA.APIKEYWAHAFOKASIR();
-//            if (!apiKey.isEmpty()) {
-//                connection.setRequestProperty("X-Api-Key", apiKey);
-//            }
-//            connection.setConnectTimeout(10000);
-//            connection.setReadTimeout(15000);
-//            connection.setDoOutput(true);
+            URL url = new URL(urlWaha + "/api/sendText");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+            String apiKey = koneksiDB.APIKEYWAHAFOKASIR();
+            if (!apiKey.isEmpty()) {
+                connection.setRequestProperty("X-Api-Key", apiKey);
+            }
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(15000);
+            connection.setDoOutput(true);
 
-//            try (OutputStream output = connection.getOutputStream()) {
-//                output.write(body.toString().getBytes(StandardCharsets.UTF_8));
-//            }
+            try (OutputStream output = connection.getOutputStream()) {
+                output.write(body.toString().getBytes(StandardCharsets.UTF_8));
+            }
 
-//            int statusCode = connection.getResponseCode();
-//            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
-//            StringBuilder responseBuilder = new StringBuilder();
-//            if (input != null) {
-//                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        responseBuilder.append(line);
-//                    }
-//                }
-//            }
+            int statusCode = connection.getResponseCode();
+            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
+            StringBuilder responseBuilder = new StringBuilder();
+            if (input != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                }
+            }
 
-//            String response = responseBuilder.toString();
-//            if (statusCode >= 400) {
-//                String reason = "HTTP " + statusCode;
-//                System.out.println("Notif : Gagal kirim WA WAHA, reason : " + reason);
-//                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, chatId, pesan, null, reason, response,
-//                        "FAILED");
-//            } else {
-//                System.out.println("Notif WA " + tipePesan + " (WAHA) : HTTP " + statusCode + " -> " + response);
-//                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, chatId, pesan, null, "OK", response,
-//                        "SENT");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Notif : Gagal kirim WA via WAHA : " + e);
-//            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, chatId, pesan, null,
-//                    "Exception : " + e.getMessage(), "", "FAILED");
-//        } finally {
-//            if (connection != null) {
-//                connection.disconnect();
-//            }
-//        }
+            String response = responseBuilder.toString();
+            if (statusCode >= 400) {
+                String reason = "HTTP " + statusCode;
+                System.out.println("Notif : Gagal kirim WA WAHA, reason : " + reason);
+                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, chatId, pesan, null, reason, response,
+                        "FAILED");
+            } else {
+                System.out.println("Notif WA " + tipePesan + " (WAHA) : HTTP " + statusCode + " -> " + response);
+                simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, chatId, pesan, null, "OK", response,
+                        "SENT");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : Gagal kirim WA via WAHA : " + e);
+            simpanFallbackWaFonnte(noRawat, noRm, namaPasien, tipePesan, chatId, pesan, null,
+                    "Exception : " + e.getMessage(), "", "FAILED");
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 
     /**
@@ -18447,19 +18444,19 @@ public final class DlgReg extends javax.swing.JDialog {
      */
     private void kirimWa(String noRawat, String noRm, String namaPasien, String tipePesan, String noWa, String pesan,
             Long scheduleUnix) {
-//        String gateway = koneksiDBWA.GATEWAYNOTIFWA();
-//        if (gateway.equals("OFF")) {
-//            System.out.println("Notif : GATEWAYNOTIFWA=OFF. Pesan " + tipePesan + " tidak dikirim.");
-//            return;
-//        }
+        String gateway = koneksiDB.GATEWAYNOTIFWA();
+        if (gateway.equals("OFF")) {
+            System.out.println("Notif : GATEWAYNOTIFWA=OFF. Pesan " + tipePesan + " tidak dikirim.");
+            return;
+        }
 
-//        if (scheduleUnix != null && scheduleUnix.longValue() > 0L) {
-//            kirimWaViaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, scheduleUnix);
-//        } else if (gateway.equals("WAHA")) {
-//            kirimWaViaWaha(noRawat, noRm, namaPasien, tipePesan, noWa, pesan);
-//        } else {
-//            kirimWaViaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, scheduleUnix);
-//        }
+        if (scheduleUnix != null && scheduleUnix.longValue() > 0L) {
+            kirimWaViaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, scheduleUnix);
+        } else if (gateway.equals("WAHA")) {
+            kirimWaViaWaha(noRawat, noRm, namaPasien, tipePesan, noWa, pesan);
+        } else {
+            kirimWaViaFonnte(noRawat, noRm, namaPasien, tipePesan, noWa, pesan, scheduleUnix);
+        }
     }
 
     private void kirimWaAsync(final String noRawat, final String noRm, final String namaPasien,

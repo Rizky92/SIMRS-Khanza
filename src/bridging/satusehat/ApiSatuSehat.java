@@ -1,8 +1,8 @@
-package bridging.satusehat.klaim;
+package bridging.satusehat;
 
+import bridging.ApiBPJSAesKeySpec;
 import bridging.ApiBPJSEnc;
 import bridging.ApiBPJSLZString;
-import bridging.ApiBPJSAesKeySpec;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;

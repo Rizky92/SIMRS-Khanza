@@ -3,6 +3,7 @@
  */
 package bridging.satusehat.klaim;
 
+import bridging.ApiSatuSehat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -200,7 +201,7 @@ public class SatuSehatPurificationDecision {
     private Konteks ambilKonteks(String noRawat) {
         Konteks k = new Konteks();
         k.idOrg = nz(koneksiDB.IDSATUSEHAT()).trim();
-//        k.idOrgBpjs = nz(koneksiDB.IDORGBPJSSATUSEHAT()).trim();
+        k.idOrgBpjs = nz(koneksiDB.IDORGBPJSSATUSEHAT()).trim();
         try {
             PreparedStatement p = koneksi.prepareStatement(
                     "select ifnull(id_claimresponse_purifikasi,'') as id_cr, "

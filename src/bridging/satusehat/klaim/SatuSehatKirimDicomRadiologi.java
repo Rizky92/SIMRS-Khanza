@@ -1,6 +1,6 @@
 package bridging.satusehat.klaim;
 
-import bridging.ApiOrthanc;
+import bridging.satusehat.ApiOrthanc;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.sql.Connection;
@@ -71,10 +71,10 @@ public class SatuSehatKirimDicomRadiologi {
         }
         int portRouter;
         try {
-//            portRouter = Integer.parseInt(koneksiDB.PORTDICOMROUTER().trim());
+            portRouter = Integer.parseInt(koneksiDB.PORTDICOMROUTER().trim());
         } catch (Exception e) {
-//            System.out.println("Notifikasi citra radiologi : PORTDICOMROUTER tidak valid ("
-//                    + koneksiDB.PORTDICOMROUTER() + "). Dilewati.");
+            System.out.println("Notifikasi citra radiologi : PORTDICOMROUTER tidak valid ("
+                    + koneksiDB.PORTDICOMROUTER() + "). Dilewati.");
             return false;
         }
         siapkanTabel();
@@ -107,30 +107,30 @@ public class SatuSehatKirimDicomRadiologi {
                             + " pakai menu \"Kirim DICOM Router Satu Sehat\" dgn filter \"Data belum terkirim\" dimatikan.");
                     continue;
                 }
-//                boolean ok = orthanc.sendStudyByAccessionNumber(
-//                        order.noOrder, idEncounter.trim(),
-//                        koneksiDB.AETITLEDICOMROUTER(),
-//                        koneksiDB.URLDICOMROUTER(),
-//                        portRouter);
-//                if (!ok) {
-//                    gagal++;
-//                    System.out.println("Bundle: citra radiologi order " + order.noOrder
-//                            + " GAGAL dikirim ke router.");
-//                    continue;
-//                }
-//                dikirim++;
+                boolean ok = orthanc.sendStudyByAccessionNumber(
+                        order.noOrder, idEncounter.trim(),
+                        koneksiDB.AETITLEDICOMROUTER(),
+                        koneksiDB.URLDICOMROUTER(),
+                        portRouter);
+                if (!ok) {
+                    gagal++;
+                    System.out.println("Bundle: citra radiologi order " + order.noOrder
+                            + " GAGAL dikirim ke router.");
+                    continue;
+                }
+                dikirim++;
                 // Router membuat ImagingStudy secara async, jadi id belum tentu ada tepat setelah store
                 // -> retry. Bila tetap kosong dlm rentang retry, tidak ada id yang tersimpan sehingga
                 // order ini tetap dianggap belum terkirim dan dicoba lagi pada kiriman klaim berikutnya.
-//                String idImaging = ambilIdImaging(order.noOrder);
-//                if (!idImaging.isEmpty()) {
-//                    adaImagingBaru = true;
-//                }
-//                for (String kdJenisPrw : order.kdJenisPrw) {
-//                    simpanTracking(order.noOrder, kdJenisPrw, order.idServiceRequest, idImaging);
-//                }
-//                System.out.println("Bundle: citra radiologi order " + order.noOrder + " terkirim (id_imaging="
-//                        + (idImaging.isEmpty() ? "(belum terindeks)" : idImaging) + ")");
+                String idImaging = ambilIdImaging(order.noOrder);
+                if (!idImaging.isEmpty()) {
+                    adaImagingBaru = true;
+                }
+                for (String kdJenisPrw : order.kdJenisPrw) {
+                    simpanTracking(order.noOrder, kdJenisPrw, order.idServiceRequest, idImaging);
+                }
+                System.out.println("Bundle: citra radiologi order " + order.noOrder + " terkirim (id_imaging="
+                        + (idImaging.isEmpty() ? "(belum terindeks)" : idImaging) + ")");
             }
             System.out.println("Citra radiologi " + noRawat + " : selesai. " + daftar.size()
                     + " order, " + dikirim + " terkirim, " + gagal + " gagal, " + dilewat + " dilewati.");

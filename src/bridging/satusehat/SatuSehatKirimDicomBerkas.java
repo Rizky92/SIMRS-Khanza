@@ -1,10 +1,9 @@
 /*
   by Mas Elkhanza
  */
-package bridging.satusehat.klaim;
+package bridging.satusehat;
 
-import bridging.satusehat.ApiOrthanc;
-import bridging.satusehat.ApiOrthancKirimBerkas;
+import bridging.satusehat.klaim.SatuSehatCekNIK;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -632,24 +631,24 @@ public final class SatuSehatKirimDicomBerkas extends javax.swing.JDialog {
                 try {
                     ApiOrthancKirimBerkas orthanc = new ApiOrthancKirimBerkas();
                     // Alur: upload berkas ke Orthanc (DISIMPAN) -> suntik AdmissionID=Encounter ID -> C-STORE ke DICOM Router.
-//                    boolean success = orthanc.uploadAndSendToRouter(
-//                            lokasiFileDicom, // path file DICOM (dari berkas_digital_perawatan_dicom)
-//                            idEncounter, // Encounter ID -> disuntik sbg AdmissionID (0038,0010); router mewajibkannya
-//                            koneksiDB.AETITLEDICOMROUTER(), // target AE title (terdaftar di Orthanc)
-//                            koneksiDB.URLDICOMROUTER(), // target host
-//                            Integer.parseInt(koneksiDB.PORTDICOMROUTER()) // target port
-//                    );
+                    boolean success = orthanc.uploadAndSendToRouter(
+                            lokasiFileDicom, // path file DICOM (dari berkas_digital_perawatan_dicom)
+                            idEncounter, // Encounter ID -> disuntik sbg AdmissionID (0038,0010); router mewajibkannya
+                            koneksiDB.AETITLEDICOMROUTER(), // target AE title (terdaftar di Orthanc)
+                            koneksiDB.URLDICOMROUTER(), // target host
+                            Integer.parseInt(koneksiDB.PORTDICOMROUTER()) // target port
+                    );
 
-//                    if (success) {
-//                        if (idImaging.equals("")) {
-//                            idImaging = cekViaSatuSehat.getImagingStudyID(accession);
-//                        }
-//                        simpanLogDicomRouter(noRawat, kode, accession, idImaging);
-//                        System.out.println("Study sent successfully");
-//                        tbObat.setValueAt(false, i, 0);
-//                    } else {
-//                        System.out.println("Failed to send study");
-//                    }
+                    if (success) {
+                        if (idImaging.equals("")) {
+                            idImaging = cekViaSatuSehat.getImagingStudyID(accession);
+                        }
+                        simpanLogDicomRouter(noRawat, kode, accession, idImaging);
+                        System.out.println("Study sent successfully");
+                        tbObat.setValueAt(false, i, 0);
+                    } else {
+                        System.out.println("Failed to send study");
+                    }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : " + e);
                 }

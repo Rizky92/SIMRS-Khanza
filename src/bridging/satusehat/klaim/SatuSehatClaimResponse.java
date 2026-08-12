@@ -3,7 +3,7 @@
  */
 package bridging.satusehat.klaim;
 
-//import bridging.SatuSehatWebhookEvent;
+import bridging.satusehat.ApiSatuSehat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
@@ -82,49 +82,49 @@ public class SatuSehatClaimResponse {
     public Hasil sinkron(String noRawat) {
         Hasil h = new Hasil();
         h.noRawat = noRawat;
-//        String orgBpjs = nz(koneksiDB.IDORGBPJSSATUSEHAT()).trim();
-//        if (orgBpjs.equals("")) {
-//            h.catatan = "IDORGBPJSSATUSEHAT kosong di setting/database.xml";
-//            System.out.println("ClaimResponse " + noRawat + " : " + h.catatan);
-//            return h;
-//        }
+        String orgBpjs = nz(koneksiDB.IDORGBPJSSATUSEHAT()).trim();
+        if (orgBpjs.equals("")) {
+            h.catatan = "IDORGBPJSSATUSEHAT kosong di setting/database.xml";
+            System.out.println("ClaimResponse " + noRawat + " : " + h.catatan);
+            return h;
+        }
         h.noSep = ambilNoSep(noRawat);
         if (h.noSep.equals("")) {
             h.catatan = "SEP tidak ditemukan";
             return h;
         }
-//        JsonNode hasil = cariClaimResponse(h.noSep, orgBpjs);
-//        if (hasil == null) {
-//            h.catatan = "gagal/kosong dari server";
-//            return h;
-//        }
-//        for (JsonNode cr : kumpulkanResource(hasil)) {
-//            String subType = nz(cr.path("subType").path("coding").path(0).path("code").asText()).trim();
-//            String id = nz(cr.path("id").asText()).trim();
-//            String status = bacaStatus(cr);
-//            String disposition = nz(cr.path("disposition").asText()).trim();
-//            String raw = cr.toString();
-//            String batch = bacaIdentifier(cr, "claim-batch-number");
-//            if (!batch.equals("")) h.noBatch = batch;
-//            if (fasaVerifikasi(subType, cr)) {
-//                h.kodeVerifikasi = bacaKodeStatus(cr);
-//                h.nilaiDiajukan = bacaTotal(cr, "submitted");
-//                h.nilaiDisetujui = bacaTotal(cr, "benefit");
-//                h.nilaiCopay = bacaCopay(cr);
-//                h.nilaiBayar = cr.path("payment").path("amount").path("value").asDouble(0);
-//                h.tglBayar = nz(cr.path("payment").path("date").asText()).trim();
-//                simpanVerifikasi(noRawat, id, status, disposition, raw, batch, h);
-//                h.adaVerifikasi = true;
-//                h.statusVerifikasi = status;
-//            } else {
+        JsonNode hasil = cariClaimResponse(h.noSep, orgBpjs);
+        if (hasil == null) {
+            h.catatan = "gagal/kosong dari server";
+            return h;
+        }
+        for (JsonNode cr : kumpulkanResource(hasil)) {
+            String subType = nz(cr.path("subType").path("coding").path(0).path("code").asText()).trim();
+            String id = nz(cr.path("id").asText()).trim();
+            String status = bacaStatus(cr);
+            String disposition = nz(cr.path("disposition").asText()).trim();
+            String raw = cr.toString();
+            String batch = bacaIdentifier(cr, "claim-batch-number");
+            if (!batch.equals("")) h.noBatch = batch;
+            if (fasaVerifikasi(subType, cr)) {
+                h.kodeVerifikasi = bacaKodeStatus(cr);
+                h.nilaiDiajukan = bacaTotal(cr, "submitted");
+                h.nilaiDisetujui = bacaTotal(cr, "benefit");
+                h.nilaiCopay = bacaCopay(cr);
+                h.nilaiBayar = cr.path("payment").path("amount").path("value").asDouble(0);
+                h.tglBayar = nz(cr.path("payment").path("date").asText()).trim();
+                simpanVerifikasi(noRawat, id, status, disposition, raw, batch, h);
+                h.adaVerifikasi = true;
+                h.statusVerifikasi = status;
+            } else {
                 // Default purifikasi: subType kosong pada langkah 8 tetap diperlakukan purifikasi.
                 // Fase ini tidak membawa angka — kolom nilai_* sengaja tidak disentuh.
                 // (Lihat fasaVerifikasi: justru ketiadaan angka itulah pembeda strukturalnya.)
-//                simpanPurifikasi(noRawat, id, status, disposition, raw, batch);
-//                h.adaPurifikasi = true;
-//                h.statusPurifikasi = status;
-//            }
-//        }
+                simpanPurifikasi(noRawat, id, status, disposition, raw, batch);
+                h.adaPurifikasi = true;
+                h.statusPurifikasi = status;
+            }
+        }
         if (!h.adaRespons()) h.catatan = "belum ada ClaimResponse untuk SEP " + h.noSep;
         StringBuilder log = new StringBuilder("ClaimResponse " + noRawat + " (SEP " + h.noSep + ") : "
                 + "purifikasi=" + (h.adaPurifikasi ? h.statusPurifikasi : "-")
@@ -220,8 +220,7 @@ public class SatuSehatClaimResponse {
         List<Long> ids = new ArrayList<>();
         try (PreparedStatement p = koneksi.prepareStatement(
                 "select id, ifnull(payload,'') as payload from satu_sehat_task_webhook "
-//                + "where diproses=0 and " + SatuSehatWebhookEvent.klausaBukanTte("payload") + " "
-                + "where diproses=0 "
+                + "where diproses=0 and " + SatuSehatWebhookEvent.klausaBukanTte("payload") + " "
                 + "order by id asc limit ?")) {
             p.setInt(1, maksimal);
             try (ResultSet r = p.executeQuery()) {
@@ -243,11 +242,11 @@ public class SatuSehatClaimResponse {
         for (int i = 0; i < ids.size(); i++) {
             long id = ids.get(i);
             try {
-//                if (SatuSehatWebhookEvent.milikTte(payload.get(i))) {
+                if (SatuSehatWebhookEvent.milikTte(payload.get(i))) {
                     // Jaring pengaman bila penyaring SQL meleset: JANGAN ditandai selesai,
                     // itu jatah DlgTTESatuSehat.
-//                    continue;
-//                }
+                    continue;
+                }
                 JsonNode akar = mapper.readTree(payload.get(i));
                 JsonNode fhir = cariFhir(akar);
                 String jenis = nz(fhir.path("resourceType").asText()).trim();
@@ -380,8 +379,7 @@ public class SatuSehatClaimResponse {
     public int jumlahSinyalMenunggu() {
         try (PreparedStatement p = koneksi.prepareStatement(
                 "select count(*) from satu_sehat_task_webhook "
-//                + "where diproses=0 and " + SatuSehatWebhookEvent.klausaBukanTte("payload"));
-                + "where diproses=0 ");
+                + "where diproses=0 and " + SatuSehatWebhookEvent.klausaBukanTte("payload"));
                 ResultSet r = p.executeQuery()) {
             if (r.next()) return r.getInt(1);
         } catch (Exception e) {

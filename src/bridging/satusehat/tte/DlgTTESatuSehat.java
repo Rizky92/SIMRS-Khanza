@@ -4,7 +4,6 @@
  */
 package bridging.satusehat.tte;
 
-import bridging.satusehat.tte.SatuSehatSignatureState.Status;
 import com.fasterxml.jackson.databind.JsonNode;
 import fungsi.koneksiDB;
 import java.awt.BorderLayout;
@@ -81,7 +80,7 @@ public class DlgTTESatuSehat extends JDialog {
         public String taskUuid = "";
         public String signer = "";     // nama pihak yang harus menandatangani baris ini
         public String signerIhs = "";  // IHS Practitioner penanda (agent Provenance)
-        public Status status = Status.BUAT;
+        public SatuSehatSignatureState.Status status = SatuSehatSignatureState.Status.BUAT;
 
         /** Peran penanda pada baris ini: author/attester/verifier/performer/enterer. */
         public String peran = "author";
@@ -467,7 +466,7 @@ public class DlgTTESatuSehat extends JDialog {
                     return;
                 }
                 DokumenTte d = curDokumen.get(r);
-                if (d.status == Status.SUDAH) {
+                if (d.status == SatuSehatSignatureState.Status.SUDAH) {
                     verifikasiDokumen(d);
                 } else {
                     JOptionPane.showMessageDialog(DlgTTESatuSehat.this,
@@ -832,7 +831,7 @@ public class DlgTTESatuSehat extends JDialog {
         int total = curDokumen.size();
         int sudah = 0;
         for (DokumenTte d : curDokumen) {
-            if (d.status == Status.SUDAH) {
+            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
                 sudah++;
             }
         }
@@ -854,7 +853,7 @@ public class DlgTTESatuSehat extends JDialog {
             // Jangan centang baris yang sudah TTE maupun yang masih menunggu giliran penanda
             // sebelumnya (model serial); menghapus centang tetap boleh untuk semua baris.
             DokumenTte dd = curDokumen.get(modelRow);
-            if (nilai && (dd.status == Status.SUDAH || dd.terkunci)) {
+            if (nilai && (dd.status == SatuSehatSignatureState.Status.SUDAH || dd.terkunci)) {
                 continue;
             }
             modelDok.setValueAt(nilai, modelRow, 0);
@@ -921,7 +920,7 @@ public class DlgTTESatuSehat extends JDialog {
             // Default TIDAK tercentang -> operator memilih sendiri (checkbox / klik kanan "Pilih Semua").
             modelDok.addRow(new Object[]{Boolean.FALSE, d.jenis, d.labelPeran(), nz(d.signer),
                 d.targetRef, labelStatusBaris(d)});
-            if (d.status == Status.SUDAH) {
+            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
                 sudah++;
             } else if (d.terkunci) {
                 menunggu++;
@@ -967,14 +966,14 @@ public class DlgTTESatuSehat extends JDialog {
         for (DokumenTte d : curDokumen) {
             d.terkunci = false;
             d.alasanKunci = "";
-            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == Status.SUDAH) {
+            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == SatuSehatSignatureState.Status.SUDAH) {
                 continue;
             }
             for (DokumenTte lain : curDokumen) {
                 if (!lain.targetRef.equals(d.targetRef) || lain.urutan >= d.urutan) {
                     continue;
                 }
-                if (lain.status != Status.SUDAH) {
+                if (lain.status != SatuSehatSignatureState.Status.SUDAH) {
                     d.terkunci = true;
                     d.alasanKunci = "menunggu " + (nz(lain.signer).equals("") ? "giliran " + lain.urutan : lain.signer);
                 }
@@ -1040,7 +1039,7 @@ public class DlgTTESatuSehat extends JDialog {
         for (int i = 0; i < curDokumen.size(); i++) {
             Boolean centang = (Boolean) modelDok.getValueAt(i, 0);
             DokumenTte d = curDokumen.get(i);
-            if (Boolean.TRUE.equals(centang) && d.status != Status.SUDAH && !d.terkunci) {
+            if (Boolean.TRUE.equals(centang) && d.status != SatuSehatSignatureState.Status.SUDAH && !d.terkunci) {
                 dicentang.add(d);
             }
         }
@@ -1058,9 +1057,9 @@ public class DlgTTESatuSehat extends JDialog {
         final List<DokumenTte> baru = new ArrayList<>();
         String uuidAda = "";
         for (DokumenTte d : dicentang) {
-            if (d.status == Status.DITOLAK && !nz(d.idProvenance).equals("")) {
+            if (d.status == SatuSehatSignatureState.Status.DITOLAK && !nz(d.idProvenance).equals("")) {
                 reuse.add(d);
-            } else if (d.status == Status.DITOLAK) {
+            } else if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
                 // Ditolak tapi id_provenance tak tersimpan -> terpaksa buat Provenance+Task baru.
                 d.taskUuid = "";
                 d.idProvenance = "";
@@ -1158,7 +1157,7 @@ public class DlgTTESatuSehat extends JDialog {
                     logSukses("Task baru " + uuid + " dibuat untuk Provenance " + provIds + ".");
                     for (DokumenTte d : grup) {
                         d.taskUuid = uuid;
-                        d.status = Status.BELUM;
+                        d.status = SatuSehatSignatureState.Status.BELUM;
                         store.simpan(noRawat, d.jenis, d.targetRef, d.idProvenance, uuid, "requested", idPractitioner);
                     }
                     return uuid;
@@ -1177,7 +1176,7 @@ public class DlgTTESatuSehat extends JDialog {
                     }
                     logSukses(hf.pesan);
                     for (DokumenTte d : grup) {
-                        d.status = Status.BELUM;
+                        d.status = SatuSehatSignatureState.Status.BELUM;
                     }
                     return hf.taskUuid;
                 }
@@ -1212,7 +1211,7 @@ public class DlgTTESatuSehat extends JDialog {
                     DokumenTte d = grup.get(i);
                     d.idProvenance = (i < hb.provIds.size()) ? hb.provIds.get(i) : "";
                     d.taskUuid = uuid;
-                    d.status = Status.BELUM;
+                    d.status = SatuSehatSignatureState.Status.BELUM;
                     store.simpan(noRawat, d.jenis, d.targetRef, d.idProvenance, uuid, "requested", idPractitioner);
                 }
                 return uuid;
@@ -1258,7 +1257,7 @@ public class DlgTTESatuSehat extends JDialog {
         }
         final java.util.LinkedHashSet<String> uuids = new java.util.LinkedHashSet<>();
         for (DokumenTte d : curDokumen) {
-            if (d.taskUuid != null && !d.taskUuid.equals("") && d.status != Status.SUDAH) {
+            if (d.taskUuid != null && !d.taskUuid.equals("") && d.status != SatuSehatSignatureState.Status.SUDAH) {
                 uuids.add(d.taskUuid);
             }
         }
@@ -1297,7 +1296,7 @@ public class DlgTTESatuSehat extends JDialog {
                 refreshDokTabel();
                 int sudah = 0;
                 for (DokumenTte d : curDokumen) {
-                    if (d.status == Status.SUDAH) {
+                    if (d.status == SatuSehatSignatureState.Status.SUDAH) {
                         sudah++;
                     }
                 }
@@ -1318,7 +1317,7 @@ public class DlgTTESatuSehat extends JDialog {
     private void bukaPopupQr(String taskUuid) {
         this.taskAktif = taskUuid;
         this.qrIssuedSec = 0L;
-//        this.basisApplink = nz(koneksiDB.URLAPPLINKSATUSEHAT());
+        this.basisApplink = nz(koneksiDB.URLAPPLINKSATUSEHAT());
         tutupPopupQr();
 
         if (basisApplink.equals("")) {
@@ -1658,7 +1657,7 @@ public class DlgTTESatuSehat extends JDialog {
             if (!uuid.equals(d.taskUuid)) {
                 continue;
             }
-            Status ui = null;
+            SatuSehatSignatureState.Status ui = null;
             if (r.adaOutput()) {
                 String out = r.perProv.get(nz(d.idProvenance));
                 if (out != null) {
@@ -1675,16 +1674,16 @@ public class DlgTTESatuSehat extends JDialog {
     }
 
     /** Ringkasan status seluruh dokumen satu Task untuk keputusan popup QR. null bila campuran / tanpa dokumen. */
-    private Status statusAgregat(String uuid) {
+    private SatuSehatSignatureState.Status statusAgregat(String uuid) {
         int total = 0, sudah = 0, tolak = 0, pending = 0;
         for (DokumenTte d : curDokumen) {
             if (!uuid.equals(d.taskUuid)) {
                 continue;
             }
             total++;
-            if (d.status == Status.SUDAH) {
+            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
                 sudah++;
-            } else if (d.status == Status.DITOLAK) {
+            } else if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
                 tolak++;
             } else {
                 pending++;
@@ -1694,13 +1693,13 @@ public class DlgTTESatuSehat extends JDialog {
             return null;
         }
         if (pending > 0) {
-            return Status.DIPROSES;   // masih ada dokumen menunggu tanda tangan
+            return SatuSehatSignatureState.Status.DIPROSES;   // masih ada dokumen menunggu tanda tangan
         }
         if (sudah == total) {
-            return Status.SUDAH;      // semua tertandatangani
+            return SatuSehatSignatureState.Status.SUDAH;      // semua tertandatangani
         }
         if (tolak == total) {
-            return Status.DITOLAK;    // semua gagal/ditolak
+            return SatuSehatSignatureState.Status.DITOLAK;    // semua gagal/ditolak
         }
         return null;                  // CAMPURAN (sebagian sukses) — pemanggil beri pesan rinci
     }
@@ -1712,9 +1711,9 @@ public class DlgTTESatuSehat extends JDialog {
             if (!uuid.equals(d.taskUuid)) {
                 continue;
             }
-            if (d.status == Status.SUDAH) {
+            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
                 sudah++;
-            } else if (d.status == Status.DITOLAK) {
+            } else if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
                 gagal++;
             }
         }
@@ -1731,7 +1730,7 @@ public class DlgTTESatuSehat extends JDialog {
             try {
                 SatuSehatProvenanceStore.Baris b = store.ambil(curNoRawat, d.targetRef, d.signerIhs);
                 if (b != null && !nz(b.status).equals("")) {
-                    Status ui = SatuSehatSignatureState.uiState(nz(b.taskUuid), mapEnumKeStatus(b.status), false);
+                    SatuSehatSignatureState.Status ui = SatuSehatSignatureState.uiState(nz(b.taskUuid), mapEnumKeStatus(b.status), false);
                     if (ui != null) {
                         d.status = ui;
                     }
@@ -1772,13 +1771,13 @@ public class DlgTTESatuSehat extends JDialog {
                     }
                     terapkanHasil(uuid, r);
                     refreshDokTabel();
-                    Status agg = statusAgregat(uuid);
-                    if (agg == Status.SUDAH) {
+                    SatuSehatSignatureState.Status agg = statusAgregat(uuid);
+                    if (agg == SatuSehatSignatureState.Status.SUDAH) {
                         tutupPopupQr();
                         JOptionPane.showMessageDialog(DlgTTESatuSehat.this,
                                 "Berkas sudah ditandatangani.\n"
                                 + "Klik dua kali berkas \"Sudah TTE\" untuk melihat verifikasi tanda tangan.");
-                    } else if (agg == Status.DITOLAK) {
+                    } else if (agg == SatuSehatSignatureState.Status.DITOLAK) {
                         tutupPopupQr();
                         JOptionPane.showMessageDialog(DlgTTESatuSehat.this, "Permintaan TTE ditolak/gagal. Silakan ulangi.");
                     } else if (agg == null && r.adaOutput()) {
@@ -2010,7 +2009,7 @@ public class DlgTTESatuSehat extends JDialog {
         JDialog dlg = new JDialog(this, "Verifikasi Tanda Tangan — " + d.jenis, true);
         dlg.setLayout(new BorderLayout(10, 10));
 
-        // Header status.
+        // Header SatuSehatSignatureState.status.
         JPanel header = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 8));
         JLabel status = new JLabel(h.ditandatangani
                 ? "✔  Tanda tangan elektronik ditemukan (" + h.jumlahSignature + " signature)"
@@ -2346,7 +2345,7 @@ public class DlgTTESatuSehat extends JDialog {
 
         List<DokumenTte> siap = new ArrayList<>();
         for (DokumenTte d : baris) {
-            if (d.status != Status.SUDAH && !d.terkunci) {
+            if (d.status != SatuSehatSignatureState.Status.SUDAH && !d.terkunci) {
                 siap.add(d);
             }
         }
@@ -2388,7 +2387,7 @@ public class DlgTTESatuSehat extends JDialog {
 
         // Sudah pernah dibuatkan Task dan belum ditolak -> tampilkan lagi QR-nya, jangan buat kedua.
         for (DokumenTte d : grup) {
-            if (!nzt(d.taskUuid).equals("") && d.status != Status.DITOLAK) {
+            if (!nzt(d.taskUuid).equals("") && d.status != SatuSehatSignatureState.Status.DITOLAK) {
                 out.berhasil = true;
                 out.taskUuid = d.taskUuid;
                 return out;
@@ -2399,11 +2398,11 @@ public class DlgTTESatuSehat extends JDialog {
             List<DokumenTte> reuse = new ArrayList<>();
             List<DokumenTte> baru = new ArrayList<>();
             for (DokumenTte d : grup) {
-                if (d.status == Status.DITOLAK && !nzt(d.idProvenance).equals("")) {
+                if (d.status == SatuSehatSignatureState.Status.DITOLAK && !nzt(d.idProvenance).equals("")) {
                     reuse.add(d);
                 } else {
                     d.taskUuid = "";
-                    if (d.status == Status.DITOLAK) {
+                    if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
                         d.idProvenance = "";
                     }
                     baru.add(d);
@@ -2509,14 +2508,14 @@ public class DlgTTESatuSehat extends JDialog {
         for (DokumenTte d : baris) {
             d.terkunci = false;
             d.alasanKunci = "";
-            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == Status.SUDAH) {
+            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == SatuSehatSignatureState.Status.SUDAH) {
                 continue;
             }
             for (DokumenTte lain : baris) {
                 if (!lain.targetRef.equals(d.targetRef) || lain.urutan >= d.urutan) {
                     continue;
                 }
-                if (lain.status != Status.SUDAH) {
+                if (lain.status != SatuSehatSignatureState.Status.SUDAH) {
                     d.terkunci = true;
                     d.alasanKunci = "menunggu "
                             + (nzt(lain.signer).equals("") ? "giliran " + lain.urutan : lain.signer);
@@ -2799,7 +2798,7 @@ public class DlgTTESatuSehat extends JDialog {
         PopupQrCepat(Component pemilik, String jenis, String namaPenanda, String peran, String taskUuid) {
             super(SwingUtilities.getWindowAncestor(pemilik), "TTE - " + jenis, ModalityType.APPLICATION_MODAL);
             this.taskUuid = nzt(taskUuid);
-//            this.basisApplink = nzt(koneksiDB.URLAPPLINKSATUSEHAT());
+            this.basisApplink = nzt(koneksiDB.URLAPPLINKSATUSEHAT());
 
             Font plain = new Font("Tahoma", Font.PLAIN, 11);
             JPanel isi = new JPanel(new BorderLayout(6, 6));

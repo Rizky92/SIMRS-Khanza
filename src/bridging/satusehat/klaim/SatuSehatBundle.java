@@ -4,6 +4,9 @@
  */
 
 package bridging.satusehat.klaim;
+import bridging.satusehat.ApiINACBG;
+import bridging.satusehat.ApiSatuSehat;
+import bridging.satusehat.SatuSehatHttpLogger;
 import bridging.satusehat.tte.DlgTTESatuSehat;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -1198,7 +1201,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
                 + " berhasil, " + gagal + " gagal/dilewati ===");
         selesaiProgres(mode + " selesai : " + antrian.size() + " pasien diproses, "
                 + berhasil + " berhasil, " + gagal + " gagal/dilewati.");
-        bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.bersihkan();
+        SatuSehatHttpLogger.Konteks.bersihkan();
     }
 
     /** Hasil pengiriman satu no_rawat lewat {@link #kirimSatuNoRawat}. */
@@ -1334,7 +1337,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
             ChkBelumTerkirim.setSelected(belumTerkirimLama);
             if (tgl1Lama != null) DTPCari1.setDate(tgl1Lama);
             if (tgl2Lama != null) DTPCari2.setDate(tgl2Lama);
-            bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.bersihkan();
+            SatuSehatHttpLogger.Konteks.bersihkan();
         }
         return hasil;
     }
@@ -1435,7 +1438,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
                 String pesan;
                 try {
                     // Supaya baris di satu_sehat_log jelas berasal dari form RME, bukan batch bundle.
-                    bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.set(jenis + " (RME)", norwt);
+                    SatuSehatHttpLogger.Konteks.set(jenis + " (RME)", norwt);
                     kirimSenderRME(jenis, norwt, idEncounter);
                     pesan = jenis + " terkirim ke Satu Sehat.\n\n"
                             + "No.Rawat  : " + norwt + "\n"
@@ -1445,7 +1448,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
                             + "\n\nDetail penolakan server ada di konsol dan tabel satu_sehat_log.";
                     System.out.println("Notifikasi kirim " + jenis + " (RME) : " + ex);
                 } finally {
-                    bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.bersihkan();
+                    SatuSehatHttpLogger.Konteks.bersihkan();
                 }
                 final String hasil = pesan;
                 SwingUtilities.invokeLater(new Runnable() {
@@ -1712,7 +1715,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
 
         // === Kirim Bundle (HTTP POST ke base URL FHIR) ===
         String mode = update ? "UPDATE" : "KIRIM";
-        bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.set("Bundle (" + mode + ")", noRawat);
+        SatuSehatHttpLogger.Konteks.set("Bundle (" + mode + ")", noRawat);
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
@@ -2073,38 +2076,37 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
                 + "        ]\n"
                 + "    }\n"
                 + "}";
-//        long mulaiMs = System.currentTimeMillis();
-//        try {
-//            String encryptedRequest = bridging.ApiINACBG.mcEncrypt(requestJson, bridging.ApiINACBG.getKey());
-//            HttpHeaders headerEklaim = new HttpHeaders();
-//            headerEklaim.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-//            String responseBody = new bridging.ApiINACBG().getRest().exchange(
-//                    bridging.ApiINACBG.getUrlWS(), HttpMethod.POST,
-//                    new HttpEntity<>(encryptedRequest, headerEklaim), String.class).getBody();
-//            int durasi = (int)(System.currentTimeMillis() - mulaiMs);
+        long mulaiMs = System.currentTimeMillis();
+        try {
+            String encryptedRequest = ApiINACBG.mcEncrypt(requestJson, ApiINACBG.getKey());
+            HttpHeaders headerEklaim = new HttpHeaders();
+            headerEklaim.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            String responseBody = new ApiINACBG().getRest().exchange(
+                    ApiINACBG.getUrlWS(), HttpMethod.POST,
+                    new HttpEntity<>(encryptedRequest, headerEklaim), String.class).getBody();
+            int durasi = (int)(System.currentTimeMillis() - mulaiMs);
 
-//            if (responseBody == null || responseBody.isEmpty()) {
-//                logWarn("[E-Klaim] No.Rawat " + noRawat + " : respon kosong dari WS eKlaim.");
-//                simpanLog("Set Encounter E-Klaim", noRawat, idEncounter, requestJson, null, "",
-//                        "FAILED", "Response kosong dari server eKlaim.", durasi);
-//                return "Response kosong dari server eKlaim.";
-//            }
-//            String decrypted = bridging.ApiINACBG.mcDecrypt(
-//                    bridging.ApiINACBG.cleanResponse(responseBody), bridging.ApiINACBG.getKey()).trim();
-//            String pesan = bacaPesanEklaim(decrypted);
-//            logSukses("[E-Klaim] No.Rawat " + noRawat + " | SEP " + noSep + " | Encounter "
-//                    + idEncounter + " -> " + pesan);
-//            simpanLog("Set Encounter E-Klaim", noRawat, idEncounter, requestJson, null, decrypted,
-//                    "SUCCESS", null, durasi);
-//            return pesan;
-//        } catch (Exception e) {
-//            int durasi = (int)(System.currentTimeMillis() - mulaiMs);
-//            logError("[E-Klaim] No.Rawat " + noRawat + " : gagal kirim satusehat_encounter_set : " + e);
-//            simpanLog("Set Encounter E-Klaim", noRawat, idEncounter, requestJson, null, null,
-//                    "FAILED", String.valueOf(e), durasi);
-//            return "Gagal : " + e;
-//        }
-        return "Dilewati : kelas bridging.ApiINACBG tidak tersedia.";
+            if (responseBody == null || responseBody.isEmpty()) {
+                logWarn("[E-Klaim] No.Rawat " + noRawat + " : respon kosong dari WS eKlaim.");
+                simpanLog("Set Encounter E-Klaim", noRawat, idEncounter, requestJson, null, "",
+                        "FAILED", "Response kosong dari server eKlaim.", durasi);
+                return "Response kosong dari server eKlaim.";
+            }
+            String decrypted = ApiINACBG.mcDecrypt(
+                    ApiINACBG.cleanResponse(responseBody), ApiINACBG.getKey()).trim();
+            String pesan = bacaPesanEklaim(decrypted);
+            logSukses("[E-Klaim] No.Rawat " + noRawat + " | SEP " + noSep + " | Encounter "
+                    + idEncounter + " -> " + pesan);
+            simpanLog("Set Encounter E-Klaim", noRawat, idEncounter, requestJson, null, decrypted,
+                    "SUCCESS", null, durasi);
+            return pesan;
+        } catch (Exception e) {
+            int durasi = (int)(System.currentTimeMillis() - mulaiMs);
+            logError("[E-Klaim] No.Rawat " + noRawat + " : gagal kirim satusehat_encounter_set : " + e);
+            simpanLog("Set Encounter E-Klaim", noRawat, idEncounter, requestJson, null, null,
+                    "FAILED", String.valueOf(e), durasi);
+            return "Gagal : " + e;
+        }
     }
 
     /** Ambil metadata.message dari balasan eKlaim (objek maupun array); apa adanya bila bukan JSON. */
@@ -3609,7 +3611,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
         langkahKe++;
         // Beritahu pencatat HTTP (SatuSehatHttpLogger) siapa yang sedang mengirim, supaya
         // tiap baris di satu_sehat_log punya service_name & no_rawat yang jelas.
-        bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.set(namaLangkah, noRawatBerjalan);
+        SatuSehatHttpLogger.Konteks.set(namaLangkah, noRawatBerjalan);
         tampilProgres("Mengirim " + namaLangkah + " ...", langkahKe);
         log("STEP", "(" + langkahKe + "/" + TOTAL_LANGKAH + ") Mengirim " + namaLangkah + " ...");
     }
@@ -3621,7 +3623,7 @@ public final class SatuSehatBundle extends javax.swing.JDialog {
      * diukur; nomor langkah sengaja tidak ditambah supaya hitungan x/28 tetap konsisten.
      */
     private void logProgresTanpaUkuran(String namaLangkah, String keterangan) {
-        bridging.satusehat.klaim.SatuSehatHttpLogger.Konteks.set(namaLangkah, noRawatBerjalan);
+        SatuSehatHttpLogger.Konteks.set(namaLangkah, noRawatBerjalan);
         tampilProgres(keterangan, -1);
         log("STEP", keterangan);
     }

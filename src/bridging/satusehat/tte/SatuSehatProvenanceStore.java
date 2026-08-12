@@ -4,7 +4,7 @@
  */
 package bridging.satusehat.tte;
 
-//import bridging.SatuSehatWebhookEvent;
+import bridging.satusehat.klaim.SatuSehatWebhookEvent;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.sql.Connection;
@@ -268,7 +268,7 @@ public class SatuSehatProvenanceStore {
      * Penyaringnya ke ISI payload, BUKAN kolom `event`: `event` hanya nama kanal, dan kanal
      * "ss_klaim" ternyata mengangkut notifikasi taskSignatureDone milik dialog ini juga
      * (7 dari 7 baris). Menyaring dengan nama kanal justru akan memutus TTE.
-     * Yang membaca sisi klaim: bridging.satusehat.klaim.SatuSehatClaimResponse.sinkronDariWebhook().
+     * Yang membaca sisi klaim: satusehatklaim.SatuSehatClaimResponse.sinkronDariWebhook().
      */
     public java.util.List<Sinyal> ambilSinyalBelumDiproses(int maksimal) {
         java.util.List<Sinyal> hasil = new java.util.ArrayList<>();
@@ -278,7 +278,7 @@ public class SatuSehatProvenanceStore {
         try (PreparedStatement p = koneksi.prepareStatement(
                 "select id, ifnull(event,'') as event, ifnull(task_uuid,'') as task_uuid "
                 + "from satu_sehat_task_webhook where diproses=0 "
-//                + "and " + SatuSehatWebhookEvent.klausaTte("payload") + " "
+                + "and " + SatuSehatWebhookEvent.klausaTte("payload") + " "
                 + "order by id asc limit ?")) {
             p.setInt(1, maksimal);
             try (ResultSet r = p.executeQuery()) {

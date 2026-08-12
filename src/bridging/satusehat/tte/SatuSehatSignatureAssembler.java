@@ -4,7 +4,7 @@
  */
 package bridging.satusehat.tte;
 import bridging.ApiSatuSehat;
-import bridging.satusehat.klaim.SatuSehatCekNIK;
+import bridging.SatuSehatCekNIK;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -86,99 +86,98 @@ public class ApiOrthancKirimBerkas {
      * @return true bila upload DAN store ke router berhasil
      */
     public boolean uploadAndSendToRouter(String dicomFilePath, String encounterId, String targetAETitle, String host, int port) {
-//        String orthancUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
-//        String studyTransient = "";   // study hasil modify (dikirim & dibersihkan setelahnya)
-//        try {
+        String orthancUrl = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
+        String studyTransient = "";   // study hasil modify (dikirim & dibersihkan setelahnya)
+        try {
             // 0) Baca byte berkas: coba disk lokal dulu, kalau tak ada ambil via HTTP hybrid web.
-//            if (dicomFilePath == null || dicomFilePath.trim().isEmpty()) {
-//                System.out.println("Path berkas DICOM kosong, dilewati.");
-//                return false;
-//            }
-//            byte[] dicomBytes = bacaBytesBerkas(dicomFilePath.trim());
-//            if (dicomBytes == null || dicomBytes.length == 0) {
-//                System.out.println("Berkas DICOM tidak dapat dibaca (lokal maupun HTTP): " + dicomFilePath.trim());
-//                return false;
-//            }
+            if (dicomFilePath == null || dicomFilePath.trim().isEmpty()) {
+                System.out.println("Path berkas DICOM kosong, dilewati.");
+                return false;
+            }
+            byte[] dicomBytes = bacaBytesBerkas(dicomFilePath.trim());
+            if (dicomBytes == null || dicomBytes.length == 0) {
+                System.out.println("Berkas DICOM tidak dapat dibaca (lokal maupun HTTP): " + dicomFilePath.trim());
+                return false;
+            }
 
             // 1) Upload ke Orthanc: POST /instances. Study asli TETAP disimpan di Orthanc.
-//            HttpHeaders upHeaders = new HttpHeaders();
-//            upHeaders.add("Authorization", "Basic " + authEncrypt);
-//            upHeaders.setContentType(MediaType.parseMediaType("application/dicom"));
-//            HttpEntity<byte[]> upEntity = new HttpEntity<byte[]>(dicomBytes, upHeaders);
-//            ResponseEntity<String> upResp = getRest().exchange(
-//                    orthancUrl + "/instances", HttpMethod.POST, upEntity, String.class);
-//            if (upResp.getStatusCode() != HttpStatus.OK) {
-//                System.out.println("Gagal upload berkas ke Orthanc: HTTP " + upResp.getStatusCode());
-//                return false;
-//            }
-//            JsonNode up = mapper.readTree(upResp.getBody());
-//            String studyId = up.path("ParentStudy").asText();
-//            if (studyId.isEmpty()) {
-//                System.out.println("Upload OK tapi ParentStudy kosong. Respons: " + upResp.getBody());
-//                return false;
-//            }
-//            System.out.println("Berkas terupload ke Orthanc (status=" + up.path("Status").asText()
-//                    + "), study=" + studyId);
+            HttpHeaders upHeaders = new HttpHeaders();
+            upHeaders.add("Authorization", "Basic " + authEncrypt);
+            upHeaders.setContentType(MediaType.parseMediaType("application/dicom"));
+            HttpEntity<byte[]> upEntity = new HttpEntity<byte[]>(dicomBytes, upHeaders);
+            ResponseEntity<String> upResp = getRest().exchange(
+                    orthancUrl + "/instances", HttpMethod.POST, upEntity, String.class);
+            if (upResp.getStatusCode() != HttpStatus.OK) {
+                System.out.println("Gagal upload berkas ke Orthanc: HTTP " + upResp.getStatusCode());
+                return false;
+            }
+            JsonNode up = mapper.readTree(upResp.getBody());
+            String studyId = up.path("ParentStudy").asText();
+            if (studyId.isEmpty()) {
+                System.out.println("Upload OK tapi ParentStudy kosong. Respons: " + upResp.getBody());
+                return false;
+            }
+            System.out.println("Berkas terupload ke Orthanc (status=" + up.path("Status").asText()
+                    + "), study=" + studyId);
 
             // 2) Suntik AdmissionID (0038,0010) = Encounter ID. Router MENOLAK DOC DICOM tanpa tag ini
             //    ("AdmissionID (Encounter ID) is missing"). Modify menghasilkan study baru bertag -> itu yg dikirim.
-//            String studyToSend = studyId;
-//            if (encounterId != null && !encounterId.trim().isEmpty()) {
-//                studyTransient = suntikAdmissionID(orthancUrl, studyId, encounterId.trim());
-//                if (!studyTransient.isEmpty()) {
-//                    studyToSend = studyTransient;
-//                    System.out.println("AdmissionID(Encounter)=" + encounterId.trim() + " disuntikkan -> study " + studyToSend);
-//                } else {
-//                    System.out.println("PERINGATAN: gagal suntik AdmissionID; kirim study asli (router mungkin menolak).");
-//                }
-//            } else {
-//                System.out.println("PERINGATAN: Encounter ID kosong; DICOM dikirim tanpa AdmissionID (router akan menolak).");
-//            }
+            String studyToSend = studyId;
+            if (encounterId != null && !encounterId.trim().isEmpty()) {
+                studyTransient = suntikAdmissionID(orthancUrl, studyId, encounterId.trim());
+                if (!studyTransient.isEmpty()) {
+                    studyToSend = studyTransient;
+                    System.out.println("AdmissionID(Encounter)=" + encounterId.trim() + " disuntikkan -> study " + studyToSend);
+                } else {
+                    System.out.println("PERINGATAN: gagal suntik AdmissionID; kirim study asli (router mungkin menolak).");
+                }
+            } else {
+                System.out.println("PERINGATAN: Encounter ID kosong; DICOM dikirim tanpa AdmissionID (router akan menolak).");
+            }
 
             // 3) Pastikan modality router terdaftar dengan benar di Orthanc.
-//            if (!ensureModalityConfigured(targetAETitle, host, port)) {
-//                System.out.println("Failed to configure modality: " + targetAETitle);
-//                return false;
-//            }
+            if (!ensureModalityConfigured(targetAETitle, host, port)) {
+                System.out.println("Failed to configure modality: " + targetAETitle);
+                return false;
+            }
 
             // 4) C-STORE study (bertag AdmissionID) ke DICOM Router (Orthanc yang bicara DIMSE ke router).
-//            String requestBody = String.format(
-//                    "{\"Resources\": [\"%s\"], \"TargetAet\": \"%s\", \"LocalAet\": \"%s\", \"Timeout\": 30, \"StorageCommitment\": false}",
-//                    studyToSend, targetAETitle, koneksiDB.AETITLEORTHANC());
-//            HttpHeaders storeHeaders = new HttpHeaders();
-//            storeHeaders.add("Authorization", "Basic " + authEncrypt);
-//            storeHeaders.setContentType(MediaType.APPLICATION_JSON);
-//            HttpEntity<String> storeEntity = new HttpEntity<String>(requestBody, storeHeaders);
-//            ResponseEntity<String> response = getRest().exchange(
-//                    orthancUrl + "/modalities/" + targetAETitle + "/store",
-//                    HttpMethod.POST, storeEntity, String.class);
-//            if (response.getStatusCode() == HttpStatus.OK) {
-//                System.out.println("Successfully sent study " + studyToSend + " to " + targetAETitle);
-//                return true;
-//            }
-//            System.out.println("Failed to send study " + studyToSend + ": HTTP " + response.getStatusCode()
-//                    + " - " + response.getBody());
-//            return false;
+            String requestBody = String.format(
+                    "{\"Resources\": [\"%s\"], \"TargetAet\": \"%s\", \"LocalAet\": \"%s\", \"Timeout\": 30, \"StorageCommitment\": false}",
+                    studyToSend, targetAETitle, koneksiDB.AETITLEORTHANC());
+            HttpHeaders storeHeaders = new HttpHeaders();
+            storeHeaders.add("Authorization", "Basic " + authEncrypt);
+            storeHeaders.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> storeEntity = new HttpEntity<String>(requestBody, storeHeaders);
+            ResponseEntity<String> response = getRest().exchange(
+                    orthancUrl + "/modalities/" + targetAETitle + "/store",
+                    HttpMethod.POST, storeEntity, String.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println("Successfully sent study " + studyToSend + " to " + targetAETitle);
+                return true;
+            }
+            System.out.println("Failed to send study " + studyToSend + ": HTTP " + response.getStatusCode()
+                    + " - " + response.getBody());
+            return false;
 
-//        } catch (HttpClientErrorException | HttpServerErrorException e) {
-//            System.out.println("HTTP error upload/kirim berkas: " + e.getStatusCode()
-//                    + " - " + e.getResponseBodyAsString());
-//            return false;
-//        } catch (ResourceAccessException e) {
-//            System.out.println("Network error upload/kirim berkas ke Orthanc/" + host + ":" + port
-//                    + " - " + e.getMessage());
-//            return false;
-//        } catch (Exception e) {
-//            System.out.println("Unexpected error uploadAndSendToRouter: " + e.getMessage());
-//            e.printStackTrace();
-//            return false;
-//        } finally {
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            System.out.println("HTTP error upload/kirim berkas: " + e.getStatusCode()
+                    + " - " + e.getResponseBodyAsString());
+            return false;
+        } catch (ResourceAccessException e) {
+            System.out.println("Network error upload/kirim berkas ke Orthanc/" + host + ":" + port
+                    + " - " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error uploadAndSendToRouter: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
             // Hapus study transient hasil modify supaya Orthanc tak menumpuk salinan tiap Kirim.
-//            if (!studyTransient.isEmpty()) {
-//                hapusStudyTransient(orthancUrl, studyTransient);
-//            }
-//        }
-        return false;
+            if (!studyTransient.isEmpty()) {
+                hapusStudyTransient(orthancUrl, studyTransient);
+            }
+        }
     }
 
     /** Salin study dgn AdmissionID(0038,0010)=encounterId via Orthanc modify (KeepSource). Return id study baru, "" bila gagal. */

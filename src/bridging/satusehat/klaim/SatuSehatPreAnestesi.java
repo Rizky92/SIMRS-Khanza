@@ -2,6 +2,8 @@
   by Ananda Widitomo,S.Kom.
  */
 package bridging.satusehat.klaim;
+import bridging.ApiSatuSehat;
+import bridging.SatuSehatCekNIK;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

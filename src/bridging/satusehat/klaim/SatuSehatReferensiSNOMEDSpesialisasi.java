@@ -12,7 +12,7 @@
 
 package bridging.satusehat.klaim;
 
-//import bridging.ApiSNOMED;
+import bridging.satusehat.ApiSNOMED;
 import com.fasterxml.jackson.databind.JsonNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
@@ -417,34 +417,34 @@ public final class SatuSehatReferensiSNOMEDSpesialisasi extends javax.swing.JDia
 
     /** Pencarian langsung ke server SNOMED; hasilnya ditandai "SNOMED" sampai benar-benar dipakai. */
     private void cariServer(String kata) {
-//        ApiSNOMED snomed=new ApiSNOMED(this);
-//        ApiSNOMED.SnomedSearchResult hasil=snomed.searchSnomedConcepts(kata,50,0);
-//        if(!hasil.isSuccess()){
-//            SwingUtilities.invokeLater(() ->
-//                    JOptionPane.showMessageDialog(null,"Maaf, pencarian SNOMED gagal.\n"+hasil.getErrorMessage()));
-//            return;
-//        }
-//        if(hasil.getConcepts()==null||hasil.getConcepts().size()==0){
-//            SwingUtilities.invokeLater(() ->
-//                    JOptionPane.showMessageDialog(null,"Maaf, tidak ada kode SNOMED untuk '"+kata+"'...!!!"));
-//            return;
-//        }
-//        final List<Object[]> baris=new ArrayList<>();
-//        for(JsonNode konsep:hasil.getConcepts()){
-//            baris.add(new Object[]{
-//                konsep.path("code").asText(),
-//                konsep.path("display").asText(),
-//                "",
-//                konsep.path("system").asText(),
-//                "SNOMED"
-//            });
-//        }
-//        SwingUtilities.invokeLater(() -> {
-//            Valid.tabelKosong(tabMode);
-//            for(Object[] b:baris){
-//                tabMode.addRow(b);
-//            }
-//        });
+        ApiSNOMED snomed=new ApiSNOMED(this);
+        ApiSNOMED.SnomedSearchResult hasil=snomed.searchSnomedConcepts(kata,50,0);
+        if(!hasil.isSuccess()){
+            SwingUtilities.invokeLater(() ->
+                    JOptionPane.showMessageDialog(null,"Maaf, pencarian SNOMED gagal.\n"+hasil.getErrorMessage()));
+            return;
+        }
+        if(hasil.getConcepts()==null||hasil.getConcepts().size()==0){
+            SwingUtilities.invokeLater(() ->
+                    JOptionPane.showMessageDialog(null,"Maaf, tidak ada kode SNOMED untuk '"+kata+"'...!!!"));
+            return;
+        }
+        final List<Object[]> baris=new ArrayList<>();
+        for(JsonNode konsep:hasil.getConcepts()){
+            baris.add(new Object[]{
+                konsep.path("code").asText(),
+                konsep.path("display").asText(),
+                "",
+                konsep.path("system").asText(),
+                "SNOMED"
+            });
+        }
+        SwingUtilities.invokeLater(() -> {
+            Valid.tabelKosong(tabMode);
+            for(Object[] b:baris){
+                tabMode.addRow(b);
+            }
+        });
     }
 
     /**

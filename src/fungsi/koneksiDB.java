@@ -502,6 +502,105 @@ public class koneksiDB {
         }
     }
 
+    public static String KEYEKLAIM() {
+        // no-op
+        return "";
+    }
+
+    public static String WSEKLAIM() {
+        // no-op
+        return "";
+    }
+
+    public static String KELASRSEKLAIM() {
+        // no-op
+        return "";
+    }
+
+    public static String URLSNOMEDAPI() {
+        // no-op
+        return "";
+    }
+
+    public static String NOTIFWAPASIEN() {
+        // no-op
+        return "";
+    }
+
+    public static String URLWAHAFOKASIR() {
+        // no-op
+        return "";
+    }
+
+    public static String APIKEYWAHAFOKASIR() {
+        // no-op
+        return "";
+    }
+
+    public static String SESSIONWAHAFOKASIR() {
+        // no-op
+        return "";
+    }
+
+    public static String TOKENWA() {
+        // no-op
+        return "";
+    }
+
+    public static String URLWAHA() {
+        // no-op
+        return "";
+    }
+
+    public static String SESSIONWAHA() {
+        // no-op
+        return "";
+    }
+
+    public static String APIKEYWAHA() {
+        // no-op
+        return "";
+    }
+
+    public static String GATEWAYNOTIFWA() {
+        // no-op
+        return "";
+    }
+
+    public static String AETITLEORTHANC() {
+        // no-op
+        return "";
+    }
+
+    public static String AETITLEDICOMROUTER() {
+        // no-op
+        return "";
+    }
+
+    public static String URLDICOMROUTER() {
+        // no-op
+        return "";
+    }
+
+    public static String PORTDICOMROUTER() {
+        // no-op
+        return "";
+    }
+
+    public static String IDORGBPJSSATUSEHAT() {
+        // no-op
+        return "";
+    }
+
+    public static String URLAPPLINKSATUSEHAT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("URLAPPLINKSATUSEHAT", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);

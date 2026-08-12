@@ -1,8 +1,9 @@
 /*
   by Ananda Widitomo,S.Kom.
  */
-package bridging.satusehat.klaim;
+package bridging.satusehat;
 
+import bridging.SatuSehatCekNIK;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -30,7 +31,7 @@ import org.springframework.web.client.HttpClientErrorException;
  * classHistory tidak wajib.
  *
  * Fase akhir (status finished + period.end + diagnosis + Condition dkk) TETAP milik
- * bridging.satusehat.klaim.SatuSehatBundle, yang memakai PUT ke id yang disimpan di sini. Kelas ini
+ * satusehatklaim.SatuSehatBundle, yang memakai PUT ke id yang disimpan di sini. Kelas ini
  * sengaja TIDAK pernah mengubah Encounter yang sudah ada — ia hanya membuat yang belum ada.
  */
 public class SatuSehatEncounterReg {

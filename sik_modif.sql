@@ -2022,9 +2022,11 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NU
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_surat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_rekap_peserta_prb_apotek`;
 
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_tindakan_invasif_non_bedah_smc` enum('true','false') DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_tindakan_invasif_non_bedah_smc` enum('true','false') NULL DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
 
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengajuan_izin_smc` enum('true','false') DEFAULT NULL AFTER `pengkajian_tindakan_invasif_non_bedah_smc`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengajuan_izin_smc` enum('true','false') NULL DEFAULT NULL AFTER `pengkajian_tindakan_invasif_non_bedah_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_tte_smc` enum('true','false') NULL DEFAULT NULL AFTER `checklist_kriteria_keluar_isolasi`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 

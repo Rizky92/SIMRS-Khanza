@@ -21,11 +21,11 @@ import bridging.DUKCAPILCekNIK;
 import bridging.DUKCAPILJakartaCekNik;
 import bridging.PCareNIK;
 import bridging.PCarePeserta;
-import bridging.satusehat.klaim.SatuSehatCekNIK;
 import bridging.YaskiReferensiKabupaten;
 import bridging.YaskiReferensiKecamatan;
 import bridging.YaskiReferensiKelurahan;
 import bridging.YaskiReferensiPropinsi;
+import bridging.satusehat.klaim.SatuSehatCekNIK;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import grafikanalisa.grafikjkel;
@@ -5952,7 +5952,7 @@ private void KdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kdp
 private void BtnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjabActionPerformed
         akses.setform("DlgPasien");
         penjab.isCek();
-//        penjab.onCari();
+        // penjab.onCari();
         penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setVisible(true);
@@ -6054,7 +6054,7 @@ private void ppKelahiranBayiActionPerformed(java.awt.event.ActionEvent evt) {//G
             DlgIKBBayi resume=new DlgIKBBayi(null,false);
             resume.setNoRM(TNo.getText(),TNm.getText(),NmIbu.getText(),Alamat.getText()+", "+Kelurahan.getText()+", "+Kecamatan.getText()+", "+Kabupaten.getText(),CmbJk.getSelectedItem().toString(),
                     TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",DTPLahir.getDate(),DTPDaftar.getDate());
-//            resume.tampil();
+            // resume.tampil();
             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);

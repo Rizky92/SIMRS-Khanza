@@ -12,35 +12,34 @@
 
 package bridging.satusehat;
 
-import bridging.satusehat.klaim.SatuSehatCekNIK;
 import bridging.ApiBPJS;
 import bridging.ApiMobileJKN;
 import bridging.ApotekBPJSKunjunganSEP;
-import bridging.BPJSCekDataIndukKecelakaan;
-import bridging.BPJSCekDataSEPInternal;
-import bridging.BPJSCekDetailSEP;
-import bridging.BPJSCekHistoriPelayanan;
-import bridging.BPJSCekNoKartu;
-import bridging.BPJSCekReferensiDokterDPJP;
 import bridging.BPJSCekReferensiFaskes;
+import bridging.BPJSCekReferensiPoli;
+import bridging.BPJSCekNoKartu;
+import bridging.BPJSCekSuplesiJasaRaharja;
+import bridging.BPJSCekReferensiDokterDPJP;
+import bridging.BPJSSuratKontrol;
+import bridging.BPJSSPRI;
+import bridging.BPJSCekReferensiPropinsi;
 import bridging.BPJSCekReferensiKabupaten;
 import bridging.BPJSCekReferensiKecamatan;
-import bridging.BPJSCekReferensiPoli;
-import bridging.BPJSCekReferensiPropinsi;
 import bridging.BPJSCekRiwayatRujukanTerakhir;
-import bridging.BPJSCekSuplesiJasaRaharja;
+import bridging.BPJSCekHistoriPelayanan;
+import bridging.BPJSCekDetailSEP;
 import bridging.BPJSProgramPRB;
+import bridging.BPJSCekDataIndukKecelakaan;
+import bridging.BPJSCekDataSEPInternal;
 import bridging.BPJSRujukanKeluar;
 import bridging.BPJSRujukanKhusus;
-import bridging.BPJSSPRI;
-import bridging.BPJSSuratKontrol;
-import bridging.satusehat.klaim.SatuSehatHttpLogger;
+import bridging.satusehat.klaim.SatuSehatCekNIK;
+import bridging.satusehat.klaim.SatuSehatBilling;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-//import fungsi.koneksiDBWA;
 import org.json.JSONObject;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -507,47 +506,49 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             public void keyReleased(KeyEvent e) {}
         });  
         
-//        skdp2.penyakit.addWindowListener(new WindowListener() {
-//            @Override
-//            public void windowOpened(WindowEvent e) {}
-//            @Override
-//            public void windowClosing(WindowEvent e) {}
-//            @Override
-//            public void windowClosed(WindowEvent e) {
-//                if(skdp2.penyakit.getTable().getSelectedRow()!= -1){   
-//                    if(pilihan==1){
-//                        KdPenyakit.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),1).toString());
-//                        NmPenyakit.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),2).toString());
-//                        KdPenyakit.requestFocus();
-//                    }else if(pilihan==2){
-//                        KdPenyakit1.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),1).toString());
-//                        NmPenyakit1.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),2).toString());
-//                        KdPenyakit1.requestFocus();
-//                    }                        
-//                }                      
-//            }
-//            @Override
-//            public void windowIconified(WindowEvent e) {}
-//            @Override
-//            public void windowDeiconified(WindowEvent e) {}
-//            @Override
-//            public void windowActivated(WindowEvent e) {}
-//            @Override
-//            public void windowDeactivated(WindowEvent e) {}
-//        });
+        /*
+        skdp2.penyakit.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(skdp2.penyakit.getTable().getSelectedRow()!= -1){   
+                    if(pilihan==1){
+                        KdPenyakit.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),1).toString());
+                        NmPenyakit.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),2).toString());
+                        KdPenyakit.requestFocus();
+                    }else if(pilihan==2){
+                        KdPenyakit1.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),1).toString());
+                        NmPenyakit1.setText(skdp2.penyakit.getTable().getValueAt(skdp2.penyakit.getTable().getSelectedRow(),2).toString());
+                        KdPenyakit1.requestFocus();
+                    }                        
+                }                      
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         
-//        skdp2.penyakit.getTable().addKeyListener(new KeyListener() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {}
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-//                    skdp2.penyakit.dispose();
-//                }
-//            }
-//            @Override
-//            public void keyReleased(KeyEvent e) {}
-//        });  
+        skdp2.penyakit.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    skdp2.penyakit.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });  
+        */
         
         poli.addWindowListener(new WindowListener() {
             @Override
@@ -3668,7 +3669,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         WindowUpdatePulang.dispose();
         WindowCariSEP.dispose();
         faskes.dispose();
-//        skdp2.penyakit.dispose();
+        // skdp2.penyakit.dispose();
         skdp.dispose();
         propinsi.dispose();
         kabupaten.dispose();
@@ -3842,9 +3843,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
     private void btnDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaActionPerformed
         pilihan=1;
-//        skdp2.penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-//        skdp2.penyakit.setLocationRelativeTo(internalFrame1);        
-//        skdp2.penyakit.setVisible(true);
+        // skdp2.penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        // skdp2.penyakit.setLocationRelativeTo(internalFrame1);        
+        // skdp2.penyakit.setVisible(true);
     }//GEN-LAST:event_btnDiagnosaActionPerformed
 
     private void btnDiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDiagnosaKeyPressed
@@ -4400,9 +4401,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
     private void btnDiagnosa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosa1ActionPerformed
         pilihan=2;
-//        skdp2.penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-//        skdp2.penyakit.setLocationRelativeTo(internalFrame1);        
-//        skdp2.penyakit.setVisible(true);
+        // skdp2.penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        // skdp2.penyakit.setLocationRelativeTo(internalFrame1);        
+        // skdp2.penyakit.setVisible(true);
     }//GEN-LAST:event_btnDiagnosa1ActionPerformed
 
     private void btnDiagnosa1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDiagnosa1KeyPressed
@@ -4695,11 +4696,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     if(!response.path("kdStatusKecelakaan").asText().equals("")){
                         LakaLantas.setSelectedIndex(1);
                         KdKecamatan.setText(response.path("lokasiKejadian").path("kdKec").asText());
-//                        NmKecamatan.setText(kecamatan.tampilKan(response.path("lokasiKejadian").path("kdKec").asText(),KdKabupaten.getText()));
+                        // NmKecamatan.setText(kecamatan.tampilKan(response.path("lokasiKejadian").path("kdKec").asText(),KdKabupaten.getText()));
                         KdKabupaten.setText(response.path("lokasiKejadian").path("kdKab").asText());
-//                        NmKabupaten.setText(kabupaten.tampilKan(response.path("lokasiKejadian").path("kdKab").asText(),KdPropinsi.getText()));
+                        // NmKabupaten.setText(kabupaten.tampilKan(response.path("lokasiKejadian").path("kdKab").asText(),KdPropinsi.getText()));
                         KdPropinsi.setText(response.path("lokasiKejadian").path("kdProp").asText());
-//                        NmPropinsi.setText(propinsi.tampilKan(response.path("lokasiKejadian").path("kdProp").asText()));
+                        // NmPropinsi.setText(propinsi.tampilKan(response.path("lokasiKejadian").path("kdProp").asText()));
                         Keterangan.setText(response.path("lokasiKejadian").path("ketKejadian").asText());
                         Valid.SetTgl(TanggalKKL,response.path("lokasiKejadian").path("tglKejadian").asText());
                     }
@@ -5709,7 +5710,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         if(TabRawat.getSelectedIndex()==1){
             if(tbDataSEP.getSelectedRow()!= -1){
                 ApotekBPJSKunjunganSEP detail=new ApotekBPJSKunjunganSEP(null,false);
-//                detail.tampil(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
+                // detail.tampil(tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
                 detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 detail.setLocationRelativeTo(internalFrame1);
                 detail.setVisible(true);
@@ -5720,7 +5721,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==2){
             if(tbDataSEPInternal.getSelectedRow()!= -1){
                 ApotekBPJSKunjunganSEP detail=new ApotekBPJSKunjunganSEP(null,false);
-//                detail.tampil(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
+                // detail.tampil(tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),0).toString());
                 detail.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 detail.setLocationRelativeTo(internalFrame1);
                 detail.setVisible(true);
@@ -6034,10 +6035,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        bridging.satusehat.klaim.SatuSehatBilling.HasilSep hasil;
+        SatuSehatBilling.HasilSep hasil;
         try {
-            hasil = new bridging.satusehat.klaim.SatuSehatBilling()
-                    .kirimSep(noRawat, idEncounterSatuSehat(noRawat));
+            hasil = new SatuSehatBilling().kirimSep(noRawat, idEncounterSatuSehat(noRawat));
         } finally {
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -6074,7 +6074,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         int jumlah;
         try {
-            jumlah = new bridging.satusehat.klaim.SatuSehatBilling().perbaikiJejakKepesertaan();
+            jumlah = new SatuSehatBilling().perbaikiJejakKepesertaan();
         } finally {
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -6109,8 +6109,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         final String no = noRawat.trim();
         Thread pekerja = new Thread(() -> {
             try {
-                bridging.satusehat.klaim.SatuSehatBilling.HasilSep hasil =
-                        new bridging.satusehat.klaim.SatuSehatBilling().kirimSep(no, idEncounterSatuSehat(no));
+                SatuSehatBilling.HasilSep hasil = new SatuSehatBilling().kirimSep(no, idEncounterSatuSehat(no));
                 System.out.println("Kepesertaan " + no + " : " + hasil.pesan);
                 tampilkanHasilCoverage(no, hasil.berhasil, hasil.pesan);
             } catch (Throwable e) {
@@ -6687,123 +6686,123 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }
 
     private void kirimNotifGrupSEPFonnte(final String pesan){
-//        if(pesan == null || pesan.trim().equals("")){
-//            return;
-//        }
+        if(pesan == null || pesan.trim().equals("")){
+            return;
+        }
 
-//        HttpURLConnection connection = null;
-//        try{
-//            String tokenWA = koneksiDB.TOKENWA();
-//            if(tokenWA == null || tokenWA.trim().equals("")){
-//                System.out.println("Notif : Token Fonnte kosong. Notifikasi SEP ke grup dibatalkan.");
-//                return;
-//            }
+        HttpURLConnection connection = null;
+        try{
+            String tokenWA = koneksiDB.TOKENWA();
+            if(tokenWA == null || tokenWA.trim().equals("")){
+                System.out.println("Notif : Token Fonnte kosong. Notifikasi SEP ke grup dibatalkan.");
+                return;
+            }
 
-//            StringBuilder postData = new StringBuilder();
-//            appendPostDataWA(postData, "target", ID_GROUP_NOTIF_BRIDGING_SEP);
-//            appendPostDataWA(postData, "message", pesan);
+            StringBuilder postData = new StringBuilder();
+            appendPostDataWA(postData, "target", ID_GROUP_NOTIF_BRIDGING_SEP);
+            appendPostDataWA(postData, "message", pesan);
 
-//            java.net.URL urlFonnte = new java.net.URL("https://api.fonnte.com/send");
-//            connection = (HttpURLConnection) urlFonnte.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Authorization", tokenWA);
-//            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//            connection.setConnectTimeout(10000);
-//            connection.setReadTimeout(15000);
-//            connection.setDoOutput(true);
+            java.net.URL urlFonnte = new java.net.URL("https://api.fonnte.com/send");
+            connection = (HttpURLConnection) urlFonnte.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", tokenWA);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(15000);
+            connection.setDoOutput(true);
 
-//            try (java.io.OutputStream output = connection.getOutputStream()) {
-//                output.write(postData.toString().getBytes(StandardCharsets.UTF_8));
-//            }
+            try (java.io.OutputStream output = connection.getOutputStream()) {
+                output.write(postData.toString().getBytes(StandardCharsets.UTF_8));
+            }
 
-//            int statusCode = connection.getResponseCode();
-//            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
-//            StringBuilder responseBuilder = new StringBuilder();
-//            if (input != null) {
-//                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        responseBuilder.append(line);
-//                    }
-//                }
-//            }
+            int statusCode = connection.getResponseCode();
+            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
+            StringBuilder responseBuilder = new StringBuilder();
+            if (input != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                }
+            }
 
-//            System.out.println("Notif WA Grup SEP : HTTP " + statusCode + " -> " + responseBuilder.toString());
-//        }catch(Exception e){
-//            System.out.println("Notif : Gagal kirim notifikasi WA Grup SEP : "+e);
-//        }finally{
-//            if(connection != null){
-//                connection.disconnect();
-//            }
-//        }
+            System.out.println("Notif WA Grup SEP : HTTP " + statusCode + " -> " + responseBuilder.toString());
+        }catch(Exception e){
+            System.out.println("Notif : Gagal kirim notifikasi WA Grup SEP : "+e);
+        }finally{
+            if(connection != null){
+                connection.disconnect();
+            }
+        }
     }
 
     private void kirimNotifGrupSEPWaha(final String pesan){
-//        if(pesan == null || pesan.trim().equals("")){
-//            return;
-//        }
+        if(pesan == null || pesan.trim().equals("")){
+            return;
+        }
 
-//        HttpURLConnection connection = null;
-//        try{
-//            String urlWaha = koneksiDBWA.URLWAHA();
-//            if(urlWaha.equals("")){
-//                System.out.println("Notif : URLWAHA kosong di setting/database.xml. Notifikasi SEP ke grup dibatalkan.");
-//                return;
-//            }
+        HttpURLConnection connection = null;
+        try{
+            String urlWaha = koneksiDB.URLWAHA();
+            if(urlWaha.equals("")){
+                System.out.println("Notif : URLWAHA kosong di setting/database.xml. Notifikasi SEP ke grup dibatalkan.");
+                return;
+            }
 
-//            JSONObject body = new JSONObject();
-//            body.put("chatId", ID_GROUP_NOTIF_BRIDGING_SEP);
-//            body.put("text", pesan);
-//            body.put("session", koneksiDBWA.SESSIONWAHA());
+            JSONObject body = new JSONObject();
+            body.put("chatId", ID_GROUP_NOTIF_BRIDGING_SEP);
+            body.put("text", pesan);
+            body.put("session", koneksiDB.SESSIONWAHA());
 
-//            java.net.URL urlSendText = new java.net.URL(urlWaha+"/api/sendText");
-//            connection = (HttpURLConnection) urlSendText.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-//            connection.setRequestProperty("Accept", "application/json");
-//            String apiKey = koneksiDBWA.APIKEYWAHA();
-//            if(!apiKey.equals("")){
-//                connection.setRequestProperty("X-Api-Key", apiKey);
-//            }
-//            connection.setConnectTimeout(10000);
-//            connection.setReadTimeout(15000);
-//            connection.setDoOutput(true);
+            java.net.URL urlSendText = new java.net.URL(urlWaha+"/api/sendText");
+            connection = (HttpURLConnection) urlSendText.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+            String apiKey = koneksiDB.APIKEYWAHA();
+            if(!apiKey.equals("")){
+                connection.setRequestProperty("X-Api-Key", apiKey);
+            }
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(15000);
+            connection.setDoOutput(true);
 
-//            try (java.io.OutputStream output = connection.getOutputStream()) {
-//                output.write(body.toString().getBytes(StandardCharsets.UTF_8));
-//            }
+            try (java.io.OutputStream output = connection.getOutputStream()) {
+                output.write(body.toString().getBytes(StandardCharsets.UTF_8));
+            }
 
-//            int statusCode = connection.getResponseCode();
-//            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
-//            StringBuilder responseBuilder = new StringBuilder();
-//            if (input != null) {
-//                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        responseBuilder.append(line);
-//                    }
-//                }
-//            }
+            int statusCode = connection.getResponseCode();
+            InputStream input = statusCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
+            StringBuilder responseBuilder = new StringBuilder();
+            if (input != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                }
+            }
 
-//            System.out.println("Notif WA Grup SEP (WAHA) : HTTP " + statusCode + " -> " + responseBuilder.toString());
-//        }catch(Exception e){
-//            System.out.println("Notif : Gagal kirim notifikasi WA Grup SEP via WAHA : "+e);
-//        }finally{
-//            if(connection != null){
-//                connection.disconnect();
-//            }
-//        }
+            System.out.println("Notif WA Grup SEP (WAHA) : HTTP " + statusCode + " -> " + responseBuilder.toString());
+        }catch(Exception e){
+            System.out.println("Notif : Gagal kirim notifikasi WA Grup SEP via WAHA : "+e);
+        }finally{
+            if(connection != null){
+                connection.disconnect();
+            }
+        }
     }
 
     private void kirimNotifGrupSEP(final String pesan){
-//        String gateway = koneksiDBWA.GATEWAYNOTIFWA();
-//        if(gateway.equals("WAHA")){
-//            kirimNotifGrupSEPWaha(pesan);
-//        }else if(gateway.equals("FONNTE")){
-//            kirimNotifGrupSEPFonnte(pesan);
-//        }else{
-//            System.out.println("Notif : GATEWAYNOTIFWA="+gateway+". Notifikasi SEP ke grup tidak dikirim.");
-//        }
+        String gateway = koneksiDB.GATEWAYNOTIFWA();
+        if(gateway.equals("WAHA")){
+            kirimNotifGrupSEPWaha(pesan);
+        }else if(gateway.equals("FONNTE")){
+            kirimNotifGrupSEPFonnte(pesan);
+        }else{
+            System.out.println("Notif : GATEWAYNOTIFWA="+gateway+". Notifikasi SEP ke grup tidak dikirim.");
+        }
     }
 
     private void kirimNotifGrupSEPAsync(final String pesan){
