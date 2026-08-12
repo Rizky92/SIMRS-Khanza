@@ -76,7 +76,7 @@ The coding guidelines should cater to users' Netbeans configuration, which as fo
 - No hard line wrap. Soft line wrap is around 200-300 characters.
 - Trim trailing whitespaces.
 - Package imports are sorted alphabetically, case sensitive.
-- Uses Yoda-style for object equality check.
+- Use Yoda-style for object equality checks.
 
 #### Workflow guideline
 - DO NOT add line comments to the code. Existing comments are unaffected by this rule.
