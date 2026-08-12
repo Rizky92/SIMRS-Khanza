@@ -286,7 +286,21 @@ public final class akses {
         bpjs_riwayat_surat_smc = false,
         pengkajian_tindakan_invasif_non_bedah_smc = false,
         pengajuan_izin_smc = false,
-        satu_sehat_tte_smc = false;
+        satu_sehat_tte_smc = false,
+        satu_sehat_kirim_bundle_smc = false,
+        satu_sehat_monitor_klaim_smc = false,
+        satu_sehat_mapping_segmen_peserta_smc = false,
+        satu_sehat_mapping_kamar_kptl_smc = false,
+        satu_sehat_referensi_snomed_profesi_smc = false,
+        satu_sehat_referensi_snomed_spesialisasi_smc = false,
+        satu_sehat_kirim_dicom_berkas_smc = false,
+        satu_sehat_kirim_dicom_router_smc = false,
+        bpjs_sep_satu_sehat_smc = false,
+        satu_sehat_mapping_kptl_tindakan_ralan_smc = false,
+        satu_sehat_mapping_kptl_tindakan_ranap_smc = false,
+        satu_sehat_mapping_kptl_tindakan_radiologi_smc = false,
+        satu_sehat_mapping_kptl_tindakan_laborat_smc = false,
+        satu_sehat_mapping_kptl_tindakan_operasi_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1554,6 +1568,20 @@ public final class akses {
                         akses.satu_sehat_mapping_kptl_tarif_kamar=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tarif_kamar");
                         akses.checklist_kriteria_keluar_isolasi=akses.getBoolean(rs2, "checklist_kriteria_keluar_isolasi");
                         akses.satu_sehat_tte_smc=akses.getBoolean(rs2, "satu_sehat_tte_smc");
+                        akses.satu_sehat_kirim_bundle_smc=akses.getBoolean(rs2, "satu_sehat_kirim_bundle_smc");
+                        akses.satu_sehat_monitor_klaim_smc=akses.getBoolean(rs2, "satu_sehat_monitor_klaim_smc");
+                        akses.satu_sehat_mapping_segmen_peserta_smc=akses.getBoolean(rs2, "satu_sehat_mapping_segmen_peserta_smc");
+                        akses.satu_sehat_mapping_kamar_kptl_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kamar_kptl_smc");
+                        akses.satu_sehat_referensi_snomed_profesi_smc=akses.getBoolean(rs2, "satu_sehat_referensi_snomed_profesi_smc");
+                        akses.satu_sehat_referensi_snomed_spesialisasi_smc=akses.getBoolean(rs2, "satu_sehat_referensi_snomed_spesialisasi_smc");
+                        akses.satu_sehat_kirim_dicom_berkas_smc=akses.getBoolean(rs2, "satu_sehat_kirim_dicom_berkas_smc");
+                        akses.satu_sehat_kirim_dicom_router_smc=akses.getBoolean(rs2, "satu_sehat_kirim_dicom_router_smc");
+                        akses.bpjs_sep_satu_sehat_smc=akses.getBoolean(rs2, "bpjs_sep_satu_sehat_smc");
+                        akses.satu_sehat_mapping_kptl_tindakan_ralan_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_ralan_smc");
+                        akses.satu_sehat_mapping_kptl_tindakan_ranap_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_ranap_smc");
+                        akses.satu_sehat_mapping_kptl_tindakan_radiologi_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_radiologi_smc");
+                        akses.satu_sehat_mapping_kptl_tindakan_laborat_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_laborat_smc");
+                        akses.satu_sehat_mapping_kptl_tindakan_operasi_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_operasi_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2827,6 +2855,20 @@ public final class akses {
         akses.satu_sehat_mapping_kptl_tarif_kamar=isadmin;
         akses.checklist_kriteria_keluar_isolasi=isadmin;
         akses.satu_sehat_tte_smc=isadmin;
+        akses.satu_sehat_kirim_bundle_smc=isadmin;
+        akses.satu_sehat_monitor_klaim_smc=isadmin;
+        akses.satu_sehat_mapping_segmen_peserta_smc=isadmin;
+        akses.satu_sehat_mapping_kamar_kptl_smc=isadmin;
+        akses.satu_sehat_referensi_snomed_profesi_smc=isadmin;
+        akses.satu_sehat_referensi_snomed_spesialisasi_smc=isadmin;
+        akses.satu_sehat_kirim_dicom_berkas_smc=isadmin;
+        akses.satu_sehat_kirim_dicom_router_smc=isadmin;
+        akses.bpjs_sep_satu_sehat_smc=isadmin;
+        akses.satu_sehat_mapping_kptl_tindakan_ralan_smc=isadmin;
+        akses.satu_sehat_mapping_kptl_tindakan_ranap_smc=isadmin;
+        akses.satu_sehat_mapping_kptl_tindakan_radiologi_smc=isadmin;
+        akses.satu_sehat_mapping_kptl_tindakan_laborat_smc=isadmin;
+        akses.satu_sehat_mapping_kptl_tindakan_operasi_smc=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4102,6 +4144,20 @@ public final class akses {
     public static boolean getsatu_sehat_mapping_kptl_tarif_kamar(){return akses.satu_sehat_mapping_kptl_tarif_kamar;}
     public static boolean getchecklist_kriteria_keluar_isolasi(){return akses.checklist_kriteria_keluar_isolasi;}
     public static boolean getsatu_sehat_tte_smc(){return akses.satu_sehat_tte_smc;}
+    public static boolean getsatu_sehat_kirim_bundle_smc(){return akses.satu_sehat_kirim_bundle_smc;}
+    public static boolean getsatu_sehat_monitor_klaim_smc(){return akses.satu_sehat_monitor_klaim_smc;}
+    public static boolean getsatu_sehat_mapping_segmen_peserta_smc(){return akses.satu_sehat_mapping_segmen_peserta_smc;}
+    public static boolean getsatu_sehat_mapping_kamar_kptl_smc(){return akses.satu_sehat_mapping_kamar_kptl_smc;}
+    public static boolean getsatu_sehat_referensi_snomed_profesi_smc(){return akses.satu_sehat_referensi_snomed_profesi_smc;}
+    public static boolean getsatu_sehat_referensi_snomed_spesialisasi_smc(){return akses.satu_sehat_referensi_snomed_spesialisasi_smc;}
+    public static boolean getsatu_sehat_kirim_dicom_berkas_smc(){return akses.satu_sehat_kirim_dicom_berkas_smc;}
+    public static boolean getsatu_sehat_kirim_dicom_router_smc(){return akses.satu_sehat_kirim_dicom_router_smc;}
+    public static boolean getbpjs_sep_satu_sehat_smc(){return akses.bpjs_sep_satu_sehat_smc;}
+    public static boolean getsatu_sehat_mapping_kptl_tindakan_ralan_smc(){return akses.satu_sehat_mapping_kptl_tindakan_ralan_smc;}
+    public static boolean getsatu_sehat_mapping_kptl_tindakan_ranap_smc(){return akses.satu_sehat_mapping_kptl_tindakan_ranap_smc;}
+    public static boolean getsatu_sehat_mapping_kptl_tindakan_radiologi_smc(){return akses.satu_sehat_mapping_kptl_tindakan_radiologi_smc;}
+    public static boolean getsatu_sehat_mapping_kptl_tindakan_laborat_smc(){return akses.satu_sehat_mapping_kptl_tindakan_laborat_smc;}
+    public static boolean getsatu_sehat_mapping_kptl_tindakan_operasi_smc(){return akses.satu_sehat_mapping_kptl_tindakan_operasi_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {

@@ -994,6 +994,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("bpjs_daftar_pelayanan_obat_apotek", "[L] Daftar Pelayanan Obat Apotek BPJS");
         namaakses.put("bpjs_daftar_resep_apotek", "[L] Daftar Resep Apotek BPJS");
         namaakses.put("bpjs_sep", "[L] Data Bridging SEP VClaim");
+        namaakses.put("bpjs_sep_satu_sehat_smc", "[L] Data Bridging SEP VClaim Satu Sehat SMC");
         namaakses.put("inhealth_sjp", "[L] Data Bridging SJP Inhealth");
         namaakses.put("bpjs_data_induk_kecelakaan", "[L] Data Induk Kecelakaan VClaim");
         namaakses.put("bridging_pcare_daftar", "[L] Data Pendafataran PCare");
@@ -1014,12 +1015,15 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("aplicare_ketersediaan_kamar", "[L] Ketersediaan Kamar Aplicare");
         namaakses.put("siranap_ketersediaan_kamar", "[L] Ketersediaan Kamar SIRANAP");
         namaakses.put("satu_sehat_kirim_allergy_intolerance", "[L] Kirim Allergy Intolerance Satu Sehat");
+        namaakses.put("satu_sehat_kirim_bundle_smc", "[L] Kirim Bundle Satu Sehat SMC");
         namaakses.put("satu_sehat_kirim_careplan", "[L] Kirim Care Plan Satu Sehat");
         namaakses.put("satu_sehat_kirim_clinicalimpression", "[L] Kirim Clinical Impression Satu Sehat");
         namaakses.put("satu_sehat_kirim_condition", "[L] Kirim Condition Satu Sehat");
         namaakses.put("satu_sehat_kirim_diagnosticreport_labmb", "[L] Kirim Diagnostic Report Lab MB Satu Sehat");
         namaakses.put("satu_sehat_kirim_diagnosticreport_lab", "[L] Kirim Diagnostic Report Lab PK Satu Sehat");
         namaakses.put("satu_sehat_kirim_diagnosticreport_radiologi", "[L] Kirim Diagnostic Report Radiologi Satu Sehat");
+        namaakses.put("satu_sehat_kirim_dicom_berkas_smc", "[L] Kirim DICOM Berkas Satu Sehat SMC");
+        namaakses.put("satu_sehat_kirim_dicom_router_smc", "[L] Kirim DICOM Router Satu Sehat SMC");
         namaakses.put("satu_sehat_kirim_diet", "[L] Kirim Diet Satu Sehat");
         namaakses.put("satu_sehat_kirim_encounter", "[L] Kirim Encounter Satu Sehat");
         namaakses.put("bridging_smart_klaim_bpjs", "[L] Kirim FHIR Smart Klaim BPJS");
@@ -1050,6 +1054,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("bpjs_mapping_dokterdpjp", "[L] Mapping Dokter DPJP VClaim");
         namaakses.put("inhealth_mapping_dokter", "[L] Mapping Dokter Inhealth");
         namaakses.put("pcare_mapping_dokter", "[L] Mapping Dokter PCare");
+        namaakses.put("satu_sehat_mapping_kamar_kptl_smc", "[L] Mapping Kamar KPTL Satu Sehat SMC");
         namaakses.put("satu_sehat_mapping_lokasi", "[L] Mapping Lokasi Satu Sehat");
         namaakses.put("bpjs_mapping_obat_apotek", "[L] Mapping Obat Apotek BPJS");
         namaakses.put("pcare_mapping_obat", "[L] Mapping Obat PCare");
@@ -1060,11 +1065,18 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pcare_mapping_poli", "[L] Mapping Poli PCare");
         namaakses.put("mapping_poli_bpjs", "[L] Mapping Poli VClaim");
         namaakses.put("mapping_prosedur_smart_klaim_bpjs", "[L] Mapping Prosedur Smart Klaim BPJS");
+        namaakses.put("satu_sehat_mapping_segmen_peserta_smc", "[L] Mapping Segmen Peserta Satu Sehat SMC");
+        namaakses.put("satu_sehat_mapping_kptl_tindakan_laborat_smc", "[L] Mapping Tindakan Lab KPTL Satu Sehat SMC");
         namaakses.put("satu_sehat_mapping_lab", "[L] Mapping Tindakan Lab PK & MB Satu Sehat");
+        namaakses.put("satu_sehat_mapping_kptl_tindakan_operasi_smc", "[L] Mapping Tindakan Operasi KPTL Satu Sehat SMC");
+        namaakses.put("satu_sehat_mapping_kptl_tindakan_radiologi_smc", "[L] Mapping Tindakan Radiologi KPTL Satu Sehat SMC");
         namaakses.put("satu_sehat_mapping_radiologi", "[L] Mapping Tindakan Radiologi Satu Sehat");
+        namaakses.put("satu_sehat_mapping_kptl_tindakan_ralan_smc", "[L] Mapping Tindakan Ralan KPTL Satu Sehat SMC");
+        namaakses.put("satu_sehat_mapping_kptl_tindakan_ranap_smc", "[L] Mapping Tindakan Ranap KPTL Satu Sehat SMC");
         namaakses.put("satu_sehat_mapping_vaksin", "[L] Mapping Vaksin Satu Sehat");
         namaakses.put("metode_pembayaran_bankmandiri", "[L] Metode Pembayaran Bank Mandiri");
         namaakses.put("bpjs_monitoring_klaim_apotek", "[L] Monitoring Klaim Apotek BPJS");
+        namaakses.put("satu_sehat_monitor_klaim_smc", "[L] Monitoring Klaim Satu Sehat SMC");
         namaakses.put("bpjs_monitoring_klaim", "[L] Monitoring Verifikasi Klaim");
         namaakses.put("bpjs_obat_23hari_apotek", "[L] Obat 23 Hari Apotek BPJS");
         namaakses.put("pasien_corona", "[L] Pasien Corona");
@@ -1123,6 +1135,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("bpjs_cek_ruangrawat", "[L] Referensi Ruang Rawat VClaim");
         namaakses.put("pcare_cek_sarana", "[L] Referensi Sarana PCare");
         namaakses.put("bpjs_referensi_setting_apotek", "[L] Referensi Setting PPK Apotek BPJS");
+        namaakses.put("satu_sehat_referensi_snomed_profesi_smc", "[L] Referensi SNOMED Profesi Satu Sehat SMC");
+        namaakses.put("satu_sehat_referensi_snomed_spesialisasi_smc", "[L] Referensi SNOMED Spesialisasi Satu Sehat SMC");
         namaakses.put("pcare_cek_spesialis", "[L] Referensi Spesialis PCare");
         namaakses.put("bpjs_referensi_spesialistik_apotek", "[L] Referensi Spesialistik Apotek BPJS");
         namaakses.put("bpjs_cek_spesialistik", "[L] Referensi Spesialistik VClaim");
@@ -1148,6 +1162,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("bpjs_surat_kontrol", "[L] Surat Kontrol VClaim");
         namaakses.put("bpjs_surat_pri", "[L] Surat PRI VClaim");
         namaakses.put("inhealth_kirim_tagihan", "[L] Tagihan Inhealth");
+        namaakses.put("satu_sehat_tte_smc", "[L] Tanda Tangan Elektronik Satu Sehat SMC");
         namaakses.put("bpjs_cek_tanggal_rujukan", "[L] Tanggal Rujukan di VClaim");
         namaakses.put("inhealth_mapping_tindakan_laborat", "[L] Tarif Laborat Inhealth");
         namaakses.put("inhealth_mapping_tindakan_operasi", "[L] Tarif Operasi Inhealth");

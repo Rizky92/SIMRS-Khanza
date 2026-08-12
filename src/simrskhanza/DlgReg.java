@@ -27,6 +27,7 @@ import bridging.InhealthDataSJP;
 import bridging.PCareDataPendaftaran;
 import bridging.PilihanBridgingAsuransi;
 import bridging.SisruteRujukanKeluar;
+import bridging.satusehat.SatuSehatEncounterReg;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -1078,6 +1079,7 @@ public final class DlgReg extends javax.swing.JDialog {
         DTPCari1 = new widget.Tanggal();
         jLabel17 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
+        BtnEncounter = new widget.Button();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -6354,9 +6356,28 @@ public final class DlgReg extends javax.swing.JDialog {
         DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
         panelGlass7.add(DTPCari2);
 
+        BtnEncounter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEncounter.setMnemonic('G');
+        BtnEncounter.setText("Encounter");
+        BtnEncounter.setToolTipText("Alt+G");
+        BtnEncounter.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        BtnEncounter.setName("BtnEncounter"); // NOI18N
+        BtnEncounter.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEncounter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEncounterActionPerformed(evt);
+            }
+        });
+        BtnEncounter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEncounterKeyPressed(evt);
+            }
+        });
+        panelGlass7.add(BtnEncounter);
+
         jLabel6.setText("Key Word :");
         jLabel6.setName("jLabel6"); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(158, 23));
+        jLabel6.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel6);
 
         TCari.setName("TCari"); // NOI18N
@@ -6889,6 +6910,48 @@ public final class DlgReg extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnEncounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEncounterActionPerformed
+        java.util.List<String> daftar = new java.util.ArrayList<>();
+        for (int b = 0; b < tbPetugas.getRowCount(); b++) {
+            if (tbPetugas.getValueAt(b, 0).toString().equals("true")) {
+                daftar.add(tbPetugas.getValueAt(b, 2).toString());
+            }
+        }
+        if (daftar.isEmpty() && tbPetugas.getSelectedRow() != -1) {
+            daftar.add(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
+        }
+        if (daftar.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu kunjungan yang mau dikirim..!!");
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        StringBuilder pesan = new StringBuilder();
+        int berhasil = 0;
+        try {
+            SatuSehatEncounterReg encounter = new SatuSehatEncounterReg();
+            for (String noRawat : daftar) {
+                SatuSehatEncounterReg.Hasil hasil = encounter.kirim(noRawat);
+                if (hasil.berhasil) {
+                    berhasil++;
+                }
+                pesan.append(noRawat).append(" : ").append(hasil.pesan).append("\n");
+            }
+        } finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+        JOptionPane.showMessageDialog(null,
+                "Berhasil " + berhasil + " dari " + daftar.size() + " kunjungan.\n\n" + pesan,
+                "Encounter Satu Sehat",
+                berhasil == daftar.size() ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_BtnEncounterActionPerformed
+
+    private void BtnEncounterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEncounterKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnEncounterActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnEncounterKeyPressed
 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         Valid.pindah(evt,TNoReg,DTPReg);
@@ -16985,6 +17048,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnDokter;
     private widget.Button BtnEdit;
+    private widget.Button BtnEncounter;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnKeluar3;

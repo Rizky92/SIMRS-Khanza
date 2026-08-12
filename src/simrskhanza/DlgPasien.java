@@ -20,11 +20,11 @@ import bridging.DUKCAPILCekNIK;
 import bridging.DUKCAPILJakartaCekNik;
 import bridging.PCareNIK;
 import bridging.PCarePeserta;
-import bridging.SatuSehatCekNIK;
 import bridging.YaskiReferensiKabupaten;
 import bridging.YaskiReferensiKecamatan;
 import bridging.YaskiReferensiKelurahan;
 import bridging.YaskiReferensiPropinsi;
+import bridging.satusehat.klaim.SatuSehatCekNIK;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -695,6 +695,7 @@ public class DlgPasien extends javax.swing.JDialog {
         MnViaDukcapilNikDKI = new javax.swing.JMenuItem();
         MnViaDukcapilNikAceh = new javax.swing.JMenuItem();
         MnViaSatuSehatNik = new javax.swing.JMenuItem();
+        MnViaSatuSehatNik2 = new javax.swing.JMenuItem();
         WindowGabungRM = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         BtnCloseIn6 = new widget.Button();
@@ -1956,6 +1957,20 @@ public class DlgPasien extends javax.swing.JDialog {
         });
         jPopupMenu2.add(MnViaSatuSehatNik);
 
+        MnViaSatuSehatNik2.setBackground(new java.awt.Color(255, 255, 254));
+        MnViaSatuSehatNik2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnViaSatuSehatNik2.setForeground(new java.awt.Color(50, 50, 50));
+        MnViaSatuSehatNik2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnViaSatuSehatNik2.setText("Cek IHS Pasien di Satu Sehat");
+        MnViaSatuSehatNik2.setName("MnViaSatuSehatNik2"); // NOI18N
+        MnViaSatuSehatNik2.setPreferredSize(new java.awt.Dimension(290, 26));
+        MnViaSatuSehatNik2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnViaSatuSehatNik2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(MnViaSatuSehatNik2);
+
         WindowGabungRM.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowGabungRM.setModal(true);
         WindowGabungRM.setName("WindowGabungRM"); // NOI18N
@@ -2452,7 +2467,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-08-2026" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -2581,7 +2596,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-08-2026" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -8641,6 +8656,28 @@ public class DlgPasien extends javax.swing.JDialog {
         Valid.pindah(evt,NmIbu,Saudara);
     }//GEN-LAST:event_CmbKeluargaKeyPressed
 
+    private String ringkasanIHS(SatuSehatCekNIK.HasilIHS hasil){
+        StringBuilder isi=new StringBuilder();
+        isi.append("IHS Number      : ").append(hasil.ihs);
+        if(!hasil.nama.equals("")){
+            isi.append("\nNama            : ").append(hasil.nama);
+        }
+        if(!hasil.gender.equals("")){
+            isi.append("\nJenis Kelamin   : ").append(hasil.gender);
+        }
+        if(!hasil.tglLahir.equals("")){
+            isi.append("\nTanggal Lahir   : ").append(hasil.tglLahir);
+        }
+        if(!hasil.nikServer.equals("")){
+            isi.append("\nNIK di server   : ").append(hasil.nikServer);
+        }
+        if(!hasil.aktif.equals("")){
+            isi.append("\nStatus          : ").append(hasil.aktif);
+        }
+        isi.append("\n\n").append(hasil.pesan);
+        return isi.toString();
+    }
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             ps=koneksi.prepareStatement("select * from set_alamat_pasien");
@@ -8760,6 +8797,60 @@ public class DlgPasien extends javax.swing.JDialog {
             ChkTgl2.setSelected(false);
         }
     }//GEN-LAST:event_ChkTgl1ItemStateChanged
+
+    private void MnViaSatuSehatNik2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnViaSatuSehatNik2ActionPerformed
+        String nik=TKtp.getText().trim();
+        if(nik.equals("")){
+            TKtp.requestFocus();
+            JOptionPane.showMessageDialog(null,"Silahkan isi terlebih dahulu NIK/No.KTP..!!");
+            return;
+        }
+        if(!nik.matches("\\d{16}")){
+            TKtp.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, NIK harus 16 digit angka..!!");
+            return;
+        }
+        SatuSehatCekNIK cekNik=new SatuSehatCekNIK();
+        SatuSehatCekNIK.HasilIHS hasil;
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try{
+            hasil=cekNik.cekIHS(nik);
+        }finally{
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+        if(hasil.ada()){
+            JOptionPane.showMessageDialog(null,ringkasanIHS(hasil),
+                    "Cek IHS Satu Sehat",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if(hasil.status.equals(SatuSehatCekNIK.IHS_GAGAL)){
+            JOptionPane.showMessageDialog(null,hasil.pesan+"\nSilahkan coba lagi.",
+                    "Cek IHS Satu Sehat",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!hasil.status.equals(SatuSehatCekNIK.IHS_TIDAK_DITEMUKAN)||hasil.adaTanpaIhs){
+            JOptionPane.showMessageDialog(null,hasil.pesan,
+                    "Cek IHS Satu Sehat",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(JOptionPane.showConfirmDialog(null,
+                hasil.pesan+"\n\nDaftarkan pasien ini ke SATUSEHAT sekarang?",
+                "Cek IHS Satu Sehat",JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)!=JOptionPane.YES_OPTION){
+            return;
+        }
+        SatuSehatCekNIK.HasilIHS daftar;
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try{
+            daftar=cekNik.daftarkanPasien(nik);
+        }finally{
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+        JOptionPane.showMessageDialog(null,
+                daftar.ada()?ringkasanIHS(daftar):daftar.pesan,
+                "Daftar Pasien Satu Sehat",
+                daftar.ada()?JOptionPane.INFORMATION_MESSAGE:JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_MnViaSatuSehatNik2ActionPerformed
 
     /**
      * @data args the command line arguments
@@ -8945,6 +9036,7 @@ public class DlgPasien extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnViaDukcapilNikAceh;
     private javax.swing.JMenuItem MnViaDukcapilNikDKI;
     private javax.swing.JMenuItem MnViaSatuSehatNik;
+    private javax.swing.JMenuItem MnViaSatuSehatNik2;
     private widget.TextBox NIP;
     private widget.TextBox NamaPasienDipilih;
     private widget.TextBox NmIbu;

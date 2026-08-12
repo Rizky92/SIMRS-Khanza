@@ -2028,6 +2028,34 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengajuan_izin_smc` enum('true','fa
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_tte_smc` enum('true','false') NULL DEFAULT NULL AFTER `checklist_kriteria_keluar_isolasi`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_kirim_bundle_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_tte_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_monitor_klaim_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_bundle_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_segmen_peserta_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_monitor_klaim_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_kamar_kptl_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_mapping_segmen_peserta_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_referensi_snomed_profesi_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_mapping_kamar_kptl_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_referensi_snomed_spesialisasi_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_referensi_snomed_profesi_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_kirim_dicom_berkas_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_referensi_snomed_spesialisasi_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_kirim_dicom_router_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_dicom_berkas_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_sep_satu_sehat_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_dicom_router_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_kptl_tindakan_ralan_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_sep_satu_sehat_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_kptl_tindakan_ranap_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_mapping_kptl_tindakan_ralan_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_kptl_tindakan_radiologi_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_mapping_kptl_tindakan_ranap_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_kptl_tindakan_laborat_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_mapping_kptl_tindakan_radiologi_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_mapping_kptl_tindakan_operasi_smc` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_mapping_kptl_tindakan_laborat_smc`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
