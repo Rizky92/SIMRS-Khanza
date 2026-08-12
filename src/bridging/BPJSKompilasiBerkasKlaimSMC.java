@@ -4989,17 +4989,22 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
     private void hapusTemporaryPDF(final int row) {
         File folder = new File("./berkaspdf/" + tanggalExport);
+        if (!folder.isDirectory()) {
+            return;
+        }
+
         File[] files = folder.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.getName().startsWith(tbKompilasi.getValueAt(row, 2).toString() + "_")) {
-                    if (!file.delete()) {
-                        System.out.println("Notif : Gagal menghapus file sementara " + file.getName());
-                    }
+        if (null == files) {
+            System.out.println("Notif : Gagal membaca isi folder " + folder.toString());
+            return;
+        }
+
+        for (File file : files) {
+            if (file.isFile() && file.getName().startsWith(tbKompilasi.getValueAt(row, 2).toString() + "_")) {
+                if (!file.delete()) {
+                    System.out.println("Notif : Gagal menghapus file sementara " + file.getName());
                 }
             }
-        } else {
-            System.out.println("Notif : Tidak ada file sementara ditemukan dalam " + folder.toString());
         }
     }
 
@@ -5007,6 +5012,58 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         if (selectedRow < 0) return;
 
         hapusTemporaryPDF(selectedRow);
+    }
+
+    private String[] kandidatAplikasiPDF() {
+        if (null == aplikasiPDF || aplikasiPDF.isBlank()) {
+            return new String[] {};
+        }
+
+        boolean windows = System.getProperty("os.name").toLowerCase().contains("win");
+
+        if ("chrome".equalsIgnoreCase(aplikasiPDF)) {
+            return windows ? new String[] {"chrome"} : new String[] {"google-chrome", "google-chrome-stable", "chromium", "chromium-browser"};
+        }
+
+        if ("firefox".equalsIgnoreCase(aplikasiPDF)) {
+            return windows ? new String[] {"firefox"} : new String[] {"firefox", "firefox-esr"};
+        }
+
+        if ("msedge".equalsIgnoreCase(aplikasiPDF)) {
+            return windows ? new String[] {"msedge"} : new String[] {"microsoft-edge", "microsoft-edge-stable"};
+        }
+
+        return new String[] {aplikasiPDF};
+    }
+
+    private void bukaHasilKompilasi(final int row) {
+        if ("disable".equalsIgnoreCase(aplikasiPDF)) {
+            return;
+        }
+
+        File hasil = new File("./berkaspdf/" + tanggalExport + "/" + tbKompilasi.getValueAt(row, 2).toString() + ".pdf");
+        if (!hasil.isFile()) {
+            System.out.println("Notif : Berkas hasil kompilasi tidak ditemukan dalam " + hasil.toString());
+            return;
+        }
+
+        try {
+            Valid.bukaBerkasSmc(hasil, kandidatAplikasiPDF());
+        } catch (IOException e) {
+            System.out.println("Notif : " + e);
+            try {
+                Valid.bukaFileDefaultSmc(hasil);
+            } catch (IOException ex) {
+                System.out.println("Notif : " + ex);
+                JOptionPane.showMessageDialog(null, "Berkas hasil kompilasi tidak bisa dibuka..!!\n" + hasil.getAbsolutePath(), "Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+
+    private void bukaHasilKompilasi() {
+        if (selectedRow < 0) return;
+
+        bukaHasilKompilasi(selectedRow);
     }
 
     private void gabung() {
@@ -5064,6 +5121,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
             mergePDF();
             hapusTemporaryPDF();
+            bukaHasilKompilasi();
             JOptionPane.showMessageDialog(null, "Kompilasi berkas PDF berhasil!");
         } catch (KompilasiException e) {
             System.out.println("Notif : " + e.getCause().getMessage());

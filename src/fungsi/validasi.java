@@ -448,6 +448,12 @@ public final class validasi {
         return "";
     }
 
+    /**
+     * @deprecated Gunakan {@link #bukaBerkasSmc(File, String...)}. Method ini memakai
+     *     {@code Runtime.exec(String)} yang memecah perintah pada spasi, sehingga path
+     *     aplikasi maupun berkas yang mengandung spasi tidak terbaca utuh.
+     */
+    @Deprecated
     public void panggilUrlSmc(String app, String url) {
         if (app == null || app.isBlank()) {
             panggilUrl2(url);
@@ -480,6 +486,59 @@ public final class validasi {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        }
+    }
+
+    public void bukaBerkasSmc(File file, String... kandidat) throws IOException {
+        if (null == file || !file.isFile()) {
+            throw new IOException("Berkas tidak ditemukan : " + file);
+        }
+
+        StringJoiner gagal = new StringJoiner(", ");
+
+        for (String aplikasi : kandidat) {
+            if (null == aplikasi || aplikasi.isBlank()) {
+                continue;
+            }
+
+            try {
+                jalankanAplikasiSmc(aplikasi, file);
+                return;
+            } catch (IOException e) {
+                gagal.add(aplikasi + " (" + e.getMessage() + ")");
+            }
+        }
+
+        if (0 == gagal.length()) {
+            bukaFileDefaultSmc(file);
+            return;
+        }
+
+        throw new IOException("Tidak ada aplikasi yang bisa dijalankan : " + gagal.toString());
+    }
+
+    public void bukaFileDefaultSmc(File file) throws IOException {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+            Desktop.getDesktop().open(file);
+            return;
+        }
+
+        new ProcessBuilder("xdg-open", file.getAbsolutePath()).start();
+    }
+
+    private void jalankanAplikasiSmc(String aplikasi, File berkas) throws IOException {
+        String path = berkas.getAbsolutePath();
+
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            if (aplikasi.toLowerCase().endsWith(".lnk") || !new File(aplikasi).isAbsolute()) {
+                new ProcessBuilder("cmd", "/c", "start", "", aplikasi, path).start();
+            } else {
+                new ProcessBuilder(aplikasi, path).start();
+            }
+        } else if (aplikasi.toLowerCase().endsWith(".desktop")) {
+            new ProcessBuilder("gio", "launch", aplikasi, path).start();
+        } else {
+            new ProcessBuilder(aplikasi, path).start();
         }
     }
 
