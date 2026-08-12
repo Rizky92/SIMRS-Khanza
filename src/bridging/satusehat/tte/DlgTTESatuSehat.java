@@ -4,7 +4,9 @@
  */
 package bridging.satusehat.tte;
 
+import bridging.satusehat.tte.SatuSehatSignatureState.Status;
 import com.fasterxml.jackson.databind.JsonNode;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -80,7 +82,7 @@ public class DlgTTESatuSehat extends JDialog {
         public String taskUuid = "";
         public String signer = "";     // nama pihak yang harus menandatangani baris ini
         public String signerIhs = "";  // IHS Practitioner penanda (agent Provenance)
-        public SatuSehatSignatureState.Status status = SatuSehatSignatureState.Status.BUAT;
+        public Status status = Status.BUAT;
 
         /** Peran penanda pada baris ini: author/attester/verifier/performer/enterer. */
         public String peran = "author";
@@ -160,29 +162,26 @@ public class DlgTTESatuSehat extends JDialog {
     private final SatuSehatSignatureVerifier verifier = new SatuSehatSignatureVerifier();
     private final QrRenderer qr = QrRendererFactory.buat();
 
-    // Komponen bertema Khanza (widget.*) — mengikuti gaya SatuSehatBundle. Tipe field sengaja
-    // tetap memakai kelas Swing induknya (widget.TextBox extends JTextField, widget.Label extends
-    // JLabel, widget.Button extends JButton, widget.Table extends JTable) supaya seluruh kode
-    // logika yang sudah ada tidak perlu ikut berubah.
-    private widget.Tanggal tglDari;       // widget.Tanggal turunan JComboBox -> dibaca via getDate()
-    private widget.Tanggal tglSampai;
-    private JTextField txtCari;
-    private JTextField txtFilterDokter;   // filter pasien by dokter (diisi via DlgCariDokter standar)
-    private JLabel labelJmlPasien;
-    private javax.swing.JTextArea taLog;  // panel log berstempel waktu (pola SatuSehatBundle)
+    /**
+     * Hak akses user yang login atas fitur TTE (kolom {@code user.satu_sehat_tanda_tangan_elektronik},
+     * hak yang sama yang menampilkan tombol menu TTE di frmUtama).
+     *
+     * Sengaja dibaca sejak konstruktor — bukan hanya di {@link #isCek()} — karena tombol Tandatangani
+     * dan Update Status dihidupkan/dimatikan ulang di banyak tempat mengikuti pilihan pasien; kalau
+     * hak akses hanya diterapkan sekali lewat isCek(), pemilihan pasien berikutnya akan menyalakan
+     * kembali tombol untuk user yang tidak berhak.
+     */
+    private boolean aksesTte = akses.getsatu_sehat_tte_smc();
+
+    // Komponen visual dideklarasikan GUI Builder di blok                                   
+    // (widget.TextBox extends JTextField, widget.Label extends JLabel, widget.Button extends
+    // JButton, widget.Table extends JTable), jadi seluruh kode logika di bawah tetap memakai API
+    // Swing biasa. Yang tersisa di sini hanya field NON-visual.
     private DefaultTableModel modelPasien;
-    private JTable tabelPasien;
     private final List<Object[]> semuaBaris = new ArrayList<>(); // cache hasil query utk filter dokter
 
-    private JLabel labelDok;
-    private JButton tombolTandatangani;
-    private JButton tombolUpdate;                                 // tarik status TTE terbaru dari SATUSEHAT (mode tanpa webhook)
-    private javax.swing.JComboBox<String> cbBerkas;               // filter berkas by jenis (RowFilter, tak ubah model)
-    private javax.swing.JComboBox<String> cbDokterSign;           // filter by kolom "Dokter Sign" di daftar dokumen
-    private javax.swing.JComboBox<String> cbStatus;               // filter by kolom "Status TTE"
     private boolean filterBerkasDiisi = false;                    // cegah reentrancy saat isi combo berkas
     private DefaultTableModel modelDok;
-    private JTable tabelDok;
     private javax.swing.table.TableRowSorter<DefaultTableModel> sorterDok; // filter view berkas (model tetap 1:1 curDokumen)
 
     // Konteks pasien terpilih.
@@ -215,7 +214,8 @@ public class DlgTTESatuSehat extends JDialog {
 
     public DlgTTESatuSehat(Frame parent, boolean modal) {
         super(parent, modal);
-        bangunUi();
+        initComponents();   // tata letak dari GUI Builder (DlgTTESatuSehat.form)
+        bangunUi();         // sisanya: model tabel, renderer, sorter, ukuran & divider
         muatPasien();
         // Sinyal webhook diproses lebih cepat: query lokal, murah, dan inilah nilai lebih webhook.
         timerSinyal = new Timer(JEDA_SINYAL_MS, e -> prosesSinyalWebhook());
@@ -225,115 +225,488 @@ public class DlgTTESatuSehat extends JDialog {
         getContentPane().repaint();
     }
 
-    private void bangunUi() {
+    /**
+     * Pola form Khanza: pemanggil menjalankan isCek() sesudah dialog dibuat supaya tombol aksi
+     * mengikuti hak akses user yang login — di sini hak {@code satu_sehat_tanda_tangan_elektronik}.
+     * Tanpa hak itu dialog tetap boleh dibuka untuk MELIHAT status & memverifikasi berkas, tetapi
+     * tidak boleh menerbitkan Provenance/Task ke SATUSEHAT.
+     */
+    public void isCek() {
+        aksesTte = akses.getsatu_sehat_tte_smc();
+        aktifkanTandatangani(!curDokumen.isEmpty());
+        aktifkanUpdate(!curDokumen.isEmpty());
+    }
+
+    /** Hidupkan tombol Tandatangani hanya bila datanya siap DAN user berhak. */
+    private void aktifkanTandatangani(boolean siap) {
+        tombolTandatangani.setEnabled(siap && aksesTte);
+    }
+
+    /** Hidupkan tombol Update Status hanya bila datanya siap DAN user berhak. */
+    private void aktifkanUpdate(boolean siap) {
+        tombolUpdate.setEnabled(siap && aksesTte);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        ppPilihSemua = new javax.swing.JMenuItem();
+        ppHapusSemua = new javax.swing.JMenuItem();
+        internalFrame1 = new widget.InternalFrame();
+        splitUtama = new javax.swing.JSplitPane();
+        splitTabel = new javax.swing.JSplitPane();
+        spKiri = new widget.ScrollPane();
+        tabelPasien = new widget.Table();
+        panelKanan = new javax.swing.JPanel();
+        panelKananAtas = new javax.swing.JPanel();
+        labelDok = new widget.Label();
+        panelFilterBerkas = new javax.swing.JPanel();
+        jLabel1 = new widget.Label();
+        cbBerkas = new widget.ComboBox();
+        jLabel2 = new widget.Label();
+        cbDokterSign = new widget.ComboBox();
+        jLabel3 = new widget.Label();
+        cbStatus = new widget.ComboBox();
+        spKanan = new widget.ScrollPane();
+        tabelDok = new widget.Table();
+        spLog = new widget.ScrollPane();
+        taLog = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        panelFilter = new widget.panelisi();
+        jLabel4 = new widget.Label();
+        tglDari = new widget.Tanggal();
+        jLabel5 = new widget.Label();
+        tglSampai = new widget.Tanggal();
+        jLabel6 = new widget.Label();
+        txtCari = new widget.TextBox();
+        tombolCari = new widget.Button();
+        jLabel7 = new widget.Label();
+        txtFilterDokter = new widget.TextBox();
+        tombolCariDokter = new widget.Button();
+        tombolSemuaDokter = new widget.Button();
+        panelTombol = new widget.panelisi();
+        labelJmlPasien = new widget.Label();
+        tombolTandatangani = new widget.Button();
+        tombolUpdate = new widget.Button();
+        tombolSalinLog = new widget.Button();
+        tombolTutup = new widget.Button();
+
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        ppPilihSemua.setText("Pilih Semua");
+        ppPilihSemua.setName("ppPilihSemua"); // NOI18N
+        ppPilihSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPilihSemuaActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppPilihSemua);
+
+        ppHapusSemua.setText("Hapus Semua");
+        ppHapusSemua.setName("ppHapusSemua"); // NOI18N
+        ppHapusSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppHapusSemuaActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppHapusSemua);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tanda Tangan Elektronik (TTE) - SATUSEHAT");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setUndecorated(true);   // tanpa title bar OS -> tidak seolah "aplikasi di dalam aplikasi"
+        setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new BorderLayout(1, 1));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+        getContentPane().setLayout(new java.awt.BorderLayout(1, 1));
+
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Tanda Tangan Elektronik (TTE) SATUSEHAT ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        internalFrame1.setName("internalFrame1"); // NOI18N
+        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        splitUtama.setBorder(null);
+        splitUtama.setDividerSize(6);
+        splitUtama.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        splitUtama.setResizeWeight(1.0);
+        splitUtama.setName("splitUtama"); // NOI18N
+
+        splitTabel.setBorder(null);
+        splitTabel.setDividerSize(6);
+        splitTabel.setResizeWeight(0.55);
+        splitTabel.setContinuousLayout(true);
+        splitTabel.setMinimumSize(new java.awt.Dimension(100, 200));
+        splitTabel.setName("splitTabel"); // NOI18N
+
+        spKiri.setName("spKiri"); // NOI18N
+
+        tabelPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        tabelPasien.setName("tabelPasien"); // NOI18N
+        tabelPasien.setRowHeight(24);
+        spKiri.setViewportView(tabelPasien);
+
+        splitTabel.setLeftComponent(spKiri);
+
+        panelKanan.setName("panelKanan"); // NOI18N
+        panelKanan.setLayout(new java.awt.BorderLayout(4, 4));
+
+        panelKananAtas.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 8, 4, 8));
+        panelKananAtas.setName("panelKananAtas"); // NOI18N
+        panelKananAtas.setLayout(new java.awt.BorderLayout());
+
+        labelDok.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        labelDok.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelDok.setText("Pilih pasien di kiri untuk melihat berkas.");
+        labelDok.setName("labelDok"); // NOI18N
+        panelKananAtas.add(labelDok, java.awt.BorderLayout.NORTH);
+
+        panelFilterBerkas.setOpaque(false);
+        panelFilterBerkas.setName("panelFilterBerkas"); // NOI18N
+        panelFilterBerkas.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 0));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("Berkas");
+        jLabel1.setName("jLabel1"); // NOI18N
+        panelFilterBerkas.add(jLabel1);
+
+        cbBerkas.setName("cbBerkas"); // NOI18N
+        cbBerkas.setPreferredSize(new java.awt.Dimension(175, 23));
+        cbBerkas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFilterActionPerformed(evt);
+            }
+        });
+        panelFilterBerkas.add(cbBerkas);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setText("Dokter");
+        jLabel2.setName("jLabel2"); // NOI18N
+        panelFilterBerkas.add(jLabel2);
+
+        cbDokterSign.setName("cbDokterSign"); // NOI18N
+        cbDokterSign.setPreferredSize(new java.awt.Dimension(185, 23));
+        cbDokterSign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFilterActionPerformed(evt);
+            }
+        });
+        panelFilterBerkas.add(cbDokterSign);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Status");
+        jLabel3.setName("jLabel3"); // NOI18N
+        panelFilterBerkas.add(jLabel3);
+
+        cbStatus.setName("cbStatus"); // NOI18N
+        cbStatus.setPreferredSize(new java.awt.Dimension(140, 23));
+        cbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFilterActionPerformed(evt);
+            }
+        });
+        panelFilterBerkas.add(cbStatus);
+
+        panelKananAtas.add(panelFilterBerkas, java.awt.BorderLayout.SOUTH);
+
+        panelKanan.add(panelKananAtas, java.awt.BorderLayout.NORTH);
+
+        spKanan.setComponentPopupMenu(jPopupMenu1);
+        spKanan.setName("spKanan"); // NOI18N
+
+        tabelDok.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        tabelDok.setComponentPopupMenu(jPopupMenu1);
+        tabelDok.setName("tabelDok"); // NOI18N
+        tabelDok.setRowHeight(26);
+        tabelDok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelDokMouseClicked(evt);
+            }
+        });
+        spKanan.setViewportView(tabelDok);
+
+        panelKanan.add(spKanan, java.awt.BorderLayout.CENTER);
+
+        splitTabel.setRightComponent(panelKanan);
+
+        splitUtama.setTopComponent(splitTabel);
+
+        spLog.setBorder(javax.swing.BorderFactory.createTitledBorder("Log TTE"));
+        spLog.setMinimumSize(new java.awt.Dimension(100, 120));
+        spLog.setName("spLog"); // NOI18N
+        spLog.setPreferredSize(new java.awt.Dimension(100, 130));
+
+        taLog.setColumns(20);
+        taLog.setEditable(false);
+        taLog.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+        taLog.setRows(5);
+        taLog.setName("taLog"); // NOI18N
+        spLog.setViewportView(taLog);
+
+        splitUtama.setBottomComponent(spLog);
+
+        internalFrame1.add(splitUtama, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setOpaque(false);
+        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel3.setPreferredSize(new java.awt.Dimension(44, 88));
+        jPanel3.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelFilter.setName("panelFilter"); // NOI18N
+        panelFilter.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelFilter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("Tanggal");
+        jLabel4.setName("jLabel4"); // NOI18N
+        panelFilter.add(jLabel4);
+
+        tglDari.setDisplayFormat("dd-MM-yyyy");
+        tglDari.setName("tglDari"); // NOI18N
+        tglDari.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelFilter.add(tglDari);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("s/d");
+        jLabel5.setName("jLabel5"); // NOI18N
+        panelFilter.add(jLabel5);
+
+        tglSampai.setDisplayFormat("dd-MM-yyyy");
+        tglSampai.setName("tglSampai"); // NOI18N
+        tglSampai.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelFilter.add(tglSampai);
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("Kata Kunci");
+        jLabel6.setName("jLabel6"); // NOI18N
+        panelFilter.add(jLabel6);
+
+        txtCari.setName("txtCari"); // NOI18N
+        txtCari.setPreferredSize(new java.awt.Dimension(140, 23));
+        txtCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCariActionPerformed(evt);
+            }
+        });
+        panelFilter.add(txtCari);
+
+        tombolCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        tombolCari.setMnemonic('C');
+        tombolCari.setText("Cari");
+        tombolCari.setToolTipText("Alt+C");
+        tombolCari.setName("tombolCari"); // NOI18N
+        tombolCari.setPreferredSize(new java.awt.Dimension(85, 30));
+        tombolCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolCariActionPerformed(evt);
+            }
+        });
+        panelFilter.add(tombolCari);
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("Dokter");
+        jLabel7.setName("jLabel7"); // NOI18N
+        panelFilter.add(jLabel7);
+
+        txtFilterDokter.setEditable(false);
+        txtFilterDokter.setName("txtFilterDokter"); // NOI18N
+        txtFilterDokter.setPreferredSize(new java.awt.Dimension(150, 23));
+        panelFilter.add(txtFilterDokter);
+
+        tombolCariDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        tombolCariDokter.setMnemonic('D');
+        tombolCariDokter.setText("Dokter");
+        tombolCariDokter.setToolTipText("Alt+D");
+        tombolCariDokter.setName("tombolCariDokter"); // NOI18N
+        tombolCariDokter.setPreferredSize(new java.awt.Dimension(95, 30));
+        tombolCariDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolCariDokterActionPerformed(evt);
+            }
+        });
+        panelFilter.add(tombolCariDokter);
+
+        tombolSemuaDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        tombolSemuaDokter.setMnemonic('S');
+        tombolSemuaDokter.setText("Semua");
+        tombolSemuaDokter.setToolTipText("Alt+S");
+        tombolSemuaDokter.setName("tombolSemuaDokter"); // NOI18N
+        tombolSemuaDokter.setPreferredSize(new java.awt.Dimension(95, 30));
+        tombolSemuaDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolSemuaDokterActionPerformed(evt);
+            }
+        });
+        panelFilter.add(tombolSemuaDokter);
+
+        jPanel3.add(panelFilter, java.awt.BorderLayout.PAGE_START);
+
+        panelTombol.setName("panelTombol"); // NOI18N
+        panelTombol.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelTombol.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        labelJmlPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelJmlPasien.setName("labelJmlPasien"); // NOI18N
+        labelJmlPasien.setPreferredSize(new java.awt.Dimension(110, 23));
+        panelTombol.add(labelJmlPasien);
+
+        tombolTandatangani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/34.png"))); // NOI18N
+        tombolTandatangani.setMnemonic('T');
+        tombolTandatangani.setText("Tandatangani");
+        tombolTandatangani.setToolTipText("Alt+T");
+        tombolTandatangani.setEnabled(false);
+        tombolTandatangani.setName("tombolTandatangani"); // NOI18N
+        tombolTandatangani.setPreferredSize(new java.awt.Dimension(135, 30));
+        tombolTandatangani.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolTandatanganiActionPerformed(evt);
+            }
+        });
+        panelTombol.add(tombolTandatangani);
+
+        tombolUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/edit_f2.png"))); // NOI18N
+        tombolUpdate.setMnemonic('U');
+        tombolUpdate.setText("Update Status");
+        tombolUpdate.setToolTipText("Alt+U");
+        tombolUpdate.setEnabled(false);
+        tombolUpdate.setName("tombolUpdate"); // NOI18N
+        tombolUpdate.setPreferredSize(new java.awt.Dimension(135, 30));
+        tombolUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolUpdateActionPerformed(evt);
+            }
+        });
+        panelTombol.add(tombolUpdate);
+
+        tombolSalinLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        tombolSalinLog.setMnemonic('L');
+        tombolSalinLog.setText("Salin Log");
+        tombolSalinLog.setToolTipText("Alt+L");
+        tombolSalinLog.setName("tombolSalinLog"); // NOI18N
+        tombolSalinLog.setPreferredSize(new java.awt.Dimension(110, 30));
+        tombolSalinLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolSalinLogActionPerformed(evt);
+            }
+        });
+        panelTombol.add(tombolSalinLog);
+
+        tombolTutup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        tombolTutup.setMnemonic('K');
+        tombolTutup.setText("Keluar");
+        tombolTutup.setToolTipText("Alt+K");
+        tombolTutup.setName("tombolTutup"); // NOI18N
+        tombolTutup.setPreferredSize(new java.awt.Dimension(100, 30));
+        tombolTutup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolTutupActionPerformed(evt);
+            }
+        });
+        panelTombol.add(tombolTutup);
+
+        jPanel3.add(panelTombol, java.awt.BorderLayout.CENTER);
+
+        internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
+
+        getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
+        // Enter di kolom pencarian = klik Cari (kebiasaan operator di form Khanza lain).
+        muatPasien();
+    }//GEN-LAST:event_txtCariActionPerformed
+
+    private void tombolCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolCariActionPerformed
+        muatPasien();
+    }//GEN-LAST:event_tombolCariActionPerformed
+
+    private void tombolCariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolCariDokterActionPerformed
+        pilihFilterDokter();
+    }//GEN-LAST:event_tombolCariDokterActionPerformed
+
+    private void tombolSemuaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSemuaDokterActionPerformed
+        txtFilterDokter.setText("");
+        terapkanFilterDokter();
+    }//GEN-LAST:event_tombolSemuaDokterActionPerformed
+
+    /** Dipakai bersama oleh ketiga combo filter (Berkas, Dokter, Status) — filternya digabung DAN. */
+    private void cbFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFilterActionPerformed
+        terapkanFilterBerkas();
+    }//GEN-LAST:event_cbFilterActionPerformed
+
+    private void tombolTandatanganiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolTandatanganiActionPerformed
+        aksiTandatangani();
+    }//GEN-LAST:event_tombolTandatanganiActionPerformed
+
+    private void tombolUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolUpdateActionPerformed
+        aksiUpdateStatus();
+    }//GEN-LAST:event_tombolUpdateActionPerformed
+
+    private void tombolSalinLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSalinLogActionPerformed
+        salinLog();
+    }//GEN-LAST:event_tombolSalinLogActionPerformed
+
+    private void tombolTutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolTutupActionPerformed
+        dispose();
+    }//GEN-LAST:event_tombolTutupActionPerformed
+
+    private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
+        setSemuaCentang(true);
+    }//GEN-LAST:event_ppPilihSemuaActionPerformed
+
+    private void ppHapusSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusSemuaActionPerformed
+        setSemuaCentang(false);
+    }//GEN-LAST:event_ppHapusSemuaActionPerformed
+
+    /** Flow 5 (Verifikasi): klik dua kali baris yang "Sudah TTE" -> panel verifikasi tanda tangan. */
+    private void tabelDokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelDokMouseClicked
+        if (evt.getClickCount() != 2) {
+            return;
+        }
+        int viewRow = tabelDok.rowAtPoint(evt.getPoint());
+        if (viewRow < 0) {
+            return;
+        }
+        int r = tabelDok.convertRowIndexToModel(viewRow); // view -> model (sorter/filter aktif)
+        if (r < 0 || r >= curDokumen.size()) {
+            return;
+        }
+        DokumenTte d = curDokumen.get(r);
+        if (d.status == Status.SUDAH) {
+            verifikasiDokumen(d);
+        } else {
+            JOptionPane.showMessageDialog(DlgTTESatuSehat.this,
+                    "Berkas ini belum ditandatangani.\n"
+                    + "Verifikasi hanya untuk berkas berstatus \"Sudah TTE\".");
+        }
+    }//GEN-LAST:event_tabelDokMouseClicked
+
+    /**
+     * frmUtama memanggil setSize() SETELAH konstruktor selesai, jadi menghitung divider sekali di
+     * konstruktor SELALU memakai ukuran lama (1240x640) dan panel log jadi kelewat tinggi. Karena
+     * itu divider dipasang ulang setiap dialog berubah ukuran.
+     */
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        aturDivider(splitUtama, splitTabel);
+    }//GEN-LAST:event_formComponentResized
+
+    /**
+     * Sisa pembangunan UI yang memang tak bisa digambar GUI Builder: model tabel beserta aturan
+     * sel-nya, renderer warna status, sorter untuk RowFilter, lebar kolom, dan tanggal awal filter.
+     */
+    private void bangunUi() {
         // Font Tahoma 11 plain: seragam dengan seluruh form Khanza (SatuSehatBundle dkk).
         Font plain = new Font("Tahoma", Font.PLAIN, 11);
 
-        // ===== Wadah utama bertema — pola SatuSehatBundle: widget.InternalFrame + TitledBorder =====
-        widget.InternalFrame internalFrame1 = new widget.InternalFrame();
-        internalFrame1.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(240, 245, 235)),
-                "::[ Tanda Tangan Elektronik (TTE) SATUSEHAT ]::",
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-                javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                plain, new Color(50, 50, 50)));
-        internalFrame1.setFont(plain);
-        internalFrame1.setLayout(new BorderLayout(1, 1));
-        getContentPane().add(internalFrame1, BorderLayout.CENTER);
-
-        // ===== Bar bawah: filter (PAGE_START) + tombol (CENTER) — pola panelGlass9/panelGlass8 =====
-        JPanel jPanel3 = new JPanel(new BorderLayout(1, 1));
-        jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new Dimension(44, 88));
-
-        widget.panelisi panelFilter = new widget.panelisi();
-        panelFilter.setPreferredSize(new Dimension(44, 44));
-        panelFilter.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 9));
-
         LocalDate now = LocalDate.now();
-        // setDisplayFormat WAJIB: tanpa ini widget.Tanggal memakai format locale bawaan
-        // ("6/22/26, 12:00") yang tidak lazim di form Khanza dan membingungkan operator.
-        tglDari = new widget.Tanggal();
-        tglDari.setDisplayFormat("dd-MM-yyyy");
+        // Rentang tanggal awal (30 hari terakhir) dihitung saat dialog dibuka, jadi tak bisa
+        // ditaruh sebagai properti di .form.
         tglDari.setDate(java.sql.Date.valueOf(now.minusDays(30)));
-        tglDari.setPreferredSize(new Dimension(95, 23));
-        tglSampai = new widget.Tanggal();
-        tglSampai.setDisplayFormat("dd-MM-yyyy");
         tglSampai.setDate(java.sql.Date.valueOf(now));
-        tglSampai.setPreferredSize(new Dimension(95, 23));
-        txtCari = new widget.TextBox();
-        txtCari.setPreferredSize(new Dimension(140, 23));
-        txtCari.setFont(plain);
-        // Enter di kolom pencarian = klik Cari (kebiasaan operator di form Khanza lain).
-        txtCari.addActionListener(e -> muatPasien());
-
-        widget.Button tombolCari = new widget.Button();
-        siapkanTombol(tombolCari, "Cari", 'C', "/picture/Search-16x16.png", plain, 85);
-        tombolCari.addActionListener(e -> muatPasien());
-
-        txtFilterDokter = new widget.TextBox();
-        txtFilterDokter.setPreferredSize(new Dimension(150, 23));
-        txtFilterDokter.setFont(plain);
-        txtFilterDokter.setEditable(false);
-        widget.Button tombolCariDokter = new widget.Button();
-        siapkanTombol(tombolCariDokter, "Dokter", 'D', "/picture/category.png", plain, 95);
-        tombolCariDokter.addActionListener(e -> pilihFilterDokter());
-        widget.Button tombolSemuaDokter = new widget.Button();
-        siapkanTombol(tombolSemuaDokter, "Semua", 'S', "/picture/accept.png", plain, 95);
-        tombolSemuaDokter.addActionListener(e -> {
-            txtFilterDokter.setText("");
-            terapkanFilterDokter();
-        });
-
-        panelFilter.add(label("Tanggal", plain));
-        panelFilter.add(tglDari);
-        panelFilter.add(label("s/d", plain));
-        panelFilter.add(tglSampai);
-        panelFilter.add(label("Kata Kunci", plain));
-        panelFilter.add(txtCari);
-        panelFilter.add(tombolCari);
-        panelFilter.add(label("Dokter", plain));
-        panelFilter.add(txtFilterDokter);
-        panelFilter.add(tombolCariDokter);
-        panelFilter.add(tombolSemuaDokter);
-        jPanel3.add(panelFilter, BorderLayout.PAGE_START);
-
-        widget.panelisi panelTombol = new widget.panelisi();
-        panelTombol.setPreferredSize(new Dimension(44, 44));
-        panelTombol.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 9));
-
-        labelJmlPasien = new widget.Label();
-        labelJmlPasien.setFont(plain);
-        labelJmlPasien.setPreferredSize(new Dimension(110, 23));
-
-        tombolTandatangani = new widget.Button();
-        siapkanTombol(tombolTandatangani, "Tandatangani", 'T', "/picture/34.png", plain, 135);
-        tombolTandatangani.setEnabled(false);
-        tombolTandatangani.addActionListener(e -> aksiTandatangani());
-        // Mode TANPA webhook: tarik status TTE terbaru dari SATUSEHAT untuk berkas yang sedang tampil.
-        tombolUpdate = new widget.Button();
-        siapkanTombol(tombolUpdate, "Update Status", 'U', "/picture/edit_f2.png", plain, 135);
-        tombolUpdate.setEnabled(false);
-        tombolUpdate.addActionListener(e -> aksiUpdateStatus());
-        widget.Button tombolSalinLog = new widget.Button();
-        siapkanTombol(tombolSalinLog, "Salin Log", 'L', "/picture/b_print.png", plain, 110);
-        tombolSalinLog.addActionListener(e -> salinLog());
-        widget.Button tombolTutup = new widget.Button();
-        siapkanTombol(tombolTutup, "Keluar", 'K', "/picture/exit.png", plain, 100);
-        tombolTutup.addActionListener(e -> dispose());
-
-        panelTombol.add(labelJmlPasien);
-        panelTombol.add(tombolTandatangani);
-        panelTombol.add(tombolUpdate);
-        panelTombol.add(tombolSalinLog);
-        panelTombol.add(tombolTutup);
-        jPanel3.add(panelTombol, BorderLayout.CENTER);
-        internalFrame1.add(jPanel3, BorderLayout.PAGE_END);
 
         // ---- KIRI: daftar pasien ----
         modelPasien = new DefaultTableModel(KOL_PASIEN, 0) {
@@ -341,68 +714,16 @@ public class DlgTTESatuSehat extends JDialog {
                 return false;
             }
         };
-        tabelPasien = new widget.Table();
         tabelPasien.setModel(modelPasien);
-        tabelPasien.setFont(plain);
         tabelPasien.getTableHeader().setFont(plain);
-        tabelPasien.setRowHeight(24);
         tabelPasien.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabelPasien.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 onPilihPasien();
             }
         });
-        widget.ScrollPane spKiri = new widget.ScrollPane();
-        spKiri.setViewportView(tabelPasien);
 
         // ---- KANAN: dokumen berkas ----
-        JPanel kanan = new JPanel(new BorderLayout(4, 4));
-        JPanel kananAtas = new JPanel(new BorderLayout());
-        kananAtas.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
-        labelDok = new widget.Label();
-        labelDok.setText("Pilih pasien di kiri untuk melihat berkas.");
-        labelDok.setFont(plain);
-        labelDok.setHorizontalAlignment(SwingConstants.LEFT);   // widget.Label bawaannya rata kanan
-        kananAtas.add(labelDok, BorderLayout.NORTH);
-        // Filter Berkas by jenis (mis. hanya "Expertise Laboratorium") -> RowFilter view, model tetap.
-        // Tombol Tandatangani & Update Status kini ada di bar bawah (pola SatuSehatBundle), jadi di
-        // sini tersisa filter berkasnya saja.
-        cbBerkas = new widget.ComboBox();
-        cbBerkas.addItem(SEMUA_BERKAS);
-        cbBerkas.setFont(plain);
-        cbBerkas.setPreferredSize(new Dimension(175, 23));
-        cbBerkas.addActionListener(e -> terapkanFilterBerkas());
-        // Filter Dokter: DIISI DARI KOLOM "Dokter Sign" milik daftar dokumen pasien ini —
-        // bukan dari master dokter, dan bukan filter dokter di bar bawah (yang menyaring PASIEN).
-        cbDokterSign = new widget.ComboBox();
-        cbDokterSign.addItem(SEMUA_DOKTER);
-        cbDokterSign.setFont(plain);
-        cbDokterSign.setPreferredSize(new Dimension(185, 23));
-        cbDokterSign.addActionListener(e -> terapkanFilterBerkas());
-        // Filter Status: daftar tetap (Sudah/Buat/Belum/Sedang Diproses/Ditolak) mengikuti
-        // SatuSehatSignatureState.label() supaya teksnya sama persis dengan yang tampil di kolom.
-        cbStatus = new widget.ComboBox();
-        cbStatus.addItem(SEMUA_STATUS);
-        for (String s : STATUS_PILIHAN) {
-            cbStatus.addItem(s);
-        }
-        cbStatus.setFont(plain);
-        cbStatus.setPreferredSize(new Dimension(140, 23));
-        cbStatus.addActionListener(e -> terapkanFilterBerkas());
-
-        // Baris filter ditaruh DI BAWAH label, bukan di sisi kanannya. Dengan BorderLayout
-        // WEST/EAST keduanya berebut lebar dan saling tindih begitu nama pasien panjang.
-        JPanel kananTombol = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 0));
-        kananTombol.setOpaque(false);
-        kananTombol.add(label("Berkas", plain));
-        kananTombol.add(cbBerkas);
-        kananTombol.add(label("Dokter", plain));
-        kananTombol.add(cbDokterSign);
-        kananTombol.add(label("Status", plain));
-        kananTombol.add(cbStatus);
-        kananAtas.add(kananTombol, BorderLayout.SOUTH);
-        kanan.add(kananAtas, BorderLayout.NORTH);
-
         modelDok = new DefaultTableModel(KOL_DOK, 0) {
             @Override public Class<?> getColumnClass(int c) {
                 return c == 0 ? Boolean.class : String.class;
@@ -413,11 +734,8 @@ public class DlgTTESatuSehat extends JDialog {
                 return c == 0 && r < curDokumen.size() && !curDokumen.get(r).terkunci;
             }
         };
-        tabelDok = new widget.Table();
         tabelDok.setModel(modelDok);
-        tabelDok.setFont(plain);
         tabelDok.getTableHeader().setFont(plain);
-        tabelDok.setRowHeight(26);
         // Sorter dipakai HANYA untuk RowFilter (Filter Berkas); sort dimatikan agar model tetap 1:1 curDokumen.
         sorterDok = new javax.swing.table.TableRowSorter<>(modelDok);
         for (int i = 0; i < KOL_DOK.length; i++) {
@@ -451,97 +769,26 @@ public class DlgTTESatuSehat extends JDialog {
                 return comp;
             }
         });
-        // Flow 5 (Verifikasi): klik dua kali baris yang "Sudah TTE" -> panel verifikasi tanda tangan.
-        tabelDok.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() != 2) {
-                    return;
-                }
-                int viewRow = tabelDok.rowAtPoint(e.getPoint());
-                if (viewRow < 0) {
-                    return;
-                }
-                int r = tabelDok.convertRowIndexToModel(viewRow); // view -> model (sorter/filter aktif)
-                if (r < 0 || r >= curDokumen.size()) {
-                    return;
-                }
-                DokumenTte d = curDokumen.get(r);
-                if (d.status == SatuSehatSignatureState.Status.SUDAH) {
-                    verifikasiDokumen(d);
-                } else {
-                    JOptionPane.showMessageDialog(DlgTTESatuSehat.this,
-                            "Berkas ini belum ditandatangani.\n"
-                            + "Verifikasi hanya untuk berkas berstatus \"Sudah TTE\".");
-                }
-            }
-        });
-        // Klik kanan di tabel berkas -> Pilih Semua / Hapus Semua centang (mengikuti Filter Berkas: hanya baris terlihat).
-        javax.swing.JPopupMenu popupDok = new javax.swing.JPopupMenu();
-        javax.swing.JMenuItem miPilihSemua = new javax.swing.JMenuItem("Pilih Semua");
-        miPilihSemua.addActionListener(e -> setSemuaCentang(true));
-        javax.swing.JMenuItem miHapusSemua = new javax.swing.JMenuItem("Hapus Semua");
-        miHapusSemua.addActionListener(e -> setSemuaCentang(false));
-        popupDok.add(miPilihSemua);
-        popupDok.add(miHapusSemua);
-        tabelDok.setComponentPopupMenu(popupDok);
-        widget.ScrollPane spKanan = new widget.ScrollPane();
-        spKanan.setViewportView(tabelDok);
-        kanan.add(spKanan, BorderLayout.CENTER);
 
-        final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, spKiri, kanan);
-        // Proporsional, bukan dipatok 720 px: di layar lebar panel kiri jadi terlalu dominan dan
-        // panel berkas terdesak sampai isinya terpotong.
-        split.setResizeWeight(0.55);
-        split.setBorder(null);
-        split.setDividerSize(6);
-        split.setContinuousLayout(true);
+        // Isi ketiga combo filter PALING AKHIR: listener-nya sudah terpasang sejak initComponents(),
+        // jadi setiap addItem() memanggil terapkanFilterBerkas() yang butuh sorterDok sudah ada.
+        // Filter Berkas by jenis (mis. hanya "Expertise Laboratorium") -> RowFilter view, model tetap.
+        cbBerkas.addItem(SEMUA_BERKAS);
+        // Filter Dokter: DIISI DARI KOLOM "Dokter Sign" milik daftar dokumen pasien ini —
+        // bukan dari master dokter, dan bukan filter dokter di bar bawah (yang menyaring PASIEN).
+        cbDokterSign.addItem(SEMUA_DOKTER);
+        // Filter Status: daftar tetap (Sudah/Buat/Belum/Sedang Diproses/Ditolak) mengikuti
+        // SatuSehatSignatureState.label() supaya teksnya sama persis dengan yang tampil di kolom.
+        cbStatus.addItem(SEMUA_STATUS);
+        for (String s : STATUS_PILIHAN) {
+            cbStatus.addItem(s);
+        }
 
-        // ===== Panel log — pola SatuSehatBundle: baris berstempel waktu, auto-scroll ke bawah =====
-        taLog = new javax.swing.JTextArea(5, 20);
-        taLog.setEditable(false);
-        taLog.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        widget.ScrollPane spLog = new widget.ScrollPane();
-        spLog.setViewportView(taLog);
-        spLog.setBorder(BorderFactory.createTitledBorder("Log TTE"));
-        spLog.setPreferredSize(new Dimension(100, 130));
-
-        final JSplitPane splitUtama = new JSplitPane(JSplitPane.VERTICAL_SPLIT, split, spLog);
-        splitUtama.setBorder(null);
-        splitUtama.setDividerSize(6);
-        splitUtama.setResizeWeight(1.0);   // tabel menyerap tinggi berlebih; log tetap ~preferred
-        // Tanpa minimumSize, panel log tergencet jadi beberapa piksel karena tabel di atasnya
-        // punya preferred size besar.
-        split.setMinimumSize(new Dimension(100, 200));
-        spLog.setMinimumSize(new Dimension(100, 120));
-        internalFrame1.add(splitUtama, BorderLayout.CENTER);
-
+        // pack() dari GUI Builder memakai preferred size; ukuran kerja dialog dipatok di sini.
+        // frmUtama tetap boleh menimpanya lewat setSize() setelah konstruktor selesai.
         setSize(1240, 640);
         setLocationRelativeTo(getParent());
-        // frmUtama memanggil setSize() SETELAH konstruktor selesai, jadi menghitung divider sekali
-        // di sini SELALU memakai ukuran lama (1240x640) dan panel log jadi kelewat tinggi.
-        // Karena itu divider dipasang ulang setiap dialog berubah ukuran.
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override public void componentResized(java.awt.event.ComponentEvent e) {
-                aturDivider(splitUtama, split);
-            }
-        });
-        javax.swing.SwingUtilities.invokeLater(() -> aturDivider(splitUtama, split));
-    }
-
-    /** Seragamkan tampilan tombol bertema Khanza: teks, mnemonic (Alt+X), ikon, font, lebar. */
-    private void siapkanTombol(javax.swing.AbstractButton b, String teks, char mnemonic, String ikon,
-                               Font font, int lebar) {
-        b.setText(teks);
-        b.setMnemonic(mnemonic);
-        b.setToolTipText("Alt+" + mnemonic);
-        b.setFont(font);
-        b.setPreferredSize(new Dimension(lebar, 30));
-        try {
-            b.setIcon(new javax.swing.ImageIcon(getClass().getResource(ikon)));
-        } catch (Exception e) {
-            // Ikon hilang tidak boleh menggagalkan pembangunan UI - tombol tetap tampil bertulisan.
-            System.out.println("Notifikasi DlgTTE ikon " + ikon + " : " + e);
-        }
+        javax.swing.SwingUtilities.invokeLater(() -> aturDivider(splitUtama, splitTabel));
     }
 
     /** Salin seluruh isi panel log ke clipboard - memudahkan lapor masalah ke IT/Kemenkes. */
@@ -814,7 +1061,7 @@ public class DlgTTESatuSehat extends JDialog {
     }
 
     /** Nilai combo terpilih; {@code bawaan} bila combo belum dibangun/kosong. */
-    private String terpilih(javax.swing.JComboBox<String> cb, String bawaan) {
+    private String terpilih(javax.swing.JComboBox<?> cb, String bawaan) {
         Object o = (cb == null) ? null : cb.getSelectedItem();
         return (o == null) ? bawaan : String.valueOf(o);
     }
@@ -831,7 +1078,7 @@ public class DlgTTESatuSehat extends JDialog {
         int total = curDokumen.size();
         int sudah = 0;
         for (DokumenTte d : curDokumen) {
-            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
+            if (d.status == Status.SUDAH) {
                 sudah++;
             }
         }
@@ -853,7 +1100,7 @@ public class DlgTTESatuSehat extends JDialog {
             // Jangan centang baris yang sudah TTE maupun yang masih menunggu giliran penanda
             // sebelumnya (model serial); menghapus centang tetap boleh untuk semua baris.
             DokumenTte dd = curDokumen.get(modelRow);
-            if (nilai && (dd.status == SatuSehatSignatureState.Status.SUDAH || dd.terkunci)) {
+            if (nilai && (dd.status == Status.SUDAH || dd.terkunci)) {
                 continue;
             }
             modelDok.setValueAt(nilai, modelRow, 0);
@@ -901,8 +1148,8 @@ public class DlgTTESatuSehat extends JDialog {
                     curIdEncounter = h.idEncounter;
                     curDokumen = h.dokumen;
                     isiDokTabel(namaPasien);
-                    tombolTandatangani.setEnabled(!curDokumen.isEmpty());
-                    tombolUpdate.setEnabled(!curDokumen.isEmpty());
+                    aktifkanTandatangani(!curDokumen.isEmpty());
+                    aktifkanUpdate(!curDokumen.isEmpty());
                 } catch (Exception ex) {
                     labelDok.setText("Gagal memuat berkas: " + pesan(ex));
                     System.out.println("Notifikasi DlgTTE onPilihPasien : " + ex);
@@ -920,7 +1167,7 @@ public class DlgTTESatuSehat extends JDialog {
             // Default TIDAK tercentang -> operator memilih sendiri (checkbox / klik kanan "Pilih Semua").
             modelDok.addRow(new Object[]{Boolean.FALSE, d.jenis, d.labelPeran(), nz(d.signer),
                 d.targetRef, labelStatusBaris(d)});
-            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
+            if (d.status == Status.SUDAH) {
                 sudah++;
             } else if (d.terkunci) {
                 menunggu++;
@@ -966,14 +1213,14 @@ public class DlgTTESatuSehat extends JDialog {
         for (DokumenTte d : curDokumen) {
             d.terkunci = false;
             d.alasanKunci = "";
-            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == SatuSehatSignatureState.Status.SUDAH) {
+            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == Status.SUDAH) {
                 continue;
             }
             for (DokumenTte lain : curDokumen) {
                 if (!lain.targetRef.equals(d.targetRef) || lain.urutan >= d.urutan) {
                     continue;
                 }
-                if (lain.status != SatuSehatSignatureState.Status.SUDAH) {
+                if (lain.status != Status.SUDAH) {
                     d.terkunci = true;
                     d.alasanKunci = "menunggu " + (nz(lain.signer).equals("") ? "giliran " + lain.urutan : lain.signer);
                 }
@@ -1035,11 +1282,18 @@ public class DlgTTESatuSehat extends JDialog {
 
     /** Tombol Tandatangani: buat Provenance placeholder utk berkas tercentang -> satu Task -> popup QR. */
     private void aksiTandatangani() {
+        // Penjaga kedua di samping tombol yang dimatikan: aksi ini menerbitkan Provenance & Task
+        // ke SATUSEHAT (tak bisa dibatalkan), jadi hak akses diperiksa lagi tepat sebelum jalan.
+        if (!aksesTte) {
+            JOptionPane.showMessageDialog(this,
+                    "Maaf, Anda tidak punya hak akses untuk tanda tangan elektronik...!!!!");
+            return;
+        }
         final List<DokumenTte> dicentang = new ArrayList<>();
         for (int i = 0; i < curDokumen.size(); i++) {
             Boolean centang = (Boolean) modelDok.getValueAt(i, 0);
             DokumenTte d = curDokumen.get(i);
-            if (Boolean.TRUE.equals(centang) && d.status != SatuSehatSignatureState.Status.SUDAH && !d.terkunci) {
+            if (Boolean.TRUE.equals(centang) && d.status != Status.SUDAH && !d.terkunci) {
                 dicentang.add(d);
             }
         }
@@ -1057,9 +1311,9 @@ public class DlgTTESatuSehat extends JDialog {
         final List<DokumenTte> baru = new ArrayList<>();
         String uuidAda = "";
         for (DokumenTte d : dicentang) {
-            if (d.status == SatuSehatSignatureState.Status.DITOLAK && !nz(d.idProvenance).equals("")) {
+            if (d.status == Status.DITOLAK && !nz(d.idProvenance).equals("")) {
                 reuse.add(d);
-            } else if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
+            } else if (d.status == Status.DITOLAK) {
                 // Ditolak tapi id_provenance tak tersimpan -> terpaksa buat Provenance+Task baru.
                 d.taskUuid = "";
                 d.idProvenance = "";
@@ -1157,7 +1411,7 @@ public class DlgTTESatuSehat extends JDialog {
                     logSukses("Task baru " + uuid + " dibuat untuk Provenance " + provIds + ".");
                     for (DokumenTte d : grup) {
                         d.taskUuid = uuid;
-                        d.status = SatuSehatSignatureState.Status.BELUM;
+                        d.status = Status.BELUM;
                         store.simpan(noRawat, d.jenis, d.targetRef, d.idProvenance, uuid, "requested", idPractitioner);
                     }
                     return uuid;
@@ -1176,7 +1430,7 @@ public class DlgTTESatuSehat extends JDialog {
                     }
                     logSukses(hf.pesan);
                     for (DokumenTte d : grup) {
-                        d.status = SatuSehatSignatureState.Status.BELUM;
+                        d.status = Status.BELUM;
                     }
                     return hf.taskUuid;
                 }
@@ -1211,13 +1465,13 @@ public class DlgTTESatuSehat extends JDialog {
                     DokumenTte d = grup.get(i);
                     d.idProvenance = (i < hb.provIds.size()) ? hb.provIds.get(i) : "";
                     d.taskUuid = uuid;
-                    d.status = SatuSehatSignatureState.Status.BELUM;
+                    d.status = Status.BELUM;
                     store.simpan(noRawat, d.jenis, d.targetRef, d.idProvenance, uuid, "requested", idPractitioner);
                 }
                 return uuid;
             }
             @Override protected void done() {
-                tombolTandatangani.setEnabled(true);
+                aktifkanTandatangani(true);
                 try {
                     String uuid = get();
                     if (uuid == null || uuid.equals("")) {
@@ -1257,7 +1511,7 @@ public class DlgTTESatuSehat extends JDialog {
         }
         final java.util.LinkedHashSet<String> uuids = new java.util.LinkedHashSet<>();
         for (DokumenTte d : curDokumen) {
-            if (d.taskUuid != null && !d.taskUuid.equals("") && d.status != SatuSehatSignatureState.Status.SUDAH) {
+            if (d.taskUuid != null && !d.taskUuid.equals("") && d.status != Status.SUDAH) {
                 uuids.add(d.taskUuid);
             }
         }
@@ -1291,12 +1545,12 @@ public class DlgTTESatuSehat extends JDialog {
                 } catch (Exception ex) {
                     System.out.println("Notifikasi DlgTTE aksiUpdateStatus done : " + ex);
                 }
-                tombolUpdate.setEnabled(!curDokumen.isEmpty());
-                tombolTandatangani.setEnabled(!curDokumen.isEmpty());
+                aktifkanUpdate(!curDokumen.isEmpty());
+                aktifkanTandatangani(!curDokumen.isEmpty());
                 refreshDokTabel();
                 int sudah = 0;
                 for (DokumenTte d : curDokumen) {
-                    if (d.status == SatuSehatSignatureState.Status.SUDAH) {
+                    if (d.status == Status.SUDAH) {
                         sudah++;
                     }
                 }
@@ -1657,7 +1911,7 @@ public class DlgTTESatuSehat extends JDialog {
             if (!uuid.equals(d.taskUuid)) {
                 continue;
             }
-            SatuSehatSignatureState.Status ui = null;
+            Status ui = null;
             if (r.adaOutput()) {
                 String out = r.perProv.get(nz(d.idProvenance));
                 if (out != null) {
@@ -1674,16 +1928,16 @@ public class DlgTTESatuSehat extends JDialog {
     }
 
     /** Ringkasan status seluruh dokumen satu Task untuk keputusan popup QR. null bila campuran / tanpa dokumen. */
-    private SatuSehatSignatureState.Status statusAgregat(String uuid) {
+    private Status statusAgregat(String uuid) {
         int total = 0, sudah = 0, tolak = 0, pending = 0;
         for (DokumenTte d : curDokumen) {
             if (!uuid.equals(d.taskUuid)) {
                 continue;
             }
             total++;
-            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
+            if (d.status == Status.SUDAH) {
                 sudah++;
-            } else if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
+            } else if (d.status == Status.DITOLAK) {
                 tolak++;
             } else {
                 pending++;
@@ -1693,13 +1947,13 @@ public class DlgTTESatuSehat extends JDialog {
             return null;
         }
         if (pending > 0) {
-            return SatuSehatSignatureState.Status.DIPROSES;   // masih ada dokumen menunggu tanda tangan
+            return Status.DIPROSES;   // masih ada dokumen menunggu tanda tangan
         }
         if (sudah == total) {
-            return SatuSehatSignatureState.Status.SUDAH;      // semua tertandatangani
+            return Status.SUDAH;      // semua tertandatangani
         }
         if (tolak == total) {
-            return SatuSehatSignatureState.Status.DITOLAK;    // semua gagal/ditolak
+            return Status.DITOLAK;    // semua gagal/ditolak
         }
         return null;                  // CAMPURAN (sebagian sukses) — pemanggil beri pesan rinci
     }
@@ -1711,9 +1965,9 @@ public class DlgTTESatuSehat extends JDialog {
             if (!uuid.equals(d.taskUuid)) {
                 continue;
             }
-            if (d.status == SatuSehatSignatureState.Status.SUDAH) {
+            if (d.status == Status.SUDAH) {
                 sudah++;
-            } else if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
+            } else if (d.status == Status.DITOLAK) {
                 gagal++;
             }
         }
@@ -1730,7 +1984,7 @@ public class DlgTTESatuSehat extends JDialog {
             try {
                 SatuSehatProvenanceStore.Baris b = store.ambil(curNoRawat, d.targetRef, d.signerIhs);
                 if (b != null && !nz(b.status).equals("")) {
-                    SatuSehatSignatureState.Status ui = SatuSehatSignatureState.uiState(nz(b.taskUuid), mapEnumKeStatus(b.status), false);
+                    Status ui = SatuSehatSignatureState.uiState(nz(b.taskUuid), mapEnumKeStatus(b.status), false);
                     if (ui != null) {
                         d.status = ui;
                     }
@@ -1771,13 +2025,13 @@ public class DlgTTESatuSehat extends JDialog {
                     }
                     terapkanHasil(uuid, r);
                     refreshDokTabel();
-                    SatuSehatSignatureState.Status agg = statusAgregat(uuid);
-                    if (agg == SatuSehatSignatureState.Status.SUDAH) {
+                    Status agg = statusAgregat(uuid);
+                    if (agg == Status.SUDAH) {
                         tutupPopupQr();
                         JOptionPane.showMessageDialog(DlgTTESatuSehat.this,
                                 "Berkas sudah ditandatangani.\n"
                                 + "Klik dua kali berkas \"Sudah TTE\" untuk melihat verifikasi tanda tangan.");
-                    } else if (agg == SatuSehatSignatureState.Status.DITOLAK) {
+                    } else if (agg == Status.DITOLAK) {
                         tutupPopupQr();
                         JOptionPane.showMessageDialog(DlgTTESatuSehat.this, "Permintaan TTE ditolak/gagal. Silakan ulangi.");
                     } else if (agg == null && r.adaOutput()) {
@@ -2009,7 +2263,7 @@ public class DlgTTESatuSehat extends JDialog {
         JDialog dlg = new JDialog(this, "Verifikasi Tanda Tangan — " + d.jenis, true);
         dlg.setLayout(new BorderLayout(10, 10));
 
-        // Header SatuSehatSignatureState.status.
+        // Header status.
         JPanel header = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 8));
         JLabel status = new JLabel(h.ditandatangani
                 ? "✔  Tanda tangan elektronik ditemukan (" + h.jumlahSignature + " signature)"
@@ -2267,6 +2521,13 @@ public class DlgTTESatuSehat extends JDialog {
      * @param jenis   nama jenis berkas persis seperti yang dipakai perakit, mis. "Laporan EKG"
      */
     public static void tteLangsung(final Component pemilik, final String noRawat, final String jenis) {
+        // Jalur TTE langsung dari tombol "TTE" di form RME. Satu penjaga di sini menutup seluruh
+        // form RME pemanggil sekaligus, sehingga tak perlu memeriksa hak akses di tiap form.
+        if (!akses.getsatu_sehat_tte_smc()) {
+            JOptionPane.showMessageDialog(pemilik,
+                    "Maaf, Anda tidak punya hak akses untuk tanda tangan elektronik...!!!!");
+            return;
+        }
         final String norwt = nzt(noRawat).trim();
         if (norwt.equals("")) {
             JOptionPane.showMessageDialog(pemilik, "No.Rawat belum terisi. Pilih dulu kunjungan pasiennya.");
@@ -2345,7 +2606,7 @@ public class DlgTTESatuSehat extends JDialog {
 
         List<DokumenTte> siap = new ArrayList<>();
         for (DokumenTte d : baris) {
-            if (d.status != SatuSehatSignatureState.Status.SUDAH && !d.terkunci) {
+            if (d.status != Status.SUDAH && !d.terkunci) {
                 siap.add(d);
             }
         }
@@ -2387,7 +2648,7 @@ public class DlgTTESatuSehat extends JDialog {
 
         // Sudah pernah dibuatkan Task dan belum ditolak -> tampilkan lagi QR-nya, jangan buat kedua.
         for (DokumenTte d : grup) {
-            if (!nzt(d.taskUuid).equals("") && d.status != SatuSehatSignatureState.Status.DITOLAK) {
+            if (!nzt(d.taskUuid).equals("") && d.status != Status.DITOLAK) {
                 out.berhasil = true;
                 out.taskUuid = d.taskUuid;
                 return out;
@@ -2398,11 +2659,11 @@ public class DlgTTESatuSehat extends JDialog {
             List<DokumenTte> reuse = new ArrayList<>();
             List<DokumenTte> baru = new ArrayList<>();
             for (DokumenTte d : grup) {
-                if (d.status == SatuSehatSignatureState.Status.DITOLAK && !nzt(d.idProvenance).equals("")) {
+                if (d.status == Status.DITOLAK && !nzt(d.idProvenance).equals("")) {
                     reuse.add(d);
                 } else {
                     d.taskUuid = "";
-                    if (d.status == SatuSehatSignatureState.Status.DITOLAK) {
+                    if (d.status == Status.DITOLAK) {
                         d.idProvenance = "";
                     }
                     baru.add(d);
@@ -2508,14 +2769,14 @@ public class DlgTTESatuSehat extends JDialog {
         for (DokumenTte d : baris) {
             d.terkunci = false;
             d.alasanKunci = "";
-            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == SatuSehatSignatureState.Status.SUDAH) {
+            if (d.model != SatuSehatTteModel.Model.SERIAL || d.urutan <= 1 || d.status == Status.SUDAH) {
                 continue;
             }
             for (DokumenTte lain : baris) {
                 if (!lain.targetRef.equals(d.targetRef) || lain.urutan >= d.urutan) {
                     continue;
                 }
-                if (lain.status != SatuSehatSignatureState.Status.SUDAH) {
+                if (lain.status != Status.SUDAH) {
                     d.terkunci = true;
                     d.alasanKunci = "menunggu "
                             + (nzt(lain.signer).equals("") ? "giliran " + lain.urutan : lain.signer);
@@ -2916,6 +3177,50 @@ public class DlgTTESatuSehat extends JDialog {
             return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
         }
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.ComboBox cbBerkas;
+    private widget.ComboBox cbDokterSign;
+    private widget.ComboBox cbStatus;
+    private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel1;
+    private widget.Label jLabel2;
+    private widget.Label jLabel3;
+    private widget.Label jLabel4;
+    private widget.Label jLabel5;
+    private widget.Label jLabel6;
+    private widget.Label jLabel7;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.Label labelDok;
+    private widget.Label labelJmlPasien;
+    private widget.panelisi panelFilter;
+    private javax.swing.JPanel panelFilterBerkas;
+    private javax.swing.JPanel panelKanan;
+    private javax.swing.JPanel panelKananAtas;
+    private widget.panelisi panelTombol;
+    private javax.swing.JMenuItem ppHapusSemua;
+    private javax.swing.JMenuItem ppPilihSemua;
+    private widget.ScrollPane spKanan;
+    private widget.ScrollPane spKiri;
+    private widget.ScrollPane spLog;
+    private javax.swing.JSplitPane splitTabel;
+    private javax.swing.JSplitPane splitUtama;
+    private javax.swing.JTextArea taLog;
+    private widget.Table tabelDok;
+    private widget.Table tabelPasien;
+    private widget.Tanggal tglDari;
+    private widget.Tanggal tglSampai;
+    private widget.Button tombolCari;
+    private widget.Button tombolCariDokter;
+    private widget.Button tombolSalinLog;
+    private widget.Button tombolSemuaDokter;
+    private widget.Button tombolTandatangani;
+    private widget.Button tombolTutup;
+    private widget.Button tombolUpdate;
+    private widget.TextBox txtCari;
+    private widget.TextBox txtFilterDokter;
+    // End of variables declaration//GEN-END:variables
 
     /** Peluncur DEMO (butuh koneksi DB SIMRS). */
     public static void main(String[] args) {
