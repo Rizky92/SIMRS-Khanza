@@ -34,6 +34,26 @@
     <entry key="BIOSYSAPIKEY">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="LABORATORIUMSUBHEADERPREFIX">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
+    <entry key="KEYEKLAIM">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="WSEKLAIM">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="KELASRSEKLAIM"></entry>
+    <entry key="URLSNOMEDAPI"></entry>
+    <entry key="NOTIFWAPASIEN"></entry>
+    <entry key="URLWAHAFOKASIR"></entry>
+    <entry key="APIKEYWAHAFOKASIR"></entry>
+    <entry key="SESSIONWAHAFOKASIR"></entry>
+    <entry key="TOKENWA"></entry>
+    <entry key="URLWAHA"></entry>
+    <entry key="SESSIONWAHA"></entry>
+    <entry key="APIKEYWAHA"></entry>
+    <entry key="GATEWAYNOTIFWA"></entry>
+    <entry key="AETITLEORTHANC"></entry>
+    <entry key="AETITLEDICOMROUTER"></entry>
+    <entry key="URLDICOMROUTER"></entry>
+    <entry key="PORTDICOMROUTER"></entry>
+    <entry key="IDORGBPJSSATUSEHAT"></entry>
+    <entry key="URLAPPLINKSATUSEHAT"></entry>
+
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="WANAME">AZHNccBwSmSho84f+X8GyQ==</entry>

@@ -503,23 +503,39 @@ public class koneksiDB {
     }
 
     public static String KEYEKLAIM() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("KEYEKLAIM", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String WSEKLAIM() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("WSEKLAIM", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String KELASRSEKLAIM() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("KELASRSEKLAIM", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String URLSNOMEDAPI() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("URLSNOMEDAPI", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String NOTIFWAPASIEN() {
@@ -568,23 +584,39 @@ public class koneksiDB {
     }
 
     public static String AETITLEORTHANC() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("AETITLEORTHANC", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String AETITLEDICOMROUTER() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("AETITLEDICOMROUTER", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String URLDICOMROUTER() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("URLDICOMROUTER", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String PORTDICOMROUTER() {
-        // no-op
-        return "";
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("PORTDICOMROUTER", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String IDORGBPJSSATUSEHAT() {
