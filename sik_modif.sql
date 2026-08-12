@@ -2358,4 +2358,759 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
+CREATE TABLE IF NOT EXISTS `satu_sehat_account` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_account` varchar(64) NOT NULL,
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_allergy` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_allergy` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_anc_episodeofcare` (
+  `no_rkm_medis` varchar(15) NOT NULL,
+  `id_episodeofcare` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rkm_medis`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_anc_observation` (
+  `no_rawat` varchar(17) NOT NULL,
+  `tipe` varchar(20) NOT NULL,
+  `id_observation` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`tipe`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_chargeitem` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_item` varchar(220) NOT NULL,
+  `id_chargeitem` varchar(64) NOT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_item`),
+  KEY `id_chargeitem` (`id_chargeitem`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_claim` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_claim` varchar(40) DEFAULT NULL COMMENT 'IHS UUID dari Claim',
+  `sub_type` varchar(20) DEFAULT 'drg',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`),
+  KEY `idx_tgl_kirim` (`tgl_kirim`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_claimresponse` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_claimresponse_purifikasi` varchar(40) DEFAULT NULL,
+  `status_purifikasi` varchar(50) DEFAULT NULL COMMENT 'Lolos / Tidak Lolos / Pending',
+  `disposition_purifikasi` text DEFAULT NULL,
+  `id_claimresponse_verifikasi` varchar(40) DEFAULT NULL,
+  `status_verifikasi` varchar(50) DEFAULT NULL COMMENT 'Layak / Tidak Layak / Pending / Kedaluwarsa',
+  `disposition_verifikasi` text DEFAULT NULL,
+  `raw_response_purifikasi` text DEFAULT NULL,
+  `raw_response_verifikasi` text DEFAULT NULL,
+  `tgl_sync` datetime NOT NULL DEFAULT current_timestamp(),
+  `no_batch` varchar(30) DEFAULT NULL COMMENT 'identifier claim-batch-number (kedua fase)',
+  `kode_verifikasi` varchar(20) DEFAULT NULL COMMENT 'adjudication.reason code, mis. CRA000001 Layak',
+  `nilai_diajukan` double DEFAULT NULL COMMENT 'total[submitted].amount',
+  `nilai_disetujui` double DEFAULT NULL COMMENT 'total[benefit].amount (tarif INA-CBG)',
+  `nilai_copay` double DEFAULT NULL COMMENT 'jumlah item[].adjudication[copay].amount = excess',
+  `nilai_bayar` double DEFAULT NULL COMMENT 'payment.amount',
+  `tgl_bayar` date DEFAULT NULL COMMENT 'payment.date',
+  `id_purificationdecision` varchar(64) DEFAULT NULL COMMENT 'id resource hasil kirim langkah 9',
+  `keputusan_kode` varchar(20) DEFAULT NULL COMMENT 'status.coding.code, mis. TK000049',
+  `keputusan_display` varchar(60) DEFAULT NULL COMMENT 'status.coding.display, mis. Lanjut',
+  `tgl_keputusan` datetime DEFAULT NULL COMMENT 'kapan keputusan dikirim',
+  PRIMARY KEY (`no_rawat`),
+  KEY `idx_tgl_sync` (`tgl_sync`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_coverage` (
+  `no_rawat` varchar(17) NOT NULL,
+  `no_kartu` varchar(25) DEFAULT NULL,
+  `no_sep` varchar(30) DEFAULT NULL COMMENT 'No.SEP sumber data kepesertaan (bridging_sep.no_sep)',
+  `id_coverage` varchar(64) NOT NULL,
+  PRIMARY KEY (`no_rawat`),
+  KEY `no_kartu` (`no_kartu`),
+  KEY `no_sep` (`no_sep`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_device` (
+  `kode_brng` varchar(15) NOT NULL,
+  `id_device` varchar(40) DEFAULT NULL COMMENT 'IHS UUID dari Device',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`kode_brng`),
+  KEY `idx_tgl_kirim` (`tgl_kirim`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_devicedispense` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_brng` varchar(15) NOT NULL,
+  `id_devicedispense` varchar(50) DEFAULT NULL,
+  `tgl_kirim` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_devicerequest` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_brng` varchar(15) NOT NULL,
+  `id_devicerequest` varchar(50) DEFAULT NULL,
+  `tgl_kirim` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_deviceusestatement` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_brng` varchar(15) NOT NULL,
+  `id_deviceusestatement` varchar(50) DEFAULT NULL,
+  `tgl_kirim` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_episode_of_care` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kd_penyakit` varchar(15) NOT NULL,
+  `status` enum('Ralan','Ranap') NOT NULL,
+  `id_episode_of_care` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kd_penyakit`,`status`) USING BTREE,
+  KEY `kd_penyakit` (`kd_penyakit`) USING BTREE,
+  KEY `status` (`status`) USING BTREE,
+  KEY `no_rawat` (`no_rawat`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_familymemberhistory` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_familymemberhistory` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_form_code` (
+  `code` char(10) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `keterangan` varchar(50) NOT NULL,
+  `system` varchar(100) NOT NULL,
+  KEY `nama` (`nama`),
+  KEY `keterangan` (`keterangan`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_goal` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_goal` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ihs_patient` (
+  `nikpasien` varchar(20) NOT NULL,
+  `ihspasien` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`nikpasien`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ihs_practitioner` (
+  `nikpegawai` varchar(20) NOT NULL,
+  `ihspegawai` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`nikpegawai`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_imagingstudy` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `tgl_periksa` date NOT NULL,
+  `jam` time NOT NULL,
+  `id_imagingstudy` varchar(50) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kd_jenis_prw`,`tgl_periksa`,`jam`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_imagingstudy_berkas` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode` varchar(10) NOT NULL,
+  `accession_number` varchar(20) NOT NULL,
+  `id_imaging` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kode`,`accession_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_imagingstudy_radiologi` (
+  `noorder` varchar(15) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `id_servicerequest` varchar(40) DEFAULT NULL,
+  `id_imaging` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`noorder`,`kd_jenis_prw`) USING BTREE,
+  KEY `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_invoice` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_invoice` varchar(64) NOT NULL,
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_keuangan` (
+  `no_rawat` varchar(17) NOT NULL,
+  `no_peserta` varchar(25) DEFAULT '',
+  `id_coverage` varchar(50) DEFAULT '',
+  `id_account` varchar(50) DEFAULT '',
+  `id_invoice` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_kfa_master` (
+  `name` varchar(255) DEFAULT NULL,
+  `kfa_code` varchar(255) NOT NULL,
+  `active` varchar(100) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `updated_at` varchar(255) DEFAULT NULL,
+  `produksi_buatan` varchar(255) DEFAULT NULL,
+  `nie` varchar(255) DEFAULT NULL,
+  `nama_dagang` varchar(255) DEFAULT NULL,
+  `manufacturer` varchar(255) DEFAULT NULL,
+  `registrar` varchar(255) DEFAULT NULL,
+  `generik` varchar(100) DEFAULT NULL,
+  `rxterm` varchar(255) DEFAULT NULL,
+  `dose_per_unit` varchar(100) DEFAULT NULL,
+  `fix_price` varchar(100) DEFAULT NULL,
+  `het_price` varchar(100) DEFAULT NULL,
+  `farmalkes_hscode` varchar(255) DEFAULT NULL,
+  `tayang_lkpp` varchar(100) DEFAULT NULL,
+  `kode_lkpp` varchar(255) DEFAULT NULL,
+  `net_weight` varchar(100) DEFAULT NULL,
+  `net_weight_uom_name` varchar(255) DEFAULT NULL,
+  `volume` varchar(100) DEFAULT NULL,
+  `volume_uom_name` varchar(255) DEFAULT NULL,
+  `dosage_form_code` varchar(100) DEFAULT NULL,
+  `dosage_form_name` varchar(100) DEFAULT NULL,
+  `product_template_kfa_code` varchar(255) DEFAULT NULL,
+  `product_template_name` varchar(255) DEFAULT NULL,
+  `product_template_state` varchar(255) DEFAULT NULL,
+  `product_template_active` varchar(100) DEFAULT NULL,
+  `product_template_display_name` varchar(255) DEFAULT NULL,
+  `product_template_updated_at` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`kfa_code`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_kfa_master_detail` (
+  `kfa_code` varchar(20) NOT NULL,
+  `active` varchar(10) DEFAULT NULL,
+  `state` varchar(20) DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `updated_at` varchar(30) DEFAULT '0000-00-00 00:00:00',
+  `farmalkes_type_code` varchar(20) DEFAULT NULL,
+  `farmalkes_type_name` varchar(255) DEFAULT NULL,
+  `farmalkes_type_group` varchar(255) DEFAULT NULL,
+  `ucum_cs_code` varchar(20) DEFAULT NULL,
+  `ucum_name` varchar(255) DEFAULT NULL,
+  `dosage_form_code` varchar(20) DEFAULT NULL,
+  `dosage_form_name` varchar(255) DEFAULT NULL,
+  `controlled_drug_code` varchar(20) DEFAULT NULL,
+  `controlled_drug_name` varchar(255) DEFAULT NULL,
+  `rute_pemberian_code` varchar(20) DEFAULT NULL,
+  `rute_pemberian_name` varchar(255) DEFAULT NULL,
+  `uom_name` varchar(255) DEFAULT NULL,
+  `produksi_buatan` varchar(100) DEFAULT NULL,
+  `nie` varchar(100) DEFAULT NULL,
+  `nama_dagang` varchar(255) DEFAULT NULL,
+  `manufacturer` varchar(255) DEFAULT NULL,
+  `registrar` varchar(255) DEFAULT NULL,
+  `generik` varchar(100) DEFAULT NULL,
+  `rxterm` varchar(255) DEFAULT NULL,
+  `dose_per_unit` int(11) DEFAULT NULL,
+  `fix_price` decimal(20,2) DEFAULT NULL,
+  `het_price` decimal(20,2) DEFAULT NULL,
+  `farmalkes_hscode` varchar(20) DEFAULT NULL,
+  `tayang_lkpp` varchar(10) DEFAULT NULL,
+  `kode_lkpp` varchar(100) DEFAULT NULL,
+  `score_tkdn` int(11) DEFAULT NULL,
+  `score_bmp` int(11) DEFAULT NULL,
+  `score_tkdn_bmp` int(11) DEFAULT NULL,
+  `med_dev_jenis` varchar(255) DEFAULT NULL,
+  `med_dev_subkategori` varchar(255) DEFAULT NULL,
+  `med_dev_kategori` varchar(255) DEFAULT NULL,
+  `med_dev_kelas_risiko` varchar(255) DEFAULT NULL,
+  `klasifikasi_izin` varchar(255) DEFAULT NULL,
+  `net_weight` decimal(10,2) DEFAULT NULL,
+  `net_weight_uom_name` varchar(20) DEFAULT NULL,
+  `volume` decimal(10,2) DEFAULT NULL,
+  `volume_uom_name` varchar(20) DEFAULT NULL,
+  `atc_ddd_name` varchar(255) DEFAULT NULL,
+  `atc_l1_name` varchar(255) DEFAULT NULL,
+  `atc_l1_code` varchar(20) DEFAULT NULL,
+  `atc_l1_level` int(11) DEFAULT NULL,
+  `atc_l1_parent_code` varchar(10) DEFAULT NULL,
+  `atc_l1_comment` text DEFAULT NULL,
+  `atc_l2_name` varchar(255) DEFAULT NULL,
+  `atc_l2_code` varchar(20) DEFAULT NULL,
+  `atc_l2_level` int(11) DEFAULT NULL,
+  `atc_l2_parent_code` varchar(20) DEFAULT NULL,
+  `atc_l2_comment` text DEFAULT NULL,
+  `atc_l3_name` varchar(255) DEFAULT NULL,
+  `atc_l3_code` varchar(20) DEFAULT NULL,
+  `atc_l3_level` int(11) DEFAULT NULL,
+  `atc_l3_parent_code` varchar(20) DEFAULT NULL,
+  `atc_l3_comment` text DEFAULT NULL,
+  `atc_l4_name` varchar(255) DEFAULT NULL,
+  `atc_l4_code` varchar(20) DEFAULT NULL,
+  `atc_l4_level` int(11) DEFAULT NULL,
+  `atc_l4_parent_code` varchar(20) DEFAULT NULL,
+  `atc_l4_comment` text DEFAULT NULL,
+  `atc_l5_name` varchar(255) DEFAULT NULL,
+  `atc_l5_code` varchar(20) DEFAULT NULL,
+  `atc_l5_level` int(11) DEFAULT NULL,
+  `atc_l5_parent_code` varchar(20) DEFAULT NULL,
+  `atc_l5_comment` text DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `indication` longtext DEFAULT NULL,
+  `warning` longtext DEFAULT NULL,
+  `side_effect` longtext DEFAULT NULL,
+  `identifier_ids_name_1` varchar(255) DEFAULT NULL,
+  `identifier_ids_code_1` varchar(20) DEFAULT NULL,
+  `identifier_ids_source_name_1` varchar(255) DEFAULT NULL,
+  `identifier_ids_url_1` text DEFAULT NULL,
+  `identifier_ids_name_2` varchar(255) DEFAULT NULL,
+  `identifier_ids_code_2` varchar(20) DEFAULT NULL,
+  `identifier_ids_source_name_2` varchar(255) DEFAULT NULL,
+  `identifier_ids_url_2` text DEFAULT NULL,
+  `packaging_ids_name` varchar(255) DEFAULT NULL,
+  `packaging_ids_kfa_code` varchar(20) DEFAULT NULL,
+  `packaging_ids_pack_price` decimal(10,2) DEFAULT NULL,
+  `packaging_ids_uom_id` varchar(20) DEFAULT NULL,
+  `packaging_ids_qty` decimal(10,2) DEFAULT NULL,
+  `product_template_kfa_code` varchar(20) DEFAULT NULL,
+  `product_template_name` varchar(255) DEFAULT NULL,
+  `product_template_state` varchar(20) DEFAULT NULL,
+  `product_template_active` varchar(10) DEFAULT NULL,
+  `product_template_display_name` varchar(255) DEFAULT NULL,
+  `product_template_updated_at` varchar(30) DEFAULT '0000-00-00 00:00:00',
+  `active_ingredients_kfa_code` varchar(20) DEFAULT NULL,
+  `active_ingredients_active` varchar(10) DEFAULT NULL,
+  `active_ingredients_state` varchar(20) DEFAULT NULL,
+  `active_ingredients_zat_aktif` varchar(255) DEFAULT NULL,
+  `active_ingredients_kekuatan_zat_aktif` varchar(255) DEFAULT NULL,
+  `active_ingredients_updated_at` varchar(30) DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`kfa_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_anestesi` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_echo` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_ekg` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_eswl` (
+  `no_rawat` varchar(17) NOT NULL,
+  `mulai` datetime DEFAULT NULL,
+  `id_composition` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_composition`),
+  UNIQUE KEY `uq_eswl_norawat_mulai` (`no_rawat`,`mulai`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_operasi` (
+  `no_rawat` varchar(17) NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `id_composition` varchar(40) DEFAULT NULL COMMENT 'IHS UUID dari Composition',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`,`tanggal`),
+  KEY `idx_tgl_kirim` (`tgl_kirim`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_persalinan` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_laporan_usg` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `log_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `service_name` varchar(50) NOT NULL,
+  `no_rawat` varchar(20) DEFAULT NULL,
+  `resource_id` varchar(100) DEFAULT NULL,
+  `request_payload` longtext DEFAULT NULL,
+  `response_code` int(11) DEFAULT NULL,
+  `response_body` longtext DEFAULT NULL,
+  `status` enum('SUCCESS','FAILED') NOT NULL,
+  `error_message` text DEFAULT NULL,
+  `duration_ms` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_service` (`service_name`),
+  KEY `idx_no_rawat` (`no_rawat`),
+  KEY `idx_status` (`status`),
+  KEY `idx_log_time` (`log_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=1460 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_mapping_diet` (
+  `kd_diet` varchar(3) NOT NULL,
+  `snomed_code` varchar(20) NOT NULL,
+  `snomed_display` varchar(100) NOT NULL,
+  PRIMARY KEY (`kd_diet`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_mapping_kamar_kptl` (
+  `kd_kamar` varchar(15) NOT NULL,
+  `code` varchar(200) DEFAULT NULL,
+  `system` varchar(1000) NOT NULL,
+  `display` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`kd_kamar`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_mapping_segmen_peserta` (
+  `peserta` varchar(100) NOT NULL COMMENT 'nilai bridging_sep.peserta',
+  `segmen` varchar(60) NOT NULL COMMENT 'Coverage.class.value (slug segmentasi)',
+  `nama` varchar(100) NOT NULL COMMENT 'Coverage.class.name (label)',
+  PRIMARY KEY (`peserta`),
+  KEY `idx_segmen` (`segmen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_medicationadministration` (
+  `no_rawat` varchar(17) NOT NULL,
+  `tgl_perawatan` date NOT NULL,
+  `jam` time NOT NULL,
+  `kode_brng` varchar(15) NOT NULL,
+  `no_batch` varchar(20) NOT NULL,
+  `no_faktur` varchar(20) NOT NULL,
+  `id_medicationadministration` varchar(40) DEFAULT NULL COMMENT 'UUID dari SatuSehat (FHIR MedicationAdministration.id)',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`,`tgl_perawatan`,`jam`,`kode_brng`,`no_batch`,`no_faktur`) USING BTREE,
+  KEY `kode_brng` (`kode_brng`) USING BTREE,
+  KEY `idx_tgl_kirim` (`tgl_kirim`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_nutrition_order` (
+  `no_rawat` varchar(17) NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `id_nutrition_order` varchar(100) NOT NULL,
+  PRIMARY KEY (`no_rawat`,`tanggal`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_obat_kronis` (
+  `no_sep_apotek` varchar(30) NOT NULL,
+  `kode_brng` varchar(30) NOT NULL,
+  `id_medicationrequest` varchar(50) DEFAULT '',
+  `id_medicationdispense` varchar(50) DEFAULT '',
+  `tgl_kirim` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_sep_apotek`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_preanestesi` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_observation` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_provenance` (
+  `no_rawat` varchar(17) NOT NULL,
+  `jenis_dokumen` varchar(60) NOT NULL,
+  `target_ref` varchar(120) NOT NULL,
+  `id_provenance` varchar(64) DEFAULT NULL,
+  `task_uuid` varchar(64) DEFAULT NULL,
+  `status_tte` enum('belum','requested','in-progress','completed','rejected') NOT NULL DEFAULT 'belum',
+  `id_practitioner` varchar(64) NOT NULL DEFAULT '',
+  `peran` varchar(20) NOT NULL DEFAULT 'author' COMMENT 'provenance-participant-type: author|attester|verifier|performer|enterer',
+  `urutan` tinyint(2) NOT NULL DEFAULT 1 COMMENT 'urutan tanda tangan; serial: 1 lalu 2. paralel: semua 1',
+  `id_provenance_sebelumnya` varchar(64) DEFAULT NULL COMMENT 'model serial: id Provenance yang ditunjuk entity[] berikutnya',
+  `trace_id` varchar(64) DEFAULT NULL,
+  `version_id` varchar(64) DEFAULT NULL,
+  `version_id_terkini` varchar(64) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`target_ref`,`id_practitioner`),
+  KEY `idx_task_uuid` (`task_uuid`),
+  KEY `idx_target` (`no_rawat`,`target_ref`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_provenance_bundle` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dibuat_at` datetime NOT NULL,
+  `jenis_kiriman` enum('bundle','task') NOT NULL DEFAULT 'bundle',
+  `no_rawat` varchar(17) DEFAULT NULL,
+  `task_uuid` varchar(64) DEFAULT NULL,
+  `id_practitioner` varchar(64) DEFAULT NULL,
+  `jml_dokumen` int(11) NOT NULL DEFAULT 0,
+  `http_status` int(11) NOT NULL DEFAULT 0,
+  `berhasil` tinyint(1) NOT NULL DEFAULT 0,
+  `request_json` mediumblob NOT NULL,
+  `response_json` mediumblob DEFAULT NULL,
+  `galat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_task` (`task_uuid`),
+  KEY `idx_rawat` (`no_rawat`),
+  KEY `idx_waktu` (`dibuat_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_purification_decision` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_decision` varchar(40) DEFAULT NULL,
+  `decision` varchar(10) NOT NULL COMMENT 'Lanjut|Batal',
+  `reason` text DEFAULT NULL,
+  `raw_response` text DEFAULT NULL,
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`),
+  KEY `idx_tgl_kirim` (`tgl_kirim`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_qr_risiko_jatuh_dewasa` (
+  `no_rawat` varchar(17) NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `id_questionnaireresponse` varchar(40) DEFAULT NULL,
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`,`tanggal`) USING BTREE,
+  KEY `idx_tgl_kirim` (`tgl_kirim`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_qr_skrining_tbc` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_questionnaireresponse` varchar(40) DEFAULT NULL COMMENT 'UUID dari SatuSehat (FHIR QuestionnaireResponse.id)',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`) USING BTREE,
+  KEY `idx_tgl_kirim` (`tgl_kirim`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_questionnaireresponse` (
+  `no_rawat` varchar(17) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `tgl_perawatan` date NOT NULL,
+  `jam_rawat` time NOT NULL,
+  `status` enum('Ralan','Ranap') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `id_questionnaireresponse` varchar(10000) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_profesi_snomed` (
+  `jenis` enum('role','specialty') NOT NULL,
+  `kode` varchar(20) NOT NULL,
+  `nama` varchar(150) NOT NULL DEFAULT '',
+  `nama_id` varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (`jenis`,`kode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ref_allergy` (
+  `kode` varchar(10) NOT NULL,
+  `system` varchar(150) DEFAULT NULL,
+  `display` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`kode`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ref_allergy_reaction` (
+  `kode` varchar(10) NOT NULL,
+  `system` varchar(150) DEFAULT NULL,
+  `display` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`kode`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ref_prognosa` (
+  `kode` varchar(10) NOT NULL,
+  `system` varchar(150) NOT NULL DEFAULT 'http://terminology.kemkes.go.id/CodeSystem/clinical-term',
+  `display` varchar(150) NOT NULL,
+  `display_id` varchar(150) NOT NULL COMMENT 'Padanan istilah Indonesia',
+  PRIMARY KEY (`kode`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ref_routecode` (
+  `kode` varchar(10) NOT NULL,
+  `system` varchar(150) DEFAULT NULL,
+  `display` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ref_vaksincode` (
+  `kode` varchar(10) NOT NULL,
+  `system` varchar(150) DEFAULT NULL,
+  `display` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`kode`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_ref_vaksin_reasoncode` (
+  `kode` varchar(10) NOT NULL,
+  `display` varchar(150) DEFAULT NULL,
+  `protocol` varchar(10) DEFAULT NULL,
+  `jenis` varchar(200) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_resume_medreq` (
+  `no_resep` varchar(50) NOT NULL,
+  `kode_brng` varchar(20) NOT NULL,
+  `id_medicationrequest` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_resep`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_resume_ralan` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_resume_ranap` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_obs_keluhan` varchar(50) DEFAULT '',
+  `id_obs_penyerta` varchar(50) DEFAULT '',
+  `id_obs_rps` varchar(50) DEFAULT '',
+  `id_obs_pengobatan` varchar(50) DEFAULT '',
+  `id_obs_fisik` varchar(50) DEFAULT '',
+  `id_obs_lab` varchar(50) DEFAULT '',
+  `id_obs_dxawal` varchar(50) DEFAULT '',
+  `id_obs_dxakhir` varchar(50) DEFAULT '',
+  `id_obs_course` varchar(50) DEFAULT '',
+  `id_allergy` varchar(50) DEFAULT '',
+  `id_composition` varchar(50) DEFAULT '',
+  `id_obs_obatrs` varchar(50) DEFAULT '',
+  `id_obs_obatpulang` varchar(50) DEFAULT '',
+  `id_obs_tindakan` varchar(50) DEFAULT '',
+  `id_medreq_rs` varchar(50) DEFAULT '',
+  `id_medreq_pulang` varchar(50) DEFAULT '',
+  `id_procedure` varchar(50) DEFAULT '',
+  `id_obs_vital` varchar(50) DEFAULT '',
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_riskassessment` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_riskassessment` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_rme_rawat_inap` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_composition` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_servicerequest_kontrol` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_servicerequest` varchar(40) DEFAULT NULL,
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_servicerequest_spri` (
+  `no_surat` varchar(40) NOT NULL,
+  `no_rawat` varchar(17) NOT NULL,
+  `id_servicerequest` varchar(40) DEFAULT NULL,
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_surat`),
+  KEY `idx_no_rawat` (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_servicerequest_usg` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_servicerequest` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_spri` (
+  `no_surat` varchar(40) NOT NULL,
+  `no_rawat` varchar(17) NOT NULL,
+  `id_servicerequest` varchar(40) DEFAULT NULL COMMENT 'IHS UUID dari ServiceRequest',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_surat`),
+  KEY `no_rawat` (`no_rawat`),
+  KEY `idx_tgl_kirim` (`tgl_kirim`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_supplydelivery` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_brng` varchar(15) NOT NULL,
+  `id_supplydelivery` varchar(50) DEFAULT NULL,
+  `tgl_kirim` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_supplyrequest` (
+  `no_rawat` varchar(17) NOT NULL,
+  `kode_brng` varchar(15) NOT NULL,
+  `id_supplyrequest` varchar(50) DEFAULT NULL,
+  `tgl_kirim` datetime DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`,`kode_brng`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_task_webhook` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `diterima_at` datetime NOT NULL,
+  `event` varchar(60) DEFAULT NULL,
+  `task_uuid` varchar(64) DEFAULT NULL,
+  `status_kirim` varchar(30) DEFAULT NULL,
+  `payload` text NOT NULL,
+  `payload_mentah` mediumtext DEFAULT NULL,
+  `terenkripsi` tinyint(1) NOT NULL DEFAULT 0,
+  `diproses` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `idx_task` (`task_uuid`),
+  KEY `idx_belum` (`diproses`,`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_triase_igd` (
+  `no_rawat` varchar(17) NOT NULL,
+  `id_obs_modearrival` varchar(40) DEFAULT NULL COMMENT 'Observation Mode of arrival (LOINC 11459-5)',
+  `id_obs_transport` varchar(50) DEFAULT NULL,
+  `id_obs_kategori` varchar(40) DEFAULT NULL COMMENT 'Observation Kategori Triase (SNOMED 273887006)',
+  `id_obs_td` varchar(40) DEFAULT NULL COMMENT 'Observation Blood Pressure panel (LOINC 85354-9)',
+  `id_obs_nadi` varchar(40) DEFAULT NULL COMMENT 'Observation Heart Rate (LOINC 8867-4)',
+  `id_obs_resp` varchar(40) DEFAULT NULL COMMENT 'Observation Respiratory Rate (LOINC 9279-1)',
+  `id_obs_suhu` varchar(40) DEFAULT NULL COMMENT 'Observation Body Temperature (LOINC 8310-5)',
+  `id_obs_spo2` varchar(40) DEFAULT NULL COMMENT 'Observation Oxygen Saturation (LOINC 2708-6)',
+  `id_obs_nyeri` varchar(40) DEFAULT NULL COMMENT 'Observation Pain Severity (LOINC 38208-5)',
+  `id_obs_disposition` varchar(40) DEFAULT NULL COMMENT 'Observation ED Disposition (LOINC 11302-7)',
+  `id_obs_abcde` varchar(40) DEFAULT NULL,
+  `id_obs_triageindex` varchar(40) DEFAULT NULL,
+  `id_obs_rps` varchar(40) DEFAULT NULL,
+  `id_obs_rpd` varchar(40) DEFAULT NULL,
+  `id_allergy` varchar(40) DEFAULT NULL,
+  `id_obs_lab` varchar(40) DEFAULT NULL,
+  `id_condition` varchar(40) DEFAULT NULL COMMENT 'Condition chief-complaint',
+  `id_composition` varchar(40) DEFAULT NULL COMMENT 'Composition Triage Note (LOINC 75500-9)',
+  `tgl_kirim` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`no_rawat`),
+  KEY `idx_tgl_kirim` (`tgl_kirim`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_tte_model` (
+  `jenis_dokumen` varchar(60) NOT NULL COMMENT 'label jenis dokumen persis seperti di daftar TTE',
+  `urutan` tinyint(2) NOT NULL DEFAULT 1,
+  `model` enum('single','paralel','serial') NOT NULL DEFAULT 'single',
+  `peran` varchar(20) NOT NULL DEFAULT 'author' COMMENT 'provenance-participant-type untuk penanda ini',
+  `sumber` varchar(40) NOT NULL COMMENT 'asal penanda, mis. nip_analis | kd_dokter_pk | dpjp | operator1 | perawat',
+  `wajib` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0 = boleh dilewati bila sumbernya kosong (dokumen tetap bisa di-TTE)',
+  `keterangan` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`jenis_dokumen`,`urutan`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='Model TTE per jenis dokumen: single/paralel/serial + peran tiap penanda';
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_tte_smc` enum('true','false') NULL DEFAULT NULL AFTER `checklist_kriteria_keluar_isolasi`;
+
+ALTER TABLE `satu_sehat_allergy` ADD CONSTRAINT `satu_sehat_allergy_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_claim` ADD CONSTRAINT `satu_sehat_claim_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_claimresponse` ADD CONSTRAINT `satu_sehat_claimresponse_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_device` ADD CONSTRAINT `satu_sehat_device_ibfk_1` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `databarang` (`kode_brng`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_episode_of_care` ADD CONSTRAINT `satu_sehat_episode_of_care_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_episode_of_care` ADD CONSTRAINT `satu_sehat_episode_of_care_ibfk_2` FOREIGN KEY IF NOT EXISTS (`kd_penyakit`) REFERENCES `penyakit` (`kd_penyakit`) ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_ihs_patient` ADD CONSTRAINT `ihs` FOREIGN KEY IF NOT EXISTS (`nikpasien`) REFERENCES `pasien` (`no_ktp`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_imagingstudy_radiologi` ADD CONSTRAINT `satu_sehat_imagingstudy_radiologi_ibfk_1` FOREIGN KEY IF NOT EXISTS (`noorder`) REFERENCES `permintaan_radiologi` (`noorder`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_imagingstudy_radiologi` ADD CONSTRAINT `satu_sehat_imagingstudy_radiologi_ibfk_2` FOREIGN KEY IF NOT EXISTS (`kd_jenis_prw`) REFERENCES `jns_perawatan_radiologi` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_laporan_ekg` ADD CONSTRAINT `satu_sehat_laporan_ekg_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_laporan_eswl` ADD CONSTRAINT `satu_sehat_laporan_eswl_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_laporan_operasi` ADD CONSTRAINT `satu_sehat_laporan_operasi_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`, `tanggal`) REFERENCES `laporan_operasi` (`no_rawat`, `tanggal`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_laporan_usg` ADD CONSTRAINT `satu_sehat_laporan_usg_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_mapping_diet` ADD CONSTRAINT `satu_sehat_mapping_diet_ibfk_1` FOREIGN KEY IF NOT EXISTS (`kd_diet`) REFERENCES `diet` (`kd_diet`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_medicationadministration` ADD CONSTRAINT `satu_sehat_medicationadministration_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_medicationadministration` ADD CONSTRAINT `satu_sehat_medicationadministration_ibfk_2` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `databarang` (`kode_brng`) ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_nutrition_order` ADD CONSTRAINT `satu_sehat_nutrition_order_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_purification_decision` ADD CONSTRAINT `satu_sehat_purification_decision_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_qr_risiko_jatuh_dewasa` ADD CONSTRAINT `ss_qr_rj_dewasa_fk1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_qr_skrining_tbc` ADD CONSTRAINT `ss_qr_tbc_fk1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_spri` ADD CONSTRAINT `satu_sehat_spri_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_surat`) REFERENCES `bridging_surat_pri_bpjs` (`no_surat`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `satu_sehat_triase_igd` ADD CONSTRAINT `satu_sehat_triase_igd_ibfk_1` FOREIGN KEY IF NOT EXISTS (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 SET FOREIGN_KEY_CHECKS=1;
