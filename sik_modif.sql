@@ -493,6 +493,12 @@ ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `kota` varchar(30) NULL DEFAULT NULL AFTER `alamat`;
 
+ALTER TABLE `ipsrsdetailpengeluaran` ADD PRIMARY KEY IF NOT EXISTS (`no_keluar`, `kode_brng`) USING BTREE;
+
+ALTER TABLE `ipsrsdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `ipsrsdetailpengeluaran_ibfk_4`;
+
+ALTER TABLE `ipsrsdetailpengeluaran` ADD CONSTRAINT `ipsrsdetailpengeluaran_ibfk_4` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `ipsrsbarang` (`kode_brng`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
 
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
@@ -1479,8 +1485,8 @@ CREATE TABLE IF NOT EXISTS `pengajuan_fingerprint_bpjs_smc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   `no_kartu` varchar(25) NOT NULL,
   `tglsep` date NOT NULL,
-  `status_pengajuan` varchar(100) NULL DEFAULT NULL,
-  `status_approval` varchar(100) NULL DEFAULT NULL,
+  `status_pengajuan` varchar(1000) NULL DEFAULT NULL,
+  `status_approval` varchar(1000) NULL DEFAULT NULL,
   `nip` varchar(20) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`,`tglsep`) USING BTREE,
   INDEX `no_kartu`(`no_kartu`) USING BTREE,
