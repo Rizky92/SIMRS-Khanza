@@ -14,14 +14,13 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -63,7 +62,6 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private static final int PANJANG_DISPLAY = 80;
 
     private final DefaultTableModel tabMode;
-    private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final String sumber;
@@ -74,7 +72,6 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private final Map<String, String[]> cacheLOINC = new HashMap<>();
     private final Map<String, String[]> cacheSNOMED = new HashMap<>();
     private final ObjectMapper mapper = new ObjectMapper();
-    private List<String[]> dataSmc = null;
     private volatile boolean ceksukses = false;
 
     /**
@@ -90,8 +87,8 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         initComponents();
 
         tabMode = new DefaultTableModel(null, new Object[] {
-                "Terima", "Jenis", "Kunci", "Nama Pemeriksaan", "Code", "System Tersimpan", "Display Tersimpan",
-                "System Seharusnya", "Display Seharusnya", "Masalah"
+                "Terima", "Jenis", "Kunci", "Nama Pemeriksaan", "Code Tersimpan", "System Tersimpan", "Display Tersimpan",
+                "Code Seharusnya", "Display Seharusnya", "Masalah"
             }) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -119,13 +116,13 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
             } else if (i == 3) {
                 column.setPreferredWidth(230);
             } else if (i == 4) {
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(110);
             } else if (i == 5) {
                 column.setPreferredWidth(160);
             } else if (i == 6) {
                 column.setPreferredWidth(260);
             } else if (i == 7) {
-                column.setPreferredWidth(160);
+                column.setPreferredWidth(110);
             } else if (i == 8) {
                 column.setPreferredWidth(260);
             } else if (i == 9) {
@@ -147,6 +144,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
+        MnCariReferensi = new javax.swing.JMenuItem();
         MnTandaiSemua = new javax.swing.JMenuItem();
         MnTandaiDisplay = new javax.swing.JMenuItem();
         MnHapusTanda = new javax.swing.JMenuItem();
@@ -154,7 +152,6 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         Scroll = new widget.ScrollPane();
         tbValidasi = new widget.Table();
         panelGlass6 = new widget.panelisi();
-        ChkKosong = new widget.CekBox();
         BtnValidasi = new widget.Button();
         BtnTerima = new widget.Button();
         jLabel6 = new widget.Label();
@@ -164,6 +161,22 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
 
         Popup.setName("Popup"); // NOI18N
+
+        MnCariReferensi.setBackground(new java.awt.Color(255, 255, 254));
+        MnCariReferensi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCariReferensi.setForeground(new java.awt.Color(50, 50, 50));
+        MnCariReferensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        MnCariReferensi.setText("Cari Referensi Kode Pengganti");
+        MnCariReferensi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCariReferensi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCariReferensi.setName("MnCariReferensi"); // NOI18N
+        MnCariReferensi.setPreferredSize(new java.awt.Dimension(240, 30));
+        MnCariReferensi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCariReferensiActionPerformed(evt);
+            }
+        });
+        Popup.add(MnCariReferensi);
 
         MnTandaiSemua.setBackground(new java.awt.Color(255, 255, 254));
         MnTandaiSemua.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -244,11 +257,6 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         panelGlass6.setName("panelGlass6"); // NOI18N
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
-
-        ChkKosong.setText("Sertakan Belum Dimaping");
-        ChkKosong.setName("ChkKosong"); // NOI18N
-        ChkKosong.setPreferredSize(new java.awt.Dimension(180, 23));
-        panelGlass6.add(ChkKosong);
 
         BtnValidasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnValidasi.setMnemonic('V');
@@ -351,6 +359,10 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnValidasiKeyPressed
 
+    private void MnCariReferensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCariReferensiActionPerformed
+        cariReferensi();
+    }//GEN-LAST:event_MnCariReferensiActionPerformed
+
     private void MnTandaiSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTandaiSemuaActionPerformed
         tandai(true, false);
     }//GEN-LAST:event_MnTandaiSemuaActionPerformed
@@ -403,9 +415,9 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnTerima;
     private widget.Button BtnValidasi;
-    private widget.CekBox ChkKosong;
     private widget.Label LCount;
     private widget.Label LProgres;
+    private javax.swing.JMenuItem MnCariReferensi;
     private javax.swing.JMenuItem MnHapusTanda;
     private javax.swing.JMenuItem MnTandaiDisplay;
     private javax.swing.JMenuItem MnTandaiSemua;
@@ -427,7 +439,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     }
 
     public void setData(JTable tabel, int[] urutan) {
-        List<String[]> data = new ArrayList<>();
+        Valid.tabelKosongSmc(tabMode);
 
         for (int i = 0; i < tabel.getRowCount(); i++) {
             String[] baris = new String[urutan.length];
@@ -436,10 +448,13 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
                 baris[j] = bersihkan(null == tabel.getValueAt(i, urutan[j]) ? "" : tabel.getValueAt(i, urutan[j]).toString());
             }
 
-            data.add(baris);
+            tambahBaris(baris, JENIS_PEMERIKSAAN);
+            tambahBaris(baris, JENIS_SAMPEL);
         }
 
-        dataSmc = data;
+        tabMode.fireTableDataChanged();
+        LProgres.setText("0 / " + tabMode.getRowCount());
+        hitungMasalah();
     }
 
     @Override
@@ -448,8 +463,33 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         super.dispose();
     }
 
+    private void tambahBaris(String[] baris, String jenis) {
+        boolean sampel = JENIS_SAMPEL.equals(jenis);
+        String code = sampel ? baris[5] : baris[2];
+
+        if (code.isBlank()) {
+            return;
+        }
+
+        tabMode.addRow(new Object[] {
+            false, jenis, baris[0], baris[1], code, sampel ? baris[6] : baris[3], sampel ? baris[7] : baris[4], "", "", ""
+        });
+    }
+
     private boolean perluKoreksi(int baris) {
         return !tabMode.getValueAt(baris, 7).toString().isBlank() || !tabMode.getValueAt(baris, 8).toString().isBlank();
+    }
+
+    private void hitungMasalah() {
+        int jumlah = 0;
+
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            if (!tabMode.getValueAt(i, 9).toString().isBlank()) {
+                jumlah++;
+            }
+        }
+
+        LCount.setText(jumlah + "");
     }
 
     private void validasi() {
@@ -457,75 +497,70 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
             return;
         }
 
+        if (0 == tabMode.getRowCount()) {
+            JOptionPane.showMessageDialog(null, "Tidak ada mapping yang bisa divalidasi..!!");
+            return;
+        }
+
         ceksukses = true;
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Valid.tabelKosongSmc(tabMode);
-        LCount.setText("0");
-        LProgres.setText("0 / 0");
         BtnValidasi.setEnabled(false);
         BtnTerima.setEnabled(false);
 
+        final List<Object[]> antrian = new ArrayList<>();
+
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            tabMode.setValueAt(false, i, 0);
+            tabMode.setValueAt("", i, 7);
+            tabMode.setValueAt("", i, 8);
+            tabMode.setValueAt("", i, 9);
+            antrian.add(new Object[] {
+                i, tabMode.getValueAt(i, 1).toString(), tabMode.getValueAt(i, 4).toString(),
+                tabMode.getValueAt(i, 5).toString(), tabMode.getValueAt(i, 6).toString()
+            });
+        }
+
+        hitungMasalah();
+        LProgres.setText("0 / " + antrian.size());
 
         new SwingWorker<Void, Object[]>() {
-            final boolean sertakanKosong = ChkKosong.isSelected();
-            private int total = 0;
             private int diperiksa = 0;
 
             @Override
             protected Void doInBackground() throws Exception {
-                List<String[]> daftar = null == dataSmc ? ambilMapping() : dataSmc;
-                total = daftar.size();
-                laporProgress(0, total);
-
-                for (String[] baris : daftar) {
+                for (Object[] antre : antrian) {
                     if (!ceksukses) {
                         break;
                     }
 
-                    validasiKode(baris, JENIS_PEMERIKSAAN);
-                    validasiKode(baris, JENIS_SAMPEL);
+                    validasiKode(antre);
                     diperiksa++;
-                    laporProgress(diperiksa, total);
+                    laporProgress(diperiksa, antrian.size());
                 }
 
                 return null;
             }
 
-            private void validasiKode(String[] baris, String jenis) {
-                boolean sampel = JENIS_SAMPEL.equals(jenis);
-                String kunci = baris[0], nama = baris[1];
-                String code = bersihkan(sampel ? baris[5] : baris[2]);
-                String system = bersihkan(sampel ? baris[6] : baris[3]);
-                String display = bersihkan(sampel ? baris[7] : baris[4]);
-                String systemBenar = sampel ? SYSTEM_SNOMED : SYSTEM_LOINC;
-
-                if (code.isBlank()) {
-                    if (sertakanKosong) {
-                        publish(new Object[] {false, jenis, kunci, nama, "", system, display, "", "", sampel ? "Kode SNOMED CT belum dipetakan" : "Kode LOINC belum dipetakan"});
-                    }
-                    return;
-                }
-
+            private void validasiKode(Object[] antre) {
+                int baris = (int) antre[0];
+                boolean sampel = JENIS_SAMPEL.equals(antre[1].toString());
+                String code = antre[2].toString(), system = antre[3].toString(), display = antre[4].toString();
                 String[] referensi = sampel ? cariSNOMED(code) : cariLOINC(code);
 
                 if (null == referensi) {
-                    publish(new Object[] {false, jenis, kunci, nama, code, system, display, "", "", sampel ? "Gagal menghubungi API SNOMED CT" : "Gagal menghubungi API LOINC"});
+                    publish(new Object[] {baris, false, "", "", sampel ? "Gagal menghubungi API SNOMED CT" : "Gagal menghubungi API LOINC"});
                     return;
                 }
 
                 if (0 == referensi.length) {
-                    publish(new Object[] {false, jenis, kunci, nama, code, system, display, "", "", sampel ? "Kode SNOMED CT tidak ditemukan" : "Kode LOINC tidak ditemukan"});
+                    publish(new Object[] {baris, false, "", "", sampel ? "Kode SNOMED CT tidak ditemukan" : "Kode LOINC tidak ditemukan"});
                     return;
                 }
 
                 List<String> masalah = new ArrayList<>();
-                String systemKoreksi = "", displayKoreksi = "";
+                String displayKoreksi = "";
                 String displayBenar = potong(referensi[0], PANJANG_DISPLAY);
-
-                if (!systemBenar.equals(system)) {
-                    systemKoreksi = systemBenar;
-                    masalah.add("System bukan " + systemBenar);
-                }
+                String systemBenar = sampel ? SYSTEM_SNOMED : SYSTEM_LOINC;
 
                 if (!displayBenar.equalsIgnoreCase(display)) {
                     displayKoreksi = displayBenar;
@@ -544,17 +579,28 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
                     masalah.add("Status LOINC " + referensi[1]);
                 }
 
+                if (!systemBenar.equals(system)) {
+                    masalah.add("System bukan " + systemBenar);
+                }
+
                 if (masalah.isEmpty()) {
                     return;
                 }
 
-                publish(new Object[] {!systemKoreksi.isBlank() || !displayKoreksi.isBlank(), jenis, kunci, nama, code, system, display, systemKoreksi, displayKoreksi, String.join(", ", masalah)});
+                publish(new Object[] {baris, !displayKoreksi.isBlank(), "", displayKoreksi, String.join(", ", masalah)});
             }
 
             @Override
             protected void process(List<Object[]> chunks) {
-                chunks.forEach(tabMode::addRow);
-                LCount.setText(tabMode.getRowCount() + "");
+                for (Object[] hasil : chunks) {
+                    int baris = (int) hasil[0];
+                    tabMode.setValueAt(hasil[1], baris, 0);
+                    tabMode.setValueAt(hasil[2], baris, 7);
+                    tabMode.setValueAt(hasil[3], baris, 8);
+                    tabMode.setValueAt(hasil[4], baris, 9);
+                }
+
+                hitungMasalah();
             }
 
             @Override
@@ -571,12 +617,12 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
                 }
 
                 tabMode.fireTableDataChanged();
-                LCount.setText(tabMode.getRowCount() + "");
+                hitungMasalah();
                 BtnValidasi.setEnabled(true);
                 isCek();
                 DlgValidasiMappingSMC.this.setCursor(Cursor.getDefaultCursor());
 
-                if (0 == tabMode.getRowCount()) {
+                if ("0".equals(LCount.getText())) {
                     JOptionPane.showMessageDialog(null, "Seluruh mapping sudah sesuai referensi.");
                 }
             }
@@ -587,28 +633,85 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         SwingUtilities.invokeLater(() -> LProgres.setText(diperiksa + " / " + total));
     }
 
-    private List<String[]> ambilMapping() throws Exception {
-        List<String[]> daftar = new ArrayList<>();
-        String sql = SUMBER_RADIOLOGI.equals(sumber)
-            ? "select satu_sehat_mapping_radiologi.kd_jenis_prw as kunci, jns_perawatan_radiologi.nm_perawatan as nama, satu_sehat_mapping_radiologi.code, " +
-              "satu_sehat_mapping_radiologi.system, satu_sehat_mapping_radiologi.display, satu_sehat_mapping_radiologi.sampel_code, satu_sehat_mapping_radiologi.sampel_system, " +
-              "satu_sehat_mapping_radiologi.sampel_display from satu_sehat_mapping_radiologi inner join jns_perawatan_radiologi on " +
-              "satu_sehat_mapping_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw order by satu_sehat_mapping_radiologi.kd_jenis_prw"
-            : "select satu_sehat_mapping_lab.id_template as kunci, template_laboratorium.Pemeriksaan as nama, satu_sehat_mapping_lab.code, satu_sehat_mapping_lab.system, " +
-              "satu_sehat_mapping_lab.display, satu_sehat_mapping_lab.sampel_code, satu_sehat_mapping_lab.sampel_system, satu_sehat_mapping_lab.sampel_display " +
-              "from satu_sehat_mapping_lab inner join template_laboratorium on satu_sehat_mapping_lab.id_template = template_laboratorium.id_template " +
-              "order by satu_sehat_mapping_lab.id_template";
+    private void cariReferensi() {
+        if (-1 == tbValidasi.getSelectedRow()) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih baris mapping terlebih dahulu..!!");
+            return;
+        }
 
-        try (ResultSet rs = koneksi.createStatement().executeQuery(sql)) {
-            while (rs.next()) {
-                daftar.add(new String[] {
-                    rs.getString("kunci"), rs.getString("nama"), rs.getString("code"), rs.getString("system"),
-                    rs.getString("display"), rs.getString("sampel_code"), rs.getString("sampel_system"), rs.getString("sampel_display")
-                });
+        final int baris = tbValidasi.getSelectedRow();
+        final String kunci = tbValidasi.getValueAt(baris, 2).toString();
+        final String jenis = tbValidasi.getValueAt(baris, 1).toString();
+        final String nama = tbValidasi.getValueAt(baris, 3).toString();
+
+        if (JENIS_SAMPEL.equals(jenis)) {
+            DlgPencarianSnomedSMC refSampel = new DlgPencarianSnomedSMC(null, false);
+            refSampel.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    int dipilih = refSampel.getTable().getSelectedRow();
+
+                    if (-1 != dipilih) {
+                        terapkanReferensi(kunci, jenis, refSampel.getTable().getValueAt(dipilih, 0).toString(), refSampel.getTable().getValueAt(dipilih, 2).toString());
+                    }
+                }
+            });
+            refSampel.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            refSampel.setLocationRelativeTo(internalFrame1);
+            refSampel.setCari(nama);
+            refSampel.setVisible(true);
+            return;
+        }
+
+        DlgPencarianLOINCSMC refPeriksa = new DlgPencarianLOINCSMC(null, false);
+        refPeriksa.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                int dipilih = refPeriksa.getTable().getSelectedRow();
+
+                if (-1 != dipilih) {
+                    terapkanReferensi(kunci, jenis, refPeriksa.getTable().getValueAt(dipilih, 0).toString(), refPeriksa.getTable().getValueAt(dipilih, 1).toString());
+                }
+            }
+        });
+        refPeriksa.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        refPeriksa.setLocationRelativeTo(internalFrame1);
+        refPeriksa.setCari(nama);
+        refPeriksa.setVisible(true);
+    }
+
+    private int cariBaris(String kunci, String jenis) {
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            if (kunci.equals(tabMode.getValueAt(i, 2).toString()) && jenis.equals(tabMode.getValueAt(i, 1).toString())) {
+                return i;
             }
         }
 
-        return daftar;
+        return -1;
+    }
+
+    private void terapkanReferensi(String kunci, String jenis, String code, String display) {
+        int baris = cariBaris(kunci, jenis);
+
+        if (-1 == baris) {
+            return;
+        }
+
+        String codeBaru = bersihkan(code);
+        String displayBaru = potong(display, PANJANG_DISPLAY);
+
+        tabMode.setValueAt(codeBaru.equals(tabMode.getValueAt(baris, 4).toString()) ? "" : codeBaru, baris, 7);
+        tabMode.setValueAt(displayBaru.equalsIgnoreCase(tabMode.getValueAt(baris, 6).toString()) ? "" : displayBaru, baris, 8);
+
+        if (perluKoreksi(baris)) {
+            tabMode.setValueAt(true, baris, 0);
+            tabMode.setValueAt("Koreksi manual dari pencarian referensi", baris, 9);
+        } else {
+            tabMode.setValueAt(false, baris, 0);
+            tabMode.setValueAt("", baris, 9);
+        }
+
+        hitungMasalah();
     }
 
     private String[] cariLOINC(String code) {
@@ -734,6 +837,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
         }
 
         int terpilih = 0;
+
         for (int i = 0; i < tabMode.getRowCount(); i++) {
             if (Boolean.TRUE.equals(tabMode.getValueAt(i, 0)) && perluKoreksi(i)) {
                 terpilih++;
@@ -759,14 +863,14 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
             }
 
             boolean sampel = JENIS_SAMPEL.equals(tabMode.getValueAt(i, 1).toString());
-            String systemKoreksi = tabMode.getValueAt(i, 7).toString();
+            String codeKoreksi = tabMode.getValueAt(i, 7).toString();
             String displayKoreksi = tabMode.getValueAt(i, 8).toString();
             List<String> kolom = new ArrayList<>();
             List<String> nilai = new ArrayList<>();
 
-            if (!systemKoreksi.isBlank()) {
-                kolom.add((sampel ? "sampel_system" : "system") + "=?");
-                nilai.add(systemKoreksi);
+            if (!codeKoreksi.isBlank()) {
+                kolom.add((sampel ? "sampel_code" : "code") + "=?");
+                nilai.add(codeKoreksi);
             }
 
             if (!displayKoreksi.isBlank()) {
@@ -776,14 +880,16 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
 
             nilai.add(tabMode.getValueAt(i, 2).toString());
 
-            if (Sequel.mengupdatetfSmc(tabel, String.join(", ", kolom), kolomKunci + "=?", nilai.toArray(String[]::new))) {
-                berhasil++;
-                tabMode.removeRow(i);
+            if (!Sequel.mengupdatetfSmc(tabel, String.join(", ", kolom), kolomKunci + "=?", nilai.toArray(String[]::new))) {
+                continue;
             }
+
+            berhasil++;
+            tabMode.removeRow(i);
         }
 
         tabMode.fireTableDataChanged();
-        LCount.setText(tabMode.getRowCount() + "");
+        hitungMasalah();
         JOptionPane.showMessageDialog(null, berhasil + " dari " + terpilih + " koreksi berhasil diterapkan.");
     }
 
