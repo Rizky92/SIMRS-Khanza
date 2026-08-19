@@ -4071,7 +4071,11 @@ public final class akses {
     public static boolean getjam_masuk_smc(){return akses.jam_masuk_smc;}
     public static boolean getjadwal_pegawai_smc(){return akses.jadwal_pegawai_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
-    public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
+    public static void resetEdit() {
+        akses.edit = false;
+        akses.tglSelesai = -1;
+        new sekuel().menghapustfSmc("set_akses_edit_sementara", "id_user = ?", getkode());
+    }
     private static void setEdit() {
         if (! akses.edit) {
             return;
