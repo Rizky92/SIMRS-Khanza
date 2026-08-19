@@ -493,6 +493,12 @@ ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `kota` varchar(30) NULL DEFAULT NULL AFTER `alamat`;
 
+ALTER TABLE `ipsrsdetailpengeluaran` ADD PRIMARY KEY IF NOT EXISTS (`no_keluar`, `kode_brng`) USING BTREE;
+
+ALTER TABLE `ipsrsdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `ipsrsdetailpengeluaran_ibfk_4`;
+
+ALTER TABLE `ipsrsdetailpengeluaran` ADD CONSTRAINT `ipsrsdetailpengeluaran_ibfk_4` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `ipsrsbarang` (`kode_brng`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
 
 ALTER TABLE `ipsrsopname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
@@ -626,21 +632,32 @@ CREATE TABLE IF NOT EXISTS `pengajuan_izin_smc`  (
   `tmt` date NOT NULL DEFAULT '0000-00-00',
   `tat` date NOT NULL DEFAULT '0000-00-00',
   `izin` enum('','Tidak Ada','1 Bulan TMT','3 Bulan TMT','6 Bulan TMT','12 Bulan TMT','1 Bulan per Tahun','3 Bulan per Tahun','6 Bulan per Tahun','12 Bulan per Tahun') NOT NULL DEFAULT '',
-  `urgensi` enum('Terlambat','Meninggalkan Kerja','Pulang Cepat','Tidak Masuk Kerja','Lainnya') NOT NULL,
+  `urgensi` enum('Terlambat','Meninggalkan Kerja','Tidak Masuk Kerja','Lainnya') NOT NULL,
   `tanggal_izin` date NOT NULL,
   `jam_mulai` time NOT NULL DEFAULT '00:00:00',
   `jam_akhir` time NOT NULL DEFAULT '00:00:00',
   `kepentingan` varchar(70) NOT NULL,
   `nik_pj` varchar(20) NOT NULL,
   `status` enum('Proses Pengajuan','Disetujui','Ditolak') NOT NULL,
+  `normatif` enum('Tidak','Ya') NOT NULL DEFAULT 'Tidak',
   PRIMARY KEY (`no_pengajuan`) USING BTREE,
   INDEX `nik` (`nik`) USING BTREE,
   INDEX `nik_pj` (`nik_pj`) USING BTREE,
-  INDEX `nik_2` (`nik`,`tmt`,`tat`) USING BTREE,
   INDEX `nik_3` (`nik`,`tanggal_izin`) USING BTREE,
+  INDEX `nik_4` (`nik`,`tmt`,`tat`,`urgensi`) USING BTREE,
   CONSTRAINT `pengajuan_izin_smc_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `pegawai` (`nik`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pengajuan_izin_smc_ibfk_2` FOREIGN KEY (`nik_pj`) REFERENCES `pegawai` (`nik`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `pengajuan_izin_smc` ADD COLUMN IF NOT EXISTS `normatif` enum('Tidak','Ya') NOT NULL DEFAULT 'Tidak' AFTER `status`;
+
+UPDATE `pengajuan_izin_smc` SET `urgensi` = 'Meninggalkan Kerja' WHERE `urgensi` = 'Pulang Cepat';
+
+ALTER TABLE `pengajuan_izin_smc` MODIFY COLUMN IF EXISTS `urgensi` enum('Terlambat','Meninggalkan Kerja','Tidak Masuk Kerja','Lainnya') NOT NULL AFTER `izin`;
+
+ALTER TABLE `pengajuan_izin_smc` DROP INDEX IF EXISTS `nik_2`;
+
+ALTER TABLE `pengajuan_izin_smc` ADD INDEX IF NOT EXISTS `nik_4`(`nik`, `tmt`, `tat`, `urgensi`) USING BTREE;
 
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
 
@@ -1468,8 +1485,8 @@ CREATE TABLE IF NOT EXISTS `pengajuan_fingerprint_bpjs_smc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   `no_kartu` varchar(25) NOT NULL,
   `tglsep` date NOT NULL,
-  `status_pengajuan` varchar(100) NULL DEFAULT NULL,
-  `status_approval` varchar(100) NULL DEFAULT NULL,
+  `status_pengajuan` varchar(1000) NULL DEFAULT NULL,
+  `status_approval` varchar(1000) NULL DEFAULT NULL,
   `nip` varchar(20) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`,`tglsep`) USING BTREE,
   INDEX `no_kartu`(`no_kartu`) USING BTREE,
@@ -1821,7 +1838,9 @@ ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `cuti_besar` enum('','Tidak Ad
 
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakcuti_besar` int NOT NULL DEFAULT 0 AFTER `cuti_besar`;
 
-ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakizin` int NOT NULL DEFAULT 0 AFTER `hakcuti_besar`;
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `izin` enum('','1 Bulan TMT','3 Bulan TMT','6 Bulan TMT','12 Bulan TMT','1 Bulan per Tahun','3 Bulan per Tahun','6 Bulan per Tahun','12 Bulan per Tahun') NOT NULL DEFAULT '' AFTER `hakcuti_besar`;
+
+ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `hakizin` int NOT NULL DEFAULT 0 AFTER `izin`;
 
 ALTER TABLE `stts_kerja` ADD COLUMN IF NOT EXISTS `max_menit` int NOT NULL DEFAULT 0 AFTER `hakizin`;
 
@@ -2004,6 +2023,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NU
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_surat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_rekap_peserta_prb_apotek`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengkajian_tindakan_invasif_non_bedah_smc` enum('true','false') DEFAULT NULL AFTER `catatan_observasi_ruang_ok`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengajuan_izin_smc` enum('true','false') DEFAULT NULL AFTER `pengkajian_tindakan_invasif_non_bedah_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
