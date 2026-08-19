@@ -83,6 +83,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     private static final int IMPOR_KOLOM_PIN = 2;
     private static final int IMPOR_KOLOM_HARI_AWAL = 3;
     private static final String SHIFT_LEGACY_DEFAULT = "Pagi";
+    private static final String JENIS_TAMBAHAN = "Jadwal Tambahan";
 
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
@@ -215,6 +216,8 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
         panelBiasa1 = new widget.PanelBiasa();
+        label13 = new widget.Label();
+        cmbJenis = new widget.ComboBox();
         label11 = new widget.Label();
         ThnCari = new widget.ComboBox();
         BlnCari = new widget.ComboBox();
@@ -438,6 +441,21 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         panelBiasa1.setPreferredSize(new java.awt.Dimension(1023, 47));
         panelBiasa1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 10));
 
+        label13.setText("Jenis Jadwal :");
+        label13.setName("label13"); // NOI18N
+        label13.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelBiasa1.add(label13);
+
+        cmbJenis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jadwal Dinas", "Jadwal Tambahan" }));
+        cmbJenis.setName("cmbJenis"); // NOI18N
+        cmbJenis.setPreferredSize(new java.awt.Dimension(140, 23));
+        cmbJenis.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbJenisItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cmbJenis);
+
         label11.setText("Tahun & Bulan :");
         label11.setName("label11"); // NOI18N
         label11.setPreferredSize(new java.awt.Dimension(90, 23));
@@ -537,14 +555,37 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         Map<String, String> legacy = getShiftLegacy();
         Map<String, String> pinLama = getPinPerPegawai(pemilikPin);
         int pinBerubah = 0;
-        for (i = 0; i < tabMode.getRowCount(); i++) {
-            String id = tabMode.getValueAt(i, KOLOM_ID).toString();
-            if (simpanPin(id, getPin(i), pinLama.getOrDefault(id, ""))) {
-                pinBerubah++;
+        boolean sukses = true;
+        try {
+            Sequel.AutoComitFalse();
+            for (i = 0; i < tabMode.getRowCount(); i++) {
+                String id = tabMode.getValueAt(i, KOLOM_ID).toString();
+                if (simpanPin(id, getPin(i), pinLama.getOrDefault(id, ""))) {
+                    pinBerubah++;
+                }
+                if (!simpanJadwal(id, i, legacy)) {
+                    sukses = false;
+                }
             }
-            simpanJadwal(id, i, legacy);
+
+            if (sukses) {
+                Sequel.Commit();
+            } else {
+                Sequel.RollBack();
+            }
+        } catch (Exception e) {
+            sukses = false;
+            Sequel.RollBack();
+            System.out.println("Notif : " + e);
+        } finally {
+            Sequel.AutoComitTrue();
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
+
+        if (!sukses) {
+            JOptionPane.showMessageDialog(null, "Sebagian jadwal gagal disimpan, seluruh perubahan dibatalkan...!!!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         JOptionPane.showMessageDialog(null, "Proses selesai...!!!!" + (0 == pinBerubah ? "" : "\nPIN diperbarui untuk " + pinBerubah + " pegawai."));
         tampilSmc();
@@ -562,9 +603,9 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         if (tabMode.getRowCount() != 0) {
             if (tbJadwal.getSelectedRow() != -1) {
                 String id = tabMode.getValueAt(tbJadwal.getSelectedRow(), KOLOM_ID).toString();
-                Sequel.menghapustfSmc("jadwal_pegawai_smc", "id=? and tanggal between ? and ?", id,
+                Sequel.menghapustfSmc(tabelSmc(), "id=? and tanggal between ? and ?", id,
                     ym.atDay(1).toString(), ym.atEndOfMonth().toString());
-                Sequel.menghapustfSmc("jadwal_pegawai", "id=? and tahun=? and bulan=?", id,
+                Sequel.menghapustfSmc(tabelLegacy(), "id=? and tahun=? and bulan=?", id,
                     ThnCari.getSelectedItem().toString(), BlnCari.getSelectedItem().toString());
                 tampilSmc();
             }
@@ -675,10 +716,33 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
 
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Map<String, String> legacy = getShiftLegacy();
-        for (Map.Entry<String, String[]> baris : jadwal.entrySet()) {
-            simpanJadwal(baris.getKey(), periode, baris.getValue(), legacy);
+        boolean sukses = true;
+        try {
+            Sequel.AutoComitFalse();
+            for (Map.Entry<String, String[]> baris : jadwal.entrySet()) {
+                if (!simpanJadwal(baris.getKey(), periode, baris.getValue(), legacy)) {
+                    sukses = false;
+                }
+            }
+
+            if (sukses) {
+                Sequel.Commit();
+            } else {
+                Sequel.RollBack();
+            }
+        } catch (Exception e) {
+            sukses = false;
+            Sequel.RollBack();
+            System.out.println("Notif : " + e);
+        } finally {
+            Sequel.AutoComitTrue();
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
+
+        if (!sukses) {
+            JOptionPane.showMessageDialog(null, "Sebagian jadwal gagal diimpor, seluruh perubahan dibatalkan...!!!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         ThnCari.setSelectedItem(String.valueOf(periode.getYear()));
         BlnCari.setSelectedItem(String.format("%02d", periode.getMonthValue()));
@@ -707,7 +771,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Simpan jadwal per karyawan");
         chooser.setFileFilter(new FileNameExtensionFilter("Berkas Excel (*.xlsx)", "xlsx"));
-        chooser.setSelectedFile(new File("JadwalPerKaryawan-" + ym + ".xlsx"));
+        chooser.setSelectedFile(new File(namaBerkas() + "PerKaryawan-" + ym + ".xlsx"));
         if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
             return;
         }
@@ -809,16 +873,16 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 }, "Laporan 4 (XLSX)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("JadwalPegawai.html", "Jadwal Dinas Pegawai", tbJadwal);
+                        Valid.exportHtmlSmc(namaBerkas() + ".html", judulJenis(), tbJadwal);
                         break;
                     case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("JadwalPegawai.wps", "Jadwal Dinas Pegawai", tbJadwal);
+                        Valid.exportWPSSmc(namaBerkas() + ".wps", judulJenis(), tbJadwal);
                         break;
                     case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("JadwalPegawai.csv", tbJadwal);
+                        Valid.exportCSVSmc(namaBerkas() + ".csv", tbJadwal);
                         break;
                     case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("JadwalPegawai.xlsx", tbJadwal);
+                        Valid.exportXlsxSmc(namaBerkas() + ".xlsx", tbJadwal);
                         break;
                 }
             } catch (Exception e) {
@@ -966,6 +1030,12 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbJadwalKeyPressed
 
+    private void cmbJenisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJenisItemStateChanged
+        if (this.isActive() == true) {
+            tampilSmc();
+        }
+    }//GEN-LAST:event_cmbJenisItemStateChanged
+
     private void BlnCariItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_BlnCariItemStateChanged
         if (this.isActive() == true) {
             tampilSmc();
@@ -1019,8 +1089,10 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel3;
+    private widget.ComboBox cmbJenis;
     private widget.Label label11;
     private widget.Label label12;
+    private widget.Label label13;
     private widget.PanelBiasa panelBiasa1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
@@ -1277,6 +1349,26 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         return shift;
     }
 
+    private boolean isTambahan() {
+        return JENIS_TAMBAHAN.equals(cmbJenis.getSelectedItem().toString());
+    }
+
+    private String tabelSmc() {
+        return isTambahan() ? "jadwal_tambahan_smc" : "jadwal_pegawai_smc";
+    }
+
+    private String tabelLegacy() {
+        return isTambahan() ? "jadwal_tambahan" : "jadwal_pegawai";
+    }
+
+    private String namaBerkas() {
+        return isTambahan() ? "JadwalTambahan" : "JadwalDinas";
+    }
+
+    private String judulJenis() {
+        return cmbJenis.getSelectedItem().toString() + " Pegawai";
+    }
+
     private Map<String, String> getShiftLegacy() {
         Map<String, String> legacy = new LinkedHashMap<>();
         try (PreparedStatement ps = koneksi.prepareStatement("select kode_shift, shift from set_kode_shift_smc")) {
@@ -1305,7 +1397,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         return pegawai;
     }
 
-    private void simpanJadwal(String id, int baris, Map<String, String> legacy) {
+    private boolean simpanJadwal(String id, int baris, Map<String, String> legacy) {
         String[] shift = new String[31];
         for (int hari = 0; hari < ym.lengthOfMonth(); hari++) {
             String kode = getKode(baris, hari);
@@ -1313,13 +1405,14 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 shift[hari] = kode;
             }
         }
-        simpanJadwal(id, ym, shift, legacy);
+        return simpanJadwal(id, ym, shift, legacy);
     }
 
-    private void simpanJadwal(String id, YearMonth periode, String[] shift, Map<String, String> legacy) {
-        Sequel.menghapustfSmc("jadwal_pegawai_smc", "id=? and tanggal between ? and ?", id,
+    private boolean simpanJadwal(String id, YearMonth periode, String[] shift, Map<String, String> legacy) {
+        Sequel.menghapustfSmc(tabelSmc(), "id=? and tanggal between ? and ?", id,
             periode.atDay(1).toString(), periode.atEndOfMonth().toString());
 
+        boolean sukses = true;
         String[] mirror = new String[31];
         for (int hari = 0; hari < 31; hari++) {
             mirror[hari] = "";
@@ -1327,34 +1420,33 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 continue;
             }
 
-            Sequel.menyimpantfSmc("jadwal_pegawai_smc", "id, tanggal, kode_shift", id,
-                periode.atDay(hari + 1).toString(), shift[hari]);
+            if (!Sequel.menyimpantfSmc(tabelSmc(), "id, tanggal, kode_shift", id,
+                periode.atDay(hari + 1).toString(), shift[hari])) {
+                sukses = false;
+            }
             mirror[hari] = legacy.getOrDefault(shift[hari], SHIFT_LEGACY_DEFAULT);
         }
 
-        simpanJadwalLegacy(id, periode, mirror);
+        return simpanJadwalLegacy(id, periode, mirror) && sukses;
     }
 
-    private void simpanJadwalLegacy(String id, YearMonth periode, String[] mirror) {
+    private boolean simpanJadwalLegacy(String id, YearMonth periode, String[] mirror) {
         StringBuilder kolom = new StringBuilder("id, tahun, bulan");
-        StringBuilder isi = new StringBuilder("?, ?, ?");
-        StringBuilder ganti = new StringBuilder();
         for (int hari = 1; hari <= 31; hari++) {
             kolom.append(", h").append(hari);
-            isi.append(", ?");
-            if (1 < hari) {
-                ganti.append(", ");
-            }
-            ganti.append("h").append(hari).append("=values(h").append(hari).append(")");
         }
+
+        String tahun = String.valueOf(periode.getYear());
+        String bulan = String.format("%02d", periode.getMonthValue());
 
         String[] nilai = new String[34];
         nilai[0] = id;
-        nilai[1] = String.valueOf(periode.getYear());
-        nilai[2] = String.format("%02d", periode.getMonthValue());
+        nilai[1] = tahun;
+        nilai[2] = bulan;
         System.arraycopy(mirror, 0, nilai, 3, 31);
 
-        Sequel.executeRawSmc("insert into jadwal_pegawai (" + kolom + ") values (" + isi + ") on duplicate key update " + ganti, nilai);
+        Sequel.menghapustfSmc(tabelLegacy(), "id=? and tahun=? and bulan=?", id, tahun, bulan);
+        return Sequel.menyimpantfSmc(tabelLegacy(), kolom.toString(), nilai);
     }
 
     private String bacaTeks(Row baris, int kolom) {
@@ -1424,7 +1516,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 protected Void doInBackground() throws Exception {
                     Map<String, String[]> jadwal = new LinkedHashMap<>();
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select id, dayofmonth(tanggal) as hari, kode_shift from jadwal_pegawai_smc where tanggal between ? and ?"
+                        "select id, dayofmonth(tanggal) as hari, kode_shift from " + tabelSmc() + " where tanggal between ? and ?"
                     )) {
                         ps.setString(1, periode.atDay(1).toString());
                         ps.setString(2, periode.atEndOfMonth().toString());
