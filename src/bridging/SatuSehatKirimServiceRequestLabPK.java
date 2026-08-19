@@ -970,56 +970,6 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                     ps.close();
                 }
             }
-
-            ps=koneksi.prepareStatement(
-                   "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.kd_dokter,pegawai.nama,pegawai.no_ktp as ktpdokter,"+
-                   "satu_sehat_encounter.id_encounter,permintaan_lab.noorder,permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan,permintaan_lab.diagnosa_klinis,"+
-                   "template_laboratorium.Pemeriksaan,satu_sehat_mapping_lab.code,satu_sehat_mapping_lab.system,satu_sehat_mapping_lab.display,"+
-                   "ifnull(satu_sehat_servicerequest_lab.id_servicerequest,'') as id_servicerequest,permintaan_detail_permintaan_lab.id_template,permintaan_detail_permintaan_lab.kd_jenis_prw "+
-                   "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pegawai.nik=reg_periksa.kd_dokter "+
-                   "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat inner join permintaan_lab on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
-                   "inner join permintaan_detail_permintaan_lab on permintaan_detail_permintaan_lab.noorder=permintaan_lab.noorder "+
-                   "inner join template_laboratorium on template_laboratorium.id_template=permintaan_detail_permintaan_lab.id_template "+
-                   "inner join satu_sehat_mapping_lab on satu_sehat_mapping_lab.id_template=template_laboratorium.id_template "+
-                   "left join satu_sehat_servicerequest_lab on satu_sehat_servicerequest_lab.noorder=permintaan_detail_permintaan_lab.noorder "+
-                   "and satu_sehat_servicerequest_lab.id_template=permintaan_detail_permintaan_lab.id_template "+
-                   "and satu_sehat_servicerequest_lab.kd_jenis_prw=permintaan_detail_permintaan_lab.kd_jenis_prw "+
-                   "where reg_periksa.tgl_registrasi between ? and ? "+
-                   (TCari.getText().equals("")?"":"and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
-                   "pasien.nm_pasien like ? or pasien.no_ktp like ? or pegawai.nama like ? or template_laboratorium.Pemeriksaan like ? or "+
-                   "satu_sehat_mapping_lab.code like ? or permintaan_lab.noorder like ?)"));
-            try {
-                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                if(!TCari.getText().equals("")){
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    ps.setString(6,"%"+TCari.getText()+"%");
-                    ps.setString(7,"%"+TCari.getText()+"%");
-                    ps.setString(8,"%"+TCari.getText()+"%");
-                    ps.setString(9,"%"+TCari.getText()+"%");
-                    ps.setString(10,"%"+TCari.getText()+"%");
-                }
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
-                        rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan"),
-                        rs.getString("diagnosa_klinis"),rs.getString("Pemeriksaan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("id_template"),rs.getString("kd_jenis_prw")
-                    });
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
