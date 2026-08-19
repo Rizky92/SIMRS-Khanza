@@ -172,7 +172,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="::[ Pengajuan Cuti Pegawai ]::">
+            <TitledBorder title="::[ Pengajuan Izin Pegawai ]::">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
@@ -245,7 +245,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="21-07-2026"/>
+                        <StringItem index="0" value="06-08-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -273,7 +273,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="21-07-2026"/>
+                        <StringItem index="0" value="06-08-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -441,7 +441,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="21-07-2026"/>
+                        <StringItem index="0" value="06-08-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -493,13 +493,12 @@
                 <Component class="widget.ComboBox" name="Urgensi">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
+                      <StringArray count="5">
                         <StringItem index="0" value="Terlambat"/>
                         <StringItem index="1" value="Meninggalkan Kerja"/>
-                        <StringItem index="2" value="Pulang Cepat"/>
-                        <StringItem index="3" value="Tidak Masuk Kerja"/>
-                        <StringItem index="4" value="Lainnya"/>
-                        <StringItem index="5" value=" "/>
+                        <StringItem index="2" value="Tidak Masuk Kerja"/>
+                        <StringItem index="3" value="Lainnya"/>
+                        <StringItem index="4" value=" "/>
                       </StringArray>
                     </Property>
                     <Property name="selectedIndex" type="int" value="1"/>
@@ -611,7 +610,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="21-07-2026"/>
+                        <StringItem index="0" value="06-08-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1061,6 +1060,18 @@
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="512" y="10" width="129" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.CekBox" name="Normatif">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Normatif"/>
+                    <Property name="name" type="java.lang.String" value="Normatif" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="false"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="649" y="10" width="90" height="23"/>
                     </Constraint>
                   </Constraints>
                 </Component>

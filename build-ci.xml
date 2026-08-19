@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SIMRSKhanzaCI" default="jar" basedir="." xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
+    <description>Standalone build script for continuous integration. Reads nbproject/project.properties but does not import the NetBeans generated nbproject/build-impl.xml or nbproject/build-native.xml, so it needs neither a NetBeans installation nor the CopyLibs task.</description>
+
+    <property name="jar.compress" value="true"/>
+
+    <property file="nbproject/project.properties"/>
+
+    <property name="javac.debug" value="true"/>
+    <property name="empty.dir" value="${build.dir}/empty"/>
+    <property name="ap.source.output.dir" value="${build.generated.sources.dir}/ap-source-output"/>
+    <property name="report.src.dir" value="report"/>
+    <property name="report.dist.dir" value="${dist.dir}/report"/>
+    <property name="report.includes" value="**/*.jrxml"/>
+    <property name="report.keepjava" value="false"/>
+    <property name="report.compiler.lib" value="${path.file-reference}/ecj-4.6.1.jar"/>
+    <property name="report.compiler" value="net.sf.jasperreports.engine.design.JRJdtCompiler"/>
+
+    <path id="classpath.ci">
+        <pathelement path="${javac.classpath}"/>
+    </path>
+
+    <path id="classpath.reports">
+        <pathelement path="${report.compiler.lib}"/>
+        <path refid="classpath.ci"/>
+    </path>
+
+    <target name="clean" description="Delete build and distribution directories.">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" description="Compile sources and copy non source resources.">
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${empty.dir}"/>
+        <mkdir dir="${ap.source.output.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.classes.dir}" includes="${includes}" excludes="${excludes}" source="${javac.source}" target="${javac.target}" encoding="${source.encoding}" debug="${javac.debug}" deprecation="${javac.deprecation}" includeantruntime="false" fork="yes" tempdir="${java.io.tmpdir}">
+            <classpath refid="classpath.ci"/>
+            <compilerarg line="${javac.compilerargs}"/>
+            <compilerarg value="-processorpath"/>
+            <compilerarg path="${javac.processorpath}:${empty.dir}"/>
+            <compilerarg value="-s"/>
+            <compilerarg path="${ap.source.output.dir}"/>
+        </javac>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}" includes="${includes}" excludes="${build.classes.excludes},${excludes}"/>
+        </copy>
+    </target>
+
+    <target name="-bundle-libs" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <restrict id="runtime.libs.ci">
+            <path refid="classpath.ci"/>
+            <rsel:exists/>
+            <rsel:type type="file"/>
+        </restrict>
+        <copy todir="${dist.dir}/lib" flatten="true" preservelastmodified="true">
+            <resources refid="runtime.libs.ci"/>
+        </copy>
+        <pathconvert pathsep=" " property="jar.classpath.ci" refid="runtime.libs.ci">
+            <chainedmapper>
+                <flattenmapper/>
+                <filtermapper>
+                    <replacestring from=" " to="%20"/>
+                </filtermapper>
+                <globmapper from="*" to="lib/*"/>
+            </chainedmapper>
+        </pathconvert>
+    </target>
+
+    <target name="compile-reports" description="Compile Jasper report designs into .jasper files.">
+        <fail message="Jasper report compilation needs ${report.compiler.lib} on the classpath ahead of jdt-compiler-3.1.1.jar, which is too old for JasperReports 6.8. Add the jar to the library bundle or point -Dreport.compiler.lib at another Eclipse compiler that supports the running JDK.">
+            <condition>
+                <not>
+                    <available file="${report.compiler.lib}"/>
+                </not>
+            </condition>
+        </fail>
+        <taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask" classpathref="classpath.reports"/>
+        <mkdir dir="${report.dist.dir}"/>
+        <mkdir dir="${build.dir}/jasper"/>
+        <jrc srcdir="${report.src.dir}" destdir="${report.dist.dir}" tempdir="${build.dir}/jasper" keepjava="${report.keepjava}" xmlvalidation="false" compiler="${report.compiler}">
+            <classpath refid="classpath.reports"/>
+            <include name="${report.includes}"/>
+        </jrc>
+    </target>
+
+    <target name="-copy-dist-resources">
+        <copy todir="${dist.dir}/setting">
+            <fileset dir="setting/" includes="**/*.xml, **/*.png, **/*.jpg"/>
+        </copy>
+        <copy todir="${dist.dir}/suara">
+            <fileset dir="suara/" includes="**/*.mp3"/>
+        </copy>
+        <copy todir="${dist.dir}/gambar">
+            <fileset dir="gambar/" includes="**/*.png, **/*.jpg"/>
+        </copy>
+    </target>
+
+    <target name="jar" depends="compile,-bundle-libs,-copy-dist-resources" description="Build the executable JAR together with its runtime libraries.">
+        <jar jarfile="${dist.jar}" compress="${jar.compress}" manifestencoding="UTF-8">
+            <fileset dir="${build.classes.dir}" excludes="${dist.archive.excludes}"/>
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="${jar.classpath.ci}"/>
+            </manifest>
+        </jar>
+    </target>
+</project>

@@ -6,8 +6,7 @@
 /build/
 /dist/
 /lib/
-/setting/*.ini
-/setting/*.xml
+/setting
 
 *.DS_Store
 *.*~*

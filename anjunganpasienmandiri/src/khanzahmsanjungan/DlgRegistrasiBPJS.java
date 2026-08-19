@@ -1164,6 +1164,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             login.setOnLoginListener(e -> {
                 btnKonfirmasi.setEnabled(false);
                 btnBatal.setEnabled(false);
+                btnApprovalFP.setEnabled(false);
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Sep/aprovalSEP";
                     System.out.println("URL : " + url);
@@ -1192,13 +1193,18 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     metadata = root.path("metaData");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
-                        String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
+                        String response = api.Decrypt(root.path("response").asText(), utc);
+                        if (null == response) {
+                            response = "";
+                        }
                         Sequel.mengupdateSmc("pengajuan_fingerprint_bpjs_smc", "status_approval = ?", "no_rkm_medis = ? and tglsep = ?", "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, noRM.getText(), tglSEP.getText());
                         Valid.popupInfoDialog("Approval Berhasil");
                     } else {
+                        btnApprovalFP.setEnabled(true);
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
                     }
                 } catch (Exception ex) {
+                    btnApprovalFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
@@ -1214,6 +1220,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private void btnPengajuanFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengajuanFPActionPerformed
         if (noPeserta.getText().isBlank()) {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
+        } else if (Sequel.cariExistsSmc("select * from pengajuan_fingerprint_bpjs_smc where no_rkm_medis = ? and tglsep = ?", noRM.getText(), tglSEP.getText())) {
+            btnPengajuanFP.setEnabled(false);
+            Valid.popupPeringatanDialog("Maaf, pengajuan validasi biometrik pasien ini sudah dikirim hari ini..!!", 5);
         } else {
             if (login == null) {
                 login = new DlgLogin(null, true);
@@ -1224,6 +1233,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             login.setOnLoginListener(e -> {
                 btnKonfirmasi.setEnabled(false);
                 btnBatal.setEnabled(false);
+                btnPengajuanFP.setEnabled(false);
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Sep/pengajuanSEP";
                     System.out.println("URL : " + url);
@@ -1235,6 +1245,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     headers.add("X-Timestamp", utc);
                     headers.add("X-Signature", api.getHmac(utc));
                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    isCekPasien();
                     payload = " {" +
                         "\"request\": {" +
                         "\"t_sep\": {" +
@@ -1242,7 +1253,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         "\"tglSep\": \"" + tglSEP.getText() + "\"," +
                         "\"jnsPelayanan\": \"2\"," +
                         "\"jnsPengajuan\": \"2\"," +
-                        "\"keterangan\": \"Pengajuan SEP Finger oleh Anjungan Pasien Mandiri " + instansiNama + "\"," +
+                        "\"keterangan\": \"Pengajuan Validasi Biometrik SEP oleh Anjungan Pasien Mandiri " + instansiNama + ", validasi biometrik pasien error atau gagal, sidik jari dan rekam wajah telah dilakukan tetapi tidak dapat terbaca oleh sistem validasi biometrik menggunakan FRISTA atau Fingerprint, pasien berusia " + umurDaftar + " " + statusUmur + " dengan diagnosa kunjungan " + kodeDiagnosa.getText() + " " + namaDiagnosa.getText() + " \", " +
                         "\"user\": \"NoRM:" + noRM.getText() + "\"" +
                         "}" +
                         "}" +
@@ -1252,20 +1263,25 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     metadata = root.path("metaData");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
-                        String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
+                        String response = api.Decrypt(root.path("response").asText(), utc);
+                        if (null == response) {
+                            response = "";
+                        }
                         Sequel.menyimpanSmc("pengajuan_fingerprint_bpjs_smc", null, noRM.getText(), noPeserta.getText(), tglSEP.getText(), "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, null, e.getUserID());
                         Valid.popupInfoDialog("Pengajuan Berhasil");
                     } else {
+                        btnPengajuanFP.setEnabled(true);
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
                     }
                 } catch (Exception ex) {
+                    btnPengajuanFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
-                btnKonfirmasi.setEnabled(false);
-                btnBatal.setEnabled(false);
+                btnKonfirmasi.setEnabled(true);
+                btnBatal.setEnabled(true);
             });
             login.setVisible(true);
         }
@@ -2919,6 +2935,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
         toggleInfoTambahan.setSelected(false);
         panelNumpad.setVisible(false);
+
+        btnKonfirmasi.setEnabled(true);
+        btnBatal.setEnabled(true);
+        btnPengajuanFP.setEnabled(true);
+        btnApprovalFP.setEnabled(true);
 
         statusFinger = false;
         isMobileJKN = false;

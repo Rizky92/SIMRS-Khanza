@@ -4063,7 +4063,11 @@ public final class akses {
     public static boolean getpengkajian_tindakan_invasif_non_bedah_smc(){return akses.pengkajian_tindakan_invasif_non_bedah_smc;}
     public static boolean getpengajuan_izin_smc(){return akses.pengajuan_izin_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
-    public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
+    public static void resetEdit() {
+        akses.edit = false;
+        akses.tglSelesai = -1;
+        new sekuel().menghapustfSmc("set_akses_edit_sementara", "id_user = ?", getkode());
+    }
     private static void setEdit() {
         if (! akses.edit) {
             return;
