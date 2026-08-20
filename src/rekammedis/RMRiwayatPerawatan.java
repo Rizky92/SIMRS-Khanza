@@ -5060,7 +5060,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     menampilkanSEPBPJS(rs.getString("no_rawat"));
                     menampilkanTriaseIGD(rs.getString("no_rawat"));
                     menampilkanAsuhanKeperawatanIGD(rs.getString("no_rawat"));
-                    menampilkanAsuhanMedisMCU(rs.getString("no_rawat"));
                     menampilkanAsuhanKeperawatanRalan(rs.getString("no_rawat"));
                     menampilkanAsuhanKeperawatanRalanGigi(rs.getString("no_rawat"));
                     menampilkanAsuhanKeperawatanRalanBayi(rs.getString("no_rawat"));
@@ -5075,6 +5074,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     menampilkanPenilaianBayiBaruLahir(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisIGD(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisIGDPsikiatri(rs.getString("no_rawat"));
+                    menampilkanAsuhanMedisMCU(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisRawatJalan(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisRawatJalanKandungan(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisRawatJalanBayi(rs.getString("no_rawat"));

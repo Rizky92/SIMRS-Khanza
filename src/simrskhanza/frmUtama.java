@@ -155,6 +155,7 @@ import bridging.SatuSehatBridgingTTE;
 import bridging.SatuSehatKirimAllergyIntolerance;
 import bridging.SatuSehatKirimCarePlan;
 import bridging.SatuSehatKirimClinicalImpression;
+import bridging.SatuSehatKirimCompositionRME;
 import bridging.SatuSehatKirimCondition;
 import bridging.SatuSehatKirimDiagnosticReportLabMB;
 import bridging.SatuSehatKirimDiagnosticReportLabPK;
@@ -24020,6 +24021,18 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.isCek();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnBridgingCompositionRMESatuSehatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatKirimCompositionRME aplikasi=new SatuSehatKirimCompositionRME(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        aplikasi.isCek();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
 
     /**
     * @param args the command line arguments
@@ -24746,7 +24759,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnSuratPermintaanBinrohtal,btnSuratPermintaanPerlindunganDariKekerasan,btnSuratPermohonanPrivasi,btnSuratPermintaanSecondOpinion,btnSuratKeteranganBerobat,btnSuratPenolakanResusitasi,btnCatatanObservasiRuangOperasi,
             btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi,btnIntervensiNyeriNonFarmakologi,btnSuratPengajuanCutiPerawatan,btnChecklistKriteriaMasukIsolasi,btnMapingTarifTindakanRalanKPTLSatuSehat,
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
-            btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat;
+            btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat;
 
     public void isWall(){
         try{
@@ -28259,6 +28272,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getsatu_sehat_mapping_kptl_tarif_kamar()==true){
                 Panelmenu.add(btnMapingTarifKamarKPTLSatuSehat);
+                jmlmenu++;
+            }
+            
+            if(akses.getsatu_sehat_kirim_composition()==true){
+                Panelmenu.add(btnBridgingCompositionRMESatuSehat);
                 jmlmenu++;
             }
 
@@ -34302,6 +34320,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getsatu_sehat_mapping_kptl_tarif_kamar()==true){
             Panelmenu.add(btnMapingTarifKamarKPTLSatuSehat);
+            jmlmenu++;
+        }
+        
+        if(akses.getsatu_sehat_kirim_composition()==true){
+            Panelmenu.add(btnBridgingCompositionRMESatuSehat);
             jmlmenu++;
         }
 
@@ -41676,6 +41699,13 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnMapingTarifKamarKPTLSatuSehat);
                 jmlmenu++;
             }
+        }
+        
+        if(akses.getsatu_sehat_kirim_composition()==true){
+            if(btnBridgingCompositionRMESatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnBridgingCompositionRMESatuSehat);
+                jmlmenu++;
+            } 
         }
 
         if(akses.getsatu_sehat_tanda_tangan_elektronik()==true){
@@ -51396,6 +51426,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnBridgingTTESatuSehat.setName("btnBridgingTTESatuSehat");
         btnBridgingTTESatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBridgingTTESatuSehat.addActionListener(this::btnBridgingTTESatuSehatActionPerformed);
+        
+        btnBridgingCompositionRMESatuSehat = new widget.ButtonBig();
+        btnBridgingCompositionRMESatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnBridgingCompositionRMESatuSehat.setText("Kirim Composition Satu Sehat");
+        btnBridgingCompositionRMESatuSehat.setIconTextGap(0);
+        btnBridgingCompositionRMESatuSehat.setName("btnBridgingCompositionRMESatuSehat"); 
+        btnBridgingCompositionRMESatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBridgingCompositionRMESatuSehat.addActionListener(this::btnBridgingCompositionRMESatuSehatActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
