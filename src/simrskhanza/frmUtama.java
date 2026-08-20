@@ -536,8 +536,10 @@ import kepegawaian.DlgDokter;
 import kepegawaian.DlgHarian;
 import kepegawaian.DlgJadwal;
 import kepegawaian.DlgJadwalPegawai;
+import kepegawaian.DlgJadwalPegawaiSMC;
 import kepegawaian.DlgJadwalTambahan;
 import kepegawaian.DlgJamMasuk;
+import kepegawaian.DlgJamMasukSMC;
 import kepegawaian.DlgKegiatanIlmiah;
 import kepegawaian.DlgKehadiran;
 import kepegawaian.DlgKehadiran2;
@@ -50938,7 +50940,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC;
+                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51052,6 +51054,22 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanIzinAdminSMC.setName("btnPengajuanIzinAdminSMC");
         btnPengajuanIzinAdminSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanIzinAdminSMC.addActionListener(this::btnPengajuanIzinAdminSMCActionPerformed);
+
+        btnJadwalDinasSMC = new widget.ButtonBig();
+        btnJadwalDinasSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427999_alarm_clock_hour_time_icon.png")));
+        btnJadwalDinasSMC.setText("Jadwal Dinas");
+        btnJadwalDinasSMC.setIconTextGap(0);
+        btnJadwalDinasSMC.setName("btnJadwalDinasSMC");
+        btnJadwalDinasSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnJadwalDinasSMC.addActionListener(this::btnJadwalDinasSMCActionPerformed);
+
+        btnJadwalDinasPegawaiSMC = new widget.ButtonBig();
+        btnJadwalDinasPegawaiSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
+        btnJadwalDinasPegawaiSMC.setText("Jadwal Dinas Pegawai");
+        btnJadwalDinasPegawaiSMC.setIconTextGap(0);
+        btnJadwalDinasPegawaiSMC.setName("btnJadwalDinasPegawaiSMC");
+        btnJadwalDinasPegawaiSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnJadwalDinasPegawaiSMC.addActionListener(this::btnJadwalDinasPegawaiSMCActionPerformed);
     }
 
     private void isComboSMC() {
@@ -51068,6 +51086,16 @@ public class frmUtama extends javax.swing.JFrame {
         } else if (cmbMenu.getSelectedIndex() == 2) {
             if (akses.getpengajuan_izin_smc()) {
                 Panelmenu.add(btnPengajuanIzinAdminSMC);
+                jmlmenu++;
+            }
+
+            if (akses.getjam_masuk_smc()) {
+                Panelmenu.add(btnJadwalDinasSMC);
+                jmlmenu++;
+            }
+
+            if (akses.getjadwal_pegawai_smc()) {
+                Panelmenu.add(btnJadwalDinasPegawaiSMC);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 11) {
@@ -51193,6 +51221,16 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnPengajuanIzinAdminSMC);
             jmlmenu++;
         }
+
+        if (akses.getjam_masuk_smc()) {
+            Panelmenu.add(btnJadwalDinasSMC);
+            jmlmenu++;
+        }
+
+        if (akses.getjadwal_pegawai_smc()) {
+            Panelmenu.add(btnJadwalDinasPegawaiSMC);
+            jmlmenu++;
+        }
     }
 
     private void isCariIsiSMC() {
@@ -51290,6 +51328,20 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getpengajuan_izin_smc()) {
             if (btnPengajuanIzinAdminSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPengajuanIzinAdminSMC);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getjam_masuk_smc()) {
+            if (btnJadwalDinasSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnJadwalDinasSMC);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getjadwal_pegawai_smc()) {
+            if (btnJadwalDinasPegawaiSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnJadwalDinasPegawaiSMC);
                 jmlmenu++;
             }
         }
@@ -51470,6 +51522,30 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         PengajuanIzinAdminSMC form = new PengajuanIzinAdminSMC(this, false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnJadwalDinasSMCActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgJamMasukSMC form = new DlgJamMasukSMC(this, false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnJadwalDinasPegawaiSMCActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgJadwalPegawaiSMC form = new DlgJadwalPegawaiSMC(this, false);
         form.isCek();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
