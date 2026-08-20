@@ -746,6 +746,10 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         TCari.setText("");
     }
 
+    public void setCari(String kata) {
+        TCari.setText(null == kata ? "" : kata.trim());
+    }
+
     private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers = {

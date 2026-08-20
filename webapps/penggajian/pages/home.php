@@ -197,6 +197,18 @@
                     </td>
                 </tr>
                 <tr width='100%' height='14.2%' align='center'>
+                <td width='16%' align='center'>
+                        <a href='index.php?act=ListKodeShiftSmc&action=TAMBAH'>
+                                <img src='images/Time.png'/><br>
+                                Kode Jam Jaga
+                        </a>
+                    </td>
+                    <td width='16%' align='center'>
+                        <a href='index.php?act=ListMappingPinSmc'>
+                                <img src='images/users.png'/><br>
+                                PIN Mesin Presensi
+                        </a>
+                    </td>
                     <td width='16%' align='center'>
                         <a href='index.php?act=ListJam&action=TAMBAH'>
                                 <img src='images/Time.png'/><br>
