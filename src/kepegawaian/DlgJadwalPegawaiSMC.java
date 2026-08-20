@@ -179,13 +179,13 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         petaAksi.put("hariBerikutnyaSmc", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pindahHari(1);
+                pindahFokusSmc(1);
             }
         });
         petaAksi.put("hariSebelumnyaSmc", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pindahHari(-1);
+                pindahFokusSmc(-1);
             }
         });
     }
@@ -967,6 +967,15 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
         if (tabMode.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+                int baris = tbJadwal.getSelectedRow();
+                int kolom = tbJadwal.getSelectedColumn();
+                if (0 > baris || KOLOM_HARI_AWAL > kolom || KOLOM_HARI_AWAL + ym.lengthOfMonth() <= kolom) {
+                    return;
+                }
+
+                evt.consume();
+                batalkanEditSmc();
+
                 DlgJamMasukSMC jammasuk = new DlgJamMasukSMC(null, false);
                 jammasuk.addWindowListener(new WindowListener() {
                     @Override
@@ -979,11 +988,13 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
 
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if (jammasuk.getTable().getSelectedRow() != -1) {
-                            if (tbJadwal.getSelectedColumn() >= KOLOM_HARI_AWAL) {
-                                tabMode.setValueAt(jammasuk.getTable().getValueAt(jammasuk.getTable().getSelectedRow(), 1).toString(), tbJadwal.getSelectedRow(), tbJadwal.getSelectedColumn());
-                            }
+                        int terpilih = jammasuk.getTable().getSelectedRow();
+                        if (-1 != terpilih) {
+                            Object kode = jammasuk.getTable().getValueAt(terpilih, 1);
+                            batalkanEditSmc();
+                            tabMode.setValueAt(null == kode ? "" : kode.toString(), baris, kolom);
                         }
+                        tbJadwal.changeSelection(baris, kolom, false, false);
                         tbJadwal.requestFocus();
                     }
 
@@ -1012,6 +1023,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                            e.consume();
                             jammasuk.dispose();
                         }
                     }
@@ -1025,7 +1037,11 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 jammasuk.setLocationRelativeTo(internalFrame1);
                 jammasuk.setVisible(true);
             } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-                tabMode.setValueAt("", tbJadwal.getSelectedRow(), tbJadwal.getSelectedColumn());
+                if (-1 != tbJadwal.getSelectedRow() && -1 != tbJadwal.getSelectedColumn()) {
+                    evt.consume();
+                    batalkanEditSmc();
+                    tabMode.setValueAt("", tbJadwal.getSelectedRow(), tbJadwal.getSelectedColumn());
+                }
             }
         }
     }//GEN-LAST:event_tbJadwalKeyPressed
@@ -1109,6 +1125,15 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         return tbJadwal;
     }
 
+    private void batalkanEditSmc() {
+        if (tbJadwal.isEditing()) {
+            TableCellEditor editor = tbJadwal.getCellEditor();
+            if (null != editor) {
+                editor.cancelCellEditing();
+            }
+        }
+    }
+
     private String getKode(int baris, int hari) {
         Object nilai = tabMode.getValueAt(baris, KOLOM_HARI_AWAL + hari);
         if (nilai == null) {
@@ -1142,6 +1167,42 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
             component.setForeground(new Color(200, 0, 0));
             return component;
         }
+    }
+
+    private void pindahFokusSmc(int langkah) {
+        if (KOLOM_PIN == tbJadwal.getSelectedColumn()) {
+            pindahBarisSmc(langkah);
+        } else {
+            pindahHari(langkah);
+        }
+    }
+
+    private void pindahBarisSmc(int langkah) {
+        if (0 == tbJadwal.getRowCount()) {
+            return;
+        }
+
+        if (tbJadwal.isEditing()) {
+            TableCellEditor editor = tbJadwal.getCellEditor();
+            if (null != editor && !editor.stopCellEditing()) {
+                return;
+            }
+        }
+
+        int baris = tbJadwal.getSelectedRow();
+        if (0 > baris) {
+            return;
+        }
+
+        int kolom = tbJadwal.getSelectedColumn();
+        baris = baris + langkah;
+        if (0 > baris) {
+            baris = 0;
+        } else if (tbJadwal.getRowCount() <= baris) {
+            baris = tbJadwal.getRowCount() - 1;
+        }
+
+        tbJadwal.changeSelection(baris, kolom, false, false);
     }
 
     private void pindahHari(int langkah) {
