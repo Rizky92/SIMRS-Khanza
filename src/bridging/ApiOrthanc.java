@@ -272,9 +272,10 @@ public class ApiOrthanc {
             headers.setContentType(MediaType.APPLICATION_JSON);
             requestJson = "[\"" + studyId + "\"]";
             requestEntity = new HttpEntity(requestJson, headers);
-            System.out.println("URL : " + koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/modalities/DICOMROUTER/store");
+            String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/modalities/" + koneksiDB.AETITLEDICOMROUTER() + "/store";
+            System.out.println("URL : " + url);
             System.out.println("Request JSON : " + requestJson);
-            String response = getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/modalities/DICOMROUTER/store",HttpMethod.POST,requestEntity,String.class).getBody();
+            String response = getRest().exchange(url,HttpMethod.POST,requestEntity,String.class).getBody();
             System.out.println("Response : " + response);
             JOptionPane.showMessageDialog(null,"Proses kirim ke Modality selesai..!!");
             return true;

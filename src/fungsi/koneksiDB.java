@@ -619,20 +619,6 @@ public class koneksiDB {
         }
     }
 
-    public static String IDORGBPJSSATUSEHAT() {
-        // no-op
-        return "";
-    }
-
-    public static String URLAPPLINKSATUSEHAT() {
-        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fs);
-            return EnkripsiAES.decrypt(prop.getProperty("URLAPPLINKSATUSEHAT", EnkripsiAES.encrypt("")));
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
@@ -2273,20 +2259,16 @@ public class koneksiDB {
         }
         return var;
     }
-    
+
     public static String URLAPPLINKSATUSEHAT() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var = prop.getProperty("URLAPPLINKSATUSEHAT");
-            if (var == null) {
-                var = "";
-            }
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("URLAPPLINKSATUSEHAT", EnkripsiAES.encrypt("")));
         } catch (Exception e) {
-            var = "";
+            return "";
         }
-        return var;
     }
-    
+
     public static String IDORGBPJSSATUSEHAT() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
