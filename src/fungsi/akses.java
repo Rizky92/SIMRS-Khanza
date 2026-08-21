@@ -271,7 +271,7 @@ public final class akses {
             surat_keterangan_berobat=false,surat_penolakan_resusitasi=false,catatan_observasi_ruang_ok=false,hasil_pemeriksaan_usg_abdomen=false,intervensi_nyeri_farmakologi=false,
             intervensi_nyeri_nonfarmakologi=false,surat_pengajuan_cuti_pasien=false,checklist_kriteria_masuk_isolasi=false,satu_sehat_mapping_kptl_tindakan_ralan=false,
             satu_sehat_mapping_kptl_tindakan_ranap=false,satu_sehat_mapping_kptl_tindakan_radiologi=false,satu_sehat_mapping_kptl_tindakan_laborat=false,satu_sehat_mapping_kptl_tindakan_operasi=false,
-            satu_sehat_mapping_kptl_tarif_kamar=false,checklist_kriteria_keluar_isolasi=false;
+            satu_sehat_mapping_kptl_tarif_kamar=false,checklist_kriteria_keluar_isolasi=false,satu_sehat_tanda_tangan_elektronik=false,satu_sehat_kirim_composition=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -286,6 +286,8 @@ public final class akses {
         bpjs_riwayat_surat_smc = false,
         pengkajian_tindakan_invasif_non_bedah_smc = false,
         pengajuan_izin_smc = false,
+        jam_masuk_smc = false,
+        jadwal_pegawai_smc = false,
         satu_sehat_tte_smc = false,
         satu_sehat_kirim_bundle_smc = false,
         satu_sehat_monitor_klaim_smc = false,
@@ -1556,6 +1558,8 @@ public final class akses {
                         akses.hasil_pemeriksaan_usg_abdomen=akses.getBoolean(rs2, "hasil_pemeriksaan_usg_abdomen");
                         akses.pengkajian_tindakan_invasif_non_bedah_smc=akses.getBoolean(rs2, "pengkajian_tindakan_invasif_non_bedah_smc");
                         akses.pengajuan_izin_smc=akses.getBoolean(rs2, "pengajuan_izin_smc");
+                        akses.jam_masuk_smc=akses.getBoolean(rs2, "jam_masuk_smc");
+                        akses.jadwal_pegawai_smc=akses.getBoolean(rs2, "jadwal_pegawai_smc");
                         akses.intervensi_nyeri_farmakologi=akses.getBoolean(rs2, "intervensi_nyeri_farmakologi");
                         akses.intervensi_nyeri_nonfarmakologi=akses.getBoolean(rs2, "intervensi_nyeri_nonfarmakologi");
                         akses.surat_pengajuan_cuti_pasien=akses.getBoolean(rs2, "surat_pengajuan_cuti_pasien");
@@ -1582,6 +1586,8 @@ public final class akses {
                         akses.satu_sehat_mapping_kptl_tindakan_radiologi_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_radiologi_smc");
                         akses.satu_sehat_mapping_kptl_tindakan_laborat_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_laborat_smc");
                         akses.satu_sehat_mapping_kptl_tindakan_operasi_smc=akses.getBoolean(rs2, "satu_sehat_mapping_kptl_tindakan_operasi_smc");
+                        akses.satu_sehat_tanda_tangan_elektronik=akses.getBoolean(rs2, "satu_sehat_tanda_tangan_elektronik");
+                        akses.satu_sehat_kirim_composition=akses.getBoolean(rs2, "satu_sehat_kirim_composition");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2843,6 +2849,8 @@ public final class akses {
         akses.hasil_pemeriksaan_usg_abdomen=isadmin;
         akses.pengkajian_tindakan_invasif_non_bedah_smc=isadmin;
         akses.pengajuan_izin_smc=isadmin;
+        akses.jam_masuk_smc=isadmin;
+        akses.jadwal_pegawai_smc=isadmin;
         akses.intervensi_nyeri_farmakologi=isadmin;
         akses.intervensi_nyeri_nonfarmakologi=isadmin;
         akses.surat_pengajuan_cuti_pasien=isadmin;
@@ -2869,6 +2877,8 @@ public final class akses {
         akses.satu_sehat_mapping_kptl_tindakan_radiologi_smc=isadmin;
         akses.satu_sehat_mapping_kptl_tindakan_laborat_smc=isadmin;
         akses.satu_sehat_mapping_kptl_tindakan_operasi_smc=isadmin;
+        akses.satu_sehat_tanda_tangan_elektronik=isadmin;
+        akses.satu_sehat_kirim_composition=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4132,6 +4142,8 @@ public final class akses {
     public static boolean gethasil_pemeriksaan_usg_abdomen(){return akses.hasil_pemeriksaan_usg_abdomen;}
     public static boolean getpengkajian_tindakan_invasif_non_bedah_smc(){return akses.pengkajian_tindakan_invasif_non_bedah_smc;}
     public static boolean getpengajuan_izin_smc(){return akses.pengajuan_izin_smc;}
+    public static boolean getjam_masuk_smc(){return akses.jam_masuk_smc;}
+    public static boolean getjadwal_pegawai_smc(){return akses.jadwal_pegawai_smc;}
     public static boolean getintervensi_nyeri_farmakologi(){return akses.intervensi_nyeri_farmakologi;}
     public static boolean getintervensi_nyeri_nonfarmakologi(){return akses.intervensi_nyeri_nonfarmakologi;}
     public static boolean getsurat_pengajuan_cuti_pasien(){return akses.surat_pengajuan_cuti_pasien;}
@@ -4158,8 +4170,14 @@ public final class akses {
     public static boolean getsatu_sehat_mapping_kptl_tindakan_radiologi_smc(){return akses.satu_sehat_mapping_kptl_tindakan_radiologi_smc;}
     public static boolean getsatu_sehat_mapping_kptl_tindakan_laborat_smc(){return akses.satu_sehat_mapping_kptl_tindakan_laborat_smc;}
     public static boolean getsatu_sehat_mapping_kptl_tindakan_operasi_smc(){return akses.satu_sehat_mapping_kptl_tindakan_operasi_smc;}
+    public static boolean getsatu_sehat_tanda_tangan_elektronik(){return akses.satu_sehat_tanda_tangan_elektronik;}
+    public static boolean getsatu_sehat_kirim_composition(){return akses.satu_sehat_kirim_composition;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
-    public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
+    public static void resetEdit() {
+        akses.edit = false;
+        akses.tglSelesai = -1;
+        new sekuel().menghapustfSmc("set_akses_edit_sementara", "id_user = ?", getkode());
+    }
     private static void setEdit() {
         if (! akses.edit) {
             return;

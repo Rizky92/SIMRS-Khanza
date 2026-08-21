@@ -36,13 +36,32 @@
  *   --post=<file>       SQL file to import after a successful migration. Repeatable, and each
  *                       value may itself be a comma-separated list. Imported in the order given.
  *
- * Presets:
- *   --default-migrate-yes   Shorthand for the full rebuild-and-migrate run:
+ * Presets (mutually exclusive — pick at most one):
+ *   --default-migrate-yes   Full rebuild-and-migrate run, drops included:
  *                           --rebuild --with-drop --migrate --yes --post=sik_local_update.sql
  *                           --output=migrate-<yyyy-mm-dd>.sql
- *                           Any of those given explicitly still wins, so the preset can be
- *                           narrowed (e.g. --default-migrate-yes --post=other.sql), but not
- *                           switched off.
+ *   --safe-migrate-yes      Same run without any drops, so nothing existing in the current
+ *                           database is removed — only additive DDL is applied:
+ *                           --rebuild --migrate --yes --post=sik_local_update.sql
+ *                           --output=migrate-<yyyy-mm-dd>-safe.sql
+ *                           Passing --with-drop/--with-drop-table/--with-drop-column alongside
+ *                           a safe preset is rejected rather than silently honoured.
+ *   --default-migrate-dry   Dry run of --default-migrate-yes: rebuild and generate the DDL,
+ *                           but apply nothing and import nothing.
+ *                           --rebuild --with-drop --output=migrate-<yyyy-mm-dd>-dry.sql
+ *   --safe-migrate-dry      Dry run of --safe-migrate-yes:
+ *                           --rebuild --output=migrate-<yyyy-mm-dd>-safe-dry.sql
+ *
+ *   Options given explicitly still win, so a preset can be narrowed (e.g.
+ *   --default-migrate-yes --post=other.sql), but not switched off. The dry presets leave
+ *   --yes alone, so the DROP DATABASE confirmation for --rebuild is still asked; add --yes
+ *   to run them unattended.
+ *
+ *   All four presets include --rebuild, which DROPs and recreates the FIRST positional
+ *   database. The no-drop guarantee of the safe presets covers the second positional
+ *   (current) database only. Reversing the argument order to back-sync a live database
+ *   into the reference schema would therefore wipe the live one — drop --rebuild for that
+ *   direction, e.g. `php schema-diff.php sik khanza --port=3307 --migrate --yes`.
  *
  * First positional arg  = latest/updated database
  * Second positional arg = current database
@@ -55,21 +74,29 @@
  * which is equivalent to:
  *   php schema-diff.php khanza sik --port=3307 --rebuild --post=sik_local_update.sql \
  *       --with-drop --migrate --yes --output=migrate-<yyyy-mm-dd>.sql
+ *
+ * Example — back-sync new tables added to the target into the source without removing
+ * anything, previewing the DDL first:
+ *   php schema-diff.php khanza sik --port=3307 --safe-migrate-dry
+ *   php schema-diff.php khanza sik --port=3307 --safe-migrate-yes
  */
 
 if (php_sapi_name() !== 'cli') {
     die('CLI only.');
 }
 
-$opts = parseArgs($argv);
-$usePreset = isset($opts['default-migrate-yes']);
+$presets = migratePresets();
 
-if ($usePreset) {
-    $opts = applyDefaultMigratePreset($opts);
+$opts = parseArgs($argv);
+$presetName = selectPreset($opts, $presets);
+
+if (null !== $presetName) {
+    $opts = applyMigratePreset($opts, $presets[$presetName]);
 }
 
 if (empty($opts['latest']) || empty($opts['current'])) {
-    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--tables=t1,t2] [--exclude=t1,t2] [--migrate] [--with-drop] [--with-drop-table] [--with-drop-column] [--yes] [--rebuild] [--base=sik.sql] [--modif=sik_modif.sql] [--no-base] [--no-modif] [--charset=latin1] [--collate=latin1_swedish_ci] [--mysql=path] [--post=a.sql [--post=b.sql]] [--default-migrate-yes]\n");
+    $presetUsage = '[--' . implode('] [--', array_keys($presets)) . ']';
+    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--tables=t1,t2] [--exclude=t1,t2] [--migrate] [--with-drop] [--with-drop-table] [--with-drop-column] [--yes] [--rebuild] [--base=sik.sql] [--modif=sik_modif.sql] [--no-base] [--no-modif] [--charset=latin1] [--collate=latin1_swedish_ci] [--mysql=path] [--post=a.sql [--post=b.sql]] {$presetUsage}\n");
     exit(1);
 }
 
@@ -102,11 +129,20 @@ if ($doRebuild) {
     }
 }
 
-if ($usePreset) {
+if (null !== $presetName) {
     $loaded = $loadFiles ? implode(' + ', $loadFiles) : 'none';
-    $posted = $postFiles ? implode(' + ', $postFiles) : 'none';
-    fwrite(STDERR, "Preset --default-migrate-yes: rebuild from {$loaded}, migrate with drops, then apply {$posted}.\n");
-    fwrite(STDERR, "Preset --default-migrate-yes: DDL written to {$opts['output']}.\n");
+    $drops = $noDropTable && $noDropColumn ? 'without drops' : 'with drops';
+    $rebuilt = $doRebuild ? "rebuild `{$opts['latest']}` from {$loaded}" : 'no rebuild';
+    if ($doMigrate) {
+        $posted = $postFiles ? implode(' + ', $postFiles) : 'none';
+        fwrite(STDERR, "Preset --{$presetName}: {$rebuilt}, migrate `{$opts['current']}` {$drops}, then apply {$posted}.\n");
+    } else {
+        fwrite(STDERR, "Preset --{$presetName}: {$rebuilt}, generate DDL for `{$opts['current']}` {$drops}, apply nothing.\n");
+    }
+    if ($doRebuild) {
+        fwrite(STDERR, "Preset --{$presetName}: `{$opts['latest']}` is DROPped and recreated — the no-drop guarantee covers `{$opts['current']}` only.\n");
+    }
+    fwrite(STDERR, "Preset --{$presetName}: DDL written to {$opts['output']}.\n");
 }
 
 $latest = $opts['latest'];
@@ -395,22 +431,81 @@ function parseArgs(array $argv): array
 }
 
 /**
- * Fills in the flags for a full rebuild-and-migrate run. Options passed
- * explicitly are left untouched, so the preset only ever supplies what is
- * missing.
+ * The rebuild-and-migrate shorthands, keyed by flag name.
+ *
+ * 'drops'   — allow DROP statements against the current database.
+ * 'migrate' — apply the DDL (and the post-migration imports) instead of only
+ *             generating it. Dry variants deliberately leave 'yes' unset so the
+ *             DROP DATABASE prompt of --rebuild is still asked.
+ * 'suffix'  — appended to the generated output filename so the four presets
+ *             never overwrite each other's DDL.
  */
-function applyDefaultMigratePreset(array $opts): array
+function migratePresets(): array
 {
-    foreach (['rebuild', 'with-drop', 'migrate', 'yes'] as $flag) {
+    return [
+        'default-migrate-yes' => ['drops' => true, 'migrate' => true, 'suffix' => ''],
+        'safe-migrate-yes' => ['drops' => false, 'migrate' => true, 'suffix' => '-safe'],
+        'default-migrate-dry' => ['drops' => true, 'migrate' => false, 'suffix' => '-dry'],
+        'safe-migrate-dry' => ['drops' => false, 'migrate' => false, 'suffix' => '-safe-dry'],
+    ];
+}
+
+/**
+ * Resolves which preset was requested, rejecting combinations that contradict
+ * each other. A safe preset paired with an explicit drop flag is an error
+ * rather than a silent win for either side, because both readings are
+ * plausible and only one of them is safe.
+ */
+function selectPreset(array $opts, array $presets): ?string
+{
+    $given = array_values(array_intersect(array_keys($presets), array_keys($opts)));
+
+    if (1 < count($given)) {
+        fwrite(STDERR, "Presets are mutually exclusive, but got: --" . implode(' --', $given) . "\n");
+        exit(1);
+    }
+    if (!$given) {
+        return null;
+    }
+
+    $name = $given[0];
+    if (!$presets[$name]['drops']) {
+        $dropFlags = array_values(array_intersect(['with-drop', 'with-drop-table', 'with-drop-column'], array_keys($opts)));
+        if ($dropFlags) {
+            fwrite(STDERR, "--{$name} allows no drops, but got: --" . implode(' --', $dropFlags) . "\n");
+            fwrite(STDERR, "Use --default-migrate-yes for the dropping variant, or drop the conflicting flag.\n");
+            exit(1);
+        }
+    }
+
+    return $name;
+}
+
+/**
+ * Fills in the flags for the chosen preset. Options passed explicitly are left
+ * untouched, so the preset only ever supplies what is missing.
+ */
+function applyMigratePreset(array $opts, array $preset): array
+{
+    $flags = ['rebuild'];
+    if ($preset['drops']) {
+        $flags[] = 'with-drop';
+    }
+    if ($preset['migrate']) {
+        $flags[] = 'migrate';
+        $flags[] = 'yes';
+    }
+
+    foreach ($flags as $flag) {
         if (!isset($opts[$flag])) {
             $opts[$flag] = true;
         }
     }
-    if (!isset($opts['post'])) {
+    if ($preset['migrate'] && !isset($opts['post'])) {
         $opts['post'] = 'sik_local_update.sql';
     }
     if (empty($opts['output'])) {
-        $opts['output'] = 'migrate-' . date('Y-m-d') . '.sql';
+        $opts['output'] = 'migrate-' . date('Y-m-d') . $preset['suffix'] . '.sql';
     }
     return $opts;
 }

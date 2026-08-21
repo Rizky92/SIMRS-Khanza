@@ -534,6 +534,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("dampak_cidera_k3rs", "[C] Dampak Cidera K3");
         namaakses.put("dampak_cidera_k3rstahun", "[C] Dampak Cidera K3 Per Tahun");
         namaakses.put("dokter", "[C] Dokter");
+        namaakses.put("jam_masuk_smc", "[C] Jadwal Dinas");
+        namaakses.put("jadwal_pegawai_smc", "[C] Jadwal Dinas Pegawai");
         namaakses.put("jadwal_pegawai", "[C] Jadwal Pegawai");
         namaakses.put("jam_masuk", "[C] Jam Presensi");
         namaakses.put("jenis_cidera_k3rs", "[C] Jenis Cidera K3");

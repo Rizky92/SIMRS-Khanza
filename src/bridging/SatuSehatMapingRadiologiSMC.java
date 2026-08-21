@@ -125,6 +125,7 @@ public final class SatuSehatMapingRadiologiSMC extends javax.swing.JDialog {
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
         BtnPrint = new widget.Button();
+        BtnValidasi = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
@@ -285,6 +286,24 @@ public final class SatuSehatMapingRadiologiSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnPrint);
+
+        BtnValidasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/checked.png"))); // NOI18N
+        BtnValidasi.setMnemonic('V');
+        BtnValidasi.setText("Validasi");
+        BtnValidasi.setToolTipText("Alt+V");
+        BtnValidasi.setName("BtnValidasi"); // NOI18N
+        BtnValidasi.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnValidasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnValidasiActionPerformed(evt);
+            }
+        });
+        BtnValidasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnValidasiKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnValidasi);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnAll.setMnemonic('M');
@@ -710,6 +729,28 @@ public final class SatuSehatMapingRadiologiSMC extends javax.swing.JDialog {
         }else{Valid.pindah(evt,BtnEdit,TCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
+    private void BtnValidasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnValidasiActionPerformed
+        DlgValidasiMappingSMC validasi = new DlgValidasiMappingSMC(null, false, DlgValidasiMappingSMC.SUMBER_RADIOLOGI);
+        validasi.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                tampil();
+                BtnValidasi.requestFocus();
+            }
+        });
+        validasi.setData(tbJnsPerawatan, new int[] {2, 3, 0, 1, 4, 5, 6, 7});
+        validasi.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        validasi.setLocationRelativeTo(internalFrame1);
+        validasi.isCek();
+        validasi.setVisible(true);
+    }//GEN-LAST:event_BtnValidasiActionPerformed
+
+    private void BtnValidasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnValidasiKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnValidasiActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnValidasiKeyPressed
+
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(ceksukses){
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
@@ -974,6 +1015,7 @@ public final class SatuSehatMapingRadiologiSMC extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnValidasi;
     private widget.CekBox ChkInput;
     private widget.PanelBiasa FormInput;
     private widget.TextBox KodePemeriksaan;

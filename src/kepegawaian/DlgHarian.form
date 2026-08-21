@@ -690,7 +690,7 @@
             <Component class="widget.ComboBox" name="Shift">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="60">
+                  <StringArray count="240">
                     <StringItem index="0" value="Pagi"/>
                     <StringItem index="1" value="Pagi2"/>
                     <StringItem index="2" value="Pagi3"/>
@@ -701,56 +701,236 @@
                     <StringItem index="7" value="Pagi8"/>
                     <StringItem index="8" value="Pagi9"/>
                     <StringItem index="9" value="Pagi10"/>
-                    <StringItem index="10" value="Siang"/>
-                    <StringItem index="11" value="Siang2"/>
-                    <StringItem index="12" value="Siang3"/>
-                    <StringItem index="13" value="Siang4"/>
-                    <StringItem index="14" value="Siang5"/>
-                    <StringItem index="15" value="Siang6"/>
-                    <StringItem index="16" value="Siang7"/>
-                    <StringItem index="17" value="Siang8"/>
-                    <StringItem index="18" value="Siang9"/>
-                    <StringItem index="19" value="Siang10"/>
-                    <StringItem index="20" value="Malam"/>
-                    <StringItem index="21" value="Malam2"/>
-                    <StringItem index="22" value="Malam3"/>
-                    <StringItem index="23" value="Malam4"/>
-                    <StringItem index="24" value="Malam5"/>
-                    <StringItem index="25" value="Malam6"/>
-                    <StringItem index="26" value="Malam7"/>
-                    <StringItem index="27" value="Malam8"/>
-                    <StringItem index="28" value="Malam9"/>
-                    <StringItem index="29" value="Malam10"/>
-                    <StringItem index="30" value="Midle Pagi1"/>
-                    <StringItem index="31" value="Midle Pagi2"/>
-                    <StringItem index="32" value="Midle Pagi3"/>
-                    <StringItem index="33" value="Midle Pagi4"/>
-                    <StringItem index="34" value="Midle Pagi5"/>
-                    <StringItem index="35" value="Midle Pagi6"/>
-                    <StringItem index="36" value="Midle Pagi7"/>
-                    <StringItem index="37" value="Midle Pagi8"/>
-                    <StringItem index="38" value="Midle Pagi9"/>
-                    <StringItem index="39" value="Midle Pagi10"/>
-                    <StringItem index="40" value="Midle Siang1"/>
-                    <StringItem index="41" value="Midle Siang2"/>
-                    <StringItem index="42" value="Midle Siang3"/>
-                    <StringItem index="43" value="Midle Siang4"/>
-                    <StringItem index="44" value="Midle Siang5"/>
-                    <StringItem index="45" value="Midle Siang6"/>
-                    <StringItem index="46" value="Midle Siang7"/>
-                    <StringItem index="47" value="Midle Siang8"/>
-                    <StringItem index="48" value="Midle Siang9"/>
-                    <StringItem index="49" value="Midle Siang10"/>
-                    <StringItem index="50" value="Midle Malam1"/>
-                    <StringItem index="51" value="Midle Malam2"/>
-                    <StringItem index="52" value="Midle Malam3"/>
-                    <StringItem index="53" value="Midle Malam4"/>
-                    <StringItem index="54" value="Midle Malam5"/>
-                    <StringItem index="55" value="Midle Malam6"/>
-                    <StringItem index="56" value="Midle Malam7"/>
-                    <StringItem index="57" value="Midle Malam8"/>
-                    <StringItem index="58" value="Midle Malam9"/>
-                    <StringItem index="59" value="Midle Malam10"/>
+                    <StringItem index="10" value="Pagi11"/>
+                    <StringItem index="11" value="Pagi12"/>
+                    <StringItem index="12" value="Pagi13"/>
+                    <StringItem index="13" value="Pagi14"/>
+                    <StringItem index="14" value="Pagi15"/>
+                    <StringItem index="15" value="Pagi16"/>
+                    <StringItem index="16" value="Pagi17"/>
+                    <StringItem index="17" value="Pagi18"/>
+                    <StringItem index="18" value="Pagi19"/>
+                    <StringItem index="19" value="Pagi20"/>
+                    <StringItem index="20" value="Pagi21"/>
+                    <StringItem index="21" value="Pagi22"/>
+                    <StringItem index="22" value="Pagi23"/>
+                    <StringItem index="23" value="Pagi24"/>
+                    <StringItem index="24" value="Pagi25"/>
+                    <StringItem index="25" value="Pagi26"/>
+                    <StringItem index="26" value="Pagi27"/>
+                    <StringItem index="27" value="Pagi28"/>
+                    <StringItem index="28" value="Pagi29"/>
+                    <StringItem index="29" value="Pagi30"/>
+                    <StringItem index="30" value="Pagi31"/>
+                    <StringItem index="31" value="Pagi32"/>
+                    <StringItem index="32" value="Pagi33"/>
+                    <StringItem index="33" value="Pagi34"/>
+                    <StringItem index="34" value="Pagi35"/>
+                    <StringItem index="35" value="Pagi36"/>
+                    <StringItem index="36" value="Pagi37"/>
+                    <StringItem index="37" value="Pagi38"/>
+                    <StringItem index="38" value="Pagi39"/>
+                    <StringItem index="39" value="Pagi40"/>
+                    <StringItem index="40" value="Siang"/>
+                    <StringItem index="41" value="Siang2"/>
+                    <StringItem index="42" value="Siang3"/>
+                    <StringItem index="43" value="Siang4"/>
+                    <StringItem index="44" value="Siang5"/>
+                    <StringItem index="45" value="Siang6"/>
+                    <StringItem index="46" value="Siang7"/>
+                    <StringItem index="47" value="Siang8"/>
+                    <StringItem index="48" value="Siang9"/>
+                    <StringItem index="49" value="Siang10"/>
+                    <StringItem index="50" value="Siang11"/>
+                    <StringItem index="51" value="Siang12"/>
+                    <StringItem index="52" value="Siang13"/>
+                    <StringItem index="53" value="Siang14"/>
+                    <StringItem index="54" value="Siang15"/>
+                    <StringItem index="55" value="Siang16"/>
+                    <StringItem index="56" value="Siang17"/>
+                    <StringItem index="57" value="Siang18"/>
+                    <StringItem index="58" value="Siang19"/>
+                    <StringItem index="59" value="Siang20"/>
+                    <StringItem index="60" value="Siang21"/>
+                    <StringItem index="61" value="Siang22"/>
+                    <StringItem index="62" value="Siang23"/>
+                    <StringItem index="63" value="Siang24"/>
+                    <StringItem index="64" value="Siang25"/>
+                    <StringItem index="65" value="Siang26"/>
+                    <StringItem index="66" value="Siang27"/>
+                    <StringItem index="67" value="Siang28"/>
+                    <StringItem index="68" value="Siang29"/>
+                    <StringItem index="69" value="Siang30"/>
+                    <StringItem index="70" value="Siang31"/>
+                    <StringItem index="71" value="Siang32"/>
+                    <StringItem index="72" value="Siang33"/>
+                    <StringItem index="73" value="Siang34"/>
+                    <StringItem index="74" value="Siang35"/>
+                    <StringItem index="75" value="Siang36"/>
+                    <StringItem index="76" value="Siang37"/>
+                    <StringItem index="77" value="Siang38"/>
+                    <StringItem index="78" value="Siang39"/>
+                    <StringItem index="79" value="Siang40"/>
+                    <StringItem index="80" value="Malam"/>
+                    <StringItem index="81" value="Malam2"/>
+                    <StringItem index="82" value="Malam3"/>
+                    <StringItem index="83" value="Malam4"/>
+                    <StringItem index="84" value="Malam5"/>
+                    <StringItem index="85" value="Malam6"/>
+                    <StringItem index="86" value="Malam7"/>
+                    <StringItem index="87" value="Malam8"/>
+                    <StringItem index="88" value="Malam9"/>
+                    <StringItem index="89" value="Malam10"/>
+                    <StringItem index="90" value="Malam11"/>
+                    <StringItem index="91" value="Malam12"/>
+                    <StringItem index="92" value="Malam13"/>
+                    <StringItem index="93" value="Malam14"/>
+                    <StringItem index="94" value="Malam15"/>
+                    <StringItem index="95" value="Malam16"/>
+                    <StringItem index="96" value="Malam17"/>
+                    <StringItem index="97" value="Malam18"/>
+                    <StringItem index="98" value="Malam19"/>
+                    <StringItem index="99" value="Malam20"/>
+                    <StringItem index="100" value="Malam21"/>
+                    <StringItem index="101" value="Malam22"/>
+                    <StringItem index="102" value="Malam23"/>
+                    <StringItem index="103" value="Malam24"/>
+                    <StringItem index="104" value="Malam25"/>
+                    <StringItem index="105" value="Malam26"/>
+                    <StringItem index="106" value="Malam27"/>
+                    <StringItem index="107" value="Malam28"/>
+                    <StringItem index="108" value="Malam29"/>
+                    <StringItem index="109" value="Malam30"/>
+                    <StringItem index="110" value="Malam31"/>
+                    <StringItem index="111" value="Malam32"/>
+                    <StringItem index="112" value="Malam33"/>
+                    <StringItem index="113" value="Malam34"/>
+                    <StringItem index="114" value="Malam35"/>
+                    <StringItem index="115" value="Malam36"/>
+                    <StringItem index="116" value="Malam37"/>
+                    <StringItem index="117" value="Malam38"/>
+                    <StringItem index="118" value="Malam39"/>
+                    <StringItem index="119" value="Malam40"/>
+                    <StringItem index="120" value="Midle Pagi1"/>
+                    <StringItem index="121" value="Midle Pagi2"/>
+                    <StringItem index="122" value="Midle Pagi3"/>
+                    <StringItem index="123" value="Midle Pagi4"/>
+                    <StringItem index="124" value="Midle Pagi5"/>
+                    <StringItem index="125" value="Midle Pagi6"/>
+                    <StringItem index="126" value="Midle Pagi7"/>
+                    <StringItem index="127" value="Midle Pagi8"/>
+                    <StringItem index="128" value="Midle Pagi9"/>
+                    <StringItem index="129" value="Midle Pagi10"/>
+                    <StringItem index="130" value="Midle Pagi11"/>
+                    <StringItem index="131" value="Midle Pagi12"/>
+                    <StringItem index="132" value="Midle Pagi13"/>
+                    <StringItem index="133" value="Midle Pagi14"/>
+                    <StringItem index="134" value="Midle Pagi15"/>
+                    <StringItem index="135" value="Midle Pagi16"/>
+                    <StringItem index="136" value="Midle Pagi17"/>
+                    <StringItem index="137" value="Midle Pagi18"/>
+                    <StringItem index="138" value="Midle Pagi19"/>
+                    <StringItem index="139" value="Midle Pagi20"/>
+                    <StringItem index="140" value="Midle Pagi21"/>
+                    <StringItem index="141" value="Midle Pagi22"/>
+                    <StringItem index="142" value="Midle Pagi23"/>
+                    <StringItem index="143" value="Midle Pagi24"/>
+                    <StringItem index="144" value="Midle Pagi25"/>
+                    <StringItem index="145" value="Midle Pagi26"/>
+                    <StringItem index="146" value="Midle Pagi27"/>
+                    <StringItem index="147" value="Midle Pagi28"/>
+                    <StringItem index="148" value="Midle Pagi29"/>
+                    <StringItem index="149" value="Midle Pagi30"/>
+                    <StringItem index="150" value="Midle Pagi31"/>
+                    <StringItem index="151" value="Midle Pagi32"/>
+                    <StringItem index="152" value="Midle Pagi33"/>
+                    <StringItem index="153" value="Midle Pagi34"/>
+                    <StringItem index="154" value="Midle Pagi35"/>
+                    <StringItem index="155" value="Midle Pagi36"/>
+                    <StringItem index="156" value="Midle Pagi37"/>
+                    <StringItem index="157" value="Midle Pagi38"/>
+                    <StringItem index="158" value="Midle Pagi39"/>
+                    <StringItem index="159" value="Midle Pagi40"/>
+                    <StringItem index="160" value="Midle Siang1"/>
+                    <StringItem index="161" value="Midle Siang2"/>
+                    <StringItem index="162" value="Midle Siang3"/>
+                    <StringItem index="163" value="Midle Siang4"/>
+                    <StringItem index="164" value="Midle Siang5"/>
+                    <StringItem index="165" value="Midle Siang6"/>
+                    <StringItem index="166" value="Midle Siang7"/>
+                    <StringItem index="167" value="Midle Siang8"/>
+                    <StringItem index="168" value="Midle Siang9"/>
+                    <StringItem index="169" value="Midle Siang10"/>
+                    <StringItem index="170" value="Midle Siang11"/>
+                    <StringItem index="171" value="Midle Siang12"/>
+                    <StringItem index="172" value="Midle Siang13"/>
+                    <StringItem index="173" value="Midle Siang14"/>
+                    <StringItem index="174" value="Midle Siang15"/>
+                    <StringItem index="175" value="Midle Siang16"/>
+                    <StringItem index="176" value="Midle Siang17"/>
+                    <StringItem index="177" value="Midle Siang18"/>
+                    <StringItem index="178" value="Midle Siang19"/>
+                    <StringItem index="179" value="Midle Siang20"/>
+                    <StringItem index="180" value="Midle Siang21"/>
+                    <StringItem index="181" value="Midle Siang22"/>
+                    <StringItem index="182" value="Midle Siang23"/>
+                    <StringItem index="183" value="Midle Siang24"/>
+                    <StringItem index="184" value="Midle Siang25"/>
+                    <StringItem index="185" value="Midle Siang26"/>
+                    <StringItem index="186" value="Midle Siang27"/>
+                    <StringItem index="187" value="Midle Siang28"/>
+                    <StringItem index="188" value="Midle Siang29"/>
+                    <StringItem index="189" value="Midle Siang30"/>
+                    <StringItem index="190" value="Midle Siang31"/>
+                    <StringItem index="191" value="Midle Siang32"/>
+                    <StringItem index="192" value="Midle Siang33"/>
+                    <StringItem index="193" value="Midle Siang34"/>
+                    <StringItem index="194" value="Midle Siang35"/>
+                    <StringItem index="195" value="Midle Siang36"/>
+                    <StringItem index="196" value="Midle Siang37"/>
+                    <StringItem index="197" value="Midle Siang38"/>
+                    <StringItem index="198" value="Midle Siang39"/>
+                    <StringItem index="199" value="Midle Siang40"/>
+                    <StringItem index="200" value="Midle Malam1"/>
+                    <StringItem index="201" value="Midle Malam2"/>
+                    <StringItem index="202" value="Midle Malam3"/>
+                    <StringItem index="203" value="Midle Malam4"/>
+                    <StringItem index="204" value="Midle Malam5"/>
+                    <StringItem index="205" value="Midle Malam6"/>
+                    <StringItem index="206" value="Midle Malam7"/>
+                    <StringItem index="207" value="Midle Malam8"/>
+                    <StringItem index="208" value="Midle Malam9"/>
+                    <StringItem index="209" value="Midle Malam10"/>
+                    <StringItem index="210" value="Midle Malam11"/>
+                    <StringItem index="211" value="Midle Malam12"/>
+                    <StringItem index="212" value="Midle Malam13"/>
+                    <StringItem index="213" value="Midle Malam14"/>
+                    <StringItem index="214" value="Midle Malam15"/>
+                    <StringItem index="215" value="Midle Malam16"/>
+                    <StringItem index="216" value="Midle Malam17"/>
+                    <StringItem index="217" value="Midle Malam18"/>
+                    <StringItem index="218" value="Midle Malam19"/>
+                    <StringItem index="219" value="Midle Malam20"/>
+                    <StringItem index="220" value="Midle Malam21"/>
+                    <StringItem index="221" value="Midle Malam22"/>
+                    <StringItem index="222" value="Midle Malam23"/>
+                    <StringItem index="223" value="Midle Malam24"/>
+                    <StringItem index="224" value="Midle Malam25"/>
+                    <StringItem index="225" value="Midle Malam26"/>
+                    <StringItem index="226" value="Midle Malam27"/>
+                    <StringItem index="227" value="Midle Malam28"/>
+                    <StringItem index="228" value="Midle Malam29"/>
+                    <StringItem index="229" value="Midle Malam30"/>
+                    <StringItem index="230" value="Midle Malam31"/>
+                    <StringItem index="231" value="Midle Malam32"/>
+                    <StringItem index="232" value="Midle Malam33"/>
+                    <StringItem index="233" value="Midle Malam34"/>
+                    <StringItem index="234" value="Midle Malam35"/>
+                    <StringItem index="235" value="Midle Malam36"/>
+                    <StringItem index="236" value="Midle Malam37"/>
+                    <StringItem index="237" value="Midle Malam38"/>
+                    <StringItem index="238" value="Midle Malam39"/>
+                    <StringItem index="239" value="Midle Malam40"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="Shift" noResource="true"/>
