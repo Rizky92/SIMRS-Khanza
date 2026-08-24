@@ -47,6 +47,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
@@ -76,7 +77,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
 
         tabMode=new DefaultTableModel(null,new String[]{
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","No.Permintaan","Tgl & Jam Sampel","Nama Pemeriksaan",
-                "Radiologi Code","Radiologi System","Radiologi Display","ID Service Request","Kode Pemeriksaan","ID Specimen"
+                "Radiologi Code","Radiologi System","Radiologi Display","ID Service Request","Kode Pemeriksaan","ID Specimen","Accession Number"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -88,7 +89,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
              Class[] types = new Class[] {
                  java.lang.Boolean.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
-                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
+                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class, String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -101,7 +102,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 14; i++) {
+        for (i = 0; i < 15; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -132,6 +133,8 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }else if(i==13){
                 column.setPreferredWidth(210);
+            }else if(i==14){
+                column.setPreferredWidth(110);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -614,6 +617,11 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=accession.ambilAccession(tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString());
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menerbitkan Accession Number!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -623,7 +631,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"available\"," +
@@ -695,6 +703,11 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=accession.ambilAccession(tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString());
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menerbitkan Accession Number!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -705,7 +718,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,5).toString()+"."+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"available\"," +
@@ -874,7 +887,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("noorder"),
                         rs.getString("tgl_sampel")+" "+rs.getString("jam_sampel"),rs.getString("nm_perawatan"),rs.getString("sampel_code"),rs.getString("sampel_system"),
-                        rs.getString("sampel_display"),rs.getString("id_servicerequest"),rs.getString("kd_jenis_prw"),rs.getString("id_specimen")
+                        rs.getString("sampel_display"),rs.getString("id_servicerequest"),rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),accession.ambilAccession(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
@@ -888,6 +901,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                 }
             }
 
+            /*
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_radiologi.noorder,"+
                    "permintaan_radiologi.tgl_sampel,permintaan_radiologi.jam_sampel,jns_perawatan_radiologi.nm_perawatan,"+
@@ -922,7 +936,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("noorder"),
                         rs.getString("tgl_sampel")+" "+rs.getString("jam_sampel"),rs.getString("nm_perawatan"),rs.getString("sampel_code"),rs.getString("sampel_system"),
-                        rs.getString("sampel_display"),rs.getString("id_servicerequest"),rs.getString("kd_jenis_prw"),rs.getString("id_specimen")
+                        rs.getString("sampel_display"),rs.getString("id_servicerequest"),rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),accession.ambilAccession(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
@@ -935,6 +949,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
+            */
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

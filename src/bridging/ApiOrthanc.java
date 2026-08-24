@@ -3,6 +3,7 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyManagementException;
@@ -45,6 +46,7 @@ public class ApiOrthanc {
     private String auth,authEncrypt,requestJson;
     private byte[] encodedBytes;
     private int i=1;
+    private final sekuel Sequel = new sekuel();
 
     public ApiOrthanc(){
         try {

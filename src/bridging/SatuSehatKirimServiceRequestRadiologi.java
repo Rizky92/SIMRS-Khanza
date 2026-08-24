@@ -47,6 +47,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
@@ -78,7 +79,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","Kode Dokter","Nama Dokter Perujuk",
                 "No.KTP Dokter","ID Encounter","No.Permintaan","Tgl & Jam Permintaan","Diagnosa Klinis",
                 "Nama Pemeriksaan","Radiologi Code","Radiologi System","Radiologi Display","ID Service Request",
-                "Kode Pemeriksaan"
+                "Kode Pemeriksaan","Accession Number"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -105,7 +106,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -144,6 +145,8 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
             }else if(i==17){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
+            }else if(i==18){
+                column.setPreferredWidth(110);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -639,6 +642,11 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=accession.ambilAccession(tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString());
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menerbitkan Accession Number!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -648,7 +656,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString().replaceAll("PR","")+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"active\"," +
@@ -749,6 +757,11 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=accession.ambilAccession(tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString());
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menerbitkan Accession Number!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -759,7 +772,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString().replaceAll("PR","")+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"active\"," +
@@ -953,7 +966,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
                         rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan"),
                         rs.getString("diagnosa_klinis"),rs.getString("nm_perawatan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("kd_jenis_prw")
+                        rs.getString("kd_jenis_prw"),accession.ambilAccession(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {

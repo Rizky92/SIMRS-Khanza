@@ -1761,6 +1761,17 @@ ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `saran` varchar(1000) NULL
 
 ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `kesan` varchar(1000) NULL DEFAULT NULL AFTER `saran`;
 
+CREATE TABLE IF NOT EXISTS `satu_sehat_accession_radiologi_smc`  (
+  `noorder` varchar(15) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `no_acsn` varchar(16) NOT NULL,
+  PRIMARY KEY (`noorder`,`kd_jenis_prw`) USING BTREE,
+  UNIQUE KEY `satu_sehat_accession_radiologi_smc_no_acsn` (`no_acsn`) USING BTREE,
+  INDEX `satu_sehat_accession_radiologi_smc_ibfk_1`(`kd_jenis_prw`) USING BTREE,
+  INDEX `satu_sehat_accession_radiologi_smc_ibfk_2`(`noorder`) USING BTREE,
+  CONSTRAINT `satu_sehat_accession_radiologi_smc_ibfk_3` FOREIGN KEY (`noorder`, `kd_jenis_prw`) REFERENCES `permintaan_pemeriksaan_radiologi` (`noorder`, `kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `satu_sehat_mapping_radiologi` MODIFY COLUMN IF EXISTS `code` varchar(20) NOT NULL AFTER `kd_jenis_prw`;
 
 ALTER TABLE `satu_sehat_mapping_radiologi` MODIFY COLUMN IF EXISTS `display` varchar(200) NOT NULL AFTER `system`;

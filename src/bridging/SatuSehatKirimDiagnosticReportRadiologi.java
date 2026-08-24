@@ -47,6 +47,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
@@ -78,7 +79,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","Kode Dokter","Nama Dokter Perujuk",
                 "No.KTP Dokter","ID Encounter","No.Permintaan","Tgl & Jam Hasil","Diagnosa Klinis",
                 "Nama Pemeriksaan","Radiologi Code","Radiologi System","Radiologi Display","ID Service Request",
-                "Kode Pemeriksaan","ID Specimen","ID Observation","ID Diagnostic Report","Hasil Radiologi"
+                "Kode Pemeriksaan","ID Specimen","ID Observation","ID Diagnostic Report","Hasil Radiologi","Accession Number"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -106,7 +107,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 22; i++) {
+        for (i = 0; i < 23; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -153,6 +154,8 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                 column.setPreferredWidth(210);
             }else if(i==21){
                 column.setPreferredWidth(310);
+            }else if(i==22){
+                column.setPreferredWidth(110);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -656,6 +659,11 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=accession.ambilAccession(tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString());
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menerbitkan Accession Number!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -666,7 +674,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
                                             "\"use\": \"official\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"final\"," +
@@ -771,6 +779,11 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=accession.ambilAccession(tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString());
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menerbitkan Accession Number!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -782,7 +795,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
                                             "\"use\": \"official\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"final\"," +
@@ -992,7 +1005,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
                         rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_hasil")+" "+rs.getString("jam_hasil"),
                         rs.getString("diagnosa_klinis"),rs.getString("nm_perawatan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil")
+                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil"),accession.ambilAccession(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
@@ -1053,7 +1066,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
                         rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_hasil")+" "+rs.getString("jam_hasil"),
                         rs.getString("diagnosa_klinis"),rs.getString("nm_perawatan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil")
+                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil"),accession.ambilAccession(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
