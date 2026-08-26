@@ -639,7 +639,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
                                         pscarikapasitas.setString(1,tbObat.getValueAt(i,2).toString());
                                         carikapasitas=pscarikapasitas.executeQuery();
                                         if(carikapasitas.next()){
-                                            if(Sequel.menyimpantf2("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                            if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
                                                 Sequel.cariIsi("select current_date()"),Sequel.cariIsi("select current_time()"),NoRawat.getText(),
                                                 tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,6).toString(),
                                                 ""+(Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)),
@@ -667,7 +667,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
                                                 sukses=false;
                                             }
                                         }else{
-                                            if(Sequel.menyimpantf("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                            if(Sequel.menyimpantfNotifSmc("data", "detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
                                                 Sequel.cariIsi("select current_date()"),Sequel.cariIsi("select current_time()"),NoRawat.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString(),
                                                 tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,10).toString(),
                                                 ""+(Double.parseDouble(tbObat.getValueAt(i,9).toString())+Double.parseDouble(tbObat.getValueAt(i,10).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
@@ -703,7 +703,7 @@ public final class DlgBarcodeRalan extends javax.swing.JDialog {
                                         }
                                     }
                                 }else{
-                                    if(Sequel.menyimpantf("detail_pemberian_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?","data",14,new String[]{
+                                    if(Sequel.menyimpantfNotifSmc("data", "detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
                                         Sequel.cariIsi("select current_date()"),Sequel.cariIsi("select current_time()"),NoRawat.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString(),
                                         tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,10).toString(),
                                         ""+(Double.parseDouble(tbObat.getValueAt(i,9).toString())+Double.parseDouble(tbObat.getValueAt(i,10).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
