@@ -306,7 +306,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
 
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new Object[]{accession.ambilAccession(rs.getString(1),rs.getString(2)),rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+                    tabMode.addRow(new Object[]{accession.getNoACSN(rs.getString(1),rs.getString(2)),rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
                 }
             } catch (Exception e) {
                 System.out.println("Notif Bangsal : "+e);

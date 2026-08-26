@@ -1397,7 +1397,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     }
                 }
                 Sequel.AutoComitTrue();
-                if((!noorderTerbit.equals(""))&&(accession.terbitkanAccession(noorderTerbit)==false)){
+                if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
                     JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
                 }
                 JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");

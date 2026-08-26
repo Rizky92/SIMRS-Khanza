@@ -1324,7 +1324,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
 
                 Sequel.AutoComitTrue();
                 if(sukses==true){
-                    if((!noorderTerbit.equals(""))&&(accession.terbitkanAccession(noorderTerbit)==false)){
+                    if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
                         JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
                     }
                     dispose();

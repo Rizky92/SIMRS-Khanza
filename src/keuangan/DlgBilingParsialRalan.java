@@ -6400,7 +6400,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 }
 
                 Sequel.AutoComitTrue();
-                if((sukses==true)&&(!noorderradiologi.equals(""))&&(accession.terbitkanAccession(noorderradiologi)==false)){
+                if((sukses==true)&&(!noorderradiologi.equals(""))&&(accession.simpanACSN(noorderradiologi)==false)){
                     JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderradiologi+"..!!");
                 }
             }catch (Exception ex) {

@@ -2249,7 +2249,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
                 */
                 String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih modality tujuan:", "Kirim ke Modality", JOptionPane.OK_CANCEL_OPTION, null, new String[] {"Tidak Ada", "FINO PACS", "DCMROUTER Satu Sehat"}, "Tidak Ada");
-                if (null != pilihan && "Tidak Ada".equals(pilihan)) {
+                if (null != pilihan && !"Tidak Ada".equals(pilihan)) {
                     String actualModalityName = "";
                     switch (pilihan) {
                         case "FINO PACS":

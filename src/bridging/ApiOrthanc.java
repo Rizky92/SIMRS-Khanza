@@ -291,8 +291,12 @@ public class ApiOrthanc {
     }
 
     public boolean kirimKeModalitySmc(String studyID, String modality) {
-        String notifKirim = "", study = (null == studyID) ? "" : studyID.trim(), tujuan = (null == modality) ? "" : modality.trim();
+        String notifKirim = "";
+        final String study = (null == studyID) ? "" : studyID.trim();
+        final String tujuan = (null == modality) ? "" : modality.trim();
+
         boolean sukses = true;
+
         if (study.isBlank()) {
             notifKirim = "Study ID kosong";
             System.out.println("Notifikasi : " + notifKirim);
