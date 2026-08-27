@@ -1,7 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-truncate table `adamlabs_orderlab`;
-truncate table `adamlabs_request_response`;
 truncate table `antriapotek`;
 truncate table `antriapotek2`;
 truncate table `antriapotek3`;
