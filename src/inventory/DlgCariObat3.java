@@ -679,7 +679,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                             }
                         }
 
-                        psobatsimpan= koneksi.prepareStatement("insert into detail_pemberian_obat values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                        psobatsimpan= koneksi.prepareStatement("insert into detail_pemberian_obat (tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                         try {
                             if(pagi>0){
                                 psobatsimpan.setString(1,Valid.SetTgl(Tanggal.getSelectedItem()+""));
