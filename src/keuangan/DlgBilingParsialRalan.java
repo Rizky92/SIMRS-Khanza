@@ -5,6 +5,7 @@
  */
 package keuangan;
 
+import bridging.AccessionRadiologiSMC;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable2;
 import fungsi.akses;
@@ -44,6 +45,7 @@ import kepegawaian.DlgCariPetugas;
 public class DlgBilingParsialRalan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
     private WarnaTable2 warna=new WarnaTable2();
@@ -5932,9 +5934,8 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                     if(tbRadiologi.getValueAt(i,0).toString().equals("true")){
                         if(tbRadiologi.getValueAt(i,11).toString().equals("0000-00-00")){
                             if((!KdDokPerujukRad.getText().equals(""))&&(!TDokterPerujukRad.getText().equals(""))){
-                                if(Sequel.menyimpantf2("permintaan_pemeriksaan_radiologi","?,?,?","Permintaan Radiologi",3,new String[]{
-                                    noorderradiologi,tbRadiologi.getValueAt(i,1).toString(),"Sudah"
-                                  })==true){
+                                if(Sequel.menyimpantfSmc("permintaan_pemeriksaan_radiologi","noorder, kd_jenis_prw, stts_bayar",
+                                    noorderradiologi,tbRadiologi.getValueAt(i,1).toString(),"Sudah")==true){
                                     tbRadiologi.setValueAt(false,i,0);
                                 }else{
                                     sukses=false;
@@ -6399,6 +6400,9 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 }
 
                 Sequel.AutoComitTrue();
+                if((sukses==true)&&(!noorderradiologi.equals(""))&&(accession.simpanACSN(noorderradiologi)==false)){
+                    JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderradiologi+"..!!");
+                }
             }catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Data yang sama dimasukkan sebelumnya...!");

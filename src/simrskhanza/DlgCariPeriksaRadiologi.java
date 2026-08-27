@@ -1057,7 +1057,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
         btnDicomRouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         btnDicomRouter.setMnemonic('T');
-        btnDicomRouter.setText("Ke DICOMROUTER");
+        btnDicomRouter.setText("Kirim ke Modality");
         btnDicomRouter.setToolTipText("Alt+T");
         btnDicomRouter.setName("btnDicomRouter"); // NOI18N
         btnDicomRouter.setPreferredSize(new java.awt.Dimension(160, 30));
@@ -2242,10 +2242,30 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             TCari.requestFocus();
         }else {
             if(tbListDicom.getSelectedRow()!= -1){
+                /*
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 ApiOrthanc orthanc=new ApiOrthanc();
                 orthanc.kirimKeModality(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
                 this.setCursor(Cursor.getDefaultCursor());
+                */
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih modality tujuan:", "Kirim ke Modality", JOptionPane.OK_CANCEL_OPTION, null, new String[] {"Tidak Ada", "FINO PACS", "DCMROUTER Satu Sehat"}, "Tidak Ada");
+                if (null != pilihan && !"Tidak Ada".equals(pilihan)) {
+                    String actualModalityName = "";
+                    switch (pilihan) {
+                        case "FINO PACS":
+                            actualModalityName = "AW47";
+                            break;
+                        case "DCMROUTER Satu Sehat":
+                            actualModalityName = "DCMROUTER";
+                            break;
+                        default:
+                            actualModalityName = null;
+                    }
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    ApiOrthanc orthanc=new ApiOrthanc();
+                    orthanc.kirimKeModalitySmc(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString(), actualModalityName);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
             }

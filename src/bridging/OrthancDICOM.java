@@ -398,7 +398,7 @@ public class OrthancDICOM extends javax.swing.JDialog {
         });
         getContentPane().setLayout(new java.awt.BorderLayout(1, 1));
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 13), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setPreferredSize(new java.awt.Dimension(500, 500));
         internalFrame1.setLayout(new java.awt.BorderLayout());
@@ -458,7 +458,7 @@ public class OrthancDICOM extends javax.swing.JDialog {
         if(AccessionNumber.getText().trim().equals("")){
             Valid.textKosong(AccessionNumber,"Accession Number");
         }else{
-            if(orthanc.UbahAccession(study,AccessionNumber.getText())==true){
+            if(orthanc.UbahAccession(study,AccessionNumber.getText().trim())==true){
                 JOptionPane.showMessageDialog(null,"Update accession number selesai..!!");
             }
         }
