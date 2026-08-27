@@ -9094,7 +9094,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-    
+
     private void BtnChecklistKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -9111,7 +9111,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-    
+
     private void BtnChecklistKriteriaKeluarIsolasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -10151,11 +10151,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         if(akses.getchecklist_kriteria_masuk_icu()==true){
             tinggi=tinggi+24;
         }
-        BtnChecklistKriteriaMasukIsolasi.setVisible(akses.getchecklist_kriteria_masuk_isolasi()); 
+        BtnChecklistKriteriaMasukIsolasi.setVisible(akses.getchecklist_kriteria_masuk_isolasi());
         if(akses.getchecklist_kriteria_masuk_isolasi()==true){
             tinggi=tinggi+24;
         }
-        BtnChecklistKriteriaKeluarIsolasi.setVisible(akses.getchecklist_kriteria_keluar_isolasi()); 
+        BtnChecklistKriteriaKeluarIsolasi.setVisible(akses.getchecklist_kriteria_keluar_isolasi());
         if(akses.getchecklist_kriteria_keluar_isolasi()==true){
             tinggi=tinggi+24;
         }
@@ -11429,29 +11429,29 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnIntervensiNyeriNonFarmakologi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnIntervensiNyeriNonFarmakologi.setRoundRect(false);
         BtnIntervensiNyeriNonFarmakologi.addActionListener(this::BtnIntervensiNyeriNonFarmakologiActionPerformed);
-        
+
         BtnChecklistKriteriaMasukIsolasi = new widget.Button();
-        BtnChecklistKriteriaMasukIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
+        BtnChecklistKriteriaMasukIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnChecklistKriteriaMasukIsolasi.setText("Check List Masuk Isolasi");
         BtnChecklistKriteriaMasukIsolasi.setFocusPainted(false);
-        BtnChecklistKriteriaMasukIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnChecklistKriteriaMasukIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnChecklistKriteriaMasukIsolasi.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnChecklistKriteriaMasukIsolasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaMasukIsolasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnChecklistKriteriaMasukIsolasi.setName("BtnChecklistKriteriaMasukIsolasi"); 
+        BtnChecklistKriteriaMasukIsolasi.setName("BtnChecklistKriteriaMasukIsolasi");
         BtnChecklistKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnChecklistKriteriaMasukIsolasi.setRoundRect(false);
         BtnChecklistKriteriaMasukIsolasi.addActionListener(this::BtnChecklistKriteriaMasukIsolasiActionPerformed);
-        
+
         BtnChecklistKriteriaKeluarIsolasi = new widget.Button();
-        BtnChecklistKriteriaKeluarIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
+        BtnChecklistKriteriaKeluarIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnChecklistKriteriaKeluarIsolasi.setText("Check List Keluar Isolasi");
         BtnChecklistKriteriaKeluarIsolasi.setFocusPainted(false);
-        BtnChecklistKriteriaKeluarIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnChecklistKriteriaKeluarIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnChecklistKriteriaKeluarIsolasi.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnChecklistKriteriaKeluarIsolasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaKeluarIsolasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnChecklistKriteriaKeluarIsolasi.setName("BtnChecklistKriteriaKeluarIsolasi"); 
+        BtnChecklistKriteriaKeluarIsolasi.setName("BtnChecklistKriteriaKeluarIsolasi");
         BtnChecklistKriteriaKeluarIsolasi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnChecklistKriteriaKeluarIsolasi.setRoundRect(false);
         BtnChecklistKriteriaKeluarIsolasi.addActionListener(this::BtnChecklistKriteriaKeluarIsolasiActionPerformed);

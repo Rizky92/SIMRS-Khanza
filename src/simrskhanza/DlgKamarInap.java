@@ -20120,7 +20120,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void MnCheckListKriteriaKeluarIsolasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -20130,7 +20130,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
-                            "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");            
+                            "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
                             psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
                             rs2=psanak.executeQuery();
@@ -21357,7 +21357,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaKeluarNICU.setEnabled(akses.getkriteria_keluar_nicu());
         MnCheckListKriteriaKeluarPICU.setEnabled(akses.getkriteria_keluar_picu());
         MnCheckListKriteriaMasukIsolasi.setEnabled(akses.getchecklist_kriteria_masuk_isolasi());
-        MnCheckListKriteriaKeluarIsolasi.setEnabled(akses.getchecklist_kriteria_keluar_isolasi());  
+        MnCheckListKriteriaKeluarIsolasi.setEnabled(akses.getchecklist_kriteria_keluar_isolasi());
         MnSkriningGiziKehamilan.setEnabled(akses.getskrining_gizi_kehamilan());
         MnDPJPRanap.setEnabled(false);
 
@@ -22062,12 +22062,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaMasukIsolasi.setName("MnCheckListKriteriaMasukIsolasi");
         MnCheckListKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaMasukIsolasi.addActionListener(this::MnCheckListKriteriaMasukIsolasiActionPerformed);
-        
+
         MnCheckListKriteriaKeluarIsolasi = new javax.swing.JMenuItem();
         MnCheckListKriteriaKeluarIsolasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaKeluarIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaKeluarIsolasi.setForeground(new java.awt.Color(50, 50, 50));
-        MnCheckListKriteriaKeluarIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnCheckListKriteriaKeluarIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnCheckListKriteriaKeluarIsolasi.setText("Check List Kriteria Keluar Isolasi");
         MnCheckListKriteriaKeluarIsolasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnCheckListKriteriaKeluarIsolasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

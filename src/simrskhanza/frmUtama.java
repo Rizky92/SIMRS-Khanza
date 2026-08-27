@@ -713,6 +713,8 @@ import keuangan.KeuanganRekapJmDokter;
 import keuangan.KeuanganRekapPengajuanBiaya;
 import keuangan.KeuanganRekapPoliAnak;
 import keuangan.KeuanganRincianPiutangPasien;
+import keuangan.KeuanganRingkasanBebanHutangLain;
+import keuangan.KeuanganRingkasanHutangVendorAsetInventaris;
 import keuangan.KeuanganRingkasanHutangVendorDapur;
 import keuangan.KeuanganRingkasanHutangVendorFarmasi;
 import keuangan.KeuanganRingkasanHutangVendorNonMedis;
@@ -24021,7 +24023,7 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.isCek();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnBridgingCompositionRMESatuSehatActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -24031,6 +24033,28 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
         aplikasi.isCek();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnRingkasanHutangVendorAsetInventarisActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        KeuanganRingkasanHutangVendorAsetInventaris aplikasi=new KeuanganRingkasanHutangVendorAsetInventaris(this,true);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnRingkasanBebanHutangLainActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        KeuanganRingkasanBebanHutangLain aplikasi=new KeuanganRingkasanBebanHutangLain(this,true);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
 
@@ -24759,7 +24783,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnSuratPermintaanBinrohtal,btnSuratPermintaanPerlindunganDariKekerasan,btnSuratPermohonanPrivasi,btnSuratPermintaanSecondOpinion,btnSuratKeteranganBerobat,btnSuratPenolakanResusitasi,btnCatatanObservasiRuangOperasi,
             btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi,btnIntervensiNyeriNonFarmakologi,btnSuratPengajuanCutiPerawatan,btnChecklistKriteriaMasukIsolasi,btnMapingTarifTindakanRalanKPTLSatuSehat,
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
-            btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat;
+            btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain;
 
     public void isWall(){
         try{
@@ -27343,6 +27367,11 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getringkasan_hutang_vendor_inventaris()==true){
+                Panelmenu.add(btnRingkasanHutangVendorAsetInventaris);
+                jmlmenu++;
+            }
+
             if(akses.getringkasan_hutang_vendor_dapur()==true){
                 Panelmenu.add(btnRingkasanHutangVendorBarangDapur);
                 jmlmenu++;
@@ -27395,6 +27424,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getbeban_hutang_lain()==true){
                 Panelmenu.add(btnBebanHutangLain);
+                jmlmenu++;
+            }
+
+            if(akses.getringkasan_beban_hutang_lain()==true){
+                Panelmenu.add(btnRingkasanBebanHutangLain);
                 jmlmenu++;
             }
 
@@ -28274,7 +28308,7 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnMapingTarifKamarKPTLSatuSehat);
                 jmlmenu++;
             }
-            
+
             if(akses.getsatu_sehat_kirim_composition()==true){
                 Panelmenu.add(btnBridgingCompositionRMESatuSehat);
                 jmlmenu++;
@@ -33392,6 +33426,11 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if(akses.getringkasan_hutang_vendor_inventaris()==true){
+            Panelmenu.add(btnRingkasanHutangVendorAsetInventaris);
+            jmlmenu++;
+        }
+
         if(akses.getringkasan_hutang_vendor_dapur()==true){
             Panelmenu.add(btnRingkasanHutangVendorBarangDapur);
             jmlmenu++;
@@ -33444,6 +33483,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getbeban_hutang_lain()==true){
             Panelmenu.add(btnBebanHutangLain);
+            jmlmenu++;
+        }
+
+        if(akses.getringkasan_beban_hutang_lain()==true){
+            Panelmenu.add(btnRingkasanBebanHutangLain);
             jmlmenu++;
         }
 
@@ -34322,7 +34366,7 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnMapingTarifKamarKPTLSatuSehat);
             jmlmenu++;
         }
-        
+
         if(akses.getsatu_sehat_kirim_composition()==true){
             Panelmenu.add(btnBridgingCompositionRMESatuSehat);
             jmlmenu++;
@@ -40399,6 +40443,13 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getringkasan_hutang_vendor_inventaris()==true){
+            if(btnRingkasanHutangVendorAsetInventaris.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRingkasanHutangVendorAsetInventaris);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getringkasan_hutang_vendor_dapur()==true){
             if(btnRingkasanHutangVendorBarangDapur.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnRingkasanHutangVendorBarangDapur);
@@ -40472,6 +40523,13 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getbeban_hutang_lain()==true){
             if(btnBebanHutangLain.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBebanHutangLain);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getringkasan_beban_hutang_lain()==true){
+            if(btnRingkasanBebanHutangLain.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRingkasanBebanHutangLain);
                 jmlmenu++;
             }
         }
@@ -41700,12 +41758,12 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getsatu_sehat_kirim_composition()==true){
             if(btnBridgingCompositionRMESatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBridgingCompositionRMESatuSehat);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getsatu_sehat_tanda_tangan_elektronik()==true){
@@ -51426,14 +51484,30 @@ public class frmUtama extends javax.swing.JFrame {
         btnBridgingTTESatuSehat.setName("btnBridgingTTESatuSehat");
         btnBridgingTTESatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBridgingTTESatuSehat.addActionListener(this::btnBridgingTTESatuSehatActionPerformed);
-        
+
         btnBridgingCompositionRMESatuSehat = new widget.ButtonBig();
         btnBridgingCompositionRMESatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnBridgingCompositionRMESatuSehat.setText("Kirim Composition Satu Sehat");
         btnBridgingCompositionRMESatuSehat.setIconTextGap(0);
-        btnBridgingCompositionRMESatuSehat.setName("btnBridgingCompositionRMESatuSehat"); 
+        btnBridgingCompositionRMESatuSehat.setName("btnBridgingCompositionRMESatuSehat");
         btnBridgingCompositionRMESatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBridgingCompositionRMESatuSehat.addActionListener(this::btnBridgingCompositionRMESatuSehatActionPerformed);
+
+        btnRingkasanHutangVendorAsetInventaris = new widget.ButtonBig();
+        btnRingkasanHutangVendorAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9016847_cleaning_kitchen_covid-19_virus_pandemic_icon.png")));
+        btnRingkasanHutangVendorAsetInventaris.setText("Ringkasan Hutang Vendor Aset/Inventaris");
+        btnRingkasanHutangVendorAsetInventaris.setIconTextGap(0);
+        btnRingkasanHutangVendorAsetInventaris.setName("btnRingkasanHutangVendorAsetInventaris");
+        btnRingkasanHutangVendorAsetInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanHutangVendorAsetInventaris.addActionListener(this::btnRingkasanHutangVendorAsetInventarisActionPerformed);
+
+        btnRingkasanBebanHutangLain = new widget.ButtonBig();
+        btnRingkasanBebanHutangLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/debt_2780190.png")));
+        btnRingkasanBebanHutangLain.setText("Ringkasan Beban Hutang Lain");
+        btnRingkasanBebanHutangLain.setIconTextGap(0);
+        btnRingkasanBebanHutangLain.setName("btnRingkasanBebanHutangLain");
+        btnRingkasanBebanHutangLain.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanBebanHutangLain.addActionListener(this::btnRingkasanBebanHutangLainActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,

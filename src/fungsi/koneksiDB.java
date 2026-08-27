@@ -2151,7 +2151,7 @@ public class koneksiDB {
         }
         return var;
     }
-    
+
     public static String URLAPPLINKSATUSEHAT() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -2164,7 +2164,7 @@ public class koneksiDB {
         }
         return var;
     }
-    
+
     public static String IDORGBPJSSATUSEHAT() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

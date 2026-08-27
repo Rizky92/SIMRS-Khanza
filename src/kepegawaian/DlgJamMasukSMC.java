@@ -625,7 +625,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         try {
             Sequel.AutoComitFalse();
             String kode = TKode.getText().trim().toUpperCase();
-            if (Sequel.mengupdatetfSmc("jam_masuk_smc", "kode_shift = ?, nama_shift = ?, jam_masuk = ?, jam_pulang = ?", "kode_shift = ?", kode, TNama.getText().trim(), 
+            if (Sequel.mengupdatetfSmc("jam_masuk_smc", "kode_shift = ?, nama_shift = ?, jam_masuk = ?, jam_pulang = ?", "kode_shift = ?", kode, TNama.getText().trim(),
                 Valid.getJamSmc(cmbJam1, cmbMnt1, cmbDtk1), Valid.getJamSmc(cmbJam2, cmbMnt2, cmbDtk2), tbJadwal.getValueAt(tbJadwal.getSelectedRow(), 1).toString()
             )) {
                 if (simpanMappingShift(kode)) {

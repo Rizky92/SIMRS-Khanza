@@ -173,7 +173,7 @@ public class SatuSehatBridgingTTE extends JDialog {
      */
     private boolean aksesTte = akses.getsatu_sehat_tanda_tangan_elektronik();
 
-    // Komponen visual dideklarasikan GUI Builder di blok                                   
+    // Komponen visual dideklarasikan GUI Builder di blok
     // (widget.TextBox extends JTextField, widget.Label extends JLabel, widget.Button extends
     // JButton, widget.Table extends JTable), jadi seluruh kode logika di bawah tetap memakai API
     // Swing biasa. Yang tersisa di sini hanya field NON-visual.
