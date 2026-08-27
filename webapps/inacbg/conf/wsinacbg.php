@@ -4,6 +4,10 @@
     }
     require_once('../conf/conf.php');
 
+    if (!defined('__DEBUG_ENABLED')) {
+        define('__DEBUG_ENABLED', false);
+    }
+
     function getKey()
     {
        $keyRS = "b5695f833187f277e420adb25298c31027f24ef2300ca1915f9be549b649ab28";
@@ -23,7 +27,7 @@
 
     function getKelasRS()
     {
-        $kelasRS = "CS";
+        $kelasRS = "AP";
 
         if (empty($kelasRS)) {
             throw new Exception("Kelas RS belum ada!");
@@ -33,6 +37,10 @@
     }
 
     function mc_encrypt($data, $strkey) {
+        if (__DEBUG_ENABLED) {
+            return $data;
+        }
+
         $key = hex2bin($strkey);
         if (mb_strlen($key, "8bit") !== 32) {
                 throw new Exception("Needs a 256-bit key!");
@@ -47,6 +55,10 @@
     }
 
     function mc_decrypt($str, $strkey){
+        if (__DEBUG_ENABLED) {
+            return $str;
+        }
+
         $key = hex2bin($strkey);
         if (mb_strlen($key, "8bit") !== 32) {
             throw new Exception("Needs a 256-bit key!");
