@@ -66,6 +66,7 @@ public class OrthancDICOM extends javax.swing.JDialog {
     private final ApiOrthanc orthanc=new ApiOrthanc();
     private final validasi Valid=new validasi();
     private OrthancDataACSN dataacsn;
+    private ChromiumSMC chromium;
 
     public OrthancDICOM(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -183,6 +184,45 @@ public class OrthancDICOM extends javax.swing.JDialog {
                 engine.load(url);
             }
         });
+    }
+
+    public void loadViewerSmc(String Study,String Series) {
+        String url=orthanc.URLViewerSmc(Study,Series);
+
+        if (ApiOrthanc.ButuhChromiumSmc()) {
+            if (bukaChromiumSmc(url)) {
+                return;
+            }
+            System.out.println("Notifikasi : Chromium tidak tersedia, memakai mesin bawaan JavaFX");
+        }
+
+        loadURL(url);
+    }
+
+    private boolean bukaChromiumSmc(String url) {
+        if (!ChromiumSMC.siapkanDenganDialog(internalFrame1)) {
+            return false;
+        }
+
+        try {
+            chromium=new ChromiumSMC();
+            panel.removeAll();
+            panel.add(chromium.komponen(url), BorderLayout.CENTER);
+            panel.revalidate();
+            panel.repaint();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notifikasi : Gagal membuka Chromium : "+e);
+            if (null != chromium) {
+                chromium.tutup();
+                chromium=null;
+            }
+            panel.removeAll();
+            panel.add(jfxPanel, BorderLayout.CENTER);
+            panel.revalidate();
+            panel.repaint();
+            return false;
+        }
     }
 
     public void CloseScane(){
@@ -409,6 +449,10 @@ public class OrthancDICOM extends javax.swing.JDialog {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Platform.setImplicitExit(false);
+        if (null != chromium) {
+            chromium.tutup();
+            chromium=null;
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
