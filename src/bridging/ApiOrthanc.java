@@ -387,6 +387,48 @@ public class ApiOrthanc {
         return sukses;
     }
 
+    public String AmbilStudyInstanceUIDSmc(String studyID) {
+        final String study = (null == studyID) ? "" : studyID.trim();
+        String studyUID = "";
+
+        if (!study.isBlank()) {
+            String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/studies/" + study;
+            try {
+                HttpHeaders header = new HttpHeaders();
+                header.add("Authorization", "Basic " + authEncrypt);
+
+                System.out.println("URL : " + url);
+                String body = getRest().exchange(url, HttpMethod.GET, new HttpEntity(header), String.class).getBody();
+                if ((null != body) && (!body.isBlank())) {
+                    studyUID = mapper.readTree(body).path("MainDicomTags").path("StudyInstanceUID").asText("").trim();
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : Gagal mengambil StudyInstanceUID Study " + study + " dari Orthanc : " + e);
+            }
+        }
+
+        return studyUID;
+    }
+
+    public String URLViewerSmc(String studyID, String seriesID) {
+        final String server = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
+        final String viewer = koneksiDB.ORTHANCVIEWERSMC();
+        final String series = (null == seriesID) ? "" : seriesID.trim();
+        String url = server + "/web-viewer/app/viewer.html?series=" + series;
+
+        if ("ohif".equalsIgnoreCase(viewer)) {
+            String studyUID = AmbilStudyInstanceUIDSmc(studyID);
+            if (!studyUID.isBlank()) {
+                url = server + "/ohif/viewer?StudyInstanceUIDs=" + studyUID;
+            } else {
+                System.out.println("Notifikasi : StudyInstanceUID tidak ditemukan, memakai viewer bawaan Orthanc");
+            }
+        }
+
+        System.out.println("URL Viewer : " + url);
+        return url;
+    }
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers= {

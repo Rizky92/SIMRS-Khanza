@@ -185,6 +185,10 @@ public class OrthancDICOM extends javax.swing.JDialog {
         });
     }
 
+    public void loadViewerSmc(String Study,String Series) {
+        loadURL(orthanc.URLViewerSmc(Study,Series));
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
