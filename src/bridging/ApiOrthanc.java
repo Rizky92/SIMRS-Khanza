@@ -414,15 +414,21 @@ public class ApiOrthanc {
         final String server = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC();
         final String viewer = koneksiDB.ORTHANCVIEWERSMC();
         final String series = (null == seriesID) ? "" : seriesID.trim();
+        final String study = (null == studyID) ? "" : studyID.trim();
         String url = server + "/web-viewer/app/viewer.html?series=" + series;
 
-        if ("ohif".equalsIgnoreCase(viewer)) {
-            String studyUID = AmbilStudyInstanceUIDSmc(studyID);
-            if (!studyUID.isBlank()) {
-                url = server + "/ohif/viewer?StudyInstanceUIDs=" + studyUID;
-            } else {
-                System.out.println("Notifikasi : StudyInstanceUID tidak ditemukan, memakai viewer bawaan Orthanc");
-            }
+        switch (viewer.toLowerCase()) {
+            case "ohif":
+                String studyUID = AmbilStudyInstanceUIDSmc(studyID);
+                if (!studyUID.isBlank()) {
+                    url = server + "/ohif/viewer?StudyInstanceUIDs=" + studyUID;
+                } else {
+                    System.out.println("Notifikasi : StudyInstanceUID tidak ditemukan, memakai viewer bawaan Orthanc");
+                }
+                break;
+            case "osimis":
+                url = server + "/osimis-viewer/app/index.html?study=" + study;
+                break;
         }
 
         System.out.println("URL Viewer : " + url);
