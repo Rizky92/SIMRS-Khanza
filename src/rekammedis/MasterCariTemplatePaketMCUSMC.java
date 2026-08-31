@@ -630,7 +630,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), null, null, null, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Cari Template Paket MCU ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -651,7 +651,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
 
         panelisi3.setName("panelisi3"); // NOI18N
         panelisi3.setPreferredSize(new java.awt.Dimension(100, 43));
-        panelisi3.setLayout(new java.awt.FlowLayout(0, 4, 9));
+        panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
 
         label9.setText("Key Word :");
         label9.setName("label9"); // NOI18N
@@ -755,7 +755,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_END);
 
-        scrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)), null, null, null, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        scrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)), "Detail Template :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         scrollPane2.setName("scrollPane2"); // NOI18N
 
         FormInput.setBackground(new java.awt.Color(255, 255, 255));
@@ -770,7 +770,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         FormInput.add(jLabel40);
         jLabel40.setBounds(16, 10, 410, 20);
 
-        scrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        scrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane3.setName("scrollPane3"); // NOI18N
 
         Subjek.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -788,7 +788,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         FormInput.add(jLabel41);
         jLabel41.setBounds(16, 110, 410, 20);
 
-        scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane4.setName("scrollPane4"); // NOI18N
 
         Objek.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -806,7 +806,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(16, 210, 410, 20);
 
-        scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane5.setName("scrollPane5"); // NOI18N
 
         Asesmen.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -824,7 +824,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         FormInput.add(jLabel43);
         jLabel43.setBounds(16, 310, 410, 20);
 
-        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane6.setName("scrollPane6"); // NOI18N
 
         Plan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -842,7 +842,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         FormInput.add(jLabel44);
         jLabel44.setBounds(16, 410, 410, 20);
 
-        scrollPane7.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        scrollPane7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane7.setName("scrollPane7"); // NOI18N
 
         Instruksi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -860,7 +860,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
         FormInput.add(jLabel45);
         jLabel45.setBounds(16, 510, 410, 20);
 
-        scrollPane8.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        scrollPane8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane8.setName("scrollPane8"); // NOI18N
 
         Evaluasi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
