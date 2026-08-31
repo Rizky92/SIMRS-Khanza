@@ -454,7 +454,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-08-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -468,7 +468,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-08-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -751,10 +751,10 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         FormInput.add(KetResepTepatDosis);
         KetResepTepatDosis.setBounds(129, 240, 140, 23);
 
-        jLabel28.setText("Telaah Obat :");
+        jLabel28.setText("Pengkajian Obat :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
-        jLabel28.setBounds(528, 100, 80, 23);
+        jLabel28.setBounds(508, 100, 120, 23);
 
         jLabel29.setText("J.K. :");
         jLabel29.setName("jLabel29"); // NOI18N
@@ -925,10 +925,10 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         FormInput.add(jLabel35);
         jLabel35.setBounds(295, 270, 140, 23);
 
-        jLabel36.setText("Telaah Resep :");
+        jLabel36.setText("Pengkajian Resep :");
         jLabel36.setName("jLabel36"); // NOI18N
         FormInput.add(jLabel36);
-        jLabel36.setBounds(0, 70, 94, 23);
+        jLabel36.setBounds(0, 70, 113, 23);
 
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel37.setText("1. Tepat Pasien");
@@ -1191,8 +1191,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                         bw.flush();
                     }
                     String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
-                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
-                }, "Laporan 5 (Jasper)");
+                        "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                    }, "Laporan 5 (Jasper)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                             Valid.exportHtmlSmc("DataTelaahResep.html", "Data Telaah Resep", tbObat);
@@ -1215,7 +1215,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                             param.put("kontakrs",akses.getkontakrs());
                             param.put("emailrs",akses.getemailrs());
                             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                            Valid.MyReportqry("rptDataTelaahResep.jasper","report","::[ Data Telaah Resep ]::",
+                            Valid.MyReportqry("rptDataTelaahResep.jasper","report","::[ Data Pengkajian Resep ]::",
                                 "select telaah_farmasi.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,resep_obat.no_rawat,reg_periksa.no_rkm_medis,"+
                                 "pasien.nm_pasien,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.jk,pasien.tgl_lahir,resep_obat.kd_dokter,dokter.nm_dokter,resep_obat.status,"+
                                 "telaah_farmasi.resep_identifikasi_pasien,telaah_farmasi.resep_ket_identifikasi_pasien,telaah_farmasi.resep_tepat_obat,"+

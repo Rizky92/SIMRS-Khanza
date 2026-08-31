@@ -2136,6 +2136,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         Kelas.setSelectedIndex(0);
         //Valid.autoNomer(" paket_operasi ","JP",6,TKd);
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_paket,5),signed)),0) from paket_operasi  ","PK",6,TKd);
+        TabRawat.setSelectedIndex(0);
         TKd.requestFocus();
     }
 
@@ -2277,6 +2278,10 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
     public JButton getButton(){
         return BtnKeluar;
+    }
+
+    public void setTabData(){
+        TabRawat.setSelectedIndex(1);
     }
 
     public void isCek(){

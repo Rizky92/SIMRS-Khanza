@@ -78,6 +78,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         jenisKunjungan = "",
         estimasiDilayani = "",
         jamPraktek = "",
+        jamMulaiJadwal = "",
+        jamSelesaiJadwal = "",
         kodePoli = "",
         kodeDokter = "",
         prb = "",
@@ -142,6 +144,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     kodeDPJPLayanan.setText(dokter.getSelectedRow(1).toString());
                     namaDPJPLayanan.setText(dokter.getSelectedRow(2).toString());
                     kodeDokterReg = Sequel.cariIsiSmc("select maping_dokter_dpjpvclaim.kd_dokter from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs = ?", kodeDokter);
+                    jamPraktek = "";
+                    jamMulaiJadwal = "";
+                    jamSelesaiJadwal = "";
                 }
                 namaDokter.requestFocus();
             }
@@ -157,6 +162,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     kodePoliReg = poli.getSelectedRow(2).toString();
                     if (batasRegistrasiSatuJam) {
                         jamPraktek = poli.getSelectedRow(3).toString();
+                        if (jamPraktek.contains("-")) {
+                            jamMulaiJadwal = jamPraktek.substring(0, jamPraktek.indexOf('-')).trim() + ":00";
+                            jamSelesaiJadwal = jamPraktek.substring(jamPraktek.indexOf('-') + 1).trim() + ":00";
+                        }
                     }
                 }
                 namaPoli.requestFocus();
@@ -187,7 +196,18 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     namaDiagnosa.setText(riwayatRujukan.getSelectedRow(1).toString());
                     kodePoli = riwayatRujukan.getSelectedRow(3).toString();
                     namaPoli.setText(riwayatRujukan.getSelectedRow(4).toString());
+                    kodePoliReg = "";
+                    kodeDokter = "";
+                    kodeDokterReg = "";
+                    namaDokter.setText("");
+                    kodeDPJPLayanan.setText("");
+                    namaDPJPLayanan.setText("");
+                    if (cariJadwalSmc()) {
+                        isiDokterSmc();
+                    }
                     tglRujukan.setText(riwayatRujukan.getSelectedRow(5).toString());
+                    System.out.println("Kode Poli Registrasi: " + kodePoliReg);
+                    System.out.println("Jadwal dokter: " + jamMulaiJadwal + " - " + jamSelesaiJadwal);
                 }
                 catatan.requestFocus();
             }
@@ -1030,14 +1050,16 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } else if (!statusFinger && Valid.compareTahun(tglSEP.getText(), tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
             Valid.popupPeringatanDialog("Silahkan lakukan validasi biometrik dahulu..!!", 3);
         } else {
-            if (kodePoliReg.isBlank()) {
-                kodePoliReg = Sequel.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs = ?", kodePoli);
-            }
             if (kodeDokterReg.isBlank()) {
                 kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
             }
+            if (kodePoliReg.isBlank() || jamMulaiJadwal.isBlank()) {
+                cariJadwalSmc();
+            }
             if (kodePoliReg.isBlank() || kodeDokterReg.isBlank()) {
                 Valid.popupPeringatanDialog("Mapping Poliklinik atau Dokter tidak ditemukan..!!", 5);
+            } else if (!cekWaktuRegistrasi()) {
+                Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
             } else {
                 if (!registerPasien()) {
                     Valid.popupGagalDialog("Terjadi kesalahan pada saat pendaftaran pasien!");
@@ -1163,6 +1185,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             login.setOnLoginListener(e -> {
                 btnKonfirmasi.setEnabled(false);
                 btnBatal.setEnabled(false);
+                btnApprovalFP.setEnabled(false);
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Sep/aprovalSEP";
                     System.out.println("URL : " + url);
@@ -1191,13 +1214,18 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     metadata = root.path("metaData");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
-                        String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
+                        String response = api.Decrypt(root.path("response").asText(), utc);
+                        if (null == response) {
+                            response = "";
+                        }
                         Sequel.mengupdateSmc("pengajuan_fingerprint_bpjs_smc", "status_approval = ?", "no_rkm_medis = ? and tglsep = ?", "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, noRM.getText(), tglSEP.getText());
                         Valid.popupInfoDialog("Approval Berhasil");
                     } else {
+                        btnApprovalFP.setEnabled(true);
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
                     }
                 } catch (Exception ex) {
+                    btnApprovalFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
@@ -1213,6 +1241,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private void btnPengajuanFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengajuanFPActionPerformed
         if (noPeserta.getText().isBlank()) {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
+        } else if (Sequel.cariExistsSmc("select * from pengajuan_fingerprint_bpjs_smc where no_rkm_medis = ? and tglsep = ?", noRM.getText(), tglSEP.getText())) {
+            btnPengajuanFP.setEnabled(false);
+            Valid.popupPeringatanDialog("Maaf, pengajuan validasi biometrik pasien ini sudah dikirim hari ini..!!", 5);
         } else {
             if (login == null) {
                 login = new DlgLogin(null, true);
@@ -1223,6 +1254,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             login.setOnLoginListener(e -> {
                 btnKonfirmasi.setEnabled(false);
                 btnBatal.setEnabled(false);
+                btnPengajuanFP.setEnabled(false);
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Sep/pengajuanSEP";
                     System.out.println("URL : " + url);
@@ -1234,6 +1266,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     headers.add("X-Timestamp", utc);
                     headers.add("X-Signature", api.getHmac(utc));
                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    isCekPasien();
                     payload = " {" +
                         "\"request\": {" +
                         "\"t_sep\": {" +
@@ -1241,7 +1274,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         "\"tglSep\": \"" + tglSEP.getText() + "\"," +
                         "\"jnsPelayanan\": \"2\"," +
                         "\"jnsPengajuan\": \"2\"," +
-                        "\"keterangan\": \"Pengajuan SEP Finger oleh Anjungan Pasien Mandiri " + instansiNama + "\"," +
+                        "\"keterangan\": \"Pengajuan Validasi Biometrik SEP oleh Anjungan Pasien Mandiri " + instansiNama + ", validasi biometrik pasien error atau gagal, sidik jari dan rekam wajah telah dilakukan tetapi tidak dapat terbaca oleh sistem validasi biometrik menggunakan FRISTA atau Fingerprint, pasien berusia " + umurDaftar + " " + statusUmur + " dengan diagnosa kunjungan " + kodeDiagnosa.getText() + " " + namaDiagnosa.getText() + " \", " +
                         "\"user\": \"NoRM:" + noRM.getText() + "\"" +
                         "}" +
                         "}" +
@@ -1251,20 +1284,25 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     metadata = root.path("metaData");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
-                        String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
+                        String response = api.Decrypt(root.path("response").asText(), utc);
+                        if (null == response) {
+                            response = "";
+                        }
                         Sequel.menyimpanSmc("pengajuan_fingerprint_bpjs_smc", null, noRM.getText(), noPeserta.getText(), tglSEP.getText(), "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, null, e.getUserID());
                         Valid.popupInfoDialog("Pengajuan Berhasil");
                     } else {
+                        btnPengajuanFP.setEnabled(true);
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
                     }
                 } catch (Exception ex) {
+                    btnPengajuanFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
-                btnKonfirmasi.setEnabled(false);
-                btnBatal.setEnabled(false);
+                btnKonfirmasi.setEnabled(true);
+                btnBatal.setEnabled(true);
             });
             login.setVisible(true);
         }
@@ -1627,8 +1665,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void tentukanHari() {
         try {
-            Calendar.getInstance().setTime(new SimpleDateFormat("yyyy-MM-dd").parse(tglSEP.getText()));
-            switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(tglSEP.getText()));
+            switch (cal.get(Calendar.DAY_OF_WEEK)) {
                 case 1:
                     hari = "AKHAD";
                     break;
@@ -1919,7 +1958,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         labelValidasi.setText(keteranganValidasi);
     }
 
-    public void tampilKunjunganPertama(String noKartu) {
+    public boolean tampilKunjunganPertama(String noKartu) {
+        boolean sukses = false;
+
+        loadPengaturanAPM();
         emptTeks();
         tentukanHari();
         try {
@@ -1952,22 +1994,17 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 namaDiagnosa.setText(response.path("diagnosa").path("nama").asText());
                 kodePoli = response.path("poliRujukan").path("kode").asText();
                 namaPoli.setText(response.path("poliRujukan").path("nama").asText());
-                kodePoliReg = Sequel.cariIsiSmc("select maping_poli_bpjs.kd_poli_rs from maping_poli_bpjs where maping_poli_bpjs.kd_poli_bpjs = ?", response.path("poliRujukan").path("kode").asText());
-                try (PreparedStatement ps = koneksi.prepareStatement("select maping_dokter_dpjpvclaim.kd_dokter, maping_dokter_dpjpvclaim.kd_dokter_bpjs, maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim inner join jadwal on maping_dokter_dpjpvclaim.kd_dokter = jadwal.kd_dokter where jadwal.kd_poli = ? and jadwal.hari_kerja = ?")) {
-                    ps.setString(1, kodePoliReg);
-                    ps.setString(2, hari);
-                    try (ResultSet rs = ps.executeQuery()) {
-                        if (rs.next()) {
-                            kodeDokterReg = rs.getString("kd_dokter");
-                            kodeDokter = rs.getString("kd_dokter_bpjs");
-                            namaDokter.setText(rs.getString("nm_dokter_bpjs"));
-                            kodeDPJPLayanan.setText(kodeDokter);
-                            namaDPJPLayanan.setText(namaDokter.getText());
-                        }
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
+                if (!cariJadwalSmc()) {
+                    emptTeks();
+                    Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                    return false;
                 }
+                if (!cekWaktuRegistrasi()) {
+                    emptTeks();
+                    Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                    return false;
+                }
+                isiDokterSmc();
                 switch (response.path("peserta").path("hakKelas").path("kode").asText()) {
                     case "1":
                         kelas.setSelectedIndex(0);
@@ -1996,6 +2033,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 noTelpBPJS = response.path("peserta").path("mr").path("noTelepon").asText();
                 setNomorRegistrasi();
                 cekStatusFinger();
+                sukses = true;
             } else {
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Rujukan/RS/Peserta/" + noKartu;
@@ -2027,22 +2065,17 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         namaDiagnosa.setText(response.path("diagnosa").path("nama").asText());
                         kodePoli = response.path("poliRujukan").path("kode").asText();
                         namaPoli.setText(response.path("poliRujukan").path("nama").asText());
-                        kodePoliReg = Sequel.cariIsiSmc("select maping_poli_bpjs.kd_poli_rs from maping_poli_bpjs where maping_poli_bpjs.kd_poli_bpjs = ?", response.path("poliRujukan").path("kode").asText());
-                        try (PreparedStatement ps = koneksi.prepareStatement("select maping_dokter_dpjpvclaim.kd_dokter, maping_dokter_dpjpvclaim.kd_dokter_bpjs, maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim inner join jadwal on maping_dokter_dpjpvclaim.kd_dokter = jadwal.kd_dokter where jadwal.kd_poli = ? and jadwal.hari_kerja = ?")) {
-                            ps.setString(1, kodePoliReg);
-                            ps.setString(2, hari);
-                            try (ResultSet rs = ps.executeQuery()) {
-                                if (rs.next()) {
-                                    kodeDokterReg = rs.getString("kd_dokter");
-                                    kodeDokter = rs.getString("kd_dokter_bpjs");
-                                    namaDokter.setText(rs.getString("nm_dokter_bpjs"));
-                                    kodeDPJPLayanan.setText(kodeDokter);
-                                    namaDPJPLayanan.setText(namaDokter.getText());
-                                }
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Notif : " + e);
+                        if (!cariJadwalSmc()) {
+                            emptTeks();
+                            Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                            return false;
                         }
+                        if (!cekWaktuRegistrasi()) {
+                            emptTeks();
+                            Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                            return false;
+                        }
+                        isiDokterSmc();
                         switch (response.path("peserta").path("hakKelas").path("kode").asText()) {
                             case "1":
                                 kelas.setSelectedIndex(0);
@@ -2071,6 +2104,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         noTelpBPJS = response.path("peserta").path("mr").path("noTelepon").asText();
                         setNomorRegistrasi();
                         cekStatusFinger();
+                        sukses = true;
                     } else {
                         emptTeks();
                         Valid.popupPeringatanDialog("Rujukan faskes pertama atau FKTL tidak ada..!!");
@@ -2088,17 +2122,26 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
+
+        return sukses;
     }
 
-    public void tampilKontrolBedaPoli(String noKartu) {
-        tampilKunjunganPertama(noKartu);
+    public boolean tampilKontrolBedaPoli(String noKartu) {
+        if (!tampilKunjunganPertama(noKartu)) {
+            return false;
+        }
         tujuanKunjungan.setSelectedIndex(0);
         flagProsedur.setSelectedIndex(0);
         penunjang.setSelectedIndex(0);
         asesmenPelayanan.setSelectedIndex(1);
+
+        return true;
     }
 
-    public void tampilKontrol(String noSurat) {
+    public boolean tampilKontrol(String noSurat) {
+        boolean sukses = false;
+
+        loadPengaturanAPM();
         emptTeks();
         tentukanHari();
         try (PreparedStatement pskontrol = koneksi.prepareStatement(
@@ -2141,10 +2184,19 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 namaDiagnosa.setText("Follow-up examination after other treatment for other conditions");
                                 kodePoli = rskontrol.getString("kd_poli_bpjs");
                                 namaPoli.setText(rskontrol.getString("nm_poli_bpjs"));
-                                kodePoliReg = Sequel.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs = ?", kodePoli);
                                 kodeDokter = rskontrol.getString("kd_dokter_bpjs");
                                 namaDokter.setText(rskontrol.getString("nm_dokter_bpjs"));
                                 kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
+                                if (!cariJadwalSmc()) {
+                                    emptTeks();
+                                    Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                                    return false;
+                                }
+                                if (!cekWaktuRegistrasi()) {
+                                    emptTeks();
+                                    Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                                    return false;
+                                }
                                 kodeDPJPLayanan.setText(kodeDokter);
                                 namaDPJPLayanan.setText(namaDokter.getText());
                                 switch (rskontrol.getString("klsrawat")) {
@@ -2178,6 +2230,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 asalRujukan.setSelectedIndex(1);
                                 setNomorRegistrasi();
                                 cekStatusFinger();
+                                sukses = true;
                             } else {
                                 emptTeks();
                             }
@@ -2227,10 +2280,19 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 namaDiagnosa.setText(response.path("diagnosa").path("nama").asText());
                                 kodePoli = rskontrol.getString("kd_poli_bpjs");
                                 namaPoli.setText(rskontrol.getString("nm_poli_bpjs"));
-                                kodePoliReg = Sequel.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs = ?", kodePoli);
                                 kodeDokter = rskontrol.getString("kd_dokter_bpjs");
                                 namaDokter.setText(rskontrol.getString("nm_dokter_bpjs"));
                                 kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
+                                if (!cariJadwalSmc()) {
+                                    emptTeks();
+                                    Valid.popupPeringatanDialog("Jadwal praktek poli " + namaPoli.getText() + " tidak ditemukan hari ini..!!", 5);
+                                    return false;
+                                }
+                                if (!cekWaktuRegistrasi()) {
+                                    emptTeks();
+                                    Valid.popupPeringatanDialog("Pendaftaran untuk jadwal praktek " + jamPraktek + "\nbaru dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                                    return false;
+                                }
                                 switch (response.path("peserta").path("hakKelas").path("kode").asText()) {
                                     case "1":
                                         kelas.setSelectedIndex(0);
@@ -2264,6 +2326,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 asesmenPelayanan.setSelectedIndex(5);
                                 setNomorRegistrasi();
                                 cekStatusFinger();
+                                sukses = true;
                             } else {
                                 emptTeks();
                             }
@@ -2280,14 +2343,19 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             System.out.println("Notif : " + e);
             Valid.popupPeringatanDialog("Maaf, Data surat kontrol tidak ditemukan...!!!");
         }
+
+        return sukses;
     }
 
-    public void tampilMobileJKN(String noKartu) {
+    public boolean tampilMobileJKN(String noKartu) {
+        boolean sukses = false;
+
+        loadPengaturanAPM();
         toggleInfoTambahan.setSelected(false);
         emptTeks();
         isMobileJKN = true;
         try (PreparedStatement psjkn = koneksi.prepareStatement(
-            "select referensi_mobilejkn_bpjs.*, maping_poli_bpjs.nm_poli_bpjs, maping_poli_bpjs.kd_poli_rs, maping_dokter_dpjpvclaim.nm_dokter_bpjs, maping_dokter_dpjpvclaim.kd_dokter, pasien.jk, pasien.tgl_lahir from " +
+            "select referensi_mobilejkn_bpjs.*, maping_poli_bpjs.nm_poli_bpjs, maping_dokter_dpjpvclaim.nm_dokter_bpjs, maping_dokter_dpjpvclaim.kd_dokter, pasien.jk, pasien.tgl_lahir from " +
             "referensi_mobilejkn_bpjs join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs join maping_dokter_dpjpvclaim on referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs " +
             "join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis where referensi_mobilejkn_bpjs.nomorkartu = ? and referensi_mobilejkn_bpjs.tanggalperiksa = current_date() and referensi_mobilejkn_bpjs.status in " +
             "('Belum', 'Checkin') and tanggalperiksa = current_date() and not exists(select * from bridging_sep where bridging_sep.no_rawat = referensi_mobilejkn_bpjs.no_rawat)"
@@ -2296,10 +2364,14 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             try (ResultSet rsjkn = psjkn.executeQuery()) {
                 if (rsjkn.next()) {
                     jamPraktek = rsjkn.getString("jampraktek");
+                    if (jamPraktek.contains("-")) {
+                        jamMulaiJadwal = jamPraktek.substring(0, jamPraktek.indexOf('-')).trim() + ":00";
+                        jamSelesaiJadwal = jamPraktek.substring(jamPraktek.indexOf('-') + 1).trim() + ":00";
+                    }
                     if (!cekWaktuRegistrasi()) {
                         emptTeks();
-                        Valid.popupPeringatanDialog("Waktu cekin anda masih harus menunggu lagi..!!");
-                        return;
+                        Valid.popupPeringatanDialog("Waktu cekin anda masih harus menunggu lagi.\nJadwal praktek " + jamPraktek + " dibuka pukul " + jamDibukaSmc() + "..!!", 5);
+                        return false;
                     }
                     noBooking = rsjkn.getString("nobooking");
                     noRawat = rsjkn.getString("no_rawat");
@@ -2315,7 +2387,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     tglLahir.setText(rsjkn.getString("tgl_lahir"));
                     kodePoli = rsjkn.getString("kodepoli");
                     namaPoli.setText(rsjkn.getString("nm_poli_bpjs"));
-                    kodePoliReg = rsjkn.getString("kd_poli_rs");
+                    kodePoliReg = Sequel.cariIsiSmc("select kd_poli from reg_periksa where no_rawat = ?", noRawat);
                     kodeDokter = rsjkn.getString("kodedokter");
                     namaDokter.setText(rsjkn.getString("nm_dokter_bpjs"));
                     kodeDokterReg = rsjkn.getString("kd_dokter");
@@ -2532,6 +2604,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     break;
                             }
                             cekStatusFinger();
+                            sukses = !noRM.getText().isBlank();
                         } else {
                             emptTeks();
                             System.out.println("Notif : " + metadata.path("message").asText());
@@ -2554,6 +2627,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             System.out.println("Notif : " + e);
             Valid.popupGagalDialog("Maaf, terjadi kesalahan pada saat mencari rujukan di MobileJKN!\nSilahkan hubungi administrasi.");
         }
+
+        return sukses;
     }
 
     private boolean kirimAntrianOnsite() {
@@ -2681,52 +2756,16 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
 
                 try {
-                    switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
-                        case 1:
-                            hari = "AKHAD";
-                            break;
-                        case 2:
-                            hari = "SENIN";
-                            break;
-                        case 3:
-                            hari = "SELASA";
-                            break;
-                        case 4:
-                            hari = "RABU";
-                            break;
-                        case 5:
-                            hari = "KAMIS";
-                            break;
-                        case 6:
-                            hari = "JUMAT";
-                            break;
-                        case 7:
-                            hari = "SABTU";
-                            break;
-                        default:
-                            break;
+                    if (jamMulaiJadwal.isBlank() && !cariJadwalSmc()) {
+                        sukses = false;
+                        System.out.println("Jadwal praktek tidak ditemukan...!!!");
+                        Valid.popupGagalDialog("Jadwal praktek tidak ditemukan...!!!");
                     }
 
-                    try (PreparedStatement ps = koneksi.prepareStatement("select jam_mulai, jam_selesai, kuota from jadwal where hari_kerja = ? and kd_poli = ? and kd_dokter = ?")) {
-                        ps.setString(1, hari);
-                        ps.setString(2, kodePoliReg);
-                        ps.setString(3, kodeDokterReg);
-                        try (ResultSet rs = ps.executeQuery()) {
-                            if (rs.next()) {
-                                jamPraktek = rs.getString("jam_mulai").substring(0, 5) + "-" + rs.getString("jam_selesai").substring(0, 5);
-                                jamMulai = rs.getString("jam_mulai");
-                                kuota = rs.getInt("kuota");
-                                datajam = Sequel.cariIsiSmc("select date_add(concat(?, ' ', ?), interval ? minute)", tglSEP.getText(), jamMulai, String.valueOf(angkaantrean * 5));
-                                parsedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(datajam);
-                            } else {
-                                sukses = false;
-                                System.out.println("Jadwal praktek tidak ditemukan...!!!");
-                                Valid.popupGagalDialog("Jadwal praktek tidak ditemukan...!!!");
-                            }
-                        }
-                    } catch (Exception e) {
-                        sukses = false;
-                        System.out.println("Notif : " + e);
+                    if (sukses) {
+                        jamMulai = jamMulaiJadwal;
+                        datajam = Sequel.cariIsiSmc("select date_add(concat(?, ' ', ?), interval ? minute)", tglSEP.getText(), jamMulai, String.valueOf(angkaantrean * 5));
+                        parsedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(datajam);
                     }
 
                     if (sukses) {
@@ -2919,6 +2958,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         toggleInfoTambahan.setSelected(false);
         panelNumpad.setVisible(false);
 
+        btnKonfirmasi.setEnabled(true);
+        btnBatal.setEnabled(true);
+        btnPengajuanFP.setEnabled(true);
+        btnApprovalFP.setEnabled(true);
+
         statusFinger = false;
         isMobileJKN = false;
 
@@ -2934,6 +2978,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         jenisKunjungan = "";
         estimasiDilayani = "";
         jamPraktek = "";
+        jamMulaiJadwal = "";
+        jamSelesaiJadwal = "";
         kodePoli = "";
         kodeDokter = "";
         prb = "";
@@ -3080,20 +3126,87 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelTambahan.setVisible(toggleInfoTambahan.isSelected());
     }
 
+    private boolean cariJadwalSmc() {
+        tentukanHari();
+        jamPraktek = "";
+        jamMulaiJadwal = "";
+        jamSelesaiJadwal = "";
+
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select jadwal.kd_poli, jadwal.kd_dokter, jadwal.jam_mulai, jadwal.jam_selesai, jadwal.kuota from jadwal join " +
+            "maping_poli_bpjs on jadwal.kd_poli = maping_poli_bpjs.kd_poli_rs where maping_poli_bpjs.kd_poli_bpjs = ? and " +
+            "jadwal.hari_kerja = ? " + (kodeDokterReg.isBlank() ? "" : "and jadwal.kd_dokter = ? ") +
+            "order by jadwal.jam_selesai >= if(? = current_date(), current_time(), '00:00:00') desc, jadwal.jam_mulai"
+        )) {
+            int p = 0;
+            ps.setString(++p, kodePoli);
+            ps.setString(++p, hari);
+            if (!kodeDokterReg.isBlank()) {
+                ps.setString(++p, kodeDokterReg);
+            }
+            ps.setString(++p, tglSEP.getText());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String selesai = rs.getString("jam_selesai");
+                    if (null == selesai) {
+                        return false;
+                    }
+                    kodePoliReg = rs.getString("kd_poli");
+                    kodeDokterReg = rs.getString("kd_dokter");
+                    jamMulaiJadwal = rs.getString("jam_mulai");
+                    jamSelesaiJadwal = selesai;
+                    jamPraktek = jamMulaiJadwal.substring(0, 5) + "-" + jamSelesaiJadwal.substring(0, 5);
+                    kuota = rs.getInt("kuota");
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        return false;
+    }
+
     private boolean cekWaktuRegistrasi() {
         if (!batasRegistrasiSatuJam) {
             return true;
         }
 
-        Calendar cal = Calendar.getInstance();
-        Instant now = cal.toInstant();
+        if (jamMulaiJadwal.isBlank() || jamSelesaiJadwal.isBlank()) {
+            return false;
+        }
 
-        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jamPraktek.substring(0, 2)));
-        cal.set(Calendar.MINUTE, Integer.parseInt(jamPraktek.substring(3, 5)));
-        cal.set(Calendar.SECOND, 0);
-        Instant jamMasuk = cal.toInstant();
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Instant mulai = format.parse(tglSEP.getText() + " " + jamMulaiJadwal).toInstant();
+            Instant selesai = format.parse(tglSEP.getText() + " " + jamSelesaiJadwal).toInstant();
+            Instant now = Instant.now();
 
-        return now.isAfter(jamMasuk.minus(1, ChronoUnit.HOURS));
+            return now.isAfter(mulai.minus(1, ChronoUnit.HOURS)) && now.isBefore(selesai);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            return false;
+        }
+    }
+
+    private void isiDokterSmc() {
+        try (PreparedStatement ps = koneksi.prepareStatement("select maping_dokter_dpjpvclaim.kd_dokter_bpjs, maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter = ?")) {
+            ps.setString(1, kodeDokterReg);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    kodeDokter = rs.getString("kd_dokter_bpjs");
+                    namaDokter.setText(rs.getString("nm_dokter_bpjs"));
+                    kodeDPJPLayanan.setText(kodeDokter);
+                    namaDPJPLayanan.setText(namaDokter.getText());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private String jamDibukaSmc() {
+        return Sequel.cariIsiSmc("select left(subtime(?, '01:00:00'), 5)", jamMulaiJadwal);
     }
 
     private void loadPengaturanAPM() {

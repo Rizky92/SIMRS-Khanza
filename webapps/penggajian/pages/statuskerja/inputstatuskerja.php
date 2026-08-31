@@ -5,8 +5,9 @@
         <a href=?act=HomeAdmin>| Menu Utama |</a>
     </div>
     <div class="entry">
-        <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
+        <form name="frm_pelatihan" onsubmit="return validasiIsi();" method="post" enctype="application/x-www-form-urlencoded">
             <?php
+                /*
                 $action   = isset($_GET['action'])?$_GET['action']:NULL;
                 $stts     = validTeks(str_replace("_"," ",isset($_GET['stts']))?str_replace("_"," ",$_GET['stts']):NULL);
                 if($action == "TAMBAH"){
@@ -90,6 +91,182 @@
                         echo 'Semua field harus isi..!!';
                     }
                 }
+                */
+            $action        = isset($_GET['action']) ? $_GET['action'] : null;
+            $stts          = isset($_GET['stts']) ? $_GET['stts'] : null;
+            $stts          = validTeks(str_replace('_', ' ', $stts));
+            $ktg           = '';
+            $indek         = '';
+            $hakcuti       = '';
+            $cuti_besar    = '';
+            $hakcuti_besar = '';
+            $izin          = '';
+            $hakizin       = '';
+            $max_menit     = '';
+
+            if ($action === 'UBAH') {
+                $_sql          = sprintf("select stts_kerja.stts, stts_kerja.ktg, stts_kerja.indek, stts_kerja.hakcuti, stts_kerja.cuti_besar, stts_kerja.hakcuti_besar, stts_kerja.izin, stts_kerja.hakizin, stts_kerja.max_menit from stts_kerja where stts_kerja.stts = '%s'", $stts);
+                $hasil         = bukaquery($_sql);
+                $baris         = mysqli_fetch_row($hasil);
+                $stts          = $baris[0];
+                $ktg           = $baris[1];
+                $indek         = $baris[2];
+                $hakcuti       = $baris[3];
+                $cuti_besar    = $baris[4];
+                $hakcuti_besar = $baris[5];
+                $izin          = $baris[6];
+                $hakizin       = $baris[7];
+                $max_menit     = $baris[8];
+            }
+            ?>
+            <input type="hidden" name="stts" value="<?= $stts ?>">
+            <table width="100%" align="center">
+                <tr class="head">
+                    <td width="31%">Status</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="stts" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type="text" id="TxtIsi1" value="<?= $stts ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required autofocus />
+                        <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Keterangan</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="ktg" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type="text" id="TxtIsi2" value="<?= $ktg ?>" size="40" maxlength="20" pattern="[a-zA-Z 0-9-]{1,20}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Index Status</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="indek" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" type="text" id="TxtIsi3" value="<?= $indek ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Hak Cuti Tahunan</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="hakcuti" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type="text" id="TxtIsi4" value="<?= $hakcuti ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Cuti Besar</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <select name="cuti_besar" class="text3" style="width: 95%">
+                            <option value=""></option>
+                            <option value="Tidak Ada" <?= $cuti_besar === 'Tidak Ada' ? 'selected' : '' ?>>Tidak Ada</option>
+                            <option value="10 Tahun Dari TMT" <?= $cuti_besar === '10 Tahun Dari TMT' ? 'selected' : '' ?>>10 Tahun Dari TMT Kerja</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Hak Cuti Besar</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="hakcuti_besar" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" type="text" id="TxtIsi5" value="<?= $hakcuti_besar ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi5" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Izin Kerja</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <select name="izin" class="text3" style="width: 95%">
+                            <option value=""></option>
+                            <option value="Tidak Ada" <?= $izin === 'Tidak Ada' ? 'selected' : '' ?>>Tidak Ada</option>
+                            <?php /* <option value="1 Bulan TMT" <?= $izin === '1 Bulan TMT' ? 'selected' : '' ?>>1 Bulan TMT Kerja</option> */ ?>
+                            <option value="3 Bulan TMT" <?= $izin === '3 Bulan TMT' ? 'selected' : '' ?>>3 Bulan TMT Kerja</option>
+                            <?php /* <option value="6 Bulan TMT" <?= $izin === '6 Bulan TMT' ? 'selected' : '' ?>>6 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan TMT" <?= $izin === '12 Bulan TMT' ? 'selected' : '' ?>>12 Bulan TMT Kerja</option> */ ?>
+                            <?php /* <option value="1 Bulan per Tahun" <?= $izin === '1 Bulan per Tahun' ? 'selected' : '' ?>>1 Bulan per Tahun Kerja</option> */ ?>
+                            <option value="3 Bulan per Tahun" <?= $izin === '3 Bulan per Tahun' ? 'selected' : '' ?>>3 Bulan per Tahun Kerja</option>
+                            <?php /* <option value="6 Bulan per Tahun" <?= $izin === '6 Bulan per Tahun' ? 'selected' : '' ?>>6 Bulan per Tahun Kerja</option> */ ?>
+                            <?php /* <option value="12 Bulan per Tahun" <?= $izin === '12 Bulan per Tahun' ? 'selected' : '' ?>>12 Bulan per Tahun Kerja</option> */ ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Hak Izin Kerja (per Kategori)</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="hakizin" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi7'));" type="text" id="TxtIsi5" value="<?= $hakizin ?>" size="10" maxlength="3" pattern="[a-zA-Z 0-9-]{1,3}" title=" a-z A-Z 0-9 (Maksimal 3 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi7" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+                <tr class="head">
+                    <td width="31%">Maksimal Lama Izin Kerja (menit)</td>
+                    <td width="">:</td>
+                    <td width="67%">
+                        <input name="max_menit" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi8'));" type="text" id="TxtIsi5" value="<?= $max_menit ?>" size="10" maxlength="4" pattern="[a-zA-Z 0-9-]{1,4}" title=" a-z A-Z 0-9 (Maksimal 4 karakter)" autocomplete="off" required />
+                        <span id="MsgIsi8" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <div>
+                <center>
+                    <button type="submit" name="BtnSimpan" class="button">
+                        <span>&nbsp;&nbsp;SIMPAN&nbsp;&nbsp;</span>
+                    </button>
+                </center>
+            </div>
+
+            <?php
+            $simpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : null;
+            if ($simpan !== null) {
+                $stts          = validTeks(trim($_POST['stts']));
+                $ktg           = validTeks(trim($_POST['ktg']));
+                $indek         = validTeks(trim($_POST['indek']));
+                $hakcuti       = validTeks(trim($_POST['hakcuti']));
+                $cuti_besar    = validTeks(trim($_POST['cuti_besar']));
+                $hakcuti_besar = validTeks(trim($_POST['hakcuti_besar']));
+                $izin          = validTeks(trim($_POST['izin']));
+                $hakizin       = validTeks(trim($_POST['hakizin']));
+                $max_menit     = validTeks(trim($_POST['max_menit']));
+                if ($stts !== '' && $ktg !== '' && $indek !== '' && $hakcuti !== '' && $cuti_besar !== '' && $hakcuti_besar !== '' && $izin !== '' && $hakizin !== '' && $max_menit !== '') {
+                    switch ($action) {
+                        case 'TAMBAH':
+                            try {
+                                bukaquery2(sprintf("insert into stts_kerja values ('%s', '%s', %s, %s, '%s', %s, '%s', %s, %s)", $stts, $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit));
+                                echo <<<'HTML'
+                                    <meta http-equiv="refresh" content="1;URL=?act=InputSttskerja&action=TAMBAH">
+                                    HTML;
+                            } catch (mysqli_sql_exception $e) {
+                                if ($e->getCode() === 1062) {
+                                    echo <<<'HTML'
+                                        <b style="color: red">Status kerja sudah ada..!!</b>
+                                        HTML;
+                                } else {
+                                    echo <<<'HTML'
+                                        <b style="color: red">Gagal menyimpan..!!</b>
+                                        HTML;
+                                }
+                            }
+                            break;
+                        case 'UBAH':
+                            try {
+                                bukaquery2(sprintf("update stts_kerja set ktg = '%s', indek = %s, hakcuti = %s, cuti_besar = '%s', hakcuti_besar = %s, izin = '%s', hakizin = %s, max_menit = %s where stts = '%s'",
+                                    $ktg, $indek, $hakcuti, $cuti_besar, $hakcuti_besar, $izin, $hakizin, $max_menit, $stts
+                                ));
+                                echo <<<'HTML'
+                                    <meta http-equiv="refresh" content="1;URL=?act=ListSttskerja&action=UBAH">
+                                    HTML;
+                            } catch (mysqli_sql_exception $e) {
+                                echo <<<'HTML'
+                                    <b style="color: red">Gagal menyimpan..!!</b>
+                                    HTML;
+                            }
+                            break;
+                    }
+                } else {
+                    echo 'Semua Field harus diisi..!!';
+                }
+            }
             ?>
         </form>
     </div>

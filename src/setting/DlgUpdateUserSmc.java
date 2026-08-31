@@ -21,16 +21,22 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -41,7 +47,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final Map<String, String> namaakses = new LinkedHashMap<>();
+    private Map<String, String> namaakses = new LinkedHashMap<>();
     private Map<String, Boolean> aksesdiubah = new HashMap<>();
 
     /**
@@ -428,6 +434,22 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     }
 
     private void setTampilSmc() {
+        // untuk pre-populate nama akses yang belum tersedia.
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select * from user limit 1")) {
+            if (rs.next()) {
+                ResultSetMetaData md = rs.getMetaData();
+                for (int i = 1; i <= md.getColumnCount(); i++) {
+                    if ("id_user".equals(md.getColumnName(i)) || "password".equals(md.getColumnName(i))) {
+                        continue;
+                    }
+
+                    namaakses.put(md.getColumnName(i), md.getColumnName(i));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
         namaakses.put("akses_depo_obat", "[A] Akses Depo Obat/BHP");
         namaakses.put("akses_dokter_lain_rawat_jalan", "[A] Akses Ke Dokter Lain Rawat Jalan");
         namaakses.put("pengkajian_askep", "[A] Asesmen Awal Rawat Inap");
@@ -512,6 +534,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("dampak_cidera_k3rs", "[C] Dampak Cidera K3");
         namaakses.put("dampak_cidera_k3rstahun", "[C] Dampak Cidera K3 Per Tahun");
         namaakses.put("dokter", "[C] Dokter");
+        namaakses.put("jam_masuk_smc", "[C] Jadwal Dinas");
+        namaakses.put("jadwal_pegawai_smc", "[C] Jadwal Dinas Pegawai");
         namaakses.put("jadwal_pegawai", "[C] Jadwal Pegawai");
         namaakses.put("jam_masuk", "[C] Jam Presensi");
         namaakses.put("jenis_cidera_k3rs", "[C] Jenis Cidera K3");
@@ -529,6 +553,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pegawai_admin", "[C] Pegawai Admin");
         namaakses.put("pegawai_user", "[C] Pegawai User");
         namaakses.put("pengajuan_cuti", "[C] Pengajuan Cuti");
+        namaakses.put("pengajuan_izin_smc", "[C] Pengajuan Izin Kerja");
         namaakses.put("skp_penilaian", "[C] Pengkajian SKP Petugas/Dokter");
         namaakses.put("penyebab_k3rs", "[C] Penyebab Kecelakaan K3");
         namaakses.put("penyebab_k3rstahun", "[C] Penyebab Kecelakaan K3 Per Tahun");
@@ -999,6 +1024,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("satu_sehat_kirim_diagnosticreport_radiologi", "[L] Kirim Diagnostic Report Radiologi Satu Sehat");
         namaakses.put("satu_sehat_kirim_diet", "[L] Kirim Diet Satu Sehat");
         namaakses.put("satu_sehat_kirim_encounter", "[L] Kirim Encounter Satu Sehat");
+        namaakses.put("bridging_smart_klaim_bpjs", "[L] Kirim FHIR Smart Klaim BPJS");
         namaakses.put("satu_sehat_kirim_medicationdispense", "[L] Kirim Medication Dispense Satu Sehat");
         namaakses.put("satu_sehat_kirim_medicationrequest", "[L] Kirim Medication Request Satu Sehat");
         namaakses.put("satu_sehat_kirim_medication", "[L] Kirim Medication Satu Sehat");
@@ -1031,9 +1057,11 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pcare_mapping_obat", "[L] Mapping Obat PCare");
         namaakses.put("satu_sehat_mapping_obat", "[L] Mapping Obat/Alkes/BHP Satu Sehat");
         namaakses.put("satu_sehat_mapping_departemen", "[L] Mapping Organisasi Satu Sehat");
+        namaakses.put("mapping_penyakit_smart_klaim_bpjs", "[L] Mapping Penyakit Smart Klaim BPJS");
         namaakses.put("inhealth_mapping_poli", "[L] Mapping Poli Inhealth");
         namaakses.put("pcare_mapping_poli", "[L] Mapping Poli PCare");
         namaakses.put("mapping_poli_bpjs", "[L] Mapping Poli VClaim");
+        namaakses.put("mapping_prosedur_smart_klaim_bpjs", "[L] Mapping Prosedur Smart Klaim BPJS");
         namaakses.put("satu_sehat_mapping_lab", "[L] Mapping Tindakan Lab PK & MB Satu Sehat");
         namaakses.put("satu_sehat_mapping_radiologi", "[L] Mapping Tindakan Radiologi Satu Sehat");
         namaakses.put("satu_sehat_mapping_vaksin", "[L] Mapping Vaksin Satu Sehat");
@@ -1150,6 +1178,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("catatan_observasi_ranap_kebidanan", "[M] Catatan Observasi Ranap Kebidanan");
         namaakses.put("catatan_observasi_ranap_postpartum", "[M] Catatan Observasi Ranap Post Partum");
         namaakses.put("catatan_observasi_restrain_nonfarma", "[M] Catatan Observasi Restrain Nonfarmakologi");
+        namaakses.put("catatan_observasi_ruang_ok", "[M] Catatan Observasi Ruang Operasi");
         namaakses.put("catatan_observasi_ventilator", "[M] Catatan Observasi Ventilator");
         namaakses.put("catatan_pasien", "[M] Catatan Pasien");
         namaakses.put("catatan_pengkajian_paska_operasi", "[M] Catatan Pengkajian Paska Operasi");
@@ -1185,6 +1214,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("hasil_pemeriksaan_oct", "[M] Hasil Pemeriksaan OCT");
         namaakses.put("hasil_pemeriksaan_slit_lamp", "[M] Hasil Pemeriksaan Slit Lamp");
         namaakses.put("hasil_pemeriksaan_treadmill", "[M] Hasil Pemeriksaan Treadmill");
+        namaakses.put("hasil_pemeriksaan_usg_abdomen", "[M] Hasil USG Abdomen");
         namaakses.put("hasil_usg_gynecologi", "[M] Hasil USG Gynecologi");
         namaakses.put("hasil_pemeriksaan_usg", "[M] Hasil USG Kandungan");
         namaakses.put("hasil_usg_neonatus", "[M] Hasil USG Neonatus");
@@ -1195,6 +1225,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("jabatan_polri", "[M] Jabatan POLRI");
         namaakses.put("jabatan_tni", "[M] Jabatan TNI");
         namaakses.put("jawaban_konsultasi_medik", "[M] Jawaban Konsultasi Medik");
+        namaakses.put("jawaban_konsultasi_perawat", "[M] Jawaban Konsultasi Perawat");
         namaakses.put("jawaban_pio_apoteker", "[M] Jawaban PIO Apoteker");
         namaakses.put("kelahiran_bayi", "[M] Kelahiran Bayi");
         namaakses.put("balance_cairan", "[M] Keseimbangan Cairan");
@@ -1318,6 +1349,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("penilaian_tambahan_pasien_geriatri", "[M] Pengkajian Tambahan Pasien Geriatri");
         namaakses.put("penilaian_tambahan_perilaku_kekerasan", "[M] Pengkajian Tambahan Perilaku Kekerasan");
         namaakses.put("penilaian_terapi_wicara", "[M] Pengkajian Terapi Wicara");
+        namaakses.put("pengkajian_tindakan_invasif_non_bedah_smc", "[M] Pengkajian Tindakan Invasif Non Bedah");
         namaakses.put("penilaian_ulang_nyeri", "[M] Pengkajian Ulang Nyeri");
         namaakses.put("perencanaan_pemulangan", "[M] Perencanaan Pemulangan");
         namaakses.put("rekonsiliasi_obat", "[M] Rekonsiliasi Obat");
@@ -1508,6 +1540,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pengumuman_epasien", "[P] Pengumuman E-Pasien");
         namaakses.put("penolakan_anjuran_medis", "[P] Penolakan Anjuran Medis");
         namaakses.put("surat_pernyataan_pasien_umum", "[P] Pernyataan Pasien Umum");
+        namaakses.put("permintaan_binrohtal", "[P] Persetujuan Bimbingan Rohani & Mental");
         namaakses.put("persetujuan_penundaan_pelayanan", "[P] Persetujuan Penundaan Pelayanan");
         namaakses.put("surat_persetujuan_rawat_inap", "[P] Persetujuan Rawat Inap");
         namaakses.put("surat_persetujuan_umum", "[P] Persetujuan Umum");
@@ -1525,6 +1558,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("surat_cuti_hamil", "[P] Surat Cuti Hamil");
         namaakses.put("surat_hamil", "[P] Surat Hamil");
         namaakses.put("surat_keluar", "[P] Surat Keluar");
+        namaakses.put("surat_keterangan_berobat", "[P] Surat Keterangan Berobat");
         namaakses.put("surat_buta_warna", "[P] Surat Keterangan Buta Warna");
         namaakses.put("surat_keterangan_covid", "[P] Surat Keterangan Covid");
         namaakses.put("surat_keterangan_layak_terbang", "[P] Surat Keterangan Layak Terbang");
@@ -1535,6 +1569,10 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("surat_kewaspadaan_kesehatan", "[P] Surat Kewaspadaan Kesehatan");
         namaakses.put("skdp_bpjs", "[P] Surat Kontrol");
         namaakses.put("surat_masuk", "[P] Surat Masuk");
+        namaakses.put("surat_penolakan_resusitasi", "[P] Surat Penolakan Resusitasi");
+        namaakses.put("surat_permintaan_perlindungan_dari_kekerasan", "[P] Surat Permintaan Perlindungan Diri Dari Kekerasan");
+        namaakses.put("surat_permintaan_second_opinion", "[P] Surat Permintaan Second Opinion");
+        namaakses.put("surat_permohonan_privasi", "[P] Surat Permohonan Privasi");
         namaakses.put("surat_pernyataan_memilih_dpjp", "[P] Surat Pernyataan Memilih DPJP");
         namaakses.put("surat_persetujuan_pemeriksaan_hiv", "[P] Surat Persetujuan Pemeriksaan HIV");
         namaakses.put("template_persetujuan_penolakan_tindakan", "[P] Template Persetujuan Penolakan Tindakan");
@@ -1627,6 +1665,14 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("set_penggunaan_tarif", "[U] Set Penggunaan Tarif");
         namaakses.put("set_no_rm", "[U] Set RM");
         namaakses.put("tracer_login", "[U] Tracer Login");
+
+        namaakses = namaakses.entrySet().stream()
+            .sorted(Map.Entry.comparingByValue())
+            .collect(Collectors.toMap(
+                Map.Entry::getKey, Map.Entry::getValue,
+                (e1, e2) -> e1,
+                LinkedHashMap::new
+            ));
     }
 
     private void tampilSmc() {
@@ -1635,26 +1681,17 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
             ps.setString(1, TNmUser.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    if (TCari.getText().isBlank()) {
-                        for (Map.Entry<String, String> entry : namaakses.entrySet()) {
-                            try {
-                                tabMode.addRow(new Object[] {rs.getBoolean(entry.getKey()), entry.getValue(), entry.getKey()});
-                            } catch (SQLException e) {
-                                if (!e.getMessage().toLowerCase().contains("column") && !e.getMessage().toLowerCase().contains("not found")) {
-                                    throw e;
-                                }
-                            }
-                        }
-                    } else {
-                        for (Map.Entry<String, String> entry : namaakses.entrySet()) {
-                            if (entry.getValue().trim().toLowerCase().contains(TCari.getText().trim().toLowerCase())) {
-                                try {
-                                    tabMode.addRow(new Object[] {rs.getBoolean(entry.getKey()), entry.getValue(), entry.getKey()});
-                                } catch (SQLException e) {
-                                    if (!e.getMessage().toLowerCase().contains("column") && !e.getMessage().toLowerCase().contains("not found")) {
-                                        throw e;
-                                    }
-                                }
+                    List<String> kata = Arrays.asList(StringUtils.split(TCari.getText().trim().toLowerCase()));
+                    BiPredicate<String, String> cari = (k, v) -> kata.isEmpty() || kata.stream().allMatch(w -> k.contains(w) || v.contains(w));
+
+                    for (Map.Entry<String, String> entry : namaakses.entrySet()) {
+                        try {
+                            if (!cari.test(entry.getKey().toLowerCase(), entry.getValue().toLowerCase())) continue;
+
+                            tabMode.addRow(new Object[] {rs.getBoolean(entry.getKey()), entry.getValue(), entry.getKey()});
+                        } catch (SQLException e) {
+                            if (!e.getMessage().toLowerCase().contains("column") && !e.getMessage().toLowerCase().contains("not found")) {
+                                throw e;
                             }
                         }
                     }

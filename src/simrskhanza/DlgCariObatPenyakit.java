@@ -633,18 +633,20 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
                 row=tabMode.getRowCount();
                 for(int r=0;r<row;r++){
                     if(Valid.SetAngka(tabMode.getValueAt(r,4).toString())>0){
-                        if(Sequel.menyimpantf("detail_pemberian_obat","'"+DTPBeri.getSelectedItem()+"','"+
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"','"+
-                                TNoRw.getText()+"','"+
-                                tabMode.getValueAt(r,0).toString()+"','"+
-                                Valid.SetAngka(tabMode.getValueAt(r,15).toString())+"','"+
-                                Valid.SetAngka(tabMode.getValueAt(r,3).toString())+"','"+
-                                Valid.SetAngka(tabMode.getValueAt(r,4).toString())+"','"+
-                                Valid.SetAngka(tabMode.getValueAt(r,5).toString())+"','"+
-                                Valid.SetAngka(tabMode.getValueAt(r,6).toString())+"','"+
-                                Valid.SetAngka(tabMode.getValueAt(r,7).toString())+"','Ralan','"+bangsal+"','"+
-                                tabMode.getValueAt(r,17).toString()+"','"+
-                                tabMode.getValueAt(r,18).toString()+"'","data")==true){
+                        if(Sequel.menyimpantfNotifSmc("data", "detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur",
+                                DTPBeri.getSelectedItem()+"",
+                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+                                TNoRw.getText(),
+                                tabMode.getValueAt(r,0).toString(),
+                                ""+Valid.SetAngka(tabMode.getValueAt(r,15).toString()),
+                                ""+Valid.SetAngka(tabMode.getValueAt(r,3).toString()),
+                                ""+Valid.SetAngka(tabMode.getValueAt(r,4).toString()),
+                                ""+Valid.SetAngka(tabMode.getValueAt(r,5).toString()),
+                                ""+Valid.SetAngka(tabMode.getValueAt(r,6).toString()),
+                                ""+Valid.SetAngka(tabMode.getValueAt(r,7).toString()),
+                                "Ralan",bangsal,
+                                tabMode.getValueAt(r,17).toString(),
+                                tabMode.getValueAt(r,18).toString())==true){
                             if(aktifkanbatch.equals("yes")){
                                 Sequel.mengedit("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa-?",4,new String[]{
                                     ""+(tabMode.getValueAt(r,4).toString()),tabMode.getValueAt(r,17).toString(),tabMode.getValueAt(r,0).toString(),tabMode.getValueAt(r,18).toString()

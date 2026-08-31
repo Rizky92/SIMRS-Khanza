@@ -1016,7 +1016,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
                 if(Valid.daysOld("./cache/penerimaanipsrs.iyem")<8){
                     runBackground(() ->tampil2());
                 }else{
-                    runBackground(() ->tampil());
+                    runBackground(() ->LoadData());
                 }
             } catch (Exception e) {
             }
@@ -1099,12 +1099,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampilAkun();
-        runBackground(() ->tampil());
-        LSubtotal.setText("0");
-        LPotongan.setText("0");
-        LTotal2.setText("0");
-        LPpn.setText("0");
-        LTagiha.setText("0");
+        runBackground(() ->LoadData());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -1184,7 +1179,6 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
 
     private void tampil() {
         try{
-            Valid.tabelKosong(tabMode);
             file=new File("./cache/penerimaanipsrs.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -1195,7 +1189,6 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             try{
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new Object[]{"",rs.getString(1),rs.getString(2),rs.getString(3),false,rs.getDouble(4),0,0,0,0});
                     iyembuilder.append("{\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"HrgBeli\":\""+rs.getString(4)+"\"},");
                 }
             }catch(Exception e){
@@ -1311,6 +1304,11 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
             response = null;
             root = null;
         }
+    }
+
+    private void LoadData(){
+        tampil();
+        tampil2();
     }
 
     private void getData(){

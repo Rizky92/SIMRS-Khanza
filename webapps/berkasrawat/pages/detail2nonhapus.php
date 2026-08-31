@@ -10,14 +10,14 @@
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
-                $action       = isset($_GET['action'])?$_GET['action']:NULL;
-                $norawat      = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-                $norawat      = json_decode(encrypt_decrypt($norawat,"d"),true);
-                $noexit = '0';
+                $action     = isset($_GET['action'])?$_GET['action']:NULL;
+                $norawat    = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
+                $norawat    = json_decode(encrypt_decrypt($norawat,"d"),true);
+                $noexit     = '0';
                 $kodeberkas = '';
                 if (isset($norawat["no_rawat"])) {
-                    $no_rawat = validTeks4($norawat["no_rawat"],20);
-                    $noexit = validTeks4($norawat['noexit'], 1);
+                    $no_rawat   = validTeks4($norawat["no_rawat"],20);
+                    $noexit     = validTeks4($norawat['noexit'], 1);
                     $kodeberkas = validTeks4($norawat['kodeberkas'], 4);
                 }else{
                     exit(header("Location:../index.php"));
@@ -30,22 +30,26 @@
                                 from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab
                                 on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                                 and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='$no_rawat' ";
-                @$hasil        = bukaquery($_sql);
-                @$baris        = mysqli_fetch_array($hasil);
-                @$no_rkm_medis = $baris["no_rkm_medis"];
-                @$nm_pasien    = $baris["nm_pasien"];
-                @$umurdaftar   = $baris["umurdaftar"];
-                @$sttsumur     = $baris["sttsumur"];
-                @$jk           = $baris["jk"];
-                @$almt_pj      = $baris["almt_pj"];
+                @$hasil          = bukaquery($_sql);
+                @$baris          = mysqli_fetch_array($hasil);
+                @$no_rkm_medis   = $baris["no_rkm_medis"];
+                @$nm_pasien      = $baris["nm_pasien"];
+                @$umurdaftar     = $baris["umurdaftar"];
+                @$sttsumur       = $baris["sttsumur"];
+                @$jk             = $baris["jk"];
+                @$almt_pj        = $baris["almt_pj"];
                 @$tgl_registrasi = $baris["tgl_registrasi"]." ".$baris["jam_reg"];
-                @$nm_poli      = $baris["nm_poli"];
-                @$nm_dokter    = $baris["nm_dokter"];
+                @$nm_poli        = $baris["nm_poli"];
+                @$nm_dokter      = $baris["nm_dokter"];
                 @$status_lanjut  = $baris["status_lanjut"];
-                @$png_jawab    = $baris["png_jawab"];
+                @$png_jawab      = $baris["png_jawab"];
 
                 $dokumen       = "";
-                $urlDetail     = "?act=Detail2NonHapus&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e");
+                $urlDetail     = "?act=Detail2NonHapus&action=TAMBAH&iyem=".encrypt_decrypt(json_encode([
+                    'no_rawat' => validTeks($no_rawat),
+                    'noexit' => $noexit,
+                    'kodeberkas' => validTeks($kodeberkas),
+                ]), "e");
 
                 echo "<input type=hidden name=no_rawat  value=$no_rawat>
                       <input type=hidden name=action value=$action>";
@@ -60,7 +64,7 @@
                     <td width="25%" valign="top">No.RM</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $no_rkm_medis;?></td>
                 </tr>
-		<tr class="isi2">
+		        <tr class="isi2">
                     <td width="25%" valign="top">Nama Pasien</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $nm_pasien.", ".$umurdaftar." ".$sttsumur;?></td>
                 </tr>

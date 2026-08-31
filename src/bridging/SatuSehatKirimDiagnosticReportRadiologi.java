@@ -21,12 +21,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -47,6 +49,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
@@ -78,7 +81,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","Kode Dokter","Nama Dokter Perujuk",
                 "No.KTP Dokter","ID Encounter","No.Permintaan","Tgl & Jam Hasil","Diagnosa Klinis",
                 "Nama Pemeriksaan","Radiologi Code","Radiologi System","Radiologi Display","ID Service Request",
-                "Kode Pemeriksaan","ID Specimen","ID Observation","ID Diagnostic Report","Hasil Radiologi"
+                "Kode Pemeriksaan","ID Specimen","ID Observation","ID Diagnostic Report","Hasil Radiologi","Accession Number"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -93,7 +96,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
-                 java.lang.String.class,java.lang.String.class
+                 java.lang.String.class,java.lang.String.class,java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -106,7 +109,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 22; i++) {
+        for (i = 0; i < 23; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -153,6 +156,8 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                 column.setPreferredWidth(210);
             }else if(i==21){
                 column.setPreferredWidth(310);
+            }else if(i==22){
+                column.setPreferredWidth(110);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -630,7 +635,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        runBackground(() ->tampil());
+        tampilSmc();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -656,6 +661,11 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=tbObat.getValueAt(i,22).toString();
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -666,7 +676,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
                                             "\"use\": \"official\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"final\"," +
@@ -771,6 +781,11 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
                         continue;
                     }
+                    String acsn=tbObat.getValueAt(i,22).toString();
+                    if (acsn.isBlank()) {
+                        System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -782,7 +797,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
                                             "\"use\": \"official\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+acsn+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"final\"," +
@@ -854,37 +869,38 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TCari.setText("");
-            runBackground(() ->tampil());
+            tampilSmc();
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tampilSmc();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        tampilSmc();
                     }
                 }
             });
@@ -942,6 +958,8 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
     private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
+
+    /*
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -992,7 +1010,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
                         rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_hasil")+" "+rs.getString("jam_hasil"),
                         rs.getString("diagnosa_klinis"),rs.getString("nm_perawatan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil")
+                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil"),accession.getNoACSN(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
@@ -1053,7 +1071,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
                         rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_hasil")+" "+rs.getString("jam_hasil"),
                         rs.getString("diagnosa_klinis"),rs.getString("nm_perawatan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil")
+                        rs.getString("kd_jenis_prw"),rs.getString("id_specimen"),rs.getString("id_observation"),rs.getString("id_diagnosticreport"),rs.getString("hasil"),accession.getNoACSN(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
@@ -1071,6 +1089,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_diagnosticreport_radiologi());
@@ -1080,6 +1099,89 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
 
     public JTable getTable(){
         return tbObat;
+    }
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+                final String tgl1 = Valid.getTglSmc(DTPCari1);
+                final String tgl2 = Valid.getTglSmc(DTPCari2);
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select reg_periksa.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, periksa_radiologi.kd_dokter, pegawai.nama, pegawai.no_ktp as ktpdokter, satu_sehat_encounter.id_encounter, " +
+                        "permintaan_radiologi.noorder, permintaan_radiologi.tgl_hasil, permintaan_radiologi.jam_hasil, permintaan_radiologi.diagnosa_klinis, jns_perawatan_radiologi.nm_perawatan, satu_sehat_mapping_radiologi.code, " +
+                        "satu_sehat_mapping_radiologi.system, satu_sehat_mapping_radiologi.display, satu_sehat_servicerequest_radiologi.id_servicerequest, permintaan_pemeriksaan_radiologi.kd_jenis_prw, " +
+                        "satu_sehat_specimen_radiologi.id_specimen, satu_sehat_observation_radiologi.id_observation, ifnull(satu_sehat_diagnosticreport_radiologi.id_diagnosticreport, '') as id_diagnosticreport, hasil_radiologi.hasil, " +
+                        "satu_sehat_accession_radiologi_smc.no_acsn from reg_periksa inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat = " +
+                        "reg_periksa.no_rawat inner join permintaan_radiologi on permintaan_radiologi.no_rawat = reg_periksa.no_rawat inner join permintaan_pemeriksaan_radiologi on permintaan_pemeriksaan_radiologi.noorder = " +
+                        "permintaan_radiologi.noorder left join satu_sehat_accession_radiologi_smc on permintaan_pemeriksaan_radiologi.noorder = satu_sehat_accession_radiologi_smc.noorder and " +
+                        "permintaan_pemeriksaan_radiologi.kd_jenis_prw = satu_sehat_accession_radiologi_smc.kd_jenis_prw inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = " +
+                        "permintaan_pemeriksaan_radiologi.kd_jenis_prw inner join satu_sehat_mapping_radiologi on satu_sehat_mapping_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw inner join " +
+                        "satu_sehat_servicerequest_radiologi on satu_sehat_servicerequest_radiologi.noorder = permintaan_pemeriksaan_radiologi.noorder and satu_sehat_servicerequest_radiologi.kd_jenis_prw = " +
+                        "permintaan_pemeriksaan_radiologi.kd_jenis_prw inner join satu_sehat_specimen_radiologi on satu_sehat_servicerequest_radiologi.noorder = satu_sehat_specimen_radiologi.noorder and " +
+                        "satu_sehat_servicerequest_radiologi.kd_jenis_prw = satu_sehat_specimen_radiologi.kd_jenis_prw inner join periksa_radiologi on periksa_radiologi.no_rawat = permintaan_radiologi.no_rawat and " +
+                        "periksa_radiologi.tgl_periksa = permintaan_radiologi.tgl_hasil and periksa_radiologi.jam = permintaan_radiologi.jam_hasil and periksa_radiologi.dokter_perujuk = permintaan_radiologi.dokter_perujuk " +
+                        "inner join hasil_radiologi on periksa_radiologi.no_rawat = hasil_radiologi.no_rawat and periksa_radiologi.tgl_periksa = hasil_radiologi.tgl_periksa and periksa_radiologi.jam = hasil_radiologi.jam " +
+                        "inner join satu_sehat_observation_radiologi on satu_sehat_specimen_radiologi.noorder = satu_sehat_observation_radiologi.noorder and satu_sehat_specimen_radiologi.kd_jenis_prw = " +
+                        "satu_sehat_observation_radiologi.kd_jenis_prw left join satu_sehat_diagnosticreport_radiologi on satu_sehat_servicerequest_radiologi.noorder = satu_sehat_diagnosticreport_radiologi.noorder and " +
+                        "satu_sehat_servicerequest_radiologi.kd_jenis_prw = satu_sehat_diagnosticreport_radiologi.kd_jenis_prw inner join pegawai on periksa_radiologi.kd_dokter = pegawai.nik where reg_periksa.tgl_registrasi " +
+                        "between ? and ? " + (cari.isBlank() ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or pasien.no_ktp like ? or pegawai.nama like ? or " +
+                        "jns_perawatan_radiologi.nm_perawatan like ? or satu_sehat_mapping_radiologi.code like ? or permintaan_radiologi.noorder like ?)")
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, tgl1);
+                        ps.setString(++p, tgl2);
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("no_ktp"), rs.getString("kd_dokter"), rs.getString("nama"), rs.getString("ktpdokter"),
+                                    rs.getString("id_encounter"), rs.getString("noorder"), rs.getString("tgl_hasil") + " " + rs.getString("jam_hasil"), rs.getString("diagnosa_klinis"), rs.getString("nm_perawatan"),
+                                    rs.getString("code"), rs.getString("system"), rs.getString("display"), rs.getString("id_servicerequest"), rs.getString("kd_jenis_prw"), rs.getString("id_specimen"),
+                                    rs.getString("id_observation"), rs.getString("id_diagnosticreport"), rs.getString("hasil"), accession.getNoACSN(rs.getString("no_acsn"), rs.getString("noorder"), rs.getString("kd_jenis_prw"))
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    SatuSehatKirimDiagnosticReportRadiologi.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
     }
 
     private void runBackground(Runnable task) {

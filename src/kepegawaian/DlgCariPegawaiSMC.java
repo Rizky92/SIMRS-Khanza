@@ -1,0 +1,595 @@
+package kepegawaian;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import fungsi.WarnaTable;
+import fungsi.batasInput;
+import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.stream.StreamSupport;
+import javax.swing.JTable;
+import javax.swing.SwingWorker;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
+/**
+ *
+ * @author dosen
+ */
+public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
+    private final DefaultTableModel tabMode;
+    private final Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
+    private final ObjectMapper mapper = new ObjectMapper();
+    private volatile boolean ceksukses = false;
+    private int indexJenjang = -1;
+
+    /**
+     * Creates new form DlgPenyakit
+     *
+     * @param parent
+     * @param modal
+     */
+    public DlgCariPegawaiSMC(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        this.setLocation(10, 2);
+        setSize(656, 250);
+
+        tabMode = new DefaultTableModel(null, new Object[] {
+            "NIP", "Nama", "J.K.", "Jabatan", "Kode Jenjang", "Index Jenjang", "Departemen", "Bidang", "Status", "Status Karyawan", "NPWP",
+            "Pendidikan", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja", "Kode Index", "BPD", "Rekening",
+            "Stts Aktif", "Wajib Masuk", "Mulai Kontrak", "No.KTP"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 5) {
+                    return Integer.class;
+                }
+                return String.class;
+            }
+        };
+        tbKamar.setModel(tabMode);
+        tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+            TableColumn column = tbKamar.getColumnModel().getColumn(i);
+            if (i == 0) {
+                column.setPreferredWidth(90);
+            } else if (i == 1) {
+                column.setPreferredWidth(170);
+            } else if (i == 2) {
+                column.setPreferredWidth(50);
+            } else if (i == 3) {
+                column.setPreferredWidth(130);
+            } else if (i == 4) {
+                column.setPreferredWidth(90);
+            } else if (i == 5) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            } else if (i == 6) {
+                column.setPreferredWidth(90);
+            } else if (i == 7) {
+                column.setPreferredWidth(90);
+            } else if (i == 8) {
+                column.setPreferredWidth(60);
+            } else if (i == 9) {
+                column.setPreferredWidth(100);
+            } else if (i == 10) {
+                column.setPreferredWidth(110);
+            } else if (i == 11) {
+                column.setPreferredWidth(130);
+            } else if (i == 12) {
+                column.setPreferredWidth(110);
+            } else if (i == 13) {
+                column.setPreferredWidth(65);
+            } else if (i == 14) {
+                column.setPreferredWidth(150);
+            } else if (i == 15) {
+                column.setPreferredWidth(90);
+            } else if (i == 16) {
+                column.setPreferredWidth(65);
+            } else if (i == 17) {
+                column.setPreferredWidth(80);
+            } else if (i == 18) {
+                column.setPreferredWidth(70);
+            } else if (i == 19) {
+                column.setPreferredWidth(90);
+            } else if (i == 20) {
+                column.setPreferredWidth(100);
+            } else if (i == 21) {
+                column.setPreferredWidth(60);
+            } else if (i == 22) {
+                column.setPreferredWidth(70);
+            } else if (i == 23) {
+                column.setPreferredWidth(80);
+            } else if (i == 24) {
+                column.setPreferredWidth(120);
+            }
+        }
+
+        tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
+        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        internalFrame1 = new widget.InternalFrame();
+        Scroll = new widget.ScrollPane();
+        tbKamar = new widget.Table();
+        panelisi3 = new widget.panelisi();
+        label9 = new widget.Label();
+        TCari = new widget.TextBox();
+        BtnCari = new widget.Button();
+        BtnAll = new widget.Button();
+        label10 = new widget.Label();
+        LCount = new widget.Label();
+        BtnKeluar = new widget.Button();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pegawai ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setName("internalFrame1"); // NOI18N
+        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        Scroll.setName("Scroll"); // NOI18N
+        Scroll.setOpaque(true);
+
+        tbKamar.setAutoCreateRowSorter(true);
+        tbKamar.setName("tbKamar"); // NOI18N
+        tbKamar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbKamarKeyPressed(evt);
+            }
+        });
+        Scroll.setViewportView(tbKamar);
+
+        internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
+
+        panelisi3.setName("panelisi3"); // NOI18N
+        panelisi3.setPreferredSize(new java.awt.Dimension(100, 43));
+        panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
+
+        label9.setText("Key Word :");
+        label9.setName("label9"); // NOI18N
+        label9.setPreferredSize(new java.awt.Dimension(68, 23));
+        panelisi3.add(label9);
+
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(335, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+        panelisi3.add(TCari);
+
+        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('1');
+        BtnCari.setToolTipText("Alt+1");
+        BtnCari.setName("BtnCari"); // NOI18N
+        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCariActionPerformed(evt);
+            }
+        });
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCariKeyPressed(evt);
+            }
+        });
+        panelisi3.add(BtnCari);
+
+        BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('2');
+        BtnAll.setToolTipText("2Alt+2");
+        BtnAll.setName("BtnAll"); // NOI18N
+        BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAllActionPerformed(evt);
+            }
+        });
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnAllKeyPressed(evt);
+            }
+        });
+        panelisi3.add(BtnAll);
+
+        label10.setText("Record :");
+        label10.setName("label10"); // NOI18N
+        label10.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelisi3.add(label10);
+
+        LCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LCount.setText("0");
+        LCount.setName("LCount"); // NOI18N
+        LCount.setPreferredSize(new java.awt.Dimension(50, 23));
+        panelisi3.add(LCount);
+
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('4');
+        BtnKeluar.setToolTipText("Alt+4");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarActionPerformed(evt);
+            }
+        });
+        panelisi3.add(BtnKeluar);
+
+        internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_END);
+
+        getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnCariActionPerformed(null);
+        } else {
+            Valid.pindahSmc(evt, tbKamar, BtnCari);
+        }
+    }//GEN-LAST:event_TCariKeyPressed
+
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        tampil2Smc();
+    }//GEN-LAST:event_BtnCariActionPerformed
+
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnCariActionPerformed(null);
+        } else {
+            Valid.pindahSmc(evt, TCari, BtnAll);
+        }
+    }//GEN-LAST:event_BtnCariKeyPressed
+
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        emptTeks();
+        tampilSmc();
+    }//GEN-LAST:event_BtnAllActionPerformed
+
+    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnAllActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnCari, TCari);
+        }
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        emptTeks();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if (Valid.umurcacheSmc("./cache/pegawaismc.iyem", 30)) {
+            tampilSmc();
+        } else {
+            tampil2Smc();
+        }
+
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil2Smc();
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil2Smc();
+                    }
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil2Smc();
+                    }
+                }
+            });
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
+        if (tabMode.getRowCount() != 0) {
+            if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+                dispose();
+            } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
+                TCari.setText("");
+                TCari.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_tbKamarKeyPressed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            DlgCariPegawaiSMC dialog = new DlgCariPegawaiSMC(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.Button BtnAll;
+    private widget.Button BtnCari;
+    private widget.Button BtnKeluar;
+    private widget.Label LCount;
+    private widget.ScrollPane Scroll;
+    private widget.TextBox TCari;
+    private widget.InternalFrame internalFrame1;
+    private widget.Label label10;
+    private widget.Label label9;
+    private widget.panelisi panelisi3;
+    public widget.Table tbKamar;
+    // End of variables declaration//GEN-END:variables
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim().toLowerCase();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    File file = new File("./cache/pegawaismc.iyem");
+                    file.createNewFile();
+                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                        "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, jnj_jabatan.indek, pegawai.departemen, pegawai.bidang, " +
+                        "pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, " +
+                        "pegawai.mulai_kerja, pegawai.ms_kerja, pegawai.indexins, pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, " +
+                        "pegawai.no_ktp from pegawai inner join jnj_jabatan on pegawai.jnj_jabatan = jnj_jabatan.kode where pegawai.stts_aktif <> 'KELUAR' order by pegawai.nik"
+                    )) {
+                        ObjectNode root = mapper.createObjectNode();
+                        ArrayNode array = mapper.createArrayNode();
+                        if (cari.isBlank()) {
+                            while (rs.next()) {
+                                ObjectNode item = mapper.createObjectNode();
+                                item.put("NIP", rs.getString(1));
+                                item.put("Nama", rs.getString(2));
+                                item.put("JK", rs.getString(3));
+                                item.put("Jabatan", rs.getString(4));
+                                item.put("KodeJenjang", rs.getString(5));
+                                item.put("IndexJenjang", rs.getInt(6));
+                                item.put("Departemen", rs.getString(7));
+                                item.put("Bidang", rs.getString(8));
+                                item.put("Status", rs.getString(9));
+                                item.put("StatusKaryawan", rs.getString(10));
+                                item.put("NPWP", rs.getString(11));
+                                item.put("Pendidikan", rs.getString(12));
+                                item.put("TmpLahir", rs.getString(13));
+                                item.put("TglLahir", rs.getString(14));
+                                item.put("Alamat", rs.getString(15));
+                                item.put("Kota", rs.getString(16));
+                                item.put("MulaiKerja", rs.getString(17));
+                                item.put("KodeMsKerja", rs.getString(18));
+                                item.put("KodeIndex", rs.getString(19));
+                                item.put("BPD", rs.getString(20));
+                                item.put("Rekening", rs.getString(21));
+                                item.put("SttsAktif", rs.getString(23));
+                                item.put("WajibMasuk", rs.getString(23));
+                                item.put("MulaiKontrak", rs.getString(24));
+                                item.put("NoKTP", rs.getString(25));
+                                array.add(item);
+                                if (rs.getInt(6) > indexJenjang) {
+                                    publish(new Object[] {
+                                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),
+                                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
+                                        rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
+                                        rs.getString(25)
+                                    });
+                                }
+                            }
+                        } else {
+                            while (rs.next()) {
+                                ObjectNode item = mapper.createObjectNode();
+                                item.put("NIP", rs.getString(1));
+                                item.put("Nama", rs.getString(2));
+                                item.put("JK", rs.getString(3));
+                                item.put("Jabatan", rs.getString(4));
+                                item.put("KodeJenjang", rs.getString(5));
+                                item.put("IndexJenjang", rs.getInt(6));
+                                item.put("Departemen", rs.getString(7));
+                                item.put("Bidang", rs.getString(8));
+                                item.put("Status", rs.getString(9));
+                                item.put("StatusKaryawan", rs.getString(10));
+                                item.put("NPWP", rs.getString(11));
+                                item.put("Pendidikan", rs.getString(12));
+                                item.put("TmpLahir", rs.getString(13));
+                                item.put("TglLahir", rs.getString(14));
+                                item.put("Alamat", rs.getString(15));
+                                item.put("Kota", rs.getString(16));
+                                item.put("MulaiKerja", rs.getString(17));
+                                item.put("KodeMsKerja", rs.getString(18));
+                                item.put("KodeIndex", rs.getString(19));
+                                item.put("BPD", rs.getString(20));
+                                item.put("Rekening", rs.getString(21));
+                                item.put("SttsAktif", rs.getString(23));
+                                item.put("WajibMasuk", rs.getString(23));
+                                item.put("MulaiKontrak", rs.getString(24));
+                                item.put("NoKTP", rs.getString(25));
+                                array.add(item);
+                                if (rs.getString(1).trim().toLowerCase().contains(cari)
+                                    || rs.getString(2).trim().toLowerCase().contains(cari)
+                                    || rs.getString(4).trim().toLowerCase().contains(cari)
+                                    || rs.getString(7).trim().toLowerCase().contains(cari)
+                                    || rs.getString(8).trim().toLowerCase().contains(cari)
+                                ) {
+                                    // if (rs.getInt(6) > indexJenjang) {
+                                        publish(new Object[] {
+                                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),
+                                            rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
+                                            rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
+                                            rs.getString(25)
+                                        });
+                                    // }
+                                }
+                            }
+                        }
+                        root.set("pegawai", array);
+                        fw.write(mapper.writeValueAsString(root));
+                        fw.flush();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampil2Smc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            SwingWorker<Void, Object[]> worker = new SwingWorker<>() {
+                final String cari = TCari.getText().trim().toLowerCase();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    if (!isCancelled()) {
+                        File file = new File("./cache/pegawaismc.iyem");
+                        if (file.isFile()) {
+                            try (FileReader fr = new FileReader(file)) {
+                                ArrayNode array = mapper.readTree(fr).withArray("pegawai");
+                                StreamSupport.stream(array.spliterator(), false)
+                                    .filter(item -> /* item.path("indexJenjang").asInt(-1) > indexJenjang && */ (
+                                        item.path("NIP").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Nama").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Jabatan").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Departemen").asText("").trim().toLowerCase().contains(cari)
+                                        || item.path("Bidang").asText("").trim().toLowerCase().contains(cari)
+                                    ))
+                                    .map(item -> new Object[] {
+                                        item.path("NIP").asText(""), item.path("Nama").asText(""), item.path("JK").asText(""), item.path("Jabatan").asText(""), item.path("KodeJenjang").asText(""),
+                                        item.path("IndexJenjang").asInt(0), item.path("Departemen").asText(""), item.path("Bidang").asText(""), item.path("Status").asText(""), item.path("StatusKaryawan").asText(""),
+                                        item.path("NPWP").asText(""), item.path("Pendidikan").asText(""), item.path("TmpLahir").asText(""), item.path("TglLahir").asText(""), item.path("Alamat").asText(""),
+                                        item.path("Kota").asText(""), item.path("MulaiKerja").asText(""), item.path("KodeMsKerja").asText(""), item.path("KodeIndex").asText(""), item.path("BPD").asText(""),
+                                        item.path("Rekening").asText(""), item.path("SttsAktif").asText(""), item.path("WajibMasuk").asText(""), item.path("MulaiKontrak").asText(""),
+                                        item.path("NoKTP").asText("")
+                                    })
+                                    .forEach(this::publish);
+                            }
+                        } else {
+                            cancel(false);
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPegawaiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            };
+
+            worker.execute();
+            if (worker.isCancelled()) {
+                tampilSmc();
+            }
+        }
+    }
+
+    public void emptTeks() {
+        TCari.setText("");
+        TCari.requestFocus();
+    }
+
+    public JTable getTable() {
+        return tbKamar;
+    }
+
+    public void setIndexJenjang(String nik) {
+        if (nik != null && !nik.isBlank()) {
+            indexJenjang = Sequel.cariIntegerSmc("select jnj_jabatan.indek from pegawai inner join jnj_jabatan on pegawai.jnj_jabatan = jnj_jabatan.kode where pegawai.nik = ?", nik);
+        } else {
+            indexJenjang = -1;
+        }
+    }
+}

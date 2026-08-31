@@ -278,9 +278,9 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="12" splitType="Stretch">
+		<band height="13" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="0" y="0" width="19" height="12" uuid="94c5c9a0-213e-4e0e-a2ab-ba887a4e4aeb">
+				<reportElement positionType="Float" x="0" y="1" width="19" height="12" uuid="94c5c9a0-213e-4e0e-a2ab-ba887a4e4aeb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -290,7 +290,7 @@
 				<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="19" y="0" width="77" height="12" uuid="6af9b4b5-fcdd-4a3a-a34e-f63a057e0e79">
+				<reportElement positionType="Float" x="19" y="1" width="77" height="12" uuid="6af9b4b5-fcdd-4a3a-a34e-f63a057e0e79">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -300,7 +300,7 @@
 				<textFieldExpression><![CDATA[$F{temp1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="96" y="0" width="89" height="12" uuid="69eb1788-3ee6-40b2-957f-bcd15dd8b70c">
+				<reportElement positionType="Float" x="96" y="1" width="89" height="12" uuid="69eb1788-3ee6-40b2-957f-bcd15dd8b70c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -310,7 +310,7 @@
 				<textFieldExpression><![CDATA[$F{temp2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="185" y="0" width="35" height="12" uuid="29f7e7cd-0a6e-44b0-8dcc-a2db741146b9">
+				<reportElement positionType="Float" x="185" y="1" width="35" height="12" uuid="29f7e7cd-0a6e-44b0-8dcc-a2db741146b9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -320,7 +320,7 @@
 				<textFieldExpression><![CDATA[$F{temp3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="220" y="0" width="160" height="12" uuid="4c9cd059-3b0b-46d3-8d7f-b275d98e2a2c">
+				<reportElement positionType="Float" x="220" y="1" width="160" height="12" uuid="4c9cd059-3b0b-46d3-8d7f-b275d98e2a2c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -330,7 +330,7 @@
 				<textFieldExpression><![CDATA[$F{temp4}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="380" y="0" width="52" height="12" uuid="1520a620-d1a6-48c9-b446-b20a85f4684e">
+				<reportElement positionType="Float" x="380" y="1" width="52" height="12" uuid="1520a620-d1a6-48c9-b446-b20a85f4684e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -340,7 +340,7 @@
 				<textFieldExpression><![CDATA[$F{temp5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="432" y="0" width="47" height="12" uuid="5b514ec9-ae16-4820-b2e2-3e6a6300524a">
+				<reportElement positionType="Float" x="432" y="1" width="47" height="12" uuid="5b514ec9-ae16-4820-b2e2-3e6a6300524a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -351,7 +351,7 @@
 				<textFieldExpression><![CDATA[$F{temp6}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="479" y="0" width="47" height="12" uuid="9e49ffc8-4336-4a28-a2b3-05bf2e9e6b45">
+				<reportElement positionType="Float" x="479" y="1" width="47" height="12" uuid="9e49ffc8-4336-4a28-a2b3-05bf2e9e6b45">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -360,8 +360,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp7}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="526" y="0" width="88" height="12" uuid="71df8340-7869-410d-959f-610af12fc5ef">
+			<textField isBlankWhenNull="false">
+				<reportElement positionType="Float" x="526" y="1" width="88" height="12" uuid="71df8340-7869-410d-959f-610af12fc5ef">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -371,7 +371,7 @@
 				<textFieldExpression><![CDATA[$F{temp8}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="614" y="0" width="156" height="12" uuid="dfffeaf7-e78c-42f6-8740-7ce8d9696eff">
+				<reportElement positionType="Float" x="614" y="1" width="156" height="12" uuid="dfffeaf7-e78c-42f6-8740-7ce8d9696eff">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -380,8 +380,18 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp9}]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement positionType="Float" x="770" y="1" width="150" height="12" uuid="ec349e31-bd3a-4a0a-bf42-82ebe27c5ce9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp10}]]></textFieldExpression>
+			</textField>
 			<textField>
-				<reportElement positionType="Float" x="920" y="0" width="64" height="12" uuid="10489129-bbf6-43ee-b821-1de1578bcb0a">
+				<reportElement positionType="Float" x="920" y="1" width="64" height="12" uuid="10489129-bbf6-43ee-b821-1de1578bcb0a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -390,14 +400,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp11}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement positionType="Float" x="0" y="11" width="984" height="1" uuid="37e7dcc7-97aa-4cdb-8aab-239eb359ae38">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="0.3" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>
@@ -459,16 +461,6 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement positionType="Float" x="770" y="-12" width="150" height="12" uuid="ec349e31-bd3a-4a0a-bf42-82ebe27c5ce9">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{temp10}]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

@@ -61,7 +61,7 @@ import rekammedis.RMRiwayatPerawatan;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgInputResepPulang;
-import support.kirimwa.DlgKirimWA;
+import smc.kirimwa.DlgKirimWA;
 
 public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4,tabMode5,tabMode6,tabMode7,tabMode8;
@@ -1525,7 +1525,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         FormMenu.add(BtnPiutangObat);
 
         BtnTelaahResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnTelaahResep.setText("Telaah Resep");
+        BtnTelaahResep.setText("Pengkajian Resep");
         BtnTelaahResep.setFocusPainted(false);
         BtnTelaahResep.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnTelaahResep.setGlassColor(new java.awt.Color(255, 255, 255));

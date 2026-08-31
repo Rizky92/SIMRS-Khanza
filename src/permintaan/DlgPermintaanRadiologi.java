@@ -11,6 +11,7 @@
 
 package permintaan;
 
+import bridging.AccessionRadiologiSMC;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -23,6 +24,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -56,6 +58,7 @@ import kepegawaian.DlgCariDokter;
 public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private DlgCariDokter dokter;
     private Connection koneksi=koneksiDB.condb();
@@ -880,8 +883,10 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_DiagnosisKlinisKeyPressed
 
     private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
-        if(this.isActive()==true){
-            autoNomor();
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(Tanggal.getSelectedItem()!=null){
+                autoNomor();
+            }
         }
     }//GEN-LAST:event_TanggalItemStateChanged
 
@@ -1356,6 +1361,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             ChkJln.setSelected(false);
+            String noorderTerbit="";
             try {
                 Sequel.AutoComitFalse();
                 //autoNomor();
@@ -1367,11 +1373,11 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     })==true){
                     for(i=0;i<tbPemeriksaan.getRowCount();i++){
                         if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-                            Sequel.menyimpan2("permintaan_pemeriksaan_radiologi","?,?,?","pemeriksaan radiologi",3,new String[]{
-                                TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
-                            });
+                            Sequel.menyimpantfSmc("permintaan_pemeriksaan_radiologi","noorder, kd_jenis_prw, stts_bayar",
+                                TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum");
                         }
                     }
+                    noorderTerbit=TNoPermintaan.getText();
                     isReset();
                     emptTeks();
                 }else{
@@ -1384,16 +1390,19 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                         })==true){
                         for(i=0;i<tbPemeriksaan.getRowCount();i++){
                             if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-                                Sequel.menyimpan2("permintaan_pemeriksaan_radiologi","?,?,?","pemeriksaan radiologi",3,new String[]{
-                                    TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
-                                });
+                                Sequel.menyimpantfSmc("permintaan_pemeriksaan_radiologi","noorder, kd_jenis_prw, stts_bayar",
+                                    TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum");
                             }
                         }
+                        noorderTerbit=TNoPermintaan.getText();
                         isReset();
                         emptTeks();
                     }
                 }
                 Sequel.AutoComitTrue();
+                if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
+                    JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
+                }
                 JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
             } catch (Exception e) {
                 System.out.println(e);

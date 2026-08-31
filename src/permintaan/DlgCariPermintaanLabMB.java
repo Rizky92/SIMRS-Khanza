@@ -1469,7 +1469,15 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
 
     private void TabRawatJalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatJalanMouseClicked
         TeksKosong();
-        pilihRalan();
+        if(TabRawatJalan.getSelectedIndex()==0){
+            if(tabMode.getRowCount()==0){
+                runBackground(() -> tampil());
+            }
+        }else if(TabRawatJalan.getSelectedIndex()==1){
+            if(tabMode2.getRowCount()==0){
+                runBackground(() -> tampil2());
+            }
+        }
     }//GEN-LAST:event_TabRawatJalanMouseClicked
 
     private void BtnHasilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHasilActionPerformed
@@ -1857,7 +1865,27 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
 
     private void TabPilihRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabPilihRawatMouseClicked
         TeksKosong();
-        pilihTab();
+        if(TabPilihRawat.getSelectedIndex()==0){
+            if(TabRawatJalan.getSelectedIndex()==0){
+                if(tabMode.getRowCount()==0){
+                    runBackground(() -> tampil());
+                }
+            }else if(TabRawatJalan.getSelectedIndex()==1){
+                if(tabMode2.getRowCount()==0){
+                    runBackground(() -> tampil2());
+                }
+            }
+        }else if(TabPilihRawat.getSelectedIndex()==1){
+            if(TabRawatInap.getSelectedIndex()==0){
+                if(tabMode3.getRowCount()==0){
+                    runBackground(() -> tampil3());
+                }
+            }else if(TabRawatInap.getSelectedIndex()==1){
+                if(tabMode4.getRowCount()==0){
+                    runBackground(() -> tampil4());
+                }
+            }
+        }
     }//GEN-LAST:event_TabPilihRawatMouseClicked
 
     private void tbLabRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabRanapMouseClicked
@@ -1890,7 +1918,15 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
 
     private void TabRawatInapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatInapMouseClicked
         TeksKosong();
-        pilihRanap();
+        if(TabRawatInap.getSelectedIndex()==0){
+            if(tabMode3.getRowCount()==0){
+                runBackground(() -> tampil3());
+            }
+        }else if(TabRawatInap.getSelectedIndex()==1){
+            if(tabMode4.getRowCount()==0){
+                runBackground(() -> tampil4());
+            }
+        }
     }//GEN-LAST:event_TabRawatInapMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

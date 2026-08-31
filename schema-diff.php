@@ -17,24 +17,86 @@
  *   --tables=<list>     Compare only these tables (comma-separated)
  *   --exclude=<list>    Exclude these tables (comma-separated)
  *   --migrate           Execute DDL directly against the current database
- *   --with-drop         Allow all DROP statements when using --migrate
- *   --with-drop-table   Allow DROP TABLE statements only when using --migrate
- *   --with-drop-column  Allow DROP COLUMN/INDEX/FK statements only when using --migrate
+ *   --with-drop         Allow all DROP statements
+ *   --with-drop-table   Allow DROP TABLE statements
+ *   --with-drop-column  Allow DROP COLUMN/INDEX/FK statements
  *   --yes               Skip confirmation prompt when using --migrate
+ *
+ * Reference database preparation (runs before the comparison):
+ *   --rebuild           DROP and CREATE the latest database, then import the base and modified dumps
+ *   --base=<file>       Base schema dump (default: sik.sql)
+ *   --modif=<file>      Modified schema applied on top of the base (default: sik_modif.sql)
+ *   --no-base           Skip the base dump
+ *   --no-modif          Skip the modified dump
+ *   --charset=<cs>      Charset used by --rebuild (default: latin1)
+ *   --collate=<col>     Collation used by --rebuild (default: latin1_swedish_ci)
+ *   --mysql=<path>      Path to the mysql client binary (default: mysql)
+ *
+ * Post-migration (runs against the current database, requires --migrate):
+ *   --post=<file>       SQL file to import after a successful migration. Repeatable, and each
+ *                       value may itself be a comma-separated list. Imported in the order given.
+ *
+ * Presets (mutually exclusive — pick at most one):
+ *   --default-migrate-yes   Full rebuild-and-migrate run, drops included:
+ *                           --rebuild --with-drop --migrate --yes --post=sik_local_update.sql
+ *                           --output=migrate-<yyyy-mm-dd>.sql
+ *   --safe-migrate-yes      Same run without any drops, so nothing existing in the current
+ *                           database is removed — only additive DDL is applied:
+ *                           --rebuild --migrate --yes --post=sik_local_update.sql
+ *                           --output=migrate-<yyyy-mm-dd>-safe.sql
+ *                           Passing --with-drop/--with-drop-table/--with-drop-column alongside
+ *                           a safe preset is rejected rather than silently honoured.
+ *   --default-migrate-dry   Dry run of --default-migrate-yes: rebuild and generate the DDL,
+ *                           but apply nothing and import nothing.
+ *                           --rebuild --with-drop --output=migrate-<yyyy-mm-dd>-dry.sql
+ *   --safe-migrate-dry      Dry run of --safe-migrate-yes:
+ *                           --rebuild --output=migrate-<yyyy-mm-dd>-safe-dry.sql
+ *
+ *   Options given explicitly still win, so a preset can be narrowed (e.g.
+ *   --default-migrate-yes --post=other.sql), but not switched off. The dry presets leave
+ *   --yes alone, so the DROP DATABASE confirmation for --rebuild is still asked; add --yes
+ *   to run them unattended.
+ *
+ *   All four presets include --rebuild, which DROPs and recreates the FIRST positional
+ *   database. The no-drop guarantee of the safe presets covers the second positional
+ *   (current) database only. Reversing the argument order to back-sync a live database
+ *   into the reference schema would therefore wipe the live one — drop --rebuild for that
+ *   direction, e.g. `php schema-diff.php sik khanza --port=3307 --migrate --yes`.
  *
  * First positional arg  = latest/updated database
  * Second positional arg = current database
  * Generates DDL to migrate current → latest.
+ *
+ * Example — rebuild the reference schema from sik.sql + sik_modif.sql, migrate
+ * the live database, then re-apply local data:
+ *   php schema-diff.php khanza sik --port=3307 --default-migrate-yes
+ *
+ * which is equivalent to:
+ *   php schema-diff.php khanza sik --port=3307 --rebuild --post=sik_local_update.sql \
+ *       --with-drop --migrate --yes --output=migrate-<yyyy-mm-dd>.sql
+ *
+ * Example — back-sync new tables added to the target into the source without removing
+ * anything, previewing the DDL first:
+ *   php schema-diff.php khanza sik --port=3307 --safe-migrate-dry
+ *   php schema-diff.php khanza sik --port=3307 --safe-migrate-yes
  */
 
 if (php_sapi_name() !== 'cli') {
     die('CLI only.');
 }
 
+$presets = migratePresets();
+
 $opts = parseArgs($argv);
+$presetName = selectPreset($opts, $presets);
+
+if (null !== $presetName) {
+    $opts = applyMigratePreset($opts, $presets[$presetName]);
+}
 
 if (empty($opts['latest']) || empty($opts['current'])) {
-    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--tables=t1,t2] [--exclude=t1,t2] [--migrate] [--with-drop] [--with-drop-table] [--with-drop-column] [--yes]\n");
+    $presetUsage = '[--' . implode('] [--', array_keys($presets)) . ']';
+    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--tables=t1,t2] [--exclude=t1,t2] [--migrate] [--with-drop] [--with-drop-table] [--with-drop-column] [--yes] [--rebuild] [--base=sik.sql] [--modif=sik_modif.sql] [--no-base] [--no-modif] [--charset=latin1] [--collate=latin1_swedish_ci] [--mysql=path] [--post=a.sql [--post=b.sql]] {$presetUsage}\n");
     exit(1);
 }
 
@@ -44,11 +106,78 @@ $user = $opts['user'] ?? 'root';
 $pass = $opts['pass'] ?? '';
 $doMigrate = isset($opts['migrate']);
 $withDropAll = isset($opts['with-drop']);
-$noDropTable = $doMigrate && !$withDropAll && !isset($opts['with-drop-table']);
-$noDropColumn = $doMigrate && !$withDropAll && !isset($opts['with-drop-column']);
+$noDropTable = !$withDropAll && !isset($opts['with-drop-table']);
+$noDropColumn = !$withDropAll && !isset($opts['with-drop-column']);
 $skipConfirm = isset($opts['yes']);
 $onlyTables = !empty($opts['tables']) ? array_map('trim', explode(',', $opts['tables'])) : [];
 $excludeTables = !empty($opts['exclude']) ? array_map('trim', explode(',', $opts['exclude'])) : [];
+$doRebuild = isset($opts['rebuild']);
+$baseFile = !empty($opts['base']) ? $opts['base'] : 'sik.sql';
+$modifFile = !empty($opts['modif']) ? $opts['modif'] : 'sik_modif.sql';
+$postFiles = collectFiles($opts['post'] ?? null);
+$charset = $opts['charset'] ?? 'latin1';
+$collate = $opts['collate'] ?? 'latin1_swedish_ci';
+$mysqlBin = $opts['mysql'] ?? 'mysql';
+
+$loadFiles = [];
+if ($doRebuild) {
+    if (!isset($opts['no-base'])) {
+        $loadFiles[] = $baseFile;
+    }
+    if (!isset($opts['no-modif'])) {
+        $loadFiles[] = $modifFile;
+    }
+}
+
+if (null !== $presetName) {
+    $loaded = $loadFiles ? implode(' + ', $loadFiles) : 'none';
+    $drops = $noDropTable && $noDropColumn ? 'without drops' : 'with drops';
+    $rebuilt = $doRebuild ? "rebuild `{$opts['latest']}` from {$loaded}" : 'no rebuild';
+    if ($doMigrate) {
+        $posted = $postFiles ? implode(' + ', $postFiles) : 'none';
+        fwrite(STDERR, "Preset --{$presetName}: {$rebuilt}, migrate `{$opts['current']}` {$drops}, then apply {$posted}.\n");
+    } else {
+        fwrite(STDERR, "Preset --{$presetName}: {$rebuilt}, generate DDL for `{$opts['current']}` {$drops}, apply nothing.\n");
+    }
+    if ($doRebuild) {
+        fwrite(STDERR, "Preset --{$presetName}: `{$opts['latest']}` is DROPped and recreated — the no-drop guarantee covers `{$opts['current']}` only.\n");
+    }
+    fwrite(STDERR, "Preset --{$presetName}: DDL written to {$opts['output']}.\n");
+}
+
+$latest = $opts['latest'];
+$current = $opts['current'];
+
+if ($postFiles && !$doMigrate) {
+    fwrite(STDERR, "--post requires --migrate.\n");
+    exit(1);
+}
+
+if ($doRebuild && $latest === $current) {
+    fwrite(STDERR, "--rebuild targets the latest database, which must differ from the current database.\n");
+    exit(1);
+}
+
+foreach ($loadFiles as $file) {
+    if (!is_readable($file)) {
+        fwrite(STDERR, "Dump file not readable: {$file}\n");
+        fwrite(STDERR, "Point --base/--modif at the right files, or skip one with --no-base/--no-modif.\n");
+        exit(1);
+    }
+}
+
+foreach ($postFiles as $file) {
+    if (!is_readable($file)) {
+        fwrite(STDERR, "Post-migration file not readable: {$file}\n");
+        exit(1);
+    }
+}
+
+if ($doRebuild) {
+    assertSafeIdentifier($latest, 'database name');
+    assertSafeIdentifier($charset, 'charset');
+    assertSafeIdentifier($collate, 'collation');
+}
 
 try {
     $pdo = new PDO("mysql:host={$host};port={$port}", $user, $pass, [
@@ -59,8 +188,28 @@ try {
     exit(1);
 }
 
-$latest = $opts['latest'];
-$current = $opts['current'];
+if ($doRebuild && !$skipConfirm) {
+    fwrite(STDERR, "About to DROP DATABASE `{$latest}` and recreate it. Type 'yes' to proceed: ");
+    if (trim(fgets(STDIN)) !== 'yes') {
+        fwrite(STDERR, "Aborted.\n");
+        exit(1);
+    }
+}
+
+if ($doRebuild) {
+    fwrite(STDERR, "Rebuilding `{$latest}` ({$charset}/{$collate})...\n");
+    try {
+        $pdo->exec("DROP DATABASE IF EXISTS `{$latest}`");
+        $pdo->exec("CREATE DATABASE `{$latest}` CHARACTER SET = {$charset} COLLATE = {$collate}");
+    } catch (PDOException $e) {
+        fwrite(STDERR, "Rebuild failed: " . $e->getMessage() . "\n");
+        exit(1);
+    }
+}
+
+foreach ($loadFiles as $file) {
+    importSqlFile($mysqlBin, $host, $port, $user, $pass, $latest, $file);
+}
 
 // Verify both databases exist
 foreach ([$latest, $current] as $db) {
@@ -126,6 +275,9 @@ if (count($statements) <= 2) {
     if (!empty($opts['output'])) {
         file_put_contents($opts['output'], '');
         fwrite(STDERR, "Cleared {$opts['output']}\n");
+    }
+    foreach ($postFiles as $file) {
+        importSqlFile($mysqlBin, $host, $port, $user, $pass, $current, $file);
     }
     exit(0);
 }
@@ -244,10 +396,15 @@ if ($failed) {
     fwrite(STDERR, "Rollback script kept at: {$rollbackFile}\n");
 }
 
+foreach ($postFiles as $file) {
+    importSqlFile($mysqlBin, $host, $port, $user, $pass, $current, $file);
+}
+
 // ========== Functions ==========
 
 function parseArgs(array $argv): array
 {
+    $repeatable = ['post'];
     $result = [];
     $positional = [];
     for ($i = 1; $i < count($argv); $i++) {
@@ -256,7 +413,11 @@ function parseArgs(array $argv): array
             $arg = substr($arg, 2);
             if (str_contains($arg, '=')) {
                 [$key, $val] = explode('=', $arg, 2);
-                $result[$key] = $val;
+                if (in_array($key, $repeatable, true) && isset($result[$key])) {
+                    $result[$key] = array_merge((array) $result[$key], [$val]);
+                } else {
+                    $result[$key] = $val;
+                }
             } else {
                 $result[$arg] = true;
             }
@@ -267,6 +428,178 @@ function parseArgs(array $argv): array
     $result['latest'] = $positional[0] ?? null;
     $result['current'] = $positional[1] ?? null;
     return $result;
+}
+
+/**
+ * The rebuild-and-migrate shorthands, keyed by flag name.
+ *
+ * 'drops'   — allow DROP statements against the current database.
+ * 'migrate' — apply the DDL (and the post-migration imports) instead of only
+ *             generating it. Dry variants deliberately leave 'yes' unset so the
+ *             DROP DATABASE prompt of --rebuild is still asked.
+ * 'suffix'  — appended to the generated output filename so the four presets
+ *             never overwrite each other's DDL.
+ */
+function migratePresets(): array
+{
+    return [
+        'default-migrate-yes' => ['drops' => true, 'migrate' => true, 'suffix' => ''],
+        'safe-migrate-yes' => ['drops' => false, 'migrate' => true, 'suffix' => '-safe'],
+        'default-migrate-dry' => ['drops' => true, 'migrate' => false, 'suffix' => '-dry'],
+        'safe-migrate-dry' => ['drops' => false, 'migrate' => false, 'suffix' => '-safe-dry'],
+    ];
+}
+
+/**
+ * Resolves which preset was requested, rejecting combinations that contradict
+ * each other. A safe preset paired with an explicit drop flag is an error
+ * rather than a silent win for either side, because both readings are
+ * plausible and only one of them is safe.
+ */
+function selectPreset(array $opts, array $presets): ?string
+{
+    $given = array_values(array_intersect(array_keys($presets), array_keys($opts)));
+
+    if (1 < count($given)) {
+        fwrite(STDERR, "Presets are mutually exclusive, but got: --" . implode(' --', $given) . "\n");
+        exit(1);
+    }
+    if (!$given) {
+        return null;
+    }
+
+    $name = $given[0];
+    if (!$presets[$name]['drops']) {
+        $dropFlags = array_values(array_intersect(['with-drop', 'with-drop-table', 'with-drop-column'], array_keys($opts)));
+        if ($dropFlags) {
+            fwrite(STDERR, "--{$name} allows no drops, but got: --" . implode(' --', $dropFlags) . "\n");
+            fwrite(STDERR, "Use --default-migrate-yes for the dropping variant, or drop the conflicting flag.\n");
+            exit(1);
+        }
+    }
+
+    return $name;
+}
+
+/**
+ * Fills in the flags for the chosen preset. Options passed explicitly are left
+ * untouched, so the preset only ever supplies what is missing.
+ */
+function applyMigratePreset(array $opts, array $preset): array
+{
+    $flags = ['rebuild'];
+    if ($preset['drops']) {
+        $flags[] = 'with-drop';
+    }
+    if ($preset['migrate']) {
+        $flags[] = 'migrate';
+        $flags[] = 'yes';
+    }
+
+    foreach ($flags as $flag) {
+        if (!isset($opts[$flag])) {
+            $opts[$flag] = true;
+        }
+    }
+    if ($preset['migrate'] && !isset($opts['post'])) {
+        $opts['post'] = 'sik_local_update.sql';
+    }
+    if (empty($opts['output'])) {
+        $opts['output'] = 'migrate-' . date('Y-m-d') . $preset['suffix'] . '.sql';
+    }
+    return $opts;
+}
+
+/**
+ * Normalizes a repeatable file option into a flat, ordered list. Accepts a
+ * single value, repeated values, or comma-separated lists in any combination.
+ */
+function collectFiles(string|array|null $value): array
+{
+    $files = [];
+    foreach ((array) $value as $entry) {
+        foreach (explode(',', $entry) as $file) {
+            $file = trim($file);
+            if ('' !== $file) {
+                $files[] = $file;
+            }
+        }
+    }
+    return $files;
+}
+
+function assertSafeIdentifier(string $value, string $label): void
+{
+    if (!preg_match('/^[A-Za-z0-9_]+$/', $value)) {
+        fwrite(STDERR, "Invalid {$label}: '{$value}'\n");
+        exit(1);
+    }
+}
+
+/**
+ * Pipes an SQL dump into the mysql client. The file is attached directly as the
+ * child process' stdin, so no shell redirection or quoting is involved, and the
+ * password travels through MYSQL_PWD instead of the command line.
+ */
+function importSqlFile(string $mysqlBin, string $host, string $port, string $user, string $pass, string $db, string $file): void
+{
+    $size = round(filesize($file) / 1048576, 1);
+    fwrite(STDERR, "Importing {$file} ({$size} MB) into `{$db}`...\n");
+    $start = microtime(true);
+
+    $descriptors = [
+        0 => ['file', $file, 'r'],
+        1 => ['pipe', 'w'],
+        2 => ['pipe', 'w'],
+    ];
+    $env = '' !== $pass ? array_merge(getenv(), ['MYSQL_PWD' => $pass]) : null;
+    $proc = @proc_open([$mysqlBin, "--host={$host}", "--port={$port}", "--user={$user}", $db], $descriptors, $pipes, null, $env);
+
+    if (!is_resource($proc)) {
+        fwrite(STDERR, "Could not run '{$mysqlBin}'. Point --mysql at the client binary.\n");
+        exit(1);
+    }
+
+    stream_set_blocking($pipes[1], false);
+    stream_set_blocking($pipes[2], false);
+
+    $output = '';
+    $write = null;
+    $except = null;
+    while (true) {
+        $read = [];
+        foreach ([1, 2] as $i) {
+            if (!feof($pipes[$i])) {
+                $read[] = $pipes[$i];
+            }
+        }
+        if (!$read) {
+            break;
+        }
+        if (0 < stream_select($read, $write, $except, 1)) {
+            foreach ($read as $stream) {
+                $output .= stream_get_contents($stream);
+            }
+        }
+    }
+
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    $code = proc_close($proc);
+    $elapsed = round(microtime(true) - $start, 1);
+
+    if (0 !== $code) {
+        fwrite(STDERR, "Import of {$file} failed (exit {$code}).\n");
+        if ('' !== trim($output)) {
+            fwrite(STDERR, trim($output) . "\n");
+        }
+        exit(1);
+    }
+
+    if ('' !== trim($output)) {
+        fwrite(STDERR, trim($output) . "\n");
+    }
+    fwrite(STDERR, "Imported {$file} in {$elapsed}s.\n");
 }
 
 function getTables(PDO $pdo, string $db): array
@@ -423,12 +756,10 @@ function columnDef(array $col): string
     $def = "`{$col['COLUMN_NAME']}` {$col['COLUMN_TYPE']}";
     $def .= $col['IS_NULLABLE'] === 'NO' ? ' NOT NULL' : ' NULL';
     if ($col['COLUMN_DEFAULT'] !== null) {
-        $default = $col['COLUMN_DEFAULT'];
-        if (is_numeric($default) || in_array(strtoupper($default), ['CURRENT_TIMESTAMP', 'NULL'])) {
-            $def .= " DEFAULT {$default}";
-        } else {
-            $def .= " DEFAULT '" . str_replace("'", "''", $default) . "'";
-        }
+        // MariaDB 10.2.7+ already returns COLUMN_DEFAULT correctly quoted/unquoted
+        // (e.g. '' for empty string, 'abc' for string literals, 5 for numbers,
+        // current_timestamp() for expressions), so emit it verbatim.
+        $def .= " DEFAULT {$col['COLUMN_DEFAULT']}";
     } elseif ($col['IS_NULLABLE'] === 'YES') {
         $def .= " DEFAULT NULL";
     }

@@ -436,17 +436,24 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
         TCari.setText("");
     }
 
+    public void setCari(String kata) {
+        TCari.setText(null == kata ? "" : kata.trim());
+    }
+
     private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
         TrustManager[] trustManagers = {
             new X509TrustManager() {
+                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
 
+                @Override
                 public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
                 }
 
+                @Override
                 public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
                 }
             }

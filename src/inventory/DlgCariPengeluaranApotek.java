@@ -950,16 +950,16 @@ public class DlgCariPengeluaranApotek extends javax.swing.JDialog {
                 }else if(tabMode2.getRowCount()!=0){
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("StokKeluarMedis2.html", "Data Stok Keluar Obat, Alkes & BHP", tbDokter);
+                            Valid.exportHtmlSmc("StokKeluarMedis2.html", "Data Stok Keluar Obat, Alkes & BHP", tbDokter2);
                             break;
                         case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("StokKeluarMedis2.wps", "Data Stok Keluar Obat, Alkes & BHP", tbDokter);
+                            Valid.exportWPSSmc("StokKeluarMedis2.wps", "Data Stok Keluar Obat, Alkes & BHP", tbDokter2);
                             break;
                         case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("StokKeluarMedis2.csv", tbDokter);
+                            Valid.exportCSVSmc("StokKeluarMedis2.csv", tbDokter2);
                             break;
                         case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("StokKeluarMedis2.xlsx", tbDokter);
+                            Valid.exportXlsxSmc("StokKeluarMedis2.xlsx", tbDokter2);
                             break;
                         case "Laporan 5 (Jasper)":
                             tanggal=" pengeluaran_obat_bhp.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' ";

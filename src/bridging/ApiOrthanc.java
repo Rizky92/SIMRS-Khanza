@@ -3,6 +3,7 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyManagementException;
@@ -21,9 +22,12 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -42,6 +46,7 @@ public class ApiOrthanc {
     private String auth,authEncrypt,requestJson;
     private byte[] encodedBytes;
     private int i=1;
+    private final sekuel Sequel = new sekuel();
 
     public ApiOrthanc(){
         try {
@@ -283,6 +288,103 @@ public class ApiOrthanc {
             JOptionPane.showMessageDialog(null,"Gagal kirim ke Modality..!!");
             return false;
         }
+    }
+
+    public boolean kirimKeModalitySmc(String studyID, String modality) {
+        String notifKirim = "";
+        final String study = (null == studyID) ? "" : studyID.trim();
+        final String tujuan = (null == modality) ? "" : modality.trim();
+
+        boolean sukses = true;
+
+        if (study.isBlank()) {
+            notifKirim = "Study ID kosong";
+            System.out.println("Notifikasi : " + notifKirim);
+            sukses = false;
+        } else if (!study.matches("[A-Za-z0-9._-]{1,128}")) {
+            notifKirim = "Study ID tidak valid : " + study;
+            System.out.println("Notifikasi : " + notifKirim);
+            sukses = false;
+        } else if (tujuan.isBlank()) {
+            notifKirim = "Nama modality kosong";
+            System.out.println("Notifikasi : " + notifKirim);
+            sukses = false;
+        } else if (!tujuan.matches("[A-Za-z0-9._-]{1,64}")) {
+            notifKirim = "Nama modality tidak valid : " + tujuan;
+            System.out.println("Notifikasi : " + notifKirim);
+            sukses = false;
+        }
+
+        if (sukses) {
+            String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/modalities/" + tujuan + "/store";
+            System.out.println("Kirim Study ke Modality " + tujuan + " : " + study);
+            try {
+                HttpHeaders header = new HttpHeaders();
+                header.add("Authorization", "Basic " + authEncrypt);
+                header.setContentType(MediaType.APPLICATION_JSON);
+
+                String json = "[\"" + study + "\"]";
+                System.out.println("URL : " + url);
+                System.out.println("Request JSON : " + json);
+
+                ResponseEntity<String> response = getRest().exchange(url, HttpMethod.POST, new HttpEntity(json, header), String.class);
+                HttpStatus status = response.getStatusCode();
+                String body = response.getBody();
+                System.out.println("Response : " + status.value() + " " + body);
+
+                if (HttpStatus.Series.SUCCESSFUL != status.series()) {
+                    notifKirim = "Orthanc membalas HTTP " + status.value() + " " + status.getReasonPhrase();
+                    sukses = false;
+                } else if ((null == body) || (body.isBlank())) {
+                    notifKirim = "Balasan Orthanc kosong";
+                    sukses = false;
+                } else {
+                    JsonNode hasil = mapper.readTree(body);
+                    int terkirim = hasil.path("InstancesCount").asInt(-1), gagal = hasil.path("FailedInstancesCount").asInt(-1);
+                    if ((0 > terkirim) || (0 > gagal)) {
+                        notifKirim = "Balasan Orthanc tidak dikenali : " + body;
+                        sukses = false;
+                    } else if (0 < gagal) {
+                        notifKirim = gagal + " instance gagal dikirim ke " + tujuan;
+                        sukses = false;
+                    } else if (0 == terkirim) {
+                        notifKirim = "Tidak ada instance yang dikirim, Study ID " + study + " tidak ditemukan di Orthanc";
+                        sukses = false;
+                    } else {
+                        System.out.println("Berhasil kirim " + terkirim + " instance ke Modality " + tujuan);
+                    }
+                }
+
+                if (!sukses) {
+                    System.out.println("Notifikasi : " + notifKirim);
+                }
+            } catch (HttpStatusCodeException e) {
+                if (HttpStatus.NOT_FOUND == e.getStatusCode()) {
+                    notifKirim = "Modality " + tujuan + " atau Study ID " + study + " tidak terdaftar di Orthanc";
+                } else if (HttpStatus.UNAUTHORIZED == e.getStatusCode() || HttpStatus.FORBIDDEN == e.getStatusCode()) {
+                    notifKirim = "Autentikasi ke Orthanc ditolak, periksa user dan password Orthanc";
+                } else {
+                    notifKirim = "Orthanc membalas HTTP " + e.getStatusCode().value() + " " + e.getStatusText() + " : " + e.getResponseBodyAsString();
+                }
+
+                System.out.println("Notifikasi : " + notifKirim);
+                sukses = false;
+            } catch (ResourceAccessException e) {
+                notifKirim = "Server Orthanc di " + url + " tidak bisa dihubungi : " + e.getMessage();
+                System.out.println("Notifikasi : " + notifKirim);
+                sukses = false;
+            } catch (Exception e) {
+                notifKirim = "Gagal kirim ke Modality " + tujuan + " : " + e;
+                System.out.println("Notifikasi : " + notifKirim);
+                sukses = false;
+            }
+        }
+
+        if (!notifKirim.isBlank()) {
+            JOptionPane.showMessageDialog(null, notifKirim, "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
+
+        return sukses;
     }
 
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {

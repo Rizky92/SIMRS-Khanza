@@ -1,0 +1,15 @@
+# Builds the application and compiles the Jasper report designs, shipping the
+# resulting .jasper files alongside it. Requires ecj-4.6.1.jar in the library
+# bundle; build-ci.xml fails with an explanatory message if it is absent.
+
+name: Java CI with Reports
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      targets: jar compile-reports
+      artifact-name: Package with Reports

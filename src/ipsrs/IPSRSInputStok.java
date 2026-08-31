@@ -32,8 +32,10 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -56,6 +58,7 @@ public class IPSRSInputStok extends javax.swing.JDialog {
     private String order="order by ipsrsbarang.nama_brng";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private JTextField jt = new JTextField();
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -65,24 +68,25 @@ public class IPSRSInputStok extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "Real","Kode Barang","Nama Barang","Kategori","Satuan","Harga","Stok","Selisih","Nominal Hilang(Rp)","Lebih","Nominal Lebih(Rp)"
-            }){
-            @Override public boolean isCellEditable(int rowIndex, int colIndex){
+            "Real","Kode Barang","Nama Barang","Kategori","Satuan","Harga","Stok","Selisih","Nominal Hilang(Rp)","Lebih","Nominal Lebih(Rp)"
+        }){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
                     a=true;
                 }
                 return a;
-             }
+            }
             Class[] types = new Class[] {
                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                 java.lang.String.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbDokter.setModel(tabMode);
 
@@ -93,6 +97,10 @@ public class IPSRSInputStok extends javax.swing.JDialog {
             TableColumn column = tbDokter.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(42);
+                jt.setDocument(new batasInput(10).getOnlyAngka(jt));
+                DefaultCellEditor editor = new DefaultCellEditor(jt);
+                editor.setClickCountToStart(2);
+                column.setCellEditor(editor);
             }else if(i==1){
                 column.setPreferredWidth(90);
             }else if(i==2){
@@ -693,6 +701,19 @@ public class IPSRSInputStok extends javax.swing.JDialog {
                     if(!tbDokter.getValueAt(i,0).toString().equals("")){
                         try {
                             if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>=0){
+                                if (Sequel.menyimpantfSmc("ipsrsopname", "", tbDokter.getValueAt(i, 1).toString(), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 5), 5), Valid.getTglSmc(Tgl),
+                                    Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 6), 5), tbDokter.getValueAt(i, 0).toString().trim(), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 7), 5),
+                                    Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 8), 5), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 9), 5), Valid.setAngkaSmc((Number) tbDokter.getValueAt(i, 10), 5),
+                                    catatan.getText()
+                                )) {
+                                    Trackbarang.catatRiwayat(tbDokter.getValueAt(i, 1).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()), 0, "Opname", akses.getkode(), "Simpan");
+                                    Sequel.mengedit3("ipsrsbarang", "kode_brng=?", "stok=?", 2, new String[] {
+                                        tbDokter.getValueAt(i, 0).toString(), tbDokter.getValueAt(i, 1).toString()
+                                    });
+                                } else {
+                                    sukses = false;
+                                }
+                                /*
                                 if(Sequel.menyimpantf2("ipsrsopname","?,?,?,?,?,?,?,?,?,?","Stok Opname",10,new String[]{
                                         tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,5).toString(),Valid.SetTgl(Tgl.getSelectedItem()+""),tbDokter.getValueAt(i,6).toString(),
                                         tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,9).toString(),tbDokter.getValueAt(i,10).toString(),catatan.getText()
@@ -704,8 +725,11 @@ public class IPSRSInputStok extends javax.swing.JDialog {
                                 }else{
                                     sukses=false;
                                 }
+                                */
                             }
                         } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                            sukses = false;
                         }
                     }
                 }

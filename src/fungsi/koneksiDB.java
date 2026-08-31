@@ -502,6 +502,15 @@ public class koneksiDB {
         }
     }
 
+    public static String DICOMROUTERAETITLESMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("DICOMROUTERAETITLESMC", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
@@ -1997,11 +2006,10 @@ public class koneksiDB {
     public static String KUNCIDOKTERRANAP(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=EnkripsiAES.decrypt(prop.getProperty("KUNCIDOKTERRANAP"));
-        }catch(Exception e){
-            var="";
+            return EnkripsiAES.decrypt(prop.getProperty("KUNCIDOKTERRANAP", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
 
     public static String ADDANTRIANAPIMOBILEJKNFKTP(){
@@ -2130,6 +2138,42 @@ public class koneksiDB {
             var=prop.getProperty("URLDOKUMENSERTISIGN");
         }catch(Exception e){
             var="";
+        }
+        return var;
+    }
+
+    public static String TAMPILTARIFOPERASI(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("TAMPILTARIFOPERASI");
+        }catch(Exception e){
+            var="no";
+        }
+        return var;
+    }
+
+    public static String URLAPPLINKSATUSEHAT() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("URLAPPLINKSATUSEHAT");
+            if (var == null) {
+                var = "";
+            }
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+    }
+
+    public static String IDORGBPJSSATUSEHAT() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("IDORGBPJSSATUSEHAT");
+            if (var == null) {
+                var = "";
+            }
+        } catch (Exception e) {
+            var = "";
         }
         return var;
     }

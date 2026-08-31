@@ -40,6 +40,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private validasi Valid=new validasi();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private PreparedStatement ps;
     private ResultSet rs;
     private String norawat="";
@@ -293,7 +294,8 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
                     "select permintaan_radiologi.noorder,permintaan_pemeriksaan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,permintaan_radiologi.tgl_permintaan,"+
                     "permintaan_radiologi.jam_permintaan from permintaan_radiologi inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder=permintaan_pemeriksaan_radiologi.noorder "+
                     "inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw=permintaan_pemeriksaan_radiologi.kd_jenis_prw where permintaan_radiologi.no_rawat=? "+
-                    (TCari.getText().trim().equals("")?"":"and (jns_perawatan_radiologi.nm_perawatan like ? or permintaan_radiologi.noorder like ?) ")
+                    (TCari.getText().trim().equals("")?"":"and (jns_perawatan_radiologi.nm_perawatan like ? or permintaan_radiologi.noorder like ?) ")+
+                    "order by permintaan_pemeriksaan_radiologi.kd_jenis_prw"
             );
             try {
                 ps.setString(1,norawat);
@@ -304,7 +306,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
 
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new Object[]{rs.getString(1).replaceAll("PR","")+rs.getString(2),rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+                    tabMode.addRow(new Object[]{accession.getNoACSN(rs.getString(1),rs.getString(2)),rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
                 }
             } catch (Exception e) {
                 System.out.println("Notif Bangsal : "+e);

@@ -10,6 +10,7 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -177,6 +178,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Catatan.setDocument(new batasInput((int)100).getKata(Catatan));
         Ditujukan.setDocument(new batasInput((int)150).getKata(Ditujukan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        Diskon.setDocument(new batasInput((int) 5).getOnlyAngka(Diskon));
     }
 
 
@@ -322,10 +324,13 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         AtasNama.setName("AtasNama"); // NOI18N
         AtasNama.setPreferredSize(new java.awt.Dimension(170, 23));
 
+        NoTelp.setHighlighter(null);
         NoTelp.setName("NoTelp"); // NOI18N
 
+        Perusahaan.setHighlighter(null);
         Perusahaan.setName("Perusahaan"); // NOI18N
 
+        AlamatAsuransi.setHighlighter(null);
         AlamatAsuransi.setName("AlamatAsuransi"); // NOI18N
 
         Ditujukan.setName("Ditujukan"); // NOI18N
@@ -794,6 +799,11 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Diskon.setToolTipText("");
         Diskon.setName("Diskon"); // NOI18N
         Diskon.setPreferredSize(new java.awt.Dimension(207, 23));
+        Diskon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiskonKeyPressed(evt);
+            }
+        });
         panelisi1.add(Diskon);
         Diskon.setBounds(396, 40, 60, 23);
 
@@ -1452,12 +1462,20 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbStatusKeyPressed
 
     private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
-        Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(TanggalTempo.getSelectedItem().toString()), Valid.SetTgl(evt.getItem().toString())));
-        Valid.autonomorSmc(NoPenagihan, "PP", "", "penagihan_piutang", "no_tagihan", 3, "0", Tanggal);
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(Tanggal.getSelectedItem()!=null){
+                Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(TanggalTempo.getSelectedItem().toString()), Valid.SetTgl(evt.getItem().toString())));
+                Valid.autonomorSmc(NoPenagihan, "PP", "", "penagihan_piutang", "no_tagihan", 3, "0", Tanggal);
+            }
+        }
     }//GEN-LAST:event_TanggalItemStateChanged
 
     private void TanggalTempoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalTempoItemStateChanged
-        Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(evt.getItem().toString()), Valid.SetTgl(Tanggal.getSelectedItem().toString())));
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(Tanggal.getSelectedItem()!=null){
+                Tempo.setText(Sequel.cariIsiSmc("select to_days(?) - to_days(?)", Valid.SetTgl(evt.getItem().toString()), Valid.SetTgl(Tanggal.getSelectedItem().toString())));
+            }
+        }
     }//GEN-LAST:event_TanggalTempoItemStateChanged
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
@@ -1602,6 +1620,17 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             });
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void DiskonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiskonKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (tabMode.getRowCount() > 0) {
+                getdata();
+            }
+            if (tabMode2.getRowCount() > 0) {
+                getdata2();
+            }
+        }
+    }//GEN-LAST:event_DiskonKeyPressed
 
     /**
     * @param args the command line arguments
@@ -2226,7 +2255,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             }
             LCountDipilih1.setText(jml+"");
             LCountDipilih2.setText(Valid.SetAngka(total));
-            TotalPenagihan.setText(Valid.SetAngka(total - (total * (Valid.setAngkaSmc(Diskon.getText()) / 100))));
+            TotalPenagihan.setText(Valid.SetAngka(total - (total * (Valid.SetAngka(Diskon.getText()) / 100))));
         }
     }
 
@@ -2245,7 +2274,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             }
             LCountDipilih1.setText(jml+"");
             LCountDipilih2.setText(Valid.SetAngka(total));
-            TotalPenagihan.setText(Valid.SetAngka(total - (total * (Valid.setAngkaSmc(Diskon.getText()) / 100))));
+            TotalPenagihan.setText(Valid.SetAngka(total - (total * (Valid.SetAngka(Diskon.getText()) / 100))));
         }
     }
 

@@ -19,8 +19,13 @@ import fungsi.validasi;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariDokter2;
+import smc.events.SimpanEvent;
+import smc.events.SimpanListener;
 
 /**
  *
@@ -31,6 +36,9 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private String aktifjadwal="";
     private int lebar=0,tinggi=0;
+    private final ArrayList<SimpanListener> listeners = new ArrayList<>();
+    private final Map eventProperties = new HashMap<>();
+
     /** Creates new form DlgPemberianObat
      * @param parent
      * @param modal */
@@ -248,9 +256,12 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
             Valid.textKosong(kddokter,"dokter");
         }else{
             if(Sequel.menyimpantf("rujukan_internal_poli","?,?,?","Rujukan Sama",3,new String[]{
-                    TNoRw.getText(),kddokter.getText(),kdpoli.getText()
-                })==true){
+                TNoRw.getText(),kddokter.getText(),kdpoli.getText()
+            })==true){
                 BtnKeluarActionPerformed(evt);
+                fireSimpanListeners(new SimpanEvent(eventProperties));
+            } else {
+                fireSimpanListeners(new SimpanEvent(eventProperties, new Exception("Gagal menyimpan")));
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -258,7 +269,6 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
-        }else{
         }
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -531,9 +541,25 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         TPasien.setText(namapasien);
         this.lebar=lebar;
         this.tinggi=tinggi;
+
+        eventProperties.put("noRawat", norw);
+        eventProperties.put("noRM", norm);
+        eventProperties.put("namaPasien", namapasien);
     }
 
     public void isCek(){
         BtnSimpan.setEnabled(true);
+    }
+
+    public void addOnSimpanListener(SimpanListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeOnSimpanListener(SimpanListener listener) {
+        listeners.remove(listener);
+    }
+
+    private void fireSimpanListeners(SimpanEvent event) {
+        listeners.forEach(listener -> listener.onSimpan(event));
     }
 }

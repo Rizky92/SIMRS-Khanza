@@ -1668,10 +1668,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStok1ActionPerformed
 
     private void DTPBeriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPBeriItemStateChanged
-        if(this.isActive()==true){
-            try {
-                emptTeksobat();
-            }catch (Exception e) {}
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if(DTPBeri.getSelectedItem()!=null){
+                if(this.isActive()==true){
+                    try {
+                        emptTeksobat();
+                    }catch (Exception e) {}
+                }
+            }
         }
     }//GEN-LAST:event_DTPBeriItemStateChanged
 
@@ -2652,16 +2656,16 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             if (rsobat.getDouble("jml") > rsobat.getDouble("stok")) {
                                 JOptionPane.showMessageDialog(rootPane, "Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
                                 tabModeResep.addRow(new Object[]{
-                                    false, "", rsobat.getString("kode_brng"), rsobat.getString("nama_brng"),
+                                    false, "", rsobat.getString("aturan_pakai"), rsobat.getString("kode_brng"), rsobat.getString("nama_brng"),
                                     rsobat.getString("kode_sat"), rsobat.getString("letak_barang"), Valid.roundUp(rsobat.getDouble("harga"), 100),
-                                    rsobat.getString("nama"), rsobat.getString("aturan_pakai"), rsobat.getString("nama_industri"),
+                                    rsobat.getString("nama"), rsobat.getString("nama_industri"),
                                     rsobat.getDouble("h_beli"), rsobat.getDouble("stok"), rsobat.getString("kategori")
                                 });
                             } else {
                                 tabModeResep.addRow(new Object[]{
-                                    false, rsobat.getDouble("jml"), rsobat.getString("kode_brng"), rsobat.getString("nama_brng"),
+                                    false, rsobat.getDouble("jml"), rsobat.getString("aturan_pakai"), rsobat.getString("kode_brng"), rsobat.getString("nama_brng"),
                                     rsobat.getString("kode_sat"), rsobat.getString("letak_barang"), Valid.roundUp(rsobat.getDouble("harga"), 100),
-                                    rsobat.getString("nama"), rsobat.getString("aturan_pakai"), rsobat.getString("nama_industri"),
+                                    rsobat.getString("nama"), rsobat.getString("nama_industri"),
                                     rsobat.getDouble("h_beli"), rsobat.getDouble("stok"), rsobat.getString("kategori")
                                 });
                             }
@@ -2669,9 +2673,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     } else {
                         while (rsobat.next()) {
                             tabModeResep.addRow(new Object[]{
-                                false, rsobat.getDouble("jml"), rsobat.getString("kode_brng"), rsobat.getString("nama_brng"),
+                                false, rsobat.getDouble("jml"), rsobat.getString("aturan_pakai"), rsobat.getString("kode_brng"), rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"), rsobat.getString("letak_barang"), Valid.roundUp(rsobat.getDouble("harga"), 100),
-                                rsobat.getString("nama"), rsobat.getString("aturan_pakai"), rsobat.getString("nama_industri"),
+                                rsobat.getString("nama"), rsobat.getString("nama_industri"),
                                 rsobat.getDouble("h_beli"), rsobat.getDouble("stok"), rsobat.getString("kategori")
                             });
                         }
@@ -2871,6 +2875,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             }
 
                             if (STOKKOSONGRESEP.equals("no")) {
+                                // "No","Kode Barang","Nama Barang","Satuan","Harga(Rp)","H.Beli",
+                                // "Jenis Obat","Stok","Kps","P1","/","P2","Kandungan","Jml","I.F.",
+                                // "Komposisi","Kategori Obat"
                                 while (rs2.next()) {
                                     if (rs2.getDouble("jml") > rs2.getDouble("stok")) {
                                         JOptionPane.showMessageDialog(rootPane, "Maaf stok " + rs2.getString("nama_brng") + " tidak mencukupi..!!");
@@ -3895,10 +3902,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             copy=true;
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
-                    qrystokkosong="";
-                    if(STOKKOSONGRESEP.equals("no")){
-                        qrystokkosong=" and gudangbarang.stok>0 ";
-                    }
                     psresepasuransi=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                         " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,sum(gudangbarang.stok) as stok,resep_dokter.jml, resep_dokter.aturan_pakai, kategori_barang.nama as kategori "+
                         " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
@@ -3906,13 +3909,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
-                    qrystokkosong="";
-                    if(STOKKOSONGRESEP.equals("no")){
-                        qrystokkosong=" and gudangbarang.stok>0 ";
-                    }
                     psresepasuransi=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                         " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,gudangbarang.stok,resep_dokter.jml, resep_dokter.aturan_pakai, kategori_barang.nama as kategori "+
                         " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
@@ -3920,7 +3919,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? order by databarang.nama_brng");
                 }
 
@@ -3968,10 +3967,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }
             }else{
                 if(aktifkanbatch.equals("yes")){
-                    qrystokkosong="";
-                    if(STOKKOSONGRESEP.equals("no")){
-                        qrystokkosong=" and gudangbarang.stok>0 ";
-                    }
                     psresep=koneksi.prepareStatement(
                         "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,"+
                         " databarang.karyawan,databarang.ralan,databarang.beliluar,databarang.kelas1," +
@@ -3982,13 +3977,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
-                    qrystokkosong="";
-                    if(STOKKOSONGRESEP.equals("no")){
-                        qrystokkosong=" and gudangbarang.stok>0 ";
-                    }
                     psresep=koneksi.prepareStatement(
                         "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,"+
                         " databarang.karyawan,databarang.ralan,databarang.beliluar,databarang.kelas1," +
@@ -3999,7 +3990,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? order by databarang.nama_brng");
                 }
 
@@ -4075,10 +4066,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     });
                     if(kenaikan>0){
                         if(aktifkanbatch.equals("yes")){
-                            qrystokkosong="";
-                            if(STOKKOSONGRESEP.equals("no")){
-                                qrystokkosong=" and gudangbarang.stok>0 ";
-                            }
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                                 "databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,sum(gudangbarang.stok) as stok,databarang.kapasitas,resep_dokter_racikan_detail.p1,"+
@@ -4088,13 +4075,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
                                 "inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                                "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                                "where databarang.status='1' and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
-                            qrystokkosong="";
-                            if(STOKKOSONGRESEP.equals("no")){
-                                qrystokkosong=" and gudangbarang.stok>0 ";
-                            }
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                                 "databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,gudangbarang.stok,databarang.kapasitas,resep_dokter_racikan_detail.p1,"+
@@ -4104,7 +4087,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
                                 "inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                                "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                                "where databarang.status='1' and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
 
@@ -4158,10 +4141,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         }
                     }else{
                         if(aktifkanbatch.equals("yes")){
-                            qrystokkosong="";
-                            if(STOKKOSONGRESEP.equals("no")){
-                                qrystokkosong=" and gudangbarang.stok>0 ";
-                            }
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,"+
                                 "databarang.karyawan,databarang.ralan,databarang.beliluar,databarang.kelas1," +
@@ -4173,13 +4152,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
                                 "inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                                "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                                "where databarang.status='1' and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
-                            qrystokkosong="";
-                            if(STOKKOSONGRESEP.equals("no")){
-                                qrystokkosong=" and gudangbarang.stok>0 ";
-                            }
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,"+
                                 "databarang.karyawan,databarang.ralan,databarang.beliluar,databarang.kelas1," +
@@ -4191,7 +4166,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
                                 "inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode "+
-                                "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                                "where databarang.status='1' and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
                         try{
