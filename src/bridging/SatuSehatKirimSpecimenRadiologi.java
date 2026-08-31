@@ -38,9 +38,11 @@ import javax.swing.text.html.StyleSheet;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 
 /**
  *
@@ -626,9 +628,6 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         continue;
                     }
                     try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                         json = "{" +
                                     "\"resourceType\": \"Specimen\"," +
                                     "\"identifier\": [" +
@@ -660,8 +659,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                                 "}";
                         System.out.println("URL : "+link+"/Specimen");
                         System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Specimen", HttpMethod.POST, requestEntity, String.class).getBody();
+                        json=kirimSmc(link+"/Specimen", HttpMethod.POST, json);
                         System.out.println("Result JSON : "+json);
                         root = mapper.readTree(json);
                         response = root.path("id");
@@ -712,9 +710,6 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         continue;
                     }
                     try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                         json = "{" +
                                     "\"resourceType\": \"Specimen\"," +
                                     "\"id\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
@@ -747,8 +742,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                                 "}";
                         System.out.println("URL : "+link+"/Specimen/"+tbObat.getValueAt(i,13).toString());
                         System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Specimen/"+tbObat.getValueAt(i,13).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                        json=kirimSmc(link+"/Specimen/"+tbObat.getValueAt(i,13).toString(), HttpMethod.PUT, json);
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -1048,6 +1042,26 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                 }
             }.execute();
         }
+    }
+
+    private String kirimSmc(String url, HttpMethod method, String isi) throws Exception {
+        for(int percobaan=0;percobaan<2;percobaan++){
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Authorization", "Bearer "+api.TokenSatuSehatSmc());
+            requestEntity = new HttpEntity(isi,headers);
+            try{
+                return api.getRest().exchange(url, method, requestEntity, String.class).getBody();
+            }catch(HttpStatusCodeException e){
+                if((HttpStatus.UNAUTHORIZED == e.getStatusCode())&&(0 == percobaan)){
+                    System.out.println("Notif : Access token Satu Sehat ditolak, mengambil token baru lalu mengulang pengiriman.");
+                    api.ResetTokenSatuSehatSmc();
+                    continue;
+                }
+                throw e;
+            }
+        }
+        return "";
     }
 
     private void runBackground(Runnable task) {

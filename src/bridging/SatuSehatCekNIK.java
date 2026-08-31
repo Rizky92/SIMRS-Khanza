@@ -259,7 +259,7 @@ public class SatuSehatCekNIK {
             try{
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
-                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                headers.add("Authorization", "Bearer "+api.TokenSatuSehatSmc());
                 requestEntity = new HttpEntity(headers);
                 System.out.println("URL : "+link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
                 json=api.getRest().exchange(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();

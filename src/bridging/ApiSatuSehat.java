@@ -26,6 +26,10 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 public class ApiSatuSehat {
+    private static final Object LOCKTOKENSMC = new Object();
+    private static final long AMBANGKADALUARSATOKENSMC = 300;
+    private static String TOKENSMC = "";
+    private static long KADALUARSATOKENSMC = 0;
     private String key,clientid,urlauth,token;
     private long millis;
     private SSLContext sslContext;
@@ -59,6 +63,34 @@ public class ApiSatuSehat {
             System.out.println("Notifikasi : "+ex);
         }
         return token;
+    }
+
+    public String TokenSatuSehatSmc() throws Exception {
+        synchronized(LOCKTOKENSMC){
+            if((!TOKENSMC.isBlank())&&(System.currentTimeMillis()<KADALUARSATOKENSMC)){
+                return TOKENSMC;
+            }
+            header = new HttpHeaders();
+            header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            requestEntity = new HttpEntity("client_id="+clientid+"&client_secret="+key,header);
+            root = mapper.readTree(getRest().exchange(urlauth+"/accesstoken?grant_type=client_credentials", HttpMethod.POST, requestEntity, String.class).getBody());
+            token = root.path("access_token").asText();
+            if((null==token)||(token.isBlank())){
+                TOKENSMC = "";
+                KADALUARSATOKENSMC = 0;
+                throw new IllegalStateException("Access token Satu Sehat tidak ditemukan pada respon autentikasi");
+            }
+            TOKENSMC = token;
+            KADALUARSATOKENSMC = System.currentTimeMillis()+(Math.max(AMBANGKADALUARSATOKENSMC,root.path("expires_in").asLong(3600))-AMBANGKADALUARSATOKENSMC)*1000;
+            return TOKENSMC;
+        }
+    }
+
+    public void ResetTokenSatuSehatSmc(){
+        synchronized(LOCKTOKENSMC){
+            TOKENSMC = "";
+            KADALUARSATOKENSMC = 0;
+        }
     }
 
     public long GetUTCdatetimeAsString(){
