@@ -3,7 +3,7 @@
 	session_destroy();
 	require_once "conf/command.php";
 	if (cekSessiAdmin()){
-	    session_unregister("ses_admin_pernyataanumum");
+	    unset($_SESSION["ses_admin_pernyataanumum"]);
 	}
 
 	header("Location:index.php");
