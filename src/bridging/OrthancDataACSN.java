@@ -23,11 +23,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -57,7 +59,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(628,674);
 
-        tabMode=new DefaultTableModel(null,new String[]{"Accesion Number","No.Permintaan","Kode","Nama Pemeriksaan","Tgl & Jam Permintaan"}){
+        tabMode=new DefaultTableModel(null,new String[]{"Accesion Number","No.Permintaan","Kode","Nama Pemeriksaan","Tgl & Jam Permintaan", "Tgl & Jam Hasil"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbKamar.setModel(tabMode);
@@ -66,7 +68,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(130);
@@ -77,6 +79,8 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
             }else if(i==3){
                 column.setPreferredWidth(200);
             }else if(i==4){
+                column.setPreferredWidth(115);
+            }else if(i==5){
                 column.setPreferredWidth(115);
             }
         }
@@ -213,7 +217,8 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            runBackground(() ->tampil(TCari.getText()));
+            // runBackground(() ->tampil(TCari.getText()));
+            tampilSmc();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -222,7 +227,8 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil(TCari.getText()));
+        // runBackground(() ->tampil(TCari.getText()));
+        tampilSmc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -239,19 +245,22 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil(TCari.getText()));
+                        // runBackground(() ->tampil(TCari.getText()));
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil(TCari.getText()));
+                        // runBackground(() ->tampil(TCari.getText()));
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil(TCari.getText()));
+                        // runBackground(() ->tampil(TCari.getText()));
+                        tampilSmc();
                     }
                 }
             });
@@ -287,6 +296,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
+    /*
     public void tampil(String poli) {
         Valid.tabelKosong(tabMode);
         try{
@@ -324,6 +334,7 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public JTable getTable(){
         return tbKamar;
@@ -331,6 +342,68 @@ public final class OrthancDataACSN extends javax.swing.JDialog {
 
     public void setNoRawat(String nomor){
         norawat=nomor;
+    }
+
+    public void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select permintaan_radiologi.noorder, permintaan_pemeriksaan_radiologi.kd_jenis_prw, jns_perawatan_radiologi.nm_perawatan, permintaan_radiologi.tgl_permintaan, " +
+                        "permintaan_radiologi.jam_permintaan, permintaan_radiologi.tgl_hasil, permintaan_radiologi.jam_hasil, ifnull(satu_sehat_accession_radiologi_smc.no_acsn, '') as no_acsn " +
+                        "from permintaan_radiologi inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder = permintaan_pemeriksaan_radiologi.noorder inner join " +
+                        "jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw left join satu_sehat_accession_radiologi_smc " +
+                        "on permintaan_pemeriksaan_radiologi.noorder = satu_sehat_accession_radiologi_smc.noorder and permintaan_pemeriksaan_radiologi.kd_jenis_prw = " +
+                        "satu_sehat_accession_radiologi_smc.kd_jenis_prw where permintaan_radiologi.no_rawat = ? " + (cari.isBlank() ? "" :
+                        "and (jns_perawatan_radiologi.nm_perawatan like ? or permintaan_radiologi.noorder like ?) ") +
+                        "order by permintaan_radiologi.tgl_hasil, permintaan_radiologi.jam_hasil"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, norawat);
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    accession.getNoACSN(rs.getString("no_acsn"), rs.getString("noorder"), rs.getString("kd_jenis_prw")), rs.getString("noorder"),
+                                    rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("tgl_permintaan") + " " + rs.getString("jam_permintaan"),
+                                    rs.getString("tgl_hasil") + " " + rs.getString("jam_hasil")
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    OrthancDataACSN.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
     }
 
     private void runBackground(Runnable task) {

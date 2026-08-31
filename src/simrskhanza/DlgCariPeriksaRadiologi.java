@@ -116,14 +116,15 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeDicom=new DefaultTableModel(null,new Object[]{
-            "UUID Pasien","ID Studies","ID Series"}){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+            "UUID Pasien","ID Studies","ID Series","Tanggal","Jam","Deskripsi"
+        }){
+            @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbListDicom.setModel(tabModeDicom);
         tbListDicom.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbListDicom.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < tabModeDicom.getColumnCount(); i++) {
             TableColumn column = tbListDicom.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -131,6 +132,12 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                 column.setPreferredWidth(310);
             }else if(i==2){
                 column.setPreferredWidth(310);
+            }else if(i==3){
+                column.setPreferredWidth(75);
+            }else if(i==4){
+                column.setPreferredWidth(75);
+            }else if(i==5){
+                column.setPreferredWidth(110);
             }
         }
         tbListDicom.setDefaultRenderer(Object.class, new WarnaTable());
@@ -2813,7 +2820,10 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
                              for(JsonNode list:root){
                                  for(JsonNode sublist:list.path("Series")){
                                       tabModeDicom.addRow(new Object[]{
-                                           list.path("PatientMainDicomTags").path("PatientID").asText(),list.path("ID").asText(),sublist.asText()
+                                           list.path("PatientMainDicomTags").path("PatientID").asText(),list.path("ID").asText(),sublist.asText(),
+                                           Valid.getTglSmc(list.path("MainDicomTags").path("StudyDate").asText(), "yyyyMMdd"),
+                                           Valid.getJamSmc(list.path("MainDicomTags").path("StudyTime").asText(), "HHmmss"),
+                                           list.path("MainDicomTags").path("StudyDescription").asText()
                                       });
                                  }
                              }
