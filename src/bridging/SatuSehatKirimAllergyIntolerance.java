@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -582,123 +583,123 @@ public final class SatuSehatKirimAllergyIntolerance extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
-                FileReader myObj=null;
-                try {
-                    String dicari=tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","").replaceAll("\t", ""),
-                           category="",coding_system="",coding_code="",coding_display="",text="";
-                    myObj = new FileReader("./cache/alergisatusehat.iyem");
-                    root = mapper.readTree(myObj);
-                    response = root.path("alergi");
-                    if(response.isArray()){
-                        for(JsonNode list:response){
-                            if(dicari.contains(list.path("keyword").asText())){
-                                category=list.path("category").asText();
-                                coding_system=list.path("coding_system").asText();
-                                coding_code=list.path("coding_code").asText();
-                                coding_display=list.path("coding_display").asText();
-                                text=list.path("text").asText();
-                                break;
-                            }
-                        }
-                    }
-                    if(!category.equals("")){
-                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"AllergyIntolerance\"," +
-                                        "\"identifier\": [" +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/allergy/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"clinicalStatus\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\"," +
-                                                    "\"code\": \"active\"," +
-                                                    "\"display\": \"Active\"" +
-                                                "}" +
-                                            "]" +
-                                        "}," +
-                                        "\"verificationStatus\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification\"," +
-                                                    "\"code\": \"confirmed\"," +
-                                                    "\"display\": \"Confirmed\"" +
-                                                "}" +
-                                            "]" +
-                                        "}," +
-                                        "\"category\": [" +
-                                            "\""+category+"\"" +
-                                        "]," +
-                                        "\"code\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \""+coding_system+"\"," +
-                                                    "\"code\": \""+coding_code+"\"," +
-                                                    "\"display\": \""+coding_display+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"text\": \""+text+"\"" +
-                                        "},"+
-                                        "\"patient\": {" +
-                                            "\"reference\" : \"Patient/"+idpasien+"\"," +
-                                            "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"encounter\" : {" +
-                                            "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
-                                            "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                        "}," +
-                                        "\"recordedDate\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"recorder\": {" +
-                                            "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
-                                            "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}" +
-                                    "}";
-                            System.out.println("URL : "+link+"/AllergyIntolerance");
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/AllergyIntolerance", HttpMethod.POST, requestEntity);
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_allergy_intolerance","?,?,?,?,?","Rencana Perawatan",5,new String[]{
-                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,10),tbObat.getValueAt(i,10).toString().substring(11,19),tbObat.getValueAt(i,12).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,11);
-                                    tbObat.setValueAt(false,i,0);
+        ResourceSender.run(this,"Mengirim AllergyIntolerance ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
+                    FileReader myObj=null;
+                    try {
+                        String dicari=tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","").replaceAll("\t", ""),
+                               category="",coding_system="",coding_code="",coding_display="",text="";
+                        myObj = new FileReader("./cache/alergisatusehat.iyem");
+                        root = mapper.readTree(myObj);
+                        response = root.path("alergi");
+                        if(response.isArray()){
+                            for(JsonNode list:response){
+                                if(dicari.contains(list.path("keyword").asText())){
+                                    category=list.path("category").asText();
+                                    coding_system=list.path("coding_system").asText();
+                                    coding_code=list.path("coding_code").asText();
+                                    coding_display=list.path("coding_display").asText();
+                                    text=list.path("text").asText();
+                                    break;
                                 }
                             }
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
                         }
+                        if(!category.equals("")){
+                            idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{" +
+                                            "\"resourceType\": \"AllergyIntolerance\"," +
+                                            "\"identifier\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/allergy/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"clinicalStatus\": {" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\"," +
+                                                        "\"code\": \"active\"," +
+                                                        "\"display\": \"Active\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}," +
+                                            "\"verificationStatus\": {" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification\"," +
+                                                        "\"code\": \"confirmed\"," +
+                                                        "\"display\": \"Confirmed\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}," +
+                                            "\"category\": [" +
+                                                "\""+category+"\"" +
+                                            "]," +
+                                            "\"code\": {" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \""+coding_system+"\"," +
+                                                        "\"code\": \""+coding_code+"\"," +
+                                                        "\"display\": \""+coding_display+"\"" +
+                                                    "}" +
+                                                "]," +
+                                                "\"text\": \""+text+"\"" +
+                                            "},"+
+                                            "\"patient\": {" +
+                                                "\"reference\" : \"Patient/"+idpasien+"\"," +
+                                                "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "}," +
+                                            "\"encounter\" : {" +
+                                                "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
+                                                "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                            "}," +
+                                            "\"recordedDate\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"recorder\": {" +
+                                                "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
+                                                "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}" +
+                                        "}";
+                                System.out.println("URL : "+link+"/AllergyIntolerance");
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/AllergyIntolerance", HttpMethod.POST, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                root = mapper.readTree(json);
+                                response = root.path("id");
+                                if(!response.asText().equals("")){
+                                    if(Sequel.menyimpantf2("satu_sehat_allergy_intolerance","?,?,?,?,?","Rencana Perawatan",5,new String[]{
+                                        tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,10),tbObat.getValueAt(i,10).toString().substring(11,19),tbObat.getValueAt(i,12).toString(),response.asText()
+                                    })==true){
+                                        pengirim.setValueAt(tbObat,response.asText(),i,11);
+                                        pengirim.setValueAt(tbObat,false,i,0);
+                                    }
+                                }
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
+                        }
+                        myObj.close();
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    }finally {
+                        if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                        response = null;
+                        root = null;
                     }
-                    myObj.close();
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }finally {
-                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
-                    response = null;
-                    root = null;
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -714,115 +715,115 @@ public final class SatuSehatKirimAllergyIntolerance extends javax.swing.JDialog 
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
-                FileReader myObj=null;
-                try {
-                    String dicari=tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","").replaceAll("\t", ""),
-                           category="",coding_system="",coding_code="",coding_display="",text="";
-                    myObj = new FileReader("./cache/alergisatusehat.iyem");
-                    root = mapper.readTree(myObj);
-                    response = root.path("alergi");
-                    if(response.isArray()){
-                        for(JsonNode list:response){
-                            if(dicari.contains(list.path("keyword").asText())){
-                                category=list.path("category").asText();
-                                coding_system=list.path("coding_system").asText();
-                                coding_code=list.path("coding_code").asText();
-                                coding_display=list.path("coding_display").asText();
-                                text=list.path("text").asText();
-                                break;
+        ResourceSender.run(this,"Memperbarui AllergyIntolerance di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
+                    FileReader myObj=null;
+                    try {
+                        String dicari=tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","").replaceAll("\t", ""),
+                               category="",coding_system="",coding_code="",coding_display="",text="";
+                        myObj = new FileReader("./cache/alergisatusehat.iyem");
+                        root = mapper.readTree(myObj);
+                        response = root.path("alergi");
+                        if(response.isArray()){
+                            for(JsonNode list:response){
+                                if(dicari.contains(list.path("keyword").asText())){
+                                    category=list.path("category").asText();
+                                    coding_system=list.path("coding_system").asText();
+                                    coding_code=list.path("coding_code").asText();
+                                    coding_display=list.path("coding_display").asText();
+                                    text=list.path("text").asText();
+                                    break;
+                                }
                             }
                         }
-                    }
-                    if(!category.equals("")){
-                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"AllergyIntolerance\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
-                                        "\"identifier\": [" +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/allergy/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"clinicalStatus\": {" +
-                                            "\"coding\": [" +
+                        if(!category.equals("")){
+                            idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
+                            idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{" +
+                                            "\"resourceType\": \"AllergyIntolerance\"," +
+                                            "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
+                                            "\"identifier\": [" +
                                                 "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\"," +
-                                                    "\"code\": \"active\"," +
-                                                    "\"display\": \"Active\"" +
-                                                "}" +
-                                            "]" +
-                                        "}," +
-                                        "\"verificationStatus\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification\"," +
-                                                    "\"code\": \"confirmed\"," +
-                                                    "\"display\": \"Confirmed\"" +
-                                                "}" +
-                                            "]" +
-                                        "}," +
-                                        "\"category\": [" +
-                                            "\""+category+"\"" +
-                                        "]," +
-                                        "\"code\": {" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \""+coding_system+"\"," +
-                                                    "\"code\": \""+coding_code+"\"," +
-                                                    "\"display\": \""+coding_display+"\"" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/allergy/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
                                                 "}" +
                                             "]," +
-                                            "\"text\": \""+text+"\"" +
-                                        "},"+
-                                        "\"patient\": {" +
-                                            "\"reference\" : \"Patient/"+idpasien+"\"," +
-                                            "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"encounter\" : {" +
-                                            "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
-                                            "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                        "}," +
-                                        "\"recordedDate\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"recorder\": {" +
-                                            "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
-                                            "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}" +
-                                    "}";
-                            System.out.println("URL : "+link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString());
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.kirimSmc(link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
-                            System.out.println("Result JSON : "+json);
-                            tbObat.setValueAt(false,i,0);
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
+                                            "\"clinicalStatus\": {" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\"," +
+                                                        "\"code\": \"active\"," +
+                                                        "\"display\": \"Active\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}," +
+                                            "\"verificationStatus\": {" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification\"," +
+                                                        "\"code\": \"confirmed\"," +
+                                                        "\"display\": \"Confirmed\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}," +
+                                            "\"category\": [" +
+                                                "\""+category+"\"" +
+                                            "]," +
+                                            "\"code\": {" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \""+coding_system+"\"," +
+                                                        "\"code\": \""+coding_code+"\"," +
+                                                        "\"display\": \""+coding_display+"\"" +
+                                                    "}" +
+                                                "]," +
+                                                "\"text\": \""+text+"\"" +
+                                            "},"+
+                                            "\"patient\": {" +
+                                                "\"reference\" : \"Patient/"+idpasien+"\"," +
+                                                "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "}," +
+                                            "\"encounter\" : {" +
+                                                "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
+                                                "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                            "}," +
+                                            "\"recordedDate\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"recorder\": {" +
+                                                "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
+                                                "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}" +
+                                        "}";
+                                System.out.println("URL : "+link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString());
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                pengirim.setValueAt(tbObat,false,i,0);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
                         }
+                        myObj.close();
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    }finally {
+                        if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                        response = null;
+                        root = null;
                     }
-                    myObj.close();
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }finally {
-                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
-                    response = null;
-                    root = null;
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

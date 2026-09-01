@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -603,85 +604,85 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,12).toString().equals("")){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Procedure\"," +
-                                    "\"status\": \"completed\","+
-                                    "\"category\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \"http://snomed.info/sct\"," +
-                                                "\"code\": \"103693007\"," +
-                                                "\"display\": \"Diagnostic procedure\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"text\":\"Diagnostic procedure\""+
-                                    "}," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \"http://hl7.org/fhir/sid/icd-9-cm\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
-                                        "\"display\": \"Prosedur "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}," +
-                                    "\"performedPeriod\": {" +
-                                        "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\","+
-                                        "\"end\": \""+tbObat.getValueAt(i,8).toString()+"\""+
-                                    "}"+
-                                "}";
-                        System.out.println("URL : "+link+"/Procedure");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.kirimSmc(link+"/Procedure", HttpMethod.POST, requestEntity);
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_procedure","?,?,?,?","Prosedur",4,new String[]{
-                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,12);
-                                tbObat.setValueAt(false,i,0);
-                            }
+        ResourceSender.run(this,"Mengirim Procedure ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,12).toString().equals("")){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Procedure\"," +
+                                        "\"status\": \"completed\","+
+                                        "\"category\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://snomed.info/sct\"," +
+                                                    "\"code\": \"103693007\"," +
+                                                    "\"display\": \"Diagnostic procedure\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\":\"Diagnostic procedure\""+
+                                        "}," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://hl7.org/fhir/sid/icd-9-cm\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
+                                            "\"display\": \"Prosedur "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}," +
+                                        "\"performedPeriod\": {" +
+                                            "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\","+
+                                            "\"end\": \""+tbObat.getValueAt(i,8).toString()+"\""+
+                                        "}"+
+                                    "}";
+                            System.out.println("URL : "+link+"/Procedure");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Procedure", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_procedure","?,?,?,?","Prosedur",4,new String[]{
+                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,12);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
+                            }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -697,77 +698,77 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,12).toString().equals(""))){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
+        ResourceSender.run(this,"Memperbarui Procedure di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,12).toString().equals(""))){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Procedure\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,12).toString()+"\"," +
+                                        "\"status\": \"completed\","+
+                                        "\"category\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://snomed.info/sct\"," +
+                                                    "\"code\": \"103693007\"," +
+                                                    "\"display\": \"Diagnostic procedure\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\":\"Diagnostic procedure\""+
+                                        "}," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://hl7.org/fhir/sid/icd-9-cm\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
+                                            "\"display\": \"Prosedur "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}," +
+                                        "\"performedPeriod\": {" +
+                                            "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\","+
+                                            "\"end\": \""+tbObat.getValueAt(i,8).toString()+"\""+
+                                        "}"+
+                                    "}";
+                            System.out.println("URL : "+link+"/Procedure/"+tbObat.getValueAt(i,12).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Procedure/"+tbObat.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Procedure\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,12).toString()+"\"," +
-                                    "\"status\": \"completed\","+
-                                    "\"category\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \"http://snomed.info/sct\"," +
-                                                "\"code\": \"103693007\"," +
-                                                "\"display\": \"Diagnostic procedure\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"text\":\"Diagnostic procedure\""+
-                                    "}," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \"http://hl7.org/fhir/sid/icd-9-cm\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
-                                        "\"display\": \"Prosedur "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}," +
-                                    "\"performedPeriod\": {" +
-                                        "\"start\": \""+tbObat.getValueAt(i,1).toString()+"\","+
-                                        "\"end\": \""+tbObat.getValueAt(i,8).toString()+"\""+
-                                    "}"+
-                                "}";
-                        System.out.println("URL : "+link+"/Procedure/"+tbObat.getValueAt(i,12).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.kirimSmc(link+"/Procedure/"+tbObat.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity);
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

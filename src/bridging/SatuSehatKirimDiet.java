@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -599,119 +600,119 @@ public final class SatuSehatKirimDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
-                try {
-                    idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (idpraktisi.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\" : \"Composition\"," +
-                                    "\"identifier\" : {" +
-                                        "\"system\" : \"http://sys-ids.kemkes.go.id/composition/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                        "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
-                                    "}," +
-                                    "\"status\" : \"final\"," +
-                                    "\"type\" : {" +
-                                        "\"coding\" : [" +
-                                            "{" +
-                                                "\"system\" : \"http://loinc.org\"," +
-                                                "\"code\" : \"18842-5\"," +
-                                                "\"display\" : \"Discharge summary\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"category\" : [" +
-                                        "{" +
+        ResourceSender.run(this,"Mengirim Diet ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
+                    try {
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (idpraktisi.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\" : \"Composition\"," +
+                                        "\"identifier\" : {" +
+                                            "\"system\" : \"http://sys-ids.kemkes.go.id/composition/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                        "}," +
+                                        "\"status\" : \"final\"," +
+                                        "\"type\" : {" +
                                             "\"coding\" : [" +
                                                 "{" +
                                                     "\"system\" : \"http://loinc.org\"," +
-                                                    "\"code\" : \"LP173421-1\"," +
-                                                    "\"display\" : \"Report\"" +
+                                                    "\"code\" : \"18842-5\"," +
+                                                    "\"display\" : \"Discharge summary\"" +
                                                 "}" +
                                             "]" +
-                                        "}" +
-                                    "]," +
-                                    "\"subject\" : {" +
-                                        "\"reference\" : \"Patient/"+idpasien+"\"," +
-                                        "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\" : {" +
-                                        "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
-                                        "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                    "}," +
-                                    "\"date\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"author\" : [" +
-                                        "{" +
-                                            "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
-                                            "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"title\" : \"Modul Gizi\"," +
-                                    "\"custodian\" : {" +
-                                        "\"reference\" : \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
-                                    "}," +
-                                    "\"section\" : [" +
-                                        "{" +
-                                            "\"code\" : {" +
+                                        "}," +
+                                        "\"category\" : [" +
+                                            "{" +
                                                 "\"coding\" : [" +
                                                     "{" +
                                                         "\"system\" : \"http://loinc.org\"," +
-                                                        "\"code\" : \"42344-2\"," +
-                                                        "\"display\" : \"Discharge diet (narrative)\"" +
+                                                        "\"code\" : \"LP173421-1\"," +
+                                                        "\"display\" : \"Report\"" +
                                                     "}" +
                                                 "]" +
-                                            "}," +
-                                            "\"text\" : {" +
-                                                "\"status\" : \"additional\"," +
-                                                "\"div\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                             "}" +
-                                        "}" +
-                                    "]" +
-                                "}";
-                        System.out.println("URL : "+link+"/Composition");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.kirimSmc(link+"/Composition", HttpMethod.POST, requestEntity);
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_diet","?,?,?","Diet/Gizi",3,new String[]{
-                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,19),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,11);
-                                tbObat.setValueAt(false,i,0);
+                                        "]," +
+                                        "\"subject\" : {" +
+                                            "\"reference\" : \"Patient/"+idpasien+"\"," +
+                                            "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\" : {" +
+                                            "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
+                                            "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                        "}," +
+                                        "\"date\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"author\" : [" +
+                                            "{" +
+                                                "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
+                                                "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"title\" : \"Modul Gizi\"," +
+                                        "\"custodian\" : {" +
+                                            "\"reference\" : \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
+                                        "}," +
+                                        "\"section\" : [" +
+                                            "{" +
+                                                "\"code\" : {" +
+                                                    "\"coding\" : [" +
+                                                        "{" +
+                                                            "\"system\" : \"http://loinc.org\"," +
+                                                            "\"code\" : \"42344-2\"," +
+                                                            "\"display\" : \"Discharge diet (narrative)\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"text\" : {" +
+                                                    "\"status\" : \"additional\"," +
+                                                    "\"div\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                                "}" +
+                                            "}" +
+                                        "]" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Composition");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Composition", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_diet","?,?,?","Diet/Gizi",3,new String[]{
+                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,19),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,11);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -727,111 +728,111 @@ public final class SatuSehatKirimDiet extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
-                try {
-                    idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (idpraktisi.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\" : \"Composition\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
-                                    "\"identifier\" : {" +
-                                        "\"system\" : \"http://sys-ids.kemkes.go.id/composition/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                        "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
-                                    "}," +
-                                    "\"status\" : \"final\"," +
-                                    "\"type\" : {" +
-                                        "\"coding\" : [" +
-                                            "{" +
-                                                "\"system\" : \"http://loinc.org\" ," +
-                                                "\"code\" : \"18842-5\" ," +
-                                                "\"display\" : \"Discharge summary\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"category\" : [" +
-                                        "{" +
+        ResourceSender.run(this,"Memperbarui Diet di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
+                    try {
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (idpraktisi.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\" : \"Composition\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
+                                        "\"identifier\" : {" +
+                                            "\"system\" : \"http://sys-ids.kemkes.go.id/composition/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                        "}," +
+                                        "\"status\" : \"final\"," +
+                                        "\"type\" : {" +
                                             "\"coding\" : [" +
                                                 "{" +
                                                     "\"system\" : \"http://loinc.org\" ," +
-                                                    "\"code\" : \"LP173421-1\" ," +
-                                                    "\"display\" : \"Report\"" +
+                                                    "\"code\" : \"18842-5\" ," +
+                                                    "\"display\" : \"Discharge summary\"" +
                                                 "}" +
                                             "]" +
-                                        "}" +
-                                    "]," +
-                                    "\"subject\" : {" +
-                                        "\"reference\" : \"Patient/"+idpasien+"\" ," +
-                                        "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\" : {" +
-                                        "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
-                                        "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                    "}," +
-                                    "\"date\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"author\" : [" +
-                                        "{" +
-                                            "\"reference\" : \"Practitioner/"+idpraktisi+"\" ," +
-                                            "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"title\" : \"Modul Gizi\" ," +
-                                    "\"custodian\" : {" +
-                                        "\"reference\" : \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
-                                    "}," +
-                                    "\"section\" : [" +
-                                        "{" +
-                                            "\"code\" : {" +
+                                        "}," +
+                                        "\"category\" : [" +
+                                            "{" +
                                                 "\"coding\" : [" +
                                                     "{" +
                                                         "\"system\" : \"http://loinc.org\" ," +
-                                                        "\"code\" : \"42344-2\" ," +
-                                                        "\"display\" : \"Discharge diet (narrative)\"" +
+                                                        "\"code\" : \"LP173421-1\" ," +
+                                                        "\"display\" : \"Report\"" +
                                                     "}" +
                                                 "]" +
-                                            "}," +
-                                            "\"text\" : {" +
-                                                "\"status\" : \"additional\" ," +
-                                                "\"div\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                             "}" +
-                                        "}" +
-                                    "]" +
-                                "}";
-                        System.out.println("URL : "+link+"/Composition/"+tbObat.getValueAt(i,11).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.kirimSmc(link+"/Composition/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                        "]," +
+                                        "\"subject\" : {" +
+                                            "\"reference\" : \"Patient/"+idpasien+"\" ," +
+                                            "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\" : {" +
+                                            "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
+                                            "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                        "}," +
+                                        "\"date\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"author\" : [" +
+                                            "{" +
+                                                "\"reference\" : \"Practitioner/"+idpraktisi+"\" ," +
+                                                "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"title\" : \"Modul Gizi\" ," +
+                                        "\"custodian\" : {" +
+                                            "\"reference\" : \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
+                                        "}," +
+                                        "\"section\" : [" +
+                                            "{" +
+                                                "\"code\" : {" +
+                                                    "\"coding\" : [" +
+                                                        "{" +
+                                                            "\"system\" : \"http://loinc.org\" ," +
+                                                            "\"code\" : \"42344-2\" ," +
+                                                            "\"display\" : \"Discharge diet (narrative)\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"text\" : {" +
+                                                    "\"status\" : \"additional\" ," +
+                                                    "\"div\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                                "}" +
+                                            "}" +
+                                        "]" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Composition/"+tbObat.getValueAt(i,11).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Composition/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

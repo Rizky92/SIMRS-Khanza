@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -637,101 +638,101 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))&&tbObat.getValueAt(i,19).toString().equals("")){
-                try {
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"ClinicalImpression\"," +
-                                    "\"status\": \"completed\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,10).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
-                                    "\"subject\" : {"+
-                                       "\"reference\" : \"Patient/"+idpasien+"\","+
-                                       "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\""+
-                                    "},"+
-                                    "\"encounter\" : { " +
-                                      "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
-                                      "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                    "},"+
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                    "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                    "\"assessor\" : {"+
-                                      "\"reference\" : \"Practitioner/"+iddokter+"\""+
-                                    "},"+
-                                    "\"summary\" : \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\","+
-                                    "\"finding\": [" +
-                                        "{" +
-                                            "\"itemCodeableConcept\": {"+
+        ResourceSender.run(this,"Mengirim ClinicalImpression ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))&&tbObat.getValueAt(i,19).toString().equals("")){
+                    try {
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"ClinicalImpression\"," +
+                                        "\"status\": \"completed\"," +
+                                        "\"description\" : \""+tbObat.getValueAt(i,10).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") +"\"," +
+                                        "\"subject\" : {"+
+                                           "\"reference\" : \"Patient/"+idpasien+"\","+
+                                           "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\""+
+                                        "},"+
+                                        "\"encounter\" : { " +
+                                          "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
+                                          "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                        "},"+
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
+                                        "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
+                                        "\"assessor\" : {"+
+                                          "\"reference\" : \"Practitioner/"+iddokter+"\""+
+                                        "},"+
+                                        "\"summary\" : \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\","+
+                                        "\"finding\": [" +
+                                            "{" +
+                                                "\"itemCodeableConcept\": {"+
+                                                    "\"coding\": ["+
+                                                        "{"+
+                                                            "\"system\": \"http://hl7.org/fhir/sid/icd-10\","+
+                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\","+
+                                                            "\"display\": \""+tbObat.getValueAt(i,17).toString()+"\""+
+                                                        "}"+
+                                                    "]"+
+                                                "},"+
+                                                "\"itemReference\": {"+
+                                                    "\"reference\": \"Condition/"+tbObat.getValueAt(i,18).toString()+"\""+
+                                                "}"+
+                                            "}"+
+                                        "],"+
+                                        "\"prognosisCodeableConcept\": ["+
+                                            "{"+
                                                 "\"coding\": ["+
                                                     "{"+
-                                                        "\"system\": \"http://hl7.org/fhir/sid/icd-10\","+
-                                                        "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\","+
-                                                        "\"display\": \""+tbObat.getValueAt(i,17).toString()+"\""+
+                                                        "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/clinical-term\","+
+                                                        "\"code\": \"PR000001\","+
+                                                        "\"display\": \"Prognosis\""+
                                                     "}"+
                                                 "]"+
-                                            "},"+
-                                            "\"itemReference\": {"+
-                                                "\"reference\": \"Condition/"+tbObat.getValueAt(i,18).toString()+"\""+
                                             "}"+
-                                        "}"+
-                                    "],"+
-                                    "\"prognosisCodeableConcept\": ["+
-                                        "{"+
-                                            "\"coding\": ["+
-                                                "{"+
-                                                    "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/clinical-term\","+
-                                                    "\"code\": \"PR000001\","+
-                                                    "\"display\": \"Prognosis\""+
-                                                "}"+
-                                            "]"+
-                                        "}"+
-                                    "]"+
-                               "}";
-                        System.out.println("URL : "+link+"/ClinicalImpression");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.kirimSmc(link+"/ClinicalImpression", HttpMethod.POST, requestEntity);
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_clinicalimpression","?,?,?,?,?","Clinical Impression",5,new String[]{
-                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,14).toString(),tbObat.getValueAt(i,15).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,19);
-                                tbObat.setValueAt(false,i,0);
+                                        "]"+
+                                   "}";
+                            System.out.println("URL : "+link+"/ClinicalImpression");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/ClinicalImpression", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_clinicalimpression","?,?,?,?,?","Clinical Impression",5,new String[]{
+                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,14).toString(),tbObat.getValueAt(i,15).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,19);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -747,93 +748,93 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        ApiSatuSehat.resetDihentikanSmc();
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(ApiSatuSehat.isDihentikanSmc()){
-                break;
-            }
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))&&(!tbObat.getValueAt(i,19).toString().equals(""))){
-                try {
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"ClinicalImpression\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                    "\"status\": \"completed\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,10).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
-                                    "\"subject\" : {"+
-                                       "\"reference\" : \"Patient/"+idpasien+"\","+
-                                       "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\""+
-                                    "},"+
-                                    "\"encounter\" : { " +
-                                      "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
-                                      "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                    "},"+
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                    "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                    "\"assessor\" : {"+
-                                      "\"reference\" : \"Practitioner/"+iddokter+"\""+
-                                    "},"+
-                                    "\"summary\" : \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\","+
-                                    "\"finding\": [" +
-                                        "{" +
-                                            "\"itemCodeableConcept\": {"+
+        ResourceSender.run(this,"Memperbarui ClinicalImpression di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))&&(!tbObat.getValueAt(i,19).toString().equals(""))){
+                    try {
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"ClinicalImpression\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                        "\"status\": \"completed\"," +
+                                        "\"description\" : \""+tbObat.getValueAt(i,10).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
+                                        "\"subject\" : {"+
+                                           "\"reference\" : \"Patient/"+idpasien+"\","+
+                                           "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\""+
+                                        "},"+
+                                        "\"encounter\" : { " +
+                                          "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
+                                          "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                        "},"+
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
+                                        "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
+                                        "\"assessor\" : {"+
+                                          "\"reference\" : \"Practitioner/"+iddokter+"\""+
+                                        "},"+
+                                        "\"summary\" : \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\","+
+                                        "\"finding\": [" +
+                                            "{" +
+                                                "\"itemCodeableConcept\": {"+
+                                                    "\"coding\": ["+
+                                                        "{"+
+                                                            "\"system\": \"http://hl7.org/fhir/sid/icd-10\","+
+                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\","+
+                                                            "\"display\": \""+tbObat.getValueAt(i,17).toString()+"\""+
+                                                        "}"+
+                                                    "]"+
+                                                "},"+
+                                                "\"itemReference\": {"+
+                                                    "\"reference\": \"Condition/"+tbObat.getValueAt(i,18).toString()+"\""+
+                                                "}"+
+                                            "}"+
+                                        "],"+
+                                        "\"prognosisCodeableConcept\": ["+
+                                            "{"+
                                                 "\"coding\": ["+
                                                     "{"+
-                                                        "\"system\": \"http://hl7.org/fhir/sid/icd-10\","+
-                                                        "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\","+
-                                                        "\"display\": \""+tbObat.getValueAt(i,17).toString()+"\""+
+                                                        "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/clinical-term\","+
+                                                        "\"code\": \"PR000001\","+
+                                                        "\"display\": \"Prognosis\""+
                                                     "}"+
                                                 "]"+
-                                            "},"+
-                                            "\"itemReference\": {"+
-                                                "\"reference\": \"Condition/"+tbObat.getValueAt(i,18).toString()+"\""+
                                             "}"+
-                                        "}"+
-                                    "],"+
-                                    "\"prognosisCodeableConcept\": ["+
-                                        "{"+
-                                            "\"coding\": ["+
-                                                "{"+
-                                                    "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/clinical-term\","+
-                                                    "\"code\": \"PR000001\","+
-                                                    "\"display\": \"Prognosis\""+
-                                                "}"+
-                                            "]"+
-                                        "}"+
-                                    "]"+
-                               "}";
-                        System.out.println("URL : "+link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.kirimSmc(link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString(), HttpMethod.PUT, requestEntity);
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                        "]"+
+                                   "}";
+                            System.out.println("URL : "+link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
-        if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
