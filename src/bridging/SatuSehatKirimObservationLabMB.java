@@ -703,7 +703,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                         System.out.println("URL : "+link+"/Observation");
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                        json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                         System.out.println("Result JSON : "+json);
                         root = mapper.readTree(json);
                         response = root.path("id");
@@ -726,7 +726,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnKirimActionPerformed
 
@@ -816,7 +816,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                         System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Observation/"+tbObat.getValueAt(i,18).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                        json=api.kirimSmc(link+"/Observation/"+tbObat.getValueAt(i,18).toString(), HttpMethod.PUT, requestEntity);
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -830,7 +830,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 

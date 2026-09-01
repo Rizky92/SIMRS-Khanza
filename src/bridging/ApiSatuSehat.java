@@ -3,7 +3,6 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
-import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
@@ -23,14 +22,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 public class ApiSatuSehat {
     public static final int TOO_MANY_REQUESTS_SMC = 429;
+    public static final int BATAS_PERCOBAAN_SMC = 3;
+    public static final long JEDA_PERMINTAAN_SMC = 60000;
 
     private static volatile boolean dihentikanSmc = false;
 
@@ -56,18 +55,28 @@ public class ApiSatuSehat {
         }
     }
 
-    public String TokenSatuSehat(){
-        if(dihentikanSmc){
+    public String TokenSatuSehat() {
+        if (dihentikanSmc) {
             return token;
         }
-        try {
-            header = new HttpHeaders();
-            header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            requestEntity = new HttpEntity("client_id="+clientid+"&client_secret="+key,header);
-            root = mapper.readTree(getRest().exchange(urlauth+"/accesstoken?grant_type=client_credentials", HttpMethod.POST, requestEntity, String.class).getBody());
-            token=root.path("access_token").asText();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+        for (int percobaan = 1; percobaan <= BATAS_PERCOBAAN_SMC; percobaan++) {
+            try {
+                header = new HttpHeaders();
+                header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                requestEntity = new HttpEntity("client_id=" + clientid + "&client_secret=" + key, header);
+                root = mapper.readTree(getRest().exchange(urlauth + "/accesstoken?grant_type=client_credentials", HttpMethod.POST, requestEntity, String.class).getBody());
+                token = root.path("access_token").asText();
+                break;
+            } catch (Exception ex) {
+                System.out.println("Notifikasi : " + ex);
+                if (!isTooManyRequestsSmc(ex)) {
+                    break;
+                }
+                if ((percobaan >= BATAS_PERCOBAAN_SMC) || (!tungguSmc(percobaan))) {
+                    hentikanSmc();
+                    break;
+                }
+            }
         }
         return token;
     }
@@ -100,9 +109,7 @@ public class ApiSatuSehat {
         scheme=new Scheme("https",443,sslFactory);
         factory=new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        RestTemplate rest = new RestTemplate(factory);
-        rest.setErrorHandler(new PenanganKesalahanSMC());
-        return rest;
+        return new RestTemplate(factory);
     }
 
     public static boolean isDihentikanSmc() {
@@ -129,39 +136,36 @@ public class ApiSatuSehat {
         return false;
     }
 
-    public static void tandaiJikaTooManyRequestsSmc(Throwable e) {
-        if (isTooManyRequestsSmc(e)) {
-            hentikanSmc();
-        }
-    }
-
     private static void hentikanSmc() {
         dihentikanSmc = true;
-        System.out.println("Notifikasi : Permintaan ke Satu Sehat dibatasi (HTTP " + TOO_MANY_REQUESTS_SMC + "), proses pengiriman dihentikan...");
+        System.out.println("Notifikasi : Permintaan ke Satu Sehat masih dibatasi (HTTP " + TOO_MANY_REQUESTS_SMC + ") setelah " + BATAS_PERCOBAAN_SMC + " percobaan, sisa proses pengiriman dihentikan...");
     }
 
-    private static class PenanganKesalahanSMC extends DefaultResponseErrorHandler {
-        @Override
-        public boolean hasError(ClientHttpResponse response) throws IOException {
-            try {
-                return super.hasError(response);
-            } catch (IllegalArgumentException e) {
-                tandaiJikaTooManyRequestsSmc(e);
-                throw e;
-            }
+    private static boolean tungguSmc(int percobaan) {
+        System.out.println("Notifikasi : Permintaan ke Satu Sehat dibatasi (HTTP " + TOO_MANY_REQUESTS_SMC + "), menunggu " + (JEDA_PERMINTAAN_SMC / 1000) + " detik sebelum percobaan ke-" + (percobaan + 1) + "...");
+        try {
+            Thread.sleep(JEDA_PERMINTAAN_SMC);
+            return true;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return false;
         }
+    }
 
-        @Override
-        public void handleError(ClientHttpResponse response) throws IOException {
+    public String kirimSmc(String url, HttpMethod method, HttpEntity request) throws Exception {
+        for (int percobaan = 1;; percobaan++) {
             try {
-                if (TOO_MANY_REQUESTS_SMC == response.getStatusCode().value()) {
-                    hentikanSmc();
+                return getRest().exchange(url, method, request, String.class).getBody();
+            } catch (Exception e) {
+                if (!isTooManyRequestsSmc(e)) {
+                    throw e;
                 }
-            } catch (IllegalArgumentException e) {
-                tandaiJikaTooManyRequestsSmc(e);
-                throw e;
+                if ((percobaan >= BATAS_PERCOBAAN_SMC) || (!tungguSmc(percobaan))) {
+                    hentikanSmc();
+                    throw e;
+                }
             }
-            super.handleError(response);
         }
     }
+
 }

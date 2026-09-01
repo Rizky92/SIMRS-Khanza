@@ -682,7 +682,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/EpisodeOfCare");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/EpisodeOfCare", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/EpisodeOfCare", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -775,7 +775,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Encounter");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Encounter", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Encounter", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -861,7 +861,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Encounter");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Encounter", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Encounter", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -885,7 +885,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnKirimActionPerformed
 
@@ -988,7 +988,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
                         System.out.println("URL : "+link+"/Encounter/"+tbObat.getValueAt(i,15).toString());
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Encounter/"+tbObat.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                        json=api.kirimSmc(link+"/Encounter/"+tbObat.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -1002,7 +1002,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 

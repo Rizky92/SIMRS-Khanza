@@ -2402,7 +2402,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -2491,7 +2491,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -2580,7 +2580,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -2669,7 +2669,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -2757,7 +2757,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -2843,7 +2843,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -2980,7 +2980,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -3067,7 +3067,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -3154,7 +3154,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -3243,7 +3243,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -3267,7 +3267,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnKirimActionPerformed
 
@@ -3435,7 +3435,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbSuhu.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbSuhu.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbSuhu.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbSuhu.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3516,7 +3516,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbRespirasi.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3597,7 +3597,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbNadi.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbNadi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbNadi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbNadi.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3678,7 +3678,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbSpO2.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbSpO2.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbSpO2.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbSpO2.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3758,7 +3758,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbGCS.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbGCS.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbGCS.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbGCS.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3836,7 +3836,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbKesadaran.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -3948,7 +3948,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbTensi.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbTensi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbTensi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbTensi.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4029,7 +4029,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbTB.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbTB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbTB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbTB.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4110,7 +4110,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbBB.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbBB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbBB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbBB.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4191,7 +4191,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation/"+tbLP.getValueAt(i,15).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Observation/"+tbLP.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/Observation/"+tbLP.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbLP.setValueAt(false,i,0);
                         } catch (HttpClientErrorException | HttpServerErrorException e) {
@@ -4206,7 +4206,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 

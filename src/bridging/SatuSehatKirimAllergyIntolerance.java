@@ -670,7 +670,7 @@ public final class SatuSehatKirimAllergyIntolerance extends javax.swing.JDialog 
                             System.out.println("URL : "+link+"/AllergyIntolerance");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/AllergyIntolerance", HttpMethod.POST, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/AllergyIntolerance", HttpMethod.POST, requestEntity);
                             System.out.println("Result JSON : "+json);
                             root = mapper.readTree(json);
                             response = root.path("id");
@@ -697,7 +697,7 @@ public final class SatuSehatKirimAllergyIntolerance extends javax.swing.JDialog 
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnKirimActionPerformed
 
@@ -803,7 +803,7 @@ public final class SatuSehatKirimAllergyIntolerance extends javax.swing.JDialog 
                             System.out.println("URL : "+link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString());
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
+                            json=api.kirimSmc(link+"/AllergyIntolerance/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
                             System.out.println("Result JSON : "+json);
                             tbObat.setValueAt(false,i,0);
                         }catch(Exception e){
@@ -821,7 +821,7 @@ public final class SatuSehatKirimAllergyIntolerance extends javax.swing.JDialog 
             }
         }
         if(ApiSatuSehat.isDihentikanSmc()){
-            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat masih dibatasi (kode 429) setelah beberapa kali menunggu. Sisa data belum terkirim dan bisa dilanjutkan lagi nanti...!!!!");
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
