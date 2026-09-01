@@ -2334,8 +2334,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
+        ApiSatuSehat.resetDihentikanSmc();
         if(TabRawat.getSelectedIndex()==0){
             for(i=0;i<tbSuhu.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbSuhu.getValueAt(i,0).toString().equals("true")&&(!tbSuhu.getValueAt(i,5).toString().equals(""))&&(!tbSuhu.getValueAt(i,12).toString().equals(""))&&tbSuhu.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSuhu.getValueAt(i,12).toString());
@@ -2422,6 +2426,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==1){
             for(i=0;i<tbRespirasi.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbRespirasi.getValueAt(i,0).toString().equals("true")&&(!tbRespirasi.getValueAt(i,5).toString().equals(""))&&(!tbRespirasi.getValueAt(i,12).toString().equals(""))&&tbRespirasi.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbRespirasi.getValueAt(i,12).toString());
@@ -2508,6 +2515,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==2){
             for(i=0;i<tbNadi.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbNadi.getValueAt(i,0).toString().equals("true")&&(!tbNadi.getValueAt(i,5).toString().equals(""))&&(!tbNadi.getValueAt(i,12).toString().equals(""))&&tbNadi.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbNadi.getValueAt(i,12).toString());
@@ -2594,6 +2604,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==3){
             for(i=0;i<tbSpO2.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbSpO2.getValueAt(i,0).toString().equals("true")&&(!tbSpO2.getValueAt(i,5).toString().equals(""))&&(!tbSpO2.getValueAt(i,12).toString().equals(""))&&tbSpO2.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSpO2.getValueAt(i,12).toString());
@@ -2680,6 +2693,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==4){
             for(i=0;i<tbGCS.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbGCS.getValueAt(i,0).toString().equals("true")&&(!tbGCS.getValueAt(i,5).toString().equals(""))&&(!tbGCS.getValueAt(i,12).toString().equals(""))&&tbGCS.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbGCS.getValueAt(i,12).toString());
@@ -2765,6 +2781,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==5){
             for(i=0;i<tbKesadaran.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbKesadaran.getValueAt(i,0).toString().equals("true")&&(!tbKesadaran.getValueAt(i,5).toString().equals(""))&&(!tbKesadaran.getValueAt(i,12).toString().equals(""))&&tbKesadaran.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbKesadaran.getValueAt(i,12).toString());
@@ -2848,6 +2867,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==6){
             for(i=0;i<tbTensi.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbTensi.getValueAt(i,0).toString().equals("true")&&(!tbTensi.getValueAt(i,5).toString().equals(""))&&(!tbTensi.getValueAt(i,12).toString().equals(""))&&tbTensi.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTensi.getValueAt(i,12).toString());
@@ -2980,6 +3002,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==7){
             for(i=0;i<tbTB.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbTB.getValueAt(i,0).toString().equals("true")&&(!tbTB.getValueAt(i,5).toString().equals(""))&&(!tbTB.getValueAt(i,12).toString().equals(""))&&tbTB.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTB.getValueAt(i,12).toString());
@@ -3064,6 +3089,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==8){
             for(i=0;i<tbBB.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbBB.getValueAt(i,0).toString().equals("true")&&(!tbBB.getValueAt(i,5).toString().equals(""))&&(!tbBB.getValueAt(i,12).toString().equals(""))&&tbBB.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbBB.getValueAt(i,12).toString());
@@ -3150,6 +3178,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==9){
             for(i=0;i<tbLP.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbLP.getValueAt(i,0).toString().equals("true")&&(!tbLP.getValueAt(i,5).toString().equals(""))&&(!tbLP.getValueAt(i,12).toString().equals(""))&&tbLP.getValueAt(i,15).toString().equals("")){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbLP.getValueAt(i,12).toString());
@@ -3234,6 +3265,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                 }
             }
+        }
+        if(ApiSatuSehat.isDihentikanSmc()){
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
         }
     }//GEN-LAST:event_BtnKirimActionPerformed
 
@@ -3332,8 +3366,12 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
+        ApiSatuSehat.resetDihentikanSmc();
         if(TabRawat.getSelectedIndex()==0){
             for(i=0;i<tbSuhu.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbSuhu.getValueAt(i,0).toString().equals("true")&&(!tbSuhu.getValueAt(i,5).toString().equals(""))&&(!tbSuhu.getValueAt(i,12).toString().equals(""))&&(!tbSuhu.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSuhu.getValueAt(i,12).toString());
@@ -3412,6 +3450,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==1){
             for(i=0;i<tbRespirasi.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbRespirasi.getValueAt(i,0).toString().equals("true")&&(!tbRespirasi.getValueAt(i,5).toString().equals(""))&&(!tbRespirasi.getValueAt(i,12).toString().equals(""))&&(!tbRespirasi.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbRespirasi.getValueAt(i,12).toString());
@@ -3490,6 +3531,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==2){
             for(i=0;i<tbNadi.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbNadi.getValueAt(i,0).toString().equals("true")&&(!tbNadi.getValueAt(i,5).toString().equals(""))&&(!tbNadi.getValueAt(i,12).toString().equals(""))&&(!tbNadi.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbNadi.getValueAt(i,12).toString());
@@ -3568,6 +3612,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==3){
             for(i=0;i<tbSpO2.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbSpO2.getValueAt(i,0).toString().equals("true")&&(!tbSpO2.getValueAt(i,5).toString().equals(""))&&(!tbSpO2.getValueAt(i,12).toString().equals(""))&&(!tbSpO2.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSpO2.getValueAt(i,12).toString());
@@ -3646,6 +3693,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==4){
             for(i=0;i<tbGCS.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbGCS.getValueAt(i,0).toString().equals("true")&&(!tbGCS.getValueAt(i,5).toString().equals(""))&&(!tbGCS.getValueAt(i,12).toString().equals(""))&&(!tbGCS.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbGCS.getValueAt(i,12).toString());
@@ -3723,6 +3773,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==5){
             for(i=0;i<tbKesadaran.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbKesadaran.getValueAt(i,0).toString().equals("true")&&(!tbKesadaran.getValueAt(i,5).toString().equals(""))&&(!tbKesadaran.getValueAt(i,12).toString().equals(""))&&(!tbKesadaran.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbKesadaran.getValueAt(i,12).toString());
@@ -3798,6 +3851,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==6){
             for(i=0;i<tbTensi.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbTensi.getValueAt(i,0).toString().equals("true")&&(!tbTensi.getValueAt(i,5).toString().equals(""))&&(!tbTensi.getValueAt(i,12).toString().equals(""))&&(!tbTensi.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTensi.getValueAt(i,12).toString());
@@ -3907,6 +3963,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==7){
             for(i=0;i<tbTB.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbTB.getValueAt(i,0).toString().equals("true")&&(!tbTB.getValueAt(i,5).toString().equals(""))&&(!tbTB.getValueAt(i,12).toString().equals(""))&&(!tbTB.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTB.getValueAt(i,12).toString());
@@ -3985,6 +4044,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==8){
             for(i=0;i<tbBB.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbBB.getValueAt(i,0).toString().equals("true")&&(!tbBB.getValueAt(i,5).toString().equals(""))&&(!tbBB.getValueAt(i,12).toString().equals(""))&&(!tbBB.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbBB.getValueAt(i,12).toString());
@@ -4063,6 +4125,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         }else if(TabRawat.getSelectedIndex()==9){
             for(i=0;i<tbLP.getRowCount();i++){
+                if(ApiSatuSehat.isDihentikanSmc()){
+                    break;
+                }
                 if(tbLP.getValueAt(i,0).toString().equals("true")&&(!tbLP.getValueAt(i,5).toString().equals(""))&&(!tbLP.getValueAt(i,12).toString().equals(""))&&(!tbLP.getValueAt(i,15).toString().equals(""))){
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbLP.getValueAt(i,12).toString());
@@ -4139,6 +4204,9 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     }
                 }
             }
+        }
+        if(ApiSatuSehat.isDihentikanSmc()){
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 

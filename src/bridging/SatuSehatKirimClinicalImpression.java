@@ -637,7 +637,11 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
+        ApiSatuSehat.resetDihentikanSmc();
         for(i=0;i<tbObat.getRowCount();i++){
+            if(ApiSatuSehat.isDihentikanSmc()){
+                break;
+            }
             if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))&&tbObat.getValueAt(i,19).toString().equals("")){
                 try {
                     iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
@@ -725,6 +729,9 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                 }
             }
         }
+        if(ApiSatuSehat.isDihentikanSmc()){
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
+        }
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -740,7 +747,11 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
+        ApiSatuSehat.resetDihentikanSmc();
         for(i=0;i<tbObat.getRowCount();i++){
+            if(ApiSatuSehat.isDihentikanSmc()){
+                break;
+            }
             if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))&&(!tbObat.getValueAt(i,19).toString().equals(""))){
                 try {
                     iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
@@ -819,6 +830,9 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                     System.out.println("Notifikasi : "+e);
                 }
             }
+        }
+        if(ApiSatuSehat.isDihentikanSmc()){
+            JOptionPane.showMessageDialog(null,"Permintaan ke server Satu Sehat dibatasi (kode 429). Proses pengiriman dihentikan, silahkan ulangi beberapa saat lagi...!!!!");
         }
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
