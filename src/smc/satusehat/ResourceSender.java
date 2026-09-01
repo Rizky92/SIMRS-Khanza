@@ -2,6 +2,7 @@ package smc.satusehat;
 
 import bridging.ApiSatuSehat;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.CancellationException;
@@ -15,6 +16,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 public class ResourceSender extends SwingWorker<Void, Void> implements ResourceStatusWatcher {
+    private static final String TEKS_TERPANJANG = "Permintaan dibatasi Satu Sehat, menunggu 60 detik (percobaan ke-9)";
+
     private final TugasSMC tugas;
     private final JProgressBar bar;
     private final JLabel keterangan;
@@ -29,6 +32,10 @@ public class ResourceSender extends SwingWorker<Void, Void> implements ResourceS
         bar.setStringPainted(true);
 
         keterangan = new JLabel("Menyiapkan data...");
+
+        int lebar = keterangan.getFontMetrics(keterangan.getFont()).stringWidth(TEKS_TERPANJANG);
+        keterangan.setPreferredSize(new Dimension(lebar, keterangan.getPreferredSize().height));
+        bar.setPreferredSize(new Dimension(lebar, bar.getPreferredSize().height));
 
         JButton batal = new JButton("Batal");
 
@@ -50,6 +57,7 @@ public class ResourceSender extends SwingWorker<Void, Void> implements ResourceS
         addPropertyChangeListener(evt -> {
             if ("keterangan".equals(evt.getPropertyName())) {
                 keterangan.setText((String) evt.getNewValue());
+                keterangan.setToolTipText((String) evt.getNewValue());
             }
 
             if ("total".equals(evt.getPropertyName())) {
@@ -113,7 +121,7 @@ public class ResourceSender extends SwingWorker<Void, Void> implements ResourceS
 
     @Override
     public void retryUntil(int percobaan, long sisaDetik) {
-        firePropertyChange("keterangan", null, "Permintaan dibatasi Satu Sehat, menunggu " + sisaDetik + " detik untuk percobaan ke-" + (percobaan + 1) + "...");
+        firePropertyChange("keterangan", null, "Permintaan dibatasi Satu Sehat, menunggu " + sisaDetik + " detik (percobaan ke-" + (percobaan + 1) + ")");
     }
 
     @Override

@@ -134,19 +134,10 @@ public class ApiSatuSehat {
     }
 
     public static boolean isTooManyRequestsSmc(Throwable e) {
-        for (Throwable telusur = e; null != telusur; telusur = telusur.getCause()) {
-            if (telusur instanceof HttpStatusCodeException) {
-                if (TOO_MANY_REQUESTS_SMC == ((HttpStatusCodeException) telusur).getStatusCode().value()) {
-                    return true;
-                }
-            } else if ((telusur instanceof IllegalArgumentException) && (null != telusur.getMessage()) && (telusur.getMessage().contains("[" + TOO_MANY_REQUESTS_SMC + "]"))) {
-                return true;
-            }
-            if (telusur == telusur.getCause()) {
-                break;
-            }
+        if (e instanceof HttpStatusCodeException) {
+            return TOO_MANY_REQUESTS_SMC == ((HttpStatusCodeException) e).getStatusCode().value();
         }
-        return false;
+        return (null != e) && (null != e.getMessage()) && (e.getMessage().contains("[" + TOO_MANY_REQUESTS_SMC + "]"));
     }
 
     private static void stopSmc() {
