@@ -2171,7 +2171,7 @@ public class koneksiDB {
         }
         return var;
     }
-    
+
     public static String KODEAKUNPENGELUARANHARIAN() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

@@ -512,7 +512,7 @@ public class KeuanganBubes extends javax.swing.JDialog {
         if(tbDokter.getSelectedRow()>-1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgCariJurnal form=new DlgCariJurnal(null,false);
-            form.emptTeks();        
+            form.emptTeks();
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setAlwaysOnTop(false);
