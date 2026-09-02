@@ -904,6 +904,7 @@ import rekammedis.MasterRencanaKeperawatanPsikiatri;
 import rekammedis.MasterTemplateHasilRadiologi;
 import rekammedis.MasterTemplateInformasiEdukasi;
 import rekammedis.MasterTemplateLaporanOperasi;
+import rekammedis.MasterTemplatePaketMCUSMC;
 import rekammedis.MasterTemplatePemeriksaanDokter;
 import rekammedis.MasterTriaseMacamKasus;
 import rekammedis.MasterTriasePemeriksaan;
@@ -51512,7 +51513,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC;
+                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC, btnTemplatePaketMCUSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51642,6 +51643,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnJadwalDinasPegawaiSMC.setName("btnJadwalDinasPegawaiSMC");
         btnJadwalDinasPegawaiSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalDinasPegawaiSMC.addActionListener(this::btnJadwalDinasPegawaiSMCActionPerformed);
+
+        btnTemplatePaketMCUSMC = new widget.ButtonBig();
+        btnTemplatePaketMCUSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852556_doctor_files_medical_record_icon.png")));
+        btnTemplatePaketMCUSMC.setText("Master Template Paket MCU");
+        btnTemplatePaketMCUSMC.setIconTextGap(0);
+        btnTemplatePaketMCUSMC.setName("btnTemplatePaketMCUSMC");
+        btnTemplatePaketMCUSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnTemplatePaketMCUSMC.addActionListener(this::btnTemplatePaketMCUSMCActionPerformed);
     }
 
     private void isComboSMC() {
@@ -51668,6 +51677,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if (akses.getjadwal_pegawai_smc()) {
                 Panelmenu.add(btnJadwalDinasPegawaiSMC);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 10) {
+            if (akses.getmaster_template_paket_mcu_smc()) {
+                Panelmenu.add(btnTemplatePaketMCUSMC);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 11) {
@@ -51700,7 +51714,7 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
-        } else if (cmbMenu.getSelectedIndex() == 19) {
+        } else if (cmbMenu.getSelectedIndex() == 12) {
             if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
                 jmlmenu++;
@@ -51801,6 +51815,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getjadwal_pegawai_smc()) {
             Panelmenu.add(btnJadwalDinasPegawaiSMC);
+            jmlmenu++;
+        }
+
+        if (akses.getmaster_template_paket_mcu_smc()) {
+            Panelmenu.add(btnTemplatePaketMCUSMC);
             jmlmenu++;
         }
     }
@@ -51914,6 +51933,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getjadwal_pegawai_smc()) {
             if (btnJadwalDinasPegawaiSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnJadwalDinasPegawaiSMC);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getmaster_template_paket_mcu_smc()) {
+            if (btnTemplatePaketMCUSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnTemplatePaketMCUSMC);
                 jmlmenu++;
             }
         }
@@ -52119,6 +52145,20 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJadwalPegawaiSMC form = new DlgJadwalPegawaiSMC(this, false);
         form.isCek();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnTemplatePaketMCUSMCActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        MasterTemplatePaketMCUSMC form = new MasterTemplatePaketMCUSMC(this, false);
+        form.isCek();
+        form.emptTeks();
+        form.setTampil();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
