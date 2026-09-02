@@ -117,7 +117,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
 
         tabMode2=new DefaultTableModel(null,new Object[]{
                 "No.Permintaan","No.Rawat","Pasien","Pemeriksaan","Detail Pemeriksaan","Satuan","Nilai Rujukan","Permintaan","Jam","Sampel","Jam","Hasil",
-                "Jam","Kode Dokter","Dokter Perujuk","Poli Registrasi","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar"
+                "Jam","Kode Dokter","Dokter Perujuk","Poli Registrasi","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar","Method"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -126,7 +126,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
         tbLabRalan2.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbLabRalan2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbLabRalan2.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(90);
@@ -171,6 +171,8 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }else if(i==19){
                 column.setPreferredWidth(110);
+            }else if(i==20){
+                column.setPreferredWidth(100);
             }
         }
         tbLabRalan2.setDefaultRenderer(Object.class, new WarnaTable());
@@ -229,7 +231,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
         tabMode4=new DefaultTableModel(null,new Object[]{
                 "No.Permintaan","No.Rawat","Pasien","Pemeriksaan","Detail Pemeriksaan","Satuan","Nilai Rujukan","Permintaan","Jam",
                 "Sampel","Jam","Hasil","Jam","Kode Dokter","Dokter Perujuk","Kamar Terakhir","Informasi Tambahan","Diagnosis Klinis",
-                "Kode Bayar","Jenis Bayar"
+                "Kode Bayar","Jenis Bayar","Method"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -238,7 +240,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
         tbLabRanap2.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbLabRanap2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbLabRanap2.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(90);
@@ -283,6 +285,8 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }else if(i==19){
                 column.setPreferredWidth(110);
+            }else if(i==20){
+                column.setPreferredWidth(100);
             }
         }
         tbLabRanap2.setDefaultRenderer(Object.class, new WarnaTable());
@@ -1226,7 +1230,8 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                         tabMode2.getValueAt(i,16).toString()+"','"+
                                         tabMode2.getValueAt(i,17).toString()+"','"+
                                         tabMode2.getValueAt(i,18).toString()+"','"+
-                                        tabMode2.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                        tabMode2.getValueAt(i,19).toString()+"','"+
+                                        tabMode2.getValueAt(i,20).toString()+"','','','','','','','','','','','','','','','',''","Periksa Lab");
                                 }
                                 Valid.MyReport("rptLapPermintaanLab2MB.jasper","report","::[ Data Detail Permintaan Laboratorium ]::",param);
                                 break;
@@ -1344,7 +1349,8 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                                     tabMode4.getValueAt(i,16).toString()+"','"+
                                                     tabMode4.getValueAt(i,17).toString()+"','"+
                                                     tabMode4.getValueAt(i,18).toString()+"','"+
-                                                    tabMode4.getValueAt(i,19).toString()+"','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                                                    tabMode4.getValueAt(i,19).toString()+"','"+
+                                                    tabMode4.getValueAt(i,20).toString()+"','','','','','','','','','','','','','','','',''","Periksa Lab");
                                 }
                                 Valid.MyReport("rptLapPermintaanLab4MB.jasper","report","::[ Data Detail Permintaan Laboratorium ]::",param);
                                 break;
@@ -1963,7 +1969,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                     "0",rs2.getString("nm_perawatan"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                                 });
                                 ps3=koneksi.prepareStatement(
-                                        "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,"+
+                                        "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                                         "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,"+
                                         "template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa from permintaan_detail_permintaan_labmb "+
                                         "inner join template_laboratorium on permintaan_detail_permintaan_labmb.id_template=template_laboratorium.id_template "+
@@ -1987,7 +1993,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                             pa=" PA : "+rs3.getString("nilai_rujukan_pa");
                                         }
                                         Sequel.menyimpan("temporary_permintaan_labmb","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                                            "0","  "+rs3.getString("Pemeriksaan"),"",ld+la+pd+pa,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                                            "0","  "+rs3.getString("Pemeriksaan"),rs3.getString("method"),ld+la+pd+pa,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                                         });
                                     }
                                 } catch (Exception e) {
@@ -2076,7 +2082,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                     "0",rs2.getString("nm_perawatan"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                                 });
                                 ps3=koneksi.prepareStatement(
-                                        "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,"+
+                                        "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                                         "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,"+
                                         "template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa from permintaan_detail_permintaan_labmb "+
                                         "inner join template_laboratorium on permintaan_detail_permintaan_labmb.id_template=template_laboratorium.id_template "+
@@ -2100,7 +2106,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                             pa=" PA : "+rs3.getString("nilai_rujukan_pa");
                                         }
                                         Sequel.menyimpan("temporary_permintaan_labmb","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                                            "0","  "+rs3.getString("Pemeriksaan"),"",ld+la+pd+pa,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                                            "0","  "+rs3.getString("Pemeriksaan"),rs3.getString("method"),ld+la+pd+pa,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
                                         });
                                     }
                                 } catch (Exception e) {
@@ -2456,7 +2462,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                 "","",rs2.getString("nm_perawatan"),"","","","","","","","Nilai Rujukan L.D.","Nilai Rujukan L.A.","Nilai Rujukan P.D.","Nilai Rujukan P.A.","",""
                             });
                             ps3=koneksi.prepareStatement(
-                                    "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,"+
+                                    "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                                     "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,"+
                                     "template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa from permintaan_detail_permintaan_labmb "+
                                     "inner join template_laboratorium on permintaan_detail_permintaan_labmb.id_template=template_laboratorium.id_template "+
@@ -2467,7 +2473,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                 rs3=ps3.executeQuery();
                                 while(rs3.next()){
                                     tabMode.addRow(new Object[]{
-                                        "","","  "+rs3.getString("Pemeriksaan"),"","","","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"",""
+                                        "","","  "+rs3.getString("Pemeriksaan"),"",rs3.getString("method"),"","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"",""
                                     });
                                 }
                             } catch (Exception e) {
@@ -2515,7 +2521,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
             semua=CrDokter.getText().trim().equals("")&&CrPoli.getText().trim().equals("")&&TCari.getText().trim().equals("");
             ps=koneksi.prepareStatement(
                 "select permintaan_labmb.noorder,permintaan_labmb.no_rawat,reg_periksa.no_rkm_medis,"+
-                "pasien.nm_pasien,jns_perawatan_lab.nm_perawatan,template_laboratorium.Pemeriksaan,"+
+                "pasien.nm_pasien,jns_perawatan_lab.nm_perawatan,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                 "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,reg_periksa.kd_pj,"+
                 "template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
                 "template_laboratorium.nilai_rujukan_pa,permintaan_labmb.tgl_permintaan,penjab.png_jawab,"+
@@ -2575,7 +2581,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                         rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),rs.getString("tgl_sampel"),
                         rs.getString("jam_sampel"),rs.getString("tgl_hasil"),rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),
                         rs.getString("nm_dokter"),rs.getString("nm_poli"),rs.getString("informasi_tambahan"),
-                        rs.getString("diagnosa_klinis"),rs.getString("kd_pj"),rs.getString("png_jawab")
+                        rs.getString("diagnosa_klinis"),rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("method")
                     });
                 }
             } catch (Exception e) {
@@ -2774,7 +2780,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                 "","",rs2.getString("nm_perawatan"),"","","","","","","","Nilai Rujukan L.D.","Nilai Rujukan L.A.","Nilai Rujukan P.D.","Nilai Rujukan P.A.","",""
                             });
                             ps3=koneksi.prepareStatement(
-                                    "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,"+
+                                    "select permintaan_detail_permintaan_labmb.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                                     "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,"+
                                     "template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa from permintaan_detail_permintaan_labmb "+
                                     "inner join template_laboratorium on permintaan_detail_permintaan_labmb.id_template=template_laboratorium.id_template "+
@@ -2785,7 +2791,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                                 rs3=ps3.executeQuery();
                                 while(rs3.next()){
                                     tabMode3.addRow(new Object[]{
-                                        "","","  "+rs3.getString("Pemeriksaan"),"","","","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"",""
+                                        "","","  "+rs3.getString("Pemeriksaan"),"",rs3.getString("method"),"","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"",""
                                     });
                                 }
                             } catch (Exception e) {
@@ -2834,7 +2840,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
             if(cmbStatus.getSelectedIndex()==0){
                 ps=koneksi.prepareStatement(
                         "select distinct permintaan_labmb.noorder,permintaan_labmb.no_rawat,reg_periksa.no_rkm_medis,"+
-                        "pasien.nm_pasien,jns_perawatan_lab.nm_perawatan,template_laboratorium.Pemeriksaan,"+
+                        "pasien.nm_pasien,jns_perawatan_lab.nm_perawatan,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                         "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,reg_periksa.kd_pj,"+
                         "template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
                         "template_laboratorium.nilai_rujukan_pa,permintaan_labmb.tgl_permintaan,penjab.png_jawab,"+
@@ -2866,7 +2872,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
             }else{
                 ps=koneksi.prepareStatement(
                         "select distinct permintaan_labmb.noorder,permintaan_labmb.no_rawat,reg_periksa.no_rkm_medis,"+
-                        "pasien.nm_pasien,jns_perawatan_lab.nm_perawatan,template_laboratorium.Pemeriksaan,"+
+                        "pasien.nm_pasien,jns_perawatan_lab.nm_perawatan,template_laboratorium.Pemeriksaan,template_laboratorium.method,"+
                         "template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,reg_periksa.kd_pj,"+
                         "template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
                         "template_laboratorium.nilai_rujukan_pa,permintaan_labmb.tgl_permintaan,penjab.png_jawab,"+
@@ -2935,7 +2941,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                         rs.getString("tgl_permintaan"),rs.getString("jam_permintaan"),rs.getString("tgl_sampel"),rs.getString("jam_sampel"),
                         rs.getString("tgl_hasil"),rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),
                         rs.getString("nm_bangsal"),rs.getString("informasi_tambahan"),rs.getString("diagnosa_klinis"),
-                        rs.getString("kd_pj"),rs.getString("png_jawab")
+                        rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("method")
                     });
                 }
             } catch (Exception e) {

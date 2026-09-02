@@ -63,6 +63,7 @@
     <entry key="TAMPILKANCOPYRESEPDOKTERLAIN">yes</entry>
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
+    <entry key="KODEAKUNPENGELUARANHARIAN"></entry>
     <entry key="ALARMLAB">no</entry>
     <entry key="FORMALARMLAB">ralan + ranap</entry>
     <entry key="ALARMRADIOLOGI">no</entry>
