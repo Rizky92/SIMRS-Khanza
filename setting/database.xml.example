@@ -13,6 +13,7 @@
     <entry key="ADAMLABSKECAMATANID"></entry>
     <entry key="ADAMLABSKABUPATENID"></entry>
     <entry key="ADAMLABSPROVINSIID"></entry>
+    <entry key="LABORATORIUMKIRIMHASIL"></entry>
     <entry key="RESTRIKSIRMKELAHIRANBAYI">yes</entry>
     <entry key="URLKFAV2SATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/kfa-v2</entry>
     <entry key="KOMPILASIBERKASGUNAKANRIWAYATPASIEN">ralan+ranap</entry>
