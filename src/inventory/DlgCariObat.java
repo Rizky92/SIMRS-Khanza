@@ -4537,7 +4537,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-                        "o.nama_brng, a.aturan, dpo.jml, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
+                        "o.nama_brng, a.aturan, dpo.jml, dpo.tgl_kadaluarsa, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
                         "reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "detail_pemberian_obat dpo on rx.no_rawat = dpo.no_rawat and rx.tgl_perawatan = dpo.tgl_perawatan and " +
                         "rx.jam = dpo.jam join aturan_pakai a on rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan and " +
@@ -4562,7 +4562,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep3.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-                        "o.nama_brng, a.aturan, dpo.jml, k.satuan, j.nama as jenis, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "o.nama_brng, a.aturan, dpo.jml, dpo.tgl_kadaluarsa, k.satuan, j.nama as jenis, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "detail_pemberian_obat dpo on rx.no_rawat = dpo.no_rawat and rx.tgl_perawatan = dpo.tgl_perawatan and " +
                         "rx.jam = dpo.jam join aturan_pakai a on rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan " +
@@ -4574,7 +4574,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 if (Sequel.cariExistsSmc("select * from resep_obat r join obat_racikan ro on r.no_rawat = ro.no_rawat and " +
                     "r.tgl_perawatan = ro.tgl_perawatan and r.jam = ro.jam where r.no_resep = ? and ro.aturan_pakai != ''", noresep
                 )) {
-                    Valid.reportSmc("rptItemResep4.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
+                    Valid.reportSmc("rptItemResep2.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
                         "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
@@ -4588,7 +4588,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep5.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-                        "o.nama_brng, a.aturan, dpo.jml, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
+                        "o.nama_brng, a.aturan, dpo.jml, dpo.tgl_kadaluarsa, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
                         "reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "detail_pemberian_obat dpo on rx.no_rawat = dpo.no_rawat and rx.tgl_perawatan = dpo.tgl_perawatan and " +
                         "rx.jam = dpo.jam join aturan_pakai a on rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan and " +

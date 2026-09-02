@@ -3,6 +3,7 @@ package widget;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.TableCellEditor;
+import uz.ncipro.calendar.JDateTimePicker;
 
 /**
  *
@@ -36,7 +38,7 @@ public final class TanggalCellEditorSMC extends AbstractCellEditor implements Ta
     private static final Color WARNA_NORMAL = new Color(50, 50, 50);
     private static final Color WARNA_SALAH = new Color(200, 0, 0);
 
-    private final Tanggal pemilih;
+    private final PemilihTanggal pemilih;
     private final PenyuntingTanggal penyunting;
     private final SimpleDateFormat format;
 
@@ -49,7 +51,7 @@ public final class TanggalCellEditorSMC extends AbstractCellEditor implements Ta
 
         penyunting = new PenyuntingTanggal();
 
-        pemilih = new Tanggal();
+        pemilih = new PemilihTanggal();
         pemilih.setDisplayFormat(FORMAT);
         pemilih.setEditable(true);
         pemilih.setEditor(penyunting);
@@ -152,6 +154,48 @@ public final class TanggalCellEditorSMC extends AbstractCellEditor implements Ta
             return bersih.equals(format.format(hasil)) ? hasil : null;
         } catch (ParseException e) {
             return null;
+        }
+    }
+
+    /**
+     * JDateTimePicker bawaan mengurai teks dengan SimpleDateFormat lenient miliknya
+     * lalu mencetak "Unparseable date" ke stdout setiap kali isian kosong. Turunan ini
+     * menggantikan actionPerformed dengan versi JComboBox ditambah pembaruan kalender
+     * yang ketat, sehingga tidak ada lagi keluaran liar.
+     */
+    private final class PemilihTanggal extends JDateTimePicker {
+
+        /*
+         * Serial version UID
+         */
+        private static final long serialVersionUID = 1L;
+
+        PemilihTanggal() {
+            super();
+            setForeground(WARNA_NORMAL);
+            setBackground(new Color(255, 255, 255));
+            setFont(new Font("Tahoma", 0, 11));
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            setPopupVisible(false);
+
+            ComboBoxEditor penyuntingAktif = getEditor();
+            if (null != penyuntingAktif) {
+                getModel().setSelectedItem(penyuntingAktif.getItem());
+            }
+
+            Object terpilih = getSelectedItem();
+            Date tanggal = urai(null == terpilih ? null : terpilih.toString());
+            if (null != tanggal) {
+                setDate(tanggal);
+            }
+
+            String perintah = getActionCommand();
+            setActionCommand("comboBoxEdited");
+            fireActionEvent();
+            setActionCommand(perintah);
         }
     }
 
