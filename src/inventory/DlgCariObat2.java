@@ -62,6 +62,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import simrskhanza.DlgCariBangsal;
+import widget.TanggalCellEditorSMC;
 
 /**
  *
@@ -121,7 +122,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if ((colIndex==0)||(colIndex==1)||(colIndex==8)||(colIndex==9)||(colIndex==13)||(colIndex==16)||(colIndex==17)) {
+                if ((colIndex==0)||(colIndex==1)||(colIndex==8)||(colIndex==9)||(colIndex==13)||(colIndex==16)||(colIndex==17)||(colIndex==18)) {
                     a=true;
                 }
                 return a;
@@ -184,7 +185,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }else if(i==17){
                 column.setPreferredWidth(100);
             }else if(i==18){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             }
         }
         warna.kolom=1;
@@ -245,7 +247,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if ((colIndex==9)||(colIndex==10)||(colIndex==11)||(colIndex==12)||(colIndex==13)||(colIndex==16)||(colIndex==17)) {
+                if ((colIndex==9)||(colIndex==10)||(colIndex==11)||(colIndex==12)||(colIndex==13)||(colIndex==16)||(colIndex==17)||(colIndex==18)) {
                     a=true;
                 }
                 return a;
@@ -308,7 +310,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }else if(i==17){
                 column.setPreferredWidth(100);
             }else if(i==18){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             }
         }
 
@@ -1123,7 +1126,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 (Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)))),
                                             "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),
-                                            (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : "0000-00-00")
+                                            (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : null)
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1185,7 +1188,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
                                             "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),
-                                            (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : "0000-00-00")
+                                            (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : null)
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1258,7 +1261,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                         Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                         Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
                                     "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),
-                                    (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : "0000-00-00")
+                                    (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : null)
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                             Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1345,7 +1348,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                         (Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()))),
                                     "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString(),
-                                    (null != tbDetailObatRacikan.getValueAt(i,18) && (!tbDetailObatRacikan.getValueAt(i, 18).toString().isBlank()) ? tbDetailObatRacikan.getValueAt(i, 18).toString() : "0000-00-00")
+                                    (null != tbDetailObatRacikan.getValueAt(i,18) && (!tbDetailObatRacikan.getValueAt(i, 18).toString().isBlank()) ? tbDetailObatRacikan.getValueAt(i, 18).toString() : null)
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,11).toString())+
                                             Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
