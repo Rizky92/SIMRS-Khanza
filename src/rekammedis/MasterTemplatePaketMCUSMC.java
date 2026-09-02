@@ -1,31 +1,50 @@
 package rekammedis;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.tarifralan;
 import fungsi.validasi;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
+import org.apache.commons.lang3.StringUtils;
 
 public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode, tabModeRadiologi, tabModeLabPK, tabModeDetailLabPK, tabModeLabPA, tabModeLabMB, tabModeDetailLabMB, tabModeTindakanDr, tabModeTindakanPr, tabModeTindakanDrPr;
+    private static final int KOL_PILIH = 0;
+    private static final int KOL_KODE_DOKTER = 4;
+    private static final int KOL_NAMA_DOKTER = 5;
+    private static final int KOL_HARGA_TINDAKAN = 6;
+    private static final int KOL_HARGA_PERIKSA = 3;
+    private static final int KOL_HARGA_DETAIL = 6;
+    private static final int KOL_NAMA_BIAYA = 0;
+    private static final int KOL_BESAR_BIAYA = 1;
+    private static final int KOL_HAPUS_BIAYA = 2;
+
+    private final DefaultTableModel tabMode, tabModeRadiologi, tabModeLabPK, tabModeDetailLabPK, tabModeLabPA, tabModeLabMB, tabModeDetailLabMB,
+            tabModeTindakanDr, tabModeTindakanPr, tabModeTindakanDrPr, tabModeTambahanBiaya, tabModePotonganBiaya;
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
-    private final ObjectMapper mapper = new ObjectMapper();
     private volatile boolean ceksukses = false;
-    private double total = -1;
+    private boolean sedangMemuat = false;
+    private DlgCariDokter dokter;
+    private JTable tabelDokter;
 
     public MasterTemplatePaketMCUSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,347 +74,41 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }
         tbTemplate.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabModeTindakanDr = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Nama Perawatan/Tindakan", "Kategori", "Dokter Pemberi Tindakan"
-        }) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
+        tabModeTindakanDr = modelTindakan();
+        siapkanTabelTindakan(tbTindakanDr, tabModeTindakanDr);
 
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-        tbTindakanDr.setModel(tabModeTindakanDr);
-        tbTindakanDr.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbTindakanDr.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < 4; i++) {
-            TableColumn column = tbTindakanDr.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(90);
-            } else if (i == 2) {
-                column.setPreferredWidth(380);
-            } else if (i == 3) {
-                column.setPreferredWidth(150);
-            }
-        }
-        tbTindakanDr.setDefaultRenderer(Object.class, new WarnaTable());
+        tabModeTindakanDrPr = modelTindakan();
+        siapkanTabelTindakan(tbTindakanDrPr, tabModeTindakanDrPr);
 
-        tabModeTindakanDrPr = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Nama Perawatan/Tindakan", "Kategori", "Dokter Pemberi Tindakan"
-        }) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
+        tabModeTindakanPr = modelTindakan();
+        siapkanTabelTindakan(tbTindakanPr, tabModeTindakanPr);
 
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-        tbTindakanDrPr.setModel(tabModeTindakanDrPr);
-        tbTindakanDrPr.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbTindakanDrPr.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < 4; i++) {
-            TableColumn column = tbTindakanDrPr.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(90);
-            } else if (i == 2) {
-                column.setPreferredWidth(380);
-            } else if (i == 3) {
-                column.setPreferredWidth(150);
-            }
-        }
-        tbTindakanDrPr.setDefaultRenderer(Object.class, new WarnaTable());
+        tabModeRadiologi = modelPemeriksaan();
+        siapkanTabelPemeriksaan(tbRadiologi, tabModeRadiologi);
 
-        tabModeTindakanPr = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Nama Perawatan/Tindakan", "Kategori", "Dokter Pemberi Tindakan"
-        }) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
+        tabModeLabPK = modelPemeriksaan();
+        siapkanTabelPemeriksaan(tbLabPK, tabModeLabPK);
 
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-        tbTindakanPr.setModel(tabModeTindakanPr);
-        tbTindakanPr.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbTindakanPr.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < 4; i++) {
-            TableColumn column = tbTindakanPr.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(90);
-            } else if (i == 2) {
-                column.setPreferredWidth(380);
-            } else if (i == 3) {
-                column.setPreferredWidth(150);
-            }
-        }
-        tbTindakanPr.setDefaultRenderer(Object.class, new WarnaTable());
+        tabModeLabPA = modelPemeriksaan();
+        siapkanTabelPemeriksaan(tbLabPA, tabModeLabPA);
 
-        tabModeRadiologi = new DefaultTableModel(null, new Object[] {"P", "Kode Periksa", "Nama Pemeriksaan", "Harga (Rp)"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return colIndex == 0;
-            }
+        tabModeLabMB = modelPemeriksaan();
+        siapkanTabelPemeriksaan(tbLabMB, tabModeLabMB);
 
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                if (columnIndex == 0) {
-                    return Boolean.class;
-                }
+        tabModeDetailLabPK = modelDetailLab();
+        siapkanTabelDetailLab(tbDetailLabPK, tabModeDetailLabPK);
 
-                if (columnIndex == 3) {
-                    return Double.class;
-                }
+        tabModeDetailLabMB = modelDetailLab();
+        siapkanTabelDetailLab(tbDetailLabMB, tabModeDetailLabMB);
 
-                return String.class;
-            }
-        };
-        tbRadiologi.setModel(tabModeRadiologi);
-        tbRadiologi.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbRadiologi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabModeTambahanBiaya = modelBiaya();
+        siapkanTabelBiaya(tbTambahanBiaya, tabModeTambahanBiaya);
 
-        for (int i = 0; i < 3; i++) {
-            TableColumn column = tbRadiologi.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(130);
-            } else if (i == 2) {
-                column.setPreferredWidth(490);
-            }
-        }
-        tbRadiologi.setDefaultRenderer(Object.class, new WarnaTable());
-
-        tabModeLabPK = new DefaultTableModel(null, new Object[] {"P", "Kode Periksa", "Nama Pemeriksaan", "Harga (Rp)"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return colIndex == 0;
-            }
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                if (columnIndex == 0) {
-                    return Boolean.class;
-                }
-
-                if (columnIndex == 3) {
-                    return Double.class;
-                }
-
-                return String.class;
-            }
-        };
-        tbLabPK.setModel(tabModeLabPK);
-        tbLabPK.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbLabPK.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (int i = 0; i < 3; i++) {
-            TableColumn column = tbLabPK.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(100);
-            } else if (i == 2) {
-                column.setPreferredWidth(520);
-            }
-        }
-        tbLabPK.setDefaultRenderer(Object.class, new WarnaTable());
-
-        tabModeDetailLabPK = new DefaultTableModel(null, new Object[] {"P", "Pemeriksaan", "Satuan", "Nilai Rujukan", "id_template", "Kode Jenis", "Harga (Rp)"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-
-        tbDetailLabPK.setModel(tabModeDetailLabPK);
-        tbDetailLabPK.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbDetailLabPK.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (int i = 0; i < 6; i++) {
-            TableColumn column = tbDetailLabPK.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(326);
-            } else if (i == 2) {
-                column.setPreferredWidth(50);
-            } else if (i == 3) {
-                column.setPreferredWidth(315);
-            } else if (i == 4) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            } else if (i == 5) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            }
-        }
-
-        tbDetailLabPK.setDefaultRenderer(Object.class, new WarnaTable());
-
-        tabModeLabPA = new DefaultTableModel(null, new Object[] {"P", "Kode Periksa", "Nama Pemeriksaan", "Harga (Rp)"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-        tbLabPA.setModel(tabModeLabPA);
-
-        tbLabPA.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbLabPA.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (int i = 0; i < 3; i++) {
-            TableColumn column = tbLabPA.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(100);
-            } else if (i == 2) {
-                column.setPreferredWidth(520);
-            }
-        }
-        tbLabPA.setDefaultRenderer(Object.class, new WarnaTable());
-
-        tabModeLabMB = new DefaultTableModel(null, new Object[] {"P", "Kode Periksa", "Nama Pemeriksaan", "Harga (Rp)"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-        tbLabMB.setModel(tabModeLabMB);
-
-        tbLabMB.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbLabMB.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < 3; i++) {
-            TableColumn column = tbLabMB.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(100);
-            } else if (i == 2) {
-                column.setPreferredWidth(520);
-            }
-        }
-        tbLabMB.setDefaultRenderer(Object.class, new WarnaTable());
-
-        tabModeDetailLabMB = new DefaultTableModel(null, new Object[] {"P", "Pemeriksaan", "Satuan", "Nilai Rujukan", "id_template", "Kode Jenis", "Harga (Rp)"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if (colIndex == 0) {
-                    a = true;
-                }
-                return a;
-            }
-            Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-
-        tbDetailLabMB.setModel(tabModeDetailLabMB);
-        //tampilPr();
-
-        tbDetailLabMB.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbDetailLabMB.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-        for (int i = 0; i < 6; i++) {
-            TableColumn column = tbDetailLabMB.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(20);
-            } else if (i == 1) {
-                column.setPreferredWidth(326);
-            } else if (i == 2) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            } else if (i == 3) {
-                column.setPreferredWidth(315);
-            } else if (i == 4) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            } else if (i == 5) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            }
-        }
-        tbDetailLabMB.setDefaultRenderer(Object.class, new WarnaTable());
+        tabModePotonganBiaya = modelBiaya();
+        siapkanTabelBiaya(tbTambahanBiaya1, tabModePotonganBiaya);
 
         noTemplate.setDocument(new batasInput((byte) 20).getKata(noTemplate));
+        namaTemplate.setDocument(new batasInput((byte) 50).getKata(namaTemplate));
         cariRadiologi.setDocument(new batasInput((byte) 100).getKata(cariRadiologi));
         cariLabPK.setDocument(new batasInput((byte) 100).getKata(cariLabPK));
         cariDetailLabPK.setDocument(new batasInput((byte) 100).getKata(cariDetailLabPK));
@@ -403,11 +116,240 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         cariLabMB.setDocument(new batasInput((byte) 100).getKata(cariLabMB));
         cariDetailLabMB.setDocument(new batasInput((byte) 100).getKata(cariDetailLabMB));
         cariTindakanDr.setDocument(new batasInput((byte) 100).getKata(cariTindakanDr));
+        cariTindakanDrPr.setDocument(new batasInput((byte) 100).getKata(cariTindakanDrPr));
+        cariTindakanPr.setDocument(new batasInput((byte) 100).getKata(cariTindakanPr));
+        cariTambahanBiaya.setDocument(new batasInput((byte) 100).getKata(cariTambahanBiaya));
+        cariPotonganBiaya.setDocument(new batasInput((byte) 100).getKata(cariPotonganBiaya));
 
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
 
+        kodeJenisBayar.setText("-");
+        namaJenisBayar.setText("-");
+        tambahan.setText("0");
+
         ChkAccor.setSelected(false);
         isDetail();
+    }
+
+    private DefaultTableModel modelPemeriksaan() {
+        return new DefaultTableModel(null, new Object[] {"P", "Kode Periksa", "Nama Pemeriksaan", "Harga (Rp)"}) {
+            private final Class[] types = new Class[] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return KOL_PILIH == colIndex;
+            }
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
+    }
+
+    private DefaultTableModel modelDetailLab() {
+        return new DefaultTableModel(null, new Object[] {"P", "Pemeriksaan", "Satuan", "Nilai Rujukan", "id_template", "Kode Jenis", "Harga (Rp)"}) {
+            private final Class[] types = new Class[] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.Object.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return KOL_PILIH == colIndex;
+            }
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
+    }
+
+    private DefaultTableModel modelTindakan() {
+        return new DefaultTableModel(null, new Object[] {"P", "Kode", "Nama Perawatan/Tindakan", "Kategori", "Kode Dokter", "Dokter Pemberi Tindakan", "Harga (Rp)"}) {
+            private final Class[] types = new Class[] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return KOL_PILIH == colIndex;
+            }
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
+    }
+
+    private DefaultTableModel modelBiaya() {
+        return new DefaultTableModel(null, new Object[] {"Nama", "Besar Biaya (Rp)", ""}) {
+            private final Class[] types = new Class[] {
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return KOL_HAPUS_BIAYA != colIndex;
+            }
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
+    }
+
+    private void siapkanTabelPemeriksaan(widget.Table tabel, DefaultTableModel model) {
+        tabel.setModel(model);
+        tabel.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tabel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            TableColumn column = tabel.getColumnModel().getColumn(i);
+            if (i == 0) {
+                column.setPreferredWidth(20);
+            } else if (i == 1) {
+                column.setPreferredWidth(130);
+            } else if (i == 2) {
+                column.setPreferredWidth(420);
+            } else {
+                column.setPreferredWidth(110);
+            }
+        }
+        tabel.setDefaultRenderer(Object.class, new WarnaTable());
+        model.addTableModelListener(e -> hitungTotal());
+    }
+
+    private void siapkanTabelDetailLab(widget.Table tabel, DefaultTableModel model) {
+        tabel.setModel(model);
+        tabel.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tabel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            TableColumn column = tabel.getColumnModel().getColumn(i);
+            if (i == 0) {
+                column.setPreferredWidth(20);
+            } else if (i == 1) {
+                column.setPreferredWidth(326);
+            } else if (i == 2) {
+                column.setPreferredWidth(60);
+            } else if (i == 3) {
+                column.setPreferredWidth(200);
+            } else if (i == 4 || i == 5) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+                column.setPreferredWidth(0);
+            } else {
+                column.setPreferredWidth(110);
+            }
+        }
+        tabel.setDefaultRenderer(Object.class, new WarnaTable());
+    }
+
+    private void siapkanTabelTindakan(widget.Table tabel, DefaultTableModel model) {
+        tabel.setModel(model);
+        tabel.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tabel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            TableColumn column = tabel.getColumnModel().getColumn(i);
+            if (i == 0) {
+                column.setPreferredWidth(20);
+            } else if (i == 1) {
+                column.setPreferredWidth(90);
+            } else if (i == 2) {
+                column.setPreferredWidth(330);
+            } else if (i == 3) {
+                column.setPreferredWidth(120);
+            } else if (i == KOL_KODE_DOKTER) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+                column.setPreferredWidth(0);
+            } else if (i == KOL_NAMA_DOKTER) {
+                column.setPreferredWidth(200);
+            } else {
+                column.setPreferredWidth(110);
+            }
+        }
+        tabel.setDefaultRenderer(Object.class, new WarnaTable());
+        model.addTableModelListener(e -> hitungTotal());
+        tabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                int baris = tabel.rowAtPoint(evt.getPoint());
+                int kolom = tabel.columnAtPoint(evt.getPoint());
+                if (baris < 0 || kolom < 0) {
+                    return;
+                }
+                if (tabel.convertColumnIndexToModel(kolom) == KOL_NAMA_DOKTER) {
+                    pilihDokter(model, tabel.convertRowIndexToModel(baris));
+                }
+            }
+        });
+    }
+
+    private void siapkanTabelBiaya(widget.Table tabel, DefaultTableModel model) {
+        tabel.setModel(model);
+        tabel.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tabel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            TableColumn column = tabel.getColumnModel().getColumn(i);
+            if (i == KOL_NAMA_BIAYA) {
+                column.setPreferredWidth(480);
+            } else if (i == KOL_BESAR_BIAYA) {
+                column.setPreferredWidth(160);
+            } else {
+                column.setPreferredWidth(60);
+            }
+        }
+        tabel.setDefaultRenderer(Object.class, new WarnaTable());
+        model.addTableModelListener(e -> {
+            jagaBarisKosong(model);
+            hitungTotal();
+        });
+        tabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                int baris = tabel.rowAtPoint(evt.getPoint());
+                int kolom = tabel.columnAtPoint(evt.getPoint());
+                if (baris < 0 || kolom < 0) {
+                    return;
+                }
+                if (tabel.convertColumnIndexToModel(kolom) != KOL_HAPUS_BIAYA) {
+                    return;
+                }
+                if (model.getRowCount() <= 1) {
+                    kosongkanBiaya(model);
+                    return;
+                }
+                model.removeRow(tabel.convertRowIndexToModel(baris));
+                jagaBarisKosong(model);
+                hitungTotal();
+            }
+        });
+        barisBaruBiaya(model);
+    }
+
+    private void barisBaruBiaya(DefaultTableModel model) {
+        model.addRow(new Object[] {"", 0.0, "Hapus"});
+    }
+
+    private void jagaBarisKosong(DefaultTableModel model) {
+        if (sedangMemuat) {
+            return;
+        }
+        int baris = model.getRowCount();
+        if (0 == baris) {
+            barisBaruBiaya(model);
+            return;
+        }
+        Object nama = model.getValueAt(baris - 1, KOL_NAMA_BIAYA);
+        if (null != nama && !nama.toString().trim().isEmpty()) {
+            barisBaruBiaya(model);
+        }
     }
 
     /**
@@ -1521,18 +1463,16 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            BtnCariActionPerformed(null);
+            tampil();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             BtnCari.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             BtnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            tbTemplate.requestFocus();
         }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        
+        tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -1544,104 +1484,52 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbTemplateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTemplateMouseClicked
-        if (tabMode.getRowCount() != 0) {
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-            try {
-                panggilDetail();
-            } catch (java.lang.NullPointerException e) {
-            }
-            if ((evt.getClickCount() == 2) && (tbTemplate.getSelectedColumn() == 0)) {
+        if (tbTemplate.getSelectedRow() != -1) {
+            getData();
+            if (evt.getClickCount() == 2) {
                 TabRawat.setSelectedIndex(0);
             }
         }
     }//GEN-LAST:event_tbTemplateMouseClicked
 
     private void tbTemplateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTemplateKeyPressed
-        if (tabMode.getRowCount() != 0) {
-            if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
-                try {
-                    getData();
-                } catch (java.lang.NullPointerException e) {
-                }
-            } else if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-                try {
-                    getData();
-                    if (ChkAccor.isSelected() == false) {
-                        if (tbTemplate.getSelectedRow() != -1) {
-                            ChkAccor.setSelected(true);
-                            isDetail();
-                            panggilDetail();
-                            ChkAccor.setSelected(false);
-                            isDetail();
-                        }
-                    }
-                    TabRawat.setSelectedIndex(0);
-                } catch (java.lang.NullPointerException e) {
-                }
+        if (tbTemplate.getSelectedRow() != -1) {
+            if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                getData();
+            } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                getData();
+                TabRawat.setSelectedIndex(0);
             }
         }
     }//GEN-LAST:event_tbTemplateKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tbTemplate.getSelectedRow() > -1) {
-            if (akses.getkode().equals("Admin Utama")) {
-                hapus();
-            } else {
-                if (kodeJenisBayar.getText().equals(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 1).toString())) {
-                    hapus();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Hanya bisa dihapus oleh dokter yang bersangkutan..!!");
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Silahkan anda pilih data terlebih dahulu..!!");
-        }
+        hapus();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnHapusActionPerformed(null);
         } else {
-            Valid.pindah(evt, BtnBatal, BtnEdit);
+            Valid.pindah(evt, BtnSimpan, BtnEdit);
         }
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if (noTemplate.getText().trim().equals("")) {
-            Valid.textKosong(noTemplate, "No.Template");
-        } else if (kodeJenisBayar.getText().trim().equals("") || namaJenisBayar.getText().trim().equals("")) {
-            Valid.textKosong(pilihJenisBayar, "Jenis Bayar");
-        } else {
-            if (tbTemplate.getSelectedRow() > -1) {
-                if (akses.getkode().equals("Admin Utama")) {
-                    ganti();
-                } else {
-                    if (kodeJenisBayar.getText().equals(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 1).toString())) {
-                        ganti();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Hanya bisa diganti oleh dokter yang bersangkutan..!!");
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Silahkan anda pilih data terlebih dahulu..!!");
-            }
-        }
+        ganti();
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnEditActionPerformed(null);
         } else {
-            Valid.pindah(evt, BtnHapus, BtnKeluar);
+            Valid.pindah(evt, BtnHapus, BtnBatal);
         }
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        
+        tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -1665,252 +1553,270 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        
+        simpan();
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnSimpanActionPerformed(null);
+        } else {
+            Valid.pindah(evt, namaTemplate, BtnHapus);
+        }
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        
+        emptTeks();
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnBatalActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnEdit, BtnPrint);
+        }
     }//GEN-LAST:event_BtnBatalKeyPressed
 
-    /*
     private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-        Valid.pindah(evt,BtnCari,Nm);
+        Valid.pindah(evt, TCari, namaTemplate);
     }//GEN-LAST:event_TKdKeyPressed
-    */
 
     private void noTemplateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noTemplateKeyPressed
-        //Valid.pindah(evt,TCari,Nm,TCari);
+        Valid.pindah(evt, TCari, namaTemplate);
     }//GEN-LAST:event_noTemplateKeyPressed
 
     private void kodeJenisBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeJenisBayarKeyPressed
-
+        Valid.pindah(evt, namaTemplate, pilihJenisBayar);
     }//GEN-LAST:event_kodeJenisBayarKeyPressed
 
     private void pilihJenisBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihJenisBayarActionPerformed
-        DlgCariDokter dokter = new DlgCariDokter(null, false);
-        dokter.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (dokter.getTable().getSelectedRow() != -1) {
-                    kodeJenisBayar.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 0).toString());
-                    namaJenisBayar.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 1).toString());
-                }
-                kodeJenisBayar.requestFocus();
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
-        });
-        dokter.isCek();
-        dokter.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        dokter.setLocationRelativeTo(internalFrame1);
-        dokter.setAlwaysOnTop(false);
-        dokter.setVisible(true);
+        pilihPenjab();
     }//GEN-LAST:event_pilihJenisBayarActionPerformed
 
     private void pilihJenisBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pilihJenisBayarKeyPressed
-        //Valid.pindah(evt,Monitoring,BtnSimpan);
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            pilihJenisBayarActionPerformed(null);
+        }
     }//GEN-LAST:event_pilihJenisBayarKeyPressed
 
     private void btnCariRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariRadiologiActionPerformed
-        
+        tampilRadiologi();
     }//GEN-LAST:event_btnCariRadiologiActionPerformed
 
     private void cariRadiologiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariRadiologiKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilRadiologi();
+        }
     }//GEN-LAST:event_cariRadiologiKeyPressed
 
     private void cariLabPKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariLabPKKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilLabPK();
+        }
     }//GEN-LAST:event_cariLabPKKeyPressed
 
     private void btnCariLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariLabPKActionPerformed
-        
+        tampilLabPK();
     }//GEN-LAST:event_btnCariLabPKActionPerformed
 
     private void cariDetailLabPKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariDetailLabPKKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilDetailLabPK();
+        }
     }//GEN-LAST:event_cariDetailLabPKKeyPressed
 
     private void btnCariDetailLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariDetailLabPKActionPerformed
-        
+        tampilDetailLabPK();
     }//GEN-LAST:event_btnCariDetailLabPKActionPerformed
 
     private void cariLabPAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariLabPAKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilLabPA();
+        }
     }//GEN-LAST:event_cariLabPAKeyPressed
 
     private void btnCariLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariLabPAActionPerformed
-        
+        tampilLabPA();
     }//GEN-LAST:event_btnCariLabPAActionPerformed
 
     private void cariLabMBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariLabMBKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilLabMB();
+        }
     }//GEN-LAST:event_cariLabMBKeyPressed
 
     private void btnCariLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariLabMBActionPerformed
-        
+        tampilLabMB();
     }//GEN-LAST:event_btnCariLabMBActionPerformed
 
     private void cariDetailLabMBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariDetailLabMBKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilDetailLabMB();
+        }
     }//GEN-LAST:event_cariDetailLabMBKeyPressed
 
     private void btnCariDetailLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariDetailLabMBActionPerformed
-        
+        tampilDetailLabMB();
     }//GEN-LAST:event_btnCariDetailLabMBActionPerformed
 
     private void cariTindakanDrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTindakanDrKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilTindakanDr();
+        }
     }//GEN-LAST:event_cariTindakanDrKeyPressed
 
     private void btnCariTindakanDrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTindakanDrActionPerformed
-        
+        tampilTindakanDr();
     }//GEN-LAST:event_btnCariTindakanDrActionPerformed
 
     private void btnAllRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllRadiologiActionPerformed
-        
+        cariRadiologi.setText("");
+        tampilRadiologi();
     }//GEN-LAST:event_btnAllRadiologiActionPerformed
 
     private void btnAllLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLabPKActionPerformed
-        
+        cariLabPK.setText("");
+        tampilLabPK();
     }//GEN-LAST:event_btnAllLabPKActionPerformed
 
     private void btnAllDetailLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllDetailLabPKActionPerformed
-        
+        cariDetailLabPK.setText("");
+        tampilDetailLabPK();
     }//GEN-LAST:event_btnAllDetailLabPKActionPerformed
 
     private void btnAllLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLabPAActionPerformed
-        
+        cariLabPA.setText("");
+        tampilLabPA();
     }//GEN-LAST:event_btnAllLabPAActionPerformed
 
     private void btnAllLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLabMBActionPerformed
-        
+        cariLabMB.setText("");
+        tampilLabMB();
     }//GEN-LAST:event_btnAllLabMBActionPerformed
 
     private void btnAllDetailLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllDetailLabMBActionPerformed
-        
+        cariDetailLabMB.setText("");
+        tampilDetailLabMB();
     }//GEN-LAST:event_btnAllDetailLabMBActionPerformed
 
     private void btnAllTindakanDrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTindakanDrActionPerformed
-        
+        cariTindakanDr.setText("");
+        tampilTindakanDr();
     }//GEN-LAST:event_btnAllTindakanDrActionPerformed
 
     private void tbLabPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabPKMouseClicked
-        
+        if (tbLabPK.getSelectedRow() != -1 && tbLabPK.convertColumnIndexToModel(tbLabPK.getSelectedColumn()) == KOL_PILIH) {
+            tampilDetailLabPK();
+        }
     }//GEN-LAST:event_tbLabPKMouseClicked
 
     private void tbLabMBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabMBMouseClicked
-        
+        if (tbLabMB.getSelectedRow() != -1 && tbLabMB.convertColumnIndexToModel(tbLabMB.getSelectedColumn()) == KOL_PILIH) {
+            tampilDetailLabMB();
+        }
     }//GEN-LAST:event_tbLabMBMouseClicked
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
-        
+        isDetail();
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-        
+        tandaiSemua(false);
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
-        
+        tandaiSemua(true);
     }//GEN-LAST:event_ppSemuaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+        tarifralan.SetTarifRalan();
+        tampil();
+        tampilRadiologi();
+        tampilLabPK();
+        tampilLabPA();
+        tampilLabMB();
+        tampilTindakanDr();
+        tampilTindakanDrPr();
+        tampilTindakanPr();
     }//GEN-LAST:event_formWindowOpened
 
     private void namaTemplateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaTemplateKeyPressed
-        
+        Valid.pindah(evt, noTemplate, BtnSimpan);
     }//GEN-LAST:event_namaTemplateKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        
+        JOptionPane.showMessageDialog(null, "Cetakan belum tersedia untuk menu ini...!!!");
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnPrintActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnBatal, BtnKeluar);
+        }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void tambahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tambahanKeyPressed
-        
+        Valid.pindah(evt, namaTemplate, BtnSimpan);
     }//GEN-LAST:event_tambahanKeyPressed
 
     private void cariTindakanDrPrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTindakanDrPrKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilTindakanDrPr();
+        }
     }//GEN-LAST:event_cariTindakanDrPrKeyPressed
 
     private void btnCariTindakanDrPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTindakanDrPrActionPerformed
-        
+        tampilTindakanDrPr();
     }//GEN-LAST:event_btnCariTindakanDrPrActionPerformed
 
     private void btnAllTindakanDrPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTindakanDrPrActionPerformed
-        // TODO add your handling code here:
+        cariTindakanDrPr.setText("");
+        tampilTindakanDrPr();
     }//GEN-LAST:event_btnAllTindakanDrPrActionPerformed
 
     private void cariTindakanPrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTindakanPrKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tampilTindakanPr();
+        }
     }//GEN-LAST:event_cariTindakanPrKeyPressed
 
     private void btnCariTindakanPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTindakanPrActionPerformed
-        // TODO add your handling code here:
+        tampilTindakanPr();
     }//GEN-LAST:event_btnCariTindakanPrActionPerformed
 
     private void btnAllTindakanPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTindakanPrActionPerformed
-        // TODO add your handling code here:
+        cariTindakanPr.setText("");
+        tampilTindakanPr();
     }//GEN-LAST:event_btnAllTindakanPrActionPerformed
 
     private void cariTambahanBiayaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTambahanBiayaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnCariTambahanBiayaActionPerformed(null);
+        }
     }//GEN-LAST:event_cariTambahanBiayaKeyPressed
 
     private void btnCariTambahanBiayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTambahanBiayaActionPerformed
-        // TODO add your handling code here:
+        tambahBarisBiaya(tabModeTambahanBiaya, cariTambahanBiaya.getText());
     }//GEN-LAST:event_btnCariTambahanBiayaActionPerformed
 
     private void btnAllTambahanBiayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTambahanBiayaActionPerformed
-        // TODO add your handling code here:
+        cariTambahanBiaya.setText("");
+        kosongkanBiaya(tabModeTambahanBiaya);
     }//GEN-LAST:event_btnAllTambahanBiayaActionPerformed
 
     private void cariPotonganBiayaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariPotonganBiayaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnCariPotonganBiayaActionPerformed(null);
+        }
     }//GEN-LAST:event_cariPotonganBiayaKeyPressed
 
     private void btnCariPotonganBiayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPotonganBiayaActionPerformed
-        // TODO add your handling code here:
+        tambahBarisBiaya(tabModePotonganBiaya, cariPotonganBiaya.getText());
     }//GEN-LAST:event_btnCariPotonganBiayaActionPerformed
 
     private void btnAllPotonganBiayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllPotonganBiayaActionPerformed
-        // TODO add your handling code here:
+        cariPotonganBiaya.setText("");
+        kosongkanBiaya(tabModePotonganBiaya);
     }//GEN-LAST:event_btnAllPotonganBiayaActionPerformed
 
     /**
@@ -1928,7 +1834,6 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             dialog.setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
@@ -2037,16 +1942,526 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     public widget.Table tbTindakanPr;
     // End of variables declaration//GEN-END:variables
 
+    private interface PemetaBaris {
+        Object[] petakan(ResultSet rs) throws Exception;
+    }
+
+    private List<String> kataKunci(String teks) {
+        List<String> kata = new ArrayList<>();
+        if (null != teks && !teks.trim().isEmpty()) {
+            kata.addAll(Arrays.asList(StringUtils.split(teks.trim())));
+        }
+        return kata;
+    }
+
+    private boolean pakaiJenisBayar() {
+        return "Yes".equals(tarifralan.getCaraBayarRalan());
+    }
+
+    private List<Object[]> ambilTerpilih(DefaultTableModel model) {
+        List<Object[]> hasil = new ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(model.getValueAt(i, KOL_PILIH))) {
+                Object[] baris = new Object[model.getColumnCount()];
+                for (int k = 0; k < baris.length; k++) {
+                    baris[k] = model.getValueAt(i, k);
+                }
+                hasil.add(baris);
+            }
+        }
+        return hasil;
+    }
+
+    private List<String> kunciTerpilih(DefaultTableModel model, int kolomKunci) {
+        List<String> hasil = new ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(model.getValueAt(i, KOL_PILIH))) {
+                hasil.add(String.valueOf(model.getValueAt(i, kolomKunci)));
+            }
+        }
+        return hasil;
+    }
+
+    private void muat(DefaultTableModel model, int kolomKunci, String sqlDasar, String[] kolomCari, List<String> kata,
+            List<String> paramAwal, String urutan, PemetaBaris pemeta) {
+        List<Object[]> terpilih = ambilTerpilih(model);
+        List<String> sudahAda = new ArrayList<>();
+        for (Object[] baris : terpilih) {
+            sudahAda.add(String.valueOf(baris[kolomKunci]));
+        }
+
+        StringBuilder sb = new StringBuilder(sqlDasar);
+        for (int i = 0; i < kata.size(); i++) {
+            sb.append("and (");
+            for (int k = 0; k < kolomCari.length; k++) {
+                sb.append(kolomCari[k]).append(" like ?");
+                if (k < kolomCari.length - 1) {
+                    sb.append(" or ");
+                }
+            }
+            sb.append(") ");
+        }
+        sb.append(urutan);
+        String sql = sb.toString();
+
+        new SwingWorker<List<Object[]>, Void>() {
+            @Override
+            protected List<Object[]> doInBackground() throws Exception {
+                List<Object[]> hasil = new ArrayList<>();
+                try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+                    int p = 0;
+                    for (String awal : paramAwal) {
+                        ps.setString(++p, awal);
+                    }
+                    for (String q : kata) {
+                        for (int k = 0; k < kolomCari.length; k++) {
+                            ps.setString(++p, "%" + q + "%");
+                        }
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            hasil.add(pemeta.petakan(rs));
+                        }
+                    }
+                }
+                return hasil;
+            }
+
+            @Override
+            protected void done() {
+                sedangMemuat = true;
+                try {
+                    Valid.tabelKosong(model);
+                    for (Object[] baris : terpilih) {
+                        model.addRow(baris);
+                    }
+                    for (Object[] baris : get()) {
+                        if (sudahAda.contains(String.valueOf(baris[kolomKunci]))) {
+                            continue;
+                        }
+                        model.addRow(baris);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                } finally {
+                    sedangMemuat = false;
+                    hitungTotal();
+                }
+            }
+        }.execute();
+    }
+
     private void tampil() {
-        
+        List<String> kata = kataKunci(TCari.getText());
+        StringBuilder sb = new StringBuilder(
+                "select template_paket_mcu_smc.no_template, template_paket_mcu_smc.keterangan, template_paket_mcu_smc.kd_pj, "
+                + "penjab.png_jawab, template_paket_mcu_smc.tambahan_rp, template_paket_mcu_smc.diskon_rp "
+                + "from template_paket_mcu_smc inner join penjab on template_paket_mcu_smc.kd_pj = penjab.kd_pj where 1 = 1 ");
+
+        List<String> paramAwal = new ArrayList<>();
+        if (pakaiJenisBayar() && !"-".equals(kodeJenisBayar.getText())) {
+            sb.append("and (template_paket_mcu_smc.kd_pj = ? or template_paket_mcu_smc.kd_pj = '-') ");
+            paramAwal.add(kodeJenisBayar.getText());
+        }
+        for (int i = 0; i < kata.size(); i++) {
+            sb.append("and (template_paket_mcu_smc.no_template like ? or template_paket_mcu_smc.keterangan like ? or penjab.png_jawab like ?) ");
+        }
+        sb.append("order by template_paket_mcu_smc.keterangan");
+        String sql = sb.toString();
+
+        new SwingWorker<List<Object[]>, Void>() {
+            @Override
+            protected List<Object[]> doInBackground() throws Exception {
+                List<Object[]> hasil = new ArrayList<>();
+                try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+                    int p = 0;
+                    for (String awal : paramAwal) {
+                        ps.setString(++p, awal);
+                    }
+                    for (String q : kata) {
+                        ps.setString(++p, "%" + q + "%");
+                        ps.setString(++p, "%" + q + "%");
+                        ps.setString(++p, "%" + q + "%");
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            double tambahanRp = rs.getDouble("tambahan_rp");
+                            double diskonRp = rs.getDouble("diskon_rp");
+                            hasil.add(new Object[] {
+                                rs.getString("no_template"), rs.getString("keterangan"), rs.getString("png_jawab"),
+                                Valid.SetAngka(tambahanRp), Valid.SetAngka(diskonRp),
+                                Valid.SetAngka(totalTemplate(rs.getString("no_template")) + tambahanRp - diskonRp)
+                            });
+                        }
+                    }
+                }
+                return hasil;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    Valid.tabelKosong(tabMode);
+                    for (Object[] baris : get()) {
+                        tabMode.addRow(baris);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+                LCount.setText("" + tabMode.getRowCount());
+            }
+        }.execute();
+    }
+
+    private double totalTemplate(String noTemplate) {
+        String sql =
+                "select ifnull((select sum(jns_perawatan_radiologi.total_byr) from template_paket_mcu_smc_permintaan_radiologi "
+                + "inner join jns_perawatan_radiologi on template_paket_mcu_smc_permintaan_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw "
+                + "where template_paket_mcu_smc_permintaan_radiologi.no_template = ?), 0) + "
+                + "ifnull((select sum(jns_perawatan_lab.total_byr) from template_paket_mcu_smc_permintaan_lab "
+                + "inner join jns_perawatan_lab on template_paket_mcu_smc_permintaan_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw "
+                + "where template_paket_mcu_smc_permintaan_lab.no_template = ?), 0) + "
+                + "ifnull((select sum(jns_perawatan.total_byrdr) from template_paket_mcu_smc_tindakan_dr "
+                + "inner join jns_perawatan on template_paket_mcu_smc_tindakan_dr.kd_jenis_prw = jns_perawatan.kd_jenis_prw "
+                + "where template_paket_mcu_smc_tindakan_dr.no_template = ?), 0) + "
+                + "ifnull((select sum(jns_perawatan.total_byrdrpr) from template_paket_mcu_smc_tindakan_drpr "
+                + "inner join jns_perawatan on template_paket_mcu_smc_tindakan_drpr.kd_jenis_prw = jns_perawatan.kd_jenis_prw "
+                + "where template_paket_mcu_smc_tindakan_drpr.no_template = ?), 0) + "
+                + "ifnull((select sum(jns_perawatan.total_byrpr) from template_paket_mcu_smc_tindakan_pr "
+                + "inner join jns_perawatan on template_paket_mcu_smc_tindakan_pr.kd_jenis_prw = jns_perawatan.kd_jenis_prw "
+                + "where template_paket_mcu_smc_tindakan_pr.no_template = ?), 0)";
+        return Sequel.cariDoubleSmc(sql, 0, noTemplate, noTemplate, noTemplate, noTemplate, noTemplate);
+    }
+
+    private void tampilRadiologi() {
+        List<String> paramAwal = new ArrayList<>();
+        StringBuilder dasar = new StringBuilder(
+                "select kd_jenis_prw, nm_perawatan, total_byr from jns_perawatan_radiologi where status = '1' ");
+        if (pakaiJenisBayar()) {
+            dasar.append("and (kd_pj = ? or kd_pj = '-') ");
+            paramAwal.add(kodeJenisBayar.getText());
+        }
+        muat(tabModeRadiologi, 1, dasar.toString(), new String[] {"kd_jenis_prw", "nm_perawatan"},
+                kataKunci(cariRadiologi.getText()), paramAwal, "order by nm_perawatan",
+                rs -> new Object[] {false, rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getDouble("total_byr")});
+    }
+
+    private void tampilLab(DefaultTableModel model, String kategori, widget.TextBox cari) {
+        List<String> paramAwal = new ArrayList<>();
+        paramAwal.add(kategori);
+        StringBuilder dasar = new StringBuilder(
+                "select kd_jenis_prw, nm_perawatan, total_byr from jns_perawatan_lab where status = '1' and kategori = ? ");
+        if (pakaiJenisBayar()) {
+            dasar.append("and (kd_pj = ? or kd_pj = '-') ");
+            paramAwal.add(kodeJenisBayar.getText());
+        }
+        muat(model, 1, dasar.toString(), new String[] {"kd_jenis_prw", "nm_perawatan"},
+                kataKunci(cari.getText()), paramAwal, "order by nm_perawatan",
+                rs -> new Object[] {false, rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getDouble("total_byr")});
+    }
+
+    private void tampilLabPK() {
+        tampilLab(tabModeLabPK, "PK", cariLabPK);
+    }
+
+    private void tampilLabPA() {
+        tampilLab(tabModeLabPA, "PA", cariLabPA);
+    }
+
+    private void tampilLabMB() {
+        tampilLab(tabModeLabMB, "MB", cariLabMB);
+    }
+
+    private void tampilDetailLab(DefaultTableModel model, DefaultTableModel induk, widget.TextBox cari) {
+        List<String> jenis = kunciTerpilih(induk, 1);
+        if (jenis.isEmpty()) {
+            sedangMemuat = true;
+            Valid.tabelKosong(model);
+            sedangMemuat = false;
+            hitungTotal();
+            return;
+        }
+
+        StringBuilder isian = new StringBuilder();
+        for (int i = 0; i < jenis.size(); i++) {
+            isian.append(0 == i ? "?" : ",?");
+        }
+
+        String dasar = "select kd_jenis_prw, id_template, Pemeriksaan, satuan, nilai_rujukan_ld, biaya_item "
+                + "from template_laboratorium where kd_jenis_prw in (" + isian + ") ";
+        String urutan = "order by field(kd_jenis_prw," + isian + "), urut";
+
+        List<String> paramAwal = new ArrayList<>(jenis);
+        List<String> kata = kataKunci(cari.getText());
+
+        StringBuilder sb = new StringBuilder(dasar);
+        for (int i = 0; i < kata.size(); i++) {
+            sb.append("and (Pemeriksaan like ? or satuan like ?) ");
+        }
+        sb.append(urutan);
+        String sql = sb.toString();
+
+        List<Object[]> terpilih = ambilTerpilih(model);
+        List<String> sudahAda = new ArrayList<>();
+        for (Object[] baris : terpilih) {
+            sudahAda.add(String.valueOf(baris[4]));
+        }
+
+        new SwingWorker<List<Object[]>, Void>() {
+            @Override
+            protected List<Object[]> doInBackground() throws Exception {
+                List<Object[]> hasil = new ArrayList<>();
+                try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+                    int p = 0;
+                    for (String awal : paramAwal) {
+                        ps.setString(++p, awal);
+                    }
+                    for (String q : kata) {
+                        ps.setString(++p, "%" + q + "%");
+                        ps.setString(++p, "%" + q + "%");
+                    }
+                    for (String awal : paramAwal) {
+                        ps.setString(++p, awal);
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            hasil.add(new Object[] {
+                                false, rs.getString("Pemeriksaan"), rs.getString("satuan"), rs.getString("nilai_rujukan_ld"),
+                                rs.getInt("id_template"), rs.getString("kd_jenis_prw"), rs.getDouble("biaya_item")
+                            });
+                        }
+                    }
+                }
+                return hasil;
+            }
+
+            @Override
+            protected void done() {
+                sedangMemuat = true;
+                try {
+                    Valid.tabelKosong(model);
+                    for (Object[] baris : terpilih) {
+                        if (jenis.contains(String.valueOf(baris[5]))) {
+                            model.addRow(baris);
+                        }
+                    }
+                    for (Object[] baris : get()) {
+                        if (sudahAda.contains(String.valueOf(baris[4]))) {
+                            continue;
+                        }
+                        model.addRow(baris);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                } finally {
+                    sedangMemuat = false;
+                    hitungTotal();
+                }
+            }
+        }.execute();
+    }
+
+    private void tampilDetailLabPK() {
+        tampilDetailLab(tabModeDetailLabPK, tabModeLabPK, cariDetailLabPK);
+    }
+
+    private void tampilDetailLabMB() {
+        tampilDetailLab(tabModeDetailLabMB, tabModeLabMB, cariDetailLabMB);
+    }
+
+    private void tampilTindakan(DefaultTableModel model, String kolomTarif, widget.TextBox cari) {
+        List<String> paramAwal = new ArrayList<>();
+        StringBuilder dasar = new StringBuilder(
+                "select jns_perawatan.kd_jenis_prw, jns_perawatan.nm_perawatan, kategori_perawatan.nm_kategori, jns_perawatan."
+                + kolomTarif + " as tarif from jns_perawatan inner join kategori_perawatan "
+                + "on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori "
+                + "where jns_perawatan.status = '1' and jns_perawatan." + kolomTarif + " > 0 ");
+        if (pakaiJenisBayar()) {
+            dasar.append("and (jns_perawatan.kd_pj = ? or jns_perawatan.kd_pj = '-') ");
+            paramAwal.add(kodeJenisBayar.getText());
+        }
+        muat(model, 1, dasar.toString(),
+                new String[] {"jns_perawatan.kd_jenis_prw", "jns_perawatan.nm_perawatan", "kategori_perawatan.nm_kategori"},
+                kataKunci(cari.getText()), paramAwal, "order by jns_perawatan.nm_perawatan",
+                rs -> new Object[] {
+                    false, rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("nm_kategori"),
+                    "", "", rs.getDouble("tarif")
+                });
+    }
+
+    private void tampilTindakanDr() {
+        tampilTindakan(tabModeTindakanDr, "total_byrdr", cariTindakanDr);
+    }
+
+    private void tampilTindakanDrPr() {
+        tampilTindakan(tabModeTindakanDrPr, "total_byrdrpr", cariTindakanDrPr);
+    }
+
+    private void tampilTindakanPr() {
+        tampilTindakan(tabModeTindakanPr, "total_byrpr", cariTindakanPr);
+    }
+
+    private void pilihDokter(DefaultTableModel model, int baris) {
+        if (dokter == null || !dokter.isDisplayable()) {
+            dokter = new DlgCariDokter(null, true);
+            dokter.setSize(getWidth() - 20, getHeight() - 20);
+            dokter.setLocationRelativeTo(this);
+        }
+        tabelDokter = dokter.getTable();
+        dokter.isCek();
+        dokter.setVisible(true);
+        if (tabelDokter.getSelectedRow() != -1) {
+            model.setValueAt(tabelDokter.getValueAt(tabelDokter.getSelectedRow(), 0).toString(), baris, KOL_KODE_DOKTER);
+            model.setValueAt(tabelDokter.getValueAt(tabelDokter.getSelectedRow(), 1).toString(), baris, KOL_NAMA_DOKTER);
+        }
+        dokter = null;
+    }
+
+    private void tandaiSemua(boolean pilih) {
+        DefaultTableModel[] semua = {
+            tabModeRadiologi, tabModeLabPK, tabModeDetailLabPK, tabModeLabPA, tabModeLabMB, tabModeDetailLabMB,
+            tabModeTindakanDr, tabModeTindakanDrPr, tabModeTindakanPr
+        };
+        sedangMemuat = true;
+        for (DefaultTableModel model : semua) {
+            for (int i = 0; i < model.getRowCount(); i++) {
+                model.setValueAt(pilih, i, KOL_PILIH);
+            }
+        }
+        sedangMemuat = false;
+        hitungTotal();
+    }
+
+    private void tambahBarisBiaya(DefaultTableModel model, String nama) {
+        if (null == nama || nama.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama biaya masih kosong...!!!");
+            return;
+        }
+        model.insertRow(Math.max(0, model.getRowCount() - 1), new Object[] {nama.trim(), 0.0, "Hapus"});
+        hitungTotal();
+    }
+
+    private void kosongkanBiaya(DefaultTableModel model) {
+        sedangMemuat = true;
+        Valid.tabelKosong(model);
+        sedangMemuat = false;
+        barisBaruBiaya(model);
+        hitungTotal();
+    }
+
+    private double jumlahBiaya(DefaultTableModel model) {
+        double jumlah = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object nama = model.getValueAt(i, KOL_NAMA_BIAYA);
+            if (null == nama || nama.toString().trim().isEmpty()) {
+                continue;
+            }
+            jumlah += angka(model.getValueAt(i, KOL_BESAR_BIAYA));
+        }
+        return jumlah;
+    }
+
+    private double angka(Object nilai) {
+        if (null == nilai) {
+            return 0;
+        }
+        if (nilai instanceof Number) {
+            return ((Number) nilai).doubleValue();
+        }
+        try {
+            return Double.parseDouble(nilai.toString().replace(",", "").trim());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    private double jumlahTerpilih(DefaultTableModel model, int kolomHarga) {
+        double jumlah = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(model.getValueAt(i, KOL_PILIH))) {
+                jumlah += angka(model.getValueAt(i, kolomHarga));
+            }
+        }
+        return jumlah;
+    }
+
+    private void hitungTotal() {
+        if (sedangMemuat) {
+            return;
+        }
+        double total = jumlahTerpilih(tabModeRadiologi, KOL_HARGA_PERIKSA)
+                + jumlahTerpilih(tabModeLabPK, KOL_HARGA_PERIKSA)
+                + jumlahTerpilih(tabModeLabPA, KOL_HARGA_PERIKSA)
+                + jumlahTerpilih(tabModeLabMB, KOL_HARGA_PERIKSA)
+                + jumlahTerpilih(tabModeTindakanDr, KOL_HARGA_TINDAKAN)
+                + jumlahTerpilih(tabModeTindakanDrPr, KOL_HARGA_TINDAKAN)
+                + jumlahTerpilih(tabModeTindakanPr, KOL_HARGA_TINDAKAN)
+                + jumlahBiaya(tabModeTambahanBiaya)
+                - jumlahBiaya(tabModePotonganBiaya);
+        tambahan.setText(Valid.SetAngka(total));
+    }
+
+    private void pilihPenjab() {
+        List<String> kode = new ArrayList<>();
+        List<String> nama = new ArrayList<>();
+        kode.add("-");
+        nama.add("-");
+        try (PreparedStatement ps = koneksi.prepareStatement("select kd_pj, png_jawab from penjab where status = '1' order by png_jawab");
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                kode.add(rs.getString("kd_pj"));
+                nama.add(rs.getString("png_jawab"));
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        Object dipilih = JOptionPane.showInputDialog(this, "Pilih jenis bayar :", "Jenis Bayar",
+                JOptionPane.PLAIN_MESSAGE, null, nama.toArray(), namaJenisBayar.getText());
+        if (null == dipilih) {
+            return;
+        }
+
+        int urutan = nama.indexOf(dipilih.toString());
+        if (urutan < 0) {
+            return;
+        }
+
+        kodeJenisBayar.setText(kode.get(urutan));
+        namaJenisBayar.setText(nama.get(urutan));
+        tampilRadiologi();
+        tampilLabPK();
+        tampilLabPA();
+        tampilLabMB();
+        tampilTindakanDr();
+        tampilTindakanDrPr();
+        tampilTindakanPr();
     }
 
     public void emptTeks() {
-        
+        noTemplate.setText(Sequel.autonomorSmc("TPM", "template_paket_mcu_smc", 17, "0"));
+        namaTemplate.setText("");
+        kodeJenisBayar.setText("-");
+        namaJenisBayar.setText("-");
+        tandaiSemua(false);
+        kosongkanBiaya(tabModeTambahanBiaya);
+        kosongkanBiaya(tabModePotonganBiaya);
+        tampilDetailLabPK();
+        tampilDetailLabMB();
+        hitungTotal();
+        noTemplate.requestFocus();
     }
 
     private void getData() {
-        
+        if (tbTemplate.getSelectedRow() == -1) {
+            return;
+        }
+        noTemplate.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 0).toString());
+        namaTemplate.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 1).toString());
+        String kdPj = Sequel.cariIsiSmc("select kd_pj from template_paket_mcu_smc where no_template = ?", noTemplate.getText());
+        kodeJenisBayar.setText(null == kdPj || kdPj.isEmpty() ? "-" : kdPj);
+        namaJenisBayar.setText(tbTemplate.getValueAt(tbTemplate.getSelectedRow(), 2).toString());
+        panggilDetail();
     }
 
     public JTable getTable() {
@@ -2054,11 +2469,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }
 
     public void isCek() {
-        
+        BtnSimpan.setEnabled(akses.getmaster_template_paket_mcu_smc());
+        BtnEdit.setEnabled(akses.getmaster_template_paket_mcu_smc());
+        BtnHapus.setEnabled(akses.getmaster_template_paket_mcu_smc());
     }
 
     public void setTampil() {
-        
+        tampil();
     }
 
     private void isDetail() {
@@ -2075,15 +2492,239 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }
     }
 
+    private void tandai(DefaultTableModel model, int kolomKunci, List<String> kunci) {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (kunci.contains(String.valueOf(model.getValueAt(i, kolomKunci)))) {
+                model.setValueAt(true, i, KOL_PILIH);
+            }
+        }
+    }
+
+    private List<String> ambilKunci(String sql, String kolom, String... nilai) {
+        List<String> hasil = new ArrayList<>();
+        try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+            for (int i = 0; i < nilai.length; i++) {
+                ps.setString(i + 1, nilai[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    hasil.add(rs.getString(kolom));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return hasil;
+    }
+
     private void panggilDetail() {
-        
+        String no = noTemplate.getText();
+
+        sedangMemuat = true;
+        tandai(tabModeRadiologi, 1, ambilKunci(
+                "select kd_jenis_prw from template_paket_mcu_smc_permintaan_radiologi where no_template = ?", "kd_jenis_prw", no));
+
+        List<String> lab = ambilKunci(
+                "select kd_jenis_prw from template_paket_mcu_smc_permintaan_lab where no_template = ?", "kd_jenis_prw", no);
+        tandai(tabModeLabPK, 1, lab);
+        tandai(tabModeLabPA, 1, lab);
+        tandai(tabModeLabMB, 1, lab);
+
+        muatTindakanTersimpan(tabModeTindakanDr, "template_paket_mcu_smc_tindakan_dr", no);
+        muatTindakanTersimpan(tabModeTindakanDrPr, "template_paket_mcu_smc_tindakan_drpr", no);
+        muatTindakanTersimpan(tabModeTindakanPr, "template_paket_mcu_smc_tindakan_pr", no);
+
+        Valid.tabelKosong(tabModeTambahanBiaya);
+        muatBiaya(tabModeTambahanBiaya, "template_paket_mcu_smc_tambahan_biaya", no);
+        Valid.tabelKosong(tabModePotonganBiaya);
+        muatBiaya(tabModePotonganBiaya, "template_paket_mcu_smc_potongan_biaya", no);
+        sedangMemuat = false;
+
+        barisBaruBiaya(tabModeTambahanBiaya);
+        barisBaruBiaya(tabModePotonganBiaya);
+
+        tampilDetailLabPK();
+        tampilDetailLabMB();
+        hitungTotal();
+    }
+
+    private void muatTindakanTersimpan(DefaultTableModel model, String tabel, String no) {
+        String sql = "select " + tabel + ".kd_jenis_prw, " + tabel + ".kd_dokter, dokter.nm_dokter from " + tabel
+                + " left join dokter on " + tabel + ".kd_dokter = dokter.kd_dokter where " + tabel + ".no_template = ?";
+        try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+            ps.setString(1, no);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        if (rs.getString("kd_jenis_prw").equals(String.valueOf(model.getValueAt(i, 1)))) {
+                            model.setValueAt(true, i, KOL_PILIH);
+                            model.setValueAt(null == rs.getString("kd_dokter") ? "" : rs.getString("kd_dokter"), i, KOL_KODE_DOKTER);
+                            model.setValueAt(null == rs.getString("nm_dokter") ? "" : rs.getString("nm_dokter"), i, KOL_NAMA_DOKTER);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private void muatBiaya(DefaultTableModel model, String tabel, String no) {
+        try (PreparedStatement ps = koneksi.prepareStatement("select nama, besar_biaya from " + tabel + " where no_template = ? order by nama")) {
+            ps.setString(1, no);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    model.addRow(new Object[] {rs.getString("nama"), rs.getDouble("besar_biaya"), "Hapus"});
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private boolean cekMasukan() {
+        if (noTemplate.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Kode template masih kosong...!!!");
+            noTemplate.requestFocus();
+            return false;
+        }
+        if (namaTemplate.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama template masih kosong...!!!");
+            namaTemplate.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void simpan() {
+        if (!akses.getmaster_template_paket_mcu_smc()) {
+            JOptionPane.showMessageDialog(null, "Maaf, anda tidak punya hak akses...!!!");
+            return;
+        }
+        if (!cekMasukan()) {
+            return;
+        }
+        if (Sequel.cariExistsSmc("select no_template from template_paket_mcu_smc where no_template = ?", noTemplate.getText())) {
+            ganti();
+            return;
+        }
+        if (Sequel.menyimpantfSmc("template_paket_mcu_smc", "no_template, keterangan, kd_pj, tambahan_rp, diskon_rp",
+                noTemplate.getText(), namaTemplate.getText(), kodeJenisBayar.getText(),
+                Valid.setAngkaSmc(jumlahBiaya(tabModeTambahanBiaya), 2), Valid.setAngkaSmc(jumlahBiaya(tabModePotonganBiaya), 2))) {
+            simpanDetail();
+            tampil();
+            emptTeks();
+        }
     }
 
     private void ganti() {
-        
+        if (!akses.getmaster_template_paket_mcu_smc()) {
+            JOptionPane.showMessageDialog(null, "Maaf, anda tidak punya hak akses...!!!");
+            return;
+        }
+        if (!cekMasukan()) {
+            return;
+        }
+        if (Sequel.mengupdatetfSmc("template_paket_mcu_smc", "keterangan = ?, kd_pj = ?, tambahan_rp = ?, diskon_rp = ?",
+                "no_template = ?", namaTemplate.getText(), kodeJenisBayar.getText(),
+                Valid.setAngkaSmc(jumlahBiaya(tabModeTambahanBiaya), 2), Valid.setAngkaSmc(jumlahBiaya(tabModePotonganBiaya), 2),
+                noTemplate.getText())) {
+            simpanDetail();
+            tampil();
+            emptTeks();
+        }
     }
 
     private void hapus() {
-        
+        if (!akses.getmaster_template_paket_mcu_smc()) {
+            JOptionPane.showMessageDialog(null, "Maaf, anda tidak punya hak akses...!!!");
+            return;
+        }
+        if (tbTemplate.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih template yang mau dihapus...!!!");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(null, "Yakin akan menghapus template ini..??", "Konfirmasi", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+        if (Sequel.menghapustfSmc("template_paket_mcu_smc", "no_template = ?", noTemplate.getText())) {
+            tampil();
+            emptTeks();
+        }
+    }
+
+    private void hapusDetail(String tabel, String no) {
+        Sequel.menghapusSmc(tabel, "no_template = ?", no);
+    }
+
+    private void simpanDetail() {
+        String no = noTemplate.getText();
+
+        hapusDetail("template_paket_mcu_smc_detail_permintaan_lab", no);
+        hapusDetail("template_paket_mcu_smc_permintaan_lab", no);
+        hapusDetail("template_paket_mcu_smc_permintaan_radiologi", no);
+        hapusDetail("template_paket_mcu_smc_tindakan_dr", no);
+        hapusDetail("template_paket_mcu_smc_tindakan_drpr", no);
+        hapusDetail("template_paket_mcu_smc_tindakan_pr", no);
+        hapusDetail("template_paket_mcu_smc_tambahan_biaya", no);
+        hapusDetail("template_paket_mcu_smc_potongan_biaya", no);
+
+        for (String kode : kunciTerpilih(tabModeRadiologi, 1)) {
+            Sequel.menyimpanSmc("template_paket_mcu_smc_permintaan_radiologi", "no_template, kd_jenis_prw", no, kode);
+        }
+
+        List<String> lab = new ArrayList<>();
+        lab.addAll(kunciTerpilih(tabModeLabPK, 1));
+        lab.addAll(kunciTerpilih(tabModeLabPA, 1));
+        lab.addAll(kunciTerpilih(tabModeLabMB, 1));
+        for (String kode : lab) {
+            Sequel.menyimpanSmc("template_paket_mcu_smc_permintaan_lab", "no_template, kd_jenis_prw", no, kode);
+        }
+
+        simpanDetailLab(tabModeDetailLabPK, no);
+        simpanDetailLab(tabModeDetailLabMB, no);
+
+        simpanTindakan(tabModeTindakanDr, "template_paket_mcu_smc_tindakan_dr", "no_template, kd_jenis_prw, kd_dokter", no, false);
+        simpanTindakan(tabModeTindakanDrPr, "template_paket_mcu_smc_tindakan_drpr", "no_template, kd_jenis_prw, kd_dokter, nip", no, true);
+        simpanTindakan(tabModeTindakanPr, "template_paket_mcu_smc_tindakan_pr", "no_template, kd_jenis_prw, kd_dokter, nip", no, true);
+
+        simpanBiaya(tabModeTambahanBiaya, "template_paket_mcu_smc_tambahan_biaya", no);
+        simpanBiaya(tabModePotonganBiaya, "template_paket_mcu_smc_potongan_biaya", no);
+    }
+
+    private void simpanDetailLab(DefaultTableModel model, String no) {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(model.getValueAt(i, KOL_PILIH))) {
+                Sequel.menyimpanSmc("template_paket_mcu_smc_detail_permintaan_lab", "no_template, kd_jenis_prw, id_template",
+                        no, String.valueOf(model.getValueAt(i, 5)), String.valueOf(model.getValueAt(i, 4)));
+            }
+        }
+    }
+
+    private void simpanTindakan(DefaultTableModel model, String tabel, String kolom, String no, boolean adaNip) {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (!Boolean.TRUE.equals(model.getValueAt(i, KOL_PILIH))) {
+                continue;
+            }
+            Object kdDokter = model.getValueAt(i, KOL_KODE_DOKTER);
+            String dokterTerpilih = null == kdDokter || kdDokter.toString().trim().isEmpty() ? null : kdDokter.toString();
+            if (adaNip) {
+                Sequel.menyimpanSmc(tabel, kolom, no, String.valueOf(model.getValueAt(i, 1)), dokterTerpilih, null);
+            } else {
+                Sequel.menyimpanSmc(tabel, kolom, no, String.valueOf(model.getValueAt(i, 1)), dokterTerpilih);
+            }
+        }
+    }
+
+    private void simpanBiaya(DefaultTableModel model, String tabel, String no) {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object nama = model.getValueAt(i, KOL_NAMA_BIAYA);
+            if (null == nama || nama.toString().trim().isEmpty()) {
+                continue;
+            }
+            Sequel.menyimpanSmc(tabel, "no_template, nama, besar_biaya", no, nama.toString().trim(),
+                    Valid.setAngkaSmc(angka(model.getValueAt(i, KOL_BESAR_BIAYA)), 2));
+        }
     }
 }

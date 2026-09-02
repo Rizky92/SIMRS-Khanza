@@ -75,6 +75,7 @@ import permintaan.DlgPermintaanKonsultasiPerawat;
 import permintaan.DlgPermintaanLaboratorium;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
+import rekammedis.MasterCariTemplatePaketMCUSMC;
 import rekammedis.MasterCariTemplatePemeriksaan;
 import rekammedis.RMCari5SOAPTerakhir;
 import rekammedis.RMCatatanADIMEGizi;
@@ -10742,7 +10743,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
-    private void BtnChecklistKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -10755,6 +10756,25 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+    private void BtnCariTemplatePaketMCUSMCActionPerformed(ActionEvent e) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else if(Sequel.CariDokter(KdPeg.getText()).equals("")){
+            JOptionPane.showMessageDialog(null,"Template paket MCU hanya untuk dokter...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            MasterCariTemplatePaketMCUSMC form=new MasterCariTemplatePaketMCUSMC(null,false);
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.isCek();
+            form.setDokter(KdPeg.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),TNoRM.getText());
+            form.tampil2();
+            form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -11132,7 +11152,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
-    private widget.Button BtnPengkajianInvasifNonBedahSMC;
+    private widget.Button BtnPengkajianInvasifNonBedahSMC, BtnCariTemplatePaketMCUSMC;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -14491,6 +14511,18 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(210, 26));
         BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
 
+        BtnCariTemplatePaketMCUSMC = new widget.Button();
+        BtnCariTemplatePaketMCUSMC.setBackground(new java.awt.Color(255, 255, 254));
+        BtnCariTemplatePaketMCUSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnCariTemplatePaketMCUSMC.setForeground(new java.awt.Color(50, 50, 50));
+        BtnCariTemplatePaketMCUSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        BtnCariTemplatePaketMCUSMC.setText("Template Paket MCU");
+        BtnCariTemplatePaketMCUSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnCariTemplatePaketMCUSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnCariTemplatePaketMCUSMC.setName("BtnCariTemplatePaketMCUSMC");
+        BtnCariTemplatePaketMCUSMC.setPreferredSize(new java.awt.Dimension(210, 26));
+        BtnCariTemplatePaketMCUSMC.addActionListener(this::BtnCariTemplatePaketMCUSMCActionPerformed);
+
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");
 
@@ -14591,6 +14623,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         FormMenu.add(BtnCatatanPengkajianPaskaOperasi);
         FormMenu.add(BtnPengkajianInvasifNonBedahSMC);
         FormMenu.add(BtnMedicalCheckUp);
+        FormMenu.add(BtnCariTemplatePaketMCUSMC);
         FormMenu.add(BtnPenilaianPsikolog);
         FormMenu.add(BtnPenilaianPsikologKlinis);
         FormMenu.add(BtnPenilaianLanjutanRisikoJatuhDewasa);

@@ -288,7 +288,9 @@ public final class akses {
         pengkajian_tindakan_invasif_non_bedah_smc = false,
         pengajuan_izin_smc = false,
         jam_masuk_smc = false,
-        jadwal_pegawai_smc = false;
+        jadwal_pegawai_smc = false,
+        template_paket_mcu_smc = false,
+        master_template_paket_mcu_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1561,6 +1563,8 @@ public final class akses {
                         akses.satu_sehat_kirim_composition=akses.getBoolean(rs2, "satu_sehat_kirim_composition");
                         akses.ringkasan_hutang_vendor_inventaris=akses.getBoolean(rs2, "ringkasan_hutang_vendor_inventaris");
                         akses.ringkasan_beban_hutang_lain=akses.getBoolean(rs2, "ringkasan_beban_hutang_lain");
+                        akses.template_paket_mcu_smc=akses.getBoolean(rs2, "template_paket_mcu_smc");
+                        akses.master_template_paket_mcu_smc=akses.getBoolean(rs2, "master_template_paket_mcu_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2839,6 +2843,8 @@ public final class akses {
         akses.satu_sehat_kirim_composition=isadmin;
         akses.ringkasan_hutang_vendor_inventaris=isadmin;
         akses.ringkasan_beban_hutang_lain=isadmin;
+        akses.template_paket_mcu_smc=isadmin;
+        akses.master_template_paket_mcu_smc=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4119,6 +4125,8 @@ public final class akses {
     public static boolean getsatu_sehat_kirim_composition(){return akses.satu_sehat_kirim_composition;}
     public static boolean getringkasan_hutang_vendor_inventaris(){return akses.ringkasan_hutang_vendor_inventaris;}
     public static boolean getringkasan_beban_hutang_lain(){return akses.ringkasan_beban_hutang_lain;}
+    public static boolean gettemplate_paket_mcu_smc(){return akses.template_paket_mcu_smc;}
+    public static boolean getmaster_template_paket_mcu_smc(){return akses.master_template_paket_mcu_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {
         akses.edit = false;
