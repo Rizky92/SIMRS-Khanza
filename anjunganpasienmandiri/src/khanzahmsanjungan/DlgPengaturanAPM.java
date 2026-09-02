@@ -23,11 +23,16 @@ import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class DlgPengaturanAPM extends widget.Dialog {
     private final validasi Valid = new validasi();
     private DlgCariPoli2 poli = null;
-    private String userLoginFP = "", passLoginFP = "";
+    private static final String TOPENG = "************";
+    private String userLoginFP = EnkripsiAES.encrypt(""), passLoginFP = EnkripsiAES.encrypt("");
+    private boolean userFPDiubah = false, passFPDiubah = false;
+    private boolean abaikanPerubahanFP = false;
     private List<String> listPoli = null;
 
     /**
@@ -38,6 +43,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
         initComponents();
         jumlahBarcode.setDocument(new BatasInput().hanyaInteger(2));
         jumlahAntrianFarmasi.setDocument(new BatasInput().hanyaInteger(2));
+        pantauPerubahanFP();
     }
 
     /**
@@ -499,32 +505,38 @@ public class DlgPengaturanAPM extends widget.Dialog {
 
     private void peekUserFPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekUserFPMousePressed
         peekUserFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye.png")));
-        if (new String(userFP.getPassword()).equals("************")) {
-            userFP.setText(EnkripsiAES.decrypt(userLoginFP));
+        if (!userFPDiubah) {
+            String asli = EnkripsiAES.decrypt(userLoginFP);
+            if (asli != null) {
+                setTeksFP(userFP, asli);
+            }
         }
         userFP.setEchoChar((char) 0);
     }//GEN-LAST:event_peekUserFPMousePressed
 
     private void peekUserFPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekUserFPMouseReleased
         peekUserFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye2.png")));
-        if (new String(userFP.getPassword()).equals(EnkripsiAES.decrypt(userLoginFP))) {
-            userFP.setText("************");
+        if (!userFPDiubah) {
+            setTeksFP(userFP, TOPENG);
         }
         userFP.setEchoChar('\u2022');
     }//GEN-LAST:event_peekUserFPMouseReleased
 
     private void peekPasswordFPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekPasswordFPMousePressed
         peekPasswordFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye.png")));
-        if (new String(passFP.getPassword()).equals("************")) {
-            passFP.setText(EnkripsiAES.decrypt(passLoginFP));
+        if (!passFPDiubah) {
+            String asli = EnkripsiAES.decrypt(passLoginFP);
+            if (asli != null) {
+                setTeksFP(passFP, asli);
+            }
         }
         passFP.setEchoChar((char) 0);
     }//GEN-LAST:event_peekPasswordFPMousePressed
 
     private void peekPasswordFPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekPasswordFPMouseReleased
         peekPasswordFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye2.png")));
-        if (new String(passFP.getPassword()).equals(EnkripsiAES.decrypt(passLoginFP))) {
-            passFP.setText("************");
+        if (!passFPDiubah) {
+            setTeksFP(passFP, TOPENG);
         }
         passFP.setEchoChar('\u2022');
     }//GEN-LAST:event_peekPasswordFPMouseReleased
@@ -576,6 +588,51 @@ public class DlgPengaturanAPM extends widget.Dialog {
     private widget.PasswordField userFP;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Menandai kolom user/password biometrik sebagai "diubah" begitu operator
+     * mengetik di dalamnya. Perubahan yang dilakukan program sendiri (memasang
+     * atau melepas topeng) tidak ikut dihitung.
+     */
+    private void pantauPerubahanFP() {
+        DocumentListener pantau = new DocumentListener() {
+            private void tandai(DocumentEvent evt) {
+                if (abaikanPerubahanFP) {
+                    return;
+                }
+
+                if (evt.getDocument() == userFP.getDocument()) {
+                    userFPDiubah = true;
+                } else {
+                    passFPDiubah = true;
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent evt) {
+                tandai(evt);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent evt) {
+                tandai(evt);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent evt) {
+                tandai(evt);
+            }
+        };
+
+        userFP.getDocument().addDocumentListener(pantau);
+        passFP.getDocument().addDocumentListener(pantau);
+    }
+
+    private void setTeksFP(widget.PasswordField field, String teks) {
+        abaikanPerubahanFP = true;
+        field.setText(teks);
+        abaikanPerubahanFP = false;
+    }
+
     public void tampil(final boolean admin) {
         printerRegist.removeAllItems();
         printerBarcode.removeAllItems();
@@ -616,8 +673,9 @@ public class DlgPengaturanAPM extends widget.Dialog {
 
                 userLoginFP = decrypted.path("userFP").asText(EnkripsiAES.encrypt(""));
                 passLoginFP = decrypted.path("passFP").asText(EnkripsiAES.encrypt(""));
-                userFP.setText("************");
-                passFP.setText("************");
+                setTeksFP(userFP, TOPENG);
+                setTeksFP(passFP, TOPENG);
+                userFPDiubah = passFPDiubah = false;
 
                 Collection<String> c = StreamSupport.stream(decrypted.path("tombolDiaktifkan").spliterator(), false).map(JsonNode::asText).collect(Collectors.toList());
                 enableAntrian.setSelected(c.contains("antrian"));
@@ -673,13 +731,8 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 String user = new String(userFP.getPassword());
                 String pass = new String(passFP.getPassword());
 
-                if ("************".equals(user) && "************".equals(pass)) {
-                    root.put("userFP", userLoginFP);
-                    root.put("passFP", passLoginFP);
-                } else {
-                    root.put("userFP", EnkripsiAES.encrypt(user));
-                    root.put("passFP", EnkripsiAES.encrypt(pass));
-                }
+                root.put("userFP", userFPDiubah ? EnkripsiAES.encrypt(user) : userLoginFP);
+                root.put("passFP", passFPDiubah ? EnkripsiAES.encrypt(pass) : passLoginFP);
 
                 final ArrayNode td = mapper.createArrayNode();
                 if (enableAntrian.isSelected()) {
