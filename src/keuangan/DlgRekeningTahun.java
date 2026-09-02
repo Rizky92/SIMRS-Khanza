@@ -1001,6 +1001,13 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         BtnPrint.setEnabled(akses.getrekening_tahun());
     }
 
+    public Object getSelectedRow(int column) {
+        if (tbKamar.getSelectedRow() < 0) {
+            return null;
+        }
+        return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
