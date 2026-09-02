@@ -948,6 +948,12 @@ public class DlgCariJurnal extends javax.swing.JDialog {
             }.execute();
         }
     }
+    
+    public void setJurnal(String nojurnal,String tanggal){
+        NoJur.setText(nojurnal);
+        Valid.SetTgl(TglJurnal1,tanggal);
+        tampil();
+    }
 
     public void emptTeks() {
         kdrek.setText("");
