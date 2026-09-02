@@ -250,7 +250,8 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                  if(row>-1){
                      for(int i=0;i<row;i++){
                          //System.out.println(tbKamar.getValueAt(i,0).toString());
-                        if(tbKamar.getValueAt(i,14).toString().equals("")){
+                         if(tbKamar.getValueAt(i,14).toString().equals("")){
+                            /*
                              Sequel.menyimpan("template_laboratorium","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Id Hasil Periksa",17,new String[]{
                                    KdPeriksa.getText(),"0",tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),
                                    tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),tbKamar.getValueAt(i,4).toString(),
@@ -259,6 +260,13 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                                    tbKamar.getValueAt(i,11).toString(),tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),
                                    tbKamar.getValueAt(i,15).toString()
                              });
+                            */
+                            Sequel.menyimpanSmc("template_laboratorium", "kd_jenis_prw, id_template, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, nilai_rujukan_pa, " +
+                                "bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut", KdPeriksa.getText(), "0", tbKamar.getValueAt(i, 0).toString(),
+                                tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 2).toString(), tbKamar.getValueAt(i, 3).toString(), tbKamar.getValueAt(i, 4).toString(),
+                                tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 8).toString(),
+                                tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(), tbKamar.getValueAt(i, 12).toString(),
+                                tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 15).toString());
                         }else if(!tbKamar.getValueAt(i,14).toString().equals("")){
                              Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,"+
                                    "nilai_rujukan_pd=?,nilai_rujukan_pa=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",16,new String[]{
