@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -596,199 +597,206 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    if(tbObat.getValueAt(i,11).toString().equals("")){
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{"+
-                                        "\"resourceType\": \"QuestionnaireResponse\"," +
-                                        "\"status\": \"completed\"," +
-                                        "\"authored\": \""+tbObat.getValueAt(i,9).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"subject\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"source\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"" +
-                                        "}," +
-                                        "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}," +
-                                        "\"author\": {" +
-                                            "\"reference\": \"Practitioner/"+idpraktisi+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                        "}," +
-                                        "\"item\": [" +
-                                            "{" +
-                                                "\"linkId\": \"identitas\"," +
-                                                "\"text\": \"Identitas\"," +
-                                                "\"item\": [" +
-                                                    "{" +
-                                                        "\"linkId\": \"no-rawat\"," +
-                                                        "\"text\": \"No. Rawat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,2).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"no-rm\"," +
-                                                        "\"text\": \"No. RM\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,3).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"no-resep\"," +
-                                                        "\"text\": \"No. Resep\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,10).toString()+"\"}]" +
-                                                    "}" +
-                                                "]" +
+        ResourceSender.run(this,"Mengirim QRTelaahFarmasi ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        if(tbObat.getValueAt(i,11).toString().equals("")){
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{"+
+                                            "\"resourceType\": \"QuestionnaireResponse\"," +
+                                            "\"status\": \"completed\"," +
+                                            "\"authored\": \""+tbObat.getValueAt(i,9).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"subject\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
                                             "}," +
-                                            "{" +
-                                                "\"linkId\": \"telaah-resep\"," +
-                                                "\"text\": \"Telaah Resep\"," +
-                                                "\"item\": [" +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-1-tepat-identifikasi-pasien\"," +
-                                                        "\"text\": \"1. Tepat Identifikasi Pasien\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,12).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-1-tepat-identifikasi-pasien-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,13).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-2-tepat-obat\"," +
-                                                        "\"text\": \"2. Tepat Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,14).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-2-tepat-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,15).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-3-tepat-dosis\"," +
-                                                        "\"text\": \"3. Tepat Dosis\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,16).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-3-tepat-dosis-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,17).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-4-tepat-cara-pemberian\"," +
-                                                        "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,18).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-4-tepat-cara-pemberian-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,19).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-5-tepat-waktu-pemberian\"," +
-                                                        "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,20).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-5-tepat-waktu-pemberian-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,21).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-6-duplikasi-obat\"," +
-                                                        "\"text\": \"6. Ada Tidak Duplikasi Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,22).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-6-duplikasi-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,23).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-7-interaksi-obat\"," +
-                                                        "\"text\": \"7. Interaksi Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,24).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-7-interaksi-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,25).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-8-kontra-indikasi-obat\"," +
-                                                        "\"text\": \"8. Kontra Indikasi Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,26).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-8-kontra-indikasi-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,27).toString()+"\"}]" +
-                                                    "}" +
-                                                "]" +
+                                            "\"source\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"" +
                                             "}," +
-                                            "{" +
-                                                "\"linkId\": \"telaah-obat\"," +
-                                                "\"text\": \"Telaah Obat\"," +
-                                                "\"item\": [" +
-                                                    "{" +
-                                                        "\"linkId\": \"to-1-tepat-pasien\"," +
-                                                        "\"text\": \"1. Tepat Pasien\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,28).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-2-tepat-obat\"," +
-                                                        "\"text\": \"2. Tepat Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,29).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-3-tepat-dosis\"," +
-                                                        "\"text\": \"3. Tepat Dosis\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,30).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-4-tepat-cara-pemberian\"," +
-                                                        "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,31).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-5-tepat-waktu-pemberian\"," +
-                                                        "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,32).toString()+"\"}]" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]" +
-                                    "}";
-                            System.out.println("URL : "+link+"/QuestionnaireResponse");
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/QuestionnaireResponse", HttpMethod.POST, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_questionresponse_telaah_farmasi","?,?","No.Resep",2,new String[]{
-                                    tbObat.getValueAt(i,10).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,11);
-                                    tbObat.setValueAt(false,i,0);
+                                            "\"encounter\": {" +
+                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}," +
+                                            "\"author\": {" +
+                                                "\"reference\": \"Practitioner/"+idpraktisi+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "}," +
+                                            "\"item\": [" +
+                                                "{" +
+                                                    "\"linkId\": \"identitas\"," +
+                                                    "\"text\": \"Identitas\"," +
+                                                    "\"item\": [" +
+                                                        "{" +
+                                                            "\"linkId\": \"no-rawat\"," +
+                                                            "\"text\": \"No. Rawat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,2).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"no-rm\"," +
+                                                            "\"text\": \"No. RM\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,3).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"no-resep\"," +
+                                                            "\"text\": \"No. Resep\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,10).toString()+"\"}]" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "{" +
+                                                    "\"linkId\": \"telaah-resep\"," +
+                                                    "\"text\": \"Telaah Resep\"," +
+                                                    "\"item\": [" +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-1-tepat-identifikasi-pasien\"," +
+                                                            "\"text\": \"1. Tepat Identifikasi Pasien\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,12).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-1-tepat-identifikasi-pasien-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,13).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-2-tepat-obat\"," +
+                                                            "\"text\": \"2. Tepat Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,14).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-2-tepat-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,15).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-3-tepat-dosis\"," +
+                                                            "\"text\": \"3. Tepat Dosis\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,16).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-3-tepat-dosis-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,17).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-4-tepat-cara-pemberian\"," +
+                                                            "\"text\": \"4. Tepat Cara Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,18).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-4-tepat-cara-pemberian-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,19).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-5-tepat-waktu-pemberian\"," +
+                                                            "\"text\": \"5. Tepat Waktu Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,20).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-5-tepat-waktu-pemberian-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,21).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-6-duplikasi-obat\"," +
+                                                            "\"text\": \"6. Ada Tidak Duplikasi Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,22).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-6-duplikasi-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,23).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-7-interaksi-obat\"," +
+                                                            "\"text\": \"7. Interaksi Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,24).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-7-interaksi-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,25).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-8-kontra-indikasi-obat\"," +
+                                                            "\"text\": \"8. Kontra Indikasi Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,26).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-8-kontra-indikasi-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,27).toString()+"\"}]" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "{" +
+                                                    "\"linkId\": \"telaah-obat\"," +
+                                                    "\"text\": \"Telaah Obat\"," +
+                                                    "\"item\": [" +
+                                                        "{" +
+                                                            "\"linkId\": \"to-1-tepat-pasien\"," +
+                                                            "\"text\": \"1. Tepat Pasien\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,28).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-2-tepat-obat\"," +
+                                                            "\"text\": \"2. Tepat Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,29).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-3-tepat-dosis\"," +
+                                                            "\"text\": \"3. Tepat Dosis\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,30).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-4-tepat-cara-pemberian\"," +
+                                                            "\"text\": \"4. Tepat Cara Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,31).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-5-tepat-waktu-pemberian\"," +
+                                                            "\"text\": \"5. Tepat Waktu Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,32).toString()+"\"}]" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]" +
+                                        "}";
+                                System.out.println("URL : "+link+"/QuestionnaireResponse");
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/QuestionnaireResponse", HttpMethod.POST, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                root = mapper.readTree(json);
+                                response = root.path("id");
+                                if(!response.asText().equals("")){
+                                    if(Sequel.menyimpantf2("satu_sehat_questionresponse_telaah_farmasi","?,?","No.Resep",2,new String[]{
+                                        tbObat.getValueAt(i,10).toString(),response.asText()
+                                    })==true){
+                                        pengirim.setValueAt(tbObat,response.asText(),i,11);
+                                        pengirim.setValueAt(tbObat,false,i,0);
+                                    }
                                 }
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
                         }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -804,191 +812,198 @@ public final class SatuSehatKirimQRTelaahFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    if(!tbObat.getValueAt(i,11).toString().equals("")){
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{"+
-                                        "\"resourceType\": \"QuestionnaireResponse\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
-                                        "\"status\": \"completed\"," +
-                                        "\"authored\": \""+tbObat.getValueAt(i,9).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"subject\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"source\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"" +
-                                        "}," +
-                                        "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}," +
-                                        "\"author\": {" +
-                                            "\"reference\": \"Practitioner/"+idpraktisi+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                        "}," +
-                                        "\"item\": [" +
-                                            "{" +
-                                                "\"linkId\": \"identitas\"," +
-                                                "\"text\": \"Identitas\"," +
-                                                "\"item\": [" +
-                                                    "{" +
-                                                        "\"linkId\": \"no-rawat\"," +
-                                                        "\"text\": \"No. Rawat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,2).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"no-rm\"," +
-                                                        "\"text\": \"No. RM\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,3).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"no-resep\"," +
-                                                        "\"text\": \"No. Resep\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,10).toString()+"\"}]" +
-                                                    "}" +
-                                                "]" +
+        ResourceSender.run(this,"Memperbarui QRTelaahFarmasi di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        if(!tbObat.getValueAt(i,11).toString().equals("")){
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{"+
+                                            "\"resourceType\": \"QuestionnaireResponse\"," +
+                                            "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
+                                            "\"status\": \"completed\"," +
+                                            "\"authored\": \""+tbObat.getValueAt(i,9).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"subject\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
                                             "}," +
-                                            "{" +
-                                                "\"linkId\": \"telaah-resep\"," +
-                                                "\"text\": \"Telaah Resep\"," +
-                                                "\"item\": [" +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-1-tepat-identifikasi-pasien\"," +
-                                                        "\"text\": \"1. Tepat Identifikasi Pasien\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,12).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-1-tepat-identifikasi-pasien-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,13).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-2-tepat-obat\"," +
-                                                        "\"text\": \"2. Tepat Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,14).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-2-tepat-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,15).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-3-tepat-dosis\"," +
-                                                        "\"text\": \"3. Tepat Dosis\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,16).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-3-tepat-dosis-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,17).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-4-tepat-cara-pemberian\"," +
-                                                        "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,18).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-4-tepat-cara-pemberian-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,19).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-5-tepat-waktu-pemberian\"," +
-                                                        "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,20).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-5-tepat-waktu-pemberian-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,21).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-6-duplikasi-obat\"," +
-                                                        "\"text\": \"6. Ada Tidak Duplikasi Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,22).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-6-duplikasi-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,23).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-7-interaksi-obat\"," +
-                                                        "\"text\": \"7. Interaksi Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,24).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-7-interaksi-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,25).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-8-kontra-indikasi-obat\"," +
-                                                        "\"text\": \"8. Kontra Indikasi Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,26).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"tr-8-kontra-indikasi-obat-ket\"," +
-                                                        "\"text\": \"Keterangan\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,27).toString()+"\"}]" +
-                                                    "}" +
-                                                "]" +
+                                            "\"source\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"" +
                                             "}," +
-                                            "{" +
-                                                "\"linkId\": \"telaah-obat\"," +
-                                                "\"text\": \"Telaah Obat\"," +
-                                                "\"item\": [" +
-                                                    "{" +
-                                                        "\"linkId\": \"to-1-tepat-pasien\"," +
-                                                        "\"text\": \"1. Tepat Pasien\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,28).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-2-tepat-obat\"," +
-                                                        "\"text\": \"2. Tepat Obat\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,29).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-3-tepat-dosis\"," +
-                                                        "\"text\": \"3. Tepat Dosis\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,30).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-4-tepat-cara-pemberian\"," +
-                                                        "\"text\": \"4. Tepat Cara Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,31).toString()+"\"}]" +
-                                                    "}," +
-                                                    "{" +
-                                                        "\"linkId\": \"to-5-tepat-waktu-pemberian\"," +
-                                                        "\"text\": \"5. Tepat Waktu Pemberian\"," +
-                                                        "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,32).toString()+"\"}]" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]" +
-                                    "}";
-                            System.out.println("URL : "+link+"/QuestionnaireResponse/"+tbObat.getValueAt(i,11).toString());
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/QuestionnaireResponse/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            tbObat.setValueAt(false,i,0);
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
+                                            "\"encounter\": {" +
+                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}," +
+                                            "\"author\": {" +
+                                                "\"reference\": \"Practitioner/"+idpraktisi+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "}," +
+                                            "\"item\": [" +
+                                                "{" +
+                                                    "\"linkId\": \"identitas\"," +
+                                                    "\"text\": \"Identitas\"," +
+                                                    "\"item\": [" +
+                                                        "{" +
+                                                            "\"linkId\": \"no-rawat\"," +
+                                                            "\"text\": \"No. Rawat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,2).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"no-rm\"," +
+                                                            "\"text\": \"No. RM\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,3).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"no-resep\"," +
+                                                            "\"text\": \"No. Resep\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,10).toString()+"\"}]" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "{" +
+                                                    "\"linkId\": \"telaah-resep\"," +
+                                                    "\"text\": \"Telaah Resep\"," +
+                                                    "\"item\": [" +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-1-tepat-identifikasi-pasien\"," +
+                                                            "\"text\": \"1. Tepat Identifikasi Pasien\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,12).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-1-tepat-identifikasi-pasien-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,13).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-2-tepat-obat\"," +
+                                                            "\"text\": \"2. Tepat Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,14).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-2-tepat-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,15).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-3-tepat-dosis\"," +
+                                                            "\"text\": \"3. Tepat Dosis\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,16).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-3-tepat-dosis-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,17).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-4-tepat-cara-pemberian\"," +
+                                                            "\"text\": \"4. Tepat Cara Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,18).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-4-tepat-cara-pemberian-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,19).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-5-tepat-waktu-pemberian\"," +
+                                                            "\"text\": \"5. Tepat Waktu Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,20).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-5-tepat-waktu-pemberian-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,21).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-6-duplikasi-obat\"," +
+                                                            "\"text\": \"6. Ada Tidak Duplikasi Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,22).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-6-duplikasi-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,23).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-7-interaksi-obat\"," +
+                                                            "\"text\": \"7. Interaksi Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,24).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-7-interaksi-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,25).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-8-kontra-indikasi-obat\"," +
+                                                            "\"text\": \"8. Kontra Indikasi Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,26).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"tr-8-kontra-indikasi-obat-ket\"," +
+                                                            "\"text\": \"Keterangan\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,27).toString()+"\"}]" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "{" +
+                                                    "\"linkId\": \"telaah-obat\"," +
+                                                    "\"text\": \"Telaah Obat\"," +
+                                                    "\"item\": [" +
+                                                        "{" +
+                                                            "\"linkId\": \"to-1-tepat-pasien\"," +
+                                                            "\"text\": \"1. Tepat Pasien\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,28).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-2-tepat-obat\"," +
+                                                            "\"text\": \"2. Tepat Obat\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,29).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-3-tepat-dosis\"," +
+                                                            "\"text\": \"3. Tepat Dosis\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,30).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-4-tepat-cara-pemberian\"," +
+                                                            "\"text\": \"4. Tepat Cara Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,31).toString()+"\"}]" +
+                                                        "}," +
+                                                        "{" +
+                                                            "\"linkId\": \"to-5-tepat-waktu-pemberian\"," +
+                                                            "\"text\": \"5. Tepat Waktu Pemberian\"," +
+                                                            "\"answer\": [{\"valueString\": \""+tbObat.getValueAt(i,32).toString()+"\"}]" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]" +
+                                        "}";
+                                System.out.println("URL : "+link+"/QuestionnaireResponse/"+tbObat.getValueAt(i,11).toString());
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/QuestionnaireResponse/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                pengirim.setValueAt(tbObat,false,i,0);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
                         }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
