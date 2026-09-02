@@ -204,6 +204,8 @@ ALTER TABLE `detailpiutang` DROP CONSTRAINT IF EXISTS `detailpiutang_ibfk_1`;
 
 ALTER TABLE `detailpiutang` MODIFY COLUMN IF EXISTS `nota_piutang` varchar(40) NOT NULL FIRST;
 
+ALTER TABLE `detail_pemberian_obat` ADD COLUMN IF NOT EXISTS `tgl_kadaluarsa` date NULL DEFAULT NULL after `no_faktur`;
+
 CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
   `tgl_perawatan` date NOT NULL,
   `jam` time NOT NULL,

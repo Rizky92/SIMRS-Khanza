@@ -1116,13 +1116,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                     pscarikapasitas.setString(1,tbObat.getValueAt(i,2).toString());
                                     carikapasitas=pscarikapasitas.executeQuery();
                                     if(carikapasitas.next()){
-                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                             Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,12).toString(),
                                             tbObat.getValueAt(i,6).toString(),""+(Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)),
                                             tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 (Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)))),
-                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()
+                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),tbObat.getValueAt(i,18).toString()
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1177,13 +1177,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                             sukses=false;
                                         }
                                     }else{
-                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                             Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,12).toString(),
                                             tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),
                                             tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
-                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()
+                                            "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),tbObat.getValueAt(i,18).toString()
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1249,13 +1249,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                     }
                                 }
                             }else{
-                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                     Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,12).toString(),
                                     tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),
                                     tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                         Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                         Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
-                                    "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()
+                                    "Ranap",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),tbObat.getValueAt(i,18).toString()
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                             Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1332,7 +1332,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                tbDetailObatRacikan.getValueAt(i,0).toString(),tbDetailObatRacikan.getValueAt(i,1).toString()
                             })==true){
-                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                     Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                     tbDetailObatRacikan.getValueAt(i,1).toString(),tbDetailObatRacikan.getValueAt(i,5).toString(),
                                     tbDetailObatRacikan.getValueAt(i,4).toString(),""+Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()),
@@ -1341,7 +1341,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+
                                         (Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()))),
-                                    "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString()
+                                    "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString(),tbDetailObatRacikan.getValueAt(i,18).toString()
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,11).toString())+
                                             Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
