@@ -406,6 +406,8 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbDetailPermintaanResepPulang.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        TKadaluarsaRacikanSmc.setDocument(new batasInput(4).getOnlyAngka(TKadaluarsaRacikanSmc));
+        TKadaluarsaRacikanSmc.setEnabled(false);
 
         try {
             aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
@@ -463,6 +465,9 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         ChkPreviewLembarObat = new widget.CekBox();
         CmbModelLembarObat = new widget.ComboBox();
         ChkPreviewAturanPakai = new widget.CekBox();
+        ChkKadaluarsaRacikanSmc = new widget.CekBox();
+        TKadaluarsaRacikanSmc = new widget.TextBox();
+        label4 = new widget.Label();
         CmbModelAturanPakai = new widget.ComboBox();
         label2 = new widget.Label();
         CmbPrinterLembarObat = new widget.ComboBox();
@@ -720,6 +725,27 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         });
         panelBiasa1.add(CmbStatusResepDefault);
         CmbStatusResepDefault.setBounds(243, 190, 150, 23);
+
+        ChkKadaluarsaRacikanSmc.setText("Isi otomatis kadaluarsa obat racikan");
+        ChkKadaluarsaRacikanSmc.setName("ChkKadaluarsaRacikanSmc"); // NOI18N
+        ChkKadaluarsaRacikanSmc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkKadaluarsaRacikanSmcItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(ChkKadaluarsaRacikanSmc);
+        ChkKadaluarsaRacikanSmc.setBounds(10, 220, 228, 23);
+
+        TKadaluarsaRacikanSmc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        TKadaluarsaRacikanSmc.setName("TKadaluarsaRacikanSmc"); // NOI18N
+        panelBiasa1.add(TKadaluarsaRacikanSmc);
+        TKadaluarsaRacikanSmc.setBounds(243, 220, 50, 23);
+
+        label4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label4.setText("hari setelah tanggal resep");
+        label4.setName("label4"); // NOI18N
+        panelBiasa1.add(label4);
+        label4.setBounds(298, 220, 180, 23);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -4422,7 +4448,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
-        WindowPengaturan.setSize(558, 310);
+        WindowPengaturan.setSize(558, 340);
         WindowPengaturan.setLocationRelativeTo(internalFrame1);
         WindowPengaturan.setVisible(true);
     }//GEN-LAST:event_BtnPengaturanActionPerformed
@@ -4486,6 +4512,13 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_ChkAutoValidasiRanapItemStateChanged
 
+    private void ChkKadaluarsaRacikanSmcItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkKadaluarsaRacikanSmcItemStateChanged
+        TKadaluarsaRacikanSmc.setEnabled(ChkKadaluarsaRacikanSmc.isSelected());
+        if (! ChkKadaluarsaRacikanSmc.isSelected()) {
+            TKadaluarsaRacikanSmc.setText("");
+        }
+    }//GEN-LAST:event_ChkKadaluarsaRacikanSmcItemStateChanged
+
     private void BtnSimpanPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanPengaturanActionPerformed
         try {
             File file = new File("./cache/pengaturanresep.iyem");
@@ -4521,6 +4554,17 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         setelahValidasi.set("aturanpakai", aturanPakai);
                     }
                     iyem.set("setelahvalidasi", setelahValidasi);
+                }
+                if (ChkKadaluarsaRacikanSmc.isSelected()) {
+                    int hari = (int) Valid.SetAngka(TKadaluarsaRacikanSmc.getText());
+                    if (1 > hari) {
+                        JOptionPane.showMessageDialog(null, "Jumlah hari kadaluarsa obat racikan harus lebih dari 0..!!", "Kadaluarsa Obat Racikan", JOptionPane.WARNING_MESSAGE);
+                        throw new Exception();
+                    }
+                    ObjectNode kadaluarsaRacikan = mapper.createObjectNode();
+                    kadaluarsaRacikan.put("otomatis", true);
+                    kadaluarsaRacikan.put("hari", hari);
+                    iyem.set("kadaluarsaracikan", kadaluarsaRacikan);
                 }
                 iyem.put("statusdefault", CmbStatusResepDefault.getSelectedItem().toString());
                 fw.write(iyem.toString());
@@ -4698,6 +4742,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private widget.CekBox ChkAccor;
     private widget.CekBox ChkAutoValidasiRalan;
     private widget.CekBox ChkAutoValidasiRanap;
+    private widget.CekBox ChkKadaluarsaRacikanSmc;
     private widget.CekBox ChkPreviewAturanPakai;
     private widget.CekBox ChkPreviewLembarObat;
     private widget.CekBox ChkSelesai;
@@ -4716,6 +4761,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private widget.PanelBiasa PanelAccor;
     private widget.ScrollPane ScrollMenu;
     private widget.TextBox TCari;
+    private widget.TextBox TKadaluarsaRacikanSmc;
     private javax.swing.JTabbedPane TabPilihRawat;
     private javax.swing.JTabbedPane TabRawatInap;
     private javax.swing.JTabbedPane TabRawatJalan;
@@ -4741,6 +4787,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private widget.Label label10;
     private widget.Label label2;
     private widget.Label label3;
+    private widget.Label label4;
     private widget.Label label9;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
@@ -6760,6 +6807,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 if (ChkPreviewAturanPakai.isSelected()) {
                     CmbModelAturanPakai.setSelectedItem(iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText(""));
                 }
+                ChkKadaluarsaRacikanSmc.setSelected(iyem.path("kadaluarsaracikan").path("otomatis").asBoolean(false));
+                if (ChkKadaluarsaRacikanSmc.isSelected()) {
+                    TKadaluarsaRacikanSmc.setText("" + iyem.path("kadaluarsaracikan").path("hari").asInt(0));
+                }
+                ChkKadaluarsaRacikanSmcItemStateChanged(null);
                 cmbStatus.setSelectedItem(iyem.path("statusdefault").asText("Semua"));
                 CmbStatusResepDefault.setSelectedItem(iyem.path("statusdefault").asText("Semua"));
             } catch (Exception e) {

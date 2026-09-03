@@ -204,6 +204,8 @@ ALTER TABLE `detailpiutang` DROP CONSTRAINT IF EXISTS `detailpiutang_ibfk_1`;
 
 ALTER TABLE `detailpiutang` MODIFY COLUMN IF EXISTS `nota_piutang` varchar(40) NOT NULL FIRST;
 
+ALTER TABLE `detail_pemberian_obat` ADD COLUMN IF NOT EXISTS `tgl_kadaluarsa` date NULL DEFAULT NULL after `no_faktur`;
+
 CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
   `tgl_perawatan` date NOT NULL,
   `jam` time NOT NULL,
@@ -739,6 +741,8 @@ CREATE TABLE IF NOT EXISTS `mapping_user_bridginglab`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `master_berkas_digital` ADD COLUMN IF NOT EXISTS `include_kompilasi_berkas` tinyint(1) NOT NULL DEFAULT 1 AFTER `nama`;
+
+ALTER TABLE `obat_racikan` ADD COLUMN IF NOT EXISTS `tgl_kadaluarsa` date NULL DEFAULT NULL after `keterangan`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAULT NULL AFTER `no_rkm_medis`;
 

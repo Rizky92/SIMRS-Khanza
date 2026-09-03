@@ -72,6 +72,7 @@ import org.springframework.http.MediaType;
 import simrskhanza.DlgCariBangsal;
 import smc.kirimwa.DlgKirimWA;
 import widget.Button;
+import widget.TanggalCellEditorSMC;
 
 /**
  *
@@ -124,6 +125,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private boolean autocetak = false, previewLembarObat = false, previewAturanPakai = false;
+    private boolean kadaluarsaRacikanOtomatisSmc = false;
+    private int hariKadaluarsaRacikanSmc = 0;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
@@ -218,7 +221,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
             } else if (i == 17) {
                 column.setPreferredWidth(50);
             } else if (i == 18) {
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             } else if (i == 19) {
                 if (VALIDASIRESEPKRONIS) {
                     column.setPreferredWidth(70);
@@ -248,7 +252,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
         tabModeObatRacikan = new DefaultTableModel(null, new Object[] {
             "No", "Nama Racikan", "Kode Racik", "Metode Racik", "Jml.Racik",
-            "Aturan Pakai", "Keterangan"
+            "Aturan Pakai", "Keterangan", "Kadaluarsa"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -258,7 +262,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }
             Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             @Override
@@ -271,7 +275,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         tbObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 8; i++) {
             TableColumn column = tbObatRacikan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(25);
@@ -288,6 +292,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             } else if (i == 6) {
                 column.setPreferredWidth(250);
+            } else if (i == 7) {
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             }
         }
 
@@ -372,7 +379,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
             } else if (i == 17) {
                 column.setPreferredWidth(50);
             } else if (i == 18) {
-                column.setPreferredWidth(65);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             } else if (i == 19) {
                 if (VALIDASIRESEPKRONIS) {
                     column.setPreferredWidth(70);
@@ -1334,13 +1342,14 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                     pscarikapasitas.setString(1,tbObat.getValueAt(i,2).toString());
                                     carikapasitas=pscarikapasitas.executeQuery();
                                     if(carikapasitas.next()){
-                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                             Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,13).toString(),
                                             tbObat.getValueAt(i,6).toString(),""+(Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)),
                                             tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 (Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)))),
-                                            "Ralan",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()
+                                            "Ralan",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),
+                                            (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : null)
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1395,13 +1404,14 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                             sukses=false;
                                         }
                                     }else{
-                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                        if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                             Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,13).toString(),
                                             tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),
                                             tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                 Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
                                                 Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
-                                            "Ralan",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()
+                                            "Ralan",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),
+                                            (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : null)
                                         })==true){
                                             ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+
                                                     Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*
@@ -1467,12 +1477,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                     }
                                 }
                             }else{
-                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                     Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,13).toString(),
                                     tbObat.getValueAt(i,6).toString(),""+Double.parseDouble(tbObat.getValueAt(i,1).toString()),
                                     tbObat.getValueAt(i,8).toString(),tbObat.getValueAt(i,9).toString(),""+
                                     Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*Double.parseDouble(tbObat.getValueAt(i,1).toString()))),
-                                    "Ralan",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString()
+                                    "Ralan",kdgudang.getText(),tbObat.getValueAt(i,16).toString(),tbObat.getValueAt(i,17).toString(),
+                                    (null != tbObat.getValueAt(i,18) && (!tbObat.getValueAt(i, 18).toString().isBlank()) ? tbObat.getValueAt(i, 18).toString() : null)
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbObat.getValueAt(i,8).toString())+Double.parseDouble(tbObat.getValueAt(i,9).toString())+(Double.parseDouble(tbObat.getValueAt(i,6).toString())*Double.parseDouble(tbObat.getValueAt(i,1).toString())));
                                     ttlhpp=ttlhpp+Math.round(Double.parseDouble(tbObat.getValueAt(i,13).toString())*Double.parseDouble(tbObat.getValueAt(i,1).toString()));
@@ -1529,11 +1540,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
                     for(i=0;i<tbObatRacikan.getRowCount();i++){
                         if(Valid.SetAngka(tbObatRacikan.getValueAt(i,4).toString())>0){
-                            if(Sequel.menyimpantf2("obat_racikan","?,?,?,?,?,?,?,?,?","Obat Racikan",9,new String[]{
+                            if(Sequel.menyimpantfNotifSmc("Obat Racikan","obat_racikan","tgl_perawatan, jam, no_rawat, no_racik, nama_racik, kd_racik, jml_dr, aturan_pakai, keterangan, tgl_kadaluarsa",new String[]{
                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                tbObatRacikan.getValueAt(i,0).toString(),tbObatRacikan.getValueAt(i,1).toString(),
                                tbObatRacikan.getValueAt(i,2).toString(),tbObatRacikan.getValueAt(i,4).toString(),
-                               tbObatRacikan.getValueAt(i,5).toString(),tbObatRacikan.getValueAt(i,6).toString()
+                               tbObatRacikan.getValueAt(i,5).toString(),tbObatRacikan.getValueAt(i,6).toString(),
+                               (null != tbObatRacikan.getValueAt(i,7) && (!tbObatRacikan.getValueAt(i,7).toString().isBlank()) ? tbObatRacikan.getValueAt(i,7).toString() : null)
                             })==false){
                                 sukses=false;
                             }
@@ -1546,7 +1558,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                tbDetailObatRacikan.getValueAt(i,0).toString(),tbDetailObatRacikan.getValueAt(i,1).toString()
                             })==true){
-                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur", new String[]{
+                                if(Sequel.menyimpantfSmc("detail_pemberian_obat", "tgl_perawatan, jam, no_rawat, kode_brng, h_beli, biaya_obat, jml, embalase, tuslah, total, status, kd_bangsal, no_batch, no_faktur, tgl_kadaluarsa", new String[]{
                                     Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                     tbDetailObatRacikan.getValueAt(i,1).toString(),tbDetailObatRacikan.getValueAt(i,5).toString(),
                                     tbDetailObatRacikan.getValueAt(i,4).toString(),""+Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()),
@@ -1555,7 +1567,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+
                                         (Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()))),
-                                    "Ralan",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString()
+                                    "Ralan",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString(),null
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,11).toString())+
                                             Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
@@ -1930,7 +1942,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         if(i==99){
             JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
         }else{
-            tabModeObatRacikan.addRow(new Object[]{""+i,"","","","","",""});
+            tabModeObatRacikan.addRow(new Object[]{""+i,"","","","","","",kadaluarsaRacikanSmc()});
         }
     }//GEN-LAST:event_BtnTambah1ActionPerformed
 
@@ -3059,7 +3071,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                         tabModeObatRacikan.addRow(new Object[]{
                             rsobat.getString("no_racik"),rsobat.getString("nama_racik"),rsobat.getString("kd_racik"),
                             rsobat.getString("metode"),rsobat.getString("jml_dr"),rsobat.getString("aturan_pakai"),
-                            rsobat.getString("keterangan")
+                            rsobat.getString("keterangan"),kadaluarsaRacikanSmc()
                         });
                         if(kenaikan>0){
                             if(aktifkanbatch.equals("yes")){
@@ -4491,6 +4503,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
                         modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
                     }
                 }
+                kadaluarsaRacikanOtomatisSmc = iyem.path("kadaluarsaracikan").path("otomatis").asBoolean(false);
+                hariKadaluarsaRacikanSmc = iyem.path("kadaluarsaracikan").path("hari").asInt(0);
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
                 autocetak = false;
@@ -4498,6 +4512,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 previewAturanPakai = false;
                 modelLembarObat = "";
                 modelAturanPakai = "";
+                kadaluarsaRacikanOtomatisSmc = false;
+                hariKadaluarsaRacikanSmc = 0;
                 ChkNoResep.setSelected(oldValue);
             }
         } else {
@@ -4507,6 +4523,22 @@ public final class DlgCariObat extends javax.swing.JDialog {
             modelLembarObat = "";
             modelAturanPakai = "";
             ChkNoResep.setSelected(oldValue);
+        }
+    }
+
+    private String kadaluarsaRacikanSmc() {
+        if (! kadaluarsaRacikanOtomatisSmc || 1 > hariKadaluarsaRacikanSmc) {
+            return "";
+        }
+
+        try {
+            Calendar kalender = Calendar.getInstance();
+            kalender.setTime(DTPTgl.getDate());
+            kalender.add(Calendar.DATE, hariKadaluarsaRacikanSmc);
+            return new SimpleDateFormat(TanggalCellEditorSMC.FORMAT).format(kalender.getTime());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            return "";
         }
     }
 
@@ -4529,7 +4561,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-                        "o.nama_brng, a.aturan, dpo.jml, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
+                        "o.nama_brng, a.aturan, dpo.jml, dpo.tgl_kadaluarsa, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
                         "reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "detail_pemberian_obat dpo on rx.no_rawat = dpo.no_rawat and rx.tgl_perawatan = dpo.tgl_perawatan and " +
                         "rx.jam = dpo.jam join aturan_pakai a on rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan and " +
@@ -4542,7 +4574,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep2.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
-                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, ro.tgl_kadaluarsa, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "obat_racikan ro on rx.no_rawat = ro.no_rawat and rx.tgl_perawatan = ro.tgl_perawatan and rx.jam = ro.jam " +
                         "join metode_racik mr on ro.kd_racik = mr.kd_racik where rx.no_resep = ?", noresep);
@@ -4554,7 +4586,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep3.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-                        "o.nama_brng, a.aturan, dpo.jml, k.satuan, j.nama as jenis, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "o.nama_brng, a.aturan, dpo.jml, dpo.tgl_kadaluarsa, k.satuan, j.nama as jenis, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "detail_pemberian_obat dpo on rx.no_rawat = dpo.no_rawat and rx.tgl_perawatan = dpo.tgl_perawatan and " +
                         "rx.jam = dpo.jam join aturan_pakai a on rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan " +
@@ -4566,9 +4598,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 if (Sequel.cariExistsSmc("select * from resep_obat r join obat_racikan ro on r.no_rawat = ro.no_rawat and " +
                     "r.tgl_perawatan = ro.tgl_perawatan and r.jam = ro.jam where r.no_resep = ? and ro.aturan_pakai != ''", noresep
                 )) {
-                    Valid.reportSmc("rptItemResep4.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
+                    Valid.reportSmc("rptItemResep2.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
-                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, ro.tgl_kadaluarsa, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "obat_racikan ro on rx.no_rawat = ro.no_rawat and rx.tgl_perawatan = ro.tgl_perawatan and rx.jam = ro.jam " +
                         "join metode_racik mr on ro.kd_racik = mr.kd_racik where rx.no_resep = ?", noresep);
@@ -4580,7 +4612,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep5.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-                        "o.nama_brng, a.aturan, dpo.jml, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
+                        "o.nama_brng, a.aturan, dpo.jml, dpo.tgl_kadaluarsa, k.satuan, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx join " +
                         "reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "detail_pemberian_obat dpo on rx.no_rawat = dpo.no_rawat and rx.tgl_perawatan = dpo.tgl_perawatan and " +
                         "rx.jam = dpo.jam join aturan_pakai a on rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan and " +
@@ -4593,7 +4625,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep6.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
-                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, ro.tgl_kadaluarsa, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "obat_racikan ro on rx.no_rawat = ro.no_rawat and rx.tgl_perawatan = ro.tgl_perawatan and rx.jam = ro.jam " +
                         "join metode_racik mr on ro.kd_racik = mr.kd_racik where rx.no_resep = ?", noresep);
