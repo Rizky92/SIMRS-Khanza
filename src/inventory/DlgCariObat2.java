@@ -41,6 +41,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -104,6 +105,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private DlgResepObat ResepObat;
     private Map<String, Object> map;
     private boolean autoCetak = false, previewLembarObat = false, previewAturanPakai = false;
+    private boolean kadaluarsaRacikanOtomatisSmc = false;
+    private int hariKadaluarsaRacikanSmc = 0;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
@@ -194,7 +197,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
         tabModeObatRacikan=new DefaultTableModel(null,new Object[]{
                 "No","Nama Racikan","Kode Racik","Metode Racik","Jml.Racik",
-                "Aturan Pakai","Keterangan"
+                "Aturan Pakai","Keterangan","Kadaluarsa"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = true;
@@ -205,7 +208,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
              }
              Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -217,7 +220,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         tbObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 8; i++) {
             TableColumn column = tbObatRacikan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(25);
@@ -234,6 +237,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             }else if(i==6){
                 column.setPreferredWidth(250);
+            }else if(i==7){
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             }
         }
 
@@ -247,7 +253,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if ((colIndex==9)||(colIndex==10)||(colIndex==11)||(colIndex==12)||(colIndex==13)||(colIndex==16)||(colIndex==17)||(colIndex==18)) {
+                if ((colIndex==9)||(colIndex==10)||(colIndex==11)||(colIndex==12)||(colIndex==13)||(colIndex==16)||(colIndex==17)) {
                     a=true;
                 }
                 return a;
@@ -310,8 +316,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }else if(i==17){
                 column.setPreferredWidth(100);
             }else if(i==18){
-                column.setPreferredWidth(95);
-                column.setCellEditor(new TanggalCellEditorSMC());
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }
         }
 
@@ -1321,11 +1327,12 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
                     for(i=0;i<tbObatRacikan.getRowCount();i++){
                         if(Valid.SetAngka(tbObatRacikan.getValueAt(i,4).toString())>0){
-                            if(Sequel.menyimpantf2("obat_racikan","?,?,?,?,?,?,?,?,?","Obat Racikan",9,new String[]{
+                            if(Sequel.menyimpantfNotifSmc("Obat Racikan","obat_racikan","tgl_perawatan, jam, no_rawat, no_racik, nama_racik, kd_racik, jml_dr, aturan_pakai, keterangan, tgl_kadaluarsa",new String[]{
                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),
                                tbObatRacikan.getValueAt(i,0).toString(),tbObatRacikan.getValueAt(i,1).toString(),
                                tbObatRacikan.getValueAt(i,2).toString(),tbObatRacikan.getValueAt(i,4).toString(),
-                               tbObatRacikan.getValueAt(i,5).toString(),tbObatRacikan.getValueAt(i,6).toString()
+                               tbObatRacikan.getValueAt(i,5).toString(),tbObatRacikan.getValueAt(i,6).toString(),
+                               (null != tbObatRacikan.getValueAt(i,7) && (!tbObatRacikan.getValueAt(i,7).toString().isBlank()) ? tbObatRacikan.getValueAt(i,7).toString() : null)
                             })==false){
                                 sukses=false;
                             }
@@ -1347,8 +1354,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+
                                         (Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
                                         Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString()))),
-                                    "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString(),
-                                    (null != tbDetailObatRacikan.getValueAt(i,18) && (!tbDetailObatRacikan.getValueAt(i, 18).toString().isBlank()) ? tbDetailObatRacikan.getValueAt(i, 18).toString() : null)
+                                    "Ranap",kdgudang.getText(),tbDetailObatRacikan.getValueAt(i,16).toString(),tbDetailObatRacikan.getValueAt(i,17).toString(),null
                                 })==true){
                                     ttljual=ttljual+Math.round(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,11).toString())+
                                             Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString())+(Double.parseDouble(tbDetailObatRacikan.getValueAt(i,4).toString())*
@@ -1884,7 +1890,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         if(i==99){
             JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
         }else{
-            tabModeObatRacikan.addRow(new Object[]{""+i,"","","","","",""});
+            tabModeObatRacikan.addRow(new Object[]{""+i,"","","","","","",kadaluarsaRacikanSmc()});
         }
     }//GEN-LAST:event_BtnTambah1ActionPerformed
 
@@ -3401,7 +3407,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         tabModeObatRacikan.addRow(new Object[]{
                             rsobat.getString("no_racik"),rsobat.getString("nama_racik"),rsobat.getString("kd_racik"),
                             rsobat.getString("metode"),rsobat.getString("jml_dr"),rsobat.getString("aturan_pakai"),
-                            rsobat.getString("keterangan")
+                            rsobat.getString("keterangan"),kadaluarsaRacikanSmc()
                         });
                         if(kenaikan>0){
                             if(aktifkanbatch.equals("yes")){
@@ -4231,6 +4237,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
                     }
                 }
+                kadaluarsaRacikanOtomatisSmc = iyem.path("kadaluarsaracikan").path("otomatis").asBoolean(false);
+                hariKadaluarsaRacikanSmc = iyem.path("kadaluarsaracikan").path("hari").asInt(0);
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
                 autoCetak = false;
@@ -4238,6 +4246,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 previewAturanPakai = false;
                 modelLembarObat = "";
                 modelAturanPakai = "";
+                kadaluarsaRacikanOtomatisSmc = false;
+                hariKadaluarsaRacikanSmc = 0;
                 ChkNoResep.setSelected(oldValue);
             }
         } else {
@@ -4247,6 +4257,22 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             modelLembarObat = "";
             modelAturanPakai = "";
             ChkNoResep.setSelected(oldValue);
+        }
+    }
+
+    private String kadaluarsaRacikanSmc() {
+        if (! kadaluarsaRacikanOtomatisSmc || 1 > hariKadaluarsaRacikanSmc) {
+            return "";
+        }
+
+        try {
+            Calendar kalender = Calendar.getInstance();
+            kalender.setTime(DTPTgl.getDate());
+            kalender.add(Calendar.DATE, hariKadaluarsaRacikanSmc);
+            return new SimpleDateFormat(TanggalCellEditorSMC.FORMAT).format(kalender.getTime());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            return "";
         }
     }
 
@@ -4282,7 +4308,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep2.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
-                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, ro.tgl_kadaluarsa, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "obat_racikan ro on rx.no_rawat = ro.no_rawat and rx.tgl_perawatan = ro.tgl_perawatan and rx.jam = ro.jam " +
                         "join metode_racik mr on ro.kd_racik = mr.kd_racik where rx.no_resep = ?", noresep);
@@ -4308,7 +4334,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep2.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
-                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, ro.tgl_kadaluarsa, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "obat_racikan ro on rx.no_rawat = ro.no_rawat and rx.tgl_perawatan = ro.tgl_perawatan and rx.jam = ro.jam " +
                         "join metode_racik mr on ro.kd_racik = mr.kd_racik where rx.no_resep = ?", noresep);
@@ -4333,7 +4359,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 )) {
                     Valid.reportSmc("rptItemResep6.jasper", "report", "::[ Aturan Pakai Obat ]::", param,
                         "select rx.no_resep, rx.tgl_perawatan, rx.jam, px.tgl_lahir, rx.no_rawat, px.no_rkm_medis, px.nm_pasien, " +
-                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
+                        "ro.nama_racik, ro.aturan_pakai, ro.jml_dr, ro.tgl_kadaluarsa, mr.nm_racik, px.jk, r.umurdaftar, r.sttsumur from resep_obat rx " +
                         "join reg_periksa r on rx.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
                         "obat_racikan ro on rx.no_rawat = ro.no_rawat and rx.tgl_perawatan = ro.tgl_perawatan and rx.jam = ro.jam " +
                         "join metode_racik mr on ro.kd_racik = mr.kd_racik where rx.no_resep = ?", noresep);

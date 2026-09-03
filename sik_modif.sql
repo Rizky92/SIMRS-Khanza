@@ -742,6 +742,8 @@ CREATE TABLE IF NOT EXISTS `mapping_user_bridginglab`  (
 
 ALTER TABLE `master_berkas_digital` ADD COLUMN IF NOT EXISTS `include_kompilasi_berkas` tinyint(1) NOT NULL DEFAULT 1 AFTER `nama`;
 
+ALTER TABLE `obat_racikan` ADD COLUMN IF NOT EXISTS `tgl_kadaluarsa` date NULL DEFAULT NULL after `keterangan`;
+
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAULT NULL AFTER `no_rkm_medis`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAULT NULL AFTER `jk`;
