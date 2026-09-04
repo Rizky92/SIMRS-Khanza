@@ -306,12 +306,13 @@ public class DlgCekDataBPJS extends widget.Dialog {
                     Valid.popupGagalDialog("Data pasien tidak ditemukan..!!", 5);
                 } else {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
-                        regist.tampilMobileJKN(noKartu);
-                        regist.setSize(getContentPane().getSize());
-                        regist.setLocationRelativeTo(getContentPane());
-                        regist.setVisible(true);
-                        flag = -1;
-                        dispose();
+                        if (regist.tampilMobileJKN(noKartu)) {
+                            regist.setSize(getContentPane().getSize());
+                            regist.setLocationRelativeTo(getContentPane());
+                            regist.setVisible(true);
+                            flag = -1;
+                            dispose();
+                        }
                     } else {
                         Valid.popupGagalDialog("Data booking MobileJKN tidak ditemukan..!!", 5);
                     }
@@ -326,12 +327,13 @@ public class DlgCekDataBPJS extends widget.Dialog {
                     } else if (Sequel.cariIntegerSmc("select datediff((select tgl_rencana from bridging_surat_kontrol_bpjs where no_surat = ?), current_date())", noSKDP) > 0) {
                         Valid.popupPeringatanDialog("Jadwal kontrol pasien tidak boleh dimajukan..!!");
                     } else {
-                        regist.tampilKontrol(noSKDP);
-                        regist.setSize(getContentPane().getSize());
-                        regist.setLocationRelativeTo(getContentPane());
-                        regist.setVisible(true);
-                        flag = -1;
-                        dispose();
+                        if (regist.tampilKontrol(noSKDP)) {
+                            regist.setSize(getContentPane().getSize());
+                            regist.setLocationRelativeTo(getContentPane());
+                            regist.setVisible(true);
+                            flag = -1;
+                            dispose();
+                        }
                     }
                 }
             } else {
@@ -342,19 +344,22 @@ public class DlgCekDataBPJS extends widget.Dialog {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
                         Valid.popupPeringatanDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
                     } else {
+                        boolean tampil = false;
                         switch (flag) {
                             case SEP_KUNJUNGAN_PERTAMA:
-                                regist.tampilKunjunganPertama(noKartu);
+                                tampil = regist.tampilKunjunganPertama(noKartu);
                                 break;
                             case SEP_KONTROL_BEDA_POLI:
-                                regist.tampilKontrolBedaPoli(noKartu);
+                                tampil = regist.tampilKontrolBedaPoli(noKartu);
                                 break;
                         }
-                        regist.setSize(getContentPane().getSize());
-                        regist.setLocationRelativeTo(getContentPane());
-                        regist.setVisible(true);
-                        flag = -1;
-                        dispose();
+                        if (tampil) {
+                            regist.setSize(getContentPane().getSize());
+                            regist.setLocationRelativeTo(getContentPane());
+                            regist.setVisible(true);
+                            flag = -1;
+                            dispose();
+                        }
                     }
                 }
             }
