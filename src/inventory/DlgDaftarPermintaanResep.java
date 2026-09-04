@@ -649,7 +649,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         WindowPengaturan.setUndecorated(true);
         WindowPengaturan.setResizable(false);
 
-        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Resep Otomatis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 50, 50)), "::[ Pengaturan Resep Otomatis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame12.setName("internalFrame12"); // NOI18N
         internalFrame12.setPreferredSize(new java.awt.Dimension(610, 182));
         internalFrame12.setLayout(new java.awt.GridBagLayout());
