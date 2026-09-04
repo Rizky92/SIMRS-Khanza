@@ -502,7 +502,7 @@ public class OrthancDICOM extends javax.swing.JDialog {
         if (dataacsn == null) return;
         if (!dataacsn.isVisible()) {
             dataacsn.setNoRawat(norawat);
-            dataacsn.tampil("");
+            dataacsn.tampilSmc();
         }
         if (dataacsn.isVisible()) {
             dataacsn.toFront();
