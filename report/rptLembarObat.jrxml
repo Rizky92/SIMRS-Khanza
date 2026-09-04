@@ -23,6 +23,7 @@
 	<parameter name="peresep" class="java.lang.String"/>
 	<parameter name="noresep" class="java.lang.String"/>
 	<parameter name="finger" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="noantrian" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select 1;]]>
 	</queryString>
@@ -266,6 +267,12 @@
 			<line>
 				<reportElement x="200" y="9" width="1" height="41" uuid="4b3ca4de-87ef-40df-a13b-cc317857da3e"/>
 			</line>
+			<textField>
+				<reportElement x="201" y="20" width="62" height="29" uuid="082b65fb-869e-437a-af16-54b207412293"/>
+				<box leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{noantrian}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

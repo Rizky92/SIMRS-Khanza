@@ -149,6 +149,7 @@ public class DlgPembelian extends javax.swing.JDialog {
         NoFaktur.setDocument(new batasInput((byte)20).getKata(NoFaktur));
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
+        tppn.setDocument(new batasInput((byte)5).getOnlyAngka(tppn));
     }
 
     /** This method is called from within the constructor to
@@ -1376,11 +1377,6 @@ public class DlgPembelian extends javax.swing.JDialog {
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         runBackground(() ->LoadData());
-        LSubtotal.setText("0");
-        LPotongan.setText("0");
-        LTotal2.setText("0");
-        LPpn.setText("0");
-        LTagiha.setText("0");
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed

@@ -13,6 +13,7 @@
     <entry key="ADAMLABSKECAMATANID"></entry>
     <entry key="ADAMLABSKABUPATENID"></entry>
     <entry key="ADAMLABSPROVINSIID"></entry>
+    <entry key="LABORATORIUMKIRIMHASIL"></entry>
     <entry key="RESTRIKSIRMKELAHIRANBAYI">yes</entry>
     <entry key="URLKFAV2SATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/kfa-v2</entry>
     <entry key="KOMPILASIBERKASGUNAKANRIWAYATPASIEN">ralan+ranap</entry>
@@ -63,10 +64,12 @@
     <entry key="TAMPILKANCOPYRESEPDOKTERLAIN">yes</entry>
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
+    <entry key="KODEAKUNPENGELUARANHARIAN"></entry>
     <entry key="ALARMLAB">no</entry>
     <entry key="FORMALARMLAB">ralan + ranap</entry>
     <entry key="ALARMRADIOLOGI">no</entry>
     <entry key="FORMALARMRADIOLOGI">ralan + ranap</entry>
+    <entry key="TAMPILTARIFOPERASI">yes</entry>
     <entry key="ALARMRSISRUTE">no</entry>
     <entry key="ALARMBOOKINGPERIKSA">no</entry>
     <entry key="ALARMPENGADUANPASIEN">no</entry>
@@ -136,6 +139,8 @@
     <entry key="SECRETKEYSATUSEHAT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLAUTHSATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1</entry>
     <entry key="URLFHIRSATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/fhir-r4/v1</entry>
+    <entry key="URLAPPLINKSATUSEHAT">https://applink-stg.dto.kemkes.go.id/ssm/tte</entry>
+    <entry key="IDORGBPJSSATUSEHAT">100071505</entry>
     <entry key="IDSATUSEHAT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="KELURAHANSATUSEHAT">1</entry>
     <entry key="KECAMATANSATUSEHAT">1</entry>

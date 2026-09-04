@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariDokter2;
-import smc.Events.SimpanEvent;
-import smc.Events.SimpanListener;
+import smc.events.SimpanEvent;
+import smc.events.SimpanListener;
 
 /**
  *

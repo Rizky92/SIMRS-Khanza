@@ -25,13 +25,14 @@
 	<queryString>
 		<![CDATA[select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir,
 resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik,
-obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,
-pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur 
+obat_racikan.aturan_pakai,obat_racikan.jml_dr,obat_racikan.tgl_kadaluarsa,
+metode_racik.nm_racik,
+pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur
 from resep_obat inner join reg_periksa inner join pasien inner join
-obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat 
+obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat
 and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and obat_racikan.kd_racik=metode_racik.kd_racik
-and resep_obat.no_rawat=obat_racikan.no_rawat and 
+and resep_obat.no_rawat=obat_racikan.no_rawat and
 resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and
 resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 	</queryString>
@@ -81,6 +82,11 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 	</field>
 	<field name="jml_dr" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="jml_dr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="obat_racikan"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_kadaluarsa" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tgl_kadaluarsa"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="obat_racikan"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -171,7 +177,7 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="1" y="94" width="219" height="36" uuid="797dc0a5-5e7d-4e05-98ef-45adc4b9b015">
+				<reportElement x="1" y="103" width="219" height="27" uuid="797dc0a5-5e7d-4e05-98ef-45adc4b9b015">
 					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
 					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
@@ -314,6 +320,14 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="94" width="100" height="9" uuid="6b05e19e-c870-4483-82f6-fba560af745a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ED :" + new java.text.SimpleDateFormat("dd-MM-yyyy").format($F{tgl_kadaluarsa})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

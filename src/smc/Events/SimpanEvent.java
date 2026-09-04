@@ -1,4 +1,4 @@
-package smc.Events;
+package smc.events;
 
 import java.util.Map;
 
