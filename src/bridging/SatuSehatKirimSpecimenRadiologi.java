@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -612,77 +613,84 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&tbObat.getValueAt(i,13).toString().equals("")){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    String acsn=tbObat.getValueAt(i,14).toString();
-                    if (acsn.isBlank()) {
-                        System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,5).toString()+"!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Specimen\"," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+acsn+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"status\": \"available\"," +
-                                    "\"type\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,3).toString()+"\"" +
-                                    "}," +
-                                    "\"request\": [" +
-                                        "{" +
-                                            "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
-                                "}";
-                        System.out.println("URL : "+link+"/Specimen");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Specimen", HttpMethod.POST, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_specimen_radiologi","?,?,?","No.Order",3,new String[]{
-                                tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,13);
-                                tbObat.setValueAt(false,i,0);
-                            }
+        ResourceSender.run(this,"Mengirim SpecimenRadiologi ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&tbObat.getValueAt(i,13).toString().equals("")){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                        String acsn=tbObat.getValueAt(i,14).toString();
+                        if (acsn.isBlank()) {
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,5).toString()+"!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Specimen\"," +
+                                        "\"identifier\": [" +
+                                            "{" +
+                                                "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                "\"value\": \""+acsn+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"status\": \"available\"," +
+                                        "\"type\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,3).toString()+"\"" +
+                                        "}," +
+                                        "\"request\": [" +
+                                            "{" +
+                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Specimen");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Specimen", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_specimen_radiologi","?,?,?","No.Order",3,new String[]{
+                                    tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,13);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
+                            }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -698,69 +706,76 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    String acsn=tbObat.getValueAt(i,14).toString();
-                    if (acsn.isBlank()) {
-                        System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,5).toString()+"!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Specimen\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+acsn+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"status\": \"available\"," +
-                                    "\"type\": {" +
-                                        "\"coding\": [" +
+        ResourceSender.run(this,"Memperbarui SpecimenRadiologi di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        String acsn=tbObat.getValueAt(i,14).toString();
+                        if (acsn.isBlank()) {
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,5).toString()+"!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Specimen\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
+                                        "\"identifier\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                "\"system\": \"http://sys-ids.kemkes.go.id/specimen/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                "\"value\": \""+acsn+"\"" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,3).toString()+"\"" +
-                                    "}," +
-                                    "\"request\": [" +
-                                        "{" +
-                                            "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
-                                "}";
-                        System.out.println("URL : "+link+"/Specimen/"+tbObat.getValueAt(i,13).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Specimen/"+tbObat.getValueAt(i,13).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                        "]," +
+                                        "\"status\": \"available\"," +
+                                        "\"type\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,10).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,3).toString()+"\"" +
+                                        "}," +
+                                        "\"request\": [" +
+                                            "{" +
+                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Specimen/"+tbObat.getValueAt(i,13).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Specimen/"+tbObat.getValueAt(i,13).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

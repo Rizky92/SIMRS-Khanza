@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -677,267 +678,274 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,26).toString().equals("")){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
+        ResourceSender.run(this,"Mengirim MedicationRequest ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,26).toString().equals("")){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
 
-                    arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
-                    signa1="1";
-                    try {
-                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
-                        }
-                    } catch (Exception e) {
+                        arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                         signa1="1";
-                    }
-                    signa2="1";
-                    try {
-                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
+                        try {
+                            if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                                signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
+                            }
+                        } catch (Exception e) {
+                            signa1="1";
+                        }
+                        signa2="1";
+                        try {
+                            if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                                signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
+                            }
+                        } catch (Exception e) {
+                            signa2="1";
+                        }
+                        if(tbObat.getValueAt(i,27).toString().equals("")){
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{" +
+                                            "\"resourceType\": \"MedicationRequest\"," +
+                                            "\"identifier\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
+                                                "}," +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"status\": \"completed\"," +
+                                            "\"intent\": \"order\"," +
+                                            "\"category\": [" +
+                                                "{" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
+                                                            "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
+                                                            "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"medicationReference\": {" +
+                                                "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "}," +
+                                            "\"subject\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "}," +
+                                            "\"encounter\": {" +
+                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}," +
+                                            "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"requester\": {" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "}," +
+                                            "\"dosageInstruction\": [" +
+                                                "{" +
+                                                    "\"sequence\": 1," +
+                                                    "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
+                                                    "\"timing\": {" +
+                                                        "\"repeat\": {" +
+                                                            "\"frequency\": "+signa2+"," +
+                                                            "\"period\": 1," +
+                                                            "\"periodUnit\": \"d\"" +
+                                                        "}" +
+                                                    "}," +
+                                                    "\"route\": {" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
+                                                                "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
+                                                            "}" +
+                                                        "]" +
+                                                    "}," +
+                                                    "\"doseAndRate\": [" +
+                                                        "{" +
+                                                            "\"doseQuantity\": {" +
+                                                                "\"value\": "+signa1+"," +
+                                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                            "}" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"dispenseRequest\": {" +
+                                                "\"quantity\": {" +
+                                                    "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
+                                                    "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                    "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                "}," +
+                                                "\"performer\": {" +
+                                                    "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
+                                                "}" +
+                                            "}" +
+                                        "}";
+                                System.out.println("URL : "+link+"/MedicationRequest");
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/MedicationRequest", HttpMethod.POST, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                root = mapper.readTree(json);
+                                response = root.path("id");
+                                if(!response.asText().equals("")){
+                                    if(Sequel.menyimpantf2("satu_sehat_medicationrequest","?,?,?","Obat/Alkes",3,new String[]{
+                                        tbObat.getValueAt(i,25).toString(),tbObat.getValueAt(i,11).toString(),response.asText()
+                                    })==true){
+                                        pengirim.setValueAt(tbObat,response.asText(),i,26);
+                                        pengirim.setValueAt(tbObat,false,i,0);
+                                    }
+                                }
+                            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                                System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
+                        }else if(!tbObat.getValueAt(i,27).toString().equals("")){
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{" +
+                                            "\"resourceType\": \"MedicationRequest\"," +
+                                            "\"identifier\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,25).toString()+"-"+tbObat.getValueAt(i,27).toString()+"\"" +
+                                                "}," +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"status\": \"completed\"," +
+                                            "\"intent\": \"order\"," +
+                                            "\"category\": [" +
+                                                "{" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
+                                                            "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
+                                                            "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"medicationReference\": {" +
+                                                "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "}," +
+                                            "\"subject\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "}," +
+                                            "\"encounter\": {" +
+                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}," +
+                                            "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"requester\": {" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "}," +
+                                            "\"dosageInstruction\": [" +
+                                                "{" +
+                                                    "\"sequence\": 1," +
+                                                    "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
+                                                    "\"timing\": {" +
+                                                        "\"repeat\": {" +
+                                                            "\"frequency\": "+signa2+"," +
+                                                            "\"period\": 1," +
+                                                            "\"periodUnit\": \"d\"" +
+                                                        "}" +
+                                                    "}," +
+                                                    "\"route\": {" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
+                                                                "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
+                                                            "}" +
+                                                        "]" +
+                                                    "}," +
+                                                    "\"doseAndRate\": [" +
+                                                        "{" +
+                                                            "\"doseQuantity\": {" +
+                                                                "\"value\": "+signa1+"," +
+                                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                            "}" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"dispenseRequest\": {" +
+                                                "\"quantity\": {" +
+                                                    "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
+                                                    "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                    "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                "}," +
+                                                "\"performer\": {" +
+                                                    "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
+                                                "}" +
+                                            "}" +
+                                        "}";
+                                System.out.println("URL : "+link+"/MedicationRequest");
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/MedicationRequest", HttpMethod.POST, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                root = mapper.readTree(json);
+                                response = root.path("id");
+                                if(!response.asText().equals("")){
+                                    if(Sequel.menyimpantf2("satu_sehat_medicationrequest_racikan","?,?,?,?","Obat/Alkes",4,new String[]{
+                                        tbObat.getValueAt(i,25).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,27).toString(),response.asText()
+                                    })==true){
+                                        pengirim.setValueAt(tbObat,response.asText(),i,26);
+                                        pengirim.setValueAt(tbObat,false,i,0);
+                                    }
+                                }
+                            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                                System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
                         }
                     } catch (Exception e) {
-                        signa2="1";
+                        System.out.println("Notifikasi : "+e);
                     }
-                    if(tbObat.getValueAt(i,27).toString().equals("")){
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"MedicationRequest\"," +
-                                        "\"identifier\": [" +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
-                                            "}," +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"status\": \"completed\"," +
-                                        "\"intent\": \"order\"," +
-                                        "\"category\": [" +
-                                            "{" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
-                                                        "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"medicationReference\": {" +
-                                            "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
-                                        "}," +
-                                        "\"subject\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}," +
-                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"requester\": {" +
-                                            "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                        "}," +
-                                        "\"dosageInstruction\": [" +
-                                            "{" +
-                                                "\"sequence\": 1," +
-                                                "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
-                                                "\"timing\": {" +
-                                                    "\"repeat\": {" +
-                                                        "\"frequency\": "+signa2+"," +
-                                                        "\"period\": 1," +
-                                                        "\"periodUnit\": \"d\"" +
-                                                    "}" +
-                                                "}," +
-                                                "\"route\": {" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                                            "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}," +
-                                                "\"doseAndRate\": [" +
-                                                    "{" +
-                                                        "\"doseQuantity\": {" +
-                                                            "\"value\": "+signa1+"," +
-                                                            "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                                        "}" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"dispenseRequest\": {" +
-                                            "\"quantity\": {" +
-                                                "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
-                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                            "}," +
-                                            "\"performer\": {" +
-                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
-                                            "}" +
-                                        "}" +
-                                    "}";
-                            System.out.println("URL : "+link+"/MedicationRequest");
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/MedicationRequest", HttpMethod.POST, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_medicationrequest","?,?,?","Obat/Alkes",3,new String[]{
-                                    tbObat.getValueAt(i,25).toString(),tbObat.getValueAt(i,11).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,26);
-                                    tbObat.setValueAt(false,i,0);
-                                }
-                            }
-                        } catch (HttpClientErrorException | HttpServerErrorException e) {
-                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
-                        }
-                    }else if(!tbObat.getValueAt(i,27).toString().equals("")){
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"MedicationRequest\"," +
-                                        "\"identifier\": [" +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,25).toString()+"-"+tbObat.getValueAt(i,27).toString()+"\"" +
-                                            "}," +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"status\": \"completed\"," +
-                                        "\"intent\": \"order\"," +
-                                        "\"category\": [" +
-                                            "{" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
-                                                        "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"medicationReference\": {" +
-                                            "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
-                                        "}," +
-                                        "\"subject\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}," +
-                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"requester\": {" +
-                                            "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                        "}," +
-                                        "\"dosageInstruction\": [" +
-                                            "{" +
-                                                "\"sequence\": 1," +
-                                                "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
-                                                "\"timing\": {" +
-                                                    "\"repeat\": {" +
-                                                        "\"frequency\": "+signa2+"," +
-                                                        "\"period\": 1," +
-                                                        "\"periodUnit\": \"d\"" +
-                                                    "}" +
-                                                "}," +
-                                                "\"route\": {" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                                            "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}," +
-                                                "\"doseAndRate\": [" +
-                                                    "{" +
-                                                        "\"doseQuantity\": {" +
-                                                            "\"value\": "+signa1+"," +
-                                                            "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                                        "}" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"dispenseRequest\": {" +
-                                            "\"quantity\": {" +
-                                                "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
-                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                            "}," +
-                                            "\"performer\": {" +
-                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
-                                            "}" +
-                                        "}" +
-                                    "}";
-                            System.out.println("URL : "+link+"/MedicationRequest");
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/MedicationRequest", HttpMethod.POST, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_medicationrequest_racikan","?,?,?,?","Obat/Alkes",4,new String[]{
-                                    tbObat.getValueAt(i,25).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,27).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,26);
-                                    tbObat.setValueAt(false,i,0);
-                                }
-                            }
-                        } catch (HttpClientErrorException | HttpServerErrorException e) {
-                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
-                        }
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -953,251 +961,258 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,26).toString().equals(""))){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
+        ResourceSender.run(this,"Memperbarui MedicationRequest di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,26).toString().equals(""))){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
 
-                    arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
-                    signa1="1";
-                    try {
-                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
-                        }
-                    } catch (Exception e) {
+                        arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                         signa1="1";
-                    }
-                    signa2="1";
-                    try {
-                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
+                        try {
+                            if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                                signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
+                            }
+                        } catch (Exception e) {
+                            signa1="1";
+                        }
+                        signa2="1";
+                        try {
+                            if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                                signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
+                            }
+                        } catch (Exception e) {
+                            signa2="1";
+                        }
+                        if(tbObat.getValueAt(i,27).toString().equals("")){
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{" +
+                                            "\"resourceType\": \"MedicationRequest\"," +
+                                            "\"id\": \""+tbObat.getValueAt(i,26).toString()+"\"," +
+                                            "\"identifier\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
+                                                "}," +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"status\": \"completed\"," +
+                                            "\"intent\": \"order\"," +
+                                            "\"category\": [" +
+                                                "{" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
+                                                            "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
+                                                            "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"medicationReference\": {" +
+                                                "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "}," +
+                                            "\"subject\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "}," +
+                                            "\"encounter\": {" +
+                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}," +
+                                            "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"requester\": {" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "}," +
+                                            "\"dosageInstruction\": [" +
+                                                "{" +
+                                                    "\"sequence\": 1," +
+                                                    "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
+                                                    "\"timing\": {" +
+                                                        "\"repeat\": {" +
+                                                            "\"frequency\": "+signa2+"," +
+                                                            "\"period\": 1," +
+                                                            "\"periodUnit\": \"d\"" +
+                                                        "}" +
+                                                    "}," +
+                                                    "\"route\": {" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
+                                                                "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
+                                                            "}" +
+                                                        "]" +
+                                                    "}," +
+                                                    "\"doseAndRate\": [" +
+                                                        "{" +
+                                                            "\"doseQuantity\": {" +
+                                                                "\"value\": "+signa1+"," +
+                                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                            "}" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"dispenseRequest\": {" +
+                                                "\"quantity\": {" +
+                                                    "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
+                                                    "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                    "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                "}," +
+                                                "\"performer\": {" +
+                                                    "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
+                                                "}" +
+                                            "}" +
+                                        "}";
+                                System.out.println("URL : "+link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString());
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString(), HttpMethod.PUT, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                pengirim.setValueAt(tbObat,false,i,0);
+                            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                                System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
+                        }else if(!tbObat.getValueAt(i,27).toString().equals("")){
+                            try{
+                                headers = new HttpHeaders();
+                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                json = "{" +
+                                            "\"resourceType\": \"MedicationRequest\"," +
+                                            "\"id\": \""+tbObat.getValueAt(i,26).toString()+"\"," +
+                                            "\"identifier\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,25).toString()+"-"+tbObat.getValueAt(i,27).toString()+"\"" +
+                                                "}," +
+                                                "{" +
+                                                    "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                    "\"use\": \"official\"," +
+                                                    "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"status\": \"completed\"," +
+                                            "\"intent\": \"order\"," +
+                                            "\"category\": [" +
+                                                "{" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
+                                                            "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
+                                                            "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"medicationReference\": {" +
+                                                "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                            "}," +
+                                            "\"subject\": {" +
+                                                "\"reference\": \"Patient/"+idpasien+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                            "}," +
+                                            "\"encounter\": {" +
+                                                "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                            "}," +
+                                            "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
+                                            "\"requester\": {" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"," +
+                                                "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                            "}," +
+                                            "\"dosageInstruction\": [" +
+                                                "{" +
+                                                    "\"sequence\": 1," +
+                                                    "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
+                                                    "\"timing\": {" +
+                                                        "\"repeat\": {" +
+                                                            "\"frequency\": "+signa2+"," +
+                                                            "\"period\": 1," +
+                                                            "\"periodUnit\": \"d\"" +
+                                                        "}" +
+                                                    "}," +
+                                                    "\"route\": {" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
+                                                                "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
+                                                            "}" +
+                                                        "]" +
+                                                    "}," +
+                                                    "\"doseAndRate\": [" +
+                                                        "{" +
+                                                            "\"doseQuantity\": {" +
+                                                                "\"value\": "+signa1+"," +
+                                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                            "}" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "]," +
+                                            "\"dispenseRequest\": {" +
+                                                "\"quantity\": {" +
+                                                    "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
+                                                    "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
+                                                    "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                                "}," +
+                                                "\"performer\": {" +
+                                                    "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
+                                                "}" +
+                                            "}" +
+                                        "}";
+                                System.out.println("URL : "+link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString());
+                                System.out.println("Request JSON : "+json);
+                                requestEntity = new HttpEntity(json,headers);
+                                json=api.kirimSmc(link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString(), HttpMethod.PUT, requestEntity);
+                                System.out.println("Result JSON : "+json);
+                                pengirim.setValueAt(tbObat,false,i,0);
+                            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                                System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
+                            }
                         }
                     } catch (Exception e) {
-                        signa2="1";
+                        System.out.println("Notifikasi : "+e);
                     }
-                    if(tbObat.getValueAt(i,27).toString().equals("")){
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"MedicationRequest\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,26).toString()+"\"," +
-                                        "\"identifier\": [" +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
-                                            "}," +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"status\": \"completed\"," +
-                                        "\"intent\": \"order\"," +
-                                        "\"category\": [" +
-                                            "{" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
-                                                        "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"medicationReference\": {" +
-                                            "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
-                                        "}," +
-                                        "\"subject\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}," +
-                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"requester\": {" +
-                                            "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                        "}," +
-                                        "\"dosageInstruction\": [" +
-                                            "{" +
-                                                "\"sequence\": 1," +
-                                                "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
-                                                "\"timing\": {" +
-                                                    "\"repeat\": {" +
-                                                        "\"frequency\": "+signa2+"," +
-                                                        "\"period\": 1," +
-                                                        "\"periodUnit\": \"d\"" +
-                                                    "}" +
-                                                "}," +
-                                                "\"route\": {" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                                            "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}," +
-                                                "\"doseAndRate\": [" +
-                                                    "{" +
-                                                        "\"doseQuantity\": {" +
-                                                            "\"value\": "+signa1+"," +
-                                                            "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                                        "}" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"dispenseRequest\": {" +
-                                            "\"quantity\": {" +
-                                                "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
-                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                            "}," +
-                                            "\"performer\": {" +
-                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
-                                            "}" +
-                                        "}" +
-                                    "}";
-                            System.out.println("URL : "+link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString());
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            tbObat.setValueAt(false,i,0);
-                        } catch (HttpClientErrorException | HttpServerErrorException e) {
-                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
-                        }
-                    }else if(!tbObat.getValueAt(i,27).toString().equals("")){
-                        try{
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                            json = "{" +
-                                        "\"resourceType\": \"MedicationRequest\"," +
-                                        "\"id\": \""+tbObat.getValueAt(i,26).toString()+"\"," +
-                                        "\"identifier\": [" +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,25).toString()+"-"+tbObat.getValueAt(i,27).toString()+"\"" +
-                                            "}," +
-                                            "{" +
-                                                "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                                "\"use\": \"official\"," +
-                                                "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                            "}" +
-                                        "]," +
-                                        "\"status\": \"completed\"," +
-                                        "\"intent\": \"order\"," +
-                                        "\"category\": [" +
-                                            "{" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/medicationrequest-category\"," +
-                                                        "\"code\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","outpatient").replaceAll("Ranap","inpatient")+"\"," +
-                                                        "\"display\": \""+tbObat.getValueAt(i,28).toString().replaceAll("Ralan","Outpatient").replaceAll("Ranap","Inpatient")+"\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"medicationReference\": {" +
-                                            "\"reference\": \"Medication/"+tbObat.getValueAt(i,23).toString()+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
-                                        "}," +
-                                        "\"subject\": {" +
-                                            "\"reference\": \"Patient/"+idpasien+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                        "}," +
-                                        "\"encounter\": {" +
-                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                        "}," +
-                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
-                                        "\"requester\": {" +
-                                            "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                        "}," +
-                                        "\"dosageInstruction\": [" +
-                                            "{" +
-                                                "\"sequence\": 1," +
-                                                "\"patientInstruction\": \""+tbObat.getValueAt(i,24).toString()+"\"," +
-                                                "\"timing\": {" +
-                                                    "\"repeat\": {" +
-                                                        "\"frequency\": "+signa2+"," +
-                                                        "\"period\": 1," +
-                                                        "\"periodUnit\": \"d\"" +
-                                                    "}" +
-                                                "}," +
-                                                "\"route\": {" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \""+tbObat.getValueAt(i,17).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                                            "\"display\": \""+tbObat.getValueAt(i,18).toString()+"\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}," +
-                                                "\"doseAndRate\": [" +
-                                                    "{" +
-                                                        "\"doseQuantity\": {" +
-                                                            "\"value\": "+signa1+"," +
-                                                            "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                            "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                            "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                                        "}" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "]," +
-                                        "\"dispenseRequest\": {" +
-                                            "\"quantity\": {" +
-                                                "\"value\": "+tbObat.getValueAt(i,22).toString()+"," +
-                                                "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
-                                                "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
-                                            "}," +
-                                            "\"performer\": {" +
-                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
-                                            "}" +
-                                        "}" +
-                                    "}";
-                            System.out.println("URL : "+link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString());
-                            System.out.println("Request JSON : "+json);
-                            requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/MedicationRequest/"+tbObat.getValueAt(i,26).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            tbObat.setValueAt(false,i,0);
-                        } catch (HttpClientErrorException | HttpServerErrorException e) {
-                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                        }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
-                        }
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
