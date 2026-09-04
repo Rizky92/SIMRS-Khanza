@@ -1611,8 +1611,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     }
 
                     if(!noresep.equals("")){
-                        Sequel.mengupdatetfSmc("resep_obat", "tgl_perawatan = ?, jam = ?", "no_resep = ?", Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), noresep);
-                        // Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"'");
+                        Sequel.mengedit("resep_obat","no_resep='"+noresep+"'","tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"'");
                     }
 
                     if(sukses){
@@ -1689,9 +1688,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             JTextField asdf = new JTextField("");
                             asdf.setDocument(new batasInput(5).getOnlyAngka(asdf));
 
-                            if (JOptionPane.showConfirmDialog(null, new Object[] {"Masukkan no. antrian :", asdf}, "No. Antrian",
-                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION
-                            ) {
+                            if (JOptionPane.showConfirmDialog(null, new Object[] {"Masukkan no. antrian :", asdf}, "No. Antrian", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION) {
                                 int nomor = Valid.SetInteger(asdf.getText().trim());
 
                                 if (nomor > 0) {
