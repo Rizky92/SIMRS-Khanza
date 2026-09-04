@@ -175,15 +175,15 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
     // End of variables declaration//GEN-END:variables
 
     private void cetakAntrian() {
-        int nomor = Sequel.cariIntegerSmc("select ifnull(max(convert(antriloketfarmasi_smc.nomor, unsigned)), 0) + 1 from antriloketfarmasi_smc where antriloketfarmasi_smc.tanggal = current_date()", 0);
+        int nomor = Sequel.cariIntegerSmc("select ifnull(max(convert(antriloketfarmasi_smc.nomor, unsigned)), 0) + 1 from antriloketfarmasi_smc where antriloketfarmasi_smc.tanggal = current_date()");
 
-        if (nomor > 0 && Sequel.executeRawSmc("insert into antriloketfarmasi_smc (nomor, tanggal, jam) values (lpad(?, 4, '0'), current_date(), current_time())", String.valueOf(nomor))) {
+        if (nomor > 0 && Sequel.executeRawSmc("insert into antriloketfarmasi_smc (nomor, tanggal, jam) values (lpad(?, greatest(length(?), 4), '0'), current_date(), current_time())", String.valueOf(nomor), String.valueOf(nomor))) {
             Valid.printReportSmc("rptAntriFarmasiAPM.jasper", "report", "::[ Antrian Farmasi ]::", param, printerAntrian, printJumlahAntrianFarmasi,
-                "select date_format(antriloketfarmasi_smc.tanggal, '%d-%m-%Y') as tanggal, antriloketfarmasi_smc.nomor, antriloketfarmasi_smc.jam from antriloketfarmasi_smc " +
-                "where antriloketfarmasi_smc.tanggal = current_date() and antriloketfarmasi_smc.nomor = lpad(?, 4, '0')", String.valueOf(nomor));
+                "select date_format(antriloketfarmasi_smc.tanggal, '%d-%m-%Y') as tanggal, antriloketfarmasi_smc.nomor, antriloketfarmasi_smc.jam from antriloketfarmasi_smc where " +
+                "antriloketfarmasi_smc.tanggal = current_date() and antriloketfarmasi_smc.nomor = lpad(?, greatest(length(?), 4), '0')", String.valueOf(nomor), String.valueOf(nomor));
             Valid.popupInfoDialog("Silahkan ambil antrian anda..!!", 3);
         } else {
-            Valid.popupInfoDialog("Maaf, nomor antrian gagal dibuat. Silahkan coba lagi..!!", 3);
+            Valid.popupPeringatanDialog("Maaf, nomor antrian gagal dibuat. Silahkan coba lagi..!!", 3);
         }
 
         tampil();
@@ -191,9 +191,9 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
 
     private void tampil() {
         tanggal.setText("Tanggal " + LocalDate.now());
-        AmbilAntrian.setText(String.format(templateAntrian,
-            Sequel.cariIsiSmc("select lpad(ifnull(max(convert(antriloketfarmasi_smc.nomor, unsigned)), 0) + 1, 4, '0') from antriloketfarmasi_smc where antriloketfarmasi_smc.tanggal = current_date()")
-        ));
+        AmbilAntrian.setText(String.format(templateAntrian, Sequel.cariIsiSmc("with lastnum as (select ifnull(max(convert(antriloketfarmasi_smc.nomor, unsigned)), 0) + 1 " +
+            "as nomor from antriloketfarmasi_smc where tanggal = current_date()) select lpad(lastnum.nomor, greatest(length(lastnum.nomor), 4), '0') from lastnum"
+        )));
     }
 
     private void loadPengaturanAPM() {
