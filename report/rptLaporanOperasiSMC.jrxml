@@ -703,59 +703,6 @@
 				<textFieldExpression><![CDATA[$P{ruang}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="284" y="21" width="60" height="11" uuid="13b15ff9-0b7e-4324-b14e-edcab5e299cf">
-					<property name="com.jaspersoft.layout.grid.x" value="3"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box leftPadding="4"/>
-				<textElement>
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tindakan]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="344" y="21" width="5" height="11" uuid="ca898a1b-fe4b-4df0-a3ca-5e63e03ac072">
-					<property name="com.jaspersoft.layout.grid.x" value="4"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="349" y="21" width="204" height="33" uuid="21f77dd8-7bfe-4818-8a75-aba54bebae6c">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="5"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="3"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
-				</reportElement>
-				<textElement textAlignment="Left">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{tindakan}]]></textFieldExpression>
-			</textField>
-			<staticText>
 				<reportElement x="284" y="54" width="60" height="11" uuid="ee15ff40-c4c7-4d4d-9821-4edb31248500">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="4"/>
