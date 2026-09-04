@@ -101,7 +101,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             tabMode2=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","Pasien","Tgl.Periksa","Jam","Pemeriksaan",
                 "Item Pemeriksaan","Hasil","Satuan","Nilai Rujukan","Keterangan",
-                "Ruang","Petugas","Dokter Perujuk","Penanggung Jawab","Method"
+                "Ruang","Petugas","Dokter Perujuk","Penanggung Jawab","Metode"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -1839,7 +1839,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -1849,7 +1849,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -1966,7 +1966,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                 ttl=ttl+item;
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("kd_jenis_prw"), rs2.getString("nm_perawatan"), Valid.SetAngka(item), "Pemeriksaan");
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -1978,7 +1978,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     while(rs3.next()){
                                         item=rs3.getDouble("biaya_item");
                                         ttl=ttl+item;
-                                        Sequel.temporaryLab(String.valueOf(++i), rs3.getString("kd_jenis_prw"), "   " + rs3.getString("Pemeriksaan"), Valid.SetAngka(item), "Detail Pemeriksaan");
+                                        Sequel.temporaryLab(String.valueOf(++i), rs3.getString("kd_jenis_prw"), "   " + rs3.getString("Pemeriksaan"), Valid.SetAngka(item), "Detail Pemeriksaan", rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -2121,7 +2121,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -2132,7 +2132,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
                                         Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"),
-                                            rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                            rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -2276,7 +2276,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -2286,7 +2286,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -2431,7 +2431,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -2441,7 +2441,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -2586,7 +2586,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -2596,7 +2596,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -2742,7 +2742,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -2752,7 +2752,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -2900,7 +2900,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -2910,7 +2910,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -3059,7 +3059,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -3069,7 +3069,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -3241,7 +3241,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -3251,7 +3251,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -3422,7 +3422,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -3432,7 +3432,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -3604,7 +3604,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -3614,7 +3614,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -3867,7 +3867,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -3877,7 +3877,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4022,7 +4022,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4032,7 +4032,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4178,7 +4178,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4188,7 +4188,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4334,7 +4334,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4344,7 +4344,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4489,7 +4489,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4499,7 +4499,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4645,7 +4645,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4655,7 +4655,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4804,7 +4804,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4814,7 +4814,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -4963,7 +4963,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -4973,7 +4973,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -5146,7 +5146,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -5156,7 +5156,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -5328,7 +5328,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -5338,7 +5338,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -5511,7 +5511,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -5521,7 +5521,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -5746,7 +5746,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -5756,7 +5756,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -5927,7 +5927,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                             while(rs2.next()){
                                 Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
                                 ps3=koneksi.prepareStatement(
-                                    "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
+                                    "select template_laboratorium.Pemeriksaan,template_laboratorium.method,detail_periksa_lab.nilai,template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
                                     "detail_periksa_lab.keterangan,detail_periksa_lab.kd_jenis_prw from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=? order by template_laboratorium.urut");
                                 try {
@@ -5937,7 +5937,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                     ps3.setString(4,rs.getString("jam"));
                                     rs3=ps3.executeQuery();
                                     while(rs3.next()){
-                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"));
+                                        Sequel.temporaryLab(String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"), rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan"), rs3.getString("method"));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Notif ps3 : "+e);
@@ -6707,7 +6707,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+kamar+" : "+namakamar+")",
                                                 rs.getString("nama"),rs.getString("tgl_periksa"),rs.getString("jam"),
                                                 Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",rs.getString("dokter_perujuk")),rs.getString("nm_dokter")});
-                    tabMode.addRow(new Object[]{"Cara Bayar : "+rs.getString("png_jawab"),"Pemeriksaan","Hasil","Method","Satuan","Nilai Rujukan","Keterangan"});
+                    tabMode.addRow(new Object[]{"Cara Bayar : "+rs.getString("png_jawab"),"Pemeriksaan","Hasil","Metode","Satuan","Nilai Rujukan","Keterangan"});
                     ps2=koneksi.prepareStatement(
                         "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,periksa_lab.biaya from periksa_lab inner join jns_perawatan_lab "+
                         "on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw where periksa_lab.kategori='PK' and periksa_lab.no_rawat=? and periksa_lab.tgl_periksa=? "+
@@ -7106,7 +7106,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                                                     "<td valign='top' bgcolor='#fdfff9' align='center' width='30%'>Pemeriksaan</td>"+
                                                     "<td valign='top' bgcolor='#fdfff9' align='center' width='15%'>Hasil</td>"+
                                                     "<td valign='top' bgcolor='#fdfff9' align='center' width='10%'>Satuan</td>"+
-                                                    "<td valign='top' bgcolor='#fdfff9' align='center' width='10%'>Method</td>"+
+                                                    "<td valign='top' bgcolor='#fdfff9' align='center' width='10%'>Metode</td>"+
                                                     "<td valign='top' bgcolor='#fdfff9' align='center' width='15%'>Nilai Rujukan</td>"+
                                                     "<td valign='top' bgcolor='#fdfff9' align='center' width='20%'>Keterangan</td>"+
                                                 "</tr>");
