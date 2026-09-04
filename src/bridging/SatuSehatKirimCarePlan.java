@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -604,98 +605,105 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
-                try {
-                    idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+        ResourceSender.run(this,"Mengirim CarePlan ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,11).toString().equals("")){
+                    try {
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
 
-                        ObjectMapper mapper = new ObjectMapper();
-                        ObjectNode root = mapper.createObjectNode();
+                            ObjectMapper mapper = new ObjectMapper();
+                            ObjectNode root = mapper.createObjectNode();
 
-                        root.put("resourceType", "CarePlan");
+                            root.put("resourceType", "CarePlan");
 
-                        ObjectNode identifier = root.putObject("identifier");
-                        identifier.put("system", "http://sys-ids.kemkes.go.id/careplan/" + koneksiDB.IDSATUSEHAT());
-                        identifier.put("value", tbObat.getValueAt(i, 2).toString());
+                            ObjectNode identifier = root.putObject("identifier");
+                            identifier.put("system", "http://sys-ids.kemkes.go.id/careplan/" + koneksiDB.IDSATUSEHAT());
+                            identifier.put("value", tbObat.getValueAt(i, 2).toString());
 
-                        root.put("title", "Instruksi Medik dan Keperawatan Pasien");
-                        root.put("status", "active");
+                            root.put("title", "Instruksi Medik dan Keperawatan Pasien");
+                            root.put("status", "active");
 
-                        // --- Category ---
-                        ArrayNode categoryArray = root.putArray("category");
-                        ObjectNode category = categoryArray.addObject();
-                        ArrayNode codingArray = category.putArray("coding");
-                        ObjectNode coding = codingArray.addObject();
+                            // --- Category ---
+                            ArrayNode categoryArray = root.putArray("category");
+                            ObjectNode category = categoryArray.addObject();
+                            ArrayNode codingArray = category.putArray("coding");
+                            ObjectNode coding = codingArray.addObject();
 
-                        if (tbObat.getValueAt(i, 12).toString().equals("Ralan")) {
-                            coding.put("system", "http://snomed.info/sct");
-                            coding.put("code", "736271009");
-                            coding.put("display", "Outpatient care plan");
-                        } else {
-                            coding.put("system", "http://snomed.info/sct");
-                            coding.put("code", "736353004");
-                            coding.put("display", "Inpatient care plan");
-                        }
-
-                        root.put("intent", "plan");
-                        root.put("description", tbObat.getValueAt(i, 7).toString()
-                                .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
-                                .replaceAll("\t", " "));
-
-                        // --- Subject ---
-                        ObjectNode subject = root.putObject("subject");
-                        subject.put("reference", "Patient/" + idpasien);
-                        subject.put("display", tbObat.getValueAt(i, 4).toString());
-
-                        // --- Encounter ---
-                        ObjectNode encounter = root.putObject("encounter");
-                        encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 6).toString());
-                        encounter.put("display",
-                                "Kunjungan " + tbObat.getValueAt(i, 4).toString()
-                                + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
-                                + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
-
-                        // --- Created ---
-                        root.put("created", tbObat.getValueAt(i, 10).toString().replaceAll(" ", "T") + "+07:00");
-
-                        // --- Author ---
-                        ObjectNode author = root.putObject("author");
-                        author.put("reference", "Practitioner/" + idpraktisi);
-                        author.put("display", tbObat.getValueAt(i, 8).toString());
-
-                        // --- Serialize ke string JSON valid ---
-                        String json = mapper.writeValueAsString(root);
-
-                        System.out.println("URL : "+link+"/CarePlan");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/CarePlan", HttpMethod.POST, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        root = (ObjectNode) mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_careplan","?,?,?,?,?","Rencana Perawatan",5,new String[]{
-                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,10),tbObat.getValueAt(i,10).toString().substring(11,19),tbObat.getValueAt(i,12).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,11);
-                                tbObat.setValueAt(false,i,0);
+                            if (tbObat.getValueAt(i, 12).toString().equals("Ralan")) {
+                                coding.put("system", "http://snomed.info/sct");
+                                coding.put("code", "736271009");
+                                coding.put("display", "Outpatient care plan");
+                            } else {
+                                coding.put("system", "http://snomed.info/sct");
+                                coding.put("code", "736353004");
+                                coding.put("display", "Inpatient care plan");
                             }
+
+                            root.put("intent", "plan");
+                            root.put("description", tbObat.getValueAt(i, 7).toString()
+                                    .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
+                                    .replaceAll("\t", " "));
+
+                            // --- Subject ---
+                            ObjectNode subject = root.putObject("subject");
+                            subject.put("reference", "Patient/" + idpasien);
+                            subject.put("display", tbObat.getValueAt(i, 4).toString());
+
+                            // --- Encounter ---
+                            ObjectNode encounter = root.putObject("encounter");
+                            encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 6).toString());
+                            encounter.put("display",
+                                    "Kunjungan " + tbObat.getValueAt(i, 4).toString()
+                                    + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
+                                    + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
+
+                            // --- Created ---
+                            root.put("created", tbObat.getValueAt(i, 10).toString().replaceAll(" ", "T") + "+07:00");
+
+                            // --- Author ---
+                            ObjectNode author = root.putObject("author");
+                            author.put("reference", "Practitioner/" + idpraktisi);
+                            author.put("display", tbObat.getValueAt(i, 8).toString());
+
+                            // --- Serialize ke string JSON valid ---
+                            String json = mapper.writeValueAsString(root);
+
+                            System.out.println("URL : "+link+"/CarePlan");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/CarePlan", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = (ObjectNode) mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_careplan","?,?,?,?,?","Rencana Perawatan",5,new String[]{
+                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString().substring(0,10),tbObat.getValueAt(i,10).toString().substring(11,19),tbObat.getValueAt(i,12).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,11);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
+                            }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -711,80 +719,87 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
-                try {
-                    idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\" : \"CarePlan\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
-                                    "\"identifier\" : {" +
-                                        "\"system\" : \"http://sys-ids.kemkes.go.id/careplan/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                        "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
-                                    "}," +
-                                    "\"title\" : \"Instruksi Medik dan Keperawatan Pasien\"," +
-                                    "\"status\" : \"active\"," +
-                                    (tbObat.getValueAt(i,12).toString().equals("Ralan")?
-                                        "\"category\" : [" +
-                                            "{" +
-                                                "\"coding\" : [" +
-                                                    "{" +
-                                                        "\"system\" : \"http://snomed.info/sct\"," +
-                                                        "\"code\" : \"736271009\"," +
-                                                        "\"display\" : \"Outpatient care plan\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "],":
-                                        "\"category\" : [" +
-                                            "{" +
-                                                "\"coding\" : [" +
-                                                    "{" +
-                                                        "\"system\" : \"http://snomed.info/sct\"," +
-                                                        "\"code\" : \"736353004\"," +
-                                                        "\"display\" : \"Inpatient care plan\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "],"
-                                    )+
-                                    "\"intent\" : \"plan\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
-                                    "\"subject\" : {" +
-                                        "\"reference\" : \"Patient/"+idpasien+"\"," +
-                                        "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\" : {" +
-                                        "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
-                                        "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                    "}," +
-                                    "\"created\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"author\" : {" +
-                                        "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
-                                        "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}" +
-                                "}";
-                        System.out.println("URL : "+link+"/CarePlan/"+tbObat.getValueAt(i,11).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/CarePlan/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+        ResourceSender.run(this,"Memperbarui CarePlan di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,6).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,11).toString().equals(""))){
+                    try {
+                        idpraktisi=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,9).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\" : \"CarePlan\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,11).toString()+"\"," +
+                                        "\"identifier\" : {" +
+                                            "\"system\" : \"http://sys-ids.kemkes.go.id/careplan/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
+                                        "}," +
+                                        "\"title\" : \"Instruksi Medik dan Keperawatan Pasien\"," +
+                                        "\"status\" : \"active\"," +
+                                        (tbObat.getValueAt(i,12).toString().equals("Ralan")?
+                                            "\"category\" : [" +
+                                                "{" +
+                                                    "\"coding\" : [" +
+                                                        "{" +
+                                                            "\"system\" : \"http://snomed.info/sct\"," +
+                                                            "\"code\" : \"736271009\"," +
+                                                            "\"display\" : \"Outpatient care plan\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "],":
+                                            "\"category\" : [" +
+                                                "{" +
+                                                    "\"coding\" : [" +
+                                                        "{" +
+                                                            "\"system\" : \"http://snomed.info/sct\"," +
+                                                            "\"code\" : \"736353004\"," +
+                                                            "\"display\" : \"Inpatient care plan\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
+                                            "],"
+                                        )+
+                                        "\"intent\" : \"plan\"," +
+                                        "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
+                                        "\"subject\" : {" +
+                                            "\"reference\" : \"Patient/"+idpasien+"\"," +
+                                            "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\" : {" +
+                                            "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
+                                            "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
+                                        "}," +
+                                        "\"created\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"author\" : {" +
+                                            "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
+                                            "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}" +
+                                    "}";
+                            System.out.println("URL : "+link+"/CarePlan/"+tbObat.getValueAt(i,11).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/CarePlan/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

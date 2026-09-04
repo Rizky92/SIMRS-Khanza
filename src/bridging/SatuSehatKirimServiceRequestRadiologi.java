@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -21,12 +22,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -47,6 +50,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
@@ -78,7 +82,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","Kode Dokter","Nama Dokter Perujuk",
                 "No.KTP Dokter","ID Encounter","No.Permintaan","Tgl & Jam Permintaan","Diagnosa Klinis",
                 "Nama Pemeriksaan","Radiologi Code","Radiologi System","Radiologi Display","ID Service Request",
-                "Kode Pemeriksaan"
+                "Kode Pemeriksaan","Accession Number"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -92,7 +96,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
-                 java.lang.String.class,java.lang.String.class
+                 java.lang.String.class,java.lang.String.class,java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -105,7 +109,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -144,6 +148,8 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
             }else if(i==17){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
+            }else if(i==18){
+                column.setPreferredWidth(110);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -613,7 +619,8 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        runBackground(() ->tampil());
+        // runBackground(() ->tampil());
+        tampilSmc();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -626,101 +633,113 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,16).toString().equals("")){
-                try {
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"ServiceRequest\"," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString().replaceAll("PR","")+tbObat.getValueAt(i,17).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"status\": \"active\"," +
-                                    "\"intent\": \"order\"," +
-                                    "\"category\": [" +
-                                        "{" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://snomed.info/sct\"," +
-                                                    "\"code\": \"363679005\"," +
-                                                    "\"display\": \"Imaging\"" +
-                                                "}" +
-                                            "]" +
-                                        "}" +
-                                    "],"+
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+        ResourceSender.run(this,"Mengirim ServiceRequestRadiologi ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,16).toString().equals("")){
+                    try {
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        String acsn=tbObat.getValueAt(i,18).toString();
+                        if (acsn.isBlank()) {
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"ServiceRequest\"," +
+                                        "\"identifier\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"" +
+                                                "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                "\"value\": \""+acsn+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"text\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"," +
-                                        "\"display\": \"Permintaan "+tbObat.getValueAt(i,12).toString()+" atas nama pasien "+tbObat.getValueAt(i,3).toString()+" No.RM "+tbObat.getValueAt(i,2).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", pada tanggal "+tbObat.getValueAt(i,10).toString()+"\"" +
-                                    "}," +
-                                    "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"requester\": {" +
-                                        "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                    "}," +
-                                    "\"performer\": [{" +
-                                        "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                        "\"display\": \"Ruang Radiologi/Petugas Radiologi\"" +
-                                    "}]," +
-                                    "\"reasonCode\": [" +
-                                        "{" +
-                                            "\"text\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                        "}" +
-                                    "]" +
-                                "}";
-                        System.out.println("URL : "+link+"/ServiceRequest");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/ServiceRequest", HttpMethod.POST, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_servicerequest_radiologi","?,?,?","No.Order",3,new String[]{
-                                tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,16);
-                                tbObat.setValueAt(false,i,0);
+                                        "\"status\": \"active\"," +
+                                        "\"intent\": \"order\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://snomed.info/sct\"," +
+                                                        "\"code\": \"363679005\"," +
+                                                        "\"display\": \"Imaging\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "],"+
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"," +
+                                            "\"display\": \"Permintaan "+tbObat.getValueAt(i,12).toString()+" atas nama pasien "+tbObat.getValueAt(i,3).toString()+" No.RM "+tbObat.getValueAt(i,2).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", pada tanggal "+tbObat.getValueAt(i,10).toString()+"\"" +
+                                        "}," +
+                                        "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"requester\": {" +
+                                            "\"reference\": \"Practitioner/"+iddokter+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                        "}," +
+                                        "\"performer\": [{" +
+                                            "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"display\": \"Ruang Radiologi/Petugas Radiologi\"" +
+                                        "}]," +
+                                        "\"reasonCode\": [" +
+                                            "{" +
+                                                "\"text\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                            "}" +
+                                        "]" +
+                                    "}";
+                            System.out.println("URL : "+link+"/ServiceRequest");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/ServiceRequest", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_servicerequest_radiologi","?,?,?","No.Order",3,new String[]{
+                                    tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,16);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -736,104 +755,118 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,16).toString().equals(""))){
-                try {
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"ServiceRequest\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString().replaceAll("PR","")+tbObat.getValueAt(i,17).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"status\": \"active\"," +
-                                    "\"intent\": \"order\"," +
-                                    "\"category\": [" +
-                                        "{" +
-                                            "\"coding\": [" +
-                                                "{" +
-                                                    "\"system\": \"http://snomed.info/sct\"," +
-                                                    "\"code\": \"363679005\"," +
-                                                    "\"display\": \"Imaging\"" +
-                                                "}" +
-                                            "]" +
-                                        "}" +
-                                    "],"+
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+        ResourceSender.run(this,"Memperbarui ServiceRequestRadiologi di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,16).toString().equals(""))){
+                    try {
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        String acsn=tbObat.getValueAt(i,18).toString();
+                        if (acsn.isBlank()) {
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"ServiceRequest\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,16).toString()+"\"," +
+                                        "\"identifier\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"" +
+                                                "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                "\"value\": \""+acsn+"\"" +
                                             "}" +
                                         "]," +
-                                        "\"text\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"," +
-                                        "\"display\": \"Permintaan "+tbObat.getValueAt(i,12).toString()+" atas nama pasien "+tbObat.getValueAt(i,3).toString()+" No.RM "+tbObat.getValueAt(i,2).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", pada tanggal "+tbObat.getValueAt(i,10).toString()+"\"" +
-                                    "}," +
-                                    "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"requester\": {" +
-                                        "\"reference\": \"Practitioner/"+iddokter+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
-                                    "}," +
-                                    "\"performer\": [{" +
-                                        "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                        "\"display\": \"Ruang Radiologi/Petugas Radiologi\"" +
-                                    "}]," +
-                                    "\"reasonCode\": [" +
-                                        "{" +
-                                            "\"text\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
-                                        "}" +
-                                    "]" +
-                                "}";
-                        System.out.println("URL : "+link+"/ServiceRequest/"+tbObat.getValueAt(i,16).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/ServiceRequest/"+tbObat.getValueAt(i,16).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                        "\"status\": \"active\"," +
+                                        "\"intent\": \"order\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://snomed.info/sct\"," +
+                                                        "\"code\": \"363679005\"," +
+                                                        "\"display\": \"Imaging\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "],"+
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \""+tbObat.getValueAt(i,12).toString()+"\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"," +
+                                            "\"display\": \"Permintaan "+tbObat.getValueAt(i,12).toString()+" atas nama pasien "+tbObat.getValueAt(i,3).toString()+" No.RM "+tbObat.getValueAt(i,2).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", pada tanggal "+tbObat.getValueAt(i,10).toString()+"\"" +
+                                        "}," +
+                                        "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"requester\": {" +
+                                            "\"reference\": \"Practitioner/"+iddokter+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
+                                        "}," +
+                                        "\"performer\": [{" +
+                                            "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"display\": \"Ruang Radiologi/Petugas Radiologi\"" +
+                                        "}]," +
+                                        "\"reasonCode\": [" +
+                                            "{" +
+                                                "\"text\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                            "}" +
+                                        "]" +
+                                    "}";
+                            System.out.println("URL : "+link+"/ServiceRequest/"+tbObat.getValueAt(i,16).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/ServiceRequest/"+tbObat.getValueAt(i,16).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        // runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TCari.setText("");
-            runBackground(() ->tampil());
+            // runBackground(() ->tampil());
+            tampilSmc();
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
@@ -845,19 +878,22 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        // runBackground(() ->tampil());
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        // runBackground(() ->tampil());
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        // runBackground(() ->tampil());
+                        tampilSmc();
                     }
                 }
             });
@@ -915,6 +951,8 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
     private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
+
+    /*
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -953,7 +991,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("kd_dokter"),
                         rs.getString("nama"),rs.getString("ktpdokter"),rs.getString("id_encounter"),rs.getString("noorder"),rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan"),
                         rs.getString("diagnosa_klinis"),rs.getString("nm_perawatan"),rs.getString("code"),rs.getString("system"),rs.getString("display"),rs.getString("id_servicerequest"),
-                        rs.getString("kd_jenis_prw")
+                        rs.getString("kd_jenis_prw"),accession.getNoACSN(rs.getString("noorder"),rs.getString("kd_jenis_prw"))
                     });
                 }
             } catch (Exception e) {
@@ -971,6 +1009,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_servicerequest_radiologi());
@@ -980,6 +1019,92 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
 
     public JTable getTable(){
         return tbObat;
+    }
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+                final String tgl1 = Valid.getTglSmc(DTPCari1);
+                final String tgl2 = Valid.getTglSmc(DTPCari2);
+
+                private String getString(String str, String defaultStr) {
+                    if (null == str || str.isBlank()) {
+                        return defaultStr;
+                    }
+
+                    return str;
+                }
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select reg_periksa.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, reg_periksa.kd_dokter, pegawai.nama, pegawai.no_ktp as ktpdokter, " +
+                        "satu_sehat_encounter.id_encounter, permintaan_radiologi.noorder, permintaan_radiologi.tgl_permintaan, permintaan_radiologi.jam_permintaan, permintaan_radiologi.diagnosa_klinis, " +
+                        "jns_perawatan_radiologi.nm_perawatan, satu_sehat_mapping_radiologi.code, satu_sehat_mapping_radiologi.system, satu_sehat_mapping_radiologi.display, " +
+                        "ifnull(satu_sehat_servicerequest_radiologi.id_servicerequest, '') as id_servicerequest, permintaan_pemeriksaan_radiologi.kd_jenis_prw, " +
+                        "satu_sehat_accession_radiologi_smc.no_acsn from reg_periksa inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis inner join pegawai on " +
+                        "pegawai.nik = reg_periksa.kd_dokter inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat = reg_periksa.no_rawat inner join permintaan_radiologi " +
+                        "on permintaan_radiologi.no_rawat = reg_periksa.no_rawat inner join permintaan_pemeriksaan_radiologi on permintaan_pemeriksaan_radiologi.noorder = permintaan_radiologi.noorder " +
+                        "inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw inner join satu_sehat_mapping_radiologi " +
+                        "on satu_sehat_mapping_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw left join satu_sehat_accession_radiologi_smc on " +
+                        "permintaan_pemeriksaan_radiologi.noorder = satu_sehat_accession_radiologi_smc.noorder and permintaan_pemeriksaan_radiologi.kd_jenis_prw = satu_sehat_accession_radiologi_smc.kd_jenis_prw " +
+                        "left join satu_sehat_servicerequest_radiologi on satu_sehat_servicerequest_radiologi.noorder = permintaan_pemeriksaan_radiologi.noorder " +
+                        "and satu_sehat_servicerequest_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw where reg_periksa.tgl_registrasi between ? and ? " +
+                        (cari.isBlank() ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or pasien.no_ktp like ? or pegawai.nama like ? " +
+                        "or jns_perawatan_radiologi.nm_perawatan like ? or satu_sehat_mapping_radiologi.code like ? or permintaan_radiologi.noorder like ?)")
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, tgl1);
+                        ps.setString(++p, tgl2);
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("no_ktp"), rs.getString("kd_dokter"),
+                                    rs.getString("nama"), rs.getString("ktpdokter"), rs.getString("id_encounter"), rs.getString("noorder"), rs.getString("tgl_permintaan") + " " + rs.getString("jam_permintaan"),
+                                    rs.getString("diagnosa_klinis"), rs.getString("nm_perawatan"), rs.getString("code"), rs.getString("system"), rs.getString("display"), rs.getString("id_servicerequest"),
+                                    rs.getString("kd_jenis_prw"), accession.getNoACSN(rs.getString("no_acsn"), rs.getString("noorder"), rs.getString("kd_jenis_prw"))
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    SatuSehatKirimServiceRequestRadiologi.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
     }
 
     private void runBackground(Runnable task) {

@@ -11,6 +11,7 @@
 
 package rekammedis;
 
+import bridging.AccessionRadiologiSMC;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.akuntindakanralan;
@@ -45,6 +46,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                 TabModeTindakan;
     private validasi Valid=new validasi();
     private sekuel Sequel=new sekuel();
+    private AccessionRadiologiSMC accession=new AccessionRadiologiSMC();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
@@ -1072,6 +1074,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
         }else{
             if(tbDokter.getSelectedRow()>-1){
                 Sequel.AutoComitFalse();
+                String noorderTerbit="";
                 sukses=true;
                 if(Sequel.menyimpantf2("pemeriksaan_ralan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",21,new String[]{
                         noperawatan,tanggaldilakukan,jamdilakukan,"","","","","","","","","Compos Mentis",Subjek.getText(),Objek.getText(),"","",Plan.getText(),Asesmen.getText(),Instruksi.getText(),Evaluasi.getText(),kodedokter}
@@ -1108,12 +1111,12 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                                 nomor,noperawatan,tanggaldilakukan,jamdilakukan,"0000-00-00","00:00:00","0000-00-00","00:00:00",kodedokter,"ralan","-",Asesmen.getText()
                             })==true){
                             for(i=0;i<tbPermintaanRadiologi.getRowCount();i++){
-                                if(Sequel.menyimpantf2("permintaan_pemeriksaan_radiologi","?,?,?","Permintaan Radiologi "+tbPermintaanRadiologi.getValueAt(i,1).toString(),3,new String[]{
-                                        nomor,tbPermintaanRadiologi.getValueAt(i,0).toString(),"Belum"
-                                    })==false){
+                                if(Sequel.menyimpantfSmc("permintaan_pemeriksaan_radiologi","noorder, kd_jenis_prw, stts_bayar",
+                                        nomor,tbPermintaanRadiologi.getValueAt(i,0).toString(),"Belum")==false){
                                     sukses=false;
                                 }
                             }
+                            noorderTerbit=nomor;
                         }else{
                             sukses=false;
                         }
@@ -1321,6 +1324,9 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
 
                 Sequel.AutoComitTrue();
                 if(sukses==true){
+                    if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
+                        JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
+                    }
                     dispose();
                 }
             }else{
