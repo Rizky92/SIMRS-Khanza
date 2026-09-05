@@ -3030,6 +3030,11 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                     ambilHasilBIOSYS(order);
                 });
                 break;
+            default:
+                runBackground(() -> {
+                    tampilkanOrder(order);
+                });
+                break;
         }
     }
 
