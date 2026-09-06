@@ -208,6 +208,14 @@ public final class sekuel {
         return autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, 1);
     }
 
+    public String noRawatSmc(String tanggal) {
+        return cariIsiSmc(
+            "select concat(date_format(?, '%Y/%m/%d'), '/', lpad(ifnull(max(convert(right(reg_periksa.no_rawat, 6), " +
+            "signed)), 0) + 1, 6, '0')) from reg_periksa where reg_periksa.no_rawat like concat(date_format(?, '%Y/%m/%d'), '%')",
+            tanggal, tanggal
+        );
+    }
+
     public String cariIsiSmc(String sql, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {

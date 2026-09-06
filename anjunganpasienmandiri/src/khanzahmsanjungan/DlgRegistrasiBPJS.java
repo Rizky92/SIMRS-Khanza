@@ -1660,7 +1660,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 break;
         }
 
-        noRawat = Sequel.cariIsiSmc("select concat(date_format(tgl_registrasi, '%Y/%m/%d'), '/', lpad(ifnull(max(convert(right(no_rawat, 6), signed)), 0) + 1, 6, '0')) from reg_periksa where tgl_registrasi = ?", tglSEP.getText());
+        noRawat = Sequel.noRawatSmc(tglSEP.getText());
     }
 
     private void tentukanHari() {

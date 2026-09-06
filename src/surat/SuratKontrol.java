@@ -1923,7 +1923,7 @@ public class SuratKontrol extends javax.swing.JDialog {
                 ));
                 break;
         }
-        norawat = Sequel.autonomorSmc("", "/", "reg_periksa", "no_rawat", 6, "0", Valid.getTglSmc(TanggalPeriksa));
+        norawat = Sequel.noRawatSmc(Valid.getTglSmc(TanggalPeriksa));
     }
 
     private void getData() {

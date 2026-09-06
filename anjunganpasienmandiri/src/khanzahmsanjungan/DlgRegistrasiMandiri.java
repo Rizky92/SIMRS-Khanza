@@ -486,7 +486,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 noReg = Sequel.cariIsiSmc("select lpad(ifnull(max(convert(no_reg, signed)), 0) + 1, 3, '0') from reg_periksa where kd_poli = ? and kd_dokter = ? and tgl_registrasi = current_date()", kdPoli, kdDokter);
                 break;
         }
-        noRawat = Sequel.cariIsiSmc("select concat(date_format(current_date(), '%Y/%m/%d'), '/', lpad(ifnull(max(convert(right(no_rawat, 6), signed)), 0) + 1, 6, '0')) from reg_periksa where tgl_registrasi = current_date()");
+        noRawat = Sequel.noRawatSmc(Sequel.cariIsiSmc("select current_date()"));
     }
 
     private void tentukanHari() {
