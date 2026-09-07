@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
+import fungsi.WarnaTableStokSMC;
 import fungsi.WarnaTableValidasiResep;
 import fungsi.akses;
 import fungsi.akunobatralan;
@@ -49,6 +50,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -128,6 +131,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private boolean kadaluarsaRacikanOtomatisSmc = false;
     private int hariKadaluarsaRacikanSmc = 0;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
+    private final Set<String> stokTidakCukupSmc = ConcurrentHashMap.newKeySet();
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -204,6 +208,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 column.setPreferredWidth(40);
             } else if (i == 10) {
                 column.setPreferredWidth(40);
+                column.setCellRenderer(new WarnaTableStokSMC(stokTidakCukupSmc, 2));
             } else if (i == 11) {
                 column.setPreferredWidth(130);
             } else if (i == 12) {
@@ -357,6 +362,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             } else if (i == 7) {
                 column.setPreferredWidth(40);
+                column.setCellRenderer(new WarnaTableStokSMC(stokTidakCukupSmc, 1));
             } else if (i == 8) {
                 column.setPreferredWidth(40);
             } else if (i == 9) {
@@ -2793,6 +2799,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         this.load = true;
         this.noresep=no_resep;
         adaObatKronis = false;
+        stokTidakCukupSmc.clear();
         try {
             Valid.tabelKosong(tabModeobat);
             Valid.tabelKosong(tabModeObatRacikan);
@@ -2843,7 +2850,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             tabModeobat.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
@@ -2901,7 +2908,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             tabModeobat.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
@@ -2978,7 +2985,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             }
 
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             tabModeobat.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
@@ -3035,7 +3042,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
 
                             switch (Jeniskelas.getSelectedItem().toString()) {
@@ -3136,7 +3143,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok "+rs2.getString("nama_brng")+" tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                         }
                                         tabModeDetailObatRacikan.addRow(new Object[]{
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
@@ -3195,7 +3202,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok "+rs2.getString("nama_brng")+" tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                         }
                                         tabModeDetailObatRacikan.addRow(new Object[]{
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
@@ -3272,7 +3279,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok "+rs2.getString("nama_brng")+" tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                         }
                                         tabModeDetailObatRacikan.addRow(new Object[]{
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
@@ -3330,7 +3337,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok "+rs2.getString("nama_brng")+" tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                         }
                                         switch (Jeniskelas.getSelectedItem().toString()) {
                                             case "Karyawan": kolomHarga = "karyawan"; break;
@@ -3389,9 +3396,23 @@ public final class DlgCariObat extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
 
+        notifStokTidakCukupSmc();
+
         if (adaObatKronis) {
             JOptionPane.showMessageDialog(null, "Ditemukan obat kronis diresepkan oleh dokter, silahkan dilakukan review dahulu..!!");
         }
+    }
+
+    private void notifStokTidakCukupSmc() {
+        if (stokTidakCukupSmc.isEmpty()) {
+            return;
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            tbObat.repaint();
+            tbDetailObatRacikan.repaint();
+            JOptionPane.showMessageDialog(null, "Maaf, stok obat yang ditandai merah tidak mencukupi..!!", "Stok Tidak Mencukupi", JOptionPane.WARNING_MESSAGE);
+        });
     }
 
     public void tampilobat3(String no_resep) {

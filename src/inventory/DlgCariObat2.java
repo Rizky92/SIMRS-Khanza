@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
+import fungsi.WarnaTableStokSMC;
 import fungsi.akses;
 import fungsi.akunobatranap;
 import fungsi.batasInput;
@@ -46,6 +47,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
@@ -108,6 +111,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private boolean kadaluarsaRacikanOtomatisSmc = false;
     private int hariKadaluarsaRacikanSmc = 0;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
+    private final Set<String> stokTidakCukupSmc = ConcurrentHashMap.newKeySet();
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -172,6 +176,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(40);
             }else if(i==10){
                 column.setPreferredWidth(40);
+                column.setCellRenderer(new WarnaTableStokSMC(stokTidakCukupSmc, 2));
             }else if(i==11){
                 column.setPreferredWidth(80);
             }else if(i==12){
@@ -295,6 +300,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             }else if(i==7){
                 column.setPreferredWidth(40);
+                column.setCellRenderer(new WarnaTableStokSMC(stokTidakCukupSmc, 1));
             }else if(i==8){
                 column.setPreferredWidth(40);
             }else if(i==9){
@@ -3080,6 +3086,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void tampilobat2(String no_resep) {
         this.noresep=no_resep;
+        stokTidakCukupSmc.clear();
         try{
             Valid.tabelKosong(tabMode);
             Valid.tabelKosong(tabModeObatRacikan);
@@ -3130,7 +3137,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             tabMode.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
@@ -3185,7 +3192,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             tabMode.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
@@ -3267,7 +3274,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             tabMode.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
@@ -3324,7 +3331,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                 }
                             }
                             if(rsobat.getDouble("jml")>sisacari){
-                                JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
+                                stokTidakCukupSmc.add(rsobat.getString("kode_brng"));
                             }
                             if(Jeniskelas.getSelectedItem().equals("Kelas 1")){
                                 tabMode.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
@@ -3455,7 +3462,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                             tabModeDetailObatRacikan.addRow(new Object[]{
                                                 rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                                 rs2.getString("kode_sat"),hargacari,h_belicari,
@@ -3519,7 +3526,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                             tabModeDetailObatRacikan.addRow(new Object[]{
                                                 rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                                 rs2.getString("kode_sat"),rs2.getDouble("harga"),rs2.getDouble("dasar"),
@@ -3609,7 +3616,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                             tabModeDetailObatRacikan.addRow(new Object[]{
                                                 rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                                 rs2.getString("kode_sat"),hargacari,h_belicari,
@@ -3672,7 +3679,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                                             }
                                         }
                                         if(rs2.getDouble("jml")>sisacari){
-                                            JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
+                                            stokTidakCukupSmc.add(rs2.getString("kode_brng"));
                                             if(Jeniskelas.getSelectedItem().equals("Kelas 1")){
                                                 tabModeDetailObatRacikan.addRow(new Object[]{
                                                     rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
@@ -3836,6 +3843,20 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+
+        notifStokTidakCukupSmc();
+    }
+
+    private void notifStokTidakCukupSmc() {
+        if (stokTidakCukupSmc.isEmpty()) {
+            return;
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            tbObat.repaint();
+            tbDetailObatRacikan.repaint();
+            JOptionPane.showMessageDialog(null, "Maaf, stok obat yang ditandai merah tidak mencukupi..!!", "Stok Tidak Mencukupi", JOptionPane.WARNING_MESSAGE);
+        });
     }
 
     public void tampilobat3(String no_resep) {
