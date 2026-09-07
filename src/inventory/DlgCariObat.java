@@ -1737,8 +1737,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             cetakLembarObat();
                         }
 
-                        ChkJln.setSelected(true);
-
                         if(ChkNoResep.isSelected()==true){
                             if (ResepObat == null || !ResepObat.isDisplayable()) {
                                 ResepObat=new DlgResepObat(null,false);
@@ -1774,6 +1772,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                         }
                         dispose();
                     }
+                    ChkJln.setSelected(true);
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
