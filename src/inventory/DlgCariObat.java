@@ -1691,9 +1691,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
                     if (!sukses) {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                        ChkJln.setSelected(true);
                     }
-
-                    ChkJln.setSelected(true);
 
                     if(sukses==true){
                         if (!noresep.isBlank()) {
@@ -1737,6 +1736,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             cetakAturanPakai();
                             cetakLembarObat();
                         }
+
+                        ChkJln.setSelected(true);
 
                         if(ChkNoResep.isSelected()==true){
                             if (ResepObat == null || !ResepObat.isDisplayable()) {
