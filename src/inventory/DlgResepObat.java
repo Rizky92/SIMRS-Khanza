@@ -51,6 +51,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import smc.kirimwa.DlgKirimWA;
+import widget.TanggalCellEditorSMC;
 
 
 /**
@@ -110,11 +111,11 @@ public final class DlgResepObat extends javax.swing.JDialog {
         tbResep.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabmodeUbahRacikan=new DefaultTableModel(null,new Object[]{
-                "Tgl.Rawat","Jam Rawat","No.Rawat","Kode Barang","Nama Barang","Aturan Pakai"
+                "Tgl.Rawat","Jam Rawat","No.Rawat","Kode Barang","Nama Barang","Aturan Pakai", "Kadaluarsa"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if (colIndex==5) {
+                if ((colIndex==5)||(colIndex==6)) {
                     a=true;
                 }
                 return a;
@@ -126,7 +127,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         tbTambahan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbTambahan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 7; i++) {
             TableColumn column = tbTambahan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setMinWidth(0);
@@ -143,16 +144,19 @@ public final class DlgResepObat extends javax.swing.JDialog {
                 column.setPreferredWidth(250);
             }else if(i==5){
                 column.setPreferredWidth(200);
+            } else if (i == 6) {
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             }
         }
         tbTambahan.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabmodeUbahRacikan2=new DefaultTableModel(null,new Object[]{
-                "Tgl.Rawat","Jam Rawat","No.Rawat","No.Racik","Nama Racik","Aturan Pakai"
+                "Tgl.Rawat","Jam Rawat","No.Rawat","No.Racik","Nama Racik","Aturan Pakai", "Kadaluarsa"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if (colIndex==5) {
+                if ((colIndex==5)||(colIndex==6)) {
                     a=true;
                 }
                 return a;
@@ -164,7 +168,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         tbTambahan1.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbTambahan1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 7; i++) {
             TableColumn column = tbTambahan1.getColumnModel().getColumn(i);
             if(i==0){
                 column.setMinWidth(0);
@@ -181,6 +185,9 @@ public final class DlgResepObat extends javax.swing.JDialog {
                 column.setPreferredWidth(250);
             }else if(i==5){
                 column.setPreferredWidth(200);
+            } else if (i == 6) {
+                column.setPreferredWidth(95);
+                column.setCellEditor(new TanggalCellEditorSMC());
             }
         }
         tbTambahan1.setDefaultRenderer(Object.class, new WarnaTable());
@@ -1544,7 +1551,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                     "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
                     "resep_obat.jam=aturan_pakai.jam where resep_obat.no_resep=? and aturan_pakai.aturan<>''",NoResep.getText())>0){
                 Valid.MyReportqry("rptItemResep.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
+                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir,detail_pemberian_obat.tgl_kadaluarsa, "+
                     "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
                     "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
                     "from resep_obat inner join reg_periksa inner join pasien inner join "+
@@ -1608,6 +1615,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             param.put("noresep",NoResep.getText());
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("noantrian", Sequel.cariIsiSmc("select antriloketfarmasi_smc.nomor from antriloketfarmasi_smc where antriloketfarmasi_smc.no_resep = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString()));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdDokter.getText());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmDokter.getText()+"\nID "+(finger.equals("")?KdDokter.getText():finger)+"\n"+DTPBeri.getSelectedItem());
 
@@ -1639,6 +1647,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         tbTambahan.getValueAt(i,2).toString(),tbTambahan.getValueAt(i,3).toString(),
                         tbTambahan.getValueAt(i,5).toString()
                     });
+                    Sequel.mengupdateSmc("detail_pemberian_obat", "tgl_kadaluarsa = ?", "tgl_perawatan = ? and jam = ? and no_rawat = ? and kode_brng = ?",
+                        (null != tbTambahan.getValueAt(i, 6) && (!tbTambahan.getValueAt(i, 6).toString().isBlank()) ? tbTambahan.getValueAt(i, 6).toString() : null),
+                        tbTambahan.getValueAt(i, 0).toString(), tbTambahan.getValueAt(i, 1).toString(), tbTambahan.getValueAt(i, 2).toString(), tbTambahan.getValueAt(i, 3).toString()
+                    );
                 }
             }
 
@@ -1708,6 +1720,9 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         @Override
                         public void windowDeactivated(WindowEvent e) {}
                     });
+                    aturanpakai.setSize(WindowInput3.getWidth()-20,WindowInput3.getHeight()-20);
+                    aturanpakai.setLocationRelativeTo(WindowInput3);
+                    aturanpakai.setVisible(true);
                 }
             }
         }
@@ -1740,6 +1755,9 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         @Override
                         public void windowDeactivated(WindowEvent e) {}
                     });
+                    aturanpakai.setSize(WindowInput4.getWidth()-20,WindowInput4.getHeight()-20);
+                    aturanpakai.setLocationRelativeTo(WindowInput4);
+                    aturanpakai.setVisible(true);
                 }
             }
         }
@@ -1755,10 +1773,16 @@ public final class DlgResepObat extends javax.swing.JDialog {
         }else{
             for(i=0;i<tbTambahan1.getRowCount();i++){
                 if(!tbTambahan1.getValueAt(i,5).toString().equals("")){
+                    /*
                     Sequel.queryu2("update obat_racikan set aturan_pakai=? where tgl_perawatan=? and jam=? and no_rawat=? and no_racik=?",5,new String[]{
                         tbTambahan1.getValueAt(i,5).toString(),tbTambahan1.getValueAt(i,0).toString(),tbTambahan1.getValueAt(i,1).toString(),
                         tbTambahan1.getValueAt(i,2).toString(),tbTambahan1.getValueAt(i,3).toString()
                     });
+                    */
+                    Sequel.mengupdateSmc("obat_racikan", "aturan_pakai = ?, tgl_kadaluarsa = ?", "tgl_perawatan = ? and jam = ? and no_rawat = ? and no_racik = ?",
+                        tbTambahan1.getValueAt(i, 5).toString(), (null != tbTambahan1.getValueAt(i, 6) && (!tbTambahan1.getValueAt(i, 6).toString().isBlank()) ?
+                        tbTambahan1.getValueAt(i, 6).toString() : null), tbTambahan1.getValueAt(i, 0).toString(), tbTambahan1.getValueAt(i, 1).toString(),
+                        tbTambahan1.getValueAt(i, 2).toString(), tbTambahan1.getValueAt(i, 3).toString());
                 }
             }
             runBackground(() -> tampil());
@@ -1792,7 +1816,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                     "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
                     "resep_obat.jam=aturan_pakai.jam where resep_obat.no_resep=? and aturan_pakai.aturan<>''",NoResep.getText())>0){
                 Valid.MyReportqry("rptItemResep3.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
+                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir,detail_pemberian_obat.tgl_kadaluarsa, "+
                     "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
                     "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,jenis.nama as jenis,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
                     "from resep_obat inner join reg_periksa inner join pasien inner join "+
@@ -1853,7 +1877,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                     "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
                     "resep_obat.jam=aturan_pakai.jam where resep_obat.no_resep=? and aturan_pakai.aturan<>''",NoResep.getText())>0){
                 Valid.MyReportqry("rptItemResep5.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
+                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir,detail_pemberian_obat.tgl_kadaluarsa, "+
                     "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
                     "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
                     "from resep_obat inner join reg_periksa inner join pasien inner join "+
@@ -2752,7 +2776,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             try {
                 ps2=koneksi.prepareStatement(
                         "select detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,detail_pemberian_obat.no_rawat,"+
-                        "detail_pemberian_obat.kode_brng,databarang.nama_brng from detail_pemberian_obat "+
+                        "detail_pemberian_obat.kode_brng,detail_pemberian_obat.tgl_kadaluarsa,databarang.nama_brng from detail_pemberian_obat "+
                         "inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng where "+
                         "detail_pemberian_obat.tgl_perawatan=? and detail_pemberian_obat.jam=? and "+
                         "detail_pemberian_obat.no_rawat=? and databarang.kode_brng not in (select kode_brng from detail_obat_racikan where tgl_perawatan=? and jam=? and no_rawat=?)");
@@ -2767,7 +2791,8 @@ public final class DlgResepObat extends javax.swing.JDialog {
                     tabmodeUbahRacikan.addRow(new Object[]{
                         rs2.getString("tgl_perawatan"),rs2.getString("jam"),rs2.getString("no_rawat"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                         Sequel.cariIsi("select aturan from aturan_pakai where tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' and "+
-                            "jam='"+rs2.getString("jam")+"' and no_rawat='"+rs2.getString("no_rawat")+"' and kode_brng='"+rs2.getString("kode_brng")+"'")
+                            "jam='"+rs2.getString("jam")+"' and no_rawat='"+rs2.getString("no_rawat")+"' and kode_brng='"+rs2.getString("kode_brng")+"'"),
+                        rs2.getString("tgl_kadaluarsa")
                     });
                 }
             } catch (Exception e) {
@@ -2792,7 +2817,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                 ps2=koneksi.prepareStatement(
                         "select obat_racikan.tgl_perawatan,obat_racikan.jam,obat_racikan.no_rawat,"+
                         "obat_racikan.no_racik,obat_racikan.nama_racik,"+
-                        "obat_racikan.aturan_pakai from obat_racikan where "+
+                        "obat_racikan.aturan_pakai,obat_racikan.tgl_kadaluarsa from obat_racikan where "+
                         "obat_racikan.tgl_perawatan=? and obat_racikan.jam=? "+
                         "and obat_racikan.no_rawat=?");
                 ps2.setString(1,tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));
@@ -2802,7 +2827,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                 while(rs2.next()){
                     tabmodeUbahRacikan2.addRow(new Object[]{
                         rs2.getString("tgl_perawatan"),rs2.getString("jam"),rs2.getString("no_rawat"),
-                        rs2.getString("no_racik"),rs2.getString("nama_racik"),rs2.getString("aturan_pakai")
+                        rs2.getString("no_racik"),rs2.getString("nama_racik"),rs2.getString("aturan_pakai"),rs2.getString("tgl_kadaluarsa")
                     });
                 }
             } catch (Exception e) {

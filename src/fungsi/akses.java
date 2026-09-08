@@ -2827,7 +2827,7 @@ public final class akses {
         akses.intervensi_nyeri_farmakologi=isadmin;
         akses.intervensi_nyeri_nonfarmakologi=isadmin;
         akses.surat_pengajuan_cuti_pasien=isadmin;
-        akses.checklist_kriteria_masuk_isolasi=false;
+        akses.checklist_kriteria_masuk_isolasi=isadmin;
         akses.satu_sehat_mapping_kptl_tindakan_ralan=isadmin;
         akses.satu_sehat_mapping_kptl_tindakan_ranap=isadmin;
         akses.satu_sehat_mapping_kptl_tindakan_radiologi=isadmin;

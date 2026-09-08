@@ -15,10 +15,14 @@
 *.jar
 *.log
 *.pdf
+*.py
 *.sql
+*.txt
 *.wps
 *.xls
 *.xlsx
+*.py
+*.txt
 
 # Don't ignore these
 !sik_bridging_lab.sql

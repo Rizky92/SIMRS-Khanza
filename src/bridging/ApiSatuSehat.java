@@ -23,9 +23,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+import smc.satusehat.ResourceStatusWatcher;
 
 public class ApiSatuSehat {
+    public static final int TOO_MANY_REQUESTS_SMC = 429;
+    public static final int BATAS_PERCOBAAN_SMC = 3;
+    public static final long JEDA_PERMINTAAN_SMC = 60000;
+
+    private static volatile boolean stoppedSmc = false;
+    private static volatile ResourceStatusWatcher resourceStatusWatcherSmc = null;
+
     private String key,clientid,urlauth,token;
     private long millis;
     private SSLContext sslContext;
@@ -48,15 +57,31 @@ public class ApiSatuSehat {
         }
     }
 
-    public String TokenSatuSehat(){
-        try {
-            header = new HttpHeaders();
-            header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            requestEntity = new HttpEntity("client_id="+clientid+"&client_secret="+key,header);
-            root = mapper.readTree(getRest().exchange(urlauth+"/accesstoken?grant_type=client_credentials", HttpMethod.POST, requestEntity, String.class).getBody());
-            token=root.path("access_token").asText();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+    public String TokenSatuSehat() {
+        if (stoppedSmc) {
+            return token;
+        }
+        for (int percobaan = 1; percobaan <= BATAS_PERCOBAAN_SMC; percobaan++) {
+            try {
+                header = new HttpHeaders();
+                header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                requestEntity = new HttpEntity("client_id=" + clientid + "&client_secret=" + key, header);
+                root = mapper.readTree(getRest().exchange(urlauth + "/accesstoken?grant_type=client_credentials", HttpMethod.POST, requestEntity, String.class).getBody());
+                token = root.path("access_token").asText();
+                break;
+            } catch (Exception ex) {
+                System.out.println("Notifikasi : " + ex);
+                if (!isTooManyRequestsSmc(ex)) {
+                    break;
+                }
+                if (percobaan >= BATAS_PERCOBAAN_SMC) {
+                    stopSmc();
+                    break;
+                }
+                if (!waitSmc(percobaan)) {
+                    break;
+                }
+            }
         }
         return token;
     }
@@ -92,4 +117,73 @@ public class ApiSatuSehat {
         return new RestTemplate(factory);
     }
 
+    public static void setResourceStatusWatcherSmc(ResourceStatusWatcher watcher) {
+        resourceStatusWatcherSmc = watcher;
+    }
+
+    public static ResourceStatusWatcher getResourceStatusWatcherSmc() {
+        return resourceStatusWatcherSmc;
+    }
+
+    public static boolean isStoppedSmc() {
+        return stoppedSmc;
+    }
+
+    public static void resetStoppedSmc() {
+        stoppedSmc = false;
+    }
+
+    public static boolean isTooManyRequestsSmc(Throwable e) {
+        if (e instanceof HttpStatusCodeException) {
+            return TOO_MANY_REQUESTS_SMC == ((HttpStatusCodeException) e).getStatusCode().value();
+        }
+        return (null != e) && (null != e.getMessage()) && (e.getMessage().contains("[" + TOO_MANY_REQUESTS_SMC + "]"));
+    }
+
+    private static void stopSmc() {
+        stoppedSmc = true;
+        System.out.println("Notifikasi : Permintaan ke Satu Sehat masih dibatasi (HTTP " + TOO_MANY_REQUESTS_SMC + ") setelah " + BATAS_PERCOBAAN_SMC + " percobaan, sisa proses pengiriman dihentikan...");
+    }
+
+    private static boolean waitSmc(int percobaan) {
+        long total = JEDA_PERMINTAAN_SMC / 1000;
+        ResourceStatusWatcher watcher = resourceStatusWatcherSmc;
+        if (null == watcher) {
+            System.out.println("Notifikasi : Permintaan ke Satu Sehat dibatasi (HTTP " + TOO_MANY_REQUESTS_SMC + "), menunggu " + total + " detik sebelum percobaan ke-" + (percobaan + 1) + "...");
+        }
+        for (long sisa = total; sisa > 0; sisa--) {
+            if (null != watcher) {
+                if (watcher.isProcessStopped()) {
+                    return false;
+                }
+                watcher.retryUntil(percobaan, sisa);
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String kirimSmc(String url, HttpMethod method, HttpEntity request) throws Exception {
+        for (int percobaan = 1;; percobaan++) {
+            try {
+                return getRest().exchange(url, method, request, String.class).getBody();
+            } catch (Exception e) {
+                if (!isTooManyRequestsSmc(e)) {
+                    throw e;
+                }
+                if (percobaan >= BATAS_PERCOBAAN_SMC) {
+                    stopSmc();
+                    throw e;
+                }
+                if (!waitSmc(percobaan)) {
+                    throw e;
+                }
+            }
+        }
+    }
 }

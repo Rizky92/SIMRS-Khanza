@@ -770,6 +770,8 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed

@@ -260,6 +260,25 @@ public final class validasi {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(tgljam);
     }
 
+    public String getTglSmc(String tgl, String format) {
+        try {
+            Date date = new SimpleDateFormat(format).parse(tgl);
+            return new SimpleDateFormat("yyyy-MM-dd").format(date);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public String getJamSmc(String jam, String format) {
+        try {
+            Date date = new SimpleDateFormat(format).parse(jam);
+
+            return new SimpleDateFormat("HH:mm:ss").format(date);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public void setTglJamSmc(Tanggal tgl) {
         tgl.setDate(Calendar.getInstance().getTime());
     }

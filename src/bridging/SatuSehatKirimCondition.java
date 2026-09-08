@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -603,83 +604,90 @@ public final class SatuSehatKirimCondition extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,12).toString().equals("")){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Condition\"," +
-                                    "\"clinicalStatus\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\"," +
-                                                "\"code\": \"active\"," +
-                                                "\"display\": \"Active\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"category\": [" +
-                                        "{" +
+        ResourceSender.run(this,"Mengirim Condition ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&tbObat.getValueAt(i,12).toString().equals("")){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Condition\"," +
+                                        "\"clinicalStatus\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\"," +
-                                                    "\"code\": \"encounter-diagnosis\"," +
-                                                    "\"display\": \"Encounter Diagnosis\"" +
+                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\"," +
+                                                    "\"code\": \"active\"," +
+                                                    "\"display\": \"Active\"" +
                                                 "}" +
                                             "]" +
-                                        "}" +
-                                    "]," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+                                        "}," +
+                                        "\"category\": [" +
                                             "{" +
-                                                "\"system\": \"http://hl7.org/fhir/sid/icd-10\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\"," +
+                                                        "\"code\": \"encounter-diagnosis\"," +
+                                                        "\"display\": \"Encounter Diagnosis\"" +
+                                                    "}" +
+                                                "]" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
-                                        "\"display\": \"Diagnosa "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}" +
-                                "}";
-                        System.out.println("URL : "+link+"/Condition");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Condition", HttpMethod.POST, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_condition","?,?,?,?","Diagnosa",4,new String[]{
-                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,12);
-                                tbObat.setValueAt(false,i,0);
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://hl7.org/fhir/sid/icd-10\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
+                                            "\"display\": \"Diagnosa "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Condition");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Condition", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_condition","?,?,?,?","Diagnosa",4,new String[]{
+                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,12);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -695,75 +703,82 @@ public final class SatuSehatKirimCondition extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,12).toString().equals(""))){
-                try {
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Condition\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,12).toString()+"\"," +
-                                    "\"clinicalStatus\": {" +
-                                        "\"coding\": [" +
-                                            "{" +
-                                                "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\"," +
-                                                "\"code\": \"active\"," +
-                                                "\"display\": \"Active\"" +
-                                            "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"category\": [" +
-                                        "{" +
+        ResourceSender.run(this,"Memperbarui Condition di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,5).toString().equals(""))&&(!tbObat.getValueAt(i,9).toString().equals(""))&&(!tbObat.getValueAt(i,12).toString().equals(""))){
+                    try {
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Condition\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,12).toString()+"\"," +
+                                        "\"clinicalStatus\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\"," +
-                                                    "\"code\": \"encounter-diagnosis\"," +
-                                                    "\"display\": \"Encounter Diagnosis\"" +
+                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\"," +
+                                                    "\"code\": \"active\"," +
+                                                    "\"display\": \"Active\"" +
                                                 "}" +
                                             "]" +
-                                        "}" +
-                                    "]," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+                                        "}," +
+                                        "\"category\": [" +
                                             "{" +
-                                                "\"system\": \"http://hl7.org/fhir/sid/icd-10\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\"," +
+                                                        "\"code\": \"encounter-diagnosis\"," +
+                                                        "\"display\": \"Encounter Diagnosis\"" +
+                                                    "}" +
+                                                "]" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"," +
-                                        "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
-                                        "\"display\": \"Diagnosa "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}" +
-                                "}";
-                        System.out.println("URL : "+link+"/Condition/"+tbObat.getValueAt(i,12).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Condition/"+tbObat.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://hl7.org/fhir/sid/icd-10\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,10).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"," +
+                                            "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\"," +
+                                            "\"display\": \"Diagnosa "+tbObat.getValueAt(i,4).toString()+" selama kunjungan/dirawat dari tanggal "+tbObat.getValueAt(i,1).toString()+" sampai "+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Condition/"+tbObat.getValueAt(i,12).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Condition/"+tbObat.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

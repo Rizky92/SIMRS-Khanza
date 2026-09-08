@@ -78,7 +78,7 @@ public class SatuSehatCekNIK {
             headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
             requestEntity = new HttpEntity(headers);
             System.out.println("URL : "+link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
-            json=api.getRest().exchange(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
+            json=api.kirimSmc(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity);
             System.out.println("JSON : "+json);
             root = mapper.readTree(json);
             for(JsonNode list:root.path("entry")){
@@ -90,7 +90,7 @@ public class SatuSehatCekNIK {
                     headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                     requestEntity = new HttpEntity(headers);
                     System.out.println("URL : "+link+"/Patient/"+idpasien);
-                    json=api.getRest().exchange(link+"/Patient/"+idpasien, HttpMethod.GET, requestEntity, String.class).getBody();
+                    json=api.kirimSmc(link+"/Patient/"+idpasien, HttpMethod.GET, requestEntity);
                     System.out.println("JSON : "+json);
                     root = mapper.readTree(json);
                     gender = root.path("gender").asText().toLowerCase().equals("male")?"Laki-laki":"Perempuan";
@@ -165,7 +165,7 @@ public class SatuSehatCekNIK {
                     headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                     requestEntity = new HttpEntity(headers);
                     System.out.println("URL : "+link+"/Patient/"+cari);
-                    json=api.getRest().exchange(link+"/Patient/"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
+                    json=api.kirimSmc(link+"/Patient/"+cari, HttpMethod.GET, requestEntity);
                     System.out.println("JSON : "+json);
                     root = mapper.readTree(json);
                     idpasien=cari;
@@ -262,7 +262,7 @@ public class SatuSehatCekNIK {
                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                 requestEntity = new HttpEntity(headers);
                 System.out.println("URL : "+link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
-                json=api.getRest().exchange(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
+                json=api.kirimSmc(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity);
                 System.out.println("JSON : "+json);
                 root = mapper.readTree(json);
                 for(JsonNode list:root.path("entry")){
@@ -291,7 +291,7 @@ public class SatuSehatCekNIK {
                 headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
                 requestEntity = new HttpEntity(headers);
                 System.out.println("URL : "+link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
-                json=api.getRest().exchange(link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
+                json=api.kirimSmc(link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity);
                 System.out.println("JSON : "+json);
                 root = mapper.readTree(json);
                 response = root.path("entry");

@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -648,111 +649,118 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,20).toString().equals("")){
-                try {
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    String acsn=tbObat.getValueAt(i,22).toString();
-                    if (acsn.isBlank()) {
-                        System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"DiagnosticReport\"," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
-                                            "\"use\": \"official\"," +
-                                            "\"value\": \""+acsn+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"status\": \"final\"," +
-                                    "\"category\": [" +
-                                        "{" +
+        ResourceSender.run(this,"Mengirim DiagnosticReportRadiologi ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&tbObat.getValueAt(i,20).toString().equals("")){
+                    try {
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        String acsn=tbObat.getValueAt(i,22).toString();
+                        if (acsn.isBlank()) {
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"DiagnosticReport\"," +
+                                        "\"identifier\": [" +
+                                            "{" +
+                                                "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
+                                                "\"use\": \"official\"," +
+                                                "\"value\": \""+acsn+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/v2-0074\"," +
+                                                        "\"code\": \"RAD\"," +
+                                                        "\"display\": \"Radiology\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/v2-0074\"," +
-                                                    "\"code\": \"RAD\"," +
-                                                    "\"display\": \"Radiology\"" +
+                                                    "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
+                                                    "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
                                                 "}" +
                                             "]" +
-                                        "}" +
-                                    "]," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"performer\": [" +
                                             "{" +
-                                                "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
-                                                "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"performer\": [" +
-                                        "{" +
-                                            "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"specimen\": [{" +
-                                        "\"reference\": \"Specimen/"+tbObat.getValueAt(i,18).toString()+"\"" +
-                                    "}]," +
-                                    "\"result\": [" +
-                                        "{" +
-                                            "\"reference\": \"Observation/"+tbObat.getValueAt(i,19).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"basedOn\": [" +
-                                        "{" +
-                                            "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,16).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"conclusion\": \""+tbObat.getValueAt(i,21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
-                                "}";
-                        System.out.println("URL : "+link+"/DiagnosticReport");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/DiagnosticReport", HttpMethod.POST, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_diagnosticreport_radiologi","?,?,?","No.Order",3,new String[]{
-                                tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,20);
-                                tbObat.setValueAt(false,i,0);
+                                        "]," +
+                                        "\"specimen\": [{" +
+                                            "\"reference\": \"Specimen/"+tbObat.getValueAt(i,18).toString()+"\"" +
+                                        "}]," +
+                                        "\"result\": [" +
+                                            "{" +
+                                                "\"reference\": \"Observation/"+tbObat.getValueAt(i,19).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"basedOn\": [" +
+                                            "{" +
+                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,16).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"conclusion\": \""+tbObat.getValueAt(i,21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                    "}";
+                            System.out.println("URL : "+link+"/DiagnosticReport");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/DiagnosticReport", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_diagnosticreport_radiologi","?,?,?","No.Order",3,new String[]{
+                                    tbObat.getValueAt(i,9).toString(),tbObat.getValueAt(i,17).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,20);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -768,103 +776,110 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,20).toString().equals(""))){
-                try {
-                    iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
-                    idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
-                    if (iddokter.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
-                        continue;
-                    }
-                    if (idpasien.isBlank()) {
-                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
-                        continue;
-                    }
-                    String acsn=tbObat.getValueAt(i,22).toString();
-                    if (acsn.isBlank()) {
-                        System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
-                        continue;
-                    }
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"DiagnosticReport\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
-                                            "\"use\": \"official\"," +
-                                            "\"value\": \""+acsn+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"status\": \"final\"," +
-                                    "\"category\": [" +
-                                        "{" +
+        ResourceSender.run(this,"Memperbarui DiagnosticReportRadiologi di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,7).toString().equals(""))&&(!tbObat.getValueAt(i,20).toString().equals(""))){
+                    try {
+                        iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
+                        idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
+                        String acsn=tbObat.getValueAt(i,22).toString();
+                        if (acsn.isBlank()) {
+                            System.out.println("Notif : Accession Number belum tersedia untuk No.Permintaan "+tbObat.getValueAt(i,9).toString()+"!");
+                            continue;
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"DiagnosticReport\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
+                                        "\"identifier\": [" +
+                                            "{" +
+                                                "\"system\": \"http://sys-ids.kemkes.go.id/diagnostic/"+koneksiDB.IDSATUSEHAT()+"/rad\"," +
+                                                "\"use\": \"official\"," +
+                                                "\"value\": \""+acsn+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/v2-0074\"," +
+                                                        "\"code\": \"RAD\"," +
+                                                        "\"display\": \"Radiology\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
                                             "\"coding\": [" +
                                                 "{" +
-                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/v2-0074\"," +
-                                                    "\"code\": \"RAD\"," +
-                                                    "\"display\": \"Radiology\"" +
+                                                    "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
+                                                    "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
                                                 "}" +
                                             "]" +
-                                        "}" +
-                                    "]," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"performer\": [" +
                                             "{" +
-                                                "\"code\": \""+tbObat.getValueAt(i,13).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,15).toString()+"\"," +
-                                                "\"system\": \""+tbObat.getValueAt(i,14).toString()+"\"" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"subject\": {" +
-                                        "\"reference\": \"Patient/"+idpasien+"\"" +
-                                    "}," +
-                                    "\"encounter\": {" +
-                                        "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"performer\": [" +
-                                        "{" +
-                                            "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"specimen\": [{" +
-                                        "\"reference\": \"Specimen/"+tbObat.getValueAt(i,18).toString()+"\"" +
-                                    "}]," +
-                                    "\"result\": [" +
-                                        "{" +
-                                            "\"reference\": \"Observation/"+tbObat.getValueAt(i,19).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"basedOn\": [" +
-                                        "{" +
-                                            "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,16).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"conclusion\": \""+tbObat.getValueAt(i,21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
-                                "}";
-                        System.out.println("URL : "+link+"/DiagnosticReport/"+tbObat.getValueAt(i,20).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/DiagnosticReport/"+tbObat.getValueAt(i,20).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                        "]," +
+                                        "\"specimen\": [{" +
+                                            "\"reference\": \"Specimen/"+tbObat.getValueAt(i,18).toString()+"\"" +
+                                        "}]," +
+                                        "\"result\": [" +
+                                            "{" +
+                                                "\"reference\": \"Observation/"+tbObat.getValueAt(i,19).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"basedOn\": [" +
+                                            "{" +
+                                                "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,16).toString()+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"conclusion\": \""+tbObat.getValueAt(i,21).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
+                                    "}";
+                            System.out.println("URL : "+link+"/DiagnosticReport/"+tbObat.getValueAt(i,20).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/DiagnosticReport/"+tbObat.getValueAt(i,20).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

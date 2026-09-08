@@ -3,9 +3,6 @@
   IT - SIMRS Hj. Fatimah Sulhan
  */
 package bridging;
-import bridging.ApiSatuSehat;
-import bridging.SatuSehatCekNIK;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
