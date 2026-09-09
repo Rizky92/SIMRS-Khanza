@@ -3595,7 +3595,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                 Map<String, Integer> map = new HashMap<>();
                 for (int row = 0; row < tabMode.getRowCount(); row++) {
                     tabMode.setValueAt(tabMode.getValueAt(row, 1).toString().startsWith("   " + LABORATORIUMSUBHEADERPREFIX), row, 0);
-                    map.put(tabMode.getValueAt(row, 6).toString(), row);
+                    map.put(tabMode.getValueAt(row, 7).toString(), row);
                 }
 
                 for (JsonNode result : sortedResults) {
@@ -3607,6 +3607,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                         .filter(p -> p.matches("\\d+"))
                         .findFirst()
                         .orElse("");
+
 
                     if (idtemplate.isEmpty()) continue;
 
@@ -3630,7 +3631,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                         tabMode.setValueAt(true, row, 0);
                         tabMode.setValueAt(resultValue, row, 2);
                         tabMode.setValueAt(nilaiRujukan, row, 4);
-                        tabMode.setValueAt(result.path("Flag").asText(""), row, 5);
+                        tabMode.setValueAt(result.path("Flag").asText(""), row, 6);
                     }
                 }
 
