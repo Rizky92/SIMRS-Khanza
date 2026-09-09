@@ -496,15 +496,15 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         ChkPreviewLembarObat = new widget.CekBox();
         CmbModelLembarObat = new widget.ComboBox();
         ChkPreviewAturanPakai = new widget.CekBox();
-        ChkKadaluarsaRacikanSmc = new widget.CekBox();
-        TKadaluarsaRacikanSmc = new widget.TextBox();
-        label4 = new widget.Label();
         CmbModelAturanPakai = new widget.ComboBox();
         label2 = new widget.Label();
         CmbPrinterLembarObat = new widget.ComboBox();
         BtnRefreshPrinterLembarObat = new widget.Button();
         label3 = new widget.Label();
         CmbStatusResepDefault = new widget.ComboBox();
+        ChkKadaluarsaRacikanSmc = new widget.CekBox();
+        TKadaluarsaRacikanSmc = new widget.TextBox();
+        label4 = new widget.Label();
         panelBiasa2 = new widget.PanelBiasa();
         BtnSimpanPengaturan = new widget.Button();
         BtnResetPengaturan = new widget.Button();
@@ -633,7 +633,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 17:02:37" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026 10:45:13" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -767,7 +767,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelBiasa1.add(ChkKadaluarsaRacikanSmc);
         ChkKadaluarsaRacikanSmc.setBounds(10, 220, 228, 23);
 
-        TKadaluarsaRacikanSmc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        TKadaluarsaRacikanSmc.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TKadaluarsaRacikanSmc.setName("TKadaluarsaRacikanSmc"); // NOI18N
         panelBiasa1.add(TKadaluarsaRacikanSmc);
         TKadaluarsaRacikanSmc.setBounds(243, 220, 50, 23);
@@ -898,7 +898,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -912,7 +912,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
