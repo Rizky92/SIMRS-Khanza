@@ -3146,12 +3146,12 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         for (String nama : orthanc.listModalitySmc()) {
             String aet = orthanc.detailModalitySmc(nama);
 
-            if (false == aet.isBlank()) {
+            if (!aet.isBlank()) {
                 daftar.put(nama + " (" + aet + ")", aet);
             }
         }
 
-        if (false == daftar.isEmpty()) {
+        if (!daftar.isEmpty()) {
             stasiunSmc = daftar;
         }
 
@@ -3200,7 +3200,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }
 
     private void kirimWorklistSmc(String noorder) {
-        if (false == koneksiDB.WORKLISTORTHANCSMC()) {
+        if (!koneksiDB.WORKLISTORTHANCSMC()) {
             return;
         }
 
@@ -3212,7 +3212,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
 
         try {
             executor.submit(() -> {
-                if (false == worklist.kirim(noorder, tujuan)) {
+                if (!worklist.kirim(noorder, tujuan)) {
                     String pesan = worklist.getNotif();
                     SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null,
                         "Gagal kirim worklist ke Orthanc untuk No.Order " + noorder + (pesan.isBlank() ? "" : "\n" + pesan)));

@@ -69,7 +69,7 @@ public class AccessionRadiologiSMC {
 
         for (String kodeTindakan : belumTerbit) {
             urutan++;
-            if (false == Sequel.menyimpantfSmc("satu_sehat_accession_radiologi_smc", "noorder, kd_jenis_prw, no_acsn",
+            if (!Sequel.menyimpantfSmc("satu_sehat_accession_radiologi_smc", "noorder, kd_jenis_prw, no_acsn",
                     noorder, kodeTindakan, noorder.substring(2) + String.format("%02d", urutan))) {
                 System.out.println("Notifikasi : Accession Number gagal diterbitkan untuk " + noorder + " / " + kodeTindakan);
                 berhasil = false;

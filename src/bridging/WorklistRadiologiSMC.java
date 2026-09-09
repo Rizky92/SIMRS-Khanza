@@ -48,7 +48,7 @@ public class WorklistRadiologiSMC {
                 "order by permintaan_pemeriksaan_radiologi.kd_jenis_prw", noorder)) {
             String modality = modality(nmPerawatan);
 
-            if (false == daftar.contains(modality)) {
+            if (!daftar.contains(modality)) {
                 daftar.add(modality);
             }
         }
@@ -97,7 +97,7 @@ public class WorklistRadiologiSMC {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     diproses++;
-                    if (false == kirimPemeriksaan(rs, aetPerModality, ulangi)) {
+                    if (!kirimPemeriksaan(rs, aetPerModality, ulangi)) {
                         sukses = false;
                     }
                 }
@@ -164,7 +164,7 @@ public class WorklistRadiologiSMC {
             return false;
         }
 
-        if ((false == worklistId.isBlank()) && (false == ulangi)) {
+        if ((!worklistId.isBlank()) && (!ulangi)) {
             System.out.println("Worklist " + noACSN + " sudah terkirim, dilewati");
             return true;
         }
@@ -184,7 +184,7 @@ public class WorklistRadiologiSMC {
 
         if (studyIUID.isBlank()) {
             studyIUID = buatStudyInstanceUID();
-            if (false == Sequel.mengupdatetfSmc("satu_sehat_accession_radiologi_smc", "study_iuid = ?", "noorder = ? and kd_jenis_prw = ?",
+            if (!Sequel.mengupdatetfSmc("satu_sehat_accession_radiologi_smc", "study_iuid = ?", "noorder = ? and kd_jenis_prw = ?",
                     studyIUID, noorder, kodeTindakan)) {
                 notif = "Gagal menyimpan Study Instance UID untuk " + noACSN;
                 System.out.println("Notifikasi : " + notif);
@@ -192,7 +192,7 @@ public class WorklistRadiologiSMC {
             }
         }
 
-        if (false == worklistId.isBlank()) {
+        if (!worklistId.isBlank()) {
             hapusWorklist(worklistId);
         }
 
@@ -232,7 +232,7 @@ public class WorklistRadiologiSMC {
             return false;
         }
 
-        if (false == Sequel.mengupdatetfSmc("satu_sehat_accession_radiologi_smc", "worklist_id = ?, aet_tujuan = ?, tgl_kirim_worklist = now()",
+        if (!Sequel.mengupdatetfSmc("satu_sehat_accession_radiologi_smc", "worklist_id = ?, aet_tujuan = ?, tgl_kirim_worklist = now()",
                 "noorder = ? and kd_jenis_prw = ?", idBaru, aetitle, noorder, kodeTindakan)) {
             notif = "Worklist " + noACSN + " terkirim tetapi gagal dicatat, ID " + idBaru;
             System.out.println("Notifikasi : " + notif);
