@@ -1,6 +1,7 @@
 package bridging;
 
 import fungsi.sekuel;
+import java.util.ArrayList;
 
 public class AccessionRadiologiSMC {
     private final sekuel Sequel = new sekuel();
@@ -48,12 +49,33 @@ public class AccessionRadiologiSMC {
             return false;
         }
 
-        Sequel.menghapustfSmc("satu_sehat_accession_radiologi_smc", "noorder = ?", noorder);
-
-        return Sequel.executeRawSmc(
-            "insert into satu_sehat_accession_radiologi_smc (noorder, kd_jenis_prw, no_acsn) select permintaan_pemeriksaan_radiologi.noorder, permintaan_pemeriksaan_radiologi.kd_jenis_prw, " +
-            "concat(substr(permintaan_pemeriksaan_radiologi.noorder, 3), lpad(row_number() over (order by permintaan_pemeriksaan_radiologi.kd_jenis_prw), 2, '0')) as no_acsn from " +
-            "permintaan_pemeriksaan_radiologi where permintaan_pemeriksaan_radiologi.noorder = ?", noorder
+        ArrayList<String> belumTerbit = Sequel.cariArraySmc(
+            "select permintaan_pemeriksaan_radiologi.kd_jenis_prw from permintaan_pemeriksaan_radiologi left join satu_sehat_accession_radiologi_smc " +
+            "on satu_sehat_accession_radiologi_smc.noorder = permintaan_pemeriksaan_radiologi.noorder and satu_sehat_accession_radiologi_smc.kd_jenis_prw = " +
+            "permintaan_pemeriksaan_radiologi.kd_jenis_prw where permintaan_pemeriksaan_radiologi.noorder = ? and satu_sehat_accession_radiologi_smc.no_acsn is null " +
+            "order by permintaan_pemeriksaan_radiologi.kd_jenis_prw", noorder
         );
+
+        if (belumTerbit.isEmpty()) {
+            return true;
+        }
+
+        int urutan = Sequel.cariIntegerSmc(
+            "select ifnull(max(cast(right(satu_sehat_accession_radiologi_smc.no_acsn, 2) as unsigned)), 0) from satu_sehat_accession_radiologi_smc " +
+            "where satu_sehat_accession_radiologi_smc.noorder = ?", 0, noorder
+        );
+
+        boolean berhasil = true;
+
+        for (String kodeTindakan : belumTerbit) {
+            urutan++;
+            if (false == Sequel.menyimpantfSmc("satu_sehat_accession_radiologi_smc", "noorder, kd_jenis_prw, no_acsn",
+                    noorder, kodeTindakan, noorder.substring(2) + String.format("%02d", urutan))) {
+                System.out.println("Notifikasi : Accession Number gagal diterbitkan untuk " + noorder + " / " + kodeTindakan);
+                berhasil = false;
+            }
+        }
+
+        return berhasil;
     }
 }
