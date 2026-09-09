@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -26,6 +27,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 
 public class WorklistRadiologiSMC {
+    private static final String[] KODE_MODALITY = {"CR", "CT", "DOC", "DR", "DX", "KO", "MG", "MR", "NM", "OT", "PR", "PT", "PX", "RTDOSE", "RTPLAN", "RTSTRUCT", "SEG", "SR", "US", "XA", "XC"};
     private final Connection koneksi = koneksiDB.condb();
     private final ApiOrthanc orthanc = new ApiOrthanc();
     private final sekuel Sequel = new sekuel();
@@ -46,12 +48,38 @@ public class WorklistRadiologiSMC {
 
     public ArrayList<String> daftarBelumDipetakan(String noorder) {
         return Sequel.cariArraySmc(
-            "select concat(permintaan_pemeriksaan_radiologi.kd_jenis_prw, ' - ', ifnull(jns_perawatan_radiologi.nm_perawatan, '')) from " +
-            "permintaan_pemeriksaan_radiologi inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = " +
-            "permintaan_pemeriksaan_radiologi.kd_jenis_prw left join jns_perawatan_radiologi_modality_smc on " +
-            "jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw where " +
-            "permintaan_pemeriksaan_radiologi.noorder = ? and jns_perawatan_radiologi_modality_smc.modality is null " +
+            "select permintaan_pemeriksaan_radiologi.kd_jenis_prw from permintaan_pemeriksaan_radiologi left join " +
+            "jns_perawatan_radiologi_modality_smc on jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "where permintaan_pemeriksaan_radiologi.noorder = ? and jns_perawatan_radiologi_modality_smc.modality is null " +
             "order by permintaan_pemeriksaan_radiologi.kd_jenis_prw", noorder
+        );
+    }
+
+    public ArrayList<String> daftarKodeModality() {
+        ArrayList<String> daftar = new ArrayList<>(Arrays.asList(KODE_MODALITY));
+
+        for (String kode : Sequel.cariArraySmc(
+                "select distinct jns_perawatan_radiologi_modality_smc.modality from jns_perawatan_radiologi_modality_smc " +
+                "order by jns_perawatan_radiologi_modality_smc.modality")) {
+            if (!daftar.contains(kode)) {
+                daftar.add(kode);
+            }
+        }
+
+        return daftar;
+    }
+
+    public String namaPemeriksaan(String kodeTindakan) {
+        return Sequel.cariIsiSmc(
+            "select ifnull(jns_perawatan_radiologi.nm_perawatan, '') from jns_perawatan_radiologi where " +
+            "jns_perawatan_radiologi.kd_jenis_prw = ?", kodeTindakan
+        );
+    }
+
+    public boolean simpanModality(String kodeTindakan, String modality) {
+        return Sequel.executeRawSmc(
+            "insert into jns_perawatan_radiologi_modality_smc (kd_jenis_prw, modality) values (?, ?) " +
+            "on duplicate key update modality = values(modality)", kodeTindakan, modality
         );
     }
 
@@ -76,23 +104,24 @@ public class WorklistRadiologiSMC {
         int diproses = 0;
 
         try (PreparedStatement ps = koneksi.prepareStatement(
-                "select permintaan_radiologi.noorder, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.tgl_lahir, pasien.jk, " +
-                "permintaan_pemeriksaan_radiologi.kd_jenis_prw, jns_perawatan_radiologi.nm_perawatan, permintaan_radiologi.tgl_permintaan, " +
-                "ifnull(jns_perawatan_radiologi_modality_smc.modality, '') as modality, " +
-                "permintaan_radiologi.jam_permintaan, dokter.nm_dokter, ifnull(poliklinik.nm_poli, '') as nm_poli, permintaan_radiologi.diagnosa_klinis, " +
-                "ifnull(satu_sehat_accession_radiologi_smc.no_acsn, '') as no_acsn, ifnull(satu_sehat_accession_radiologi_smc.study_iuid, '') as study_iuid, " +
-                "ifnull(satu_sehat_accession_radiologi_smc.worklist_id, '') as worklist_id, " +
-                "ifnull(satu_sehat_accession_radiologi_smc.aet_tujuan, '') as aet_tujuan from permintaan_radiologi " +
-                "inner join reg_periksa on permintaan_radiologi.no_rawat = reg_periksa.no_rawat " +
-                "inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                "inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder = permintaan_pemeriksaan_radiologi.noorder " +
-                "inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
-                "left join jns_perawatan_radiologi_modality_smc on jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
-                "inner join dokter on permintaan_radiologi.dokter_perujuk = dokter.kd_dokter " +
-                "left join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
-                "left join satu_sehat_accession_radiologi_smc on satu_sehat_accession_radiologi_smc.noorder = permintaan_pemeriksaan_radiologi.noorder " +
-                "and satu_sehat_accession_radiologi_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
-                "where permintaan_radiologi.noorder = ? order by permintaan_pemeriksaan_radiologi.kd_jenis_prw")) {
+            "select permintaan_radiologi.noorder, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.tgl_lahir, pasien.jk, " +
+            "permintaan_pemeriksaan_radiologi.kd_jenis_prw, jns_perawatan_radiologi.nm_perawatan, permintaan_radiologi.tgl_permintaan, " +
+            "ifnull(jns_perawatan_radiologi_modality_smc.modality, '') as modality, " +
+            "permintaan_radiologi.jam_permintaan, dokter.nm_dokter, ifnull(poliklinik.nm_poli, '') as nm_poli, permintaan_radiologi.diagnosa_klinis, " +
+            "ifnull(satu_sehat_accession_radiologi_smc.no_acsn, '') as no_acsn, ifnull(satu_sehat_accession_radiologi_smc.study_iuid, '') as study_iuid, " +
+            "ifnull(satu_sehat_accession_radiologi_smc.worklist_id, '') as worklist_id, " +
+            "ifnull(satu_sehat_accession_radiologi_smc.aet_tujuan, '') as aet_tujuan from permintaan_radiologi " +
+            "inner join reg_periksa on permintaan_radiologi.no_rawat = reg_periksa.no_rawat " +
+            "inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+            "inner join permintaan_pemeriksaan_radiologi on permintaan_radiologi.noorder = permintaan_pemeriksaan_radiologi.noorder " +
+            "inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "left join jns_perawatan_radiologi_modality_smc on jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "inner join dokter on permintaan_radiologi.dokter_perujuk = dokter.kd_dokter " +
+            "left join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
+            "left join satu_sehat_accession_radiologi_smc on satu_sehat_accession_radiologi_smc.noorder = permintaan_pemeriksaan_radiologi.noorder " +
+            "and satu_sehat_accession_radiologi_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "where permintaan_radiologi.noorder = ? order by permintaan_pemeriksaan_radiologi.kd_jenis_prw"
+        )) {
             ps.setString(1, noorder);
 
             try (ResultSet rs = ps.executeQuery()) {

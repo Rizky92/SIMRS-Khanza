@@ -3158,12 +3158,35 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         return daftar;
     }
 
-    private Map<String, String> pilihStasiunSmc(String noorder) {
+    private boolean petakanModalitySmc(String noorder) {
         ArrayList<String> belumDipetakan = worklist.daftarBelumDipetakan(noorder);
 
-        if (!belumDipetakan.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Maaf, jenis pemeriksaan berikut belum dipetakan ke modality DICOM :\n" +
-                String.join("\n", belumDipetakan));
+        if (belumDipetakan.isEmpty()) {
+            return true;
+        }
+
+        Object[] kodeModality = worklist.daftarKodeModality().toArray();
+
+        for (String kodeTindakan : belumDipetakan) {
+            Object terpilih = JOptionPane.showInputDialog(null,
+                "Modality DICOM untuk pemeriksaan :\n" + kodeTindakan + " - " + worklist.namaPemeriksaan(kodeTindakan),
+                "Pemetaan Modality", JOptionPane.QUESTION_MESSAGE, null, kodeModality, null);
+
+            if (null == terpilih) {
+                return false;
+            }
+
+            if (!worklist.simpanModality(kodeTindakan, terpilih.toString())) {
+                JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan pemetaan modality untuk " + kodeTindakan + "..!!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private Map<String, String> pilihStasiunSmc(String noorder) {
+        if (!petakanModalitySmc(noorder)) {
             return null;
         }
 
