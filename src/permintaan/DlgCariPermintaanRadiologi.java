@@ -3159,6 +3159,14 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }
 
     private Map<String, String> pilihStasiunSmc(String noorder) {
+        ArrayList<String> belumDipetakan = worklist.daftarBelumDipetakan(noorder);
+
+        if (!belumDipetakan.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Maaf, jenis pemeriksaan berikut belum dipetakan ke modality DICOM :\n" +
+                String.join("\n", belumDipetakan));
+            return null;
+        }
+
         ArrayList<String> modalitas = worklist.daftarModality(noorder);
 
         if (modalitas.isEmpty()) {
