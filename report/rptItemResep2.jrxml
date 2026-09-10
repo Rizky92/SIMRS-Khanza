@@ -322,7 +322,9 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="94" width="100" height="9" uuid="6b05e19e-c870-4483-82f6-fba560af745a"/>
+				<reportElement x="120" y="94" width="100" height="9" uuid="6b05e19e-c870-4483-82f6-fba560af745a">
+					<printWhenExpression><![CDATA[null != $F{tgl_kadaluarsa}]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
