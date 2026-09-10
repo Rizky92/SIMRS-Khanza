@@ -2089,6 +2089,8 @@ CREATE TABLE IF NOT EXISTS `tempinacbg`  (
   PRIMARY KEY (`coder_nik`, `cmg_code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `template_laboratorium` MODIFY COLUMN IF EXISTS `method` varchar(30) NOT NULL DEFAULT '' AFTER `nilai_rujukan_pa`;
+
 ALTER TABLE `temporary` DROP INDEX IF EXISTS `no`;
 
 ALTER TABLE `temporary_bayar_ralan` DROP INDEX IF EXISTS `no`;
