@@ -259,7 +259,7 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                                    tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
                                    tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),
                                    tbKamar.getValueAt(i,11).toString(),tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),
-                                   tbKamar.getValueAt(i,15).toString(),tbKamar.getValueAt(i,16).toString()
+                                   tbKamar.getValueAt(i,14).toString(),tbKamar.getValueAt(i,16).toString()
                              });
                         }else if(!tbKamar.getValueAt(i,15).toString().equals("")){
                              Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,nilai_rujukan_pd=?,nilai_rujukan_pa=?,"+
