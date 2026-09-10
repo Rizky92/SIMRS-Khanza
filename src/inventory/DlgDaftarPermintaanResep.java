@@ -496,15 +496,15 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         ChkPreviewLembarObat = new widget.CekBox();
         CmbModelLembarObat = new widget.ComboBox();
         ChkPreviewAturanPakai = new widget.CekBox();
-        ChkKadaluarsaRacikanSmc = new widget.CekBox();
-        TKadaluarsaRacikanSmc = new widget.TextBox();
-        label4 = new widget.Label();
         CmbModelAturanPakai = new widget.ComboBox();
         label2 = new widget.Label();
         CmbPrinterLembarObat = new widget.ComboBox();
         BtnRefreshPrinterLembarObat = new widget.Button();
         label3 = new widget.Label();
         CmbStatusResepDefault = new widget.ComboBox();
+        ChkKadaluarsaRacikanSmc = new widget.CekBox();
+        TKadaluarsaRacikanSmc = new widget.TextBox();
+        label4 = new widget.Label();
         panelBiasa2 = new widget.PanelBiasa();
         BtnSimpanPengaturan = new widget.Button();
         BtnResetPengaturan = new widget.Button();
@@ -633,7 +633,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 17:02:37" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026 10:45:13" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -767,7 +767,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelBiasa1.add(ChkKadaluarsaRacikanSmc);
         ChkKadaluarsaRacikanSmc.setBounds(10, 220, 228, 23);
 
-        TKadaluarsaRacikanSmc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        TKadaluarsaRacikanSmc.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TKadaluarsaRacikanSmc.setName("TKadaluarsaRacikanSmc"); // NOI18N
         panelBiasa1.add(TKadaluarsaRacikanSmc);
         TKadaluarsaRacikanSmc.setBounds(243, 220, 50, 23);
@@ -898,7 +898,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -912,7 +912,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-09-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -7459,11 +7459,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             "as tgl_penyerahan, if(resep_obat.jam_penyerahan = '00:00:00', '', resep_obat.jam_penyerahan) as jam_penyerahan, (select count(distinct resep_dokter.kode_brng) from resep_dokter where " +
                             "resep_dokter.no_resep = resep_obat.no_resep) + (select count(distinct resep_dokter_racikan_detail.kode_brng) from resep_dokter_racikan_detail where resep_dokter_racikan_detail.no_resep " +
                             "= resep_obat.no_resep) as jml_item, if(exists(select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = resep_obat.no_resep), 'Racikan', 'Umum') as jenis_resep, " +
-                            "ifnull(antriloketfarmasi_smc.nomor, '') as no_antrian from resep_obat inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis = " +
-                            "pasien.no_rkm_medis inner join dokter on resep_obat.kd_dokter = dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj = " +
-                            "penjab.kd_pj left join antriloketfarmasi_smc on resep_obat.no_resep = antriloketfarmasi_smc.no_resep where resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' " +
-                            (kdDokter.isBlank() ? "" : "and resep_obat.kd_dokter like ? ") + statuslayani + (kdPoli.isBlank() ? "" : "and reg_periksa.kd_poli like ? ") + (cari.isBlank() ? "" :
-                            "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ? or " +
+                            "ifnull((select antriloketfarmasi_smc.nomor from antriloketfarmasi_smc where antriloketfarmasi_smc.no_resep = resep_obat.no_resep limit 1), '') as no_antrian from resep_obat " +
+                            "inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis inner join dokter on resep_obat.kd_dokter = " +
+                            "dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj = penjab.kd_pj where resep_obat.tgl_peresepan between ? and ? " +
+                            "and resep_obat.status = 'ralan' " + (kdDokter.isBlank() ? "" : "and resep_obat.kd_dokter like ? ") + statuslayani + (kdPoli.isBlank() ? "" : "and reg_periksa.kd_poli like ? ") +
+                            (cari.isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ? or " +
                             "dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") + "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
                     } else {
                         sql = "select resep_obat.no_resep, if(resep_obat.tgl_peresepan = '0000-00-00', '', resep_obat.tgl_peresepan) as tgl_peresepan, if(resep_obat.jam_peresepan = '00:00:00', '', " +
@@ -7473,12 +7473,12 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             "as tgl_penyerahan, if(resep_obat.jam_penyerahan = '00:00:00', '', resep_obat.jam_penyerahan) as jam_penyerahan, (select count(distinct resep_dokter.kode_brng) from resep_dokter where " +
                             "resep_dokter.no_resep = resep_obat.no_resep) + (select count(distinct resep_dokter_racikan_detail.kode_brng) from resep_dokter_racikan_detail where resep_dokter_racikan_detail.no_resep = " +
                             "resep_obat.no_resep) as jml_item, if(exists(select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = resep_obat.no_resep), 'Racikan', 'Umum') as jenis_resep, " +
-                            "ifnull(antriloketfarmasi_smc.nomor, '') as no_antrian from resep_obat inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis = " +
-                            "pasien.no_rkm_medis inner join dokter on resep_obat.kd_dokter = dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj = " +
-                            "penjab.kd_pj inner join set_depo_ralan on reg_periksa.kd_poli = set_depo_ralan.kd_poli left join antriloketfarmasi_smc on resep_obat.no_resep = antriloketfarmasi_smc.no_resep where " +
-                            "resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' " + (kdDokter.isBlank() ? "" : "and resep_obat.kd_dokter like ? ") + statuslayani + (kdPoli.isBlank() ? "" :
-                            "and reg_periksa.kd_poli like ? ") + "and set_depo_ralan.kd_bangsal = ? " + (cari.isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or " +
-                            "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") +
+                            "ifnull((select antriloketfarmasi_smc.nomor from antriloketfarmasi_smc where antriloketfarmasi_smc.no_resep = resep_obat.no_resep limit 1), '') as no_antrian from resep_obat " +
+                            "inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis inner join dokter on resep_obat.kd_dokter = " +
+                            "dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj = penjab.kd_pj inner join set_depo_ralan on reg_periksa.kd_poli = " +
+                            "set_depo_ralan.kd_poli where resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' " + (kdDokter.isBlank() ? "" : "and resep_obat.kd_dokter like ? ") + statuslayani +
+                            (kdPoli.isBlank() ? "" : "and reg_periksa.kd_poli like ? ") + "and set_depo_ralan.kd_bangsal = ? " + (cari.isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? " +
+                            "or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") +
                             "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
                     }
                     try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
