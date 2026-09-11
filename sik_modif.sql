@@ -680,6 +680,14 @@ ALTER TABLE `jadwal_tambahan_smc` ADD CONSTRAINT `jadwal_tambahan_smc_ibfk_2` FO
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
+CREATE TABLE IF NOT EXISTS `jns_perawatan_radiologi_modality_smc`  (
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `modality` varchar(16) NOT NULL,
+  PRIMARY KEY (`kd_jenis_prw`) USING BTREE,
+  INDEX `jns_perawatan_radiologi_modality_smc_ibfk_1`(`modality`) USING BTREE,
+  CONSTRAINT `jns_perawatan_radiologi_modality_smc_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_radiologi` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
 
 CREATE TABLE IF NOT EXISTS `lis_orderlab`  (
@@ -1771,6 +1779,10 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_accession_radiologi_smc`  (
   `noorder` varchar(15) NOT NULL,
   `kd_jenis_prw` varchar(15) NOT NULL,
   `no_acsn` varchar(16) NOT NULL,
+  `study_iuid` varchar(64) NULL DEFAULT NULL,
+  `worklist_id` varchar(64) NULL DEFAULT NULL,
+  `aet_tujuan` varchar(16) NULL DEFAULT NULL,
+  `tgl_kirim_worklist` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`noorder`,`kd_jenis_prw`) USING BTREE,
   UNIQUE KEY `satu_sehat_accession_radiologi_smc_no_acsn` (`no_acsn`) USING BTREE,
   INDEX `satu_sehat_accession_radiologi_smc_ibfk_1`(`kd_jenis_prw`) USING BTREE,

@@ -511,6 +511,15 @@ public class koneksiDB {
         }
     }
 
+    public static boolean WORKLISTORTHANCSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("WORKLISTORTHANCSMC", "no").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
