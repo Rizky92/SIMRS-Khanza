@@ -111,6 +111,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         Jaringan.setDocument(new batasInput((int)100).getKata(Jaringan));
         NomorImplant.setDocument(new batasInput((int)50).getKata(NomorImplant));
         Laporan.setDocument(new batasInput((int)8000).getKata(Laporan));
+        Valid.setTglJamSmc(new Date(),tgl2,Jam2,Menit2,Detik2);
     }
     private double total=0;
     private int no=0;
@@ -242,6 +243,9 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         panelGlass7 = new widget.panelisi();
         label12 = new widget.Label();
         tgl2 = new widget.Tanggal();
+        Jam2 = new widget.ComboBox();
+        Menit2 = new widget.ComboBox();
+        Detik2 = new widget.ComboBox();
         jLabel6 = new widget.Label();
         PreOp = new widget.TextBox();
         PostOp = new widget.TextBox();
@@ -1302,7 +1306,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         Scroll3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Laporan :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         Scroll3.setName("Scroll3"); // NOI18N
 
-        Laporan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        Laporan.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 50, 50)), javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         Laporan.setColumns(20);
         Laporan.setRows(5);
         Laporan.setName("Laporan"); // NOI18N
@@ -1311,7 +1315,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         internalFrame6.add(Scroll3, java.awt.BorderLayout.CENTER);
 
         panelGlass7.setName("panelGlass7"); // NOI18N
-        panelGlass7.setPreferredSize(new java.awt.Dimension(300, 55));
+        panelGlass7.setPreferredSize(new java.awt.Dimension(330, 55));
         panelGlass7.setLayout(null);
 
         label12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1321,10 +1325,40 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         panelGlass7.add(label12);
         label12.setBounds(10, 10, 200, 23);
 
-        tgl2.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        tgl2.setDisplayFormat("dd-MM-yyyy");
         tgl2.setName("tgl2"); // NOI18N
         panelGlass7.add(tgl2);
-        tgl2.setBounds(30, 35, 150, 23);
+        tgl2.setBounds(30, 35, 90, 23);
+
+        Jam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        Jam2.setName("Jam2"); // NOI18N
+        Jam2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Jam2KeyPressed(evt);
+            }
+        });
+        panelGlass7.add(Jam2);
+        Jam2.setBounds(123, 35, 62, 23);
+
+        Menit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Menit2.setName("Menit2"); // NOI18N
+        Menit2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Menit2KeyPressed(evt);
+            }
+        });
+        panelGlass7.add(Menit2);
+        Menit2.setBounds(188, 35, 62, 23);
+
+        Detik2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Detik2.setName("Detik2"); // NOI18N
+        Detik2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Detik2KeyPressed(evt);
+            }
+        });
+        panelGlass7.add(Detik2);
+        Detik2.setBounds(253, 35, 62, 23);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Diagnosis Pre-operatif :");
@@ -1339,7 +1373,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(PreOp);
-        PreOp.setBounds(30, 90, 256, 23);
+        PreOp.setBounds(30, 90, 285, 23);
 
         PostOp.setName("PostOp"); // NOI18N
         PostOp.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1348,7 +1382,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(PostOp);
-        PostOp.setBounds(30, 145, 256, 23);
+        PostOp.setBounds(30, 145, 285, 23);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Diagnosis Post-operatif :");
@@ -1369,7 +1403,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(Jaringan);
-        Jaringan.setBounds(30, 200, 256, 23);
+        Jaringan.setBounds(30, 200, 285, 23);
 
         DikirimPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
         DikirimPA.setName("DikirimPA"); // NOI18N
@@ -1400,7 +1434,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(NomorImplant);
-        NomorImplant.setBounds(30, 310, 256, 23);
+        NomorImplant.setBounds(30, 310, 285, 23);
 
         internalFrame6.add(panelGlass7, java.awt.BorderLayout.WEST);
 
@@ -3427,7 +3461,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         PreOp.setText(rs2.getString("diagnosa_preop"));
                         PostOp.setText(rs2.getString("diagnosa_postop"));
                         Jaringan.setText(rs2.getString("jaringan_dieksekusi"));
-                        tgl2.setDate(rs2.getDate("selesaioperasi"));
+                        Valid.setTglJamSmc(rs2.getTimestamp("selesaioperasi"),tgl2,Jam2,Menit2,Detik2);
                         DikirimPA.setSelectedItem(rs2.getString("permintaan_pa"));
                         NomorImplant.setText(rs2.getString("nomor_implan"));
                         Laporan.setText(rs2.getString("laporan_operasi"));
@@ -3452,7 +3486,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             Sequel.queryu("delete from laporan_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1)+"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +"'");
             Sequel.menyimpan("laporan_operasi","?,?,?,?,?,?,?,?,?","laporan operasi",9,new String[]{
                 tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),PreOp.getText(),
-                PostOp.getText(),Jaringan.getText(),Valid.SetTgl(tgl2.getSelectedItem()+"")+" "+tgl2.getSelectedItem().toString().substring(11,19),
+                PostOp.getText(),Jaringan.getText(),Valid.getTglJamSmc(tgl2,Jam2,Menit2,Detik2),
                 DikirimPA.getSelectedItem().toString(),NomorImplant.getText(),Laporan.getText()
             });
             JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!");
@@ -3481,8 +3515,20 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         WindowLaporan.dispose();
     }//GEN-LAST:event_BtnCloseIn5ActionPerformed
 
+    private void Jam2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Jam2KeyPressed
+        Valid.pindah(evt,tgl2,Menit2);
+    }//GEN-LAST:event_Jam2KeyPressed
+
+    private void Menit2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Menit2KeyPressed
+        Valid.pindah(evt,Jam2,Detik2);
+    }//GEN-LAST:event_Menit2KeyPressed
+
+    private void Detik2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Detik2KeyPressed
+        Valid.pindah(evt,Menit2,PreOp);
+    }//GEN-LAST:event_Detik2KeyPressed
+
     private void PreOpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PreOpKeyPressed
-        Valid.pindah(evt,tgl2,PostOp);
+        Valid.pindah(evt,Detik2,PostOp);
     }//GEN-LAST:event_PreOpKeyPressed
 
     private void PostOpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PostOpKeyPressed
@@ -3598,12 +3644,15 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.Button BtnPrint1;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpan4;
+    private widget.ComboBox Detik2;
     private widget.ComboBox DikirimPA;
     private widget.panelisi FormInput;
+    private widget.ComboBox Jam2;
     private widget.TextBox Jaringan;
     private widget.TextBox Kd2;
     private widget.Label LTotal;
     private widget.TextArea Laporan;
+    private widget.ComboBox Menit2;
     private javax.swing.JMenuItem MnHapusObatOperasi;
     private javax.swing.JMenuItem MnHapusTagihanOperasi;
     private javax.swing.JMenuItem MnLaporanOperasi;
