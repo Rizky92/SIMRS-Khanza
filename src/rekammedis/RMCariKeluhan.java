@@ -282,7 +282,6 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() ->tampil());
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -337,7 +336,7 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             try (PreparedStatement ps = koneksi.prepareStatement(
@@ -467,6 +466,7 @@ public final class RMCariKeluhan extends javax.swing.JDialog {
 
     public void setNoRawat(String norawat){
         this.norawat=norawat;
+        runBackground(() ->tampil());
     }
 
     public JTable getTable(){

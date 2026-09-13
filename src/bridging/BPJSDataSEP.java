@@ -3210,7 +3210,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil());
+        if(TabRawat.getSelectedIndex()==1){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==2){
+            runBackground(() ->tampilInternal());
+        }
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -7055,6 +7059,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                            }
                         }
 
+                        JOptionPane.showMessageDialog(null,"No.SEP ini sudah terbit sebelumnya, terdeteksi sebagai SEP internal.\nBerpotensi tidak dibayar BPJS...!!");
                         emptTeks();
                     }
                  }

@@ -7303,6 +7303,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     psnota.setString(4,DTPTgl.getSelectedItem().toString().substring(11,19));
                     psnota.setDouble(5,uangdeposit);
                     psnota.executeUpdate();
+                    Sequel.SimpanTrack("insert into nota_inap values('"+TNoRw.getText()+"','"+no_nota+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+DTPTgl.getSelectedItem().toString().substring(11,19)+"','"+uangdeposit+"')");
                 } catch (Exception e) {
                     no_nota=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_inap.no_nota,4),signed)),0) from nota_inap where nota_inap.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RI",4);
                     Sequel.meghapus("nota_inap","no_rawat",TNoRw.getText());
@@ -7315,6 +7316,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                         psnota.setString(4,DTPTgl.getSelectedItem().toString().substring(11,19));
                         psnota.setDouble(5,uangdeposit);
                         psnota.executeUpdate();
+                        Sequel.SimpanTrack("insert into nota_inap values('"+TNoRw.getText()+"','"+no_nota+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+DTPTgl.getSelectedItem().toString().substring(11,19)+"','"+uangdeposit+"')");
                     }  catch (Exception ex) {
                         System.out.println("Notifikasi Nota 2 : "+ex);
                     } finally{
@@ -7335,6 +7337,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     psnota.setString(4,DTPTgl.getSelectedItem().toString().substring(11,19));
                     psnota.setDouble(5,uangdeposit);
                     psnota.executeUpdate();
+                    Sequel.SimpanTrack("insert into nota_inap values('"+TNoRw.getText()+"','"+no_nota+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+DTPTgl.getSelectedItem().toString().substring(11,19)+"','"+uangdeposit+"')");
                 }  catch (Exception ex) {
                     System.out.println("Notifikasi Nota 2 : "+ex);
                 } finally{

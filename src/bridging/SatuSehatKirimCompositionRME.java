@@ -78,8 +78,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","ID Encounter","Petugas/Dokter/Praktisi","No.KTP Praktisi","Tanggal","Cara Masuk","ID Observation Cara Masuk",
                 "Alat Transportasi","ID Observation Alat Transportasi","Alasan Kedatangan","Keterangan Kedatangan","ID Observation Alasan Kedatangan",
                 "Macam Kasus","ID Observation Macam Kasus","TD","ID Observation TD","Nadi","ID Observation Nadi","RR","ID Observation RR","Suhu","ID Observation Suhu",
-                "Saturasi O²","ID Observation Saturasi O²","Nyeri","ID Observation_nyeri","Keluhan Utama","ID Observation Keluhan Utama",
-                "Kebutuhan Khusus","ID Observation Kebutuhan Khusus","Catatan","ID Observation Catatan","Plan/Keputusan","ID Careplan Keputusan","ID Composition"
+                "Saturasi O²","ID Observation Saturasi O²","Nyeri","ID Observation Nyeri","Keluhan Utama","ID Observation Keluhan Utama",
+                "Kebutuhan Khusus","ID Observation Kebutuhan Khusus","Catatan","ID Observation Catatan","Plan/Keputusan","ID Careplan Keputusan",
+                "ID Observation Skala","ID Composition"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -96,7 +97,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                  java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
-                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -108,7 +109,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
         tbIGDPrimer.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbIGDPrimer.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 39; i++) {
+        for (i = 0; i < 40; i++) {
             TableColumn column = tbIGDPrimer.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -187,6 +188,8 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
             }else if(i==37){
                 column.setPreferredWidth(215);
             }else if(i==38){
+                column.setPreferredWidth(215);
+            }else if(i==39){
                 column.setPreferredWidth(215);
             }
         }
@@ -816,594 +819,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
         if(TabRawat.getSelectedIndex()==0){
-            for(i=0;i<tbIGDPrimer.getRowCount();i++){
-                if(tbIGDPrimer.getValueAt(i,0).toString().equals("true")&&(!tbIGDPrimer.getValueAt(i,4).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,7).toString().equals(""))&&tbIGDPrimer.getValueAt(i,38).toString().equals("")){
-                    try {
-                        iddokter = cekViaSatuSehat.tampilIDParktisi(tbIGDPrimer.getValueAt(i,7).toString());
-                        idpasien = cekViaSatuSehat.tampilIDPasien(tbIGDPrimer.getValueAt(i,4).toString());
-                        //Cara Masuk
-                        if(tbIGDPrimer.getValueAt(i,10).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"exam\"," +
-                                                            "\"display\": \"exam\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://snomed.info/sct\"," +
-                                                        "\"code\": \"301998005\"," +
-                                                        "\"display\": \"Ability to move\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Cara masuk IGD\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueString\": \""+tbIGDPrimer.getValueAt(i,9).toString()+"\"" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_cara_masuk=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,10);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Cara Masuk IGD : "+e);
-                            }
-                        }
-
-                        //Transportasi
-                        if(tbIGDPrimer.getValueAt(i,12).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"exam\"," +
-                                                            "\"display\": \"exam\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"11459-5\"," +
-                                                        "\"display\": \"Transport mode EMS system\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Alat transportasi kedatangan\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueString\": \""+tbIGDPrimer.getValueAt(i,11).toString()+"\"" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alat_transportasi=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,12);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Alat Transportasi : "+e);
-                            }
-                        }
-
-                        //Alasan Kedatangan
-                        if(tbIGDPrimer.getValueAt(i,15).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"exam\"," +
-                                                            "\"display\": \"exam\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"11293-8\"," +
-                                                        "\"display\": \"Type of Referral source\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Alasan Kedatangan/Alasan Rujukan\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueString\": \""+tbIGDPrimer.getValueAt(i,13).toString()+(tbIGDPrimer.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDPrimer.getValueAt(i,14).toString())+"\"" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alasan_kedatangan=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,15);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Alasan Kedatangan : "+e);
-                            }
-                        }
-
-                        //Macam Kasus
-                        if(tbIGDPrimer.getValueAt(i,17).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"exam\"," +
-                                                            "\"display\": \"exam\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"29298-7\"," +
-                                                        "\"display\": \"Reason for visit\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Macam Kasus\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueString\": \""+tbIGDPrimer.getValueAt(i,16).toString()+"\"" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_macam_kasus=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,17);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Macam Kasus : "+e);
-                            }
-                        }
-
-                        //Tekanan Darah
-                        if(tbIGDPrimer.getValueAt(i,19).toString().equals("")){
-                            arrSplit = tbIGDPrimer.getValueAt(i,18).toString().split("/");
-                            sistole="0";
-                            try {
-                                if(!arrSplit[0].equals("")){
-                                    sistole=arrSplit[0];
-                                }
-                            } catch (Exception e) {
-                                sistole="0";
-                            }
-                            diastole="0";
-                            try {
-                                if(!arrSplit[1].equals("")){
-                                    diastole=arrSplit[1];
-                                }
-                            } catch (Exception e) {
-                                diastole="0";
-                            }
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"vital-signs\"," +
-                                                            "\"display\": \"Vital Signs\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"35094-2\"," +
-                                                        "\"display\": \"Blood pressure panel\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Tekanan Darah\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"component\" : ["+
-                                                "{" +
-                                                    "\"code\" : {" +
-                                                        "\"coding\" : ["+
-                                                            "{" +
-                                                                "\"system\" : \"http://loinc.org\"," +
-                                                                "\"code\" : \"8480-6\"," +
-                                                                "\"display\" : \"Systolic blood pressure\"" +
-                                                            "}" +
-                                                        "]" +
-                                                    "}," +
-                                                    "\"valueQuantity\" : {" +
-                                                        "\"value\" : "+sistole+"," +
-                                                        "\"unit\" : \"mmHg\"," +
-                                                        "\"system\" : \"http://unitsofmeasure.org\"," +
-                                                        "\"code\" : \"mm[Hg]\"" +
-                                                    "}" +
-                                                "}," +
-                                                "{" +
-                                                    "\"code\" : {" +
-                                                        "\"coding\" : ["+
-                                                            "{" +
-                                                                "\"system\" : \"http://loinc.org\"," +
-                                                                "\"code\" : \"8462-4\"," +
-                                                                "\"display\" : \"Diastolic blood pressure\"" +
-                                                            "}"+
-                                                        "]" +
-                                                    "}," +
-                                                    "\"valueQuantity\" : {" +
-                                                        "\"value\" : "+diastole+"," +
-                                                        "\"unit\" : \"mmHg\"," +
-                                                        "\"system\" : \"http://unitsofmeasure.org\"," +
-                                                        "\"code\" : \"mm[Hg]\"" +
-                                                    "}" +
-                                                "}"+
-                                            "]" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_tekanan_darah=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,19);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Tekanan Darah : "+e);
-                            }
-                        }
-
-                        //Nadi
-                        if(tbIGDPrimer.getValueAt(i,21).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"vital-signs\"," +
-                                                            "\"display\": \"Vital Signs\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"8867-4\"," +
-                                                        "\"display\": \"Heart rate\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Nadi\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueQuantity\": {"+
-                                                "\"value\": " + tbIGDPrimer.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
-                                                "\"unit\": \"/min\","+
-                                                "\"system\": \"http://unitsofmeasure.org\","+
-                                                "\"code\": \"/min\""+
-                                            "}" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nadi=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,21);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Nadi : "+e);
-                            }
-                        }
-
-                        //Respirasi
-                        if(tbIGDPrimer.getValueAt(i,23).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"vital-signs\"," +
-                                                            "\"display\": \"Vital Signs\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"9279-1\"," +
-                                                        "\"display\": \"Respiratory rate\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Respirasi\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueQuantity\": {"+
-                                                "\"value\": " + tbIGDPrimer.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
-                                                "\"unit\": \"/min\","+
-                                                "\"system\": \"http://unitsofmeasure.org\","+
-                                                "\"code\": \"/min\""+
-                                            "}" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_pernapasan=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,23);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Respirasi : "+e);
-                            }
-                        }
-
-                        //Suhu Tubuh
-                        if(tbIGDPrimer.getValueAt(i,25).toString().equals("")){
-                            try{
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                                json = "{" +
-                                            "\"resourceType\": \"Observation\"," +
-                                            "\"status\": \"final\"," +
-                                            "\"category\": [" +
-                                                "{" +
-                                                    "\"coding\": [" +
-                                                        "{" +
-                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
-                                                            "\"code\": \"vital-signs\"," +
-                                                            "\"display\": \"Vital Signs\"" +
-                                                        "}" +
-                                                    "]" +
-                                                "}" +
-                                            "]," +
-                                            "\"code\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://loinc.org\"," +
-                                                        "\"code\": \"8310-5\"," +
-                                                        "\"display\": \"Body temperature\"" +
-                                                    "}" +
-                                                "]," +
-                                                "\"text\": \"Suhu Tubuh\"" +
-                                            "}," +
-                                            "\"subject\": {" +
-                                                "\"reference\": \"Patient/"+idpasien+"\"" +
-                                            "}," +
-                                            "\"performer\": [" +
-                                                "{" +
-                                                    "\"reference\": \"Practitioner/"+iddokter+"\"" +
-                                                "}" +
-                                            "]," +
-                                            "\"encounter\": {" +
-                                                "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
-                                            "}," +
-                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
-                                            "\"valueQuantity\": {"+
-                                                "\"value\": " + tbIGDPrimer.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
-                                                "\"unit\": \"degree Celsius\","+
-                                                "\"system\": \"http://unitsofmeasure.org\","+
-                                                "\"code\": \"Cel\""+
-                                            "}" +
-                                       "}";
-                                System.out.println("URL : "+link+"/Observation");
-                                System.out.println("Request JSON : "+json);
-                                requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_suhu=?",2,new String[]{
-                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
-                                        })==true){
-                                        tbIGDPrimer.setValueAt(response.asText(), i,25);
-                                        tbIGDPrimer.setValueAt(false,i,0);
-                                    }
-                                }
-                            }catch(Exception e){
-                                System.out.println("Notifikasi Suhu Tubuh : "+e);
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
-                    }
-                }
-            }
+            KirimTriaseIGDPrimer();
         }else if(TabRawat.getSelectedIndex()==1){
 
         }else if(TabRawat.getSelectedIndex()==2){
@@ -2384,7 +1800,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                "data_triase_igd.alat_transportasi,data_triase_igd.id_observation_alat_transportasi,data_triase_igd.alasan_kedatangan,data_triase_igd.keterangan_kedatangan,data_triase_igd.id_observation_alasan_kedatangan,master_triase_macam_kasus.macam_kasus,data_triase_igd.id_observation_macam_kasus,"+
                "data_triase_igd.tekanan_darah,data_triase_igd.id_observation_tekanan_darah,data_triase_igd.nadi,data_triase_igd.id_observation_nadi,data_triase_igd.pernapasan,data_triase_igd.id_observation_pernapasan,data_triase_igd.suhu,data_triase_igd.id_observation_suhu,data_triase_igd.saturasi_o2,"+
                "data_triase_igd.id_observation_saturasi_o2,data_triase_igd.nyeri,data_triase_igd.id_observation_nyeri,data_triase_igdprimer.keluhan_utama,data_triase_igdprimer.id_observation_keluhan_utama,data_triase_igdprimer.kebutuhan_khusus,data_triase_igdprimer.id_observation_kebutuhan_khusus,"+
-               "data_triase_igdprimer.catatan,data_triase_igdprimer.id_observation_catatan,data_triase_igdprimer.plan,data_triase_igdprimer.id_careplan_keputusan,data_triase_igd.id_composition from reg_periksa inner join data_triase_igd on reg_periksa.no_rawat=data_triase_igd.no_rawat "+
+               "data_triase_igdprimer.catatan,data_triase_igdprimer.id_observation_catatan,data_triase_igdprimer.plan,data_triase_igdprimer.id_careplan_keputusan,data_triase_igdprimer.id_observation_skala,data_triase_igd.id_composition from reg_periksa inner join data_triase_igd on reg_periksa.no_rawat=data_triase_igd.no_rawat "+
                "inner join data_triase_igdprimer on data_triase_igd.no_rawat=data_triase_igdprimer.no_rawat inner join pegawai on data_triase_igdprimer.nik=pegawai.nik inner join master_triase_macam_kasus on data_triase_igd.kode_kasus=master_triase_macam_kasus.kode_kasus  "+
                "inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat where data_triase_igdprimer.tanggaltriase between ? and ? "+(TCari.getText().equals("")?"":"and (reg_periksa.no_rawat like ? or "+
                "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or pasien.no_ktp like ? or pegawai.no_ktp like ? or pegawai.nama like ? or master_triase_macam_kasus.macam_kasus like ?)")
@@ -2408,7 +1824,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                         rs.getString("alat_transportasi"),rs.getString("id_observation_alat_transportasi"),rs.getString("alasan_kedatangan"),rs.getString("keterangan_kedatangan"),rs.getString("id_observation_alasan_kedatangan"),rs.getString("macam_kasus"),rs.getString("id_observation_macam_kasus"),
                         rs.getString("tekanan_darah"),rs.getString("id_observation_tekanan_darah"),rs.getString("nadi"),rs.getString("id_observation_nadi"),rs.getString("pernapasan"),rs.getString("id_observation_pernapasan"),rs.getString("suhu"),rs.getString("id_observation_suhu"),rs.getString("saturasi_o2"),
                         rs.getString("id_observation_saturasi_o2"),rs.getString("nyeri"),rs.getString("id_observation_nyeri"),rs.getString("keluhan_utama"),rs.getString("id_observation_keluhan_utama"),rs.getString("kebutuhan_khusus"),rs.getString("id_observation_kebutuhan_khusus"),rs.getString("catatan"),
-                        rs.getString("id_observation_catatan"),rs.getString("plan"),rs.getString("id_careplan_keputusan"),rs.getString("id_composition")
+                        rs.getString("id_observation_catatan"),rs.getString("plan"),rs.getString("id_careplan_keputusan"),rs.getString("id_observation_skala"),rs.getString("id_composition")
                     });
                 }
             } catch (Exception e) {
@@ -2436,7 +1852,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
     private void isMenuIGDPrimer(){
         if(ChkAccorIGDPrimer.isSelected()==true){
             ChkAccorIGDPrimer.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(470,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(520,HEIGHT));
             ScrollHTML.setVisible(true);
             ChkAccorIGDPrimer.setVisible(true);
         }else if(ChkAccorIGDPrimer.isSelected()==false){
@@ -2449,46 +1865,42 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
 
     private void getDataIGDPrimer() {
         try {
+            jumlahigdprimer=0;
             htmlContent = new StringBuilder();
             ps=koneksi.prepareStatement(
-                    "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan "+
-                    "from master_triase_pemeriksaan inner join master_triase_skala1 inner join data_triase_igddetail_skala1 "+
-                    "on master_triase_pemeriksaan.kode_pemeriksaan=master_triase_skala1.kode_pemeriksaan and "+
-                    "master_triase_skala1.kode_skala1=data_triase_igddetail_skala1.kode_skala1 where data_triase_igddetail_skala1.no_rawat=? "+
-                    "group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan");
+                "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan "+
+                "inner join master_triase_skala1 on master_triase_pemeriksaan.kode_pemeriksaan=master_triase_skala1.kode_pemeriksaan "+
+                "inner join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1=data_triase_igddetail_skala1.kode_skala1 "+
+                "where data_triase_igddetail_skala1.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
+            );
             try {
                 ps.setString(1,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
                 rs=ps.executeQuery();
                 if(rs.next()){
-                    jumlahigdprimer=0;
-                    htmlContent.append(
-                        "<tr class='isi'>"+
-                            "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pemeriksaan</td>"+
-                            "<td valign='middle' bgcolor='#AA0000' color='ffffff' align='center'>Immediate/Segera</td>"+
-                        "</tr>");
+                    htmlContent.append("<tr class='isi'>").
+                                    append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='40%'>Pemeriksaan</td>").
+                                    append("<td valign='middle' bgcolor='#AA0000' color='ffffff' align='left' width='60%'>Immediate/Segera</td>").
+                                append("</tr>");
                     rs.beforeFirst();
                     while(rs.next()){
-                        htmlContent.append(
-                            "<tr class='isi'>"+
-                                "<td valign='middle'>"+rs.getString("nama_pemeriksaan")+"</td>"+
-                                "<td valign='middle' bgcolor='#AA0000' color='ffffff'>"+
-                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>"
-                        );
+                        htmlContent.append("<tr class='isi'>").
+                                    append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").
+                                    append("<td valign='middle' bgcolor='#AA0000' color='ffffff'>").
+                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>");
                         ps2=koneksi.prepareStatement(
-                                "select master_triase_skala1.pengkajian_skala1 from master_triase_skala1 inner join data_triase_igddetail_skala1 "+
-                                "on master_triase_skala1.kode_skala1=data_triase_igddetail_skala1.kode_skala1 where "+
-                                "master_triase_skala1.kode_pemeriksaan=? and data_triase_igddetail_skala1.no_rawat=? "+
-                                "order by data_triase_igddetail_skala1.kode_skala1");
+                            "select data_triase_igddetail_skala1.id_observation_skala1,master_triase_skala1.pengkajian_skala1 from master_triase_skala1 inner join data_triase_igddetail_skala1 "+
+                            "on master_triase_skala1.kode_skala1=data_triase_igddetail_skala1.kode_skala1 where master_triase_skala1.kode_pemeriksaan=? and data_triase_igddetail_skala1.no_rawat=? "+
+                            "order by data_triase_igddetail_skala1.kode_skala1"
+                        );
                         try {
                             ps2.setString(1,rs.getString("kode_pemeriksaan"));
                             ps2.setString(2,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
                             rs2=ps2.executeQuery();
                             while(rs2.next()){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td border='0' valign='middle' bgcolor='#AA0000' color='ffffff' width='100%'>"+rs2.getString("pengkajian_skala1")+"</td>"+
-                                    "</tr>"
-                                );
+                                htmlContent.append("<tr class='isi'>").
+                                                append("<td border='0' valign='middle' bgcolor='#AA0000' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala1")).append("</td>").
+                                                append("<td border='0' valign='middle' bgcolor='#AA0000' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala1")).append("</td>").
+                                            append("</tr>");
                                 jumlahigdprimer++;
                             }
                         } catch (Exception e) {
@@ -2501,11 +1913,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                 ps2.close();
                             }
                         }
-                        htmlContent.append(
-                                    "</table>"+
-                                "</td>"+
-                            "</tr>"
-                        );
+                        htmlContent.append("</table>").
+                                    append("</td>").
+                                    append("</tr>");
                     }
                 }
             } catch (Exception e) {
@@ -2521,43 +1931,39 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
 
             if(jumlahigdprimer==0){
                 ps=koneksi.prepareStatement(
-                        "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan "+
-                        "from master_triase_pemeriksaan inner join master_triase_skala2 inner join data_triase_igddetail_skala2 "+
-                        "on master_triase_pemeriksaan.kode_pemeriksaan=master_triase_skala2.kode_pemeriksaan and "+
-                        "master_triase_skala2.kode_skala2=data_triase_igddetail_skala2.kode_skala2 where data_triase_igddetail_skala2.no_rawat=? "+
-                        "group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan");
+                    "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan "+
+                    "inner join master_triase_skala2 on master_triase_pemeriksaan.kode_pemeriksaan=master_triase_skala2.kode_pemeriksaan "+
+                    "inner join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2=data_triase_igddetail_skala2.kode_skala2 "+
+                    "where data_triase_igddetail_skala2.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan order by master_triase_pemeriksaan.kode_pemeriksaan"
+                );
                 try {
                     ps.setString(1,tbIGDPrimer.getValueAt(tbIGDPrimer.getSelectedRow(),1).toString());
                     rs=ps.executeQuery();
                     if(rs.next()){
-                        htmlContent.append(
-                            "<tr class='isi'>"+
-                                "<td valign='middle' bgcolor='#FFFAF8' align='center'>Pemeriksaan</td>"+
-                                "<td valign='middle' bgcolor='#FF0000' color='ffffff' align='center'>Emergensi</td>"+
-                            "</tr>");
+                        htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle' bgcolor='#FFFAF8' align='center' width='60%'>Pemeriksaan</td>").
+                                        append("<td valign='middle' bgcolor='#FF0000' color='ffffff' align='left' width='40%'>Emergensi</td>").
+                                    append("</tr>");
                         rs.beforeFirst();
                         while(rs.next()){
-                            htmlContent.append(
-                                "<tr class='isi'>"+
-                                    "<td valign='middle'>"+rs.getString("nama_pemeriksaan")+"</td>"+
-                                    "<td valign='middle' bgcolor='#FF0000' color='ffffff'>"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>"
-                            );
+                            htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='middle'>").append(rs.getString("nama_pemeriksaan")).append("</td>").
+                                        append("<td valign='middle' bgcolor='#FF0000' color='ffffff'>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0'>");
                             ps2=koneksi.prepareStatement(
-                                    "select master_triase_skala2.pengkajian_skala2 from master_triase_skala2 inner join data_triase_igddetail_skala2 "+
-                                    "on master_triase_skala2.kode_skala2=data_triase_igddetail_skala2.kode_skala2 where "+
-                                    "master_triase_skala2.kode_pemeriksaan=? and data_triase_igddetail_skala2.no_rawat=? "+
-                                    "order by data_triase_igddetail_skala2.kode_skala2");
+                                "select data_triase_igddetail_skala2.id_observation_skala2,master_triase_skala2.pengkajian_skala2 from master_triase_skala2 inner join data_triase_igddetail_skala2 "+
+                                "on master_triase_skala2.kode_skala2=data_triase_igddetail_skala2.kode_skala2 where master_triase_skala2.kode_pemeriksaan=? and data_triase_igddetail_skala2.no_rawat=? "+
+                                "order by data_triase_igddetail_skala2.kode_skala2"
+                            );
                             try {
                                 ps2.setString(1,rs.getString("kode_pemeriksaan"));
                                 ps2.setString(2,rs.getString("no_rawat"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>"+
-                                            "<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='100%'>"+rs2.getString("pengkajian_skala2")+"</td>"+
-                                        "</tr>"
-                                    );
+                                    htmlContent.append("<tr class='isi'>").
+                                                    append("<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='50%'>").append(rs2.getString("pengkajian_skala2")).append("</td>").
+                                                    append("<td border='0' valign='middle' bgcolor='#FF0000' color='ffffff' width='50%'>").append(rs2.getString("id_observation_skala2")).append("</td>").
+                                                append("</tr>");
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notif : "+e);
@@ -2569,11 +1975,9 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                     ps2.close();
                                 }
                             }
-                            htmlContent.append(
-                                        "</table>"+
-                                    "</td>"+
-                                "</tr>"
-                            );
+                            htmlContent.append("</table>").
+                                        append("</td>").
+                                        append("</tr>");
                         }
                     }
                 } catch (Exception e) {
@@ -2590,12 +1994,1500 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
 
             LoadHTML.setText(
                 "<html>"+
-                  "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                  "<table width='550px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                    htmlContent.toString()+
                   "</table>"+
                 "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
+        }
+    }
+
+    private void KirimTriaseIGDPrimer() {
+        for(i=0;i<tbIGDPrimer.getRowCount();i++){
+            if(tbIGDPrimer.getValueAt(i,0).toString().equals("true")&&(!tbIGDPrimer.getValueAt(i,4).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,7).toString().equals(""))){
+                try {
+                    iddokter = cekViaSatuSehat.tampilIDParktisi(tbIGDPrimer.getValueAt(i,7).toString());
+                    idpasien = cekViaSatuSehat.tampilIDPasien(tbIGDPrimer.getValueAt(i,4).toString());
+                    //Cara Masuk
+                    if(tbIGDPrimer.getValueAt(i,10).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://snomed.info/sct\"," +
+                                                    "\"code\": \"301998005\"," +
+                                                    "\"display\": \"Ability to move\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Cara masuk IGD\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,9).toString()+"\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_cara_masuk=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,10);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Cara Masuk IGD : "+e);
+                        }
+                    }
+
+                    //Transportasi
+                    if(tbIGDPrimer.getValueAt(i,12).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"11459-5\"," +
+                                                    "\"display\": \"Transport mode EMS system\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Alat transportasi kedatangan\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,11).toString()+"\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alat_transportasi=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,12);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Alat Transportasi : "+e);
+                        }
+                    }
+
+                    //Alasan Kedatangan
+                    if(tbIGDPrimer.getValueAt(i,15).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"11293-8\"," +
+                                                    "\"display\": \"Type of Referral source\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Alasan Kedatangan/Alasan Rujukan\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,13).toString()+(tbIGDPrimer.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDPrimer.getValueAt(i,14).toString())+"\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_alasan_kedatangan=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,15);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Alasan Kedatangan : "+e);
+                        }
+                    }
+
+                    //Macam Kasus
+                    if(tbIGDPrimer.getValueAt(i,17).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"29298-7\"," +
+                                                    "\"display\": \"Reason for visit\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Macam Kasus\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \""+tbIGDPrimer.getValueAt(i,16).toString()+"\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_macam_kasus=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,17);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Macam Kasus : "+e);
+                        }
+                    }
+
+                    //Tekanan Darah
+                    if(tbIGDPrimer.getValueAt(i,19).toString().equals("")){
+                        arrSplit = tbIGDPrimer.getValueAt(i,18).toString().split("/");
+                        sistole="0";
+                        try {
+                            if(!arrSplit[0].equals("")){
+                                sistole=arrSplit[0];
+                            }
+                        } catch (Exception e) {
+                            sistole="0";
+                        }
+                        diastole="0";
+                        try {
+                            if(!arrSplit[1].equals("")){
+                                diastole=arrSplit[1];
+                            }
+                        } catch (Exception e) {
+                            diastole="0";
+                        }
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"vital-signs\"," +
+                                                        "\"display\": \"Vital Signs\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"35094-2\"," +
+                                                    "\"display\": \"Blood pressure panel\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Tekanan Darah\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"component\" : ["+
+                                            "{" +
+                                                "\"code\" : {" +
+                                                    "\"coding\" : ["+
+                                                        "{" +
+                                                            "\"system\" : \"http://loinc.org\"," +
+                                                            "\"code\" : \"8480-6\"," +
+                                                            "\"display\" : \"Systolic blood pressure\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"valueQuantity\" : {" +
+                                                    "\"value\" : "+sistole+"," +
+                                                    "\"unit\" : \"mmHg\"," +
+                                                    "\"system\" : \"http://unitsofmeasure.org\"," +
+                                                    "\"code\" : \"mm[Hg]\"" +
+                                                "}" +
+                                            "}," +
+                                            "{" +
+                                                "\"code\" : {" +
+                                                    "\"coding\" : ["+
+                                                        "{" +
+                                                            "\"system\" : \"http://loinc.org\"," +
+                                                            "\"code\" : \"8462-4\"," +
+                                                            "\"display\" : \"Diastolic blood pressure\"" +
+                                                        "}"+
+                                                    "]" +
+                                                "}," +
+                                                "\"valueQuantity\" : {" +
+                                                    "\"value\" : "+diastole+"," +
+                                                    "\"unit\" : \"mmHg\"," +
+                                                    "\"system\" : \"http://unitsofmeasure.org\"," +
+                                                    "\"code\" : \"mm[Hg]\"" +
+                                                "}" +
+                                            "}"+
+                                        "]" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_tekanan_darah=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,19);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Tekanan Darah : "+e);
+                        }
+                    }
+
+                    //Nadi
+                    if(tbIGDPrimer.getValueAt(i,21).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"vital-signs\"," +
+                                                        "\"display\": \"Vital Signs\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"8867-4\"," +
+                                                    "\"display\": \"Heart rate\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Nadi\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueQuantity\": {"+
+                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
+                                            "\"unit\": \"/min\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"/min\""+
+                                        "}" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nadi=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,21);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Nadi : "+e);
+                        }
+                    }
+
+                    //Respirasi
+                    if(tbIGDPrimer.getValueAt(i,23).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"vital-signs\"," +
+                                                        "\"display\": \"Vital Signs\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"9279-1\"," +
+                                                    "\"display\": \"Respiratory rate\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Respirasi\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueQuantity\": {"+
+                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
+                                            "\"unit\": \"/min\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"/min\""+
+                                        "}" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_pernapasan=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,23);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Respirasi : "+e);
+                        }
+                    }
+
+                    //Suhu Tubuh
+                    if(tbIGDPrimer.getValueAt(i,25).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"vital-signs\"," +
+                                                        "\"display\": \"Vital Signs\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"8310-5\"," +
+                                                    "\"display\": \"Body temperature\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Suhu Tubuh\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueQuantity\": {"+
+                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
+                                            "\"unit\": \"degree Celsius\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"Cel\""+
+                                        "}" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_suhu=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,25);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Suhu Tubuh : "+e);
+                        }
+                    }
+
+                    //Saturasi Oksigen
+                    if(tbIGDPrimer.getValueAt(i,27).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"vital-signs\"," +
+                                                        "\"display\": \"Vital Signs\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"59408-5\"," +
+                                                    "\"display\": \"Oxygen saturation in Arterial blood by Pulse oximetry\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Saturasi Oksigen\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueQuantity\": {"+
+                                            "\"value\": " + tbIGDPrimer.getValueAt(i, 26).toString().replaceAll(",", ".") + ","+
+                                            "\"unit\": \"%\","+
+                                            "\"system\": \"http://unitsofmeasure.org\","+
+                                            "\"code\": \"%\""+
+                                        "}" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_saturasi_o2=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,27);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Saturasi O²(%) : "+e);
+                        }
+                    }
+
+                    //Nyeri
+                    if(tbIGDPrimer.getValueAt(i,29).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"vital-signs\"," +
+                                                        "\"display\": \"Vital Signs\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"72514-3\"," +
+                                                    "\"display\": \"Pain severity 0-10 Score Reported\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Nyeri\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueInteger\": " + tbIGDPrimer.getValueAt(i, 28).toString().replaceAll("[^0-9]", "") +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igd","no_rawat=?","id_observation_nyeri=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,29);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Nyeri : "+e);
+                        }
+                    }
+
+                    //Keluhan Utama
+                    if(tbIGDPrimer.getValueAt(i,31).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"8661-1\"," +
+                                                    "\"display\": \"Chief complaint - Reported\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Keluhan Utama\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" + tbIGDPrimer.getValueAt(i,30).toString().replace("\"", "'").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ") + "\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_keluhan_utama=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,31);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Keluhan Utama : "+e);
+                        }
+                    }
+
+                    //Kebutuhan Khusus
+                    if((!tbIGDPrimer.getValueAt(i, 32).toString().equals("-"))&&tbIGDPrimer.getValueAt(i,33).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"74018-3\"," +
+                                                    "\"display\": \"Alert category\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Kebutuhan Khusus\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" + tbIGDPrimer.getValueAt(i, 32).toString() + "\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_kebutuhan_khusus=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,33);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Kebutuhan Khusus : "+e);
+                        }
+                    }
+
+                    //Catatan
+                    if((!tbIGDPrimer.getValueAt(i, 34).toString().equals("")) && tbIGDPrimer.getValueAt(i, 35).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Observation\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"category\": [" +
+                                            "{" +
+                                                "\"coding\": [" +
+                                                    "{" +
+                                                        "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                        "\"code\": \"exam\"," +
+                                                        "\"display\": \"exam\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"48767-8\"," +
+                                                    "\"display\": \"Annotation comment [Interpretation] Narrative\"" +
+                                                "}" +
+                                            "]," +
+                                            "\"text\": \"Catatan\"" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"performer\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"valueString\": \"" +tbIGDPrimer.getValueAt(i, 34).toString().replace("\"", "'")+ "\"" +
+                                   "}";
+                            System.out.println("URL : "+link+"/Observation");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_catatan=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,35);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Catatan : "+e);
+                        }
+                    }
+
+                    //Keputusan
+                    if(tbIGDPrimer.getValueAt(i, 37).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"CarePlan\"," +
+                                        "\"status\": \"active\"," +
+                                        "\"intent\": \"plan\"," +
+                                        "\"title\": \"Rencana Penempatan Pasien IGD\"," +
+                                        "\"description\": \"Zona Merah " + tbIGDPrimer.getValueAt(i, 36).toString()+"\"," +
+                                        "\"category\": ["+
+                                            "{"+
+                                                "\"coding\": ["+
+                                                    "{"+
+                                                        "\"system\": \"http://snomed.info/sct\","+
+                                                        "\"code\": \"771082000\","+
+                                                        "\"display\": \"Acute medicine care plan\""+
+                                                    "}"+
+                                                "]"+
+                                            "}"+
+                                        "]," +
+                                        "\"subject\": {"+
+                                            "\"reference\": \"Patient/" + idpasien + "\""+
+                                        "}," +
+                                        "\"encounter\": {"+
+                                            "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                        "}," +
+                                        "\"author\": {"+
+                                            "\"reference\": \"Practitioner/" + iddokter + "\""+
+                                        "}," +
+                                        "\"period\": {"+
+                                            "\"start\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\""+
+                                        "}" +
+                                   "}";
+                            System.out.println("URL : "+link+"/CarePlan");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/CarePlan", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_careplan_keputusan=?",2,new String[]{
+                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                    })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(), i,37);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Keputusan : "+e);
+                        }
+                    }
+
+                    //Triase Skala 1
+                    jumlahigdprimer=0;
+                    StringBuilder iyembuilder = new StringBuilder();
+                    ps=koneksi.prepareStatement(
+                        "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan "+
+                        "inner join master_triase_skala1 on master_triase_pemeriksaan.kode_pemeriksaan=master_triase_skala1.kode_pemeriksaan "+
+                        "inner join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1=data_triase_igddetail_skala1.kode_skala1 "+
+                        "where data_triase_igddetail_skala1.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
+                    );
+                    try {
+                        ps.setString(1,tbIGDPrimer.getValueAt(i,1).toString());
+                        rs=ps.executeQuery();
+                        if(rs.next()){
+                            if(tbIGDPrimer.getValueAt(i, 38).toString().equals("")){
+                                try{
+                                    headers = new HttpHeaders();
+                                    headers.setContentType(MediaType.APPLICATION_JSON);
+                                    headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                    json = "{" +
+                                                "\"resourceType\": \"Observation\"," +
+                                                "\"status\": \"final\"," +
+                                                "\"category\": [" +
+                                                    "{" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                                "\"code\": \"exam\"," +
+                                                                "\"display\": \"exam\"" +
+                                                            "}" +
+                                                        "]" +
+                                                    "}" +
+                                                "]," +
+                                                "\"code\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://loinc.org\"," +
+                                                            "\"code\": \"75910-0\"," +
+                                                            "\"display\": \"Canadian triage and acuity scale [CTAS]\"" +
+                                                        "}" +
+                                                    "]," +
+                                                    "\"text\": \"Skala Triase\"" +
+                                                "}," +
+                                                "\"subject\": {" +
+                                                    "\"reference\": \"Patient/"+idpasien+"\"" +
+                                                "}," +
+                                                "\"performer\": [" +
+                                                    "{" +
+                                                        "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                                    "}" +
+                                                "]," +
+                                                "\"encounter\": {" +
+                                                    "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                                "}," +
+                                                "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                "\"valueCodeableConcept\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://loinc.org\"," +
+                                                            "\"code\": \"LA6112-2\"," +
+                                                            "\"display\": \"1. Resusitasi\"" +
+                                                        "}" +
+                                                    "]," +
+                                                    "\"text\": \"1. Resusitasi\"" +
+                                                "}" +
+                                           "}";
+                                    System.out.println("URL : "+link+"/Observation");
+                                    System.out.println("Request JSON : "+json);
+                                    requestEntity = new HttpEntity(json,headers);
+                                    json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                                    System.out.println("Result JSON : "+json);
+                                    root = mapper.readTree(json);
+                                    response = root.path("id");
+                                    if(!response.asText().equals("")){
+                                        if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_skala=?",2,new String[]{
+                                                response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                            })==true){
+                                            tbIGDPrimer.setValueAt(response.asText(), i,38);
+                                            tbIGDPrimer.setValueAt(false,i,0);
+                                        }
+                                    }
+                                }catch(Exception e){
+                                    System.out.println("Notifikasi Triase Skala 1 : "+e);
+                                }
+                            }
+
+                            rs.beforeFirst();
+                            while(rs.next()){
+                                ps2=koneksi.prepareStatement(
+                                    "select data_triase_igddetail_skala1.kode_skala1,master_triase_skala1.pengkajian_skala1,data_triase_igddetail_skala1.id_observation_skala1 from master_triase_skala1 "+
+                                    "inner join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1=data_triase_igddetail_skala1.kode_skala1 where master_triase_skala1.kode_pemeriksaan=? and "+
+                                    "data_triase_igddetail_skala1.no_rawat=?"
+                                );
+                                try {
+                                    ps2.setString(1,rs.getString("kode_pemeriksaan"));
+                                    ps2.setString(2,tbIGDPrimer.getValueAt(i,1).toString());
+                                    rs2=ps2.executeQuery();
+                                    while(rs2.next()){
+                                        if(rs2.getString("id_observation_skala1").equals("")){
+                                            try{
+                                                headers = new HttpHeaders();
+                                                headers.setContentType(MediaType.APPLICATION_JSON);
+                                                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                                json = "{" +
+                                                            "\"resourceType\": \"Observation\"," +
+                                                            "\"status\": \"final\"," +
+                                                            "\"category\": ["+
+                                                                "{"+
+                                                                    "\"coding\": ["+
+                                                                        "{"+
+                                                                            "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\","+
+                                                                            "\"code\": \"exam\","+
+                                                                            "\"display\": \"exam\""+
+                                                                        "}"+
+                                                                    "]"+
+                                                                "}"+
+                                                            "]," +
+                                                            "\"code\": {"+
+                                                                "\"coding\": ["+
+                                                                    "{"+
+                                                                        "\"system\": \"http://loinc.org\","+
+                                                                        "\"code\": \"75321-0\","+
+                                                                        "\"display\": \"Clinical finding\""+
+                                                                    "}"+
+                                                                "],"+
+                                                                "\"text\": \"" + rs.getString("nama_pemeriksaan") + "\""+
+                                                            "}," +
+                                                            "\"subject\": {"+
+                                                                "\"reference\": \"Patient/" + idpasien + "\""+
+                                                            "}," +
+                                                            "\"performer\": ["+
+                                                                "{"+
+                                                                    "\"reference\": \"Practitioner/" + iddokter + "\""+
+                                                                "}"+
+                                                            "]," +
+                                                            "\"encounter\": {"+
+                                                                "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                                            "}," +
+                                                            "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                            "\"valueString\": \"" + rs2.getString("pengkajian_skala1").replace("\"", "'") + "\"" +
+                                                       "}";
+                                                System.out.println("URL : "+link+"/Observation");
+                                                System.out.println("Request JSON : "+json);
+                                                requestEntity = new HttpEntity(json,headers);
+                                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                                                System.out.println("Result JSON : "+json);
+                                                root = mapper.readTree(json);
+                                                response = root.path("id");
+                                                if(!response.asText().equals("")){
+                                                    Sequel.mengedit("data_triase_igddetail_skala1","no_rawat=? AND kode_skala1=?","id_observation_skala1=?",3,new String[]{
+                                                        response.asText(),tbIGDPrimer.getValueAt(i,1).toString(),rs2.getString("kode_skala1")
+                                                    });
+                                                    iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
+                                                }
+                                            }catch(Exception e){
+                                                System.out.println("Notifikasi Triase Skala 1 : "+e);
+                                            }
+                                        }else{
+                                            iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala1")).append("\"},");
+                                        }
+
+                                        jumlahigdprimer++;
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Notif : "+e);
+                                } finally{
+                                    if(rs2!=null){
+                                        rs2.close();
+                                    }
+                                    if(ps2!=null){
+                                        ps2.close();
+                                    }
+                                }
+                            }
+                        }
+                    }catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rs!=null){
+                            rs.close();
+                        }
+                        if(ps!=null){
+                            ps.close();
+                        }
+                    }
+
+                    //Triase Skala 2
+                    if(jumlahigdprimer==0){
+                        ps=koneksi.prepareStatement(
+                            "select master_triase_pemeriksaan.kode_pemeriksaan,master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan "+
+                            "inner join master_triase_skala2 on master_triase_pemeriksaan.kode_pemeriksaan=master_triase_skala2.kode_pemeriksaan "+
+                            "inner join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2=data_triase_igddetail_skala2.kode_skala2 "+
+                            "where data_triase_igddetail_skala2.no_rawat=? group by master_triase_pemeriksaan.kode_pemeriksaan"
+                        );
+                        try {
+                            ps.setString(1,tbIGDPrimer.getValueAt(i,1).toString());
+                            rs=ps.executeQuery();
+                            if(rs.next()){
+                                if(tbIGDPrimer.getValueAt(i, 38).toString().equals("")){
+                                    try{
+                                        headers = new HttpHeaders();
+                                        headers.setContentType(MediaType.APPLICATION_JSON);
+                                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                        json = "{" +
+                                                    "\"resourceType\": \"Observation\"," +
+                                                    "\"status\": \"final\"," +
+                                                    "\"category\": [" +
+                                                        "{" +
+                                                            "\"coding\": [" +
+                                                                "{" +
+                                                                    "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"," +
+                                                                    "\"code\": \"exam\"," +
+                                                                    "\"display\": \"exam\"" +
+                                                                "}" +
+                                                            "]" +
+                                                        "}" +
+                                                    "]," +
+                                                    "\"code\": {" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \"http://loinc.org\"," +
+                                                                "\"code\": \"75910-0\"," +
+                                                                "\"display\": \"Canadian triage and acuity scale [CTAS]\"" +
+                                                            "}" +
+                                                        "]," +
+                                                        "\"text\": \"Skala Triase\"" +
+                                                    "}," +
+                                                    "\"subject\": {" +
+                                                        "\"reference\": \"Patient/"+idpasien+"\"" +
+                                                    "}," +
+                                                    "\"performer\": [" +
+                                                        "{" +
+                                                            "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                                        "}" +
+                                                    "]," +
+                                                    "\"encounter\": {" +
+                                                        "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                                    "}," +
+                                                    "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                    "\"valueCodeableConcept\": {" +
+                                                        "\"coding\": [" +
+                                                            "{" +
+                                                                "\"system\": \"http://loinc.org\"," +
+                                                                "\"code\": \"LA6113-0\"," +
+                                                                "\"display\": \"2. Emergensi\"" +
+                                                            "}" +
+                                                        "]," +
+                                                        "\"text\": \"2. Emergensi\"" +
+                                                    "}" +
+                                               "}";
+                                        System.out.println("URL : "+link+"/Observation");
+                                        System.out.println("Request JSON : "+json);
+                                        requestEntity = new HttpEntity(json,headers);
+                                        json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                                        System.out.println("Result JSON : "+json);
+                                        root = mapper.readTree(json);
+                                        response = root.path("id");
+                                        if(!response.asText().equals("")){
+                                            if(Sequel.mengedittf("data_triase_igdprimer","no_rawat=?","id_observation_skala=?",3,new String[]{
+                                                    response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                                })==true){
+                                                tbIGDPrimer.setValueAt(response.asText(), i,38);
+                                                tbIGDPrimer.setValueAt(false,i,0);
+                                            }
+                                        }
+                                    }catch(Exception e){
+                                        System.out.println("Notifikasi Triase Skala 2 : "+e);
+                                    }
+                                }
+
+                                rs.beforeFirst();
+                                while(rs.next()){
+                                    ps2=koneksi.prepareStatement(
+                                        "select data_triase_igddetail_skala2.kode_skala2,master_triase_skala2.pengkajian_skala2,data_triase_igddetail_skala2.id_observation_skala2 from master_triase_skala2 "+
+                                        "inner join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2=data_triase_igddetail_skala2.kode_skala2 where master_triase_skala2.kode_pemeriksaan=? and "+
+                                        "data_triase_igddetail_skala2.no_rawat=?"
+                                    );
+                                    try {
+                                        ps2.setString(1,rs.getString("kode_pemeriksaan"));
+                                        ps2.setString(2,tbIGDPrimer.getValueAt(i,1).toString());
+                                        rs2=ps2.executeQuery();
+                                        while(rs2.next()){
+                                            if(rs2.getString("id_observation_skala2").equals("")){
+                                                try{
+                                                    headers = new HttpHeaders();
+                                                    headers.setContentType(MediaType.APPLICATION_JSON);
+                                                    headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                                                    json = "{" +
+                                                                "\"resourceType\": \"Observation\"," +
+                                                                "\"status\": \"final\"," +
+                                                                "\"category\": ["+
+                                                                    "{"+
+                                                                        "\"coding\": ["+
+                                                                            "{"+
+                                                                                "\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\","+
+                                                                                "\"code\": \"exam\","+
+                                                                                "\"display\": \"exam\""+
+                                                                            "}"+
+                                                                        "]"+
+                                                                    "}"+
+                                                                "]," +
+                                                                "\"code\": {"+
+                                                                    "\"coding\": ["+
+                                                                        "{"+
+                                                                            "\"system\": \"http://loinc.org\","+
+                                                                            "\"code\": \"75321-0\","+
+                                                                            "\"display\": \"Clinical finding\""+
+                                                                        "}"+
+                                                                    "],"+
+                                                                    "\"text\": \"" + rs.getString("nama_pemeriksaan") + "\""+
+                                                                "}," +
+                                                                "\"subject\": {"+
+                                                                    "\"reference\": \"Patient/" + idpasien + "\""+
+                                                                "}," +
+                                                                "\"performer\": ["+
+                                                                    "{"+
+                                                                        "\"reference\": \"Practitioner/" + iddokter + "\""+
+                                                                    "}"+
+                                                                "]," +
+                                                                "\"encounter\": {"+
+                                                                    "\"reference\": \"Encounter/" + tbIGDPrimer.getValueAt(i, 5).toString() + "\""+
+                                                                "}," +
+                                                                "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                                                "\"valueString\": \"" + rs2.getString("pengkajian_skala2").replace("\"", "'") + "\"" +
+                                                           "}";
+                                                    System.out.println("URL : "+link+"/Observation");
+                                                    System.out.println("Request JSON : "+json);
+                                                    requestEntity = new HttpEntity(json,headers);
+                                                    json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                                                    System.out.println("Result JSON : "+json);
+                                                    root = mapper.readTree(json);
+                                                    response = root.path("id");
+                                                    if(!response.asText().equals("")){
+                                                        Sequel.mengedit("data_triase_igddetail_skala2","no_rawat=? AND kode_skala2=?","id_observation_skala2=?",2,new String[]{
+                                                            response.asText(),tbIGDPrimer.getValueAt(i,1).toString(),rs2.getString("kode_skala2")
+                                                        });
+                                                        iyembuilder.append("{\"reference\": \"Observation/").append(response.asText()).append("\"},");
+                                                    }
+                                                }catch(Exception e){
+                                                    System.out.println("Notifikasi Triase Skala 2 : "+e);
+                                                }
+                                            }else{
+                                                iyembuilder.append("{\"reference\": \"Observation/").append(rs2.getString("id_observation_skala2")).append("\"},");
+                                            }
+
+                                            jumlahigdprimer++;
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Notif : "+e);
+                                    } finally{
+                                        if(rs2!=null){
+                                            rs2.close();
+                                        }
+                                        if(ps2!=null){
+                                            ps2.close();
+                                        }
+                                    }
+                                }
+                            }
+                        }catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } finally{
+                            if(rs!=null){
+                                rs.close();
+                            }
+                            if(ps!=null){
+                                ps.close();
+                            }
+                        }
+                    }
+
+                    //Composition IGD
+                    if((!tbIGDPrimer.getValueAt(i,10).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,12).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,15).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,17).toString().equals(""))&&
+                            (!tbIGDPrimer.getValueAt(i,19).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,21).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,23).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,25).toString().equals(""))&&
+                            (!tbIGDPrimer.getValueAt(i,27).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,29).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,31).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,33).toString().equals(""))&&
+                            (!tbIGDPrimer.getValueAt(i,35).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,37).toString().equals(""))&&(!tbIGDPrimer.getValueAt(i,38).toString().equals(""))&&tbIGDPrimer.getValueAt(i,39).toString().equals("")){
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Composition\"," +
+                                        "\"status\": \"final\"," +
+                                        "\"type\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \"http://loinc.org\"," +
+                                                    "\"code\": \"75500-9\"," +
+                                                    "\"display\": \"Triage note\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"subject\": {" +
+                                            "\"reference\": \"Patient/"+idpasien+"\"" +
+                                        "}," +
+                                        "\"encounter\": {" +
+                                            "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
+                                        "}," +
+                                        "\"author\": [" +
+                                            "{" +
+                                                "\"reference\": \"Practitioner/"+iddokter+"\"" +
+                                            "}" +
+                                        "]," +
+                                        "\"date\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                        "\"title\": \"Data Triase IGD\"," +
+                                        "\"section\": [" +
+                                            "{" +
+                                                "\"title\": \"Identitas & Kedatangan\"," +
+                                                "\"code\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://loinc.org\"," +
+                                                            "\"code\": \"11459-5\"," +
+                                                            "\"display\": \"Mode of arrival\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"entry\": [" +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,10).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,12).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,15).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,17).toString()+"\"}" +
+                                                "]" +
+                                            "}," +
+                                            "{" +
+                                                "\"title\": \"Keluhan Utama\"," +
+                                                "\"code\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://loinc.org\"," +
+                                                            "\"code\": \"10154-3\"," +
+                                                            "\"display\": \"Chief complaint\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"entry\": [" +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,31).toString()+"\"}" +
+                                                "]" +
+                                            "}," +
+                                            "{" +
+                                                "\"title\": \"Tanda Vital\"," +
+                                                "\"code\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://loinc.org\"," +
+                                                            "\"code\": \"8716-3\"," +
+                                                            "\"display\": \"Vital signs\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"entry\": [" +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,19).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,21).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,23).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,25).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,27).toString()+"\"}" +
+                                                "]" +
+                                            "}," +
+                                            "{" +
+                                                "\"title\": \"Kebutuhan Khusus\"," +
+                                                "\"entry\": [" +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,33).toString()+"\"}" +
+                                                "]" +
+                                            "}," +
+                                            "{" +
+                                                "\"title\": \"Pengkajian & Skala/Kategori Triase\"," +
+                                                "\"code\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://loinc.org\"," +
+                                                            "\"code\": \"11283-9\"," +
+                                                            "\"display\": \"Acuity assessment\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}," +
+                                                "\"entry\": [" +
+                                                    iyembuilder.toString()+
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,29).toString()+"\"}," +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,38).toString()+"\"}" +
+                                                "]" +
+                                            "}," +
+                                            "{" +
+                                                "\"title\": \"Catatan\"," +
+                                                "\"entry\": [" +
+                                                    "{\"reference\": \"Observation/"+tbIGDPrimer.getValueAt(i,35).toString()+"\"}" +
+                                                "]" +
+                                            "}," +
+                                            "{" +
+                                                "\"title\": \"Plan/Keputusan\"," +
+                                                "\"entry\": [" +
+                                                    "{\"reference\": \"CarePlan/"+tbIGDPrimer.getValueAt(i,37).toString()+"\"}," +
+                                                    "{\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"}" +
+                                                "]" +
+                                            "}" +
+                                        "]" +
+                                    "}";
+                            System.out.println("URL : "+link+"/Composition");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.getRest().exchange(link+"/Composition",HttpMethod.POST,requestEntity,String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.mengedittf("ata_triase_igd","no_rawat=?","id_composition=?",2,new String[]{
+                                    response.asText(),tbIGDPrimer.getValueAt(i,1).toString()
+                                })==true){
+                                    tbIGDPrimer.setValueAt(response.asText(),i,39);
+                                    tbIGDPrimer.setValueAt(false,i,0);
+                                }
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Composition Triase IGD : "+e);
+                        }
+                    }
+                    iyembuilder=null;
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+            }
         }
     }
 

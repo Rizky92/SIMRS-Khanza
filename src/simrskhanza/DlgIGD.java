@@ -10626,7 +10626,12 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                    JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Data billing sudah terverifikasi, apakah yakin mau digabung..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        norawatdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString();
+                        normdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString();
+                        JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Rawat yang mau digabung...!");
+                    }
                 }else{
                     norawatdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString();
                     normdipilih=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString();

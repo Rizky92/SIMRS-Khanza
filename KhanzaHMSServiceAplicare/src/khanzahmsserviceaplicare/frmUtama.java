@@ -199,6 +199,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                   "}";
                                     TeksArea.append("JSON dikirim : "+requestJson+"\n");
                                     requestEntity = new HttpEntity(requestJson,headers);
+                                    System.out.println("URL : "+koneksiDB.URLAPIAPLICARE()+"/rest/bed/update/"+kodeppk);
                                     //System.out.println(rest.exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     root = mapper.readTree(api.getRest().exchange(koneksiDB.URLAPIAPLICARE()+"/rest/bed/update/"+kodeppk, HttpMethod.POST, requestEntity, String.class).getBody());
                                     nameNode = root.path("metadata");

@@ -1669,7 +1669,6 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
                 public void windowDeactivated(WindowEvent e) {}
             });
             carikeluhan.setNoRawat(TNoRw.getText());
-            carikeluhan.tampil();
             carikeluhan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             carikeluhan.setLocationRelativeTo(internalFrame1);
             carikeluhan.setVisible(true);
@@ -2005,7 +2004,6 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
                 public void windowDeactivated(WindowEvent e) {}
             });
             caripemeriksaan.setNoRawat(TNoRw.getText());
-            caripemeriksaan.tampil();
             caripemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             caripemeriksaan.setLocationRelativeTo(internalFrame1);
             caripemeriksaan.setVisible(true);

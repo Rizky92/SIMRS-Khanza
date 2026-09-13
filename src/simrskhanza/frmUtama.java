@@ -1128,6 +1128,7 @@ import setting.DlgSetOtoLokasi;
 import setting.DlgSetOtoRalan;
 import setting.DlgSetPenjabLab;
 import setting.DlgSetRM;
+import setting.DlgSetResepPerCaraBayar;
 import setting.DlgSetTampilJenisObatResep;
 import setting.DlgSetTarif;
 import setting.DlgUser;
@@ -8904,7 +8905,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgAdmin admin=new DlgAdmin(this,false);
-        admin.tampil();
         admin.emptTeks();
         admin.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         admin.setLocationRelativeTo(PanelUtama);
@@ -24058,6 +24058,17 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    private void btnSetResepPerCaraBayarActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetResepPerCaraBayar aplikasi=new DlgSetResepPerCaraBayar(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -24783,7 +24794,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnSuratPermintaanBinrohtal,btnSuratPermintaanPerlindunganDariKekerasan,btnSuratPermohonanPrivasi,btnSuratPermintaanSecondOpinion,btnSuratKeteranganBerobat,btnSuratPenolakanResusitasi,btnCatatanObservasiRuangOperasi,
             btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi,btnIntervensiNyeriNonFarmakologi,btnSuratPengajuanCutiPerawatan,btnChecklistKriteriaMasukIsolasi,btnMapingTarifTindakanRalanKPTLSatuSehat,
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
-            btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain;
+            btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain,btnSetResepPerCaraBayar;
 
     public void isWall(){
         try{
@@ -30986,6 +30997,11 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnRuangOperasi);
                 jmlmenu++;
             }
+
+            if(akses.getset_resep_per_cara_bayar()==true){
+                Panelmenu.add(btnSetResepPerCaraBayar);
+                jmlmenu++;
+            }
         }
     }
 
@@ -37016,8 +37032,8 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
-        if (akses.gettemplate_persetujuan_penolakan_tindakan()) {
-            Panelmenu.add(btnTemplatePersetujuanPenolakanTindakan);
+        if(akses.getset_resep_per_cara_bayar()==true){
+            Panelmenu.add(btnSetResepPerCaraBayar);
             jmlmenu++;
         }
     }
@@ -45481,9 +45497,9 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if (akses.gettemplate_persetujuan_penolakan_tindakan()) {
-            if (btnTemplatePersetujuanPenolakanTindakan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnTemplatePersetujuanPenolakanTindakan);
+        if(akses.getset_resep_per_cara_bayar()==true){
+            if(btnSetResepPerCaraBayar.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSetResepPerCaraBayar);
                 jmlmenu++;
             }
         }
@@ -51508,6 +51524,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanBebanHutangLain.setName("btnRingkasanBebanHutangLain");
         btnRingkasanBebanHutangLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanBebanHutangLain.addActionListener(this::btnRingkasanBebanHutangLainActionPerformed);
+
+        btnSetResepPerCaraBayar = new widget.ButtonBig();
+        btnSetResepPerCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/medicament_18179836.png")));
+        btnSetResepPerCaraBayar.setText("Set Resep Per Cara Bayar");
+        btnSetResepPerCaraBayar.setIconTextGap(0);
+        btnSetResepPerCaraBayar.setName("btnSetResepPerCaraBayar");
+        btnSetResepPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetResepPerCaraBayar.addActionListener(this::btnSetResepPerCaraBayarActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
