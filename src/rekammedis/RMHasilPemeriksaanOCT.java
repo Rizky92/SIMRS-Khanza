@@ -1205,7 +1205,7 @@ public final class RMHasilPemeriksaanOCT extends javax.swing.JDialog {
                 OrthancDICOM orthan=new OrthancDICOM(null,false);
                 orthan.setJudul("::[ DICOM Orthanc Pasien "+tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()+" "+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+" ]::",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString().replaceAll("/",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString(),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                 try {
-                    orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                    orthan.loadViewerSmc(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString(),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
                 } catch (Exception ex) {
                     System.out.println("Notifikasi : "+ex);
                 }
