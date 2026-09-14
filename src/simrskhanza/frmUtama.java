@@ -27072,7 +27072,7 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
-            if(akses.gettarif_lab()==true){
+            if(akses.gettarif_lab()==true || akses.gettemplate_laboratorium_smc()){
                 Panelmenu.add(btnTarifLab);
                 jmlmenu++;
             }
@@ -33131,7 +33131,7 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
-        if(akses.gettarif_lab()==true){
+        if(akses.gettarif_lab()==true || akses.gettemplate_laboratorium_smc()){
             Panelmenu.add(btnTarifLab);
             jmlmenu++;
         }
@@ -40030,7 +40030,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if(akses.gettarif_lab()==true){
+        if(akses.gettarif_lab()==true || akses.gettemplate_laboratorium_smc()){
             if(btnTarifLab.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTarifLab);
                 jmlmenu++;

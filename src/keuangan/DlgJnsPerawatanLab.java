@@ -1429,7 +1429,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.gettarif_lab());
         BtnEdit.setEnabled(akses.gettarif_lab());
         BtnPrint.setEnabled(akses.gettarif_lab());
-        ppCopyTemplate.setEnabled(akses.gettarif_lab());
+        ppCopyTemplate.setEnabled(akses.gettarif_lab() || akses.gettemplate_laboratorium_smc());
 
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);
