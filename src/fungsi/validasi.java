@@ -1895,7 +1895,7 @@ public final class validasi {
         }
     }
 
-    public void pindah(java.awt.event.KeyEvent evt,JComboBox kiri,JDateTimePicker kanan){
+    public void pindah(java.awt.event.KeyEvent evt,JComboBox kiri,Tanggal kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1903,7 +1903,7 @@ public final class validasi {
         }
     }
 
-    public void pindah(java.awt.event.KeyEvent evt,JCheckBox kiri,JDateTimePicker kanan){
+    public void pindah(java.awt.event.KeyEvent evt,JCheckBox kiri,Tanggal kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1919,7 +1919,7 @@ public final class validasi {
         }
     }
 
-    public void pindah(java.awt.event.KeyEvent evt,JDateTimePicker kiri,JTextField kanan){
+    public void pindah(java.awt.event.KeyEvent evt,Tanggal kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -2015,7 +2015,7 @@ public final class validasi {
         }
     }
 
-    public void SetTgl(DefaultTableModel tabMode,JTable table,JDateTimePicker dtp,int i){
+    public void SetTgl(DefaultTableModel tabMode,JTable table,Tanggal dtp,int i){
         j=table.getSelectedRow();
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tabMode.getValueAt(j,i).toString().replaceAll("'",""));
@@ -2093,7 +2093,7 @@ public final class validasi {
         return original;
     }
 
-    public void SetTgl(JDateTimePicker dtp,String tgl){
+    public void SetTgl(Tanggal dtp,String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tgl.replaceAll("'",""));
            dtp.setDate(dtpa);
@@ -2102,7 +2102,7 @@ public final class validasi {
         }
     }
 
-    public void SetTgl2(JDateTimePicker dtp,String tgl){
+    public void SetTgl2(Tanggal dtp,String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tgl.replaceAll("'",""));
            dtp.setDate(dtpa);
