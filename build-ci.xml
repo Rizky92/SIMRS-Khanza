@@ -14,7 +14,7 @@
     <property name="report.includes" value="**/*.jrxml"/>
     <property name="report.keepjava" value="false"/>
     <property name="report.compiler.lib" value="${path.file-reference}/ecj-4.6.1.jar"/>
-    <property name="report.compiler" value="net.sf.jasperreports.engine.design.JRJdtCompiler"/>
+    <property name="report.compiler" value=""/>
 
     <path id="classpath.ci">
         <pathelement path="${javac.classpath}"/>

@@ -1,4 +1,4 @@
-# Reusable build for the SIMRS Khanza desktop application.
+# Reusable build for the SIMRS Khanza desktop application and its subprojects.
 # Called by ant.yml and ant-report.yml; not dispatchable on its own.
 
 name: Reusable Ant Build
@@ -14,12 +14,31 @@ on:
         description: Name of the uploaded artifact.
         type: string
         default: Package
+      subprojects:
+        description: >-
+          Subprojects to build alongside the main application, into the same
+          distribution directory. Either "all", "important", "none", or a space
+          separated list of subproject directory names.
+        type: string
+        default: all
 
 env:
   # Identifies the library bundle. Uploading a new bundle yields a new ID, which
   # invalidates the cache on its own. Replacing a bundle in place keeps the ID
   # and would leave a stale cache, so upload rather than replace.
   LIB_BUNDLE_ID: 1xiXssd0B1wQN9yWcL8_dRsIEGuSiD9oe
+
+  # The subprojects CLAUDE.md flags as important, limited to the ones that are
+  # NetBeans projects. Keep in step with the checklist in ant.yml and
+  # ant-report.yml, whose inputs are named after these directories.
+  IMPORTANT_SUBPROJECTS: >-
+    KhanzaAntrianApotek
+    KhanzaAntrianLoket
+    KhanzaHMSServiceAplicare
+    KhanzaHMSServiceMobileJKNERM
+    KhanzaHMSServiceSatuSehat
+    KhanzaPengenkripsiTeks
+    anjunganpasienmandiri
 
 jobs:
   build:
@@ -56,6 +75,21 @@ jobs:
 
     - name: Build with Ant
       run: ant ${{ inputs.targets }} -noinput -buildfile build-ci.xml -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
+
+    - name: Build subprojects with Ant
+      if: inputs.subprojects != 'none'
+      env:
+        SUBPROJECTS: ${{ inputs.subprojects }}
+      run: |
+        case "$SUBPROJECTS" in
+          all) SUBPROJECTS=$(for f in */nbproject/project.properties; do dirname "$(dirname "$f")"; done | sort) ;;
+          important) SUBPROJECTS="$IMPORTANT_SUBPROJECTS" ;;
+        esac
+        for sub in $SUBPROJECTS; do
+          echo "::group::$sub"
+          ant ${{ inputs.targets }} -noinput -buildfile build-ci-sub.xml -Dsub.dir="$sub" -Dpath.file-reference=${{ github.workspace }}/lib -Djar.compress=true
+          echo "::endgroup::"
+        done
 
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
