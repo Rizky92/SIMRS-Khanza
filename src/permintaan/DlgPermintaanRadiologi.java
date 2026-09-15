@@ -1367,6 +1367,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             try {
                 Sequel.AutoComitFalse();
                 autoNomor();
+                /*
                 if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                         TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                         CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
@@ -1383,8 +1384,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     isReset();
                     emptTeks();
                 }else{
-                    // Valid.autoNomer7(TNoPermintaan.getText().substring(TNoPermintaan.getText().length()-4),"PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan);
-                    autoNomor();
+                    Valid.autoNomer7(TNoPermintaan.getText().substring(TNoPermintaan.getText().length()-4),"PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan);
                     if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                             TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                             CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
@@ -1402,11 +1402,36 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                         emptTeks();
                     }
                 }
+                */
+                int retry = 0;
+                boolean sukses = false;
+                do {
+                    sukses = Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
+                        TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
+                        CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+                        "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
+                        InformasiTambahan.getText(),DiagnosisKlinis.getText()
+                    });
+                    if(sukses){
+                        for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                                Sequel.menyimpantfSmc("permintaan_pemeriksaan_radiologi","noorder, kd_jenis_prw, stts_bayar",
+                                    TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum");
+                            }
+                        }
+                    } else {
+                        Valid.renomorSmc(TNoPermintaan, 3, "0");
+                    }
+                } while (retry++ < 5 && !sukses);
                 Sequel.AutoComitTrue();
-                if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
-                    JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
+                if (sukses) {
+                    if((!noorderTerbit.equals(""))&&(accession.simpanACSN(noorderTerbit)==false)){
+                        JOptionPane.showMessageDialog(null,"Accession Number gagal diterbitkan untuk No.Permintaan "+noorderTerbit+"..!!");
+                    }
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                } else {
+                    JOptionPane.showMessageDialog(null,"Proses simpan gagal..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                 }
-                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
             } catch (Exception e) {
                 System.out.println(e);
             }
