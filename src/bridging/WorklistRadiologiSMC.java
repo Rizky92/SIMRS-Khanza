@@ -38,21 +38,21 @@ public class WorklistRadiologiSMC {
         return notif;
     }
 
-    public ArrayList<String> daftarModality(String noorder) {
-        return Sequel.cariArraySmc(
-            "select distinct jns_perawatan_radiologi_modality_smc.modality from permintaan_pemeriksaan_radiologi inner join " +
-            "jns_perawatan_radiologi_modality_smc on jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
-            "where permintaan_pemeriksaan_radiologi.noorder = ? order by jns_perawatan_radiologi_modality_smc.modality", noorder
-        );
-    }
+    public static class Tujuan {
+        private final String modality, aetitle;
 
-    public ArrayList<String> daftarBelumDipetakan(String noorder) {
-        return Sequel.cariArraySmc(
-            "select permintaan_pemeriksaan_radiologi.kd_jenis_prw from permintaan_pemeriksaan_radiologi left join " +
-            "jns_perawatan_radiologi_modality_smc on jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
-            "where permintaan_pemeriksaan_radiologi.noorder = ? and jns_perawatan_radiologi_modality_smc.modality is null " +
-            "order by permintaan_pemeriksaan_radiologi.kd_jenis_prw", noorder
-        );
+        public Tujuan(String modality, String aetitle) {
+            this.modality = (null == modality) ? "" : modality;
+            this.aetitle = (null == aetitle) ? "" : aetitle;
+        }
+
+        public String getModality() {
+            return modality;
+        }
+
+        public String getAetitle() {
+            return aetitle;
+        }
     }
 
     public ArrayList<String> daftarKodeModality() {
@@ -69,13 +69,6 @@ public class WorklistRadiologiSMC {
         return daftar;
     }
 
-    public String namaPemeriksaan(String kodeTindakan) {
-        return Sequel.cariIsiSmc(
-            "select ifnull(jns_perawatan_radiologi.nm_perawatan, '') from jns_perawatan_radiologi where " +
-            "jns_perawatan_radiologi.kd_jenis_prw = ?", kodeTindakan
-        );
-    }
-
     public boolean simpanModality(String kodeTindakan, String modality) {
         return Sequel.executeRawSmc(
             "insert into jns_perawatan_radiologi_modality_smc (kd_jenis_prw, modality) values (?, ?) " +
@@ -83,15 +76,43 @@ public class WorklistRadiologiSMC {
         );
     }
 
+    public ArrayList<String[]> daftarPemeriksaan(String noorder, boolean semua) {
+        ArrayList<String[]> daftar = new ArrayList<>();
+
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select permintaan_pemeriksaan_radiologi.kd_jenis_prw, ifnull(jns_perawatan_radiologi.nm_perawatan, '') as nm_perawatan, " +
+            "ifnull(jns_perawatan_radiologi_modality_smc.modality, '') as modality, " +
+            "ifnull(satu_sehat_accession_radiologi_smc.aet_tujuan, '') as aet_tujuan from permintaan_pemeriksaan_radiologi " +
+            "inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "left join jns_perawatan_radiologi_modality_smc on jns_perawatan_radiologi_modality_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "left join satu_sehat_accession_radiologi_smc on satu_sehat_accession_radiologi_smc.noorder = permintaan_pemeriksaan_radiologi.noorder " +
+            "and satu_sehat_accession_radiologi_smc.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw " +
+            "where permintaan_pemeriksaan_radiologi.noorder = ?" + (semua ? "" : " and ifnull(satu_sehat_accession_radiologi_smc.worklist_id, '') = ''") +
+            " order by permintaan_pemeriksaan_radiologi.kd_jenis_prw"
+        )) {
+            ps.setString(1, noorder);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    daftar.add(new String[] {rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("modality"), rs.getString("aet_tujuan")});
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+
+        return daftar;
+    }
+
     public boolean kirimUlang(String noorder) {
         return kirim(noorder, new LinkedHashMap<>(), true);
     }
 
-    public boolean kirim(String noorder, Map<String, String> aetPerModality) {
-        return kirim(noorder, aetPerModality, false);
+    public boolean kirim(String noorder, Map<String, Tujuan> tujuanPerPemeriksaan) {
+        return kirim(noorder, tujuanPerPemeriksaan, false);
     }
 
-    public boolean kirim(String noorder, Map<String, String> aetPerModality, boolean ulangi) {
+    public boolean kirim(String noorder, Map<String, Tujuan> tujuanPerPemeriksaan, boolean ulangi) {
         notif = "";
 
         if ((null == noorder) || (noorder.isBlank())) {
@@ -127,7 +148,7 @@ public class WorklistRadiologiSMC {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     diproses++;
-                    if (!kirimPemeriksaan(rs, aetPerModality, ulangi)) {
+                    if (!kirimPemeriksaan(rs, tujuanPerPemeriksaan, ulangi)) {
                         sukses = false;
                     }
                 }
@@ -184,7 +205,7 @@ public class WorklistRadiologiSMC {
         return sukses;
     }
 
-    private boolean kirimPemeriksaan(ResultSet rs, Map<String, String> aetPerModality, boolean ulangi) throws Exception {
+    private boolean kirimPemeriksaan(ResultSet rs, Map<String, Tujuan> tujuanPerPemeriksaan, boolean ulangi) throws Exception {
         String noorder = rs.getString("noorder"), kodeTindakan = rs.getString("kd_jenis_prw"), noACSN = rs.getString("no_acsn"),
                worklistId = rs.getString("worklist_id"), studyIUID = rs.getString("study_iuid"), nmPerawatan = rs.getString("nm_perawatan");
 
@@ -199,22 +220,18 @@ public class WorklistRadiologiSMC {
             return true;
         }
 
-        String modality = rs.getString("modality");
+        Tujuan tujuan = (null == tujuanPerPemeriksaan) ? null : tujuanPerPemeriksaan.get(kodeTindakan);
+        String modality = ((null == tujuan) || (tujuan.getModality().isBlank())) ? rs.getString("modality") : tujuan.getModality(),
+               aetitle = ((null == tujuan) || (tujuan.getAetitle().isBlank())) ? rs.getString("aet_tujuan") : tujuan.getAetitle();
 
         if (modality.isBlank()) {
-            notif = "Jenis pemeriksaan " + kodeTindakan + " belum dipetakan ke modality DICOM";
+            notif = "Modality untuk pemeriksaan " + kodeTindakan + " - " + nmPerawatan + " belum dipilih";
             System.out.println("Notifikasi : " + notif);
             return false;
         }
 
-        String aetitle = (null == aetPerModality) ? "" : aetPerModality.getOrDefault(modality, "");
-
         if (aetitle.isBlank()) {
-            aetitle = rs.getString("aet_tujuan");
-        }
-
-        if (aetitle.isBlank()) {
-            notif = "Stasiun tujuan untuk modality " + modality + " belum dipilih";
+            notif = "Stasiun tujuan untuk pemeriksaan " + kodeTindakan + " - " + nmPerawatan + " belum dipilih";
             System.out.println("Notifikasi : " + notif);
             return false;
         }
@@ -257,7 +274,7 @@ public class WorklistRadiologiSMC {
         tags.put("ReferringPhysicianName", namaDICOM(rs.getString("nm_dokter"), 64));
         tags.put("RequestedProcedureID", noACSN);
         tags.put("RequestedProcedureDescription", teksDICOM(nmPerawatan, 64));
-        tags.put("ReasonForRequestedProcedure", teksDICOM(rs.getString("diagnosa_klinis"), 64));
+        tags.put("ReasonForTheRequestedProcedure", teksDICOM(rs.getString("diagnosa_klinis"), 64));
         tags.set("ScheduledProcedureStepSequence", urutan);
 
         ObjectNode permintaan = mapper.createObjectNode();

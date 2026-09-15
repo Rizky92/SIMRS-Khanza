@@ -34,7 +34,9 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -2347,7 +2349,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }
 
         final String noorder = NoPermintaan.trim();
-        final Map<String, String> tujuan = pilihStasiunSmc(noorder);
+        final Map<String, WorklistRadiologiSMC.Tujuan> tujuan = pilihTujuanSmc(noorder, true);
 
         if (null == tujuan) {
             return;
@@ -3158,42 +3160,13 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         return daftar;
     }
 
-    private boolean petakanModalitySmc(String noorder) {
-        ArrayList<String> belumDipetakan = worklist.daftarBelumDipetakan(noorder);
+    private Map<String, WorklistRadiologiSMC.Tujuan> pilihTujuanSmc(String noorder, boolean semua) {
+        ArrayList<String[]> pemeriksaan = worklist.daftarPemeriksaan(noorder, semua);
 
-        if (belumDipetakan.isEmpty()) {
-            return true;
-        }
-
-        Object[] kodeModality = worklist.daftarKodeModality().toArray();
-
-        for (String kodeTindakan : belumDipetakan) {
-            Object terpilih = JOptionPane.showInputDialog(null,
-                "Modality DICOM untuk pemeriksaan :\n" + kodeTindakan + " - " + worklist.namaPemeriksaan(kodeTindakan),
-                "Pemetaan Modality", JOptionPane.QUESTION_MESSAGE, null, kodeModality, null);
-
-            if (null == terpilih) {
-                return false;
+        if (pemeriksaan.isEmpty()) {
+            if (semua) {
+                JOptionPane.showMessageDialog(null, "Maaf, tidak ada pemeriksaan pada No.Order " + noorder + "..!!");
             }
-
-            if (!worklist.simpanModality(kodeTindakan, terpilih.toString())) {
-                JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan pemetaan modality untuk " + kodeTindakan + "..!!");
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private Map<String, String> pilihStasiunSmc(String noorder) {
-        if (!petakanModalitySmc(noorder)) {
-            return null;
-        }
-
-        ArrayList<String> modalitas = worklist.daftarModality(noorder);
-
-        if (modalitas.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Maaf, tidak ada pemeriksaan pada No.Order " + noorder + "..!!");
             return null;
         }
 
@@ -3204,30 +3177,100 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             return null;
         }
 
-        Object[] pilihan = stasiun.keySet().toArray();
-        Map<String, String> tujuan = new LinkedHashMap<>();
+        Object[] kodeModality = worklist.daftarKodeModality().toArray(), pilihanStasiun = stasiun.keySet().toArray();
+        widget.ComboBox[] cmbModality = new widget.ComboBox[pemeriksaan.size()], cmbStasiun = new widget.ComboBox[pemeriksaan.size()];
+        JPanel panel = new JPanel(null);
+        panel.setPreferredSize(new Dimension(616, 40 + (pemeriksaan.size() * 30)));
 
-        for (String modality : modalitas) {
-            Object bawaan = pilihan[0];
+        String[] judul = {"Pemeriksaan", "Modality", "Stasiun Tujuan"};
+        int[] posisiX = {0, 303, 396}, lebar = {300, 90, 220};
 
-            for (Object label : pilihan) {
-                if (label.toString().toUpperCase().contains(modality)) {
-                    bawaan = label;
+        for (int i = 0; i < judul.length; i++) {
+            widget.Label label = new widget.Label();
+            label.setText(judul[i]);
+            label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+            label.setBounds(posisiX[i], 10, lebar[i], 23);
+            panel.add(label);
+        }
+
+        for (int i = 0; i < pemeriksaan.size(); i++) {
+            String[] baris = pemeriksaan.get(i);
+            int y = 40 + (i * 30);
+
+            widget.Label label = new widget.Label();
+            label.setText(baris[0] + " - " + baris[1]);
+            label.setToolTipText(label.getText());
+            label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+            label.setBounds(posisiX[0], y, lebar[0], 23);
+            panel.add(label);
+
+            widget.ComboBox modality = new widget.ComboBox();
+            modality.setModel(new DefaultComboBoxModel(kodeModality));
+            modality.setSelectedIndex(-1);
+            modality.setBounds(posisiX[1], y, lebar[1], 23);
+            panel.add(modality);
+
+            if (!baris[2].isBlank()) {
+                modality.setSelectedItem(baris[2]);
+            }
+
+            widget.ComboBox stasiunTujuan = new widget.ComboBox();
+            stasiunTujuan.setModel(new DefaultComboBoxModel(pilihanStasiun));
+            stasiunTujuan.setSelectedIndex(-1);
+            stasiunTujuan.setBounds(posisiX[2], y, lebar[2], 23);
+            panel.add(stasiunTujuan);
+
+            for (Map.Entry<String, String> entri : stasiun.entrySet()) {
+                if (entri.getValue().equals(baris[3])) {
+                    stasiunTujuan.setSelectedItem(entri.getKey());
                     break;
                 }
             }
 
-            Object terpilih = JOptionPane.showInputDialog(null, "Stasiun tujuan untuk pemeriksaan " + modality + " :",
-                "Kirim Worklist ke Modality", JOptionPane.QUESTION_MESSAGE, null, pilihan, bawaan);
+            cmbModality[i] = modality;
+            cmbStasiun[i] = stasiunTujuan;
+        }
 
-            if (null == terpilih) {
+        while (true) {
+            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(null, panel, "Kirim Worklist No.Order " + noorder,
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE)) {
                 return null;
             }
 
-            tujuan.put(modality, stasiun.get(terpilih.toString()));
-        }
+            Map<String, WorklistRadiologiSMC.Tujuan> tujuan = new LinkedHashMap<>();
+            String belumDipilih = "";
 
-        return tujuan;
+            for (int i = 0; i < pemeriksaan.size(); i++) {
+                if (null == cmbModality[i].getSelectedItem()) {
+                    belumDipilih = "modality untuk pemeriksaan " + pemeriksaan.get(i)[0] + " - " + pemeriksaan.get(i)[1];
+                    break;
+                }
+
+                if (null == cmbStasiun[i].getSelectedItem()) {
+                    belumDipilih = "stasiun tujuan untuk pemeriksaan " + pemeriksaan.get(i)[0] + " - " + pemeriksaan.get(i)[1];
+                    break;
+                }
+
+                tujuan.put(pemeriksaan.get(i)[0], new WorklistRadiologiSMC.Tujuan(cmbModality[i].getSelectedItem().toString(),
+                    stasiun.get(cmbStasiun[i].getSelectedItem().toString())));
+            }
+
+            if (!belumDipilih.isBlank()) {
+                JOptionPane.showMessageDialog(null, "Maaf, " + belumDipilih + " belum dipilih..!!");
+                continue;
+            }
+
+            for (String[] baris : pemeriksaan) {
+                String terpilih = tujuan.get(baris[0]).getModality();
+
+                if ((!terpilih.equals(baris[2])) && (!worklist.simpanModality(baris[0], terpilih))) {
+                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan modality untuk pemeriksaan " + baris[0] + " - " + baris[1] + "..!!");
+                    return null;
+                }
+            }
+
+            return tujuan;
+        }
     }
 
     private void kirimWorklistSmc(String noorder) {
@@ -3235,7 +3278,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             return;
         }
 
-        Map<String, String> tujuan = pilihStasiunSmc(noorder);
+        Map<String, WorklistRadiologiSMC.Tujuan> tujuan = pilihTujuanSmc(noorder, false);
 
         if (null == tujuan) {
             return;
