@@ -3274,7 +3274,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }
 
     private void kirimWorklistSmc(String noorder) {
-        if (!koneksiDB.WORKLISTORTHANCSMC()) {
+        if (!koneksiDB.KIRIMORDERKEMODALITYSMC()) {
             return;
         }
 

@@ -511,10 +511,10 @@ public class koneksiDB {
         }
     }
 
-    public static boolean WORKLISTORTHANCSMC() {
+    public static boolean KIRIMORDERKEMODALITYSMC() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("WORKLISTORTHANCSMC", "no").toLowerCase().trim().equals("yes");
+            return prop.getProperty("KIRIMORDERKEMODALITYSMC", "no").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
         }

@@ -377,7 +377,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         PanelInput.add(jLabel9);
         jLabel9.setBounds(0, 42, 92, 23);
 
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -454,6 +454,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         PanelInput.add(jLabel4);
         jLabel4.setBounds(409, 72, 90, 23);
 
+        TNoPermintaan.setEditable(false);
         TNoPermintaan.setName("TNoPermintaan"); // NOI18N
         TNoPermintaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1354,7 +1355,8 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_radiologi.noorder,3),signed)),0) from permintaan_radiologi where permintaan_radiologi.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),3,TNoPermintaan);
+        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_radiologi.noorder,3),signed)),0) from permintaan_radiologi where permintaan_radiologi.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),3,TNoPermintaan);
+        Valid.autonomor1Smc(TNoPermintaan, "PR", "permintaan_radiologi", "noorder", 3, "0", Tanggal);
     }
 
     private void simpan() {
@@ -1364,7 +1366,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             String noorderTerbit="";
             try {
                 Sequel.AutoComitFalse();
-                //autoNomor();
+                autoNomor();
                 if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                         TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                         CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
@@ -1381,7 +1383,8 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     isReset();
                     emptTeks();
                 }else{
-                    Valid.autoNomer7(TNoPermintaan.getText().substring(TNoPermintaan.getText().length()-4),"PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan);
+                    // Valid.autoNomer7(TNoPermintaan.getText().substring(TNoPermintaan.getText().length()-4),"PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan);
+                    autoNomor();
                     if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                             TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                             CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
