@@ -308,7 +308,9 @@ resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode
 				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="94" width="100" height="9" uuid="72941389-8c24-4705-985f-46c44478874f"/>
+				<reportElement x="120" y="94" width="100" height="9" uuid="72941389-8c24-4705-985f-46c44478874f">
+					<printWhenExpression><![CDATA[null != $F{tgl_kadaluarsa}]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>

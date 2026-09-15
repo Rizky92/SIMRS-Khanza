@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -206,6 +207,9 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         TCari.requestFocus();
         ChkInput.setSelected(false);
+        Date sekarang=new Date();
+        Valid.setTglJamSmc(sekarang,tgl,Jam,Menit,Detik);
+        Valid.setTglJamSmc(sekarang,tgl2,Jam2,Menit2,Detik2);
         isForm();
     }
 
@@ -256,6 +260,9 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnOperator1 = new widget.Button();
         label11 = new widget.Label();
         tgl = new widget.Tanggal();
+        Jam = new widget.ComboBox();
+        Menit = new widget.ComboBox();
+        Detik = new widget.ComboBox();
         jLabel3 = new widget.Label();
         TNoRw = new widget.TextBox();
         TPasien = new widget.TextBox();
@@ -353,6 +360,9 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         label38 = new widget.Label();
         label12 = new widget.Label();
         tgl2 = new widget.Tanggal();
+        Jam2 = new widget.ComboBox();
+        Menit2 = new widget.ComboBox();
+        Detik2 = new widget.ComboBox();
         PreOp = new widget.TextBox();
         jLabel6 = new widget.Label();
         jLabel7 = new widget.Label();
@@ -747,7 +757,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(label11);
         label11.setBounds(406, 40, 101, 23);
 
-        tgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        tgl.setDisplayFormat("dd-MM-yyyy");
         tgl.setName("tgl"); // NOI18N
         tgl.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -755,7 +765,37 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(tgl);
-        tgl.setBounds(510, 40, 150, 23);
+        tgl.setBounds(510, 40, 90, 23);
+
+        Jam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        Jam.setName("Jam"); // NOI18N
+        Jam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JamKeyPressed(evt);
+            }
+        });
+        FormInput.add(Jam);
+        Jam.setBounds(603, 40, 62, 23);
+
+        Menit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Menit.setName("Menit"); // NOI18N
+        Menit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MenitKeyPressed(evt);
+            }
+        });
+        FormInput.add(Menit);
+        Menit.setBounds(668, 40, 62, 23);
+
+        Detik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Detik.setName("Detik"); // NOI18N
+        Detik.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DetikKeyPressed(evt);
+            }
+        });
+        FormInput.add(Detik);
+        Detik.setBounds(733, 40, 62, 23);
 
         jLabel3.setText("No.Rawat :");
         jLabel3.setName("jLabel3"); // NOI18N
@@ -1613,7 +1653,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(label12);
         label12.setBounds(406, 400, 101, 23);
 
-        tgl2.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        tgl2.setDisplayFormat("dd-MM-yyyy");
         tgl2.setName("tgl2"); // NOI18N
         tgl2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1621,7 +1661,37 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(tgl2);
-        tgl2.setBounds(510, 400, 150, 23);
+        tgl2.setBounds(510, 400, 90, 23);
+
+        Jam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        Jam2.setName("Jam2"); // NOI18N
+        Jam2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Jam2KeyPressed(evt);
+            }
+        });
+        FormInput.add(Jam2);
+        Jam2.setBounds(603, 400, 62, 23);
+
+        Menit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Menit2.setName("Menit2"); // NOI18N
+        Menit2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Menit2KeyPressed(evt);
+            }
+        });
+        FormInput.add(Menit2);
+        Menit2.setBounds(668, 400, 62, 23);
+
+        Detik2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Detik2.setName("Detik2"); // NOI18N
+        Detik2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Detik2KeyPressed(evt);
+            }
+        });
+        FormInput.add(Detik2);
+        Detik2.setBounds(733, 400, 62, 23);
 
         PreOp.setName("PreOp"); // NOI18N
         PreOp.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1776,7 +1846,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnOperator1ActionPerformed(null);
         }else{
-            Valid.pindah(evt,tgl,kdoperator2);
+            Valid.pindah(evt,Detik,kdoperator2);
         }
     }//GEN-LAST:event_kdoperator1KeyPressed
 
@@ -1812,8 +1882,20 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnOperator1ActionPerformed
 
     private void tglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tglKeyPressed
-        Valid.pindah(evt,jenis,BtnOperator1);
+        Valid.pindah(evt,jenis,Jam);
     }//GEN-LAST:event_tglKeyPressed
+
+    private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKeyPressed
+        Valid.pindah(evt,tgl,Menit);
+    }//GEN-LAST:event_JamKeyPressed
+
+    private void MenitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MenitKeyPressed
+        Valid.pindah(evt,Jam,Detik);
+    }//GEN-LAST:event_MenitKeyPressed
+
+    private void DetikKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DetikKeyPressed
+        Valid.pindah(evt,Menit,BtnOperator1);
+    }//GEN-LAST:event_DetikKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             int row2=tabMode.getRowCount();
@@ -2895,7 +2977,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         }else if(jml==0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih operasi...!!!!");
             TCari.requestFocus();
-        }else if(tgl.getSelectedItem().toString().equals(tgl2.getSelectedItem().toString())){
+        }else if(Valid.getTglJamSmc(tgl,Jam,Menit,Detik).equals(Valid.getTglJamSmc(tgl2,Jam2,Menit2,Detik2))){
             JOptionPane.showMessageDialog(rootPane,"Kamu operasi apa bersin..? Cepat sekali...!!");
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
@@ -2907,7 +2989,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 ttljmdokter=0;ttljmpetugas=0;ttlpendapatan=0;ttlbhp=0;
                 for(i=0;i<tbtindakan.getRowCount();i++){
                     if(tabMode.getValueAt(i,0).toString().equals("true")){
-                        if(Sequel.menyimpantf2("operasi","'"+TNoRw.getText()+"','"+Valid.SetTgl(tgl.getSelectedItem()+"")+" "+tgl.getSelectedItem().toString().substring(11,19)
+                        if(Sequel.menyimpantf2("operasi","'"+TNoRw.getText()+"','"+Valid.getTglJamSmc(tgl,Jam,Menit,Detik)
                             +"','"+jenis.getText()+"','"+Kategori.getSelectedItem()+"','"+kdoperator1.getText()+"','"+kdoperator2.getText()+"','"+kdoperator3.getText()
                             +"','"+kdasistoperator1.getText()+"','"+kdasistoperator2.getText()+"','"+kdasistoperator3.getText()+"','"+kdInstrumen.getText()
                             +"','"+kddranak.getText()+"','"+kdprwresust.getText()+"','"+kdanestesi.getText()+"','"+kdasistanestesi.getText()+"','"+kdasistanestesi2.getText()
@@ -2976,7 +3058,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 if(sukses==true){
                     for(int r=0;r<tbObat.getRowCount();r++){
                         if(Valid.SetAngka(tbObat.getValueAt(r,0).toString())>0){
-                            if(Sequel.menyimpantf2("beri_obat_operasi","'"+TNoRw.getText()+"','"+Valid.SetTgl(tgl.getSelectedItem()+"")+" "+tgl.getSelectedItem().toString().substring(11,19)+
+                            if(Sequel.menyimpantf2("beri_obat_operasi","'"+TNoRw.getText()+"','"+Valid.getTglJamSmc(tgl,Jam,Menit,Detik)+
                                 "','"+tbObat.getValueAt(r,1).toString()+"','"+tbObat.getValueAt(r,4).toString()+
                                 "','"+tbObat.getValueAt(r,0).toString()+"'","data")==true){
                                 ttlbhp=ttlbhp+Double.parseDouble(tbObat.getValueAt(r,5).toString());
@@ -2991,8 +3073,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 if(sukses==true){
                     if(!Laporan.getText().equals("")){
                         if(Sequel.menyimpantf2("laporan_operasi","?,?,?,?,?,?,?,?,?","laporan operasi",9,new String[]{
-                                TNoRw.getText(),Valid.SetTgl(tgl.getSelectedItem()+"")+" "+tgl.getSelectedItem().toString().substring(11,19),PreOp.getText(),
-                                PostOp.getText(),Jaringan.getText(),Valid.SetTgl(tgl2.getSelectedItem()+"")+" "+tgl2.getSelectedItem().toString().substring(11,19),
+                                TNoRw.getText(),Valid.getTglJamSmc(tgl,Jam,Menit,Detik),PreOp.getText(),
+                                PostOp.getText(),Jaringan.getText(),Valid.getTglJamSmc(tgl2,Jam2,Menit2,Detik2),
                                 DikirimPA.getSelectedItem().toString(),NomorImplant.getText(),Laporan.getText()
                             })==false){
                             sukses=false;
@@ -3249,11 +3331,23 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_kdonloop5KeyPressed
 
     private void tgl2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tgl2KeyPressed
-        Valid.pindah(evt,kdonloop5,PreOp);
+        Valid.pindah(evt,kdonloop5,Jam2);
     }//GEN-LAST:event_tgl2KeyPressed
 
+    private void Jam2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Jam2KeyPressed
+        Valid.pindah(evt,tgl2,Menit2);
+    }//GEN-LAST:event_Jam2KeyPressed
+
+    private void Menit2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Menit2KeyPressed
+        Valid.pindah(evt,Jam2,Detik2);
+    }//GEN-LAST:event_Menit2KeyPressed
+
+    private void Detik2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Detik2KeyPressed
+        Valid.pindah(evt,Menit2,PreOp);
+    }//GEN-LAST:event_Detik2KeyPressed
+
     private void PreOpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PreOpKeyPressed
-        Valid.pindah(evt,tgl2,PostOp);
+        Valid.pindah(evt,Detik2,PostOp);
     }//GEN-LAST:event_PreOpKeyPressed
 
     private void PostOpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PostOpKeyPressed
@@ -3269,7 +3363,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_DikirimPAKeyPressed
 
     private void BtnOperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOperator1KeyPressed
-        Valid.pindah(evt,tgl,BtnOperator2);
+        Valid.pindah(evt,Detik,BtnOperator2);
     }//GEN-LAST:event_BtnOperator1KeyPressed
 
     private void BtnOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOperator2KeyPressed
@@ -3424,13 +3518,19 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private widget.Button BtnTambah;
     private widget.Button BtnTambahOperasi;
     private widget.CekBox ChkInput;
+    private widget.ComboBox Detik;
+    private widget.ComboBox Detik2;
     private widget.ComboBox DikirimPA;
     private widget.panelisi FormInput;
+    private widget.ComboBox Jam;
+    private widget.ComboBox Jam2;
     private widget.TextBox Jaringan;
     private widget.ComboBox Kategori;
     private widget.TextBox Kd2;
     private widget.Label LTotal;
     private widget.TextArea Laporan;
+    private widget.ComboBox Menit;
+    private widget.ComboBox Menit2;
     private widget.TextBox NomorImplant;
     private javax.swing.JPanel PanelInput;
     private javax.swing.JPopupMenu Popup;

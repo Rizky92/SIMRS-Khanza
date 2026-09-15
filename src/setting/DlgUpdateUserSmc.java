@@ -967,6 +967,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("tarif_ralan", "[K] Tarif Ralan");
         namaakses.put("tarif_ranap", "[K] Tarif Ranap");
         namaakses.put("tarif_utd", "[K] Tarif UTD");
+        namaakses.put("template_laboratorium_smc", "[K] Template Laboratorium");
         namaakses.put("titip_faktur_aset", "[K] Titip Faktur/Tagihan Aset/Inventaris");
         namaakses.put("titip_faktur_dapur", "[K] Titip Faktur/Tagihan Dapur");
         namaakses.put("titip_faktur_non_medis", "[K] Titip Faktur/Tagihan Non Medis");

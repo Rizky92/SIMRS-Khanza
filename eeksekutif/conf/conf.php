@@ -1,8 +1,9 @@
 <?php
-    $db_hostname            = "localhost";
-    $db_username            = "root";
-    $db_password            = "";
-    $db_name                = "sik";
+    $db_hostname = "localhost";
+    $db_username = "root";
+    $db_password = "";
+    $db_name     = "sik";
+    $db_port     = 3307;
 
     function host(){
         global $db_hostname;
@@ -10,8 +11,8 @@
     }
 
     function  bukakoneksi(){
-     	global $db_hostname, $db_username, $db_password, $db_name;
-         $konektor=mysqli_connect($db_hostname,$db_username,$db_password)
+     	global $db_hostname, $db_username, $db_password, $db_name, $db_port;
+         $konektor=mysqli_connect($db_hostname,$db_username,$db_password, null, $db_port)
          or die ("<font color=red><h3>Not Connected ..!!</h3></font>");
          $db_select=mysqli_select_db($konektor, $db_name)
          or die("<font color=red><h3>Cannot chose database..!!</h3></font>". mysqli_error());
