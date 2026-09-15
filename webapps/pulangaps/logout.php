@@ -3,7 +3,7 @@
 	session_destroy();
 	require_once "conf/command.php";
 	if (cekSessiAdmin()){
-	    session_unregister("ses_admin_pulangaps");
+	    unset($_SESSION["ses_admin_pulangaps"]);
 	}
 
 	header("Location:index.php");

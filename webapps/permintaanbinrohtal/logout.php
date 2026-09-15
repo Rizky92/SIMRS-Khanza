@@ -3,7 +3,7 @@
 	session_destroy();
 	require_once "conf/command.php";
 	if (cekSessiAdmin()){
-	    session_unregister("ses_admin_permintaanbinrohtal");
+	    unset($_SESSION["ses_admin_permintaanbinrohtal"]);
 	}
 
 	header("Location:index.php");
