@@ -1,5 +1,7 @@
 package permintaan;
 import bridging.ApiCareStream;
+import bridging.ApiOrthanc;
+import bridging.WorklistRadiologiSMC;
 import bridging.koneksiDBFUJI;
 import fungsi.BackgroundMusic;
 import fungsi.WarnaTable;
@@ -8,6 +10,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -22,14 +25,19 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -55,6 +63,13 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private ResultSet rs,rs2;
     private Date now;
     private ApiCareStream carestream=new ApiCareStream();
+    private final WorklistRadiologiSMC worklist=new WorklistRadiologiSMC();
+    private final ApiOrthanc orthanc=new ApiOrthanc();
+    private Map<String, String> stasiunSmc=null;
+    private Map<String, WorklistRadiologiSMC.Tujuan> tujuanSmc=null;
+    private ArrayList<String[]> pemeriksaanTujuanSmc=new ArrayList<>();
+    private final DefaultTableModel tabModeTujuanSmc;
+    private final widget.ComboBox cmbModalitySmc=new widget.ComboBox(),cmbStasiunSmc=new widget.ComboBox();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private boolean aktif=false,semua, VALIDASIULANGHASILPERMINTAANRAD = koneksiDB.VALIDASIULANGHASILPERMINTAAN("rad");
@@ -70,6 +85,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         initComponents();
 
         WindowAmbilSampel.setSize(530,80);
+        WindowTujuanWorklistSmc.setSize(640,300);
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Permintaan","No.Rawat","Pasien","Permintaan","Jam","Sampel","Jam","Hasil","Jam","Kode Dokter","Dokter Perujuk","Poli Registrasi","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar"
             }){
@@ -274,6 +290,15 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }
         tbRadiologiRanap2.setDefaultRenderer(Object.class, new WarnaTable());
 
+        tabModeTujuanSmc=(DefaultTableModel)tbTujuanSmc.getModel();
+        tbTujuanSmc.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tbTujuanSmc.getColumnModel().getColumn(1).setPreferredWidth(250);
+        tbTujuanSmc.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tbTujuanSmc.getColumnModel().getColumn(3).setPreferredWidth(200);
+        tbTujuanSmc.getColumnModel().getColumn(2).setCellEditor(editorPilihanSmc(cmbModalitySmc));
+        tbTujuanSmc.getColumnModel().getColumn(3).setCellEditor(editorPilihanSmc(cmbStasiunSmc));
+        tbTujuanSmc.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
         try {
@@ -308,6 +333,16 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnSimpan4 = new widget.Button();
         jLabel26 = new widget.Label();
         TanggalPulang = new widget.Tanggal();
+        WindowTujuanWorklistSmc = new javax.swing.JDialog();
+        internalFrame6 = new widget.InternalFrame();
+        panelGlass11 = new widget.panelisi();
+        jLabel27 = new widget.Label();
+        NoOrderTujuanSmc = new widget.TextBox();
+        scrollPane5 = new widget.ScrollPane();
+        tbTujuanSmc = new widget.Table();
+        panelGlass12 = new widget.panelisi();
+        BtnSimpanTujuanSmc = new widget.Button();
+        BtnBatalTujuanSmc = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -366,6 +401,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnKirimDataFuji = new widget.Button();
         BtnAmbilDataFUJI = new widget.Button();
         BtnKirimDataCareStream = new widget.Button();
+        BtnKirimWorklistSmc = new widget.Button();
         BtnAmbilDataFUJI1 = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -408,7 +444,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 19:58:53" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-07-2026 13:02:16" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -417,6 +453,92 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         TanggalPulang.setBounds(110, 32, 150, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
+
+        WindowTujuanWorklistSmc.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowTujuanWorklistSmc.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        WindowTujuanWorklistSmc.setName("WindowTujuanWorklistSmc"); // NOI18N
+        WindowTujuanWorklistSmc.setUndecorated(true);
+        WindowTujuanWorklistSmc.setResizable(false);
+
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 50, 50)), "::[ Kirim Worklist ke Modality ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame6.setName("internalFrame6"); // NOI18N
+        internalFrame6.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelGlass11.setName("panelGlass11"); // NOI18N
+        panelGlass11.setPreferredSize(new java.awt.Dimension(44, 41));
+        panelGlass11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 9));
+
+        jLabel27.setText("No.Order :");
+        jLabel27.setName("jLabel27"); // NOI18N
+        jLabel27.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelGlass11.add(jLabel27);
+
+        NoOrderTujuanSmc.setEditable(false);
+        NoOrderTujuanSmc.setName("NoOrderTujuanSmc"); // NOI18N
+        NoOrderTujuanSmc.setPreferredSize(new java.awt.Dimension(150, 23));
+        panelGlass11.add(NoOrderTujuanSmc);
+
+        internalFrame6.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
+
+        scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        scrollPane5.setName("scrollPane5"); // NOI18N
+        scrollPane5.setOpaque(true);
+
+        tbTujuanSmc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Kode", "Pemeriksaan", "Modality", "Stasiun Tujuan"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbTujuanSmc.setName("tbTujuanSmc"); // NOI18N
+        tbTujuanSmc.getTableHeader().setReorderingAllowed(false);
+        scrollPane5.setViewportView(tbTujuanSmc);
+
+        internalFrame6.add(scrollPane5, java.awt.BorderLayout.CENTER);
+
+        panelGlass12.setName("panelGlass12"); // NOI18N
+        panelGlass12.setPreferredSize(new java.awt.Dimension(44, 48));
+        panelGlass12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        BtnSimpanTujuanSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanTujuanSmc.setMnemonic('K');
+        BtnSimpanTujuanSmc.setText("Kirim");
+        BtnSimpanTujuanSmc.setToolTipText("Alt+K");
+        BtnSimpanTujuanSmc.setName("BtnSimpanTujuanSmc"); // NOI18N
+        BtnSimpanTujuanSmc.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnSimpanTujuanSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanTujuanSmcActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(BtnSimpanTujuanSmc);
+
+        BtnBatalTujuanSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnBatalTujuanSmc.setMnemonic('B');
+        BtnBatalTujuanSmc.setText("Batal");
+        BtnBatalTujuanSmc.setToolTipText("Alt+B");
+        BtnBatalTujuanSmc.setName("BtnBatalTujuanSmc"); // NOI18N
+        BtnBatalTujuanSmc.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnBatalTujuanSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBatalTujuanSmcActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(BtnBatalTujuanSmc);
+
+        internalFrame6.add(panelGlass12, java.awt.BorderLayout.PAGE_END);
+
+        WindowTujuanWorklistSmc.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -1051,6 +1173,23 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         });
         FormMenu.add(BtnKirimDataCareStream);
 
+        BtnKirimWorklistSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimWorklistSmc.setText("Kirim Ulang Worklist ke Orthanc");
+        BtnKirimWorklistSmc.setFocusPainted(false);
+        BtnKirimWorklistSmc.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimWorklistSmc.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimWorklistSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimWorklistSmc.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimWorklistSmc.setName("BtnKirimWorklistSmc"); // NOI18N
+        BtnKirimWorklistSmc.setPreferredSize(new java.awt.Dimension(215, 23));
+        BtnKirimWorklistSmc.setRoundRect(false);
+        BtnKirimWorklistSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimWorklistSmcActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnKirimWorklistSmc);
+
         BtnAmbilDataFUJI1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAmbilDataFUJI1.setText("Ambil Hasil dari RIS Care Stream");
         BtnAmbilDataFUJI1.setFocusPainted(false);
@@ -1411,6 +1550,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString())>0){
                             JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                         }else{
+                            worklist.hapus(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
                             Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
                             runBackground(() -> tampil());
                         }
@@ -1437,6 +1577,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString())>0){
                             JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                         }else{
+                            worklist.hapus(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
                             Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
                             runBackground(() -> tampil3());
                         }
@@ -1666,7 +1807,9 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         Sequel.queryu("insert into antriradiologi values('1')");
                         tbRadiologiRalan.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbRadiologiRalan.getSelectedRow(),5);
                         tbRadiologiRalan.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRalan.getSelectedRow(),6);
+                        String noorderWorklist = tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString();
                         WindowAmbilSampel.dispose();
+                        kirimWorklistSmc(noorderWorklist);
                     }
                 }
             }else{
@@ -1683,7 +1826,9 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                     })==true){
                         tbRadiologiRanap.setValueAt(Valid.SetTgl(TanggalPulang.getSelectedItem()+""),tbRadiologiRanap.getSelectedRow(),5);
                         tbRadiologiRanap.setValueAt(TanggalPulang.getSelectedItem().toString().substring(11,19),tbRadiologiRanap.getSelectedRow(),6);
+                        String noorderWorklist = tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString();
                         WindowAmbilSampel.dispose();
+                        kirimWorklistSmc(noorderWorklist);
                     }
                 }
             }else{
@@ -2309,6 +2454,85 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnKirimDataCareStreamActionPerformed
 
+    private void BtnKirimWorklistSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimWorklistSmcActionPerformed
+        if (NoPermintaan.trim().isEmpty()) {
+            Valid.textKosong(TCari, "No.Permintaan");
+            return;
+        }
+
+        final String noorder = NoPermintaan.trim();
+        final Map<String, WorklistRadiologiSMC.Tujuan> tujuan = pilihTujuanSmc(noorder, true);
+
+        if (null == tujuan) {
+            return;
+        }
+
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                boolean sukses = worklist.kirim(noorder, tujuan, true);
+                String pesan = worklist.getNotif();
+                SwingUtilities.invokeLater(() -> {
+                    setCursor(Cursor.getDefaultCursor());
+                    if (sukses) {
+                        JOptionPane.showMessageDialog(null, "Worklist No.Order " + noorder + " selesai dikirim ke Orthanc..!!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Gagal kirim worklist ke Orthanc untuk No.Order " + noorder + (pesan.isBlank() ? "" : "\n" + pesan));
+                    }
+                });
+            });
+        } catch (RejectedExecutionException e) {
+            setCursor(Cursor.getDefaultCursor());
+            System.out.println("Notifikasi : " + e);
+        }
+    }//GEN-LAST:event_BtnKirimWorklistSmcActionPerformed
+
+    private void BtnSimpanTujuanSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanTujuanSmcActionPerformed
+        if (tbTujuanSmc.isEditing()) {
+            tbTujuanSmc.getCellEditor().stopCellEditing();
+        }
+
+        Map<String, String> stasiun = stasiunSmc();
+        Map<String, WorklistRadiologiSMC.Tujuan> tujuan = new LinkedHashMap<>();
+
+        for (int i = 0; i < tabModeTujuanSmc.getRowCount(); i++) {
+            String kode = Objects.toString(tabModeTujuanSmc.getValueAt(i, 0), ""), pemeriksaan = kode + " - " + Objects.toString(tabModeTujuanSmc.getValueAt(i, 1), ""),
+                   modality = Objects.toString(tabModeTujuanSmc.getValueAt(i, 2), ""), stasiunTujuan = Objects.toString(tabModeTujuanSmc.getValueAt(i, 3), "");
+
+            if (modality.isBlank()) {
+                tbTujuanSmc.changeSelection(i, 2, false, false);
+                JOptionPane.showMessageDialog(WindowTujuanWorklistSmc, "Maaf, modality untuk pemeriksaan " + pemeriksaan + " belum dipilih..!!");
+                return;
+            }
+
+            if (!stasiun.containsKey(stasiunTujuan)) {
+                tbTujuanSmc.changeSelection(i, 3, false, false);
+                JOptionPane.showMessageDialog(WindowTujuanWorklistSmc, "Maaf, stasiun tujuan untuk pemeriksaan " + pemeriksaan + " belum dipilih..!!");
+                return;
+            }
+
+            tujuan.put(kode, new WorklistRadiologiSMC.Tujuan(modality, stasiun.get(stasiunTujuan)));
+        }
+
+        for (String[] baris : pemeriksaanTujuanSmc) {
+            String terpilih = tujuan.get(baris[0]).getModality();
+
+            if ((!terpilih.equals(baris[2])) && (!worklist.simpanModality(baris[0], terpilih))) {
+                JOptionPane.showMessageDialog(WindowTujuanWorklistSmc, "Maaf, gagal menyimpan modality untuk pemeriksaan " + baris[0] + " - " + baris[1] + "..!!");
+                WindowTujuanWorklistSmc.dispose();
+                return;
+            }
+        }
+
+        tujuanSmc = tujuan;
+        WindowTujuanWorklistSmc.dispose();
+    }//GEN-LAST:event_BtnSimpanTujuanSmcActionPerformed
+
+    private void BtnBatalTujuanSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalTujuanSmcActionPerformed
+        WindowTujuanWorklistSmc.dispose();
+    }//GEN-LAST:event_BtnBatalTujuanSmcActionPerformed
+
     private void BtnAmbilDataFUJI1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAmbilDataFUJI1ActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
@@ -2464,6 +2688,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.Button BtnAmbilDataFUJI1;
     private widget.Button BtnBarcodePermintaan;
     private widget.Button BtnBarcodePermintaan2;
+    private widget.Button BtnBatalTujuanSmc;
     private widget.Button BtnCari;
     private widget.Button BtnCetakHasilRadiologi;
     private widget.Button BtnCloseIn4;
@@ -2472,6 +2697,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnKirimDataCareStream;
     private widget.Button BtnKirimDataFuji;
+    private widget.Button BtnKirimWorklistSmc;
     private widget.Button BtnPrint;
     private widget.Button BtnSampel;
     private widget.Button BtnSeek3;
@@ -2479,6 +2705,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.Button BtnSeek5;
     private widget.Button BtnSeek6;
     private widget.Button BtnSimpan4;
+    private widget.Button BtnSimpanTujuanSmc;
     private widget.CekBox ChkAccor;
     private widget.TextBox CrDokter;
     private widget.TextBox CrDokter2;
@@ -2486,6 +2713,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.PanelBiasa FormMenu;
     private widget.TextBox Kamar;
     private widget.Label LCount;
+    private widget.TextBox NoOrderTujuanSmc;
     private widget.PanelBiasa PanelAccor;
     private widget.ScrollPane ScrollMenu;
     private widget.TextBox TCari;
@@ -2496,11 +2724,13 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
     private javax.swing.JDialog WindowAmbilSampel;
+    private javax.swing.JDialog WindowTujuanWorklistSmc;
     private widget.ComboBox cmbStatus;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
     private widget.InternalFrame internalFrame5;
+    private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
     private widget.Label jLabel14;
     private widget.Label jLabel15;
@@ -2508,11 +2738,14 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel26;
+    private widget.Label jLabel27;
     private javax.swing.JPanel jPanel2;
     private widget.Label label10;
     private widget.Label label11;
     private widget.Label label18;
     private widget.panelisi panelGlass10;
+    private widget.panelisi panelGlass11;
+    private widget.panelisi panelGlass12;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.panelisi panelisi1;
@@ -2520,10 +2753,12 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;
     private widget.ScrollPane scrollPane4;
+    private widget.ScrollPane scrollPane5;
     private widget.Table tbRadiologiRalan;
     private widget.Table tbRadiologiRalan2;
     private widget.Table tbRadiologiRanap;
     private widget.Table tbRadiologiRanap2;
+    private widget.Table tbTujuanSmc;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
@@ -2727,6 +2962,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnKirimDataFuji.setEnabled(akses.getpermintaan_radiologi());
         BtnAmbilDataFUJI.setEnabled(akses.getperiksa_radiologi());
         BtnKirimDataCareStream.setEnabled(akses.getpermintaan_radiologi());
+        BtnKirimWorklistSmc.setEnabled(akses.getpermintaan_radiologi());
     }
 
     public void setPasien(String pasien){
@@ -3066,6 +3302,109 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
             FormMenu.setVisible(false);
             ChkAccor.setVisible(true);
+        }
+    }
+
+    private Map<String, String> stasiunSmc() {
+        if (null != stasiunSmc) {
+            return stasiunSmc;
+        }
+
+        Map<String, String> daftar = new LinkedHashMap<>();
+
+        for (String nama : orthanc.listModalitySmc()) {
+            String aet = orthanc.detailModalitySmc(nama);
+
+            if (!aet.isBlank()) {
+                daftar.put(nama + " (" + aet + ")", aet);
+            }
+        }
+
+        if (!daftar.isEmpty()) {
+            stasiunSmc = daftar;
+        }
+
+        return daftar;
+    }
+
+    private Map<String, WorklistRadiologiSMC.Tujuan> pilihTujuanSmc(String noorder, boolean semua) {
+        ArrayList<String[]> pemeriksaan = worklist.daftarPemeriksaan(noorder, semua);
+
+        if (pemeriksaan.isEmpty()) {
+            if (semua) {
+                JOptionPane.showMessageDialog(null, "Maaf, tidak ada pemeriksaan pada No.Order " + noorder + "..!!");
+            }
+            return null;
+        }
+
+        Map<String, String> stasiun = stasiunSmc();
+
+        if (stasiun.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Maaf, daftar modality di Orthanc kosong atau tidak bisa dibaca..!!");
+            return null;
+        }
+
+        if (tbTujuanSmc.isEditing()) {
+            tbTujuanSmc.getCellEditor().cancelCellEditing();
+        }
+
+        Valid.tabelKosongSmc(tabModeTujuanSmc, true);
+        cmbModalitySmc.setModel(new DefaultComboBoxModel(worklist.daftarKodeModality().toArray()));
+        cmbStasiunSmc.setModel(new DefaultComboBoxModel(stasiun.keySet().toArray()));
+
+        for (String[] baris : pemeriksaan) {
+            String stasiunTujuan = "";
+
+            for (Map.Entry<String, String> entri : stasiun.entrySet()) {
+                if (entri.getValue().equals(baris[3])) {
+                    stasiunTujuan = entri.getKey();
+                    break;
+                }
+            }
+
+            tabModeTujuanSmc.addRow(new Object[] {baris[0], baris[1], baris[2], stasiunTujuan});
+        }
+
+        pemeriksaanTujuanSmc = pemeriksaan;
+        tujuanSmc = null;
+        NoOrderTujuanSmc.setText(noorder);
+        WindowTujuanWorklistSmc.setLocationRelativeTo(internalFrame1);
+        WindowTujuanWorklistSmc.setVisible(true);
+
+        return tujuanSmc;
+    }
+
+    private DefaultCellEditor editorPilihanSmc(widget.ComboBox pilihan) {
+        return new DefaultCellEditor(pilihan) {
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                pilihan.setSelectedIndex(-1);
+                return super.getTableCellEditorComponent(table, value, isSelected, row, column);
+            }
+        };
+    }
+
+    private void kirimWorklistSmc(String noorder) {
+        if (!koneksiDB.KIRIMORDERKEMODALITYSMC()) {
+            return;
+        }
+
+        Map<String, WorklistRadiologiSMC.Tujuan> tujuan = pilihTujuanSmc(noorder, false);
+
+        if (null == tujuan) {
+            return;
+        }
+
+        try {
+            executor.submit(() -> {
+                if (!worklist.kirim(noorder, tujuan)) {
+                    String pesan = worklist.getNotif();
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null,
+                        "Gagal kirim worklist ke Orthanc untuk No.Order " + noorder + (pesan.isBlank() ? "" : "\n" + pesan)));
+                }
+            });
+        } catch (RejectedExecutionException e) {
+            System.out.println("Notifikasi : " + e);
         }
     }
 

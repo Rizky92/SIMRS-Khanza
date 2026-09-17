@@ -38,7 +38,13 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
         tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
         tbPoli.getColumnModel().getColumn(2).setMinWidth(0);
         tbPoli.getColumnModel().getColumn(2).setMaxWidth(0);
+        aturKolomSmc();
+    }
+
+    private void aturKolomSmc() {
         if (batasRegistrasiSatuJam) {
+            tbPoli.getColumnModel().getColumn(3).setMaxWidth(Integer.MAX_VALUE);
+            tbPoli.getColumnModel().getColumn(3).setMinWidth(15);
             tbPoli.getColumnModel().getColumn(3).setPreferredWidth(250);
         } else {
             tbPoli.getColumnModel().getColumn(3).setMinWidth(0);
@@ -98,6 +104,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         loadPengaturanAPM();
+        aturKolomSmc();
         Valid.tabelKosongSmc(tabMode);
         if (batasRegistrasiSatuJam) {
             try (PreparedStatement ps = koneksi.prepareStatement(

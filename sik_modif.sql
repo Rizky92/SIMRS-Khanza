@@ -680,6 +680,14 @@ ALTER TABLE `jadwal_tambahan_smc` ADD CONSTRAINT `jadwal_tambahan_smc_ibfk_2` FO
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
+CREATE TABLE IF NOT EXISTS `jns_perawatan_radiologi_modality_smc`  (
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `modality` varchar(16) NOT NULL,
+  PRIMARY KEY (`kd_jenis_prw`) USING BTREE,
+  INDEX `jns_perawatan_radiologi_modality_smc_ibfk_1`(`modality`) USING BTREE,
+  CONSTRAINT `jns_perawatan_radiologi_modality_smc_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_radiologi` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
 
 CREATE TABLE IF NOT EXISTS `lis_orderlab`  (
@@ -1709,6 +1717,8 @@ ALTER TABLE `reg_periksa` ADD INDEX IF NOT EXISTS `tgl_registrasi`(`tgl_registra
 
 ALTER TABLE `rekap_presensi` MODIFY COLUMN IF EXISTS `shift` enum('Pagi', 'Pagi2', 'Pagi3', 'Pagi4', 'Pagi5', 'Pagi6', 'Pagi7', 'Pagi8', 'Pagi9', 'Pagi10', 'Siang', 'Siang2', 'Siang3', 'Siang4', 'Siang5', 'Siang6', 'Siang7', 'Siang8', 'Siang9', 'Siang10', 'Malam', 'Malam2', 'Malam3', 'Malam4', 'Malam5', 'Malam6', 'Malam7', 'Malam8', 'Malam9', 'Malam10', 'Midle Pagi1', 'Midle Pagi2', 'Midle Pagi3', 'Midle Pagi4', 'Midle Pagi5', 'Midle Pagi6', 'Midle Pagi7', 'Midle Pagi8', 'Midle Pagi9', 'Midle Pagi10', 'Midle Siang1', 'Midle Siang2', 'Midle Siang3', 'Midle Siang4', 'Midle Siang5', 'Midle Siang6', 'Midle Siang7', 'Midle Siang8', 'Midle Siang9', 'Midle Siang10', 'Midle Malam1', 'Midle Malam2', 'Midle Malam3', 'Midle Malam4', 'Midle Malam5', 'Midle Malam6', 'Midle Malam7', 'Midle Malam8', 'Midle Malam9', 'Midle Malam10', 'Pagi11', 'Pagi12', 'Pagi13', 'Pagi14', 'Pagi15', 'Pagi16', 'Pagi17', 'Pagi18', 'Pagi19', 'Pagi20', 'Pagi21', 'Pagi22', 'Pagi23', 'Pagi24', 'Pagi25', 'Pagi26', 'Pagi27', 'Pagi28', 'Pagi29', 'Pagi30', 'Pagi31', 'Pagi32', 'Pagi33', 'Pagi34', 'Pagi35', 'Pagi36', 'Pagi37', 'Pagi38', 'Pagi39', 'Pagi40', 'Siang11', 'Siang12', 'Siang13', 'Siang14', 'Siang15', 'Siang16', 'Siang17', 'Siang18', 'Siang19', 'Siang20', 'Siang21', 'Siang22', 'Siang23', 'Siang24', 'Siang25', 'Siang26', 'Siang27', 'Siang28', 'Siang29', 'Siang30', 'Siang31', 'Siang32', 'Siang33', 'Siang34', 'Siang35', 'Siang36', 'Siang37', 'Siang38', 'Siang39', 'Siang40', 'Malam11', 'Malam12', 'Malam13', 'Malam14', 'Malam15', 'Malam16', 'Malam17', 'Malam18', 'Malam19', 'Malam20', 'Malam21', 'Malam22', 'Malam23', 'Malam24', 'Malam25', 'Malam26', 'Malam27', 'Malam28', 'Malam29', 'Malam30', 'Malam31', 'Malam32', 'Malam33', 'Malam34', 'Malam35', 'Malam36', 'Malam37', 'Malam38', 'Malam39', 'Malam40', 'Midle Pagi11', 'Midle Pagi12', 'Midle Pagi13', 'Midle Pagi14', 'Midle Pagi15', 'Midle Pagi16', 'Midle Pagi17', 'Midle Pagi18', 'Midle Pagi19', 'Midle Pagi20', 'Midle Pagi21', 'Midle Pagi22', 'Midle Pagi23', 'Midle Pagi24', 'Midle Pagi25', 'Midle Pagi26', 'Midle Pagi27', 'Midle Pagi28', 'Midle Pagi29', 'Midle Pagi30', 'Midle Pagi31', 'Midle Pagi32', 'Midle Pagi33', 'Midle Pagi34', 'Midle Pagi35', 'Midle Pagi36', 'Midle Pagi37', 'Midle Pagi38', 'Midle Pagi39', 'Midle Pagi40', 'Midle Siang11', 'Midle Siang12', 'Midle Siang13', 'Midle Siang14', 'Midle Siang15', 'Midle Siang16', 'Midle Siang17', 'Midle Siang18', 'Midle Siang19', 'Midle Siang20', 'Midle Siang21', 'Midle Siang22', 'Midle Siang23', 'Midle Siang24', 'Midle Siang25', 'Midle Siang26', 'Midle Siang27', 'Midle Siang28', 'Midle Siang29', 'Midle Siang30', 'Midle Siang31', 'Midle Siang32', 'Midle Siang33', 'Midle Siang34', 'Midle Siang35', 'Midle Siang36', 'Midle Siang37', 'Midle Siang38', 'Midle Siang39', 'Midle Siang40', 'Midle Malam11', 'Midle Malam12', 'Midle Malam13', 'Midle Malam14', 'Midle Malam15', 'Midle Malam16', 'Midle Malam17', 'Midle Malam18', 'Midle Malam19', 'Midle Malam20', 'Midle Malam21', 'Midle Malam22', 'Midle Malam23', 'Midle Malam24', 'Midle Malam25', 'Midle Malam26', 'Midle Malam27', 'Midle Malam28', 'Midle Malam29', 'Midle Malam30', 'Midle Malam31', 'Midle Malam32', 'Midle Malam33', 'Midle Malam34', 'Midle Malam35', 'Midle Malam36', 'Midle Malam37', 'Midle Malam38', 'Midle Malam39', 'Midle Malam40') NOT NULL;
 
+ALTER TABLE `resep_dokter` ADD INDEX IF NOT EXISTS resep_dokter_ibfk_3 (`no_resep`, `kode_brng`) USING BTREE;
+
 ALTER TABLE `resep_obat` ADD COLUMN IF NOT EXISTS `nama_template` varchar(100) NULL DEFAULT NULL AFTER `jam_penyerahan`;
 
 ALTER TABLE `resep_obat` ADD INDEX IF NOT EXISTS `idx_resep_obat_peresepan_status_dokter_perawatan`(`tgl_peresepan`, `status`, `kd_dokter`, `tgl_perawatan`) USING BTREE;
@@ -1769,6 +1779,10 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_accession_radiologi_smc`  (
   `noorder` varchar(15) NOT NULL,
   `kd_jenis_prw` varchar(15) NOT NULL,
   `no_acsn` varchar(16) NOT NULL,
+  `study_iuid` varchar(64) NULL DEFAULT NULL,
+  `worklist_id` varchar(64) NULL DEFAULT NULL,
+  `aet_tujuan` varchar(16) NULL DEFAULT NULL,
+  `tgl_kirim_worklist` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`noorder`,`kd_jenis_prw`) USING BTREE,
   UNIQUE KEY `satu_sehat_accession_radiologi_smc_no_acsn` (`no_acsn`) USING BTREE,
   INDEX `satu_sehat_accession_radiologi_smc_ibfk_1`(`kd_jenis_prw`) USING BTREE,
@@ -2087,6 +2101,8 @@ CREATE TABLE IF NOT EXISTS `tempinacbg`  (
   PRIMARY KEY (`coder_nik`, `cmg_code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `template_laboratorium` MODIFY COLUMN IF EXISTS `method` varchar(30) NOT NULL DEFAULT '' AFTER `nilai_rujukan_pa`;
+
 ALTER TABLE `temporary` DROP INDEX IF EXISTS `no`;
 
 ALTER TABLE `temporary_bayar_ralan` DROP INDEX IF EXISTS `no`;
@@ -2225,6 +2241,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pengajuan_izin_smc` enum('true','fa
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `jam_masuk_smc` enum('true','false') NULL DEFAULT NULL AFTER `pengajuan_izin_smc`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `jadwal_pegawai_smc` enum('true','false') NULL DEFAULT NULL AFTER `jam_masuk_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_laboratorium_smc` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_beban_hutang_lain`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 

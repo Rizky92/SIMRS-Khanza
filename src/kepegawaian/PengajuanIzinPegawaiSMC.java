@@ -881,7 +881,8 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         )) {
             JOptionPane.showMessageDialog(null, "Maaf, sudah ada pengajuan izin di tanggal yang sama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (!tanpaHakIzin() && (Integer.parseInt(Sisa.getText()) - 1) < 0) {
+            int sisa = Integer.parseInt(Sisa.getText()) - 1;
+            if (!tanpaHakIzin() && sisa < 0) {
                 if (JOptionPane.showConfirmDialog(null, "Eeiittss... hak izin yang mengajukan telah habis, apakah yakin tetap ingin mengambil izin?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     if (Sequel.menyimpantfSmc("pengajuan_izin_smc", "", NoPengajuan.getText(), Valid.getTglSmc(Tanggal), KdPetugas.getText(), tglTMTKerja, tglTATKerja, izin, Urgensi.getSelectedItem().toString(),
                         Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2), Kepentingan.getText(), KdPetugasPJ.getText(), "Proses Pengajuan", "Tidak"
@@ -889,14 +890,14 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                         switch (Urgensi.getSelectedItem().toString()) {
                             case "Tidak Masuk Kerja":
                                 tabMode.addRow(new Object[] {
-                                    NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), "", "", Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja,
+                                    NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), "", "", Kepentingan.getText(), String.valueOf(sisa), tglTMTKerja, tglTATKerja,
                                     KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan", "Tidak"
                                 });
                                 break;
                             default:
                                 tabMode.addRow(new Object[] {
                                     NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
-                                    Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja, KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan", "Tidak"
+                                    Kepentingan.getText(), String.valueOf(sisa), tglTMTKerja, tglTATKerja, KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan", "Tidak"
                                 });
                                 break;
                         }
@@ -910,14 +911,14 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                     switch (Urgensi.getSelectedItem().toString()) {
                         case "Tidak Masuk Kerja":
                             tabMode.addRow(new Object[] {
-                                NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), "", "", Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja,
+                                NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), "", "", Kepentingan.getText(), String.valueOf(sisa), tglTMTKerja, tglTATKerja,
                                 KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan", "Tidak"
                             });
                             break;
                         default:
                             tabMode.addRow(new Object[] {
                                 NoPengajuan.getText(), Valid.getTglSmc(Tanggal), Urgensi.getSelectedItem().toString(), Valid.getTglSmc(TglIzin), Valid.getJamSmc(Jam1, Menit1, Detik1), Valid.getJamSmc(Jam2, Menit2, Detik2),
-                                Kepentingan.getText(), Sisa.getText(), tglTMTKerja, tglTATKerja, KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan", "Tidak"
+                                Kepentingan.getText(), String.valueOf(sisa), tglTMTKerja, tglTATKerja, KdPetugasPJ.getText(), NmPetugasPJ.getText(), departemen, bidang, "Proses Pengajuan", "Tidak"
                             });
                             break;
                     }
@@ -1712,7 +1713,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
                 (tbObat.getSelectedRow() < 0 ? "" : "and s.no_pengajuan != ? ") + "), 0) as diambil from datapegawai"
             )) {
                 int p = 0;
-                ps.setString(++p, Valid.getTglSmc(Tanggal));
+                ps.setString(++p, Valid.getTglSmc(TglIzin));
                 ps.setString(++p, KdPetugas.getText());
                 ps.setString(++p, Urgensi.getSelectedItem().toString());
                 if (tbObat.getSelectedRow() >= 0) {

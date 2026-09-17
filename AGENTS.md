@@ -64,11 +64,7 @@ The following files are SENSITIVE, but they are still needed in order to run:
 |`webapps/conf/conf.php` | Contains database connection configuration and security login for non-user interaction. Needed for reference in repo but highly sensitive. |
 |`webapps/inacbg/conf/wsinacbg(2).php` | Contains API Key for bridging claim. Although the connection to eklaim server is within local environment, this is still sensitive information. Needed for reference in repo. |
 
-Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. These `.form` files are the design file used by Netbeans using XML structure with XML-like formatting. The design must synchronize their java counterpart from a method called `initComponents()`, as well as any events must synchronized to its method marked with `//GEN-FIRST:event_<event method name>` after opening curly brace and `//GEN-LAST:event<event method name>` after closing curly brace. Changes in this method should be reflected to their `.form` counterpart and vice versa.
-
-If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
-> [!NOTE]  
-> If you have access to Netbeans MCP, you can edit the `.form` files first if you understand its code, then request Netbeans to open the java counterpart for you using `openFile` tool. This way you don't have to mingle with re-syncing to `initComponents()` and any other generated event methods.
+Unless specified otherwise, these modules follow Netbeans' regular swing forms, so each file in the modules has a `.form` counterpart that must stay synchronized with its java counterpart. See [`docs/agent/swing-forms.md`](docs/agent/swing-forms.md) for the sync workflow, the NetBeans MCP steps, and the layout metrics.
 
 ### General coding guidelines
 The coding guidelines should cater to users' Netbeans configuration, which as follows.
@@ -80,53 +76,10 @@ The coding guidelines should cater to users' Netbeans configuration, which as fo
 
 #### Workflow guidelines
 - DO NOT add line comments to the code. Existing comments are unaffected by this rule.
-- If you're iterating a plan, make sure you're currently on a latest date-versioned branch. The latest branch begins with `custom-` followed by date in `yyyy-MM-dd`.
-- After you start editing, then switch to a new branch. Branch name must starts with the first letter of your vendor name, followed by '/', then the title, styled as `kebab-case` with at-most 4 words in length. DO NOT force create a branch name if the branch of the same name already exists.
-- Changes related to database structure change MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes are either follow upstream repository or contains referenced data dump. Ensure any addition is sorted alphabetically, in snake_case by table name. If the table contains foreign keys that are dependant of other tables where current table name is BEFORE the related table name, then add it like so:
-    ```sql
-    CREATE TABLE IF NOT EXISTS `current_table`  (
-        -- ...
-        `column_from_related_table` varchar(255) NOT NULL,
-        -- ...
-        INDEX `column_from_related_table`(`column_from_related_table`) USING BTREE,
-        -- ...
-    ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
-    -- ...
-
-    CREATE TABLE IF NOT EXISTS `related_table`  (
-        `column_from_related_table` varchar(255) NOT NULL,
-        -- ...
-        PRIMARY KEY (`column_from_related_table`),
-        -- ...
-    ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
-    -- foreign key constraints are added and sorted alphabetically by table names
-    ALTER TABLE `current_table` ADD CONSTRAINT `<constraint name>` FOREIGN KEY IF NOT EXISTS (`column_of_related_table`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-    -- ...
-    ```
-- When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirements.
-- In addition, adding new features must affix the name with SMC, where method and property names are styled "Smc", permission and table names are styled "_smc", and file/class/static property/database.xml parameter names are styled "SMC". Menus, form titles, or local declarations do not require affixes. Exception to classes whose name is already affixed by SMC, in which case method and (static) property names do not need affixes.
-- Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, reading the value from java counterpart requires decryption first. Added Parameters are append-only, positioned before `WAHOST` for `database.xml.example` and before `HOST()` in `src/fungsi/koneksiDB.java`.
-- Acronyms (e.g. SEP, KFA, INACBG, IDRG, or API) must be in ALL UPPERCASE. Exceptions for Smc-affixed methods, as a name in column or table, or as named keys, in which case they're styled `snake_case`.
 - After completing the task. DO NOT make a commit.
+- Which branch to work on, when to create one, and how to name it: see [`docs/agent/branching.md`](docs/agent/branching.md).
+- Database structure changes (`sik_modif.sql` only, ordering, foreign keys): see [`docs/agent/db-schema-change.md`](docs/agent/db-schema-change.md).
+- SMC affix naming, `Sequel`/`Valid` Smc alternatives, acronym casing, and `database.xml.example` parameters: see [`docs/agent/smc-conventions.md`](docs/agent/smc-conventions.md).
 
 #### Building the UI
-When building UI components, use primary components from `src/widget`. Following is the list of used components.
-- `ScrollPane.java` - Custom JScrollPane.
-- `Table.java` - Custom JTable.
-- `TabPane.java` - Custom JTabbedPane.
-- `Tanggal.java` - Custom JCalendar, uses `java.util.Date` for handling dates.
-- `TextArea.java` - Custom JTextArea.
-- `TextBox.java` - Custom JTextField.
-- `Button.java` - Custom JButton.
-- `ButtonBig.java` - Custom JButton, for menu items in `frmUtama`.
-- `CekBox.java` - Custom JCheckBox.
-- `ComboBox.java` - Custom JComboBox.
-- `InternalFrame.java` - Act as a main wrapper to house components inside JDialog.
-- `Label.java` - Custom JLabel.
-- `PanelBiasa.java` - Custom JPanel.
-- `PasswordBox.java` - Custom JPasswordField.
-
-Any other components not stated will fallback to swing counterpart.
+Use the primary components from `src/widget`, along with the sizing, spacing, titled border, and CRUD action row conventions in [`docs/agent/swing-forms.md`](docs/agent/swing-forms.md).

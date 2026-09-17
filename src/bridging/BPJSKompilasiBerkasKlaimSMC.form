@@ -428,7 +428,7 @@
                 <TitledBorder title="::[ Pengaturan Kompilasi Berkas ]::">
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder>
-                      <Color PropertyName="color" blue="33" green="33" red="33" type="rgb"/>
+                      <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
                     </LineBorder>
                   </Border>
                   <Font PropertyName="font" name="Tahoma" size="11" style="0"/>

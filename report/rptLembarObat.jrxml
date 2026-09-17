@@ -271,7 +271,7 @@
 				<reportElement x="201" y="20" width="62" height="29" uuid="082b65fb-869e-437a-af16-54b207412293"/>
 				<box leftPadding="4" rightPadding="4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{noantrian}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{noantrian} == null ? "" : $P{noantrian}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
