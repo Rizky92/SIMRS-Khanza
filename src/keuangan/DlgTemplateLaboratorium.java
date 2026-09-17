@@ -12,6 +12,7 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -63,7 +64,7 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex){
-                return colIndex < 14;
+                return colIndex < (akses.gettarif_lab() ? 14 : 7);
             }
             Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
@@ -261,15 +262,23 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                                    tbKamar.getValueAt(i,11).toString(),tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),
                                    tbKamar.getValueAt(i,14).toString(),tbKamar.getValueAt(i,16).toString()
                              });
-                        }else if(!tbKamar.getValueAt(i,15).toString().equals("")){
-                             Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,nilai_rujukan_pd=?,nilai_rujukan_pa=?,"+
-                                   "method=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",17,new String[]{
-                                   tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
-                                   tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
-                                   tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,11).toString(),
-                                   tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,14).toString(),tbKamar.getValueAt(i,16).toString(),
-                               tbKamar.getValueAt(i,15).toString()
-                             } );
+                        }else{
+                            if (akses.gettarif_lab()) {
+                                Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,nilai_rujukan_pd=?,nilai_rujukan_pa=?,"+
+                                    "method=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",17,new String[]{
+                                    tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
+                                    tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
+                                    tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,11).toString(),
+                                    tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,14).toString(),tbKamar.getValueAt(i,16).toString(),
+                                tbKamar.getValueAt(i,15).toString()
+                              } );
+                            } else {
+                                Sequel.mengupdateSmc("template_laboratorium","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,nilai_rujukan_pd=?,nilai_rujukan_pa=?,method=?,urut=?","id_template=?",
+                                      tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
+                                      tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,16).toString(),
+                                      tbKamar.getValueAt(i,15).toString()
+                                );
+                            }
                         }
                      }
                      tampil();
@@ -280,9 +289,19 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try{
-            Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
-            tabMode.removeRow(tbKamar.getSelectedRow());
-            urut();
+            if (!akses.gettarif_lab()) {
+                if(((Number)tbKamar.getValueAt(tbKamar.getSelectedRow(),14)).doubleValue()>0){
+                    JOptionPane.showMessageDialog(null,"Maaf, pemeriksaan yang sudah memiliki tarif tidak boleh dihapus...!!!");
+                }else{
+                    Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
+                    tabMode.removeRow(tbKamar.getSelectedRow());
+                    urut();
+                }
+            }else{
+                Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
+                tabMode.removeRow(tbKamar.getSelectedRow());
+                urut();
+            }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
         }
@@ -382,7 +401,7 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
 
     private void getData() {
         int row=tbKamar.getSelectedRow();
-        if(row!= -1){
+        if(akses.gettarif_lab()&&(row!= -1)){
             if((!tbKamar.getValueAt(row,7).toString().equals(""))
                     &&(!tbKamar.getValueAt(row,8).toString().equals(""))
                     &&(!tbKamar.getValueAt(row,9).toString().equals(""))

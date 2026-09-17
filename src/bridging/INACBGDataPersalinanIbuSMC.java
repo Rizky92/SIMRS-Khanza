@@ -922,7 +922,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         tbKelahiran.clearSelection();
         urutanLahir.setText(String.valueOf(tbKelahiran.getRowCount() + 1));
         caraLahir.setSelectedIndex(0);
-        Valid.setTglJamSmc(new Date(), tglKelahiran, cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran);
+        Valid.setTglJamSmc(tglKelahiran, cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran, new Date());
         letakJanin.setSelectedIndex(0);
         useManual.setSelectedIndex(0);
         useForcep.setSelectedIndex(0);
@@ -931,7 +931,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         spesimenDiambil.setSelectedIndex(0);
         lokasiSpesimen.setSelectedIndex(0);
         alasanSpesimenTakDiambil.setSelectedIndex(0);
-        Valid.setTglJamSmc(new Date(), tglSampel, cmbJamSampel, cmbMenitSampel, cmbDetikSampel);
+        Valid.setTglJamSmc(tglSampel, cmbJamSampel, cmbMenitSampel, cmbDetikSampel, new Date());
     }
 
     private void emptTeks2() {

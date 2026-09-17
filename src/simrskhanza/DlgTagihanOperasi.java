@@ -208,8 +208,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         TCari.requestFocus();
         ChkInput.setSelected(false);
         Date sekarang=new Date();
-        Valid.setTglJamSmc(sekarang,tgl,Jam,Menit,Detik);
-        Valid.setTglJamSmc(sekarang,tgl2,Jam2,Menit2,Detik2);
+        Valid.setTglJamSmc(tgl,Jam,Menit,Detik, sekarang);
+        Valid.setTglJamSmc(tgl2,Jam2,Menit2,Detik2, sekarang);
         isForm();
     }
 

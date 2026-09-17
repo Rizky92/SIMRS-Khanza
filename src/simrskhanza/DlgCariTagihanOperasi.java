@@ -111,7 +111,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         Jaringan.setDocument(new batasInput((int)100).getKata(Jaringan));
         NomorImplant.setDocument(new batasInput((int)50).getKata(NomorImplant));
         Laporan.setDocument(new batasInput((int)8000).getKata(Laporan));
-        Valid.setTglJamSmc(new Date(),tgl2,Jam2,Menit2,Detik2);
+        Valid.setTglJamSmc(tgl2,Jam2,Menit2,Detik2, new Date());
     }
     private double total=0;
     private int no=0;
@@ -3461,7 +3461,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                         PreOp.setText(rs2.getString("diagnosa_preop"));
                         PostOp.setText(rs2.getString("diagnosa_postop"));
                         Jaringan.setText(rs2.getString("jaringan_dieksekusi"));
-                        Valid.setTglJamSmc(rs2.getTimestamp("selesaioperasi"),tgl2,Jam2,Menit2,Detik2);
+                        Valid.setTglJamSmc(tgl2,Jam2,Menit2,Detik2, rs2.getTimestamp("selesaioperasi"));
                         DikirimPA.setSelectedItem(rs2.getString("permintaan_pa"));
                         NomorImplant.setText(rs2.getString("nomor_implan"));
                         Laporan.setText(rs2.getString("laporan_operasi"));

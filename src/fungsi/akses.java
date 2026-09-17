@@ -288,7 +288,8 @@ public final class akses {
         pengkajian_tindakan_invasif_non_bedah_smc = false,
         pengajuan_izin_smc = false,
         jam_masuk_smc = false,
-        jadwal_pegawai_smc = false;
+        jadwal_pegawai_smc = false,
+        template_laboratorium_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1561,6 +1562,7 @@ public final class akses {
                         akses.satu_sehat_kirim_composition=akses.getBoolean(rs2, "satu_sehat_kirim_composition");
                         akses.ringkasan_hutang_vendor_inventaris=akses.getBoolean(rs2, "ringkasan_hutang_vendor_inventaris");
                         akses.ringkasan_beban_hutang_lain=akses.getBoolean(rs2, "ringkasan_beban_hutang_lain");
+                        akses.template_laboratorium_smc=akses.getBoolean(rs2, "template_laboratorium_smc");
                         akses.set_resep_per_cara_bayar=akses.getBoolean(rs2, "set_resep_per_cara_bayar");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
@@ -2840,6 +2842,7 @@ public final class akses {
         akses.satu_sehat_kirim_composition=isadmin;
         akses.ringkasan_hutang_vendor_inventaris=isadmin;
         akses.ringkasan_beban_hutang_lain=isadmin;
+        akses.template_laboratorium_smc=isadmin;
         akses.set_resep_per_cara_bayar=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
@@ -4121,6 +4124,7 @@ public final class akses {
     public static boolean getsatu_sehat_kirim_composition(){return akses.satu_sehat_kirim_composition;}
     public static boolean getringkasan_hutang_vendor_inventaris(){return akses.ringkasan_hutang_vendor_inventaris;}
     public static boolean getringkasan_beban_hutang_lain(){return akses.ringkasan_beban_hutang_lain;}
+    public static boolean gettemplate_laboratorium_smc(){return akses.template_laboratorium_smc;}
     public static boolean getset_resep_per_cara_bayar(){return akses.set_resep_per_cara_bayar;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {
