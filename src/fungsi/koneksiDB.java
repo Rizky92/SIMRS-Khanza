@@ -1855,7 +1855,7 @@ public class koneksiDB {
     public static String TANGGALMUNDUR(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("TANGGALMUNDUR");
+            var=prop.getProperty("TANGGALMUNDUR", "yes");
         }catch(Exception e){
             var="yes";
         }
