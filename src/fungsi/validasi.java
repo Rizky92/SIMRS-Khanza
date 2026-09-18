@@ -286,9 +286,7 @@ public final class validasi {
     public void setTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik, Date tgljam) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(tgljam);
-        if (!getTglSmc(tgl).equals(getTglSmc(tgljam, "yyyy-MM-dd"))) {
-            tgl.setDate(tgljam);
-        }
+        tgl.setDate(tgljam);
         jam.setSelectedIndex(cal.get(Calendar.HOUR_OF_DAY));
         menit.setSelectedIndex(cal.get(Calendar.MINUTE));
         detik.setSelectedIndex(cal.get(Calendar.SECOND));
