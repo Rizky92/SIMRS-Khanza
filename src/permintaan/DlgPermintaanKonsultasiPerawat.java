@@ -1692,6 +1692,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
     }//GEN-LAST:event_ResponKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        autoNomor();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -1973,7 +1974,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         Rencana.setText("");
         Valid.setTglJamSmc(TanggalPermintaan, CmbJam, CmbMenit, CmbDetik, new Date());
         TanggalJawab.setDate(new Date());
-        // autoNomor();
+        autoNomor();
         ChkJln.setSelected(true);
         Situation.requestFocus();
     }
