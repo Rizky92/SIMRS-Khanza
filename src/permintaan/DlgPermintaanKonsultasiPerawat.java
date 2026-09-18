@@ -149,7 +149,6 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         ChkAccor.setSelected(false);
         isMenu();
         jamSmc();
-        autoNomor();
 
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
@@ -1693,6 +1692,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
     }//GEN-LAST:event_ResponKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        autoNomor();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
