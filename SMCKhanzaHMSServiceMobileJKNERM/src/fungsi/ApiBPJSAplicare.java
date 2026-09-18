@@ -1,5 +1,6 @@
 package fungsi;
 
+import fungsi.koneksiDB;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
@@ -23,7 +24,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiMobileJKN {        
+public class ApiBPJSAplicare {
     private String Key,Consid;
     private String salt;
     private String generateHmacSHA256Signature;
@@ -36,17 +37,17 @@ public class ApiMobileJKN {
     private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
     private ApiBPJSAesKeySpec mykey;
-    
-    public ApiMobileJKN(){
+
+    public ApiBPJSAplicare(){
         try {
-            Key = koneksiDB.SECRETKEYAPIMOBILEJKN();
-            Consid = koneksiDB.CONSIDAPIMOBILEJKN();
+            Key = koneksiDB.SECRETKEYAPIAPLICARE();
+            Consid = koneksiDB.CONSIDAPIAPLICARE();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
     }
 
-    public String getHmac(String utc) {               
+    public String getHmac(String utc) {
         salt = Consid +"&"+utc;
 	generateHmacSHA256Signature = null;
 	try {
@@ -58,7 +59,7 @@ public class ApiMobileJKN {
 	}
 	return generateHmacSHA256Signature;
     }
-    
+
     public String generateHmacSHA256Signature(String data, String key)throws GeneralSecurityException {
         hmacData = null;
 	try {
@@ -72,12 +73,7 @@ public class ApiMobileJKN {
 	    throw new GeneralSecurityException(e);
 	}
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        millis = System.currentTimeMillis();   
-        return millis/1000;
-    }
-    
+
     public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         System.out.println(data);
         mykey = ApiBPJSEnc.generateKey(Consid+Key+utc);
@@ -85,7 +81,12 @@ public class ApiMobileJKN {
         data=ApiBPJSLZString.decompressFromEncodedURIComponent(data);
         return data;
     }
-    
+
+    public long GetUTCdatetimeAsString(){
+        millis = System.currentTimeMillis();
+        return millis/1000;
+    }
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers= {
