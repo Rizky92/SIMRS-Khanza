@@ -1234,4 +1234,13 @@ public class koneksiDB {
         }
         return var;
     }
+
+    public static String DICOMROUTERAETITLESMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("DICOMROUTERAETITLESMC", "").trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
 }

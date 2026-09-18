@@ -19,8 +19,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.swing.Timer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -230,6 +232,7 @@ public class frmUtama extends javax.swing.JFrame {
                     specimenradiologi();
                     observationradiologi();
                     diagnosticreportradiologi();
+                    kirimDICOMRouterSmc();
                     servicerequestlabpk();
                     servicerequestlabmb();
                     specimenlabpk();
@@ -241,7 +244,6 @@ public class frmUtama extends javax.swing.JFrame {
                     careplan();
                     qrtelaahresep();
                     alergi();
-                    kirimdicomrouter();
                 }
             }
         };
@@ -8808,35 +8810,75 @@ public class frmUtama extends javax.swing.JFrame {
         }
     }
 
-    private void kirimdicomrouter() {
-        ApiOrthanc orthanc=new ApiOrthanc();
-        try{
-            ps=koneksi.prepareStatement(
-                   "select reg_periksa.no_rkm_medis from periksa_radiologi inner join reg_periksa on reg_periksa.no_rawat=periksa_radiologi.no_rawat where periksa_radiologi.tgl_periksa between ? and ? "
-            );
-            try {
-                ps.setString(1,Tanggal1.getText());
-                ps.setString(2,Tanggal2.getText());
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    root=orthanc.AmbilSeries(rs.getString(1),Tanggal1.getText().replaceAll("-",""),Tanggal2.getText().replaceAll("-",""));
-                    for(JsonNode list:root){
-                         orthanc.kirimKeModality(list.path("ID").asText());
-                    }
+    private void kirimDICOMRouterSmc() {
+        List<String[]> antrian = new ArrayList<>();
+        try (PreparedStatement psAntrian = koneksi.prepareStatement(
+            "select satu_sehat_accession_radiologi_smc.noorder, satu_sehat_accession_radiologi_smc.kd_jenis_prw, satu_sehat_accession_radiologi_smc.no_acsn " +
+            "from satu_sehat_accession_radiologi_smc inner join satu_sehat_diagnosticreport_radiologi on satu_sehat_diagnosticreport_radiologi.noorder = satu_sehat_accession_radiologi_smc.noorder " +
+            "and satu_sehat_diagnosticreport_radiologi.kd_jenis_prw = satu_sehat_accession_radiologi_smc.kd_jenis_prw " +
+            "inner join permintaan_radiologi on permintaan_radiologi.noorder = satu_sehat_accession_radiologi_smc.noorder " +
+            "inner join reg_periksa on reg_periksa.no_rawat = permintaan_radiologi.no_rawat " +
+            "where satu_sehat_accession_radiologi_smc.tgl_kirim_dicomrouter is null and reg_periksa.tgl_registrasi between ? and ? " +
+            "order by satu_sehat_accession_radiologi_smc.no_acsn"
+        )) {
+            psAntrian.setString(1, Tanggal1.getText());
+            psAntrian.setString(2, Tanggal2.getText());
+            try (ResultSet rsAntrian = psAntrian.executeQuery()) {
+                while (rsAntrian.next()) {
+                    antrian.add(new String[] {rsAntrian.getString("noorder"), rsAntrian.getString("kd_jenis_prw"), rsAntrian.getString("no_acsn")});
                 }
-            } catch (Exception ex) {
-                System.out.println("Notif : "+ex);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-                root = null;
             }
-        }catch(Exception ez){
-            System.out.println("Notifikasi : "+ez);
+        } catch (Exception e) {
+            TeksArea.append("DICOM Router : Gagal mengambil antrian study, " + e + "\n");
+            return;
+        }
+
+        if (antrian.isEmpty()) {
+            return;
+        }
+
+        String aet = koneksiDB.DICOMROUTERAETITLESMC();
+        if (aet.isBlank()) {
+            TeksArea.append("DICOM Router : DICOMROUTERAETITLESMC belum diisi, " + antrian.size() + " study tidak dikirim\n");
+            return;
+        }
+
+        ApiOrthanc orthanc = new ApiOrthanc();
+        String modality;
+        try {
+            List<String> daftarModality = orthanc.cariModalityAETSmc(aet);
+            if (1 != daftarModality.size()) {
+                TeksArea.append("DICOM Router : Ditemukan " + daftarModality.size() + " modality Orthanc dengan AET " + aet + ", harus tepat 1. " + antrian.size() + " study tidak dikirim\n");
+                return;
+            }
+            modality = daftarModality.get(0);
+        } catch (Exception e) {
+            TeksArea.append("DICOM Router : Gagal mengambil daftar modality Orthanc, " + e + "\n");
+            return;
+        }
+
+        for (String[] item : antrian) {
+            String keterangan = "DICOM Router : No.Order " + item[0] + ", Kode " + item[1] + ", Accession " + item[2];
+            try {
+                List<String> studyID = orthanc.cariStudyAccessionSmc(item[2]);
+                if (studyID.isEmpty()) {
+                    TeksArea.append(keterangan + " belum ada di Orthanc\n");
+                    continue;
+                }
+                JsonNode hasil = orthanc.kirimKeModalitySmc(studyID, modality);
+                int jumlahInstance = hasil.path("InstancesCount").asInt(0), jumlahGagal = hasil.path("FailedInstancesCount").asInt(0);
+                if ((0 < jumlahInstance) && (0 == jumlahGagal)) {
+                    if (Sequel.queryu2tf("update satu_sehat_accession_radiologi_smc set tgl_kirim_dicomrouter = now() where noorder = ? and kd_jenis_prw = ?", 2, new String[] {item[0], item[1]})) {
+                        TeksArea.append(keterangan + " terkirim ke " + modality + ", " + studyID.size() + " study, " + jumlahInstance + " instance\n");
+                    } else {
+                        TeksArea.append(keterangan + " terkirim ke " + modality + ", tetapi tanggal kirim gagal disimpan\n");
+                    }
+                } else {
+                    TeksArea.append(keterangan + " gagal dikirim ke " + modality + ", " + jumlahGagal + " dari " + jumlahInstance + " instance gagal. Respon : " + hasil + "\n");
+                }
+            } catch (Exception e) {
+                TeksArea.append(keterangan + " gagal dikirim ke " + modality + ", " + e + "\n");
+            }
         }
     }
 }
