@@ -1,3 +1,8 @@
+---
+name: db-schema-change
+description: Rules for changing the database structure in this repo — new tables, columns, indexes, or foreign keys. Use whenever a task adds or alters a table/column, or whenever you are about to touch any `.sql` file. Every structural change goes in `sik_modif.sql` only, alphabetically sorted by table name, with FK constraints appended separately.
+---
+
 # Database structure changes
 
 Applies to any agent working in this repository.
@@ -54,4 +59,4 @@ Conventions to keep: `CREATE TABLE IF NOT EXISTS`, `ENGINE = InnoDB CHARACTER SE
 and `FOREIGN KEY IF NOT EXISTS` in the trailing constraint block (itself sorted alphabetically by table name).
 
 ## Naming
-New tables added for this fork are affixed `_smc`. See [`smc-conventions.md`](smc-conventions.md).
+New tables added for this fork are affixed `_smc`. See [`smc-conventions.md`](../smc-conventions/SKILL.md).
