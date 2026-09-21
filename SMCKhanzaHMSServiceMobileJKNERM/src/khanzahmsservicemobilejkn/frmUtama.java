@@ -165,7 +165,7 @@ public class frmUtama extends javax.swing.JFrame {
                         Tanggal1.setDate(c.getTime());
                     }
 
-                    if (menit % 60 == 0) {
+                    if (menit == 0) {
                         koneksi = koneksiDB.condb();
                     }
 
