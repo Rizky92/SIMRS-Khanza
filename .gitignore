@@ -1,7 +1,7 @@
 # Root level ignore
 /.vscode/
 /.idea/
-/.claude/
+/.claude/*
 /*.css
 /*.html
 /*.html_files
