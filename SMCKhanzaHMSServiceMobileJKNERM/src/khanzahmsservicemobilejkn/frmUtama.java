@@ -164,7 +164,10 @@ public class frmUtama extends javax.swing.JFrame {
                         TeksArea.setText("");
                         Tanggal1.setDate(c.getTime());
                     }
-                    koneksi = koneksiDB.condb();
+
+                    if (menit % 60 == 0) {
+                        koneksi = koneksiDB.condb();
+                    }
 
                     // Addantrean MobileJKN
                     try (PreparedStatement ps = koneksi.prepareStatement(
