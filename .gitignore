@@ -29,6 +29,7 @@
 CLAUDE.local.md
 
 # Don't ignore these
+!/.claude/skills/
 !lisensi.txt
 !README.TXT
 !sik_bersih.sql

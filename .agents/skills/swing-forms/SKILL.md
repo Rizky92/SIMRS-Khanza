@@ -15,7 +15,7 @@ The two files must agree:
 
 - The design maps to the `initComponents()` method in the java file.
 - Every event maps to a method marked with `//GEN-FIRST:event_<event method name>` after the opening curly
-  brace and `//GEN-LAST:event<event method name>` after the closing curly brace.
+  brace and `//GEN-LAST:event_<event method name>` after the closing curly brace.
 
 A change on either side must be reflected on the other.
 
@@ -59,11 +59,12 @@ Any component not listed falls back to its Swing counterpart.
 ## Layout metrics
 
 ### Heights
-| Component | Height |
-| --- | --- |
-| Label, TextBox, PasswordBox, CekBox, radio button, ComboBox, Tanggal | 23 |
-| Button | 30 |
-| Clip button (quick-pick button, icon `/picture/190.png`) | 23 (width 28) |
+| Component | Width | Height |
+| --- | --- | --- |
+| Label, TextBox, PasswordBox, CekBox, radio button, ComboBox | \<per design spec\> | 23 |
+| Tanggal | - 90 (dd-MM-yyyy format)<br>- \<per design spec\> (for everything else) | 23 |
+| Jam, Menit, Detik ComboBox | 62 | 23 |
+| Button | - 100 (CRUD Action button)<br>- 28 (Clip/quick-pick button, icon `/picture/190.png`)<br>- \<per design spec\> (for everything else) | - 23 (Clip/quick-pick button, icon `/picture/190.png`)<br>- 30 (for everything else) |
 
 Clip buttons are the exception to the button height: they sit inside an input row, so they are **28 x 23**
 — matching the input height, not the button height.
