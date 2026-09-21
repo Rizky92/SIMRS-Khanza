@@ -10,6 +10,8 @@
 /lib/
 /setting/*.ini
 /setting/*.xml
+report/.settings/org.eclipse.core.resources.prefs
+report/.project
 
 *.DS_Store
 *.*~*
