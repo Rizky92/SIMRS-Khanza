@@ -511,6 +511,15 @@ public class koneksiDB {
         }
     }
 
+    public static boolean KIRIMORDERKEMODALITYSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("KIRIMORDERKEMODALITYSMC", "no").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
@@ -1846,7 +1855,7 @@ public class koneksiDB {
     public static String TANGGALMUNDUR(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("TANGGALMUNDUR");
+            var=prop.getProperty("TANGGALMUNDUR", "yes");
         }catch(Exception e){
             var="yes";
         }
