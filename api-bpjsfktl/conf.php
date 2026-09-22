@@ -1,5 +1,6 @@
 <?php
     date_default_timezone_set('Asia/Makassar');
+    mysqli_report(MYSQLI_REPORT_OFF);
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
     define('DB_PASS', '');
