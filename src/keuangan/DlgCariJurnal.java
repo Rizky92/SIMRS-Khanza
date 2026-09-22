@@ -494,7 +494,7 @@ public class DlgCariJurnal extends javax.swing.JDialog {
                         nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         tipe.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString());
                         balance.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString());
-                        saldoawal.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),5).toString());
+                        saldoawal.setText(Valid.SetAngka(((Number) rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),5)).doubleValue()));
                         kdrek.requestFocus();
                     }
                 }
