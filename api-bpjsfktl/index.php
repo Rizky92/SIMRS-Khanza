@@ -539,7 +539,7 @@
                                                                     )
                                                                 );
                                                                 http_response_code(201);
-                                                            } else if ($decode['jeniskunjungan'] == '3' && (strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '$decode[nomorreferensi]'")))) < 0) {
+                                                            } else if ($decode['jeniskunjungan'] == '3' && (strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '".validTeks4($decode['nomorreferensi'], 30)."'")))) < 0) {
                                                                 $response = [
                                                                     'metadata' => [
                                                                         'message' => 'Pengambilan antrian poli tidak boleh maju dari tanggal rencana kontrol. Minimal pengambilan mulai tanggal ' . date('d-m-Y', $tanggalskdp) . '.',
@@ -587,9 +587,9 @@
                                                                     $queryregistrasi = bukaquery2(sprintf("insert into reg_periksa values('%s', '%s', '%s', '%s', '%s', '%s', '%s',
                                                                         '%s', '%s, %s, %s, %s, %s', '%s', '%s', 'Belum', '%s', 'Ralan', '%s', '%s', '%s', 'Belum Bayar', '%s')",
                                                                         $noReg, $no_rawat, validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $kddokter,
-                                                                        $datapeserta['no_rkm_medis'], $kdpoli, $datapeserta['namakeluarga'], $datapeserta['alamatpj'],
-                                                                        $datapeserta['kelurahanpj'], $datapeserta['kecamatanpj'], $datapeserta['kabupatenpj'],
-                                                                        $datapeserta['propinsipj'], $datapeserta['keluarga'],
+                                                                        $datapeserta['no_rkm_medis'], $kdpoli, escapeSmc($datapeserta['namakeluarga']), escapeSmc($datapeserta['alamatpj']),
+                                                                        escapeSmc($datapeserta['kelurahanpj']), escapeSmc($datapeserta['kecamatanpj']), escapeSmc($datapeserta['kabupatenpj']),
+                                                                        escapeSmc($datapeserta['propinsipj']), $datapeserta['keluarga'],
                                                                         getOne2("select registrasilama from poliklinik where kd_poli = '$kdpoli'"),
                                                                         str_replace('0', 'Lama', str_replace('1', 'Baru', $statusdaftar)), CARABAYAR,
                                                                         $umur, $sttsumur, $statuspoli
@@ -644,9 +644,9 @@
                                                                         $queryregistrasi = bukaquery2(sprintf("insert into reg_periksa values('%s', '%s', '%s', '%s', '%s', '%s', '%s',
                                                                             '%s', '%s, %s, %s, %s, %s', '%s', '%s', 'Belum', '%s', 'Ralan', '%s', '%s', '%s', 'Belum Bayar', '%s')",
                                                                             $noReg, $no_rawat, validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $kddokter,
-                                                                            $datapeserta['no_rkm_medis'], $kdpoli, $datapeserta['namakeluarga'], $datapeserta['alamatpj'],
-                                                                            $datapeserta['kelurahanpj'], $datapeserta['kecamatanpj'], $datapeserta['kabupatenpj'],
-                                                                            $datapeserta['propinsipj'], $datapeserta['keluarga'],
+                                                                            $datapeserta['no_rkm_medis'], $kdpoli, escapeSmc($datapeserta['namakeluarga']), escapeSmc($datapeserta['alamatpj']),
+                                                                            escapeSmc($datapeserta['kelurahanpj']), escapeSmc($datapeserta['kecamatanpj']), escapeSmc($datapeserta['kabupatenpj']),
+                                                                            escapeSmc($datapeserta['propinsipj']), $datapeserta['keluarga'],
                                                                             getOne2("select registrasilama from poliklinik where kd_poli = '$kdpoli'"),
                                                                             str_replace('0', 'Lama', str_replace('1', 'Baru', $statusdaftar)), CARABAYAR,
                                                                             $umur, $sttsumur, $statuspoli

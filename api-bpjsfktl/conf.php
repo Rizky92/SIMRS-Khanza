@@ -638,6 +638,13 @@
         return $result;
     }
 
+    function escapeSmc($string) {
+        $konektor = bukakoneksi();
+        $result = mysqli_real_escape_string($konektor, (string) $string);
+        mysqli_close($konektor);
+        return $result;
+    }
+
     date_default_timezone_set('Asia/Makassar');
     $month      = date('Y-m');
     $date       = date('Y-m-d');
