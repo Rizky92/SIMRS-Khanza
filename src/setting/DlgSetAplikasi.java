@@ -71,7 +71,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
         tabMode = new DefaultTableModel(null, new Object[] {
             "Faskes", "Alamat", "Kota", "Propinsi", "Aktifkan?", "Wallpaper", "Kontak", "Email", "Logo", "Kode PPK BPJS",
-            "Kode PPK Apotek Online", "Kode PPK Inhealth", "Kode PPK Kemenkes", "Batas Edit 2x24 Jam", "Sistem Import Koding"
+            "Kode PPK Apotek Online", "Kode PPK Inhealth", "Kode PPK Kemenkes", "Batas Edit 2x24 Jam", "Sistem Import Koding", "Cutoff Gaji"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -166,6 +166,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         label45 = new widget.Label();
         label46 = new widget.Label();
         kdPPKApotekOnline = new widget.TextBox();
+        label47 = new widget.Label();
+        CutoffGaji = new widget.ComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -474,6 +476,17 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         panelGlass1.add(kdPPKApotekOnline);
         kdPPKApotekOnline.setBounds(628, 280, 110, 23);
 
+        label47.setText("Cutoff Gaji :");
+        label47.setName("label47"); // NOI18N
+        label47.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass1.add(label47);
+        label47.setBounds(554, 250, 70, 23);
+
+        CutoffGaji.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Akhir Bulan", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        CutoffGaji.setName("CutoffGaji"); // NOI18N
+        panelGlass1.add(CutoffGaji);
+        CutoffGaji.setBounds(628, 250, 110, 23);
+
         internalFrame1.add(panelGlass1, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
@@ -557,10 +570,10 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
             Sequel.menghapusSmc("setting");
             if (Sequel.executeRawSmc("insert into setting (nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, " +
-                "pemberlakuan_2x24_jam, sistem_import_koding, kode_ppkapotek, wallpaper, logo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?))",
+                "pemberlakuan_2x24_jam, sistem_import_koding, kode_ppkapotek, tgl_cutoff_gaji, wallpaper, logo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, nullif(?, ''), from_base64(?), from_base64(?))",
                 Nm.getText(), Almt.getText(), Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(),
                 kdPPKInhealth.getText(), kdPPKKemenkes.getText(), BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(),
-                kdPPKApotekOnline.getText(), gb, logo)
+                kdPPKApotekOnline.getText(), 0 == CutoffGaji.getSelectedIndex() ? "" : CutoffGaji.getSelectedItem().toString(), gb, logo)
             ) {
                 emptTeks();
                 runBackground(() ->tampil());
@@ -648,6 +661,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
+    private widget.ComboBox CutoffGaji;
     private widget.TextBox EGb;
     private widget.TextBox ELogo;
     private widget.TextBox Email;
@@ -680,6 +694,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private widget.Label label44;
     private widget.Label label45;
     private widget.Label label46;
+    private widget.Label label47;
     private widget.panelGlass panelGlass1;
     private widget.panelisi panelisi1;
     private widget.ScrollPane scrollPane2;
@@ -692,13 +707,13 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         try (ResultSet rs = koneksi.createStatement().executeQuery(
             "select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, to_base64(wallpaper) as wallpaper, " +
             "kontak, email, to_base64(logo) as logo, kode_ppk, kode_ppkapotek, kode_ppkinhealth, kode_ppkkemenkes, " +
-            "pemberlakuan_2x24_jam, sistem_import_koding from setting"
+            "pemberlakuan_2x24_jam, sistem_import_koding, tgl_cutoff_gaji from setting"
         )) {
             if (rs.next()) {
                 tabMode.addRow(new Object[] {
                     rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                     rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
-                    rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15)
+                    rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), null == rs.getString(16) ? "Akhir Bulan" : rs.getString(16)
                 });
             }
         } catch (Exception e) {
@@ -722,6 +737,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             kdPPKKemenkes.setText((String) tbAdmin.getValueAt(row, 12));
             BatasEdit2x24jam.setSelectedItem((String) tbAdmin.getValueAt(row, 13));
             SistemImportKoding.setSelectedItem((String) tbAdmin.getValueAt(row, 14));
+            CutoffGaji.setSelectedItem((String) tbAdmin.getValueAt(row, 15));
             try {
                 ((Painter) PhotoGambar).fromBase64((String) tbAdmin.getValueAt(row, 5));
                 ((Painter) PhotoLogo).fromBase64((String) tbAdmin.getValueAt(row, 8));
@@ -741,6 +757,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         YesNo.setSelectedItem("No");
         BatasEdit2x24jam.setSelectedIndex(0);
         SistemImportKoding.setSelectedIndex(2);
+        CutoffGaji.setSelectedIndex(0);
         kdPPKBPJS.setText("");
         kdPPKInhealth.setText("");
         kdPPKKemenkes.setText("");

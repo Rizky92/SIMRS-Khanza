@@ -1931,6 +1931,8 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','I
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `sistem_import_koding`;
 
+ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `tgl_cutoff_gaji` tinyint(2) UNSIGNED NULL DEFAULT NULL AFTER `kode_ppkapotek`;
+
 CREATE TABLE IF NOT EXISTS `smc_master_masalah_keperawatan`  (
   `menu` varchar(50) NOT NULL,
   `kode_masalah` varchar(3) NOT NULL,
@@ -2243,6 +2245,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `jam_masuk_smc` enum('true','false')
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `jadwal_pegawai_smc` enum('true','false') NULL DEFAULT NULL AFTER `jam_masuk_smc`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_laboratorium_smc` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_beban_hutang_lain`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `rekap_kehadiran_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_laboratorium_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
