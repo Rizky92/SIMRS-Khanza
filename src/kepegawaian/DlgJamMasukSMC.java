@@ -15,6 +15,9 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -37,7 +40,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import smc.utils.ExcelSMC;
 
 /**
  *
@@ -660,7 +663,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
     private void BtnImporActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImporActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Pilih berkas jadwal dinas");
-        chooser.setFileFilter(new FileNameExtensionFilter("Berkas Excel (*.xlsx)", "xlsx"));
+        chooser.setFileFilter(new FileNameExtensionFilter("Berkas Excel (*.xlsx, *.xls)", "xlsx", "xls"));
         if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
             return;
         }
@@ -669,7 +672,7 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
         int dilewati = 0;
         Map<String, String[]> impor = new LinkedHashMap<>();
         List<String> bermasalah = new ArrayList<>();
-        try (Workbook workbook = WorkbookFactory.create(chooser.getSelectedFile())) {
+        try (Workbook workbook = ExcelSMC.openExcel(chooser.getSelectedFile())) {
             Sheet sheet = workbook.getSheetAt(0);
             Set<String> terdaftar = getKodeShift();
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -1083,7 +1086,15 @@ public class DlgJamMasukSMC extends javax.swing.JDialog {
 
     private String bacaJam(Row baris, int kolom) {
         Cell cell = baris.getCell(kolom);
-        if (cell == null || !CellType.NUMERIC.equals(cell.getCellType())) {
+        if (null != cell && CellType.STRING.equals(cell.getCellType())) {
+            try {
+                LocalTime jam = LocalTime.parse(cell.getStringCellValue().trim(), DateTimeFormatter.ofPattern("H:mm[:ss]"));
+                return String.format("%02d:%02d:00", jam.getHour(), jam.getMinute());
+            } catch (DateTimeParseException e) {
+                return "00:00:00";
+            }
+        }
+        if (null == cell || !CellType.NUMERIC.equals(cell.getCellType())) {
             return "00:00:00";
         }
 
