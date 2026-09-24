@@ -4,7 +4,7 @@
 	require_once "conf/command.php";
 	if (cekSessiAdmin())
 	{
-	    session_unregister("ses_admin_medrec");
+	    unset($_SESSION["ses_admin_medrec"]);
 	}
 
 	header("Location:index.php");

@@ -9,30 +9,30 @@
 
 
  	function cekSessiKunjung() {
-		if (session_is_registered('ses_kunjung'))
+		if (isset($_SESSION['ses_kunjung']))
 			return true;
 		else
 			return false;
 	}
 
 	function cekSessiAdmin() {
-		if (session_is_registered('ses_admin'))
+		if (isset($_SESSION['ses_admin']))
 			return true;
 		else
 			return false;
 	}
 
         function cekSessiKelas() {
-		if (session_is_registered('ses_billing'))
+		if (isset($_SESSION['ses_billing']))
 			return true;
 		else
 			return false;
 	}
 
         function cekUser() {
-		if (session_is_registered('ses_admin'))
+		if (isset($_SESSION['ses_admin']))
 			return true;
-		elseif (session_is_registered('ses_billing'))
+		elseif (isset($_SESSION['ses_billing']))
 			return true;
 		else
 			return false;

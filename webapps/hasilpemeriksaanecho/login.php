@@ -14,7 +14,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin_gambarpemeriksaanecho");
+                unset($_SESSION["ses_admin_gambarpemeriksaanecho"]);
             }
             $url = "index.php?act=HomeAdmin";
         }

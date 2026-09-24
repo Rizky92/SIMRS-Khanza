@@ -32,7 +32,7 @@
                 HapusAll(" sesion ");
                 InsertData(" sesion ","'$nip'");
                 $ses_pegawai = $hasil2[0];
-                session_register("ses_pegawai");
+                $_SESSION["ses_pegawai"] = $ses_pegawai;
                 $url = "index.php?act=HomeAdmin";
                 header("Location:".$url);
             }
@@ -42,7 +42,7 @@
              InsertData(" sesion ","'$nip'");
              if($type=='ADMIN'){
                  $ses_admin = $hasil[0];
-                 session_register("ses_admin");
+                 $_SESSION["ses_admin"] = $ses_admin;
                  $url = "index.php?act=HomeAdmin";
              }
             header("Location:".$url);
