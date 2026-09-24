@@ -644,7 +644,7 @@ import keuangan.DlgPembayaranRanapPerhari;
 import keuangan.DlgPendapatanPerAKun;
 import keuangan.DlgPendapatanPerAKunClosing;
 import keuangan.DlgPendapatanPerCaraBayar;
-import keuangan.DlgPengaturanRekening;
+import keuangan.DlgPengaturanRekeningSMC;
 import keuangan.DlgPengeluaranHarian;
 import keuangan.DlgPengeluaranPengeluaran;
 import keuangan.DlgPengembalianDepositPasien;
@@ -10760,7 +10760,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgPengaturanRekening aplikasi=new DlgPengaturanRekening(this,false);
+        DlgPengaturanRekeningSMC aplikasi=new DlgPengaturanRekeningSMC(this,false);
         aplikasi.isCek();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
