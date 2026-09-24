@@ -10,17 +10,17 @@ package khanzahmsservicemobilejkn;
  * @author windiartonugroho
  */
 public class KhanzaHMSServiceMobileJKN {
-    
+
 
     /**
      * @param args the command line arguments
      */
-    
+
 
     public static void main(String[] args) {
         new frmUtama().setVisible(true);
     }
-    
-    
-    
+
+
+
 }

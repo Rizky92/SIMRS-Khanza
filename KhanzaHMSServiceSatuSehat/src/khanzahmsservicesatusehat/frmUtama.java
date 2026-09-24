@@ -45,8 +45,8 @@ public class frmUtama extends javax.swing.JFrame {
     private ResultSet rs;
     private String[] arrSplit;
     private SimpleDateFormat tanggalFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private Date date = new Date();  
-    private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
+    private Date date = new Date();
+    private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();
 
     /**
      * Creates new form frmUtama
@@ -58,13 +58,13 @@ public class frmUtama extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        
+
         this.setSize(490,340);
-        
-        date = new Date();  
-        Tanggal1.setText(tanggalFormat.format(date)); 
-        Tanggal2.setText(tanggalFormat.format(date)); 
-        
+
+        date = new Date();
+        Tanggal1.setText(tanggalFormat.format(date));
+        Tanggal2.setText(tanggalFormat.format(date));
+
         jam();
     }
 
@@ -138,7 +138,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -205,16 +205,16 @@ public class frmUtama extends javax.swing.JFrame {
                 detik = nol_detik + Integer.toString(nilai_detik);
                 if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
                     TeksArea.setText("");
-                    date = new Date();  
-                    Tanggal1.setText(tanggalFormat.format(date)); 
-                    Tanggal2.setText(tanggalFormat.format(date)); 
+                    date = new Date();
+                    Tanggal1.setText(tanggalFormat.format(date));
+                    Tanggal2.setText(tanggalFormat.format(date));
                 }
-                
+
                 if(detik.equals("01")&&(nilai_menit%4==0)){
                     encounter2();
                     servicerequestradiologi();
                 }
-                
+
                 if((nilai_jam%4==0)&&(detik.equals("01")&&menit.equals("01"))){
                     medication();
                     encounter();
@@ -247,7 +247,7 @@ public class frmUtama extends javax.swing.JFrame {
         };
         new Timer(1000, taskPerformer).start();
     }
-    
+
     private void encounter() {
         try{
             ps=koneksi.prepareStatement(
@@ -396,7 +396,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "]" +
                                             "}";
                                 }
-                                    
+
                                 TeksArea.append("URL : "+link+"/Encounter\n");
                                 TeksArea.append("Request JSON : "+json+"\n");
                                 requestEntity = new HttpEntity(json,headers);
@@ -550,7 +550,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "]" +
                                             "}";
                                 }
-                                    
+
                                 TeksArea.append("URL : "+link+"/Encounter/"+rs.getString("id_encounter")+"\n");
                                 TeksArea.append("Request JSON : "+json+"\n");
                                 requestEntity = new HttpEntity(json,headers);
@@ -585,7 +585,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+ez);
         }
     }
-    
+
     private void observationTTV(){
         try{
             ps=koneksi.prepareStatement(
@@ -645,6 +645,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Suhu Badan di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("suhu_tubuh").replaceAll(",",".")+"," +
                                                 "\"unit\": \"degree Celsius\"," +
@@ -740,6 +741,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Suhu Badan di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("suhu_tubuh").replaceAll(",",".")+"," +
                                                 "\"unit\": \"degree Celsius\"," +
@@ -838,7 +840,8 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
                                                 "\"display\": \"Pemeriksaan Fisik Respirasi di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
-                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("respirasi")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
@@ -933,7 +936,8 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
                                                 "\"display\": \"Pemeriksaan Fisik Respirasi di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
-                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("respirasi")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
@@ -1033,6 +1037,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Nadi di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("nadi")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
@@ -1128,6 +1133,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Nadi di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("nadi")+"," +
                                                 "\"unit\": \"breaths/minute\"," +
@@ -1227,6 +1233,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik SpO2  di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("spo2")+"," +
                                                 "\"unit\": \"percent saturation\"," +
@@ -1322,6 +1329,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik SpO2  di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("spo2")+"," +
                                                 "\"unit\": \"percent saturation\"," +
@@ -1421,6 +1429,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik GCS di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("gcs")+"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
@@ -1515,6 +1524,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik GCS di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("gcs")+"," +
                                                 "\"system\": \"http://unitsofmeasure.org\"," +
@@ -1613,6 +1623,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Kesadaran di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueCodeableConcept\": {" +
                                                 "\"text\": \""+rs.getString("kesadaran").replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
                                             "}" +
@@ -1705,6 +1716,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Kesadaran di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueCodeableConcept\": {" +
                                                 "\"text\": \""+rs.getString("kesadaran").replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
                                             "}" +
@@ -1819,6 +1831,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Tensi di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"component\" : ["+
                                                 "{" +
                                                     "\"code\" : {" +
@@ -1962,6 +1975,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Tensi di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"component\" : ["+
                                                 "{" +
                                                     "\"code\" : {" +
@@ -2091,6 +2105,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Tinggi Badan di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("tinggi").replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
@@ -2186,6 +2201,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Tinggi Badan di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("tinggi").replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
@@ -2285,6 +2301,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Berat Badan di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("berat").replaceAll(",",".")+"," +
                                                 "\"unit\": \"kilogram\"," +
@@ -2322,7 +2339,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,pasien.nm_pasien,pasien.no_ktp,satu_sehat_encounter.id_encounter,pegawai.no_ktp as ktppraktisi,pemeriksaan_ranap.tgl_perawatan,"+
                    "pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.berat,ifnull(satu_sehat_observationttvbb.id_observation,'') as satu_sehat_observationttvbb "+
@@ -2380,6 +2397,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Berat Badan di Rawat Inap, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("berat").replaceAll(",",".")+"," +
                                                 "\"unit\": \"kilogram\"," +
@@ -2420,7 +2438,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,pasien.nm_pasien,pasien.no_ktp,satu_sehat_encounter.id_encounter,pegawai.no_ktp as ktppraktisi,pemeriksaan_ralan.tgl_perawatan,"+
@@ -2479,6 +2497,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"display\": \"Pemeriksaan Fisik Lingkar Perut di Rawat Jalan/IGD, Pasien "+rs.getString("nm_pasien")+" Pada Tanggal "+rs.getString("tgl_perawatan")+" Jam "+rs.getString("jam_rawat")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_perawatan")+"T"+rs.getString("jam_rawat")+"+07:00\"," +
                                             "\"valueQuantity\": {" +
                                                 "\"value\": "+rs.getString("lingkar_perut").replaceAll(",",".")+"," +
                                                 "\"unit\": \"centimeter\"," +
@@ -2520,7 +2539,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void clinicalimpression(){
         try{
             ps=koneksi.prepareStatement(
@@ -2628,7 +2647,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,pasien.no_ktp,satu_sehat_encounter.id_encounter,pegawai.no_ktp as ktppraktisi,"+
                    "pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.penilaian,"+
@@ -2736,7 +2755,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void vaksin(){
         try{
             ps=koneksi.prepareStatement(
@@ -2877,7 +2896,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,pasien.no_ktp,satu_sehat_encounter.id_encounter,satu_sehat_mapping_vaksin.vaksin_code,satu_sehat_mapping_vaksin.vaksin_system,"+
                    "satu_sehat_mapping_vaksin.kode_brng,satu_sehat_mapping_vaksin.vaksin_display,satu_sehat_mapping_vaksin.route_code,satu_sehat_mapping_vaksin.route_system,"+
@@ -3020,7 +3039,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void prosedur(){
         try{
             ps=koneksi.prepareStatement(
@@ -3108,7 +3127,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,pasien.nm_pasien,pasien.no_ktp,reg_periksa.status_lanjut,"+
                    "concat(reg_periksa.tgl_registrasi,'T',reg_periksa.jam_reg,'+07:00') as pulang,satu_sehat_encounter.id_encounter,prosedur_pasien.kode,icd9.deskripsi_panjang,"+
@@ -3198,7 +3217,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void condition(){
         try{
             ps=koneksi.prepareStatement(
@@ -3291,7 +3310,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,pasien.nm_pasien,pasien.no_ktp,reg_periksa.status_lanjut,concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) as pulang,"+
                    "satu_sehat_encounter.id_encounter,diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,ifnull(satu_sehat_condition.id_condition,'') as id_condition "+
@@ -3386,7 +3405,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void dietgizi(){
         try{
             ps=koneksi.prepareStatement(
@@ -3509,7 +3528,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
                    "pasien.nm_pasien,pasien.no_ktp,satu_sehat_encounter.id_encounter,catatan_adime_gizi.instruksi,"+
@@ -3634,7 +3653,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void medication(){
         try{
             ps=koneksi.prepareStatement(
@@ -3725,7 +3744,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void medicationrequest(){
         try{
             ps=koneksi.prepareStatement(
@@ -3769,7 +3788,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3891,7 +3910,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "pegawai.nama,pegawai.no_ktp as ktppraktisi,satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -3933,7 +3952,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4055,7 +4074,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "pegawai.nama,pegawai.no_ktp as ktppraktisi,satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -4099,7 +4118,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4221,7 +4240,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "pegawai.nama,pegawai.no_ktp as ktppraktisi,satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -4265,7 +4284,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4391,7 +4410,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void medicationdispense(){
         try{
             ps=koneksi.prepareStatement(
@@ -4448,7 +4467,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4575,7 +4594,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "pegawai.nama,pegawai.no_ktp as ktppraktisi,satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -4630,7 +4649,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -4761,7 +4780,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void servicerequestradiologi() {
         try{
             ps=koneksi.prepareStatement(
@@ -4877,7 +4896,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void specimenradiologi() {
         try{
             ps=koneksi.prepareStatement(
@@ -4967,7 +4986,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select pasien.nm_pasien,pasien.no_ktp,permintaan_radiologi.noorder,permintaan_radiologi.tgl_sampel,permintaan_radiologi.jam_sampel,"+
@@ -5057,7 +5076,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void observationradiologi() {
         try{
             ps=koneksi.prepareStatement(
@@ -5139,6 +5158,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Specimen/"+rs.getString("id_specimen")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
                                             "\"valueString\": \""+rs.getString("hasil").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                        "}";
                                 TeksArea.append("URL : "+link+"/Observation");
@@ -5174,7 +5194,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_radiologi.noorder,"+
@@ -5255,6 +5275,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Specimen/"+rs.getString("id_specimen")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
                                             "\"valueString\": \""+rs.getString("hasil").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                        "}";
                                 TeksArea.append("URL : "+link+"/Observation");
@@ -5291,7 +5312,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void diagnosticreportradiologi() {
         try{
             ps=koneksi.prepareStatement(
@@ -5423,7 +5444,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,periksa_radiologi.kd_dokter,pegawai.nama,pegawai.no_ktp as ktpdokter,"+
@@ -5555,7 +5576,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void servicerequestlabpk() {
         try{
             ps=koneksi.prepareStatement(
@@ -5671,7 +5692,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.kd_dokter,pegawai.nama,pegawai.no_ktp as ktpdokter,"+
@@ -5787,7 +5808,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void servicerequestlabmb() {
         try{
             ps=koneksi.prepareStatement(
@@ -5903,7 +5924,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.kd_dokter,pegawai.nama,pegawai.no_ktp as ktpdokter,"+
@@ -6019,7 +6040,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void specimenlabpk() {
         try{
             ps=koneksi.prepareStatement(
@@ -6112,7 +6133,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_lab.noorder,"+
@@ -6205,7 +6226,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void specimenlabmb() {
         try{
             ps=koneksi.prepareStatement(
@@ -6298,7 +6319,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_labmb.noorder,"+
@@ -6391,7 +6412,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void observationlabpk() {
         try{
             ps=koneksi.prepareStatement(
@@ -6476,6 +6497,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Specimen/"+rs.getString("id_specimen")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
                                             "\"valueString\": \""+("Hasil Lab : "+rs.getString("nilai")+" "+rs.getString("satuan")+", Nilai Rujukan : "+rs.getString("nilai_rujukan")+(rs.getString("keterangan").equals("")?"":", Keterangan : "+rs.getString("keterangan"))).replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                        "}";
                                 TeksArea.append("URL : "+link+"/Observation");
@@ -6511,7 +6533,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_lab.noorder,"+
@@ -6595,6 +6617,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Specimen/"+rs.getString("id_specimen")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
                                             "\"valueString\": \""+("Hasil Lab : "+rs.getString("nilai")+" "+rs.getString("satuan")+", Nilai Rujukan : "+rs.getString("nilai_rujukan")+(rs.getString("keterangan").equals("")?"":", Keterangan : "+rs.getString("keterangan"))).replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                        "}";
                                 TeksArea.append("URL : "+link+"/Observation");
@@ -6631,7 +6654,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void observationlabmb() {
         try{
             ps=koneksi.prepareStatement(
@@ -6716,6 +6739,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Specimen/"+rs.getString("id_specimen")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
                                             "\"valueString\": \""+("Hasil Lab : "+rs.getString("nilai")+" "+rs.getString("satuan")+", Nilai Rujukan : "+rs.getString("nilai_rujukan")+(rs.getString("keterangan").equals("")?"":", Keterangan : "+rs.getString("keterangan"))).replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                        "}";
                                 TeksArea.append("URL : "+link+"/Observation");
@@ -6751,7 +6775,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_labmb.noorder,"+
@@ -6835,6 +6859,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Specimen/"+rs.getString("id_specimen")+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
+                                            "\"issued\": \""+rs.getString("tgl_hasil")+"T"+rs.getString("jam_hasil")+"+07:00\"," +
                                             "\"valueString\": \""+("Hasil Lab : "+rs.getString("nilai")+" "+rs.getString("satuan")+", Nilai Rujukan : "+rs.getString("nilai_rujukan")+(rs.getString("keterangan").equals("")?"":", Keterangan : "+rs.getString("keterangan"))).replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                        "}";
                                 TeksArea.append("URL : "+link+"/Observation");
@@ -6871,7 +6896,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void diagnosticreportlabpk() {
         try{
             ps=koneksi.prepareStatement(
@@ -7007,7 +7032,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,periksa_lab.kd_dokter,pegawai.nama,pegawai.no_ktp as ktpdokter,"+
@@ -7143,7 +7168,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void diagnosticreportlabmb() {
         try{
             ps=koneksi.prepareStatement(
@@ -7279,7 +7304,7 @@ public class frmUtama extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,periksa_lab.kd_dokter,pegawai.nama,pegawai.no_ktp as ktpdokter,"+
@@ -7415,7 +7440,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void careplan(){
         try{
             ps=koneksi.prepareStatement(
@@ -7508,7 +7533,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
                    "pasien.nm_pasien,pasien.no_ktp,satu_sehat_encounter.id_encounter,pemeriksaan_ranap.rtl,"+
@@ -7603,7 +7628,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void medicationstatement(){
         try{
             ps=koneksi.prepareStatement(
@@ -7645,7 +7670,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7748,7 +7773,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -7788,7 +7813,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -7891,7 +7916,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -7933,7 +7958,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -8036,7 +8061,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,"+
                    "satu_sehat_encounter.id_encounter,satu_sehat_mapping_obat.obat_code,satu_sehat_mapping_obat.obat_system,"+
@@ -8078,7 +8103,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                             } catch (Exception e) {
                                 signa2="1";
-                            } 
+                            }
                             try{
                                 headers = new HttpHeaders();
                                 headers.setContentType(MediaType.APPLICATION_JSON);
@@ -8185,7 +8210,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void encounter2() {
         try{
             ps=koneksi.prepareStatement(
@@ -8305,7 +8330,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+ez);
         }
     }
-    
+
     private void qrtelaahresep() {
         //questionairesespon telaah resep
         try{
@@ -8533,7 +8558,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+ez);
         }
     }
-    
+
     private void alergi() {
         try{
             ps=koneksi.prepareStatement(
@@ -8669,7 +8694,7 @@ public class frmUtama extends javax.swing.JFrame {
                     ps.close();
                 }
             }
-            
+
             ps=koneksi.prepareStatement(
                    "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.no_rkm_medis,"+
                    "pasien.nm_pasien,pasien.no_ktp,satu_sehat_encounter.id_encounter,pemeriksaan_ranap.alergi,"+
@@ -8807,7 +8832,7 @@ public class frmUtama extends javax.swing.JFrame {
             System.out.println("Notifikasi : "+ez);
         }
     }
-    
+
     private void kirimdicomrouter() {
         ApiOrthanc orthanc=new ApiOrthanc();
         try{
@@ -8821,7 +8846,7 @@ public class frmUtama extends javax.swing.JFrame {
                 while(rs.next()){
                     root=orthanc.AmbilSeries(rs.getString(1),Tanggal1.getText().replaceAll("-",""),Tanggal2.getText().replaceAll("-",""));
                     for(JsonNode list:root){
-                         orthanc.kirimKeModality(list.path("ID").asText());       
+                         orthanc.kirimKeModality(list.path("ID").asText());
                     }
                 }
             } catch (Exception ex) {
