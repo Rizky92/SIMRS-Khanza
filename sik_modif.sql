@@ -1783,6 +1783,7 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_accession_radiologi_smc`  (
   `worklist_id` varchar(64) NULL DEFAULT NULL,
   `aet_tujuan` varchar(16) NULL DEFAULT NULL,
   `tgl_kirim_worklist` datetime NULL DEFAULT NULL,
+  `tgl_kirim_dicomrouter` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`noorder`,`kd_jenis_prw`) USING BTREE,
   UNIQUE KEY `satu_sehat_accession_radiologi_smc_no_acsn` (`no_acsn`) USING BTREE,
   INDEX `satu_sehat_accession_radiologi_smc_ibfk_1`(`kd_jenis_prw`) USING BTREE,
