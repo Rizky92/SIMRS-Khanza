@@ -130,7 +130,7 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbRekapFinger">
                   <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Klik 2x/tekan spasi pada kolom tanggal untuk melihat detail scan log&lt;br /&gt;&#xa;Isi kolom tanggal: scan masuk | scan pulang, - apabila tidak ada&lt;br /&gt;&lt;br /&gt;&#xa;Keterangan warna kolom&lt;br /&gt;&#xa;- Merah: Tanpa keterangan atau pengajuan izin/cuti/sakit tidak disetujui&lt;br /&gt;&#xa;- Biru: Izin&lt;br /&gt;&#xa;- Kuning: Cuti/sakit&lt;br /&gt;&#xa;- Hitam: Izin/cuti/sakit normatif&lt;br /&gt;&#xa;- Cyan: Tidak ada jadwal dinas&lt;br /&gt;&#xa;- Merah muda: Hari minggu/libur&lt;br /&gt;&#xa;- Oranye: Scan tidak lengkap/perlu dikoreksi&lt;br /&gt;&#xa;&lt;/html&gt;" noResource="true"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Klik 2x/tekan spasi pada kolom tanggal untuk melihat detail scanlog&lt;br /&gt;&#xa;Isi kolom tanggal: scan masuk | scan pulang, &quot;-&quot; apabila tidak ada&lt;br /&gt;&lt;br /&gt;&#xa;Keterangan warna kolom&lt;br /&gt;&#xa;- Merah: Tanpa keterangan atau pengajuan izin/cuti/sakit tidak disetujui&lt;br /&gt;&#xa;- Biru: Izin&lt;br /&gt;&#xa;- Kuning: Cuti/sakit&lt;br /&gt;&#xa;- Hitam: Izin normatif&lt;br /&gt;&#xa;- Cyan: Tidak ada jadwal dinas&lt;br /&gt;&#xa;- Merah muda: Hari minggu/libur&lt;br /&gt;&#xa;- Oranye: Scan tidak lengkap/perlu dikoreksi&lt;br /&gt;&#xa;&lt;/html&gt;" noResource="true"/>
                     <Property name="name" type="java.lang.String" value="tbRekapFinger" noResource="true"/>
                   </Properties>
                   <Events>

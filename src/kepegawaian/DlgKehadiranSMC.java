@@ -324,7 +324,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
 
         Scroll1.setName("Scroll1"); // NOI18N
 
-        tbRekapFinger.setToolTipText("<html>\nKlik 2x/tekan spasi pada kolom tanggal untuk melihat detail scan log<br />\nIsi kolom tanggal: scan masuk | scan pulang, - apabila tidak ada<br /><br />\nKeterangan warna kolom<br />\n- Merah: Tanpa keterangan atau pengajuan izin/cuti/sakit tidak disetujui<br />\n- Biru: Izin<br />\n- Kuning: Cuti/sakit<br />\n- Hitam: Izin/cuti/sakit normatif<br />\n- Cyan: Tidak ada jadwal dinas<br />\n- Merah muda: Hari minggu/libur<br />\n- Oranye: Scan tidak lengkap/perlu dikoreksi<br />\n</html>"); // NOI18N
+        tbRekapFinger.setToolTipText("<html>\nKlik 2x/tekan spasi pada kolom tanggal untuk melihat detail scanlog<br />\nIsi kolom tanggal: scan masuk | scan pulang, \"-\" apabila tidak ada<br /><br />\nKeterangan warna kolom<br />\n- Merah: Tanpa keterangan atau pengajuan izin/cuti/sakit tidak disetujui<br />\n- Biru: Izin<br />\n- Kuning: Cuti/sakit<br />\n- Hitam: Izin normatif<br />\n- Cyan: Tidak ada jadwal dinas<br />\n- Merah muda: Hari minggu/libur<br />\n- Oranye: Scan tidak lengkap/perlu dikoreksi<br />\n</html>"); // NOI18N
         tbRekapFinger.setName("tbRekapFinger"); // NOI18N
         tbRekapFinger.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1185,21 +1185,15 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                     final String sqlJadwal = "select ifnull(sum(case " + slotJadwal + "else 0 end), 0) from jadwal_pegawai where jadwal_pegawai.id = ?";
 
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select pegawai.nik, pegawai.nama, departemen.nama, pegawai.id, pegawai.wajibmasuk, count(rekap_presensi.id) as hadir, " +
-                        "count(if(rekap_presensi.shift like '%Pagi%', 1, null)) as pagi, count(if(rekap_presensi.shift like '%Siang%', 1, null)) as siang, " +
-                        "count(if(rekap_presensi.shift like '%Malam%', 1, null)) as malam, count(if(rekap_presensi.status like '%Tepat Waktu%', 1, null)) as tepatwaktu, " +
-                        "count(if(rekap_presensi.status like '%Terlambat Toleransi%', 1, null)) as toleransi, count(if(rekap_presensi.status like '%Terlambat I%', 1, null)) as terlambat1, " +
-                        "count(if(rekap_presensi.status like '%Terlambat II%', 1, null)) as terlambat2, " +
-                        "ifnull(concat(round((sum(time_to_sec(rekap_presensi.keterlambatan)) - mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600)) / 3600), ':', " +
-                        "round((mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600) - mod(mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600), 60)) / 60), ':', " +
-                        "round(mod(mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600), 60))), '00:00:00') as keterlambatan, " +
-                        "ifnull(concat(round((sum(time_to_sec(rekap_presensi.durasi)) - mod(sum(time_to_sec(rekap_presensi.durasi)), 3600)) / 3600), ':', " +
-                        "round((mod(sum(time_to_sec(rekap_presensi.durasi)), 3600) - mod(mod(sum(time_to_sec(rekap_presensi.durasi)), 3600), 60)) / 60), ':', " +
-                        "round(mod(mod(sum(time_to_sec(rekap_presensi.durasi)), 3600), 60))), '00:00:00') as durasi " +
-                        "from pegawai inner join departemen on pegawai.departemen = departemen.dep_id inner join stts_kerja on stts_kerja.stts = pegawai.stts_kerja " +
-                        "left join rekap_presensi on rekap_presensi.id = pegawai.id and rekap_presensi.jam_datang between ? and ? " +
-                        "where pegawai.stts_aktif != 'KELUAR' " + (departemen.isBlank() ? "" : "and pegawai.departemen = ? ") + (statuskerja.isBlank() ? "" : "and pegawai.stts_kerja = ? ") +
-                        (cari.isBlank() ? "" : "and (pegawai.nik like ? or pegawai.nama like ?) ") +
+                        "select pegawai.nik, pegawai.nama, departemen.nama, pegawai.id, pegawai.wajibmasuk, count(rekap_presensi.id) as hadir, count(if(rekap_presensi.shift like '%Pagi%', 1, null)) as pagi, count(if(rekap_presensi.shift " +
+                        "like '%Siang%', 1, null)) as siang, count(if(rekap_presensi.shift like '%Malam%', 1, null)) as malam, count(if(rekap_presensi.status like '%Tepat Waktu%', 1, null)) as tepatwaktu, count(if(rekap_presensi.status " +
+                        "like '%Terlambat Toleransi%', 1, null)) as toleransi, count(if(rekap_presensi.status like '%Terlambat I%', 1, null)) as terlambat1, count(if(rekap_presensi.status like '%Terlambat II%', 1, null)) as terlambat2, " +
+                        "ifnull(concat(round((sum(time_to_sec(rekap_presensi.keterlambatan)) - mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600)) / 3600), ':', round((mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600) - " +
+                        "mod(mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600), 60)) / 60), ':', round(mod(mod(sum(time_to_sec(rekap_presensi.keterlambatan)), 3600), 60))), '00:00:00') as keterlambatan, ifnull(concat(round(" +
+                        "(sum(time_to_sec(rekap_presensi.durasi)) - mod(sum(time_to_sec(rekap_presensi.durasi)), 3600)) / 3600), ':', round((mod(sum(time_to_sec(rekap_presensi.durasi)), 3600) - mod(mod(sum(time_to_sec(rekap_presensi.durasi)), " +
+                        "3600), 60)) / 60), ':', round(mod(mod(sum(time_to_sec(rekap_presensi.durasi)), 3600), 60))), '00:00:00') as durasi from pegawai inner join departemen on pegawai.departemen = departemen.dep_id inner join stts_kerja " +
+                        "on stts_kerja.stts = pegawai.stts_kerja left join rekap_presensi on rekap_presensi.id = pegawai.id and rekap_presensi.jam_datang between ? and ? where pegawai.stts_aktif != 'KELUAR' " + (departemen.isBlank() ? "" :
+                        "and pegawai.departemen = ? ") + (statuskerja.isBlank() ? "" : "and pegawai.stts_kerja = ? ") + (cari.isBlank() ? "" : "and (pegawai.nik like ? or pegawai.nama like ?) ") +
                         "group by pegawai.id, pegawai.nik, pegawai.nama, departemen.nama, pegawai.wajibmasuk order by pegawai.nik"
                     )) {
                         int p = 0;
