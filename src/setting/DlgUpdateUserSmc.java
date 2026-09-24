@@ -561,6 +561,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("petugas", "[C] Petugas");
         namaakses.put("presensi_bulanan", "[C] Presensi Bulanan");
         namaakses.put("presensi_harian", "[C] Presensi Harian");
+        namaakses.put("rekap_kehadiran_smc", "[C] Rekap Kehadiran Pegawai");
         namaakses.put("skp_rekapitulasi_penilaian", "[C] Rekapitulasi Pengkajian SKP");
         namaakses.put("riwayat_jabatan", "[C] Riwayat Jabatan");
         namaakses.put("riwayat_naik_gaji", "[C] Riwayat Naik Gaji");

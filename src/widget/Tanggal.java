@@ -6,6 +6,8 @@
 package widget;
 
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import uz.ncipro.calendar.JDateTimePicker;
 
 /**
@@ -24,4 +26,11 @@ public final class Tanggal extends JDateTimePicker {
         setSize(WIDTH,23);
     }
 
+    public LocalDate getLocalDate() {
+        return getLocalDate(ZoneId.systemDefault());
+    }
+
+    public LocalDate getLocalDate(ZoneId zoneId) {
+        return LocalDate.ofInstant(getDate().toInstant(), zoneId);
+    }
 }
