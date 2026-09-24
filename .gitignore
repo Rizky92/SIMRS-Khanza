@@ -1,6 +1,7 @@
 # Root level ignore
 /.vscode/
 /.idea/
+/.claude/
 /*.css
 /*.html
 /*.html_files
@@ -9,6 +10,8 @@
 /lib/
 /setting/*.ini
 /setting/*.xml
+report/.settings/org.eclipse.core.resources.prefs
+report/.project
 
 *.DS_Store
 *.*~*
@@ -25,6 +28,7 @@
 *.xlsx
 *.py
 *.txt
+CLAUDE.local.md
 
 # Don't ignore these
 !lisensi.txt
