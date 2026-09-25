@@ -544,6 +544,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         } else if (Email.getText().isBlank()) {
             Valid.textKosong(Email, "Email");
         } else {
+            boolean sukses = true;
             if (EGb.getText().isBlank()) {
                 YesNo.setSelectedItem("No");
                 EGb.setText("./setting/wallpaper.jpg");
@@ -566,23 +567,43 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 logo = Base64.encodeBase64String(b2);
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Tidak dapat menyimpan gambar latar dan logo,\nPastikan gambar yang dipilih valid..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                sukses = false;
             }
 
-            Sequel.menghapusSmc("setting");
-            if (Sequel.executeRawSmc("insert into setting (nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, " +
-                "pemberlakuan_2x24_jam, sistem_import_koding, kode_ppkapotek, tgl_cutoff_gaji, wallpaper, logo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, nullif(?, ''), from_base64(?), from_base64(?))",
-                Nm.getText(), Almt.getText(), Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(),
-                kdPPKInhealth.getText(), kdPPKKemenkes.getText(), BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(),
-                kdPPKApotekOnline.getText(), 0 == CutoffGaji.getSelectedIndex() ? "" : CutoffGaji.getSelectedItem().toString(), gb, logo)
-            ) {
-                emptTeks();
-                runBackground(() ->tampil());
-                JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Pengaturan gagal disimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-            }
+            if (sukses) {
+                Sequel.AutoComitFalse();
+                try {
+                    Sequel.menghapustfSmc("setting");
+                    if (Sequel.executeRawSmc("insert into setting (nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, " +
+                        "pemberlakuan_2x24_jam, sistem_import_koding, kode_ppkapotek, tgl_cutoff_gaji, wallpaper, logo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, nullif(?, ''), from_base64(?), from_base64(?))",
+                        Nm.getText(), Almt.getText(), Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(),
+                        kdPPKInhealth.getText(), kdPPKKemenkes.getText(), BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(),
+                        kdPPKApotekOnline.getText(), 0 == CutoffGaji.getSelectedIndex() ? "" : CutoffGaji.getSelectedItem().toString(), gb, logo)
+                    ) {
+                        Sequel.Commit();
+                    } else {
+                        Sequel.RollBack();
+                        sukses = false;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                    Sequel.RollBack();
+                    sukses = false;
+                }
 
-            frmUtama.getInstance().isWall();
+                Sequel.AutoComitTrue();
+
+                if (sukses) {
+                    emptTeks();
+                    runBackground(() ->tampil());
+                    JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Pengaturan gagal disimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                }
+
+                frmUtama.getInstance().isWall();
+            }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -633,7 +654,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             BtnCariGb.setEnabled(false);
             EGb.setText("./setting/wallpaper.jpg");
         }
-        runBackground(() ->tampil());
     }//GEN-LAST:event_YesNoItemStateChanged
 
     /**
@@ -707,7 +727,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         try (ResultSet rs = koneksi.createStatement().executeQuery(
             "select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, to_base64(wallpaper) as wallpaper, " +
             "kontak, email, to_base64(logo) as logo, kode_ppk, kode_ppkapotek, kode_ppkinhealth, kode_ppkkemenkes, " +
-            "pemberlakuan_2x24_jam, sistem_import_koding, tgl_cutoff_gaji from setting"
+            "ifnull(pemberlakuan_2x24_jam, 'No'), ifnull(sistem_import_koding, ''), tgl_cutoff_gaji from setting"
         )) {
             if (rs.next()) {
                 tabMode.addRow(new Object[] {
