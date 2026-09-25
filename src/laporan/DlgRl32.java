@@ -482,7 +482,7 @@ public final class DlgRl32 extends javax.swing.JDialog {
 
                 dirawat=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join kamar_inap "+
                         "on reg_periksa.no_rawat=kamar_inap.no_rawat where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and "+
-                        "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' group by reg_periksa.no_rawat");
+                        "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"'");
                 ttldirawat=ttldirawat+dirawat;
 
                 dirujuk=Sequel.cariInteger("select count(rujuk.no_rawat) from reg_periksa inner join rujuk on rujuk.no_rawat=reg_periksa.no_rawat "+
@@ -497,7 +497,7 @@ public final class DlgRl32 extends javax.swing.JDialog {
                 pulang=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join kamar_inap "+
                         "on reg_periksa.no_rawat=kamar_inap.no_rawat where reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and "+
                         "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and "+
-                        "kamar_inap.stts_pulang<>('Rujuk' or 'Meninggal' or 'Pindah Kamar') group by reg_periksa.no_rawat");
+                        "kamar_inap.stts_pulang<>('Rujuk' or 'Meninggal' or 'Pindah Kamar')");
                 ttlpulang=ttlpulang+pulang;
                 tabMode.addRow(new Object[]{
                     i,rs.getString("nm_poli"),rujukan,nonrujukan,dirawat,dirujuk,pulang,meninggal,"0"

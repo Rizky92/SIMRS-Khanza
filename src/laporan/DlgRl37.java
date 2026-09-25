@@ -51,7 +51,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
     private ResultSet rstindakan;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private int i=0,ttl=0;
+    private int i=0,ttl=0,ttlL=0,ttlP=0;
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -61,7 +61,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] rowRwJlDr={"No.","Jenis Kegiatan","Jumlah"};
+        Object[] rowRwJlDr={"No.","Jenis Kegiatan","Jumlah","Laki-laki","Perempuan"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -70,7 +70,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 5; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(25);
@@ -299,7 +299,9 @@ public final class DlgRl37 extends javax.swing.JDialog {
                                 Sequel.menyimpan("temporary","'"+r+"','"+
                                                 tabMode.getValueAt(r,0).toString()+"','"+
                                                 tabMode.getValueAt(r,1).toString()+"','"+
-                                                tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                                tabMode.getValueAt(r,2).toString()+"','"+
+                                        tabMode.getValueAt(r,3).toString()+"','"+
+                                        tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                             }
                         }
                         Valid.MyReportqry("rptRl37.jasper","report","::[ Formulir RL 3.7 ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
@@ -426,9 +428,15 @@ public final class DlgRl37 extends javax.swing.JDialog {
         try{
             Valid.tabelKosong(tabMode);
             pstindakan=koneksi.prepareStatement(
-                "select jns_perawatan_radiologi.nm_perawatan,count(jns_perawatan_radiologi.nm_perawatan) from periksa_radiologi "+
-                "inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw where periksa_radiologi.tgl_periksa between ? and ? "+
-                (TCari.getText().trim().equals("")?"":"and jns_perawatan_radiologi.nm_perawatan like ? ")+"group by jns_perawatan_radiologi.nm_perawatan"
+                "select jns_perawatan_radiologi.nm_perawatan,count(jns_perawatan_radiologi.nm_perawatan),"+
+                "sum(case when pasien.jk='L' then 1 else 0 end),"+
+                "sum(case when pasien.jk='P' then 1 else 0 end) from periksa_radiologi "+
+                "inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
+                "inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
+                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "where periksa_radiologi.tgl_periksa between ? and ? "+
+                (TCari.getText().trim().equals("")?"":"and jns_perawatan_radiologi.nm_perawatan like ? ")+
+                "group by jns_perawatan_radiologi.nm_perawatan"
             );
             try {
                 pstindakan.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -437,19 +445,20 @@ public final class DlgRl37 extends javax.swing.JDialog {
                     pstindakan.setString(3,"%"+TCari.getText().trim()+"%");
                 }
                 rstindakan=pstindakan.executeQuery();
-                i=1;
-                ttl=0;
+                i=1;ttl=0;ttlL=0;ttlP=0;
                 while(rstindakan.next()){
                     tabMode.addRow(new Object[]{
-                        i,rstindakan.getString(1),rstindakan.getInt(2)
+                        i,rstindakan.getString(1),rstindakan.getInt(2),rstindakan.getInt(3),rstindakan.getInt(4)
                     });
                     ttl=ttl+rstindakan.getInt(2);
+                    ttlL=ttlL+rstindakan.getInt(3);
+                    ttlP=ttlP+rstindakan.getInt(4);
                     i++;
                 }
 
                 if(i>1){
                     tabMode.addRow(new Object[]{
-                        "","TOTAL",ttl
+                        "","TOTAL",ttl,ttlL,ttlP
                     });
                 }
             } catch (Exception e) {
