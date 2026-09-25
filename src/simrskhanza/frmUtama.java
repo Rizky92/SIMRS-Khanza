@@ -551,6 +551,7 @@ import kepegawaian.DlgJamMasukSMC;
 import kepegawaian.DlgKegiatanIlmiah;
 import kepegawaian.DlgKehadiran;
 import kepegawaian.DlgKehadiran2;
+import kepegawaian.DlgKehadiranSMC;
 import kepegawaian.DlgMasterBerkasPegawai;
 import kepegawaian.DlgPenggajian;
 import kepegawaian.DlgPetugas;
@@ -51536,7 +51537,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC;
+                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC, btnRekapKehadiranSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51666,6 +51667,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnJadwalDinasPegawaiSMC.setName("btnJadwalDinasPegawaiSMC");
         btnJadwalDinasPegawaiSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalDinasPegawaiSMC.addActionListener(this::btnJadwalDinasPegawaiSMCActionPerformed);
+
+        btnRekapKehadiranSMC = new widget.ButtonBig();
+        btnRekapKehadiranSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
+        btnRekapKehadiranSMC.setText("Rekap Kehadiran Pegawai");
+        btnRekapKehadiranSMC.setIconTextGap(0);
+        btnRekapKehadiranSMC.setName("btnRekapKehadiranSMC");
+        btnRekapKehadiranSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRekapKehadiranSMC.addActionListener(this::btnRekapKehadiranSMCActionPerformed);
     }
 
     private void isComboSMC() {
@@ -51692,6 +51701,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if (akses.getjadwal_pegawai_smc()) {
                 Panelmenu.add(btnJadwalDinasPegawaiSMC);
+                jmlmenu++;
+            }
+
+            if (akses.getrekap_kehadiran_smc()) {
+                Panelmenu.add(btnRekapKehadiranSMC);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 11) {
@@ -51827,6 +51841,11 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnJadwalDinasPegawaiSMC);
             jmlmenu++;
         }
+
+        if (akses.getrekap_kehadiran_smc()) {
+            Panelmenu.add(btnRekapKehadiranSMC);
+            jmlmenu++;
+        }
     }
 
     private void isCariIsiSMC() {
@@ -51938,6 +51957,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getjadwal_pegawai_smc()) {
             if (btnJadwalDinasPegawaiSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnJadwalDinasPegawaiSMC);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getrekap_kehadiran_smc()) {
+            if (btnRekapKehadiranSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnRekapKehadiranSMC);
                 jmlmenu++;
             }
         }
@@ -52142,6 +52168,18 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJadwalPegawaiSMC form = new DlgJadwalPegawaiSMC(this, false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnRekapKehadiranSMCActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgKehadiranSMC form = new DlgKehadiranSMC(this, false);
         form.isCek();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
