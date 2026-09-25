@@ -1,23 +1,12 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.Path2D;
-import java.awt.geom.RoundRectangle2D;
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
-import javax.swing.ButtonModel;
-import javax.swing.Icon;
 import javax.swing.JCheckBox;
-import javax.swing.plaf.basic.BasicCheckBoxUI;
 
 public class CekBox extends JCheckBox {
+    /*
     private static final long serialVersionUID = 2L;
     static final Color AKSEN    = new Color(0x16A05D);
     static final Color BORDER   = new Color(0xA7B6AD);
@@ -109,5 +98,18 @@ public class CekBox extends JCheckBox {
                 g2.dispose();
             }
         }
+    }
+    */
+    private static final long serialVersionUID = 2L;
+
+    public CekBox() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        setFocusPainted(false);
+        setRolloverEnabled(true);
+        setOpaque(false);
+        setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        setIconTextGap(6);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 }

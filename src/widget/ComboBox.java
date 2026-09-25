@@ -1,38 +1,11 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Path2D;
-import java.awt.geom.RoundRectangle2D;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.border.AbstractBorder;
-import javax.swing.plaf.basic.BasicComboBoxEditor;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.basic.BasicComboPopup;
-import javax.swing.plaf.basic.ComboPopup;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class ComboBox extends JComboBox {
+    /*
     private static final long serialVersionUID = 2L;
     static final Color AKSEN     = new Color(0x16A05D);
     static final Color BORDER    = new Color(0xA7B6AD);
@@ -283,5 +256,13 @@ public final class ComboBox extends JComboBox {
                 g2.dispose();
             }
         }
+    }
+    */
+    private static final long serialVersionUID = 2L;
+
+    public ComboBox() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        setMaximumRowCount(12);
     }
 }

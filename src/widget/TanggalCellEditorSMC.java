@@ -1,6 +1,5 @@
 package widget;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,132 +13,123 @@ import javax.swing.ComboBoxEditor;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.TableCellEditor;
-import uz.ncipro.calendar.JDateTimePicker;
 
-/**
- *
- * @author smc
- */
 public final class TanggalCellEditorSMC extends AbstractCellEditor implements TableCellEditor {
 
-    /*
-     * Serial version UID
-     */
     private static final long serialVersionUID = 1L;
 
     public static final String FORMAT = "yyyy-MM-dd";
     public static final String KOSONG = "";
 
-    private static final Color WARNA_NORMAL = new Color(50, 50, 50);
-    private static final Color WARNA_SALAH = new Color(200, 0, 0);
-
-    private final PemilihTanggal pemilih;
-    private final PenyuntingTanggal penyunting;
+    private final DateChooser chooser;
+    private final DateEditor editor;
     private final SimpleDateFormat format;
 
-    private boolean menyetel = false;
-    private boolean sedangEdit = false;
+    private boolean isSetting = false;
+    private boolean isEditing = false;
 
     public TanggalCellEditorSMC() {
         format = new SimpleDateFormat(FORMAT);
         format.setLenient(false);
 
-        penyunting = new PenyuntingTanggal();
+        editor = new DateEditor();
 
-        pemilih = new PemilihTanggal();
-        pemilih.setDisplayFormat(FORMAT);
-        pemilih.setEditable(true);
-        pemilih.setEditor(penyunting);
-        pemilih.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
-        pemilih.addPopupMenuListener(new PopupMenuListener() {
+        chooser = new DateChooser();
+        chooser.setDisplayFormat(FORMAT);
+        chooser.setEditable(true);
+        chooser.setEditor(editor);
+        chooser.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
+        chooser.addPopupMenuListener(new PopupMenuListener() {
             @Override
             public void popupMenuWillBecomeVisible(PopupMenuEvent evt) {
             }
 
             @Override
             public void popupMenuWillBecomeInvisible(PopupMenuEvent evt) {
-                selesaikan();
+                finish();
             }
 
             @Override
             public void popupMenuCanceled(PopupMenuEvent evt) {
             }
         });
-        penyunting.addActionListener(evt -> selesaikan());
+
+        editor.addActionListener(evt -> finish());
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        String teks = normalkan(value);
-        Date tanggal = urai(teks);
+        String teks = normalize(value);
+        Date tanggal = apply(teks);
 
-        menyetel = true;
+        isSetting = true;
         try {
-            pemilih.setDate(null == tanggal ? new Date() : tanggal);
-            pemilih.removeAllItems();
-            pemilih.addItem(teks);
-            pemilih.setSelectedItem(teks);
-            penyunting.setItem(teks);
+            chooser.setDate(null == tanggal ? new Date() : tanggal);
+            chooser.removeAllItems();
+            chooser.addItem(teks);
+            chooser.setSelectedItem(teks);
+            editor.setItem(teks);
         } finally {
-            menyetel = false;
+            isSetting = false;
         }
 
-        sedangEdit = true;
-        return pemilih;
+        isEditing = true;
+        return chooser;
     }
 
     @Override
     public Object getCellEditorValue() {
-        return normalkan(penyunting.getItem());
+        return normalize(editor.getItem());
     }
 
     @Override
     public boolean stopCellEditing() {
-        sedangEdit = false;
-        tutupPopup();
+        isEditing = false;
+        hidePopup();
         return super.stopCellEditing();
     }
 
     @Override
     public void cancelCellEditing() {
-        sedangEdit = false;
-        tutupPopup();
+        isEditing = false;
+        hidePopup();
         super.cancelCellEditing();
     }
 
-    private void selesaikan() {
-        if (menyetel || !sedangEdit) {
+    private void finish() {
+        if (isSetting || !isEditing) {
             return;
         }
         SwingUtilities.invokeLater(() -> {
-            if (sedangEdit) {
+            if (isEditing) {
                 stopCellEditing();
             }
         });
     }
 
-    private void tutupPopup() {
-        if (pemilih.isPopupVisible()) {
-            menyetel = true;
+    private void hidePopup() {
+        if (chooser.isPopupVisible()) {
+            isSetting = true;
             try {
-                pemilih.hidePopup();
+                chooser.hidePopup();
             } finally {
-                menyetel = false;
+                isSetting = false;
             }
         }
     }
 
-    private String normalkan(Object nilai) {
-        Date tanggal = urai(null == nilai ? null : nilai.toString());
+    private String normalize(Object nilai) {
+        Date tanggal = apply(null == nilai ? null : nilai.toString());
         return null == tanggal ? KOSONG : format.format(tanggal);
     }
 
-    private Date urai(String teks) {
+    private Date apply(String teks) {
         if (null == teks) {
             return null;
         }
@@ -163,17 +153,15 @@ public final class TanggalCellEditorSMC extends AbstractCellEditor implements Ta
      * menggantikan actionPerformed dengan versi JComboBox ditambah pembaruan kalender
      * yang ketat, sehingga tidak ada lagi keluaran liar.
      */
-    private final class PemilihTanggal extends JDateTimePicker {
+    private final class DateChooser extends DateTimePickerSMC {
 
         /*
          * Serial version UID
          */
         private static final long serialVersionUID = 1L;
 
-        PemilihTanggal() {
+        DateChooser() {
             super();
-            setForeground(WARNA_NORMAL);
-            setBackground(new Color(255, 255, 255));
             setFont(new Font("Tahoma", 0, 11));
         }
 
@@ -181,21 +169,21 @@ public final class TanggalCellEditorSMC extends AbstractCellEditor implements Ta
         public void actionPerformed(ActionEvent evt) {
             setPopupVisible(false);
 
-            ComboBoxEditor penyuntingAktif = getEditor();
-            if (null != penyuntingAktif) {
-                getModel().setSelectedItem(penyuntingAktif.getItem());
+            ComboBoxEditor activeEditor = getEditor();
+            if (null != activeEditor) {
+                getModel().setSelectedItem(activeEditor.getItem());
             }
 
-            Object terpilih = getSelectedItem();
-            Date tanggal = urai(null == terpilih ? null : terpilih.toString());
-            if (null != tanggal) {
-                setDate(tanggal);
+            Object selected = getSelectedItem();
+            Date date = apply(null == selected ? null : selected.toString());
+            if (null != date) {
+                setDate(date);
             }
 
-            String perintah = getActionCommand();
+            String command = getActionCommand();
             setActionCommand("comboBoxEdited");
             fireActionEvent();
-            setActionCommand(perintah);
+            setActionCommand(command);
         }
     }
 
@@ -204,71 +192,72 @@ public final class TanggalCellEditorSMC extends AbstractCellEditor implements Ta
      * tanggal yang sudah normal, supaya JDateTimePicker.actionPerformed tidak
      * pernah mengurai teks mentah dengan SimpleDateFormat lenient miliknya.
      */
-    private final class PenyuntingTanggal implements ComboBoxEditor {
+    private final class DateEditor implements ComboBoxEditor {
 
-        private final JTextField teks;
+        private final JTextField text;
 
-        PenyuntingTanggal() {
-            teks = new JTextField();
-            teks.setFont(new Font("Tahoma", 0, 11));
-            teks.setForeground(WARNA_NORMAL);
-            teks.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
-            teks.getDocument().addDocumentListener(new DocumentListener() {
+        DateEditor() {
+            text = new JTextField();
+            text.setFont(new Font("Tahoma", 0, 11));
+            text.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+            text.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent evt) {
-                    tandai();
+                    mark();
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent evt) {
-                    tandai();
+                    mark();
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent evt) {
-                    tandai();
+                    mark();
                 }
             });
         }
 
         @Override
         public Component getEditorComponent() {
-            return teks;
+            return text;
         }
 
         @Override
-        public void setItem(Object nilai) {
-            String baru = normalkan(nilai);
-            if (!baru.equals(teks.getText())) {
-                teks.setText(baru);
+        public void setItem(Object value) {
+            String newValue = normalize(value);
+
+            if (!newValue.equals(text.getText())) {
+                text.setText(newValue);
             }
-            tandai();
+
+            mark();
         }
 
         @Override
         public Object getItem() {
-            return normalkan(teks.getText());
+            return normalize(text.getText());
         }
 
         @Override
         public void selectAll() {
-            teks.selectAll();
-            teks.requestFocus();
+            text.selectAll();
+            text.requestFocus();
         }
 
         @Override
         public void addActionListener(ActionListener pendengar) {
-            teks.addActionListener(pendengar);
+            text.addActionListener(pendengar);
         }
 
         @Override
         public void removeActionListener(ActionListener pendengar) {
-            teks.removeActionListener(pendengar);
+            text.removeActionListener(pendengar);
         }
 
-        private void tandai() {
-            String isi = teks.getText().trim();
-            teks.setForeground(isi.isEmpty() || null != urai(isi) ? WARNA_NORMAL : WARNA_SALAH);
+        private void mark() {
+            String content = text.getText().trim();
+            text.setForeground(UIManager.getColor(content.isEmpty() || null != apply(content) ? "TextField.foreground" : "Component.error.focusedBorderColor"));
         }
     }
 }

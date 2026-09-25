@@ -48,7 +48,10 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
+/*
 import uz.ncipro.calendar.JDateTimePicker;
+*/
+import widget.DateTimePickerSMC;
 
 /**
  *
@@ -2138,7 +2141,7 @@ public final class sekuel {
         }
     }
 
-    public void cariIsi(String sql,JDateTimePicker dtp){
+    public void cariIsi(String sql,DateTimePickerSMC dtp){
         try {
             ps=connect.prepareStatement(sql);
             try{

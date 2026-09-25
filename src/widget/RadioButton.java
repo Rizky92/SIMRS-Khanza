@@ -1,23 +1,12 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.Ellipse2D;
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.Icon;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicRadioButtonUI;
 
 public class RadioButton extends JRadioButton {
-
+    /*
     private static final long serialVersionUID = 2L;
 
     static final Color AKSEN    = new Color(0x16A05D);
@@ -107,5 +96,19 @@ public class RadioButton extends JRadioButton {
                 g2.dispose();
             }
         }
+    }
+    */
+
+    private static final long serialVersionUID = 2L;
+
+    public RadioButton() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        setFocusPainted(false);
+        setBorder(new EmptyBorder(1, 1, 1, 1));
+        setOpaque(false);
+        setRolloverEnabled(true);
+        setIconTextGap(6);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 }

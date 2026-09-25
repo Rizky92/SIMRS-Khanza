@@ -1,33 +1,11 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.geom.RoundRectangle2D;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.border.AbstractBorder;
-import javax.swing.text.JTextComponent;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import uz.ncipro.calendar.JDateTimePicker;
 
-public final class Tanggal extends JDateTimePicker {
+public final class Tanggal extends DateTimePickerSMC {
+    /*
     private static final long serialVersionUID = 2L;
     private static final Color AKSEN     = new Color(0x16A05D);
     private static final Color BORDER    = new Color(0xA7B6AD);
@@ -187,14 +165,6 @@ public final class Tanggal extends JDateTimePicker {
         super.paintComponent(g);
     }
 
-    public LocalDate getLocalDate() {
-        return getLocalDate(ZoneId.systemDefault());
-    }
-
-    public LocalDate getLocalDate(ZoneId zoneId) {
-        return LocalDate.ofInstant(getDate().toInstant(), zoneId);
-    }
-
     private class BorderModern extends AbstractBorder {
 
         private static final long serialVersionUID = 1L;
@@ -234,5 +204,21 @@ public final class Tanggal extends JDateTimePicker {
             insets.set(2, 6, 2, 3);
             return insets;
         }
+    }
+    */
+
+    private static final long serialVersionUID = 2L;
+
+    public Tanggal() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+    }
+
+    public LocalDate getLocalDate() {
+        return getLocalDate(ZoneId.systemDefault());
+    }
+
+    public LocalDate getLocalDate(ZoneId zoneId) {
+        return LocalDate.ofInstant(getDate().toInstant(), zoneId);
     }
 }
