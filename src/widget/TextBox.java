@@ -1,29 +1,12 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
-import javax.swing.border.AbstractBorder;
-import javax.swing.plaf.basic.BasicTextFieldUI;
 
 public class TextBox extends JTextField {
+    /*
     private static final long serialVersionUID = 2L;
     static final Color AKSEN_DEFAULT = new Color(0x16A05D);
     private Color warnaAksen;
@@ -169,7 +152,15 @@ public class TextBox extends JTextField {
 
     public int getRadius() { return radius; }
     public void setRadius(int r) { radius = r; repaint(); }
+    */
 
+    private static final long serialVersionUID = 2L;
+
+    public TextBox() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        setHorizontalAlignment(LEFT);
+    }
 
     @FunctionalInterface
     public interface CustomDocumentListener extends DocumentListener {

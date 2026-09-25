@@ -1,27 +1,15 @@
 package widget;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.plaf.UIResource;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 public class Table extends JTable {
-
+    /*
     private static final long serialVersionUID = 2L;
 
     static final Color AKSEN     = new Color(0x16A05D);
@@ -187,4 +175,35 @@ public class Table extends JTable {
 
     public boolean isZebra() { return zebra; }
     public void setZebra(boolean z) { zebra = z; repaint(); }
+    */
+
+    private static final long serialVersionUID = 2L;
+
+    public Table() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        setShowGrid(true);
+        getTableHeader().setBorder(BorderFactory.createEmptyBorder());
+        getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
+        getTableHeader().setReorderingAllowed(false);
+        getTableHeader().setDefaultRenderer(new LeftHeaderRendererSMC(getTableHeader().getDefaultRenderer()));
+    }
+
+    private static class LeftHeaderRendererSMC implements TableCellRenderer {
+        private final TableCellRenderer delegate;
+
+        LeftHeaderRendererSMC(TableCellRenderer delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component component = delegate.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (component instanceof JLabel) {
+                ((JLabel) component).setHorizontalAlignment(SwingConstants.LEADING);
+            }
+
+            return component;
+        }
+    }
 }

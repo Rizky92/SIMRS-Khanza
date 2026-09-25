@@ -32,7 +32,7 @@ Use the primary components from `src/widget`:
 | `ScrollPane.java` | Custom JScrollPane. |
 | `Table.java` | Custom JTable. |
 | `TabPane.java` | Custom JTabbedPane. |
-| `Tanggal.java` | Custom JCalendar, uses `java.util.Date` for handling dates. |
+| `Tanggal.java` | Date picker built on `DateTimePickerSMC` (replaces the old `uz.ncipro` JCalendar), uses `java.util.Date` for handling dates. |
 | `TextArea.java` | Custom JTextArea. |
 | `TextBox.java` | Custom JTextField. |
 | `Button.java` | Custom JButton. |
@@ -45,6 +45,9 @@ Use the primary components from `src/widget`:
 | `PasswordBox.java` | Custom JPasswordField. |
 
 Any component not listed falls back to its Swing counterpart.
+
+### Look and feel
+The application runs on FlatLaf through `widget.LookAndFeelSMC`, installed in `SIMRSKhanza.main`. Theme values (corner radius, input border color, margins, table grid) live in `src/widget/LookAndFeelSMC.properties`; change them there instead of painting inside widgets. The default font is Inter Tabular 12 (`src/widget/fonts`, Inter with its tabular digits baked in), falling back to Inter 12 and then Tahoma 11. Tahoma fonts set by forms are remapped at runtime to Inter Tabular at the same size, so forms keep their generated `Tahoma` fonts and their Tahoma 11 layouts still fit.
 
 ## Layout metrics
 

@@ -1,44 +1,18 @@
 package widget;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
-import javax.swing.border.AbstractBorder;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.UIResource;
+import javax.swing.plaf.basic.BasicBorders;
 
-/**
- * TextArea modern untuk SIMRS Khanza, tampilannya SAMA dengan widget.TextBox.
- * <p>
- * Karena TextArea selalu dibungkus ScrollPane, border rounded dipasang otomatis
- * ke ScrollPane pembungkusnya (apa pun border lamanya), sehingga:
- * <ul>
- *   <li>Kotak rounded, border tipis, warna sama persis dengan TextBox</li>
- *   <li>Fokus: border hijau + ring lembut; hover: border lebih gelap</li>
- *   <li>Non-editable / disabled: latar hampir putih, teks tetap terbaca</li>
- *   <li>Scrollbar tipis modern (sama dengan widget.ScrollPane)</li>
- *   <li>Seleksi hijau muda, caret hijau, placeholder opsional</li>
- * </ul>
- * Drop-in: konstruktor sama, extends JTextArea. Kompatibel Java 8.
- *
- * @author usu (dimodernkan)
- */
 public class TextArea extends JTextArea {
-
+    /*
     private static final long serialVersionUID = 2L;
 
     // warna & ukuran disamakan dengan widget.TextBox
@@ -127,7 +101,7 @@ public class TextArea extends JTextArea {
         }
     }
 
-    /** Border rounded identik dengan TextBox; sekaligus menggambar latar di dalamnya. */
+    /** Border rounded identik dengan TextBox; sekaligus menggambar latar di dalamnya.
     private class BorderTextArea extends AbstractBorder {
 
         private static final long serialVersionUID = 1L;
@@ -205,4 +179,62 @@ public class TextArea extends JTextArea {
 
     public String getPlaceholder() { return placeholder; }
     public void setPlaceholder(String p) { placeholder = p; repaint(); }
+    */
+
+    private static final long serialVersionUID = 2L;
+
+    public TextArea() {
+        super();
+        setLineWrap(true);
+        setWrapStyleWord(true);
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        JScrollPane sp = scrollPane();
+        if (null != sp && !(sp.getBorder() instanceof UIResource)) {
+            Border border = UIManager.getBorder("ScrollPane.border");
+            if (null != border) {
+                sp.setBorder(border);
+            }
+        }
+    }
+
+    @Override
+    public void setBorder(Border border) {
+        if (border instanceof EmptyBorder) {
+            Border margin = UIManager.getBorder("TextArea.border");
+            border = null == margin ? new BasicBorders.MarginBorder() : margin;
+        }
+        super.setBorder(border);
+    }
+
+    @Override
+    public void setEditable(boolean b) {
+        super.setEditable(b);
+        repaintScrollPane();
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        repaintScrollPane();
+    }
+
+    private void repaintScrollPane() {
+        JScrollPane sp = scrollPane();
+        if (null != sp) {
+            sp.repaint();
+        }
+    }
+
+    private JScrollPane scrollPane() {
+        Container p = getParent();
+        if (p instanceof JViewport && p.getParent() instanceof JScrollPane) {
+            return (JScrollPane) p.getParent();
+        }
+        return null;
+    }
 }
