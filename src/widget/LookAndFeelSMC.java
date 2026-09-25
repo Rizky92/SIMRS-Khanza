@@ -20,8 +20,12 @@ import java.awt.Toolkit;
 import java.awt.event.ContainerEvent;
 import java.beans.PropertyChangeListener;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.Properties;
+import java.util.Set;
+import java.util.WeakHashMap;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -64,13 +68,14 @@ public class LookAndFeelSMC extends FlatLightLaf {
     private static final String TABULAR_FONT_FAMILY = "Inter Tabular";
     private static final String[] TABULAR_FONT_FILES = {"InterTabular-Regular.ttf", "InterTabular-Bold.ttf", "InterTabular-Italic.ttf", "InterTabular-BoldItalic.ttf"};
     private static final int FONT_SIZE = 12;
-    private static final String FONT_MAPPED_KEY = "LookAndFeelSMC.fontMapped";
     private static final String WINDOWS_SCROLL_BAR_UI = "com.sun.java.swing.plaf.windows.WindowsScrollBarUI";
     private static final int WINDOWS_SCROLL_BAR_WIDTH = 17;
     private static final float CHECK_BOX_ICON_SCALE = 1.2f;
 
     private static final PropertyChangeListener FONT_LISTENER = e -> mapFont((Component) e.getSource());
     private static final PropertyChangeListener BORDER_LISTENER = e -> mapBorder((Border) e.getNewValue());
+
+    private static final Set<Component> WATCHED = Collections.newSetFromMap(new WeakHashMap<>());
 
     private static boolean fontMappingInstalled = false;
     private static String defaultFont = LEGACY_FONT_SIZE + " " + LEGACY_FONT_FAMILY;
@@ -196,18 +201,25 @@ public class LookAndFeelSMC extends FlatLightLaf {
         }, AWTEvent.CONTAINER_EVENT_MASK);
     }
 
+    /**
+     * Starts remapping the fonts of a newly added component. Nothing here may fire
+     * a property change while the owning form is still in {@code initComponents()}:
+     * forms attach catch-all property change listeners that read fields assigned
+     * later in their constructor. Watched components are therefore tracked outside
+     * the component, and the font itself is swapped once the current event, such
+     * as the form construction, has finished.
+     */
     private static void watch(Component component) {
+        if (!WATCHED.add(component)) {
+            return;
+        }
         if (component instanceof JComponent) {
             JComponent c = (JComponent) component;
-            if (null != c.getClientProperty(FONT_MAPPED_KEY)) {
-                return;
-            }
-            c.putClientProperty(FONT_MAPPED_KEY, Boolean.TRUE);
             c.addPropertyChangeListener("font", FONT_LISTENER);
             c.addPropertyChangeListener("border", BORDER_LISTENER);
             mapBorder(c.getBorder());
         }
-        mapFont(component);
+        SwingUtilities.invokeLater(() -> mapFont(component));
     }
 
     private static void mapFont(Component component) {

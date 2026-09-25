@@ -2,11 +2,21 @@ package widget;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.plaf.UIResource;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 public class Table extends JTable {
     /*
@@ -179,6 +189,13 @@ public class Table extends JTable {
 
     private static final long serialVersionUID = 2L;
 
+    private static final Pattern GROUPED_NUMBER = Pattern.compile("-?\\d{1,3}(,\\d{3})+(\\.\\d+)?");
+    private static final Pattern PLAIN_NUMBER = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final String ALIGNMENT_KEY = "Table.numberAlignmentSMC";
+    private static final DecimalFormat DECIMAL_FORMAT = decimalFormatSMC();
+
+    private final Map<Integer, Boolean> numberTextColumns = new HashMap<>();
+
     public Table() {
         super();
         setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -187,6 +204,129 @@ public class Table extends JTable {
         getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
         getTableHeader().setReorderingAllowed(false);
         getTableHeader().setDefaultRenderer(new LeftHeaderRendererSMC(getTableHeader().getDefaultRenderer()));
+    }
+
+    /**
+     * Maps legacy Tahoma fonts right away. Forms attach catch-all property change
+     * listeners to tables after setting their font, so remapping it later would
+     * fire those listeners again once the form is visible.
+     */
+    @Override
+    public void setFont(Font font) {
+        super.setFont(LookAndFeelSMC.mapFont(font));
+    }
+
+    /**
+     * Right-aligns numbers and displays decimals in Indonesian format. Only the
+     * rendered text changes; the table model keeps its original values.
+     */
+    @Override
+    public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+        Component component = super.prepareRenderer(renderer, row, column);
+        if (!(component instanceof JLabel)) {
+            return component;
+        }
+
+        JLabel label = (JLabel) component;
+        Object value = getValueAt(row, column);
+        String text = null == value || !(String.valueOf(value).equals(label.getText()) || renderer instanceof UIResource) ? null : numberTextSMC(value, column);
+        if (null != text) {
+            if (null == label.getClientProperty(ALIGNMENT_KEY)) {
+                label.putClientProperty(ALIGNMENT_KEY, label.getHorizontalAlignment());
+            }
+            label.setText(text);
+            label.setHorizontalAlignment(SwingConstants.RIGHT);
+        } else {
+            Object alignment = label.getClientProperty(ALIGNMENT_KEY);
+            if (alignment instanceof Integer) {
+                if (SwingConstants.RIGHT == label.getHorizontalAlignment()) {
+                    label.setHorizontalAlignment((Integer) alignment);
+                }
+                label.putClientProperty(ALIGNMENT_KEY, null);
+            }
+        }
+        return component;
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        super.tableChanged(e);
+        if (null != numberTextColumns) {
+            numberTextColumns.clear();
+        }
+    }
+
+    private String numberTextSMC(Object value, int column) {
+        if (value instanceof Double || value instanceof Float || value instanceof BigDecimal) {
+            double number = ((Number) value).doubleValue();
+            return Double.isNaN(number) || Double.isInfinite(number) ? null : DECIMAL_FORMAT.format(value);
+        }
+        if (value instanceof Integer || value instanceof Long || value instanceof Short || value instanceof Byte || value instanceof BigInteger) {
+            return value.toString();
+        }
+        if (value instanceof String) {
+            String text = ((String) value).trim();
+            if (!text.isEmpty() && isNumberTextColumnSMC(column) && PLAIN_NUMBER.matcher(text.replace(",", "")).matches()) {
+                return indonesianNumberSMC(text.replace(",", ""));
+            }
+        }
+        return null;
+    }
+
+    private boolean isNumberTextColumnSMC(int column) {
+        int modelColumn = convertColumnIndexToModel(column);
+        Boolean cached = numberTextColumns.get(modelColumn);
+        if (null == cached) {
+            cached = scanNumberTextColumnSMC(getModel(), modelColumn);
+            numberTextColumns.put(modelColumn, cached);
+        }
+        return cached;
+    }
+
+    private static boolean scanNumberTextColumnSMC(TableModel model, int column) {
+        boolean grouped = false;
+        for (int row = 0; row < model.getRowCount(); row++) {
+            Object value = model.getValueAt(row, column);
+            if (null == value || value instanceof Number) {
+                continue;
+            }
+            String text = value.toString().trim();
+            if (text.isEmpty()) {
+                continue;
+            }
+            if (GROUPED_NUMBER.matcher(text).matches()) {
+                grouped = true;
+            } else if (!PLAIN_NUMBER.matcher(text).matches()) {
+                return false;
+            }
+        }
+        return grouped;
+    }
+
+    private static String indonesianNumberSMC(String number) {
+        boolean negative = number.startsWith("-");
+        String digits = negative ? number.substring(1) : number;
+        int dot = digits.indexOf('.');
+        String integer = dot < 0 ? digits : digits.substring(0, dot);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < integer.length(); i++) {
+            if (i > 0 && 0 == (integer.length() - i) % 3) {
+                result.append('.');
+            }
+            result.append(integer.charAt(i));
+        }
+        if (dot >= 0) {
+            result.append(',').append(digits.substring(dot + 1));
+        }
+        return (negative ? "-" : "") + result;
+    }
+
+    private static DecimalFormat decimalFormatSMC() {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        symbols.setDecimalSeparator(',');
+        symbols.setMinusSign('-');
+        return new DecimalFormat("#,##0.###", symbols);
     }
 
     private static class LeftHeaderRendererSMC implements TableCellRenderer {

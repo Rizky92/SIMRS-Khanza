@@ -49,6 +49,8 @@ Any component not listed falls back to its Swing counterpart.
 ### Look and feel
 The application runs on FlatLaf through `widget.LookAndFeelSMC`, installed in `SIMRSKhanza.main`. Theme values (corner radius, input border color, margins, table grid) live in `src/widget/LookAndFeelSMC.properties`; change them there instead of painting inside widgets. The default font is Inter Tabular 12 (`src/widget/fonts`, Inter with its tabular digits baked in), falling back to Inter 12 and then Tahoma 11. Tahoma fonts set by forms are remapped at runtime to Inter Tabular at the same size, so forms keep their generated `Tahoma` fonts and their Tahoma 11 layouts still fit.
 
+`widget.Table` right-aligns numbers and displays decimals in Indonesian format (`1.234.567,5`) at render time only; the table model keeps its values, so code that reads cells back is unaffected. String columns count as numeric only when every value is a number and at least one has thousands separators (`Valid.SetAngka` output). Never shrink fonts below 11px to make content fit; widen the component instead, and leave a few pixels of slack for display scaling.
+
 ## Layout metrics
 
 ### Heights

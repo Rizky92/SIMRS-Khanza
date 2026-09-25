@@ -2,21 +2,30 @@ package widget;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatComboBoxUI;
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseWheelEvent;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 import javax.swing.AbstractSpinnerModel;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -28,8 +37,11 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -46,7 +58,9 @@ import javax.swing.plaf.basic.ComboPopup;
  *   <li>edited text is parsed leniently when the editor commits (enter, focus lost,
  *       or opening the popup), and unparseable text keeps the previous date;</li>
  *   <li>clicking a day closes the popup; the month and year spinners (arrows or
- *       mouse wheel) keep it open and change the date immediately.</li>
+ *       mouse wheel) keep it open and change the date immediately. Wheel events that
+ *       Windows delivers to the owner dialog instead of the popup are rerouted to the
+ *       popup, so scrolling never dismisses it.</li>
  * </ul>
  * The combo box itself is drawn by the installed look and feel, so it follows the
  * FlatLaf theme; only the popup content is custom.
@@ -60,6 +74,8 @@ public class DateTimePickerSMC extends JComboBox {
 
     private static final int DAYS_IN_WEEK = 7;
     private static final int WEEKS_IN_MONTH = 6;
+    private static final int ARROW_WIDTH = 13;
+    private static final String COMPACT_STYLE = "padding: 1,2,1,0";
 
     private SimpleDateFormat format;
     private String displayFormat;
@@ -74,7 +90,11 @@ public class DateTimePickerSMC extends JComboBox {
 
     @Override
     public void updateUI() {
-        ComboBoxUI ui = UIManager.getLookAndFeel() instanceof FlatLaf ? new FlatPickerUI() : new BasicPickerUI();
+        boolean flat = UIManager.getLookAndFeel() instanceof FlatLaf;
+        if (flat) {
+            putClientProperty("FlatLaf.style", COMPACT_STYLE);
+        }
+        ComboBoxUI ui = flat ? new FlatPickerUI() : new BasicPickerUI();
         setUI(ui);
     }
 
@@ -165,11 +185,54 @@ public class DateTimePickerSMC extends JComboBox {
         return format.format(calendar().getTime()).equals(getSelectedItem());
     }
 
+    /**
+     * FlatLaf combo box UI with the calendar popup and a narrower arrow button, so
+     * a {@code dd-MM-yyyy} date keeps some slack in the common 90px wide pickers.
+     */
     private static class FlatPickerUI extends FlatComboBoxUI {
 
         @Override
         protected ComboPopup createPopup() {
             return new CalendarPopup(comboBox);
+        }
+
+        @Override
+        protected LayoutManager createLayoutManager() {
+            LayoutManager layout = super.createLayoutManager();
+            return new LayoutManager() {
+                @Override
+                public void addLayoutComponent(String name, Component component) {
+                    layout.addLayoutComponent(name, component);
+                }
+
+                @Override
+                public void removeLayoutComponent(Component component) {
+                    layout.removeLayoutComponent(component);
+                }
+
+                @Override
+                public Dimension preferredLayoutSize(Container parent) {
+                    return layout.preferredLayoutSize(parent);
+                }
+
+                @Override
+                public Dimension minimumLayoutSize(Container parent) {
+                    return layout.minimumLayoutSize(parent);
+                }
+
+                @Override
+                public void layoutContainer(Container parent) {
+                    layout.layoutContainer(parent);
+                    if (null == arrowButton || arrowButton.getWidth() <= ARROW_WIDTH) {
+                        return;
+                    }
+                    int offset = comboBox.getComponentOrientation().isLeftToRight() ? arrowButton.getWidth() - ARROW_WIDTH : 0;
+                    arrowButton.setBounds(arrowButton.getX() + offset, arrowButton.getY(), ARROW_WIDTH, arrowButton.getHeight());
+                    if (null != editor) {
+                        editor.setBounds(rectangleForCurrentValue());
+                    }
+                }
+            };
         }
     }
 
@@ -199,6 +262,24 @@ public class DateTimePickerSMC extends JComboBox {
         CalendarPopup(JComboBox comboBox) {
             super(comboBox);
             picker = (DateTimePickerSMC) comboBox;
+
+            WheelRedirect.install();
+            addPopupMenuListener(new PopupMenuListener() {
+                @Override
+                public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                    WheelRedirect.SHOWING.add(CalendarPopup.this);
+                }
+
+                @Override
+                public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                    WheelRedirect.SHOWING.remove(CalendarPopup.this);
+                }
+
+                @Override
+                public void popupMenuCanceled(PopupMenuEvent e) {
+                    WheelRedirect.SHOWING.remove(CalendarPopup.this);
+                }
+            });
 
             month = spinner(Calendar.MONTH, "Bulan", 9);
             year = spinner(Calendar.YEAR, "Tahun", 4);
@@ -390,6 +471,56 @@ public class DateTimePickerSMC extends JComboBox {
             void changed() {
                 fireStateChanged();
             }
+        }
+    }
+
+    /**
+     * Reroutes mouse wheel events over a showing calendar popup to the component
+     * under the pointer inside the popup. Windows may deliver wheel events to the
+     * focused owner dialog rather than to the popup window, and Swing's popup mouse
+     * grabber cancels popups on wheel events coming from a dialog.
+     */
+    private static final class WheelRedirect extends EventQueue {
+
+        private static final Set<CalendarPopup> SHOWING = new LinkedHashSet<>();
+
+        private static boolean installed = false;
+
+        static void install() {
+            if (!installed) {
+                installed = true;
+                Toolkit.getDefaultToolkit().getSystemEventQueue().push(new WheelRedirect());
+            }
+        }
+
+        @Override
+        protected void dispatchEvent(AWTEvent event) {
+            if (event instanceof MouseWheelEvent && !SHOWING.isEmpty()) {
+                event = redirect((MouseWheelEvent) event);
+            }
+            super.dispatchEvent(event);
+        }
+
+        private static AWTEvent redirect(MouseWheelEvent e) {
+            for (CalendarPopup popup : SHOWING) {
+                if (!popup.isShowing() || !e.getComponent().isShowing() || SwingUtilities.isDescendingFrom(e.getComponent(), popup)) {
+                    continue;
+                }
+                Point screen = e.getPoint();
+                SwingUtilities.convertPointToScreen(screen, e.getComponent());
+                Point point = new Point(screen);
+                SwingUtilities.convertPointFromScreen(point, popup);
+                if (!popup.contains(point)) {
+                    continue;
+                }
+                Component target = SwingUtilities.getDeepestComponentAt(popup, point.x, point.y);
+                if (null == target) {
+                    return e;
+                }
+                Point local = SwingUtilities.convertPoint(popup, point, target);
+                return new MouseWheelEvent(target, e.getID(), e.getWhen(), e.getModifiersEx(), local.x, local.y, screen.x, screen.y, e.getClickCount(), e.isPopupTrigger(), e.getScrollType(), e.getScrollAmount(), e.getWheelRotation(), e.getPreciseWheelRotation());
+            }
+            return e;
         }
     }
 }
