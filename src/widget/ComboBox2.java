@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
 /**
  *
