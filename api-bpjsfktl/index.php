@@ -1,5 +1,6 @@
 <?php
 
+
 date_default_timezone_set('Asia/Makassar');
 $logfile = '/var/log/api-bpjsfktl/output-' . date('Y-m-d') . '.log';
 ob_start();
@@ -2075,6 +2076,7 @@ if (!empty($url[0])) {
 
 function tampil()
 {
+    /*
     $instansi = fetch_assoc(bukaquery2("select nama_instansi from setting"));
     echo "Selamat Datang di Web Service Antrean BPJS Mobile JKN FKTL " . $instansi['nama_instansi'] . " " . date('Y');
     echo "\n\n";
@@ -2341,4 +2343,5 @@ function tampil()
     echo '          "code": 200' . "\n";
     echo '      }' . "\n";
     echo '   }' . "\n\n";
+    */
 }
