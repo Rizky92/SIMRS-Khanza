@@ -518,7 +518,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         LblNoRawat = new widget.TextBox();
         jLabel9 = new widget.Label();
         DTPObatKronisSelanjutnya = new widget.Tanggal();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
         jPanel3 = new javax.swing.JPanel();
@@ -2310,7 +2310,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.TextBox Tanggal;
     private widget.ComboBox cmbDtk;
     private widget.ComboBox cmbJam;
