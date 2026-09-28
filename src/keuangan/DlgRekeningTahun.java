@@ -62,6 +62,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
+    private DecimalFormat dfNominalSmc = new DecimalFormat("#,##0.##");
     private double md = 0,mk = 0,saldoakhir=0;
     private String asalform="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -100,20 +101,22 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        DefaultTableCellRenderer rSaldoAkhir = new DefaultTableCellRenderer() {
+        DefaultTableCellRenderer rNominal = new DefaultTableCellRenderer() {
             @Override
             protected void setValue(Object value) {
                 if (value instanceof Number) {
                     double nilai = ((Number) value).doubleValue();
                     if (nilai < 0) {
-                        setText("(" + df2.format(-nilai) + ")");
+                        setText("(" + dfNominalSmc.format(-nilai) + ")");
                     } else {
-                        setText(df2.format(nilai));
+                        setText(dfNominalSmc.format(nilai));
                     }
+                } else {
+                    setText(null == value ? "" : value.toString());
                 }
             }
         };
-        rSaldoAkhir.setHorizontalAlignment(JLabel.RIGHT);
+        rNominal.setHorizontalAlignment(JLabel.RIGHT);
 
         for (int i = 0; i < 9; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
@@ -129,14 +132,16 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                 column.setPreferredWidth(50);
             }else if(i==5){
                 column.setPreferredWidth(110);
-                column.setCellRenderer(rSaldoAkhir);
+                column.setCellRenderer(rNominal);
             }else if(i==6){
                 column.setPreferredWidth(100);
+                column.setCellRenderer(rNominal);
             }else if(i==7){
                 column.setPreferredWidth(100);
+                column.setCellRenderer(rNominal);
             }else if(i==8){
                 column.setPreferredWidth(110);
-                column.setCellRenderer(rSaldoAkhir);
+                column.setCellRenderer(rNominal);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -986,7 +991,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
             Tipe.setText(tbKamar.getValueAt(row,3).toString());
             Balance.setText(tbKamar.getValueAt(row,4).toString());
             // Saldo.setText(tbKamar.getValueAt(row,5).toString().replaceAll(",", ""));
-            Saldo.setText(new BigDecimal(((Number) tbKamar.getValueAt(row, 5)).doubleValue()).setScale(2, RoundingMode.HALF_UP).toPlainString());
+            Saldo.setText(BigDecimal.valueOf(((Number) tbKamar.getValueAt(row, 5)).doubleValue()).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString());
         }
     }
 
@@ -1033,6 +1038,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                             "where jurnal.tgl_jurnal between ? and ? group by detailjurnal.kd_rek) as mutasi on mutasi.kd_rek = rekening.kd_rek where rekeningtahun.thn = ? " + (cari.isBlank() ? "" :
                             "and (rekening.kd_rek like ? or rekening.nm_rek like ? or rekening.tipe like ? or rekening.balance like ?) ") + "order by rekening.kd_rek";
                     }
+
                     try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
                         int p = 0;
                         if (loadMutasi) {
@@ -1053,12 +1059,12 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                                     double mk = 0;
                                     switch (rs.getString("balance")) {
                                         case "D":
-                                            md = rs.getDouble(7);
-                                            mk = rs.getDouble(8);
+                                            md = rs.getDouble("totaldebet");
+                                            mk = rs.getDouble("totalkredit");
                                             break;
                                         case "K":
-                                            md = rs.getDouble(8);
-                                            mk = rs.getDouble(7);
+                                            md = rs.getDouble("totalkredit");
+                                            mk = rs.getDouble("totaldebet");
                                             break;
                                     }
                                     publish(new Object[] {
