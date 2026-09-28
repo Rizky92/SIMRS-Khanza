@@ -863,6 +863,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueString\": \""+tbIGDPrimer.getValueAt(i,9).toString()+"\"" +
                                        "}";
                                 System.out.println("URL : "+link+"/Observation");
@@ -927,6 +928,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueString\": \""+tbIGDPrimer.getValueAt(i,11).toString()+"\"" +
                                        "}";
                                 System.out.println("URL : "+link+"/Observation");
@@ -991,6 +993,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueString\": \""+tbIGDPrimer.getValueAt(i,13).toString()+(tbIGDPrimer.getValueAt(i,14).toString().equals("")?"":", Keterangan : "+tbIGDPrimer.getValueAt(i,14).toString())+"\"" +
                                        "}";
                                 System.out.println("URL : "+link+"/Observation");
@@ -1055,6 +1058,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueString\": \""+tbIGDPrimer.getValueAt(i,16).toString()+"\"" +
                                        "}";
                                 System.out.println("URL : "+link+"/Observation");
@@ -1136,6 +1140,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"component\" : ["+
                                                 "{" +
                                                     "\"code\" : {" +
@@ -1235,6 +1240,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueQuantity\": {"+
                                                 "\"value\": " + tbIGDPrimer.getValueAt(i, 20).toString().replaceAll(",", ".") + ","+
                                                 "\"unit\": \"/min\","+
@@ -1304,6 +1310,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueQuantity\": {"+
                                                 "\"value\": " + tbIGDPrimer.getValueAt(i, 22).toString().replaceAll(",", ".") + ","+
                                                 "\"unit\": \"/min\","+
@@ -1373,6 +1380,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                                 "\"reference\": \"Encounter/"+tbIGDPrimer.getValueAt(i,5).toString()+"\"" +
                                             "}," +
                                             "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
+                                            "\"issued\": \""+tbIGDPrimer.getValueAt(i,8).toString().replace(" ", "T")+"+07:00\"," +
                                             "\"valueQuantity\": {"+
                                                 "\"value\": " + tbIGDPrimer.getValueAt(i, 24).toString().replaceAll(",", ".") + ","+
                                                 "\"unit\": \"degree Celsius\","+
@@ -1567,6 +1575,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Suhu Badan di "+tbIGDPrimer.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbIGDPrimer.getValueAt(i,4).toString()+" Pada Tanggal "+tbIGDPrimer.getValueAt(i,13).toString()+" Jam "+tbIGDPrimer.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbIGDPrimer.getValueAt(i,13).toString()+"T"+tbIGDPrimer.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbIGDPrimer.getValueAt(i,13).toString()+"T"+tbIGDPrimer.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbIGDPrimer.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"degree Celsius\"," +
@@ -1635,6 +1644,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Respirasi di "+tbRespirasi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbRespirasi.getValueAt(i,4).toString()+" Pada Tanggal "+tbRespirasi.getValueAt(i,13).toString()+" Jam "+tbRespirasi.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbRespirasi.getValueAt(i,13).toString()+"T"+tbRespirasi.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbRespirasi.getValueAt(i,13).toString()+"T"+tbRespirasi.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbRespirasi.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"breaths/minute\"," +
@@ -1703,6 +1713,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Nadi di "+tbNadi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbNadi.getValueAt(i,4).toString()+" Pada Tanggal "+tbNadi.getValueAt(i,13).toString()+" Jam "+tbNadi.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbNadi.getValueAt(i,13).toString()+"T"+tbNadi.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbNadi.getValueAt(i,13).toString()+"T"+tbNadi.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbNadi.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"breaths/minute\"," +
@@ -1771,6 +1782,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik SpO2 di "+tbSpO2.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbSpO2.getValueAt(i,4).toString()+" Pada Tanggal "+tbSpO2.getValueAt(i,13).toString()+" Jam "+tbSpO2.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbSpO2.getValueAt(i,13).toString()+"T"+tbSpO2.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbSpO2.getValueAt(i,13).toString()+"T"+tbSpO2.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbSpO2.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"percent saturation\"," +
@@ -1839,6 +1851,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik GCS di "+tbGCS.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbGCS.getValueAt(i,4).toString()+" Pada Tanggal "+tbGCS.getValueAt(i,13).toString()+" Jam "+tbGCS.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbGCS.getValueAt(i,13).toString()+"T"+tbGCS.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbGCS.getValueAt(i,13).toString()+"T"+tbGCS.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbGCS.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"system\": \"http://unitsofmeasure.org\"," +
@@ -1906,6 +1919,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Kesadaran di "+tbKesadaran.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbKesadaran.getValueAt(i,4).toString()+" Pada Tanggal "+tbKesadaran.getValueAt(i,13).toString()+" Jam "+tbKesadaran.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbKesadaran.getValueAt(i,13).toString()+"T"+tbKesadaran.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbKesadaran.getValueAt(i,13).toString()+"T"+tbKesadaran.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueCodeableConcept\": {" +
                                             "\"text\": \""+tbKesadaran.getValueAt(i,10).toString().replaceAll("Compos Mentis","Alert").replaceAll("Somnolence","Voice").replaceAll("Sopor","Pain").replaceAll("Coma","Unresponsive")+"\"" +
                                         "}" +
@@ -1972,6 +1986,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Tensi di "+tbTensi.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbTensi.getValueAt(i,4).toString()+" Pada Tanggal "+tbTensi.getValueAt(i,13).toString()+" Jam "+tbTensi.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbTensi.getValueAt(i,13).toString()+"T"+tbTensi.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbTensi.getValueAt(i,13).toString()+"T"+tbTensi.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"component\" : ["+
                                             "{" +
                                                 "\"code\" : {" +
@@ -2070,6 +2085,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Tinggi Badan di "+tbTB.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbTB.getValueAt(i,4).toString()+" Pada Tanggal "+tbTB.getValueAt(i,13).toString()+" Jam "+tbTB.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbTB.getValueAt(i,13).toString()+"T"+tbTB.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbTB.getValueAt(i,13).toString()+"T"+tbTB.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbTB.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"centimeter\"," +
@@ -2138,6 +2154,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Berat Badan di "+tbBB.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbBB.getValueAt(i,4).toString()+" Pada Tanggal "+tbBB.getValueAt(i,13).toString()+" Jam "+tbBB.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbBB.getValueAt(i,13).toString()+"T"+tbBB.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbBB.getValueAt(i,13).toString()+"T"+tbBB.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbBB.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"kilogram\"," +
@@ -2206,6 +2223,7 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
                                             "\"display\": \"Pemeriksaan Fisik Lingkar Perut di "+tbLP.getValueAt(i,7).toString().replaceAll("Ralan","Rawat Jalan/IGD").replaceAll("Ranap","Rawat Inap")+", Pasien "+tbLP.getValueAt(i,4).toString()+" Pada Tanggal "+tbLP.getValueAt(i,13).toString()+" Jam "+tbLP.getValueAt(i,14).toString()+"\"" +
                                         "}," +
                                         "\"effectiveDateTime\": \""+tbLP.getValueAt(i,13).toString()+"T"+tbLP.getValueAt(i,14).toString()+"+07:00\"," +
+                                        "\"issued\": \""+tbLP.getValueAt(i,13).toString()+"T"+tbLP.getValueAt(i,14).toString()+"+07:00\"," +
                                         "\"valueQuantity\": {" +
                                             "\"value\": "+tbLP.getValueAt(i,10).toString().replaceAll(",",".")+"," +
                                             "\"unit\": \"centimeter\"," +
