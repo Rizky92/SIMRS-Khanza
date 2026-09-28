@@ -1,6 +1,5 @@
 <?php
 
-
 date_default_timezone_set('Asia/Makassar');
 $logfile = '/var/log/api-bpjsfktl/output-' . date('Y-m-d') . '.log';
 ob_start();
@@ -15,24 +14,29 @@ register_shutdown_function(function () use ($logfile) {
     $line     = '[' . date('Y-m-d H:i:s') . '] ' . $service . ': ' . $konten . ' - ' . $code . ' ' . $message;
     @file_put_contents($logfile, str_replace(["\r", "\n"], ' ', $line) . "\n", FILE_APPEND | LOCK_EX);
 });
+
 header("X-Robots-Tag: noindex", true);
 require_once 'conf.php';
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 $url     = $_GET['url'] ?? '/';
 $url     = explode("/", $url);
 $header  = apache_request_headers();
 $newhead = [];
+
 if ($header) {
     foreach ($header as $idx => $val) {
         $newhead[strtolower($idx)] = $val;
     }
 }
-$header      = $newhead;
-$method      = $_SERVER['REQUEST_METHOD'];
-$waktutunggu = 5;
+
+$header       = $newhead;
+$method       = $_SERVER['REQUEST_METHOD'];
+$waktutunggu  = 5;
+$intervalHari = 7;
 
 if (!empty($url[0])) {
     if ($method == 'GET') {
@@ -534,8 +538,8 @@ if (!empty($url[0])) {
                                                                 ],
                                                             ];
                                                             http_response_code(201);
-                                                        } elseif ($interval > 7) {
-                                                            $tanggalbatasambil = getOne2("select date_format(date_sub('" . validTeks4($decode["tanggalperiksa"], 20) . "', interval 7 day), '%d-%m-%Y')");
+                                                        } elseif ($interval > $intervalHari) {
+                                                            $tanggalbatasambil = getOne2("select date_format(date_sub('" . validTeks4($decode["tanggalperiksa"], 20) . "', interval {$intervalHari} day), '%d-%m-%Y')");
                                                             $response          = [
                                                                 'metadata' => [
                                                                     'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal ' . $tanggalbatasambil . '.',
