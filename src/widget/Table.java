@@ -207,16 +207,6 @@ public class Table extends JTable {
     }
 
     /**
-     * Maps legacy Tahoma fonts right away. Forms attach catch-all property change
-     * listeners to tables after setting their font, so remapping it later would
-     * fire those listeners again once the form is visible.
-     */
-    @Override
-    public void setFont(Font font) {
-        super.setFont(LookAndFeelSMC.mapFont(font));
-    }
-
-    /**
      * Right-aligns numbers and displays decimals in Indonesian format. Only the
      * rendered text changes; the table model keeps its original values.
      */

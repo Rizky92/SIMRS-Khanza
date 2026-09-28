@@ -108,7 +108,7 @@ public class RadioButton extends JRadioButton {
         setBorder(new EmptyBorder(1, 1, 1, 1));
         setOpaque(false);
         setRolloverEnabled(true);
-        setIconTextGap(6);
+        setIconTextGap(4);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 }

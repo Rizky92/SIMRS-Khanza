@@ -109,7 +109,7 @@ public class CekBox extends JCheckBox {
         setRolloverEnabled(true);
         setOpaque(false);
         setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        setIconTextGap(6);
+        setIconTextGap(4);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 }
