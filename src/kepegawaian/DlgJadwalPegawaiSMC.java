@@ -40,6 +40,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -68,8 +69,8 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import smc.utils.ExcelSMC;
 
 public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
     private static final int KOLOM_ID = 1;
@@ -628,7 +629,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Pilih berkas jadwal per karyawan");
-        chooser.setFileFilter(new FileNameExtensionFilter("Berkas Excel (*.xlsx)", "xlsx"));
+        chooser.setFileFilter(new FileNameExtensionFilter("Berkas Excel (*.xlsx, *.xls)", "xlsx", "xls"));
         if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
             return;
         }
@@ -638,7 +639,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         Map<String, String[]> jadwal = new LinkedHashMap<>();
         Set<String> pinAsing = new LinkedHashSet<>();
         Set<String> kodeAsing = new LinkedHashSet<>();
-        try (Workbook workbook = WorkbookFactory.create(chooser.getSelectedFile())) {
+        try (Workbook workbook = ExcelSMC.openExcel(chooser.getSelectedFile())) {
             Sheet sheet = workbook.getSheetAt(0);
             periode = YearMonth.of(Integer.parseInt(bacaTeks(sheet.getRow(IMPOR_BARIS_TAHUN), 1)),
                 Integer.parseInt(bacaTeks(sheet.getRow(IMPOR_BARIS_BULAN), 1)));
@@ -1142,7 +1143,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         return nilai.toString().trim().toUpperCase();
     }
 
-    private static class WarnaMingguSMC extends WarnaTable {
+    private static class WarnaLiburSMC extends WarnaTable {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -1154,10 +1155,10 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         }
     }
 
-    private static class JudulMingguSMC implements TableCellRenderer {
+    private static class JudulLiburSMC implements TableCellRenderer {
         private final TableCellRenderer asli;
 
-        JudulMingguSMC(TableCellRenderer asli) {
+        JudulLiburSMC(TableCellRenderer asli) {
             this.asli = asli;
         }
 
@@ -1396,6 +1397,22 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
         return kode;
     }
 
+    private Set<LocalDate> getHariLibur() {
+        Set<LocalDate> libur = new HashSet<>();
+        try (PreparedStatement ps = koneksi.prepareStatement("select set_hari_libur.tanggal from set_hari_libur where set_hari_libur.tanggal between ? and ?")) {
+            ps.setString(1, ym.atDay(1).toString());
+            ps.setString(2, ym.atEndOfMonth().toString());
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    libur.add(rs.getDate("tanggal").toLocalDate());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return libur;
+    }
+
     private Map<String, String> getNamaShift() {
         Map<String, String> shift = new LinkedHashMap<>();
         try (PreparedStatement ps = koneksi.prepareStatement("select kode_shift, nama_shift from jam_masuk_smc order by nama_shift")) {
@@ -1538,6 +1555,7 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd (EEEE)", new Locale("id", "ID"));
             final LinkedList<LocalDate> days = IntStream.rangeClosed(1, ym.lengthOfMonth())
                 .collect(LinkedList::new, (list, day) -> list.add(ym.atDay(day)), LinkedList::addAll);
+            final Set<LocalDate> libur = getHariLibur();
 
             int i = KOLOM_HARI_AWAL;
             for (LocalDate day : days) {
@@ -1546,9 +1564,9 @@ public class DlgJadwalPegawaiSMC extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(Integer.MAX_VALUE);
                 column.setPreferredWidth(75);
-                if (DayOfWeek.SUNDAY.equals(day.getDayOfWeek())) {
-                    column.setCellRenderer(new WarnaMingguSMC());
-                    column.setHeaderRenderer(new JudulMingguSMC(tbJadwal.getTableHeader().getDefaultRenderer()));
+                if (DayOfWeek.SUNDAY.equals(day.getDayOfWeek()) || libur.contains(day)) {
+                    column.setCellRenderer(new WarnaLiburSMC());
+                    column.setHeaderRenderer(new JudulLiburSMC(tbJadwal.getTableHeader().getDefaultRenderer()));
                 } else {
                     column.setCellRenderer(null);
                     column.setHeaderRenderer(null);

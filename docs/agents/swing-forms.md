@@ -2,8 +2,7 @@
 
 Applies to any agent working in this repository.
 
-Unless specified otherwise, the modules under `/src` are regular NetBeans Swing forms: every UI class has a
-`.form` counterpart — the design file, an XML structure with XML-like formatting.
+Unless specified otherwise, the modules under `/src` are regular NetBeans Swing forms: every UI class has a `.form` counterpart — the design file, an XML structure with XML-like formatting.
 
 ## Keeping `.form` and `.java` in sync
 The two files must agree:
@@ -17,17 +16,13 @@ A change on either side must be reflected on the other.
 ### Preferred workflow
 1. **Edit the `.form` file first**, if you understand its XML.
 2. Then hand it to NetBeans so it regenerates the java side for you:
-   - **If the NetBeans MCP server is available**, call its `openFile` tool on the java counterpart. Opening
-     the form in the IDE re-synchronizes `initComponents()` and the generated event methods, so you never
-     hand-write them.
+   - **If the NetBeans MCP server is available**, call its `openFile` tool on the java counterpart. Opening the form in the IDE re-synchronizes `initComponents()` and the generated event methods, so you never hand-write them.
    - **If it is not available**, tell the user to open the form manually in NetBeans, and say which file.
 
-This avoids hand-editing generated code. If you do edit `initComponents()` or an event method directly, you
-own the job of mirroring it back into the `.form`.
+This avoids hand-editing generated code. If you do edit `initComponents()` or an event method directly, you own the job of mirroring it back into the `.form`.
 
 ## Planning a new menu
-When planning a new menu, describe the general window layout you intend to design. This lets the user catch
-a broken layout before it is previewed in NetBeans.
+When planning a new menu, describe the general window layout you intend to design. This lets the user catch a broken layout before it is previewed in NetBeans.
 
 ## Components
 Use the primary components from `src/widget`:
@@ -60,8 +55,7 @@ Any component not listed falls back to its Swing counterpart.
 | Button | 30 |
 | Clip button (quick-pick button, icon `/picture/190.png`) | 23 (width 28) |
 
-Clip buttons are the exception to the button height: they sit inside an input row, so they are **28 x 23**
-— matching the input height, not the button height.
+Clip buttons are the exception to the button height: they sit inside an input row, so they are **28 x 23** — matching the input height, not the button height.
 
 ### Spacing
 Between label / textbox / checkbox / radio button / combobox / tanggal components:
@@ -82,16 +76,23 @@ All forms and custom-designed dialogs give their `InternalFrame` panel a titled 
 - title color: **[50, 50, 50]**
 - title text formatted as `::[ <title> ]::`
 
-**Exception — sub-dialogs:** a sub-dialog panel keeps everything above but uses a line border color of
-**[50, 50, 50]** (`blue="32" green="32" red="32"`), the same value as the title color.
-So far only two forms use it, and both also carry a normal [240, 245, 235] panel alongside the
-sub-dialog one:
+**Exception — sub-dialogs of preferred size:** a sub-dialog panel keeps everything above but uses a line border color of **[50, 50, 50]** (`blue="32" green="32" red="32"`), the same value as the title color.
 
-- `src/bridging/BPJSKompilasiBerkasKlaimSMC.form` — `::[ Pengaturan Kompilasi Berkas ]::`
-- `src/inventory/DlgDaftarPermintaanResep.form` — `::[ Pengaturan Resep Otomatis ]::`
+That only covers a sub-dialog which opens at its own size, meaning it is shown with a fixed `setSize(width, height)` or its panel's preferred size:
 
-Every other form is not converted yet. Follow this rule for new work; do not treat an unconverted form as
-a counter-example.
+```java
+WindowPengaturan.setSize(610, 232);
+WindowPengaturan.setLocationRelativeTo(internalFrame1);
+```
+
+A sub-dialog sized from its parent instead keeps the normal [240, 245, 235] inner border, because it hosts a child form rather than a small panel:
+
+```java
+WindowImportScanlogFingerspot.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+WindowImportScanlogFingerspot.setLocationRelativeTo(internalFrame1);
+```
+
+Every other form is not converted yet. Follow this rule for new work; do not treat an unconverted form as a counter-example.
 
 In the `.form` XML:
 

@@ -1,7 +1,7 @@
 # Root level ignore
 /.vscode/
 /.idea/
-/.claude/*
+/.claude/
 /*.css
 /*.html
 /*.html_files
@@ -31,7 +31,6 @@ report/.project
 CLAUDE.local.md
 
 # Don't ignore these
-!/.claude/skills/
 !lisensi.txt
 !README.TXT
 !sik_bersih.sql

@@ -1123,6 +1123,7 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         }else if(Recommendation.getText().trim().equals("")){
             Valid.textKosong(Recommendation,"Recommendation");
         }else{
+            autoNomor();
             if(Sequel.menyimpantf("konsultasi_perawat","?,?,?,?,?,?,?,?,?","No.Permintaan",9,new String[]{
                 NoPermintaan.getText(),NoRw.getText(), Valid.getTglJamSmc(TanggalPermintaan, CmbJam, CmbMenit, CmbDetik),
                 KdPerawat.getText(),KdDokterDikonsuli.getText(),Situation.getText(),Background.getText(),Assessment.getText(),Recommendation.getText()
