@@ -79,7 +79,7 @@ The coding guidelines should cater to users' Netbeans configuration, which as fo
 - After completing the task. DO NOT make a commit.
 - Which branch to work on, when to create one, and how to name it: see [`.agents/skills/branch-workflow/SKILL.md`](.agents/skills/branch-workflow/SKILL.md).
 - Database structure changes (`sik_modif.sql` only, ordering, foreign keys): see [`.agents/skills/db-schema-change/SKILL.md`](.agents/skills/db-schema-change/SKILL.md).
-- SMC affix naming, `Sequel`/`Valid` Smc alternatives, acronym casing, and `database.xml.example` parameters: see [`.agents/skills/smc-conventions/SKILL.md`](.agents/skills/smc-conventions/SKILL.md).
+- SMC affix naming, `Sequel`/`Valid` Smc alternatives, acronym casing, commenting out superseded upstream code, and `database.xml.example` parameters: see [`.agents/skills/smc-conventions/SKILL.md`](.agents/skills/smc-conventions/SKILL.md).
 
 #### Building the UI
 Use the primary components from `src/widget`, along with the sizing, spacing, titled border, and CRUD action row conventions in [`.agents/skills/swing-forms/SKILL.md`](.agents/skills/swing-forms/SKILL.md).

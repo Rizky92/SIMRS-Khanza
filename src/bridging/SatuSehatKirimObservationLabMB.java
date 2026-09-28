@@ -78,7 +78,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new String[]{
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","No.Permintaan","Tgl & Jam Hasil","Detail Pemeriksaan",
                 "Lab Code","Lab System","Lab Display","Hasil Laborat","ID Detail","ID Specimen",
-                "Kode Dokter","Nama Dokter","No.KTP Dokter","ID Encounter","ID Observation","Kode Pemeriksaan"
+                //"Kode Dokter","Nama Dokter","No.KTP Dokter","ID Encounter","ID Observation","Kode Pemeriksaan"
+                "Kode Dokter","Nama Dokter","No.KTP Dokter","ID Encounter","ID Observation","Kode Pemeriksaan","Tgl & Jam Sampel"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -91,7 +92,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                  java.lang.Boolean.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
-                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
+                 //java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
+                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -104,7 +106,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 20; i++) {
+        //for (i = 0; i < 20; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -148,6 +151,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
             }else if(i==19){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
+            }else if(i==20){
+                column.setPreferredWidth(115);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -700,8 +705,9 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                         "\"specimen\": {" +
                                             "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r|\r||\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
@@ -814,8 +820,9 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                         "\"specimen\": {" +
                                             "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r|\r||\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
@@ -933,6 +940,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_labmb.noorder,"+
                    "permintaan_labmb.tgl_hasil,permintaan_labmb.jam_hasil,template_laboratorium.Pemeriksaan,satu_sehat_mapping_lab.code,"+
+                   "if(permintaan_labmb.tgl_sampel<>'0000-00-00' and concat(permintaan_labmb.tgl_sampel,' ',permintaan_labmb.jam_sampel)<=concat(permintaan_labmb.tgl_hasil,' ',permintaan_labmb.jam_hasil),concat(permintaan_labmb.tgl_sampel,' ',permintaan_labmb.jam_sampel),concat(permintaan_labmb.tgl_hasil,' ',permintaan_labmb.jam_hasil)) as waktu_efektif,"+
                    "satu_sehat_mapping_lab.system,satu_sehat_mapping_lab.display,detail_periksa_lab.nilai,detail_periksa_lab.nilai_rujukan,"+
                    "detail_periksa_lab.keterangan,permintaan_detail_permintaan_labmb.id_template,satu_sehat_specimen_lab_mb.id_specimen,"+
                    "periksa_lab.kd_dokter,pegawai.nama,pegawai.no_ktp as ktppraktisi,satu_sehat_encounter.id_encounter,"+
@@ -974,7 +982,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("noorder"),rs.getString("tgl_hasil")+" "+rs.getString("jam_hasil"),rs.getString("Pemeriksaan"),
                         rs.getString("code"),rs.getString("system"),rs.getString("display"),"Hasil Lab : "+rs.getString("nilai")+" "+rs.getString("satuan")+", Nilai Rujukan : "+rs.getString("nilai_rujukan")+(rs.getString("keterangan").equals("")?"":", Keterangan : "+rs.getString("keterangan")),
-                        rs.getString("id_template"),rs.getString("id_specimen"),rs.getString("kd_dokter"),rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("id_encounter"),rs.getString("id_observation"),rs.getString("kd_jenis_prw")
+                        //rs.getString("id_template"),rs.getString("id_specimen"),rs.getString("kd_dokter"),rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("id_encounter"),rs.getString("id_observation"),rs.getString("kd_jenis_prw")
+                        rs.getString("id_template"),rs.getString("id_specimen"),rs.getString("kd_dokter"),rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("id_encounter"),rs.getString("id_observation"),rs.getString("kd_jenis_prw"),rs.getString("waktu_efektif")
                     });
                 }
             } catch (Exception e) {
@@ -991,6 +1000,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,permintaan_labmb.noorder,"+
                    "permintaan_labmb.tgl_hasil,permintaan_labmb.jam_hasil,template_laboratorium.Pemeriksaan,satu_sehat_mapping_lab.code,"+
+                   "if(permintaan_labmb.tgl_sampel<>'0000-00-00' and concat(permintaan_labmb.tgl_sampel,' ',permintaan_labmb.jam_sampel)<=concat(permintaan_labmb.tgl_hasil,' ',permintaan_labmb.jam_hasil),concat(permintaan_labmb.tgl_sampel,' ',permintaan_labmb.jam_sampel),concat(permintaan_labmb.tgl_hasil,' ',permintaan_labmb.jam_hasil)) as waktu_efektif,"+
                    "satu_sehat_mapping_lab.system,satu_sehat_mapping_lab.display,detail_periksa_lab.nilai,detail_periksa_lab.nilai_rujukan,"+
                    "detail_periksa_lab.keterangan,permintaan_detail_permintaan_labmb.id_template,satu_sehat_specimen_lab_mb.id_specimen,"+
                    "periksa_lab.kd_dokter,pegawai.nama,pegawai.no_ktp as ktppraktisi,satu_sehat_encounter.id_encounter,"+
@@ -1032,7 +1042,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         false,rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("noorder"),rs.getString("tgl_hasil")+" "+rs.getString("jam_hasil"),rs.getString("Pemeriksaan"),
                         rs.getString("code"),rs.getString("system"),rs.getString("display"),"Hasil Lab : "+rs.getString("nilai")+" "+rs.getString("satuan")+", Nilai Rujukan : "+rs.getString("nilai_rujukan")+(rs.getString("keterangan").equals("")?"":", Keterangan : "+rs.getString("keterangan")),
-                        rs.getString("id_template"),rs.getString("id_specimen"),rs.getString("kd_dokter"),rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("id_encounter"),rs.getString("id_observation"),rs.getString("kd_jenis_prw")
+                        //rs.getString("id_template"),rs.getString("id_specimen"),rs.getString("kd_dokter"),rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("id_encounter"),rs.getString("id_observation"),rs.getString("kd_jenis_prw")
+                        rs.getString("id_template"),rs.getString("id_specimen"),rs.getString("kd_dokter"),rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("id_encounter"),rs.getString("id_observation"),rs.getString("kd_jenis_prw"),rs.getString("waktu_efektif")
                     });
                 }
             } catch (Exception e) {
