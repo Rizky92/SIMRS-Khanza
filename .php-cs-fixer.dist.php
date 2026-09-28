@@ -4,9 +4,6 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
-    ->in([
-        'api-bpjsfktl',
-    ])
     ->notName([
         '*.blade.php',
     ])
