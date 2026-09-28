@@ -1336,6 +1336,15 @@ public final class validasi {
         cmb.setSelectedItem(year);
     }
 
+    public void LoadTahun2(JComboBox cmb){
+        cmb.removeAllItems();
+        cmb.addItem("");
+        for(i =year;i>=1980;i--){
+            cmb.addItem(i);
+        }
+        cmb.setSelectedItem("");
+    }
+
     public void LoadTahunAkd(JComboBox cmb){
         cmb.removeAllItems();
         for(i = 1950;i<=year;i++){

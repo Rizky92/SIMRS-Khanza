@@ -169,7 +169,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
     private void initComponents() {
 
         internalFrame1 = new widget.InternalFrame();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
         scrollPane2 = new widget.ScrollPane();
@@ -660,7 +660,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.editorpane LoadHTML1;
     private widget.TextBox TCari;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private javax.swing.JPanel jPanel2;

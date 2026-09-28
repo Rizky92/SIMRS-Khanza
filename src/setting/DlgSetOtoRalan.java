@@ -179,7 +179,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         jLabel10 = new widget.Label();
         LCount = new widget.Label();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         Table1 = new widget.Table();
@@ -1620,7 +1620,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.TextBox TCari;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Table Table1;
     private widget.Table Table2;
     private widget.Table Table3;

@@ -326,7 +326,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
         label7 = new widget.Label();
         NamaSampel = new widget.TextBox();
         btnSampel = new widget.Button();
-        TabData = new javax.swing.JTabbedPane();
+        TabData = new widget.TabPane();
         jPanel2 = new javax.swing.JPanel();
         scrollPane1 = new widget.ScrollPane();
         tbPermintaan = new widget.Table();
@@ -2024,7 +2024,7 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
     private widget.PanelBiasa PanelAccor;
     private widget.ComboBox Status;
     private widget.TextBox TCari;
-    private javax.swing.JTabbedPane TabData;
+    private widget.TabPane TabData;
     private widget.Tanggal Tanggal1;
     private widget.Tanggal Tanggal2;
     private javax.swing.JDialog WindowInput;

@@ -118,7 +118,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
         CmbDetik2 = new widget.ComboBox();
         cmbStatus = new widget.ComboBox();
         jLabel12 = new widget.Label();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         scrollPane2 = new widget.ScrollPane();
         LoadHTML = new widget.editorpane();
         scrollPane3 = new widget.ScrollPane();
@@ -801,7 +801,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
     private widget.TextBox NmCaraBayar;
     private widget.TextBox NmDokter;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
     private widget.Button btnDokter;

@@ -85,7 +85,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
     private void initComponents() {
 
         internalFrame1 = new widget.InternalFrame();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
         scrollInput = new widget.ScrollPane();
         FormInput = new widget.PanelBiasa();
@@ -947,7 +947,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
     private javax.swing.JTextArea Risiko;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private javax.swing.JTextArea TataCara;
     private javax.swing.JTextArea TindakanKedokteran;
     private javax.swing.JTextArea Tujuan;

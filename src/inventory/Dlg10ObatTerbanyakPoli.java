@@ -102,7 +102,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
         kdkategori = new widget.TextBox();
         kdgolongan = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         Scroll = new widget.ScrollPane();
         LoadHTML = new widget.editorpane();
         Scroll1 = new widget.ScrollPane();
@@ -965,7 +965,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
     private widget.InternalFrame internalFrame1;

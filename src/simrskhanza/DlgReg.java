@@ -1137,7 +1137,7 @@ public final class DlgReg extends javax.swing.JDialog {
         TNoAntrian = new widget.TextBox();
         labelKeterangan = new widget.Label();
         ChkInput = new widget.CekBox();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         Scroll = new widget.ScrollPane();
         tbPetugas = new widget.Table();
         Scroll1 = new widget.ScrollPane();
@@ -17327,7 +17327,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private widget.TextBox TPngJwb;
     private widget.TextBox TPoli;
     private widget.TextBox TStatus;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private javax.swing.JDialog WindowInputNoAntrian;
     private widget.Button btnCekBridging;
     private widget.Button btnKab;

@@ -242,7 +242,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
         btnAmbil = new widget.Button();
         BtnRefreshPhoto1 = new widget.Button();
         BtnPrint1 = new widget.Button();
-        TabData = new javax.swing.JTabbedPane();
+        TabData = new widget.TabPane();
         Scroll5 = new widget.ScrollPane();
         LoadHTML2 = new widget.editorpane();
         Scroll6 = new widget.ScrollPane();
@@ -1423,7 +1423,7 @@ public final class SuratPulangAtasPermintaanSendiri extends javax.swing.JDialog 
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private javax.swing.JTabbedPane TabData;
+    private widget.TabPane TabData;
     private widget.Tanggal Tanggal;
     private widget.Tanggal TglLahir;
     private widget.TextBox Umur;

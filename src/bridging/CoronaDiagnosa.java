@@ -225,7 +225,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
         Popup = new javax.swing.JPopupMenu();
         ppBersihkan = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
-        TabSetting = new javax.swing.JTabbedPane();
+        TabSetting = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -934,7 +934,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TCari2;
-    private javax.swing.JTabbedPane TabSetting;
+    private widget.TabPane TabSetting;
     private widget.Button btnPetugas;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
