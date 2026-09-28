@@ -81,7 +81,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
         tabMode=new DefaultTableModel(null,new String[]{
                 "P","No.Rawat","No.RM","Nama Pasien","No.KTP Pasien","No.Permintaan","Tgl & Jam Hasil","Nama Pemeriksaan",
                 "Radiologi Code","Radiologi System","Radiologi Display","Hasil Radiologi","Kode Pemeriksaan","ID Specimen",
-                "Kode Dokter","Nama Dokter","No.KTP Dokter","ID Encounter","ID Observation","Accession Number"
+                //"Kode Dokter","Nama Dokter","No.KTP Dokter","ID Encounter","ID Observation","Accession Number"
+                "Kode Dokter","Nama Dokter","No.KTP Dokter","ID Encounter","ID Observation","Accession Number","Tgl & Jam Sampel"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -94,7 +95,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                  java.lang.Boolean.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
-                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
+                 //java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
+                 java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -107,7 +109,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 20; i++) {
+        //for (i = 0; i < 20; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -150,6 +153,8 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                 column.setPreferredWidth(210);
             }else if(i==19){
                 column.setPreferredWidth(110);
+            }else if(i==20){
+                column.setPreferredWidth(115);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -708,7 +713,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                         "\"specimen\": {" +
                                             "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation");
@@ -826,7 +833,9 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                         "\"specimen\": {" +
                                             "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                         "}," +
-                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        //"\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                        "\"effectiveDateTime\": \""+tbObat.getValueAt(i,20).toString().replace(" ","T")+"+07:00\"," +
+                                        "\"issued\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"" +
                                    "}";
                             System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());
@@ -1092,7 +1101,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                         "select reg_periksa.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, permintaan_radiologi.noorder, permintaan_radiologi.tgl_hasil, permintaan_radiologi.jam_hasil," +
                         "jns_perawatan_radiologi.nm_perawatan, satu_sehat_mapping_radiologi.code, satu_sehat_mapping_radiologi.system, satu_sehat_mapping_radiologi.display, hasil_radiologi.hasil, " +
                         "permintaan_pemeriksaan_radiologi.kd_jenis_prw, satu_sehat_specimen_radiologi.id_specimen, periksa_radiologi.kd_dokter, pegawai.nama, pegawai.no_ktp as ktppraktisi, satu_sehat_encounter.id_encounter, " +
-                        "ifnull(satu_sehat_observation_radiologi.id_observation, '') as id_observation, satu_sehat_accession_radiologi_smc.no_acsn from reg_periksa inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                        "ifnull(satu_sehat_observation_radiologi.id_observation, '') as id_observation, satu_sehat_accession_radiologi_smc.no_acsn, if(permintaan_radiologi.tgl_sampel <> '0000-00-00' and concat(permintaan_radiologi.tgl_sampel, ' ', permintaan_radiologi.jam_sampel) <= concat(permintaan_radiologi.tgl_hasil, ' ', permintaan_radiologi.jam_hasil), concat(permintaan_radiologi.tgl_sampel, ' ', permintaan_radiologi.jam_sampel), concat(permintaan_radiologi.tgl_hasil, ' ', permintaan_radiologi.jam_hasil)) as waktu_efektif from reg_periksa inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                         "inner join permintaan_radiologi on permintaan_radiologi.no_rawat = reg_periksa.no_rawat inner join permintaan_pemeriksaan_radiologi on permintaan_pemeriksaan_radiologi.noorder = permintaan_radiologi.noorder " +
                         "left join satu_sehat_accession_radiologi_smc on permintaan_pemeriksaan_radiologi.noorder = satu_sehat_accession_radiologi_smc.noorder and permintaan_pemeriksaan_radiologi.kd_jenis_prw = " +
                         "satu_sehat_accession_radiologi_smc.kd_jenis_prw inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw inner join " +
@@ -1122,7 +1131,7 @@ public final class SatuSehatKirimObservationRadiologi extends javax.swing.JDialo
                                 publish(new Object[] {
                                     false, rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("no_ktp"), rs.getString("noorder"), rs.getString("tgl_hasil") + " " + rs.getString("jam_hasil"),
                                     rs.getString("nm_perawatan"), rs.getString("code"), rs.getString("system"), rs.getString("display"), rs.getString("hasil"), rs.getString("kd_jenis_prw"), rs.getString("id_specimen"), rs.getString("kd_dokter"),
-                                    rs.getString("nama"), rs.getString("ktppraktisi"), rs.getString("id_encounter"), rs.getString("id_observation"), accession.getNoACSN(rs.getString("no_acsn"), rs.getString("noorder"), rs.getString("kd_jenis_prw"))
+                                    rs.getString("nama"), rs.getString("ktppraktisi"), rs.getString("id_encounter"), rs.getString("id_observation"), accession.getNoACSN(rs.getString("no_acsn"), rs.getString("noorder"), rs.getString("kd_jenis_prw")), rs.getString("waktu_efektif")
                                 });
                             }
                         }
