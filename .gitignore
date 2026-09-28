@@ -29,6 +29,7 @@ report/.project
 *.xlsx
 *.py
 *.txt
+.php-cs-fixer.cache
 CLAUDE.local.md
 
 # Don't ignore these
