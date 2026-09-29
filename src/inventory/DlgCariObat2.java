@@ -2597,8 +2597,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         tbObat.setValueAt("",row,1);
                         tbObat.setValueAt(0,row,10);
                     }
+                /*
                 }else{
                     tbObat.setValueAt(0,row,10);
+                */
                 }
             }
         }
