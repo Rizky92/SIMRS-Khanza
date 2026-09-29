@@ -254,7 +254,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Diskon = new widget.TextBox();
         jLabel15 = new javax.swing.JLabel();
         TotalPenagihan = new javax.swing.JLabel();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         Scroll = new widget.ScrollPane();
         tbBelumLunas = new widget.Table();
         Scroll1 = new widget.ScrollPane();
@@ -1676,7 +1676,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     private widget.ScrollPane Scroll1;
     private widget.TextBox TCari;
     private widget.TextBox TKd;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Tanggal Tanggal;
     private widget.Tanggal TanggalTempo;
     private widget.TextBox Tempo;

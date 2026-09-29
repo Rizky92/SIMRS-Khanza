@@ -170,7 +170,7 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
         scrollPane3 = new widget.ScrollPane();
@@ -1232,7 +1232,7 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
     private widget.Button BtnSeek2;
     private widget.editorpane LoadHTML;
     private widget.editorpane LoadHTML2;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
     private widget.CekBox chkLaborat;

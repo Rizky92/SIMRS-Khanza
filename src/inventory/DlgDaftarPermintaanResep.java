@@ -533,9 +533,9 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         label10 = new widget.Label();
         LCount = new widget.Label();
         BtnKeluar = new widget.Button();
-        TabPilihRawat = new javax.swing.JTabbedPane();
+        TabPilihRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
-        TabRawatJalan = new javax.swing.JTabbedPane();
+        TabRawatJalan = new widget.TabPane();
         scrollPane1 = new widget.ScrollPane();
         tbResepRalan = new widget.Table();
         scrollPane2 = new widget.ScrollPane();
@@ -548,7 +548,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         CrPoli = new widget.TextBox();
         BtnSeek4 = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
-        TabRawatInap = new javax.swing.JTabbedPane();
+        TabRawatInap = new widget.TabPane();
         scrollPane3 = new widget.ScrollPane();
         tbResepRanap = new widget.Table();
         scrollPane4 = new widget.ScrollPane();
@@ -4791,9 +4791,9 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private widget.ScrollPane ScrollMenu;
     private widget.TextBox TCari;
     private widget.TextBox TKadaluarsaRacikanSmc;
-    private javax.swing.JTabbedPane TabPilihRawat;
-    private javax.swing.JTabbedPane TabRawatInap;
-    private javax.swing.JTabbedPane TabRawatJalan;
+    private widget.TabPane TabPilihRawat;
+    private widget.TabPane TabRawatInap;
+    private widget.TabPane TabRawatJalan;
     private widget.Tanggal TglSelesai;
     private javax.swing.JDialog WindowJamPenyerahan;
     private javax.swing.JDialog WindowPengaturan;

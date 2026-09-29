@@ -339,7 +339,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         InformasiTambahan = new widget.TextBox();
         DiagnosisKlinis = new widget.TextBox();
         jLabel7 = new widget.Label();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         PanelCariUtama = new javax.swing.JPanel();
         Scroll = new widget.ScrollPane();
         tbDetailPK = new widget.Table();
@@ -1972,7 +1972,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Tanggal Tanggal;
     private widget.Tanggal TanggalBahan;
     private widget.Tanggal TanggalPA;

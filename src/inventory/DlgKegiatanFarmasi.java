@@ -148,7 +148,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
         Scroll2 = new widget.ScrollPane();
@@ -672,7 +672,7 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
     private widget.ScrollPane Scroll3;
     private widget.TextBox TCari;
     private widget.TextBox TKd;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
     private widget.InternalFrame internalFrame1;
