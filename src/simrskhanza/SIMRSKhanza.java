@@ -12,6 +12,9 @@
 package simrskhanza;
 
 import fungsi.sekuel;
+import it.sauronsoftware.junique.AlreadyLockedException;
+import it.sauronsoftware.junique.JUnique;
+import javax.swing.JOptionPane;
 import usu.widget.util.WidgetUtilities;
 
 /**
@@ -19,17 +22,31 @@ import usu.widget.util.WidgetUtilities;
  * @author khanzasoft
  */
 public class SIMRSKhanza {
-
+    private static boolean isRunning = false;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String appId = SIMRSKhanza.class.getName();
+        try {
+            JUnique.acquireLock(appId);
+            isRunning = false;
+        } catch (AlreadyLockedException e) {
+            isRunning = true;
+        }
+        
         WidgetUtilities.invokeLater(() -> {
-            frmUtama utama = frmUtama.getInstance();
-            utama.isWall();
-            utama.setVisible(true);
+            if (isRunning) {
+                JOptionPane.showMessageDialog(null, "Hanya boleh ada satu SIMRS Khanza yang berjalan..!!", "Peringatan", JOptionPane.ERROR_MESSAGE);
+                System.exit(1);
+            } else {
+                frmUtama utama = frmUtama.getInstance();
 
-            sekuel.nyalakanBatasEdit();
+                utama.isWall();
+                utama.setVisible(true);
+
+                sekuel.nyalakanBatasEdit();
+            }
         });
     }
 }
