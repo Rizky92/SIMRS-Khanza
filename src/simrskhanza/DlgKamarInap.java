@@ -6013,87 +6013,89 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
                     "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
                 }, "Laporan 5 (Jasper)");
-                switch (pilihan) {
-                    case "Laporan 1 (HTML)":
-                        Valid.exportHtmlSmc("KamarInap.html", "Data Kamar Inap Pasien", tbKamIn);
-                        break;
-                    case "Laporan 2 (WPS)":
-                        Valid.exportWPSSmc("KamarInap.wps", "Data Kamar Inap Pasien", tbKamIn);
-                        break;
-                    case "Laporan 3 (CSV)":
-                        Valid.exportCSVSmc("KamarInap.csv", tbKamIn);
-                        break;
-                    case "Laporan 4 (XLSX)":
-                        Valid.exportXlsxSmc("KamarInap.xlsx", tbKamIn);
-                        break;
-                    case "Laporan 5 (Jasper)":
-                        String pilihancetak = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan yang mau dicetak!","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1", "Laporan 2","Lembar Bimbingan Rohani"},"Laporan 1");
-                        switch (pilihancetak) {
-                            case "Laporan 1":
-                                Map<String, Object> param = new HashMap<>();
-                                param.put("namars",akses.getnamars());
-                                param.put("alamatrs",akses.getalamatrs());
-                                param.put("kotars",akses.getkabupatenrs());
-                                param.put("propinsirs",akses.getpropinsirs());
-                                param.put("kontakrs",akses.getkontakrs());
-                                param.put("emailrs",akses.getemailrs());
-                                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                                Valid.MyReportqry("rptKamarInap.jasper","report","::[ Data Kamar Inap Pasien ]::","select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab),"+
-                                   "penjab.png_jawab,kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
-                                   "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar) as tgl_keluar,"+
-                                   "if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar) as jam_keluar,kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter "+
-                                   "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                                   "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                                   "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                   "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                                   "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk",param);
+                if (null != pilihan) {
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("KamarInap.html", "Data Kamar Inap Pasien", tbKamIn);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("KamarInap.wps", "Data Kamar Inap Pasien", tbKamIn);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("KamarInap.csv", tbKamIn);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("KamarInap.xlsx", tbKamIn);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            String pilihancetak = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan yang mau dicetak!","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1", "Laporan 2","Lembar Bimbingan Rohani"},"Laporan 1");
+                            if (null != pilihancetak) {
+                                switch (pilihancetak) {
+                                    case "Laporan 1":
+                                        Map<String, Object> param = new HashMap<>();
+                                        param.put("namars",akses.getnamars());
+                                        param.put("alamatrs",akses.getalamatrs());
+                                        param.put("kotars",akses.getkabupatenrs());
+                                        param.put("propinsirs",akses.getpropinsirs());
+                                        param.put("kontakrs",akses.getkontakrs());
+                                        param.put("emailrs",akses.getemailrs());
+                                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                                        Valid.MyReportqry("rptKamarInap.jasper","report","::[ Data Kamar Inap Pasien ]::","select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab),"+
+                                           "penjab.png_jawab,kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
+                                           "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar) as tgl_keluar,"+
+                                           "if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar) as jam_keluar,kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter "+
+                                           "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                           "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                                           "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                           "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                                           "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk",param);
+                                        break;
+                                    case "Laporan 2":
+                                        Map<String, Object> param2 = new HashMap<>();
+                                        param2.put("namars",akses.getnamars());
+                                        param2.put("alamatrs",akses.getalamatrs());
+                                        param2.put("kotars",akses.getkabupatenrs());
+                                        param2.put("propinsirs",akses.getpropinsirs());
+                                        param2.put("kontakrs",akses.getkontakrs());
+                                        param2.put("emailrs",akses.getemailrs());
+                                        param2.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                                        Valid.MyReportqry("rptKamarInap2.jasper","report","::[ Data Kamar Inap Pasien ]::","select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,"+
+                                            "penjab.png_jawab,kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
+                                            "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar) as tgl_keluar,"+
+                                            "ifnull((select perujuk from rujuk_masuk where rujuk_masuk.no_rawat=reg_periksa.no_rawat),'') as perujuk,"+
+                                            "ifnull((select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=kamar_inap.no_rawat limit 1),'') as dpjp,"+
+                                            "if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar) as jam_keluar,kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter "+
+                                            "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                            "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                                            "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                            "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                                            "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk",param2);
+                                        break;
+                                    case "Lembar Bimbingan Rohani":
+                                        Map<String, Object> param3 = new HashMap<>();
+                                        param3.put("namars",akses.getnamars());
+                                        param3.put("alamatrs",akses.getalamatrs());
+                                        param3.put("kotars",akses.getkabupatenrs());
+                                        param3.put("propinsirs",akses.getpropinsirs());
+                                        param3.put("kontakrs",akses.getkontakrs());
+                                        param3.put("emailrs",akses.getemailrs());
+                                        param3.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                                        Valid.MyReportqry("rptKamarInap3.jasper","report","::[ Data Kamar Inap Pasien ]::","select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,"+
+                                            "penjab.png_jawab,kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir,pasien.agama," +
+                                            "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
+                                            "ifnull((select perujuk from rujuk_masuk where rujuk_masuk.no_rawat=reg_periksa.no_rawat),'') as perujuk,"+
+                                            "ifnull((select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=kamar_inap.no_rawat limit 1),'') as dpjp,"+
+                                            "kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter "+
+                                            "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                            "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                                            "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                            "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                                            "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk",param3);
+                                        break;
+                                }
                                 break;
-                            case "Laporan 2":
-                                Map<String, Object> param2 = new HashMap<>();
-                                param2.put("namars",akses.getnamars());
-                                param2.put("alamatrs",akses.getalamatrs());
-                                param2.put("kotars",akses.getkabupatenrs());
-                                param2.put("propinsirs",akses.getpropinsirs());
-                                param2.put("kontakrs",akses.getkontakrs());
-                                param2.put("emailrs",akses.getemailrs());
-                                param2.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                Valid.MyReportqry("rptKamarInap2.jasper","report","::[ Data Kamar Inap Pasien ]::","select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,"+
-                                    "penjab.png_jawab,kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
-                                    "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar) as tgl_keluar,"+
-                                    "ifnull((select perujuk from rujuk_masuk where rujuk_masuk.no_rawat=reg_periksa.no_rawat),'') as perujuk,"+
-                                    "ifnull((select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=kamar_inap.no_rawat limit 1),'') as dpjp,"+
-                                    "if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar) as jam_keluar,kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter "+
-                                    "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                                    "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                                    "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                    "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk",param2);
-                                break;
-                            case "Lembar Bimbingan Rohani":
-                                Map<String, Object> param3 = new HashMap<>();
-                                param3.put("namars",akses.getnamars());
-                                param3.put("alamatrs",akses.getalamatrs());
-                                param3.put("kotars",akses.getkabupatenrs());
-                                param3.put("propinsirs",akses.getpropinsirs());
-                                param3.put("kontakrs",akses.getkontakrs());
-                                param3.put("emailrs",akses.getemailrs());
-                                param3.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                Valid.MyReportqry("rptKamarInap3.jasper","report","::[ Data Kamar Inap Pasien ]::","select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,"+
-                                    "penjab.png_jawab,kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir,pasien.agama," +
-                                    "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
-                                    "ifnull((select perujuk from rujuk_masuk where rujuk_masuk.no_rawat=reg_periksa.no_rawat),'') as perujuk,"+
-                                    "ifnull((select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=kamar_inap.no_rawat limit 1),'') as dpjp,"+
-                                    "kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter "+
-                                    "from kamar_inap inner join reg_periksa on kamar_inap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                                    "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                                    "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                    "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk",param3);
-                                break;
-                        }
-                        break;
+                            }
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);

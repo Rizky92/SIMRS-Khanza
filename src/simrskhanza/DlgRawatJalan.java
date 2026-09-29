@@ -1183,14 +1183,14 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
         BtnTambahTindakan = new widget.Button();
-        TabRawat = new widget.TabPane();
+        TabRawat = new javax.swing.JTabbedPane();
         internalFrame2 = new widget.InternalFrame();
         panelGlass7 = new widget.panelisi();
         jLabel5 = new widget.Label();
         KdDok = new widget.TextBox();
         BtnSeekDokter = new widget.Button();
         TDokter = new widget.TextBox();
-        TabRawatTindakanDokter = new widget.TabPane();
+        TabRawatTindakanDokter = new javax.swing.JTabbedPane();
         Scroll6 = new widget.ScrollPane();
         tbTindakan = new widget.Table();
         Scroll = new widget.ScrollPane();
@@ -1201,7 +1201,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         kdptg = new widget.TextBox();
         BtnSeekPetugas = new widget.Button();
         TPerawat = new widget.TextBox();
-        TabRawatTindakanPetugas = new widget.TabPane();
+        TabRawatTindakanPetugas = new javax.swing.JTabbedPane();
         Scroll7 = new widget.ScrollPane();
         tbTindakan2 = new widget.Table();
         Scroll8 = new widget.ScrollPane();
@@ -1216,7 +1216,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         KdDok2 = new widget.TextBox();
         TDokter2 = new widget.TextBox();
         BtnSeekDokter2 = new widget.Button();
-        TabRawatTindakanDokterPetugas = new widget.TabPane();
+        TabRawatTindakanDokterPetugas = new javax.swing.JTabbedPane();
         Scroll9 = new widget.ScrollPane();
         tbTindakan3 = new widget.Table();
         Scroll10 = new widget.ScrollPane();
@@ -1495,11 +1495,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -1663,7 +1658,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-09-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1677,7 +1672,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-09-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2352,7 +2347,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(jLabel29);
         jLabel29.setBounds(234, 220, 70, 23);
 
-        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma" ,"Meninggal"}));
+        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma", "Meninggal" }));
         cmbKesadaran.setName("cmbKesadaran"); // NOI18N
         cmbKesadaran.setPreferredSize(new java.awt.Dimension(62, 28));
         cmbKesadaran.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3382,7 +3377,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-09-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -3487,8 +3482,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnRiwayat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnRiwayat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRiwayat.setName("BtnRiwayat"); // NOI18N
-        BtnRiwayat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRiwayat.setRoundRect(false);
+        BtnRiwayat.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRiwayatActionPerformed(evt);
@@ -3504,8 +3498,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnResepObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnResepObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnResepObat.setName("BtnResepObat"); // NOI18N
-        BtnResepObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnResepObat.setRoundRect(false);
+        BtnResepObat.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnResepObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnResepObatActionPerformed(evt);
@@ -3521,8 +3514,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCopyResep.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCopyResep.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCopyResep.setName("BtnCopyResep"); // NOI18N
-        BtnCopyResep.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCopyResep.setRoundRect(false);
+        BtnCopyResep.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCopyResep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCopyResepActionPerformed(evt);
@@ -3538,8 +3530,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnResepLuar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnResepLuar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnResepLuar.setName("BtnResepLuar"); // NOI18N
-        BtnResepLuar.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnResepLuar.setRoundRect(false);
+        BtnResepLuar.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnResepLuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnResepLuarActionPerformed(evt);
@@ -3555,8 +3546,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnInputObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnInputObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnInputObat.setName("BtnInputObat"); // NOI18N
-        BtnInputObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnInputObat.setRoundRect(false);
+        BtnInputObat.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnInputObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnInputObatActionPerformed(evt);
@@ -3572,8 +3562,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnObatBhp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnObatBhp.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnObatBhp.setName("BtnObatBhp"); // NOI18N
-        BtnObatBhp.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnObatBhp.setRoundRect(false);
+        BtnObatBhp.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnObatBhp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnObatBhpActionPerformed(evt);
@@ -3589,8 +3578,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnBerkasDigital.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnBerkasDigital.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnBerkasDigital.setName("BtnBerkasDigital"); // NOI18N
-        BtnBerkasDigital.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnBerkasDigital.setRoundRect(false);
+        BtnBerkasDigital.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBerkasDigitalActionPerformed(evt);
@@ -3606,8 +3594,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPermintaanLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPermintaanLab.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanLab.setName("BtnPermintaanLab"); // NOI18N
-        BtnPermintaanLab.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanLab.setRoundRect(false);
+        BtnPermintaanLab.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPermintaanLab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPermintaanLabActionPerformed(evt);
@@ -3623,8 +3610,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPermintaanRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPermintaanRad.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanRad.setName("BtnPermintaanRad"); // NOI18N
-        BtnPermintaanRad.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanRad.setRoundRect(false);
+        BtnPermintaanRad.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPermintaanRad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPermintaanRadActionPerformed(evt);
@@ -3640,8 +3626,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnJadwalOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnJadwalOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnJadwalOperasi.setName("BtnJadwalOperasi"); // NOI18N
-        BtnJadwalOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnJadwalOperasi.setRoundRect(false);
+        BtnJadwalOperasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnJadwalOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnJadwalOperasiActionPerformed(evt);
@@ -3657,8 +3642,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSKDP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSKDP.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSKDP.setName("BtnSKDP"); // NOI18N
-        BtnSKDP.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSKDP.setRoundRect(false);
+        BtnSKDP.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSKDP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSKDPActionPerformed(evt);
@@ -3674,8 +3658,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnKamar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnKamar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnKamar.setName("BtnKamar"); // NOI18N
-        BtnKamar.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKamar.setRoundRect(false);
+        BtnKamar.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnKamar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKamarActionPerformed(evt);
@@ -3691,8 +3674,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnTriaseIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnTriaseIGD.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnTriaseIGD.setName("BtnTriaseIGD"); // NOI18N
-        BtnTriaseIGD.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnTriaseIGD.setRoundRect(false);
+        BtnTriaseIGD.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnTriaseIGD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTriaseIGDActionPerformed(evt);
@@ -3708,8 +3690,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnRujukInternal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnRujukInternal.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRujukInternal.setName("BtnRujukInternal"); // NOI18N
-        BtnRujukInternal.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRujukInternal.setRoundRect(false);
+        BtnRujukInternal.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnRujukInternal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRujukInternalActionPerformed(evt);
@@ -3725,8 +3706,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnResume.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnResume.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnResume.setName("BtnResume"); // NOI18N
-        BtnResume.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnResume.setRoundRect(false);
+        BtnResume.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnResume.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnResumeActionPerformed(evt);
@@ -3742,8 +3722,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatanIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatanIGD.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanIGD.setName("BtnAwalKeperawatanIGD"); // NOI18N
-        BtnAwalKeperawatanIGD.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanIGD.setRoundRect(false);
+        BtnAwalKeperawatanIGD.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatanIGD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanIGDActionPerformed(evt);
@@ -3759,8 +3738,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatan.setName("BtnAwalKeperawatan"); // NOI18N
-        BtnAwalKeperawatan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatan.setRoundRect(false);
+        BtnAwalKeperawatan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanActionPerformed(evt);
@@ -3776,8 +3754,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatanGigi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatanGigi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanGigi.setName("BtnAwalKeperawatanGigi"); // NOI18N
-        BtnAwalKeperawatanGigi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanGigi.setRoundRect(false);
+        BtnAwalKeperawatanGigi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatanGigi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanGigiActionPerformed(evt);
@@ -3793,8 +3770,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatanKandungan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatanKandungan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanKandungan.setName("BtnAwalKeperawatanKandungan"); // NOI18N
-        BtnAwalKeperawatanKandungan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanKandungan.setRoundRect(false);
+        BtnAwalKeperawatanKandungan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatanKandungan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanKandunganActionPerformed(evt);
@@ -3810,8 +3786,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatanAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatanAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanAnak.setName("BtnAwalKeperawatanAnak"); // NOI18N
-        BtnAwalKeperawatanAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanAnak.setRoundRect(false);
+        BtnAwalKeperawatanAnak.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatanAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanAnakActionPerformed(evt);
@@ -3827,8 +3802,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatanPsikiatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatanPsikiatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanPsikiatri.setName("BtnAwalKeperawatanPsikiatri"); // NOI18N
-        BtnAwalKeperawatanPsikiatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanPsikiatri.setRoundRect(false);
+        BtnAwalKeperawatanPsikiatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatanPsikiatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanPsikiatriActionPerformed(evt);
@@ -3844,8 +3818,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatanGeriatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalKeperawatanGeriatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanGeriatri.setName("BtnAwalKeperawatanGeriatri"); // NOI18N
-        BtnAwalKeperawatanGeriatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanGeriatri.setRoundRect(false);
+        BtnAwalKeperawatanGeriatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalKeperawatanGeriatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanGeriatriActionPerformed(evt);
@@ -3861,8 +3834,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalFisioterapi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalFisioterapi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalFisioterapi.setName("BtnAwalFisioterapi"); // NOI18N
-        BtnAwalFisioterapi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalFisioterapi.setRoundRect(false);
+        BtnAwalFisioterapi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalFisioterapi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalFisioterapiActionPerformed(evt);
@@ -3878,8 +3850,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalTerapiWicara.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalTerapiWicara.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalTerapiWicara.setName("BtnAwalTerapiWicara"); // NOI18N
-        BtnAwalTerapiWicara.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalTerapiWicara.setRoundRect(false);
+        BtnAwalTerapiWicara.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalTerapiWicara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalTerapiWicaraActionPerformed(evt);
@@ -3895,8 +3866,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisIGD.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisIGD.setName("BtnAwalMedisIGD"); // NOI18N
-        BtnAwalMedisIGD.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisIGD.setRoundRect(false);
+        BtnAwalMedisIGD.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisIGD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisIGDActionPerformed(evt);
@@ -3912,8 +3882,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisIGDPsikiatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisIGDPsikiatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisIGDPsikiatri.setName("BtnAwalMedisIGDPsikiatri"); // NOI18N
-        BtnAwalMedisIGDPsikiatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisIGDPsikiatri.setRoundRect(false);
+        BtnAwalMedisIGDPsikiatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisIGDPsikiatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisIGDPsikiatriActionPerformed(evt);
@@ -3929,8 +3898,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedis.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedis.setName("BtnAwalMedis"); // NOI18N
-        BtnAwalMedis.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedis.setRoundRect(false);
+        BtnAwalMedis.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisActionPerformed(evt);
@@ -3946,8 +3914,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisKandungan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisKandungan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisKandungan.setName("BtnAwalMedisKandungan"); // NOI18N
-        BtnAwalMedisKandungan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisKandungan.setRoundRect(false);
+        BtnAwalMedisKandungan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisKandungan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisKandunganActionPerformed(evt);
@@ -3963,8 +3930,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisAnak.setName("BtnAwalMedisAnak"); // NOI18N
-        BtnAwalMedisAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisAnak.setRoundRect(false);
+        BtnAwalMedisAnak.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisAnakActionPerformed(evt);
@@ -3980,8 +3946,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisTHT.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisTHT.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisTHT.setName("BtnAwalMedisTHT"); // NOI18N
-        BtnAwalMedisTHT.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisTHT.setRoundRect(false);
+        BtnAwalMedisTHT.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisTHT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisTHTActionPerformed(evt);
@@ -3997,8 +3962,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisPsikiatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisPsikiatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisPsikiatri.setName("BtnAwalMedisPsikiatri"); // NOI18N
-        BtnAwalMedisPsikiatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisPsikiatri.setRoundRect(false);
+        BtnAwalMedisPsikiatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisPsikiatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisPsikiatriActionPerformed(evt);
@@ -4014,8 +3978,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisPenyakitDalam.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisPenyakitDalam.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisPenyakitDalam.setName("BtnAwalMedisPenyakitDalam"); // NOI18N
-        BtnAwalMedisPenyakitDalam.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisPenyakitDalam.setRoundRect(false);
+        BtnAwalMedisPenyakitDalam.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisPenyakitDalam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisPenyakitDalamActionPerformed(evt);
@@ -4031,8 +3994,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisMata.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisMata.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisMata.setName("BtnAwalMedisMata"); // NOI18N
-        BtnAwalMedisMata.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisMata.setRoundRect(false);
+        BtnAwalMedisMata.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisMata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisMataActionPerformed(evt);
@@ -4048,8 +4010,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisNeurologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisNeurologi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisNeurologi.setName("BtnAwalMedisNeurologi"); // NOI18N
-        BtnAwalMedisNeurologi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisNeurologi.setRoundRect(false);
+        BtnAwalMedisNeurologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisNeurologi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisNeurologiActionPerformed(evt);
@@ -4065,8 +4026,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisOrthopedi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisOrthopedi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisOrthopedi.setName("BtnAwalMedisOrthopedi"); // NOI18N
-        BtnAwalMedisOrthopedi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisOrthopedi.setRoundRect(false);
+        BtnAwalMedisOrthopedi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisOrthopedi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisOrthopediActionPerformed(evt);
@@ -4082,8 +4042,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisBedah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisBedah.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisBedah.setName("BtnAwalMedisBedah"); // NOI18N
-        BtnAwalMedisBedah.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisBedah.setRoundRect(false);
+        BtnAwalMedisBedah.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisBedah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisBedahActionPerformed(evt);
@@ -4099,8 +4058,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisBedahMulut.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisBedahMulut.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisBedahMulut.setName("BtnAwalMedisBedahMulut"); // NOI18N
-        BtnAwalMedisBedahMulut.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisBedahMulut.setRoundRect(false);
+        BtnAwalMedisBedahMulut.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisBedahMulut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisBedahMulutActionPerformed(evt);
@@ -4116,8 +4074,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisGeriatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisGeriatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisGeriatri.setName("BtnAwalMedisGeriatri"); // NOI18N
-        BtnAwalMedisGeriatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisGeriatri.setRoundRect(false);
+        BtnAwalMedisGeriatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisGeriatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisGeriatriActionPerformed(evt);
@@ -4133,8 +4090,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisKulitKelamin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisKulitKelamin.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisKulitKelamin.setName("BtnAwalMedisKulitKelamin"); // NOI18N
-        BtnAwalMedisKulitKelamin.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisKulitKelamin.setRoundRect(false);
+        BtnAwalMedisKulitKelamin.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisKulitKelamin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisKulitKelaminActionPerformed(evt);
@@ -4150,8 +4106,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisParu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisParu.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisParu.setName("BtnAwalMedisParu"); // NOI18N
-        BtnAwalMedisParu.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisParu.setRoundRect(false);
+        BtnAwalMedisParu.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisParu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisParuActionPerformed(evt);
@@ -4167,8 +4122,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisRehabMedik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisRehabMedik.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisRehabMedik.setName("BtnAwalMedisRehabMedik"); // NOI18N
-        BtnAwalMedisRehabMedik.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisRehabMedik.setRoundRect(false);
+        BtnAwalMedisRehabMedik.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisRehabMedik.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisRehabMedikActionPerformed(evt);
@@ -4184,8 +4138,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisHemodialisa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisHemodialisa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisHemodialisa.setName("BtnAwalMedisHemodialisa"); // NOI18N
-        BtnAwalMedisHemodialisa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisHemodialisa.setRoundRect(false);
+        BtnAwalMedisHemodialisa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisHemodialisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisHemodialisaActionPerformed(evt);
@@ -4201,8 +4154,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnRujukKeluar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnRujukKeluar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRujukKeluar.setName("BtnRujukKeluar"); // NOI18N
-        BtnRujukKeluar.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRujukKeluar.setRoundRect(false);
+        BtnRujukKeluar.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnRujukKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRujukKeluarActionPerformed(evt);
@@ -4218,8 +4170,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatan.setName("BtnCatatan"); // NOI18N
-        BtnCatatan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatan.setRoundRect(false);
+        BtnCatatan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanActionPerformed(evt);
@@ -4235,8 +4186,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanObservasiIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanObservasiIGD.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiIGD.setName("BtnCatatanObservasiIGD"); // NOI18N
-        BtnCatatanObservasiIGD.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiIGD.setRoundRect(false);
+        BtnCatatanObservasiIGD.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanObservasiIGD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanObservasiIGDActionPerformed(evt);
@@ -4252,8 +4202,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanCekGDS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanCekGDS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanCekGDS.setName("BtnCatatanCekGDS"); // NOI18N
-        BtnCatatanCekGDS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanCekGDS.setRoundRect(false);
+        BtnCatatanCekGDS.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanCekGDS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanCekGDSActionPerformed(evt);
@@ -4269,8 +4218,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanKeperawatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanKeperawatan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanKeperawatan.setName("BtnCatatanKeperawatan"); // NOI18N
-        BtnCatatanKeperawatan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanKeperawatan.setRoundRect(false);
+        BtnCatatanKeperawatan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanKeperawatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanKeperawatanActionPerformed(evt);
@@ -4286,8 +4234,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianUlangNyeri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianUlangNyeri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianUlangNyeri.setName("BtnPenilaianUlangNyeri"); // NOI18N
-        BtnPenilaianUlangNyeri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianUlangNyeri.setRoundRect(false);
+        BtnPenilaianUlangNyeri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianUlangNyeri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianUlangNyeriActionPerformed(evt);
@@ -4303,8 +4250,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPemantauanPEWSAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPemantauanPEWSAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanPEWSAnak.setName("BtnPemantauanPEWSAnak"); // NOI18N
-        BtnPemantauanPEWSAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanPEWSAnak.setRoundRect(false);
+        BtnPemantauanPEWSAnak.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPemantauanPEWSAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanPEWSAnakActionPerformed(evt);
@@ -4320,8 +4266,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPemantauanPEWSDewasa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPemantauanPEWSDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanPEWSDewasa.setName("BtnPemantauanPEWSDewasa"); // NOI18N
-        BtnPemantauanPEWSDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanPEWSDewasa.setRoundRect(false);
+        BtnPemantauanPEWSDewasa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPemantauanPEWSDewasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanPEWSDewasaActionPerformed(evt);
@@ -4337,8 +4282,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPemantauanMEOWS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPemantauanMEOWS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanMEOWS.setName("BtnPemantauanMEOWS"); // NOI18N
-        BtnPemantauanMEOWS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanMEOWS.setRoundRect(false);
+        BtnPemantauanMEOWS.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPemantauanMEOWS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanMEOWSActionPerformed(evt);
@@ -4354,8 +4298,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPemantauanEWSNeonatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPemantauanEWSNeonatus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanEWSNeonatus.setName("BtnPemantauanEWSNeonatus"); // NOI18N
-        BtnPemantauanEWSNeonatus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanEWSNeonatus.setRoundRect(false);
+        BtnPemantauanEWSNeonatus.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPemantauanEWSNeonatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanEWSNeonatusActionPerformed(evt);
@@ -4371,8 +4314,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnMonitoringReaksiTranfusi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnMonitoringReaksiTranfusi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnMonitoringReaksiTranfusi.setName("BtnMonitoringReaksiTranfusi"); // NOI18N
-        BtnMonitoringReaksiTranfusi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnMonitoringReaksiTranfusi.setRoundRect(false);
+        BtnMonitoringReaksiTranfusi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnMonitoringReaksiTranfusi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnMonitoringReaksiTranfusiActionPerformed(evt);
@@ -4388,8 +4330,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnUjiFungsiKFR.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnUjiFungsiKFR.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnUjiFungsiKFR.setName("BtnUjiFungsiKFR"); // NOI18N
-        BtnUjiFungsiKFR.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnUjiFungsiKFR.setRoundRect(false);
+        BtnUjiFungsiKFR.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnUjiFungsiKFR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnUjiFungsiKFRActionPerformed(evt);
@@ -4405,8 +4346,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaMasukHCU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukHCU.setName("BtnChecklistKriteriaMasukHCU"); // NOI18N
-        BtnChecklistKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukHCU.setRoundRect(false);
+        BtnChecklistKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistKriteriaMasukHCU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistKriteriaMasukHCUActionPerformed(evt);
@@ -4422,8 +4362,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaMasukICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukICU.setName("BtnChecklistKriteriaMasukICU"); // NOI18N
-        BtnChecklistKriteriaMasukICU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukICU.setRoundRect(false);
+        BtnChecklistKriteriaMasukICU.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistKriteriaMasukICU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistKriteriaMasukICUActionPerformed(evt);
@@ -4439,8 +4378,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistPreOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistPreOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistPreOperasi.setName("BtnChecklistPreOperasi"); // NOI18N
-        BtnChecklistPreOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistPreOperasi.setRoundRect(false);
+        BtnChecklistPreOperasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistPreOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistPreOperasiActionPerformed(evt);
@@ -4456,8 +4394,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSignInSebelumAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSignInSebelumAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSignInSebelumAnestesi.setName("BtnSignInSebelumAnestesi"); // NOI18N
-        BtnSignInSebelumAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSignInSebelumAnestesi.setRoundRect(false);
+        BtnSignInSebelumAnestesi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSignInSebelumAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSignInSebelumAnestesiActionPerformed(evt);
@@ -4473,8 +4410,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnTimeOutSebelumInsisi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnTimeOutSebelumInsisi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnTimeOutSebelumInsisi.setName("BtnTimeOutSebelumInsisi"); // NOI18N
-        BtnTimeOutSebelumInsisi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnTimeOutSebelumInsisi.setRoundRect(false);
+        BtnTimeOutSebelumInsisi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnTimeOutSebelumInsisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTimeOutSebelumInsisiActionPerformed(evt);
@@ -4490,8 +4426,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSignOutSebelumMenutupLuka.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSignOutSebelumMenutupLuka.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSignOutSebelumMenutupLuka.setName("BtnSignOutSebelumMenutupLuka"); // NOI18N
-        BtnSignOutSebelumMenutupLuka.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSignOutSebelumMenutupLuka.setRoundRect(false);
+        BtnSignOutSebelumMenutupLuka.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSignOutSebelumMenutupLuka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSignOutSebelumMenutupLukaActionPerformed(evt);
@@ -4507,8 +4442,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistPostOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistPostOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistPostOperasi.setName("BtnChecklistPostOperasi"); // NOI18N
-        BtnChecklistPostOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistPostOperasi.setRoundRect(false);
+        BtnChecklistPostOperasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistPostOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistPostOperasiActionPerformed(evt);
@@ -4524,8 +4458,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPreOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPreOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPreOperasi.setName("BtnPenilaianPreOperasi"); // NOI18N
-        BtnPenilaianPreOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPreOperasi.setRoundRect(false);
+        BtnPenilaianPreOperasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPreOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPreOperasiActionPerformed(evt);
@@ -4541,8 +4474,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPreAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPreAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPreAnestesi.setName("BtnPenilaianPreAnestesi"); // NOI18N
-        BtnPenilaianPreAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPreAnestesi.setRoundRect(false);
+        BtnPenilaianPreAnestesi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPreAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPreAnestesiActionPerformed(evt);
@@ -4558,8 +4490,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkorAldrettePascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkorAldrettePascaAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkorAldrettePascaAnestesi.setName("BtnSkorAldrettePascaAnestesi"); // NOI18N
-        BtnSkorAldrettePascaAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkorAldrettePascaAnestesi.setRoundRect(false);
+        BtnSkorAldrettePascaAnestesi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkorAldrettePascaAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkorAldrettePascaAnestesiActionPerformed(evt);
@@ -4575,8 +4506,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkorStewardPascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkorStewardPascaAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkorStewardPascaAnestesi.setName("BtnSkorStewardPascaAnestesi"); // NOI18N
-        BtnSkorStewardPascaAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkorStewardPascaAnestesi.setRoundRect(false);
+        BtnSkorStewardPascaAnestesi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkorStewardPascaAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkorStewardPascaAnestesiActionPerformed(evt);
@@ -4592,8 +4522,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnMedicalCheckUp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnMedicalCheckUp.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnMedicalCheckUp.setName("BtnMedicalCheckUp"); // NOI18N
-        BtnMedicalCheckUp.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnMedicalCheckUp.setRoundRect(false);
+        BtnMedicalCheckUp.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnMedicalCheckUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnMedicalCheckUpActionPerformed(evt);
@@ -4609,8 +4538,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanRisikoJatuhDewasa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanRisikoJatuhDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanRisikoJatuhDewasa.setName("BtnPenilaianLanjutanRisikoJatuhDewasa"); // NOI18N
-        BtnPenilaianLanjutanRisikoJatuhDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanRisikoJatuhDewasa.setRoundRect(false);
+        BtnPenilaianLanjutanRisikoJatuhDewasa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanRisikoJatuhDewasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanRisikoJatuhDewasaActionPerformed(evt);
@@ -4626,8 +4554,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanRisikoJatuhAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanRisikoJatuhAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanRisikoJatuhAnak.setName("BtnPenilaianLanjutanRisikoJatuhAnak"); // NOI18N
-        BtnPenilaianLanjutanRisikoJatuhAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanRisikoJatuhAnak.setRoundRect(false);
+        BtnPenilaianLanjutanRisikoJatuhAnak.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanRisikoJatuhAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanRisikoJatuhAnakActionPerformed(evt);
@@ -4643,8 +4570,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanRisikoJatuhLansia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanRisikoJatuhLansia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanRisikoJatuhLansia.setName("BtnPenilaianLanjutanRisikoJatuhLansia"); // NOI18N
-        BtnPenilaianLanjutanRisikoJatuhLansia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanRisikoJatuhLansia.setRoundRect(false);
+        BtnPenilaianLanjutanRisikoJatuhLansia.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanRisikoJatuhLansia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanRisikoJatuhLansiaActionPerformed(evt);
@@ -4660,8 +4586,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanRisikoJatuhNeonatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanRisikoJatuhNeonatus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanRisikoJatuhNeonatus.setName("BtnPenilaianLanjutanRisikoJatuhNeonatus"); // NOI18N
-        BtnPenilaianLanjutanRisikoJatuhNeonatus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanRisikoJatuhNeonatus.setRoundRect(false);
+        BtnPenilaianLanjutanRisikoJatuhNeonatus.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanRisikoJatuhNeonatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanRisikoJatuhNeonatusActionPerformed(evt);
@@ -4677,8 +4602,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanRisikoJatuhGeriatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanRisikoJatuhGeriatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanRisikoJatuhGeriatri.setName("BtnPenilaianLanjutanRisikoJatuhGeriatri"); // NOI18N
-        BtnPenilaianLanjutanRisikoJatuhGeriatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanRisikoJatuhGeriatri.setRoundRect(false);
+        BtnPenilaianLanjutanRisikoJatuhGeriatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanRisikoJatuhGeriatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanRisikoJatuhGeriatriActionPerformed(evt);
@@ -4694,8 +4618,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanRisikoJatuhPsikiatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanRisikoJatuhPsikiatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanRisikoJatuhPsikiatri.setName("BtnPenilaianLanjutanRisikoJatuhPsikiatri"); // NOI18N
-        BtnPenilaianLanjutanRisikoJatuhPsikiatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanRisikoJatuhPsikiatri.setRoundRect(false);
+        BtnPenilaianLanjutanRisikoJatuhPsikiatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanRisikoJatuhPsikiatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanRisikoJatuhPsikiatriActionPerformed(evt);
@@ -4711,8 +4634,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianLanjutanSkriningFungsional.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianLanjutanSkriningFungsional.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanSkriningFungsional.setName("BtnPenilaianLanjutanSkriningFungsional"); // NOI18N
-        BtnPenilaianLanjutanSkriningFungsional.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanSkriningFungsional.setRoundRect(false);
+        BtnPenilaianLanjutanSkriningFungsional.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianLanjutanSkriningFungsional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanSkriningFungsionalActionPerformed(evt);
@@ -4728,8 +4650,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSG.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanUSG.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanUSG.setName("BtnHasilPemeriksaanUSG"); // NOI18N
-        BtnHasilPemeriksaanUSG.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanUSG.setRoundRect(false);
+        BtnHasilPemeriksaanUSG.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanUSG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHasilPemeriksaanUSGActionPerformed(evt);
@@ -4745,8 +4666,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnDokumentasiESWL.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnDokumentasiESWL.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnDokumentasiESWL.setName("BtnDokumentasiESWL"); // NOI18N
-        BtnDokumentasiESWL.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnDokumentasiESWL.setRoundRect(false);
+        BtnDokumentasiESWL.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnDokumentasiESWL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDokumentasiESWLActionPerformed(evt);
@@ -4762,8 +4682,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanPersalinanan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanPersalinanan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanPersalinanan.setName("BtnCatatanPersalinanan"); // NOI18N
-        BtnCatatanPersalinanan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanPersalinanan.setRoundRect(false);
+        BtnCatatanPersalinanan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanPersalinanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanPersalinananActionPerformed(evt);
@@ -4779,8 +4698,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningNutrisiDewasa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningNutrisiDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningNutrisiDewasa.setName("BtnSkriningNutrisiDewasa"); // NOI18N
-        BtnSkriningNutrisiDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningNutrisiDewasa.setRoundRect(false);
+        BtnSkriningNutrisiDewasa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningNutrisiDewasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningNutrisiDewasaActionPerformed(evt);
@@ -4796,8 +4714,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningNutrisiLansia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningNutrisiLansia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningNutrisiLansia.setName("BtnSkriningNutrisiLansia"); // NOI18N
-        BtnSkriningNutrisiLansia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningNutrisiLansia.setRoundRect(false);
+        BtnSkriningNutrisiLansia.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningNutrisiLansia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningNutrisiLansiaActionPerformed(evt);
@@ -4813,8 +4730,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningNutrisiAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningNutrisiAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningNutrisiAnak.setName("BtnSkriningNutrisiAnak"); // NOI18N
-        BtnSkriningNutrisiAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningNutrisiAnak.setRoundRect(false);
+        BtnSkriningNutrisiAnak.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningNutrisiAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningNutrisiAnakActionPerformed(evt);
@@ -4830,8 +4746,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningGiziLanjut.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningGiziLanjut.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningGiziLanjut.setName("BtnSkriningGiziLanjut"); // NOI18N
-        BtnSkriningGiziLanjut.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningGiziLanjut.setRoundRect(false);
+        BtnSkriningGiziLanjut.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningGiziLanjut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningGiziLanjutActionPerformed(evt);
@@ -4847,8 +4762,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAsuhanGizi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAsuhanGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAsuhanGizi.setName("BtnAsuhanGizi"); // NOI18N
-        BtnAsuhanGizi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAsuhanGizi.setRoundRect(false);
+        BtnAsuhanGizi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAsuhanGizi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAsuhanGiziActionPerformed(evt);
@@ -4864,8 +4778,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnMonitoringAsuhanGizi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnMonitoringAsuhanGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnMonitoringAsuhanGizi.setName("BtnMonitoringAsuhanGizi"); // NOI18N
-        BtnMonitoringAsuhanGizi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnMonitoringAsuhanGizi.setRoundRect(false);
+        BtnMonitoringAsuhanGizi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnMonitoringAsuhanGizi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnMonitoringAsuhanGiziActionPerformed(evt);
@@ -4881,8 +4794,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanADIMEGizi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanADIMEGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanADIMEGizi.setName("BtnCatatanADIMEGizi"); // NOI18N
-        BtnCatatanADIMEGizi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanADIMEGizi.setRoundRect(false);
+        BtnCatatanADIMEGizi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanADIMEGizi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanADIMEGiziActionPerformed(evt);
@@ -4898,8 +4810,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnKonselingFarmasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnKonselingFarmasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnKonselingFarmasi.setName("BtnKonselingFarmasi"); // NOI18N
-        BtnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKonselingFarmasi.setRoundRect(false);
+        BtnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnKonselingFarmasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKonselingFarmasiActionPerformed(evt);
@@ -4915,8 +4826,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnInformasiObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnInformasiObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnInformasiObat.setName("BtnInformasiObat"); // NOI18N
-        BtnInformasiObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnInformasiObat.setRoundRect(false);
+        BtnInformasiObat.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnInformasiObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnInformasiObatActionPerformed(evt);
@@ -4932,8 +4842,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnRekonsiliasiObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnRekonsiliasiObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRekonsiliasiObat.setName("BtnRekonsiliasiObat"); // NOI18N
-        BtnRekonsiliasiObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRekonsiliasiObat.setRoundRect(false);
+        BtnRekonsiliasiObat.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnRekonsiliasiObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRekonsiliasiObatActionPerformed(evt);
@@ -4949,8 +4858,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnTransferAntarRuang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnTransferAntarRuang.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnTransferAntarRuang.setName("BtnTransferAntarRuang"); // NOI18N
-        BtnTransferAntarRuang.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnTransferAntarRuang.setRoundRect(false);
+        BtnTransferAntarRuang.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnTransferAntarRuang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTransferAntarRuangActionPerformed(evt);
@@ -4966,8 +4874,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnEdukasiPasienKeluarga.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnEdukasiPasienKeluarga.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnEdukasiPasienKeluarga.setName("BtnEdukasiPasienKeluarga"); // NOI18N
-        BtnEdukasiPasienKeluarga.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnEdukasiPasienKeluarga.setRoundRect(false);
+        BtnEdukasiPasienKeluarga.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnEdukasiPasienKeluarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEdukasiPasienKeluargaActionPerformed(evt);
@@ -4983,8 +4890,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPengkajianRestrain.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPengkajianRestrain.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPengkajianRestrain.setName("BtnPengkajianRestrain"); // NOI18N
-        BtnPengkajianRestrain.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPengkajianRestrain.setRoundRect(false);
+        BtnPengkajianRestrain.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPengkajianRestrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPengkajianRestrainActionPerformed(evt);
@@ -5000,8 +4906,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPasienTerminal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPasienTerminal.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPasienTerminal.setName("BtnPenilaianPasienTerminal"); // NOI18N
-        BtnPenilaianPasienTerminal.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPasienTerminal.setRoundRect(false);
+        BtnPenilaianPasienTerminal.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPasienTerminal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPasienTerminalActionPerformed(evt);
@@ -5017,8 +4922,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianKorbanKekerasan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianKorbanKekerasan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianKorbanKekerasan.setName("BtnPenilaianKorbanKekerasan"); // NOI18N
-        BtnPenilaianKorbanKekerasan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianKorbanKekerasan.setRoundRect(false);
+        BtnPenilaianKorbanKekerasan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianKorbanKekerasan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianKorbanKekerasanActionPerformed(evt);
@@ -5034,8 +4938,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPasienPenyakitMenular.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPasienPenyakitMenular.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPasienPenyakitMenular.setName("BtnPenilaianPasienPenyakitMenular"); // NOI18N
-        BtnPenilaianPasienPenyakitMenular.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPasienPenyakitMenular.setRoundRect(false);
+        BtnPenilaianPasienPenyakitMenular.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPasienPenyakitMenular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPasienPenyakitMenularActionPerformed(evt);
@@ -5051,8 +4954,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPasienKeracunan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPasienKeracunan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPasienKeracunan.setName("BtnPenilaianPasienKeracunan"); // NOI18N
-        BtnPenilaianPasienKeracunan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPasienKeracunan.setRoundRect(false);
+        BtnPenilaianPasienKeracunan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPasienKeracunan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPasienKeracunanActionPerformed(evt);
@@ -5068,8 +4970,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianTambahanGeriatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianTambahanGeriatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanGeriatri.setName("BtnPenilaianTambahanGeriatri"); // NOI18N
-        BtnPenilaianTambahanGeriatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanGeriatri.setRoundRect(false);
+        BtnPenilaianTambahanGeriatri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianTambahanGeriatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanGeriatriActionPerformed(evt);
@@ -5085,8 +4986,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianTambahanBunuhDiri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianTambahanBunuhDiri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanBunuhDiri.setName("BtnPenilaianTambahanBunuhDiri"); // NOI18N
-        BtnPenilaianTambahanBunuhDiri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanBunuhDiri.setRoundRect(false);
+        BtnPenilaianTambahanBunuhDiri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianTambahanBunuhDiri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanBunuhDiriActionPerformed(evt);
@@ -5102,8 +5002,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianTambahanPerilakuKekerasan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianTambahanPerilakuKekerasan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanPerilakuKekerasan.setName("BtnPenilaianTambahanPerilakuKekerasan"); // NOI18N
-        BtnPenilaianTambahanPerilakuKekerasan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanPerilakuKekerasan.setRoundRect(false);
+        BtnPenilaianTambahanPerilakuKekerasan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianTambahanPerilakuKekerasan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanPerilakuKekerasanActionPerformed(evt);
@@ -5119,8 +5018,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianTambahanMelarikanDiri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianTambahanMelarikanDiri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanMelarikanDiri.setName("BtnPenilaianTambahanMelarikanDiri"); // NOI18N
-        BtnPenilaianTambahanMelarikanDiri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanMelarikanDiri.setRoundRect(false);
+        BtnPenilaianTambahanMelarikanDiri.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianTambahanMelarikanDiri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanMelarikanDiriActionPerformed(evt);
@@ -10743,7 +10641,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
-    private void BtnChecklistKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaMasukIsolasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -10993,10 +10891,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private widget.TextBox TUkuran;
     private widget.TextBox TVulva;
     private widget.TextBox TVulvaInspekulo;
-    private widget.TabPane TabRawat;
-    private widget.TabPane TabRawatTindakanDokter;
-    private widget.TabPane TabRawatTindakanDokterPetugas;
-    private widget.TabPane TabRawatTindakanPetugas;
+    private javax.swing.JTabbedPane TabRawat;
+    private javax.swing.JTabbedPane TabRawatTindakanDokter;
+    private javax.swing.JTabbedPane TabRawatTindakanDokterPetugas;
+    private javax.swing.JTabbedPane TabRawatTindakanPetugas;
     private widget.TextArea TindakLanjut;
     private widget.Button btnPasien;
     private widget.ComboBox cmbAlbus;
@@ -11442,7 +11340,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(205,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(230,HEIGHT));
             FormMenu.setVisible(true);
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){
@@ -13486,8 +13384,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkorBromagePascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkorBromagePascaAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkorBromagePascaAnestesi.setName("BtnSkorBromagePascaAnestesi");
-        BtnSkorBromagePascaAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkorBromagePascaAnestesi.setRoundRect(false);
+        BtnSkorBromagePascaAnestesi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkorBromagePascaAnestesi.addActionListener(this::BtnSkorBromagePascaAnestesiActionPerformed);
 
         BtnPenilaianPreInduksi = new widget.Button();
@@ -13499,8 +13396,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPreInduksi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPreInduksi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPreInduksi.setName("Pengkajian Pre Induksi");
-        BtnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPreInduksi.setRoundRect(false);
+        BtnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPreInduksi.addActionListener(this::BtnPenilaianPreInduksiActionPerformed);
 
         BtnHasilPemeriksaanUSGUrologi = new widget.Button();
@@ -13512,8 +13408,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSGUrologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanUSGUrologi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanUSGUrologi.setName("BtnHasilPemeriksaanUSGUrologi");
-        BtnHasilPemeriksaanUSGUrologi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanUSGUrologi.setRoundRect(false);
+        BtnHasilPemeriksaanUSGUrologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanUSGUrologi.addActionListener(this::BtnHasilPemeriksaanUSGUrologiActionPerformed);
 
         BtnHasilPemeriksaanUSGGynecologi = new widget.Button();
@@ -13525,8 +13420,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSGGynecologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanUSGGynecologi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanUSGGynecologi.setName("BtnHasilPemeriksaanUSGGynecologi");
-        BtnHasilPemeriksaanUSGGynecologi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanUSGGynecologi.setRoundRect(false);
+        BtnHasilPemeriksaanUSGGynecologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanUSGGynecologi.addActionListener(this::BtnHasilPemeriksaanUSGGynecologiActionPerformed);
 
         BtnHasilPemeriksaanUSGNeonatus = new widget.Button();
@@ -13538,8 +13432,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSGNeonatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanUSGNeonatus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanUSGNeonatus.setName("BtnHasilPemeriksaanUSGNeonatus");
-        BtnHasilPemeriksaanUSGNeonatus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanUSGNeonatus.setRoundRect(false);
+        BtnHasilPemeriksaanUSGNeonatus.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanUSGNeonatus.addActionListener(this::BtnHasilPemeriksaanUSGNeonatusActionPerformed);
 
         BtnHasilPemeriksaanUSGAbdomen = new widget.Button();
@@ -13551,8 +13444,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSGAbdomen.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanUSGAbdomen.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanUSGAbdomen.setName("BtnHasilPemeriksaanUSGAbdomen");
-        BtnHasilPemeriksaanUSGAbdomen.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanUSGAbdomen.setRoundRect(false);
+        BtnHasilPemeriksaanUSGAbdomen.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanUSGAbdomen.addActionListener(this::BtnHasilPemeriksaanUSGAbdomenActionPerformed);
 
         BtnHasilPemeriksaanEKG = new widget.Button();
@@ -13564,8 +13456,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanEKG.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanEKG.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanEKG.setName("BtnHasilPemeriksaanEKG");
-        BtnHasilPemeriksaanEKG.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanEKG.setRoundRect(false);
+        BtnHasilPemeriksaanEKG.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanEKG.addActionListener(this::BtnHasilPemeriksaanEKGActionPerformed);
 
         BtnHasilPemeriksaanTreadmill = new widget.Button();
@@ -13577,8 +13468,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanTreadmill.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanTreadmill.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanTreadmill.setName("BtnHasilPemeriksaanTreadmill");
-        BtnHasilPemeriksaanTreadmill.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanTreadmill.setRoundRect(false);
+        BtnHasilPemeriksaanTreadmill.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanTreadmill.addActionListener(this::BtnHasilPemeriksaanTreadmillActionPerformed);
 
         BtnHasilPemeriksaanSlitLamp = new widget.Button();
@@ -13590,8 +13480,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanSlitLamp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanSlitLamp.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanSlitLamp.setName("BtnHasilPemeriksaanSlitLamp");
-        BtnHasilPemeriksaanSlitLamp.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanSlitLamp.setRoundRect(false);
+        BtnHasilPemeriksaanSlitLamp.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanSlitLamp.addActionListener(this::BtnHasilPemeriksaanSlitLampActionPerformed);
 
         BtnHasilPemeriksaanOCT = new widget.Button();
@@ -13603,8 +13492,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanOCT.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanOCT.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanOCT.setName("BtnHasilPemeriksaanOCT");
-        BtnHasilPemeriksaanOCT.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanOCT.setRoundRect(false);
+        BtnHasilPemeriksaanOCT.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanOCT.addActionListener(this::BtnHasilPemeriksaanOCTActionPerformed);
 
         BtnHasilPemeriksaanECHO = new widget.Button();
@@ -13616,8 +13504,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanECHO.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanECHO.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanECHO.setName("BtnHasilPemeriksaanECHO");
-        BtnHasilPemeriksaanECHO.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanECHO.setRoundRect(false);
+        BtnHasilPemeriksaanECHO.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanECHO.addActionListener(this::BtnHasilPemeriksaanECHOActionPerformed);
 
         BtnHasilPemeriksaanECHOPediatrik = new widget.Button();
@@ -13629,8 +13516,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanECHOPediatrik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilPemeriksaanECHOPediatrik.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanECHOPediatrik.setName("BtnHasilPemeriksaanECHOPediatrik");
-        BtnHasilPemeriksaanECHOPediatrik.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanECHOPediatrik.setRoundRect(false);
+        BtnHasilPemeriksaanECHOPediatrik.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilPemeriksaanECHOPediatrik.addActionListener(this::BtnHasilPemeriksaanECHOPediatrikActionPerformed);
 
         BtnPenatalaksanaanTerapiOkupasi = new widget.Button();
@@ -13642,8 +13528,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenatalaksanaanTerapiOkupasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenatalaksanaanTerapiOkupasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenatalaksanaanTerapiOkupasi.setName("BtnPenatalaksanaanTerapiOkupasi");
-        BtnPenatalaksanaanTerapiOkupasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenatalaksanaanTerapiOkupasi.setRoundRect(false);
+        BtnPenatalaksanaanTerapiOkupasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenatalaksanaanTerapiOkupasi.addActionListener(this::BtnPenatalaksanaanTerapiOkupasiActionPerformed);
 
         BtnPenilaianPsikolog = new widget.Button();
@@ -13655,8 +13540,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPsikolog.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPsikolog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPsikolog.setName("BtnPenilaianPsikolog");
-        BtnPenilaianPsikolog.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPsikolog.setRoundRect(false);
+        BtnPenilaianPsikolog.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPsikolog.addActionListener(this::BtnPenilaianPsikologActionPerformed);
 
         BtnPenilaianPsikologKlinis = new widget.Button();
@@ -13668,8 +13552,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPsikologKlinis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPsikologKlinis.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPsikologKlinis.setName("BtnPenilaianPsikologKlinis");
-        BtnPenilaianPsikologKlinis.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPsikologKlinis.setRoundRect(false);
+        BtnPenilaianPsikologKlinis.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPsikologKlinis.addActionListener(this::BtnPenilaianPsikologKlinisActionPerformed);
 
         BtnPenilaianBayiBaruLahir = new widget.Button();
@@ -13681,8 +13564,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianBayiBaruLahir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianBayiBaruLahir.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianBayiBaruLahir.setName("BtnPenilaianBayiBaruLahir");
-        BtnPenilaianBayiBaruLahir.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianBayiBaruLahir.setRoundRect(false);
+        BtnPenilaianBayiBaruLahir.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianBayiBaruLahir.addActionListener(this::BtnPenilaianBayiBaruLahirActionPerformed);
 
         BtnPenilaianDerajatDehidrasi = new widget.Button();
@@ -13694,8 +13576,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianDerajatDehidrasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianDerajatDehidrasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianDerajatDehidrasi.setName("BtnPenilaianDerajatDehidrasi");
-        BtnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianDerajatDehidrasi.setRoundRect(false);
+        BtnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianDerajatDehidrasi.addActionListener(this::BtnPenilaianDerajatDehidrasiActionPerformed);
 
         BtnPelaksanaanInformasiEdukasi = new widget.Button();
@@ -13707,8 +13588,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPelaksanaanInformasiEdukasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPelaksanaanInformasiEdukasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPelaksanaanInformasiEdukasi.setName("BtnPelaksanaanInformasiEdukasi");
-        BtnPelaksanaanInformasiEdukasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPelaksanaanInformasiEdukasi.setRoundRect(false);
+        BtnPelaksanaanInformasiEdukasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPelaksanaanInformasiEdukasi.addActionListener(this::BtnPelaksanaanInformasiEdukasiActionPerformed);
 
         BtnLayananKedokteranFisikRehabilitasi = new widget.Button();
@@ -13720,8 +13600,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnLayananKedokteranFisikRehabilitasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnLayananKedokteranFisikRehabilitasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnLayananKedokteranFisikRehabilitasi.setName("BtnLayananKedokteranFisikRehabilitasi");
-        BtnLayananKedokteranFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnLayananKedokteranFisikRehabilitasi.setRoundRect(false);
+        BtnLayananKedokteranFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnLayananKedokteranFisikRehabilitasi.addActionListener(this::BtnLayananKedokteranFisikRehabilitasiActionPerformed);
 
         BtnHasilEndoskopiFaringLaring = new widget.Button();
@@ -13733,8 +13612,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilEndoskopiFaringLaring.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilEndoskopiFaringLaring.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilEndoskopiFaringLaring.setName("BtnHasilEndoskopiFaringLaring");
-        BtnHasilEndoskopiFaringLaring.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilEndoskopiFaringLaring.setRoundRect(false);
+        BtnHasilEndoskopiFaringLaring.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilEndoskopiFaringLaring.addActionListener(this::BtnHasilEndoskopiFaringLaringActionPerformed);
 
         BtnHasilEndoskopiHidung = new widget.Button();
@@ -13746,8 +13624,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilEndoskopiHidung.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilEndoskopiHidung.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilEndoskopiHidung.setName("BtnHasilEndoskopiHidung");
-        BtnHasilEndoskopiHidung.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilEndoskopiHidung.setRoundRect(false);
+        BtnHasilEndoskopiHidung.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilEndoskopiHidung.addActionListener(this::BtnHasilEndoskopiHidungActionPerformed);
 
         BtnHasilEndoskopiTelinga = new widget.Button();
@@ -13759,8 +13636,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilEndoskopiTelinga.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnHasilEndoskopiTelinga.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilEndoskopiTelinga.setName("BtnHasilEndoskopiTelinga");
-        BtnHasilEndoskopiTelinga.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilEndoskopiTelinga.setRoundRect(false);
+        BtnHasilEndoskopiTelinga.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnHasilEndoskopiTelinga.addActionListener(this::BtnHasilEndoskopiTelingaActionPerformed);
 
         BtnPenilaianPasienImunitasRendah = new widget.Button();
@@ -13772,8 +13648,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPenilaianPasienImunitasRendah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPenilaianPasienImunitasRendah.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPasienImunitasRendah.setName("BtnPenilaianPasienImunitasRendah");
-        BtnPenilaianPasienImunitasRendah.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPasienImunitasRendah.setRoundRect(false);
+        BtnPenilaianPasienImunitasRendah.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPenilaianPasienImunitasRendah.addActionListener(this::BtnPenilaianPasienImunitasRendahActionPerformed);
 
         BtnCatatanKeseimbanganCairan = new widget.Button();
@@ -13785,8 +13660,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanKeseimbanganCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanKeseimbanganCairan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanKeseimbanganCairan.setName("BtnCatatanKeseimbanganCairan");
-        BtnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanKeseimbanganCairan.setRoundRect(false);
+        BtnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanKeseimbanganCairan.addActionListener(this::BtnCatatanKeseimbanganCairanActionPerformed);
 
         BtnCatatanObservasiCHBP = new widget.Button();
@@ -13798,8 +13672,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanObservasiCHBP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanObservasiCHBP.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiCHBP.setName("BtnCatatanObservasiCHBP");
-        BtnCatatanObservasiCHBP.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiCHBP.setRoundRect(false);
+        BtnCatatanObservasiCHBP.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanObservasiCHBP.addActionListener(this::BtnCatatanObservasiCHBPActionPerformed);
 
         BtnCatatanObservasiInduksiPersalinan = new widget.Button();
@@ -13811,8 +13684,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanObservasiInduksiPersalinan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanObservasiInduksiPersalinan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiInduksiPersalinan.setName("BtnCatatanObservasiInduksiPersalinan");
-        BtnCatatanObservasiInduksiPersalinan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiInduksiPersalinan.setRoundRect(false);
+        BtnCatatanObservasiInduksiPersalinan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanObservasiInduksiPersalinan.addActionListener(this::BtnCatatanObservasiInduksiPersalinanActionPerformed);
 
         BtnCatatanObservasiHemodialisa = new widget.Button();
@@ -13824,8 +13696,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanObservasiHemodialisa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanObservasiHemodialisa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiHemodialisa.setName("BtnCatatanObservasiHemodialisa");
-        BtnCatatanObservasiHemodialisa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiHemodialisa.setRoundRect(false);
+        BtnCatatanObservasiHemodialisa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanObservasiHemodialisa.addActionListener(this::BtnCatatanObservasiHemodialisaActionPerformed);
 
         BtnCatatanObservasiRuangOperasi = new widget.Button();
@@ -13837,8 +13708,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanObservasiRuangOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanObservasiRuangOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiRuangOperasi.setName("BtnCatatanObservasiRuangOperasi");
-        BtnCatatanObservasiRuangOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiRuangOperasi.setRoundRect(false);
+        BtnCatatanObservasiRuangOperasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanObservasiRuangOperasi.addActionListener(this::BtnCatatanObservasiRuangOperasiActionPerformed);
 
         BtnCatatanCairanHemodialisa = new widget.Button();
@@ -13850,8 +13720,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanCairanHemodialisa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanCairanHemodialisa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanCairanHemodialisa.setName("BtnCatatanCairanHemodialisa");
-        BtnCatatanCairanHemodialisa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanCairanHemodialisa.setRoundRect(false);
+        BtnCatatanCairanHemodialisa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanCairanHemodialisa.addActionListener(this::BtnCatatanCairanHemodialisaActionPerformed);
 
         BtnChecklistPemberianFibrinolitik = new widget.Button();
@@ -13863,8 +13732,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistPemberianFibrinolitik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistPemberianFibrinolitik.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistPemberianFibrinolitik.setName("BtnChecklistPemberianFibrinolitik");
-        BtnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistPemberianFibrinolitik.setRoundRect(false);
+        BtnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistPemberianFibrinolitik.addActionListener(this::BtnChecklistPemberianFibrinolitikActionPerformed);
 
         BtnPermintaanKonsultasiMedik = new widget.Button();
@@ -13876,8 +13744,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPermintaanKonsultasiMedik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPermintaanKonsultasiMedik.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanKonsultasiMedik.setName("BtnPermintaanKonsultasiMedik");
-        BtnPermintaanKonsultasiMedik.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanKonsultasiMedik.setRoundRect(false);
+        BtnPermintaanKonsultasiMedik.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPermintaanKonsultasiMedik.addActionListener(this::BtnPermintaanKonsultasiMedikActionPerformed);
 
         BtnPermintaanKonsultasiPerawat = new widget.Button();
@@ -13889,8 +13756,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPermintaanKonsultasiPerawat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPermintaanKonsultasiPerawat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanKonsultasiPerawat.setName("BtnPermintaanKonsultasiPerawat");
-        BtnPermintaanKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanKonsultasiPerawat.setRoundRect(false);
+        BtnPermintaanKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPermintaanKonsultasiPerawat.addActionListener(this::BtnPermintaanKonsultasiPerawatActionPerformed);
 
         BtnSkriningMerokokUsiaRemaja = new widget.Button();
@@ -13902,8 +13768,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningMerokokUsiaRemaja.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningMerokokUsiaRemaja.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningMerokokUsiaRemaja.setName("BtnSkriningMerokokUsiaRemaja");
-        BtnSkriningMerokokUsiaRemaja.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningMerokokUsiaRemaja.setRoundRect(false);
+        BtnSkriningMerokokUsiaRemaja.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningMerokokUsiaRemaja.addActionListener(this::BtnSkriningMerokokUsiaRemajaActionPerformed);
 
         BtnSkriningKekerasanPadaWanita = new widget.Button();
@@ -13915,8 +13780,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKekerasanPadaWanita.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKekerasanPadaWanita.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKekerasanPadaWanita.setName("BtnSkriningKekerasanPadaWanita");
-        BtnSkriningKekerasanPadaWanita.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKekerasanPadaWanita.setRoundRect(false);
+        BtnSkriningKekerasanPadaWanita.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKekerasanPadaWanita.addActionListener(this::BtnSkriningKekerasanPadaWanitaActionPerformed);
 
         BtnSkriningObesitas = new widget.Button();
@@ -13928,8 +13792,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningObesitas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningObesitas.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningObesitas.setName("BtnSkriningObesitas");
-        BtnSkriningObesitas.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningObesitas.setRoundRect(false);
+        BtnSkriningObesitas.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningObesitas.addActionListener(this::BtnSkriningObesitasActionPerformed);
 
         BtnSkriningRisikoKankerPayudara = new widget.Button();
@@ -13941,8 +13804,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningRisikoKankerPayudara.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningRisikoKankerPayudara.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningRisikoKankerPayudara.setName("BtnSkriningRisikoKankerPayudara");
-        BtnSkriningRisikoKankerPayudara.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningRisikoKankerPayudara.setRoundRect(false);
+        BtnSkriningRisikoKankerPayudara.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningRisikoKankerPayudara.addActionListener(this::BtnSkriningRisikoKankerPayudaraActionPerformed);
 
         BtnSkriningRisikoKankerParu = new widget.Button();
@@ -13954,8 +13816,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningRisikoKankerParu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningRisikoKankerParu.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningRisikoKankerParu.setName("BtnSkriningRisikoKankerParu");
-        BtnSkriningRisikoKankerParu.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningRisikoKankerParu.setRoundRect(false);
+        BtnSkriningRisikoKankerParu.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningRisikoKankerParu.addActionListener(this::BtnSkriningRisikoKankerParuActionPerformed);
 
         BtnSkriningKesehatanGigiMulutremaja = new widget.Button();
@@ -13967,8 +13828,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKesehatanGigiMulutremaja.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKesehatanGigiMulutremaja.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKesehatanGigiMulutremaja.setName("BtnSkriningKesehatanGigiMulutremaja");
-        BtnSkriningKesehatanGigiMulutremaja.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKesehatanGigiMulutremaja.setRoundRect(false);
+        BtnSkriningKesehatanGigiMulutremaja.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKesehatanGigiMulutremaja.addActionListener(this::BtnSkriningKesehatanGigiMulutremajaActionPerformed);
 
         BtnSkriningKesehatanGigiMulutBalita = new widget.Button();
@@ -13980,8 +13840,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKesehatanGigiMulutBalita.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKesehatanGigiMulutBalita.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKesehatanGigiMulutBalita.setName("BtnSkriningKesehatanGigiMulutBalita");
-        BtnSkriningKesehatanGigiMulutBalita.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKesehatanGigiMulutBalita.setRoundRect(false);
+        BtnSkriningKesehatanGigiMulutBalita.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKesehatanGigiMulutBalita.addActionListener(this::BtnSkriningKesehatanGigiMulutBalitaActionPerformed);
 
         BtnSkriningKesehatanGigiMulutLansia = new widget.Button();
@@ -13993,8 +13852,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKesehatanGigiMulutLansia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKesehatanGigiMulutLansia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKesehatanGigiMulutLansia.setName("BtnSkriningKesehatanGigiMulutLansia");
-        BtnSkriningKesehatanGigiMulutLansia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKesehatanGigiMulutLansia.setRoundRect(false);
+        BtnSkriningKesehatanGigiMulutLansia.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKesehatanGigiMulutLansia.addActionListener(this::BtnSkriningKesehatanGigiMulutLansiaActionPerformed);
 
         BtnSkriningKesehatanGigiMulutDewasa = new widget.Button();
@@ -14006,8 +13864,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKesehatanGigiMulutDewasa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKesehatanGigiMulutDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKesehatanGigiMulutDewasa.setName("BtnSkriningKesehatanGigiMulutDewasa");
-        BtnSkriningKesehatanGigiMulutDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKesehatanGigiMulutDewasa.setRoundRect(false);
+        BtnSkriningKesehatanGigiMulutDewasa.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKesehatanGigiMulutDewasa.addActionListener(this::BtnSkriningKesehatanGigiMulutDewasaActionPerformed);
 
         BtnSkriningRisikoKankerServiks = new widget.Button();
@@ -14019,8 +13876,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningRisikoKankerServiks.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningRisikoKankerServiks.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningRisikoKankerServiks.setName("BtnSkriningRisikoKankerServiks");
-        BtnSkriningRisikoKankerServiks.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningRisikoKankerServiks.setRoundRect(false);
+        BtnSkriningRisikoKankerServiks.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningRisikoKankerServiks.addActionListener(this::BtnSkriningRisikoKankerServiksActionPerformed);
 
         BtnSkriningAnemia = new widget.Button();
@@ -14032,8 +13888,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningAnemia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningAnemia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningAnemia.setName("BtnSkriningAnemia");
-        BtnSkriningAnemia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningAnemia.setRoundRect(false);
+        BtnSkriningAnemia.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningAnemia.addActionListener(this::BtnSkriningAnemiaActionPerformed);
 
         BtnSkriningHipertensi = new widget.Button();
@@ -14045,8 +13900,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningHipertensi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningHipertensi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningHipertensi.setName("BtnSkriningHipertensi");
-        BtnSkriningHipertensi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningHipertensi.setRoundRect(false);
+        BtnSkriningHipertensi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningHipertensi.addActionListener(this::BtnSkriningHipertensiActionPerformed);
 
         BtnSkriningKesehatanPenglihatan = new widget.Button();
@@ -14058,8 +13912,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKesehatanPenglihatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKesehatanPenglihatan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKesehatanPenglihatan.setName("BtnSkriningKesehatanPenglihatan");
-        BtnSkriningKesehatanPenglihatan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKesehatanPenglihatan.setRoundRect(false);
+        BtnSkriningKesehatanPenglihatan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKesehatanPenglihatan.addActionListener(this::BtnSkriningKesehatanPenglihatanActionPerformed);
 
         BtnSkriningIndraPendengaran = new widget.Button();
@@ -14071,8 +13924,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningIndraPendengaran.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningIndraPendengaran.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningIndraPendengaran.setName("BtnSkriningIndraPendengaran");
-        BtnSkriningIndraPendengaran.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningIndraPendengaran.setRoundRect(false);
+        BtnSkriningIndraPendengaran.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningIndraPendengaran.addActionListener(this::BtnSkriningIndraPendengaranActionPerformed);
 
         BtnSkriningFrailtySyndrome = new widget.Button();
@@ -14084,8 +13936,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningFrailtySyndrome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningFrailtySyndrome.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningFrailtySyndrome.setName("BtnSkriningFrailtySyndrome");
-        BtnSkriningFrailtySyndrome.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningFrailtySyndrome.setRoundRect(false);
+        BtnSkriningFrailtySyndrome.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningFrailtySyndrome.addActionListener(this::BtnSkriningFrailtySyndromeActionPerformed);
 
         BtnSkriningTBC = new widget.Button();
@@ -14097,8 +13948,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningTBC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningTBC.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningTBC.setName("BtnSkriningTBC");
-        BtnSkriningTBC.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningTBC.setRoundRect(false);
+        BtnSkriningTBC.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningTBC.addActionListener(this::BtnSkriningTBCActionPerformed);
 
         BtnSkriningPUMA = new widget.Button();
@@ -14110,8 +13960,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningPUMA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningPUMA.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningPUMA.setName("BtnSkriningPUMA");
-        BtnSkriningPUMA.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningPUMA.setRoundRect(false);
+        BtnSkriningPUMA.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningPUMA.addActionListener(this::BtnSkriningPUMAActionPerformed);
 
         BtnSkriningAdiksiNikotin = new widget.Button();
@@ -14123,8 +13972,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningAdiksiNikotin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningAdiksiNikotin.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningAdiksiNikotin.setName("BtnSkriningAdiksiNikotin");
-        BtnSkriningAdiksiNikotin.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningAdiksiNikotin.setRoundRect(false);
+        BtnSkriningAdiksiNikotin.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningAdiksiNikotin.addActionListener(this::BtnSkriningAdiksiNikotinActionPerformed);
 
         BtnSkriningThalassemia = new widget.Button();
@@ -14136,8 +13984,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningThalassemia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningThalassemia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningThalassemia.setName("BtnSkriningThalassemia");
-        BtnSkriningThalassemia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningThalassemia.setRoundRect(false);
+        BtnSkriningThalassemia.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningThalassemia.addActionListener(this::BtnSkriningThalassemiaActionPerformed);
 
         BtnSkriningInstrumenSDQ = new widget.Button();
@@ -14149,8 +13996,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningInstrumenSDQ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningInstrumenSDQ.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningInstrumenSDQ.setName("BtnSkriningInstrumenSDQ");
-        BtnSkriningInstrumenSDQ.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningInstrumenSDQ.setRoundRect(false);
+        BtnSkriningInstrumenSDQ.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningInstrumenSDQ.addActionListener(this::BtnSkriningInstrumenSDQActionPerformed);
 
         BtnSkriningInstrumenACRS = new widget.Button();
@@ -14162,8 +14008,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningInstrumenACRS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningInstrumenACRS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningInstrumenACRS.setName("BtnSkriningInstrumenACRS");
-        BtnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningInstrumenACRS.setRoundRect(false);
+        BtnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningInstrumenACRS.addActionListener(this::BtnSkriningInstrumenACRSActionPerformed);
 
         BtnSkriningInstrumenMentalEmosional = new widget.Button();
@@ -14175,8 +14020,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningInstrumenMentalEmosional.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningInstrumenMentalEmosional.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningInstrumenMentalEmosional.setName("BtnSkriningInstrumenMentalEmosional");
-        BtnSkriningInstrumenMentalEmosional.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningInstrumenMentalEmosional.setRoundRect(false);
+        BtnSkriningInstrumenMentalEmosional.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningInstrumenMentalEmosional.addActionListener(this::BtnSkriningInstrumenMentalEmosionalActionPerformed);
 
         BtnSkriningInstrumenAMT = new widget.Button();
@@ -14188,8 +14032,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningInstrumenAMT.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningInstrumenAMT.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningInstrumenAMT.setName("BtnSkriningInstrumenAMT");
-        BtnSkriningInstrumenAMT.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningInstrumenAMT.setRoundRect(false);
+        BtnSkriningInstrumenAMT.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningInstrumenAMT.addActionListener(this::BtnSkriningInstrumenAMTActionPerformed);
 
         BtnSkriningPneumoniaSeverityIndex = new widget.Button();
@@ -14201,8 +14044,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningPneumoniaSeverityIndex.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningPneumoniaSeverityIndex.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningPneumoniaSeverityIndex.setName("BtnSkriningPneumoniaSeverityIndex");
-        BtnSkriningPneumoniaSeverityIndex.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningPneumoniaSeverityIndex.setRoundRect(false);
+        BtnSkriningPneumoniaSeverityIndex.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningPneumoniaSeverityIndex.addActionListener(this::BtnSkriningPneumoniaSeverityIndexActionPerformed);
 
         BtnSkriningCURB65 = new widget.Button();
@@ -14214,8 +14056,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningCURB65.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningCURB65.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningCURB65.setName("BtnSkriningCURB65");
-        BtnSkriningCURB65.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningCURB65.setRoundRect(false);
+        BtnSkriningCURB65.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningCURB65.addActionListener(this::BtnSkriningCURB65ActionPerformed);
 
         BtnSkriningInstrumenSRQ = new widget.Button();
@@ -14227,8 +14068,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningInstrumenSRQ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningInstrumenSRQ.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningInstrumenSRQ.setName("BtnSkriningInstrumenSRQ");
-        BtnSkriningInstrumenSRQ.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningInstrumenSRQ.setRoundRect(false);
+        BtnSkriningInstrumenSRQ.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningInstrumenSRQ.addActionListener(this::BtnSkriningInstrumenSRQActionPerformed);
 
         BtnSkriningKankerKolorektal = new widget.Button();
@@ -14240,8 +14080,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningKankerKolorektal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningKankerKolorektal.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningKankerKolorektal.setName("BtnSkriningKankerKolorektal");
-        BtnSkriningKankerKolorektal.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningKankerKolorektal.setRoundRect(false);
+        BtnSkriningKankerKolorektal.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningKankerKolorektal.addActionListener(this::BtnSkriningKankerKolorektalActionPerformed);
 
         BtnSkriningDiabetesMelitus = new widget.Button();
@@ -14253,8 +14092,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningDiabetesMelitus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningDiabetesMelitus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningDiabetesMelitus.setName("BtnSkriningDiabetesMelitus");
-        BtnSkriningDiabetesMelitus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningDiabetesMelitus.setRoundRect(false);
+        BtnSkriningDiabetesMelitus.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningDiabetesMelitus.addActionListener(this::BtnSkriningDiabetesMelitusActionPerformed);
 
         BtnAwalMedisJantung = new widget.Button();
@@ -14266,8 +14104,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisJantung.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisJantung.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisJantung.setName("BtnAwalMedisJantung");
-        BtnAwalMedisJantung.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisJantung.setRoundRect(false);
+        BtnAwalMedisJantung.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisJantung.addActionListener(this::BtnAwalMedisJantungActionPerformed);
 
         BtnAwalMedisUrologi = new widget.Button();
@@ -14279,8 +14116,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisUrologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAwalMedisUrologi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisUrologi.setName("BtnAwalMedisUrologi");
-        BtnAwalMedisUrologi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisUrologi.setRoundRect(false);
+        BtnAwalMedisUrologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnAwalMedisUrologi.addActionListener(this::BtnAwalMedisUrologiActionPerformed);
 
         BtnLaporanTindakan = new widget.Button();
@@ -14292,8 +14128,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnLaporanTindakan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnLaporanTindakan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnLaporanTindakan.setName("BtnLaporanTindakan");
-        BtnLaporanTindakan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnLaporanTindakan.setRoundRect(false);
+        BtnLaporanTindakan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnLaporanTindakan.addActionListener(this::BtnLaporanTindakanActionPerformed);
 
         BtnCatatanPengkajianPaskaOperasi = new widget.Button();
@@ -14305,8 +14140,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanPengkajianPaskaOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanPengkajianPaskaOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanPengkajianPaskaOperasi.setName("BtnCatatanPengkajianPaskaOperasi");
-        BtnCatatanPengkajianPaskaOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanPengkajianPaskaOperasi.setRoundRect(false);
+        BtnCatatanPengkajianPaskaOperasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanPengkajianPaskaOperasi.addActionListener(this::BtnCatatanPengkajianPaskaOperasiActionPerformed);
 
         BtnChecklistKesiapanAnestesi = new widget.Button();
@@ -14318,8 +14152,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKesiapanAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKesiapanAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKesiapanAnestesi.setName("BtnChecklistKesiapanAnestesi");
-        BtnChecklistKesiapanAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKesiapanAnestesi.setRoundRect(false);
+        BtnChecklistKesiapanAnestesi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistKesiapanAnestesi.addActionListener(this::BtnChecklistKesiapanAnestesiActionPerformed);
 
         BtnCatatanAnastesiSedasi = new widget.Button();
@@ -14331,8 +14164,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanAnastesiSedasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanAnastesiSedasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanAnastesiSedasi.setName("BtnCatatanAnastesiSedasi");
-        BtnCatatanAnastesiSedasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanAnastesiSedasi.setRoundRect(false);
+        BtnCatatanAnastesiSedasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanAnastesiSedasi.addActionListener(this::BtnCatatanAnastesiSedasiActionPerformed);
 
         BtnCatatanObservasiBayi = new widget.Button();
@@ -14344,8 +14176,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatanObservasiBayi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnCatatanObservasiBayi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiBayi.setName("BtnCatatanObservasiBayi");
-        BtnCatatanObservasiBayi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiBayi.setRoundRect(false);
+        BtnCatatanObservasiBayi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnCatatanObservasiBayi.addActionListener(this::BtnCatatanObservasiBayiActionPerformed);
 
         BtnChecklistKriteriaMasukNICU = new widget.Button();
@@ -14357,8 +14188,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukNICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaMasukNICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukNICU.setName("BtnChecklistKriteriaMasukNICU");
-        BtnChecklistKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukNICU.setRoundRect(false);
+        BtnChecklistKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistKriteriaMasukNICU.addActionListener(this::BtnChecklistKriteriaMasukNICUActionPerformed);
 
         BtnChecklistKriteriaMasukPICU = new widget.Button();
@@ -14370,8 +14200,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukPICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaMasukPICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukPICU.setName("BtnChecklistKriteriaMasukPICU");
-        BtnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukPICU.setRoundRect(false);
+        BtnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistKriteriaMasukPICU.addActionListener(this::BtnChecklistKriteriaMasukPICUActionPerformed);
 
         BtnSkriningGiziKehamilan = new widget.Button();
@@ -14383,8 +14212,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningGiziKehamilan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningGiziKehamilan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningGiziKehamilan.setName("BtnSkriningGiziKehamilan");
-        BtnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningGiziKehamilan.setRoundRect(false);
+        BtnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningGiziKehamilan.addActionListener(this::BtnSkriningGiziKehamilanActionPerformed);
 
         BtnIntervensiNyeriFarmakologi = new widget.Button();
@@ -14396,8 +14224,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIntervensiNyeriFarmakologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnIntervensiNyeriFarmakologi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnIntervensiNyeriFarmakologi.setName("BtnIntervensiNyeriFarmakologi");
-        BtnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnIntervensiNyeriFarmakologi.setRoundRect(false);
+        BtnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnIntervensiNyeriFarmakologi.addActionListener(this::BtnIntervensiNyeriFarmakologiActionPerformed);
 
         BtnIntervensiNyeriNonFarmakologi = new widget.Button();
@@ -14409,8 +14236,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIntervensiNyeriNonFarmakologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnIntervensiNyeriNonFarmakologi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnIntervensiNyeriNonFarmakologi.setName("BtnIntervensiNyeriNonFarmakologi");
-        BtnIntervensiNyeriNonFarmakologi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnIntervensiNyeriNonFarmakologi.setRoundRect(false);
+        BtnIntervensiNyeriNonFarmakologi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnIntervensiNyeriNonFarmakologi.addActionListener(this::BtnIntervensiNyeriNonFarmakologiActionPerformed);
 
         BtnResepIterasiBPJS = new widget.Button();
@@ -14422,8 +14248,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnResepIterasiBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnResepIterasiBPJS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnResepIterasiBPJS.setName("BtnResepIterasiBPJS");
-        BtnResepIterasiBPJS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnResepIterasiBPJS.setRoundRect(false);
+        BtnResepIterasiBPJS.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnResepIterasiBPJS.addActionListener(this::BtnResepIterasiBPJSActionPerformed);
 
         BtnChecklistKriteriaMasukIsolasi = new widget.Button();
@@ -14435,8 +14260,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukIsolasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnChecklistKriteriaMasukIsolasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukIsolasi.setName("BtnChecklistKriteriaMasukIsolasi");
-        BtnChecklistKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukIsolasi.setRoundRect(false);
+        BtnChecklistKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnChecklistKriteriaMasukIsolasi.addActionListener(this::BtnChecklistKriteriaMasukIsolasiActionPerformed);
 
         BtnSkriningTOLAC = new widget.Button();
@@ -14448,8 +14272,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningTOLAC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningTOLAC.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningTOLAC.setName("BtnSkriningTOLAC");
-        BtnSkriningTOLAC.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningTOLAC.setRoundRect(false);
+        BtnSkriningTOLAC.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnSkriningTOLAC.addActionListener(this::BtnSkriningTOLACActionPerformed);
 
         PopupSOAP = new javax.swing.JPopupMenu();
@@ -14515,15 +14338,15 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnPasteSOAP.addActionListener(this::MnPasteSOAPActionPerformed);
 
         BtnPengkajianInvasifNonBedahSMC = new widget.Button();
-        BtnPengkajianInvasifNonBedahSMC.setBackground(new java.awt.Color(255, 255, 254));
-        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
-        BtnPengkajianInvasifNonBedahSMC.setForeground(new java.awt.Color(50, 50, 50));
-        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnPengkajianInvasifNonBedahSMC.setText("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSMC.setFocusPainted(false);
+        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPengkajianInvasifNonBedahSMC.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnPengkajianInvasifNonBedahSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnPengkajianInvasifNonBedahSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnPengkajianInvasifNonBedahSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPengkajianInvasifNonBedahSMC.setName("BtnPengkajianInvasifNonBedahSMC");
-        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(210, 26));
+        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(185, 23));
         BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
 
         TanggalRegistrasi = new widget.TextBox();
