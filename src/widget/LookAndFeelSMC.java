@@ -3,19 +3,34 @@ package widget;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.icons.FlatCheckBoxIcon;
+import com.formdev.flatlaf.ui.FlatComboBoxUI;
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
+import com.formdev.flatlaf.ui.FlatOptionPaneUI;
 import com.formdev.flatlaf.ui.FlatScrollPaneBorder;
 import com.formdev.flatlaf.ui.FlatTabbedPaneUI;
 import com.formdev.flatlaf.ui.FlatTextBorder;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.SystemInfo;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.Toolkit;
+import java.beans.PropertyChangeListener;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
+import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -27,6 +42,11 @@ import javax.swing.text.JTextComponent;
  * <ul>
  *   <li>a larger check box icon;</li>
  *   <li>read-only text fields and text areas drawn with the disabled border color;</li>
+ *   <li>extra padding around combo box popup items, apart from the padding of the
+ *       combo box itself;</li>
+ *   <li>dialog components, such as the choice list of an input dialog or a check
+ *       box in an {@code Object[]} message, drawn in the message font, and custom
+ *       option buttons drawn in the button font;</li>
  *   <li>the selected tab keeping its background while hovered, and unselected tabs
  *       drawn with their own background and outline;</li>
  *   <li>the native scroll bar on Windows.</li>
@@ -75,6 +95,10 @@ public class LookAndFeelSMC extends FlatLightLaf {
         defaults.put("FormattedTextField.border", (UIDefaults.LazyValue) table -> new TextBorder());
         defaults.put("PasswordField.border", (UIDefaults.LazyValue) table -> new TextBorder());
         defaults.put("ScrollPane.border", (UIDefaults.LazyValue) table -> new ScrollPaneBorder());
+        defaults.put("ComboBoxUI", ComboBoxUI.class.getName());
+        defaults.put(ComboBoxUI.class.getName(), ComboBoxUI.class);
+        defaults.put("OptionPaneUI", OptionPaneUI.class.getName());
+        defaults.put(OptionPaneUI.class.getName(), OptionPaneUI.class);
         defaults.put("TabbedPaneUI", TabbedPaneUI.class.getName());
         defaults.put(TabbedPaneUI.class.getName(), TabbedPaneUI.class);
 
@@ -122,6 +146,166 @@ public class LookAndFeelSMC extends FlatLightLaf {
         @Override
         protected boolean isEnabled(Component c) {
             return super.isEnabled(c) && isEditable(c);
+        }
+    }
+
+    /**
+     * FlatLaf combo box UI that pads each popup item by
+     * {@code ComboBox.popupItemInsets}. FlatLaf pads popup items with
+     * {@code ComboBox.padding}, the same padding as the combo box itself, so a
+     * compact combo box would otherwise get equally compact popup items.
+     */
+    public static class ComboBoxUI extends FlatComboBoxUI {
+
+        private Insets popupItemInsets;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new ComboBoxUI();
+        }
+
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+            popupItemInsets = UIManager.getInsets("ComboBox.popupItemInsets");
+        }
+
+        @Override
+        protected ComboPopup createPopup() {
+            return new PaddedComboPopup(comboBox);
+        }
+
+        /**
+         * FlatLaf combo popup whose list renderer is wrapped in a
+         * {@link PaddedItemRenderer}, again whenever the combo box renderer changes.
+         */
+        protected class PaddedComboPopup extends FlatComboPopup {
+
+            protected PaddedComboPopup(JComboBox<?> combo) {
+                super(combo);
+            }
+
+            @Override
+            protected void configurePopup() {
+                super.configurePopup();
+                wrapCellRenderer();
+            }
+
+            @Override
+            protected PropertyChangeListener createPropertyChangeListener() {
+                PropertyChangeListener superListener = super.createPropertyChangeListener();
+                return e -> {
+                    superListener.propertyChange(e);
+                    if ("renderer".equals(e.getPropertyName())) {
+                        wrapCellRenderer();
+                    }
+                };
+            }
+
+            private void wrapCellRenderer() {
+                ListCellRenderer<? super Object> renderer = list.getCellRenderer();
+                if (!(renderer instanceof PaddedItemRenderer)) {
+                    list.setCellRenderer(new PaddedItemRenderer(renderer));
+                }
+            }
+        }
+
+        /**
+         * Renders a popup item inside a panel whose border adds the item padding.
+         * The panel takes the item background, so a selected item stays highlighted
+         * across the whole row.
+         */
+        private class PaddedItemRenderer implements ListCellRenderer<Object> {
+
+            private final ListCellRenderer<? super Object> renderer;
+            private final JPanel item = new JPanel(new BorderLayout());
+
+            PaddedItemRenderer(ListCellRenderer<? super Object> renderer) {
+                this.renderer = renderer;
+                if (null != popupItemInsets) {
+                    item.setBorder(new FlatEmptyBorder(popupItemInsets));
+                }
+            }
+
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                @SuppressWarnings("unchecked")
+                Component c = renderer.getListCellRendererComponent((JList<Object>) list, value, index, isSelected, cellHasFocus);
+                if (index < 0 || null == item.getBorder()) {
+                    return c;
+                }
+                if (c.getParent() != item) {
+                    item.removeAll();
+                    item.add(c, BorderLayout.CENTER);
+                }
+                item.setOpaque(c.isOpaque());
+                item.setBackground(c.getBackground());
+                item.setComponentOrientation(c.getComponentOrientation());
+                return item;
+            }
+        }
+    }
+
+    /**
+     * FlatLaf option pane UI that draws the components of a dialog in
+     * {@code OptionPane.messageFont}, like its text: the input field that
+     * {@code JOptionPane.showInputDialog} creates on its own, and components the
+     * caller puts in the message, such as a check box in an {@code Object[]}
+     * message. Buttons the caller passes as options get
+     * {@code OptionPane.buttonFont}, like the buttons the option pane creates.
+     * A component keeps a font that the caller set explicitly; only the look and
+     * feel default is replaced.
+     */
+    public static class OptionPaneUI extends FlatOptionPaneUI {
+
+        private Font messageFont;
+        private Font buttonFont;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new OptionPaneUI();
+        }
+
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+            messageFont = UIManager.getFont("OptionPane.messageFont");
+            buttonFont = UIManager.getFont("OptionPane.buttonFont");
+        }
+
+        @Override
+        protected Object getMessage() {
+            Object message = super.getMessage();
+            applyFont(inputComponent, messageFont);
+            return message;
+        }
+
+        @Override
+        protected void addMessageComponents(Container container, GridBagConstraints cons, Object msg, int maxll, boolean internallyCreated) {
+            if (msg instanceof Component) {
+                applyFont((Component) msg, messageFont);
+            }
+            super.addMessageComponents(container, cons, msg, maxll, internallyCreated);
+        }
+
+        @Override
+        protected void addButtonComponents(Container container, Object[] buttons, int initialIndex) {
+            if (null != buttons) {
+                for (Object button : buttons) {
+                    if (button instanceof Component) {
+                        applyFont((Component) button, buttonFont);
+                    }
+                }
+            }
+            super.addButtonComponents(container, buttons, initialIndex);
+        }
+
+        private static void applyFont(Component c, Font font) {
+            if (null == c || null == font) {
+                return;
+            }
+            Font current = c.getFont();
+            if (null == current || current instanceof UIResource) {
+                c.setFont(font);
+            }
         }
     }
 
