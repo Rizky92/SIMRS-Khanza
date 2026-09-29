@@ -224,7 +224,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         BtnSimpan = new widget.Button();
         BtnHapus = new widget.Button();
         BtnKeluar = new widget.Button();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
         panelGlass7 = new widget.panelisi();
         jLabel4 = new widget.Label();
@@ -2124,7 +2124,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     private widget.ScrollPane Scroll5;
     private widget.ScrollPane Scroll6;
     private widget.ScrollPane Scroll7;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.ComboBox TampilkanTNI;
     private widget.ComboBox ValidasiCatatan;
     private widget.ComboBox ValidasiRegistrasi;

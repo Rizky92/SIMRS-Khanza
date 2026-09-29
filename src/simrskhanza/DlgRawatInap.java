@@ -800,7 +800,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
-        TabRawat = new javax.swing.JTabbedPane();
+        TabRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbRawatDr = new widget.Table();
@@ -9327,7 +9327,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private widget.TextBox TUkuran;
     private widget.TextBox TVulva;
     private widget.TextBox TVulvaInspekulo;
-    private javax.swing.JTabbedPane TabRawat;
+    private widget.TabPane TabRawat;
     private widget.TextArea TindakLanjut;
     private widget.Button btnPasien;
     private widget.Button btnTindakan;

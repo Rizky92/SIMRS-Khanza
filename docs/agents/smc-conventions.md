@@ -18,7 +18,7 @@ No affix needed for: menus, form titles, and local declarations.
 **Exception:** in a class whose name is already affixed with SMC, its methods and (static) properties do not need affixes.
 
 ## Acronyms
-Acronyms (SEP, KFA, INACBG, IDRG, API, …) are **ALL UPPERCASE** everywhere they are not part of the SMC affix.
+Acronyms (SEP, KFA, INACBG, IDRG, API, ...) are **ALL UPPERCASE** everywhere they are not part of the SMC affix.
 
 The SMC affix is not an acronym in this rule — it keeps its own casing from the table above. So on an Smc-affixed method the acronym stays uppercase and the affix stays `Smc`:
 
@@ -26,6 +26,25 @@ The SMC affix is not an acronym in this rule — it keeps its own casing from th
 - incorrect: `obatKFASMC`, `obatKfaSmc`
 
 In database structures (column and table names) and named keys, the whole name is `snake_case`, acronym included: `no_sep`, `kode_kfa`, `tarif_inacbg`.
+
+## Superseding upstream code
+Upstream code that an SMC replacement makes obsolete stays in the file, commented out — never deleted and
+never moved elsewhere. Put the SMC code next to it.
+
+- A whole method or block: wrap it in `/* ... */`.
+- A single call site or statement: prefix it with `//`.
+
+This repository merges from [`mas-elkhanza/SIMRS-Khanza`](https://github.com/mas-elkhanza/SIMRS-Khanza)
+regularly. Deleted or relocated upstream lines make every upstream touch of that file a merge conflict;
+commented-out lines still match, so the merge applies cleanly while our changes stay visible as the added
+side.
+
+Consequences for agents:
+- Do not offer to clean up the commented-out remains, and do not count them as dead code.
+- Keep the upstream fields, imports and helpers the commented-out code still refers to, even when nothing
+  live calls them any more.
+- Confirm provenance before treating code as ours and editing it in place: `git show custom:<path>` shows
+  the file as it stands after the last upstream merge.
 
 ## New `database.xml` parameters
 Adding a parameter to `database.xml.example` MUST be reflected in `src/fungsi/koneksiDB.java`.

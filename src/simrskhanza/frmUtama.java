@@ -500,7 +500,10 @@ import ipsrs.IPSRSSuratPemesanan;
 import ipsrs.IPSRSVerifikasiPenerimaan;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -517,6 +520,7 @@ import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import kepegawaian.DlgAuditBundleIADP;
 import kepegawaian.DlgAuditBundleIDO;
@@ -1096,8 +1100,8 @@ import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningRisikoKankerPayudara;
 import rekammedis.RMSkriningRisikoKankerServiks;
 import rekammedis.RMSkriningSRQ;
-import rekammedis.RMSkriningTOLAC;
 import rekammedis.RMSkriningTBC;
+import rekammedis.RMSkriningTOLAC;
 import rekammedis.RMSkriningTalasemia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
@@ -1259,6 +1263,9 @@ public class frmUtama extends javax.swing.JFrame {
     private final INACBGHybrid inacbgklaim=new INACBGHybrid(this,false);
     private final INACBGCariCoderNIK cariNIK=new INACBGCariCoderNIK(this,false);
     private static frmUtama myInstance;
+    private final java.util.List<Window> dialogTersembunyi = new java.util.ArrayList<>();
+    private final java.util.Map<Window, Point> posisiDialogModal = new java.util.HashMap<>();
+    private Window dialogAktifSebelumnya;
     private PreparedStatement ps;
     private ResultSet rs;
     private final Properties prop = new Properties();
@@ -8653,8 +8660,12 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnToolRegActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
-        if(this.getState()==1){
-            isTutup();
+        boolean tadinyaKecil = (evt.getOldState() & Frame.ICONIFIED) != 0;
+        boolean sekarangKecil = (evt.getNewState() & Frame.ICONIFIED) != 0;
+        if (!tadinyaKecil && sekarangKecil) {
+            sembunyikanDialog();
+        } else if (tadinyaKecil && !sekarangKecil) {
+            SwingUtilities.invokeLater(this::tampilkanDialog);
         }
     }//GEN-LAST:event_formWindowStateChanged
 
@@ -45533,6 +45544,54 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
+    }
+
+    private void sembunyikanDialog() {
+        FlayMenu.setVisible(false);
+        if (!dialogTersembunyi.isEmpty()) {
+            return;
+        }
+
+        dialogAktifSebelumnya = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
+        for (Window win : Window.getWindows()) {
+            if (!(win instanceof JDialog) || !win.isVisible()) {
+                continue;
+            }
+
+            JDialog dlg = (JDialog) win;
+            if (dlg.isModal()) {
+                posisiDialogModal.put(dlg, dlg.getLocation());
+                dlg.setLocation(-20000, -20000);
+            } else {
+                dlg.setVisible(false);
+            }
+            dialogTersembunyi.add(dlg);
+        }
+    }
+
+    private void tampilkanDialog() {
+        for (Window win : dialogTersembunyi) {
+            if (!win.isDisplayable()) {
+                continue;
+            }
+
+            Point asli = posisiDialogModal.get(win);
+            if (asli != null) {
+                win.setLocation(asli);
+            } else {
+                win.setVisible(true);
+            }
+        }
+
+        if (dialogAktifSebelumnya != null && dialogTersembunyi.contains(dialogAktifSebelumnya)
+                && dialogAktifSebelumnya.isDisplayable()) {
+            dialogAktifSebelumnya.toFront();
+            dialogAktifSebelumnya.requestFocus();
+        }
+
+        dialogTersembunyi.clear();
+        posisiDialogModal.clear();
+        dialogAktifSebelumnya = null;
     }
 
     private void initKhanza() {
