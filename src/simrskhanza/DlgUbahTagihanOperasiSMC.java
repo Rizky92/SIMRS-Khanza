@@ -9,9 +9,6 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -19,13 +16,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -41,16 +41,17 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final Jurnal jur = new Jurnal();
+    private final boolean TAMPILTARIFOPERASI = koneksiDB.TAMPILTARIFOPERASI().equals("yes");
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private DlgCariPetugas petugas;
     private DlgCariDokter dokter;
-    private String kelas_operasi = "Yes", kelas = "", cara_bayar_operasi = "Yes", kd_pj = "", status = "";
+    private String kelas_operasi = "Yes", kelas = "", cara_bayar_operasi = "Yes", kd_pj = "", status = "", tglOperasi = "";
     private double ttljmdokter = 0, ttljmpetugas = 0, ttlpendapatan = 0, ttlbhp = 0;
     private String norawatibu = "";
     private double y = 0, biayatindakan = 0, biayaobat = 0;
-    private int jml = 0, i = 0, index = 0;
+    private int jml = 0, index = 0;
     private boolean[] pilih;
     private boolean sukses = true;
     private String[] kode_paket, nm_perawatan, kategori, kd_obat, nm_obat, satuan;
@@ -102,7 +103,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
             } else if (i == 3) {
                 column.setPreferredWidth(100);
             } else if (i == 33) {
-                if (koneksiDB.TAMPILTARIFOPERASI().equals("yes")) {
+                if (TAMPILTARIFOPERASI) {
                     column.setPreferredWidth(85);
                 } else {
                     column.setMinWidth(0);
@@ -115,42 +116,27 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         }
         tbtindakan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        //tagihan obat
-        Object[] row2 = {"Jumlah",
-            "Kode",
-            "Nama",
-            "Satuan",
-            "Harga",
-            "Total"};
-
-        tabMode2 = new DefaultTableModel(null, row2) {
+        tabMode2 = new DefaultTableModel(null, new Object[] {"Jumlah", "Kode", "Nama", "Satuan", "Harga", "Total"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if ((colIndex == 0) || (colIndex == 4)) {
-                    a = true;
-                }
-                return a;
+                return colIndex == 0;
             }
-            Class[] types = new Class[] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class
-            };
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                if (columnIndex == 0) {
+                    return String.class;
+                }
+
+                return Object.class;
             }
         };
 
         tbObat.setModel(tabMode2);
-        //tampil();
-
-        //tbBangsal.setDefaultRenderer(Object.class, new WarnaTable(jPanel2.getBackground(),tbBangsal.getBackground()));
         tbObat.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 6; i++) {
+        for (int i = 0; i < tabMode2.getColumnCount(); i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(50);
@@ -170,7 +156,6 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
 
         TNoRw.setDocument(new batasInput((byte) 17).getKata(TNoRw));
-        jenis.setDocument(new batasInput((byte) 8).getKata(jenis));
         kdoperator1.setDocument(new batasInput((byte) 20).getKata(kdoperator1));
         kdoperator2.setDocument(new batasInput((byte) 20).getKata(kdoperator2));
         kdoperator3.setDocument(new batasInput((byte) 20).getKata(kdoperator3));
@@ -194,36 +179,14 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         kdonloop5.setDocument(new batasInput((byte) 20).getKata(kdonloop5));
         kdpjanak.setDocument(new batasInput((byte) 20).getKata(kdpjanak));
         kddrumum.setDocument(new batasInput((byte) 20).getKata(kddrumum));
-        PreOp.setDocument(new batasInput((int) 100).getKata(PreOp));
-        PostOp.setDocument(new batasInput((int) 100).getKata(PostOp));
-        NomorImplant.setDocument(new batasInput((int) 50).getKata(NomorImplant));
-        Jaringan.setDocument(new batasInput((int) 100).getKata(Jaringan));
-        Laporan.setDocument(new batasInput((int) 8000).getKata(Laporan));
 
         TCariPaket.setDocument(new batasInput((byte) 100).getKata(TCari));
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
 
         TCari.requestFocus();
         ChkInput.setSelected(false);
-        Date sekarang = new Date();
-        Valid.setTglJamSmc(tgl, Jam, Menit, Detik, sekarang);
-        Valid.setTglJamSmc(tgl2, Jam2, Menit2, Detik2, sekarang);
+
         isForm();
-
-        panelBiasa1.addComponentListener(new ComponentAdapter() {
-            private final Dimension ukuranInput = scrollPane1.getPreferredSize();
-
-            @Override
-            public void componentResized(ComponentEvent e) {
-                Insets insets = panelBiasa1.getInsets();
-                int sisa = panelBiasa1.getWidth() - insets.left - insets.right - FormInput1.getMinimumSize().width;
-                int lebar = Math.max(0, Math.min(ukuranInput.width, sisa));
-                if (lebar != scrollPane1.getPreferredSize().width) {
-                    scrollPane1.setPreferredSize(new Dimension(lebar, ukuranInput.height));
-                    panelBiasa1.revalidate();
-                }
-            }
-        });
     }
 
     /**
@@ -1589,7 +1552,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             BtnOperator1ActionPerformed(null);
         } else {
-            Valid.pindah(evt, Detik, kdoperator2);
+
         }
     }//GEN-LAST:event_kdoperator1KeyPressed
 
@@ -1687,9 +1650,9 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            BtnCariActionPerformed(null);
+            BtnCari1ActionPerformed(null);
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnCari.requestFocus();
+            BtnCari1.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             BtnKeluar.requestFocus();
         }
@@ -1716,7 +1679,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             BtnAllActionPerformed(null);
         } else {
-            Valid.pindah(evt, BtnCari, TCari);
+            Valid.pindah(evt, BtnCari1, TCari);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -2269,7 +2232,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KategoriKeyPressed
-        Valid.pindah(evt, TCariPaket, jenis);
+
     }//GEN-LAST:event_KategoriKeyPressed
 
     private void btnBidan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidan2ActionPerformed
@@ -2676,7 +2639,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         }
 
         jml = 0;
-        for (i = 0; i < tbtindakan.getRowCount(); i++) {
+        for (int i = 0; i < tbtindakan.getRowCount(); i++) {
             if (tabMode.getValueAt(i, 0).toString().equals("true")) {
                 jml++;
             }
@@ -2684,8 +2647,6 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
 
         if (TNoRw.getText().trim().equals("") || TPasien.getText().trim().equals("")) {
             Valid.textKosong(TNoRw, "Pasien");
-        } else if (jenis.getText().trim().equals("")) {
-            Valid.textKosong(jenis, "Jenis");
         } else if (kdoperator1.getText().trim().equals("") || nmoperator1.getText().trim().equals("")) {
             Valid.textKosong(kdoperator1, "Operator 1");
         } else if (kdoperator2.getText().trim().equals("") || nmoperator2.getText().trim().equals("")) {
@@ -2738,20 +2699,58 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         } else if (jml == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih operasi...!!!!");
             TCari.requestFocus();
-        } else if (Valid.getTglJamSmc(tgl, Jam, Menit, Detik).equals(Valid.getTglJamSmc(tgl2, Jam2, Menit2, Detik2))) {
-            JOptionPane.showMessageDialog(rootPane, "Kamu operasi apa bersin..? Cepat sekali...!!");
         } else {
             if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
-                JOptionPane.showMessageDialog(rootPane, "Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                JOptionPane.showMessageDialog(null, "Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                 TCariPaket.requestFocus();
             } else {
+                try {
+                    Sequel.AutoComitFalse();
+
+                    double ttljmdokter = 0;
+                    double ttljmpetugas = 0;
+                    double ttlpendapatan = 0;
+                    double ttlbhp = 0;
+                    String jenisAnestesi = "";
+                    String kategori = "";
+                    String status = "";
+
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select operasi.jenis_anasthesi, operasi.kategori, operasi.status 0 as ttljmdokter, 0 as ttljmpetugas, 0 as ttlpendapatan, ifnull((select * from beri_obat_operasi " +
+                        "where beri_obat_operasi.no_rawat = operasi.no_rawat and beri_obat_operasi.tgl_operasi = operasi.tgl_operasi), 0) as ttlbhp from operasi where operasi.no_rawat = ? " +
+                        "and operasi.tgl_operasi = ?"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, TNoRw.getText());
+                        ps.setString(++p, tglOperasi);
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                jenisAnestesi = rs.getString("jenis_anasthesi");
+                                kategori = rs.getString("kategori");
+                                status = rs.getString("status");
+                                ttljmdokter = rs.getDouble("ttljmdokter");
+                                ttljmpetugas = rs.getDouble("ttljmpetugas");
+                                ttlpendapatan = rs.getDouble("ttlpendapatan");
+                                ttlbhp = rs.getDouble("ttlbhp");
+                            }
+                        }
+                    }
+
+
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                } finally {
+                    Sequel.AutoComitTrue();
+                }
+
                 Sequel.AutoComitFalse();
                 sukses = true;
                 ttljmdokter = 0;
                 ttljmpetugas = 0;
                 ttlpendapatan = 0;
                 ttlbhp = 0;
-                for (i = 0; i < tbtindakan.getRowCount(); i++) {
+                for (int i = 0; i < tbtindakan.getRowCount(); i++) {
                     if (tabMode.getValueAt(i, 0).toString().equals("true")) {
                         if (Sequel.menyimpantf2("operasi", "'" + TNoRw.getText() + "','" + Valid.getTglJamSmc(tgl, Jam, Menit, Detik) +
                              "','" + jenis.getText() + "','" + Kategori.getSelectedItem() + "','" + kdoperator1.getText() + "','" + kdoperator2.getText() + "','" + kdoperator3.getText() +
@@ -3099,11 +3098,11 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOnloop5ActionPerformed
 
     private void kdonloop5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdonloop5KeyPressed
-        Valid.pindah(evt, kdonloop4, tgl2);
+        // Valid.pindah(evt, kdonloop4, tgl2);
     }//GEN-LAST:event_kdonloop5KeyPressed
 
     private void BtnOperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOperator1KeyPressed
-        Valid.pindah(evt, Detik, BtnOperator2);
+        // Valid.pindah(evt, Detik, BtnOperator2);
     }//GEN-LAST:event_BtnOperator1KeyPressed
 
     private void BtnOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOperator2KeyPressed
@@ -3118,29 +3117,17 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
         if (akuntindakanoperasi.getSuspen_Piutang_Operasi_Ralan().equals("") || akuntindakanoperasi.getSuspen_Piutang_Operasi_Ranap().equals("")) {
             akuntindakanoperasi.SetAkunTindakanOperasi();
         }
-        try {
-            psset_tarif = koneksi.prepareStatement("select set_tarif.cara_bayar_operasi,set_tarif.kelas_operasi from set_tarif");
-            try {
-                rsset_tarif = psset_tarif.executeQuery();
-                if (rsset_tarif.next()) {
-                    cara_bayar_operasi = rsset_tarif.getString("cara_bayar_operasi");
-                    kelas_operasi = rsset_tarif.getString("kelas_operasi");
-                } else {
-                    cara_bayar_operasi = "Yes";
-                    kelas_operasi = "Yes";
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : " + e);
-            } finally {
-                if (rsset_tarif != null) {
-                    rsset_tarif.close();
-                }
-                if (psset_tarif != null) {
-                    psset_tarif.close();
-                }
+
+        cara_bayar_operasi = "Yes";
+        kelas_operasi = "Yes";
+
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select set_tarif.cara_bayar_operasi, set_tarif.kelas_operasi from set_tarif")) {
+            if (rs.next()) {
+                cara_bayar_operasi = rs.getString("cara_bayar_operasi");
+                kelas_operasi = rs.getString("kelas_operasi");
             }
         } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            System.out.println("Notif : " + e);
         }
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
@@ -3339,323 +3326,187 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     private widget.Table tbtindakan;
     // End of variables declaration//GEN-END:variables
 
+    public void setDataOperasi(String noRawat, String namaPasien, String tglOperasi) {
+        TNoRw.setText(noRawat);
+        TPasien.setText(namaPasien);
+        this.tglOperasi = tglOperasi;
+    }
+
     private void tampil() {
-        jml = 0;
-        for (i = 0; i < tabMode.getRowCount(); i++) {
-            if (tabMode.getValueAt(i, 0).toString().equals("true")) {
-                jml++;
-            }
-        }
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        pilih = null;
-        pilih = new boolean[jml];
-        kode_paket = null;
-        kode_paket = new String[jml];
-        kategori = null;
-        kategori = new String[jml];
-        nm_perawatan = null;
-        nm_perawatan = new String[jml];
-        operator1 = null;
-        operator1 = new double[jml];
-        operator2 = null;
-        operator2 = new double[jml];
-        operator3 = null;
-        operator3 = new double[jml];
-        asisten_operator1 = null;
-        asisten_operator1 = new double[jml];
-        asisten_operator2 = null;
-        asisten_operator2 = new double[jml];
-        asisten_operator3 = null;
-        asisten_operator3 = new double[jml];
-        instrumen = null;
-        instrumen = new double[jml];
-        dokter_anak = null;
-        dokter_anak = new double[jml];
-        perawaat_resusitas = null;
-        perawaat_resusitas = new double[jml];
-        dokter_anestesi = null;
-        dokter_anestesi = new double[jml];
-        asisten_anestesi = null;
-        asisten_anestesi = new double[jml];
-        asisten_anestesi2 = null;
-        asisten_anestesi2 = new double[jml];
-        bidan = null;
-        bidan = new double[jml];
-        bidan2 = null;
-        bidan2 = new double[jml];
-        bidan3 = null;
-        bidan3 = new double[jml];
-        bidan = new double[jml];
-        perawat_luar = null;
-        perawat_luar = new double[jml];
-        sewa_ok = null;
-        sewa_ok = new double[jml];
-        akomodasi = null;
-        akomodasi = new double[jml];
-        bagian_rs = null;
-        bagian_rs = new double[jml];
-        omloop = null;
-        omloop = new double[jml];
-        omloop2 = null;
-        omloop2 = new double[jml];
-        omloop3 = null;
-        omloop3 = new double[jml];
-        omloop4 = null;
-        omloop4 = new double[jml];
-        omloop5 = null;
-        omloop5 = new double[jml];
-        sarpras = null;
-        sarpras = new double[jml];
-        alat = null;
-        alat = new double[jml];
-        dokter_pjanak = null;
-        dokter_pjanak = new double[jml];
-        dokter_umum = null;
-        dokter_umum = new double[jml];
-        ttltindakan = null;
-        ttltindakan = new double[jml];
-        index = 0;
-        for (i = 0; i < tabMode.getRowCount(); i++) {
-            if (tabMode.getValueAt(i, 0).toString().equals("true")) {
-                pilih[index] = true;
-                kode_paket[index] = tabMode.getValueAt(i, 1).toString();
-                nm_perawatan[index] = tabMode.getValueAt(i, 2).toString();
-                kategori[index] = tabMode.getValueAt(i, 3).toString();
-                operator1[index] = Double.parseDouble(tabMode.getValueAt(i, 4).toString());
-                operator2[index] = Double.parseDouble(tabMode.getValueAt(i, 5).toString());
-                operator3[index] = Double.parseDouble(tabMode.getValueAt(i, 6).toString());
-                asisten_operator1[index] = Double.parseDouble(tabMode.getValueAt(i, 7).toString());
-                asisten_operator2[index] = Double.parseDouble(tabMode.getValueAt(i, 8).toString());
-                asisten_operator3[index] = Double.parseDouble(tabMode.getValueAt(i, 9).toString());
-                instrumen[index] = Double.parseDouble(tabMode.getValueAt(i, 10).toString());
-                dokter_anak[index] = Double.parseDouble(tabMode.getValueAt(i, 11).toString());
-                perawaat_resusitas[index] = Double.parseDouble(tabMode.getValueAt(i, 12).toString());
-                dokter_anestesi[index] = Double.parseDouble(tabMode.getValueAt(i, 13).toString());
-                asisten_anestesi[index] = Double.parseDouble(tabMode.getValueAt(i, 14).toString());
-                asisten_anestesi2[index] = Double.parseDouble(tabMode.getValueAt(i, 15).toString());
-                bidan[index] = Double.parseDouble(tabMode.getValueAt(i, 16).toString());
-                bidan2[index] = Double.parseDouble(tabMode.getValueAt(i, 17).toString());
-                bidan3[index] = Double.parseDouble(tabMode.getValueAt(i, 18).toString());
-                perawat_luar[index] = Double.parseDouble(tabMode.getValueAt(i, 19).toString());
-                alat[index] = Double.parseDouble(tabMode.getValueAt(i, 20).toString());
-                sewa_ok[index] = Double.parseDouble(tabMode.getValueAt(i, 21).toString());
-                akomodasi[index] = Double.parseDouble(tabMode.getValueAt(i, 22).toString());
-                bagian_rs[index] = Double.parseDouble(tabMode.getValueAt(i, 23).toString());
-                omloop[index] = Double.parseDouble(tabMode.getValueAt(i, 24).toString());
-                omloop2[index] = Double.parseDouble(tabMode.getValueAt(i, 25).toString());
-                omloop3[index] = Double.parseDouble(tabMode.getValueAt(i, 26).toString());
-                omloop4[index] = Double.parseDouble(tabMode.getValueAt(i, 27).toString());
-                omloop5[index] = Double.parseDouble(tabMode.getValueAt(i, 28).toString());
-                sarpras[index] = Double.parseDouble(tabMode.getValueAt(i, 29).toString());
-                dokter_pjanak[index] = Double.parseDouble(tabMode.getValueAt(i, 30).toString());
-                dokter_umum[index] = Double.parseDouble(tabMode.getValueAt(i, 31).toString());
-                ttltindakan[index] = Double.parseDouble(tabMode.getValueAt(i, 32).toString());
-                index++;
-            }
-        }
+            Map<String, Object[]> selected = new LinkedHashMap<>();
 
-        Valid.tabelKosong(tabMode);
-        for (i = 0; i < jml; i++) {
-            tabMode.addRow(new Object[] {pilih[i], kode_paket[i], nm_perawatan[i], kategori[i], operator1[i],
-                operator2[i], operator3[i], asisten_operator1[i], asisten_operator2[i], asisten_operator3[i],
-                instrumen[i], dokter_anak[i], perawaat_resusitas[i], dokter_anestesi[i],
-                asisten_anestesi[i], asisten_anestesi2[i], bidan[i], bidan2[i], bidan3[i], perawat_luar[i],
-                alat[i], sewa_ok[i], akomodasi[i], bagian_rs[i], omloop[i], omloop2[i],
-                omloop3[i], omloop4[i], omloop5[i], sarpras[i], dokter_pjanak[i], dokter_umum[i], ttltindakan[i]
-            });
-        }
-
-        try {
-            if (cara_bayar_operasi.equals("Yes") && kelas_operasi.equals("No")) {
-                pstindakan = koneksi.prepareStatement("select kode_paket, nm_perawatan,kategori, operator1, operator2, operator3, " +
-                    "asisten_operator1, asisten_operator2,asisten_operator3, instrumen, dokter_anak,perawaat_resusitas," +
-                    "dokter_anestesi, asisten_anestesi, asisten_anestesi2, bidan, bidan2, bidan3, perawat_luar, alat," +
-                    "sewa_ok,akomodasi,bagian_rs,omloop,omloop2,omloop3,omloop4,omloop5,sarpras,dokter_pjanak,dokter_umum,(operator1+operator2+operator3+" +
-                    "asisten_operator1+asisten_operator2+asisten_operator3+instrumen+dokter_anak+perawaat_resusitas+" +
-                    "alat+dokter_anestesi+asisten_anestesi+asisten_anestesi2+bidan+bidan2+bidan3+perawat_luar+sewa_ok+" +
-                    "akomodasi+bagian_rs+omloop+omloop2+omloop3+omloop4+omloop5+sarpras+dokter_pjanak+dokter_umum) as jumlah " +
-                    "from paket_operasi where status='1' and (kd_pj=? or kd_pj='-') " +
-                    (TCariPaket.getText().trim().equals("") ? "" : "and (kode_paket like ? or nm_perawatan like ?) ") + "order by nm_perawatan ");
-            } else if (cara_bayar_operasi.equals("No") && kelas_operasi.equals("No")) {
-                pstindakan = koneksi.prepareStatement("select kode_paket, nm_perawatan,kategori, operator1, operator2, operator3, " +
-                    "asisten_operator1, asisten_operator2,asisten_operator3, instrumen, dokter_anak,perawaat_resusitas," +
-                    "dokter_anestesi, asisten_anestesi, asisten_anestesi2, bidan, bidan2, bidan3, perawat_luar, alat," +
-                    "sewa_ok,akomodasi,bagian_rs,omloop,omloop2,omloop3,omloop4,omloop5,sarpras,dokter_pjanak,dokter_umum,(operator1+operator2+operator3+" +
-                    "asisten_operator1+asisten_operator2+asisten_operator3+instrumen+dokter_anak+perawaat_resusitas+" +
-                    "alat+dokter_anestesi+asisten_anestesi+asisten_anestesi2+bidan+bidan2+bidan3+perawat_luar+sewa_ok+" +
-                    "akomodasi+bagian_rs+omloop+omloop2+omloop3+omloop4+omloop5+sarpras+dokter_pjanak+dokter_umum) as jumlah " +
-                    "from paket_operasi where status='1' " +
-                    (TCariPaket.getText().trim().equals("") ? "" : "and (kode_paket like ? or nm_perawatan like ?) ") + "order by nm_perawatan ");
-            } else if (cara_bayar_operasi.equals("Yes") && kelas_operasi.equals("Yes")) {
-                pstindakan = koneksi.prepareStatement("select kode_paket, nm_perawatan,kategori, operator1, operator2, operator3, " +
-                    "asisten_operator1, asisten_operator2,asisten_operator3, instrumen, dokter_anak,perawaat_resusitas," +
-                    "dokter_anestesi, asisten_anestesi, asisten_anestesi2, bidan, bidan2, bidan3, perawat_luar, alat," +
-                    "sewa_ok,akomodasi,bagian_rs,omloop,omloop2,omloop3,omloop4,omloop5,sarpras,dokter_pjanak,dokter_umum,(operator1+operator2+operator3+" +
-                    "asisten_operator1+asisten_operator2+asisten_operator3+instrumen+dokter_anak+perawaat_resusitas+" +
-                    "alat+dokter_anestesi+asisten_anestesi+asisten_anestesi2+bidan+bidan2+bidan3+perawat_luar+sewa_ok+" +
-                    "akomodasi+bagian_rs+omloop+omloop2+omloop3+omloop4+omloop5+sarpras+dokter_pjanak+dokter_umum) as jumlah " +
-                    "from paket_operasi where status='1' and (kd_pj=? or kd_pj='-') and (kelas=? or kelas='-') " +
-                    (TCariPaket.getText().trim().equals("") ? "" : "and (kode_paket like ? or nm_perawatan like ?) ") + "order by nm_perawatan ");
-            } else if (cara_bayar_operasi.equals("No") && kelas_operasi.equals("Yes")) {
-                pstindakan = koneksi.prepareStatement("select kode_paket, nm_perawatan,kategori, operator1, operator2, operator3, " +
-                    "asisten_operator1, asisten_operator2,asisten_operator3, instrumen, dokter_anak,perawaat_resusitas," +
-                    "dokter_anestesi, asisten_anestesi, asisten_anestesi2, bidan, bidan2, bidan3, perawat_luar, alat," +
-                    "sewa_ok,akomodasi,bagian_rs,omloop,omloop2,omloop3,omloop4,omloop5,sarpras,dokter_pjanak,dokter_umum,(operator1+operator2+operator3+" +
-                    "asisten_operator1+asisten_operator2+asisten_operator3+instrumen+dokter_anak+perawaat_resusitas+" +
-                    "alat+dokter_anestesi+asisten_anestesi+asisten_anestesi2+bidan+bidan2+bidan3+perawat_luar+sewa_ok+" +
-                    "akomodasi+bagian_rs+omloop+omloop2+omloop3+omloop4+omloop5+sarpras+dokter_pjanak+dokter_umum) as jumlah " +
-                    "from paket_operasi where status='1' and (kelas=? or kelas='-') " +
-                    (TCariPaket.getText().trim().equals("") ? "" : "and (kode_paket like ? or nm_perawatan like ?) ") + "order by nm_perawatan ");
-            }
-
-            try {
-                if (cara_bayar_operasi.equals("Yes") && kelas_operasi.equals("No")) {
-                    pstindakan.setString(1, kd_pj.trim());
-                    if (!TCariPaket.getText().trim().equals("")) {
-                        pstindakan.setString(2, "%" + TCariPaket.getText() + "%");
-                        pstindakan.setString(3, "%" + TCariPaket.getText() + "%");
+            if (tabMode.getRowCount() > 0) {
+                for (int i = 0; i < tabMode.getRowCount(); i++) {
+                    if ((Boolean) tabMode.getValueAt(i, 0)) {
+                        selected.put(tabMode.getValueAt(i, 1).toString(), new Object[] {
+                            true, tabMode.getValueAt(i, 1), tabMode.getValueAt(i, 2), tabMode.getValueAt(i, 3), tabMode.getValueAt(i, 4), tabMode.getValueAt(i, 5), tabMode.getValueAt(i, 6),
+                            tabMode.getValueAt(i, 7), tabMode.getValueAt(i, 8), tabMode.getValueAt(i, 9), tabMode.getValueAt(i, 10), tabMode.getValueAt(i, 11), tabMode.getValueAt(i, 12),
+                            tabMode.getValueAt(i, 13), tabMode.getValueAt(i, 14), tabMode.getValueAt(i, 15), tabMode.getValueAt(i, 16), tabMode.getValueAt(i, 17), tabMode.getValueAt(i, 18),
+                            tabMode.getValueAt(i, 19), tabMode.getValueAt(i, 20), tabMode.getValueAt(i, 21), tabMode.getValueAt(i, 22), tabMode.getValueAt(i, 23), tabMode.getValueAt(i, 24),
+                            tabMode.getValueAt(i, 25), tabMode.getValueAt(i, 26), tabMode.getValueAt(i, 27), tabMode.getValueAt(i, 28), tabMode.getValueAt(i, 29), tabMode.getValueAt(i, 30),
+                            tabMode.getValueAt(i, 31), tabMode.getValueAt(i, 32)
+                        });
                     }
-                    rstindakan = pstindakan.executeQuery();
-                } else if (cara_bayar_operasi.equals("No") && kelas_operasi.equals("No")) {
-                    if (!TCariPaket.getText().trim().equals("")) {
-                        pstindakan.setString(1, "%" + TCariPaket.getText() + "%");
-                        pstindakan.setString(2, "%" + TCariPaket.getText() + "%");
-                    }
-                    rstindakan = pstindakan.executeQuery();
-                } else if (cara_bayar_operasi.equals("Yes") && kelas_operasi.equals("Yes")) {
-                    pstindakan.setString(1, kd_pj.trim());
-                    pstindakan.setString(2, kelas.trim());
-                    if (!TCariPaket.getText().trim().equals("")) {
-                        pstindakan.setString(3, "%" + TCariPaket.getText() + "%");
-                        pstindakan.setString(4, "%" + TCariPaket.getText() + "%");
-                    }
-                    rstindakan = pstindakan.executeQuery();
-                } else if (cara_bayar_operasi.equals("No") && kelas_operasi.equals("Yes")) {
-                    pstindakan.setString(1, kelas.trim());
-                    if (!TCariPaket.getText().trim().equals("")) {
-                        pstindakan.setString(2, "%" + TCariPaket.getText() + "%");
-                        pstindakan.setString(3, "%" + TCariPaket.getText() + "%");
-                    }
-                    rstindakan = pstindakan.executeQuery();
-                }
-
-                while (rstindakan.next()) {
-                    tabMode.addRow(new Object[] {false, rstindakan.getString("kode_paket"),
-                        rstindakan.getString("nm_perawatan"),
-                        rstindakan.getString("kategori"),
-                        rstindakan.getDouble("operator1"),
-                        rstindakan.getDouble("operator2"),
-                        rstindakan.getDouble("operator3"),
-                        rstindakan.getDouble("asisten_operator1"),
-                        rstindakan.getDouble("asisten_operator2"),
-                        rstindakan.getDouble("asisten_operator3"),
-                        rstindakan.getDouble("instrumen"),
-                        rstindakan.getDouble("dokter_anak"),
-                        rstindakan.getDouble("perawaat_resusitas"),
-                        rstindakan.getDouble("dokter_anestesi"),
-                        rstindakan.getDouble("asisten_anestesi"),
-                        rstindakan.getDouble("asisten_anestesi2"),
-                        rstindakan.getDouble("bidan"),
-                        rstindakan.getDouble("bidan2"),
-                        rstindakan.getDouble("bidan3"),
-                        rstindakan.getDouble("perawat_luar"),
-                        rstindakan.getDouble("alat"),
-                        rstindakan.getDouble("sewa_ok"),
-                        rstindakan.getDouble("akomodasi"),
-                        rstindakan.getDouble("bagian_rs"),
-                        rstindakan.getDouble("omloop"),
-                        rstindakan.getDouble("omloop2"),
-                        rstindakan.getDouble("omloop3"),
-                        rstindakan.getDouble("omloop4"),
-                        rstindakan.getDouble("omloop5"),
-                        rstindakan.getDouble("sarpras"),
-                        rstindakan.getDouble("dokter_pjanak"),
-                        rstindakan.getDouble("dokter_umum"),
-                        rstindakan.getDouble("jumlah")});
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : " + e);
-            } finally {
-                if (rstindakan != null) {
-                    rstindakan.close();
-                }
-                if (pstindakan != null) {
-                    pstindakan.close();
                 }
             }
-        } catch (SQLException e) {
-            System.out.println("Notifikasi : " + e);
-        }
 
+            Valid.tabelKosongSmc(tabMode);
+
+            new SwingWorker<Void, Object[]>() {
+                final boolean perCaraBayar = cara_bayar_operasi.equals("Yes");
+                final boolean perKelas = kelas_operasi.equals("Yes");
+                final String cari = TCariPaket.getText().trim();
+                final String kodePJ = kd_pj.trim();
+                final String kelas = DlgUbahTagihanOperasiSMC.this.kelas.trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    selected.values().forEach(this::publish);
+
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select paket_operasi.kode_paket, paket_operasi.nm_perawatan, paket_operasi.kategori, paket_operasi.operator1, paket_operasi.operator2, paket_operasi.operator3, paket_operasi.asisten_operator1, " +
+                        "paket_operasi.asisten_operator2, paket_operasi.asisten_operator3, paket_operasi.instrumen, paket_operasi.dokter_anak, paket_operasi.perawaat_resusitas, paket_operasi.dokter_anestesi, " +
+                        "paket_operasi.asisten_anestesi, paket_operasi.asisten_anestesi2, paket_operasi.bidan, paket_operasi.bidan2, paket_operasi.bidan3, paket_operasi.perawat_luar, paket_operasi.alat, " +
+                        "paket_operasi.sewa_ok, paket_operasi.akomodasi, paket_operasi.bagian_rs, paket_operasi.omloop, paket_operasi.omloop2, paket_operasi.omloop3, paket_operasi.omloop4, paket_operasi.omloop5, " +
+                        "paket_operasi.sarpras, paket_operasi.dokter_pjanak, paket_operasi.dokter_umum, (paket_operasi.operator1 + paket_operasi.operator2 + paket_operasi.operator3 + paket_operasi.asisten_operator1 + " +
+                        "paket_operasi.asisten_operator2 + paket_operasi.asisten_operator3 + paket_operasi.instrumen + paket_operasi.dokter_anak + paket_operasi.perawaat_resusitas + paket_operasi.alat + " +
+                        "paket_operasi.dokter_anestesi + paket_operasi.asisten_anestesi + paket_operasi.asisten_anestesi2 + paket_operasi.bidan + paket_operasi.bidan2 + paket_operasi.bidan3 + paket_operasi.perawat_luar + " +
+                        "paket_operasi.sewa_ok + paket_operasi.akomodasi + paket_operasi.bagian_rs + paket_operasi.omloop + paket_operasi.omloop2 + paket_operasi.omloop3 + paket_operasi.omloop4 + paket_operasi.omloop5 + " +
+                        "paket_operasi.sarpras + paket_operasi.dokter_pjanak + paket_operasi.dokter_umum) as jumlah from paket_operasi where paket_operasi.status = '1' " + (perCaraBayar ?
+                        "and (paket_operasi.kd_pj = ? or paket_operasi.kd_pj = '-') " : "") + (perKelas ? "and (paket_operasi.kelas = ? or paket_operasi.kelas = '-') " : "") + (cari.isBlank() ? "" :
+                        "and (paket_operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") + "order by paket_operasi.nm_perawatan"
+                    )) {
+                        int p = 0;
+
+                        if (perCaraBayar) {
+                            ps.setString(++p, kodePJ);
+                        }
+
+                        if (perKelas) {
+                            ps.setString(++p, kelas);
+                        }
+
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                if (selected.keySet().contains(rs.getString("kode_paket"))) {
+                                    continue;
+                                }
+
+                                publish(new Object[] {
+                                    false, rs.getString("kode_paket"), rs.getString("nm_perawatan"), rs.getString("kategori"), rs.getDouble("operator1"), rs.getDouble("operator2"), rs.getDouble("operator3"),
+                                    rs.getDouble("asisten_operator1"), rs.getDouble("asisten_operator2"), rs.getDouble("asisten_operator3"), rs.getDouble("instrumen"), rs.getDouble("dokter_anak"),
+                                    rs.getDouble("perawaat_resusitas"), rs.getDouble("dokter_anestesi"), rs.getDouble("asisten_anestesi"), rs.getDouble("asisten_anestesi2"), rs.getDouble("bidan"),
+                                    rs.getDouble("bidan2"), rs.getDouble("bidan3"), rs.getDouble("perawat_luar"), rs.getDouble("alat"), rs.getDouble("sewa_ok"), rs.getDouble("akomodasi"),
+                                    rs.getDouble("bagian_rs"), rs.getDouble("omloop"), rs.getDouble("omloop2"), rs.getDouble("omloop3"), rs.getDouble("omloop4"), rs.getDouble("omloop5"),
+                                    rs.getDouble("sarpras"), rs.getDouble("dokter_pjanak"), rs.getDouble("dokter_umum"), rs.getDouble("jumlah")
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    DlgUbahTagihanOperasiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+
+                }
+            }.execute();
+        }
     }
 
     //obat
     private void tampil2() {
-        jml = 0;
-        for (i = 0; i < tbObat.getRowCount(); i++) {
-            //System.out.println(tbObat.getValueAt(i,0).toString());
-            if (!tbObat.getValueAt(i, 0).toString().equals("")) {
-                jml++;
-            }
-        }
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        jmlobat = new double[jml];
-        kd_obat = new String[jml];
-        nm_obat = new String[jml];
-        satuan = new String[jml];
-        hargasatuan = new double[jml];
-        ttlobat = new double[jml];
+            Map<String, Object[]> selected = new LinkedHashMap<>();
 
-        index = 0;
-        for (i = 0; i < tabMode2.getRowCount(); i++) {
-            if (!tabMode2.getValueAt(i, 0).toString().equals("")) {
-                jmlobat[index] = Double.parseDouble(tabMode2.getValueAt(i, 0).toString());
-                kd_obat[index] = tabMode2.getValueAt(i, 1).toString();
-                nm_obat[index] = tabMode2.getValueAt(i, 2).toString();
-                satuan[index] = tabMode2.getValueAt(i, 3).toString();
-                hargasatuan[index] = Double.parseDouble(tabMode2.getValueAt(i, 4).toString());
-                ttlobat[index] = Double.parseDouble(tabMode2.getValueAt(i, 5).toString());
-                index++;
-            }
-        }
-
-        Valid.tabelKosong(tabMode2);
-
-        for (i = 0; i < jml; i++) {
-            tabMode2.addRow(new Object[] {jmlobat[i], kd_obat[i], nm_obat[i], satuan[i], hargasatuan[i], ttlobat[i]});
-        }
-
-        try {
-            psobat = koneksi.prepareStatement("select obatbhp_ok.kd_obat, obatbhp_ok.nm_obat, kodesatuan.satuan, " +
-                "obatbhp_ok.hargasatuan from obatbhp_ok inner join kodesatuan " +
-                "on obatbhp_ok.kode_sat=kodesatuan.kode_sat " +
-                "where obatbhp_ok.kd_obat like ? or " +
-                "obatbhp_ok.nm_obat like ? or " +
-                "kodesatuan.satuan like ? " +
-                "order by obatbhp_ok.kd_obat");
-            try {
-                psobat.setString(1, "%" + TCari.getText() + "%");
-                psobat.setString(2, "%" + TCari.getText() + "%");
-                psobat.setString(3, "%" + TCari.getText() + "%");
-                rsobat = psobat.executeQuery();
-                while (rsobat.next()) {
-                    tabMode2.addRow(new Object[] {"", rsobat.getString(1),
-                        rsobat.getString(2),
-                        rsobat.getString(3),
-                        rsobat.getString(4), 0});
-                }
-            } catch (SQLException e) {
-                System.out.println(e);
-            } finally {
-                if (rsobat != null) {
-                    rsobat.close();
-                }
-                if (psobat != null) {
-                    psobat.close();
+            if (tabMode2.getRowCount() > 0) {
+                for (int i = 0; i < tabMode2.getRowCount(); i++) {
+                    if (Valid.SetAngka((String) tabMode2.getValueAt(i, 0)) > 0) {
+                        selected.put((String) tabMode2.getValueAt(i, 1), new Object[] {
+                            tabMode2.getValueAt(i, 0), tabMode2.getValueAt(i, 1), tabMode2.getValueAt(i, 2), tabMode2.getValueAt(i, 3), tabMode2.getValueAt(i, 4), tabMode2.getValueAt(i, 5)
+                        });
+                    }
                 }
             }
-        } catch (SQLException e) {
-            System.out.println("Notifikasi : " + e);
+
+            Valid.tabelKosongSmc(tabMode2);
+
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    selected.values().forEach(this::publish);
+
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select obatbhp_ok.kd_obat, obatbhp_ok.nm_obat, kodesatuan.satuan, obatbhp_ok.hargasatuan from obatbhp_ok inner join kodesatuan on obatbhp_ok.kode_sat = kodesatuan.kode_sat " +
+                        (cari.isBlank() ? "" : "where obatbhp_ok.kd_obat like ? or obatbhp_ok.nm_obat like ? or kodesatuan.satuan like ? ") + "order by obatbhp_ok.kd_obat"
+                    )) {
+                        int p = 0;
+
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                if (selected.keySet().contains(rs.getString("kd_obat"))) {
+                                    continue;
+                                }
+
+                                publish(new Object[] {"", rs.getString("kd_obat"), rs.getString("nm_obat"), rs.getString("satuan"), rs.getString("hargasatuan"), 0});
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode2::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode2.fireTableDataChanged();
+                    DlgUbahTagihanOperasiSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
     }
 
