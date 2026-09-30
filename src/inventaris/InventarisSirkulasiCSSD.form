@@ -803,7 +803,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbKamIn">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="tbKamIn" noResource="true"/>
               </Properties>
               <Events>

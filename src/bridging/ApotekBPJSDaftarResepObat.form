@@ -338,7 +338,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbResep">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbResep" noResource="true"/>
                       </Properties>
                       <Events>

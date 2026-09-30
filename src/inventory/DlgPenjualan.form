@@ -1182,7 +1182,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDetailObatRacikan">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbDetailObatRacikan" noResource="true"/>
                       </Properties>
                       <Events>

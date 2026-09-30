@@ -258,7 +258,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbTemporary">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="Popup2"/>
                 </Property>

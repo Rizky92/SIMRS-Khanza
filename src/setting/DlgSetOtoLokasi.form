@@ -351,7 +351,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbAdmin">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbAdmin" noResource="true"/>
                       </Properties>
@@ -535,7 +535,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRalan">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbRalan" noResource="true"/>
                       </Properties>
@@ -719,7 +719,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbRanap">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                         <Property name="name" type="java.lang.String" value="tbRanap" noResource="true"/>
                       </Properties>

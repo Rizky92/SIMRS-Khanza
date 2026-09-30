@@ -463,7 +463,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbPengaduan">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbPengaduanMouseClicked"/>

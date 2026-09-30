@@ -634,7 +634,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbBayarDenda.setAutoCreateRowSorter(true);
+        tbBayarDenda.setAutoCreateRowSorter(false);
         tbBayarDenda.setName("tbBayarDenda"); // NOI18N
         tbBayarDenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -699,7 +699,7 @@ public class PerpustakaanBayarDenda extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
-        tbDendaLain.setAutoCreateRowSorter(true);
+        tbDendaLain.setAutoCreateRowSorter(false);
         tbDendaLain.setName("tbDendaLain"); // NOI18N
         tbDendaLain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

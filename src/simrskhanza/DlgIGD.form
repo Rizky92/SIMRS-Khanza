@@ -6148,7 +6148,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbPetugas">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                 <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk menampilkan menu yang dibutuhkan"/>
                 <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="jPopupMenu1"/>
