@@ -617,7 +617,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbBayarDenda">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbBayarDenda" noResource="true"/>
                       </Properties>
                       <Events>
@@ -737,7 +737,7 @@
                   <SubComponents>
                     <Component class="widget.Table" name="tbDendaLain">
                       <Properties>
-                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                        <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                         <Property name="name" type="java.lang.String" value="tbDendaLain" noResource="true"/>
                       </Properties>
                       <Events>

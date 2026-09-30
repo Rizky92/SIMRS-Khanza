@@ -2479,7 +2479,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbDataSEP.setAutoCreateRowSorter(true);
+        tbDataSEP.setAutoCreateRowSorter(false);
         tbDataSEP.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDataSEP.setComponentPopupMenu(Popup);
         tbDataSEP.setName("tbDataSEP"); // NOI18N
@@ -2584,7 +2584,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbDataSEPInternal.setAutoCreateRowSorter(true);
+        tbDataSEPInternal.setAutoCreateRowSorter(false);
         tbDataSEPInternal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDataSEPInternal.setComponentPopupMenu(Popup);
         tbDataSEPInternal.setName("tbDataSEPInternal"); // NOI18N

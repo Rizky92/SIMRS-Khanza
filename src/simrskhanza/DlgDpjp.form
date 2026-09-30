@@ -71,7 +71,7 @@
           <SubComponents>
             <Component class="widget.Table" name="tbPasien">
               <Properties>
-                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="tbPasien" noResource="true"/>
               </Properties>
               <Events>
