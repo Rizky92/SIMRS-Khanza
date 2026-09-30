@@ -1,9 +1,10 @@
 package widget;
 
 import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.ui.FlatScrollPaneBorder;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
+import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
@@ -155,7 +156,8 @@ public class ScrollPane extends JScrollPane {
         setOpaque(false);
 
         if (UIManager.getLookAndFeel() instanceof FlatLaf) {
-            setBorder(new ViewBorderSMC());
+            setBorder(new LookAndFeelSMC.ViewBorder());
+            setCorner(LOWER_RIGHT_CORNER, new TrackCornerSMC());
         }
 
         getVerticalScrollBar().setUnitIncrement(15);
@@ -169,17 +171,18 @@ public class ScrollPane extends JScrollPane {
             getViewport().setBackground(view.getBackground());
         }
 
-        if (view instanceof JTextComponent && getBorder() instanceof ViewBorderSMC) {
+        if (view instanceof JTextComponent && getBorder() instanceof LookAndFeelSMC.ViewBorder) {
             setBorder(UIManager.getBorder("ScrollPane.border"));
         }
     }
 
-    private static class ViewBorderSMC extends FlatScrollPaneBorder {
-        ViewBorderSMC() {
-            super();
-            Color color = UIManager.getColor("ScrollPane.viewBorderColor");
+    private static class TrackCornerSMC extends JComponent {
+        @Override
+        protected void paintComponent(Graphics g) {
+            Color color = UIManager.getColor("ScrollBar.track");
             if (null != color) {
-                borderColor = color;
+                g.setColor(color);
+                g.fillRect(0, 0, getWidth(), getHeight());
             }
         }
     }

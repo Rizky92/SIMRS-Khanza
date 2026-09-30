@@ -337,7 +337,6 @@ public class Table extends JTable {
     public Table() {
         super();
         setFont(new Font("Tahoma", Font.PLAIN, 11));
-        setShowGrid(true);
         getTableHeader().setBorder(BorderFactory.createEmptyBorder());
         getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
         getTableHeader().setReorderingAllowed(false);

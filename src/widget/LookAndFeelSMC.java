@@ -6,11 +6,11 @@ import com.formdev.flatlaf.icons.FlatCheckBoxIcon;
 import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import com.formdev.flatlaf.ui.FlatOptionPaneUI;
+import com.formdev.flatlaf.ui.FlatScrollBarUI;
 import com.formdev.flatlaf.ui.FlatScrollPaneBorder;
 import com.formdev.flatlaf.ui.FlatTabbedPaneUI;
 import com.formdev.flatlaf.ui.FlatTextBorder;
 import com.formdev.flatlaf.ui.FlatUIUtils;
-import com.formdev.flatlaf.util.SystemInfo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -19,12 +19,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.Rectangle;
 import java.beans.PropertyChangeListener;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -42,6 +43,7 @@ import javax.swing.text.JTextComponent;
  * <ul>
  *   <li>a larger check box icon;</li>
  *   <li>read-only text fields and text areas drawn with the disabled border color;</li>
+ *   <li>scroll panes around a table drawn with {@code ScrollPane.viewBorderColor};</li>
  *   <li>extra padding around combo box popup items, apart from the padding of the
  *       combo box itself;</li>
  *   <li>dialog components, such as the choice list of an input dialog or a check
@@ -49,7 +51,8 @@ import javax.swing.text.JTextComponent;
  *       option buttons drawn in the button font;</li>
  *   <li>the selected tab keeping its background while hovered, and unselected tabs
  *       drawn with their own background and outline;</li>
- *   <li>the native scroll bar on Windows.</li>
+ *   <li>a scroll bar thumb that thickens while hovered or dragged, beside a
+ *       separator line along the track.</li>
  * </ul>
  * The default font is Tahoma 11, the font every form is laid out for; its digits
  * are already fixed width.
@@ -60,8 +63,6 @@ public class LookAndFeelSMC extends FlatLightLaf {
 
     public static final String NAME = "SIMRS Khanza";
 
-    private static final String WINDOWS_SCROLL_BAR_UI = "com.sun.java.swing.plaf.windows.WindowsScrollBarUI";
-    private static final int WINDOWS_SCROLL_BAR_WIDTH = 17;
     private static final float CHECK_BOX_ICON_SCALE = 1.15f;
 
     /**
@@ -95,18 +96,15 @@ public class LookAndFeelSMC extends FlatLightLaf {
         defaults.put("FormattedTextField.border", (UIDefaults.LazyValue) table -> new TextBorder());
         defaults.put("PasswordField.border", (UIDefaults.LazyValue) table -> new TextBorder());
         defaults.put("ScrollPane.border", (UIDefaults.LazyValue) table -> new ScrollPaneBorder());
+        defaults.put("Table.scrollPaneBorder", (UIDefaults.LazyValue) table -> new ViewBorder());
         defaults.put("ComboBoxUI", ComboBoxUI.class.getName());
         defaults.put(ComboBoxUI.class.getName(), ComboBoxUI.class);
         defaults.put("OptionPaneUI", OptionPaneUI.class.getName());
         defaults.put(OptionPaneUI.class.getName(), OptionPaneUI.class);
         defaults.put("TabbedPaneUI", TabbedPaneUI.class.getName());
         defaults.put(TabbedPaneUI.class.getName(), TabbedPaneUI.class);
-
-        if (SystemInfo.isWindows) {
-            Object width = Toolkit.getDefaultToolkit().getDesktopProperty("win.scrollbar.width");
-            defaults.put("ScrollBarUI", WINDOWS_SCROLL_BAR_UI);
-            defaults.put("ScrollBar.width", width instanceof Integer ? width : WINDOWS_SCROLL_BAR_WIDTH);
-        }
+        defaults.put("ScrollBarUI", ScrollBarUI.class.getName());
+        defaults.put(ScrollBarUI.class.getName(), ScrollBarUI.class);
 
         return defaults;
     }
@@ -146,6 +144,23 @@ public class LookAndFeelSMC extends FlatLightLaf {
         @Override
         protected boolean isEnabled(Component c) {
             return super.isEnabled(c) && isEditable(c);
+        }
+    }
+
+    /**
+     * Scroll pane border drawn with {@code ScrollPane.viewBorderColor}, for scroll
+     * panes around a view such as a table. {@code JTable} puts it on its enclosing
+     * scroll pane as {@code Table.scrollPaneBorder}, replacing any border that is a
+     * {@code UIResource}, which every FlatLaf border is.
+     */
+    public static class ViewBorder extends FlatScrollPaneBorder {
+
+        public ViewBorder() {
+            super();
+            Color color = UIManager.getColor("ScrollPane.viewBorderColor");
+            if (null != color) {
+                borderColor = color;
+            }
         }
     }
 
@@ -195,6 +210,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
                 PropertyChangeListener superListener = super.createPropertyChangeListener();
                 return e -> {
                     superListener.propertyChange(e);
+
                     if ("renderer".equals(e.getPropertyName())) {
                         wrapCellRenderer();
                     }
@@ -221,6 +237,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
 
             PaddedItemRenderer(ListCellRenderer<? super Object> renderer) {
                 this.renderer = renderer;
+
                 if (null != popupItemInsets) {
                     item.setBorder(new FlatEmptyBorder(popupItemInsets));
                 }
@@ -230,16 +247,20 @@ public class LookAndFeelSMC extends FlatLightLaf {
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 @SuppressWarnings("unchecked")
                 Component c = renderer.getListCellRendererComponent((JList<Object>) list, value, index, isSelected, cellHasFocus);
+
                 if (index < 0 || null == item.getBorder()) {
                     return c;
                 }
+
                 if (c.getParent() != item) {
                     item.removeAll();
                     item.add(c, BorderLayout.CENTER);
                 }
+
                 item.setOpaque(c.isOpaque());
                 item.setBackground(c.getBackground());
                 item.setComponentOrientation(c.getComponentOrientation());
+
                 return item;
             }
         }
@@ -275,6 +296,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
         protected Object getMessage() {
             Object message = super.getMessage();
             applyFont(inputComponent, messageFont);
+
             return message;
         }
 
@@ -283,6 +305,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
             if (msg instanceof Component) {
                 applyFont((Component) msg, messageFont);
             }
+
             super.addMessageComponents(container, cons, msg, maxll, internallyCreated);
         }
 
@@ -295,6 +318,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
                     }
                 }
             }
+
             super.addButtonComponents(container, buttons, initialIndex);
         }
 
@@ -302,6 +326,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
             if (null == c || null == font) {
                 return;
             }
+
             Font current = c.getFont();
             if (null == current || current instanceof UIResource) {
                 c.setFont(font);
@@ -335,25 +360,30 @@ public class LookAndFeelSMC extends FlatLightLaf {
                 if (null != focusColor && FlatUIUtils.isPermanentFocusOwner(tabPane)) {
                     return focusColor;
                 }
+
                 if (null != selectedBackground) {
                     return selectedBackground;
                 }
             }
+
             if (!isSelected && null != unselectedBackground && getRolloverTab() != tabIndex && tabPane.getBackgroundAt(tabIndex) == tabPane.getBackground()) {
                 return unselectedBackground;
             }
+
             return super.getTabBackground(tabPlacement, tabIndex, isSelected);
         }
 
         @Override
         protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
             super.paintTabBorder(g, tabPlacement, tabIndex, x, y, w, h, isSelected);
+
             if (isSelected || null == contentAreaColor) {
                 return;
             }
 
             boolean first = tabRuns[getRunForTab(tabPane.getTabCount(), tabIndex)] == tabIndex;
             g.setColor(contentAreaColor);
+
             switch (tabPlacement) {
                 case LEFT:
                     g.fillRect(x, y, 1, h);
@@ -384,6 +414,72 @@ public class LookAndFeelSMC extends FlatLightLaf {
                     }
                     break;
             }
+        }
+    }
+
+    /**
+     * FlatLaf scroll bar UI whose thumb uses {@code ScrollBar.hoverThumbInsets}
+     * instead of {@code ScrollBar.thumbInsets} while it is hovered or dragged, so
+     * it grows thicker, and whose track has a {@code ScrollBar.trackSeparatorColor}
+     * line along the side facing the view. Both insets are given for the vertical
+     * scroll bar, with the left side facing the view; the horizontal scroll bar
+     * faces the view with its top side.
+     */
+    public static class ScrollBarUI extends FlatScrollBarUI {
+
+        private Insets hoverThumbInsets;
+        private Color trackSeparatorColor;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new ScrollBarUI();
+        }
+
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+            hoverThumbInsets = UIManager.getInsets("ScrollBar.hoverThumbInsets");
+            trackSeparatorColor = UIManager.getColor("ScrollBar.trackSeparatorColor");
+        }
+
+        @Override
+        protected void uninstallDefaults() {
+            super.uninstallDefaults();
+            hoverThumbInsets = null;
+            trackSeparatorColor = null;
+        }
+
+        @Override
+        protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+            super.paintTrack(g, c, trackBounds);
+
+            if (trackBounds.isEmpty() || null == trackSeparatorColor) {
+                return;
+            }
+
+            g.setColor(trackSeparatorColor);
+
+            if (JScrollBar.VERTICAL == scrollbar.getOrientation()) {
+                g.fillRect(trackBounds.x, trackBounds.y, 1, trackBounds.height);
+            } else {
+                g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, 1);
+            }
+        }
+
+        @Override
+        protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+            if (thumbBounds.isEmpty() || !scrollbar.isEnabled()) {
+                return;
+            }
+
+            boolean active = hoverThumb || isDragging;
+            Insets insets = active && null != hoverThumbInsets ? hoverThumbInsets : thumbInsets;
+
+            if (JScrollBar.HORIZONTAL == scrollbar.getOrientation()) {
+                insets = new Insets(insets.top, insets.right, insets.bottom, insets.left);
+            }
+
+            g.setColor(getThumbColor(c, hoverThumb, isDragging));
+            paintTrackOrThumb(g, c, thumbBounds, insets, thumbArc);
         }
     }
 }
