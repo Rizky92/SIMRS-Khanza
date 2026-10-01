@@ -434,16 +434,12 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
         TCari.requestFocus();
     }
 
-    public String getIsiTemplateSmc() {
-        if (Template.getText().isBlank()) {
-            return "";
-        }
-
-        return Template.getText().trim();
-    }
-
     public JTable getTable(){
         return tbKamar;
+    }
+
+    public String getIsiTemplateSmc() {
+        return Template.getText();
     }
 
     public void isCek(){
