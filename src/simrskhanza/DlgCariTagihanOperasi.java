@@ -3588,7 +3588,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     PostOp.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),3).toString());
                     Jaringan.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),4).toString());
                     DikirimPA.setSelectedItem(template.getTable().getValueAt(template.getTable().getSelectedRow(),5).toString());
-                    Laporan.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),6).toString());
+                    Laporan.setText(template.getIsiTemplateSmc());
                     Laporan.requestFocus();
                 }
             }
