@@ -8,9 +8,6 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -214,21 +211,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         Valid.setTglJamSmc(tgl,Jam,Menit,Detik, sekarang);
         Valid.setTglJamSmc(tgl2,Jam2,Menit2,Detik2, sekarang);
         isForm();
-
-        panelBiasa1.addComponentListener(new ComponentAdapter() {
-            private final Dimension ukuranInput = scrollPane1.getPreferredSize();
-
-            @Override
-            public void componentResized(ComponentEvent e) {
-                Insets insets = panelBiasa1.getInsets();
-                int sisa = panelBiasa1.getWidth() - insets.left - insets.right - FormInput1.getMinimumSize().width;
-                int lebar = Math.max(0, Math.min(ukuranInput.width, sisa));
-                if (lebar != scrollPane1.getPreferredSize().width) {
-                    scrollPane1.setPreferredSize(new Dimension(lebar, ukuranInput.height));
-                    panelBiasa1.revalidate();
-                }
-            }
-        });
     }
 
     /** This method is called from within the constructor to
@@ -269,13 +251,18 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         BtnKeluar = new widget.Button();
         PanelInput = new javax.swing.JPanel();
-        panelBiasa1 = new widget.PanelBiasa();
+        ChkInput = new widget.CekBox();
         scrollPane1 = new widget.ScrollPane();
         FormInput = new widget.panelisi();
         label14 = new widget.Label();
         kdoperator1 = new widget.TextBox();
         nmoperator1 = new widget.TextBox();
         BtnOperator1 = new widget.Button();
+        label11 = new widget.Label();
+        tgl = new widget.Tanggal();
+        Jam = new widget.ComboBox();
+        Menit = new widget.ComboBox();
+        Detik = new widget.ComboBox();
         jLabel3 = new widget.Label();
         TNoRw = new widget.TextBox();
         TPasien = new widget.TextBox();
@@ -371,32 +358,25 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         nmonloop5 = new widget.TextBox();
         kdonloop5 = new widget.TextBox();
         label38 = new widget.Label();
-        FormInput1 = new widget.panelisi();
-        panelBiasa2 = new widget.PanelBiasa();
-        btnTemplate = new widget.Button();
-        jLabel7 = new widget.Label();
-        PreOp = new widget.TextBox();
-        jLabel11 = new widget.Label();
-        Jaringan = new widget.TextBox();
-        jLabel8 = new widget.Label();
-        DikirimPA = new widget.ComboBox();
-        NomorImplant = new widget.TextBox();
-        PostOp = new widget.TextBox();
-        jLabel9 = new widget.Label();
-        jLabel6 = new widget.Label();
-        tgl2 = new widget.Tanggal();
-        Detik = new widget.ComboBox();
-        tgl = new widget.Tanggal();
-        Jam = new widget.ComboBox();
-        Menit2 = new widget.ComboBox();
         label12 = new widget.Label();
-        Detik2 = new widget.ComboBox();
-        Menit = new widget.ComboBox();
-        label11 = new widget.Label();
+        tgl2 = new widget.Tanggal();
         Jam2 = new widget.ComboBox();
+        Menit2 = new widget.ComboBox();
+        Detik2 = new widget.ComboBox();
+        PreOp = new widget.TextBox();
+        jLabel6 = new widget.Label();
+        jLabel7 = new widget.Label();
+        PostOp = new widget.TextBox();
+        jLabel8 = new widget.Label();
+        Jaringan = new widget.TextBox();
+        jLabel9 = new widget.Label();
+        DikirimPA = new widget.ComboBox();
         scrollPane2 = new widget.ScrollPane();
         Laporan = new widget.TextArea();
-        ChkInput = new widget.CekBox();
+        jLabel10 = new widget.Label();
+        btnTemplate = new widget.Button();
+        jLabel11 = new widget.Label();
+        NomorImplant = new widget.TextBox();
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -699,19 +679,35 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(560, 460));
+        PanelInput.setPreferredSize(new java.awt.Dimension(560, 444));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
-        panelBiasa1.setName("panelBiasa1"); // NOI18N
-        panelBiasa1.setPreferredSize(new java.awt.Dimension(1264, 605));
-        panelBiasa1.setLayout(new java.awt.BorderLayout());
+        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setMnemonic('I');
+        ChkInput.setText(".: Input Data");
+        ChkInput.setToolTipText("Alt+I");
+        ChkInput.setBorderPainted(true);
+        ChkInput.setBorderPaintedFlat(true);
+        ChkInput.setFocusable(false);
+        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ChkInput.setName("ChkInput"); // NOI18N
+        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
+        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        ChkInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkInputActionPerformed(evt);
+            }
+        });
+        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
 
         scrollPane1.setName("scrollPane1"); // NOI18N
-        scrollPane1.setPreferredSize(new java.awt.Dimension(852, 465));
 
         FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(833, 435));
+        FormInput.setPreferredSize(new java.awt.Dimension(89, 583));
         FormInput.setLayout(null);
 
         label14.setText("Operator 1 :");
@@ -755,6 +751,52 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(BtnOperator1);
         BtnOperator1.setBounds(376, 70, 28, 23);
 
+        label11.setText("Mulai :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(70, 23));
+        FormInput.add(label11);
+        label11.setBounds(406, 40, 101, 23);
+
+        tgl.setDisplayFormat("dd-MM-yyyy");
+        tgl.setName("tgl"); // NOI18N
+        tgl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tglKeyPressed(evt);
+            }
+        });
+        FormInput.add(tgl);
+        tgl.setBounds(510, 40, 90, 23);
+
+        Jam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        Jam.setName("Jam"); // NOI18N
+        Jam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JamKeyPressed(evt);
+            }
+        });
+        FormInput.add(Jam);
+        Jam.setBounds(603, 40, 62, 23);
+
+        Menit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Menit.setName("Menit"); // NOI18N
+        Menit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MenitKeyPressed(evt);
+            }
+        });
+        FormInput.add(Menit);
+        Menit.setBounds(668, 40, 62, 23);
+
+        Detik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Detik.setName("Detik"); // NOI18N
+        Detik.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DetikKeyPressed(evt);
+            }
+        });
+        FormInput.add(Detik);
+        Detik.setBounds(733, 40, 62, 23);
+
         jLabel3.setText("No.Rawat :");
         jLabel3.setName("jLabel3"); // NOI18N
         FormInput.add(jLabel3);
@@ -774,10 +816,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(TPasien);
         TPasien.setBounds(265, 10, 535, 23);
 
-        jLabel4.setText("Jenis Anestesi :");
+        jLabel4.setText("Jenis Anasthesi :");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
-        jLabel4.setBounds(406, 40, 101, 23);
+        jLabel4.setBounds(249, 40, 90, 23);
 
         jenis.setName("jenis"); // NOI18N
         jenis.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -786,7 +828,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(jenis);
-        jenis.setBounds(510, 40, 100, 23);
+        jenis.setBounds(342, 40, 92, 23);
 
         label17.setText("Ast. Operator 1 :");
         label17.setName("label17"); // NOI18N
@@ -906,7 +948,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(btnOperator3);
         btnOperator3.setBounds(376, 130, 28, 23);
 
-        label21.setText("dr. Anestesi :");
+        label21.setText("dr Anestesi :");
         label21.setName("label21"); // NOI18N
         label21.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label21);
@@ -942,7 +984,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(BtnAnastesi);
         BtnAnastesi.setBounds(376, 160, 28, 23);
 
-        label22.setText("dr. Anak :");
+        label22.setText("dr Anak :");
         label22.setName("label22"); // NOI18N
         label22.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label22);
@@ -1080,7 +1122,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(kdprwresust);
         kdprwresust.setBounds(510, 220, 100, 23);
 
-        label24.setText("Prw. Resusitasi :");
+        label24.setText("Prw.Resusitasi :");
         label24.setName("label24"); // NOI18N
         label24.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label24);
@@ -1158,7 +1200,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(btnBidan);
         btnBidan.setBounds(376, 220, 28, 23);
 
-        label28.setText("Perawat Luar :");
+        label28.setText("Prwat Luar :");
         label28.setName("label28"); // NOI18N
         label28.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label28);
@@ -1207,7 +1249,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kategori);
-        Kategori.setBounds(84, 40, 291, 23);
+        Kategori.setBounds(84, 40, 152, 23);
 
         btnBidan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnBidan2.setMnemonic('2');
@@ -1389,7 +1431,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(kdonloop3);
         kdonloop3.setBounds(510, 310, 100, 23);
 
-        label33.setText("dr. Pj. Anak :");
+        label33.setText("dr Pj. Anak :");
         label33.setName("label33"); // NOI18N
         label33.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label33);
@@ -1425,7 +1467,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(btndrpjanak);
         btndrpjanak.setBounds(376, 370, 28, 23);
 
-        label34.setText("dr. Umum :");
+        label34.setText("dr Umum :");
         label34.setName("label34"); // NOI18N
         label34.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label34);
@@ -1605,105 +1647,11 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         FormInput.add(label38);
         label38.setBounds(406, 370, 101, 23);
 
-        scrollPane1.setViewportView(FormInput);
-
-        panelBiasa1.add(scrollPane1, java.awt.BorderLayout.WEST);
-
-        FormInput1.setBorder(null);
-        FormInput1.setMinimumSize(new java.awt.Dimension(410, 0));
-        FormInput1.setName("FormInput1"); // NOI18N
-        FormInput1.setPreferredSize(new java.awt.Dimension(410, 583));
-        FormInput1.setLayout(new java.awt.BorderLayout(1, 1));
-
-        panelBiasa2.setName("panelBiasa2"); // NOI18N
-        panelBiasa2.setPreferredSize(new java.awt.Dimension(1, 260));
-        panelBiasa2.setLayout(null);
-
-        btnTemplate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnTemplate.setMnemonic('2');
-        btnTemplate.setText("Pilih Template Laporan");
-        btnTemplate.setToolTipText("Alt+2");
-        btnTemplate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnTemplate.setName("btnTemplate"); // NOI18N
-        btnTemplate.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnTemplate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTemplateActionPerformed(evt);
-            }
-        });
-        panelBiasa2.add(btnTemplate);
-        btnTemplate.setBounds(148, 220, 256, 23);
-
-        jLabel7.setText("Diagnosis Post-operatif :");
-        jLabel7.setName("jLabel7"); // NOI18N
-        panelBiasa2.add(jLabel7);
-        jLabel7.setBounds(0, 70, 145, 23);
-
-        PreOp.setName("PreOp"); // NOI18N
-        PreOp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PreOpKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(PreOp);
-        PreOp.setBounds(148, 40, 285, 23);
-
-        jLabel11.setText("Nomor Implan :");
-        jLabel11.setName("jLabel11"); // NOI18N
-        panelBiasa2.add(jLabel11);
-        jLabel11.setBounds(0, 160, 145, 23);
-
-        Jaringan.setName("Jaringan"); // NOI18N
-        Jaringan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JaringanKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Jaringan);
-        Jaringan.setBounds(148, 100, 285, 23);
-
-        jLabel8.setText("Jaringan di-Eksisi / -Insisi :");
-        jLabel8.setName("jLabel8"); // NOI18N
-        panelBiasa2.add(jLabel8);
-        jLabel8.setBounds(0, 100, 145, 23);
-
-        DikirimPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
-        DikirimPA.setName("DikirimPA"); // NOI18N
-        DikirimPA.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DikirimPAKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(DikirimPA);
-        DikirimPA.setBounds(148, 130, 130, 23);
-
-        NomorImplant.setName("NomorImplant"); // NOI18N
-        NomorImplant.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                NomorImplantKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(NomorImplant);
-        NomorImplant.setBounds(148, 160, 285, 23);
-
-        PostOp.setName("PostOp"); // NOI18N
-        PostOp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PostOpKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(PostOp);
-        PostOp.setBounds(148, 70, 285, 23);
-
-        jLabel9.setText("Dikirim Pemeriksaan PA :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        panelBiasa2.add(jLabel9);
-        jLabel9.setBounds(0, 130, 145, 23);
-
-        jLabel6.setText("Diagnosis Pre-operatif :");
-        jLabel6.setName("jLabel6"); // NOI18N
-        panelBiasa2.add(jLabel6);
-        jLabel6.setBounds(0, 40, 145, 23);
+        label12.setText("Selesai :");
+        label12.setName("label12"); // NOI18N
+        label12.setPreferredSize(new java.awt.Dimension(70, 23));
+        FormInput.add(label12);
+        label12.setBounds(406, 400, 101, 23);
 
         tgl2.setDisplayFormat("dd-MM-yyyy");
         tgl2.setName("tgl2"); // NOI18N
@@ -1712,80 +1660,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 tgl2KeyPressed(evt);
             }
         });
-        panelBiasa2.add(tgl2);
-        tgl2.setBounds(148, 190, 90, 23);
-
-        Detik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        Detik.setName("Detik"); // NOI18N
-        Detik.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DetikKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Detik);
-        Detik.setBounds(371, 10, 62, 23);
-
-        tgl.setDisplayFormat("dd-MM-yyyy");
-        tgl.setName("tgl"); // NOI18N
-        tgl.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tglKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(tgl);
-        tgl.setBounds(148, 10, 90, 23);
-
-        Jam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        Jam.setName("Jam"); // NOI18N
-        Jam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JamKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Jam);
-        Jam.setBounds(241, 10, 62, 23);
-
-        Menit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        Menit2.setName("Menit2"); // NOI18N
-        Menit2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Menit2KeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Menit2);
-        Menit2.setBounds(306, 190, 62, 23);
-
-        label12.setText("Selesai Operasi :");
-        label12.setName("label12"); // NOI18N
-        label12.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelBiasa2.add(label12);
-        label12.setBounds(0, 190, 145, 23);
-
-        Detik2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        Detik2.setName("Detik2"); // NOI18N
-        Detik2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Detik2KeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Detik2);
-        Detik2.setBounds(371, 190, 62, 23);
-
-        Menit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        Menit.setName("Menit"); // NOI18N
-        Menit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                MenitKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Menit);
-        Menit.setBounds(306, 10, 62, 23);
-
-        label11.setText("Mulai Operasi :");
-        label11.setName("label11"); // NOI18N
-        label11.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelBiasa2.add(label11);
-        label11.setBounds(0, 10, 145, 23);
+        FormInput.add(tgl2);
+        tgl2.setBounds(510, 400, 90, 23);
 
         Jam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         Jam2.setName("Jam2"); // NOI18N
@@ -1794,47 +1670,133 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 Jam2KeyPressed(evt);
             }
         });
-        panelBiasa2.add(Jam2);
-        Jam2.setBounds(241, 190, 62, 23);
+        FormInput.add(Jam2);
+        Jam2.setBounds(603, 400, 62, 23);
 
-        FormInput1.add(panelBiasa2, java.awt.BorderLayout.PAGE_START);
+        Menit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Menit2.setName("Menit2"); // NOI18N
+        Menit2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Menit2KeyPressed(evt);
+            }
+        });
+        FormInput.add(Menit2);
+        Menit2.setBounds(668, 400, 62, 23);
 
-        scrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 50, 50)), "Laporan Operasi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        Detik2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        Detik2.setName("Detik2"); // NOI18N
+        Detik2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Detik2KeyPressed(evt);
+            }
+        });
+        FormInput.add(Detik2);
+        Detik2.setBounds(733, 400, 62, 23);
+
+        PreOp.setName("PreOp"); // NOI18N
+        PreOp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PreOpKeyPressed(evt);
+            }
+        });
+        FormInput.add(PreOp);
+        PreOp.setBounds(148, 430, 256, 23);
+
+        jLabel6.setText("Diagnosis Pre-operatif :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        FormInput.add(jLabel6);
+        jLabel6.setBounds(0, 430, 145, 23);
+
+        jLabel7.setText("Diagnosis Post-operatif :");
+        jLabel7.setName("jLabel7"); // NOI18N
+        FormInput.add(jLabel7);
+        jLabel7.setBounds(0, 460, 145, 23);
+
+        PostOp.setName("PostOp"); // NOI18N
+        PostOp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PostOpKeyPressed(evt);
+            }
+        });
+        FormInput.add(PostOp);
+        PostOp.setBounds(148, 460, 256, 23);
+
+        jLabel8.setText("Jaringan di-Eksisi / -Insisi :");
+        jLabel8.setName("jLabel8"); // NOI18N
+        FormInput.add(jLabel8);
+        jLabel8.setBounds(0, 490, 145, 23);
+
+        Jaringan.setName("Jaringan"); // NOI18N
+        Jaringan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JaringanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Jaringan);
+        Jaringan.setBounds(148, 490, 256, 23);
+
+        jLabel9.setText("Dikirim Pemeriksaan PA :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        FormInput.add(jLabel9);
+        jLabel9.setBounds(0, 520, 145, 23);
+
+        DikirimPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        DikirimPA.setName("DikirimPA"); // NOI18N
+        DikirimPA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DikirimPAKeyPressed(evt);
+            }
+        });
+        FormInput.add(DikirimPA);
+        DikirimPA.setBounds(148, 520, 130, 23);
+
+        scrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane2.setName("scrollPane2"); // NOI18N
 
         Laporan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Laporan.setColumns(20);
-        Laporan.setRows(1);
-        Laporan.setTabSize(4);
+        Laporan.setRows(30);
         Laporan.setName("Laporan"); // NOI18N
         scrollPane2.setViewportView(Laporan);
 
-        FormInput1.add(scrollPane2, java.awt.BorderLayout.CENTER);
+        FormInput.add(scrollPane2);
+        scrollPane2.setBounds(510, 430, 320, 143);
 
-        panelBiasa1.add(FormInput1, java.awt.BorderLayout.CENTER);
+        jLabel10.setText("Laporan Operasi :");
+        jLabel10.setName("jLabel10"); // NOI18N
+        FormInput.add(jLabel10);
+        jLabel10.setBounds(406, 430, 101, 23);
 
-        PanelInput.add(panelBiasa1, java.awt.BorderLayout.CENTER);
-
-        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('I');
-        ChkInput.setText(".: Input Data");
-        ChkInput.setToolTipText("Alt+I");
-        ChkInput.setBorderPainted(true);
-        ChkInput.setBorderPaintedFlat(true);
-        ChkInput.setFocusable(false);
-        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ChkInput.setName("ChkInput"); // NOI18N
-        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
-        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
+        btnTemplate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnTemplate.setMnemonic('2');
+        btnTemplate.setToolTipText("Alt+2");
+        btnTemplate.setName("btnTemplate"); // NOI18N
+        btnTemplate.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnTemplate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkInputActionPerformed(evt);
+                btnTemplateActionPerformed(evt);
             }
         });
-        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
+        FormInput.add(btnTemplate);
+        btnTemplate.setBounds(479, 460, 28, 23);
+
+        jLabel11.setText("Nomor Implan :");
+        jLabel11.setName("jLabel11"); // NOI18N
+        FormInput.add(jLabel11);
+        jLabel11.setBounds(0, 550, 145, 23);
+
+        NomorImplant.setName("NomorImplant"); // NOI18N
+        NomorImplant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NomorImplantKeyPressed(evt);
+            }
+        });
+        FormInput.add(NomorImplant);
+        NomorImplant.setBounds(148, 550, 256, 23);
+
+        scrollPane1.setViewportView(FormInput);
+
+        PanelInput.add(scrollPane1, java.awt.BorderLayout.CENTER);
 
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
@@ -3561,7 +3523,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private widget.ComboBox Detik2;
     private widget.ComboBox DikirimPA;
     private widget.panelisi FormInput;
-    private widget.panelisi FormInput1;
     private widget.ComboBox Jam;
     private widget.ComboBox Jam2;
     private widget.TextBox Jaringan;
@@ -3602,6 +3563,7 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private widget.Button btndrpjanak;
     private widget.Button btndrumum;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
@@ -3687,8 +3649,6 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
     private widget.TextBox nmpjanak;
     private widget.TextBox nmprwluar;
     private widget.TextBox nmprwresust;
-    private widget.PanelBiasa panelBiasa1;
-    private widget.PanelBiasa panelBiasa2;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
