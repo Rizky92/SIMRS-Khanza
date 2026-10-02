@@ -1,5 +1,6 @@
 <?php
     date_default_timezone_set('Asia/Makassar');
+    mysqli_report(MYSQLI_REPORT_OFF);
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
     define('DB_PASS', '');
@@ -633,6 +634,13 @@
         $konektor = bukakoneksi();
         mysqli_query($konektor, $sql);
         $result = mysqli_affected_rows($konektor);
+        mysqli_close($konektor);
+        return $result;
+    }
+
+    function escapeSmc($string) {
+        $konektor = bukakoneksi();
+        $result = mysqli_real_escape_string($konektor, (string) $string);
         mysqli_close($konektor);
         return $result;
     }

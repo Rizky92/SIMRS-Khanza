@@ -2,6 +2,7 @@
 /.vscode/
 /.idea/
 /.claude/
+/.php-cs-fixer.cache
 /*.css
 /*.html
 /*.html_files
