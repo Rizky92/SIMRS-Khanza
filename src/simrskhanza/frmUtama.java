@@ -917,6 +917,7 @@ import rekammedis.MasterTriaseSkala2;
 import rekammedis.MasterTriaseSkala3;
 import rekammedis.MasterTriaseSkala4;
 import rekammedis.MasterTriaseSkala5;
+import rekammedis.RMAdmisiSkoringTOLAC;
 import rekammedis.RMCariRekonsiliasiObat;
 import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMCatatanAnastesiSedasi;
@@ -2120,7 +2121,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24/09/2026" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30/09/2026" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
 
@@ -7177,7 +7178,7 @@ public class frmUtama extends javax.swing.JFrame {
         label1.setText("label1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("::[ Khanza SIMKES 2022 ]::");
+        setTitle("::[ Khanza SIMKES 2026 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
         setIconImages(null);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -24091,7 +24092,19 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-
+    
+    private void btnAdmisiSkoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMAdmisiSkoringTOLAC form=new RMAdmisiSkoringTOLAC(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -24818,8 +24831,8 @@ public class frmUtama extends javax.swing.JFrame {
             btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi,btnIntervensiNyeriNonFarmakologi,btnSuratPengajuanCutiPerawatan,btnChecklistKriteriaMasukIsolasi,btnMapingTarifTindakanRalanKPTLSatuSehat,
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
             btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain,btnSetResepPerCaraBayar,
-            btnSkriningTOLAC;
-
+            btnSkriningTOLAC,btnAdmisiSkoringTOLAC;
+    
     public void isWall(){
         try{
             ps=koneksi.prepareStatement("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.aktifkan,setting.wallpaper,setting.kontak,setting.email,setting.logo,setting.kode_ppk,setting.kode_ppkkemenkes from setting");
@@ -29689,7 +29702,12 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnSkriningTOLAC);
                 jmlmenu++;
             }
-
+            
+            if(akses.getadmisi_skoring_tolac()==true){
+                Panelmenu.add(btnAdmisiSkoringTOLAC);
+                jmlmenu++;
+            }
+            
             if(akses.getlaporan_tindakan()==true){
                 Panelmenu.add(btnLaporanTindakan);
                 jmlmenu++;
@@ -35746,7 +35764,12 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnSkriningTOLAC);
             jmlmenu++;
         }
-
+        
+        if(akses.getadmisi_skoring_tolac()==true){
+            Panelmenu.add(btnAdmisiSkoringTOLAC);
+            jmlmenu++;
+        }
+        
         if(akses.getlaporan_tindakan()==true){
             Panelmenu.add(btnLaporanTindakan);
             jmlmenu++;
@@ -43515,7 +43538,14 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
-
+        
+        if(akses.getadmisi_skoring_tolac()==true){
+            if(btnAdmisiSkoringTOLAC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnAdmisiSkoringTOLAC);
+                jmlmenu++;
+            } 
+        }
+        
         if(akses.getlaporan_tindakan()==true){
             if(btnLaporanTindakan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLaporanTindakan);
@@ -51629,6 +51659,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningTOLAC.setName("btnSkriningTOLAC");
         btnSkriningTOLAC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningTOLAC.addActionListener(this::btnSkriningTOLACActionPerformed);
+        
+        btnAdmisiSkoringTOLAC = new widget.ButtonBig();
+        btnAdmisiSkoringTOLAC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pregnant_4829967.png")));
+        btnAdmisiSkoringTOLAC.setText("Admisi & Skoring TOLAC");
+        btnAdmisiSkoringTOLAC.setIconTextGap(0);
+        btnAdmisiSkoringTOLAC.setName("btnAdmisiSkoringTOLAC"); 
+        btnAdmisiSkoringTOLAC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnAdmisiSkoringTOLAC.addActionListener(this::btnAdmisiSkoringTOLACActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
