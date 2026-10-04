@@ -125,10 +125,10 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnBilling = new widget.JMenuItem();
-        MnSudahBayar = new widget.JMenuItem();
-        MnBelumBayar = new widget.JMenuItem();
-        MnSemuaStatusBayar = new widget.JMenuItem();
+        MnBilling = new widget.MenuItem();
+        MnSudahBayar = new widget.MenuItem();
+        MnBelumBayar = new widget.MenuItem();
+        MnSemuaStatusBayar = new widget.MenuItem();
         kdbangsal = new widget.TextBox();
         KdCaraBayar = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -788,10 +788,10 @@ public final class DlgPembayaranRanap extends javax.swing.JDialog {
     private widget.TextBox KdCaraBayar;
     private javax.swing.JLabel LCount;
     private widget.Label LCount2;
-    private widget.JMenuItem MnBelumBayar;
-    private widget.JMenuItem MnBilling;
-    private widget.JMenuItem MnSemuaStatusBayar;
-    private widget.JMenuItem MnSudahBayar;
+    private widget.MenuItem MnBelumBayar;
+    private widget.MenuItem MnBilling;
+    private widget.MenuItem MnSemuaStatusBayar;
+    private widget.MenuItem MnSudahBayar;
     private widget.TextBox NmCaraBayar;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

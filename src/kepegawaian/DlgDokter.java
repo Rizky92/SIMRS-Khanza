@@ -155,8 +155,8 @@ public class DlgDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        MnGambarTTD = new widget.JMenuItem();
-        MnRestore = new widget.JMenuItem();
+        MnGambarTTD = new widget.MenuItem();
+        MnRestore = new widget.MenuItem();
         WindowInputTTD = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         FormInput1 = new widget.PanelBiasa();
@@ -1515,8 +1515,8 @@ public class DlgDokter extends javax.swing.JDialog {
     private widget.PanelBiasa FormInput1;
     private widget.TextBox KdSps;
     private widget.Label LCount;
-    private widget.JMenuItem MnGambarTTD;
-    private widget.JMenuItem MnRestore;
+    private widget.MenuItem MnGambarTTD;
+    private widget.MenuItem MnRestore;
     private javax.swing.JPanel PanelInput;
     private java.awt.Canvas PhotoTTD;
     private javax.swing.JPopupMenu Popup;

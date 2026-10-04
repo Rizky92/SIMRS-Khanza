@@ -148,7 +148,7 @@ public class DlgUbahPemesanan extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
         NoFaktur2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -1268,7 +1268,7 @@ public class DlgUbahPemesanan extends javax.swing.JDialog {
     private widget.TextBox nmsup;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private widget.JMenuItem ppBersihkan;
+    private widget.MenuItem ppBersihkan;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     private widget.TextBox tppn;

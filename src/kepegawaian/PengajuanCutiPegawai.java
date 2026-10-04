@@ -186,8 +186,8 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
         KdPetugas = new widget.TextBox();
         NmPetugas = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppSetujui = new widget.JMenuItem();
-        ppTolak = new widget.JMenuItem();
+        ppSetujui = new widget.MenuItem();
+        ppTolak = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         TabRawat = new widget.TabPane();
         panelBiasa1 = new widget.PanelBiasa();
@@ -1663,8 +1663,8 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.JMenuItem ppSetujui;
-    private widget.JMenuItem ppTolak;
+    private widget.MenuItem ppSetujui;
+    private widget.MenuItem ppTolak;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbObat;
     private widget.Table tbObat2;

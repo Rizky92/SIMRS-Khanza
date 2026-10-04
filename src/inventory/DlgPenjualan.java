@@ -316,9 +316,9 @@ public class DlgPenjualan extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppStok = new widget.JMenuItem();
-        ppStok1 = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppStok = new widget.MenuItem();
+        ppStok1 = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
         panelisi1 = new widget.panelisi();
@@ -2526,9 +2526,9 @@ public class DlgPenjualan extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi5;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppStok;
-    private widget.JMenuItem ppStok1;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppStok;
+    private widget.MenuItem ppStok1;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDetailObatRacikan;
     private widget.Table tbObat;

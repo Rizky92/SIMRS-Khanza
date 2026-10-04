@@ -147,7 +147,7 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnKriteriaKeluarICU = new widget.JMenuItem();
+        MnKriteriaKeluarICU = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1258,7 +1258,7 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
     private widget.ComboBox Kriteria9;
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
-    private widget.JMenuItem MnKriteriaKeluarICU;
+    private widget.MenuItem MnKriteriaKeluarICU;
     private widget.TextBox NamaPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

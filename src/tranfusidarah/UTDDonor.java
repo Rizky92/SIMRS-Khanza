@@ -240,14 +240,14 @@ public final class UTDDonor extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppTampilkanBHPMedis = new widget.JMenuItem();
-        ppTampilkanBHPPenunjang = new widget.JMenuItem();
-        ppTampilkanBHPPenunjangDanMedis = new widget.JMenuItem();
-        ppUbah = new widget.JMenuItem();
-        ppHapusBHPMedis = new widget.JMenuItem();
-        ppHapusBHPNonMedis = new widget.JMenuItem();
-        ppHapusBHPMedisDanNonMedis = new widget.JMenuItem();
-        ppCekal = new widget.JMenuItem();
+        ppTampilkanBHPMedis = new widget.MenuItem();
+        ppTampilkanBHPPenunjang = new widget.MenuItem();
+        ppTampilkanBHPPenunjangDanMedis = new widget.MenuItem();
+        ppUbah = new widget.MenuItem();
+        ppHapusBHPMedis = new widget.MenuItem();
+        ppHapusBHPNonMedis = new widget.MenuItem();
+        ppHapusBHPMedisDanNonMedis = new widget.MenuItem();
+        ppCekal = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         TabRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
@@ -2552,14 +2552,14 @@ public final class UTDDonor extends javax.swing.JDialog {
     private widget.panelisi panelisi5;
     private widget.panelisi panelisi6;
     private widget.panelisi panelisi7;
-    private widget.JMenuItem ppCekal;
-    private widget.JMenuItem ppHapusBHPMedis;
-    private widget.JMenuItem ppHapusBHPMedisDanNonMedis;
-    private widget.JMenuItem ppHapusBHPNonMedis;
-    private widget.JMenuItem ppTampilkanBHPMedis;
-    private widget.JMenuItem ppTampilkanBHPPenunjang;
-    private widget.JMenuItem ppTampilkanBHPPenunjangDanMedis;
-    private widget.JMenuItem ppUbah;
+    private widget.MenuItem ppCekal;
+    private widget.MenuItem ppHapusBHPMedis;
+    private widget.MenuItem ppHapusBHPMedisDanNonMedis;
+    private widget.MenuItem ppHapusBHPNonMedis;
+    private widget.MenuItem ppTampilkanBHPMedis;
+    private widget.MenuItem ppTampilkanBHPPenunjang;
+    private widget.MenuItem ppTampilkanBHPPenunjangDanMedis;
+    private widget.MenuItem ppUbah;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbMedis;
     private widget.Table tbNonMedis;

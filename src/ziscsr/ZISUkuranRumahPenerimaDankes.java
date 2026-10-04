@@ -121,9 +121,9 @@ public final class ZISUkuranRumahPenerimaDankes extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppSimpan = new widget.JMenuItem();
-        ppGanti = new widget.JMenuItem();
-        ppHapus = new widget.JMenuItem();
+        ppSimpan = new widget.MenuItem();
+        ppGanti = new widget.MenuItem();
+        ppHapus = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -631,9 +631,9 @@ public final class ZISUkuranRumahPenerimaDankes extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private widget.JMenuItem ppGanti;
-    private widget.JMenuItem ppHapus;
-    private widget.JMenuItem ppSimpan;
+    private widget.MenuItem ppGanti;
+    private widget.MenuItem ppHapus;
+    private widget.MenuItem ppSimpan;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

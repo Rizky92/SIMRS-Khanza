@@ -200,9 +200,9 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppPilihSemua = new widget.JMenuItem();
-        ppPilihBelumDikirim = new widget.JMenuItem();
-        ppBersihkan = new widget.JMenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppPilihBelumDikirim = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -955,9 +955,9 @@ public final class SatuSehatKirimDiagnosticReportLabPK extends javax.swing.JDial
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppPilihBelumDikirim;
-    private widget.JMenuItem ppPilihSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPilihBelumDikirim;
+    private widget.MenuItem ppPilihSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     private void tampil() {

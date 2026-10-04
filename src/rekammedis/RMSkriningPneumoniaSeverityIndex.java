@@ -242,7 +242,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSkriningPSI = new widget.JMenuItem();
+        MnSkriningPSI = new widget.MenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         LoadHTML = new widget.editorpane();
         TanggalRegistrasi = new widget.TextBox();
@@ -2299,7 +2299,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.ComboBox Menit;
-    private widget.JMenuItem MnSkriningPSI;
+    private widget.MenuItem MnSkriningPSI;
     private widget.TextBox Mortalitas;
     private widget.ComboBox Nadi;
     private widget.ComboBox Natrium;

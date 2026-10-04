@@ -176,13 +176,13 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppGrafikBatangKejadianIKPPerDampak = new widget.JMenuItem();
-        ppGrafikPieKejadianIKPPerDampak = new widget.JMenuItem();
-        ppGrafikBatangKejadianIKPPerJenis = new widget.JMenuItem();
-        ppGrafikPieKejadianIKPPerJenis = new widget.JMenuItem();
-        ppGrafikBatangKejadianIKPPerTanggal = new widget.JMenuItem();
-        ppGrafikBatangKejadianIKPPerbulan = new widget.JMenuItem();
-        ppGrafikBatangKejadianIKPPerTahun = new widget.JMenuItem();
+        ppGrafikBatangKejadianIKPPerDampak = new widget.MenuItem();
+        ppGrafikPieKejadianIKPPerDampak = new widget.MenuItem();
+        ppGrafikBatangKejadianIKPPerJenis = new widget.MenuItem();
+        ppGrafikPieKejadianIKPPerJenis = new widget.MenuItem();
+        ppGrafikBatangKejadianIKPPerTanggal = new widget.MenuItem();
+        ppGrafikBatangKejadianIKPPerbulan = new widget.MenuItem();
+        ppGrafikBatangKejadianIKPPerTahun = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1679,13 +1679,13 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.JMenuItem ppGrafikBatangKejadianIKPPerDampak;
-    private widget.JMenuItem ppGrafikBatangKejadianIKPPerJenis;
-    private widget.JMenuItem ppGrafikBatangKejadianIKPPerTahun;
-    private widget.JMenuItem ppGrafikBatangKejadianIKPPerTanggal;
-    private widget.JMenuItem ppGrafikBatangKejadianIKPPerbulan;
-    private widget.JMenuItem ppGrafikPieKejadianIKPPerDampak;
-    private widget.JMenuItem ppGrafikPieKejadianIKPPerJenis;
+    private widget.MenuItem ppGrafikBatangKejadianIKPPerDampak;
+    private widget.MenuItem ppGrafikBatangKejadianIKPPerJenis;
+    private widget.MenuItem ppGrafikBatangKejadianIKPPerTahun;
+    private widget.MenuItem ppGrafikBatangKejadianIKPPerTanggal;
+    private widget.MenuItem ppGrafikBatangKejadianIKPPerbulan;
+    private widget.MenuItem ppGrafikPieKejadianIKPPerDampak;
+    private widget.MenuItem ppGrafikPieKejadianIKPPerJenis;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 

@@ -281,9 +281,9 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppSemua = new widget.JMenuItem();
-        ppCSVWARocket = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppSemua = new widget.MenuItem();
+        ppCSVWARocket = new widget.MenuItem();
         jLabel10 = new widget.Label();
         TanggalBooking = new widget.Tanggal();
         internalFrame1 = new widget.InternalFrame();
@@ -1705,9 +1705,9 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     private widget.panelisi panelCari;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppCSVWARocket;
-    private widget.JMenuItem ppSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppCSVWARocket;
+    private widget.MenuItem ppSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 

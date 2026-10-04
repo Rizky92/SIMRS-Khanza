@@ -152,7 +152,7 @@ public final class DlgPiutangRanap extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnBilling = new widget.JMenuItem();
+        MnBilling = new widget.MenuItem();
         kdpenjab = new widget.TextBox();
         KdKamar = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -690,7 +690,7 @@ public final class DlgPiutangRanap extends javax.swing.JDialog {
     private widget.TextBox KdKamar;
     private javax.swing.JLabel LCount;
     private widget.Label LCount2;
-    private widget.JMenuItem MnBilling;
+    private widget.MenuItem MnBilling;
     private widget.TextBox NmKamar;
     private widget.ScrollPane Scroll;
     private widget.ComboBox StatusLunas;

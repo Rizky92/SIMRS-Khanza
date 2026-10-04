@@ -158,9 +158,9 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppPilih = new widget.JMenuItem();
-        ppBersihkan = new widget.JMenuItem();
-        ppPengajuanPasienBaru = new widget.JMenuItem();
+        ppPilih = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppPengajuanPasienBaru = new widget.MenuItem();
         TNoReg = new widget.TextBox();
         TNoRw = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1155,9 +1155,9 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
     private widget.Label label18;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppPengajuanPasienBaru;
-    private widget.JMenuItem ppPilih;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPengajuanPasienBaru;
+    private widget.MenuItem ppPilih;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

@@ -134,8 +134,8 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppPilihSemua = new widget.JMenuItem();
-        ppBersihkan = new widget.JMenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJnsPerawatan = new widget.Table();
@@ -685,8 +685,8 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppPilihSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPilihSemua;
     private widget.Table tbJnsPerawatan;
     // End of variables declaration//GEN-END:variables
 

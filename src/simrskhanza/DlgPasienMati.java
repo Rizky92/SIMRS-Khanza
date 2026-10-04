@@ -139,9 +139,9 @@ public class DlgPasienMati extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakSuratMati = new widget.JMenuItem();
-        MnCetakSuratMati1 = new widget.JMenuItem();
-        MnAngkutJenazah = new widget.JMenuItem();
+        MnCetakSuratMati = new widget.MenuItem();
+        MnCetakSuratMati1 = new widget.MenuItem();
+        MnAngkutJenazah = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbMati = new widget.Table();
@@ -1153,9 +1153,9 @@ public class DlgPasienMati extends javax.swing.JDialog {
     private widget.panelisi FormInput;
     private widget.TextBox KdDokter;
     private widget.Label LCount;
-    private widget.JMenuItem MnAngkutJenazah;
-    private widget.JMenuItem MnCetakSuratMati;
-    private widget.JMenuItem MnCetakSuratMati1;
+    private widget.MenuItem MnAngkutJenazah;
+    private widget.MenuItem MnCetakSuratMati;
+    private widget.MenuItem MnCetakSuratMati1;
     private widget.TextBox NmDokter;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

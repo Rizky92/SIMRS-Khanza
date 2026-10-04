@@ -88,11 +88,11 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppRegistrasiPasienBaru = new widget.JMenuItem();
-        ppRegistrasiPasienLama = new widget.JMenuItem();
-        ppRegistrasiPasienBaru1 = new widget.JMenuItem();
-        ppRegistrasiPasienLama1 = new widget.JMenuItem();
-        ppRegistrasiPasienNonBatal = new widget.JMenuItem();
+        ppRegistrasiPasienBaru = new widget.MenuItem();
+        ppRegistrasiPasienLama = new widget.MenuItem();
+        ppRegistrasiPasienBaru1 = new widget.MenuItem();
+        ppRegistrasiPasienLama1 = new widget.MenuItem();
+        ppRegistrasiPasienNonBatal = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJadwal = new widget.Table();
@@ -602,11 +602,11 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label11;
     private widget.panelisi panelGlass8;
-    private widget.JMenuItem ppRegistrasiPasienBaru;
-    private widget.JMenuItem ppRegistrasiPasienBaru1;
-    private widget.JMenuItem ppRegistrasiPasienLama;
-    private widget.JMenuItem ppRegistrasiPasienLama1;
-    private widget.JMenuItem ppRegistrasiPasienNonBatal;
+    private widget.MenuItem ppRegistrasiPasienBaru;
+    private widget.MenuItem ppRegistrasiPasienBaru1;
+    private widget.MenuItem ppRegistrasiPasienLama;
+    private widget.MenuItem ppRegistrasiPasienLama1;
+    private widget.MenuItem ppRegistrasiPasienNonBatal;
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 

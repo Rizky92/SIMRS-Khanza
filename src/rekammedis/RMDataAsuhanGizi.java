@@ -231,7 +231,7 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnAsuhanGizi = new widget.JMenuItem();
+        MnAsuhanGizi = new widget.MenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
@@ -1922,7 +1922,7 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.TextBox LiLA;
     private widget.TextBox LiLAPerU;
-    private widget.JMenuItem MnAsuhanGizi;
+    private widget.MenuItem MnAsuhanGizi;
     private widget.TextArea Monitoring;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;

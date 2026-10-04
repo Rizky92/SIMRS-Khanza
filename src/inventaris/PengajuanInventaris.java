@@ -172,9 +172,9 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppProses = new widget.JMenuItem();
-        ppDosetujui = new widget.JMenuItem();
-        ppDitolak = new widget.JMenuItem();
+        ppProses = new widget.MenuItem();
+        ppDosetujui = new widget.MenuItem();
+        ppDitolak = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1436,9 +1436,9 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.JMenuItem ppDitolak;
-    private widget.JMenuItem ppDosetujui;
-    private widget.JMenuItem ppProses;
+    private widget.MenuItem ppDitolak;
+    private widget.MenuItem ppDosetujui;
+    private widget.MenuItem ppProses;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbObat;

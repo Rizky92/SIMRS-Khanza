@@ -163,8 +163,8 @@ public final class RMMonitoringAldrettePascaAnestesi extends javax.swing.JDialog
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnMonitoringSkorAldrette = new widget.JMenuItem();
-        MnMonitoringSkorAldrette2 = new widget.JMenuItem();
+        MnMonitoringSkorAldrette = new widget.MenuItem();
+        MnMonitoringSkorAldrette2 = new widget.MenuItem();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1613,8 +1613,8 @@ public final class RMMonitoringAldrettePascaAnestesi extends javax.swing.JDialog
     private widget.TextArea Keluar;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private widget.JMenuItem MnMonitoringSkorAldrette;
-    private widget.JMenuItem MnMonitoringSkorAldrette2;
+    private widget.MenuItem MnMonitoringSkorAldrette;
+    private widget.MenuItem MnMonitoringSkorAldrette2;
     private widget.TextBox NilaKriteria1;
     private widget.TextBox NilaKriteria2;
     private widget.TextBox NilaKriteria3;

@@ -162,7 +162,7 @@ public final class RMDataCatatanObservasiRanapKebidanan extends javax.swing.JDia
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCatatanObservasiRanapKebidanan = new widget.JMenuItem();
+        MnCatatanObservasiRanapKebidanan = new widget.MenuItem();
         JK = new widget.TextBox();
         Umur = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1326,7 +1326,7 @@ public final class RMDataCatatanObservasiRanapKebidanan extends javax.swing.JDia
     private widget.TextBox Kontraksi;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private widget.JMenuItem MnCatatanObservasiRanapKebidanan;
+    private widget.MenuItem MnCatatanObservasiRanapKebidanan;
     private widget.TextBox NmPetugas;
     private widget.TextBox PPV;
     private javax.swing.JPanel PanelInput;

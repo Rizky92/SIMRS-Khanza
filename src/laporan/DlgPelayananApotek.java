@@ -118,8 +118,8 @@ public final class DlgPelayananApotek extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnResepRacikan = new widget.JMenuItem();
-        MnResepNonRacikan = new widget.JMenuItem();
+        MnResepRacikan = new widget.MenuItem();
+        MnResepNonRacikan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -517,8 +517,8 @@ public final class DlgPelayananApotek extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
-    private widget.JMenuItem MnResepNonRacikan;
-    private widget.JMenuItem MnResepRacikan;
+    private widget.MenuItem MnResepNonRacikan;
+    private widget.MenuItem MnResepRacikan;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TKd;

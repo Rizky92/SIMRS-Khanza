@@ -114,8 +114,8 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppStok = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppStok = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -765,8 +765,8 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
     private widget.Label label40;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppStok;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppStok;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

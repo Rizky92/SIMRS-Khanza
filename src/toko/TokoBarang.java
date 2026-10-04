@@ -139,7 +139,7 @@ public final class TokoBarang extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        MnRestore = new widget.JMenuItem();
+        MnRestore = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJnsPerawatan = new widget.Table();
@@ -1151,7 +1151,7 @@ public final class TokoBarang extends javax.swing.JDialog {
     private widget.CekBox ChkInput;
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
-    private widget.JMenuItem MnRestore;
+    private widget.MenuItem MnRestore;
     private javax.swing.JPanel PanelInput;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;

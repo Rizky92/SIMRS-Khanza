@@ -122,9 +122,9 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakLembarSkrining = new widget.JMenuItem();
-        MnEvaluasiFormA = new widget.JMenuItem();
-        MnEvaluasiFormB = new widget.JMenuItem();
+        MnCetakLembarSkrining = new widget.MenuItem();
+        MnEvaluasiFormA = new widget.MenuItem();
+        MnEvaluasiFormB = new widget.MenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
@@ -1619,9 +1619,9 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     private widget.TextBox JK;
     private widget.TextBox KdPetugas;
     private widget.Label LCount;
-    private widget.JMenuItem MnCetakLembarSkrining;
-    private widget.JMenuItem MnEvaluasiFormA;
-    private widget.JMenuItem MnEvaluasiFormB;
+    private widget.MenuItem MnCetakLembarSkrining;
+    private widget.MenuItem MnEvaluasiFormA;
+    private widget.MenuItem MnEvaluasiFormB;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.RadioButton Param10Tidak;

@@ -154,8 +154,8 @@ public final class RMMonitoringStewardPascaAnestesi extends javax.swing.JDialog 
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnMonitoringStewardScore = new widget.JMenuItem();
-        MnMonitoringStewardScore2 = new widget.JMenuItem();
+        MnMonitoringStewardScore = new widget.MenuItem();
+        MnMonitoringStewardScore2 = new widget.MenuItem();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1479,8 +1479,8 @@ public final class RMMonitoringStewardPascaAnestesi extends javax.swing.JDialog 
     private widget.TextArea Keluar;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private widget.JMenuItem MnMonitoringStewardScore;
-    private widget.JMenuItem MnMonitoringStewardScore2;
+    private widget.MenuItem MnMonitoringStewardScore;
+    private widget.MenuItem MnMonitoringStewardScore2;
     private widget.TextBox NilaiKriteria1;
     private widget.TextBox NilaiKriteria2;
     private widget.TextBox NilaiKriteria3;

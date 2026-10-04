@@ -142,8 +142,8 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppStok1 = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppStok1 = new widget.MenuItem();
         DlgCetak = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
         panelBiasa4 = new widget.PanelBiasa();
@@ -1495,8 +1495,8 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     private widget.PanelBiasa panelBiasa4;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppStok1;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppStok1;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     private widget.TextBox tppn;

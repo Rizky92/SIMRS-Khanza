@@ -127,8 +127,8 @@ public class TokoCariPenjualan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppCetakNota = new widget.JMenuItem();
-        ppHapus = new widget.JMenuItem();
+        ppCetakNota = new widget.MenuItem();
+        ppHapus = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
         panelisi4 = new widget.panelisi();
@@ -1178,8 +1178,8 @@ public class TokoCariPenjualan extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private widget.JMenuItem ppCetakNota;
-    private widget.JMenuItem ppHapus;
+    private widget.MenuItem ppCetakNota;
+    private widget.MenuItem ppHapus;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

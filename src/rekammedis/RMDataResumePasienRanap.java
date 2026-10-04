@@ -279,11 +279,11 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnLaporanResume = new widget.JMenuItem();
-        MnLaporanResumeESign = new widget.JMenuItem();
-        MnLaporanResumeSertisign = new widget.JMenuItem();
-        MnInputDiagnosa = new widget.JMenuItem();
-        ppBerkasDigital = new widget.JMenuItem();
+        MnLaporanResume = new widget.MenuItem();
+        MnLaporanResumeESign = new widget.MenuItem();
+        MnLaporanResumeSertisign = new widget.MenuItem();
+        MnInputDiagnosa = new widget.MenuItem();
+        ppBerkasDigital = new widget.MenuItem();
         WindowURLSertisign = new javax.swing.JDialog();
         internalFrame9 = new widget.InternalFrame();
         jLabel43 = new widget.Label();
@@ -3148,10 +3148,10 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.TextArea LabBelum;
     private widget.TextBox Masuk;
-    private widget.JMenuItem MnInputDiagnosa;
-    private widget.JMenuItem MnLaporanResume;
-    private widget.JMenuItem MnLaporanResumeESign;
-    private widget.JMenuItem MnLaporanResumeSertisign;
+    private widget.MenuItem MnInputDiagnosa;
+    private widget.MenuItem MnLaporanResume;
+    private widget.MenuItem MnLaporanResumeESign;
+    private widget.MenuItem MnLaporanResumeSertisign;
     private widget.TextBox NamaDokterPengirim;
     private widget.TextBox NmDokter;
     private widget.TextBox NmRuang;
@@ -3229,7 +3229,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.panelisi panelisi5;
     private widget.panelisi panelisi6;
-    private widget.JMenuItem ppBerkasDigital;
+    private widget.MenuItem ppBerkasDigital;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane10;
     private widget.ScrollPane scrollPane11;

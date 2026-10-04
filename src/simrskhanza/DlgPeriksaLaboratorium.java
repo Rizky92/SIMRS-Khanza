@@ -272,8 +272,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         Alamat = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppSemua = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppSemua = new widget.MenuItem();
         WindowExpandIsiHasil = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
         panelBiasa1 = new widget.PanelBiasa();
@@ -1669,8 +1669,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private widget.PanelBiasa panelBiasa1;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppSemua;
     private widget.RadioButton rbAnak;
     private widget.RadioButton rbDewasa;
     private widget.ScrollPane scrollPane1;

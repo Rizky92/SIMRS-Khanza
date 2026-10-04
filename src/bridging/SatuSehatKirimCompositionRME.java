@@ -406,8 +406,8 @@ public final class SatuSehatKirimCompositionRME extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppPilihSemua = new widget.JMenuItem();
-        ppBersihkan = new widget.JMenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
@@ -1276,8 +1276,8 @@ KirimTriaseIGDSekunder();
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppPilihSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPilihSemua;
     private widget.Table tbAwalKeperawatanIGD;
     private widget.Table tbBB;
     private widget.Table tbGCS;

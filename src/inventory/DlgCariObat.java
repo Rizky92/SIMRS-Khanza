@@ -469,9 +469,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppStok = new widget.JMenuItem();
-        ppStok1 = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppStok = new widget.MenuItem();
+        ppStok1 = new widget.MenuItem();
         Kd2 = new widget.TextBox();
         TNoRw = new widget.TextBox();
         Tanggal = new widget.TextBox();
@@ -2332,9 +2332,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.TextBox nmgudang;
     private widget.panelisi panelisi3;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppStok;
-    private widget.JMenuItem ppStok1;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppStok;
+    private widget.MenuItem ppStok1;
     private widget.Table tbDetailObatRacikan;
     private widget.Table tbObat;
     private widget.Table tbObatRacikan;

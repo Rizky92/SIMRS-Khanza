@@ -129,9 +129,9 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnLabelDiet = new widget.JMenuItem();
-        MnLabelDiet1 = new widget.JMenuItem();
-        MnSisaDietPasien = new widget.JMenuItem();
+        MnLabelDiet = new widget.MenuItem();
+        MnLabelDiet1 = new widget.MenuItem();
+        MnSisaDietPasien = new widget.MenuItem();
         Ruang = new widget.TextBox();
         Diagnosa = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1306,9 +1306,9 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
     private widget.TextBox Kamar;
     private widget.TextBox KdDiet;
     private widget.Label LCount;
-    private widget.JMenuItem MnLabelDiet;
-    private widget.JMenuItem MnLabelDiet1;
-    private widget.JMenuItem MnSisaDietPasien;
+    private widget.MenuItem MnLabelDiet;
+    private widget.MenuItem MnLabelDiet1;
+    private widget.MenuItem MnSisaDietPasien;
     private widget.TextBox NmBangsalCari;
     private widget.TextBox NmDiet;
     private javax.swing.JPanel PanelInput;

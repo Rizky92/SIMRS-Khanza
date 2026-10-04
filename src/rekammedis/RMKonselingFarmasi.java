@@ -147,7 +147,7 @@ public final class RMKonselingFarmasi extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnKonselingFarmasi = new widget.JMenuItem();
+        MnKonselingFarmasi = new widget.MenuItem();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1227,7 +1227,7 @@ public final class RMKonselingFarmasi extends javax.swing.JDialog {
     private widget.TextArea Keluhan;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private widget.JMenuItem MnKonselingFarmasi;
+    private widget.MenuItem MnKonselingFarmasi;
     private widget.TextBox NmPetugas;
     private widget.TextArea ObatPemakaian;
     private javax.swing.JPanel PanelInput;

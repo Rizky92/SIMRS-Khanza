@@ -462,7 +462,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCopyRekening = new widget.JMenuItem();
+        MnCopyRekening = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -1225,7 +1225,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
-    private widget.JMenuItem MnCopyRekening;
+    private widget.MenuItem MnCopyRekening;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;

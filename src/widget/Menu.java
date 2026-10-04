@@ -8,6 +8,6 @@ package widget;
  *
  * @author ASUS
  */
-public class JMenuItem extends widget.JMenuItem {
+public class Menu extends widget.Menu {
     
 }

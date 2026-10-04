@@ -14,7 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.BorderFactory;
-import widget.JMenu;
+import widget.Menu;
 import javax.swing.JMenuBar;
 import javax.swing.event.ChangeListener;
 

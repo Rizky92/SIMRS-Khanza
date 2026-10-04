@@ -122,11 +122,11 @@ public final class SuratSakit extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakSuratSakit = new widget.JMenuItem();
-        MnCetakSuratSakit1 = new widget.JMenuItem();
-        MnCetakSuratSakit4 = new widget.JMenuItem();
-        MnCetakSuratSakit5 = new widget.JMenuItem();
-        MnCetakSuratSakit2 = new widget.JMenuItem();
+        MnCetakSuratSakit = new widget.MenuItem();
+        MnCetakSuratSakit1 = new widget.MenuItem();
+        MnCetakSuratSakit4 = new widget.MenuItem();
+        MnCetakSuratSakit5 = new widget.MenuItem();
+        MnCetakSuratSakit2 = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1218,11 +1218,11 @@ public final class SuratSakit extends javax.swing.JDialog {
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
     private widget.TextBox LamaSakit;
-    private widget.JMenuItem MnCetakSuratSakit;
-    private widget.JMenuItem MnCetakSuratSakit1;
-    private widget.JMenuItem MnCetakSuratSakit2;
-    private widget.JMenuItem MnCetakSuratSakit4;
-    private widget.JMenuItem MnCetakSuratSakit5;
+    private widget.MenuItem MnCetakSuratSakit;
+    private widget.MenuItem MnCetakSuratSakit1;
+    private widget.MenuItem MnCetakSuratSakit2;
+    private widget.MenuItem MnCetakSuratSakit4;
+    private widget.MenuItem MnCetakSuratSakit5;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

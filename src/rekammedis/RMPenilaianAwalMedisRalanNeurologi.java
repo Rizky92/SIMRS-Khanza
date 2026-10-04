@@ -229,7 +229,7 @@ public final class RMPenilaianAwalMedisRalanNeurologi extends javax.swing.JDialo
 
         LoadHTML = new widget.editorpane();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianMedis = new widget.JMenuItem();
+        MnPenilaianMedis = new widget.MenuItem();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
@@ -2099,7 +2099,7 @@ public final class RMPenilaianAwalMedisRalanNeurologi extends javax.swing.JDialo
     private widget.TextArea Lab;
     private widget.TextArea Lainnya;
     private widget.editorpane LoadHTML;
-    private widget.JMenuItem MnPenilaianMedis;
+    private widget.MenuItem MnPenilaianMedis;
     private widget.ComboBox Muskulos;
     private widget.TextBox Nadi;
     private widget.TextBox NmDokter;

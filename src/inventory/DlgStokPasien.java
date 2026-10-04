@@ -176,11 +176,11 @@ public final class DlgStokPasien extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppResepObat = new widget.JMenuItem();
-        ppResepObat1 = new widget.JMenuItem();
-        ppResepObat2 = new widget.JMenuItem();
-        ppLabelObat = new widget.JMenuItem();
-        ppLabelObat2 = new widget.JMenuItem();
+        ppResepObat = new widget.MenuItem();
+        ppResepObat1 = new widget.MenuItem();
+        ppResepObat2 = new widget.MenuItem();
+        ppLabelObat = new widget.MenuItem();
+        ppLabelObat2 = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -1988,11 +1988,11 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private widget.JMenuItem ppLabelObat;
-    private widget.JMenuItem ppLabelObat2;
-    private widget.JMenuItem ppResepObat;
-    private widget.JMenuItem ppResepObat1;
-    private widget.JMenuItem ppResepObat2;
+    private widget.MenuItem ppLabelObat;
+    private widget.MenuItem ppLabelObat2;
+    private widget.MenuItem ppResepObat;
+    private widget.MenuItem ppResepObat1;
+    private widget.MenuItem ppResepObat2;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

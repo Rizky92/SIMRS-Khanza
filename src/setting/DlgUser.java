@@ -3771,8 +3771,8 @@ public class DlgUser extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCopyHakAkses = new widget.JMenuItem();
-        MnSetUser = new widget.JMenuItem();
+        MnCopyHakAkses = new widget.MenuItem();
+        MnSetUser = new widget.MenuItem();
         Jabatan = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -7061,8 +7061,8 @@ public class DlgUser extends javax.swing.JDialog {
     private widget.Button BtnSimpan;
     private widget.TextBox Jabatan;
     private widget.Label LCount;
-    private widget.JMenuItem MnCopyHakAkses;
-    private widget.JMenuItem MnSetUser;
+    private widget.MenuItem MnCopyHakAkses;
+    private widget.MenuItem MnSetUser;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TKd;

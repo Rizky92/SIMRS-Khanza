@@ -499,12 +499,12 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         TPoli = new widget.TextBox();
         TBiaya = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDocument = new widget.JMenuItem();
-        ppPengajuan = new widget.JMenuItem();
-        ppPengajuan1 = new widget.JMenuItem();
-        ppPengajuan2 = new widget.JMenuItem();
-        ppPengajuan3 = new widget.JMenuItem();
-        ppStatusFinger = new widget.JMenuItem();
+        MnDocument = new widget.MenuItem();
+        ppPengajuan = new widget.MenuItem();
+        ppPengajuan1 = new widget.MenuItem();
+        ppPengajuan2 = new widget.MenuItem();
+        ppPengajuan3 = new widget.MenuItem();
+        ppStatusFinger = new widget.MenuItem();
         NoBalasan = new widget.TextBox();
         kdsuku = new widget.TextBox();
         kdbahasa = new widget.TextBox();
@@ -6210,7 +6210,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     private widget.Label LabelSatuanPolri;
     private widget.Label LabelSatuanTNI;
     private widget.ComboBox LakaLantas;
-    private widget.JMenuItem MnDocument;
+    private widget.MenuItem MnDocument;
     private widget.TextBox NIP;
     private widget.ComboBox NaikKelas;
     private widget.TextBox NmDPJP;
@@ -6357,11 +6357,11 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     private widget.TextBox nmsukubangsa;
     private widget.panelisi panelCari;
     private widget.panelisi panelGlass6;
-    private widget.JMenuItem ppPengajuan;
-    private widget.JMenuItem ppPengajuan1;
-    private widget.JMenuItem ppPengajuan2;
-    private widget.JMenuItem ppPengajuan3;
-    private widget.JMenuItem ppStatusFinger;
+    private widget.MenuItem ppPengajuan;
+    private widget.MenuItem ppPengajuan1;
+    private widget.MenuItem ppPengajuan2;
+    private widget.MenuItem ppPengajuan3;
+    private widget.MenuItem ppStatusFinger;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables

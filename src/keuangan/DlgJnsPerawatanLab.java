@@ -139,9 +139,9 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppTemplate = new widget.JMenuItem();
-        ppCopyTemplate = new widget.JMenuItem();
-        MnRestore = new widget.JMenuItem();
+        ppTemplate = new widget.MenuItem();
+        ppCopyTemplate = new widget.MenuItem();
+        MnRestore = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJnsPerawatan = new widget.Table();
@@ -1267,7 +1267,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     private widget.ComboBox Kelas;
     private widget.Label LCount;
     private widget.TextBox Menejemen;
-    private widget.JMenuItem MnRestore;
+    private widget.MenuItem MnRestore;
     private javax.swing.JPanel PanelInput;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
@@ -1297,8 +1297,8 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     private widget.TextBox nmpnj;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.JMenuItem ppCopyTemplate;
-    private widget.JMenuItem ppTemplate;
+    private widget.MenuItem ppCopyTemplate;
+    private widget.MenuItem ppTemplate;
     private widget.Table tbJnsPerawatan;
     // End of variables declaration//GEN-END:variables
 

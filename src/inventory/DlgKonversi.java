@@ -104,9 +104,9 @@ public final class DlgKonversi extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppSimpan = new widget.JMenuItem();
-        ppHapus = new widget.JMenuItem();
-        ppCetak = new widget.JMenuItem();
+        ppSimpan = new widget.MenuItem();
+        ppHapus = new widget.MenuItem();
+        ppCetak = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -739,9 +739,9 @@ public final class DlgKonversi extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private widget.JMenuItem ppCetak;
-    private widget.JMenuItem ppHapus;
-    private widget.JMenuItem ppSimpan;
+    private widget.MenuItem ppCetak;
+    private widget.MenuItem ppHapus;
+    private widget.MenuItem ppSimpan;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

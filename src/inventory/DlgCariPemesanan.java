@@ -161,9 +161,9 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppHapus = new widget.JMenuItem();
-        ppBayar = new widget.JMenuItem();
-        ppUbah = new widget.JMenuItem();
+        ppHapus = new widget.MenuItem();
+        ppBayar = new widget.MenuItem();
+        ppUbah = new widget.MenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
@@ -1598,9 +1598,9 @@ public class DlgCariPemesanan extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private widget.JMenuItem ppBayar;
-    private widget.JMenuItem ppHapus;
-    private widget.JMenuItem ppUbah;
+    private widget.MenuItem ppBayar;
+    private widget.MenuItem ppHapus;
+    private widget.MenuItem ppUbah;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

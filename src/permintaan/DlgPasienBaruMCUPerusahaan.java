@@ -176,8 +176,8 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppPilih = new widget.JMenuItem();
-        ppBersihkan = new widget.JMenuItem();
+        ppPilih = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         DTPDaftar = new widget.Tanggal();
         NoRm = new widget.TextBox();
         TNo = new widget.TextBox();
@@ -710,8 +710,8 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     private widget.Label jLabel7;
     private widget.Label label10;
     private widget.panelisi panelisi1;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppPilih;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPilih;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

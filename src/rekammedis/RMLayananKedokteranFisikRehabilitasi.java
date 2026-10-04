@@ -180,8 +180,8 @@ public final class RMLayananKedokteranFisikRehabilitasi extends javax.swing.JDia
 
         LoadHTML = new widget.editorpane();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnLayananRehab = new widget.JMenuItem();
-        MnLayananProgramKFR = new widget.JMenuItem();
+        MnLayananRehab = new widget.MenuItem();
+        MnLayananProgramKFR = new widget.MenuItem();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
@@ -1652,8 +1652,8 @@ public final class RMLayananKedokteranFisikRehabilitasi extends javax.swing.JDia
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.editorpane LoadHTML2;
-    private widget.JMenuItem MnLayananProgramKFR;
-    private widget.JMenuItem MnLayananRehab;
+    private widget.MenuItem MnLayananProgramKFR;
+    private widget.MenuItem MnLayananRehab;
     private widget.TextBox NmDokter;
     private widget.PanelBiasa PanelAccor;
     private widget.TextArea PemeriksaanFisik;

@@ -159,12 +159,12 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDetailPiutang = new widget.JMenuItem();
-        ppPilihSemua = new widget.JMenuItem();
-        ppBersihkan = new widget.JMenuItem();
-        ppKapitasiPaket = new widget.JMenuItem();
-        ppUmbal = new widget.JMenuItem();
-        ppUmbalAsuransi = new widget.JMenuItem();
+        MnDetailPiutang = new widget.MenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppKapitasiPaket = new widget.MenuItem();
+        ppUmbal = new widget.MenuItem();
+        ppUmbalAsuransi = new widget.MenuItem();
         WindowHitungPaket = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         jLabel42 = new widget.Label();
@@ -1653,7 +1653,7 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
     private javax.swing.JLabel LCount;
     private javax.swing.JLabel LCount1;
     private widget.TextBox LebihBayarPiutang;
-    private widget.JMenuItem MnDetailPiutang;
+    private widget.MenuItem MnDetailPiutang;
     private widget.TextBox NilaiKapitasiPaket;
     private widget.TextBox PersentaseBayarPaket;
     private widget.ComboBox PilihanKekurangan;
@@ -1686,11 +1686,11 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppKapitasiPaket;
-    private widget.JMenuItem ppPilihSemua;
-    private widget.JMenuItem ppUmbal;
-    private widget.JMenuItem ppUmbalAsuransi;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppKapitasiPaket;
+    private widget.MenuItem ppPilihSemua;
+    private widget.MenuItem ppUmbal;
+    private widget.MenuItem ppUmbalAsuransi;
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 

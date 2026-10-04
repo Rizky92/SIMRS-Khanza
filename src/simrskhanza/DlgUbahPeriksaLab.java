@@ -187,8 +187,8 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
         Jk = new widget.TextBox();
         Penjab = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new widget.JMenuItem();
-        ppSemua = new widget.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppSemua = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -1293,8 +1293,8 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     private widget.Label jLabel9;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
-    private widget.JMenuItem ppBersihkan;
-    private widget.JMenuItem ppSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppSemua;
     private widget.RadioButton rbAnak;
     private widget.RadioButton rbDewasa;
     private widget.Table tbPemeriksaan;
