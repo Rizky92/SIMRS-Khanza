@@ -166,8 +166,8 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppTampilkanBaru = new javax.swing.JMenuItem();
-        ppTampilkanLama = new javax.swing.JMenuItem();
+        ppTampilkanBaru = new widget.JMenuItem();
+        ppTampilkanLama = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         TabRawat = new widget.TabPane();
         Scroll = new widget.ScrollPane();
@@ -1280,8 +1280,8 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
     private widget.TextBox nmkelurahan;
     private widget.TextBox nmpenjab;
     private widget.panelisi panelGlass5;
-    private javax.swing.JMenuItem ppTampilkanBaru;
-    private javax.swing.JMenuItem ppTampilkanLama;
+    private widget.JMenuItem ppTampilkanBaru;
+    private widget.JMenuItem ppTampilkanLama;
     private widget.Table tbBangsal;
     private widget.Table tbBangsal2;
     // End of variables declaration//GEN-END:variables

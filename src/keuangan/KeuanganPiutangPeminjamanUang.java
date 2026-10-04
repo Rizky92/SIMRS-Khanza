@@ -157,7 +157,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBayarPiutang = new javax.swing.JMenuItem();
+        ppBayarPiutang = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -1200,7 +1200,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBayarPiutang;
+    private widget.JMenuItem ppBayarPiutang;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

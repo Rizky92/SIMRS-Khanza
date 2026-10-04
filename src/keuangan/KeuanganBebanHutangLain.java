@@ -150,8 +150,8 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBayarBeban = new javax.swing.JMenuItem();
-        ppBelumLunas = new javax.swing.JMenuItem();
+        ppBayarBeban = new widget.JMenuItem();
+        ppBelumLunas = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -1155,8 +1155,8 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBayarBeban;
-    private javax.swing.JMenuItem ppBelumLunas;
+    private widget.JMenuItem ppBayarBeban;
+    private widget.JMenuItem ppBelumLunas;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

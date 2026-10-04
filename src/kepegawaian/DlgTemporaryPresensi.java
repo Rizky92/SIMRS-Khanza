@@ -124,12 +124,12 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup2 = new javax.swing.JPopupMenu();
-        ppVerify = new javax.swing.JMenuItem();
-        ppVerifySemua = new javax.swing.JMenuItem();
-        ppHapusSemua = new javax.swing.JMenuItem();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppBersihkanSemua = new javax.swing.JMenuItem();
-        ppVerifyOtomatis = new javax.swing.JMenuItem();
+        ppVerify = new widget.JMenuItem();
+        ppVerifySemua = new widget.JMenuItem();
+        ppHapusSemua = new widget.JMenuItem();
+        ppPilihSemua = new widget.JMenuItem();
+        ppBersihkanSemua = new widget.JMenuItem();
+        ppVerifyOtomatis = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbTemporary = new widget.Table();
@@ -723,12 +723,12 @@ public final class DlgTemporaryPresensi extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass7;
-    private javax.swing.JMenuItem ppBersihkanSemua;
-    private javax.swing.JMenuItem ppHapusSemua;
-    private javax.swing.JMenuItem ppPilihSemua;
-    private javax.swing.JMenuItem ppVerify;
-    private javax.swing.JMenuItem ppVerifyOtomatis;
-    private javax.swing.JMenuItem ppVerifySemua;
+    private widget.JMenuItem ppBersihkanSemua;
+    private widget.JMenuItem ppHapusSemua;
+    private widget.JMenuItem ppPilihSemua;
+    private widget.JMenuItem ppVerify;
+    private widget.JMenuItem ppVerifyOtomatis;
+    private widget.JMenuItem ppVerifySemua;
     private widget.Table tbTemporary;
     // End of variables declaration//GEN-END:variables
 

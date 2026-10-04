@@ -158,12 +158,12 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppCetakNota = new javax.swing.JMenuItem();
-        ppHapus = new javax.swing.JMenuItem();
-        ppVerif = new javax.swing.JMenuItem();
-        ppResepObat = new javax.swing.JMenuItem();
-        ppResepObat1 = new javax.swing.JMenuItem();
-        ppResepObat2 = new javax.swing.JMenuItem();
+        ppCetakNota = new widget.JMenuItem();
+        ppHapus = new widget.JMenuItem();
+        ppVerif = new widget.JMenuItem();
+        ppResepObat = new widget.JMenuItem();
+        ppResepObat1 = new widget.JMenuItem();
+        ppResepObat2 = new widget.JMenuItem();
         WindowGantiCaraBayar = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
         BtnCloseIn4 = new widget.Button();
@@ -1776,12 +1776,12 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppCetakNota;
-    private javax.swing.JMenuItem ppHapus;
-    private javax.swing.JMenuItem ppResepObat;
-    private javax.swing.JMenuItem ppResepObat1;
-    private javax.swing.JMenuItem ppResepObat2;
-    private javax.swing.JMenuItem ppVerif;
+    private widget.JMenuItem ppCetakNota;
+    private widget.JMenuItem ppHapus;
+    private widget.JMenuItem ppResepObat;
+    private widget.JMenuItem ppResepObat1;
+    private widget.JMenuItem ppResepObat2;
+    private widget.JMenuItem ppVerif;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

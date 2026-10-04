@@ -212,9 +212,9 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppSEP = new javax.swing.JMenuItem();
-        ppPulang = new javax.swing.JMenuItem();
-        ppMapping = new javax.swing.JMenuItem();
+        ppSEP = new widget.JMenuItem();
+        ppPulang = new widget.JMenuItem();
+        ppMapping = new widget.JMenuItem();
         WindowUpdatePulang = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
         BtnCloseIn4 = new widget.Button();
@@ -1896,9 +1896,9 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppMapping;
-    private javax.swing.JMenuItem ppPulang;
-    private javax.swing.JMenuItem ppSEP;
+    private widget.JMenuItem ppMapping;
+    private widget.JMenuItem ppPulang;
+    private widget.JMenuItem ppSEP;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 

@@ -122,11 +122,11 @@ public final class DlgPoli extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppOrder = new javax.swing.JMenu();
-        ppOrderKode = new javax.swing.JMenuItem();
-        ppOrderNama = new javax.swing.JMenuItem();
-        ppOrderKtg = new javax.swing.JMenuItem();
-        MnRestore = new javax.swing.JMenuItem();
+        ppOrder = new widget.JMenu();
+        ppOrderKode = new widget.JMenuItem();
+        ppOrderNama = new widget.JMenuItem();
+        ppOrderKtg = new widget.JMenuItem();
+        MnRestore = new widget.JMenuItem();
         Kd2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -836,7 +836,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     private widget.TextBox Kd;
     private widget.TextBox Kd2;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnRestore;
+    private widget.JMenuItem MnRestore;
     private widget.TextBox Nm;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
@@ -852,10 +852,10 @@ public final class DlgPoli extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenu ppOrder;
-    private javax.swing.JMenuItem ppOrderKode;
-    private javax.swing.JMenuItem ppOrderKtg;
-    private javax.swing.JMenuItem ppOrderNama;
+    private widget.JMenu ppOrder;
+    private widget.JMenuItem ppOrderKode;
+    private widget.JMenuItem ppOrderKtg;
+    private widget.JMenuItem ppOrderNama;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

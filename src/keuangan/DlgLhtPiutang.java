@@ -132,8 +132,8 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDetailPiutang = new javax.swing.JMenuItem();
-        MnDetailCicilan = new javax.swing.JMenuItem();
+        MnDetailPiutang = new widget.JMenuItem();
+        MnDetailCicilan = new widget.JMenuItem();
         kdpenjab = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -774,8 +774,8 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
     private widget.Button BtnSeek2;
     private javax.swing.JLabel LCount;
     private widget.Label LCount2;
-    private javax.swing.JMenuItem MnDetailCicilan;
-    private javax.swing.JMenuItem MnDetailPiutang;
+    private widget.JMenuItem MnDetailCicilan;
+    private widget.JMenuItem MnDetailPiutang;
     private widget.ScrollPane Scroll;
     private widget.ComboBox StatusLunas;
     private widget.TextBox TCari;

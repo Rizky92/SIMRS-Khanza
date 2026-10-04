@@ -146,8 +146,8 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppTampilkanSeleksi = new javax.swing.JMenuItem();
-        ppTampilkanRanapGabung = new javax.swing.JMenuItem();
+        ppTampilkanSeleksi = new widget.JMenuItem();
+        ppTampilkanRanapGabung = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelisi4 = new widget.panelisi();
         label11 = new widget.Label();
@@ -1249,8 +1249,8 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
     private widget.TextBox nmdokter;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppTampilkanRanapGabung;
-    private javax.swing.JMenuItem ppTampilkanSeleksi;
+    private widget.JMenuItem ppTampilkanRanapGabung;
+    private widget.JMenuItem ppTampilkanSeleksi;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane3;
     private widget.ScrollPane scrollPane4;

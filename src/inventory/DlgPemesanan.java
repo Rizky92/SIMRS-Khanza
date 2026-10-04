@@ -169,8 +169,8 @@ public class DlgPemesanan extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppStok1 = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppStok1 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -1510,8 +1510,8 @@ public class DlgPemesanan extends javax.swing.JDialog {
     private widget.TextBox nmsup;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppStok1;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppStok1;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     private widget.TextBox tppn;

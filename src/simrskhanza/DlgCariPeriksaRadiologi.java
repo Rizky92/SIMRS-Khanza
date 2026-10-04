@@ -191,12 +191,12 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakNota = new javax.swing.JMenuItem();
-        MnUbahDokterPetugas = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
-        ppRiwayat = new javax.swing.JMenuItem();
-        ppSudahKeluarBacaan = new javax.swing.JMenuItem();
-        ppBelumKeluarBacaan = new javax.swing.JMenuItem();
+        MnCetakNota = new widget.JMenuItem();
+        MnUbahDokterPetugas = new widget.JMenuItem();
+        ppBerkasDigital = new widget.JMenuItem();
+        ppRiwayat = new widget.JMenuItem();
+        ppSudahKeluarBacaan = new widget.JMenuItem();
+        ppBelumKeluarBacaan = new widget.JMenuItem();
         Penjab = new widget.TextBox();
         Jk = new widget.TextBox();
         Umur = new widget.TextBox();
@@ -2389,8 +2389,8 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     private widget.TextBox KodePerujuk;
     private widget.TextBox KodePj;
     private widget.editorpane LoadHTML;
-    private javax.swing.JMenuItem MnCetakNota;
-    private javax.swing.JMenuItem MnUbahDokterPetugas;
+    private widget.JMenuItem MnCetakNota;
+    private widget.JMenuItem MnUbahDokterPetugas;
     private widget.TextBox NmDokterPj;
     private widget.TextBox NmPerujuk;
     private widget.TextBox NmPtgUbah;
@@ -2449,10 +2449,10 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi8;
-    private javax.swing.JMenuItem ppBelumKeluarBacaan;
-    private javax.swing.JMenuItem ppBerkasDigital;
-    private javax.swing.JMenuItem ppRiwayat;
-    private javax.swing.JMenuItem ppSudahKeluarBacaan;
+    private widget.JMenuItem ppBelumKeluarBacaan;
+    private widget.JMenuItem ppBerkasDigital;
+    private widget.JMenuItem ppRiwayat;
+    private widget.JMenuItem ppSudahKeluarBacaan;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     private widget.Table tbListDicom;

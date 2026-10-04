@@ -180,9 +180,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup2 = new javax.swing.JPopupMenu();
-        ppResepObat = new javax.swing.JMenuItem();
-        ppNoRawat = new javax.swing.JMenuItem();
-        ppLokasi = new javax.swing.JMenuItem();
+        ppResepObat = new widget.JMenuItem();
+        ppNoRawat = new widget.JMenuItem();
+        ppLokasi = new widget.JMenuItem();
         THBeli = new widget.TextBox();
         Tanggal = new widget.Tanggal();
         internalFrame1 = new widget.InternalFrame();
@@ -1366,9 +1366,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator5;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppLokasi;
-    private javax.swing.JMenuItem ppNoRawat;
-    private javax.swing.JMenuItem ppResepObat;
+    private widget.JMenuItem ppLokasi;
+    private widget.JMenuItem ppNoRawat;
+    private widget.JMenuItem ppResepObat;
     private widget.Table tbPemberianObat;
     // End of variables declaration//GEN-END:variables
 

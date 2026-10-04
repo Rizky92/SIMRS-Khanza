@@ -129,14 +129,14 @@ public class DlgCariPiutang extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppCetakNota = new javax.swing.JMenuItem();
-        ppHapus = new javax.swing.JMenuItem();
-        MnDetailCicilan = new javax.swing.JMenuItem();
-        ppResepObat = new javax.swing.JMenuItem();
-        ppResepObat1 = new javax.swing.JMenuItem();
-        ppResepObat2 = new javax.swing.JMenuItem();
-        ppLembarObat = new javax.swing.JMenuItem();
-        ppLembarObat1 = new javax.swing.JMenuItem();
+        ppCetakNota = new widget.JMenuItem();
+        ppHapus = new widget.JMenuItem();
+        MnDetailCicilan = new widget.JMenuItem();
+        ppResepObat = new widget.JMenuItem();
+        ppResepObat1 = new widget.JMenuItem();
+        ppResepObat2 = new widget.JMenuItem();
+        ppLembarObat = new widget.JMenuItem();
+        ppLembarObat1 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -1423,7 +1423,7 @@ public class DlgCariPiutang extends javax.swing.JDialog {
     private widget.Button BtnPetugas;
     private widget.Button BtnPrint;
     private widget.Label LTotal;
-    private javax.swing.JMenuItem MnDetailCicilan;
+    private widget.JMenuItem MnDetailCicilan;
     private widget.TextBox NoNota;
     private widget.TextBox TCari;
     private widget.Tanggal Tgl1;
@@ -1453,13 +1453,13 @@ public class DlgCariPiutang extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppCetakNota;
-    private javax.swing.JMenuItem ppHapus;
-    private javax.swing.JMenuItem ppLembarObat;
-    private javax.swing.JMenuItem ppLembarObat1;
-    private javax.swing.JMenuItem ppResepObat;
-    private javax.swing.JMenuItem ppResepObat1;
-    private javax.swing.JMenuItem ppResepObat2;
+    private widget.JMenuItem ppCetakNota;
+    private widget.JMenuItem ppHapus;
+    private widget.JMenuItem ppLembarObat;
+    private widget.JMenuItem ppLembarObat1;
+    private widget.JMenuItem ppResepObat;
+    private widget.JMenuItem ppResepObat1;
+    private widget.JMenuItem ppResepObat2;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

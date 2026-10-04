@@ -143,8 +143,8 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnMonitoringBromageScore = new javax.swing.JMenuItem();
-        MnMonitoringBromageScore2 = new javax.swing.JMenuItem();
+        MnMonitoringBromageScore = new widget.JMenuItem();
+        MnMonitoringBromageScore2 = new widget.JMenuItem();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1337,8 +1337,8 @@ public final class RMMonitoringBromagePascaAnestesi extends javax.swing.JDialog 
     private widget.TextArea Keluar;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnMonitoringBromageScore;
-    private javax.swing.JMenuItem MnMonitoringBromageScore2;
+    private widget.JMenuItem MnMonitoringBromageScore;
+    private widget.JMenuItem MnMonitoringBromageScore2;
     private widget.TextBox NilaiKriteria;
     private widget.TextBox NmDokter;
     private widget.TextBox NmPetugas;

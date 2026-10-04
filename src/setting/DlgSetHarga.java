@@ -194,11 +194,11 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppUPdate = new javax.swing.JMenuItem();
+        ppUPdate = new widget.JMenuItem();
         Popup1 = new javax.swing.JPopupMenu();
-        ppUPdate1 = new javax.swing.JMenuItem();
+        ppUPdate1 = new widget.JMenuItem();
         Popup2 = new javax.swing.JPopupMenu();
-        ppUPdate2 = new javax.swing.JMenuItem();
+        ppUPdate2 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -2902,9 +2902,9 @@ public class DlgSetHarga extends javax.swing.JDialog {
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
     private widget.panelisi panelisi6;
-    private javax.swing.JMenuItem ppUPdate;
-    private javax.swing.JMenuItem ppUPdate1;
-    private javax.swing.JMenuItem ppUPdate2;
+    private widget.JMenuItem ppUPdate;
+    private widget.JMenuItem ppUPdate1;
+    private widget.JMenuItem ppUPdate2;
     private widget.TextBox ralan;
     private widget.TextBox ralanperbarang;
     private widget.TextBox ralanumum;

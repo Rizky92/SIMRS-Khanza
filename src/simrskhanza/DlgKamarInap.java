@@ -494,222 +494,222 @@ public class DlgKamarInap extends javax.swing.JDialog {
         TOut = new widget.TextBox();
         TIn = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDataRM = new javax.swing.JMenu();
-        MnPenilaianAwal = new javax.swing.JMenu();
-        MnPenilaianAwalKeperawatanRanap = new javax.swing.JMenuItem();
-        MnPenilaianAwalKeperawatanKebidanan = new javax.swing.JMenuItem();
-        MnPenilaianAwalMedisRanap = new javax.swing.JMenuItem();
-        MnPenilaianAwalMedisKandungan = new javax.swing.JMenuItem();
-        MnPenilaianAwalMedisHemodialisa = new javax.swing.JMenuItem();
-        MnPenilaianFisioterapi = new javax.swing.JMenuItem();
-        MnRMOperasi = new javax.swing.JMenu();
-        MnChecklistPreOperasi = new javax.swing.JMenuItem();
-        MnSignInSebelumAnestesi = new javax.swing.JMenuItem();
-        MnTimeOutSebelumInsisi = new javax.swing.JMenuItem();
-        MnSignOutSebelumMenutupLuka = new javax.swing.JMenuItem();
-        MnChecklistPostOperasi = new javax.swing.JMenuItem();
-        MnPenilaianPreOp = new javax.swing.JMenuItem();
-        MnPenilaianPreAnestesi = new javax.swing.JMenuItem();
-        MnRMHCU = new javax.swing.JMenu();
-        MnCheckListKriteriaMasukHCU = new javax.swing.JMenuItem();
-        MnCheckListKriteriaKeluarHCU = new javax.swing.JMenuItem();
-        MnCheckListKriteriaMasukICU = new javax.swing.JMenuItem();
-        MnCheckListKriteriaKeluarICU = new javax.swing.JMenuItem();
-        MnUjiFungsiKFR = new javax.swing.JMenuItem();
-        MnRMRisikoJatuh = new javax.swing.JMenu();
-        MnPenilaianRisikoJatuhDewasa = new javax.swing.JMenuItem();
-        MnPenilaianRisikoJatuhAnak = new javax.swing.JMenuItem();
-        MnPenilaianRisikoJatuhLansia = new javax.swing.JMenuItem();
-        MnPenilaianRisikoJatuhNeonatus = new javax.swing.JMenuItem();
-        MnPenilaianRisikoJatuhGeriatri = new javax.swing.JMenuItem();
-        MnPenilaianRisikoJatuhPsikiatri = new javax.swing.JMenuItem();
-        MnPenilaianRisikoDikubitus = new javax.swing.JMenuItem();
-        MnPenilaianLanjutanSkriningFungsional = new javax.swing.JMenuItem();
-        MnPenilaianLain = new javax.swing.JMenu();
-        MnPenilaianTambahanGeriatri = new javax.swing.JMenuItem();
-        MnPenilaianTambahanBunuhDiri = new javax.swing.JMenuItem();
-        MnPenilaianTambahanPerilakuKekerasan = new javax.swing.JMenuItem();
-        MnPenilaianTambahanMalarikanDiri = new javax.swing.JMenuItem();
-        MnPenilaianPasienTerminal = new javax.swing.JMenuItem();
-        MnPenilaianKorbanKekerasan = new javax.swing.JMenuItem();
-        MnPenilaianKecemasanAnak = new javax.swing.JMenuItem();
-        MnPenilaianPasienPenyakitMenular = new javax.swing.JMenuItem();
-        MnPenilaianPsikolog = new javax.swing.JMenuItem();
-        MnHemodialisa = new javax.swing.JMenuItem();
-        MnPengkajianRestrain = new javax.swing.JMenuItem();
-        MnPemantauanPEWS = new javax.swing.JMenu();
-        MnPemantauanPEWSAnak = new javax.swing.JMenuItem();
-        MnPemantauanPEWSDewasa = new javax.swing.JMenuItem();
-        MnPemantauanMEOWS = new javax.swing.JMenuItem();
-        MnPemantauanEWSNeonatus = new javax.swing.JMenuItem();
-        MnRMFarmasi = new javax.swing.JMenu();
-        MnKonselingFarmasi = new javax.swing.JMenuItem();
-        MnRekonsiliasiObat = new javax.swing.JMenuItem();
-        MnObservasi = new javax.swing.JMenu();
-        MnCatatanObservasiRanap = new javax.swing.JMenuItem();
-        MnCatatanObservasiRanapKebidanan = new javax.swing.JMenuItem();
-        MnCatatanObservasiRanapPostPartum = new javax.swing.JMenuItem();
-        MnFollowUpDBD = new javax.swing.JMenuItem();
-        MnCatatanKeperawatan = new javax.swing.JMenuItem();
-        MnCatatanCekGDS = new javax.swing.JMenuItem();
-        MnMonitoringReaksiTranfusi = new javax.swing.JMenuItem();
-        MnHasilPemeriksaanUSG = new javax.swing.JMenuItem();
-        MnDokumentasiTindakanESWL = new javax.swing.JMenuItem();
-        MnPenilaianUlangNyeri = new javax.swing.JMenuItem();
-        MnCatatanPersalinan = new javax.swing.JMenuItem();
-        MnDiagnosa = new javax.swing.JMenuItem();
-        MnGizi = new javax.swing.JMenu();
-        ppSkriningNutrisiDewasa = new javax.swing.JMenuItem();
-        ppSkriningNutrisiLansia = new javax.swing.JMenuItem();
-        ppSkriningNutrisiAnak = new javax.swing.JMenuItem();
-        ppSkriningGizi = new javax.swing.JMenuItem();
-        ppAsuhanGizi = new javax.swing.JMenuItem();
-        ppMonitoringAsuhanGizi = new javax.swing.JMenuItem();
-        ppCatatanADIMEGizi = new javax.swing.JMenuItem();
-        MnTransferAntarRuang = new javax.swing.JMenuItem();
-        MnPerencanaanPemulangan = new javax.swing.JMenuItem();
-        ppResume = new javax.swing.JMenuItem();
-        ppRiwayat = new javax.swing.JMenuItem();
-        MnPermintaan = new javax.swing.JMenu();
-        MnJadwalOperasi = new javax.swing.JMenuItem();
-        MnPermintaanLab = new javax.swing.JMenuItem();
-        MnPermintaanRadiologi = new javax.swing.JMenuItem();
-        MnPermintaanInformasiObat = new javax.swing.JMenuItem();
-        MnTindakan = new javax.swing.JMenu();
-        MnRawatJalan = new javax.swing.JMenuItem();
-        MnRawatInap = new javax.swing.JMenuItem();
-        MnPeriksaLab = new javax.swing.JMenuItem();
-        MnPeriksaLabPA = new javax.swing.JMenuItem();
-        MnPeriksaLabMB = new javax.swing.JMenuItem();
-        MnPeriksaRadiologi = new javax.swing.JMenuItem();
-        MnOperasi = new javax.swing.JMenuItem();
-        MnDiet = new javax.swing.JMenuItem();
-        MnObat = new javax.swing.JMenu();
-        MnPemberianObat = new javax.swing.JMenuItem();
-        MnInputResep = new javax.swing.JMenuItem();
-        MnNoResep = new javax.swing.JMenuItem();
-        MnResepDOkter = new javax.swing.JMenuItem();
-        MnPermintaanStokObatPasien = new javax.swing.JMenuItem();
-        MnPermintaanResepPulang = new javax.swing.JMenuItem();
-        MnStokObatPasien = new javax.swing.JMenuItem();
-        MnResepPulang = new javax.swing.JMenuItem();
-        MnReturJual = new javax.swing.JMenuItem();
-        MnPenjualan1 = new javax.swing.JMenuItem();
-        MnDeposit = new javax.swing.JMenuItem();
-        MnBilling = new javax.swing.JMenuItem();
+        MnDataRM = new widget.JMenu();
+        MnPenilaianAwal = new widget.JMenu();
+        MnPenilaianAwalKeperawatanRanap = new widget.JMenuItem();
+        MnPenilaianAwalKeperawatanKebidanan = new widget.JMenuItem();
+        MnPenilaianAwalMedisRanap = new widget.JMenuItem();
+        MnPenilaianAwalMedisKandungan = new widget.JMenuItem();
+        MnPenilaianAwalMedisHemodialisa = new widget.JMenuItem();
+        MnPenilaianFisioterapi = new widget.JMenuItem();
+        MnRMOperasi = new widget.JMenu();
+        MnChecklistPreOperasi = new widget.JMenuItem();
+        MnSignInSebelumAnestesi = new widget.JMenuItem();
+        MnTimeOutSebelumInsisi = new widget.JMenuItem();
+        MnSignOutSebelumMenutupLuka = new widget.JMenuItem();
+        MnChecklistPostOperasi = new widget.JMenuItem();
+        MnPenilaianPreOp = new widget.JMenuItem();
+        MnPenilaianPreAnestesi = new widget.JMenuItem();
+        MnRMHCU = new widget.JMenu();
+        MnCheckListKriteriaMasukHCU = new widget.JMenuItem();
+        MnCheckListKriteriaKeluarHCU = new widget.JMenuItem();
+        MnCheckListKriteriaMasukICU = new widget.JMenuItem();
+        MnCheckListKriteriaKeluarICU = new widget.JMenuItem();
+        MnUjiFungsiKFR = new widget.JMenuItem();
+        MnRMRisikoJatuh = new widget.JMenu();
+        MnPenilaianRisikoJatuhDewasa = new widget.JMenuItem();
+        MnPenilaianRisikoJatuhAnak = new widget.JMenuItem();
+        MnPenilaianRisikoJatuhLansia = new widget.JMenuItem();
+        MnPenilaianRisikoJatuhNeonatus = new widget.JMenuItem();
+        MnPenilaianRisikoJatuhGeriatri = new widget.JMenuItem();
+        MnPenilaianRisikoJatuhPsikiatri = new widget.JMenuItem();
+        MnPenilaianRisikoDikubitus = new widget.JMenuItem();
+        MnPenilaianLanjutanSkriningFungsional = new widget.JMenuItem();
+        MnPenilaianLain = new widget.JMenu();
+        MnPenilaianTambahanGeriatri = new widget.JMenuItem();
+        MnPenilaianTambahanBunuhDiri = new widget.JMenuItem();
+        MnPenilaianTambahanPerilakuKekerasan = new widget.JMenuItem();
+        MnPenilaianTambahanMalarikanDiri = new widget.JMenuItem();
+        MnPenilaianPasienTerminal = new widget.JMenuItem();
+        MnPenilaianKorbanKekerasan = new widget.JMenuItem();
+        MnPenilaianKecemasanAnak = new widget.JMenuItem();
+        MnPenilaianPasienPenyakitMenular = new widget.JMenuItem();
+        MnPenilaianPsikolog = new widget.JMenuItem();
+        MnHemodialisa = new widget.JMenuItem();
+        MnPengkajianRestrain = new widget.JMenuItem();
+        MnPemantauanPEWS = new widget.JMenu();
+        MnPemantauanPEWSAnak = new widget.JMenuItem();
+        MnPemantauanPEWSDewasa = new widget.JMenuItem();
+        MnPemantauanMEOWS = new widget.JMenuItem();
+        MnPemantauanEWSNeonatus = new widget.JMenuItem();
+        MnRMFarmasi = new widget.JMenu();
+        MnKonselingFarmasi = new widget.JMenuItem();
+        MnRekonsiliasiObat = new widget.JMenuItem();
+        MnObservasi = new widget.JMenu();
+        MnCatatanObservasiRanap = new widget.JMenuItem();
+        MnCatatanObservasiRanapKebidanan = new widget.JMenuItem();
+        MnCatatanObservasiRanapPostPartum = new widget.JMenuItem();
+        MnFollowUpDBD = new widget.JMenuItem();
+        MnCatatanKeperawatan = new widget.JMenuItem();
+        MnCatatanCekGDS = new widget.JMenuItem();
+        MnMonitoringReaksiTranfusi = new widget.JMenuItem();
+        MnHasilPemeriksaanUSG = new widget.JMenuItem();
+        MnDokumentasiTindakanESWL = new widget.JMenuItem();
+        MnPenilaianUlangNyeri = new widget.JMenuItem();
+        MnCatatanPersalinan = new widget.JMenuItem();
+        MnDiagnosa = new widget.JMenuItem();
+        MnGizi = new widget.JMenu();
+        ppSkriningNutrisiDewasa = new widget.JMenuItem();
+        ppSkriningNutrisiLansia = new widget.JMenuItem();
+        ppSkriningNutrisiAnak = new widget.JMenuItem();
+        ppSkriningGizi = new widget.JMenuItem();
+        ppAsuhanGizi = new widget.JMenuItem();
+        ppMonitoringAsuhanGizi = new widget.JMenuItem();
+        ppCatatanADIMEGizi = new widget.JMenuItem();
+        MnTransferAntarRuang = new widget.JMenuItem();
+        MnPerencanaanPemulangan = new widget.JMenuItem();
+        ppResume = new widget.JMenuItem();
+        ppRiwayat = new widget.JMenuItem();
+        MnPermintaan = new widget.JMenu();
+        MnJadwalOperasi = new widget.JMenuItem();
+        MnPermintaanLab = new widget.JMenuItem();
+        MnPermintaanRadiologi = new widget.JMenuItem();
+        MnPermintaanInformasiObat = new widget.JMenuItem();
+        MnTindakan = new widget.JMenu();
+        MnRawatJalan = new widget.JMenuItem();
+        MnRawatInap = new widget.JMenuItem();
+        MnPeriksaLab = new widget.JMenuItem();
+        MnPeriksaLabPA = new widget.JMenuItem();
+        MnPeriksaLabMB = new widget.JMenuItem();
+        MnPeriksaRadiologi = new widget.JMenuItem();
+        MnOperasi = new widget.JMenuItem();
+        MnDiet = new widget.JMenuItem();
+        MnObat = new widget.JMenu();
+        MnPemberianObat = new widget.JMenuItem();
+        MnInputResep = new widget.JMenuItem();
+        MnNoResep = new widget.JMenuItem();
+        MnResepDOkter = new widget.JMenuItem();
+        MnPermintaanStokObatPasien = new widget.JMenuItem();
+        MnPermintaanResepPulang = new widget.JMenuItem();
+        MnStokObatPasien = new widget.JMenuItem();
+        MnResepPulang = new widget.JMenuItem();
+        MnReturJual = new widget.JMenuItem();
+        MnPenjualan1 = new widget.JMenuItem();
+        MnDeposit = new widget.JMenuItem();
+        MnBilling = new widget.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
-        MnLaporan = new javax.swing.JMenu();
-        MnPersetujuanUmum = new javax.swing.JMenuItem();
-        MnPersetujuanPenolakanTindakan = new javax.swing.JMenuItem();
-        MnPulangAtasPermintaanSendiri = new javax.swing.JMenuItem();
-        MnPernyataanPasienUmum = new javax.swing.JMenuItem();
-        MnPersetujuanPenundaanPelayanan = new javax.swing.JMenuItem();
-        MnPenolakanAnjuranMedis = new javax.swing.JMenuItem();
-        MnSuratKontrol = new javax.swing.JMenuItem();
-        MnRincianObat = new javax.swing.JMenuItem();
-        MnSensusRanap = new javax.swing.JMenuItem();
-        MnPenggunaanKamar = new javax.swing.JMenuItem();
-        MnPengantarPulang = new javax.swing.JMenuItem();
-        MnFormulirPenerimaan = new javax.swing.JMenuItem();
-        MnFormulirPenerimaan1 = new javax.swing.JMenuItem();
-        MnCetakSuratSakit1 = new javax.swing.JMenuItem();
-        MnSuratKeteranganRawatInap = new javax.swing.JMenuItem();
-        MnSuratJaminanPelayanan = new javax.swing.JMenuItem();
-        MnCetakSuratSakit = new javax.swing.JMenuItem();
-        MnCetakSuratSakitPihak2 = new javax.swing.JMenuItem();
-        MnRingkasanMasukKeluar = new javax.swing.JMenuItem();
-        MnGelang = new javax.swing.JMenu();
-        MnLabelTracker = new javax.swing.JMenuItem();
-        MnLabelTracker1 = new javax.swing.JMenuItem();
-        MnLabelTracker2 = new javax.swing.JMenuItem();
-        MnLabelTracker3 = new javax.swing.JMenuItem();
-        MnBarcode = new javax.swing.JMenuItem();
-        MnBarcode1 = new javax.swing.JMenuItem();
-        MnBarcode2 = new javax.swing.JMenuItem();
-        MnBarcodeRM9 = new javax.swing.JMenuItem();
-        MnGelang5 = new javax.swing.JMenuItem();
-        MnGelang6 = new javax.swing.JMenuItem();
-        MnGelang7 = new javax.swing.JMenuItem();
-        MnGelang8 = new javax.swing.JMenuItem();
-        MnGelang9 = new javax.swing.JMenuItem();
-        MnGelang10 = new javax.swing.JMenuItem();
-        MnGelang11 = new javax.swing.JMenuItem();
-        MnGelang1 = new javax.swing.JMenuItem();
-        MnGelang2 = new javax.swing.JMenuItem();
-        MnGelang3 = new javax.swing.JMenuItem();
-        MnGelang4 = new javax.swing.JMenuItem();
-        MnRanapGabung = new javax.swing.JMenuItem();
-        MnGabungkanRanap = new javax.swing.JMenuItem();
-        MnDPJP = new javax.swing.JMenuItem();
-        MnDPJPRanap = new javax.swing.JMenuItem();
+        MnLaporan = new widget.JMenu();
+        MnPersetujuanUmum = new widget.JMenuItem();
+        MnPersetujuanPenolakanTindakan = new widget.JMenuItem();
+        MnPulangAtasPermintaanSendiri = new widget.JMenuItem();
+        MnPernyataanPasienUmum = new widget.JMenuItem();
+        MnPersetujuanPenundaanPelayanan = new widget.JMenuItem();
+        MnPenolakanAnjuranMedis = new widget.JMenuItem();
+        MnSuratKontrol = new widget.JMenuItem();
+        MnRincianObat = new widget.JMenuItem();
+        MnSensusRanap = new widget.JMenuItem();
+        MnPenggunaanKamar = new widget.JMenuItem();
+        MnPengantarPulang = new widget.JMenuItem();
+        MnFormulirPenerimaan = new widget.JMenuItem();
+        MnFormulirPenerimaan1 = new widget.JMenuItem();
+        MnCetakSuratSakit1 = new widget.JMenuItem();
+        MnSuratKeteranganRawatInap = new widget.JMenuItem();
+        MnSuratJaminanPelayanan = new widget.JMenuItem();
+        MnCetakSuratSakit = new widget.JMenuItem();
+        MnCetakSuratSakitPihak2 = new widget.JMenuItem();
+        MnRingkasanMasukKeluar = new widget.JMenuItem();
+        MnGelang = new widget.JMenu();
+        MnLabelTracker = new widget.JMenuItem();
+        MnLabelTracker1 = new widget.JMenuItem();
+        MnLabelTracker2 = new widget.JMenuItem();
+        MnLabelTracker3 = new widget.JMenuItem();
+        MnBarcode = new widget.JMenuItem();
+        MnBarcode1 = new widget.JMenuItem();
+        MnBarcode2 = new widget.JMenuItem();
+        MnBarcodeRM9 = new widget.JMenuItem();
+        MnGelang5 = new widget.JMenuItem();
+        MnGelang6 = new widget.JMenuItem();
+        MnGelang7 = new widget.JMenuItem();
+        MnGelang8 = new widget.JMenuItem();
+        MnGelang9 = new widget.JMenuItem();
+        MnGelang10 = new widget.JMenuItem();
+        MnGelang11 = new widget.JMenuItem();
+        MnGelang1 = new widget.JMenuItem();
+        MnGelang2 = new widget.JMenuItem();
+        MnGelang3 = new widget.JMenuItem();
+        MnGelang4 = new widget.JMenuItem();
+        MnRanapGabung = new widget.JMenuItem();
+        MnGabungkanRanap = new widget.JMenuItem();
+        MnDPJP = new widget.JMenuItem();
+        MnDPJPRanap = new widget.JMenuItem();
         jSeparator13 = new javax.swing.JPopupMenu.Separator();
-        MnRujukan = new javax.swing.JMenu();
-        MnRujuk = new javax.swing.JMenuItem();
-        MnRujukMasuk = new javax.swing.JMenuItem();
-        MenuBPJS = new javax.swing.JMenu();
-        MnCekKepesertaan = new javax.swing.JMenuItem();
-        MnCekNIK = new javax.swing.JMenuItem();
-        MnSEP = new javax.swing.JMenuItem();
-        MnDataSEP = new javax.swing.JMenuItem();
-        ppSuratKontrol = new javax.swing.JMenuItem();
-        ppSuratPRI = new javax.swing.JMenuItem();
-        ppSuplesiJasaRaharja = new javax.swing.JMenuItem();
-        ppDataIndukKecelakaan = new javax.swing.JMenuItem();
-        MnRujukSisrute = new javax.swing.JMenuItem();
-        ppPasienCorona = new javax.swing.JMenuItem();
-        ppPerawatanCorona = new javax.swing.JMenuItem();
-        MnTeridentifikasiTB = new javax.swing.JMenuItem();
-        MnPCare = new javax.swing.JMenuItem();
-        MenuInputData = new javax.swing.JMenu();
-        ppCatatanPasien = new javax.swing.JMenuItem();
-        ppDataHAIs = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
-        ppIKP = new javax.swing.JMenuItem();
-        ppKlasifikasiPasien = new javax.swing.JMenuItem();
-        ppSkriningManagerPelayananPasien = new javax.swing.JMenuItem();
-        SetStatus = new javax.swing.JMenu();
-        MnSehat = new javax.swing.JMenuItem();
-        MnStatusRujuk = new javax.swing.JMenuItem();
-        MnStatusAPS = new javax.swing.JMenuItem();
-        MnStatusPlus = new javax.swing.JMenuItem();
-        MnStatusMeninggal = new javax.swing.JMenuItem();
-        MnStatusSembuh = new javax.swing.JMenuItem();
-        MnStatusMembaik = new javax.swing.JMenuItem();
-        MnStatusPulangPaksa = new javax.swing.JMenuItem();
-        MnStatusMin = new javax.swing.JMenuItem();
-        MnStatusBelumLengkap = new javax.swing.JMenuItem();
-        MnStatusBelumPulang = new javax.swing.JMenuItem();
-        MnGanti = new javax.swing.JMenu();
-        MnPenjab = new javax.swing.JMenuItem();
-        MnDiagnosaMasuk = new javax.swing.JMenuItem();
-        MnDiagnosaAkhir = new javax.swing.JMenuItem();
-        MnHapusData = new javax.swing.JMenu();
-        MnHapusTagihanOperasi = new javax.swing.JMenuItem();
-        MnHapusObatOperasi = new javax.swing.JMenuItem();
-        MnHapusDataSalah = new javax.swing.JMenuItem();
+        MnRujukan = new widget.JMenu();
+        MnRujuk = new widget.JMenuItem();
+        MnRujukMasuk = new widget.JMenuItem();
+        MenuBPJS = new widget.JMenu();
+        MnCekKepesertaan = new widget.JMenuItem();
+        MnCekNIK = new widget.JMenuItem();
+        MnSEP = new widget.JMenuItem();
+        MnDataSEP = new widget.JMenuItem();
+        ppSuratKontrol = new widget.JMenuItem();
+        ppSuratPRI = new widget.JMenuItem();
+        ppSuplesiJasaRaharja = new widget.JMenuItem();
+        ppDataIndukKecelakaan = new widget.JMenuItem();
+        MnRujukSisrute = new widget.JMenuItem();
+        ppPasienCorona = new widget.JMenuItem();
+        ppPerawatanCorona = new widget.JMenuItem();
+        MnTeridentifikasiTB = new widget.JMenuItem();
+        MnPCare = new widget.JMenuItem();
+        MenuInputData = new widget.JMenu();
+        ppCatatanPasien = new widget.JMenuItem();
+        ppDataHAIs = new widget.JMenuItem();
+        ppBerkasDigital = new widget.JMenuItem();
+        ppIKP = new widget.JMenuItem();
+        ppKlasifikasiPasien = new widget.JMenuItem();
+        ppSkriningManagerPelayananPasien = new widget.JMenuItem();
+        SetStatus = new widget.JMenu();
+        MnSehat = new widget.JMenuItem();
+        MnStatusRujuk = new widget.JMenuItem();
+        MnStatusAPS = new widget.JMenuItem();
+        MnStatusPlus = new widget.JMenuItem();
+        MnStatusMeninggal = new widget.JMenuItem();
+        MnStatusSembuh = new widget.JMenuItem();
+        MnStatusMembaik = new widget.JMenuItem();
+        MnStatusPulangPaksa = new widget.JMenuItem();
+        MnStatusMin = new widget.JMenuItem();
+        MnStatusBelumLengkap = new widget.JMenuItem();
+        MnStatusBelumPulang = new widget.JMenuItem();
+        MnGanti = new widget.JMenu();
+        MnPenjab = new widget.JMenuItem();
+        MnDiagnosaMasuk = new widget.JMenuItem();
+        MnDiagnosaAkhir = new widget.JMenuItem();
+        MnHapusData = new widget.JMenu();
+        MnHapusTagihanOperasi = new widget.JMenuItem();
+        MnHapusObatOperasi = new widget.JMenuItem();
+        MnHapusDataSalah = new widget.JMenuItem();
         jSeparator14 = new javax.swing.JPopupMenu.Separator();
-        MnUpdateHari = new javax.swing.JMenuItem();
-        MnPerkiraanBiaya = new javax.swing.JMenuItem();
-        MnUrut = new javax.swing.JMenu();
-        MnUrutNoRawatDesc = new javax.swing.JMenuItem();
-        MnUrutNoRawatAsc = new javax.swing.JMenuItem();
-        MnUrutPenjabDesc = new javax.swing.JMenuItem();
-        MnUrutPenjabAsc = new javax.swing.JMenuItem();
-        MnUrutRMDesc = new javax.swing.JMenuItem();
-        MnUrutRMAsc = new javax.swing.JMenuItem();
-        MnUrutNamaDesc = new javax.swing.JMenuItem();
-        MnUrutNamaAsc = new javax.swing.JMenuItem();
-        MnUrutKamarDesc = new javax.swing.JMenuItem();
-        MnUrutKamarAsc = new javax.swing.JMenuItem();
-        MnUrutTanggalMasukAsc = new javax.swing.JMenuItem();
-        MnUrutTanggalMasukDesc = new javax.swing.JMenuItem();
-        MnTampilkan = new javax.swing.JMenu();
-        MnTampilkanJenisBayar = new javax.swing.JMenu();
-        ppTampilkanSeleksiBPJS = new javax.swing.JMenuItem();
-        ppTampilkanSeleksiPribadi = new javax.swing.JMenuItem();
-        ppTampilkanSeleksiAsuransi = new javax.swing.JMenuItem();
-        ppTampilkanSeleksi = new javax.swing.JMenuItem();
-        ppTampilkanBelumDiagnosa = new javax.swing.JMenuItem();
+        MnUpdateHari = new widget.JMenuItem();
+        MnPerkiraanBiaya = new widget.JMenuItem();
+        MnUrut = new widget.JMenu();
+        MnUrutNoRawatDesc = new widget.JMenuItem();
+        MnUrutNoRawatAsc = new widget.JMenuItem();
+        MnUrutPenjabDesc = new widget.JMenuItem();
+        MnUrutPenjabAsc = new widget.JMenuItem();
+        MnUrutRMDesc = new widget.JMenuItem();
+        MnUrutRMAsc = new widget.JMenuItem();
+        MnUrutNamaDesc = new widget.JMenuItem();
+        MnUrutNamaAsc = new widget.JMenuItem();
+        MnUrutKamarDesc = new widget.JMenuItem();
+        MnUrutKamarAsc = new widget.JMenuItem();
+        MnUrutTanggalMasukAsc = new widget.JMenuItem();
+        MnUrutTanggalMasukDesc = new widget.JMenuItem();
+        MnTampilkan = new widget.JMenu();
+        MnTampilkanJenisBayar = new widget.JMenu();
+        ppTampilkanSeleksiBPJS = new widget.JMenuItem();
+        ppTampilkanSeleksiPribadi = new widget.JMenuItem();
+        ppTampilkanSeleksiAsuransi = new widget.JMenuItem();
+        ppTampilkanSeleksi = new widget.JMenuItem();
+        ppTampilkanBelumDiagnosa = new widget.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         JamMasuk = new widget.TextBox();
         WindowPindahKamar = new javax.swing.JDialog();
@@ -20238,192 +20238,192 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.Label LabelCatatan;
     private widget.Label LblStts;
-    private javax.swing.JMenu MenuBPJS;
-    private javax.swing.JMenu MenuInputData;
-    private javax.swing.JMenuItem MnBarcode;
-    private javax.swing.JMenuItem MnBarcode1;
-    private javax.swing.JMenuItem MnBarcode2;
-    private javax.swing.JMenuItem MnBarcodeRM9;
-    private javax.swing.JMenuItem MnBilling;
-    private javax.swing.JMenuItem MnCatatanCekGDS;
-    private javax.swing.JMenuItem MnCatatanKeperawatan;
-    private javax.swing.JMenuItem MnCatatanObservasiRanap;
-    private javax.swing.JMenuItem MnCatatanObservasiRanapKebidanan;
-    private javax.swing.JMenuItem MnCatatanObservasiRanapPostPartum;
-    private javax.swing.JMenuItem MnCatatanPersalinan;
-    private javax.swing.JMenuItem MnCekKepesertaan;
-    private javax.swing.JMenuItem MnCekNIK;
-    private javax.swing.JMenuItem MnCetakSuratSakit;
-    private javax.swing.JMenuItem MnCetakSuratSakit1;
-    private javax.swing.JMenuItem MnCetakSuratSakitPihak2;
-    private javax.swing.JMenuItem MnCheckListKriteriaKeluarHCU;
-    private javax.swing.JMenuItem MnCheckListKriteriaKeluarICU;
-    private javax.swing.JMenuItem MnCheckListKriteriaMasukHCU;
-    private javax.swing.JMenuItem MnCheckListKriteriaMasukICU;
-    private javax.swing.JMenuItem MnChecklistPostOperasi;
-    private javax.swing.JMenuItem MnChecklistPreOperasi;
-    private javax.swing.JMenuItem MnDPJP;
-    private javax.swing.JMenuItem MnDPJPRanap;
-    private javax.swing.JMenu MnDataRM;
-    private javax.swing.JMenuItem MnDataSEP;
-    private javax.swing.JMenuItem MnDeposit;
-    private javax.swing.JMenuItem MnDiagnosa;
-    private javax.swing.JMenuItem MnDiagnosaAkhir;
-    private javax.swing.JMenuItem MnDiagnosaMasuk;
-    private javax.swing.JMenuItem MnDiet;
-    private javax.swing.JMenuItem MnDokumentasiTindakanESWL;
-    private javax.swing.JMenuItem MnFollowUpDBD;
-    private javax.swing.JMenuItem MnFormulirPenerimaan;
-    private javax.swing.JMenuItem MnFormulirPenerimaan1;
-    private javax.swing.JMenuItem MnGabungkanRanap;
-    private javax.swing.JMenu MnGanti;
-    private javax.swing.JMenu MnGelang;
-    private javax.swing.JMenuItem MnGelang1;
-    private javax.swing.JMenuItem MnGelang10;
-    private javax.swing.JMenuItem MnGelang11;
-    private javax.swing.JMenuItem MnGelang2;
-    private javax.swing.JMenuItem MnGelang3;
-    private javax.swing.JMenuItem MnGelang4;
-    private javax.swing.JMenuItem MnGelang5;
-    private javax.swing.JMenuItem MnGelang6;
-    private javax.swing.JMenuItem MnGelang7;
-    private javax.swing.JMenuItem MnGelang8;
-    private javax.swing.JMenuItem MnGelang9;
-    private javax.swing.JMenu MnGizi;
-    private javax.swing.JMenu MnHapusData;
-    private javax.swing.JMenuItem MnHapusDataSalah;
-    private javax.swing.JMenuItem MnHapusObatOperasi;
-    private javax.swing.JMenuItem MnHapusTagihanOperasi;
-    private javax.swing.JMenuItem MnHasilPemeriksaanUSG;
-    private javax.swing.JMenuItem MnHemodialisa;
-    private javax.swing.JMenuItem MnInputResep;
-    private javax.swing.JMenuItem MnJadwalOperasi;
-    private javax.swing.JMenuItem MnKonselingFarmasi;
-    private javax.swing.JMenuItem MnLabelTracker;
-    private javax.swing.JMenuItem MnLabelTracker1;
-    private javax.swing.JMenuItem MnLabelTracker2;
-    private javax.swing.JMenuItem MnLabelTracker3;
-    private javax.swing.JMenu MnLaporan;
-    private javax.swing.JMenuItem MnMonitoringReaksiTranfusi;
-    private javax.swing.JMenuItem MnNoResep;
-    private javax.swing.JMenu MnObat;
-    private javax.swing.JMenu MnObservasi;
-    private javax.swing.JMenuItem MnOperasi;
-    private javax.swing.JMenuItem MnPCare;
-    private javax.swing.JMenuItem MnPemantauanEWSNeonatus;
-    private javax.swing.JMenuItem MnPemantauanMEOWS;
-    private javax.swing.JMenu MnPemantauanPEWS;
-    private javax.swing.JMenuItem MnPemantauanPEWSAnak;
-    private javax.swing.JMenuItem MnPemantauanPEWSDewasa;
-    private javax.swing.JMenuItem MnPemberianObat;
-    private javax.swing.JMenuItem MnPengantarPulang;
-    private javax.swing.JMenuItem MnPenggunaanKamar;
-    private javax.swing.JMenuItem MnPengkajianRestrain;
-    private javax.swing.JMenu MnPenilaianAwal;
-    private javax.swing.JMenuItem MnPenilaianAwalKeperawatanKebidanan;
-    private javax.swing.JMenuItem MnPenilaianAwalKeperawatanRanap;
-    private javax.swing.JMenuItem MnPenilaianAwalMedisHemodialisa;
-    private javax.swing.JMenuItem MnPenilaianAwalMedisKandungan;
-    private javax.swing.JMenuItem MnPenilaianAwalMedisRanap;
-    private javax.swing.JMenuItem MnPenilaianFisioterapi;
-    private javax.swing.JMenuItem MnPenilaianKecemasanAnak;
-    private javax.swing.JMenuItem MnPenilaianKorbanKekerasan;
-    private javax.swing.JMenu MnPenilaianLain;
-    private javax.swing.JMenuItem MnPenilaianLanjutanSkriningFungsional;
-    private javax.swing.JMenuItem MnPenilaianPasienPenyakitMenular;
-    private javax.swing.JMenuItem MnPenilaianPasienTerminal;
-    private javax.swing.JMenuItem MnPenilaianPreAnestesi;
-    private javax.swing.JMenuItem MnPenilaianPreOp;
-    private javax.swing.JMenuItem MnPenilaianPsikolog;
-    private javax.swing.JMenuItem MnPenilaianRisikoDikubitus;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuhAnak;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuhDewasa;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuhGeriatri;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuhLansia;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuhNeonatus;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuhPsikiatri;
-    private javax.swing.JMenuItem MnPenilaianTambahanBunuhDiri;
-    private javax.swing.JMenuItem MnPenilaianTambahanGeriatri;
-    private javax.swing.JMenuItem MnPenilaianTambahanMalarikanDiri;
-    private javax.swing.JMenuItem MnPenilaianTambahanPerilakuKekerasan;
-    private javax.swing.JMenuItem MnPenilaianUlangNyeri;
-    private javax.swing.JMenuItem MnPenjab;
-    private javax.swing.JMenuItem MnPenjualan1;
-    private javax.swing.JMenuItem MnPenolakanAnjuranMedis;
-    private javax.swing.JMenuItem MnPerencanaanPemulangan;
-    private javax.swing.JMenuItem MnPeriksaLab;
-    private javax.swing.JMenuItem MnPeriksaLabMB;
-    private javax.swing.JMenuItem MnPeriksaLabPA;
-    private javax.swing.JMenuItem MnPeriksaRadiologi;
-    private javax.swing.JMenuItem MnPerkiraanBiaya;
-    private javax.swing.JMenu MnPermintaan;
-    private javax.swing.JMenuItem MnPermintaanInformasiObat;
-    private javax.swing.JMenuItem MnPermintaanLab;
-    private javax.swing.JMenuItem MnPermintaanRadiologi;
-    private javax.swing.JMenuItem MnPermintaanResepPulang;
-    private javax.swing.JMenuItem MnPermintaanStokObatPasien;
-    private javax.swing.JMenuItem MnPernyataanPasienUmum;
-    private javax.swing.JMenuItem MnPersetujuanPenolakanTindakan;
-    private javax.swing.JMenuItem MnPersetujuanPenundaanPelayanan;
-    private javax.swing.JMenuItem MnPersetujuanUmum;
-    private javax.swing.JMenuItem MnPulangAtasPermintaanSendiri;
-    private javax.swing.JMenu MnRMFarmasi;
-    private javax.swing.JMenu MnRMHCU;
-    private javax.swing.JMenu MnRMOperasi;
-    private javax.swing.JMenu MnRMRisikoJatuh;
-    private javax.swing.JMenuItem MnRanapGabung;
-    private javax.swing.JMenuItem MnRawatInap;
-    private javax.swing.JMenuItem MnRawatJalan;
-    private javax.swing.JMenuItem MnRekonsiliasiObat;
-    private javax.swing.JMenuItem MnResepDOkter;
-    private javax.swing.JMenuItem MnResepPulang;
-    private javax.swing.JMenuItem MnReturJual;
-    private javax.swing.JMenuItem MnRincianObat;
-    private javax.swing.JMenuItem MnRingkasanMasukKeluar;
-    private javax.swing.JMenuItem MnRujuk;
-    private javax.swing.JMenuItem MnRujukMasuk;
-    private javax.swing.JMenuItem MnRujukSisrute;
-    private javax.swing.JMenu MnRujukan;
-    private javax.swing.JMenuItem MnSEP;
-    private javax.swing.JMenuItem MnSehat;
-    private javax.swing.JMenuItem MnSensusRanap;
-    private javax.swing.JMenuItem MnSignInSebelumAnestesi;
-    private javax.swing.JMenuItem MnSignOutSebelumMenutupLuka;
-    private javax.swing.JMenuItem MnStatusAPS;
-    private javax.swing.JMenuItem MnStatusBelumLengkap;
-    private javax.swing.JMenuItem MnStatusBelumPulang;
-    private javax.swing.JMenuItem MnStatusMembaik;
-    private javax.swing.JMenuItem MnStatusMeninggal;
-    private javax.swing.JMenuItem MnStatusMin;
-    private javax.swing.JMenuItem MnStatusPlus;
-    private javax.swing.JMenuItem MnStatusPulangPaksa;
-    private javax.swing.JMenuItem MnStatusRujuk;
-    private javax.swing.JMenuItem MnStatusSembuh;
-    private javax.swing.JMenuItem MnStokObatPasien;
-    private javax.swing.JMenuItem MnSuratJaminanPelayanan;
-    private javax.swing.JMenuItem MnSuratKeteranganRawatInap;
-    private javax.swing.JMenuItem MnSuratKontrol;
-    private javax.swing.JMenu MnTampilkan;
-    private javax.swing.JMenu MnTampilkanJenisBayar;
-    private javax.swing.JMenuItem MnTeridentifikasiTB;
-    private javax.swing.JMenuItem MnTimeOutSebelumInsisi;
-    private javax.swing.JMenu MnTindakan;
-    private javax.swing.JMenuItem MnTransferAntarRuang;
-    private javax.swing.JMenuItem MnUjiFungsiKFR;
-    private javax.swing.JMenuItem MnUpdateHari;
-    private javax.swing.JMenu MnUrut;
-    private javax.swing.JMenuItem MnUrutKamarAsc;
-    private javax.swing.JMenuItem MnUrutKamarDesc;
-    private javax.swing.JMenuItem MnUrutNamaAsc;
-    private javax.swing.JMenuItem MnUrutNamaDesc;
-    private javax.swing.JMenuItem MnUrutNoRawatAsc;
-    private javax.swing.JMenuItem MnUrutNoRawatDesc;
-    private javax.swing.JMenuItem MnUrutPenjabAsc;
-    private javax.swing.JMenuItem MnUrutPenjabDesc;
-    private javax.swing.JMenuItem MnUrutRMAsc;
-    private javax.swing.JMenuItem MnUrutRMDesc;
-    private javax.swing.JMenuItem MnUrutTanggalMasukAsc;
-    private javax.swing.JMenuItem MnUrutTanggalMasukDesc;
+    private widget.JMenu MenuBPJS;
+    private widget.JMenu MenuInputData;
+    private widget.JMenuItem MnBarcode;
+    private widget.JMenuItem MnBarcode1;
+    private widget.JMenuItem MnBarcode2;
+    private widget.JMenuItem MnBarcodeRM9;
+    private widget.JMenuItem MnBilling;
+    private widget.JMenuItem MnCatatanCekGDS;
+    private widget.JMenuItem MnCatatanKeperawatan;
+    private widget.JMenuItem MnCatatanObservasiRanap;
+    private widget.JMenuItem MnCatatanObservasiRanapKebidanan;
+    private widget.JMenuItem MnCatatanObservasiRanapPostPartum;
+    private widget.JMenuItem MnCatatanPersalinan;
+    private widget.JMenuItem MnCekKepesertaan;
+    private widget.JMenuItem MnCekNIK;
+    private widget.JMenuItem MnCetakSuratSakit;
+    private widget.JMenuItem MnCetakSuratSakit1;
+    private widget.JMenuItem MnCetakSuratSakitPihak2;
+    private widget.JMenuItem MnCheckListKriteriaKeluarHCU;
+    private widget.JMenuItem MnCheckListKriteriaKeluarICU;
+    private widget.JMenuItem MnCheckListKriteriaMasukHCU;
+    private widget.JMenuItem MnCheckListKriteriaMasukICU;
+    private widget.JMenuItem MnChecklistPostOperasi;
+    private widget.JMenuItem MnChecklistPreOperasi;
+    private widget.JMenuItem MnDPJP;
+    private widget.JMenuItem MnDPJPRanap;
+    private widget.JMenu MnDataRM;
+    private widget.JMenuItem MnDataSEP;
+    private widget.JMenuItem MnDeposit;
+    private widget.JMenuItem MnDiagnosa;
+    private widget.JMenuItem MnDiagnosaAkhir;
+    private widget.JMenuItem MnDiagnosaMasuk;
+    private widget.JMenuItem MnDiet;
+    private widget.JMenuItem MnDokumentasiTindakanESWL;
+    private widget.JMenuItem MnFollowUpDBD;
+    private widget.JMenuItem MnFormulirPenerimaan;
+    private widget.JMenuItem MnFormulirPenerimaan1;
+    private widget.JMenuItem MnGabungkanRanap;
+    private widget.JMenu MnGanti;
+    private widget.JMenu MnGelang;
+    private widget.JMenuItem MnGelang1;
+    private widget.JMenuItem MnGelang10;
+    private widget.JMenuItem MnGelang11;
+    private widget.JMenuItem MnGelang2;
+    private widget.JMenuItem MnGelang3;
+    private widget.JMenuItem MnGelang4;
+    private widget.JMenuItem MnGelang5;
+    private widget.JMenuItem MnGelang6;
+    private widget.JMenuItem MnGelang7;
+    private widget.JMenuItem MnGelang8;
+    private widget.JMenuItem MnGelang9;
+    private widget.JMenu MnGizi;
+    private widget.JMenu MnHapusData;
+    private widget.JMenuItem MnHapusDataSalah;
+    private widget.JMenuItem MnHapusObatOperasi;
+    private widget.JMenuItem MnHapusTagihanOperasi;
+    private widget.JMenuItem MnHasilPemeriksaanUSG;
+    private widget.JMenuItem MnHemodialisa;
+    private widget.JMenuItem MnInputResep;
+    private widget.JMenuItem MnJadwalOperasi;
+    private widget.JMenuItem MnKonselingFarmasi;
+    private widget.JMenuItem MnLabelTracker;
+    private widget.JMenuItem MnLabelTracker1;
+    private widget.JMenuItem MnLabelTracker2;
+    private widget.JMenuItem MnLabelTracker3;
+    private widget.JMenu MnLaporan;
+    private widget.JMenuItem MnMonitoringReaksiTranfusi;
+    private widget.JMenuItem MnNoResep;
+    private widget.JMenu MnObat;
+    private widget.JMenu MnObservasi;
+    private widget.JMenuItem MnOperasi;
+    private widget.JMenuItem MnPCare;
+    private widget.JMenuItem MnPemantauanEWSNeonatus;
+    private widget.JMenuItem MnPemantauanMEOWS;
+    private widget.JMenu MnPemantauanPEWS;
+    private widget.JMenuItem MnPemantauanPEWSAnak;
+    private widget.JMenuItem MnPemantauanPEWSDewasa;
+    private widget.JMenuItem MnPemberianObat;
+    private widget.JMenuItem MnPengantarPulang;
+    private widget.JMenuItem MnPenggunaanKamar;
+    private widget.JMenuItem MnPengkajianRestrain;
+    private widget.JMenu MnPenilaianAwal;
+    private widget.JMenuItem MnPenilaianAwalKeperawatanKebidanan;
+    private widget.JMenuItem MnPenilaianAwalKeperawatanRanap;
+    private widget.JMenuItem MnPenilaianAwalMedisHemodialisa;
+    private widget.JMenuItem MnPenilaianAwalMedisKandungan;
+    private widget.JMenuItem MnPenilaianAwalMedisRanap;
+    private widget.JMenuItem MnPenilaianFisioterapi;
+    private widget.JMenuItem MnPenilaianKecemasanAnak;
+    private widget.JMenuItem MnPenilaianKorbanKekerasan;
+    private widget.JMenu MnPenilaianLain;
+    private widget.JMenuItem MnPenilaianLanjutanSkriningFungsional;
+    private widget.JMenuItem MnPenilaianPasienPenyakitMenular;
+    private widget.JMenuItem MnPenilaianPasienTerminal;
+    private widget.JMenuItem MnPenilaianPreAnestesi;
+    private widget.JMenuItem MnPenilaianPreOp;
+    private widget.JMenuItem MnPenilaianPsikolog;
+    private widget.JMenuItem MnPenilaianRisikoDikubitus;
+    private widget.JMenuItem MnPenilaianRisikoJatuhAnak;
+    private widget.JMenuItem MnPenilaianRisikoJatuhDewasa;
+    private widget.JMenuItem MnPenilaianRisikoJatuhGeriatri;
+    private widget.JMenuItem MnPenilaianRisikoJatuhLansia;
+    private widget.JMenuItem MnPenilaianRisikoJatuhNeonatus;
+    private widget.JMenuItem MnPenilaianRisikoJatuhPsikiatri;
+    private widget.JMenuItem MnPenilaianTambahanBunuhDiri;
+    private widget.JMenuItem MnPenilaianTambahanGeriatri;
+    private widget.JMenuItem MnPenilaianTambahanMalarikanDiri;
+    private widget.JMenuItem MnPenilaianTambahanPerilakuKekerasan;
+    private widget.JMenuItem MnPenilaianUlangNyeri;
+    private widget.JMenuItem MnPenjab;
+    private widget.JMenuItem MnPenjualan1;
+    private widget.JMenuItem MnPenolakanAnjuranMedis;
+    private widget.JMenuItem MnPerencanaanPemulangan;
+    private widget.JMenuItem MnPeriksaLab;
+    private widget.JMenuItem MnPeriksaLabMB;
+    private widget.JMenuItem MnPeriksaLabPA;
+    private widget.JMenuItem MnPeriksaRadiologi;
+    private widget.JMenuItem MnPerkiraanBiaya;
+    private widget.JMenu MnPermintaan;
+    private widget.JMenuItem MnPermintaanInformasiObat;
+    private widget.JMenuItem MnPermintaanLab;
+    private widget.JMenuItem MnPermintaanRadiologi;
+    private widget.JMenuItem MnPermintaanResepPulang;
+    private widget.JMenuItem MnPermintaanStokObatPasien;
+    private widget.JMenuItem MnPernyataanPasienUmum;
+    private widget.JMenuItem MnPersetujuanPenolakanTindakan;
+    private widget.JMenuItem MnPersetujuanPenundaanPelayanan;
+    private widget.JMenuItem MnPersetujuanUmum;
+    private widget.JMenuItem MnPulangAtasPermintaanSendiri;
+    private widget.JMenu MnRMFarmasi;
+    private widget.JMenu MnRMHCU;
+    private widget.JMenu MnRMOperasi;
+    private widget.JMenu MnRMRisikoJatuh;
+    private widget.JMenuItem MnRanapGabung;
+    private widget.JMenuItem MnRawatInap;
+    private widget.JMenuItem MnRawatJalan;
+    private widget.JMenuItem MnRekonsiliasiObat;
+    private widget.JMenuItem MnResepDOkter;
+    private widget.JMenuItem MnResepPulang;
+    private widget.JMenuItem MnReturJual;
+    private widget.JMenuItem MnRincianObat;
+    private widget.JMenuItem MnRingkasanMasukKeluar;
+    private widget.JMenuItem MnRujuk;
+    private widget.JMenuItem MnRujukMasuk;
+    private widget.JMenuItem MnRujukSisrute;
+    private widget.JMenu MnRujukan;
+    private widget.JMenuItem MnSEP;
+    private widget.JMenuItem MnSehat;
+    private widget.JMenuItem MnSensusRanap;
+    private widget.JMenuItem MnSignInSebelumAnestesi;
+    private widget.JMenuItem MnSignOutSebelumMenutupLuka;
+    private widget.JMenuItem MnStatusAPS;
+    private widget.JMenuItem MnStatusBelumLengkap;
+    private widget.JMenuItem MnStatusBelumPulang;
+    private widget.JMenuItem MnStatusMembaik;
+    private widget.JMenuItem MnStatusMeninggal;
+    private widget.JMenuItem MnStatusMin;
+    private widget.JMenuItem MnStatusPlus;
+    private widget.JMenuItem MnStatusPulangPaksa;
+    private widget.JMenuItem MnStatusRujuk;
+    private widget.JMenuItem MnStatusSembuh;
+    private widget.JMenuItem MnStokObatPasien;
+    private widget.JMenuItem MnSuratJaminanPelayanan;
+    private widget.JMenuItem MnSuratKeteranganRawatInap;
+    private widget.JMenuItem MnSuratKontrol;
+    private widget.JMenu MnTampilkan;
+    private widget.JMenu MnTampilkanJenisBayar;
+    private widget.JMenuItem MnTeridentifikasiTB;
+    private widget.JMenuItem MnTimeOutSebelumInsisi;
+    private widget.JMenu MnTindakan;
+    private widget.JMenuItem MnTransferAntarRuang;
+    private widget.JMenuItem MnUjiFungsiKFR;
+    private widget.JMenuItem MnUpdateHari;
+    private widget.JMenu MnUrut;
+    private widget.JMenuItem MnUrutKamarAsc;
+    private widget.JMenuItem MnUrutKamarDesc;
+    private widget.JMenuItem MnUrutNamaAsc;
+    private widget.JMenuItem MnUrutNamaDesc;
+    private widget.JMenuItem MnUrutNoRawatAsc;
+    private widget.JMenuItem MnUrutNoRawatDesc;
+    private widget.JMenuItem MnUrutPenjabAsc;
+    private widget.JMenuItem MnUrutPenjabDesc;
+    private widget.JMenuItem MnUrutRMAsc;
+    private widget.JMenuItem MnUrutRMDesc;
+    private widget.JMenuItem MnUrutTanggalMasukAsc;
+    private widget.JMenuItem MnUrutTanggalMasukDesc;
     private widget.TextBox NmBayi;
     private widget.TextBox NoLPManual;
     private widget.TextBox NoRawatGabung;
@@ -20439,7 +20439,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private widget.RadioButton Rganti3;
     private widget.RadioButton Rganti4;
     private widget.ScrollPane Scroll;
-    private javax.swing.JMenu SetStatus;
+    private widget.JMenu SetStatus;
     private widget.ComboBox StatusPulang;
     private widget.TextBox TBangsal;
     private widget.TextBox TBangsalasal;
@@ -20567,37 +20567,37 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppAsuhanGizi;
-    private javax.swing.JMenuItem ppBerkasDigital;
-    private javax.swing.JMenuItem ppCatatanADIMEGizi;
-    private javax.swing.JMenuItem ppCatatanPasien;
-    private javax.swing.JMenuItem ppDataHAIs;
-    private javax.swing.JMenuItem ppDataIndukKecelakaan;
-    private javax.swing.JMenuItem ppIKP;
-    private javax.swing.JMenuItem ppKlasifikasiPasien;
-    private javax.swing.JMenuItem ppMonitoringAsuhanGizi;
-    private javax.swing.JMenuItem ppPasienCorona;
-    private javax.swing.JMenuItem ppPerawatanCorona;
-    private javax.swing.JMenuItem ppResume;
-    private javax.swing.JMenuItem ppRiwayat;
-    private javax.swing.JMenuItem ppSkriningGizi;
-    private javax.swing.JMenuItem ppSkriningManagerPelayananPasien;
-    private javax.swing.JMenuItem ppSkriningNutrisiAnak;
-    private javax.swing.JMenuItem ppSkriningNutrisiDewasa;
-    private javax.swing.JMenuItem ppSkriningNutrisiLansia;
-    private javax.swing.JMenuItem ppSuplesiJasaRaharja;
-    private javax.swing.JMenuItem ppSuratKontrol;
-    private javax.swing.JMenuItem ppSuratPRI;
-    private javax.swing.JMenuItem ppTampilkanBelumDiagnosa;
-    private javax.swing.JMenuItem ppTampilkanSeleksi;
-    private javax.swing.JMenuItem ppTampilkanSeleksiAsuransi;
-    private javax.swing.JMenuItem ppTampilkanSeleksiBPJS;
-    private javax.swing.JMenuItem ppTampilkanSeleksiPribadi;
+    private widget.JMenuItem ppAsuhanGizi;
+    private widget.JMenuItem ppBerkasDigital;
+    private widget.JMenuItem ppCatatanADIMEGizi;
+    private widget.JMenuItem ppCatatanPasien;
+    private widget.JMenuItem ppDataHAIs;
+    private widget.JMenuItem ppDataIndukKecelakaan;
+    private widget.JMenuItem ppIKP;
+    private widget.JMenuItem ppKlasifikasiPasien;
+    private widget.JMenuItem ppMonitoringAsuhanGizi;
+    private widget.JMenuItem ppPasienCorona;
+    private widget.JMenuItem ppPerawatanCorona;
+    private widget.JMenuItem ppResume;
+    private widget.JMenuItem ppRiwayat;
+    private widget.JMenuItem ppSkriningGizi;
+    private widget.JMenuItem ppSkriningManagerPelayananPasien;
+    private widget.JMenuItem ppSkriningNutrisiAnak;
+    private widget.JMenuItem ppSkriningNutrisiDewasa;
+    private widget.JMenuItem ppSkriningNutrisiLansia;
+    private widget.JMenuItem ppSuplesiJasaRaharja;
+    private widget.JMenuItem ppSuratKontrol;
+    private widget.JMenuItem ppSuratPRI;
+    private widget.JMenuItem ppTampilkanBelumDiagnosa;
+    private widget.JMenuItem ppTampilkanSeleksi;
+    private widget.JMenuItem ppTampilkanSeleksiAsuransi;
+    private widget.JMenuItem ppTampilkanSeleksiBPJS;
+    private widget.JMenuItem ppTampilkanSeleksiPribadi;
     private widget.Table tbKamIn;
     private widget.TextBox ttlbiaya;
     private widget.TextBox ttlbiayapindah;
     // End of variables declaration//GEN-END:variables
-    private javax.swing.JMenuItem MnSkorAldrettePascaAnestesi,
+    private widget.JMenuItem MnSkorAldrettePascaAnestesi,
                                   MnSkorStewardPascaAnestesi,
                                   MnSkorBromagePascaAnestesi,
                                   MnPenilaianPreInduksi,
@@ -20623,9 +20623,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                   MnCheckListKriteriaMasukPICU,MnCheckListKriteriaKeluarPICU,MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnPenilaianAwalMedisJantung,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiPerawat,
                                   MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,MnHasilPemeriksaanUSGAbdomen,MnIntervensiNyeriFarmakologi,
                                   MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien,MnCheckListKriteriaMasukIsolasi,MnCheckListKriteriaKeluarIsolasi;
-    private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi,MnEdukasi,MnSuratPersetujuan,MnHasilPemeriksaanAlat;
+    private widget.JMenu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi,MnEdukasi,MnSuratPersetujuan,MnHasilPemeriksaanAlat;
 
-    private javax.swing.JMenuItem MnPengkajianInvasifNonBedahSMC;
+    private widget.JMenuItem MnPengkajianInvasifNonBedahSMC;
 
     private void tampil() {
         tampilSmc();
@@ -21441,7 +21441,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }
 
     private void initKamarInap(){
-        MnPenilaianPreInduksi = new javax.swing.JMenuItem();
+        MnPenilaianPreInduksi = new widget.JMenuItem();
         MnPenilaianPreInduksi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPreInduksi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianPreInduksi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21453,7 +21453,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPenilaianPreInduksi.addActionListener(this::MnPenilaianPreInduksiActionPerformed);
 
-        MnPengkajianInvasifNonBedahSMC = new javax.swing.JMenuItem();
+        MnPengkajianInvasifNonBedahSMC = new widget.JMenuItem();
         MnPengkajianInvasifNonBedahSMC.setBackground(new java.awt.Color(255, 255, 254));
         MnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPengkajianInvasifNonBedahSMC.setForeground(new java.awt.Color(50, 50, 50));
@@ -21465,7 +21465,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPengkajianInvasifNonBedahSMC.addActionListener(this::MnPengkajianInvasifNonBedahSMCActionPerformed);
 
-        MnSkorAldrettePascaAnestesi = new javax.swing.JMenuItem();
+        MnSkorAldrettePascaAnestesi = new widget.JMenuItem();
         MnSkorAldrettePascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
         MnSkorAldrettePascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkorAldrettePascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21477,7 +21477,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkorAldrettePascaAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnSkorAldrettePascaAnestesi.addActionListener(this::MnSkorAldrettePascaAnestesiActionPerformed);
 
-        MnSkorStewardPascaAnestesi = new javax.swing.JMenuItem();
+        MnSkorStewardPascaAnestesi = new widget.JMenuItem();
         MnSkorStewardPascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
         MnSkorStewardPascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkorStewardPascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21489,7 +21489,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkorStewardPascaAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnSkorStewardPascaAnestesi.addActionListener(this::MnSkorStewardPascaAnestesiActionPerformed);
 
-        MnSkorBromagePascaAnestesi = new javax.swing.JMenuItem();
+        MnSkorBromagePascaAnestesi = new widget.JMenuItem();
         MnSkorBromagePascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
         MnSkorBromagePascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkorBromagePascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21501,7 +21501,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkorBromagePascaAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnSkorBromagePascaAnestesi.addActionListener(this::MnSkorBromagePascaAnestesiActionPerformed);
 
-        MnHasilPemeriksaanUSGUrologi = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanUSGUrologi = new widget.JMenuItem();
         MnHasilPemeriksaanUSGUrologi.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanUSGUrologi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanUSGUrologi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21513,7 +21513,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanUSGUrologi.setPreferredSize(new java.awt.Dimension(170, 26));
         MnHasilPemeriksaanUSGUrologi.addActionListener(this::MnHasilPemeriksaanUSGUrologiActionPerformed);
 
-        MnHasilPemeriksaanUSGGynecologi = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanUSGGynecologi = new widget.JMenuItem();
         MnHasilPemeriksaanUSGGynecologi.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanUSGGynecologi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanUSGGynecologi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21525,7 +21525,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanUSGGynecologi.setPreferredSize(new java.awt.Dimension(170, 26));
         MnHasilPemeriksaanUSGGynecologi.addActionListener(this::MnHasilPemeriksaanUSGGynecologiActionPerformed);
 
-        MnHasilPemeriksaanEKG = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanEKG = new widget.JMenuItem();
         MnHasilPemeriksaanEKG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanEKG.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanEKG.setForeground(new java.awt.Color(50, 50, 50));
@@ -21537,7 +21537,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanEKG.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanEKG.addActionListener(this::MnHasilPemeriksaanEKGActionPerformed);
 
-        MnHasilPemeriksaanTreadmill = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanTreadmill = new widget.JMenuItem();
         MnHasilPemeriksaanTreadmill.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanTreadmill.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanTreadmill.setForeground(new java.awt.Color(50, 50, 50));
@@ -21549,7 +21549,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanTreadmill.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanTreadmill.addActionListener(this::MnHasilPemeriksaanTreadmillActionPerformed);
 
-        MnHasilPemeriksaanECHO = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanECHO = new widget.JMenuItem();
         MnHasilPemeriksaanECHO.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanECHO.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanECHO.setForeground(new java.awt.Color(50, 50, 50));
@@ -21561,7 +21561,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanECHO.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanECHO.addActionListener(this::MnHasilPemeriksaanECHOActionPerformed);
 
-        MnHasilPemeriksaanECHOPediatrik = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanECHOPediatrik = new widget.JMenuItem();
         MnHasilPemeriksaanECHOPediatrik.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanECHOPediatrik.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanECHOPediatrik.setForeground(new java.awt.Color(50, 50, 50));
@@ -21573,7 +21573,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanECHOPediatrik.setPreferredSize(new java.awt.Dimension(220, 26));
         MnHasilPemeriksaanECHOPediatrik.addActionListener(this::MnHasilPemeriksaanECHOPediatrikActionPerformed);
 
-        MnBelumTerbitSEP = new javax.swing.JMenuItem();
+        MnBelumTerbitSEP = new widget.JMenuItem();
         MnBelumTerbitSEP.setBackground(new java.awt.Color(255, 255, 254));
         MnBelumTerbitSEP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnBelumTerbitSEP.setForeground(new java.awt.Color(50, 50, 50));
@@ -21585,7 +21585,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnBelumTerbitSEP.setPreferredSize(new java.awt.Dimension(320, 26));
         MnBelumTerbitSEP.addActionListener(this::MnBelumTerbitSEPActionPerformed);
 
-        MnSudahTerbitSEP = new javax.swing.JMenuItem();
+        MnSudahTerbitSEP = new widget.JMenuItem();
         MnSudahTerbitSEP.setBackground(new java.awt.Color(255, 255, 254));
         MnSudahTerbitSEP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSudahTerbitSEP.setForeground(new java.awt.Color(50, 50, 50));
@@ -21597,7 +21597,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSudahTerbitSEP.setPreferredSize(new java.awt.Dimension(320, 26));
         MnSudahTerbitSEP.addActionListener(this::MnSudahTerbitSEPActionPerformed);
 
-        MnSEPUpdateTanggalPulang = new javax.swing.JMenuItem();
+        MnSEPUpdateTanggalPulang = new widget.JMenuItem();
         MnSEPUpdateTanggalPulang.setBackground(new java.awt.Color(255, 255, 254));
         MnSEPUpdateTanggalPulang.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSEPUpdateTanggalPulang.setForeground(new java.awt.Color(50, 50, 50));
@@ -21609,7 +21609,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSEPUpdateTanggalPulang.setPreferredSize(new java.awt.Dimension(320, 26));
         MnSEPUpdateTanggalPulang.addActionListener(this::MnSEPUpdateTanggalPulangActionPerformed);
 
-        MnDataOperasi = new javax.swing.JMenuItem();
+        MnDataOperasi = new widget.JMenuItem();
         MnDataOperasi.setBackground(new java.awt.Color(255, 255, 254));
         MnDataOperasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnDataOperasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21621,7 +21621,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnDataOperasi.setPreferredSize(new java.awt.Dimension(320, 26));
         MnDataOperasi.addActionListener(this::MnDataOperasiActionPerformed);
 
-        MnHasilPemeriksaanUSGNeonatus = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanUSGNeonatus = new widget.JMenuItem();
         MnHasilPemeriksaanUSGNeonatus.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanUSGNeonatus.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanUSGNeonatus.setForeground(new java.awt.Color(50, 50, 50));
@@ -21633,7 +21633,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanUSGNeonatus.setPreferredSize(new java.awt.Dimension(170, 26));
         MnHasilPemeriksaanUSGNeonatus.addActionListener(this::MnHasilPemeriksaanUSGNeonatusActionPerformed);
 
-        MnHasilPemeriksaanUSGAbdomen = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanUSGAbdomen = new widget.JMenuItem();
         MnHasilPemeriksaanUSGAbdomen.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanUSGAbdomen.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanUSGAbdomen.setForeground(new java.awt.Color(50, 50, 50));
@@ -21645,7 +21645,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanUSGAbdomen.setPreferredSize(new java.awt.Dimension(170, 26));
         MnHasilPemeriksaanUSGAbdomen.addActionListener(this::MnHasilPemeriksaanUSGAbdomenActionPerformed);
 
-        MnHasilEndoskopiFaringLaring = new javax.swing.JMenuItem();
+        MnHasilEndoskopiFaringLaring = new widget.JMenuItem();
         MnHasilEndoskopiFaringLaring.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilEndoskopiFaringLaring.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilEndoskopiFaringLaring.setForeground(new java.awt.Color(50, 50, 50));
@@ -21657,7 +21657,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilEndoskopiFaringLaring.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilEndoskopiFaringLaring.addActionListener(this::MnHasilEndoskopiFaringLaringActionPerformed);
 
-        MnHasilEndoskopiHidung = new javax.swing.JMenuItem();
+        MnHasilEndoskopiHidung = new widget.JMenuItem();
         MnHasilEndoskopiHidung.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilEndoskopiHidung.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilEndoskopiHidung.setForeground(new java.awt.Color(50, 50, 50));
@@ -21669,7 +21669,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilEndoskopiHidung.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilEndoskopiHidung.addActionListener(this::MnHasilEndoskopiHidungActionPerformed);
 
-        MnHasilEndoskopiTelinga = new javax.swing.JMenuItem();
+        MnHasilEndoskopiTelinga = new widget.JMenuItem();
         MnHasilEndoskopiTelinga.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilEndoskopiTelinga.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilEndoskopiTelinga.setForeground(new java.awt.Color(50, 50, 50));
@@ -21681,7 +21681,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilEndoskopiTelinga.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilEndoskopiTelinga.addActionListener(this::MnHasilEndoskopiTelingaActionPerformed);
 
-        MnPenilaianAwalKeperawatanRanapNeonatus = new javax.swing.JMenuItem();
+        MnPenilaianAwalKeperawatanRanapNeonatus = new widget.JMenuItem();
         MnPenilaianAwalKeperawatanRanapNeonatus.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanRanapNeonatus.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianAwalKeperawatanRanapNeonatus.setForeground(new java.awt.Color(50, 50, 50));
@@ -21693,7 +21693,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanRanapNeonatus.setPreferredSize(new java.awt.Dimension(240, 26));
         MnPenilaianAwalKeperawatanRanapNeonatus.addActionListener(this::MnPenilaianAwalKeperawatanRanapNeonatusActionPerformed);
 
-        MnPenilaianAwalKeperawatanRanapBayiAnak = new javax.swing.JMenuItem();
+        MnPenilaianAwalKeperawatanRanapBayiAnak = new widget.JMenuItem();
         MnPenilaianAwalKeperawatanRanapBayiAnak.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanRanapBayiAnak.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianAwalKeperawatanRanapBayiAnak.setForeground(new java.awt.Color(50, 50, 50));
@@ -21705,7 +21705,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanRanapBayiAnak.setPreferredSize(new java.awt.Dimension(240, 26));
         MnPenilaianAwalKeperawatanRanapBayiAnak.addActionListener(this::MnPenilaianAwalKeperawatanRanapBayiAnakActionPerformed);
 
-        MnPenilaianPasienImunitasRendah = new javax.swing.JMenuItem();
+        MnPenilaianPasienImunitasRendah = new widget.JMenuItem();
         MnPenilaianPasienImunitasRendah.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPasienImunitasRendah.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianPasienImunitasRendah.setForeground(new java.awt.Color(50, 50, 50));
@@ -21717,7 +21717,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianPasienImunitasRendah.setPreferredSize(new java.awt.Dimension(250, 26));
         MnPenilaianPasienImunitasRendah.addActionListener(this::MnPenilaianPasienImunitasRendahActionPerformed);
 
-        MnCatatanKeseimbanganCairan = new javax.swing.JMenuItem();
+        MnCatatanKeseimbanganCairan = new widget.JMenuItem();
         MnCatatanKeseimbanganCairan.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanKeseimbanganCairan.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanKeseimbanganCairan.setForeground(new java.awt.Color(50, 50, 50));
@@ -21729,7 +21729,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(200, 26));
         MnCatatanKeseimbanganCairan.addActionListener(this::MnCatatanKeseimbanganCairanActionPerformed);
 
-        MnCatatanObservasiCHBP = new javax.swing.JMenuItem();
+        MnCatatanObservasiCHBP = new widget.JMenuItem();
         MnCatatanObservasiCHBP.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiCHBP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiCHBP.setForeground(new java.awt.Color(50, 50, 50));
@@ -21741,7 +21741,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiCHBP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiCHBP.addActionListener(this::MnCatatanObservasiCHBPActionPerformed);
 
-        MnCatatanObservasiRestrainNonFarmakologi = new javax.swing.JMenuItem();
+        MnCatatanObservasiRestrainNonFarmakologi = new widget.JMenuItem();
         MnCatatanObservasiRestrainNonFarmakologi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiRestrainNonFarmakologi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiRestrainNonFarmakologi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21753,7 +21753,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiRestrainNonFarmakologi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiRestrainNonFarmakologi.addActionListener(this::MnCatatanObservasiRestrainNonFarmakologiActionPerformed);
 
-        MnCatatanObservasiVentilator = new javax.swing.JMenuItem();
+        MnCatatanObservasiVentilator = new widget.JMenuItem();
         MnCatatanObservasiVentilator.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiVentilator.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiVentilator.setForeground(new java.awt.Color(50, 50, 50));
@@ -21765,7 +21765,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiVentilator.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiVentilator.addActionListener(this::MnCatatanObservasiVentilatorActionPerformed);
 
-        MnCatatanObservasiBayi = new javax.swing.JMenuItem();
+        MnCatatanObservasiBayi = new widget.JMenuItem();
         MnCatatanObservasiBayi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiBayi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiBayi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21777,7 +21777,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiBayi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiBayi.addActionListener(this::MnCatatanObservasiBayiActionPerformed);
 
-        MnCatatanAnastesiSedasi = new javax.swing.JMenuItem();
+        MnCatatanAnastesiSedasi = new widget.JMenuItem();
         MnCatatanAnastesiSedasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanAnastesiSedasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanAnastesiSedasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21789,7 +21789,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanAnastesiSedasi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanAnastesiSedasi.addActionListener(this::MnCatatanAnastesiSedasiActionPerformed);
 
-        MnCatatanObservasiInduksiPersalinan = new javax.swing.JMenuItem();
+        MnCatatanObservasiInduksiPersalinan = new widget.JMenuItem();
         MnCatatanObservasiInduksiPersalinan.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiInduksiPersalinan.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiInduksiPersalinan.setForeground(new java.awt.Color(50, 50, 50));
@@ -21801,7 +21801,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiInduksiPersalinan.setPreferredSize(new java.awt.Dimension(220, 26));
         MnCatatanObservasiInduksiPersalinan.addActionListener(this::MnCatatanObservasiInduksiPersalinanActionPerformed);
 
-        MnCatatanObservasiHemodialisa = new javax.swing.JMenuItem();
+        MnCatatanObservasiHemodialisa = new widget.JMenuItem();
         MnCatatanObservasiHemodialisa.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiHemodialisa.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiHemodialisa.setForeground(new java.awt.Color(50, 50, 50));
@@ -21813,7 +21813,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiHemodialisa.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiHemodialisa.addActionListener(this::MnCatatanObservasiHemodialisaActionPerformed);
 
-        MnCatatanCairanHemodialisa = new javax.swing.JMenuItem();
+        MnCatatanCairanHemodialisa = new widget.JMenuItem();
         MnCatatanCairanHemodialisa.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanCairanHemodialisa.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanCairanHemodialisa.setForeground(new java.awt.Color(50, 50, 50));
@@ -21825,7 +21825,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanCairanHemodialisa.setPreferredSize(new java.awt.Dimension(200, 26));
         MnCatatanCairanHemodialisa.addActionListener(this::MnCatatanCairanHemodialisaActionPerformed);
 
-        MnChecklistPemberianFibrinolitik = new javax.swing.JMenuItem();
+        MnChecklistPemberianFibrinolitik = new widget.JMenuItem();
         MnChecklistPemberianFibrinolitik.setBackground(new java.awt.Color(255, 255, 254));
         MnChecklistPemberianFibrinolitik.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnChecklistPemberianFibrinolitik.setForeground(new java.awt.Color(50, 50, 50));
@@ -21837,7 +21837,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(230, 26));
         MnChecklistPemberianFibrinolitik.addActionListener(this::MnChecklistPemberianFibrinolitikActionPerformed);
 
-        MnPermintaanKonsultasiMedik = new javax.swing.JMenuItem();
+        MnPermintaanKonsultasiMedik = new widget.JMenuItem();
         MnPermintaanKonsultasiMedik.setBackground(new java.awt.Color(255, 255, 254));
         MnPermintaanKonsultasiMedik.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPermintaanKonsultasiMedik.setForeground(new java.awt.Color(50, 50, 50));
@@ -21849,7 +21849,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPermintaanKonsultasiMedik.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPermintaanKonsultasiMedik.addActionListener(this::MnPermintaanKonsultasiMedikActionPerformed);
 
-        MnPermintaanKonsultasiPerawat = new javax.swing.JMenuItem();
+        MnPermintaanKonsultasiPerawat = new widget.JMenuItem();
         MnPermintaanKonsultasiPerawat.setBackground(new java.awt.Color(255, 255, 254));
         MnPermintaanKonsultasiPerawat.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPermintaanKonsultasiPerawat.setForeground(new java.awt.Color(50, 50, 50));
@@ -21861,7 +21861,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPermintaanKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPermintaanKonsultasiPerawat.addActionListener(this::MnPermintaanKonsultasiPerawatActionPerformed);
 
-        MnPenilaianPsikologKlinis = new javax.swing.JMenuItem();
+        MnPenilaianPsikologKlinis = new widget.JMenuItem();
         MnPenilaianPsikologKlinis.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPsikologKlinis.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianPsikologKlinis.setForeground(new java.awt.Color(50, 50, 50));
@@ -21873,7 +21873,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianPsikologKlinis.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianPsikologKlinis.addActionListener(this::MnPenilaianPsikologKlinisActionPerformed);
 
-        MnPenilaianDerajatDehidrasi = new javax.swing.JMenuItem();
+        MnPenilaianDerajatDehidrasi = new widget.JMenuItem();
         MnPenilaianDerajatDehidrasi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianDerajatDehidrasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianDerajatDehidrasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21885,7 +21885,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianDerajatDehidrasi.addActionListener(this::MnPenilaianDerajatDehidrasiActionPerformed);
 
-        MnPenilaianAwalMedisNeonatus = new javax.swing.JMenuItem();
+        MnPenilaianAwalMedisNeonatus = new widget.JMenuItem();
         MnPenilaianAwalMedisNeonatus.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisNeonatus.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianAwalMedisNeonatus.setForeground(new java.awt.Color(50, 50, 50));
@@ -21897,7 +21897,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianAwalMedisNeonatus.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianAwalMedisNeonatus.addActionListener(this::MnPenilaianAwalMedisNeonatusActionPerformed);
 
-        MnPenilaianAwalMedisJantung = new javax.swing.JMenuItem();
+        MnPenilaianAwalMedisJantung = new widget.JMenuItem();
         MnPenilaianAwalMedisJantung.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisJantung.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianAwalMedisJantung.setForeground(new java.awt.Color(50, 50, 50));
@@ -21909,7 +21909,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianAwalMedisJantung.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianAwalMedisJantung.addActionListener(this::MnPenilaianAwalMedisJantungActionPerformed);
 
-        MnPenilaianBayiBaruLahir = new javax.swing.JMenuItem();
+        MnPenilaianBayiBaruLahir = new widget.JMenuItem();
         MnPenilaianBayiBaruLahir.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianBayiBaruLahir.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianBayiBaruLahir.setForeground(new java.awt.Color(50, 50, 50));
@@ -21921,7 +21921,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianBayiBaruLahir.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianBayiBaruLahir.addActionListener(this::MnPenilaianBayiBaruLahirActionPerformed);
 
-        MnLaporanTindakan = new javax.swing.JMenuItem();
+        MnLaporanTindakan = new widget.JMenuItem();
         MnLaporanTindakan.setBackground(new java.awt.Color(255, 255, 254));
         MnLaporanTindakan.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnLaporanTindakan.setForeground(new java.awt.Color(50, 50, 50));
@@ -21933,7 +21933,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnLaporanTindakan.setPreferredSize(new java.awt.Dimension(200, 26));
         MnLaporanTindakan.addActionListener(this::MnLaporanTindakanActionPerformed);
 
-        MnPelaksanaanInformasiEdukasi = new javax.swing.JMenuItem();
+        MnPelaksanaanInformasiEdukasi = new widget.JMenuItem();
         MnPelaksanaanInformasiEdukasi.setBackground(new java.awt.Color(255, 255, 254));
         MnPelaksanaanInformasiEdukasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPelaksanaanInformasiEdukasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21945,7 +21945,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPelaksanaanInformasiEdukasi.setPreferredSize(new java.awt.Dimension(230, 26));
         MnPelaksanaanInformasiEdukasi.addActionListener(this::MnPelaksanaanInformasiEdukasiActionPerformed);
 
-        MnCatatanPengkajianPaskaOperasi = new javax.swing.JMenuItem();
+        MnCatatanPengkajianPaskaOperasi = new widget.JMenuItem();
         MnCatatanPengkajianPaskaOperasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanPengkajianPaskaOperasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanPengkajianPaskaOperasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21957,7 +21957,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanPengkajianPaskaOperasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCatatanPengkajianPaskaOperasi.addActionListener(this::MnCatatanPengkajianPaskaOperasiActionPerformed);
 
-        MnCatatanObservasiRuangOperasi = new javax.swing.JMenuItem();
+        MnCatatanObservasiRuangOperasi = new widget.JMenuItem();
         MnCatatanObservasiRuangOperasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasiRuangOperasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiRuangOperasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21969,7 +21969,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiRuangOperasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCatatanObservasiRuangOperasi.addActionListener(this::MnCatatanObservasiRuangOperasiActionPerformed);
 
-        MnCheckListKesiapanAnestesi = new javax.swing.JMenuItem();
+        MnCheckListKesiapanAnestesi = new widget.JMenuItem();
         MnCheckListKesiapanAnestesi.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKesiapanAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKesiapanAnestesi.setForeground(new java.awt.Color(50, 50, 50));
@@ -21981,7 +21981,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKesiapanAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCheckListKesiapanAnestesi.addActionListener(this::MnCheckListKesiapanAnestesiActionPerformed);
 
-        MnHasilPemeriksaanSlitLamp = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanSlitLamp = new widget.JMenuItem();
         MnHasilPemeriksaanSlitLamp.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanSlitLamp.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanSlitLamp.setForeground(new java.awt.Color(50, 50, 50));
@@ -21993,7 +21993,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanSlitLamp.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanSlitLamp.addActionListener(this::MnHasilPemeriksaanSlitLampActionPerformed);
 
-        MnHasilPemeriksaanOCT = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanOCT = new widget.JMenuItem();
         MnHasilPemeriksaanOCT.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanOCT.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnHasilPemeriksaanOCT.setForeground(new java.awt.Color(50, 50, 50));
@@ -22005,7 +22005,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanOCT.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanOCT.addActionListener(this::MnHasilPemeriksaanOCTActionPerformed);
 
-        MnPersetujuanPemeriksaanHIV = new javax.swing.JMenuItem();
+        MnPersetujuanPemeriksaanHIV = new widget.JMenuItem();
         MnPersetujuanPemeriksaanHIV.setBackground(new java.awt.Color(255, 255, 254));
         MnPersetujuanPemeriksaanHIV.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPersetujuanPemeriksaanHIV.setForeground(new java.awt.Color(50, 50, 50));
@@ -22017,7 +22017,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPersetujuanPemeriksaanHIV.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPersetujuanPemeriksaanHIV.addActionListener(this::MnPersetujuanPemeriksaanHIVActionPerformed);
 
-        MnSuratPernyataanMemilihDPJP = new javax.swing.JMenuItem();
+        MnSuratPernyataanMemilihDPJP = new widget.JMenuItem();
         MnSuratPernyataanMemilihDPJP.setBackground(new java.awt.Color(255, 255, 254));
         MnSuratPernyataanMemilihDPJP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSuratPernyataanMemilihDPJP.setForeground(new java.awt.Color(50, 50, 50));
@@ -22029,7 +22029,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSuratPernyataanMemilihDPJP.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSuratPernyataanMemilihDPJP.addActionListener(this::MnSuratPernyataanMemilihDPJPActionPerformed);
 
-        MnCheckListKriteriaMasukNICU = new javax.swing.JMenuItem();
+        MnCheckListKriteriaMasukNICU = new widget.JMenuItem();
         MnCheckListKriteriaMasukNICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaMasukNICU.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaMasukNICU.setForeground(new java.awt.Color(50, 50, 50));
@@ -22041,7 +22041,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaMasukNICU.addActionListener(this::MnCheckListKriteriaMasukNICUActionPerformed);
 
-        MnCheckListKriteriaMasukPICU = new javax.swing.JMenuItem();
+        MnCheckListKriteriaMasukPICU = new widget.JMenuItem();
         MnCheckListKriteriaMasukPICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaMasukPICU.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaMasukPICU.setForeground(new java.awt.Color(50, 50, 50));
@@ -22053,7 +22053,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaMasukPICU.addActionListener(this::MnCheckListKriteriaMasukPICUActionPerformed);
 
-        MnCheckListKriteriaMasukIsolasi = new javax.swing.JMenuItem();
+        MnCheckListKriteriaMasukIsolasi = new widget.JMenuItem();
         MnCheckListKriteriaMasukIsolasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaMasukIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaMasukIsolasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -22065,7 +22065,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaMasukIsolasi.addActionListener(this::MnCheckListKriteriaMasukIsolasiActionPerformed);
 
-        MnCheckListKriteriaKeluarIsolasi = new javax.swing.JMenuItem();
+        MnCheckListKriteriaKeluarIsolasi = new widget.JMenuItem();
         MnCheckListKriteriaKeluarIsolasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaKeluarIsolasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaKeluarIsolasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -22077,7 +22077,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaKeluarIsolasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaKeluarIsolasi.addActionListener(this::MnCheckListKriteriaKeluarIsolasiActionPerformed);
 
-        MnCheckListKriteriaKeluarPICU = new javax.swing.JMenuItem();
+        MnCheckListKriteriaKeluarPICU = new widget.JMenuItem();
         MnCheckListKriteriaKeluarPICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaKeluarPICU.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaKeluarPICU.setForeground(new java.awt.Color(50, 50, 50));
@@ -22089,7 +22089,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaKeluarPICU.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaKeluarPICU.addActionListener(this::MnCheckListKriteriaKeluarPICUActionPerformed);
 
-        MnCheckListKriteriaKeluarNICU = new javax.swing.JMenuItem();
+        MnCheckListKriteriaKeluarNICU = new widget.JMenuItem();
         MnCheckListKriteriaKeluarNICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaKeluarNICU.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCheckListKriteriaKeluarNICU.setForeground(new java.awt.Color(50, 50, 50));
@@ -22101,7 +22101,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCheckListKriteriaKeluarNICU.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaKeluarNICU.addActionListener(this::MnCheckListKriteriaKeluarNICUActionPerformed);
 
-        MnPenilaianAwalMedisPsikiatri = new javax.swing.JMenuItem();
+        MnPenilaianAwalMedisPsikiatri = new widget.JMenuItem();
         MnPenilaianAwalMedisPsikiatri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisPsikiatri.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPenilaianAwalMedisPsikiatri.setForeground(new java.awt.Color(50, 50, 50));
@@ -22113,7 +22113,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianAwalMedisPsikiatri.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianAwalMedisPsikiatri.addActionListener(this::MnPenilaianAwalMedisPsikiatriActionPerformed);
 
-        MnSkriningGiziKehamilan = new javax.swing.JMenuItem();
+        MnSkriningGiziKehamilan = new widget.JMenuItem();
         MnSkriningGiziKehamilan.setBackground(new java.awt.Color(255, 255, 254));
         MnSkriningGiziKehamilan.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkriningGiziKehamilan.setForeground(new java.awt.Color(50, 50, 50));
@@ -22125,7 +22125,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSkriningGiziKehamilan.addActionListener(this::MnSkriningGiziKehamilanActionPerformed);
 
-        MnSerahTerimaBarangAnggotaTubuh = new javax.swing.JMenuItem();
+        MnSerahTerimaBarangAnggotaTubuh = new widget.JMenuItem();
         MnSerahTerimaBarangAnggotaTubuh.setBackground(new java.awt.Color(255, 255, 254));
         MnSerahTerimaBarangAnggotaTubuh.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSerahTerimaBarangAnggotaTubuh.setForeground(new java.awt.Color(50, 50, 50));
@@ -22137,7 +22137,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSerahTerimaBarangAnggotaTubuh.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSerahTerimaBarangAnggotaTubuh.addActionListener(this::MnSerahTerimaBarangAnggotaTubuhActionPerformed);
 
-        MnPersetujuanBimbinganRohani = new javax.swing.JMenuItem();
+        MnPersetujuanBimbinganRohani = new widget.JMenuItem();
         MnPersetujuanBimbinganRohani.setBackground(new java.awt.Color(255, 255, 254));
         MnPersetujuanBimbinganRohani.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPersetujuanBimbinganRohani.setForeground(new java.awt.Color(50, 50, 50));
@@ -22149,7 +22149,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPersetujuanBimbinganRohani.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPersetujuanBimbinganRohani.addActionListener(this::MnPersetujuanBimbinganRohaniActionPerformed);
 
-        MnPermintaanPerlindunganDariKekerasan = new javax.swing.JMenuItem();
+        MnPermintaanPerlindunganDariKekerasan = new widget.JMenuItem();
         MnPermintaanPerlindunganDariKekerasan.setBackground(new java.awt.Color(255, 255, 254));
         MnPermintaanPerlindunganDariKekerasan.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPermintaanPerlindunganDariKekerasan.setForeground(new java.awt.Color(50, 50, 50));
@@ -22161,7 +22161,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPermintaanPerlindunganDariKekerasan.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPermintaanPerlindunganDariKekerasan.addActionListener(this::MnPermintaanPerlindunganDariKekerasanActionPerformed);
 
-        MnSuratPermohonanPrivasi = new javax.swing.JMenuItem();
+        MnSuratPermohonanPrivasi = new widget.JMenuItem();
         MnSuratPermohonanPrivasi.setBackground(new java.awt.Color(255, 255, 254));
         MnSuratPermohonanPrivasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSuratPermohonanPrivasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -22173,7 +22173,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSuratPermohonanPrivasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSuratPermohonanPrivasi.addActionListener(this::MnSuratPermohonanPrivasiActionPerformed);
 
-        MnSuratPermintaanSecondOpinion = new javax.swing.JMenuItem();
+        MnSuratPermintaanSecondOpinion = new widget.JMenuItem();
         MnSuratPermintaanSecondOpinion.setBackground(new java.awt.Color(255, 255, 254));
         MnSuratPermintaanSecondOpinion.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSuratPermintaanSecondOpinion.setForeground(new java.awt.Color(50, 50, 50));
@@ -22185,7 +22185,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSuratPermintaanSecondOpinion.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSuratPermintaanSecondOpinion.addActionListener(this::MnSuratPermintaanSecondOpinionActionPerformed);
 
-        MnSuratPenolakanResusitasi = new javax.swing.JMenuItem();
+        MnSuratPenolakanResusitasi = new widget.JMenuItem();
         MnSuratPenolakanResusitasi.setBackground(new java.awt.Color(255, 255, 254));
         MnSuratPenolakanResusitasi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSuratPenolakanResusitasi.setForeground(new java.awt.Color(50, 50, 50));
@@ -22197,7 +22197,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSuratPenolakanResusitasi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSuratPenolakanResusitasi.addActionListener(this::MnSuratPenolakanResusitasiActionPerformed);
 
-        MnPengajuanCutiPerawatanPasien = new javax.swing.JMenuItem();
+        MnPengajuanCutiPerawatanPasien = new widget.JMenuItem();
         MnPengajuanCutiPerawatanPasien.setBackground(new java.awt.Color(255, 255, 254));
         MnPengajuanCutiPerawatanPasien.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPengajuanCutiPerawatanPasien.setForeground(new java.awt.Color(50, 50, 50));
@@ -22209,7 +22209,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPengajuanCutiPerawatanPasien.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPengajuanCutiPerawatanPasien.addActionListener(this::MnPengajuanCutiPerawatanPasienActionPerformed);
 
-        MnIntervensiNyeriFarmakologi = new javax.swing.JMenuItem();
+        MnIntervensiNyeriFarmakologi = new widget.JMenuItem();
         MnIntervensiNyeriFarmakologi.setBackground(new java.awt.Color(255, 255, 254));
         MnIntervensiNyeriFarmakologi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnIntervensiNyeriFarmakologi.setForeground(new java.awt.Color(50, 50, 50));
@@ -22221,7 +22221,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnIntervensiNyeriFarmakologi.addActionListener(this::MnIntervensiNyeriFarmakologiActionPerformed);
 
-        MnIntervensiNyeriNonFarmakologi = new javax.swing.JMenuItem();
+        MnIntervensiNyeriNonFarmakologi = new widget.JMenuItem();
         MnIntervensiNyeriNonFarmakologi.setBackground(new java.awt.Color(255, 255, 254));
         MnIntervensiNyeriNonFarmakologi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnIntervensiNyeriNonFarmakologi.setForeground(new java.awt.Color(50, 50, 50));
@@ -22233,7 +22233,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnIntervensiNyeriNonFarmakologi.setPreferredSize(new java.awt.Dimension(210, 26));
         MnIntervensiNyeriNonFarmakologi.addActionListener(this::MnIntervensiNyeriNonFarmakologiActionPerformed);
 
-        MnHasilUSG = new javax.swing.JMenu();
+        MnHasilUSG = new widget.JMenu();
         MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
         MnHasilUSG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
@@ -22244,7 +22244,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilUSG.setName("MnHasilUSG");
         MnHasilUSG.setPreferredSize(new java.awt.Dimension(200, 26));
 
-        MnHasilEndoskopi = new javax.swing.JMenu();
+        MnHasilEndoskopi = new widget.JMenu();
         MnHasilEndoskopi.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilEndoskopi.setForeground(new java.awt.Color(50, 50, 50));
         MnHasilEndoskopi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
@@ -22255,7 +22255,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilEndoskopi.setName("MnHasilEndoskopi");
         MnHasilEndoskopi.setPreferredSize(new java.awt.Dimension(200, 26));
 
-        MnHasilPemeriksaanAlat = new javax.swing.JMenu();
+        MnHasilPemeriksaanAlat = new widget.JMenu();
         MnHasilPemeriksaanAlat.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanAlat.setForeground(new java.awt.Color(50, 50, 50));
         MnHasilPemeriksaanAlat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
@@ -22266,7 +22266,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPemeriksaanAlat.setName("MnHasilPemeriksaanAlat");
         MnHasilPemeriksaanAlat.setPreferredSize(new java.awt.Dimension(200, 26));
 
-        MnCatatanObservasi = new javax.swing.JMenu();
+        MnCatatanObservasi = new widget.JMenu();
         MnCatatanObservasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanObservasi.setForeground(new java.awt.Color(50, 50, 50));
         MnCatatanObservasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
@@ -22277,7 +22277,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasi.setName("MnCatatanObservasi");
         MnCatatanObservasi.setPreferredSize(new java.awt.Dimension(200, 26));
 
-        MnEdukasi = new javax.swing.JMenu();
+        MnEdukasi = new widget.JMenu();
         MnEdukasi.setBackground(new java.awt.Color(255, 255, 254));
         MnEdukasi.setForeground(new java.awt.Color(50, 50, 50));
         MnEdukasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
@@ -22288,7 +22288,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnEdukasi.setName("MnEdukasi");
         MnEdukasi.setPreferredSize(new java.awt.Dimension(200, 26));
 
-        MnSuratPersetujuan = new javax.swing.JMenu();
+        MnSuratPersetujuan = new widget.JMenu();
         MnSuratPersetujuan.setBackground(new java.awt.Color(255, 255, 254));
         MnSuratPersetujuan.setForeground(new java.awt.Color(50, 50, 50));
         MnSuratPersetujuan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));

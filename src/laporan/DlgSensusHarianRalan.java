@@ -203,10 +203,10 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppTampilkanBaru = new javax.swing.JMenuItem();
-        ppTampilkanLama = new javax.swing.JMenuItem();
-        ppTampilkanLanjutRalan = new javax.swing.JMenuItem();
-        ppTampilkanLanjutRanap = new javax.swing.JMenuItem();
+        ppTampilkanBaru = new widget.JMenuItem();
+        ppTampilkanLama = new widget.JMenuItem();
+        ppTampilkanLanjutRalan = new widget.JMenuItem();
+        ppTampilkanLanjutRanap = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass5 = new widget.panelisi();
         label11 = new widget.Label();
@@ -1148,10 +1148,10 @@ public final class DlgSensusHarianRalan extends javax.swing.JDialog {
     private widget.TextBox nmpoli;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppTampilkanBaru;
-    private javax.swing.JMenuItem ppTampilkanLama;
-    private javax.swing.JMenuItem ppTampilkanLanjutRalan;
-    private javax.swing.JMenuItem ppTampilkanLanjutRanap;
+    private widget.JMenuItem ppTampilkanBaru;
+    private widget.JMenuItem ppTampilkanLama;
+    private widget.JMenuItem ppTampilkanLanjutRalan;
+    private widget.JMenuItem ppTampilkanLanjutRanap;
     private widget.Table table;
     private widget.Table table2;
     // End of variables declaration//GEN-END:variables

@@ -279,11 +279,11 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnLaporanResume = new javax.swing.JMenuItem();
-        MnLaporanResumeESign = new javax.swing.JMenuItem();
-        MnLaporanResumeSertisign = new javax.swing.JMenuItem();
-        MnInputDiagnosa = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
+        MnLaporanResume = new widget.JMenuItem();
+        MnLaporanResumeESign = new widget.JMenuItem();
+        MnLaporanResumeSertisign = new widget.JMenuItem();
+        MnInputDiagnosa = new widget.JMenuItem();
+        ppBerkasDigital = new widget.JMenuItem();
         WindowURLSertisign = new javax.swing.JDialog();
         internalFrame9 = new widget.InternalFrame();
         jLabel43 = new widget.Label();
@@ -3148,10 +3148,10 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.TextArea LabBelum;
     private widget.TextBox Masuk;
-    private javax.swing.JMenuItem MnInputDiagnosa;
-    private javax.swing.JMenuItem MnLaporanResume;
-    private javax.swing.JMenuItem MnLaporanResumeESign;
-    private javax.swing.JMenuItem MnLaporanResumeSertisign;
+    private widget.JMenuItem MnInputDiagnosa;
+    private widget.JMenuItem MnLaporanResume;
+    private widget.JMenuItem MnLaporanResumeESign;
+    private widget.JMenuItem MnLaporanResumeSertisign;
     private widget.TextBox NamaDokterPengirim;
     private widget.TextBox NmDokter;
     private widget.TextBox NmRuang;
@@ -3229,7 +3229,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.panelisi panelisi5;
     private widget.panelisi panelisi6;
-    private javax.swing.JMenuItem ppBerkasDigital;
+    private widget.JMenuItem ppBerkasDigital;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane10;
     private widget.ScrollPane scrollPane11;

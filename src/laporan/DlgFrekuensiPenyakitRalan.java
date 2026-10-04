@@ -105,10 +105,10 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppGrafikTerbanyakBatang = new javax.swing.JMenuItem();
-        ppGrafikTerbanyakPie = new javax.swing.JMenuItem();
-        ppGrafikTerkecilBatang = new javax.swing.JMenuItem();
-        ppGrafikTerkecilPie = new javax.swing.JMenuItem();
+        ppGrafikTerbanyakBatang = new widget.JMenuItem();
+        ppGrafikTerbanyakPie = new widget.JMenuItem();
+        ppGrafikTerkecilBatang = new widget.JMenuItem();
+        ppGrafikTerkecilPie = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -1887,10 +1887,10 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
     private widget.TextBox nmpenjab;
     private widget.TextBox nmpoli;
     private widget.panelisi panelisi1;
-    private javax.swing.JMenuItem ppGrafikTerbanyakBatang;
-    private javax.swing.JMenuItem ppGrafikTerbanyakPie;
-    private javax.swing.JMenuItem ppGrafikTerkecilBatang;
-    private javax.swing.JMenuItem ppGrafikTerkecilPie;
+    private widget.JMenuItem ppGrafikTerbanyakBatang;
+    private widget.JMenuItem ppGrafikTerbanyakPie;
+    private widget.JMenuItem ppGrafikTerkecilBatang;
+    private widget.JMenuItem ppGrafikTerkecilPie;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

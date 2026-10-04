@@ -197,11 +197,11 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnLaporanResume = new javax.swing.JMenuItem();
-        MnInputDiagnosa = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
-        MnSPBK = new javax.swing.JMenuItem();
-        MnSPBK2 = new javax.swing.JMenuItem();
+        MnLaporanResume = new widget.JMenuItem();
+        MnInputDiagnosa = new widget.JMenuItem();
+        ppBerkasDigital = new widget.JMenuItem();
+        MnSPBK = new widget.JMenuItem();
+        MnSPBK2 = new widget.JMenuItem();
         Tanggal = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -2102,10 +2102,10 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private widget.TextBox KodeProsedurUtama;
     private widget.ComboBox Kondisi;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnInputDiagnosa;
-    private javax.swing.JMenuItem MnLaporanResume;
-    private javax.swing.JMenuItem MnSPBK;
-    private javax.swing.JMenuItem MnSPBK2;
+    private widget.JMenuItem MnInputDiagnosa;
+    private widget.JMenuItem MnLaporanResume;
+    private widget.JMenuItem MnSPBK;
+    private widget.JMenuItem MnSPBK2;
     private widget.TextBox NmDokter;
     private widget.TextArea Obat2an;
     private javax.swing.JPanel PanelInput;
@@ -2148,7 +2148,7 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private widget.Label label14;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppBerkasDigital;
+    private widget.JMenuItem ppBerkasDigital;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;

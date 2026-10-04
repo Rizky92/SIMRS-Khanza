@@ -126,8 +126,8 @@ public class DlgPermintaan extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppStok1 = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppStok1 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -936,8 +936,8 @@ public class DlgPermintaan extends javax.swing.JDialog {
     private widget.TextBox nmptg;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppStok1;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppStok1;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

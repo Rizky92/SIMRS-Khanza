@@ -131,11 +131,11 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppHapus = new javax.swing.JMenuItem();
-        ppDisetujui = new javax.swing.JMenuItem();
-        ppTidakDisetujui = new javax.swing.JMenuItem();
-        ppVerifikasi = new javax.swing.JMenuItem();
-        ppCetakInvoice = new javax.swing.JMenuItem();
+        ppHapus = new widget.JMenuItem();
+        ppDisetujui = new widget.JMenuItem();
+        ppTidakDisetujui = new widget.JMenuItem();
+        ppVerifikasi = new widget.JMenuItem();
+        ppCetakInvoice = new widget.JMenuItem();
         Perusahaan = new widget.TextBox();
         AlamatAsuransi = new widget.TextBox();
         NoTelp = new widget.TextBox();
@@ -1172,11 +1172,11 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.TextBox nmpenjab;
     private widget.panelisi panelisi1;
-    private javax.swing.JMenuItem ppCetakInvoice;
-    private javax.swing.JMenuItem ppDisetujui;
-    private javax.swing.JMenuItem ppHapus;
-    private javax.swing.JMenuItem ppTidakDisetujui;
-    private javax.swing.JMenuItem ppVerifikasi;
+    private widget.JMenuItem ppCetakInvoice;
+    private widget.JMenuItem ppDisetujui;
+    private widget.JMenuItem ppHapus;
+    private widget.JMenuItem ppTidakDisetujui;
+    private widget.JMenuItem ppVerifikasi;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

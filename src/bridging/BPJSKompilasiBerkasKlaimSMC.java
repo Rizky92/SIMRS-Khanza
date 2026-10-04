@@ -201,10 +201,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
+        ppPilihSemua = new widget.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        ppUpdateTanggalPulangSEP = new javax.swing.JMenuItem();
+        ppUpdateTanggalPulangSEP = new widget.JMenuItem();
         WindowUpdatePulang = new javax.swing.JDialog();
         internalFrame11 = new widget.InternalFrame();
         BtnCloseIn8 = new widget.Button();
@@ -3212,9 +3212,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private laporan.PanelIdrgSmc panelIdrg;
     private laporan.PanelInacbgSmc panelInacbg;
     private widget.panelisi panelInvoices;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppPilihSemua;
-    private javax.swing.JMenuItem ppUpdateTanggalPulangSEP;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppPilihSemua;
+    private widget.JMenuItem ppUpdateTanggalPulangSEP;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.TabPane tabKanan;

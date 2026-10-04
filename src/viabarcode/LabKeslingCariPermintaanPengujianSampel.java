@@ -260,9 +260,9 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppSuratPermintaan = new javax.swing.JMenuItem();
-        ppDapatDilayani = new javax.swing.JMenuItem();
-        ppTidakDapatDilayani = new javax.swing.JMenuItem();
+        ppSuratPermintaan = new widget.JMenuItem();
+        ppDapatDilayani = new widget.JMenuItem();
+        ppTidakDapatDilayani = new widget.JMenuItem();
         KodeSampel = new widget.TextBox();
         KodePelanggan = new widget.TextBox();
         KodePetugas = new widget.TextBox();
@@ -2060,9 +2060,9 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppDapatDilayani;
-    private javax.swing.JMenuItem ppSuratPermintaan;
-    private javax.swing.JMenuItem ppTidakDapatDilayani;
+    private widget.JMenuItem ppDapatDilayani;
+    private widget.JMenuItem ppSuratPermintaan;
+    private widget.JMenuItem ppTidakDapatDilayani;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane4;

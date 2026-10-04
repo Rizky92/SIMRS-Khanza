@@ -234,12 +234,12 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnJadikanPerkiraan = new javax.swing.JMenuItem();
+        MnJadikanPerkiraan = new widget.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
-        MnJadikanPerkiraan1 = new javax.swing.JMenuItem();
+        MnJadikanPerkiraan1 = new widget.JMenuItem();
         jPopupMenu3 = new javax.swing.JPopupMenu();
-        MnJadikanPerkiraan2 = new javax.swing.JMenuItem();
-        MnPerkiraanBiayaManual = new javax.swing.JMenuItem();
+        MnJadikanPerkiraan2 = new widget.JMenuItem();
+        MnPerkiraanBiayaManual = new widget.JMenuItem();
         WindowInput = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
         NilaiPerkiraanManual = new widget.TextBox();
@@ -1312,10 +1312,10 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
     private widget.CekBox ChkCari;
     public widget.TextBox Diagnosa;
     private javax.swing.JPanel FormCari;
-    private javax.swing.JMenuItem MnJadikanPerkiraan;
-    private javax.swing.JMenuItem MnJadikanPerkiraan1;
-    private javax.swing.JMenuItem MnJadikanPerkiraan2;
-    private javax.swing.JMenuItem MnPerkiraanBiayaManual;
+    private widget.JMenuItem MnJadikanPerkiraan;
+    private widget.JMenuItem MnJadikanPerkiraan1;
+    private widget.JMenuItem MnJadikanPerkiraan2;
+    private widget.JMenuItem MnPerkiraanBiayaManual;
     private widget.TextBox NilaiPerkiraanManual;
     private widget.TextBox NmBangsal;
     private widget.ScrollPane Scroll;

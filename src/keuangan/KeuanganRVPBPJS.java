@@ -227,13 +227,13 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDetailPiutang = new javax.swing.JMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppUmbal = new javax.swing.JMenuItem();
-        ppUmbalMonitoringKlaim = new javax.swing.JMenuItem();
-        ppRincian = new javax.swing.JMenuItem();
-        ppHilangkanRincian = new javax.swing.JMenuItem();
+        MnDetailPiutang = new widget.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppPilihSemua = new widget.JMenuItem();
+        ppUmbal = new widget.JMenuItem();
+        ppUmbalMonitoringKlaim = new widget.JMenuItem();
+        ppRincian = new widget.JMenuItem();
+        ppHilangkanRincian = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -3173,7 +3173,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     private javax.swing.JLabel LCount1;
     private javax.swing.JLabel LCount2;
     private javax.swing.JLabel LCount3;
-    private javax.swing.JMenuItem MnDetailPiutang;
+    private widget.JMenuItem MnDetailPiutang;
     private widget.TextBox NmPetugas;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -3202,12 +3202,12 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppHilangkanRincian;
-    private javax.swing.JMenuItem ppPilihSemua;
-    private javax.swing.JMenuItem ppRincian;
-    private javax.swing.JMenuItem ppUmbal;
-    private javax.swing.JMenuItem ppUmbalMonitoringKlaim;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppHilangkanRincian;
+    private widget.JMenuItem ppPilihSemua;
+    private widget.JMenuItem ppRincian;
+    private widget.JMenuItem ppUmbal;
+    private widget.JMenuItem ppUmbalMonitoringKlaim;
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 

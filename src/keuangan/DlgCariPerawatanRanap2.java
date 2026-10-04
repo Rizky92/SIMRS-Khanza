@@ -160,10 +160,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppDokter = new javax.swing.JMenuItem();
-        ppPetugas = new javax.swing.JMenuItem();
-        ppPetugasDokter = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppDokter = new widget.JMenuItem();
+        ppPetugas = new widget.JMenuItem();
+        ppPetugasDokter = new widget.JMenuItem();
         TNoRw = new widget.TextBox();
         TPasien = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1011,10 +1011,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.TextBox nmdokter;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppDokter;
-    private javax.swing.JMenuItem ppPetugas;
-    private javax.swing.JMenuItem ppPetugasDokter;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppDokter;
+    private widget.JMenuItem ppPetugas;
+    private widget.JMenuItem ppPetugasDokter;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

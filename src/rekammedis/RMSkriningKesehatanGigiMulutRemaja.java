@@ -183,7 +183,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSkriningKesehatanGigiMulutRemaja = new javax.swing.JMenuItem();
+        MnSkriningKesehatanGigiMulutRemaja = new widget.JMenuItem();
         LoadHTML = new widget.editorpane();
         Jk = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1498,7 +1498,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnSkriningKesehatanGigiMulutRemaja;
+    private widget.JMenuItem MnSkriningKesehatanGigiMulutRemaja;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.TextArea PemeriksaanFisik;

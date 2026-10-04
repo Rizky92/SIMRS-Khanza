@@ -11046,7 +11046,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                           BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnSkriningCURB65,BtnSkriningGiziKehamilan,BtnResepIterasiBPJS,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,
                           BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnSkriningTOLAC;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
-    private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
+    private widget.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
     private widget.Button BtnPengkajianInvasifNonBedahSMC;
 
@@ -14289,7 +14289,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TInstruksi.setComponentPopupMenu(PopupPemeriksaan);
         TEvaluasi.setComponentPopupMenu(PopupPemeriksaan);
 
-        MnSOAPDokter = new javax.swing.JMenuItem();
+        MnSOAPDokter = new widget.JMenuItem();
         MnSOAPDokter.setBackground(new java.awt.Color(255, 255, 254));
         MnSOAPDokter.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSOAPDokter.setForeground(new java.awt.Color(50, 50, 50));
@@ -14301,7 +14301,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnSOAPDokter.setPreferredSize(new java.awt.Dimension(210, 26));
         MnSOAPDokter.addActionListener(this::MnSOAPDokterActionPerformed);
 
-        MnSOAPPetugas = new javax.swing.JMenuItem();
+        MnSOAPPetugas = new widget.JMenuItem();
         MnSOAPPetugas.setBackground(new java.awt.Color(255, 255, 254));
         MnSOAPPetugas.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSOAPPetugas.setForeground(new java.awt.Color(50, 50, 50));
@@ -14313,7 +14313,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnSOAPPetugas.setPreferredSize(new java.awt.Dimension(210, 26));
         MnSOAPPetugas.addActionListener(this::MnSOAPPetugasActionPerformed);
 
-        MnCopySOAP = new javax.swing.JMenuItem();
+        MnCopySOAP = new widget.JMenuItem();
         MnCopySOAP.setBackground(new java.awt.Color(255, 255, 254));
         MnCopySOAP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCopySOAP.setForeground(new java.awt.Color(50, 50, 50));
@@ -14325,7 +14325,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnCopySOAP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCopySOAP.addActionListener(this::MnCopySOAPActionPerformed);
 
-        MnPasteSOAP = new javax.swing.JMenuItem();
+        MnPasteSOAP = new widget.JMenuItem();
         MnPasteSOAP.setBackground(new java.awt.Color(255, 255, 254));
         MnPasteSOAP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPasteSOAP.setForeground(new java.awt.Color(50, 50, 50));

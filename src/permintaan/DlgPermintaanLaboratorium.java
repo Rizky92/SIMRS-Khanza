@@ -308,14 +308,14 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
 
         Penjab = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppSemua = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppSemua = new widget.JMenuItem();
         Jk = new widget.TextBox();
         Umur = new widget.TextBox();
         Alamat = new widget.TextBox();
         PopupMB = new javax.swing.JPopupMenu();
-        ppBersihkan1 = new javax.swing.JMenuItem();
-        ppSemua1 = new javax.swing.JMenuItem();
+        ppBersihkan1 = new widget.JMenuItem();
+        ppSemua1 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         internalFrame2 = new widget.InternalFrame();
         FormInput = new javax.swing.JPanel();
@@ -2006,10 +2006,10 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private widget.panelisi panelGlass12;
     private widget.panelisi panelGlass13;
     private widget.panelisi panelGlass8;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppBersihkan1;
-    private javax.swing.JMenuItem ppSemua;
-    private javax.swing.JMenuItem ppSemua1;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppBersihkan1;
+    private widget.JMenuItem ppSemua;
+    private widget.JMenuItem ppSemua1;
     private widget.Table tbDetailMB;
     private widget.Table tbDetailPK;
     private widget.Table tbTarifMB;

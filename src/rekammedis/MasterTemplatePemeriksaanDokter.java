@@ -670,8 +670,8 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppSemua = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppSemua = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         TabRawat = new widget.TabPane();
         internalFrame2 = new widget.InternalFrame();
@@ -3073,8 +3073,8 @@ public class MasterTemplatePemeriksaanDokter extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppSemua;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppSemua;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;

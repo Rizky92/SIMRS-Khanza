@@ -139,10 +139,10 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakSuratSKBN = new javax.swing.JMenuItem();
-        MnCetakSuratSKBN1 = new javax.swing.JMenuItem();
-        MnCetakSuratSKBN2 = new javax.swing.JMenuItem();
-        MnCetakSuratSKBN3 = new javax.swing.JMenuItem();
+        MnCetakSuratSKBN = new widget.JMenuItem();
+        MnCetakSuratSKBN1 = new widget.JMenuItem();
+        MnCetakSuratSKBN2 = new widget.JMenuItem();
+        MnCetakSuratSKBN3 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1348,10 +1348,10 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private widget.TextBox KdDokter;
     private widget.TextBox Keperluan;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnCetakSuratSKBN;
-    private javax.swing.JMenuItem MnCetakSuratSKBN1;
-    private javax.swing.JMenuItem MnCetakSuratSKBN2;
-    private javax.swing.JMenuItem MnCetakSuratSKBN3;
+    private widget.JMenuItem MnCetakSuratSKBN;
+    private widget.JMenuItem MnCetakSuratSKBN1;
+    private widget.JMenuItem MnCetakSuratSKBN2;
+    private widget.JMenuItem MnCetakSuratSKBN3;
     private widget.TextBox NmDokter;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;

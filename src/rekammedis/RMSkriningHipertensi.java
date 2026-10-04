@@ -215,7 +215,7 @@ public final class RMSkriningHipertensi extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSkriningHipertensi = new javax.swing.JMenuItem();
+        MnSkriningHipertensi = new widget.JMenuItem();
         LoadHTML = new widget.editorpane();
         Jk = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1522,7 +1522,7 @@ public final class RMSkriningHipertensi extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnSkriningHipertensi;
+    private widget.JMenuItem MnSkriningHipertensi;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

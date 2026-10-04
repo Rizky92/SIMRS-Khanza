@@ -122,15 +122,15 @@ public class UTDCariPenyerahanDarah extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppCetakNota = new javax.swing.JMenuItem();
-        ppHapus = new javax.swing.JMenuItem();
-        ppVerif = new javax.swing.JMenuItem();
-        ppTampilkanBHPMedis = new javax.swing.JMenuItem();
-        ppTampilkanBHPPenunjang = new javax.swing.JMenuItem();
-        ppTampilkanBHPPenunjangDanMedis = new javax.swing.JMenuItem();
-        ppHapusBHPMedis = new javax.swing.JMenuItem();
-        ppHapusBHPNonMedis = new javax.swing.JMenuItem();
-        ppHapusBHPMedisDanNonMedis = new javax.swing.JMenuItem();
+        ppCetakNota = new widget.JMenuItem();
+        ppHapus = new widget.JMenuItem();
+        ppVerif = new widget.JMenuItem();
+        ppTampilkanBHPMedis = new widget.JMenuItem();
+        ppTampilkanBHPPenunjang = new widget.JMenuItem();
+        ppTampilkanBHPPenunjangDanMedis = new widget.JMenuItem();
+        ppHapusBHPMedis = new widget.JMenuItem();
+        ppHapusBHPNonMedis = new widget.JMenuItem();
+        ppHapusBHPMedisDanNonMedis = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -1370,15 +1370,15 @@ public class UTDCariPenyerahanDarah extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppCetakNota;
-    private javax.swing.JMenuItem ppHapus;
-    private javax.swing.JMenuItem ppHapusBHPMedis;
-    private javax.swing.JMenuItem ppHapusBHPMedisDanNonMedis;
-    private javax.swing.JMenuItem ppHapusBHPNonMedis;
-    private javax.swing.JMenuItem ppTampilkanBHPMedis;
-    private javax.swing.JMenuItem ppTampilkanBHPPenunjang;
-    private javax.swing.JMenuItem ppTampilkanBHPPenunjangDanMedis;
-    private javax.swing.JMenuItem ppVerif;
+    private widget.JMenuItem ppCetakNota;
+    private widget.JMenuItem ppHapus;
+    private widget.JMenuItem ppHapusBHPMedis;
+    private widget.JMenuItem ppHapusBHPMedisDanNonMedis;
+    private widget.JMenuItem ppHapusBHPNonMedis;
+    private widget.JMenuItem ppTampilkanBHPMedis;
+    private widget.JMenuItem ppTampilkanBHPPenunjang;
+    private widget.JMenuItem ppTampilkanBHPPenunjangDanMedis;
+    private widget.JMenuItem ppVerif;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

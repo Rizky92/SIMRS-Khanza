@@ -194,10 +194,10 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppRincian = new javax.swing.JMenuItem();
-        ppHilangkanRincian = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppPilihSemua = new widget.JMenuItem();
+        ppRincian = new widget.JMenuItem();
+        ppHilangkanRincian = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -1868,10 +1868,10 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
     private widget.Label label18;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppHilangkanRincian;
-    private javax.swing.JMenuItem ppPilihSemua;
-    private javax.swing.JMenuItem ppRincian;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppHilangkanRincian;
+    private widget.JMenuItem ppPilihSemua;
+    private widget.JMenuItem ppRincian;
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 

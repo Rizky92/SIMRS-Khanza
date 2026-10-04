@@ -131,8 +131,8 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppSemua = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppSemua = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -1148,8 +1148,8 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
     private widget.Label label11;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelisi5;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppSemua;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppSemua;
     private widget.ScrollPane scrollInput;
     private widget.Table tbPermintaan;
     // End of variables declaration//GEN-END:variables

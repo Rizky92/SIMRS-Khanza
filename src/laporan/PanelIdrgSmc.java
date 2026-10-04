@@ -222,9 +222,9 @@ public class PanelIdrgSmc extends widget.panelisi {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppJadikanDiagnosaUtama = new javax.swing.JMenuItem();
+        ppJadikanDiagnosaUtama = new widget.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
-        ppJadikanProsedurUtama = new javax.swing.JMenuItem();
+        ppJadikanProsedurUtama = new widget.JMenuItem();
         TabRawat = new javax.swing.JTabbedPane();
         FormData = new widget.PanelBiasa();
         jLabel13 = new widget.Label();
@@ -585,8 +585,8 @@ public class PanelIdrgSmc extends widget.panelisi {
     private widget.Label jLabel15;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JMenuItem ppJadikanDiagnosaUtama;
-    private javax.swing.JMenuItem ppJadikanProsedurUtama;
+    private widget.JMenuItem ppJadikanDiagnosaUtama;
+    private widget.JMenuItem ppJadikanProsedurUtama;
     private widget.Table tbDiagnosaPasien;
     private widget.Table tbICD10;
     private widget.Table tbICD9CM;

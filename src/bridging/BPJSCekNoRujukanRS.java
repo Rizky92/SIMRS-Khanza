@@ -425,12 +425,12 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
         TPoli = new widget.TextBox();
         TBiaya = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDocument = new javax.swing.JMenuItem();
-        ppPengajuan = new javax.swing.JMenuItem();
-        ppPengajuan1 = new javax.swing.JMenuItem();
-        ppPengajuan2 = new javax.swing.JMenuItem();
-        ppPengajuan3 = new javax.swing.JMenuItem();
-        ppStatusFinger = new javax.swing.JMenuItem();
+        MnDocument = new widget.JMenuItem();
+        ppPengajuan = new widget.JMenuItem();
+        ppPengajuan1 = new widget.JMenuItem();
+        ppPengajuan2 = new widget.JMenuItem();
+        ppPengajuan3 = new widget.JMenuItem();
+        ppStatusFinger = new widget.JMenuItem();
         NoBalasan = new widget.TextBox();
         kdsuku = new widget.TextBox();
         kdbahasa = new widget.TextBox();
@@ -6142,7 +6142,7 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
     private widget.Label LabelSatuanPolri;
     private widget.Label LabelSatuanTNI;
     private widget.ComboBox LakaLantas;
-    private javax.swing.JMenuItem MnDocument;
+    private widget.JMenuItem MnDocument;
     private widget.TextBox NIP;
     private widget.ComboBox NaikKelas;
     private widget.TextBox NmDPJP;
@@ -6286,11 +6286,11 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
     private widget.TextBox nmsukubangsa;
     private widget.panelisi panelCari;
     private widget.panelisi panelGlass6;
-    private javax.swing.JMenuItem ppPengajuan;
-    private javax.swing.JMenuItem ppPengajuan1;
-    private javax.swing.JMenuItem ppPengajuan2;
-    private javax.swing.JMenuItem ppPengajuan3;
-    private javax.swing.JMenuItem ppStatusFinger;
+    private widget.JMenuItem ppPengajuan;
+    private widget.JMenuItem ppPengajuan1;
+    private widget.JMenuItem ppPengajuan2;
+    private widget.JMenuItem ppPengajuan3;
+    private widget.JMenuItem ppStatusFinger;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables

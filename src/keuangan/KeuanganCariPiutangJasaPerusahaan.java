@@ -100,9 +100,9 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppCetakNota = new javax.swing.JMenuItem();
-        ppHapus = new javax.swing.JMenuItem();
-        MnDetailCicilan = new javax.swing.JMenuItem();
+        ppCetakNota = new widget.JMenuItem();
+        ppHapus = new widget.JMenuItem();
+        MnDetailCicilan = new widget.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -915,7 +915,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     private widget.Button BtnPrint;
     private widget.TextBox KdPerusahaan;
     private widget.TextBox KdPetugas;
-    private javax.swing.JMenuItem MnDetailCicilan;
+    private widget.JMenuItem MnDetailCicilan;
     private widget.TextBox NmPerusahaan;
     private widget.TextBox NmPetugas;
     private widget.TextBox NoPiutang;
@@ -942,8 +942,8 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppCetakNota;
-    private javax.swing.JMenuItem ppHapus;
+    private widget.JMenuItem ppCetakNota;
+    private widget.JMenuItem ppHapus;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

@@ -106,10 +106,10 @@ public class IPSRSCariSuratPemesanan extends javax.swing.JDialog {
     {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppHapus = new javax.swing.JMenuItem();
-        ppDatang = new javax.swing.JMenuItem();
-        ppProses = new javax.swing.JMenuItem();
-        ppSuratPemesanan = new javax.swing.JMenuItem();
+        ppHapus = new widget.JMenuItem();
+        ppDatang = new widget.JMenuItem();
+        ppProses = new widget.JMenuItem();
+        ppSuratPemesanan = new widget.JMenuItem();
         DlgCetak = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
         panelBiasa4 = new widget.PanelBiasa();
@@ -1395,10 +1395,10 @@ public class IPSRSCariSuratPemesanan extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppDatang;
-    private javax.swing.JMenuItem ppHapus;
-    private javax.swing.JMenuItem ppProses;
-    private javax.swing.JMenuItem ppSuratPemesanan;
+    private widget.JMenuItem ppDatang;
+    private widget.JMenuItem ppHapus;
+    private widget.JMenuItem ppProses;
+    private widget.JMenuItem ppSuratPemesanan;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

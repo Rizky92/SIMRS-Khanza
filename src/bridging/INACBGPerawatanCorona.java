@@ -150,8 +150,8 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu2 = new javax.swing.JPopupMenu();
-        MnNIK = new javax.swing.JMenuItem();
-        MnKartu = new javax.swing.JMenuItem();
+        MnNIK = new widget.JMenuItem();
+        MnKartu = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1138,8 +1138,8 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     private widget.PanelBiasa FormInput;
     private widget.ComboBox KantongJenazah;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnKartu;
-    private javax.swing.JMenuItem MnNIK;
+    private widget.JMenuItem MnKartu;
+    private widget.JMenuItem MnNIK;
     private widget.ComboBox MobilJenazah;
     private widget.TextBox NamaPasien;
     private widget.TextBox NoJaminan;

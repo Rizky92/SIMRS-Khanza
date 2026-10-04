@@ -143,9 +143,9 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppResepObat = new javax.swing.JMenuItem();
-        ppResepObat1 = new javax.swing.JMenuItem();
-        ppResepObat2 = new javax.swing.JMenuItem();
+        ppResepObat = new widget.JMenuItem();
+        ppResepObat1 = new widget.JMenuItem();
+        ppResepObat2 = new widget.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbResep = new widget.Table();
@@ -976,9 +976,9 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppResepObat;
-    private javax.swing.JMenuItem ppResepObat1;
-    private javax.swing.JMenuItem ppResepObat2;
+    private widget.JMenuItem ppResepObat;
+    private widget.JMenuItem ppResepObat1;
+    private widget.JMenuItem ppResepObat2;
     private widget.Table tbResep;
     // End of variables declaration//GEN-END:variables
 

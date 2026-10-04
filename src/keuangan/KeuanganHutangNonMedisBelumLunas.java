@@ -180,8 +180,8 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
 
         TKd = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppSemua = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
+        ppSemua = new widget.JMenuItem();
         DlgBayarMandiri = new javax.swing.JDialog();
         internalFrame4 = new widget.InternalFrame();
         panelBiasa2 = new widget.PanelBiasa();
@@ -1704,8 +1704,8 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppSemua;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppSemua;
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 

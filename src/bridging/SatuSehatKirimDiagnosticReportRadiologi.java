@@ -202,9 +202,9 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppPilihBelumDikirim = new javax.swing.JMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
+        ppPilihSemua = new widget.JMenuItem();
+        ppPilihBelumDikirim = new widget.JMenuItem();
+        ppBersihkan = new widget.JMenuItem();
         LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -968,9 +968,9 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppPilihBelumDikirim;
-    private javax.swing.JMenuItem ppPilihSemua;
+    private widget.JMenuItem ppBersihkan;
+    private widget.JMenuItem ppPilihBelumDikirim;
+    private widget.JMenuItem ppPilihSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
