@@ -6,9 +6,12 @@
 package setting;
 
 import fungsi.batasInput;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +22,8 @@ public class WindowInputPassword extends javax.swing.JDialog {
     private final validasi Valid=new validasi();
     private final sekuel Sequel=new sekuel();
     private String user="",password="";
+    private int panjangMinimalSmc = 0;
+    private boolean hurufBesarSmc = false, hurufKecilSmc = false, angkaSmc = false, simbolSmc = false;
 
     /**
      * Creates new form WindowInputPassword
@@ -134,6 +139,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnClosePassKeyPressed
 
     private void BtnSimpanPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanPassActionPerformed
+        String aturan = cekAturanPasswordSmc(PassBaru2.getText());
         if(PassLama.getText().trim().equals("")){
             Valid.textKosong(PassLama,"Password Lama");
         }else if(Passbaru1.getText().trim().equals("")){
@@ -146,9 +152,21 @@ public class WindowInputPassword extends javax.swing.JDialog {
         }else if(!Passbaru1.getText().trim().equals(PassBaru2.getText())){
             JOptionPane.showMessageDialog(null,"Maaf, Password Baru 1 dan Password Baru 2 tidak sesuai...!!!");
             PassBaru2.requestFocus();
+        }else if(PassLama.getText().equals(PassBaru2.getText())){
+            JOptionPane.showMessageDialog(null,"Maaf, Password baru tidak boleh sama dengan password lama...!!!");
+            Passbaru1.requestFocus();
+        }else if(!aturan.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Maaf, Password baru harus memenuhi aturan berikut :"+aturan);
+            Passbaru1.requestFocus();
         }else{
-            Sequel.queryu("update user set password=AES_ENCRYPT('"+PassBaru2.getText()+"','windi')  where id_user=AES_ENCRYPT('"+user+"','nur')");
-            dispose();
+            //Sequel.queryu("update user set password=AES_ENCRYPT('"+PassBaru2.getText()+"','windi')  where id_user=AES_ENCRYPT('"+user+"','nur')");
+            //dispose();
+            if(simpanPasswordSmc()){
+                JOptionPane.showMessageDialog(null,"Password berhasil diubah...!!!");
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, Password gagal diubah...!!!");
+            }
         }
     }//GEN-LAST:event_BtnSimpanPassActionPerformed
 
@@ -215,5 +233,69 @@ public class WindowInputPassword extends javax.swing.JDialog {
         PassBaru2.setText("");
         this.user=user;
         this.password=pass;
+        tampilAturanPasswordSmc();
+    }
+
+    private void tampilAturanPasswordSmc() {
+        panjangMinimalSmc = 0;
+        hurufBesarSmc = false;
+        hurufKecilSmc = false;
+        angkaSmc = false;
+        simbolSmc = false;
+        try (PreparedStatement ps = koneksiDB.condb().prepareStatement(
+            "select set_aturan_password_smc.panjang_minimal, set_aturan_password_smc.huruf_besar, set_aturan_password_smc.huruf_kecil, set_aturan_password_smc.angka, " +
+            "set_aturan_password_smc.simbol from set_aturan_password_smc limit 1"
+        ); ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                panjangMinimalSmc = rs.getInt(1);
+                hurufBesarSmc = "Yes".equals(rs.getString(2));
+                hurufKecilSmc = "Yes".equals(rs.getString(3));
+                angkaSmc = "Yes".equals(rs.getString(4));
+                simbolSmc = "Yes".equals(rs.getString(5));
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private String cekAturanPasswordSmc(String pass) {
+        StringBuilder pesan = new StringBuilder();
+        if (pass.length() < panjangMinimalSmc) {
+            pesan.append("\n- Minimal ").append(panjangMinimalSmc).append(" karakter");
+        }
+        if (hurufBesarSmc && pass.chars().noneMatch(Character::isUpperCase)) {
+            pesan.append("\n- Mengandung huruf besar");
+        }
+        if (hurufKecilSmc && pass.chars().noneMatch(Character::isLowerCase)) {
+            pesan.append("\n- Mengandung huruf kecil");
+        }
+        if (angkaSmc && pass.chars().noneMatch(Character::isDigit)) {
+            pesan.append("\n- Mengandung angka");
+        }
+        if (simbolSmc && pass.chars().noneMatch(c -> !Character.isLetterOrDigit(c) && !Character.isWhitespace(c))) {
+            pesan.append("\n- Mengandung simbol");
+        }
+        return pesan.toString();
+    }
+
+    private boolean simpanPasswordSmc() {
+        boolean sukses = false;
+        Sequel.AutoComitFalse();
+        try (PreparedStatement ps = koneksiDB.condb().prepareStatement("update user set user.password = aes_encrypt(?, 'windi') where user.id_user = aes_encrypt(?, 'nur')")) {
+            if (Sequel.executeRawSmc("insert into user_password_smc (id_user, tgl_ubah) values (aes_encrypt(?, 'nur'), now()) on duplicate key update tgl_ubah = values(tgl_ubah)", user)) {
+                ps.setString(1, PassBaru2.getText());
+                ps.setString(2, user);
+                sukses = ps.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        if (sukses) {
+            Sequel.Commit();
+        } else {
+            Sequel.RollBack();
+        }
+        Sequel.AutoComitTrue();
+        return sukses;
     }
 }

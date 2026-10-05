@@ -1887,6 +1887,15 @@ ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Piutang_Jasa_Perusahaan` varcha
 
 ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Pendapatan_Piutang_Jasa_Perusahaan` varchar(15) NULL DEFAULT NULL AFTER `Piutang_Jasa_Perusahaan`;
 
+CREATE TABLE IF NOT EXISTS `set_aturan_password_smc`  (
+  `panjang_minimal` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `huruf_besar` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `huruf_kecil` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `angka` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `simbol` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `hari_peringatan` smallint(5) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ralan`  (
   `kd_poli` char(5) NOT NULL,
   `kd_pj` char(3) NOT NULL,
@@ -2555,5 +2564,11 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjam_piutang` enum('true','false
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression` enum('true','false') NULL DEFAULT NULL AFTER `konfirmasi_rekonsiliasi_obat`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
+
+CREATE TABLE IF NOT EXISTS `user_password_smc`  (
+  `id_user` varchar(700) NOT NULL,
+  `tgl_ubah` datetime NOT NULL,
+  PRIMARY KEY (`id_user`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS=1;

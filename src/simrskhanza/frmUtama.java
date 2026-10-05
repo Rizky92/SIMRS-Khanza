@@ -1115,6 +1115,7 @@ import setting.DlgRunTeks;
 import setting.DlgRunTeksApotek;
 import setting.DlgSetAksesEditSementara;
 import setting.DlgSetAplikasi;
+import setting.DlgSetAturanPasswordSMC;
 import setting.DlgSetEmbalase;
 import setting.DlgSetHarga;
 import setting.DlgSetHargaKamar;
@@ -8546,6 +8547,7 @@ public class frmUtama extends javax.swing.JFrame {
                     if(AKTIFKANTRACKSQL.equals("yes")){
                         Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                     }
+                    cekPeringatanPasswordSmc();
                 }else if((akses.getjml1()==0)&&(akses.getjml2()==0)){
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
                     BtnToolReg.setEnabled(false);
@@ -51513,7 +51515,8 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC, btnRekapKehadiranSMC;
+                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC, btnRekapKehadiranSMC,
+                             btnSetAturanPasswordSMC;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -51651,6 +51654,33 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapKehadiranSMC.setName("btnRekapKehadiranSMC");
         btnRekapKehadiranSMC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapKehadiranSMC.addActionListener(this::btnRekapKehadiranSMCActionPerformed);
+
+        btnSetAturanPasswordSMC = new widget.ButtonBig();
+        btnSetAturanPasswordSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/preferences-desktop-user-password.png")));
+        btnSetAturanPasswordSMC.setText("Set Aturan Password");
+        btnSetAturanPasswordSMC.setIconTextGap(0);
+        btnSetAturanPasswordSMC.setName("btnSetAturanPasswordSMC");
+        btnSetAturanPasswordSMC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetAturanPasswordSMC.addActionListener(this::btnSetAturanPasswordSMCActionPerformed);
+    }
+
+    private void cekPeringatanPasswordSmc() {
+        int hari = Sequel.cariIntegerSmc("select set_aturan_password_smc.hari_peringatan from set_aturan_password_smc limit 1");
+        if (hari <= 0) {
+            return;
+        }
+        int umur = Sequel.cariIntegerSmc("select datediff(current_date(), user_password_smc.tgl_ubah) from user_password_smc where user_password_smc.id_user = aes_encrypt(?, 'nur')", -1, akses.getkode());
+        String pesan;
+        if (umur < 0) {
+            pesan = "Password Anda belum pernah diubah.";
+        } else if (umur >= hari) {
+            pesan = "Password Anda terakhir diubah " + umur + " hari yang lalu.";
+        } else {
+            return;
+        }
+        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, pesan + "\nDemi keamanan, silahkan ubah password Anda setiap " + hari + " hari.\nUbah password sekarang?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)) {
+            MnGantiPasswordBtnLogActionPerformed(null);
+        }
     }
 
     private void isComboSMC() {
@@ -51734,6 +51764,11 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnSetTampilJenisObatResep);
                 jmlmenu++;
             }
+
+            if (akses.getadmin()) {
+                Panelmenu.add(btnSetAturanPasswordSMC);
+                jmlmenu++;
+            }
         }
     }
 
@@ -51755,6 +51790,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getadmin()) {
             Panelmenu.add(btnSetTampilJenisObatResep);
+            jmlmenu++;
+        }
+
+        if (akses.getadmin()) {
+            Panelmenu.add(btnSetAturanPasswordSMC);
             jmlmenu++;
         }
 
@@ -51849,6 +51889,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getadmin()) {
             if (btnSetTampilJenisObatResep.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnSetTampilJenisObatResep);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getadmin()) {
+            if (btnSetAturanPasswordSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetAturanPasswordSMC);
                 jmlmenu++;
             }
         }
@@ -52019,6 +52066,17 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setAlwaysOnTop(false);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSetAturanPasswordSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetAturanPasswordSMC aplikasi = new DlgSetAturanPasswordSMC(this, false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
