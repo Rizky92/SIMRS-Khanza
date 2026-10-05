@@ -123,7 +123,7 @@ public final class TokoMember extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        MnKartu = new javax.swing.JMenuItem();
+        MnKartu = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbPetugas = new widget.Table();
@@ -890,7 +890,7 @@ public final class TokoMember extends javax.swing.JDialog {
     private widget.PanelBiasa FormInput;
     private widget.ComboBox JK;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnKartu;
+    private widget.MenuItem MnKartu;
     private widget.TextBox NamaMember;
     private widget.TextBox NoMember;
     private widget.TextBox NoTelp;

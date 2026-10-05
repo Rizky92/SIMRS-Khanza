@@ -137,9 +137,9 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDetailPiutang = new javax.swing.JMenuItem();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
+        MnDetailPiutang = new widget.MenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -839,7 +839,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     private javax.swing.JLabel LCount;
     private javax.swing.JLabel LCount1;
     private widget.Label LCount2;
-    private javax.swing.JMenuItem MnDetailPiutang;
+    private widget.MenuItem MnDetailPiutang;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TKd;
@@ -856,8 +856,8 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppPilihSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPilihSemua;
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 

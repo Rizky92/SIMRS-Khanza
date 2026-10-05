@@ -137,9 +137,9 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppGrafikHidupMati = new javax.swing.JMenuItem();
-        ppGrafikLakiPerempuan = new javax.swing.JMenuItem();
-        ppGrafikGolonganUmur = new javax.swing.JMenuItem();
+        ppGrafikHidupMati = new widget.MenuItem();
+        ppGrafikLakiPerempuan = new widget.MenuItem();
+        ppGrafikGolonganUmur = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass5 = new widget.panelisi();
         label11 = new widget.Label();
@@ -617,9 +617,9 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
     private widget.Label label12;
     private widget.Label label18;
     private widget.panelisi panelGlass5;
-    private javax.swing.JMenuItem ppGrafikGolonganUmur;
-    private javax.swing.JMenuItem ppGrafikHidupMati;
-    private javax.swing.JMenuItem ppGrafikLakiPerempuan;
+    private widget.MenuItem ppGrafikGolonganUmur;
+    private widget.MenuItem ppGrafikHidupMati;
+    private widget.MenuItem ppGrafikLakiPerempuan;
     private widget.Table tbBangsal;
     private widget.Table tbBangsal2;
     // End of variables declaration//GEN-END:variables

@@ -139,8 +139,8 @@ public final class DlgKamar extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnUpdateStatus = new javax.swing.JMenuItem();
-        MnRestore = new javax.swing.JMenuItem();
+        MnUpdateStatus = new widget.MenuItem();
+        MnRestore = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -1137,8 +1137,8 @@ public final class DlgKamar extends javax.swing.JDialog {
     private widget.ComboBox CmbStatus;
     private widget.ComboBox Kelas;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnRestore;
-    private javax.swing.JMenuItem MnUpdateStatus;
+    private widget.MenuItem MnRestore;
+    private widget.MenuItem MnUpdateStatus;
     private javax.swing.JPanel PanelCariUtama;
     private widget.ScrollPane Scroll;
     private widget.TextBox TBangsal;

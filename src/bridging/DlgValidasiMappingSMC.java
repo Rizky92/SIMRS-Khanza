@@ -144,10 +144,10 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        MnCariReferensi = new javax.swing.JMenuItem();
-        MnTandaiSemua = new javax.swing.JMenuItem();
-        MnTandaiDisplay = new javax.swing.JMenuItem();
-        MnHapusTanda = new javax.swing.JMenuItem();
+        MnCariReferensi = new widget.MenuItem();
+        MnTandaiSemua = new widget.MenuItem();
+        MnTandaiDisplay = new widget.MenuItem();
+        MnHapusTanda = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbValidasi = new widget.Table();
@@ -417,10 +417,10 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private widget.Button BtnValidasi;
     private widget.Label LCount;
     private widget.Label LProgres;
-    private javax.swing.JMenuItem MnCariReferensi;
-    private javax.swing.JMenuItem MnHapusTanda;
-    private javax.swing.JMenuItem MnTandaiDisplay;
-    private javax.swing.JMenuItem MnTandaiSemua;
+    private widget.MenuItem MnCariReferensi;
+    private widget.MenuItem MnHapusTanda;
+    private widget.MenuItem MnTandaiDisplay;
+    private widget.MenuItem MnTandaiSemua;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.InternalFrame internalFrame1;

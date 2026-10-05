@@ -161,7 +161,7 @@ public final class ReklasifikasiRanap extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnBilling = new javax.swing.JMenuItem();
+        MnBilling = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -712,7 +712,7 @@ public final class ReklasifikasiRanap extends javax.swing.JDialog {
     private widget.Button BtnPrint;
     private widget.Button BtnSeek2;
     private javax.swing.JLabel LCount;
-    private javax.swing.JMenuItem MnBilling;
+    private widget.MenuItem MnBilling;
     private widget.ScrollPane Scroll;
     private widget.TextBox TKd;
     private widget.Tanggal Tgl1;

@@ -160,7 +160,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCatatanKeseimbanganCairan = new javax.swing.JMenuItem();
+        MnCatatanKeseimbanganCairan = new widget.MenuItem();
         JK = new widget.TextBox();
         Umur = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1331,7 +1331,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.ComboBox Menit;
     private widget.TextBox Minum;
-    private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
+    private widget.MenuItem MnCatatanKeseimbanganCairan;
     private widget.TextBox NGT;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;

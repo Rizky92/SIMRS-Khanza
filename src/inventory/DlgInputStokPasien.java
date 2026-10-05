@@ -224,7 +224,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
         kelas = new widget.TextBox();
         KdPj = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1121,7 +1121,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
     private widget.TextBox norawat;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBersihkan;
+    private widget.MenuItem ppBersihkan;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

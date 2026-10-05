@@ -185,7 +185,7 @@ public final class RMSkriningIndraPendengaran extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSkriningIndraPendengaran = new javax.swing.JMenuItem();
+        MnSkriningIndraPendengaran = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         Jk = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1513,7 +1513,7 @@ public final class RMSkriningIndraPendengaran extends javax.swing.JDialog {
     private widget.ComboBox MendengarBisikanTelingaKanan;
     private widget.ComboBox MendengarBisikanTelingaKiri;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnSkriningIndraPendengaran;
+    private widget.MenuItem MnSkriningIndraPendengaran;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ComboBox PenurunanPendengaranTelingaKanan;

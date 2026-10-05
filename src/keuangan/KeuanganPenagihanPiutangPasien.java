@@ -195,9 +195,9 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnDetailPiutang = new javax.swing.JMenuItem();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
+        MnDetailPiutang = new widget.MenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         KdAkun = new widget.TextBox();
         AtasNama = new widget.TextBox();
         NoTelp = new widget.TextBox();
@@ -1666,7 +1666,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     private javax.swing.JLabel LCountBelumDibayar2;
     private widget.Label LCountDipilih1;
     private javax.swing.JLabel LCountDipilih2;
-    private javax.swing.JMenuItem MnDetailPiutang;
+    private widget.MenuItem MnDetailPiutang;
     private widget.TextBox NamaBank;
     private widget.TextBox NoPenagihan;
     private widget.TextBox NoRek;
@@ -1711,8 +1711,8 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     private widget.TextBox nmptg;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppPilihSemua;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppPilihSemua;
     private widget.Table tbBelumDitagihkan;
     private widget.Table tbBelumLunas;
     // End of variables declaration//GEN-END:variables

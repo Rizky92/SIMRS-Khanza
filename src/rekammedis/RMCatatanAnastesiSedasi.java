@@ -311,7 +311,7 @@ public final class RMCatatanAnastesiSedasi extends javax.swing.JDialog {
 
         LoadHTML = new widget.editorpane();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianSedasi = new javax.swing.JMenuItem();
+        MnPenilaianSedasi = new widget.MenuItem();
         TanggalRegistrasi = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
@@ -2922,7 +2922,7 @@ public final class RMCatatanAnastesiSedasi extends javax.swing.JDialog {
     private widget.ComboBox LanjutTindakan;
     private widget.TextBox Leko;
     private widget.editorpane LoadHTML;
-    private javax.swing.JMenuItem MnPenilaianSedasi;
+    private widget.MenuItem MnPenilaianSedasi;
     private widget.TextBox MonitoringLainLain;
     private widget.ComboBox NGT;
     private widget.ComboBox NIBP;

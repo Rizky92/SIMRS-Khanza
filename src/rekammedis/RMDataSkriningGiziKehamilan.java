@@ -158,7 +158,7 @@ public final class RMDataSkriningGiziKehamilan extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSkriningGizi = new javax.swing.JMenuItem();
+        MnSkriningGizi = new widget.MenuItem();
         JK = new widget.TextBox();
         Umur = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1327,7 +1327,7 @@ public final class RMDataSkriningGiziKehamilan extends javax.swing.JDialog {
     private widget.TextBox Keterangan;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnSkriningGizi;
+    private widget.MenuItem MnSkriningGizi;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;

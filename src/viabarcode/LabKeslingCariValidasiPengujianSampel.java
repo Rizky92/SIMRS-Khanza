@@ -248,8 +248,8 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppSuratValidasi = new javax.swing.JMenuItem();
-        ppHapusValidasiPengujian = new javax.swing.JMenuItem();
+        ppSuratValidasi = new widget.MenuItem();
+        ppHapusValidasiPengujian = new widget.MenuItem();
         KodeSampel = new widget.TextBox();
         KodePelanggan = new widget.TextBox();
         KodePetugas = new widget.TextBox();
@@ -1642,8 +1642,8 @@ public class LabKeslingCariValidasiPengujianSampel extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenuItem ppHapusValidasiPengujian;
-    private javax.swing.JMenuItem ppSuratValidasi;
+    private widget.MenuItem ppHapusValidasiPengujian;
+    private widget.MenuItem ppSuratValidasi;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPaneDetail;

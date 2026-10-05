@@ -130,7 +130,7 @@ public class UTDPendonor extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnKartu1 = new javax.swing.JMenuItem();
+        MnKartu1 = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelisi2 = new widget.panelisi();
@@ -1522,7 +1522,7 @@ public class UTDPendonor extends javax.swing.JDialog {
     private widget.TextBox Kelurahan;
     private widget.Label LCount;
     private widget.TextBox Lahir;
-    private javax.swing.JMenuItem MnKartu1;
+    private widget.MenuItem MnKartu1;
     private widget.TextBox Nama;
     private widget.TextBox NoId;
     private javax.swing.JPanel PanelInput;

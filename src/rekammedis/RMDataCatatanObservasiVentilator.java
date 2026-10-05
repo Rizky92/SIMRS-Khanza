@@ -151,7 +151,7 @@ public final class RMDataCatatanObservasiVentilator extends javax.swing.JDialog 
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCatatanObservasiVentilator = new javax.swing.JMenuItem();
+        MnCatatanObservasiVentilator = new widget.MenuItem();
         JK = new widget.TextBox();
         Umur = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1207,7 +1207,7 @@ public final class RMDataCatatanObservasiVentilator extends javax.swing.JDialog 
     private widget.TextBox Keterangan;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnCatatanObservasiVentilator;
+    private widget.MenuItem MnCatatanObservasiVentilator;
     private widget.ComboBox Mode;
     private widget.TextBox NmPetugas;
     private widget.TextBox Pakar;

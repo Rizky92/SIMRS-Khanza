@@ -140,7 +140,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppBarcode = new javax.swing.JMenuItem();
+        ppBarcode = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJnsPerawatan = new widget.Table();
@@ -1339,7 +1339,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     private widget.ComboBox no_rak;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppBarcode;
+    private widget.MenuItem ppBarcode;
     private widget.ComboBox status_buku;
     private widget.Table tbJnsPerawatan;
     private widget.Tanggal tgl_pengadaan;

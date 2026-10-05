@@ -127,12 +127,12 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnHapusObatOperasi = new javax.swing.JMenuItem();
-        MnHapusTagihanOperasi = new javax.swing.JMenuItem();
-        MnUbahOperatorPetugas = new javax.swing.JMenuItem();
-        MnLaporanOperasi = new javax.swing.JMenuItem();
-        MnUbahLaporan = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
+        MnHapusObatOperasi = new widget.MenuItem();
+        MnHapusTagihanOperasi = new widget.MenuItem();
+        MnUbahOperatorPetugas = new widget.MenuItem();
+        MnLaporanOperasi = new widget.MenuItem();
+        MnUbahLaporan = new widget.MenuItem();
+        ppBerkasDigital = new widget.MenuItem();
         WindowGantiDokterParamedis = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
         scrollPane2 = new widget.ScrollPane();
@@ -3653,11 +3653,11 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.Label LTotal;
     private widget.TextArea Laporan;
     private widget.ComboBox Menit2;
-    private javax.swing.JMenuItem MnHapusObatOperasi;
-    private javax.swing.JMenuItem MnHapusTagihanOperasi;
-    private javax.swing.JMenuItem MnLaporanOperasi;
-    private javax.swing.JMenuItem MnUbahLaporan;
-    private javax.swing.JMenuItem MnUbahOperatorPetugas;
+    private widget.MenuItem MnHapusObatOperasi;
+    private widget.MenuItem MnHapusTagihanOperasi;
+    private widget.MenuItem MnLaporanOperasi;
+    private widget.MenuItem MnUbahLaporan;
+    private widget.MenuItem MnUbahOperatorPetugas;
     private widget.TextBox NoRawat;
     private widget.TextBox NomorImplant;
     private widget.TextBox PostOp;
@@ -3778,7 +3778,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.panelisi panelGlass7;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
-    private javax.swing.JMenuItem ppBerkasDigital;
+    private widget.MenuItem ppBerkasDigital;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbDokter;

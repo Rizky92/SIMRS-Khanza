@@ -149,7 +149,7 @@ public final class RMPenilaianUlangNyeri extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianUlangNyeri = new javax.swing.JMenuItem();
+        MnPenilaianUlangNyeri = new widget.MenuItem();
         JK = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -1318,7 +1318,7 @@ public final class RMPenilaianUlangNyeri extends javax.swing.JDialog {
     private widget.TextBox Lokasi;
     private widget.ComboBox Menit;
     private widget.ComboBox Menyebar;
-    private javax.swing.JMenuItem MnPenilaianUlangNyeri;
+    private widget.MenuItem MnPenilaianUlangNyeri;
     private widget.TextBox NmPetugas;
     private widget.ComboBox Nyeri;
     private widget.ComboBox NyeriHilang;

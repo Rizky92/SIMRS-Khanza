@@ -111,7 +111,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppCetak = new javax.swing.JMenuItem();
+        ppCetak = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         scrollPane1 = new widget.ScrollPane();
@@ -1159,7 +1159,7 @@ public class UTDStokDarah extends javax.swing.JDialog {
     private javax.swing.JPanel panelCariKategori;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi2;
-    private javax.swing.JMenuItem ppCetak;
+    private widget.MenuItem ppCetak;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables

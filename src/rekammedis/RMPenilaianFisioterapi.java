@@ -251,7 +251,7 @@ public final class RMPenilaianFisioterapi extends javax.swing.JDialog {
 
         LoadHTML = new widget.editorpane();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianFisio = new javax.swing.JMenuItem();
+        MnPenilaianFisio = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -2170,7 +2170,7 @@ public final class RMPenilaianFisioterapi extends javax.swing.JDialog {
     private widget.TextBox LainlainFungsioal;
     private widget.editorpane LoadHTML;
     private widget.TextBox LuasGerakSendi;
-    private javax.swing.JMenuItem MnPenilaianFisio;
+    private widget.MenuItem MnPenilaianFisio;
     private widget.TextBox NmPetugas;
     private widget.TextBox NyeriDiam;
     private widget.TextBox NyeriGerak;

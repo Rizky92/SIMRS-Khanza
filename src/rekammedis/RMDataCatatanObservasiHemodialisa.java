@@ -196,7 +196,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCatatanObservasiHemodialisa = new javax.swing.JMenuItem();
+        MnCatatanObservasiHemodialisa = new widget.MenuItem();
         JK = new widget.TextBox();
         Umur = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -1399,7 +1399,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnCatatanObservasiHemodialisa;
+    private widget.MenuItem MnCatatanObservasiHemodialisa;
     private widget.TextBox Nadi;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;

@@ -125,7 +125,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        RiwayatTransaksi = new javax.swing.JMenuItem();
+        RiwayatTransaksi = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         label11 = new widget.Label();
@@ -555,7 +555,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
     private widget.Button BtnPrint;
     private widget.TextBox Kd2;
     private javax.swing.JPopupMenu Popup;
-    private javax.swing.JMenuItem RiwayatTransaksi;
+    private widget.MenuItem RiwayatTransaksi;
     private widget.TabPane TabRawat;
     private widget.Table Table1;
     private widget.Table Table2;

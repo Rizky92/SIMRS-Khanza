@@ -147,7 +147,7 @@ public final class RMPenilaianRisikoJatuhNeonatus extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianRisikoJatuh = new javax.swing.JMenuItem();
+        MnPenilaianRisikoJatuh = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         JK = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1643,7 +1643,7 @@ public final class RMPenilaianRisikoJatuhNeonatus extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnPenilaianRisikoJatuh;
+    private widget.MenuItem MnPenilaianRisikoJatuh;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ComboBox Sasaran1;

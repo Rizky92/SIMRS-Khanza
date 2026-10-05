@@ -122,9 +122,9 @@ public final class DlgRekening extends javax.swing.JDialog {
         Balan1 = new widget.ComboBox();
         label39 = new widget.Label();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSubAkun = new javax.swing.JMenuItem();
-        MnJadikanSub = new javax.swing.JMenuItem();
-        MnJadikanUtama = new javax.swing.JMenuItem();
+        MnSubAkun = new widget.MenuItem();
+        MnJadikanSub = new widget.MenuItem();
+        MnJadikanUtama = new widget.MenuItem();
         WindowJadikanSub = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         BtnCloseIn6 = new widget.Button();
@@ -1116,9 +1116,9 @@ public final class DlgRekening extends javax.swing.JDialog {
     private widget.TextBox KdSub;
     private widget.TextBox KdSubInduk;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnJadikanSub;
-    private javax.swing.JMenuItem MnJadikanUtama;
-    private javax.swing.JMenuItem MnSubAkun;
+    private widget.MenuItem MnJadikanSub;
+    private widget.MenuItem MnJadikanUtama;
+    private widget.MenuItem MnSubAkun;
     private widget.TextBox Nm;
     private widget.TextBox NmSub;
     private widget.TextBox NmSubInduk;

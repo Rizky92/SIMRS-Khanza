@@ -220,13 +220,13 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private void initComponents() {
 
         ppMenu = new javax.swing.JPopupMenu();
-        MnUbahResep = new javax.swing.JMenuItem();
-        MnCopyResep = new javax.swing.JMenuItem();
-        MnPemberianObat = new javax.swing.JMenuItem();
-        MnPiutangObat = new javax.swing.JMenuItem();
+        MnUbahResep = new widget.MenuItem();
+        MnCopyResep = new widget.MenuItem();
+        MnPemberianObat = new widget.MenuItem();
+        MnPiutangObat = new widget.MenuItem();
         ppCek = new javax.swing.JPopupMenu();
-        ppPilihSemua = new javax.swing.JMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
+        ppPilihSemua = new widget.MenuItem();
+        ppBersihkan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -814,10 +814,10 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private widget.Tanggal DTPCari2;
     private widget.panelisi FormMenu;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnCopyResep;
-    private javax.swing.JMenuItem MnPemberianObat;
-    private javax.swing.JMenuItem MnPiutangObat;
-    private javax.swing.JMenuItem MnUbahResep;
+    private widget.MenuItem MnCopyResep;
+    private widget.MenuItem MnPemberianObat;
+    private widget.MenuItem MnPiutangObat;
+    private widget.MenuItem MnUbahResep;
     private widget.panelisi PanelAccor;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -828,10 +828,10 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private widget.Label jLabel21;
     private widget.Label jLabel7;
     private widget.panelisi panelGlass6;
-    private javax.swing.JMenuItem ppBersihkan;
+    private widget.MenuItem ppBersihkan;
     private javax.swing.JPopupMenu ppCek;
     private javax.swing.JPopupMenu ppMenu;
-    private javax.swing.JMenuItem ppPilihSemua;
+    private widget.MenuItem ppPilihSemua;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbDetailRacikanObat;

@@ -171,9 +171,9 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
         KdPetugas = new widget.TextBox();
         NmPetugas = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppSetujui = new javax.swing.JMenuItem();
-        ppSetujuiNormatif = new javax.swing.JMenuItem();
-        ppTolak = new javax.swing.JMenuItem();
+        ppSetujui = new widget.MenuItem();
+        ppSetujuiNormatif = new widget.MenuItem();
+        ppTolak = new widget.MenuItem();
         Detik1 = new widget.ComboBox();
         Detik2 = new widget.ComboBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1463,9 +1463,9 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppSetujui;
-    private javax.swing.JMenuItem ppSetujuiNormatif;
-    private javax.swing.JMenuItem ppTolak;
+    private widget.MenuItem ppSetujui;
+    private widget.MenuItem ppSetujuiNormatif;
+    private widget.MenuItem ppTolak;
     private widget.Table tbObat;
     private widget.Table tbObat2;
     // End of variables declaration//GEN-END:variables

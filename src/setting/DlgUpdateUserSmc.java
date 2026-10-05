@@ -106,8 +106,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppClear = new javax.swing.JMenuItem();
-        ppSemua = new javax.swing.JMenuItem();
+        ppClear = new widget.MenuItem();
+        ppSemua = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbUser = new widget.Table();
@@ -422,8 +422,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private widget.Label jLabel9;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass8;
-    private javax.swing.JMenuItem ppClear;
-    private javax.swing.JMenuItem ppSemua;
+    private widget.MenuItem ppClear;
+    private widget.MenuItem ppSemua;
     private widget.Table tbUser;
     // End of variables declaration//GEN-END:variables
 

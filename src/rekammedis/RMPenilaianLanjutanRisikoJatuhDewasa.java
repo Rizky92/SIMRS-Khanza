@@ -156,7 +156,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianLanjutanRisikoJatuh = new javax.swing.JMenuItem();
+        MnPenilaianLanjutanRisikoJatuh = new widget.MenuItem();
         JK = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -1538,7 +1538,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
     private widget.Label KeteranganResiko;
     private widget.Label LCount;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnPenilaianLanjutanRisikoJatuh;
+    private widget.MenuItem MnPenilaianLanjutanRisikoJatuh;
     private widget.TextBox NilaiResiko1;
     private widget.TextBox NilaiResiko2;
     private widget.TextBox NilaiResiko3;

@@ -208,8 +208,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSurat = new javax.swing.JMenuItem();
-        MnTampilkanObatPRB = new javax.swing.JMenuItem();
+        MnSurat = new widget.MenuItem();
+        MnTampilkanObatPRB = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbProgramPRB = new widget.Table();
@@ -1504,8 +1504,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     private widget.TextBox KdProgram;
     private widget.TextBox Keterangan;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnSurat;
-    private javax.swing.JMenuItem MnTampilkanObatPRB;
+    private widget.MenuItem MnSurat;
+    private widget.MenuItem MnTampilkanObatPRB;
     private widget.TextBox NmDPJP;
     private widget.TextBox NmPasien;
     private widget.TextBox NmProgram;

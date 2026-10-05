@@ -135,7 +135,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakSuratRawat = new javax.swing.JMenuItem();
+        MnCetakSuratRawat = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1009,7 +1009,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
     private widget.TextBox KdDokter;
     private widget.Label LCount;
     private widget.TextBox LamaSakit;
-    private javax.swing.JMenuItem MnCetakSuratRawat;
+    private widget.MenuItem MnCetakSuratRawat;
     private widget.TextBox NmDokter;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;

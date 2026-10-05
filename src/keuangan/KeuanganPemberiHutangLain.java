@@ -115,7 +115,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        MnRestore = new javax.swing.JMenuItem();
+        MnRestore = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -921,7 +921,7 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
     private widget.TextBox KdPemberi;
     private widget.TextBox KodeRekening;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnRestore;
+    private widget.MenuItem MnRestore;
     private widget.TextBox NamaRekening;
     private widget.TextBox NmPemberi;
     private widget.TextBox NoTelp;

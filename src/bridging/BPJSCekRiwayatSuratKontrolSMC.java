@@ -138,7 +138,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppTarikDataSKDP = new javax.swing.JMenuItem();
+        ppTarikDataSKDP = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -388,7 +388,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label11;
     private widget.panelisi panelGlass6;
-    private javax.swing.JMenuItem ppTarikDataSKDP;
+    private widget.MenuItem ppTarikDataSKDP;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 

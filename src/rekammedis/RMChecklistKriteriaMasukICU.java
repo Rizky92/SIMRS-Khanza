@@ -151,7 +151,7 @@ public final class RMChecklistKriteriaMasukICU extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnKriteriaMasukICU = new javax.swing.JMenuItem();
+        MnKriteriaMasukICU = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -2134,7 +2134,7 @@ public final class RMChecklistKriteriaMasukICU extends javax.swing.JDialog {
     private widget.ComboBox Laborat5;
     private widget.ComboBox Laborat6;
     private widget.editorpane LoadHTML;
-    private javax.swing.JMenuItem MnKriteriaMasukICU;
+    private widget.MenuItem MnKriteriaMasukICU;
     private widget.TextBox NamaPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ComboBox Prioritas1_1;

@@ -372,10 +372,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppTampilkanSemuaObat = new javax.swing.JMenuItem();
+        ppTampilkanSemuaObat = new widget.MenuItem();
         pcFilterPerJenisObat = new javax.swing.JCheckBoxMenuItem();
-        ppBersihkan = new javax.swing.JMenuItem();
-        ppStok1 = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
+        ppStok1 = new widget.MenuItem();
         KdPj = new widget.TextBox();
         LPpn = new widget.Label();
         jLabel6 = new widget.Label();
@@ -1804,9 +1804,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private widget.Label label9;
     private widget.panelisi panelisi3;
     private javax.swing.JCheckBoxMenuItem pcFilterPerJenisObat;
-    private javax.swing.JMenuItem ppBersihkan;
-    private javax.swing.JMenuItem ppStok1;
-    private javax.swing.JMenuItem ppTampilkanSemuaObat;
+    private widget.MenuItem ppBersihkan;
+    private widget.MenuItem ppStok1;
+    private widget.MenuItem ppTampilkanSemuaObat;
     private widget.Table tbDetailResepObatRacikan;
     private widget.Table tbObatResepRacikan;
     private widget.Table tbResep;

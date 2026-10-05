@@ -115,9 +115,9 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        MnDetailKode = new javax.swing.JMenuItem();
-        ppCariTurunan = new javax.swing.JMenuItem();
-        ppCariMemberRefset = new javax.swing.JMenuItem();
+        MnDetailKode = new widget.MenuItem();
+        ppCariTurunan = new widget.MenuItem();
+        ppCariMemberRefset = new widget.MenuItem();
         WindowDetailKode = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
         Scroll1 = new widget.ScrollPane();
@@ -499,7 +499,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     private widget.Button BtnLihatTurunan;
     private widget.Label LCount;
     private widget.ComboBox LimitData;
-    private javax.swing.JMenuItem MnDetailKode;
+    private widget.MenuItem MnDetailKode;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
@@ -514,8 +514,8 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass7;
-    private javax.swing.JMenuItem ppCariMemberRefset;
-    private javax.swing.JMenuItem ppCariTurunan;
+    private widget.MenuItem ppCariMemberRefset;
+    private widget.MenuItem ppCariTurunan;
     private widget.Table tbKamar;
     private widget.Table tbKamar1;
     // End of variables declaration//GEN-END:variables

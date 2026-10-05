@@ -118,7 +118,7 @@ public final class DlgLhtBankJabar extends javax.swing.JDialog {
 
         TKd = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        cetakkwitansi = new javax.swing.JMenuItem();
+        cetakkwitansi = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -480,7 +480,7 @@ public final class DlgLhtBankJabar extends javax.swing.JDialog {
     private widget.TextBox TKd;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
-    private javax.swing.JMenuItem cetakkwitansi;
+    private widget.MenuItem cetakkwitansi;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JLabel jLabel10;
     private widget.Label label11;
