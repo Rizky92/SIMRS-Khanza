@@ -1,19 +1,16 @@
 package widget;
 
 import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -74,8 +71,6 @@ public class DateTimePickerSMC extends JComboBox {
 
     private static final int DAYS_IN_WEEK = 7;
     private static final int WEEKS_IN_MONTH = 6;
-    private static final int ARROW_WIDTH = 13;
-    private static final String COMPACT_STYLE = "padding: 1,2,1,0";
 
     private SimpleDateFormat format;
     private String displayFormat;
@@ -90,11 +85,7 @@ public class DateTimePickerSMC extends JComboBox {
 
     @Override
     public void updateUI() {
-        boolean flat = UIManager.getLookAndFeel() instanceof FlatLaf;
-        if (flat) {
-            putClientProperty("FlatLaf.style", COMPACT_STYLE);
-        }
-        ComboBoxUI ui = flat ? new FlatPickerUI() : new BasicPickerUI();
+        ComboBoxUI ui = UIManager.getLookAndFeel() instanceof FlatLaf ? new FlatPickerUI() : new BasicPickerUI();
         setUI(ui);
     }
 
@@ -186,53 +177,14 @@ public class DateTimePickerSMC extends JComboBox {
     }
 
     /**
-     * FlatLaf combo box UI with the calendar popup and a narrower arrow button, so
-     * a {@code dd-MM-yyyy} date keeps some slack in the common 90px wide pickers.
+     * Application combo box UI with the calendar popup, so the picker gets the same
+     * arrow button as every other combo box.
      */
-    private static class FlatPickerUI extends FlatComboBoxUI {
+    private static class FlatPickerUI extends LookAndFeelSMC.ComboBoxUI {
 
         @Override
         protected ComboPopup createPopup() {
             return new CalendarPopup(comboBox);
-        }
-
-        @Override
-        protected LayoutManager createLayoutManager() {
-            LayoutManager layout = super.createLayoutManager();
-            return new LayoutManager() {
-                @Override
-                public void addLayoutComponent(String name, Component component) {
-                    layout.addLayoutComponent(name, component);
-                }
-
-                @Override
-                public void removeLayoutComponent(Component component) {
-                    layout.removeLayoutComponent(component);
-                }
-
-                @Override
-                public Dimension preferredLayoutSize(Container parent) {
-                    return layout.preferredLayoutSize(parent);
-                }
-
-                @Override
-                public Dimension minimumLayoutSize(Container parent) {
-                    return layout.minimumLayoutSize(parent);
-                }
-
-                @Override
-                public void layoutContainer(Container parent) {
-                    layout.layoutContainer(parent);
-                    if (null == arrowButton || arrowButton.getWidth() <= ARROW_WIDTH) {
-                        return;
-                    }
-                    int offset = comboBox.getComponentOrientation().isLeftToRight() ? arrowButton.getWidth() - ARROW_WIDTH : 0;
-                    arrowButton.setBounds(arrowButton.getX() + offset, arrowButton.getY(), ARROW_WIDTH, arrowButton.getHeight());
-                    if (null != editor) {
-                        editor.setBounds(rectangleForCurrentValue());
-                    }
-                }
-            };
         }
     }
 
