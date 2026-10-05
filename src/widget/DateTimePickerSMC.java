@@ -47,20 +47,14 @@ import javax.swing.plaf.basic.ComboPopup;
 /**
  * Editable combo box that picks a date from a calendar popup.
  * <p>
- * Re-implementation of {@code uz.ncipro.calendar.JDateTimePicker}, keeping its
- * contract so existing forms behave the same:
+ * Re-implementation of {@code uz.ncipro.calendar.JDateTimePicker}, keeping its contract so existing forms behave the same:
  * <ul>
- *   <li>the selected item is the date formatted with {@link #getDisplayFormat()};</li>
- *   <li>every date change replaces the single item, firing item and action events;</li>
- *   <li>edited text is parsed leniently when the editor commits (enter, focus lost,
- *       or opening the popup), and unparseable text keeps the previous date;</li>
- *   <li>clicking a day closes the popup; the month and year spinners (arrows or
- *       mouse wheel) keep it open and change the date immediately. Wheel events that
- *       Windows delivers to the owner dialog instead of the popup are rerouted to the
- *       popup, so scrolling never dismisses it.</li>
+ * <li>the selected item is the date formatted with {@link #getDisplayFormat()};</li>
+ * <li>every date change replaces the single item, firing item and action events;</li>
+ * <li>edited text is parsed leniently when the editor commits (enter, focus lost, or opening the popup), and unparseable text keeps the previous date;</li>
+ * <li>clicking a day closes the popup; the month and year spinners (arrows or mouse wheel) keep it open and change the date immediately. Wheel events that Windows delivers to the owner dialog instead of the popup are rerouted to the popup, so scrolling never dismisses it.</li>
  * </ul>
- * The combo box itself is drawn by the installed look and feel, so it follows the
- * FlatLaf theme; only the popup content is custom.
+ * The combo box itself is drawn by the installed look and feel, so it follows the FlatLaf theme; only the popup content is custom.
  *
  * @author smc
  */
@@ -177,8 +171,7 @@ public class DateTimePickerSMC extends JComboBox {
     }
 
     /**
-     * Application combo box UI with the calendar popup, so the picker gets the same
-     * arrow button as every other combo box.
+     * Application combo box UI with the calendar popup, so the picker gets the same arrow button as every other combo box.
      */
     private static class FlatPickerUI extends LookAndFeelSMC.ComboBoxUI {
 
@@ -379,9 +372,7 @@ public class DateTimePickerSMC extends JComboBox {
         }
 
         /**
-         * Spinner model stepping one calendar field of the picker. The value is the
-         * displayed text; next and previous values are the step to add, so month
-         * steps roll over into the next or previous year.
+         * Spinner model stepping one calendar field of the picker. The value is the displayed text; next and previous values are the step to add, so month steps roll over into the next or previous year.
          */
         private final class FieldModel extends AbstractSpinnerModel {
 
@@ -427,10 +418,7 @@ public class DateTimePickerSMC extends JComboBox {
     }
 
     /**
-     * Reroutes mouse wheel events over a showing calendar popup to the component
-     * under the pointer inside the popup. Windows may deliver wheel events to the
-     * focused owner dialog rather than to the popup window, and Swing's popup mouse
-     * grabber cancels popups on wheel events coming from a dialog.
+     * Reroutes mouse wheel events over a showing calendar popup to the component under the pointer inside the popup. Windows may deliver wheel events to the focused owner dialog rather than to the popup window, and Swing's popup mouse grabber cancels popups on wheel events coming from a dialog.
      */
     private static final class WheelRedirect extends EventQueue {
 
