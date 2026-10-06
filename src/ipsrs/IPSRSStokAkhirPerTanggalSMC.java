@@ -267,8 +267,8 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
     */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        if(ceksukses){
-            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+        if (ceksukses) {
+            JOptionPane.showMessageDialog(null, "Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
         if (tabMode.getRowCount() == 0) {
@@ -299,7 +299,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasi : " + e);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -427,7 +427,6 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
     private void tampilSmc() {
         if (!ceksukses) {
             ceksukses = true;
-            Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
             final YearMonth ym = YearMonth.of(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()));
@@ -453,6 +452,7 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
             }
 
             tbDokter.repaint();
+            Valid.tabelKosongSmc(tabMode);
 
             new SwingWorker<Void, Object[]>() {
                 private final String cari = TCari.getText().trim();
@@ -474,9 +474,9 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
                                     .collect(LinkedHashMap::new, (map, day) -> map.put(day, 0d), LinkedHashMap::putAll);
 
                                 try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                    "(select 1 as d, r.stok_akhir from ipsrs_riwayat_barang r where r.tanggal < ? and r.kode_brng = ? and r.kd_bangsal = ? order by r.tanggal desc, r.jam desc " +
-                                    "limit 1) union all (select day(t.tanggal) as d, t.stok_akhir from (select row_number() over (partition by r.tanggal order by r.jam desc) as rn, r.tanggal, " +
-                                    "r.stok_akhir from ipsrs_riwayat_barang r where r.tanggal between ? and ? and r.kode_brng = ? and r.kd_bangsal = ?) as t where t.rn = 1)"
+                                    "(select 1 as d, r.stok_akhir from ipsrs_riwayat_barang r where r.tanggal < ? and r.kode_brng = ? order by r.tanggal desc, r.jam desc limit 1) union all (select day(t.tanggal) as d, " +
+                                    "t.stok_akhir from (select row_number() over (partition by r.tanggal order by r.jam desc) as rn, r.tanggal, r.stok_akhir from ipsrs_riwayat_barang r where r.tanggal between ? and ? " +
+                                    "and r.kode_brng = ?) as t where t.rn = 1)"
                                 )) {
                                     int p = 0;
                                     ps2.setString(++p, ym.atDay(2).toString());
@@ -541,6 +541,6 @@ public class IPSRSStokAkhirPerTanggalSMC extends javax.swing.JDialog {
     }
 
     public void isCek() {
-        BtnPrint.setEnabled(akses.getstok_akhir_farmasi_pertanggal());
+        BtnPrint.setEnabled(akses.getipsrs_stok_akhir_pertanggal_smc());
     }
 }
