@@ -48,14 +48,14 @@ public class WindowInputPassword extends javax.swing.JDialog {
     private void initComponents() {
 
         internalFrame6 = new widget.InternalFrame();
-        PassLama = new widget.TextBox();
+        PassLama = new widget.PasswordBox();
         jLabel9 = new widget.Label();
         BtnClosePass = new widget.Button();
         BtnSimpanPass = new widget.Button();
         jLabel10 = new widget.Label();
-        Passbaru1 = new widget.TextBox();
+        Passbaru1 = new widget.PasswordBox();
         jLabel12 = new widget.Label();
-        PassBaru2 = new widget.TextBox();
+        PassBaru2 = new widget.PasswordBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -64,6 +64,8 @@ public class WindowInputPassword extends javax.swing.JDialog {
         internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame6.setLayout(null);
 
+        PassLama.setForeground(new java.awt.Color(50, 50, 50));
+        PassLama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         internalFrame6.add(PassLama);
         PassLama.setBounds(108, 30, 210, 23);
 
@@ -109,6 +111,8 @@ public class WindowInputPassword extends javax.swing.JDialog {
         internalFrame6.add(jLabel10);
         jLabel10.setBounds(0, 60, 105, 23);
 
+        Passbaru1.setForeground(new java.awt.Color(50, 50, 50));
+        Passbaru1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         internalFrame6.add(Passbaru1);
         Passbaru1.setBounds(108, 60, 210, 23);
 
@@ -116,6 +120,8 @@ public class WindowInputPassword extends javax.swing.JDialog {
         internalFrame6.add(jLabel12);
         jLabel12.setBounds(0, 90, 105, 23);
 
+        PassBaru2.setForeground(new java.awt.Color(50, 50, 50));
+        PassBaru2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         internalFrame6.add(PassBaru2);
         PassBaru2.setBounds(108, 90, 210, 23);
 
@@ -219,9 +225,9 @@ public class WindowInputPassword extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnClosePass;
     private widget.Button BtnSimpanPass;
-    private widget.TextBox PassBaru2;
-    private widget.TextBox PassLama;
-    private widget.TextBox Passbaru1;
+    private widget.PasswordBox PassBaru2;
+    private widget.PasswordBox PassLama;
+    private widget.PasswordBox Passbaru1;
     private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
     private widget.Label jLabel12;
