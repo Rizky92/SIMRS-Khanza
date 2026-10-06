@@ -16,7 +16,7 @@ public final class QrRendererFactory {
 
     public static QrRenderer buat() {
         try {
-            Class<?> c = Class.forName("satusehattte.QrRendererZxing");
+            Class<?> c = Class.forName("bridging.QrRendererZxing");
             Object o = c.getDeclaredConstructor().newInstance();
             if (o instanceof QrRenderer) {
                 return (QrRenderer) o;

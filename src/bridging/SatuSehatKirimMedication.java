@@ -4,6 +4,7 @@
 
 package bridging;
 
+import smc.satusehat.ResourceSender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -564,86 +565,93 @@ public final class SatuSehatKirimMedication extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&tbObat.getValueAt(i,9).toString().equals("")){
-                try {
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Medication\"," +
-                                    "\"meta\": {" +
-                                        "\"profile\": [" +
-                                            "\"https://fhir.kemkes.go.id/r4/StructureDefinition/Medication\"" +
-                                        "]" +
-                                    "}," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\" : \"http://sys-ids.kemkes.go.id/medication/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"use\": \"official\"," +
-                                            "\"value\" : \""+tbObat.getValueAt(i,3).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+        ResourceSender.run(this,"Mengirim Medication ke Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&tbObat.getValueAt(i,9).toString().equals("")){
+                    try {
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Medication\"," +
+                                        "\"meta\": {" +
+                                            "\"profile\": [" +
+                                                "\"https://fhir.kemkes.go.id/r4/StructureDefinition/Medication\"" +
+                                            "]" +
+                                        "}," +
+                                        "\"identifier\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,2).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"system\" : \"http://sys-ids.kemkes.go.id/medication/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                "\"use\": \"official\"," +
+                                                "\"value\" : \""+tbObat.getValueAt(i,3).toString()+"\"" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"status\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                    "\"form\": {" +
-                                        "\"coding\": [" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,2).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"status\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
+                                        "\"form\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,6).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,5).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"extension\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,6).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,5).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                "\"url\": \"https://fhir.kemkes.go.id/r4/StructureDefinition/MedicationType\"," +
+                                                    "\"valueCodeableConcept\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/medication-type\"," +
+                                                            "\"code\": \"NC\"," +
+                                                            "\"display\": \"Non-compound\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
                                             "}" +
                                         "]" +
-                                    "}," +
-                                    "\"extension\": [" +
-                                        "{" +
-                                            "\"url\": \"https://fhir.kemkes.go.id/r4/StructureDefinition/MedicationType\"," +
-                                                "\"valueCodeableConcept\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/medication-type\"," +
-                                                        "\"code\": \"NC\"," +
-                                                        "\"display\": \"Non-compound\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "}" +
-                                    "]" +
-                                "}";
-                        System.out.println("URL : "+link+"/Medication");
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Medication", HttpMethod.POST, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
-                        response = root.path("id");
-                        if(!response.asText().equals("")){
-                            if(Sequel.menyimpantf2("satu_sehat_medication","?,?","Obat/Alkes",2,new String[]{
-                                tbObat.getValueAt(i,3).toString(),response.asText()
-                            })==true){
-                                tbObat.setValueAt(response.asText(),i,9);
-                                tbObat.setValueAt(false,i,0);
+                                    "}";
+                            System.out.println("URL : "+link+"/Medication");
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Medication", HttpMethod.POST, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_medication","?,?","Obat/Alkes",2,new String[]{
+                                    tbObat.getValueAt(i,3).toString(),response.asText()
+                                })==true){
+                                    pengirim.setValueAt(tbObat,response.asText(),i,9);
+                                    pengirim.setValueAt(tbObat,false,i,0);
+                                }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnKirimActionPerformed
 
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
@@ -659,78 +667,85 @@ public final class SatuSehatKirimMedication extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void BtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
-            if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,9).toString().equals(""))){
-                try {
-                    try{
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\": \"Medication\"," +
-                                    "\"id\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
-                                    "\"meta\": {" +
-                                        "\"profile\": [" +
-                                            "\"https://fhir.kemkes.go.id/r4/StructureDefinition/Medication\"" +
-                                        "]" +
-                                    "}," +
-                                    "\"identifier\": [" +
-                                        "{" +
-                                            "\"system\" : \"http://sys-ids.kemkes.go.id/medication/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"use\": \"official\"," +
-                                            "\"value\" : \""+tbObat.getValueAt(i,3).toString()+"\"" +
-                                        "}" +
-                                    "]," +
-                                    "\"code\": {" +
-                                        "\"coding\": [" +
+        ResourceSender.run(this,"Memperbarui Medication di Satu Sehat...",pengirim -> {
+            pengirim.setTotal(ResourceSender.countSelected(tbObat));
+            for(i=0;i<tbObat.getRowCount();i++){
+                if(pengirim.isProcessStopped()||ApiSatuSehat.isStoppedSmc()){
+                    break;
+                }
+                pengirim.incrementIfSelected(tbObat,i);
+                if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,9).toString().equals(""))){
+                    try {
+                        try{
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                            json = "{" +
+                                        "\"resourceType\": \"Medication\"," +
+                                        "\"id\": \""+tbObat.getValueAt(i,9).toString()+"\"," +
+                                        "\"meta\": {" +
+                                            "\"profile\": [" +
+                                                "\"https://fhir.kemkes.go.id/r4/StructureDefinition/Medication\"" +
+                                            "]" +
+                                        "}," +
+                                        "\"identifier\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,2).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "\"system\" : \"http://sys-ids.kemkes.go.id/medication/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                                "\"use\": \"official\"," +
+                                                "\"value\" : \""+tbObat.getValueAt(i,3).toString()+"\"" +
                                             "}" +
-                                        "]" +
-                                    "}," +
-                                    "\"status\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
-                                    "\"form\": {" +
-                                        "\"coding\": [" +
+                                        "]," +
+                                        "\"code\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,2).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,1).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,4).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"status\": \""+tbObat.getValueAt(i,8).toString()+"\"," +
+                                        "\"form\": {" +
+                                            "\"coding\": [" +
+                                                "{" +
+                                                    "\"system\": \""+tbObat.getValueAt(i,6).toString()+"\"," +
+                                                    "\"code\": \""+tbObat.getValueAt(i,5).toString()+"\"," +
+                                                    "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                "}" +
+                                            "]" +
+                                        "}," +
+                                        "\"extension\": [" +
                                             "{" +
-                                                "\"system\": \""+tbObat.getValueAt(i,6).toString()+"\"," +
-                                                "\"code\": \""+tbObat.getValueAt(i,5).toString()+"\"," +
-                                                "\"display\": \""+tbObat.getValueAt(i,7).toString()+"\"" +
+                                                "\"url\": \"https://fhir.kemkes.go.id/r4/StructureDefinition/MedicationType\"," +
+                                                    "\"valueCodeableConcept\": {" +
+                                                    "\"coding\": [" +
+                                                        "{" +
+                                                            "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/medication-type\"," +
+                                                            "\"code\": \"NC\"," +
+                                                            "\"display\": \"Non-compound\"" +
+                                                        "}" +
+                                                    "]" +
+                                                "}" +
                                             "}" +
                                         "]" +
-                                    "}," +
-                                    "\"extension\": [" +
-                                        "{" +
-                                            "\"url\": \"https://fhir.kemkes.go.id/r4/StructureDefinition/MedicationType\"," +
-                                                "\"valueCodeableConcept\": {" +
-                                                "\"coding\": [" +
-                                                    "{" +
-                                                        "\"system\": \"http://terminology.kemkes.go.id/CodeSystem/medication-type\"," +
-                                                        "\"code\": \"NC\"," +
-                                                        "\"display\": \"Non-compound\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "}" +
-                                    "]" +
-                                "}";
-                        System.out.println("URL : "+link+"/Medication/"+tbObat.getValueAt(i,9).toString());
-                        System.out.println("Request JSON : "+json);
-                        requestEntity = new HttpEntity(json,headers);
-                        json=api.getRest().exchange(link+"/Medication/"+tbObat.getValueAt(i,9).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
-                        System.out.println("Result JSON : "+json);
-                        tbObat.setValueAt(false,i,0);
-                    } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    }catch(Exception e){
-                        System.out.println("Notifikasi Bridging : "+e);
+                                    "}";
+                            System.out.println("URL : "+link+"/Medication/"+tbObat.getValueAt(i,9).toString());
+                            System.out.println("Request JSON : "+json);
+                            requestEntity = new HttpEntity(json,headers);
+                            json=api.kirimSmc(link+"/Medication/"+tbObat.getValueAt(i,9).toString(), HttpMethod.PUT, requestEntity);
+                            System.out.println("Result JSON : "+json);
+                            pengirim.setValueAt(tbObat,false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
                 }
             }
-        }
+        });
     }//GEN-LAST:event_BtnUpdateActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed

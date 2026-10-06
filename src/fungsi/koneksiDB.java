@@ -511,6 +511,15 @@ public class koneksiDB {
         }
     }
 
+    public static boolean KIRIMORDERKEMODALITYSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("KIRIMORDERKEMODALITYSMC", "no").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
@@ -1846,7 +1855,7 @@ public class koneksiDB {
     public static String TANGGALMUNDUR(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("TANGGALMUNDUR");
+            var=prop.getProperty("TANGGALMUNDUR", "yes");
         }catch(Exception e){
             var="yes";
         }
@@ -2145,20 +2154,19 @@ public class koneksiDB {
     public static String TAMPILTARIFOPERASI(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("TAMPILTARIFOPERASI");
+            // var=prop.getProperty("TAMPILTARIFOPERASI");
+            return prop.getProperty("TAMPILTARIFOPERASI", "no");
         }catch(Exception e){
-            var="no";
+            // var="no";
+            return "no";
         }
-        return var;
+        // return var;
     }
 
     public static String URLAPPLINKSATUSEHAT() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var = prop.getProperty("URLAPPLINKSATUSEHAT");
-            if (var == null) {
-                var = "";
-            }
         } catch (Exception e) {
             var = "";
         }
@@ -2169,12 +2177,27 @@ public class koneksiDB {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var = prop.getProperty("IDORGBPJSSATUSEHAT");
-            if (var == null) {
-                var = "";
-            }
         } catch (Exception e) {
             var = "";
         }
         return var;
+    }
+
+    public static String KODEAKUNPENGELUARANHARIAN() {
+        /*
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var = prop.getProperty("KODEAKUNPENGELUARANHARIAN");
+        } catch (Exception e) {
+            var = "";
+        }
+        return var;
+        */
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            return prop.getProperty("KODEAKUNPENGELUARANHARIAN", "");
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

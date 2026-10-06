@@ -976,7 +976,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
                         "insert into template_laboratorium (kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, " +
                         "nilai_rujukan_pa, bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut) " +
                         "select ? as kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, nilai_rujukan_pa, " +
-                        "bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut " +
+                        (akses.gettarif_lab() ? "bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, " : "0, 0, 0, 0, 0, 0, 0, 0, ") + "urut " +
                         "from template_laboratorium where kd_jenis_prw = ?",
                         tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString(),
                         kodeTindakanDicopy
@@ -1429,7 +1429,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.gettarif_lab());
         BtnEdit.setEnabled(akses.gettarif_lab());
         BtnPrint.setEnabled(akses.gettarif_lab());
-        ppCopyTemplate.setEnabled(akses.gettarif_lab());
+        ppCopyTemplate.setEnabled(akses.gettarif_lab() || akses.gettemplate_laboratorium_smc());
 
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);

@@ -16,12 +16,13 @@
 	<queryString>
 		<![CDATA[select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir,
 resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik,
-obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur
+obat_racikan.aturan_pakai,obat_racikan.jml_dr,obat_racikan.tgl_kadaluarsa,
+metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur
 from resep_obat inner join reg_periksa inner join pasien inner join
-obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat 
+obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat
 and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and obat_racikan.kd_racik=metode_racik.kd_racik
-and resep_obat.no_rawat=obat_racikan.no_rawat and 
+and resep_obat.no_rawat=obat_racikan.no_rawat and
 resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and
 resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 	</queryString>
@@ -71,6 +72,11 @@ resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat]]>
 	</field>
 	<field name="jml_dr" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="jml_dr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="obat_racikan"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_kadaluarsa" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tgl_kadaluarsa"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="obat_racikan"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>

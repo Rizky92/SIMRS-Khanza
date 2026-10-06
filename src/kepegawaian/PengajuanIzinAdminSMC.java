@@ -1377,7 +1377,7 @@ public final class PengajuanIzinAdminSMC extends javax.swing.JDialog {
                 (tbObat.getSelectedRow() < 0 ? "" : "and s.no_pengajuan != ? ") + "), 0) as diambil from datapegawai"
             )) {
                 int p = 0;
-                ps.setString(++p, Valid.getTglSmc(Tanggal));
+                ps.setString(++p, Valid.getTglSmc(TglIzin));
                 ps.setString(++p, KdPetugas.getText());
                 ps.setString(++p, Urgensi.getSelectedItem().toString());
                 if (tbObat.getSelectedRow() >= 0) {

@@ -70,4 +70,60 @@
     nbproject/build-impl.xml file.
 
     -->
+
+    <target name="-package-native-init" depends="init">
+        <property name="platform.home" location="${java.home}"/>
+        <property name="native.name" value="JRViewerSMC"/>
+        <property name="native.dir" location="${dist.dir}/native"/>
+        <property name="native.image.dir" location="${native.dir}/${native.name}"/>
+        <property name="native.input.dir" location="${build.dir}/native-input"/>
+        <property name="native.modules" value="java.base,java.desktop,java.management.rmi,java.prefs,java.scripting,java.sql.rowset,jdk.unsupported,jdk.charsets,jdk.localedata"/>
+        <condition property="native.jpackage" value="${platform.home}/bin/jpackage.exe" else="${platform.home}/bin/jpackage">
+            <os family="windows"/>
+        </condition>
+        <fail message="jpackage not found in ${platform.home}. Package with a JDK 17 or newer.">
+            <condition>
+                <not>
+                    <available file="${native.jpackage}"/>
+                </not>
+            </condition>
+        </fail>
+    </target>
+
+    <target name="package-native" depends="jar,-package-native-init" description="Build a native app image with a bundled Java runtime.">
+        <fail message="No libraries in ${dist.dir}/lib. The jar was built without NetBeans CopyLibs, so the app image would not start.">
+            <condition>
+                <resourcecount when="equal" count="0">
+                    <fileset dir="${dist.dir}/lib" includes="*.jar" erroronmissingdir="false"/>
+                </resourcecount>
+            </condition>
+        </fail>
+        <delete dir="${native.input.dir}"/>
+        <delete dir="${native.image.dir}"/>
+        <copy todir="${native.input.dir}">
+            <fileset dir="${dist.dir}" includes="${native.name}.jar,lib/*.jar"/>
+        </copy>
+        <mkdir dir="${native.dir}"/>
+        <exec executable="${native.jpackage}" failonerror="true">
+            <arg value="--type"/>
+            <arg value="app-image"/>
+            <arg value="--name"/>
+            <arg value="${native.name}"/>
+            <arg value="--description"/>
+            <arg value="JRViewer SMC"/>
+            <arg value="--input"/>
+            <arg file="${native.input.dir}"/>
+            <arg value="--main-jar"/>
+            <arg value="${native.name}.jar"/>
+            <arg value="--main-class"/>
+            <arg value="${main.class}"/>
+            <arg value="--add-modules"/>
+            <arg value="${native.modules}"/>
+            <arg value="--jlink-options"/>
+            <arg value="--strip-native-commands --strip-debug --no-man-pages --no-header-files --include-locales=en,id"/>
+            <arg value="--dest"/>
+            <arg file="${native.dir}"/>
+        </exec>
+        <echo message="Native app image: ${native.image.dir}"/>
+    </target>
 </project>

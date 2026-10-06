@@ -38,7 +38,8 @@
  *
  * Presets (mutually exclusive — pick at most one):
  *   --default-migrate-yes   Full rebuild-and-migrate run, drops included:
- *                           --rebuild --with-drop --migrate --yes --post=sik_local_update.sql
+ *                           --rebuild --with-drop --migrate --yes
+ *                           --post=sik_bersih.sql,sik_local_update.sql
  *                           --output=migrate-<yyyy-mm-dd>.sql
  *   --safe-migrate-yes      Same run without any drops, so nothing existing in the current
  *                           database is removed — only additive DDL is applied:
@@ -72,7 +73,8 @@
  *   php schema-diff.php khanza sik --port=3307 --default-migrate-yes
  *
  * which is equivalent to:
- *   php schema-diff.php khanza sik --port=3307 --rebuild --post=sik_local_update.sql \
+ *   php schema-diff.php khanza sik --port=3307 --rebuild \
+ *       --post=sik_bersih.sql,sik_local_update.sql \
  *       --with-drop --migrate --yes --output=migrate-<yyyy-mm-dd>.sql
  *
  * Example — back-sync new tables added to the target into the source without removing
@@ -439,14 +441,16 @@ function parseArgs(array $argv): array
  *             DROP DATABASE prompt of --rebuild is still asked.
  * 'suffix'  — appended to the generated output filename so the four presets
  *             never overwrite each other's DDL.
+ * 'post'    — post-migration imports supplied when --post was not given, in the
+ *             order they must run. Only consulted by the migrating presets.
  */
 function migratePresets(): array
 {
     return [
-        'default-migrate-yes' => ['drops' => true, 'migrate' => true, 'suffix' => ''],
-        'safe-migrate-yes' => ['drops' => false, 'migrate' => true, 'suffix' => '-safe'],
-        'default-migrate-dry' => ['drops' => true, 'migrate' => false, 'suffix' => '-dry'],
-        'safe-migrate-dry' => ['drops' => false, 'migrate' => false, 'suffix' => '-safe-dry'],
+        'default-migrate-yes' => ['drops' => true, 'migrate' => true, 'suffix' => '', 'post' => ['sik_bersih.sql', 'sik_local_update.sql']],
+        'safe-migrate-yes'    => ['drops' => false, 'migrate' => true, 'suffix' => '-safe', 'post' => ['sik_local_update.sql']],
+        'default-migrate-dry' => ['drops' => true, 'migrate' => false, 'suffix' => '-dry', 'post' => []],
+        'safe-migrate-dry'    => ['drops' => false, 'migrate' => false, 'suffix' => '-safe-dry', 'post' => []],
     ];
 }
 
@@ -501,8 +505,8 @@ function applyMigratePreset(array $opts, array $preset): array
             $opts[$flag] = true;
         }
     }
-    if ($preset['migrate'] && !isset($opts['post'])) {
-        $opts['post'] = 'sik_local_update.sql';
+    if ($preset['migrate'] && !isset($opts['post']) && $preset['post']) {
+        $opts['post'] = $preset['post'];
     }
     if (empty($opts['output'])) {
         $opts['output'] = 'migrate-' . date('Y-m-d') . $preset['suffix'] . '.sql';

@@ -11,7 +11,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -26,6 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -288,6 +292,43 @@ public class ApiOrthanc {
             JOptionPane.showMessageDialog(null,"Gagal kirim ke Modality..!!");
             return false;
         }
+    }
+
+    public ArrayList<String> listModalitySmc() {
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/modalities";
+            HttpHeaders header = new HttpHeaders();
+            header.add("Authorization", "Basic " + authEncrypt);
+            header.setContentType(MediaType.APPLICATION_JSON);
+
+            System.out.println("URL : " + url);
+
+            ResponseEntity<String> response = getRest().exchange(url, HttpMethod.GET, new HttpEntity(header), String.class);
+            list.addAll(Arrays.asList(mapper.readValue(response.getBody(), String[].class)));
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return list;
+    }
+
+    public String detailModalitySmc(String modality) {
+        String aet = "";
+        try {
+            String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/modalities/" + modality + "/configuration";
+            HttpHeaders header = new HttpHeaders();
+            header.add("Authorization", "Basic " + authEncrypt);
+            header.setContentType(MediaType.APPLICATION_JSON);
+
+            System.out.println("URL : " + url);
+
+            ResponseEntity<String> response = getRest().exchange(url, HttpMethod.GET, new HttpEntity(header), String.class);
+            JsonNode root = mapper.readTree(response.getBody());
+            aet = root.path("AET").asText("");
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return aet;
     }
 
     public boolean kirimKeModalitySmc(String studyID, String modality) {

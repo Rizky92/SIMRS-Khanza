@@ -12,6 +12,7 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -55,22 +56,25 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Pemeriksaan","Satuan","N.Rujukan L.D.","N.Rujukan L.A.","N.Rujukan P.D.",
-                      "N.Rujukan P.A.","J.S. Rmh Skt","Paket BHP","J.M. Perujuk","J.M. Dokter",
-                      "J.M. Laborat","K.S.O.","Menejemen","Biaya Item","ID Template",""};
+        Object[] row={
+            "Pemeriksaan","Satuan","N.Rujukan L.D.","N.Rujukan L.A.","N.Rujukan P.D.",
+            "N.Rujukan P.A.","Metode","J.S. Rmh Skt","Paket BHP","J.M. Perujuk","J.M. Dokter",
+            "J.M. Laborat","K.S.O.","Menejemen","Biaya Item","ID Template",""
+        };
         tabMode=new DefaultTableModel(null,row){
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex){
-                return colIndex < 13;
+                return colIndex < (akses.gettarif_lab() ? 14 : 7);
             }
             Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class,
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
-                java.lang.Double.class,java.lang.Double.class,java.lang.Object.class,java.lang.Object.class
-            };
-            @Override
-            public Class getColumnClass(int columnIndex) {
+                java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Object.class,
+                java.lang.Object.class
+             };
+             @Override
+             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         };
@@ -78,13 +82,13 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 17; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(180);
-            } else if (i == 14) {
+            } else if (i == 15) {
                 column.setPreferredWidth(100);
-            }else if(i==15){
+            }else if(i==16){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else {
@@ -93,7 +97,6 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         KdPeriksa.setDocument(new batasInput((byte)100).getKata(KdPeriksa));
-
     }
 
 
@@ -231,9 +234,9 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(KdPeriksa,"Pemeriksaan");
         }else{
             if(tbKamar.getSelectedRow()>-1){
-                tabMode.insertRow(tbKamar.getSelectedRow(),new Object[]{"","","","","","",0,0,0,0,0,0,0,0,""});
+                tabMode.insertRow(tbKamar.getSelectedRow(),new Object[]{"","","","","","","",0,0,0,0,0,0,0,0,""});
             }else{
-                tabMode.addRow(new Object[]{"","","","","","",0,0,0,0,0,0,0,0,"",""});
+                tabMode.addRow(new Object[]{"","","","","","","",0,0,0,0,0,0,0,0,"",""});
                 tbKamar.requestFocus();
             }
             urut();
@@ -250,23 +253,32 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                  if(row>-1){
                      for(int i=0;i<row;i++){
                          //System.out.println(tbKamar.getValueAt(i,0).toString());
-                        if(tbKamar.getValueAt(i,14).toString().equals("")){
-                             Sequel.menyimpan("template_laboratorium","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Id Hasil Periksa",17,new String[]{
+                        if(tbKamar.getValueAt(i,15).toString().equals("")){
+                             Sequel.menyimpan("template_laboratorium","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Id Hasil Periksa",18,new String[]{
                                    KdPeriksa.getText(),"0",tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),
                                    tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),tbKamar.getValueAt(i,4).toString(),
                                    tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
                                    tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),
                                    tbKamar.getValueAt(i,11).toString(),tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),
-                                   tbKamar.getValueAt(i,15).toString()
+                                   tbKamar.getValueAt(i,14).toString(),tbKamar.getValueAt(i,16).toString()
                              });
-                        }else if(!tbKamar.getValueAt(i,14).toString().equals("")){
-                             Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,"+
-                                   "nilai_rujukan_pd=?,nilai_rujukan_pa=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",16,new String[]{
-                                   tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
-                                   tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
-                                   tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,11).toString(),
-                                   tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,15).toString(),tbKamar.getValueAt(i,14).toString()
-                             } );
+                        }else{
+                            if (akses.gettarif_lab()) {
+                                Sequel.mengedit("template_laboratorium","id_template=?","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,nilai_rujukan_pd=?,nilai_rujukan_pa=?,"+
+                                    "method=?,bagian_rs=?,bhp=?,bagian_perujuk=?,bagian_dokter=?,bagian_laborat=?,kso=?,menejemen=?,biaya_item=?,urut=?",17,new String[]{
+                                    tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
+                                    tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,7).toString(),
+                                    tbKamar.getValueAt(i,8).toString(),tbKamar.getValueAt(i,9).toString(),tbKamar.getValueAt(i,10).toString(),tbKamar.getValueAt(i,11).toString(),
+                                    tbKamar.getValueAt(i,12).toString(),tbKamar.getValueAt(i,13).toString(),tbKamar.getValueAt(i,14).toString(),tbKamar.getValueAt(i,16).toString(),
+                                tbKamar.getValueAt(i,15).toString()
+                              } );
+                            } else {
+                                Sequel.mengupdateSmc("template_laboratorium","Pemeriksaan=?,satuan=?,nilai_rujukan_ld=?,nilai_rujukan_la=?,nilai_rujukan_pd=?,nilai_rujukan_pa=?,method=?,urut=?","id_template=?",
+                                      tbKamar.getValueAt(i,0).toString(),tbKamar.getValueAt(i,1).toString(),tbKamar.getValueAt(i,2).toString(),tbKamar.getValueAt(i,3).toString(),
+                                      tbKamar.getValueAt(i,4).toString(),tbKamar.getValueAt(i,5).toString(),tbKamar.getValueAt(i,6).toString(),tbKamar.getValueAt(i,16).toString(),
+                                      tbKamar.getValueAt(i,15).toString()
+                                );
+                            }
                         }
                      }
                      tampil();
@@ -277,9 +289,19 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try{
-            Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),14).toString());
-            tabMode.removeRow(tbKamar.getSelectedRow());
-            urut();
+            if (!akses.gettarif_lab()) {
+                if(((Number)tbKamar.getValueAt(tbKamar.getSelectedRow(),14)).doubleValue()>0){
+                    JOptionPane.showMessageDialog(null,"Maaf, pemeriksaan yang sudah memiliki tarif tidak boleh dihapus...!!!");
+                }else{
+                    Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
+                    tabMode.removeRow(tbKamar.getSelectedRow());
+                    urut();
+                }
+            }else{
+                Sequel.meghapus("template_laboratorium","id_template",tbKamar.getValueAt(tbKamar.getSelectedRow(),15).toString());
+                tabMode.removeRow(tbKamar.getSelectedRow());
+                urut();
+            }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Pilih dulu data yang mau dihapus..!!");
         }
@@ -344,9 +366,10 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
-                    "template_laboratorium.nilai_rujukan_pa,template_laboratorium.bagian_rs,template_laboratorium.bhp,template_laboratorium.bagian_perujuk,template_laboratorium.bagian_dokter,template_laboratorium.bagian_laborat,template_laboratorium.kso,template_laboratorium.menejemen,"+
-                    "template_laboratorium.biaya_item,template_laboratorium.urut from template_laboratorium where template_laboratorium.kd_jenis_prw=? order by template_laboratorium.urut");
+                "select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
+                "template_laboratorium.nilai_rujukan_pa,template_laboratorium.method,template_laboratorium.bagian_rs,template_laboratorium.bhp,template_laboratorium.bagian_perujuk,template_laboratorium.bagian_dokter,template_laboratorium.bagian_laborat,"+
+                "template_laboratorium.kso,template_laboratorium.menejemen,template_laboratorium.biaya_item,template_laboratorium.urut from template_laboratorium where template_laboratorium.kd_jenis_prw=? order by template_laboratorium.urut"
+            );
             try {
                 ps.setString(1,KdPeriksa.getText());
                 rs=ps.executeQuery();
@@ -354,9 +377,10 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         rs.getString(2),rs.getString(3),rs.getString(4),
                         rs.getString(5),rs.getString(6),rs.getString(7),
-                        rs.getDouble(8),rs.getDouble(9),rs.getDouble(10),
+                        rs.getString(8),rs.getDouble(9),rs.getDouble(10),
                         rs.getDouble(11),rs.getDouble(12),rs.getDouble(13),
-                        rs.getDouble(14),rs.getDouble(15),rs.getString(1),""
+                        rs.getDouble(14),rs.getDouble(15),rs.getDouble(16),
+                        rs.getString(1),""
                     });
                 }
                 urut();
@@ -377,21 +401,21 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
 
     private void getData() {
         int row=tbKamar.getSelectedRow();
-        if(row!= -1){
-            if((!tbKamar.getValueAt(row,6).toString().equals(""))
-                    &&(!tbKamar.getValueAt(row,7).toString().equals(""))
+        if(akses.gettarif_lab()&&(row!= -1)){
+            if((!tbKamar.getValueAt(row,7).toString().equals(""))
                     &&(!tbKamar.getValueAt(row,8).toString().equals(""))
                     &&(!tbKamar.getValueAt(row,9).toString().equals(""))
                     &&(!tbKamar.getValueAt(row,10).toString().equals(""))
                     &&(!tbKamar.getValueAt(row,11).toString().equals(""))
-                    &&(!tbKamar.getValueAt(row,12).toString().equals(""))){
-               tbKamar.setValueAt(Valid.SetAngka(tbKamar.getValueAt(row,6).toString())+
-                       Valid.SetAngka(tbKamar.getValueAt(row,7).toString())+
+                    &&(!tbKamar.getValueAt(row,12).toString().equals(""))
+                    &&(!tbKamar.getValueAt(row,13).toString().equals(""))){
+               tbKamar.setValueAt(Valid.SetAngka(tbKamar.getValueAt(row,7).toString())+
                        Valid.SetAngka(tbKamar.getValueAt(row,8).toString())+
                        Valid.SetAngka(tbKamar.getValueAt(row,9).toString())+
                        Valid.SetAngka(tbKamar.getValueAt(row,10).toString())+
                        Valid.SetAngka(tbKamar.getValueAt(row,11).toString())+
-                       Valid.SetAngka(tbKamar.getValueAt(row,12).toString()), row,13);
+                       Valid.SetAngka(tbKamar.getValueAt(row,12).toString())+
+                       Valid.SetAngka(tbKamar.getValueAt(row,13).toString()), row,14);
             }
         }
     }
@@ -407,7 +431,7 @@ public final class DlgTemplateLaboratorium extends javax.swing.JDialog {
     public void urut(){
         if(tbKamar.getRowCount()>-1){
             for(int i=0;i<tbKamar.getRowCount();i++){
-                  tbKamar.setValueAt(i, i,15);
+                  tbKamar.setValueAt(i, i,16);
             }
         }
     }

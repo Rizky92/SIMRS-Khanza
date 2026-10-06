@@ -260,14 +260,35 @@ public final class validasi {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(tgljam);
     }
 
+    public String getTglSmc(String tgl, String format) {
+        try {
+            Date date = new SimpleDateFormat(format).parse(tgl);
+            return new SimpleDateFormat("yyyy-MM-dd").format(date);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public String getJamSmc(String jam, String format) {
+        try {
+            Date date = new SimpleDateFormat(format).parse(jam);
+
+            return new SimpleDateFormat("HH:mm:ss").format(date);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public void setTglJamSmc(Tanggal tgl) {
         tgl.setDate(Calendar.getInstance().getTime());
     }
 
-    public void setTglJamSmc(Date tgljam, Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
+    public void setTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik, Date tgljam) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(tgljam);
-        tgl.setDate(tgljam);
+        if (!getTglSmc(tgl).equals(getTglSmc(tgljam, "yyyy-MM-dd"))) {
+            tgl.setDate(tgljam);
+        }
         jam.setSelectedIndex(cal.get(Calendar.HOUR_OF_DAY));
         menit.setSelectedIndex(cal.get(Calendar.MINUTE));
         detik.setSelectedIndex(cal.get(Calendar.SECOND));

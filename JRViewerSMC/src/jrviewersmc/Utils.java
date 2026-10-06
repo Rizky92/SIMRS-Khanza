@@ -30,7 +30,7 @@ public class Utils {
             JasperViewer viewer = new JasperViewer(jasperPrint, false);
             viewer.setExtendedState(JFrame.MAXIMIZED_BOTH);
             viewer.setLocationRelativeTo(null);
-            viewer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            viewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             viewer.setTitle("JRViewer SMC - " + file.getName());
             viewer.setVisible(true);
         } catch (Exception e) {
