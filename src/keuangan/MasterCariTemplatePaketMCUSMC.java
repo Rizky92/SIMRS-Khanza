@@ -1,4 +1,4 @@
-package rekammedis;
+package keuangan;
 
 import fungsi.WarnaTable;
 import fungsi.akses;
@@ -31,6 +31,7 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import keuangan.Jurnal;
 import org.apache.commons.lang3.StringUtils;
+import rekammedis.MasterTemplatePaketMCUSMC;
 
 public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
     private static final int KOL_TINDAKAN_KODE = 0;
