@@ -133,6 +133,37 @@ public final class sekuel {
         return cekTanggalRegistrasiSmc(noRawat, "");
     }
 
+    public boolean cekBatasan2x24JamSmc(String tglawal, String tglinput) {
+        if (!sekuel.pemberlakuanBatasEdit || akses.getakses_edit_sementara()) {
+            return true;
+        }
+
+        try {
+            Date awal = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tglawal);
+            Date sekarang = new Date();
+
+            if (null != tglinput && tglinput.isBlank()) {
+                sekarang = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tglinput);
+            }
+
+            long diff = (sekarang.getTime() - awal.getTime()) / 1000;
+
+            if (diff > (60 * 60 * 24 * 2)) {
+                JOptionPane.showMessageDialog(null, "Maaf, perubahan / penghapusan data tidak boleh lebih dari 2 x 24 jam..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            return true;
+        }
+    }
+
+    public boolean cekBatasan2x24JamSmc(String tglawal) {
+        return cekBatasan2x24JamSmc(tglawal, null);
+    }
+
     private double parseDouble(String value) {
         try {
             return Double.parseDouble(value);

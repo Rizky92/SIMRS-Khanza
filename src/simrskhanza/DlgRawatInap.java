@@ -1160,7 +1160,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
         BtnBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emptTeks();
+                BtnBatalActionPerformed(evt);
             }
         });
         BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1288,7 +1288,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-10-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-10-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1302,7 +1302,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-10-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-10-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1561,7 +1561,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSeekPetugas.setBounds(849, 10, 28, 23);
 
         TPerawat.setEditable(false);
-        TPerawat.setBackground(new java.awt.Color(202, 202, 202));
         TPerawat.setName("TPerawat"); // NOI18N
         panelGlass13.add(TPerawat);
         TPerawat.setBounds(240, 10, 606, 23);
@@ -1679,7 +1678,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSeekPetugas2.setBounds(849, 40, 28, 23);
 
         TPerawat2.setEditable(false);
-        TPerawat2.setBackground(new java.awt.Color(202, 202, 202));
         TPerawat2.setName("TPerawat2"); // NOI18N
         panelGlass11.add(TPerawat2);
         TPerawat2.setBounds(240, 40, 606, 23);
@@ -1799,7 +1797,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
         PanelInput1.setName("PanelInput1"); // NOI18N
         PanelInput1.setOpaque(false);
-        PanelInput1.setPreferredSize(new java.awt.Dimension(192, 273));
+        PanelInput1.setPreferredSize(new java.awt.Dimension(192, 308));
         PanelInput1.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -1846,7 +1844,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
         TKeluhan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         TKeluhan.setColumns(20);
-        TKeluhan.setRows(5);
+        TKeluhan.setRows(1);
+        TKeluhan.setTabSize(4);
         TKeluhan.setName("TKeluhan"); // NOI18N
         TKeluhan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1856,14 +1855,15 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         scrollPane1.setViewportView(TKeluhan);
 
         panelGlass12.add(scrollPane1);
-        scrollPane1.setBounds(73, 70, 360, 38);
+        scrollPane1.setBounds(73, 70, 360, 53);
 
         scrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane2.setName("scrollPane2"); // NOI18N
 
         TPemeriksaan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         TPemeriksaan.setColumns(20);
-        TPemeriksaan.setRows(5);
+        TPemeriksaan.setRows(1);
+        TPemeriksaan.setTabSize(4);
         TPemeriksaan.setName("TPemeriksaan"); // NOI18N
         TPemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1873,7 +1873,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         scrollPane2.setViewportView(TPemeriksaan);
 
         panelGlass12.add(scrollPane2);
-        scrollPane2.setBounds(73, 115, 360, 38);
+        scrollPane2.setBounds(73, 130, 360, 53);
 
         jLabel8.setText("Subjek :");
         jLabel8.setName("jLabel8"); // NOI18N
@@ -1883,14 +1883,15 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         jLabel9.setText("Objek :");
         jLabel9.setName("jLabel9"); // NOI18N
         panelGlass12.add(jLabel9);
-        jLabel9.setBounds(0, 115, 70, 23);
+        jLabel9.setBounds(0, 130, 70, 23);
 
         scrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane3.setName("scrollPane3"); // NOI18N
 
         TPenilaian.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         TPenilaian.setColumns(20);
-        TPenilaian.setRows(5);
+        TPenilaian.setRows(1);
+        TPenilaian.setTabSize(4);
         TPenilaian.setName("TPenilaian"); // NOI18N
         TPenilaian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1900,7 +1901,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         scrollPane3.setViewportView(TPenilaian);
 
         panelGlass12.add(scrollPane3);
-        scrollPane3.setBounds(543, 40, 360, 38);
+        scrollPane3.setBounds(543, 40, 360, 53);
 
         jLabel37.setText("Asesmen :");
         jLabel37.setName("jLabel37"); // NOI18N
@@ -1910,14 +1911,15 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         jLabel26.setText("Plan :");
         jLabel26.setName("jLabel26"); // NOI18N
         panelGlass12.add(jLabel26);
-        jLabel26.setBounds(450, 85, 90, 23);
+        jLabel26.setBounds(450, 100, 90, 23);
 
         scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane4.setName("scrollPane4"); // NOI18N
 
         TindakLanjut.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         TindakLanjut.setColumns(20);
-        TindakLanjut.setRows(5);
+        TindakLanjut.setRows(1);
+        TindakLanjut.setTabSize(4);
         TindakLanjut.setName("TindakLanjut"); // NOI18N
         TindakLanjut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1927,7 +1929,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         scrollPane4.setViewportView(TindakLanjut);
 
         panelGlass12.add(scrollPane4);
-        scrollPane4.setBounds(543, 85, 360, 47);
+        scrollPane4.setBounds(543, 100, 360, 53);
 
         jLabel53.setText("Dilakukan :");
         jLabel53.setName("jLabel53"); // NOI18N
@@ -1973,14 +1975,15 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         jLabel55.setText("Inst/Impl :");
         jLabel55.setName("jLabel55"); // NOI18N
         panelGlass12.add(jLabel55);
-        jLabel55.setBounds(450, 139, 90, 23);
+        jLabel55.setBounds(450, 160, 90, 23);
 
         scrollPane7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane7.setName("scrollPane7"); // NOI18N
 
         TInstruksi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         TInstruksi.setColumns(20);
-        TInstruksi.setRows(5);
+        TInstruksi.setRows(1);
+        TInstruksi.setTabSize(4);
         TInstruksi.setName("TInstruksi"); // NOI18N
         TInstruksi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1990,12 +1993,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         scrollPane7.setViewportView(TInstruksi);
 
         panelGlass12.add(scrollPane7);
-        scrollPane7.setBounds(543, 139, 360, 50);
+        scrollPane7.setBounds(543, 160, 360, 53);
 
         jLabel56.setText("SpO2 (%) :");
         jLabel56.setName("jLabel56"); // NOI18N
         panelGlass12.add(jLabel56);
-        jLabel56.setBounds(0, 220, 70, 23);
+        jLabel56.setBounds(0, 250, 70, 23);
 
         SpO2.setFocusTraversalPolicyProvider(true);
         SpO2.setName("SpO2"); // NOI18N
@@ -2005,12 +2008,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(SpO2);
-        SpO2.setBounds(73, 220, 42, 23);
+        SpO2.setBounds(73, 250, 42, 23);
 
         jLabel22.setText("GCS (E,V,M) :");
         jLabel22.setName("jLabel22"); // NOI18N
         panelGlass12.add(jLabel22);
-        jLabel22.setBounds(120, 220, 70, 23);
+        jLabel22.setBounds(120, 250, 70, 23);
 
         TGCS.setFocusTraversalPolicyProvider(true);
         TGCS.setName("TGCS"); // NOI18N
@@ -2020,14 +2023,14 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TGCS);
-        TGCS.setBounds(193, 220, 42, 23);
+        TGCS.setBounds(193, 250, 42, 23);
 
         jLabel58.setText("Kesadaran :");
         jLabel58.setName("jLabel58"); // NOI18N
         panelGlass12.add(jLabel58);
-        jLabel58.setBounds(234, 220, 70, 23);
+        jLabel58.setBounds(234, 250, 70, 23);
 
-        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Compos Mentis", "Somnolence", "Sopor", "Coma","Meninggal" }));
+        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Compos Mentis", "Somnolence", "Sopor", "Coma" }));
         cmbKesadaran.setName("cmbKesadaran"); // NOI18N
         cmbKesadaran.setPreferredSize(new java.awt.Dimension(62, 28));
         cmbKesadaran.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2036,14 +2039,15 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(cmbKesadaran);
-        cmbKesadaran.setBounds(307, 220, 126, 23);
+        cmbKesadaran.setBounds(307, 250, 126, 23);
 
         scrollPane8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane8.setName("scrollPane8"); // NOI18N
 
         TEvaluasi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         TEvaluasi.setColumns(20);
-        TEvaluasi.setRows(5);
+        TEvaluasi.setRows(1);
+        TEvaluasi.setTabSize(4);
         TEvaluasi.setName("TEvaluasi"); // NOI18N
         TEvaluasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2053,12 +2057,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         scrollPane8.setViewportView(TEvaluasi);
 
         panelGlass12.add(scrollPane8);
-        scrollPane8.setBounds(543, 196, 360, 44);
+        scrollPane8.setBounds(543, 220, 360, 53);
 
         jLabel59.setText("Evaluasi :");
         jLabel59.setName("jLabel59"); // NOI18N
         panelGlass12.add(jLabel59);
-        jLabel59.setBounds(450, 196, 90, 23);
+        jLabel59.setBounds(450, 220, 90, 23);
 
         Btn5Soap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         Btn5Soap.setMnemonic('4');
@@ -2075,7 +2079,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         jLabel7.setText("Suhu (°C) :");
         jLabel7.setName("jLabel7"); // NOI18N
         panelGlass12.add(jLabel7);
-        jLabel7.setBounds(0, 160, 70, 23);
+        jLabel7.setBounds(0, 190, 70, 23);
 
         TSuhu.setFocusTraversalPolicyProvider(true);
         TSuhu.setName("TSuhu"); // NOI18N
@@ -2085,12 +2089,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TSuhu);
-        TSuhu.setBounds(73, 160, 55, 23);
+        TSuhu.setBounds(73, 190, 55, 23);
 
         jLabel17.setText("TB (Cm) :");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass12.add(jLabel17);
-        jLabel17.setBounds(0, 190, 70, 23);
+        jLabel17.setBounds(0, 220, 70, 23);
 
         TTinggi.setFocusTraversalPolicyProvider(true);
         TTinggi.setName("TTinggi"); // NOI18N
@@ -2100,12 +2104,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TTinggi);
-        TTinggi.setBounds(73, 190, 55, 23);
+        TTinggi.setBounds(73, 220, 55, 23);
 
         jLabel4.setText("Tensi (mmHg) :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass12.add(jLabel4);
-        jLabel4.setBounds(130, 160, 90, 23);
+        jLabel4.setBounds(130, 190, 90, 23);
 
         TTensi.setName("TTensi"); // NOI18N
         TTensi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2114,7 +2118,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TTensi);
-        TTensi.setBounds(223, 160, 74, 23);
+        TTensi.setBounds(223, 190, 74, 23);
 
         TRespirasi.setName("TRespirasi"); // NOI18N
         TRespirasi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2123,17 +2127,17 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TRespirasi);
-        TRespirasi.setBounds(223, 190, 55, 23);
+        TRespirasi.setBounds(223, 220, 55, 23);
 
         jLabel41.setText("RR (/menit) :");
         jLabel41.setName("jLabel41"); // NOI18N
         panelGlass12.add(jLabel41);
-        jLabel41.setBounds(130, 190, 90, 23);
+        jLabel41.setBounds(130, 220, 90, 23);
 
         jLabel16.setText("Berat (Kg) :");
         jLabel16.setName("jLabel16"); // NOI18N
         panelGlass12.add(jLabel16);
-        jLabel16.setBounds(296, 160, 79, 23);
+        jLabel16.setBounds(296, 190, 79, 23);
 
         TBerat.setName("TBerat"); // NOI18N
         TBerat.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2142,7 +2146,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TBerat);
-        TBerat.setBounds(378, 160, 55, 23);
+        TBerat.setBounds(378, 190, 55, 23);
 
         TNadi.setFocusTraversalPolicyProvider(true);
         TNadi.setName("TNadi"); // NOI18N
@@ -2152,12 +2156,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(TNadi);
-        TNadi.setBounds(378, 190, 55, 23);
+        TNadi.setBounds(378, 220, 55, 23);
 
         jLabel61.setText("Nadi (/menit) :");
         jLabel61.setName("jLabel61"); // NOI18N
         panelGlass12.add(jLabel61);
-        jLabel61.setBounds(296, 190, 79, 23);
+        jLabel61.setBounds(296, 220, 79, 23);
 
         PanelInput1.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -2910,7 +2914,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-10-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-10-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -6555,7 +6559,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         Valid.pindah2(evt,TKeluhan,TSuhu);
     }//GEN-LAST:event_TPemeriksaanKeyPressed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
             akuntindakanranap.SetAkunTindakanRanap();
         }
@@ -6645,7 +6649,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 }
             });
         }
-    }
+    }//GEN-LAST:event_formWindowOpened
 
     private void tbRawatDrKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRawatDrKeyReleased
         if(tabModeDr.getRowCount()!=0){
@@ -9850,7 +9854,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput1.setPreferredSize(new Dimension(WIDTH,273));
+            PanelInput1.setPreferredSize(new Dimension(WIDTH,308));
             panelGlass12.setVisible(true);
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){
@@ -10804,7 +10808,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(205,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(230,HEIGHT));
             FormMenu.setVisible(true);
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){
@@ -10841,19 +10845,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnPenilaianPreInduksi.setRoundRect(false);
         BtnPenilaianPreInduksi.addActionListener(this::BtnPenilaianPreInduksiActionPerformed);
-
-        BtnPengkajianInvasifNonBedahSMC = new widget.Button();
-        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
-        BtnPengkajianInvasifNonBedahSMC.setText("Pengkajian Invasif Non Bedah");
-        BtnPengkajianInvasifNonBedahSMC.setFocusPainted(false);
-        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
-        BtnPengkajianInvasifNonBedahSMC.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnPengkajianInvasifNonBedahSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnPengkajianInvasifNonBedahSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnPengkajianInvasifNonBedahSMC.setName("Pengkajian Invasif Non Bedah");
-        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPengkajianInvasifNonBedahSMC.setRoundRect(false);
-        BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
 
         BtnHasilPemeriksaanUSGUrologi = new widget.Button();
         BtnHasilPemeriksaanUSGUrologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
@@ -11515,6 +11506,19 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         MnPasteSOAP.setName("MnPasteSOAP");
         MnPasteSOAP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPasteSOAP.addActionListener(this::MnPasteSOAPActionPerformed);
+
+        BtnPengkajianInvasifNonBedahSMC = new widget.Button();
+        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPengkajianInvasifNonBedahSMC.setText("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSMC.setFocusPainted(false);
+        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPengkajianInvasifNonBedahSMC.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPengkajianInvasifNonBedahSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPengkajianInvasifNonBedahSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPengkajianInvasifNonBedahSMC.setName("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPengkajianInvasifNonBedahSMC.setRoundRect(false);
+        BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
 
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");

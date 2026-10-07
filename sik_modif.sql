@@ -168,6 +168,12 @@ ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `rr` varcha
 
 ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `ufv` varchar(10) NULL DEFAULT NULL AFTER `rr`;
 
+ALTER TABLE `dapurdetailpengeluaran` ADD PRIMARY KEY IF NOT EXISTS (`no_keluar`, `kode_brng`) USING BTREE;
+
+ALTER TABLE `dapurdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `dapurdetailpengeluaran_ibfk_3`;
+
+ALTER TABLE `dapurdetailpengeluaran` ADD CONSTRAINT `dapurdetailpengeluaran_ibfk_3` FOREIGN KEY IF NOT EXISTS (`kode_brng`) REFERENCES `dapurbarang` (`kode_brng`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `stok` double NOT NULL AFTER `tanggal`;
 
 ALTER TABLE `dapuropname` MODIFY COLUMN IF EXISTS `real` double NOT NULL AFTER `stok`;
@@ -2247,6 +2253,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `jadwal_pegawai_smc` enum('true','fa
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_laboratorium_smc` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_beban_hutang_lain`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `rekap_kehadiran_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_laboratorium_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `ipsrs_stok_akhir_pertanggal_smc` enum('true','false') NULL DEFAULT NULL AFTER `rekap_kehadiran_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
