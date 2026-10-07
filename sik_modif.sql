@@ -2254,6 +2254,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_laboratorium_smc` enum('tr
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `rekap_kehadiran_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_laboratorium_smc`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `ipsrs_stok_akhir_pertanggal_smc` enum('true','false') NULL DEFAULT NULL AFTER `rekap_kehadiran_smc`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
