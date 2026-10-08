@@ -9,8 +9,11 @@ import com.formdev.flatlaf.ui.FlatOptionPaneUI;
 import com.formdev.flatlaf.ui.FlatScrollBarUI;
 import com.formdev.flatlaf.ui.FlatScrollPaneBorder;
 import com.formdev.flatlaf.ui.FlatTabbedPaneUI;
+import com.formdev.flatlaf.ui.FlatTableHeaderBorder;
+import com.formdev.flatlaf.ui.FlatTableUI;
 import com.formdev.flatlaf.ui.FlatTextBorder;
 import com.formdev.flatlaf.ui.FlatUIUtils;
+import com.formdev.flatlaf.util.UIScale;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -21,17 +24,23 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.beans.PropertyChangeListener;
+import java.util.IdentityHashMap;
+import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -44,6 +53,7 @@ import javax.swing.text.JTextComponent;
  *   <li>a larger check box icon;</li>
  *   <li>read-only text fields and text areas drawn with the disabled border color;</li>
  *   <li>scroll panes around a table drawn with {@code ScrollPane.viewBorderColor};</li>
+ *   <li>table header column separators that stop short of the top and bottom edges;</li>
  *   <li>extra padding around combo box popup items, apart from the padding of the
  *       combo box itself;</li>
  *   <li>dialog components, such as the choice list of an input dialog or a check
@@ -52,7 +62,9 @@ import javax.swing.text.JTextComponent;
  *   <li>the selected tab keeping its background while hovered, and unselected tabs
  *       drawn with their own background and outline;</li>
  *   <li>a scroll bar thumb that thickens while hovered or dragged, beside a
- *       separator line along the track.</li>
+ *       separator line along the track;</li>
+ *   <li>check boxes in table cells centered horizontally and drawn with the
+ *       larger check box icon, while editing too.</li>
  * </ul>
  * The default font is Tahoma 11, the font every form is laid out for; its digits
  * are already fixed width.
@@ -97,6 +109,7 @@ public class LookAndFeelSMC extends FlatLightLaf {
         defaults.put("PasswordField.border", (UIDefaults.LazyValue) table -> new TextBorder());
         defaults.put("ScrollPane.border", (UIDefaults.LazyValue) table -> new ScrollPaneBorder());
         defaults.put("Table.scrollPaneBorder", (UIDefaults.LazyValue) table -> new ViewBorder());
+        defaults.put("TableHeader.cellBorder", (UIDefaults.LazyValue) table -> new TableHeaderBorder());
         defaults.put("ComboBoxUI", ComboBoxUI.class.getName());
         defaults.put(ComboBoxUI.class.getName(), ComboBoxUI.class);
         defaults.put("OptionPaneUI", OptionPaneUI.class.getName());
@@ -105,6 +118,8 @@ public class LookAndFeelSMC extends FlatLightLaf {
         defaults.put(TabbedPaneUI.class.getName(), TabbedPaneUI.class);
         defaults.put("ScrollBarUI", ScrollBarUI.class.getName());
         defaults.put(ScrollBarUI.class.getName(), ScrollBarUI.class);
+        defaults.put("TableUI", TableUI.class.getName());
+        defaults.put(TableUI.class.getName(), TableUI.class);
 
         return defaults;
     }
@@ -160,6 +175,43 @@ public class LookAndFeelSMC extends FlatLightLaf {
             Color color = UIManager.getColor("ScrollPane.viewBorderColor");
             if (null != color) {
                 borderColor = color;
+            }
+        }
+    }
+
+    /**
+     * FlatLaf table header cell border whose column separator lines stop
+     * {@code TableHeader.separatorInset} pixels short of the top and bottom
+     * edges, so they stand apart from the bottom separator line.
+     */
+    public static class TableHeaderBorder extends FlatTableHeaderBorder {
+
+        private final int separatorInset = UIManager.getInt("TableHeader.separatorInset");
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            int inset = UIScale.scale(separatorInset);
+            int lineWidth = UIScale.scale(1);
+
+            if (inset <= 0 || height <= inset * 2) {
+                super.paintBorder(c, g, x, y, width, height);
+                return;
+            }
+
+            Graphics separator = g.create();
+            try {
+                separator.clipRect(x, y + inset, width, height - inset * 2);
+                super.paintBorder(c, separator, x, y, width, height);
+            } finally {
+                separator.dispose();
+            }
+
+            Graphics bottom = g.create();
+            try {
+                bottom.clipRect(x, y + height - lineWidth, width, lineWidth);
+                super.paintBorder(c, bottom, x, y, width, height);
+            } finally {
+                bottom.dispose();
             }
         }
     }
@@ -480,6 +532,118 @@ public class LookAndFeelSMC extends FlatLightLaf {
 
             g.setColor(getThumbColor(c, hoverThumb, isDragging));
             paintTrackOrThumb(g, c, thumbBounds, insets, thumbArc);
+        }
+    }
+
+    /**
+     * FlatLaf table UI that renders {@code Boolean} cells with a
+     * {@link BooleanRenderer} in place of the FlatLaf boolean renderer, whose
+     * check box follows the uneven {@code Table.cellMargins} and sits right of
+     * the cell center.
+     */
+    public static class TableUI extends FlatTableUI {
+
+        private TableCellRenderer flatBooleanRenderer;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new TableUI();
+        }
+
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
+
+            TableCellRenderer renderer = table.getDefaultRenderer(Boolean.class);
+            if (renderer instanceof UIResource && !(renderer instanceof BooleanRenderer)) {
+                flatBooleanRenderer = renderer;
+                table.setDefaultRenderer(Boolean.class, new BooleanRenderer());
+            }
+        }
+
+        @Override
+        protected void uninstallDefaults() {
+            if (null != flatBooleanRenderer && table.getDefaultRenderer(Boolean.class) instanceof BooleanRenderer) {
+                table.setDefaultRenderer(Boolean.class, flatBooleanRenderer);
+            }
+            flatBooleanRenderer = null;
+
+            super.uninstallDefaults();
+        }
+    }
+
+    /**
+     * Table cell renderer for {@code Boolean} values that draws the
+     * {@link CheckBoxIcon} at the horizontal center of the cell. Its cell border
+     * is wrapped in a {@link CenteredBorder}. {@code DefaultCellEditor} copies
+     * the renderer border onto the editing check box, so the check box stays in
+     * place while the cell is edited.
+     */
+    public static class BooleanRenderer extends DefaultTableCellRenderer implements UIResource {
+
+        private final Map<Border, Border> centeredBorders = new IdentityHashMap<>();
+        private boolean selected;
+
+        public BooleanRenderer() {
+            super();
+            setHorizontalAlignment(CENTER);
+
+            CheckBoxIcon icon = new CheckBoxIcon() {
+                @Override
+                protected boolean isSelected(Component c) {
+                    return selected;
+                }
+            };
+            setIcon(icon);
+            setDisabledIcon(icon);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            Border border = getBorder();
+            if (null != border && !(border instanceof CenteredBorder)) {
+                setBorder(centeredBorders.computeIfAbsent(border, CenteredBorder::new));
+            }
+
+            return this;
+        }
+
+        @Override
+        protected void setValue(Object value) {
+            selected = Boolean.TRUE.equals(value);
+        }
+    }
+
+    /**
+     * Border that paints like the border it wraps but splits the left and right
+     * insets evenly between both sides, so content centered within the insets is
+     * centered within the component.
+     */
+    private static class CenteredBorder implements Border, UIResource {
+
+        private final Border border;
+
+        CenteredBorder(Border border) {
+            this.border = border;
+        }
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            border.paintBorder(c, g, x, y, width, height);
+        }
+
+        @Override
+        public Insets getBorderInsets(Component c) {
+            Insets insets = border.getBorderInsets(c);
+            int side = (insets.left + insets.right) / 2;
+
+            return new Insets(insets.top, side, insets.bottom, side);
+        }
+
+        @Override
+        public boolean isBorderOpaque() {
+            return border.isBorderOpaque();
         }
     }
 }

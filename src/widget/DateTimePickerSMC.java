@@ -128,13 +128,16 @@ public class DateTimePickerSMC extends JComboBox {
         String oldDisplayFormat = this.displayFormat;
         this.displayFormat = displayFormat;
         format.applyPattern(displayFormat);
+
         refreshValue();
+
         firePropertyChange("displayFormat", oldDisplayFormat, displayFormat);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
+
         try {
             setDate(format.parse((String) getSelectedItem()));
         } catch (Exception ex) {
@@ -145,6 +148,7 @@ public class DateTimePickerSMC extends JComboBox {
         if (null == calendar) {
             calendar = Calendar.getInstance(getLocale());
         }
+
         return calendar;
     }
 
@@ -152,6 +156,7 @@ public class DateTimePickerSMC extends JComboBox {
         if (null == format) {
             return;
         }
+
         removeAllItems();
         addItem(format.format(calendar().getTime()));
     }
@@ -237,12 +242,16 @@ public class DateTimePickerSMC extends JComboBox {
 
             JPanel grid = new JPanel(new GridLayout(WEEKS_IN_MONTH + 1, DAYS_IN_WEEK, 2, 2));
             grid.setOpaque(false);
+
             weekdays = new JLabel[DAYS_IN_WEEK];
+
             for (int i = 0; i < DAYS_IN_WEEK; i++) {
                 weekdays[i] = new JLabel("", SwingConstants.CENTER);
                 grid.add(weekdays[i]);
             }
+
             days = new JButton[DAYS_IN_WEEK * WEEKS_IN_MONTH];
+
             for (int i = 0; i < days.length; i++) {
                 JButton day = flatButton();
                 day.addActionListener(e -> {
@@ -252,6 +261,7 @@ public class DateTimePickerSMC extends JComboBox {
                 days[i] = day;
                 grid.add(day);
             }
+
             dayBackground = days[0].getBackground();
             dayFont = days[0].getFont();
 
@@ -267,6 +277,7 @@ public class DateTimePickerSMC extends JComboBox {
         protected void configurePopup() {
             setLayout(new BorderLayout());
             setBorderPainted(true);
+
             Border border = UIManager.getBorder("PopupMenu.border");
             setBorder(null == border ? BorderFactory.createLineBorder(UIManager.getColor("Component.borderColor")) : border);
             setOpaque(true);
@@ -279,7 +290,9 @@ public class DateTimePickerSMC extends JComboBox {
             if (!picker.isFormattedDateShown()) {
                 picker.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
             }
+
             refresh();
+
             Dimension size = getPreferredSize();
             Rectangle bounds = computePopupBounds(0, comboBox.getHeight(), size.width, size.height);
             setLightWeightPopupEnabled(comboBox.isLightWeightPopupEnabled());
@@ -295,6 +308,7 @@ public class DateTimePickerSMC extends JComboBox {
 
             String[] names = symbols.getShortWeekdays();
             int firstDayOfWeek = selected.getFirstDayOfWeek();
+
             for (int i = 0; i < DAYS_IN_WEEK; i++) {
                 int weekday = (firstDayOfWeek - 1 + i) % DAYS_IN_WEEK + 1;
                 weekdays[i].setText(names[weekday]);
@@ -303,9 +317,11 @@ public class DateTimePickerSMC extends JComboBox {
 
             Calendar cursor = (Calendar) selected.clone();
             cursor.set(Calendar.DAY_OF_MONTH, 1);
+
             int offset = (cursor.get(Calendar.DAY_OF_WEEK) - firstDayOfWeek + DAYS_IN_WEEK) % DAYS_IN_WEEK;
             int length = cursor.getActualMaximum(Calendar.DAY_OF_MONTH);
             int day = selected.get(Calendar.DAY_OF_MONTH);
+
             Calendar today = Calendar.getInstance(locale);
             boolean currentMonth = today.get(Calendar.YEAR) == selected.get(Calendar.YEAR) && today.get(Calendar.MONTH) == selected.get(Calendar.MONTH);
 
@@ -314,17 +330,23 @@ public class DateTimePickerSMC extends JComboBox {
             Color selectionForeground = UIManager.getColor("List.selectionForeground");
             Color foreground = UIManager.getColor("Button.foreground");
             Font font = dayFont;
+
             for (int i = 0; i < days.length; i++) {
                 JButton button = days[i];
                 int number = i - offset + 1;
                 boolean visible = number >= 1 && number <= length;
+
                 button.setVisible(visible);
+
                 if (!visible) {
                     continue;
                 }
+
                 button.setText(Integer.toString(number));
+
                 boolean isSelected = number == day;
                 boolean isToday = currentMonth && number == today.get(Calendar.DAY_OF_MONTH);
+
                 button.setFont(isToday ? font.deriveFont(Font.BOLD) : font);
                 button.setBackground(isSelected ? selectionBackground : dayBackground);
                 button.setForeground(isSelected ? selectionForeground : isToday && null != accent ? accent : foreground);
@@ -336,38 +358,44 @@ public class DateTimePickerSMC extends JComboBox {
             spinner.setToolTipText(toolTip);
             spinner.setFocusable(false);
             spinner.setRequestFocusEnabled(false);
+
             for (Component child : spinner.getComponents()) {
                 child.setFocusable(false);
                 if (child instanceof JComponent) {
                     ((JComponent) child).setRequestFocusEnabled(false);
                 }
             }
+
             JFormattedTextField text = ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField();
             text.setEditable(false);
             text.setFocusable(false);
             text.setColumns(columns);
             text.setHorizontalAlignment(Calendar.YEAR == field ? JTextField.RIGHT : JTextField.LEFT);
+
             Color background = UIManager.getColor("TextField.background");
+
             if (null != background) {
                 text.setBackground(background);
             }
+
             spinner.addMouseWheelListener(e -> {
                 if (0 != e.getWheelRotation()) {
                     picker.addToDate(field, e.getWheelRotation() < 0 ? 1 : -1);
                     refresh();
                 }
             });
+
             return spinner;
         }
 
         private static JButton flatButton() {
             JButton button = new JButton();
-            button.putClientProperty("JButton.buttonType", "toolBarButton");
             button.setMargin(new Insets(2, 2, 2, 2));
             button.setPreferredSize(new Dimension(28, 22));
             button.setFocusable(false);
             button.setRequestFocusEnabled(false);
             button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
             return button;
         }
 
@@ -375,7 +403,6 @@ public class DateTimePickerSMC extends JComboBox {
          * Spinner model stepping one calendar field of the picker. The value is the displayed text; next and previous values are the step to add, so month steps roll over into the next or previous year.
          */
         private final class FieldModel extends AbstractSpinnerModel {
-
             private static final long serialVersionUID = 1L;
 
             private final int field;
@@ -387,9 +414,11 @@ public class DateTimePickerSMC extends JComboBox {
             @Override
             public Object getValue() {
                 Calendar selected = picker.calendar();
+
                 if (Calendar.MONTH == field) {
                     return DateFormatSymbols.getInstance(picker.getLocale()).getMonths()[selected.get(Calendar.MONTH)];
                 }
+
                 return Integer.toString(selected.get(field));
             }
 
@@ -438,6 +467,7 @@ public class DateTimePickerSMC extends JComboBox {
             if (event instanceof MouseWheelEvent && !SHOWING.isEmpty()) {
                 event = redirect((MouseWheelEvent) event);
             }
+
             super.dispatchEvent(event);
         }
 
@@ -446,19 +476,30 @@ public class DateTimePickerSMC extends JComboBox {
                 if (!popup.isShowing() || !e.getComponent().isShowing() || SwingUtilities.isDescendingFrom(e.getComponent(), popup)) {
                     continue;
                 }
+
                 Point screen = e.getPoint();
                 SwingUtilities.convertPointToScreen(screen, e.getComponent());
                 Point point = new Point(screen);
                 SwingUtilities.convertPointFromScreen(point, popup);
+
                 if (!popup.contains(point)) {
                     continue;
                 }
+
                 Component target = SwingUtilities.getDeepestComponentAt(popup, point.x, point.y);
                 if (null == target) {
                     return e;
                 }
+
                 Point local = SwingUtilities.convertPoint(popup, point, target);
-                return new MouseWheelEvent(target, e.getID(), e.getWhen(), e.getModifiersEx(), local.x, local.y, screen.x, screen.y, e.getClickCount(), e.isPopupTrigger(), e.getScrollType(), e.getScrollAmount(), e.getWheelRotation(), e.getPreciseWheelRotation());
+
+                return new MouseWheelEvent(
+                    target,
+                    e.getID(), e.getWhen(), e.getModifiersEx(),
+                    local.x, local.y,
+                    screen.x, screen.y,
+                    e.getClickCount(), e.isPopupTrigger(), e.getScrollType(), e.getScrollAmount(), e.getWheelRotation(), e.getPreciseWheelRotation()
+                );
             }
             return e;
         }
