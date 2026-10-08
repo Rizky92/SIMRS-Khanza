@@ -239,8 +239,10 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
 
         Template.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         Template.setColumns(20);
-        Template.setRows(40);
+        Template.setRows(1);
+        Template.setTabSize(4);
         Template.setName("Template"); // NOI18N
+        Template.setPreferredSize(null);
         scrollPane2.setViewportView(Template);
 
         internalFrame1.add(scrollPane2, java.awt.BorderLayout.CENTER);
@@ -249,7 +251,6 @@ public final class MasterCariTemplateLaporanOperasi extends javax.swing.JDialog 
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){

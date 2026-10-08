@@ -7233,6 +7233,14 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         return statusantrean;
     }
 
+    public void setNoRM2Smc(String norawat) {
+        TCari.setText(norawat);
+        DTPCari1.setDate(Sequel.cariTglSmc("select reg_periksa.tgl_registrasi from reg_periksa where reg_periksa.no_rawat = ?", norawat));
+        DTPCari2.setDate(new Date());
+        TabRawat.setSelectedIndex(1);
+        runBackground(() -> tampil());
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;

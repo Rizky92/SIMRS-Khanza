@@ -2128,6 +2128,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void MnUbahOperatorPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUbahOperatorPetugasActionPerformed
+        /*
         if(tbDokter.getSelectedRow()>-1){
             if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
                 if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString())>0){
@@ -2202,6 +2203,30 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data, klik pada No.Rawat ..!!");
+            }
+        }
+        */
+        if (tbDokter.getSelectedRow() > -1) {
+            if (!tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString().equals("")) {
+                if (Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString()) > 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Data billing sudah terverifikasi, data tidak boleh diubah.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                    TCari.requestFocus();
+                } else {
+                    DlgUbahTagihanOperasiSMC ubah = new DlgUbahTagihanOperasiSMC(null, false);
+                    ubah.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            runBackground(() -> tampil());
+                        }
+                    });
+                    ubah.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    ubah.setLocationRelativeTo(internalFrame1);
+                    ubah.isCek();
+                    ubah.setDataOperasi(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 2).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                    ubah.setVisible(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Silahkan pilih data, klik pada No.Rawat ..!!");
             }
         }
     }//GEN-LAST:event_MnUbahOperatorPetugasActionPerformed
@@ -3588,6 +3613,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     PostOp.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),3).toString());
                     Jaringan.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),4).toString());
                     DikirimPA.setSelectedItem(template.getTable().getValueAt(template.getTable().getSelectedRow(),5).toString());
+                    // Laporan.setText(template.getTable().getValueAt(template.getTable().getSelectedRow(),6).toString());
                     Laporan.setText(template.getIsiTemplateSmc());
                     Laporan.requestFocus();
                 }
