@@ -32,10 +32,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -53,6 +57,7 @@ import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -2230,7 +2235,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
-                            autoKirimOrderKeLIS(NoPermintaan);
+                            autoKirimOrderKeLISSmc(NoPermintaan);
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -2278,7 +2283,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
-                            autoKirimOrderKeLIS(NoPermintaan);
+                            autoKirimOrderKeLISSmc(NoPermintaan);
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -5686,6 +5691,235 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         }
     }
 
+    private void autoKirimOrderKeLISSmc(String noorder) {
+        if (LABORATORIUMKIRIMHASIL == null || LABORATORIUMKIRIMHASIL.isBlank()) {
+            return;
+        }
+
+        switch (LABORATORIUMKIRIMHASIL) {
+            case "adamlabs":
+                apiAdamlabs.registrasi(noorder);
+                break;
+            case "biosys":
+                try {
+                    int status = apiBioSysSmc.kirimOrder(noorder);
+                    if (status == 200) {
+                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
+                    } else if (status == 406) {
+                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS,\nSilahkan cek mapping tindakan/pemeriksaan sebelum dlakukan pengambilan hasil..!!");
+                    }
+                } catch (ApiBIOSYS.BiosysException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                break;
+            default:
+                return;
+        }
+    }
+
+    private void tampilRalanSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+
+            new SwingWorker<Void, Object>() {
+                final String tgl1 = Valid.getTglSmc(Tgl1);
+                final String tgl2 = Valid.getTglSmc(Tgl2);
+                final String cariDokter = CrDokter.getText().trim();
+                final String cariPoli = CrPoli.getText().trim();
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    Map<String, Object[]> rows = new LinkedHashMap<>();
+                    StringJoiner sj = new StringJoiner(", ");
+
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select permintaan_lab.noorder, permintaan_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, permintaan_lab.tgl_permintaan, if(permintaan_lab.jam_permintaan = '00:00:00', '', " +
+                        "permintaan_lab.jam_permintaan) as jam_permintaan, reg_periksa.kd_pj, penjab.png_jawab, if(permintaan_lab.tgl_sampel = '0000-00-00', '', permintaan_lab.tgl_sampel) as tgl_sampel, " +
+                        "if(permintaan_lab.jam_sampel = '00:00:00', '', permintaan_lab.jam_sampel) as jam_sampel, if(permintaan_lab.tgl_hasil = '0000-00-00', '', permintaan_lab.tgl_hasil) as tgl_hasil, " +
+                        "if(permintaan_lab.jam_hasil = '00:00:00', '', permintaan_lab.jam_hasil) as jam_hasil, permintaan_lab.dokter_perujuk, dokter.nm_dokter, poliklinik.nm_poli, permintaan_lab.informasi_tambahan, " +
+                        "permintaan_lab.diagnosa_klinis from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat = reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                        "inner join dokter on permintaan_lab.dokter_perujuk = dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
+                        "where permintaan_lab.status = 'ralan' and permintaan_lab.tgl_permintaan between ? and ? " + (cariDokter.isBlank() ? "" : "and dokter.nm_dokter like ? ") + (cariPoli.isBlank() ? "" :
+                        "and poliklinik.nm_poli like ? ") + (cari.isBlank() ? "" : "and (permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or " +
+                        "penjab.png_jawab like ? or permintaan_lab.dokter_perujuk like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ? or permintaan_lab.informasi_tambahan like ? or permintaan_lab.diagnosa_klinis like ?) ") +
+                        "order by permintaan_lab.tgl_permintaan, permintaan_lab.jam_permintaan desc"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, tgl1);
+                        ps.setString(++p, tgl2);
+
+                        if (!cariDokter.isBlank()) {
+                            ps.setString(++p, cariDokter + "%");
+                        }
+
+                        if (!cariPoli.isBlank()) {
+                            ps.setString(++p, cariPoli + "%");
+                        }
+
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                rows.put(rs.getString("noorder"), new Object[] {
+                                    rs.getString("noorder"), rs.getString("no_rawat"), rs.getString("no_rkm_medis") + " " + rs.getString("nm_pasien"), rs.getString("tgl_permintaan"), rs.getString("jam_permintaan"),
+                                    rs.getString("tgl_sampel"), rs.getString("jam_sampel"), rs.getString("tgl_hasil"), rs.getString("jam_hasil"), rs.getString("dokter_perujuk"), rs.getString("nm_dokter"),
+                                    rs.getString("nm_poli"), rs.getString("informasi_tambahan"), rs.getString("diagnosa_klinis"), rs.getString("kd_pj"), rs.getString("png_jawab")
+                                });
+
+                                sj.add("'" + rs.getString("noorder") + "'");
+                            }
+                        }
+                    }
+
+                    if (sj.length() > 0) {
+                        try (Statement st = koneksi.createStatement(); ResultSet rs = st.executeQuery(
+                            "select permintaan_pemeriksaan_lab.noorder, permintaan_pemeriksaan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan from permintaan_pemeriksaan_lab inner join " +
+                            "jns_perawatan_lab on permintaan_pemeriksaan_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where permintaan_pemeriksaan_lab.noorder in (" + sj.toString() + ")"
+                        )) {
+                            while (rs.next()) {
+
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object> chunks) {
+                    super.process(chunks); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPermintaanLab.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampilDetailRalanSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+
+                @Override
+                protected void process(List<Object> chunks) {
+                    super.process(chunks); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPermintaanLab.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampilRanapSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+
+                @Override
+                protected void process(List<Object> chunks) {
+                    super.process(chunks); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPermintaanLab.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampilDetailRanapSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+
+                @Override
+                protected void process(List<Object> chunks) {
+                    super.process(chunks); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariPermintaanLab.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -5716,31 +5950,5 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
-    }
-
-    private void autoKirimOrderKeLIS(String noorder) {
-        if (LABORATORIUMKIRIMHASIL == null || LABORATORIUMKIRIMHASIL.isBlank()) {
-            return;
-        }
-
-        switch (LABORATORIUMKIRIMHASIL) {
-            case "adamlabs":
-                apiAdamlabs.registrasi(noorder);
-                break;
-            case "biosys":
-                try {
-                    int status = apiBioSysSmc.kirimOrder(noorder);
-                    if (status == 200) {
-                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
-                    } else if (status == 406) {
-                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS,\nSilahkan cek mapping tindakan/pemeriksaan sebelum dlakukan pengambilan hasil..!!");
-                    }
-                } catch (ApiBIOSYS.BiosysException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                break;
-            default:
-                return;
-        }
     }
 }
