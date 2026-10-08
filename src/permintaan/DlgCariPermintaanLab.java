@@ -5276,7 +5276,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     "where permintaan_lab.status='ranap' and permintaan_lab.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
-                    "pasien.nm_pasien like ? or permintaan_lab.diagnosa_klinis like ? or permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ? )")+
+                    "pasien.nm_pasien like ? or permintaan_lab.diagnosa_klinis like ? or permintaan_lab.informasi_tambahan like ? or penjab.png_jawab like ? )")+
                     "group by permintaan_lab.noorder order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
                 );
             }else{
@@ -5300,7 +5300,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     "where permintaan_lab.status='ranap' and permintaan_lab.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
-                    "pasien.nm_pasien like ? or permintaan_lab.diagnosa_klinis like ? or permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ? )")+
+                    "pasien.nm_pasien like ? or permintaan_lab.diagnosa_klinis like ? or permintaan_lab.informasi_tambahan like ? or penjab.png_jawab like ? )")+
                     "group by permintaan_lab.noorder order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
                 );
             }
@@ -5431,7 +5431,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                         (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                         "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                         "pasien.nm_pasien like ? or jns_perawatan_lab.nm_perawatan like ? or template_laboratorium.Pemeriksaan like ? or "+
-                        "permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ?)")+
+                        "permintaan_lab.diagnosa_klinis like ? or permintaan_lab.informasi_tambahan like ? or penjab.png_jawab like ?)")+
                         "group by permintaan_lab.noorder,permintaan_detail_permintaan_lab.id_template order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
                 );
             }else{
@@ -5465,7 +5465,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                         (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                         "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                         "pasien.nm_pasien like ? or jns_perawatan_lab.nm_perawatan like ? or template_laboratorium.Pemeriksaan like ? or "+
-                        "permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ?)")+
+                        "permintaan_lab.diagnosa_klinis like ? or permintaan_lab.informasi_tambahan like ? or penjab.png_jawab like ?)")+
                         "group by permintaan_lab.noorder,permintaan_detail_permintaan_lab.id_template order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
                 );
             }
@@ -5484,6 +5484,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     ps.setString(10,"%"+TCari.getText()+"%");
                     ps.setString(11,"%"+TCari.getText()+"%");
                     ps.setString(12,"%"+TCari.getText()+"%");
+                    ps.setString(13,"%"+TCari.getText()+"%");
                 }
 
                 rs=ps.executeQuery();
