@@ -22,6 +22,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
 
 public class Menu extends JMenu {
 
+    /*
     private static final long serialVersionUID = 1L;
 
     static final Color AKSEN       = new Color(22, 160, 93);     
@@ -202,5 +203,35 @@ public class Menu extends JMenu {
         public int getIconHeight() {
             return 10;
         }
+    }
+    */
+
+    private static final long serialVersionUID = 1L;
+
+    private static final int MINIMUM_HEIGHT = 24;
+
+    public Menu() {
+        super();
+    }
+
+    public Menu(String s) {
+        super(s);
+    }
+
+    public Menu(String s, boolean b) {
+        super(s, b);
+    }
+
+    public Menu(Action a) {
+        super(a);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        Dimension d = super.getPreferredSize();
+        if (!isPreferredSizeSet() && !isTopLevelMenu() && d.height < MINIMUM_HEIGHT) {
+            d.height = MINIMUM_HEIGHT;
+        }
+        return d;
     }
 }

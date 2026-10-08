@@ -1,23 +1,16 @@
 package widget;
 
+import com.formdev.flatlaf.FlatLaf;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.UIManager;
+import javax.swing.text.JTextComponent;
 
 public class ScrollPane extends JScrollPane {
-
+    /*
     private static final long serialVersionUID = 2L;
 
     static final Color AKSEN_DEFAULT = new Color(0x16A05D);
@@ -153,5 +146,44 @@ public class ScrollPane extends JScrollPane {
     public void setViewportView(Component view) {
         super.setViewportView(view);
         getViewport().setBackground(Color.WHITE);
+    }
+    */
+
+    private static final long serialVersionUID = 2L;
+
+    public ScrollPane() {
+        super();
+        setOpaque(false);
+
+        if (UIManager.getLookAndFeel() instanceof FlatLaf) {
+            setBorder(new LookAndFeelSMC.ViewBorder());
+            setCorner(LOWER_RIGHT_CORNER, new TrackCornerSMC());
+        }
+
+        getVerticalScrollBar().setUnitIncrement(15);
+        getHorizontalScrollBar().setUnitIncrement(15);
+    }
+
+    @Override
+    public void setViewportView(Component view) {
+        super.setViewportView(view);
+        if (null != view) {
+            getViewport().setBackground(view.getBackground());
+        }
+
+        if (view instanceof JTextComponent && getBorder() instanceof LookAndFeelSMC.ViewBorder) {
+            setBorder(UIManager.getBorder("ScrollPane.border"));
+        }
+    }
+
+    private static class TrackCornerSMC extends JComponent {
+        @Override
+        protected void paintComponent(Graphics g) {
+            Color color = UIManager.getColor("ScrollBar.track");
+            if (null != color) {
+                g.setColor(color);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        }
     }
 }

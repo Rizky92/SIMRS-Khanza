@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicMenuItemUI;
 
 public class MenuItem extends JMenuItem {
+    /*
     private static final long serialVersionUID = 1L;
     static final Color AKSEN       = new Color(22, 160, 93);  
     static final Color PILIH_PASIF = new Color(220, 234, 226); 
@@ -138,5 +139,43 @@ public class MenuItem extends JMenuItem {
             }
             g.setColor(item.getForeground());
         }
+    }
+    */
+
+    private static final long serialVersionUID = 1L;
+
+    private static final int MINIMUM_HEIGHT = 24;
+
+    public MenuItem() {
+        super();
+    }
+
+    public MenuItem(String text) {
+        super(text);
+    }
+
+    public MenuItem(Icon icon) {
+        super(icon);
+    }
+
+    public MenuItem(String text, Icon icon) {
+        super(text, icon);
+    }
+
+    public MenuItem(String text, int mnemonic) {
+        super(text, mnemonic);
+    }
+
+    public MenuItem(Action a) {
+        super(a);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        Dimension d = super.getPreferredSize();
+        if (!isPreferredSizeSet() && d.height < MINIMUM_HEIGHT) {
+            d.height = MINIMUM_HEIGHT;
+        }
+        return d;
     }
 }
