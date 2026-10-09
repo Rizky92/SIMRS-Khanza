@@ -2155,7 +2155,7 @@ public class koneksiDB {
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
             // var=prop.getProperty("TAMPILTARIFOPERASI");
-            return prop.getProperty("TAMPILTARIFOPERASI", "no");
+            return prop.getProperty("TAMPILTARIFOPERASI", "no").toLowerCase();
         }catch(Exception e){
             // var="no";
             return "no";

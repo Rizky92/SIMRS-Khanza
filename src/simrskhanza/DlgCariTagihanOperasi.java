@@ -17,6 +17,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ import laporan.DlgBerkasRawat;
 import rekammedis.MasterCariTemplateLaporanOperasi;
 
 public class DlgCariTagihanOperasi extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode;
+    private final DefaultTableModel tabMode, tabMode2;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
@@ -55,6 +56,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private double ttljmdokter=0,ttljmpetugas=0,ttlpendapatan=0,ttlbhp=0;
     private String status="",tanggal="",mem="",norawat="",sql="",diagnosa_preop="",diagnosa_postop="",jaringan_dieksekusi="",selesaioperasi="",permintaan_pa="",
             laporan_operasi="",finger="",kodeoperator="",nomor_implan;
+
+    private final boolean TAMPILTARIFOPERASI = koneksiDB.TAMPILTARIFOPERASI().equals("yes");
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -104,6 +107,36 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
+        tabMode2 = new DefaultTableModel(null, new Object[] {"Kode Operasi", "Tindakan Operasi Dilakukan", "Total Biaya"}) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (2 == columnIndex) {
+                    return Double.class;
+                }
+
+                return String.class;
+            }
+        };
+        tbTindakan.setModel(tabMode2);
+        tbTindakan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbTindakan.getColumnModel().getColumn(0).setMinWidth(0);
+        tbTindakan.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbTindakan.getColumnModel().getColumn(1).setPreferredWidth(400);
+        tbTindakan.getColumnModel().getColumn(2).setMinWidth(0);
+        if (TAMPILTARIFOPERASI) {
+            tbTindakan.getColumnModel().getColumn(2).setMaxWidth(Integer.MAX_VALUE);
+            tbTindakan.getColumnModel().getColumn(2).setPreferredWidth(100);
+        } else {
+            tbTindakan.getColumnModel().getColumn(2).setMaxWidth(0);
+        }
+        tbTindakan.setDefaultRenderer(Object.class, new WarnaTable());
+
         kdmem.setDocument(new batasInput((byte)10).getKata(kdmem));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         PreOp.setDocument(new batasInput((int)100).getKata(PreOp));
@@ -238,6 +271,9 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         BtnSimpan = new widget.Button();
         BtnPrint1 = new widget.Button();
         BtnCloseIn5 = new widget.Button();
+        panelBiasa1 = new widget.PanelBiasa();
+        scrollPane3 = new widget.ScrollPane();
+        tbTindakan = new widget.Table();
         Scroll3 = new widget.ScrollPane();
         Laporan = new widget.TextArea();
         panelGlass7 = new widget.panelisi();
@@ -256,6 +292,10 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         jLabel9 = new widget.Label();
         jLabel10 = new widget.Label();
         NomorImplant = new widget.TextBox();
+        jLabel5 = new widget.Label();
+        Kategori = new widget.ComboBox();
+        jLabel4 = new widget.Label();
+        jenis = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -1303,6 +1343,25 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
         internalFrame6.add(panelGlass6, java.awt.BorderLayout.PAGE_END);
 
+        panelBiasa1.setName("panelBiasa1"); // NOI18N
+        panelBiasa1.setLayout(new java.awt.BorderLayout());
+
+        scrollPane3.setName("scrollPane3"); // NOI18N
+
+        tbTindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbTindakan.setName("tbTindakan"); // NOI18N
+        tbTindakan.setPreferredScrollableViewportSize(new java.awt.Dimension(450, 70));
+        scrollPane3.setViewportView(tbTindakan);
+
+        panelBiasa1.add(scrollPane3, java.awt.BorderLayout.PAGE_START);
+
         Scroll3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Laporan :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         Scroll3.setName("Scroll3"); // NOI18N
 
@@ -1312,23 +1371,25 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         Laporan.setName("Laporan"); // NOI18N
         Scroll3.setViewportView(Laporan);
 
-        internalFrame6.add(Scroll3, java.awt.BorderLayout.CENTER);
+        panelBiasa1.add(Scroll3, java.awt.BorderLayout.CENTER);
+
+        internalFrame6.add(panelBiasa1, java.awt.BorderLayout.CENTER);
 
         panelGlass7.setName("panelGlass7"); // NOI18N
         panelGlass7.setPreferredSize(new java.awt.Dimension(330, 55));
         panelGlass7.setLayout(null);
 
         label12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label12.setText("Selesai :");
+        label12.setText("Selesai Operasi :");
         label12.setName("label12"); // NOI18N
         label12.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass7.add(label12);
-        label12.setBounds(10, 10, 200, 23);
+        label12.setBounds(10, 120, 200, 23);
 
         tgl2.setDisplayFormat("dd-MM-yyyy");
         tgl2.setName("tgl2"); // NOI18N
         panelGlass7.add(tgl2);
-        tgl2.setBounds(30, 35, 90, 23);
+        tgl2.setBounds(30, 145, 90, 23);
 
         Jam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         Jam2.setName("Jam2"); // NOI18N
@@ -1338,7 +1399,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(Jam2);
-        Jam2.setBounds(123, 35, 62, 23);
+        Jam2.setBounds(123, 145, 62, 23);
 
         Menit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         Menit2.setName("Menit2"); // NOI18N
@@ -1348,7 +1409,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(Menit2);
-        Menit2.setBounds(188, 35, 62, 23);
+        Menit2.setBounds(188, 145, 62, 23);
 
         Detik2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         Detik2.setName("Detik2"); // NOI18N
@@ -1358,13 +1419,13 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(Detik2);
-        Detik2.setBounds(253, 35, 62, 23);
+        Detik2.setBounds(253, 145, 62, 23);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Diagnosis Pre-operatif :");
         jLabel6.setName("jLabel6"); // NOI18N
         panelGlass7.add(jLabel6);
-        jLabel6.setBounds(10, 65, 200, 23);
+        jLabel6.setBounds(10, 175, 200, 23);
 
         PreOp.setName("PreOp"); // NOI18N
         PreOp.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1373,7 +1434,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(PreOp);
-        PreOp.setBounds(30, 90, 285, 23);
+        PreOp.setBounds(30, 200, 285, 23);
 
         PostOp.setName("PostOp"); // NOI18N
         PostOp.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1382,19 +1443,19 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(PostOp);
-        PostOp.setBounds(30, 145, 285, 23);
+        PostOp.setBounds(30, 255, 285, 23);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Diagnosis Post-operatif :");
         jLabel7.setName("jLabel7"); // NOI18N
         panelGlass7.add(jLabel7);
-        jLabel7.setBounds(10, 120, 200, 23);
+        jLabel7.setBounds(10, 230, 200, 23);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Jaringan di-Eksisi / -Insisi :");
         jLabel8.setName("jLabel8"); // NOI18N
         panelGlass7.add(jLabel8);
-        jLabel8.setBounds(10, 175, 200, 23);
+        jLabel8.setBounds(10, 285, 200, 23);
 
         Jaringan.setName("Jaringan"); // NOI18N
         Jaringan.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1403,7 +1464,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(Jaringan);
-        Jaringan.setBounds(30, 200, 285, 23);
+        Jaringan.setBounds(30, 310, 285, 23);
 
         DikirimPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
         DikirimPA.setName("DikirimPA"); // NOI18N
@@ -1413,19 +1474,19 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(DikirimPA);
-        DikirimPA.setBounds(30, 255, 130, 23);
+        DikirimPA.setBounds(30, 365, 130, 23);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Dikirim Pemeriksaan PA :");
         jLabel9.setName("jLabel9"); // NOI18N
         panelGlass7.add(jLabel9);
-        jLabel9.setBounds(10, 230, 200, 23);
+        jLabel9.setBounds(10, 340, 200, 23);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel10.setText("Nomor Implan :");
+        jLabel10.setText("Nomor Implan (jika ada) :");
         jLabel10.setName("jLabel10"); // NOI18N
         panelGlass7.add(jLabel10);
-        jLabel10.setBounds(10, 285, 200, 23);
+        jLabel10.setBounds(10, 395, 200, 23);
 
         NomorImplant.setName("NomorImplant"); // NOI18N
         NomorImplant.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1434,7 +1495,28 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(NomorImplant);
-        NomorImplant.setBounds(30, 310, 285, 23);
+        NomorImplant.setBounds(30, 420, 285, 23);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("Kategori :");
+        jLabel5.setName("jLabel5"); // NOI18N
+        panelGlass7.add(jLabel5);
+        jLabel5.setBounds(10, 10, 81, 23);
+
+        Kategori.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Ringan", "Ringan Cito", "Ringan Khusus", "Ringan Khusus Cito", "Ringan Khusus Cito Ganda", "Sedang", "Sedang Cito", "Sedang Ganda", "Sedang Khusus", "Sedang Khusus Cito", "Sedang Khusus Cito Ganda", "Sedang Khusus Ganda", "Besar", "Besar Cito", "Besar Ganda", "Besar Khusus", "Besar Khusus Cito", "Besar Khusus Cito Ganda", "Besar Khusus Ganda", "Khusus", "Kecil", "Elektive", "Emergency" }));
+        Kategori.setName("Kategori"); // NOI18N
+        panelGlass7.add(Kategori);
+        Kategori.setBounds(30, 35, 220, 23);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("Jenis Anasthesi :");
+        jLabel4.setName("jLabel4"); // NOI18N
+        panelGlass7.add(jLabel4);
+        jLabel4.setBounds(10, 65, 90, 23);
+
+        jenis.setName("jenis"); // NOI18N
+        panelGlass7.add(jenis);
+        jenis.setBounds(30, 90, 92, 23);
 
         internalFrame6.add(panelGlass7, java.awt.BorderLayout.WEST);
 
@@ -3477,6 +3559,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private void MnUbahLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUbahLaporanActionPerformed
         if(tbDokter.getSelectedRow()>-1){
             if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
+                /*
                 try {
                     rs2=koneksi.prepareStatement(
                         "select laporan_operasi.diagnosa_preop,laporan_operasi.diagnosa_postop,laporan_operasi.jaringan_dieksekusi,laporan_operasi.selesaioperasi,laporan_operasi.permintaan_pa,"+
@@ -3497,6 +3580,44 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 }
+                */
+                Valid.tabelKosong(tabMode2);
+                try (PreparedStatement ps = koneksi.prepareStatement("select l.diagnosa_preop, l.diagnosa_postop, l.jaringan_dieksekusi, l.selesaioperasi, " +
+                        "l.permintaan_pa, l.laporan_operasi, l.nomor_implan from laporan_operasi l where l.no_rawat = ? and l.tanggal = ?");
+                    PreparedStatement ps2 = koneksi.prepareStatement("select o.kode_paket, p.nm_perawatan, o.jenis_anasthesi, o.kategori, (o.biayaoperator1 + o.biayaoperator2 + o.biayaoperator3 + " +
+                        "o.biayaasisten_operator1 + o.biayaasisten_operator2 + o.biayaasisten_operator3 + o.biayainstrumen + o.biayadokter_anak + o.biayaperawaat_resusitas + o.biayadokter_anestesi + " +
+                        "o.biayaasisten_anestesi + o.biayaasisten_anestesi2 + o.biayabidan + o.biayabidan2 + o.biayabidan3 + o.biayaperawat_luar + o.biayaalat + o.biayasewaok + o.akomodasi + o.bagian_rs + " +
+                        "o.biaya_omloop + o.biaya_omloop2 + o.biaya_omloop3 + o.biaya_omloop4 + o.biaya_omloop5 + o.biayasarpras + o.biaya_dokter_pjanak + o.biaya_dokter_umum) as total from operasi o " +
+                        "inner join paket_operasi p on o.kode_paket = p.kode_paket where o.no_rawat = ? and o.tgl_operasi = ?")
+                ) {
+                    ps.setString(1, tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString());
+                    ps.setString(2, tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                    ps2.setString(1, tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString());
+                    ps2.setString(2, tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+
+                    try (ResultSet rs = ps.executeQuery(); ResultSet rs2 = ps2.executeQuery()) {
+                        if (rs.next()) {
+                            PreOp.setText(rs.getString("diagnosa_preop"));
+                            PostOp.setText(rs.getString("diagnosa_postop"));
+                            Jaringan.setText(rs.getString("jaringan_dieksekusi"));
+                            Valid.setTglJamSmc(tgl2, Jam2, Menit2, Detik2, rs.getTimestamp("selesaioperasi"));
+                            DikirimPA.setSelectedItem(rs.getString("permintaan_pa"));
+                            NomorImplant.setText(rs.getString("nomor_implan"));
+                            Laporan.setText(rs.getString("laporan_operasi"));
+                        }
+
+                        if (rs2.next()) {
+                            Kategori.setSelectedItem(rs2.getString("kategori"));
+                            jenis.setText(rs2.getString("jenis_anasthesi"));
+                            do {
+                                tabMode2.addRow(new Object[] {rs2.getString("kode_paket"), rs2.getString("nm_perawatan"), rs2.getDouble("total")});
+                            } while (rs2.next());
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+
                 WindowLaporan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 WindowLaporan.setLocationRelativeTo(internalFrame1);
                 WindowLaporan.setVisible(true);
@@ -3675,6 +3796,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.panelisi FormInput;
     private widget.ComboBox Jam2;
     private widget.TextBox Jaringan;
+    private widget.ComboBox Kategori;
     private widget.TextBox Kd2;
     private widget.Label LTotal;
     private widget.TextArea Laporan;
@@ -3717,11 +3839,15 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
+    private widget.Label jLabel4;
+    private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private widget.TextBox jenis;
     private widget.TextBox kdInstrumen;
     private widget.TextBox kdanestesi;
     private widget.TextBox kdasistanestesi;
@@ -3800,6 +3926,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.TextBox nmpjanak;
     private widget.TextBox nmprwluar;
     private widget.TextBox nmprwresust;
+    private widget.PanelBiasa panelBiasa1;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass7;
     private widget.panelisi panelisi1;
@@ -3807,7 +3934,9 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private javax.swing.JMenuItem ppBerkasDigital;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
+    private widget.ScrollPane scrollPane3;
     private widget.Table tbDokter;
+    private widget.Table tbTindakan;
     private widget.Tanggal tgl2;
     // End of variables declaration//GEN-END:variables
 
