@@ -291,6 +291,7 @@ public final class akses {
         jadwal_pegawai_smc = false,
         template_laboratorium_smc = false,
         rekap_kehadiran_smc = false,
+        ipsrs_stok_akhir_pertanggal_smc = false,
         template_paket_mcu_smc = false,
         master_template_paket_mcu_smc = false;
 
@@ -1567,6 +1568,7 @@ public final class akses {
                         akses.ringkasan_beban_hutang_lain=akses.getBoolean(rs2, "ringkasan_beban_hutang_lain");
                         akses.template_laboratorium_smc=akses.getBoolean(rs2, "template_laboratorium_smc");
                         akses.rekap_kehadiran_smc=akses.getBoolean(rs2, "rekap_kehadiran_smc");
+                        akses.ipsrs_stok_akhir_pertanggal_smc=akses.getBoolean(rs2, "ipsrs_stok_akhir_pertanggal_smc");
                         akses.template_paket_mcu_smc=akses.getBoolean(rs2, "template_paket_mcu_smc");
                         akses.master_template_paket_mcu_smc=akses.getBoolean(rs2, "master_template_paket_mcu_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
@@ -2848,6 +2850,7 @@ public final class akses {
         akses.ringkasan_beban_hutang_lain=isadmin;
         akses.template_laboratorium_smc=isadmin;
         akses.rekap_kehadiran_smc=isadmin;
+        akses.ipsrs_stok_akhir_pertanggal_smc=isadmin;
         akses.template_paket_mcu_smc=isadmin;
         akses.master_template_paket_mcu_smc=isadmin;
         akses.edit=isadmin;
@@ -4132,6 +4135,7 @@ public final class akses {
     public static boolean getringkasan_beban_hutang_lain(){return akses.ringkasan_beban_hutang_lain;}
     public static boolean gettemplate_laboratorium_smc(){return akses.template_laboratorium_smc;}
     public static boolean getrekap_kehadiran_smc(){return akses.rekap_kehadiran_smc;}
+    public static boolean getipsrs_stok_akhir_pertanggal_smc(){return akses.ipsrs_stok_akhir_pertanggal_smc;}
     public static boolean gettemplate_paket_mcu_smc(){return akses.template_paket_mcu_smc;}
     public static boolean getmaster_template_paket_mcu_smc(){return akses.master_template_paket_mcu_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
