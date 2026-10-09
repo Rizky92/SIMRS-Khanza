@@ -314,17 +314,17 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="widget.TextBox" name="tambahan">
+                    <Component class="widget.TextBox" name="totalBiaya">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="1,300,000"/>
-                        <Property name="name" type="java.lang.String" value="tambahan" noResource="true"/>
+                        <Property name="text" type="java.lang.String" value="0"/>
+                        <Property name="name" type="java.lang.String" value="totalBiaya" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[100, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tambahanKeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="totalBiayaKeyPressed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -359,7 +359,7 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="FormInput" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[742, 1800]"/>
+                          <Dimension value="[742, 2140]"/>
                         </Property>
                       </Properties>
 
@@ -384,7 +384,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="570" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="570" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -402,7 +402,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="600" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="600" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -410,11 +410,11 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbRadiologi">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbRadiologi" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -425,12 +425,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariRadiologiKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="570" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="570" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -465,12 +462,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariLabPKKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="750" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="750" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -491,7 +485,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="750" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="750" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -509,7 +503,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="780" width="700" height="113"/>
+                              <AbsoluteConstraints x="16" y="780" width="800" height="113"/>
                             </Constraint>
                           </Constraints>
 
@@ -517,14 +511,14 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLabPK">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbLabPK" noResource="true"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbLabPKMouseClicked"/>
                               </Events>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -537,15 +531,12 @@
                                 </LineBorder>
                               </Border>
                             </Property>
-                            <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="Popup"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Scroll5" noResource="true"/>
                             <Property name="opaque" type="boolean" value="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="930" width="700" height="223"/>
+                              <AbsoluteConstraints x="16" y="930" width="800" height="223"/>
                             </Constraint>
                           </Constraints>
 
@@ -558,9 +549,6 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbDetailLabPK" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -571,12 +559,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariDetailLabPKKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="900" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="900" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -597,7 +582,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="900" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="900" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -620,12 +605,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariLabPAKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1180" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="1180" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -646,7 +628,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="1180" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="1180" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -664,7 +646,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1210" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="1210" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -672,11 +654,11 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLabPA">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbLabPA" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -699,12 +681,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariLabMBKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1360" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="1360" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -725,7 +704,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="1360" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="1360" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -743,7 +722,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1390" width="700" height="113"/>
+                              <AbsoluteConstraints x="16" y="1390" width="800" height="113"/>
                             </Constraint>
                           </Constraints>
 
@@ -751,14 +730,14 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLabMB">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbLabMB" noResource="true"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbLabMBMouseClicked"/>
                               </Events>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -769,12 +748,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariDetailLabMBKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1510" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="1510" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -795,7 +771,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="1510" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="1510" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -813,7 +789,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1540" width="700" height="223"/>
+                              <AbsoluteConstraints x="16" y="1540" width="800" height="223"/>
                             </Constraint>
                           </Constraints>
 
@@ -821,11 +797,11 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbDetailLabMB">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbDetailLabMB" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -848,12 +824,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariTindakanDrKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="30" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="30" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -874,7 +847,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="30" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="30" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -892,7 +865,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="60" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="60" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -900,11 +873,11 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanDr">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbTindakanDr" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -925,7 +898,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="570" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="570" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -946,7 +919,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="750" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="750" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -967,7 +940,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="900" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="900" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -988,7 +961,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="1180" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="1180" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1009,7 +982,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="1360" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="1360" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1030,7 +1003,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="1510" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="1510" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1051,7 +1024,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="30" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="30" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1074,12 +1047,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariTindakanDrPrKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="210" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="210" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1100,7 +1070,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="210" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="210" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1121,7 +1091,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="210" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="210" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1139,7 +1109,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="240" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="240" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -1147,11 +1117,11 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanDrPr">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbTindakanDrPr" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1174,12 +1144,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariTindakanPrKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="390" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="390" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1200,7 +1167,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="390" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="390" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1221,7 +1188,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="390" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="390" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1239,7 +1206,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="420" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="420" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -1247,11 +1214,11 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanPr">
                               <Properties>
+                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                  <ComponentRef name="Popup"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="tbTindakanPr" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1274,12 +1241,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariTambahanBiayaKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1790" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="1790" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1300,7 +1264,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="1790" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="1790" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1321,7 +1285,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="1790" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="1790" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1339,7 +1303,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1820" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="1820" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -1349,9 +1313,6 @@
                               <Properties>
                                 <Property name="name" type="java.lang.String" value="tbTambahanBiaya" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1374,12 +1335,9 @@
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cariPotonganBiayaKeyPressed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="1970" width="640" height="23"/>
+                              <AbsoluteConstraints x="16" y="1970" width="738" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1400,7 +1358,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="658" y="1970" width="28" height="23"/>
+                              <AbsoluteConstraints x="757" y="1970" width="28" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1421,7 +1379,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="688" y="1970" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="788" y="1970" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1439,7 +1397,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="16" y="2000" width="700" height="123"/>
+                              <AbsoluteConstraints x="16" y="2000" width="800" height="123"/>
                             </Constraint>
                           </Constraints>
 
@@ -1449,9 +1407,6 @@
                               <Properties>
                                 <Property name="name" type="java.lang.String" value="tbTambahanBiaya1" noResource="true"/>
                               </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>

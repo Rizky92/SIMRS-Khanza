@@ -172,21 +172,26 @@ public final class sekuel {
         }
     }
 
-    public String autonomorSmc(String prefix, String table, int panjang, String pad) {
-        try (PreparedStatement ps = connect.prepareStatement("select concat(?, lpad(count(*), ?, ?)) from " + table)) {
+    public String autonomorSmc(String prefix, String table, String kolom, int panjang, String pad) {
+        if (prefix == null) {
+            prefix = "";
+        }
+        try (PreparedStatement ps = connect.prepareStatement(
+            "select concat(?, lpad(ifnull(max(convert(right(" + table + "." + kolom + ", ?), unsigned)), 0) + 1, ?, ?)) from " + table +
+            " where " + table + "." + kolom + " like concat(?, '%')"
+        )) {
             ps.setString(1, prefix);
             ps.setInt(2, panjang);
-            ps.setString(3, pad);
+            ps.setInt(3, panjang);
+            ps.setString(4, pad);
+            ps.setString(5, prefix);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
+                if (rs.next() && rs.getString(1) != null) {
                     return rs.getString(1);
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-        }
-        if (prefix == null) {
-            prefix = "";
         }
         String output = "";
         for (int i = 0; i < panjang - 1; i++) {

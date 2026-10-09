@@ -735,6 +735,7 @@ import keuangan.KeuanganValidasiTagihanAset;
 import keuangan.KeuanganValidasiTagihanDapur;
 import keuangan.KeuanganValidasiTagihanNonMedis;
 import keuangan.KeuanganValidasiTagihanObatBHP;
+import keuangan.MasterTemplatePaketMCUSMC;
 import laporan.DlgAnggotaMiliterDirawat;
 import laporan.DlgAnggotaPolriDirawat;
 import laporan.DlgBerkasRawat;
@@ -906,7 +907,6 @@ import rekammedis.MasterRencanaKeperawatanPsikiatri;
 import rekammedis.MasterTemplateHasilRadiologi;
 import rekammedis.MasterTemplateInformasiEdukasi;
 import rekammedis.MasterTemplateLaporanOperasi;
-import rekammedis.MasterTemplatePaketMCUSMC;
 import rekammedis.MasterTemplatePemeriksaanDokter;
 import rekammedis.MasterTriaseMacamKasus;
 import rekammedis.MasterTriasePemeriksaan;
@@ -51515,7 +51515,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2ApotekSmc, btnBPJSKirimObatApotekSmc, btnBPJSKirimEditObatApotekSmc, btnBPJSRiwayatPelayananResepApotekSmc, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSMC;
+                             btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
@@ -51662,13 +51662,13 @@ public class frmUtama extends javax.swing.JFrame {
         btnIPSRSStokAkhirPerTanggalSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIPSRSStokAkhirPerTanggalSmc.addActionListener(this::btnIPSRSStokAkhirPerTanggalSmcActionPerformed);
 
-        btnTemplatePaketMCUSMC = new widget.ButtonBig();
-        btnTemplatePaketMCUSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852556_doctor_files_medical_record_icon.png")));
-        btnTemplatePaketMCUSMC.setText("Master Template Paket MCU");
-        btnTemplatePaketMCUSMC.setIconTextGap(0);
-        btnTemplatePaketMCUSMC.setName("btnTemplatePaketMCUSMC");
-        btnTemplatePaketMCUSMC.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTemplatePaketMCUSMC.addActionListener(this::btnTemplatePaketMCUSMCActionPerformed);
+        btnTemplatePaketMCUSmc = new widget.ButtonBig();
+        btnTemplatePaketMCUSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852556_doctor_files_medical_record_icon.png")));
+        btnTemplatePaketMCUSmc.setText("Template Paket MCU");
+        btnTemplatePaketMCUSmc.setIconTextGap(0);
+        btnTemplatePaketMCUSmc.setName("btnTemplatePaketMCUSmc");
+        btnTemplatePaketMCUSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnTemplatePaketMCUSmc.addActionListener(this::btnTemplatePaketMCUSmcActionPerformed);
     }
 
     private void isComboSmc() {
@@ -51709,11 +51709,11 @@ public class frmUtama extends javax.swing.JFrame {
             }
         } else if (cmbMenu.getSelectedIndex() == 10) {
             if (akses.getmaster_template_paket_mcu_smc()) {
-                Panelmenu.add(btnTemplatePaketMCUSMC);
+                Panelmenu.add(btnTemplatePaketMCUSmc);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 11) {
-            if (akses.getbpjs_kompilasi_berkas_klaim()) {
+            if (akses.getbpjs_kompilasi_berkas_klaim_smc()) {
                 Panelmenu.add(btnBPJSKompilasiBerkasKlaimSmc);
                 jmlmenu++;
             }
@@ -51766,7 +51766,7 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     private void isCariKosongSmc() {
-        if (akses.getbpjs_kompilasi_berkas_klaim()) {
+        if (akses.getbpjs_kompilasi_berkas_klaim_smc()) {
             Panelmenu.add(btnBPJSKompilasiBerkasKlaimSmc);
             jmlmenu++;
         }
@@ -51857,13 +51857,13 @@ public class frmUtama extends javax.swing.JFrame {
         }
 
         if (akses.getmaster_template_paket_mcu_smc()) {
-            Panelmenu.add(btnTemplatePaketMCUSMC);
+            Panelmenu.add(btnTemplatePaketMCUSmc);
             jmlmenu++;
         }
     }
 
     private void isCariIsiSmc() {
-        if (akses.getbpjs_kompilasi_berkas_klaim()) {
+        if (akses.getbpjs_kompilasi_berkas_klaim_smc()) {
             if (btnBPJSKompilasiBerkasKlaimSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSKompilasiBerkasKlaimSmc);
                 jmlmenu++;
@@ -51990,8 +51990,8 @@ public class frmUtama extends javax.swing.JFrame {
         }
 
         if (akses.getmaster_template_paket_mcu_smc()) {
-            if (btnTemplatePaketMCUSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnTemplatePaketMCUSMC);
+            if (btnTemplatePaketMCUSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnTemplatePaketMCUSmc);
                 jmlmenu++;
             }
         }
@@ -52228,7 +52228,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnTemplatePaketMCUSMCActionPerformed(ActionEvent e) {
+    private void btnTemplatePaketMCUSmcActionPerformed(ActionEvent e) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         MasterTemplatePaketMCUSMC form = new MasterTemplatePaketMCUSMC(this, false);

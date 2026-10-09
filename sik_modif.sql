@@ -2135,6 +2135,14 @@ CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_detail_permintaan_lab`  (
   CONSTRAINT `template_paket_mcu_smc_detail_permintaan_lab_ibfk_3` FOREIGN KEY (`id_template`) REFERENCES `template_laboratorium` (`id_template`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
 
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_pengurangan_biaya`  (
+  `no_template` varchar(20) NOT NULL,
+  `nama_pengurangan` varchar(60) NOT NULL,
+  `besar_pengurangan` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_template`,`nama_pengurangan`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_pengurangan_biaya_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_permintaan_lab`  (
   `no_template` varchar(20) NOT NULL,
   `kd_jenis_prw` varchar(15) NOT NULL,
@@ -2153,19 +2161,11 @@ CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_permintaan_radiologi`  (
   CONSTRAINT `template_paket_mcu_smc_permintaan_radiologi_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_radiologi` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_potongan_biaya`  (
-  `no_template` varchar(20) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `besar_biaya` double NOT NULL DEFAULT 0,
-  PRIMARY KEY (`no_template`,`nama`) USING BTREE,
-  CONSTRAINT `template_paket_mcu_smc_potongan_biaya_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_tambahan_biaya`  (
   `no_template` varchar(20) NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `nama_biaya` varchar(60) NOT NULL,
   `besar_biaya` double NOT NULL DEFAULT 0,
-  PRIMARY KEY (`no_template`,`nama`) USING BTREE,
+  PRIMARY KEY (`no_template`,`nama_biaya`) USING BTREE,
   CONSTRAINT `template_paket_mcu_smc_tambahan_biaya_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 

@@ -3916,7 +3916,7 @@ public final class akses {
     public static boolean getsatu_sehat_kirim_servicerequest_radiologi(){return akses.satu_sehat_kirim_servicerequest_radiologi;}
     public static boolean gethasil_endoskopi_hidung(){return akses.hasil_endoskopi_hidung;}
     public static boolean getsatu_sehat_kirim_specimen_radiologi(){return akses.satu_sehat_kirim_specimen_radiologi;}
-    public static boolean getbpjs_kompilasi_berkas_klaim(){return akses.bpjs_kompilasi_berkas_klaim;}
+    public static boolean getbpjs_kompilasi_berkas_klaim_smc(){return akses.bpjs_kompilasi_berkas_klaim;}
     public static boolean getmaster_masalah_keperawatan_neonatus(){return akses.master_masalah_keperawatan_neonatus;}
     public static boolean getmaster_rencana_keperawatan_neonatus(){return akses.master_rencana_keperawatan_neonatus;}
     public static boolean getpenilaian_awal_keperawatan_ranap_neonatus(){return akses.penilaian_awal_keperawatan_ranap_neonatus;}
