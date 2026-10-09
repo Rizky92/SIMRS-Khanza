@@ -827,9 +827,9 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }
 
     public void isCek() {
-        BtnSimpan.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
-        BtnHapus.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
-        BtnEdit.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
+        BtnSimpan.setEnabled(akses.getbpjs_kompilasi_berkas_klaim_smc());
+        BtnHapus.setEnabled(akses.getbpjs_kompilasi_berkas_klaim_smc());
+        BtnEdit.setEnabled(akses.getbpjs_kompilasi_berkas_klaim_smc());
         TCari.requestFocus();
     }
 

@@ -671,6 +671,8 @@ public final class RMMCU extends javax.swing.JDialog {
         Sinus = new widget.ComboBox();
         BtnDokter3 = new widget.Button();
         BtnDokter2 = new widget.Button();
+        BtnHasilEKGSmc = new widget.Button();
+        BtnHasilTreadmillSmc = new widget.Button();
         jLabel27 = new widget.Label();
         IMT = new widget.TextBox();
         jLabel40 = new widget.Label();
@@ -2557,6 +2559,32 @@ public final class RMMCU extends javax.swing.JDialog {
         FormInput.add(BtnDokter2);
         BtnDokter2.setBounds(14, 1420, 28, 23);
 
+        BtnHasilEKGSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnHasilEKGSmc.setMnemonic('2');
+        BtnHasilEKGSmc.setToolTipText("Alt+2");
+        BtnHasilEKGSmc.setName("BtnHasilEKGSmc"); // NOI18N
+        BtnHasilEKGSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnHasilEKGSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHasilEKGSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnHasilEKGSmc);
+        BtnHasilEKGSmc.setBounds(14, 1500, 28, 23);
+
+        BtnHasilTreadmillSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnHasilTreadmillSmc.setMnemonic('2');
+        BtnHasilTreadmillSmc.setToolTipText("Alt+2");
+        BtnHasilTreadmillSmc.setName("BtnHasilTreadmillSmc"); // NOI18N
+        BtnHasilTreadmillSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnHasilTreadmillSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHasilTreadmillSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnHasilTreadmillSmc);
+        BtnHasilTreadmillSmc.setBounds(14, 1740, 28, 23);
+
         jLabel27.setText("BMI(BB/TB²) :");
         jLabel27.setName("jLabel27"); // NOI18N
         FormInput.add(jLabel27);
@@ -4095,6 +4123,39 @@ public final class RMMCU extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnDokter4ActionPerformed
 
+    private void BtnHasilEKGSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHasilEKGSmcActionPerformed
+        pilihHasilPemeriksaanSmc(EKG, RMCariHasilPemeriksaanSMC.EKG);
+    }//GEN-LAST:event_BtnHasilEKGSmcActionPerformed
+
+    private void BtnHasilTreadmillSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHasilTreadmillSmcActionPerformed
+        pilihHasilPemeriksaanSmc(Treadmill, RMCariHasilPemeriksaanSMC.TREADMILL);
+    }//GEN-LAST:event_BtnHasilTreadmillSmcActionPerformed
+
+    private void pilihHasilPemeriksaanSmc(widget.TextArea tujuan, String... jenis) {
+        if (TNoRw.getText().equals("")&&TNoRM.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,"Pasien masih kosong...!!!");
+            return;
+        }
+
+        RMCariHasilPemeriksaanSMC form=new RMCariHasilPemeriksaanSMC(null,false);
+        form.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                for (int i = 0; i < form.getTable().getRowCount(); i++) {
+                    if (Boolean.TRUE.equals(form.getTable().getValueAt(i, 0))) {
+                        tujuan.append(form.getTable().getValueAt(i, 3).toString()+", ");
+                    }
+                }
+                tujuan.requestFocus();
+            }
+        });
+        form.setNoRawat(TNoRw.getText());
+        form.setJenis(jenis);
+        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        form.setLocationRelativeTo(internalFrame1);
+        form.setVisible(true);
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -4136,6 +4197,8 @@ public final class RMMCU extends javax.swing.JDialog {
     private widget.Button BtnDokter4;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
+    private widget.Button BtnHasilEKGSmc;
+    private widget.Button BtnHasilTreadmillSmc;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
