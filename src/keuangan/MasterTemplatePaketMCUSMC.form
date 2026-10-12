@@ -1403,9 +1403,9 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="widget.Table" name="tbPotonganBiaya">
+                            <Component class="widget.Table" name="tbTambahanBiaya1">
                               <Properties>
-                                <Property name="name" type="java.lang.String" value="tbPotonganBiaya" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="tbTambahanBiaya1" noResource="true"/>
                               </Properties>
                             </Component>
                           </SubComponents>
