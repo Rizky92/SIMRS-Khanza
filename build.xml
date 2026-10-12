@@ -107,4 +107,21 @@
             <fileset dir="gambar/" includes="**/*.png, **/*.jpg" />
         </copy>
     </target>
+
+    <target name="pembaruan-sumberdaya" description="Menyusun dist-pembaruan/sumberdaya untuk disalin ke direktori sumberdaya di server pembaruan.">
+        <delete dir="dist-pembaruan/sumberdaya" />
+        <mkdir dir="dist-pembaruan/sumberdaya" />
+        <copy todir="dist-pembaruan/sumberdaya/report" preservelastmodified="true">
+            <fileset dir="report/" includes="**/*.jasper" />
+        </copy>
+        <copy todir="dist-pembaruan/sumberdaya/gambar" preservelastmodified="true">
+            <fileset dir="gambar/" includes="**/*.png, **/*.jpg" />
+        </copy>
+        <copy todir="dist-pembaruan/sumberdaya/suara" preservelastmodified="true">
+            <fileset dir="suara/" includes="**/*.mp3" />
+        </copy>
+        <copy todir="dist-pembaruan/sumberdaya/setting" preservelastmodified="true">
+            <fileset dir="setting/" includes="*.png, *.jpg" />
+        </copy>
+    </target>
 </project>
