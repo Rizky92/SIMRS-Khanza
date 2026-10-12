@@ -2268,12 +2268,16 @@ public final class validasi {
 
         if(angka >= 2000 && angka <=999999)
         {
-            return terbilang((int)angka/1000)+" ribu "+ terbilang(angka%1000);
+            return terbilang((long)angka/1000)+" ribu "+ terbilang(angka%1000);
         }
 
         if(angka >= 1000000 && angka <=999999999)
         {
-            return terbilang((int)angka/1000000)+" juta "+ terbilang(angka%1000000);
+            return terbilang((long)angka/1000000)+" juta "+ terbilang(angka%1000000);
+        }
+
+        if (angka >= 1_000_000_000 && angka <= 999_999_999_999L) {
+            return terbilang((long) angka / 1_000_000_000) + " milyar " + terbilang(angka % 1_000_000_000);
         }
 
         return "";
