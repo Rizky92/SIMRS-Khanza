@@ -520,6 +520,15 @@ public class koneksiDB {
         }
     }
 
+    public static String POLIMCUSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("POLIMCUSMC", "-").trim();
+        } catch (Exception e) {
+            return "-";
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);

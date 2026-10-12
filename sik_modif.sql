@@ -2117,6 +2117,7 @@ CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc`  (
   `kd_pj` char(3) NOT NULL,
   `tambahan_rp` double NOT NULL DEFAULT 0,
   `diskon_rp` double NOT NULL DEFAULT 0,
+  `total_rp` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`no_template`) USING BTREE,
   INDEX `kd_pj` (`kd_pj`) USING BTREE,
   INDEX `keterangan` (`keterangan`) USING BTREE,

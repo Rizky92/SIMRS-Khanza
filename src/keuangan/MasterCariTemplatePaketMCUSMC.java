@@ -988,7 +988,7 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
 
         StringBuilder sb = new StringBuilder(
                 "select template_paket_mcu_smc.no_template, template_paket_mcu_smc.keterangan, penjab.png_jawab, "
-                + "template_paket_mcu_smc.tambahan_rp, template_paket_mcu_smc.diskon_rp from template_paket_mcu_smc "
+                + "template_paket_mcu_smc.tambahan_rp, template_paket_mcu_smc.diskon_rp, template_paket_mcu_smc.total_rp from template_paket_mcu_smc "
                 + "inner join penjab on template_paket_mcu_smc.kd_pj = penjab.kd_pj where 1 = 1 ");
 
         List<String> paramAwal = new ArrayList<>();
@@ -1015,12 +1015,9 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
             }
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    double tambahanRp = rs.getDouble("tambahan_rp");
-                    double diskonRp = rs.getDouble("diskon_rp");
                     tabMode.addRow(new Object[] {
                         rs.getString("no_template"), rs.getString("keterangan"), rs.getString("png_jawab"),
-                        Valid.SetAngka(tambahanRp), Valid.SetAngka(diskonRp),
-                        Valid.SetAngka(totalTemplate(rs.getString("no_template")) + tambahanRp - diskonRp)
+                        Valid.SetAngka(rs.getDouble("tambahan_rp")), Valid.SetAngka(rs.getDouble("diskon_rp")), Valid.SetAngka(rs.getDouble("total_rp"))
                     });
                 }
             }
@@ -1028,29 +1025,6 @@ public final class MasterCariTemplatePaketMCUSMC extends javax.swing.JDialog {
             System.out.println("Notifikasi : " + e);
         }
         LCount.setText("" + tabMode.getRowCount());
-    }
-
-    private double totalTemplate(String noTemplate) {
-        String sql =
-                "select ifnull((select sum(jns_perawatan_radiologi.total_byr) from template_paket_mcu_smc_permintaan_radiologi "
-                + "inner join jns_perawatan_radiologi on template_paket_mcu_smc_permintaan_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw "
-                + "where template_paket_mcu_smc_permintaan_radiologi.no_template = ?), 0) + "
-                + "ifnull((select sum(jns_perawatan_lab.total_byr) from template_paket_mcu_smc_permintaan_lab "
-                + "inner join jns_perawatan_lab on template_paket_mcu_smc_permintaan_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw "
-                + "where template_paket_mcu_smc_permintaan_lab.no_template = ?), 0) + "
-                + "ifnull((select sum(template_laboratorium.biaya_item) from template_paket_mcu_smc_detail_permintaan_lab "
-                + "inner join template_laboratorium on template_paket_mcu_smc_detail_permintaan_lab.id_template = template_laboratorium.id_template "
-                + "where template_paket_mcu_smc_detail_permintaan_lab.no_template = ?), 0) + "
-                + "ifnull((select sum(jns_perawatan.total_byrdr) from template_paket_mcu_smc_tindakan_dr "
-                + "inner join jns_perawatan on template_paket_mcu_smc_tindakan_dr.kd_jenis_prw = jns_perawatan.kd_jenis_prw "
-                + "where template_paket_mcu_smc_tindakan_dr.no_template = ?), 0) + "
-                + "ifnull((select sum(jns_perawatan.total_byrdrpr) from template_paket_mcu_smc_tindakan_drpr "
-                + "inner join jns_perawatan on template_paket_mcu_smc_tindakan_drpr.kd_jenis_prw = jns_perawatan.kd_jenis_prw "
-                + "where template_paket_mcu_smc_tindakan_drpr.no_template = ?), 0) + "
-                + "ifnull((select sum(jns_perawatan.total_byrpr) from template_paket_mcu_smc_tindakan_pr "
-                + "inner join jns_perawatan on template_paket_mcu_smc_tindakan_pr.kd_jenis_prw = jns_perawatan.kd_jenis_prw "
-                + "where template_paket_mcu_smc_tindakan_pr.no_template = ?), 0)";
-        return Sequel.cariDoubleSmc(sql, 0, noTemplate, noTemplate, noTemplate, noTemplate, noTemplate, noTemplate);
     }
 
     public void tampil2() {

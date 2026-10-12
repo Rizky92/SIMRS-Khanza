@@ -597,6 +597,14 @@ public final class validasi {
         }
     }
 
+    public double getAngkaSmc(Object value) {
+        if (value != null && value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+
+        return 0;
+    }
+
     public boolean umurcacheSmc(File file, int hari) {
         if (!file.isFile()) return true;
 
