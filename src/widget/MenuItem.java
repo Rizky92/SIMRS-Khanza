@@ -17,15 +17,15 @@ import javax.swing.plaf.basic.BasicMenuItemUI;
 
 public class MenuItem extends JMenuItem {
     private static final long serialVersionUID = 1L;
-    static final Color AKSEN       = new Color(22, 160, 93);  
-    static final Color PILIH_PASIF = new Color(220, 234, 226); 
+    static final Color AKSEN       = new Color(22, 160, 93);
+    static final Color PILIH_PASIF = new Color(220, 234, 226);
     static final Color TEKS        = new Color(50, 50, 50);
     static final Color SHORTCUT    = new Color(120, 120, 120);
-    static final Color LATAR       = new Color(255, 255, 254);   
+    static final Color LATAR       = new Color(255, 255, 254);
     static final Font  FONT        = new Font("Tahoma", Font.PLAIN, 11);
     static final Border PADDING    = new EmptyBorder(0, 6, 0, 6);
     static final int   TINGGI_MIN  = 24;
-    static final int   R           = 4;   
+    static final int   R           = 4;
 
     private static final BufferedImage SUDUT_AKTIF = buatSudut(AKSEN);
     private static final BufferedImage SUDUT_PASIF = buatSudut(PILIH_PASIF);
@@ -95,13 +95,13 @@ public class MenuItem extends JMenuItem {
         setBorder(PADDING);
     }
 
-    
+
     @Override
     public void updateUI() {
         setUI(new ModernMenuItemUI());
     }
 
-    
+
     @Override
     public Dimension getPreferredSize() {
         Dimension d = super.getPreferredSize();

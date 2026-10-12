@@ -188,7 +188,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
-        ppBersihkan = new javax.swing.JMenuItem();
+        ppBersihkan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -3374,7 +3374,7 @@ public class DlgUbahTagihanOperasiSMC extends javax.swing.JDialog {
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
-    private javax.swing.JMenuItem ppBersihkan;
+    private widget.MenuItem ppBersihkan;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbObat;
     private widget.Table tbtindakan;
