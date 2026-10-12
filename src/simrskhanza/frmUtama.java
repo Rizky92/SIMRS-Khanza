@@ -981,6 +981,7 @@ import rekammedis.RMHasilPemeriksaanUSGAbdomen;
 import rekammedis.RMHasilPemeriksaanUSGGynecologi;
 import rekammedis.RMHasilPemeriksaanUSGNeonatus;
 import rekammedis.RMHasilPemeriksaanUSGUrologi;
+import rekammedis.RMHasilPersalinanTOLAC;
 import rekammedis.RMHasilTindakanESWL;
 import rekammedis.RMHemodialisa;
 import rekammedis.RMKonselingFarmasi;
@@ -1316,7 +1317,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         try{
             if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                DlgHome.setOpacity(0.7f);
+                DlgHome.setOpacity(0.64f);
                 DlgLogin.setOpacity(0.74f);
             }
         }catch(Exception e){
@@ -24025,6 +24026,18 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    private void btnHasilPersalinanTOLACActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMHasilPersalinanTOLAC form=new RMHasilPersalinanTOLAC(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -24750,7 +24763,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi,btnIntervensiNyeriNonFarmakologi,btnSuratPengajuanCutiPerawatan,btnChecklistKriteriaMasukIsolasi,btnMapingTarifTindakanRalanKPTLSatuSehat,
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
             btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain,btnSetResepPerCaraBayar,
-            btnSkriningTOLAC,btnAdmisiSkoringTOLAC,btnMonitoringTOLAC;
+            btnSkriningTOLAC,btnAdmisiSkoringTOLAC,btnMonitoringTOLAC,btnHasilPersalinanTOLAC;
 
     public void isWall(){
         try{
@@ -29629,6 +29642,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getmonitoring_tolac()==true){
                 Panelmenu.add(btnMonitoringTOLAC);
+                jmlmenu++;
+            }
+
+            if(akses.gethasil_persalinan_tolac()==true){
+                Panelmenu.add(btnHasilPersalinanTOLAC);
                 jmlmenu++;
             }
 
@@ -35696,6 +35714,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getmonitoring_tolac()==true){
             Panelmenu.add(btnMonitoringTOLAC);
+            jmlmenu++;
+        }
+
+        if(akses.gethasil_persalinan_tolac()==true){
+            Panelmenu.add(btnHasilPersalinanTOLAC);
             jmlmenu++;
         }
 
@@ -43478,6 +43501,13 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getmonitoring_tolac()==true){
             if(btnMonitoringTOLAC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnMonitoringTOLAC);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.gethasil_persalinan_tolac()==true){
+            if(btnHasilPersalinanTOLAC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnHasilPersalinanTOLAC);
                 jmlmenu++;
             }
         }
@@ -51611,6 +51641,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnMonitoringTOLAC.setName("btnMonitoringTOLAC");
         btnMonitoringTOLAC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMonitoringTOLAC.addActionListener(this::btnMonitoringTOLACActionPerformed);
+
+        btnHasilPersalinanTOLAC = new widget.ButtonBig();
+        btnHasilPersalinanTOLAC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/baby_864560.png")));
+        btnHasilPersalinanTOLAC.setText("Resume Hasil Persalinan TOLAC");
+        btnHasilPersalinanTOLAC.setIconTextGap(0);
+        btnHasilPersalinanTOLAC.setName("btnHasilPersalinanTOLAC");
+        btnHasilPersalinanTOLAC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnHasilPersalinanTOLAC.addActionListener(this::btnHasilPersalinanTOLACActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,

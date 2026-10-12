@@ -32,7 +32,7 @@ import uz.ncipro.calendar.JDateTimePicker;
 public final class Tanggal extends JDateTimePicker {
     private static final long serialVersionUID = 2L;
     private static final Color AKSEN     = new Color(0x16A05D);
-    private static final Color BORDER    = new Color(0xA7B6AD);
+    private static final Color BORDER    = new Color(0x96BEA5);
     private static final Color NONAKTIF  = new Color(0xFAFCFB);
     private static final Color PEMISAH   = new Color(0xD3DDD7);
     private static final Color TINT      = new Color(0x16, 0xA0, 0x5D, 30);
@@ -265,7 +265,7 @@ public final class Tanggal extends JDateTimePicker {
                 }
                 Color garis = !isEnabled() ? new Color(BORDER.getRed(), BORDER.getGreen(), BORDER.getBlue(), 130)
                         : f ? AKSEN
-                        : hover ? new Color(0x6F8578)
+                        : hover ? new Color(0x5A9170)
                         : BORDER;
                 g2.setColor(garis);
                 g2.setStroke(new BasicStroke(1f));
