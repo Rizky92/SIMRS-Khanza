@@ -68,6 +68,7 @@ import kepegawaian.DlgCariPegawai;
 import kepegawaian.DlgCariPetugas;
 import keuangan.DlgJnsPerawatanRalan;
 import keuangan.Jurnal;
+import keuangan.MasterCariTemplatePaketMCUSMC;
 import laporan.DlgBerkasRawat;
 import permintaan.DlgBookingOperasi;
 import permintaan.DlgPermintaanKonsultasiMedik;
@@ -10698,7 +10699,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }
 
-    private void BtnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
+    private void BtnPengkajianInvasifNonBedahSmcActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -10762,6 +10763,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+    private void BtnCariTemplatePaketMCUSmcActionPerformed(ActionEvent e) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            MasterCariTemplatePaketMCUSMC form=new MasterCariTemplatePaketMCUSMC(null,false);
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.isCek();
+            form.setDokter(KdPeg.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),TNoRM.getText());
+            form.tampil2();
+            form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -11139,7 +11157,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
-    private widget.Button BtnPengkajianInvasifNonBedahSMC;
+    private widget.Button BtnPengkajianInvasifNonBedahSmc, BtnCariTemplatePaketMCUSmc;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -12141,10 +12159,15 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             tinggi=tinggi+24;
         }
 
-        BtnPengkajianInvasifNonBedahSMC.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
+        BtnPengkajianInvasifNonBedahSmc.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
         if(akses.getpengkajian_tindakan_invasif_non_bedah_smc()==true){
             tinggi=tinggi+24;
         }
+        BtnCariTemplatePaketMCUSmc.setVisible(akses.gettemplate_paket_mcu_smc());
+        if(akses.gettemplate_paket_mcu_smc()==true){
+            tinggi=tinggi+24;
+        }
+
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
         TCari.setPreferredSize(new Dimension(207,23));
 
@@ -14486,18 +14509,31 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MnPasteSOAP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPasteSOAP.addActionListener(this::MnPasteSOAPActionPerformed);
 
-        BtnPengkajianInvasifNonBedahSMC = new widget.Button();
-        BtnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
-        BtnPengkajianInvasifNonBedahSMC.setText("Pengkajian Invasif Non Bedah");
-        BtnPengkajianInvasifNonBedahSMC.setFocusPainted(false);
-        BtnPengkajianInvasifNonBedahSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
-        BtnPengkajianInvasifNonBedahSMC.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnPengkajianInvasifNonBedahSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnPengkajianInvasifNonBedahSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnPengkajianInvasifNonBedahSMC.setName("BtnPengkajianInvasifNonBedahSMC");
-        BtnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPengkajianInvasifNonBedahSMC.setRoundRect(false);
-        BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
+        BtnPengkajianInvasifNonBedahSmc = new widget.Button();
+        BtnPengkajianInvasifNonBedahSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPengkajianInvasifNonBedahSmc.setText("Pengkajian Invasif Non Bedah");
+        BtnPengkajianInvasifNonBedahSmc.setFocusPainted(false);
+        BtnPengkajianInvasifNonBedahSmc.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPengkajianInvasifNonBedahSmc.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPengkajianInvasifNonBedahSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPengkajianInvasifNonBedahSmc.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPengkajianInvasifNonBedahSmc.setName("BtnPengkajianInvasifNonBedahSmc");
+        BtnPengkajianInvasifNonBedahSmc.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPengkajianInvasifNonBedahSmc.setRoundRect(false);
+        BtnPengkajianInvasifNonBedahSmc.addActionListener(this::BtnPengkajianInvasifNonBedahSmcActionPerformed);
+
+        BtnCariTemplatePaketMCUSmc = new widget.Button();
+        BtnCariTemplatePaketMCUSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnCariTemplatePaketMCUSmc.setText("Template Paket MCU");
+        BtnCariTemplatePaketMCUSmc.setFocusPainted(false);
+        BtnCariTemplatePaketMCUSmc.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnCariTemplatePaketMCUSmc.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnCariTemplatePaketMCUSmc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnCariTemplatePaketMCUSmc.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnCariTemplatePaketMCUSmc.setName("BtnCariTemplatePaketMCUSmc");
+        BtnCariTemplatePaketMCUSmc.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnCariTemplatePaketMCUSmc.setRoundRect(false);
+        BtnCariTemplatePaketMCUSmc.addActionListener(this::BtnCariTemplatePaketMCUSmcActionPerformed);
 
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");
@@ -14597,8 +14633,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         FormMenu.add(BtnSkorStewardPascaAnestesi);
         FormMenu.add(BtnSkorBromagePascaAnestesi);
         FormMenu.add(BtnCatatanPengkajianPaskaOperasi);
-        FormMenu.add(BtnPengkajianInvasifNonBedahSMC);
+        FormMenu.add(BtnPengkajianInvasifNonBedahSmc);
         FormMenu.add(BtnMedicalCheckUp);
+        FormMenu.add(BtnCariTemplatePaketMCUSmc);
         FormMenu.add(BtnPenilaianPsikolog);
         FormMenu.add(BtnPenilaianPsikologKlinis);
         FormMenu.add(BtnPenilaianLanjutanRisikoJatuhDewasa);
