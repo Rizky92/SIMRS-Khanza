@@ -330,16 +330,14 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         tbTindakanDrPr.getColumnModel().getColumn(6).setPreferredWidth(100);
         tbTindakanDrPr.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabModeTindakanPr = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Nama Perawatan/Tindakan", "Kategori", "Kode Dokter", "Dokter Pemberi Tindakan", "Harga (Rp)"
-        }) {
+        tabModeTindakanPr = new DefaultTableModel(null, new Object[] {"P", "Kode", "Nama Perawatan/Tindakan", "Kategori", "Harga (Rp)"}) {
             @Override
             public Class getColumnClass(int columnIndex) {
                 if (columnIndex == 0) {
                     return Boolean.class;
                 }
 
-                if (columnIndex == 6) {
+                if (columnIndex == 4) {
                     return Double.class;
                 }
 
@@ -357,12 +355,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         tbTindakanPr.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbTindakanPr.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbTindakanPr.getColumnModel().getColumn(1).setPreferredWidth(90);
-        tbTindakanPr.getColumnModel().getColumn(2).setPreferredWidth(280);
+        tbTindakanPr.getColumnModel().getColumn(2).setPreferredWidth(480);
         tbTindakanPr.getColumnModel().getColumn(3).setPreferredWidth(110);
-        tbTindakanPr.getColumnModel().getColumn(4).setMinWidth(0);
-        tbTindakanPr.getColumnModel().getColumn(4).setMaxWidth(0);
-        tbTindakanPr.getColumnModel().getColumn(5).setPreferredWidth(200);
-        tbTindakanPr.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tbTindakanPr.getColumnModel().getColumn(4).setPreferredWidth(100);
         tbTindakanPr.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeTambahanBiaya = new DefaultTableModel(null, new Object[] {"Nama", "Besar Biaya (Rp)", ""}) {
@@ -422,7 +417,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             });
         }
 
-        for (widget.Table tabel : new widget.Table[] {tbTindakanDr, tbTindakanDrPr, tbTindakanPr}) {
+        for (widget.Table tabel : new widget.Table[] {tbTindakanDr, tbTindakanDrPr}) {
             tabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -485,9 +480,6 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        ChkAccor.setSelected(false);
-        isDetail();
     }
 
     /**
@@ -588,11 +580,6 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
         BtnAll = new widget.Button();
-        PanelAccor = new widget.PanelBiasa();
-        ChkAccor = new widget.CekBox();
-        FormDetail = new widget.PanelBiasa();
-        Scroll13 = new widget.ScrollPane();
-        LoadHTML = new widget.editorpane();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
@@ -1428,50 +1415,6 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
 
         internalFrame3.add(panelGlass9, java.awt.BorderLayout.PAGE_END);
 
-        PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
-        PanelAccor.setName("PanelAccor"); // NOI18N
-        PanelAccor.setPreferredSize(new java.awt.Dimension(430, 43));
-        PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
-
-        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
-        ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
-        ChkAccor.setSelected(true);
-        ChkAccor.setFocusable(false);
-        ChkAccor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkAccor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkAccor.setName("ChkAccor"); // NOI18N
-        ChkAccor.setPreferredSize(new java.awt.Dimension(15, 20));
-        ChkAccor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
-        ChkAccor.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        ChkAccor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        ChkAccor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkAccorActionPerformed(evt);
-            }
-        });
-        PanelAccor.add(ChkAccor, java.awt.BorderLayout.WEST);
-
-        FormDetail.setBackground(new java.awt.Color(255, 255, 255));
-        FormDetail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), " Detail Template Pemeriksaan : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
-        FormDetail.setName("FormDetail"); // NOI18N
-        FormDetail.setPreferredSize(new java.awt.Dimension(115, 73));
-        FormDetail.setLayout(new java.awt.BorderLayout());
-
-        Scroll13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        Scroll13.setName("Scroll13"); // NOI18N
-        Scroll13.setOpaque(true);
-        Scroll13.setPreferredSize(new java.awt.Dimension(200, 200));
-
-        LoadHTML.setBorder(null);
-        LoadHTML.setName("LoadHTML"); // NOI18N
-        Scroll13.setViewportView(LoadHTML);
-
-        FormDetail.add(Scroll13, java.awt.BorderLayout.CENTER);
-
-        PanelAccor.add(FormDetail, java.awt.BorderLayout.CENTER);
-
-        internalFrame3.add(PanelAccor, java.awt.BorderLayout.EAST);
-
         TabRawat.addTab("Data Template", internalFrame3);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
@@ -1847,7 +1790,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_pilihJenisBayarKeyPressed
 
     private void btnCariRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariRadiologiActionPerformed
-        tampilRadiologi(null);
+        tampilRadiologi(null, true);
     }//GEN-LAST:event_btnCariRadiologiActionPerformed
 
     private void cariRadiologiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariRadiologiKeyPressed
@@ -1863,7 +1806,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariLabPKKeyPressed
 
     private void btnCariLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariLabPKActionPerformed
-        tampilLabPK(null);
+        tampilLabPK(null, true);
     }//GEN-LAST:event_btnCariLabPKActionPerformed
 
     private void cariDetailLabPKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariDetailLabPKKeyPressed
@@ -1873,7 +1816,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariDetailLabPKKeyPressed
 
     private void btnCariDetailLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariDetailLabPKActionPerformed
-        tampilDetailLabPK(null);
+        tampilDetailLabPK(null, true);
     }//GEN-LAST:event_btnCariDetailLabPKActionPerformed
 
     private void cariLabPAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariLabPAKeyPressed
@@ -1883,7 +1826,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariLabPAKeyPressed
 
     private void btnCariLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariLabPAActionPerformed
-        tampilLabPA(null);
+        tampilLabPA(null, true);
     }//GEN-LAST:event_btnCariLabPAActionPerformed
 
     private void cariLabMBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariLabMBKeyPressed
@@ -1893,7 +1836,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariLabMBKeyPressed
 
     private void btnCariLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariLabMBActionPerformed
-        tampilLabMB(null);
+        tampilLabMB(null, true);
     }//GEN-LAST:event_btnCariLabMBActionPerformed
 
     private void cariDetailLabMBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariDetailLabMBKeyPressed
@@ -1903,7 +1846,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariDetailLabMBKeyPressed
 
     private void btnCariDetailLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariDetailLabMBActionPerformed
-        tampilDetailLabMB(null);
+        tampilDetailLabMB(null, true);
     }//GEN-LAST:event_btnCariDetailLabMBActionPerformed
 
     private void cariTindakanDrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTindakanDrKeyPressed
@@ -1913,51 +1856,44 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariTindakanDrKeyPressed
 
     private void btnCariTindakanDrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTindakanDrActionPerformed
-        tampilTindakanDr(null);
+        tampilTindakanDr(null, true);
     }//GEN-LAST:event_btnCariTindakanDrActionPerformed
 
     private void btnAllRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllRadiologiActionPerformed
         cariRadiologi.setText("");
-        Valid.tabelKosongSmc(tabModeRadiologi);
-        tampilRadiologi(null);
+        tampilRadiologi(null, true);
     }//GEN-LAST:event_btnAllRadiologiActionPerformed
 
     private void btnAllLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLabPKActionPerformed
         cariLabPK.setText("");
         cariDetailLabPK.setText("");
-        Valid.tabelKosongSmc(tabModeLabPK);
-        tampilLabPK(null);
+        tampilLabPK(null, true);
     }//GEN-LAST:event_btnAllLabPKActionPerformed
 
     private void btnAllDetailLabPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllDetailLabPKActionPerformed
         cariDetailLabPK.setText("");
-        Valid.tabelKosongSmc(tabModeDetailLabPK);
-        tampilDetailLabPK(null);
+        tampilDetailLabPK(null, true);
     }//GEN-LAST:event_btnAllDetailLabPKActionPerformed
 
     private void btnAllLabPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLabPAActionPerformed
         cariLabPA.setText("");
-        Valid.tabelKosongSmc(tabModeLabPA);
-        tampilLabPA(null);
+        tampilLabPA(null, true);
     }//GEN-LAST:event_btnAllLabPAActionPerformed
 
     private void btnAllLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLabMBActionPerformed
         cariLabMB.setText("");
         cariDetailLabMB.setText("");
-        Valid.tabelKosongSmc(tabModeLabMB);
-        tampilLabMB(null);
+        tampilLabMB(null, true);
     }//GEN-LAST:event_btnAllLabMBActionPerformed
 
     private void btnAllDetailLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllDetailLabMBActionPerformed
         cariDetailLabMB.setText("");
-        Valid.tabelKosongSmc(tabModeDetailLabMB);
-        tampilDetailLabMB(null);
+        tampilDetailLabMB(null, true);
     }//GEN-LAST:event_btnAllDetailLabMBActionPerformed
 
     private void btnAllTindakanDrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTindakanDrActionPerformed
         cariTindakanDr.setText("");
-        Valid.tabelKosongSmc(tabModeTindakanDr);
-        tampilTindakanDr(null);
+        tampilTindakanDr(null, true);
     }//GEN-LAST:event_btnAllTindakanDrActionPerformed
 
     private void tbLabPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabPKMouseClicked
@@ -1971,10 +1907,6 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             btnCariDetailLabMBActionPerformed(null);
         }
     }//GEN-LAST:event_tbLabMBMouseClicked
-
-    private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
-        isDetail();
-    }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         tandaiSemua(false);
@@ -1991,13 +1923,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 if (penjab.getTable().getSelectedRow() != -1) {
                     kodeJenisBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 1).toString());
                     namaJenisBayar.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 2).toString());
-                    tampilRadiologi(null);
-                    tampilLabPK(null);
-                    tampilLabPA(null);
-                    tampilLabMB(null);
-                    tampilTindakanDr(null);
-                    tampilTindakanDrPr(null);
-                    tampilTindakanPr(null);
+                    tampilRadiologi(null, false);
+                    tampilLabPK(null, false);
+                    tampilLabPA(null, false);
+                    tampilLabMB(null, false);
+                    tampilTindakanDr(null, false);
+                    tampilTindakanDrPr(null, false);
+                    tampilTindakanPr(null, false);
                 }
                 pilihJenisBayar.requestFocus();
             }
@@ -2065,13 +1997,12 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariTindakanDrPrKeyPressed
 
     private void btnCariTindakanDrPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTindakanDrPrActionPerformed
-        tampilTindakanDrPr(null);
+        tampilTindakanDrPr(null, true);
     }//GEN-LAST:event_btnCariTindakanDrPrActionPerformed
 
     private void btnAllTindakanDrPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTindakanDrPrActionPerformed
         cariTindakanDrPr.setText("");
-        Valid.tabelKosongSmc(tabModeTindakanDrPr);
-        tampilTindakanDrPr(null);
+        tampilTindakanDrPr(null, true);
     }//GEN-LAST:event_btnAllTindakanDrPrActionPerformed
 
     private void cariTindakanPrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTindakanPrKeyPressed
@@ -2081,13 +2012,12 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_cariTindakanPrKeyPressed
 
     private void btnCariTindakanPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariTindakanPrActionPerformed
-        tampilTindakanPr(null);
+        tampilTindakanPr(null, true);
     }//GEN-LAST:event_btnCariTindakanPrActionPerformed
 
     private void btnAllTindakanPrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllTindakanPrActionPerformed
         cariTindakanPr.setText("");
-        Valid.tabelKosongSmc(tabModeTindakanPr);
-        tampilTindakanPr(null);
+        tampilTindakanPr(null, true);
     }//GEN-LAST:event_btnAllTindakanPrActionPerformed
 
     private void cariTambahanBiayaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariTambahanBiayaKeyPressed
@@ -2159,16 +2089,11 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
-    private widget.CekBox ChkAccor;
-    private widget.PanelBiasa FormDetail;
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
-    private widget.editorpane LoadHTML;
-    private widget.PanelBiasa PanelAccor;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll12;
-    private widget.ScrollPane Scroll13;
     private widget.ScrollPane Scroll14;
     private widget.ScrollPane Scroll15;
     private widget.ScrollPane Scroll16;
@@ -2320,9 +2245,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }
     }
 
-    private void tampilRadiologi(String noTemplate) {
+    private void tampilRadiologi(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeRadiologi, 1, Integer::sum);
-        final String[] kata = cariRadiologi.getText().isBlank() ? new String[0] : cariRadiologi.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariRadiologi.getText().isBlank() ? new String[0] : cariRadiologi.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
@@ -2342,15 +2267,15 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     "select jns_perawatan_radiologi.kd_jenis_prw, jns_perawatan_radiologi.nm_perawatan, jns_perawatan_radiologi.total_byr, " +
                     "template_paket_mcu_smc_permintaan_radiologi.no_template is not null as dipilih from jns_perawatan_radiologi left join template_paket_mcu_smc_permintaan_radiologi " +
                     "on template_paket_mcu_smc_permintaan_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw and template_paket_mcu_smc_permintaan_radiologi.no_template = ? " +
-                    "where template_paket_mcu_smc_permintaan_radiologi.no_template is not null or (jns_perawatan_radiologi.status = '1' " + (caraBayarRadiologi ?
+                    "where template_paket_mcu_smc_permintaan_radiologi.no_template is not null " + (cari ? "or (jns_perawatan_radiologi.status = '1' " + (caraBayarRadiologi ?
                     "and (jns_perawatan_radiologi.kd_pj = ? or jns_perawatan_radiologi.kd_pj = '-') " : "") + (kelasRadiologi ?
                     "and (jns_perawatan_radiologi.kelas = 'Rawat Jalan' or jns_perawatan_radiologi.kelas = '-') " : "") +
-                    "and (jns_perawatan_radiologi.kd_jenis_prw like ? or jns_perawatan_radiologi.nm_perawatan like ?) ".repeat(kata.length) +
-                    ") order by dipilih desc, jns_perawatan_radiologi.nm_perawatan"
+                    "and (jns_perawatan_radiologi.kd_jenis_prw like ? or jns_perawatan_radiologi.nm_perawatan like ?) ".repeat(kata.length) + ") " : "") +
+                    "order by dipilih desc, jns_perawatan_radiologi.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarRadiologi) {
+                    if (cari && caraBayarRadiologi) {
                         ps.setString(++p, kodePJ);
                     }
                     for (String k : kata) {
@@ -2390,9 +2315,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }.execute();
     }
 
-    private void tampilLabPK(String noTemplate) {
+    private void tampilLabPK(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeLabPK, 1, Integer::sum);
-        final String[] kata = cariLabPK.getText().isBlank() ? new String[0] : cariLabPK.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariLabPK.getText().isBlank() ? new String[0] : cariLabPK.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
@@ -2411,15 +2336,15 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, jns_perawatan_lab.total_byr, template_paket_mcu_smc_permintaan_lab.no_template is not null " +
                     "as dipilih from jns_perawatan_lab left join template_paket_mcu_smc_permintaan_lab on template_paket_mcu_smc_permintaan_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw " +
-                    "and template_paket_mcu_smc_permintaan_lab.no_template = ? where jns_perawatan_lab.kategori = 'PK' and (template_paket_mcu_smc_permintaan_lab.no_template is not null " +
+                    "and template_paket_mcu_smc_permintaan_lab.no_template = ? where jns_perawatan_lab.kategori = 'PK' and (template_paket_mcu_smc_permintaan_lab.no_template is not null " + (cari ?
                     "or (jns_perawatan_lab.status = '1' " + (caraBayarLab ? "and (jns_perawatan_lab.kd_pj = ? or jns_perawatan_lab.kd_pj = '-') " : "") + (kelasLab ?
                     "and (jns_perawatan_lab.kelas = 'Rawat Jalan' or jns_perawatan_lab.kelas = '-') " : "") +
-                    "and (jns_perawatan_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ".repeat(kata.length) +
-                    ")) order by dipilih desc, jns_perawatan_lab.nm_perawatan"
+                    "and (jns_perawatan_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ".repeat(kata.length) + ") " : "") +
+                    ") order by dipilih desc, jns_perawatan_lab.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarLab) {
+                    if (cari && caraBayarLab) {
                         ps.setString(++p, kodePJ);
                     }
                     for (String k : kata) {
@@ -2454,13 +2379,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 }
                 if (versi == versiMuat.get(tabModeLabPK)) {
                     tabModeLabPK.fireTableDataChanged();
-                    tampilDetailLabPK(noTemplate);
+                    tampilDetailLabPK(noTemplate, cari);
                 }
             }
         }.execute();
     }
 
-    private void tampilDetailLabPK(String noTemplate) {
+    private void tampilDetailLabPK(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeDetailLabPK, 1, Integer::sum);
         final String[] kata = cariDetailLabPK.getText().isBlank() ? new String[0] : cariDetailLabPK.getText().trim().toLowerCase().split("\\s+");
         final List<String[]> pemeriksaan = new ArrayList<>();
@@ -2497,7 +2422,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                             while (rs.next()) {
                                 final boolean dipilih = rs.getBoolean("dipilih") || idTerpilih.contains(rs.getString("id_template"));
                                 final String nama = rs.getString("Pemeriksaan").toLowerCase();
-                                if (!dipilih && !Arrays.stream(kata).allMatch(nama::contains)) {
+                                if (!dipilih && (!cari || !Arrays.stream(kata).allMatch(nama::contains))) {
                                     continue;
                                 }
                                 StringJoiner rujukan = new StringJoiner(", ");
@@ -2539,9 +2464,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }.execute();
     }
 
-    private void tampilLabPA(String noTemplate) {
+    private void tampilLabPA(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeLabPA, 1, Integer::sum);
-        final String[] kata = cariLabPA.getText().isBlank() ? new String[0] : cariLabPA.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariLabPA.getText().isBlank() ? new String[0] : cariLabPA.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
@@ -2560,15 +2485,15 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, jns_perawatan_lab.total_byr, template_paket_mcu_smc_permintaan_lab.no_template is not null " +
                     "as dipilih from jns_perawatan_lab left join template_paket_mcu_smc_permintaan_lab on template_paket_mcu_smc_permintaan_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw " +
-                    "and template_paket_mcu_smc_permintaan_lab.no_template = ? where jns_perawatan_lab.kategori = 'PA' and (template_paket_mcu_smc_permintaan_lab.no_template is not null " +
+                    "and template_paket_mcu_smc_permintaan_lab.no_template = ? where jns_perawatan_lab.kategori = 'PA' and (template_paket_mcu_smc_permintaan_lab.no_template is not null " + (cari ?
                     "or (jns_perawatan_lab.status = '1' " + (caraBayarLab ? "and (jns_perawatan_lab.kd_pj = ? or jns_perawatan_lab.kd_pj = '-') " : "") + (kelasLab ?
                     "and (jns_perawatan_lab.kelas = 'Rawat Jalan' or jns_perawatan_lab.kelas = '-') " : "") +
-                    "and (jns_perawatan_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ".repeat(kata.length) +
-                    ")) order by dipilih desc, jns_perawatan_lab.nm_perawatan"
+                    "and (jns_perawatan_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ".repeat(kata.length) + ") " : "") +
+                    ") order by dipilih desc, jns_perawatan_lab.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarLab) {
+                    if (cari && caraBayarLab) {
                         ps.setString(++p, kodePJ);
                     }
                     for (String k : kata) {
@@ -2608,9 +2533,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }.execute();
     }
 
-    private void tampilLabMB(String noTemplate) {
+    private void tampilLabMB(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeLabMB, 1, Integer::sum);
-        final String[] kata = cariLabMB.getText().isBlank() ? new String[0] : cariLabMB.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariLabMB.getText().isBlank() ? new String[0] : cariLabMB.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
@@ -2629,15 +2554,15 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, jns_perawatan_lab.total_byr, template_paket_mcu_smc_permintaan_lab.no_template is not null " +
                     "as dipilih from jns_perawatan_lab left join template_paket_mcu_smc_permintaan_lab on template_paket_mcu_smc_permintaan_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw " +
-                    "and template_paket_mcu_smc_permintaan_lab.no_template = ? where jns_perawatan_lab.kategori = 'MB' and (template_paket_mcu_smc_permintaan_lab.no_template is not null " +
+                    "and template_paket_mcu_smc_permintaan_lab.no_template = ? where jns_perawatan_lab.kategori = 'MB' and (template_paket_mcu_smc_permintaan_lab.no_template is not null " + (cari ?
                     "or (jns_perawatan_lab.status = '1' " + (caraBayarLab ? "and (jns_perawatan_lab.kd_pj = ? or jns_perawatan_lab.kd_pj = '-') " : "") + (kelasLab ?
                     "and (jns_perawatan_lab.kelas = 'Rawat Jalan' or jns_perawatan_lab.kelas = '-') " : "") +
-                    "and (jns_perawatan_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ".repeat(kata.length) +
-                    ")) order by dipilih desc, jns_perawatan_lab.nm_perawatan"
+                    "and (jns_perawatan_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ".repeat(kata.length) + ") " : "") +
+                    ") order by dipilih desc, jns_perawatan_lab.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarLab) {
+                    if (cari && caraBayarLab) {
                         ps.setString(++p, kodePJ);
                     }
                     for (String k : kata) {
@@ -2672,13 +2597,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 }
                 if (versi == versiMuat.get(tabModeLabMB)) {
                     tabModeLabMB.fireTableDataChanged();
-                    tampilDetailLabMB(noTemplate);
+                    tampilDetailLabMB(noTemplate, cari);
                 }
             }
         }.execute();
     }
 
-    private void tampilDetailLabMB(String noTemplate) {
+    private void tampilDetailLabMB(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeDetailLabMB, 1, Integer::sum);
         final String[] kata = cariDetailLabMB.getText().isBlank() ? new String[0] : cariDetailLabMB.getText().trim().toLowerCase().split("\\s+");
         final List<String[]> pemeriksaan = new ArrayList<>();
@@ -2715,7 +2640,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                             while (rs.next()) {
                                 final boolean dipilih = rs.getBoolean("dipilih") || idTerpilih.contains(rs.getString("id_template"));
                                 final String nama = rs.getString("Pemeriksaan").toLowerCase();
-                                if (!dipilih && !Arrays.stream(kata).allMatch(nama::contains)) {
+                                if (!dipilih && (!cari || !Arrays.stream(kata).allMatch(nama::contains))) {
                                     continue;
                                 }
                                 StringJoiner rujukan = new StringJoiner(", ");
@@ -2757,9 +2682,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }.execute();
     }
 
-    private void tampilTindakanDr(String noTemplate) {
+    private void tampilTindakanDr(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeTindakanDr, 1, Integer::sum);
-        final String[] kata = cariTindakanDr.getText().isBlank() ? new String[0] : cariTindakanDr.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariTindakanDr.getText().isBlank() ? new String[0] : cariTindakanDr.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
@@ -2783,17 +2708,17 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     "ifnull(dokter.nm_dokter, '') as nm_dokter, jns_perawatan.total_byrdr, template_paket_mcu_smc_tindakan_dr.no_template is not null as dipilih from jns_perawatan join " +
                     "kategori_perawatan on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori left join template_paket_mcu_smc_tindakan_dr on template_paket_mcu_smc_tindakan_dr.kd_jenis_prw = " +
                     "jns_perawatan.kd_jenis_prw and template_paket_mcu_smc_tindakan_dr.no_template = ? left join dokter on template_paket_mcu_smc_tindakan_dr.kd_dokter = dokter.kd_dokter where " +
-                    "template_paket_mcu_smc_tindakan_dr.no_template is not null or (jns_perawatan.status = '1' and jns_perawatan.total_byrdr > 0 " + (caraBayarRalan ?
+                    "template_paket_mcu_smc_tindakan_dr.no_template is not null " + (cari ? "or (jns_perawatan.status = '1' and jns_perawatan.total_byrdr > 0 " + (caraBayarRalan ?
                     "and (jns_perawatan.kd_pj = ? or jns_perawatan.kd_pj = '-') " : "") + (poliRalan ? "and (jns_perawatan.kd_poli = ? or jns_perawatan.kd_poli = '-') " : "") +
-                    "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ".repeat(kata.length) +
-                    ") order by dipilih desc, jns_perawatan.nm_perawatan"
+                    "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ".repeat(kata.length) + ") " : "") +
+                    "order by dipilih desc, jns_perawatan.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarRalan) {
+                    if (cari && caraBayarRalan) {
                         ps.setString(++p, kodePJ);
                     }
-                    if (poliRalan) {
+                    if (cari && poliRalan) {
                         ps.setString(++p, kodePoli);
                     }
                     for (String k : kata) {
@@ -2837,9 +2762,9 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }.execute();
     }
 
-    private void tampilTindakanDrPr(String noTemplate) {
+    private void tampilTindakanDrPr(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeTindakanDrPr, 1, Integer::sum);
-        final String[] kata = cariTindakanDrPr.getText().isBlank() ? new String[0] : cariTindakanDrPr.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariTindakanDrPr.getText().isBlank() ? new String[0] : cariTindakanDrPr.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
@@ -2863,17 +2788,17 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     "ifnull(dokter.nm_dokter, '') as nm_dokter, jns_perawatan.total_byrdrpr, template_paket_mcu_smc_tindakan_drpr.no_template is not null as dipilih from jns_perawatan join " +
                     "kategori_perawatan on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori left join template_paket_mcu_smc_tindakan_drpr on template_paket_mcu_smc_tindakan_drpr.kd_jenis_prw = " +
                     "jns_perawatan.kd_jenis_prw and template_paket_mcu_smc_tindakan_drpr.no_template = ? left join dokter on template_paket_mcu_smc_tindakan_drpr.kd_dokter = dokter.kd_dokter where " +
-                    "template_paket_mcu_smc_tindakan_drpr.no_template is not null or (jns_perawatan.status = '1' and jns_perawatan.total_byrdrpr > 0 " + (caraBayarRalan ?
+                    "template_paket_mcu_smc_tindakan_drpr.no_template is not null " + (cari ? "or (jns_perawatan.status = '1' and jns_perawatan.total_byrdrpr > 0 " + (caraBayarRalan ?
                     "and (jns_perawatan.kd_pj = ? or jns_perawatan.kd_pj = '-') " : "") + (poliRalan ? "and (jns_perawatan.kd_poli = ? or jns_perawatan.kd_poli = '-') " : "") +
-                    "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ".repeat(kata.length) +
-                    ") order by dipilih desc, jns_perawatan.nm_perawatan"
+                    "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ".repeat(kata.length) + ") " : "") +
+                    "order by dipilih desc, jns_perawatan.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarRalan) {
+                    if (cari && caraBayarRalan) {
                         ps.setString(++p, kodePJ);
                     }
-                    if (poliRalan) {
+                    if (cari && poliRalan) {
                         ps.setString(++p, kodePoli);
                     }
                     for (String k : kata) {
@@ -2917,18 +2842,15 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
         }.execute();
     }
 
-    private void tampilTindakanPr(String noTemplate) {
+    private void tampilTindakanPr(String noTemplate, boolean cari) {
         final int versi = versiMuat.merge(tabModeTindakanPr, 1, Integer::sum);
-        final String[] kata = cariTindakanPr.getText().isBlank() ? new String[0] : cariTindakanPr.getText().trim().split("\\s+");
+        final String[] kata = !cari || cariTindakanPr.getText().isBlank() ? new String[0] : cariTindakanPr.getText().trim().split("\\s+");
         final String kodePJ = kodeJenisBayar.getText();
         final List<Object[]> terpilih = new ArrayList<>();
         final Set<String> kodeTerpilih = new HashSet<>();
         for (int i = 0; i < tabModeTindakanPr.getRowCount(); i++) {
             if (Boolean.TRUE.equals(tabModeTindakanPr.getValueAt(i, 0))) {
-                terpilih.add(new Object[] {
-                    true, tabModeTindakanPr.getValueAt(i, 1), tabModeTindakanPr.getValueAt(i, 2), tabModeTindakanPr.getValueAt(i, 3), tabModeTindakanPr.getValueAt(i, 4), tabModeTindakanPr.getValueAt(i, 5),
-                    tabModeTindakanPr.getValueAt(i, 6)
-                });
+                terpilih.add(new Object[] {true, tabModeTindakanPr.getValueAt(i, 1), tabModeTindakanPr.getValueAt(i, 2), tabModeTindakanPr.getValueAt(i, 3), tabModeTindakanPr.getValueAt(i, 4)});
                 kodeTerpilih.add(tabModeTindakanPr.getValueAt(i, 1).toString());
             }
         }
@@ -2939,21 +2861,20 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             @Override
             protected Void doInBackground() throws Exception {
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select jns_perawatan.kd_jenis_prw, jns_perawatan.nm_perawatan, kategori_perawatan.nm_kategori, ifnull(template_paket_mcu_smc_tindakan_pr.kd_dokter, '') as kd_dokter, " +
-                    "ifnull(dokter.nm_dokter, '') as nm_dokter, jns_perawatan.total_byrpr, template_paket_mcu_smc_tindakan_pr.no_template is not null as dipilih from jns_perawatan join " +
-                    "kategori_perawatan on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori left join template_paket_mcu_smc_tindakan_pr on template_paket_mcu_smc_tindakan_pr.kd_jenis_prw = " +
-                    "jns_perawatan.kd_jenis_prw and template_paket_mcu_smc_tindakan_pr.no_template = ? left join dokter on template_paket_mcu_smc_tindakan_pr.kd_dokter = dokter.kd_dokter where " +
-                    "template_paket_mcu_smc_tindakan_pr.no_template is not null or (jns_perawatan.status = '1' and jns_perawatan.total_byrpr > 0 " + (caraBayarRalan ?
+                    "select jns_perawatan.kd_jenis_prw, jns_perawatan.nm_perawatan, kategori_perawatan.nm_kategori, jns_perawatan.total_byrpr, template_paket_mcu_smc_tindakan_pr.no_template " +
+                    "is not null as dipilih from jns_perawatan join kategori_perawatan on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori left join template_paket_mcu_smc_tindakan_pr " +
+                    "on template_paket_mcu_smc_tindakan_pr.kd_jenis_prw = jns_perawatan.kd_jenis_prw and template_paket_mcu_smc_tindakan_pr.no_template = ? where " +
+                    "template_paket_mcu_smc_tindakan_pr.no_template is not null " + (cari ? "or (jns_perawatan.status = '1' and jns_perawatan.total_byrpr > 0 " + (caraBayarRalan ?
                     "and (jns_perawatan.kd_pj = ? or jns_perawatan.kd_pj = '-') " : "") + (poliRalan ? "and (jns_perawatan.kd_poli = ? or jns_perawatan.kd_poli = '-') " : "") +
-                    "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ".repeat(kata.length) +
-                    ") order by dipilih desc, jns_perawatan.nm_perawatan"
+                    "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ".repeat(kata.length) + ") " : "") +
+                    "order by dipilih desc, jns_perawatan.nm_perawatan"
                 )) {
                     int p = 0;
                     ps.setString(++p, noTemplate);
-                    if (caraBayarRalan) {
+                    if (cari && caraBayarRalan) {
                         ps.setString(++p, kodePJ);
                     }
-                    if (poliRalan) {
+                    if (cari && poliRalan) {
                         ps.setString(++p, kodePoli);
                     }
                     for (String k : kata) {
@@ -2964,10 +2885,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                     try (ResultSet rs = ps.executeQuery()) {
                         while (rs.next()) {
                             if (!kodeTerpilih.contains(rs.getString("kd_jenis_prw"))) {
-                                publish(new Object[] {
-                                    rs.getBoolean("dipilih"), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("nm_kategori"), rs.getString("kd_dokter"),
-                                    rs.getString("nm_dokter"), rs.getDouble("total_byrpr")
-                                });
+                                publish(new Object[] {rs.getBoolean("dipilih"), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("nm_kategori"), rs.getDouble("total_byrpr")});
                             }
                         }
                     }
@@ -3172,13 +3090,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             versiMuat.merge(model, 1, Integer::sum);
             Valid.tabelKosongSmc(model);
         }
-        tampilRadiologi(null);
-        tampilLabPK(null);
-        tampilLabPA(null);
-        tampilLabMB(null);
-        tampilTindakanDr(null);
-        tampilTindakanDrPr(null);
-        tampilTindakanPr(null);
+        tampilRadiologi(null, false);
+        tampilLabPK(null, false);
+        tampilLabPA(null, false);
+        tampilLabMB(null, false);
+        tampilTindakanDr(null, false);
+        tampilTindakanDrPr(null, false);
+        tampilTindakanPr(null, false);
         tampilTambahanBiaya(null);
         tampilPotonganBiaya(null);
         noTemplate.requestFocus();
@@ -3207,13 +3125,13 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
                 versiMuat.merge(model, 1, Integer::sum);
                 Valid.tabelKosongSmc(model);
             }
-            tampilRadiologi(no);
-            tampilLabPK(no);
-            tampilLabPA(no);
-            tampilLabMB(no);
-            tampilTindakanDr(no);
-            tampilTindakanDrPr(no);
-            tampilTindakanPr(no);
+            tampilRadiologi(no, false);
+            tampilLabPK(no, false);
+            tampilLabPA(no, false);
+            tampilLabMB(no, false);
+            tampilTindakanDr(no, false);
+            tampilTindakanDrPr(no, false);
+            tampilTindakanPr(no, false);
             tampilTambahanBiaya(no);
             tampilPotonganBiaya(no);
         }
@@ -3231,20 +3149,6 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
 
     public void setTampil() {
         tampil();
-    }
-
-    private void isDetail() {
-        if (ChkAccor.isSelected()) {
-            ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(internalFrame3.getWidth() - 200, HEIGHT));
-            FormDetail.setVisible(true);
-            ChkAccor.setVisible(true);
-        } else {
-            ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(15, HEIGHT));
-            FormDetail.setVisible(false);
-            ChkAccor.setVisible(true);
-        }
     }
 
     private boolean cekMasukan() {
@@ -3323,9 +3227,16 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
             }
         }
 
+        for (int i = 0; i < tabModeTindakanPr.getRowCount(); i++) {
+            if (Boolean.TRUE.equals(tabModeTindakanPr.getValueAt(i, 0)) && !Sequel.menyimpantfSmc("template_paket_mcu_smc_tindakan_pr", "no_template, kd_jenis_prw",
+                noTemplate, tabModeTindakanPr.getValueAt(i, 1).toString()
+            )) {
+                return false;
+            }
+        }
+
         return simpanTindakan(tabModeTindakanDr, "template_paket_mcu_smc_tindakan_dr", noTemplate) &&
             simpanTindakan(tabModeTindakanDrPr, "template_paket_mcu_smc_tindakan_drpr", noTemplate) &&
-            simpanTindakan(tabModeTindakanPr, "template_paket_mcu_smc_tindakan_pr", noTemplate) &&
             simpanBiaya(tabModeTambahanBiaya, "template_paket_mcu_smc_tambahan_biaya", "no_template, nama_biaya, besar_biaya", noTemplate) &&
             simpanBiaya(tabModePotonganBiaya, "template_paket_mcu_smc_pengurangan_biaya", "no_template, nama_pengurangan, besar_pengurangan", noTemplate);
     }
