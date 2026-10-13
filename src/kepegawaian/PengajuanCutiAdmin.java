@@ -1515,6 +1515,18 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
+            ceksukses = true;
+            try {
+                isiData();
+            } finally {
+                ceksukses = false;
+            }
+            hitungSisaCuti();
+        }
+    }
+
+    private void isiData() {
+        if(tbObat.getSelectedRow()!= -1){
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             Valid.SetTgl(Tgl1,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -1579,7 +1591,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                         "pengajuan_cuti.tmt_kerja) as tmt_kerja, if(pengajuan_cuti.tat_kerja = '0000-00-00', '', pengajuan_cuti.tat_kerja) as tat_kerja, pegawai.bidang, departemen.nama as departemen, pengajuan_cuti.urgensi, " +
                         "pengajuan_cuti.alamat, pengajuan_cuti.jumlah, ((case when pengajuan_cuti.urgensi = 'Tahunan' and datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, " +
                         "interval 1 year)) >= 0 then stts_kerja.hakcuti when pengajuan_cuti.urgensi = 'Besar' and stts_kerja.cuti_besar = '10 Tahun Dari TMT' and datediff(makedate(year(pengajuan_cuti.tanggal_awal), dayofyear(" +
-                        "pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 10 year)) >= 0 then stts_kerja.hakcuti_besar else 0 end) - if(pengajuan_cuti.urgensi not in ('Tahunan', 'Besasr'), 0, ifnull((select sum(p2.jumlah) " +
+                        "pegawai.mulai_kerja)), date_add(pegawai.mulai_kerja, interval 10 year)) >= 0 then stts_kerja.hakcuti_besar else 0 end) - if(pengajuan_cuti.urgensi not in ('Tahunan', 'Besar'), 0, ifnull((select sum(p2.jumlah) " +
                         "from pengajuan_cuti p2 where p2.nik = pengajuan_cuti.nik and p2.tmt_kerja = pengajuan_cuti.tmt_kerja and p2.tat_kerja = pengajuan_cuti.tat_kerja and p2.urgensi = pengajuan_cuti.urgensi and p2.tanggal_akhir <= " +
                         "pengajuan_cuti.tanggal_akhir), 0))) as sisa, pengajuan_cuti.kepentingan, pengajuan_cuti.nik_pj, pegawai_pj.nama as nama_pj, pengajuan_cuti.status from pengajuan_cuti inner join pegawai on pengajuan_cuti.nik = " +
                         "pegawai.nik inner join stts_kerja on pegawai.stts_kerja = stts_kerja.stts inner join departemen on pegawai.departemen = departemen.dep_id inner join pegawai as pegawai_pj on pengajuan_cuti.nik_pj = pegawai_pj.nik " +
@@ -1640,7 +1652,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
     }
 
     private void hitungSisaCuti() {
-        if (!KdPetugas.getText().isBlank()) {
+        if (!ceksukses && !KdPetugas.getText().isBlank()) {
             switch (Urgensi.getSelectedItem().toString()) {
                 case "Tahunan":
                     hitungSisaCutiTahunan();
