@@ -292,7 +292,9 @@ public final class akses {
         jadwal_pegawai_smc = false,
         template_laboratorium_smc = false,
         rekap_kehadiran_smc = false,
-        ipsrs_stok_akhir_pertanggal_smc = false;
+        ipsrs_stok_akhir_pertanggal_smc = false,
+        template_paket_mcu_smc = false,
+        master_template_paket_mcu_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1568,6 +1570,8 @@ public final class akses {
                         akses.template_laboratorium_smc=akses.getBoolean(rs2, "template_laboratorium_smc");
                         akses.rekap_kehadiran_smc=akses.getBoolean(rs2, "rekap_kehadiran_smc");
                         akses.ipsrs_stok_akhir_pertanggal_smc=akses.getBoolean(rs2, "ipsrs_stok_akhir_pertanggal_smc");
+                        akses.template_paket_mcu_smc=akses.getBoolean(rs2, "template_paket_mcu_smc");
+                        akses.master_template_paket_mcu_smc=akses.getBoolean(rs2, "master_template_paket_mcu_smc");
                         akses.set_resep_per_cara_bayar=akses.getBoolean(rs2, "set_resep_per_cara_bayar");
                         akses.skrining_tolac=akses.getBoolean(rs2, "skrining_tolac");
                         akses.admisi_skoring_tolac=akses.getBoolean(rs2, "admisi_skoring_tolac");
@@ -2853,6 +2857,8 @@ public final class akses {
         akses.template_laboratorium_smc=isadmin;
         akses.rekap_kehadiran_smc=isadmin;
         akses.ipsrs_stok_akhir_pertanggal_smc=isadmin;
+        akses.template_paket_mcu_smc=isadmin;
+        akses.master_template_paket_mcu_smc=isadmin;
         akses.set_resep_per_cara_bayar=isadmin;
         akses.skrining_tolac=isadmin;
         akses.admisi_skoring_tolac=isadmin;
@@ -3921,7 +3927,7 @@ public final class akses {
     public static boolean getsatu_sehat_kirim_servicerequest_radiologi(){return akses.satu_sehat_kirim_servicerequest_radiologi;}
     public static boolean gethasil_endoskopi_hidung(){return akses.hasil_endoskopi_hidung;}
     public static boolean getsatu_sehat_kirim_specimen_radiologi(){return akses.satu_sehat_kirim_specimen_radiologi;}
-    public static boolean getbpjs_kompilasi_berkas_klaim(){return akses.bpjs_kompilasi_berkas_klaim;}
+    public static boolean getbpjs_kompilasi_berkas_klaim_smc(){return akses.bpjs_kompilasi_berkas_klaim;}
     public static boolean getmaster_masalah_keperawatan_neonatus(){return akses.master_masalah_keperawatan_neonatus;}
     public static boolean getmaster_rencana_keperawatan_neonatus(){return akses.master_rencana_keperawatan_neonatus;}
     public static boolean getpenilaian_awal_keperawatan_ranap_neonatus(){return akses.penilaian_awal_keperawatan_ranap_neonatus;}
@@ -4141,6 +4147,8 @@ public final class akses {
     public static boolean gettemplate_laboratorium_smc(){return akses.template_laboratorium_smc;}
     public static boolean getrekap_kehadiran_smc(){return akses.rekap_kehadiran_smc;}
     public static boolean getipsrs_stok_akhir_pertanggal_smc(){return akses.ipsrs_stok_akhir_pertanggal_smc;}
+    public static boolean gettemplate_paket_mcu_smc(){return akses.template_paket_mcu_smc;}
+    public static boolean getmaster_template_paket_mcu_smc(){return akses.master_template_paket_mcu_smc;}
     public static boolean getset_resep_per_cara_bayar(){return akses.set_resep_per_cara_bayar;}
     public static boolean getskrining_tolac(){return akses.skrining_tolac;}
     public static boolean getadmisi_skoring_tolac(){return akses.admisi_skoring_tolac;}
