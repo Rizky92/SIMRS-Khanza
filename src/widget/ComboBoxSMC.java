@@ -60,6 +60,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         setForeground(new Color(50, 50, 50));
         setSize(WIDTH, 23);
         filterModel = new FilterModel();
+
         super.setModel(filterModel);
     }
 
@@ -69,9 +70,11 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
     public void setItems(Map<?, ?> items) {
         List<Object> entries = new ArrayList<>();
+
         if (null != items) {
             items.forEach((key, value) -> entries.add(new Entry(key, value)));
         }
+
         filterModel.replace(entries);
     }
 
@@ -85,17 +88,21 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
     public Object getSelectedValue() {
         Object selected = getSelectedItem();
+
         return selected instanceof Entry ? ((Entry) selected).value : selected;
     }
 
     public void setSelectedKey(Object key) {
         Object match = null;
+
         for (Object element : filterModel.all) {
             if (Objects.equals(keyOf(element), key)) {
                 match = element;
+
                 break;
             }
         }
+
         setSelectedItem(match);
     }
 
@@ -103,6 +110,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
     public void setModel(ComboBoxModel<Object> model) {
         if (null == filterModel || filterModel == model) {
             super.setModel(model);
+
             return;
         }
 
@@ -110,6 +118,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         for (int i = 0; i < model.getSize(); i++) {
             elements.add(model.getElementAt(i));
         }
+
         filterModel.replace(elements);
         filterModel.setSelectedItem(filterModel.find(model.getSelectedItem()));
     }
@@ -124,6 +133,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         if (!editable && null != filterModel) {
             endSearch();
         }
+
         super.setEditable(editable);
     }
 
@@ -131,6 +141,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
     public void setSelectedItem(Object item) {
         if (null == filterModel) {
             super.setSelectedItem(item);
+
             return;
         }
 
@@ -142,6 +153,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         boolean wasSearching = searching;
         endSearch();
         super.setSelectedItem(element);
+
         if (wasSearching) {
             configureEditor(getEditor(), getSelectedItem());
         }
@@ -151,10 +163,12 @@ public final class ComboBoxSMC extends JComboBox<Object> {
     public void removeAllItems() {
         if (null == filterModel) {
             super.removeAllItems();
+
             return;
         }
 
         filterModel.clear();
+
         if (isEditable()) {
             configureEditor(getEditor(), null);
         }
@@ -185,6 +199,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
     private void commit(boolean lenient) {
         Object previous = getSelectedItem();
         Object chosen = resolve(lenient);
+
         setPopupVisible(false);
         restore(chosen);
 
@@ -205,6 +220,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
     private Object resolve(boolean lenient) {
         Object selected = filterModel.getSelectedItem();
         String text = editorText().trim();
+
         if (null != selected && label(selected).equalsIgnoreCase(text)) {
             return selected;
         }
@@ -212,6 +228,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         if (lenient && searching) {
             JList<?> list = popupList();
             Object highlighted = null == list ? null : list.getSelectedValue();
+
             if (null != highlighted && filterModel.visible.contains(highlighted)) {
                 return highlighted;
             }
@@ -227,6 +244,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         }
 
         Object top = matches.get(0);
+
         return lenient || label(top).equalsIgnoreCase(text) ? top : selected;
     }
 
@@ -240,6 +258,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         searching = false;
         if (filterModel.isFiltered()) {
             filtering = true;
+
             try {
                 filterModel.show(filterModel.all);
             } finally {
@@ -317,17 +336,20 @@ public final class ComboBoxSMC extends JComboBox<Object> {
                     evt.consume();
                 }
                 break;
+
             case KeyEvent.VK_UP:
             case KeyEvent.VK_KP_UP:
                 if (isPopupVisible() && moveHighlight(-1)) {
                     evt.consume();
                 }
                 break;
+
             case KeyEvent.VK_ESCAPE:
                 setPopupVisible(false);
                 restore(getSelectedItem());
                 evt.consume();
                 break;
+
             default:
                 break;
         }
@@ -335,14 +357,17 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
     private boolean moveHighlight(int step) {
         JList<?> list = popupList();
+
         if (null == list) {
             return false;
         }
 
         int size = list.getModel().getSize();
+
         if (0 < size) {
             highlight(Math.max(0, Math.min(size - 1, list.getSelectedIndex() + step)));
         }
+
         return true;
     }
 
@@ -354,6 +379,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
         if (0 > index || index >= list.getModel().getSize()) {
             list.clearSelection();
+
             return;
         }
 
@@ -369,16 +395,19 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
         for (int i = 0; i < ui.getAccessibleChildrenCount(this); i++) {
             Accessible child = ui.getAccessibleChild(this, i);
+
             if (child instanceof ComboPopup) {
                 return ((ComboPopup) child).getList();
             }
         }
+
         return null;
     }
 
     private String editorText() {
         ComboBoxEditor editor = getEditor();
         Component component = null == editor ? null : editor.getEditorComponent();
+
         return component instanceof JTextComponent ? ((JTextComponent) component).getText() : "";
     }
 
@@ -441,6 +470,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
             if (selected == element || (null != selected && selected.equals(element))) {
                 return;
             }
+
             selected = element;
             fireContentsChanged(this, -1, -1);
         }
@@ -450,6 +480,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
             endSearch();
             all.add(element);
             fireIntervalAdded(this, all.size() - 1, all.size() - 1);
+
             if (1 == all.size() && null == selected && null != element) {
                 setSelectedItem(element);
             }
@@ -465,6 +496,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         @Override
         public void removeElement(Object element) {
             int index = all.indexOf(element);
+
             if (-1 != index) {
                 removeElementAt(index);
             }
@@ -473,6 +505,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         @Override
         public void removeElementAt(int index) {
             endSearch();
+
             if (all.get(index) == selected) {
                 if (0 == index) {
                     setSelectedItem(1 == all.size() ? null : all.get(1));
@@ -480,6 +513,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
                     setSelectedItem(all.get(index - 1));
                 }
             }
+
             all.remove(index);
             fireIntervalRemoved(this, index, index);
         }
@@ -490,9 +524,11 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
         private void replace(Collection<?> elements) {
             clear();
+
             if (elements.isEmpty()) {
                 return;
             }
+
             all.addAll(elements);
             fireIntervalAdded(this, 0, all.size() - 1);
             setSelectedItem(all.get(0));
@@ -500,10 +536,13 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
         private void clear() {
             endSearch();
+
             int size = all.size();
             boolean hadSelection = null != selected;
+
             all.clear();
             selected = null;
+
             if (0 < size) {
                 fireIntervalRemoved(this, 0, size - 1);
             } else if (hadSelection) {
@@ -519,11 +558,13 @@ public final class ComboBoxSMC extends JComboBox<Object> {
             int oldSize = visible.size();
             int newSize = elements.size();
             visible = elements;
+
             if (oldSize > newSize) {
                 fireIntervalRemoved(this, newSize, oldSize - 1);
             } else if (newSize > oldSize) {
                 fireIntervalAdded(this, oldSize, newSize - 1);
             }
+
             if (0 < Math.min(oldSize, newSize)) {
                 fireContentsChanged(this, 0, Math.min(oldSize, newSize) - 1);
             }
@@ -538,8 +579,10 @@ public final class ComboBoxSMC extends JComboBox<Object> {
             List<Object> exact = new ArrayList<>();
             List<Object> prefix = new ArrayList<>();
             List<Object> contains = new ArrayList<>();
+
             for (Object element : all) {
                 String candidate = label(element).toLowerCase();
+
                 if (candidate.equals(keyword)) {
                     exact.add(element);
                 } else if (candidate.startsWith(keyword)) {
@@ -548,8 +591,10 @@ public final class ComboBoxSMC extends JComboBox<Object> {
                     contains.add(element);
                 }
             }
+
             exact.addAll(prefix);
             exact.addAll(contains);
+
             return exact;
         }
 
@@ -570,6 +615,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
                     return element;
                 }
             }
+
             return null;
         }
     }
@@ -585,6 +631,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         EditableComboBoxEditor(ComboBoxEditor editor) {
             this.mainEditor = editor;
             Component component = editor.getEditorComponent();
+
             if (component instanceof JTextComponent) {
                 ((JTextComponent) component).getDocument().addDocumentListener(new DocumentListener() {
                     @Override
@@ -610,6 +657,7 @@ public final class ComboBoxSMC extends JComboBox<Object> {
                         press(evt);
                     }
                 });
+
                 component.addFocusListener(new FocusAdapter() {
                     @Override
                     public void focusLost(FocusEvent evt) {
@@ -631,7 +679,9 @@ public final class ComboBoxSMC extends JComboBox<Object> {
             if (filtering) {
                 return;
             }
+
             settingText = true;
+
             try {
                 mainEditor.setItem(item);
             } finally {
