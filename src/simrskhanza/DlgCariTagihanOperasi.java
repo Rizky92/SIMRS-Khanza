@@ -3580,9 +3580,9 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     Sequel.AutoComitFalse();
 
                     if (sukses) {
-                        sukses = Sequel.mengupdatetfSmc("laporan_operasi", "tanggal = ?, diagnosa_preop = ?, diagnosa_postop = ?, jaringan_dieksekusi = ?, selesaioperasi = ?, permintaan_pa = ?, " +
-                            "nomor_implan = ?, laporan_operasi = ?", "no_rawat = ? and tanggal = ?", Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), PreOp.getText().trim(), PostOp.getText().trim(),
-                            Jaringan.getText().trim(), Valid.getTglJamSmc(TglSelesai, Jam2, Menit2, Detik2), DikirimPA.getSelectedItem().toString(), NomorImplant.getText().trim(), Laporan.getText(), norawat, tgl);
+                        Sequel.menghapustfSmc("laporan_operasi", "no_rawat = ? and tanggal = ?", norawat, tgl);
+                        sukses = Sequel.menyimpantfSmc("laporan_operasi", "", norawat, Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), PreOp.getText().trim(), PostOp.getText().trim(),
+                            Jaringan.getText().trim(), Valid.getTglJamSmc(TglSelesai, Jam2, Menit2, Detik2), DikirimPA.getSelectedItem().toString(), NomorImplant.getText().trim(), Laporan.getText());
                     }
 
                     if (sukses) {
