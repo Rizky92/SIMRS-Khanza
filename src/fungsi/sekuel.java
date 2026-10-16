@@ -498,6 +498,12 @@ public final class sekuel {
         return false;
     }
 
+    public boolean mengupdatetfIgnoreSmc(String table, String kolom, String where, String... values) {
+        mengupdatetfSmc(table, kolom, where, values);
+
+        return true;
+    }
+
     public void menghapusSmc(String table, String where, String... values) {
         String sql = "delete from " + table + " where " + where;
         if (where == null || where.isBlank()) {
