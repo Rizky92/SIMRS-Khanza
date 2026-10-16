@@ -258,6 +258,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         jLabel9 = new widget.Label();
         jLabel10 = new widget.Label();
         NomorImplant = new widget.TextBox();
+        jLabel11 = new widget.Label();
+        Kategori = new widget.ComboBox();
         TglMulai = new widget.Tanggal();
         Jam3 = new widget.ComboBox();
         Menit3 = new widget.ComboBox();
@@ -1442,6 +1444,22 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         });
         panelGlass7.add(NomorImplant);
         NomorImplant.setBounds(30, 365, 285, 23);
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("Kategori :");
+        jLabel11.setName("jLabel11"); // NOI18N
+        panelGlass7.add(jLabel11);
+        jLabel11.setBounds(10, 395, 200, 23);
+
+        Kategori.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Ringan", "Ringan Cito", "Ringan Khusus", "Ringan Khusus Cito", "Ringan Khusus Cito Ganda", "Sedang", "Sedang Cito", "Sedang Ganda", "Sedang Khusus", "Sedang Khusus Cito", "Sedang Khusus Cito Ganda", "Sedang Khusus Ganda", "Besar", "Besar Cito", "Besar Ganda", "Besar Khusus", "Besar Khusus Cito", "Besar Khusus Cito Ganda", "Besar Khusus Ganda", "Khusus", "Kecil", "Elektive", "Emergency" }));
+        Kategori.setName("Kategori"); // NOI18N
+        Kategori.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KategoriKeyPressed(evt);
+            }
+        });
+        panelGlass7.add(Kategori);
+        Kategori.setBounds(30, 420, 152, 23);
 
         TglMulai.setDisplayFormat("dd-MM-yyyy");
         TglMulai.setName("TglMulai"); // NOI18N
@@ -3544,6 +3562,9 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     if(rs2!=null){
                         rs2.close();
                     }
+                    Kategori.setSelectedIndex(-1);
+                    Kategori.setSelectedItem(Sequel.cariIsiSmc("select if(count(distinct operasi.kategori) = 1, min(operasi.kategori), null) from operasi where operasi.no_rawat = ? and operasi.tgl_operasi = ?",
+                        tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()));
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 }
@@ -3571,6 +3592,9 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 
             if (akhir.compareTo(awal) <= 0) {
                 JOptionPane.showMessageDialog(WindowLaporan.getRootPane(), "Waktu selesai operasi tidak boleh sama atau lebih dulu dari mulai operasi..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            } else if (Kategori.getSelectedIndex() < 0) {
+                JOptionPane.showMessageDialog(WindowLaporan.getRootPane(), "Silahkan pilih kategori operasi..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                Kategori.requestFocus();
             } else {
                 boolean sukses = true;
                 String norawat = (String) tbDokter.getValueAt(tbDokter.getSelectedRow(), 1);
@@ -3586,7 +3610,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     }
 
                     if (sukses) {
-                        sukses = Sequel.mengupdatetfSmc("operasi", "tgl_operasi = ?", "no_rawat = ? and tgl_operasi = ?", Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), norawat, tgl);
+                        sukses = Sequel.mengupdatetfSmc("operasi", "tgl_operasi = ?, kategori = ?", "no_rawat = ? and tgl_operasi = ?", Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), Kategori.getSelectedItem().toString(), norawat, tgl);
                     }
 
                     if (sukses) {
@@ -3730,8 +3754,12 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAmbilPhoto1ActionPerformed
 
     private void NomorImplantKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomorImplantKeyPressed
-        Valid.pindah(evt,DikirimPA,Laporan);
+        Valid.pindah(evt,DikirimPA,Kategori);
     }//GEN-LAST:event_NomorImplantKeyPressed
+
+    private void KategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KategoriKeyPressed
+        Valid.pindah(evt,NomorImplant,Laporan);
+    }//GEN-LAST:event_KategoriKeyPressed
 
     private void Jam3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Jam3KeyPressed
         // TODO add your handling code here:
@@ -3784,6 +3812,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.ComboBox Jam2;
     private widget.ComboBox Jam3;
     private widget.TextBox Jaringan;
+    private widget.ComboBox Kategori;
     private widget.TextBox Kd2;
     private widget.Label LTotal;
     private widget.TextArea Laporan;
@@ -3829,6 +3858,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
+    private widget.Label jLabel11;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
