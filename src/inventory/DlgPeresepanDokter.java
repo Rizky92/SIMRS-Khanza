@@ -3075,6 +3075,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     }
 
     private void tampilobat(String no_resep) {
+        ChkJln.setSelected(false);
+        ChkJln.setEnabled(false);
         NoResep.setText(no_resep);
         ubah=true;
         try {
