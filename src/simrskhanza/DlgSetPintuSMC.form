@@ -354,9 +354,6 @@
             </Component>
             <Component class="widget.TextBox" name="nmdokter">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="nmdokter" noResource="true"/>
               </Properties>
               <Constraints>
@@ -378,9 +375,6 @@
             </Component>
             <Component class="widget.TextBox" name="TPoli">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="TPoli" noResource="true"/>
               </Properties>
               <Constraints>
@@ -410,9 +404,6 @@
             </Component>
             <Component class="widget.TextBox" name="kddokter">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="kddokter" noResource="true"/>
               </Properties>
               <Constraints>
@@ -423,9 +414,6 @@
             </Component>
             <Component class="widget.TextBox" name="KdPoli">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdPoli" noResource="true"/>
               </Properties>
               <Constraints>
@@ -466,9 +454,6 @@
             </Component>
             <Component class="widget.TextBox" name="kdPintu">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="kdPintu" noResource="true"/>
               </Properties>
               <Constraints>
@@ -479,9 +464,6 @@
             </Component>
             <Component class="widget.TextBox" name="nmPintu">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="nmPintu" noResource="true"/>
               </Properties>
               <Constraints>

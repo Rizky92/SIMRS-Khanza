@@ -223,15 +223,12 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         tbPermintaan = new widget.Table();
 
         KegiatanUsaha.setEditable(false);
-        KegiatanUsaha.setHighlighter(null);
         KegiatanUsaha.setName("KegiatanUsaha"); // NOI18N
 
         PersonalDihubungi.setEditable(false);
-        PersonalDihubungi.setHighlighter(null);
         PersonalDihubungi.setName("PersonalDihubungi"); // NOI18N
 
         KontakPelanggan.setEditable(false);
-        KontakPelanggan.setHighlighter(null);
         KontakPelanggan.setName("KontakPelanggan"); // NOI18N
 
         Popup.setName("Popup"); // NOI18N
@@ -424,7 +421,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.setLayout(null);
 
         KodePelanggan.setEditable(false);
-        KodePelanggan.setHighlighter(null);
         KodePelanggan.setName("KodePelanggan"); // NOI18N
         KodePelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -435,13 +431,11 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         KodePelanggan.setBounds(104, 70, 90, 23);
 
         NamaPelanggan.setEditable(false);
-        NamaPelanggan.setHighlighter(null);
         NamaPelanggan.setName("NamaPelanggan"); // NOI18N
         PanelInput.add(NamaPelanggan);
         NamaPelanggan.setBounds(196, 70, 210, 23);
 
         AlamatPelanggan.setEditable(false);
-        AlamatPelanggan.setHighlighter(null);
         AlamatPelanggan.setName("AlamatPelanggan"); // NOI18N
         PanelInput.add(AlamatPelanggan);
         AlamatPelanggan.setBounds(408, 70, 242, 23);
@@ -503,7 +497,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         KdPetugas.setBounds(104, 10, 105, 23);
 
         NmPetugas.setEditable(false);
-        NmPetugas.setHighlighter(null);
         NmPetugas.setName("NmPetugas"); // NOI18N
         PanelInput.add(NmPetugas);
         NmPetugas.setBounds(211, 10, 200, 23);
@@ -530,7 +523,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(jLabel4);
         jLabel4.setBounds(446, 40, 100, 23);
 
-        TNoPermintaan.setHighlighter(null);
         TNoPermintaan.setName("TNoPermintaan"); // NOI18N
         TNoPermintaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -540,7 +532,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(TNoPermintaan);
         TNoPermintaan.setBounds(550, 40, 130, 23);
 
-        LokasiSampling.setHighlighter(null);
         LokasiSampling.setName("LokasiSampling"); // NOI18N
         LokasiSampling.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -555,7 +546,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(jLabel5);
         jLabel5.setBounds(0, 100, 100, 23);
 
-        DeskripsiSampling.setHighlighter(null);
         DeskripsiSampling.setName("DeskripsiSampling"); // NOI18N
         DeskripsiSampling.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -609,7 +599,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(jLabel8);
         jLabel8.setBounds(0, 130, 100, 23);
 
-        JenisSampel.setHighlighter(null);
         JenisSampel.setName("JenisSampel"); // NOI18N
         JenisSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -619,7 +608,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(JenisSampel);
         JenisSampel.setBounds(104, 130, 140, 23);
 
-        JmlSampel.setHighlighter(null);
         JmlSampel.setName("JmlSampel"); // NOI18N
         JmlSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -639,7 +627,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(jLabel12);
         jLabel12.setBounds(0, 160, 100, 23);
 
-        VolumeSampel.setHighlighter(null);
         VolumeSampel.setName("VolumeSampel"); // NOI18N
         VolumeSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -649,7 +636,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(VolumeSampel);
         VolumeSampel.setBounds(104, 160, 100, 23);
 
-        WadahSampel.setHighlighter(null);
         WadahSampel.setName("WadahSampel"); // NOI18N
         WadahSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -664,7 +650,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(jLabel13);
         jLabel13.setBounds(204, 160, 60, 23);
 
-        KondisiWadah.setHighlighter(null);
         KondisiWadah.setName("KondisiWadah"); // NOI18N
         KondisiWadah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -684,7 +669,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         PanelInput.add(jLabel17);
         jLabel17.setBounds(396, 130, 140, 23);
 
-        DisamplingOleh.setHighlighter(null);
         DisamplingOleh.setName("DisamplingOleh"); // NOI18N
         DisamplingOleh.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -700,7 +684,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         jLabel18.setBounds(0, 190, 100, 23);
 
         KodeSampel.setEditable(false);
-        KodeSampel.setHighlighter(null);
         KodeSampel.setName("KodeSampel"); // NOI18N
         KodeSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -711,7 +694,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         KodeSampel.setBounds(104, 190, 65, 23);
 
         NamaSampel.setEditable(false);
-        NamaSampel.setHighlighter(null);
         NamaSampel.setName("NamaSampel"); // NOI18N
         PanelInput.add(NamaSampel);
         NamaSampel.setBounds(171, 190, 170, 23);
@@ -734,7 +716,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         BtnSampel.setBounds(652, 190, 28, 23);
 
         BakuMutu.setEditable(false);
-        BakuMutu.setHighlighter(null);
         BakuMutu.setName("BakuMutu"); // NOI18N
         PanelInput.add(BakuMutu);
         BakuMutu.setBounds(343, 190, 307, 23);

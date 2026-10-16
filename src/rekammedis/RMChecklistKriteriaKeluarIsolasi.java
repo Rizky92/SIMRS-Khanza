@@ -244,10 +244,8 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
 
-        JK.setHighlighter(null);
         JK.setName("JK"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -539,7 +537,6 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         FormInput.add(jLabel4);
         jLabel4.setBounds(21, 10, 75, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -550,7 +547,6 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         TNoRw.setBounds(79, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -561,7 +557,6 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         TPasien.setBounds(336, 10, 285, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -582,7 +577,6 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -606,7 +600,6 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         jLabel23.setBounds(221, 40, 160, 23);
 
         KodePetugas.setEditable(false);
-        KodePetugas.setHighlighter(null);
         KodePetugas.setName("KodePetugas"); // NOI18N
         FormInput.add(KodePetugas);
         KodePetugas.setBounds(385, 40, 127, 23);
@@ -783,7 +776,6 @@ public final class RMChecklistKriteriaKeluarIsolasi extends javax.swing.JDialog 
         FormInput.add(jLabel24);
         jLabel24.setBounds(220, 200, 70, 23);
 
-        Alasan.setHighlighter(null);
         Alasan.setName("Alasan"); // NOI18N
         FormInput.add(Alasan);
         Alasan.setBounds(294, 200, 495, 23);

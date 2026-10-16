@@ -737,7 +737,6 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         NmPerujuk.setBounds(177, 72, 193, 23);
 
         TUmur.setEditable(false);
-        TUmur.setHighlighter(null);
         TUmur.setName("TUmur"); // NOI18N
         PanelInput.add(TUmur);
         TUmur.setBounds(716, 12, 110, 23);

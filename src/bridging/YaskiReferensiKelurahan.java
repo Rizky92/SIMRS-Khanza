@@ -173,7 +173,6 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
         panelGlass6.add(jLabel19);
 
         KdKec.setEditable(false);
-        KdKec.setHighlighter(null);
         KdKec.setName("KdKec"); // NOI18N
         KdKec.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass6.add(KdKec);

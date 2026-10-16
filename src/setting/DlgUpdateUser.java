@@ -314,7 +314,6 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
 
         TKd.setEditable(false);
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

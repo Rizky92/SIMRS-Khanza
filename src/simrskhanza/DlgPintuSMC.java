@@ -164,7 +164,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         });
         Popup.add(MnRestore);
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -218,7 +217,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi4.add(label34);
         label34.setBounds(0, 12, 75, 23);
 
-        Kd.setHighlighter(null);
         Kd.setName("Kd"); // NOI18N
         Kd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -234,7 +232,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi4.add(label36);
         label36.setBounds(190, 12, 75, 23);
 
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -965,7 +965,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput.add(jLabel48);
         jLabel48.setBounds(0, 250, 165, 23);
 
-        NotaLabkesling.setHighlighter(null);
         NotaLabkesling.setName("NotaLabkesling"); // NOI18N
         NotaLabkesling.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -987,7 +986,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput.add(jLabel50);
         jLabel50.setBounds(222, 280, 60, 23);
 
-        KwitansiLabKesling.setHighlighter(null);
         KwitansiLabKesling.setName("KwitansiLabKesling"); // NOI18N
         KwitansiLabKesling.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -455,10 +455,8 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         Scroll2 = new widget.ScrollPane();
         tbDetailObatRacikan = new widget.Table();
 
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
 
-        KdPj.setHighlighter(null);
         KdPj.setName("KdPj"); // NOI18N
 
         kdgudang.setEditable(false);
@@ -470,7 +468,6 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
             }
         });
 
-        NmPasien.setHighlighter(null);
         NmPasien.setName("NmPasien"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -593,7 +590,6 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel8.setBounds(330, 100, 70, 23);
 
         TglResep.setEditable(false);
-        TglResep.setHighlighter(null);
         TglResep.setName("TglResep"); // NOI18N
         FormInput.add(TglResep);
         TglResep.setBounds(84, 70, 135, 23);
@@ -667,13 +663,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel20.setBounds(10, 70, 70, 23);
 
         NmPoli.setEditable(false);
-        NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormInput.add(NmPoli);
         NmPoli.setBounds(161, 130, 165, 23);
 
         KdPoli.setEditable(false);
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormInput.add(KdPoli);
         KdPoli.setBounds(84, 130, 75, 23);
@@ -689,13 +683,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel15.setBounds(0, 100, 80, 23);
 
         KdDPJP.setEditable(false);
-        KdDPJP.setHighlighter(null);
         KdDPJP.setName("KdDPJP"); // NOI18N
         FormInput.add(KdDPJP);
         KdDPJP.setBounds(84, 100, 75, 23);
 
         NmDPJP.setEditable(false);
-        NmDPJP.setHighlighter(null);
         NmDPJP.setName("NmDPJP"); // NOI18N
         FormInput.add(NmDPJP);
         NmDPJP.setBounds(161, 100, 165, 23);
@@ -706,7 +698,6 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel14.setBounds(226, 70, 70, 23);
 
         NoResep.setEditable(false);
-        NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         FormInput.add(NoResep);
         NoResep.setBounds(300, 70, 138, 23);
@@ -740,13 +731,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel4.setBounds(0, 40, 80, 23);
 
         NoKartu.setEditable(false);
-        NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
         FormInput.add(NoKartu);
         NoKartu.setBounds(84, 40, 150, 23);
 
         NoSEP.setEditable(false);
-        NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
         FormInput.add(NoSEP);
         NoSEP.setBounds(529, 40, 185, 23);
@@ -757,13 +746,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel18.setBounds(475, 40, 50, 23);
 
         TNoRW.setEditable(false);
-        TNoRW.setHighlighter(null);
         TNoRW.setName("TNoRW"); // NOI18N
         FormInput.add(TNoRW);
         TNoRW.setBounds(84, 10, 120, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(206, 10, 508, 23);
@@ -774,7 +761,6 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         jLabel3.setBounds(0, 10, 80, 23);
 
         TglSEP.setEditable(false);
-        TglSEP.setHighlighter(null);
         TglSEP.setName("TglSEP"); // NOI18N
         FormInput.add(TglSEP);
         TglSEP.setBounds(327, 40, 135, 23);

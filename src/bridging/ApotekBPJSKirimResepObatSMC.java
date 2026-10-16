@@ -579,7 +579,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         jLabel20.setBounds(0, 130, 74, 23);
 
         NmPoli.setEditable(false);
-        NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         NmPoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -590,7 +589,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         NmPoli.setBounds(481, 70, 183, 23);
 
         KdPoli.setEditable(false);
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         KdPoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -611,7 +609,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         jLabel15.setBounds(0, 70, 74, 23);
 
         KdDPJP.setEditable(false);
-        KdDPJP.setHighlighter(null);
         KdDPJP.setName("KdDPJP"); // NOI18N
         KdDPJP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -622,7 +619,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         KdDPJP.setBounds(78, 70, 75, 23);
 
         NmDPJP.setEditable(false);
-        NmDPJP.setHighlighter(null);
         NmDPJP.setName("NmDPJP"); // NOI18N
         NmDPJP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -637,7 +633,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(0, 100, 74, 23);
 
-        NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         NoResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -663,7 +658,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         jLabel4.setBounds(172, 40, 60, 23);
 
         NoKartu.setEditable(false);
-        NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -674,7 +668,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         NoKartu.setBounds(236, 40, 130, 23);
 
         NoSEP.setEditable(false);
-        NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
         NoSEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -690,7 +683,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         jLabel18.setBounds(370, 40, 50, 23);
 
         Lahir.setEditable(false);
-        Lahir.setHighlighter(null);
         Lahir.setName("Lahir"); // NOI18N
         Lahir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

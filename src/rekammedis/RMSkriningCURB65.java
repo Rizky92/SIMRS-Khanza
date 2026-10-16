@@ -284,7 +284,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         Jk.setFocusTraversalPolicyProvider(true);
         Jk.setName("Jk"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -575,7 +574,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 75, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -586,7 +584,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         TNoRw.setBounds(79, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -610,7 +607,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         Tanggal.setBounds(79, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -671,7 +667,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         jLabel18.setBounds(400, 40, 70, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         KdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -708,7 +703,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -829,7 +823,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         FormInput.add(jLabel130);
         jLabel130.setBounds(700, 90, 40, 23);
 
-        NilaiCURB1.setHighlighter(null);
         NilaiCURB1.setName("NilaiCURB1"); // NOI18N
         FormInput.add(NilaiCURB1);
         NilaiCURB1.setBounds(744, 90, 45, 23);
@@ -854,22 +847,18 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         FormInput.add(jLabel144);
         jLabel144.setBounds(700, 210, 40, 23);
 
-        NilaiCURB2.setHighlighter(null);
         NilaiCURB2.setName("NilaiCURB2"); // NOI18N
         FormInput.add(NilaiCURB2);
         NilaiCURB2.setBounds(744, 120, 45, 23);
 
-        NilaiCURB3.setHighlighter(null);
         NilaiCURB3.setName("NilaiCURB3"); // NOI18N
         FormInput.add(NilaiCURB3);
         NilaiCURB3.setBounds(744, 150, 45, 23);
 
-        NilaiCURB4.setHighlighter(null);
         NilaiCURB4.setName("NilaiCURB4"); // NOI18N
         FormInput.add(NilaiCURB4);
         NilaiCURB4.setBounds(744, 180, 45, 23);
 
-        NilaiCURB5.setHighlighter(null);
         NilaiCURB5.setName("NilaiCURB5"); // NOI18N
         FormInput.add(NilaiCURB5);
         NilaiCURB5.setBounds(744, 210, 45, 23);
@@ -885,7 +874,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         FormInput.add(jLabel161);
         jLabel161.setBounds(0, 290, 140, 23);
 
-        Kesimpulan.setHighlighter(null);
         Kesimpulan.setName("Kesimpulan"); // NOI18N
         Kesimpulan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -900,7 +888,6 @@ public final class RMSkriningCURB65 extends javax.swing.JDialog {
         FormInput.add(jLabel162);
         jLabel162.setBounds(610, 240, 130, 23);
 
-        TotalNilai.setHighlighter(null);
         TotalNilai.setName("TotalNilai"); // NOI18N
         FormInput.add(TotalNilai);
         TotalNilai.setBounds(744, 240, 45, 23);

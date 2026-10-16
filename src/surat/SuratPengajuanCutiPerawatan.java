@@ -259,11 +259,9 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         LoadHTML2 = new widget.editorpane();
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
 
         LoadHTML.setBorder(null);
@@ -532,7 +530,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 65, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -543,7 +540,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         TNoRw.setBounds(69, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -554,7 +550,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         TPasien.setBounds(320, 10, 290, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 111, 23);
@@ -564,7 +559,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel17);
         jLabel17.setBounds(616, 10, 60, 23);
 
-        LahirPasien.setHighlighter(null);
         LahirPasien.setName("LahirPasien"); // NOI18N
         FormInput.add(LahirPasien);
         LahirPasien.setBounds(680, 10, 85, 23);
@@ -575,7 +569,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         jLabel18.setBounds(389, 70, 60, 23);
 
         NIK.setEditable(false);
-        NIK.setHighlighter(null);
         NIK.setName("NIK"); // NOI18N
         FormInput.add(NIK);
         NIK.setBounds(453, 70, 100, 23);
@@ -626,7 +619,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(575, 40, 56, 23);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -642,7 +634,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         jLabel22.setBounds(0, 70, 65, 23);
 
         KodeDokter.setEditable(false);
-        KodeDokter.setHighlighter(null);
         KodeDokter.setName("KodeDokter"); // NOI18N
         FormInput.add(KodeDokter);
         KodeDokter.setBounds(69, 70, 100, 23);
@@ -726,7 +717,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(0, 140, 87, 23);
 
-        PembuatPengajuan.setHighlighter(null);
         PembuatPengajuan.setName("PembuatPengajuan"); // NOI18N
         PembuatPengajuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -779,7 +769,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel39);
         jLabel39.setBounds(231, 140, 55, 23);
 
-        AlamatPembuatPengajuan.setHighlighter(null);
         AlamatPembuatPengajuan.setName("AlamatPembuatPengajuan"); // NOI18N
         AlamatPembuatPengajuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -794,7 +783,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(591, 110, 50, 23);
 
-        NoHpPembuatPengajuan.setHighlighter(null);
         NoHpPembuatPengajuan.setName("NoHpPembuatPengajuan"); // NOI18N
         NoHpPembuatPengajuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -809,7 +797,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel40);
         jLabel40.setBounds(217, 170, 84, 23);
 
-        AlasanCuti.setHighlighter(null);
         AlasanCuti.setName("AlasanCuti"); // NOI18N
         AlasanCuti.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -843,7 +830,6 @@ public final class SuratPengajuanCutiPerawatan extends javax.swing.JDialog {
         FormInput.add(jLabel41);
         jLabel41.setBounds(220, 200, 121, 23);
 
-        AlamatSelamaCuti.setHighlighter(null);
         AlamatSelamaCuti.setName("AlamatSelamaCuti"); // NOI18N
         AlamatSelamaCuti.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

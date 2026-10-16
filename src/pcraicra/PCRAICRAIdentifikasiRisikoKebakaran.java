@@ -156,7 +156,6 @@ public final class PCRAICRAIdentifikasiRisikoKebakaran extends javax.swing.JDial
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 80, 23);
 
-        KodeRisiko.setHighlighter(null);
         KodeRisiko.setName("KodeRisiko"); // NOI18N
         KodeRisiko.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
