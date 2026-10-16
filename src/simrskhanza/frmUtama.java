@@ -2131,7 +2131,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDataPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357971_desktop_computer.png"))); // NOI18N
         btnDataPenjualan.setText("Data Penjualan Obat & BHP");
-        btnDataPenjualan.setIconTextGap(0);
         btnDataPenjualan.setName("btnDataPenjualan"); // NOI18N
         btnDataPenjualan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataPenjualan.addActionListener(new java.awt.event.ActionListener() {
@@ -2142,7 +2141,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInputPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cashbox.png"))); // NOI18N
         btnInputPenjualan.setText("Input Penjualan Obat & BHP");
-        btnInputPenjualan.setIconTextGap(0);
         btnInputPenjualan.setName("btnInputPenjualan"); // NOI18N
         btnInputPenjualan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInputPenjualan.addActionListener(new java.awt.event.ActionListener() {
@@ -2153,7 +2151,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDataPenyerahanDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kwrite.png"))); // NOI18N
         btnDataPenyerahanDarah.setText("Data Penyerahan Darah");
-        btnDataPenyerahanDarah.setIconTextGap(0);
         btnDataPenyerahanDarah.setName("btnDataPenyerahanDarah"); // NOI18N
         btnDataPenyerahanDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataPenyerahanDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -2164,7 +2161,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnResepObatDepan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/stock_task.png"))); // NOI18N
         btnResepObatDepan.setText("No. Resep");
-        btnResepObatDepan.setIconTextGap(0);
         btnResepObatDepan.setName("btnResepObatDepan"); // NOI18N
         btnResepObatDepan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResepObatDepan.addActionListener(new java.awt.event.ActionListener() {
@@ -2175,7 +2171,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484263_barcode.png"))); // NOI18N
         btnBarcode.setText("Barcode Presensi");
-        btnBarcode.setIconTextGap(0);
         btnBarcode.setName("btnBarcode"); // NOI18N
         btnBarcode.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarcode.addActionListener(new java.awt.event.ActionListener() {
@@ -2186,7 +2181,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnICD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnICD.setText("ICD 10");
-        btnICD.setIconTextGap(0);
         btnICD.setName("btnICD"); // NOI18N
         btnICD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnICD.addActionListener(new java.awt.event.ActionListener() {
@@ -2197,7 +2191,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnObat.setText("Obat, Alkes & BHP");
-        btnObat.setIconTextGap(0);
         btnObat.setName("btnObat"); // NOI18N
         btnObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObat.addActionListener(new java.awt.event.ActionListener() {
@@ -2208,7 +2201,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484848_applications-science.png"))); // NOI18N
         btnObatPenyakit.setText("Obat Penyakit");
-        btnObatPenyakit.setIconTextGap(0);
         btnObatPenyakit.setName("btnObatPenyakit"); // NOI18N
         btnObatPenyakit.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPenyakit.addActionListener(new java.awt.event.ActionListener() {
@@ -2219,7 +2211,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/industry.png"))); // NOI18N
         btnKamar.setText("Kamar");
-        btnKamar.setIconTextGap(0);
         btnKamar.setName("btnKamar"); // NOI18N
         btnKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -2230,7 +2221,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTindakanRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/plaster.png"))); // NOI18N
         btnTindakanRalan.setText("Tarif Ralan");
-        btnTindakanRalan.setIconTextGap(0);
         btnTindakanRalan.setName("btnTindakanRalan"); // NOI18N
         btnTindakanRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTindakanRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -2241,7 +2231,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/doctor2.png"))); // NOI18N
         btnDokter.setText("Dokter");
-        btnDokter.setIconTextGap(0);
         btnDokter.setName("btnDokter"); // NOI18N
         btnDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -2252,7 +2241,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/receptionist.png"))); // NOI18N
         btnPegawai.setText("Petugas");
-        btnPegawai.setIconTextGap(0);
         btnPegawai.setName("btnPegawai"); // NOI18N
         btnPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPegawai.addActionListener(new java.awt.event.ActionListener() {
@@ -2263,7 +2251,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/patient.png"))); // NOI18N
         btnPasien.setText("Pasien");
-        btnPasien.setIconTextGap(0);
         btnPasien.setName("btnPasien"); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -2274,7 +2261,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRegistrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist.png"))); // NOI18N
         btnRegistrasi.setText("Registrasi");
-        btnRegistrasi.setIconTextGap(0);
         btnRegistrasi.setName("btnRegistrasi"); // NOI18N
         btnRegistrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRegistrasi.addActionListener(new java.awt.event.ActionListener() {
@@ -2285,7 +2271,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Icon-Tindakan-Rajal.png"))); // NOI18N
         btnRalan.setText("Tindakan Ralan");
-        btnRalan.setIconTextGap(0);
         btnRalan.setName("btnRalan"); // NOI18N
         btnRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -2296,7 +2281,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKamarInap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Home.png"))); // NOI18N
         btnKamarInap.setText("Rawat Inap");
-        btnKamarInap.setIconTextGap(0);
         btnKamarInap.setName("btnKamarInap"); // NOI18N
         btnKamarInap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKamarInap.addActionListener(new java.awt.event.ActionListener() {
@@ -2307,7 +2291,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/tindakanranap.png"))); // NOI18N
         btnRanap.setText("Tindakan Ranap");
-        btnRanap.setIconTextGap(0);
         btnRanap.setName("btnRanap"); // NOI18N
         btnRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -2318,7 +2301,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnResepObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconnomorresep.png"))); // NOI18N
         btnResepObat.setText("No. Resep");
-        btnResepObat.setIconTextGap(0);
         btnResepObat.setName("btnResepObat"); // NOI18N
         btnResepObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResepObat.addActionListener(new java.awt.event.ActionListener() {
@@ -2329,7 +2311,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRujukPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357758_Doctor.png"))); // NOI18N
         btnRujukPasien.setText("Rujukan Keluar");
-        btnRujukPasien.setIconTextGap(0);
         btnRujukPasien.setName("btnRujukPasien"); // NOI18N
         btnRujukPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRujukPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -2340,7 +2321,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBeriObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/first_aid_kit.png"))); // NOI18N
         btnBeriObat.setText("Beri Obat/BHP");
-        btnBeriObat.setIconTextGap(0);
         btnBeriObat.setName("btnBeriObat"); // NOI18N
         btnBeriObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBeriObat.addActionListener(new java.awt.event.ActionListener() {
@@ -2351,7 +2331,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPasienMati.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Ambulance.png"))); // NOI18N
         btnPasienMati.setText("Pasien Meninggal");
-        btnPasienMati.setIconTextGap(0);
         btnPasienMati.setName("btnPasienMati"); // NOI18N
         btnPasienMati.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPasienMati.addActionListener(new java.awt.event.ActionListener() {
@@ -2362,7 +2341,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/preferences-desktop-cryptography.png"))); // NOI18N
         btnAdmin.setText("Set Admin");
-        btnAdmin.setIconTextGap(0);
         btnAdmin.setName("btnAdmin"); // NOI18N
         btnAdmin.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -2373,7 +2351,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnVakum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486615_remove-from-database.png"))); // NOI18N
         btnVakum.setText("Vakum Table");
-        btnVakum.setIconTextGap(0);
         btnVakum.setName("btnVakum"); // NOI18N
         btnVakum.setPreferredSize(new java.awt.Dimension(200, 90));
         btnVakum.addActionListener(new java.awt.event.ActionListener() {
@@ -2384,7 +2361,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/find.png"))); // NOI18N
         btnDisplay.setText("Display Antrian Registrasi & Poli");
-        btnDisplay.setIconTextGap(0);
         btnDisplay.setName("btnDisplay"); // NOI18N
         btnDisplay.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDisplay.addActionListener(new java.awt.event.ActionListener() {
@@ -2395,7 +2371,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupHarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); // NOI18N
         btnSetupHarga.setText("Set Harga Obat");
-        btnSetupHarga.setIconTextGap(0);
         btnSetupHarga.setName("btnSetupHarga"); // NOI18N
         btnSetupHarga.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupHarga.addActionListener(new java.awt.event.ActionListener() {
@@ -2406,7 +2381,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357959_truck.png"))); // NOI18N
         btnSuplier.setText("Suplier Obat/Alkes/BHP");
-        btnSuplier.setIconTextGap(0);
         btnSuplier.setName("btnSuplier"); // NOI18N
         btnSuplier.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuplier.addActionListener(new java.awt.event.ActionListener() {
@@ -2417,7 +2391,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJnsBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Card_file.png"))); // NOI18N
         btnJnsBarang.setText("Jenis Obat, Alkes & BHP");
-        btnJnsBarang.setIconTextGap(0);
         btnJnsBarang.setName("btnJnsBarang"); // NOI18N
         btnJnsBarang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJnsBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -2428,7 +2401,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKonversi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/ark2.png"))); // NOI18N
         btnKonversi.setText("Konversi Satuan");
-        btnKonversi.setIconTextGap(0);
         btnKonversi.setName("btnKonversi"); // NOI18N
         btnKonversi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonversi.addActionListener(new java.awt.event.ActionListener() {
@@ -2439,7 +2411,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSatuan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bag1.png"))); // NOI18N
         btnSatuan.setText("Satuan Barang");
-        btnSatuan.setIconTextGap(0);
         btnSatuan.setName("btnSatuan"); // NOI18N
         btnSatuan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSatuan.addActionListener(new java.awt.event.ActionListener() {
@@ -2450,7 +2421,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCashFlow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486845_23.png"))); // NOI18N
         btnCashFlow.setText("Cash Flow");
-        btnCashFlow.setIconTextGap(0);
         btnCashFlow.setName("btnCashFlow"); // NOI18N
         btnCashFlow.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCashFlow.addActionListener(new java.awt.event.ActionListener() {
@@ -2461,7 +2431,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBubes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/applications-office.png"))); // NOI18N
         btnBubes.setText("Buku Besar");
-        btnBubes.setIconTextGap(0);
         btnBubes.setName("btnBubes"); // NOI18N
         btnBubes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBubes.addActionListener(new java.awt.event.ActionListener() {
@@ -2472,7 +2441,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPostingJurnal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         btnPostingJurnal.setText("Posting Jurnal");
-        btnPostingJurnal.setIconTextGap(0);
         btnPostingJurnal.setName("btnPostingJurnal"); // NOI18N
         btnPostingJurnal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPostingJurnal.addActionListener(new java.awt.event.ActionListener() {
@@ -2483,7 +2451,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekeningTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money_bag.png"))); // NOI18N
         btnRekeningTahun.setText("Rekening Tahun");
-        btnRekeningTahun.setIconTextGap(0);
         btnRekeningTahun.setName("btnRekeningTahun"); // NOI18N
         btnRekeningTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekeningTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -2494,7 +2461,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekening.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kwrite.png"))); // NOI18N
         btnRekening.setText("Akun Rekening");
-        btnRekening.setIconTextGap(0);
         btnRekening.setName("btnRekening"); // NOI18N
         btnRekening.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekening.addActionListener(new java.awt.event.ActionListener() {
@@ -2505,7 +2471,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembelian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487067_calculator.png"))); // NOI18N
         btnPembelian.setText("Pengadaan Obat & BHP");
-        btnPembelian.setIconTextGap(0);
         btnPembelian.setName("btnPembelian"); // NOI18N
         btnPembelian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembelian.addActionListener(new java.awt.event.ActionListener() {
@@ -2516,7 +2481,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cashbox.png"))); // NOI18N
         btnPenjualan.setText("Penjualan Obat & BHP");
-        btnPenjualan.setIconTextGap(0);
         btnPenjualan.setName("btnPenjualan"); // NOI18N
         btnPenjualan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenjualan.addActionListener(new java.awt.event.ActionListener() {
@@ -2527,7 +2491,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist.png"))); // NOI18N
         btnPiutang.setText("Piutang Obat & BHP");
-        btnPiutang.setIconTextGap(0);
         btnPiutang.setName("btnPiutang"); // NOI18N
         btnPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutang.addActionListener(new java.awt.event.ActionListener() {
@@ -2538,7 +2501,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBayarPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); // NOI18N
         btnBayarPiutang.setText("Bayar Piutang");
-        btnBayarPiutang.setIconTextGap(0);
         btnBayarPiutang.setName("btnBayarPiutang"); // NOI18N
         btnBayarPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPiutang.addActionListener(new java.awt.event.ActionListener() {
@@ -2549,7 +2511,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnOpname.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnOpname.setText("Stok Opname Obat & BHP");
-        btnOpname.setIconTextGap(0);
         btnOpname.setName("btnOpname"); // NOI18N
         btnOpname.setPreferredSize(new java.awt.Dimension(200, 90));
         btnOpname.addActionListener(new java.awt.event.ActionListener() {
@@ -2560,7 +2521,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReturBeli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360816189_arrow_down.png"))); // NOI18N
         btnReturBeli.setText("Retur Ke Suplier");
-        btnReturBeli.setIconTextGap(0);
         btnReturBeli.setName("btnReturBeli"); // NOI18N
         btnReturBeli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturBeli.addActionListener(new java.awt.event.ActionListener() {
@@ -2571,7 +2531,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReturJual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486142_shopping_cart.png"))); // NOI18N
         btnReturJual.setText("Retur Dari Pembeli");
-        btnReturJual.setIconTextGap(0);
         btnReturJual.setName("btnReturJual"); // NOI18N
         btnReturJual.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturJual.addActionListener(new java.awt.event.ActionListener() {
@@ -2582,7 +2541,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSirkulasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); // NOI18N
         btnSirkulasi.setText("Sirkulasi Obat, Alkes & BHP");
-        btnSirkulasi.setIconTextGap(0);
         btnSirkulasi.setName("btnSirkulasi"); // NOI18N
         btnSirkulasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasi.addActionListener(new java.awt.event.ActionListener() {
@@ -2593,7 +2551,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKeuntungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
         btnKeuntungan.setText("Keuntungan Penjualan");
-        btnKeuntungan.setIconTextGap(0);
         btnKeuntungan.setName("btnKeuntungan"); // NOI18N
         btnKeuntungan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKeuntungan.addActionListener(new java.awt.event.ActionListener() {
@@ -2604,7 +2561,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLabaRugi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486822_20.png"))); // NOI18N
         btnLabaRugi.setText("Keuangan");
-        btnLabaRugi.setIconTextGap(0);
         btnLabaRugi.setName("btnLabaRugi"); // NOI18N
         btnLabaRugi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabaRugi.addActionListener(new java.awt.event.ActionListener() {
@@ -2615,7 +2571,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReturPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/custom-reports.png"))); // NOI18N
         btnReturPiutang.setText("Retur Piutang Pembeli");
-        btnReturPiutang.setIconTextGap(0);
         btnReturPiutang.setName("btnReturPiutang"); // NOI18N
         btnReturPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturPiutang.addActionListener(new java.awt.event.ActionListener() {
@@ -2626,7 +2581,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnAnalisaKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_cleaning-door-knob-object-hygiene_5728178.png"))); // NOI18N
         btnAnalisaKamar.setText("Informasi Kamar");
-        btnAnalisaKamar.setIconTextGap(0);
         btnAnalisaKamar.setName("btnAnalisaKamar"); // NOI18N
         btnAnalisaKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAnalisaKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -2637,7 +2591,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHDOkter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRHDOkter.setText("Harian Dokter");
-        btnRHDOkter.setIconTextGap(0);
         btnRHDOkter.setName("btnRHDOkter"); // NOI18N
         btnRHDOkter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHDOkter.addActionListener(new java.awt.event.ActionListener() {
@@ -2648,7 +2601,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRBDokter.setText("Bulanan Dokter");
-        btnRBDokter.setIconTextGap(0);
         btnRBDokter.setName("btnRBDokter"); // NOI18N
         btnRBDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -2659,7 +2611,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046800_Cash_register.png"))); // NOI18N
         btnTagihanMasuk.setText("Tagihan Masuk");
-        btnTagihanMasuk.setIconTextGap(0);
         btnTagihanMasuk.setName("btnTagihanMasuk"); // NOI18N
         btnTagihanMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -2670,7 +2621,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnResume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360816018_tests.png"))); // NOI18N
         btnResume.setText("Riwayat Perawatan");
-        btnResume.setIconTextGap(0);
         btnResume.setName("btnResume"); // NOI18N
         btnResume.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResume.addActionListener(new java.awt.event.ActionListener() {
@@ -2681,7 +2631,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/dietpasien.png"))); // NOI18N
         btnDiet.setText("Diet Pasien");
-        btnDiet.setIconTextGap(0);
         btnDiet.setName("btnDiet"); // NOI18N
         btnDiet.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDiet.addActionListener(new java.awt.event.ActionListener() {
@@ -2692,7 +2641,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHParamedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485894_add-notes.png"))); // NOI18N
         btnRHParamedis.setText("Harian Paramedis");
-        btnRHParamedis.setIconTextGap(0);
         btnRHParamedis.setName("btnRHParamedis"); // NOI18N
         btnRHParamedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHParamedis.addActionListener(new java.awt.event.ActionListener() {
@@ -2703,7 +2651,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBParamedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485894_add-notes.png"))); // NOI18N
         btnRBParamedis.setText("Bulanan Paramedis");
-        btnRBParamedis.setIconTextGap(0);
         btnRBParamedis.setName("btnRBParamedis"); // NOI18N
         btnRBParamedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBParamedis.addActionListener(new java.awt.event.ActionListener() {
@@ -2714,7 +2661,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKasir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cashbox.png"))); // NOI18N
         btnKasir.setText("Rawat Jalan");
-        btnKasir.setIconTextGap(0);
         btnKasir.setName("btnKasir"); // NOI18N
         btnKasir.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKasir.addActionListener(new java.awt.event.ActionListener() {
@@ -2725,7 +2671,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLahir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/baby-girl.png"))); // NOI18N
         btnLahir.setText("Kelahiran Bayi");
-        btnLahir.setIconTextGap(0);
         btnLahir.setName("btnLahir"); // NOI18N
         btnLahir.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLahir.addActionListener(new java.awt.event.ActionListener() {
@@ -2736,7 +2681,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetBiayaHarian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486845_23.png"))); // NOI18N
         btnSetBiayaHarian.setText("Biaya Harian");
-        btnSetBiayaHarian.setIconTextGap(0);
         btnSetBiayaHarian.setName("btnSetBiayaHarian"); // NOI18N
         btnSetBiayaHarian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetBiayaHarian.addActionListener(new java.awt.event.ActionListener() {
@@ -2747,7 +2691,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJenisInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cabinet.png"))); // NOI18N
         btnJenisInventaris.setText("Jenis Inventaris");
-        btnJenisInventaris.setIconTextGap(0);
         btnJenisInventaris.setName("btnJenisInventaris"); // NOI18N
         btnJenisInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2758,7 +2701,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKategoriInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnKategoriInventaris.setText("Kategori Inventaris");
-        btnKategoriInventaris.setIconTextGap(0);
         btnKategoriInventaris.setName("btnKategoriInventaris"); // NOI18N
         btnKategoriInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKategoriInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2769,7 +2711,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLihatPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png"))); // NOI18N
         btnLihatPiutang.setText("Piutang Pasien");
-        btnLihatPiutang.setIconTextGap(0);
         btnLihatPiutang.setName("btnLihatPiutang"); // NOI18N
         btnLihatPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLihatPiutang.addActionListener(new java.awt.event.ActionListener() {
@@ -2780,7 +2721,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLaboratorium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/laboratory.png"))); // NOI18N
         btnLaboratorium.setText("Periksa Lab PK");
-        btnLaboratorium.setIconTextGap(0);
         btnLaboratorium.setName("btnLaboratorium"); // NOI18N
         btnLaboratorium.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaboratorium.addActionListener(new java.awt.event.ActionListener() {
@@ -2791,7 +2731,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRalanMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
         btnRalanMasuk.setText("Pembayaran Ralan");
-        btnRalanMasuk.setIconTextGap(0);
         btnRalanMasuk.setName("btnRalanMasuk"); // NOI18N
         btnRalanMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRalanMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -2802,7 +2741,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupAplikasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/local_network.png"))); // NOI18N
         btnSetupAplikasi.setText("Set Aplikasi");
-        btnSetupAplikasi.setIconTextGap(0);
         btnSetupAplikasi.setName("btnSetupAplikasi"); // NOI18N
         btnSetupAplikasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupAplikasi.addActionListener(new java.awt.event.ActionListener() {
@@ -2813,7 +2751,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetOtoRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/stethoscope (1).png"))); // NOI18N
         btnSetOtoRalan.setText("Set Oto Ralan");
-        btnSetOtoRalan.setIconTextGap(0);
         btnSetOtoRalan.setName("btnSetOtoRalan"); // NOI18N
         btnSetOtoRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetOtoRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -2824,7 +2761,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRanapMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
         btnRanapMasuk.setText("Pembayaran Ranap");
-        btnRanapMasuk.setIconTextGap(0);
         btnRanapMasuk.setName("btnRanapMasuk"); // NOI18N
         btnRanapMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRanapMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -2835,7 +2771,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnProdusenInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/industry.png"))); // NOI18N
         btnProdusenInventaris.setText("Produsen Inventaris");
-        btnProdusenInventaris.setIconTextGap(0);
         btnProdusenInventaris.setName("btnProdusenInventaris"); // NOI18N
         btnProdusenInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnProdusenInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2846,7 +2781,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetBiayaMasukSekali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486845_23.png"))); // NOI18N
         btnSetBiayaMasukSekali.setText("Biaya Masuk Sekali");
-        btnSetBiayaMasukSekali.setIconTextGap(0);
         btnSetBiayaMasukSekali.setName("btnSetBiayaMasukSekali"); // NOI18N
         btnSetBiayaMasukSekali.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetBiayaMasukSekali.addActionListener(new java.awt.event.ActionListener() {
@@ -2857,7 +2791,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPaketOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487111_stock_paste.png"))); // NOI18N
         btnPaketOperasi.setText("Tarif Operasi/VK");
-        btnPaketOperasi.setIconTextGap(0);
         btnPaketOperasi.setName("btnPaketOperasi"); // NOI18N
         btnPaketOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPaketOperasi.addActionListener(new java.awt.event.ActionListener() {
@@ -2868,7 +2801,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/surgeon.png"))); // NOI18N
         btnTagihanOperasi.setText("Operasi/VK");
-        btnTagihanOperasi.setIconTextGap(0);
         btnTagihanOperasi.setName("btnTagihanOperasi"); // NOI18N
         btnTagihanOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanOperasi.addActionListener(new java.awt.event.ActionListener() {
@@ -2879,7 +2811,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         BtnJadwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/informasidokter.png"))); // NOI18N
         BtnJadwal.setText("Jadwal Praktek");
-        BtnJadwal.setIconTextGap(0);
         BtnJadwal.setName("BtnJadwal"); // NOI18N
         BtnJadwal.setPreferredSize(new java.awt.Dimension(200, 90));
         BtnJadwal.addActionListener(new java.awt.event.ActionListener() {
@@ -2890,7 +2821,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMerkInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bag1.png"))); // NOI18N
         btnMerkInventaris.setText("Merk Inventaris");
-        btnMerkInventaris.setIconTextGap(0);
         btnMerkInventaris.setName("btnMerkInventaris"); // NOI18N
         btnMerkInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMerkInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2901,7 +2831,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRuangInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
         btnRuangInventaris.setText("Ruang Inventaris");
-        btnRuangInventaris.setIconTextGap(0);
         btnRuangInventaris.setName("btnRuangInventaris"); // NOI18N
         btnRuangInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRuangInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2912,7 +2841,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarangInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fax.png"))); // NOI18N
         btnBarangInventaris.setText("Koleksi Inventaris");
-        btnBarangInventaris.setIconTextGap(0);
         btnBarangInventaris.setName("btnBarangInventaris"); // NOI18N
         btnBarangInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarangInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2923,7 +2851,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486921_bar-code.png"))); // NOI18N
         btnInventaris.setText("Data Inventaris");
-        btnInventaris.setIconTextGap(0);
         btnInventaris.setName("btnInventaris"); // NOI18N
         btnInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2934,7 +2861,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSirkulasiInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); // NOI18N
         btnSirkulasiInventaris.setText("Sirkulasi Inventaris");
-        btnSirkulasiInventaris.setIconTextGap(0);
         btnSirkulasiInventaris.setName("btnSirkulasiInventaris"); // NOI18N
         btnSirkulasiInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiInventaris.addActionListener(new java.awt.event.ActionListener() {
@@ -2945,7 +2871,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnFrekuensiRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnFrekuensiRalan.setText("Frekuensi Penyakit Ralan");
-        btnFrekuensiRalan.setIconTextGap(0);
         btnFrekuensiRalan.setName("btnFrekuensiRalan"); // NOI18N
         btnFrekuensiRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnFrekuensiRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -2956,7 +2881,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnFrekuensiRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/applications-office.png"))); // NOI18N
         btnFrekuensiRanap.setText("Frekuensi Penyakit Ranap");
-        btnFrekuensiRanap.setIconTextGap(0);
         btnFrekuensiRanap.setName("btnFrekuensiRanap"); // NOI18N
         btnFrekuensiRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnFrekuensiRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -2967,7 +2891,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupOtoLokasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/our_process_2.png"))); // NOI18N
         btnSetupOtoLokasi.setText("Set Oto Lokasi");
-        btnSetupOtoLokasi.setIconTextGap(0);
         btnSetupOtoLokasi.setName("btnSetupOtoLokasi"); // NOI18N
         btnSetupOtoLokasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupOtoLokasi.addActionListener(new java.awt.event.ActionListener() {
@@ -2978,7 +2901,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047106_emblem-money.png"))); // NOI18N
         btnTagihanPoli.setText("Harian Dokter Poli");
-        btnTagihanPoli.setIconTextGap(0);
         btnTagihanPoli.setName("btnTagihanPoli"); // NOI18N
         btnTagihanPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -2989,7 +2911,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRujukMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_vector_65_13_473800.png"))); // NOI18N
         btnRujukMasuk.setText("Rujukan Masuk");
-        btnRujukMasuk.setIconTextGap(0);
         btnRujukMasuk.setName("btnRujukMasuk"); // NOI18N
         btnRujukMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRujukMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -3000,7 +2921,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTracker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/receptionist.png"))); // NOI18N
         btnTracker.setText("Tracker Login");
-        btnTracker.setIconTextGap(0);
         btnTracker.setName("btnTracker"); // NOI18N
         btnTracker.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTracker.addActionListener(new java.awt.event.ActionListener() {
@@ -3011,7 +2931,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTindakanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/doctor (2).png"))); // NOI18N
         btnTindakanRanap.setText("Tarif Ranap");
-        btnTindakanRanap.setIconTextGap(0);
         btnTindakanRanap.setName("btnTindakanRanap"); // NOI18N
         btnTindakanRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTindakanRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3022,7 +2941,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupJamInap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Time.png"))); // NOI18N
         btnSetupJamInap.setText("Set Kamar Inap");
-        btnSetupJamInap.setIconTextGap(0);
         btnSetupJamInap.setName("btnSetupJamInap"); // NOI18N
         btnSetupJamInap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupJamInap.addActionListener(new java.awt.event.ActionListener() {
@@ -3033,7 +2951,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnStokObatPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnStokObatPasien.setText("Stok Obat Pasien");
-        btnStokObatPasien.setIconTextGap(0);
         btnStokObatPasien.setName("btnStokObatPasien"); // NOI18N
         btnStokObatPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStokObatPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -3044,7 +2961,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTarifLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnTarifLab.setText("Tarif Lab");
-        btnTarifLab.setIconTextGap(0);
         btnTarifLab.setName("btnTarifLab"); // NOI18N
         btnTarifLab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTarifLab.addActionListener(new java.awt.event.ActionListener() {
@@ -3055,7 +2971,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/user3.png"))); // NOI18N
         btnSetPenjab.setText("Set P.J. Unit Penunjang");
-        btnSetPenjab.setIconTextGap(0);
         btnSetPenjab.setName("btnSetPenjab"); // NOI18N
         btnSetPenjab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetPenjab.addActionListener(new java.awt.event.ActionListener() {
@@ -3066,7 +2981,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanObatPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnTagihanObatPoli.setText("Obat Per Poli");
-        btnTagihanObatPoli.setIconTextGap(0);
         btnTagihanObatPoli.setName("btnTagihanObatPoli"); // NOI18N
         btnTagihanObatPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanObatPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -3077,7 +2991,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanObatBangsal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnTagihanObatBangsal.setText("Obat Per Kamar");
-        btnTagihanObatBangsal.setIconTextGap(0);
         btnTagihanObatBangsal.setName("btnTagihanObatBangsal"); // NOI18N
         btnTagihanObatBangsal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanObatBangsal.addActionListener(new java.awt.event.ActionListener() {
@@ -3088,7 +3001,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReturPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815295_medical_case.png"))); // NOI18N
         btnReturPasien.setText("Retur Obat Ranap");
-        btnReturPasien.setIconTextGap(0);
         btnReturPasien.setName("btnReturPasien"); // NOI18N
         btnReturPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -3099,7 +3011,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKeuntunganObatRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
         btnKeuntunganObatRanap.setText("Keuntungan Beri Obat ");
-        btnKeuntunganObatRanap.setIconTextGap(0);
         btnKeuntunganObatRanap.setName("btnKeuntunganObatRanap"); // NOI18N
         btnKeuntunganObatRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKeuntunganObatRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3110,7 +3021,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenggajian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046603_wallet.png"))); // NOI18N
         btnPenggajian.setText("Kepegawaian & Gaji");
-        btnPenggajian.setIconTextGap(0);
         btnPenggajian.setName("btnPenggajian"); // NOI18N
         btnPenggajian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenggajian.addActionListener(new java.awt.event.ActionListener() {
@@ -3121,7 +3031,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPresensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/sign-up.png"))); // NOI18N
         btnRekapPresensi.setText("Rekap Kehadiran");
-        btnRekapPresensi.setIconTextGap(0);
         btnRekapPresensi.setName("btnRekapPresensi"); // NOI18N
         btnRekapPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPresensi.addActionListener(new java.awt.event.ActionListener() {
@@ -3132,7 +3041,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapHarian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/rekap.png"))); // NOI18N
         btnRekapHarian.setText("Presensi Harian");
-        btnRekapHarian.setIconTextGap(0);
         btnRekapHarian.setName("btnRekapHarian"); // NOI18N
         btnRekapHarian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapHarian.addActionListener(new java.awt.event.ActionListener() {
@@ -3143,7 +3051,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapBulanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486898_project-plan.png"))); // NOI18N
         btnRekapBulanan.setText("Presensi Bulanan");
-        btnRekapBulanan.setIconTextGap(0);
         btnRekapBulanan.setName("btnRekapBulanan"); // NOI18N
         btnRekapBulanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapBulanan.addActionListener(new java.awt.event.ActionListener() {
@@ -3154,7 +3061,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDeposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Money.png"))); // NOI18N
         btnDeposit.setText("Deposit Pasien");
-        btnDeposit.setIconTextGap(0);
         btnDeposit.setName("btnDeposit"); // NOI18N
         btnDeposit.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDeposit.addActionListener(new java.awt.event.ActionListener() {
@@ -3165,7 +3071,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupRM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/patient (1).png"))); // NOI18N
         btnSetupRM.setText("Set RM");
-        btnSetupRM.setIconTextGap(0);
         btnSetupRM.setName("btnSetupRM"); // NOI18N
         btnSetupRM.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupRM.addActionListener(new java.awt.event.ActionListener() {
@@ -3176,7 +3081,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnResepPulang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/IconResepPulang.png"))); // NOI18N
         btnResepPulang.setText("Resep Pulang");
-        btnResepPulang.setIconTextGap(0);
         btnResepPulang.setName("btnResepPulang"); // NOI18N
         btnResepPulang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResepPulang.addActionListener(new java.awt.event.ActionListener() {
@@ -3187,7 +3091,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupTarif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/x-office-address-book.png"))); // NOI18N
         btnSetupTarif.setText("Set Penggunaan Tarif");
-        btnSetupTarif.setIconTextGap(0);
         btnSetupTarif.setName("btnSetupTarif"); // NOI18N
         btnSetupTarif.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupTarif.addActionListener(new java.awt.event.ActionListener() {
@@ -3198,7 +3101,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarangIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnBarangIpsrs.setText("Barang Non Medis");
-        btnBarangIpsrs.setIconTextGap(0);
         btnBarangIpsrs.setName("btnBarangIpsrs"); // NOI18N
         btnBarangIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarangIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3209,7 +3111,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembelianIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inventory-maintenance.png"))); // NOI18N
         btnPembelianIpsrs.setText("Pengadaan Barang Non Medis");
-        btnPembelianIpsrs.setIconTextGap(0);
         btnPembelianIpsrs.setName("btnPembelianIpsrs"); // NOI18N
         btnPembelianIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembelianIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3220,7 +3121,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengeluaranIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/shopping-basket-full.png"))); // NOI18N
         btnPengeluaranIpsrs.setText("Stok Keluar Non Medis");
-        btnPengeluaranIpsrs.setIconTextGap(0);
         btnPengeluaranIpsrs.setName("btnPengeluaranIpsrs"); // NOI18N
         btnPengeluaranIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengeluaranIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3231,7 +3131,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHMasukIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/shopping_cart.png"))); // NOI18N
         btnRHMasukIpsrs.setText("Rekap Pengadaan Non Medis");
-        btnRHMasukIpsrs.setIconTextGap(0);
         btnRHMasukIpsrs.setName("btnRHMasukIpsrs"); // NOI18N
         btnRHMasukIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHMasukIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3242,7 +3141,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHKeluarIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360816018_tests.png"))); // NOI18N
         btnRHKeluarIpsrs.setText("Rekap Stok Keluar Non Medis");
-        btnRHKeluarIpsrs.setIconTextGap(0);
         btnRHKeluarIpsrs.setName("btnRHKeluarIpsrs"); // NOI18N
         btnRHKeluarIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHKeluarIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3253,7 +3151,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBiayaIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486845_23.png"))); // NOI18N
         btnRBiayaIpsrs.setText("Biaya Pengadaan Non Medis");
-        btnRBiayaIpsrs.setIconTextGap(0);
         btnRBiayaIpsrs.setName("btnRBiayaIpsrs"); // NOI18N
         btnRBiayaIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBiayaIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3264,7 +3161,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTarifRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1410153940_radiology.png"))); // NOI18N
         btnTarifRadiologi.setText("Tarif Radiologi");
-        btnTarifRadiologi.setIconTextGap(0);
         btnTarifRadiologi.setName("btnTarifRadiologi"); // NOI18N
         btnTarifRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTarifRadiologi.addActionListener(new java.awt.event.ActionListener() {
@@ -3275,7 +3171,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPeriksaRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Icon-Radiologi.png"))); // NOI18N
         btnPeriksaRadiologi.setText("Periksa Radiologi");
-        btnPeriksaRadiologi.setIconTextGap(0);
         btnPeriksaRadiologi.setName("btnPeriksaRadiologi"); // NOI18N
         btnPeriksaRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener() {
@@ -3286,7 +3181,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanRalanPerhari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnTagihanRalanPerhari.setText("Rekap Pembayaran Ralan");
-        btnTagihanRalanPerhari.setIconTextGap(0);
         btnTagihanRalanPerhari.setName("btnTagihanRalanPerhari"); // NOI18N
         btnTagihanRalanPerhari.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanRalanPerhari.addActionListener(new java.awt.event.ActionListener() {
@@ -3297,7 +3191,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanRanapPerhari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnTagihanRanapPerhari.setText("Rekap Pembayaran Ranap");
-        btnTagihanRanapPerhari.setIconTextGap(0);
         btnTagihanRanapPerhari.setName("btnTagihanRanapPerhari"); // NOI18N
         btnTagihanRanapPerhari.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanRanapPerhari.addActionListener(new java.awt.event.ActionListener() {
@@ -3308,7 +3201,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupEmbalase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Money.png"))); // NOI18N
         btnSetupEmbalase.setText("Set Embalase & Tuslah");
-        btnSetupEmbalase.setIconTextGap(0);
         btnSetupEmbalase.setName("btnSetupEmbalase"); // NOI18N
         btnSetupEmbalase.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupEmbalase.addActionListener(new java.awt.event.ActionListener() {
@@ -3319,7 +3211,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSirkulasiBerkas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/data_management.png"))); // NOI18N
         btnSirkulasiBerkas.setText("Peminjaman Berkas RM");
-        btnSirkulasiBerkas.setIconTextGap(0);
         btnSirkulasiBerkas.setName("btnSirkulasiBerkas"); // NOI18N
         btnSirkulasiBerkas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiBerkas.addActionListener(new java.awt.event.ActionListener() {
@@ -3330,7 +3221,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPasienRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnObatPasienRalan.setText("Obat Per Dokter Ralan");
-        btnObatPasienRalan.setIconTextGap(0);
         btnObatPasienRalan.setName("btnObatPasienRalan"); // NOI18N
         btnObatPasienRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPasienRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -3341,7 +3231,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnObatPasienRanap.setText("Obat Per Dokter Ranap");
-        btnObatPasienRanap.setIconTextGap(0);
         btnObatPasienRanap.setName("btnObatPasienRanap"); // NOI18N
         btnObatPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPasienRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3352,7 +3241,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPemesanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kwrite.png"))); // NOI18N
         btnPemesanan.setText("Penerimaan Obat & BHP");
-        btnPemesanan.setIconTextGap(0);
         btnPemesanan.setName("btnPemesanan"); // NOI18N
         btnPemesanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemesanan.addActionListener(new java.awt.event.ActionListener() {
@@ -3363,7 +3251,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengeluaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047106_emblem-money.png"))); // NOI18N
         btnPengeluaran.setText("Pengeluaran Harian");
-        btnPengeluaran.setIconTextGap(0);
         btnPengeluaran.setName("btnPengeluaran"); // NOI18N
         btnPengeluaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengeluaran.addActionListener(new java.awt.event.ActionListener() {
@@ -3374,7 +3261,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTambahanBiaya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046786_Money.png"))); // NOI18N
         btnTambahanBiaya.setText("Tambahan Biaya Pasien");
-        btnTambahanBiaya.setIconTextGap(0);
         btnTambahanBiaya.setName("btnTambahanBiaya"); // NOI18N
         btnTambahanBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTambahanBiaya.addActionListener(new java.awt.event.ActionListener() {
@@ -3385,7 +3271,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPotonganBiaya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046786_Money.png"))); // NOI18N
         btnPotonganBiaya.setText("Potongan Biaya Pasien");
-        btnPotonganBiaya.setIconTextGap(0);
         btnPotonganBiaya.setName("btnPotonganBiaya"); // NOI18N
         btnPotonganBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPotonganBiaya.addActionListener(new java.awt.event.ActionListener() {
@@ -3396,7 +3281,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJMDetailDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnJMDetailDokter.setText("Detail JM Dokter");
-        btnJMDetailDokter.setIconTextGap(0);
         btnJMDetailDokter.setName("btnJMDetailDokter"); // NOI18N
         btnJMDetailDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJMDetailDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -3407,7 +3291,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Iconigd.png"))); // NOI18N
         btnIGD.setText("IGD/UGD");
-        btnIGD.setIconTextGap(0);
         btnIGD.setName("btnIGD"); // NOI18N
         btnIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIGD.addActionListener(new java.awt.event.ActionListener() {
@@ -3418,7 +3301,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarcodeRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Barcode-Rawat-Jalan.png"))); // NOI18N
         btnBarcodeRalan.setText("Rawat Jalan");
-        btnBarcodeRalan.setIconTextGap(0);
         btnBarcodeRalan.setName("btnBarcodeRalan"); // NOI18N
         btnBarcodeRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarcodeRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -3429,7 +3311,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarcodeRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Barcode-Rawat-Inap.png"))); // NOI18N
         btnBarcodeRanap.setText("Rawat Inap");
-        btnBarcodeRanap.setIconTextGap(0);
         btnBarcodeRanap.setName("btnBarcodeRanap"); // NOI18N
         btnBarcodeRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarcodeRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3440,7 +3321,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetObatRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); // NOI18N
         btnSetObatRalan.setText("Set Obat Ralan");
-        btnSetObatRalan.setIconTextGap(0);
         btnSetObatRalan.setName("btnSetObatRalan"); // NOI18N
         btnSetObatRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetObatRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -3451,7 +3331,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetObatRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); // NOI18N
         btnSetObatRanap.setText("Set Obat Ranap");
-        btnSetObatRanap.setIconTextGap(0);
         btnSetObatRanap.setName("btnSetObatRanap"); // NOI18N
         btnSetObatRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetObatRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3462,7 +3341,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenyakitPD3I.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnPenyakitPD3I.setText("Penyakit AFP & PD3I");
-        btnPenyakitPD3I.setIconTextGap(0);
         btnPenyakitPD3I.setName("btnPenyakitPD3I"); // NOI18N
         btnPenyakitPD3I.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenyakitPD3I.addActionListener(new java.awt.event.ActionListener() {
@@ -3473,7 +3351,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSurveilansPD3I.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnSurveilansPD3I.setText("Surveilans AFP & PD3I");
-        btnSurveilansPD3I.setIconTextGap(0);
         btnSurveilansPD3I.setName("btnSurveilansPD3I"); // NOI18N
         btnSurveilansPD3I.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSurveilansPD3I.addActionListener(new java.awt.event.ActionListener() {
@@ -3484,7 +3361,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSurveilansRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnSurveilansRalan.setText("Surveilans Ralan");
-        btnSurveilansRalan.setIconTextGap(0);
         btnSurveilansRalan.setName("btnSurveilansRalan"); // NOI18N
         btnSurveilansRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSurveilansRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -3495,7 +3371,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/health.png"))); // NOI18N
         btnDiagnosa.setText("Diagnosa Pasien");
-        btnDiagnosa.setIconTextGap(0);
         btnDiagnosa.setName("btnDiagnosa"); // NOI18N
         btnDiagnosa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
@@ -3506,7 +3381,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSurveilansRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnSurveilansRanap.setText("Surveilans Ranap");
-        btnSurveilansRanap.setIconTextGap(0);
         btnSurveilansRanap.setName("btnSurveilansRanap"); // NOI18N
         btnSurveilansRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSurveilansRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3517,7 +3391,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPnyTakMenularRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnPnyTakMenularRanap.setText("Pny Tdk Menular Ranap");
-        btnPnyTakMenularRanap.setIconTextGap(0);
         btnPnyTakMenularRanap.setName("btnPnyTakMenularRanap"); // NOI18N
         btnPnyTakMenularRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPnyTakMenularRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3528,7 +3401,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPnyTakMenularRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnPnyTakMenularRalan.setText("Pny Tdk Menular Ralan");
-        btnPnyTakMenularRalan.setIconTextGap(0);
         btnPnyTakMenularRalan.setName("btnPnyTakMenularRalan"); // NOI18N
         btnPnyTakMenularRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPnyTakMenularRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -3539,7 +3411,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKunjunganRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnKunjunganRalan.setText("Kunjungan Ralan");
-        btnKunjunganRalan.setIconTextGap(0);
         btnKunjunganRalan.setName("btnKunjunganRalan"); // NOI18N
         btnKunjunganRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -3550,7 +3421,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnRl32.setText("RL 3.2 Rawat Darurat");
-        btnRl32.setIconTextGap(0);
         btnRl32.setName("btnRl32"); // NOI18N
         btnRl32.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl32.addActionListener(new java.awt.event.ActionListener() {
@@ -3561,7 +3431,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnRl33.setText("RL 3.3 Gigi dan Mulut");
-        btnRl33.setIconTextGap(0);
         btnRl33.setName("btnRl33"); // NOI18N
         btnRl33.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl33.addActionListener(new java.awt.event.ActionListener() {
@@ -3572,7 +3441,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnRl37.setText("RL 3.7 Radiologi");
-        btnRl37.setIconTextGap(0);
         btnRl37.setName("btnRl37"); // NOI18N
         btnRl37.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl37.addActionListener(new java.awt.event.ActionListener() {
@@ -3583,7 +3451,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnRl38.setText("RL 3.8 Laboratorium");
-        btnRl38.setIconTextGap(0);
         btnRl38.setName("btnRl38"); // NOI18N
         btnRl38.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl38.addActionListener(new java.awt.event.ActionListener() {
@@ -3594,7 +3461,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTagihanDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047106_emblem-money.png"))); // NOI18N
         btnTagihanDokter.setText("Harian Dokter Ralan");
-        btnTagihanDokter.setIconTextGap(0);
         btnTagihanDokter.setName("btnTagihanDokter"); // NOI18N
         btnTagihanDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -3605,7 +3471,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485538_recieve-mail.png"))); // NOI18N
         btnSMS.setText("SMS Gateway");
-        btnSMS.setIconTextGap(0);
         btnSMS.setName("btnSMS"); // NOI18N
         btnSMS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSMS.addActionListener(new java.awt.event.ActionListener() {
@@ -3616,7 +3481,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSidikJari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/finger.png"))); // NOI18N
         btnSidikJari.setText("Sidik Jari");
-        btnSidikJari.setIconTextGap(0);
         btnSidikJari.setName("btnSidikJari"); // NOI18N
         btnSidikJari.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSidikJari.addActionListener(new java.awt.event.ActionListener() {
@@ -3627,7 +3491,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJamPresensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Time.png"))); // NOI18N
         btnJamPresensi.setText("Jam Presensi");
-        btnJamPresensi.setIconTextGap(0);
         btnJamPresensi.setName("btnJamPresensi"); // NOI18N
         btnJamPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJamPresensi.addActionListener(new java.awt.event.ActionListener() {
@@ -3638,7 +3501,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJadwalPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnJadwalPegawai.setText("Jadwal Pegawai");
-        btnJadwalPegawai.setIconTextGap(0);
         btnJadwalPegawai.setName("btnJadwalPegawai"); // NOI18N
         btnJadwalPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalPegawai.addActionListener(new java.awt.event.ActionListener() {
@@ -3649,7 +3511,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJenisParkir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/parkirjenis.png"))); // NOI18N
         btnJenisParkir.setText("Jenis Parkir");
-        btnJenisParkir.setIconTextGap(0);
         btnJenisParkir.setName("btnJenisParkir"); // NOI18N
         btnJenisParkir.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisParkir.addActionListener(new java.awt.event.ActionListener() {
@@ -3660,7 +3521,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarcodeParkir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484263_barcode.png"))); // NOI18N
         btnBarcodeParkir.setText("Barcode Parkir");
-        btnBarcodeParkir.setIconTextGap(0);
         btnBarcodeParkir.setName("btnBarcodeParkir"); // NOI18N
         btnBarcodeParkir.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarcodeParkir.addActionListener(new java.awt.event.ActionListener() {
@@ -3671,7 +3531,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnParkirMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/parkirmasuk.png"))); // NOI18N
         btnParkirMasuk.setText("Parkir Masuk");
-        btnParkirMasuk.setIconTextGap(0);
         btnParkirMasuk.setName("btnParkirMasuk"); // NOI18N
         btnParkirMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnParkirMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -3682,7 +3541,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetupNota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         btnSetupNota.setText("Set Billing");
-        btnSetupNota.setIconTextGap(0);
         btnSetupNota.setName("btnSetupNota"); // NOI18N
         btnSetupNota.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetupNota.addActionListener(new java.awt.event.ActionListener() {
@@ -3693,7 +3551,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         BtnDpjp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/doctor2.png"))); // NOI18N
         BtnDpjp.setText("DPJP Ranap");
-        BtnDpjp.setIconTextGap(0);
         BtnDpjp.setName("BtnDpjp"); // NOI18N
         BtnDpjp.setPreferredSize(new java.awt.Dimension(200, 90));
         BtnDpjp.addActionListener(new java.awt.event.ActionListener() {
@@ -3704,7 +3561,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMutasiBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         btnMutasiBarang.setText("Mutasi Obat & BHP");
-        btnMutasiBarang.setIconTextGap(0);
         btnMutasiBarang.setName("btnMutasiBarang"); // NOI18N
         btnMutasiBarang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMutasiBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -3715,7 +3571,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnRl34.setText("RL 3.4 Kebidanan");
-        btnRl34.setIconTextGap(0);
         btnRl34.setName("btnRl34"); // NOI18N
         btnRl34.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl34.addActionListener(new java.awt.event.ActionListener() {
@@ -3726,7 +3581,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnRl36.setText("RL 3.6 Pembedahan");
-        btnRl36.setIconTextGap(0);
         btnRl36.setName("btnRl36"); // NOI18N
         btnRl36.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl36.addActionListener(new java.awt.event.ActionListener() {
@@ -3737,7 +3591,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnfee_bacaan_ekg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnfee_bacaan_ekg.setText("Fee Bacaan EKG");
-        btnfee_bacaan_ekg.setIconTextGap(0);
         btnfee_bacaan_ekg.setName("btnfee_bacaan_ekg"); // NOI18N
         btnfee_bacaan_ekg.setPreferredSize(new java.awt.Dimension(200, 90));
         btnfee_bacaan_ekg.addActionListener(new java.awt.event.ActionListener() {
@@ -3748,7 +3601,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnfee_rujukan_rontgen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnfee_rujukan_rontgen.setText("Fee Rujukan Rontgen");
-        btnfee_rujukan_rontgen.setIconTextGap(0);
         btnfee_rujukan_rontgen.setName("btnfee_rujukan_rontgen"); // NOI18N
         btnfee_rujukan_rontgen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnfee_rujukan_rontgen.addActionListener(new java.awt.event.ActionListener() {
@@ -3759,7 +3611,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnfee_rujukan_ranap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnfee_rujukan_ranap.setText("Fee Rujukan Ranap");
-        btnfee_rujukan_ranap.setIconTextGap(0);
         btnfee_rujukan_ranap.setName("btnfee_rujukan_ranap"); // NOI18N
         btnfee_rujukan_ranap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnfee_rujukan_ranap.addActionListener(new java.awt.event.ActionListener() {
@@ -3770,7 +3621,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnfee_ralan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnfee_ralan.setText("Fee Periksa Ralan");
-        btnfee_ralan.setIconTextGap(0);
         btnfee_ralan.setName("btnfee_ralan"); // NOI18N
         btnfee_ralan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnfee_ralan.addActionListener(new java.awt.event.ActionListener() {
@@ -3781,7 +3631,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnakun_bayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist.png"))); // NOI18N
         btnakun_bayar.setText("Akun Bayar");
-        btnakun_bayar.setIconTextGap(0);
         btnakun_bayar.setName("btnakun_bayar"); // NOI18N
         btnakun_bayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnakun_bayar.addActionListener(new java.awt.event.ActionListener() {
@@ -3792,7 +3641,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnbayar_pemesanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cashbox.png"))); // NOI18N
         btnbayar_pemesanan.setText("Bayar Pesan Obat/BHP");
-        btnbayar_pemesanan.setIconTextGap(0);
         btnbayar_pemesanan.setName("btnbayar_pemesanan"); // NOI18N
         btnbayar_pemesanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnbayar_pemesanan.addActionListener(new java.awt.event.ActionListener() {
@@ -3803,7 +3651,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPasienPeresep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnObatPasienPeresep.setText("Obat Per Dokter Peresep");
-        btnObatPasienPeresep.setIconTextGap(0);
         btnObatPasienPeresep.setName("btnObatPasienPeresep"); // NOI18N
         btnObatPasienPeresep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPasienPeresep.addActionListener(new java.awt.event.ActionListener() {
@@ -3814,7 +3661,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJenisIpsrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cabinet.png"))); // NOI18N
         btnJenisIpsrs.setText("Jenis Barang Non Medis");
-        btnJenisIpsrs.setIconTextGap(0);
         btnJenisIpsrs.setName("btnJenisIpsrs"); // NOI18N
         btnJenisIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisIpsrs.addActionListener(new java.awt.event.ActionListener() {
@@ -3825,7 +3671,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPemasukanLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486845_23.png"))); // NOI18N
         btnPemasukanLain.setText("Pemasukan Lain-Lain");
-        btnPemasukanLain.setIconTextGap(0);
         btnPemasukanLain.setName("btnPemasukanLain"); // NOI18N
         btnPemasukanLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemasukanLain.addActionListener(new java.awt.event.ActionListener() {
@@ -3836,7 +3681,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengaturanRekening.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/gtk-stock-book.png"))); // NOI18N
         btnPengaturanRekening.setText("Pengaturan Rekening");
-        btnPengaturanRekening.setIconTextGap(0);
         btnPengaturanRekening.setName("btnPengaturanRekening"); // NOI18N
         btnPengaturanRekening.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengaturanRekening.addActionListener(new java.awt.event.ActionListener() {
@@ -3847,7 +3691,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJadwalTambahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnJadwalTambahan.setText("Jadwal Tambahan");
-        btnJadwalTambahan.setIconTextGap(0);
         btnJadwalTambahan.setName("btnJadwalTambahan"); // NOI18N
         btnJadwalTambahan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalTambahan.addActionListener(new java.awt.event.ActionListener() {
@@ -3858,7 +3701,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnClosingKasir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnClosingKasir.setText("Closing Kasir");
-        btnClosingKasir.setIconTextGap(0);
         btnClosingKasir.setName("btnClosingKasir"); // NOI18N
         btnClosingKasir.setPreferredSize(new java.awt.Dimension(200, 90));
         btnClosingKasir.addActionListener(new java.awt.event.ActionListener() {
@@ -3869,7 +3711,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKeterlambatanPresensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Time.png"))); // NOI18N
         btnKeterlambatanPresensi.setText("Set Keterlambatan Presensi");
-        btnKeterlambatanPresensi.setIconTextGap(0);
         btnKeterlambatanPresensi.setName("btnKeterlambatanPresensi"); // NOI18N
         btnKeterlambatanPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKeterlambatanPresensi.addActionListener(new java.awt.event.ActionListener() {
@@ -3880,7 +3721,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetHargaKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
         btnSetHargaKamar.setText("Set Harga Kamar");
-        btnSetHargaKamar.setIconTextGap(0);
         btnSetHargaKamar.setName("btnSetHargaKamar"); // NOI18N
         btnSetHargaKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetHargaKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -3891,7 +3731,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPershift.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist.png"))); // NOI18N
         btnRekapPershift.setText("Rekap Uang Pershift");
-        btnRekapPershift.setIconTextGap(0);
         btnRekapPershift.setName("btnRekapPershift"); // NOI18N
         btnRekapPershift.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPershift.addActionListener(new java.awt.event.ActionListener() {
@@ -3902,7 +3741,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSNik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSNik.setText("Cek NIK VClaim");
-        btnCekBPJSNik.setIconTextGap(0);
         btnCekBPJSNik.setName("btnCekBPJSNik"); // NOI18N
         btnCekBPJSNik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSNik.addActionListener(new java.awt.event.ActionListener() {
@@ -3913,7 +3751,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSKartu.setText("Cek No.Kartu VClaim");
-        btnCekBPJSKartu.setIconTextGap(0);
         btnCekBPJSKartu.setName("btnCekBPJSKartu"); // NOI18N
         btnCekBPJSKartu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSKartu.addActionListener(new java.awt.event.ActionListener() {
@@ -3924,7 +3761,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSRiwayatRujukanPCare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSRiwayatRujukanPCare.setText("Riwayat Rujukan PCare di VClaim");
-        btnCekBPJSRiwayatRujukanPCare.setIconTextGap(0);
         btnCekBPJSRiwayatRujukanPCare.setName("btnCekBPJSRiwayatRujukanPCare"); // NOI18N
         btnCekBPJSRiwayatRujukanPCare.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSRiwayatRujukanPCare.addActionListener(new java.awt.event.ActionListener() {
@@ -3935,7 +3771,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPresensi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/sign-up.png"))); // NOI18N
         btnRekapPresensi2.setText("Rekap Kehadiran 2");
-        btnRekapPresensi2.setIconTextGap(0);
         btnRekapPresensi2.setName("btnRekapPresensi2"); // NOI18N
         btnRekapPresensi2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPresensi2.addActionListener(new java.awt.event.ActionListener() {
@@ -3946,7 +3781,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPerCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnObatPerCaraBayar.setText("Obat Per Cara Bayar");
-        btnObatPerCaraBayar.setIconTextGap(0);
         btnObatPerCaraBayar.setName("btnObatPerCaraBayar"); // NOI18N
         btnObatPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPerCaraBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -3957,7 +3791,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKunjunganRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnKunjunganRanap.setText("Kunjungan Ranap");
-        btnKunjunganRanap.setIconTextGap(0);
         btnKunjunganRanap.setName("btnKunjunganRanap"); // NOI18N
         btnKunjunganRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -3968,7 +3801,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPaymentPoint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
         btnPaymentPoint.setText("Payment Point");
-        btnPaymentPoint.setIconTextGap(0);
         btnPaymentPoint.setName("btnPaymentPoint"); // NOI18N
         btnPaymentPoint.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPaymentPoint.addActionListener(new java.awt.event.ActionListener() {
@@ -3979,7 +3811,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSNomorRujukanPCare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSNomorRujukanPCare.setText("Cek No.Rujukan PCare di VClaim");
-        btnCekBPJSNomorRujukanPCare.setIconTextGap(0);
         btnCekBPJSNomorRujukanPCare.setName("btnCekBPJSNomorRujukanPCare"); // NOI18N
         btnCekBPJSNomorRujukanPCare.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSNomorRujukanPCare.addActionListener(new java.awt.event.ActionListener() {
@@ -3990,7 +3821,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnICD9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnICD9.setText("ICD 9");
-        btnICD9.setIconTextGap(0);
         btnICD9.setName("btnICD9"); // NOI18N
         btnICD9.setPreferredSize(new java.awt.Dimension(200, 90));
         btnICD9.addActionListener(new java.awt.event.ActionListener() {
@@ -4001,7 +3831,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDaruratStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnDaruratStok.setText("Darurat Stok");
-        btnDaruratStok.setIconTextGap(0);
         btnDaruratStok.setName("btnDaruratStok"); // NOI18N
         btnDaruratStok.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDaruratStok.addActionListener(new java.awt.event.ActionListener() {
@@ -4012,7 +3841,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRetensiRM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/reportorium.png"))); // NOI18N
         btnRetensiRM.setText("Retensi Berkas R.M.");
-        btnRetensiRM.setIconTextGap(0);
         btnRetensiRM.setName("btnRetensiRM"); // NOI18N
         btnRetensiRM.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRetensiRM.addActionListener(new java.awt.event.ActionListener() {
@@ -4023,7 +3851,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTemporaryPresensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047834_application-vnd.ms-excel.png"))); // NOI18N
         btnTemporaryPresensi.setText("Temporary Presensi");
-        btnTemporaryPresensi.setIconTextGap(0);
         btnTemporaryPresensi.setName("btnTemporaryPresensi"); // NOI18N
         btnTemporaryPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTemporaryPresensi.addActionListener(new java.awt.event.ActionListener() {
@@ -4034,7 +3861,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJurnalHarian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnJurnalHarian.setText("Jurnal Harian");
-        btnJurnalHarian.setIconTextGap(0);
         btnJurnalHarian.setName("btnJurnalHarian"); // NOI18N
         btnJurnalHarian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJurnalHarian.addActionListener(new java.awt.event.ActionListener() {
@@ -4045,7 +3871,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSirkulasi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); // NOI18N
         btnSirkulasi2.setText("Sirkulasi Obat, Alkes & BHP 2");
-        btnSirkulasi2.setIconTextGap(0);
         btnSirkulasi2.setName("btnSirkulasi2"); // NOI18N
         btnSirkulasi2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasi2.addActionListener(new java.awt.event.ActionListener() {
@@ -4056,7 +3881,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSDiagnosa.setText("Referensi Diagnosa VClaim");
-        btnCekBPJSDiagnosa.setIconTextGap(0);
         btnCekBPJSDiagnosa.setName("btnCekBPJSDiagnosa"); // NOI18N
         btnCekBPJSDiagnosa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSDiagnosa.addActionListener(new java.awt.event.ActionListener() {
@@ -4067,7 +3891,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSPoli.setText("Referensi Poli VClaim");
-        btnCekBPJSPoli.setIconTextGap(0);
         btnCekBPJSPoli.setName("btnCekBPJSPoli"); // NOI18N
         btnCekBPJSPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -4078,7 +3901,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnIndustriFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486910_company.png"))); // NOI18N
         btnIndustriFarmasi.setText("Industri Farmasi");
-        btnIndustriFarmasi.setIconTextGap(0);
         btnIndustriFarmasi.setName("btnIndustriFarmasi"); // NOI18N
         btnIndustriFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIndustriFarmasi.addActionListener(new java.awt.event.ActionListener() {
@@ -4089,7 +3911,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHJasaSarana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRHJasaSarana.setText("Harian Jasa Sarana");
-        btnRHJasaSarana.setIconTextGap(0);
         btnRHJasaSarana.setName("btnRHJasaSarana"); // NOI18N
         btnRHJasaSarana.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHJasaSarana.addActionListener(new java.awt.event.ActionListener() {
@@ -4100,7 +3921,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBJasaSarana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRBJasaSarana.setText("Bulanan Jasa Sarana");
-        btnRBJasaSarana.setIconTextGap(0);
         btnRBJasaSarana.setName("btnRBJasaSarana"); // NOI18N
         btnRBJasaSarana.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBJasaSarana.addActionListener(new java.awt.event.ActionListener() {
@@ -4111,7 +3931,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHPaketBHP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnRHPaketBHP.setText("Harian BHP Medis/Paket Obat");
-        btnRHPaketBHP.setIconTextGap(0);
         btnRHPaketBHP.setName("btnRHPaketBHP"); // NOI18N
         btnRHPaketBHP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHPaketBHP.addActionListener(new java.awt.event.ActionListener() {
@@ -4122,7 +3941,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBPaketBHP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnRBPaketBHP.setText("Bulanan BHP Medis/Paket Obat");
-        btnRBPaketBHP.setIconTextGap(0);
         btnRBPaketBHP.setName("btnRBPaketBHP"); // NOI18N
         btnRBPaketBHP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBPaketBHP.addActionListener(new java.awt.event.ActionListener() {
@@ -4133,7 +3951,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPiutangBelumLunas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png"))); // NOI18N
         btnPiutangBelumLunas.setText("Piutang Belum Lunas");
-        btnPiutangBelumLunas.setIconTextGap(0);
         btnPiutangBelumLunas.setName("btnPiutangBelumLunas"); // NOI18N
         btnPiutangBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangBelumLunas.addActionListener(new java.awt.event.ActionListener() {
@@ -4144,7 +3961,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSFaskes.setText("Referensi Faskes VClaim");
-        btnCekBPJSFaskes.setIconTextGap(0);
         btnCekBPJSFaskes.setName("btnCekBPJSFaskes"); // NOI18N
         btnCekBPJSFaskes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSFaskes.addActionListener(new java.awt.event.ActionListener() {
@@ -4155,7 +3971,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBPJSSEP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnBPJSSEP.setText("Data Bridging SEP VClaim");
-        btnBPJSSEP.setIconTextGap(0);
         btnBPJSSEP.setName("btnBPJSSEP"); // NOI18N
         btnBPJSSEP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSSEP.addActionListener(new java.awt.event.ActionListener() {
@@ -4166,7 +3981,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengambilanUTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnPengambilanUTD.setText("Pengambilan BHP UTD");
-        btnPengambilanUTD.setIconTextGap(0);
         btnPengambilanUTD.setName("btnPengambilanUTD"); // NOI18N
         btnPengambilanUTD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengambilanUTD.addActionListener(new java.awt.event.ActionListener() {
@@ -4177,7 +3991,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnTarifUtd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481001686_injection_blood.png"))); // NOI18N
         btnTarifUtd.setText("Tarif UTD");
-        btnTarifUtd.setIconTextGap(0);
         btnTarifUtd.setName("btnTarifUtd"); // NOI18N
         btnTarifUtd.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTarifUtd.addActionListener(new java.awt.event.ActionListener() {
@@ -4188,7 +4001,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengambilanUTD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487078_shipping.png"))); // NOI18N
         btnPengambilanUTD2.setText("Pengambilan BHP Medis");
-        btnPengambilanUTD2.setIconTextGap(0);
         btnPengambilanUTD2.setName("btnPengambilanUTD2"); // NOI18N
         btnPengambilanUTD2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengambilanUTD2.addActionListener(new java.awt.event.ActionListener() {
@@ -4199,7 +4011,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDMedisRusak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486858_stock-market.png"))); // NOI18N
         btnUTDMedisRusak.setText("BHP Medis Rusak");
-        btnUTDMedisRusak.setIconTextGap(0);
         btnUTDMedisRusak.setName("btnUTDMedisRusak"); // NOI18N
         btnUTDMedisRusak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDMedisRusak.addActionListener(new java.awt.event.ActionListener() {
@@ -4210,7 +4021,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengambilanPenunjangUTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002155_skills.png"))); // NOI18N
         btnPengambilanPenunjangUTD.setText("Pengambilan UTD");
-        btnPengambilanPenunjangUTD.setIconTextGap(0);
         btnPengambilanPenunjangUTD.setName("btnPengambilanPenunjangUTD"); // NOI18N
         btnPengambilanPenunjangUTD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengambilanPenunjangUTD.addActionListener(new java.awt.event.ActionListener() {
@@ -4221,7 +4031,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengambilanPenunjangUTD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002155_skills.png"))); // NOI18N
         btnPengambilanPenunjangUTD2.setText("Pengambilan BHP Non Medis");
-        btnPengambilanPenunjangUTD2.setIconTextGap(0);
         btnPengambilanPenunjangUTD2.setName("btnPengambilanPenunjangUTD2"); // NOI18N
         btnPengambilanPenunjangUTD2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengambilanPenunjangUTD2.addActionListener(new java.awt.event.ActionListener() {
@@ -4232,7 +4041,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDPenunjangRusak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inventory-maintenance.png"))); // NOI18N
         btnUTDPenunjangRusak.setText("BHP Non Medis Rusak");
-        btnUTDPenunjangRusak.setIconTextGap(0);
         btnUTDPenunjangRusak.setName("btnUTDPenunjangRusak"); // NOI18N
         btnUTDPenunjangRusak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDPenunjangRusak.addActionListener(new java.awt.event.ActionListener() {
@@ -4243,7 +4051,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuplierIPSRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002123_wheelchair.png"))); // NOI18N
         btnSuplierIPSRS.setText("Suplier Non Medis");
-        btnSuplierIPSRS.setIconTextGap(0);
         btnSuplierIPSRS.setName("btnSuplierIPSRS"); // NOI18N
         btnSuplierIPSRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuplierIPSRS.addActionListener(new java.awt.event.ActionListener() {
@@ -4254,7 +4061,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDDonorDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481001706_heart_beat.png"))); // NOI18N
         btnUTDDonorDarah.setText("Donor Darah");
-        btnUTDDonorDarah.setIconTextGap(0);
         btnUTDDonorDarah.setName("btnUTDDonorDarah"); // NOI18N
         btnUTDDonorDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDDonorDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -4265,7 +4071,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMonitoringKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnMonitoringKlaim.setText("Monitoring Verifikasi Klaim BPJS");
-        btnMonitoringKlaim.setIconTextGap(0);
         btnMonitoringKlaim.setName("btnMonitoringKlaim"); // NOI18N
         btnMonitoringKlaim.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMonitoringKlaim.addActionListener(new java.awt.event.ActionListener() {
@@ -4276,7 +4081,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDCekalDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); // NOI18N
         btnUTDCekalDarah.setText("Pencekalan Darah");
-        btnUTDCekalDarah.setIconTextGap(0);
         btnUTDCekalDarah.setName("btnUTDCekalDarah"); // NOI18N
         btnUTDCekalDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDCekalDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -4287,7 +4091,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDKomponenDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481001686_injection_blood.png"))); // NOI18N
         btnUTDKomponenDarah.setText("Komponen Darah");
-        btnUTDKomponenDarah.setIconTextGap(0);
         btnUTDKomponenDarah.setName("btnUTDKomponenDarah"); // NOI18N
         btnUTDKomponenDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDKomponenDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -4298,7 +4101,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDStokDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481001585_blood_drop.png"))); // NOI18N
         btnUTDStokDarah.setText("Stok Darah");
-        btnUTDStokDarah.setIconTextGap(0);
         btnUTDStokDarah.setName("btnUTDStokDarah"); // NOI18N
         btnUTDStokDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDStokDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -4309,7 +4111,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDPemisahanDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png"))); // NOI18N
         btnUTDPemisahanDarah.setText("Pemisahan Darah");
-        btnUTDPemisahanDarah.setIconTextGap(0);
         btnUTDPemisahanDarah.setName("btnUTDPemisahanDarah"); // NOI18N
         btnUTDPemisahanDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDPemisahanDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -4320,7 +4121,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHarianKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047106_emblem-money.png"))); // NOI18N
         btnHarianKamar.setText("Harian Kamar");
-        btnHarianKamar.setIconTextGap(0);
         btnHarianKamar.setName("btnHarianKamar"); // NOI18N
         btnHarianKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHarianKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -4331,7 +4131,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRincianPiutangPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png"))); // NOI18N
         btnRincianPiutangPasien.setText("Rincian Piutang Pasien");
-        btnRincianPiutangPasien.setIconTextGap(0);
         btnRincianPiutangPasien.setName("btnRincianPiutangPasien"); // NOI18N
         btnRincianPiutangPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRincianPiutangPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -4342,7 +4141,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKeuntunganObat2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
         btnKeuntunganObat2.setText("Keuntungan Beri Obat 2");
-        btnKeuntunganObat2.setIconTextGap(0);
         btnKeuntunganObat2.setName("btnKeuntunganObat2"); // NOI18N
         btnKeuntunganObat2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKeuntunganObat2.addActionListener(new java.awt.event.ActionListener() {
@@ -4353,7 +4151,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReklasifikasiRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
         btnReklasifikasiRalan.setText("Reklasifikasi Ralan");
-        btnReklasifikasiRalan.setIconTextGap(0);
         btnReklasifikasiRalan.setName("btnReklasifikasiRalan"); // NOI18N
         btnReklasifikasiRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReklasifikasiRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -4364,7 +4161,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReklasifikasiRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
         btnReklasifikasiRanap.setText("Reklasifikasi Ranap");
-        btnReklasifikasiRanap.setIconTextGap(0);
         btnReklasifikasiRanap.setName("btnReklasifikasiRanap"); // NOI18N
         btnReklasifikasiRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReklasifikasiRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -4375,7 +4171,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnUTDPenyerahanDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/health.png"))); // NOI18N
         btnUTDPenyerahanDarah.setText("Penyerahan Darah");
-        btnUTDPenyerahanDarah.setIconTextGap(0);
         btnUTDPenyerahanDarah.setName("btnUTDPenyerahanDarah"); // NOI18N
         btnUTDPenyerahanDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUTDPenyerahanDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -4386,7 +4181,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHutangObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cashbox.png"))); // NOI18N
         btnHutangObat.setText("Hutang Obat & BHP");
-        btnHutangObat.setIconTextGap(0);
         btnHutangObat.setName("btnHutangObat"); // NOI18N
         btnHutangObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHutangObat.addActionListener(new java.awt.event.ActionListener() {
@@ -4397,7 +4191,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatBarangMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/gnome-searchtool.png"))); // NOI18N
         btnRiwayatBarangMedis.setText("Riwayat Obat, Alkes & BHP");
-        btnRiwayatBarangMedis.setIconTextGap(0);
         btnRiwayatBarangMedis.setName("btnRiwayatBarangMedis"); // NOI18N
         btnRiwayatBarangMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatBarangMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -4408,7 +4201,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSensusHarianPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/custom-reports.png"))); // NOI18N
         btnSensusHarianPoli.setText("Sensus Harian Poli");
-        btnSensusHarianPoli.setIconTextGap(0);
         btnSensusHarianPoli.setName("btnSensusHarianPoli"); // NOI18N
         btnSensusHarianPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSensusHarianPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -4419,7 +4211,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl4a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
         btnRl4a.setText("RL 4A Morbiditas Ranap");
-        btnRl4a.setIconTextGap(0);
         btnRl4a.setName("btnRl4a"); // NOI18N
         btnRl4a.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl4a.addActionListener(new java.awt.event.ActionListener() {
@@ -4430,7 +4221,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnAplicareReferensiKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
         btnAplicareReferensiKamar.setText("Referensi Kamar Aplicare");
-        btnAplicareReferensiKamar.setIconTextGap(0);
         btnAplicareReferensiKamar.setName("btnAplicareReferensiKamar"); // NOI18N
         btnAplicareReferensiKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAplicareReferensiKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -4441,7 +4231,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnAplicareKetersediaanKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357524_Company.png"))); // NOI18N
         btnAplicareKetersediaanKamar.setText("Ketersediaan Kamar Aplicare");
-        btnAplicareKetersediaanKamar.setIconTextGap(0);
         btnAplicareKetersediaanKamar.setName("btnAplicareKetersediaanKamar"); // NOI18N
         btnAplicareKetersediaanKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAplicareKetersediaanKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -4452,7 +4241,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInaCBGKlaimBaruOtomatis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485358050_receptionist.png"))); // NOI18N
         btnInaCBGKlaimBaruOtomatis.setText("Klaim Baru Otomatis INACBG");
-        btnInaCBGKlaimBaruOtomatis.setIconTextGap(0);
         btnInaCBGKlaimBaruOtomatis.setName("btnInaCBGKlaimBaruOtomatis"); // NOI18N
         btnInaCBGKlaimBaruOtomatis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInaCBGKlaimBaruOtomatis.addActionListener(new java.awt.event.ActionListener() {
@@ -4463,7 +4251,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInaCBGKlaimBaruManual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485358050_receptionist.png"))); // NOI18N
         btnInaCBGKlaimBaruManual.setText("Klaim Baru Manual INACBG");
-        btnInaCBGKlaimBaruManual.setIconTextGap(0);
         btnInaCBGKlaimBaruManual.setName("btnInaCBGKlaimBaruManual"); // NOI18N
         btnInaCBGKlaimBaruManual.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInaCBGKlaimBaruManual.addActionListener(new java.awt.event.ActionListener() {
@@ -4474,7 +4261,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInaCBGCoderNIK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002113_guard.png"))); // NOI18N
         btnInaCBGCoderNIK.setText("Coder NIK INACBG");
-        btnInaCBGCoderNIK.setIconTextGap(0);
         btnInaCBGCoderNIK.setName("btnInaCBGCoderNIK"); // NOI18N
         btnInaCBGCoderNIK.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInaCBGCoderNIK.addActionListener(new java.awt.event.ActionListener() {
@@ -4485,7 +4271,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMutasiBerkas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         btnMutasiBerkas.setText("Mutasi Berkas RM");
-        btnMutasiBerkas.setIconTextGap(0);
         btnMutasiBerkas.setName("btnMutasiBerkas"); // NOI18N
         btnMutasiBerkas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMutasiBerkas.addActionListener(new java.awt.event.ActionListener() {
@@ -4496,7 +4281,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnAkunPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046603_wallet.png"))); // NOI18N
         btnAkunPiutang.setText("Akun Piutang");
-        btnAkunPiutang.setIconTextGap(0);
         btnAkunPiutang.setName("btnAkunPiutang"); // NOI18N
         btnAkunPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunPiutang.addActionListener(new java.awt.event.ActionListener() {
@@ -4507,7 +4291,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHKSO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRHKSO.setText("Harian KSO");
-        btnRHKSO.setIconTextGap(0);
         btnRHKSO.setName("btnRHKSO"); // NOI18N
         btnRHKSO.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHKSO.addActionListener(new java.awt.event.ActionListener() {
@@ -4518,7 +4301,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBKSO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRBKSO.setText("Bulanan KSO");
-        btnRBKSO.setIconTextGap(0);
         btnRBKSO.setName("btnRBKSO"); // NOI18N
         btnRBKSO.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBKSO.addActionListener(new java.awt.event.ActionListener() {
@@ -4529,7 +4311,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRHMenejemen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRHMenejemen.setText("Harian Menejemen");
-        btnRHMenejemen.setIconTextGap(0);
         btnRHMenejemen.setName("btnRHMenejemen"); // NOI18N
         btnRHMenejemen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRHMenejemen.addActionListener(new java.awt.event.ActionListener() {
@@ -4540,7 +4321,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRBMenejemen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRBMenejemen.setText("Bulanan Menejemen");
-        btnRBMenejemen.setIconTextGap(0);
         btnRBMenejemen.setName("btnRBMenejemen"); // NOI18N
         btnRBMenejemen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBMenejemen.addActionListener(new java.awt.event.ActionListener() {
@@ -4551,7 +4331,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekEligibilitasInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png"))); // NOI18N
         btnCekEligibilitasInhealth.setText("Cek Eligibilitas Inhealth");
-        btnCekEligibilitasInhealth.setIconTextGap(0);
         btnCekEligibilitasInhealth.setName("btnCekEligibilitasInhealth"); // NOI18N
         btnCekEligibilitasInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekEligibilitasInhealth.addActionListener(new java.awt.event.ActionListener() {
@@ -4562,7 +4341,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnReferensiKamarInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png"))); // NOI18N
         btnReferensiKamarInhealth.setText("Referensi Ruang Rawat Inhealth");
-        btnReferensiKamarInhealth.setIconTextGap(0);
         btnReferensiKamarInhealth.setName("btnReferensiKamarInhealth"); // NOI18N
         btnReferensiKamarInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiKamarInhealth.addActionListener(new java.awt.event.ActionListener() {
@@ -4573,7 +4351,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekInhealthPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png"))); // NOI18N
         btnCekInhealthPoli.setText("Referensi Poli Inhealth");
-        btnCekInhealthPoli.setIconTextGap(0);
         btnCekInhealthPoli.setName("btnCekInhealthPoli"); // NOI18N
         btnCekInhealthPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekInhealthPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -4584,7 +4361,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekInhealthFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png"))); // NOI18N
         btnCekInhealthFaskes.setText("Referensi Faskes Inhealth");
-        btnCekInhealthFaskes.setIconTextGap(0);
         btnCekInhealthFaskes.setName("btnCekInhealthFaskes"); // NOI18N
         btnCekInhealthFaskes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekInhealthFaskes.addActionListener(new java.awt.event.ActionListener() {
@@ -4595,7 +4371,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInhealthSJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png"))); // NOI18N
         btnInhealthSJP.setText("Data Bridging SJP Inhealth");
-        btnInhealthSJP.setIconTextGap(0);
         btnInhealthSJP.setName("btnInhealthSJP"); // NOI18N
         btnInhealthSJP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInhealthSJP.addActionListener(new java.awt.event.ActionListener() {
@@ -4606,7 +4381,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPiutangRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
         btnPiutangRalan.setText("Piutang Ralan");
-        btnPiutangRalan.setIconTextGap(0);
         btnPiutangRalan.setName("btnPiutangRalan"); // NOI18N
         btnPiutangRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -4617,7 +4391,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPiutangRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
         btnPiutangRanap.setText("Piutang Ranap");
-        btnPiutangRanap.setIconTextGap(0);
         btnPiutangRanap.setName("btnPiutangRanap"); // NOI18N
         btnPiutangRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -4628,7 +4401,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPiutangPerCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png"))); // NOI18N
         btnPiutangPerCaraBayar.setText("Piutang Per Cara Bayar");
-        btnPiutangPerCaraBayar.setIconTextGap(0);
         btnPiutangPerCaraBayar.setName("btnPiutangPerCaraBayar"); // NOI18N
         btnPiutangPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangPerCaraBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -4639,7 +4411,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLamaPelayananRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnLamaPelayananRalan.setText("Lama Pelayanan Ralan");
-        btnLamaPelayananRalan.setIconTextGap(0);
         btnLamaPelayananRalan.setName("btnLamaPelayananRalan"); // NOI18N
         btnLamaPelayananRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -4650,7 +4421,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCatatanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kwrite.png"))); // NOI18N
         btnCatatanPasien.setText("Catatan Pasien");
-        btnCatatanPasien.setIconTextGap(0);
         btnCatatanPasien.setName("btnCatatanPasien"); // NOI18N
         btnCatatanPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -4661,7 +4431,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl4b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
         btnRl4b.setText("RL 4B Morbiditas Ralan");
-        btnRl4b.setIconTextGap(0);
         btnRl4b.setName("btnRl4b"); // NOI18N
         btnRl4b.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl4b.addActionListener(new java.awt.event.ActionListener() {
@@ -4672,7 +4441,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl4asebab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
         btnRl4asebab.setText("RL 4A Sebab Morbiditas Ranap");
-        btnRl4asebab.setIconTextGap(0);
         btnRl4asebab.setName("btnRl4asebab"); // NOI18N
         btnRl4asebab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl4asebab.addActionListener(new java.awt.event.ActionListener() {
@@ -4683,7 +4451,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRl4bsebab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
         btnRl4bsebab.setText("RL 4B Sebab Morbiditas Ralan");
-        btnRl4bsebab.setIconTextGap(0);
         btnRl4bsebab.setName("btnRl4bsebab"); // NOI18N
         btnRl4bsebab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl4bsebab.addActionListener(new java.awt.event.ActionListener() {
@@ -4694,7 +4461,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDataHAIs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360816018_tests.png"))); // NOI18N
         btnDataHAIs.setText("Data HAIs");
-        btnDataHAIs.setIconTextGap(0);
         btnDataHAIs.setName("btnDataHAIs"); // NOI18N
         btnDataHAIs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataHAIs.addActionListener(new java.awt.event.ActionListener() {
@@ -4705,7 +4471,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHarianHAIs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_house_shelf_1378832.png"))); // NOI18N
         btnHarianHAIs.setText("Harian HAIs");
-        btnHarianHAIs.setIconTextGap(0);
         btnHarianHAIs.setName("btnHarianHAIs"); // NOI18N
         btnHarianHAIs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHarianHAIs.addActionListener(new java.awt.event.ActionListener() {
@@ -4716,7 +4481,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBulananHAIs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_house_shelf_1378832.png"))); // NOI18N
         btnBulananHAIs.setText("Bulanan HAIs");
-        btnBulananHAIs.setIconTextGap(0);
         btnBulananHAIs.setName("btnBulananHAIs"); // NOI18N
         btnBulananHAIs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBulananHAIs.addActionListener(new java.awt.event.ActionListener() {
@@ -4727,7 +4491,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHitungBor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
         btnHitungBor.setText("Hitung BOR");
-        btnHitungBor.setIconTextGap(0);
         btnHitungBor.setName("btnHitungBor"); // NOI18N
         btnHitungBor.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHitungBor.addActionListener(new java.awt.event.ActionListener() {
@@ -4738,7 +4501,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357524_Company.png"))); // NOI18N
         btnPerusahaan.setText("Instansi/Perusahaan Pasien");
-        btnPerusahaan.setIconTextGap(0);
         btnPerusahaan.setName("btnPerusahaan"); // NOI18N
         btnPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerusahaan.addActionListener(new java.awt.event.ActionListener() {
@@ -4749,7 +4511,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDaftarPermintaanResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485894_add-notes.png"))); // NOI18N
         btnDaftarPermintaanResep.setText("Daftar Resep Dokter");
-        btnDaftarPermintaanResep.setIconTextGap(0);
         btnDaftarPermintaanResep.setName("btnDaftarPermintaanResep"); // NOI18N
         btnDaftarPermintaanResep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDaftarPermintaanResep.addActionListener(new java.awt.event.ActionListener() {
@@ -4760,7 +4521,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLamaPelayananApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnLamaPelayananApotek.setText("Lama Pelayanan Apotek");
-        btnLamaPelayananApotek.setIconTextGap(0);
         btnLamaPelayananApotek.setName("btnLamaPelayananApotek"); // NOI18N
         btnLamaPelayananApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananApotek.addActionListener(new java.awt.event.ActionListener() {
@@ -4771,7 +4531,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHitungAlos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
         btnHitungAlos.setText("Hitung ALOS");
-        btnHitungAlos.setIconTextGap(0);
         btnHitungAlos.setName("btnHitungAlos"); // NOI18N
         btnHitungAlos.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHitungAlos.addActionListener(new java.awt.event.ActionListener() {
@@ -4782,7 +4541,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDetailTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnDetailTindakan.setText("Detail Tindakan");
-        btnDetailTindakan.setIconTextGap(0);
         btnDetailTindakan.setName("btnDetailTindakan"); // NOI18N
         btnDetailTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDetailTindakan.addActionListener(new java.awt.event.ActionListener() {
@@ -4793,7 +4551,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPoliAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnRekapPoliAnak.setText("Rekap Poli Anak");
-        btnRekapPoliAnak.setIconTextGap(0);
         btnRekapPoliAnak.setName("btnRekapPoliAnak"); // NOI18N
         btnRekapPoliAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPoliAnak.addActionListener(new java.awt.event.ActionListener() {
@@ -4804,7 +4561,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganPoli.setText("Registrasi Per Poli");
-        btnGrafikKunjunganPoli.setIconTextGap(0);
         btnGrafikKunjunganPoli.setName("btnGrafikKunjunganPoli"); // NOI18N
         btnGrafikKunjunganPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -4815,7 +4571,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerDokter.setText("Registrasi Per Dokter");
-        btnGrafikKunjunganPerDokter.setIconTextGap(0);
         btnGrafikKunjunganPerDokter.setName("btnGrafikKunjunganPerDokter"); // NOI18N
         btnGrafikKunjunganPerDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -4826,7 +4581,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerPekerjaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganPerPekerjaan.setText("Registrasi Per Pekerjaan");
-        btnGrafikKunjunganPerPekerjaan.setIconTextGap(0);
         btnGrafikKunjunganPerPekerjaan.setName("btnGrafikKunjunganPerPekerjaan"); // NOI18N
         btnGrafikKunjunganPerPekerjaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerPekerjaan.addActionListener(new java.awt.event.ActionListener() {
@@ -4837,7 +4591,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerPendidikan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerPendidikan.setText("Registrasi Per Pendidikan");
-        btnGrafikKunjunganPerPendidikan.setIconTextGap(0);
         btnGrafikKunjunganPerPendidikan.setName("btnGrafikKunjunganPerPendidikan"); // NOI18N
         btnGrafikKunjunganPerPendidikan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerPendidikan.addActionListener(new java.awt.event.ActionListener() {
@@ -4848,7 +4601,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganPerTahun.setText("Registrasi Per Tahun");
-        btnGrafikKunjunganPerTahun.setIconTextGap(0);
         btnGrafikKunjunganPerTahun.setName("btnGrafikKunjunganPerTahun"); // NOI18N
         btnGrafikKunjunganPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -4859,7 +4611,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBerkasDigitalPerawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_folder_images_61610.png"))); // NOI18N
         btnBerkasDigitalPerawatan.setText("Berkas Digital Perawatan");
-        btnBerkasDigitalPerawatan.setIconTextGap(0);
         btnBerkasDigitalPerawatan.setName("btnBerkasDigitalPerawatan"); // NOI18N
         btnBerkasDigitalPerawatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBerkasDigitalPerawatan.addActionListener(new java.awt.event.ActionListener() {
@@ -4870,7 +4621,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPnyMenularRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnPnyMenularRanap.setText("Pny Menular Ranap");
-        btnPnyMenularRanap.setIconTextGap(0);
         btnPnyMenularRanap.setName("btnPnyMenularRanap"); // NOI18N
         btnPnyMenularRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPnyMenularRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -4881,7 +4631,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPnyMenularRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnPnyMenularRalan.setText("Pny Menular Ralan");
-        btnPnyMenularRalan.setIconTextGap(0);
         btnPnyMenularRalan.setName("btnPnyMenularRalan"); // NOI18N
         btnPnyMenularRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPnyMenularRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -4892,7 +4641,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerBulan.setText("Registrasi Per Bulan");
-        btnGrafikKunjunganPerBulan.setIconTextGap(0);
         btnGrafikKunjunganPerBulan.setName("btnGrafikKunjunganPerBulan"); // NOI18N
         btnGrafikKunjunganPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -4903,7 +4651,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganPerTanggal.setText("Registrasi Per Tanggal");
-        btnGrafikKunjunganPerTanggal.setIconTextGap(0);
         btnGrafikKunjunganPerTanggal.setName("btnGrafikKunjunganPerTanggal"); // NOI18N
         btnGrafikKunjunganPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -4914,7 +4661,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikDemografiRegistrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikDemografiRegistrasi.setText("Demografi Registrasi");
-        btnGrafikDemografiRegistrasi.setIconTextGap(0);
         btnGrafikDemografiRegistrasi.setName("btnGrafikDemografiRegistrasi"); // NOI18N
         btnGrafikDemografiRegistrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikDemografiRegistrasi.addActionListener(new java.awt.event.ActionListener() {
@@ -4925,7 +4671,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikStatusRegPerTahun.setText("Registrasi Lama Per Tahun");
-        btnGrafikStatusRegPerTahun.setIconTextGap(0);
         btnGrafikStatusRegPerTahun.setName("btnGrafikStatusRegPerTahun"); // NOI18N
         btnGrafikStatusRegPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -4936,7 +4681,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegPerTahun2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikStatusRegPerTahun2.setText("Registrasi Baru Per Tahun");
-        btnGrafikStatusRegPerTahun2.setIconTextGap(0);
         btnGrafikStatusRegPerTahun2.setName("btnGrafikStatusRegPerTahun2"); // NOI18N
         btnGrafikStatusRegPerTahun2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegPerTahun2.addActionListener(new java.awt.event.ActionListener() {
@@ -4947,7 +4691,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikStatusRegPerBulan.setText("Registrasi Lama Per Bulan");
-        btnGrafikStatusRegPerBulan.setIconTextGap(0);
         btnGrafikStatusRegPerBulan.setName("btnGrafikStatusRegPerBulan"); // NOI18N
         btnGrafikStatusRegPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -4958,7 +4701,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegPerBulan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikStatusRegPerBulan2.setText("Registrasi Baru Per Bulan");
-        btnGrafikStatusRegPerBulan2.setIconTextGap(0);
         btnGrafikStatusRegPerBulan2.setName("btnGrafikStatusRegPerBulan2"); // NOI18N
         btnGrafikStatusRegPerBulan2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegPerBulan2.addActionListener(new java.awt.event.ActionListener() {
@@ -4969,7 +4711,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikStatusRegPerTanggal.setText("Registrasi Lama Per Tanggal");
-        btnGrafikStatusRegPerTanggal.setIconTextGap(0);
         btnGrafikStatusRegPerTanggal.setName("btnGrafikStatusRegPerTanggal"); // NOI18N
         btnGrafikStatusRegPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -4980,7 +4721,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegPerTanggal2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikStatusRegPerTanggal2.setText("Registrasi Baru Per Tanggal");
-        btnGrafikStatusRegPerTanggal2.setIconTextGap(0);
         btnGrafikStatusRegPerTanggal2.setName("btnGrafikStatusRegPerTanggal2"); // NOI18N
         btnGrafikStatusRegPerTanggal2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegPerTanggal2.addActionListener(new java.awt.event.ActionListener() {
@@ -4991,7 +4731,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegBatalPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikStatusRegBatalPerTahun.setText("Batal Periksa Per Tahun");
-        btnGrafikStatusRegBatalPerTahun.setIconTextGap(0);
         btnGrafikStatusRegBatalPerTahun.setName("btnGrafikStatusRegBatalPerTahun"); // NOI18N
         btnGrafikStatusRegBatalPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegBatalPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -5002,7 +4741,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegBatalPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikStatusRegBatalPerBulan.setText("Batal Periksa Per Bulan");
-        btnGrafikStatusRegBatalPerBulan.setIconTextGap(0);
         btnGrafikStatusRegBatalPerBulan.setName("btnGrafikStatusRegBatalPerBulan"); // NOI18N
         btnGrafikStatusRegBatalPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegBatalPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -5013,7 +4751,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekPCareDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnCekPCareDiagnosa.setText("Referensi Diagnosa PCare");
-        btnCekPCareDiagnosa.setIconTextGap(0);
         btnCekPCareDiagnosa.setName("btnCekPCareDiagnosa"); // NOI18N
         btnCekPCareDiagnosa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekPCareDiagnosa.addActionListener(new java.awt.event.ActionListener() {
@@ -5024,7 +4761,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikStatusRegBatalPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikStatusRegBatalPerTanggal.setText("Batal Periksa Per Tanggal");
-        btnGrafikStatusRegBatalPerTanggal.setIconTextGap(0);
         btnGrafikStatusRegBatalPerTanggal.setName("btnGrafikStatusRegBatalPerTanggal"); // NOI18N
         btnGrafikStatusRegBatalPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusRegBatalPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -5035,7 +4771,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKategoriBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnKategoriBarang.setText("Kategori Obat, Alkes & BHP");
-        btnKategoriBarang.setIconTextGap(0);
         btnKategoriBarang.setName("btnKategoriBarang"); // NOI18N
         btnKategoriBarang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKategoriBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -5046,7 +4781,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGolonganBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485894_add-notes.png"))); // NOI18N
         btnGolonganBarang.setText("Golongan Obat, Alkes & BHP");
-        btnGolonganBarang.setIconTextGap(0);
         btnGolonganBarang.setName("btnGolonganBarang"); // NOI18N
         btnGolonganBarang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGolonganBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -5057,7 +4791,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnObatPerTanggal.setText("Obat/Alkes/BHP Per Tanggal");
-        btnObatPerTanggal.setIconTextGap(0);
         btnObatPerTanggal.setName("btnObatPerTanggal"); // NOI18N
         btnObatPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -5068,7 +4801,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenjualanPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png"))); // NOI18N
         btnPenjualanPerTanggal.setText("Penjualan Bebas Per Tanggal");
-        btnPenjualanPerTanggal.setIconTextGap(0);
         btnPenjualanPerTanggal.setName("btnPenjualanPerTanggal"); // NOI18N
         btnPenjualanPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenjualanPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -5079,7 +4811,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekPCareKesadaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnCekPCareKesadaran.setText("Referensi Kesadaran PCare");
-        btnCekPCareKesadaran.setIconTextGap(0);
         btnCekPCareKesadaran.setName("btnCekPCareKesadaran"); // NOI18N
         btnCekPCareKesadaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekPCareKesadaran.addActionListener(new java.awt.event.ActionListener() {
@@ -5090,7 +4821,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembatalanPeriksaDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnPembatalanPeriksaDokter.setText("Pembatalan Periksa Per Dokter");
-        btnPembatalanPeriksaDokter.setIconTextGap(0);
         btnPembatalanPeriksaDokter.setName("btnPembatalanPeriksaDokter"); // NOI18N
         btnPembatalanPeriksaDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembatalanPeriksaDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -5101,7 +4831,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembayaranPerUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_TextEdit_37595.png"))); // NOI18N
         btnPembayaranPerUnit.setText("Pembayaran Per Unit");
-        btnPembayaranPerUnit.setIconTextGap(0);
         btnPembayaranPerUnit.setName("btnPembayaranPerUnit"); // NOI18N
         btnPembayaranPerUnit.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranPerUnit.addActionListener(new java.awt.event.ActionListener() {
@@ -5112,7 +4841,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPembayaranPerUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_kde-document-open_23426.png"))); // NOI18N
         btnRekapPembayaranPerUnit.setText("Rekap Pembayaran Per Unit");
-        btnRekapPembayaranPerUnit.setIconTextGap(0);
         btnRekapPembayaranPerUnit.setName("btnRekapPembayaranPerUnit"); // NOI18N
         btnRekapPembayaranPerUnit.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPembayaranPerUnit.addActionListener(new java.awt.event.ActionListener() {
@@ -5123,7 +4851,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerCarabayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerCarabayar.setText("Registrasi Per Cara Bayar");
-        btnGrafikKunjunganPerCarabayar.setIconTextGap(0);
         btnGrafikKunjunganPerCarabayar.setName("btnGrafikKunjunganPerCarabayar"); // NOI18N
         btnGrafikKunjunganPerCarabayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerCarabayar.addActionListener(new java.awt.event.ActionListener() {
@@ -5134,7 +4861,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengadaanIPSRSPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_document-new_23212.png"))); // NOI18N
         btnPengadaanIPSRSPerTanggal.setText("Pengadaan Non Medis Per Tanggal");
-        btnPengadaanIPSRSPerTanggal.setIconTextGap(0);
         btnPengadaanIPSRSPerTanggal.setName("btnPengadaanIPSRSPerTanggal"); // NOI18N
         btnPengadaanIPSRSPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengadaanIPSRSPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -5145,7 +4871,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnStokKeluarIPSRSPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_document-open_23214.png"))); // NOI18N
         btnStokKeluarIPSRSPerTanggal.setText("Stok Keluar Non Medis Per Tanggal");
-        btnStokKeluarIPSRSPerTanggal.setIconTextGap(0);
         btnStokKeluarIPSRSPerTanggal.setName("btnStokKeluarIPSRSPerTanggal"); // NOI18N
         btnStokKeluarIPSRSPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStokKeluarIPSRSPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -5156,7 +4881,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganRanapPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganRanapPerTahun.setText("Kunjungan Ranap Per Tahun");
-        btnGrafikKunjunganRanapPerTahun.setIconTextGap(0);
         btnGrafikKunjunganRanapPerTahun.setName("btnGrafikKunjunganRanapPerTahun"); // NOI18N
         btnGrafikKunjunganRanapPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganRanapPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -5167,7 +4891,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekPCareRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnCekPCareRujukan.setText("Cek Rujukan PCare");
-        btnCekPCareRujukan.setIconTextGap(0);
         btnCekPCareRujukan.setName("btnCekPCareRujukan"); // NOI18N
         btnCekPCareRujukan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekPCareRujukan.addActionListener(new java.awt.event.ActionListener() {
@@ -5178,7 +4901,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikLabRalanPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikLabRalanPerTahun.setText("Kunjungan Lab Ralan Per Tahun");
-        btnGrafikLabRalanPerTahun.setIconTextGap(0);
         btnGrafikLabRalanPerTahun.setName("btnGrafikLabRalanPerTahun"); // NOI18N
         btnGrafikLabRalanPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLabRalanPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -5189,7 +4911,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikRadRalanPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikRadRalanPerTahun.setText("Kunjungan Rad Ralan Per Tahun");
-        btnGrafikRadRalanPerTahun.setIconTextGap(0);
         btnGrafikRadRalanPerTahun.setName("btnGrafikRadRalanPerTahun"); // NOI18N
         btnGrafikRadRalanPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikRadRalanPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -5200,7 +4921,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekEntryRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_TextEdit_37595.png"))); // NOI18N
         btnCekEntryRalan.setText("Cek Entry Ralan");
-        btnCekEntryRalan.setIconTextGap(0);
         btnCekEntryRalan.setName("btnCekEntryRalan"); // NOI18N
         btnCekEntryRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekEntryRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -5211,7 +4931,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInaCBGKlaimBaruManual2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485358050_receptionist.png"))); // NOI18N
         btnInaCBGKlaimBaruManual2.setText("Klaim Baru Manual INACBG 2");
-        btnInaCBGKlaimBaruManual2.setIconTextGap(0);
         btnInaCBGKlaimBaruManual2.setName("btnInaCBGKlaimBaruManual2"); // NOI18N
         btnInaCBGKlaimBaruManual2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInaCBGKlaimBaruManual2.addActionListener(new java.awt.event.ActionListener() {
@@ -5222,7 +4941,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPermintaanMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_packing_49602.png"))); // NOI18N
         btnPermintaanMedis.setText("Permintaan Obat & BHP");
-        btnPermintaanMedis.setIconTextGap(0);
         btnPermintaanMedis.setName("btnPermintaanMedis"); // NOI18N
         btnPermintaanMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5233,7 +4951,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRingkasanPermintaanMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png"))); // NOI18N
         btnRingkasanPermintaanMedis.setText("Ringkasan Permintaan Obat & BHP");
-        btnRingkasanPermintaanMedis.setIconTextGap(0);
         btnRingkasanPermintaanMedis.setName("btnRingkasanPermintaanMedis"); // NOI18N
         btnRingkasanPermintaanMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPermintaanMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5244,7 +4961,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratPemesananMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Select-Language_49621.png"))); // NOI18N
         btnSuratPemesananMedis.setText("Surat Pemesanan Obat & BHP");
-        btnSuratPemesananMedis.setIconTextGap(0);
         btnSuratPemesananMedis.setName("btnSuratPemesananMedis"); // NOI18N
         btnSuratPemesananMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPemesananMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5255,7 +4971,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPermintaanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_packing_49602.png"))); // NOI18N
         btnPermintaanNonMedis.setText("Permintaan Barang Non Medis");
-        btnPermintaanNonMedis.setIconTextGap(0);
         btnPermintaanNonMedis.setName("btnPermintaanNonMedis"); // NOI18N
         btnPermintaanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5266,7 +4981,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPermintaanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png"))); // NOI18N
         btnRekapPermintaanNonMedis.setText("Ringkasan Permintaan Barang Non Medis");
-        btnRekapPermintaanNonMedis.setIconTextGap(0);
         btnRekapPermintaanNonMedis.setName("btnRekapPermintaanNonMedis"); // NOI18N
         btnRekapPermintaanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPermintaanNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5277,7 +4991,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratPemesananNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Select-Language_49621.png"))); // NOI18N
         btnSuratPemesananNonMedis.setText("Surat Pemesanan Barang Non Medis");
-        btnSuratPemesananNonMedis.setIconTextGap(0);
         btnSuratPemesananNonMedis.setName("btnSuratPemesananNonMedis"); // NOI18N
         btnSuratPemesananNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPemesananNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5288,7 +5001,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikPerPerujuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikPerPerujuk.setText("Registrasi Per Perujuk");
-        btnGrafikPerPerujuk.setIconTextGap(0);
         btnGrafikPerPerujuk.setName("btnGrafikPerPerujuk"); // NOI18N
         btnGrafikPerPerujuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPerPerujuk.addActionListener(new java.awt.event.ActionListener() {
@@ -5299,7 +5011,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiProsedurBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiProsedurBPJS.setText("Referensi Prosedur VClaim");
-        btnCekReferensiProsedurBPJS.setIconTextGap(0);
         btnCekReferensiProsedurBPJS.setName("btnCekReferensiProsedurBPJS"); // NOI18N
         btnCekReferensiProsedurBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiProsedurBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5310,7 +5021,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiKelasRawatBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiKelasRawatBPJS.setText("Referensi Kelas Rawat VClaim");
-        btnCekReferensiKelasRawatBPJS.setIconTextGap(0);
         btnCekReferensiKelasRawatBPJS.setName("btnCekReferensiKelasRawatBPJS"); // NOI18N
         btnCekReferensiKelasRawatBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiKelasRawatBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5321,7 +5031,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiDokterBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiDokterBPJS.setText("Referensi Dokter VClaim");
-        btnCekReferensiDokterBPJS.setIconTextGap(0);
         btnCekReferensiDokterBPJS.setName("btnCekReferensiDokterBPJS"); // NOI18N
         btnCekReferensiDokterBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiDokterBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5332,7 +5041,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiSpesialistikBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiSpesialistikBPJS.setText("Referensi Spesialistik VClaim");
-        btnCekReferensiSpesialistikBPJS.setIconTextGap(0);
         btnCekReferensiSpesialistikBPJS.setName("btnCekReferensiSpesialistikBPJS"); // NOI18N
         btnCekReferensiSpesialistikBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiSpesialistikBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5343,7 +5051,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiRuangRawatBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiRuangRawatBPJS.setText("Referensi Ruang Rawat VClaim");
-        btnCekReferensiRuangRawatBPJS.setIconTextGap(0);
         btnCekReferensiRuangRawatBPJS.setName("btnCekReferensiRuangRawatBPJS"); // NOI18N
         btnCekReferensiRuangRawatBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiRuangRawatBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5354,7 +5061,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiCaraKeluarBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiCaraKeluarBPJS.setText("Referensi Cara Keluar VClaim");
-        btnCekReferensiCaraKeluarBPJS.setIconTextGap(0);
         btnCekReferensiCaraKeluarBPJS.setName("btnCekReferensiCaraKeluarBPJS"); // NOI18N
         btnCekReferensiCaraKeluarBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiCaraKeluarBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5365,7 +5071,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiPascaPulangBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiPascaPulangBPJS.setText("Referensi Pasca Pulang VClaim");
-        btnCekReferensiPascaPulangBPJS.setIconTextGap(0);
         btnCekReferensiPascaPulangBPJS.setName("btnCekReferensiPascaPulangBPJS"); // NOI18N
         btnCekReferensiPascaPulangBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiPascaPulangBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5376,7 +5081,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDetailVKOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnDetailVKOK.setText("Detail VK & OK");
-        btnDetailVKOK.setIconTextGap(0);
         btnDetailVKOK.setName("btnDetailVKOK"); // NOI18N
         btnDetailVKOK.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDetailVKOK.addActionListener(new java.awt.event.ActionListener() {
@@ -5387,7 +5091,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSNomorRujukanRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSNomorRujukanRS.setText("Cek No.Rujukan RS di VClaim");
-        btnCekBPJSNomorRujukanRS.setIconTextGap(0);
         btnCekBPJSNomorRujukanRS.setName("btnCekBPJSNomorRujukanRS"); // NOI18N
         btnCekBPJSNomorRujukanRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSNomorRujukanRS.addActionListener(new java.awt.event.ActionListener() {
@@ -5398,7 +5101,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSRujukanKartuPCare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSRujukanKartuPCare.setText("Cek Rujukan Kartu PCare di VClaim");
-        btnCekBPJSRujukanKartuPCare.setIconTextGap(0);
         btnCekBPJSRujukanKartuPCare.setName("btnCekBPJSRujukanKartuPCare"); // NOI18N
         btnCekBPJSRujukanKartuPCare.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSRujukanKartuPCare.addActionListener(new java.awt.event.ActionListener() {
@@ -5409,7 +5111,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSRujukanKartuRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSRujukanKartuRS.setText("Cek Rujukan Kartu RS di VClaim");
-        btnCekBPJSRujukanKartuRS.setIconTextGap(0);
         btnCekBPJSRujukanKartuRS.setName("btnCekBPJSRujukanKartuRS"); // NOI18N
         btnCekBPJSRujukanKartuRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSRujukanKartuRS.addActionListener(new java.awt.event.ActionListener() {
@@ -5420,7 +5121,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRujukanKeluarBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnRujukanKeluarBPJS.setText("Data Rujukan Keluar VClaim");
-        btnRujukanKeluarBPJS.setIconTextGap(0);
         btnRujukanKeluarBPJS.setName("btnRujukanKeluarBPJS"); // NOI18N
         btnRujukanKeluarBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRujukanKeluarBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5431,7 +5131,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikLabRalanPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikLabRalanPerBulan.setText("Kunjungan Lab Ralan Per Bulan");
-        btnGrafikLabRalanPerBulan.setIconTextGap(0);
         btnGrafikLabRalanPerBulan.setName("btnGrafikLabRalanPerBulan"); // NOI18N
         btnGrafikLabRalanPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLabRalanPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -5442,7 +5141,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnStokKeluarMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/shopping-basket-full.png"))); // NOI18N
         btnStokKeluarMedis.setText("Stok Keluar Medis");
-        btnStokKeluarMedis.setIconTextGap(0);
         btnStokKeluarMedis.setName("btnStokKeluarMedis"); // NOI18N
         btnStokKeluarMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStokKeluarMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5453,7 +5151,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikRadRalanPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikRadRalanPerBulan.setText("Kunjungan Rad Ralan Per Bulan");
-        btnGrafikRadRalanPerBulan.setIconTextGap(0);
         btnGrafikRadRalanPerBulan.setName("btnGrafikRadRalanPerBulan"); // NOI18N
         btnGrafikRadRalanPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikRadRalanPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -5464,7 +5161,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJMDetailDokter2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png"))); // NOI18N
         btnJMDetailDokter2.setText("Detail JM Dokter 2");
-        btnJMDetailDokter2.setIconTextGap(0);
         btnJMDetailDokter2.setName("btnJMDetailDokter2"); // NOI18N
         btnJMDetailDokter2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJMDetailDokter2.addActionListener(new java.awt.event.ActionListener() {
@@ -5475,7 +5171,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPengaduan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_message_add_17398.png"))); // NOI18N
         btnPengaduan.setText("Pengaduan/Chat");
-        btnPengaduan.setIconTextGap(0);
         btnPengaduan.setName("btnPengaduan"); // NOI18N
         btnPengaduan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengaduan.addActionListener(new java.awt.event.ActionListener() {
@@ -5486,7 +5181,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikLabRalanPerHari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikLabRalanPerHari.setText("Kunjungan Lab Ralan Per Tanggal");
-        btnGrafikLabRalanPerHari.setIconTextGap(0);
         btnGrafikLabRalanPerHari.setName("btnGrafikLabRalanPerHari"); // NOI18N
         btnGrafikLabRalanPerHari.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLabRalanPerHari.addActionListener(new java.awt.event.ActionListener() {
@@ -5497,7 +5191,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikRadRalanPerHari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikRadRalanPerHari.setText("Kunjungan Rad Ralan Per Tanggal");
-        btnGrafikRadRalanPerHari.setIconTextGap(0);
         btnGrafikRadRalanPerHari.setName("btnGrafikRadRalanPerHari"); // NOI18N
         btnGrafikRadRalanPerHari.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikRadRalanPerHari.addActionListener(new java.awt.event.ActionListener() {
@@ -5508,7 +5201,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSensusHarianRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/custom-reports.png"))); // NOI18N
         btnSensusHarianRalan.setText("Sensus Harian Ralan");
-        btnSensusHarianRalan.setIconTextGap(0);
         btnSensusHarianRalan.setName("btnSensusHarianRalan"); // NOI18N
         btnSensusHarianRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSensusHarianRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -5519,7 +5211,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMetodeRacik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_document-new_23212.png"))); // NOI18N
         btnMetodeRacik.setText("Metode Racik");
-        btnMetodeRacik.setIconTextGap(0);
         btnMetodeRacik.setName("btnMetodeRacik"); // NOI18N
         btnMetodeRacik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMetodeRacik.addActionListener(new java.awt.event.ActionListener() {
@@ -5530,7 +5221,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembayaranAkunBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); // NOI18N
         btnPembayaranAkunBayar.setText("Pembayaran Per Akun Bayar");
-        btnPembayaranAkunBayar.setIconTextGap(0);
         btnPembayaranAkunBayar.setName("btnPembayaranAkunBayar"); // NOI18N
         btnPembayaranAkunBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranAkunBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -5541,7 +5231,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenggunaObatResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/family.png"))); // NOI18N
         btnPenggunaObatResep.setText("Pengguna Obat/Alkes/BHP Resep");
-        btnPenggunaObatResep.setIconTextGap(0);
         btnPenggunaObatResep.setName("btnPenggunaObatResep"); // NOI18N
         btnPenggunaObatResep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenggunaObatResep.addActionListener(new java.awt.event.ActionListener() {
@@ -5552,7 +5241,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPenerimaanObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_TextEdit_37595.png"))); // NOI18N
         btnRekapPenerimaanObat.setText("Rekap Penerimaan Obat & BHP");
-        btnRekapPenerimaanObat.setIconTextGap(0);
         btnRekapPenerimaanObat.setName("btnRekapPenerimaanObat"); // NOI18N
         btnRekapPenerimaanObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPenerimaanObat.addActionListener(new java.awt.event.ActionListener() {
@@ -5563,7 +5251,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMasterBerkasPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/folder.png"))); // NOI18N
         btnMasterBerkasPegawai.setText("Master Berkas Pegawai");
-        btnMasterBerkasPegawai.setIconTextGap(0);
         btnMasterBerkasPegawai.setName("btnMasterBerkasPegawai"); // NOI18N
         btnMasterBerkasPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterBerkasPegawai.addActionListener(new java.awt.event.ActionListener() {
@@ -5574,7 +5261,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBerkasPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002437_partners.png"))); // NOI18N
         btnBerkasPegawai.setText("Berkas Kepegawaian");
-        btnBerkasPegawai.setIconTextGap(0);
         btnBerkasPegawai.setName("btnBerkasPegawai"); // NOI18N
         btnBerkasPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBerkasPegawai.addActionListener(new java.awt.event.ActionListener() {
@@ -5585,7 +5271,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatJabatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_TextEdit_37595.png"))); // NOI18N
         btnRiwayatJabatan.setText("Riwayat Jabatan");
-        btnRiwayatJabatan.setIconTextGap(0);
         btnRiwayatJabatan.setName("btnRiwayatJabatan"); // NOI18N
         btnRiwayatJabatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatJabatan.addActionListener(new java.awt.event.ActionListener() {
@@ -5596,7 +5281,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatPendidikan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481038237_Adobe_Bridge_CS.png"))); // NOI18N
         btnRiwayatPendidikan.setText("Riwayat Pendidikan");
-        btnRiwayatPendidikan.setIconTextGap(0);
         btnRiwayatPendidikan.setName("btnRiwayatPendidikan"); // NOI18N
         btnRiwayatPendidikan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatPendidikan.addActionListener(new java.awt.event.ActionListener() {
@@ -5607,7 +5291,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatNaikGaji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
         btnRiwayatNaikGaji.setText("Riwayat Naik Gaji");
-        btnRiwayatNaikGaji.setIconTextGap(0);
         btnRiwayatNaikGaji.setName("btnRiwayatNaikGaji"); // NOI18N
         btnRiwayatNaikGaji.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatNaikGaji.addActionListener(new java.awt.event.ActionListener() {
@@ -5618,7 +5301,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKegiatanIlmiah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_gtk-find-and-replace_39047.png"))); // NOI18N
         btnKegiatanIlmiah.setText("Kegiatan Ilmiah & Pelatihan");
-        btnKegiatanIlmiah.setIconTextGap(0);
         btnKegiatanIlmiah.setName("btnKegiatanIlmiah"); // NOI18N
         btnKegiatanIlmiah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKegiatanIlmiah.addActionListener(new java.awt.event.ActionListener() {
@@ -5629,7 +5311,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatPenghargaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_folder_images_61610.png"))); // NOI18N
         btnRiwayatPenghargaan.setText("Riwayat Penghargaan");
-        btnRiwayatPenghargaan.setIconTextGap(0);
         btnRiwayatPenghargaan.setName("btnRiwayatPenghargaan"); // NOI18N
         btnRiwayatPenghargaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatPenghargaan.addActionListener(new java.awt.event.ActionListener() {
@@ -5640,7 +5321,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatPenelitian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_research_87460.png"))); // NOI18N
         btnRiwayatPenelitian.setText("Riwayat Penelitian");
-        btnRiwayatPenelitian.setIconTextGap(0);
         btnRiwayatPenelitian.setName("btnRiwayatPenelitian"); // NOI18N
         btnRiwayatPenelitian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatPenelitian.addActionListener(new java.awt.event.ActionListener() {
@@ -5651,7 +5331,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenerimaanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481038192_market.png"))); // NOI18N
         btnPenerimaanNonMedis.setText("Penerimaan Barang Non Medis");
-        btnPenerimaanNonMedis.setIconTextGap(0);
         btnPenerimaanNonMedis.setName("btnPenerimaanNonMedis"); // NOI18N
         btnPenerimaanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenerimaanNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5662,7 +5341,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBayarPesanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487067_calculator.png"))); // NOI18N
         btnBayarPesanNonMedis.setText("Bayar Pesan Non Medis");
-        btnBayarPesanNonMedis.setIconTextGap(0);
         btnBayarPesanNonMedis.setName("btnBayarPesanNonMedis"); // NOI18N
         btnBayarPesanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPesanNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5673,7 +5351,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHutangNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487067_calculator.png"))); // NOI18N
         btnHutangNonMedis.setText("Hutang Non Medis");
-        btnHutangNonMedis.setIconTextGap(0);
         btnHutangNonMedis.setName("btnHutangNonMedis"); // NOI18N
         btnHutangNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHutangNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5684,7 +5361,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapPenerimaanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_TextEdit_37595.png"))); // NOI18N
         btnRekapPenerimaanNonMedis.setText("Rekap Penerimaan Non Medis");
-        btnRekapPenerimaanNonMedis.setIconTextGap(0);
         btnRekapPenerimaanNonMedis.setName("btnRekapPenerimaanNonMedis"); // NOI18N
         btnRekapPenerimaanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPenerimaanNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -5695,7 +5371,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInsidenKeselamatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002123_wheelchair.png"))); // NOI18N
         btnInsidenKeselamatan.setText("Insiden Keselamatan");
-        btnInsidenKeselamatan.setIconTextGap(0);
         btnInsidenKeselamatan.setName("btnInsidenKeselamatan"); // NOI18N
         btnInsidenKeselamatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInsidenKeselamatan.addActionListener(new java.awt.event.ActionListener() {
@@ -5706,7 +5381,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnInsidenKeselamatanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357758_Doctor.png"))); // NOI18N
         btnInsidenKeselamatanPasien.setText("Data Insiden Keselamatan");
-        btnInsidenKeselamatanPasien.setIconTextGap(0);
         btnInsidenKeselamatanPasien.setName("btnInsidenKeselamatanPasien"); // NOI18N
         btnInsidenKeselamatanPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInsidenKeselamatanPasien.addActionListener(new java.awt.event.ActionListener() {
@@ -5717,7 +5391,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKejadianIKPPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKejadianIKPPerTahun.setText("Kejadian IKP Per Tahun");
-        btnGrafikKejadianIKPPerTahun.setIconTextGap(0);
         btnGrafikKejadianIKPPerTahun.setName("btnGrafikKejadianIKPPerTahun"); // NOI18N
         btnGrafikKejadianIKPPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKejadianIKPPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -5728,7 +5401,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKejadianIKPPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKejadianIKPPerBulan.setText("Kejadian IKP Per Bulan");
-        btnGrafikKejadianIKPPerBulan.setIconTextGap(0);
         btnGrafikKejadianIKPPerBulan.setName("btnGrafikKejadianIKPPerBulan"); // NOI18N
         btnGrafikKejadianIKPPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKejadianIKPPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -5739,7 +5411,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKejadianIKPPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKejadianIKPPerTanggal.setText("Kejadian IKP Per Tanggal");
-        btnGrafikKejadianIKPPerTanggal.setIconTextGap(0);
         btnGrafikKejadianIKPPerTanggal.setName("btnGrafikKejadianIKPPerTanggal"); // NOI18N
         btnGrafikKejadianIKPPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKejadianIKPPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -5750,7 +5421,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRiwayatBatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481038237_Adobe_Bridge_CS.png"))); // NOI18N
         btnRiwayatBatch.setText("Riwayat Batch");
-        btnRiwayatBatch.setIconTextGap(0);
         btnRiwayatBatch.setName("btnRiwayatBatch"); // NOI18N
         btnRiwayatBatch.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatBatch.addActionListener(new java.awt.event.ActionListener() {
@@ -5761,7 +5431,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKejadianIKPPerJenis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKejadianIKPPerJenis.setText("Kejadian IKP Per Jenis");
-        btnGrafikKejadianIKPPerJenis.setIconTextGap(0);
         btnGrafikKejadianIKPPerJenis.setName("btnGrafikKejadianIKPPerJenis"); // NOI18N
         btnGrafikKejadianIKPPerJenis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKejadianIKPPerJenis.addActionListener(new java.awt.event.ActionListener() {
@@ -5772,7 +5441,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKejadianIKPPerDampak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKejadianIKPPerDampak.setText("Kejadian IKP Per Dampak");
-        btnGrafikKejadianIKPPerDampak.setIconTextGap(0);
         btnGrafikKejadianIKPPerDampak.setName("btnGrafikKejadianIKPPerDampak"); // NOI18N
         btnGrafikKejadianIKPPerDampak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKejadianIKPPerDampak.addActionListener(new java.awt.event.ActionListener() {
@@ -5783,7 +5451,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPiutangPerAkunPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/stock_task.png"))); // NOI18N
         btnPiutangPerAkunPiutang.setText("Piutang Per Akun Piutang");
-        btnPiutangPerAkunPiutang.setIconTextGap(0);
         btnPiutangPerAkunPiutang.setName("btnPiutangPerAkunPiutang"); // NOI18N
         btnPiutangPerAkunPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangPerAkunPiutang.addActionListener(new java.awt.event.ActionListener() {
@@ -5794,7 +5461,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerAgama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerAgama.setText("Registrasi Per Agama");
-        btnGrafikKunjunganPerAgama.setIconTextGap(0);
         btnGrafikKunjunganPerAgama.setName("btnGrafikKunjunganPerAgama"); // NOI18N
         btnGrafikKunjunganPerAgama.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerAgama.addActionListener(new java.awt.event.ActionListener() {
@@ -5805,7 +5471,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerUmur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganPerUmur.setText("Registrasi Per Umur");
-        btnGrafikKunjunganPerUmur.setIconTextGap(0);
         btnGrafikKunjunganPerUmur.setName("btnGrafikKunjunganPerUmur"); // NOI18N
         btnGrafikKunjunganPerUmur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerUmur.addActionListener(new java.awt.event.ActionListener() {
@@ -5816,7 +5481,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Login Manager_3503.png"))); // NOI18N
         btnSuku.setText("Suku/Bangsa Pasien");
-        btnSuku.setIconTextGap(0);
         btnSuku.setName("btnSuku"); // NOI18N
         btnSuku.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuku.addActionListener(new java.awt.event.ActionListener() {
@@ -5827,7 +5491,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBahasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Orange forum_54521.png"))); // NOI18N
         btnBahasa.setText("Bahasa Pasien");
-        btnBahasa.setIconTextGap(0);
         btnBahasa.setName("btnBahasa"); // NOI18N
         btnBahasa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBahasa.addActionListener(new java.awt.event.ActionListener() {
@@ -5838,7 +5501,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGolonganTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_advantage_teamwork_1034367.png"))); // NOI18N
         btnGolonganTNI.setText("Golongan TNI");
-        btnGolonganTNI.setIconTextGap(0);
         btnGolonganTNI.setName("btnGolonganTNI"); // NOI18N
         btnGolonganTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGolonganTNI.addActionListener(new java.awt.event.ActionListener() {
@@ -5849,7 +5511,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSatuanTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_17_2959846.png"))); // NOI18N
         btnSatuanTNI.setText("Satuan TNI");
-        btnSatuanTNI.setIconTextGap(0);
         btnSatuanTNI.setName("btnSatuanTNI"); // NOI18N
         btnSatuanTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSatuanTNI.addActionListener(new java.awt.event.ActionListener() {
@@ -5860,7 +5521,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJabatanTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_house_kitchen_table_1378836.png"))); // NOI18N
         btnJabatanTNI.setText("Jabatan TNI");
-        btnJabatanTNI.setIconTextGap(0);
         btnJabatanTNI.setName("btnJabatanTNI"); // NOI18N
         btnJabatanTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJabatanTNI.addActionListener(new java.awt.event.ActionListener() {
@@ -5871,7 +5531,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPangkatTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_23_Page_Rank_Badge_1688850.png"))); // NOI18N
         btnPangkatTNI.setText("Pangkat TNI");
-        btnPangkatTNI.setIconTextGap(0);
         btnPangkatTNI.setName("btnPangkatTNI"); // NOI18N
         btnPangkatTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPangkatTNI.addActionListener(new java.awt.event.ActionListener() {
@@ -5882,7 +5541,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGolonganPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_advantage_teamwork_1034367.png"))); // NOI18N
         btnGolonganPolri.setText("Golongan POLRI");
-        btnGolonganPolri.setIconTextGap(0);
         btnGolonganPolri.setName("btnGolonganPolri"); // NOI18N
         btnGolonganPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGolonganPolri.addActionListener(new java.awt.event.ActionListener() {
@@ -5893,7 +5551,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSatuanPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_17_2959846.png"))); // NOI18N
         btnSatuanPolri.setText("Satuan POLRI");
-        btnSatuanPolri.setIconTextGap(0);
         btnSatuanPolri.setName("btnSatuanPolri"); // NOI18N
         btnSatuanPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSatuanPolri.addActionListener(new java.awt.event.ActionListener() {
@@ -5904,7 +5561,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJabatanPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_house_kitchen_table_1378836.png"))); // NOI18N
         btnJabatanPolri.setText("Jabatan POLRI");
-        btnJabatanPolri.setIconTextGap(0);
         btnJabatanPolri.setName("btnJabatanPolri"); // NOI18N
         btnJabatanPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJabatanPolri.addActionListener(new java.awt.event.ActionListener() {
@@ -5915,7 +5571,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPangkatPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_23_Page_Rank_Badge_1688850.png"))); // NOI18N
         btnPangkatPolri.setText("Pangkat POLRI");
-        btnPangkatPolri.setIconTextGap(0);
         btnPangkatPolri.setName("btnPangkatPolri"); // NOI18N
         btnPangkatPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPangkatPolri.addActionListener(new java.awt.event.ActionListener() {
@@ -5926,7 +5581,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCacatFisik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/plaster.png"))); // NOI18N
         btnCacatFisik.setText("Cacat Fisik");
-        btnCacatFisik.setIconTextGap(0);
         btnCacatFisik.setName("btnCacatFisik"); // NOI18N
         btnCacatFisik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCacatFisik.addActionListener(new java.awt.event.ActionListener() {
@@ -5937,7 +5591,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerSuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerSuku.setText("Registrasi Per Suku/Bangsa");
-        btnGrafikKunjunganPerSuku.setIconTextGap(0);
         btnGrafikKunjunganPerSuku.setName("btnGrafikKunjunganPerSuku"); // NOI18N
         btnGrafikKunjunganPerSuku.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerSuku.addActionListener(new java.awt.event.ActionListener() {
@@ -5948,7 +5601,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerBahasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikKunjunganPerBahasa.setText("Registrasi Per Bahasa");
-        btnGrafikKunjunganPerBahasa.setIconTextGap(0);
         btnGrafikKunjunganPerBahasa.setName("btnGrafikKunjunganPerBahasa"); // NOI18N
         btnGrafikKunjunganPerBahasa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerBahasa.addActionListener(new java.awt.event.ActionListener() {
@@ -5959,7 +5611,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJadwalOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/JadwalOperasi.png"))); // NOI18N
         btnJadwalOperasi.setText("Jadwal Operasi");
-        btnJadwalOperasi.setIconTextGap(0);
         btnJadwalOperasi.setName("btnJadwalOperasi"); // NOI18N
         btnJadwalOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalOperasi.addActionListener(new java.awt.event.ActionListener() {
@@ -5970,7 +5621,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnMapingPoliBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnMapingPoliBPJS.setText("Mapping Poli VClaim");
-        btnMapingPoliBPJS.setIconTextGap(0);
         btnMapingPoliBPJS.setName("btnMapingPoliBPJS"); // NOI18N
         btnMapingPoliBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingPoliBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -5981,7 +5631,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikKunjunganPerCacat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikKunjunganPerCacat.setText("Registrasi Per Cacat Fisik");
-        btnGrafikKunjunganPerCacat.setIconTextGap(0);
         btnGrafikKunjunganPerCacat.setName("btnGrafikKunjunganPerCacat"); // NOI18N
         btnGrafikKunjunganPerCacat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganPerCacat.addActionListener(new java.awt.event.ActionListener() {
@@ -5992,7 +5641,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBarangCSSD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_order-history_49596.png"))); // NOI18N
         btnBarangCSSD.setText("Barang CSSD");
-        btnBarangCSSD.setIconTextGap(0);
         btnBarangCSSD.setName("btnBarangCSSD"); // NOI18N
         btnBarangCSSD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarangCSSD.addActionListener(new java.awt.event.ActionListener() {
@@ -6003,7 +5651,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSKDPBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_vector_66_15_473627.png"))); // NOI18N
         btnSKDPBPJS.setText("Surat Kontrol");
-        btnSKDPBPJS.setIconTextGap(0);
         btnSKDPBPJS.setName("btnSKDPBPJS"); // NOI18N
         btnSKDPBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSKDPBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -6014,7 +5661,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnBookingRegistrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Icon-Booking.png"))); // NOI18N
         btnBookingRegistrasi.setText("Booking Registrasi");
-        btnBookingRegistrasi.setIconTextGap(0);
         btnBookingRegistrasi.setName("btnBookingRegistrasi"); // NOI18N
         btnBookingRegistrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingRegistrasi.addActionListener(new java.awt.event.ActionListener() {
@@ -6025,7 +5671,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiPropinsiBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiPropinsiBPJS.setText("Referensi Propinsi VClaim");
-        btnCekReferensiPropinsiBPJS.setIconTextGap(0);
         btnCekReferensiPropinsiBPJS.setName("btnCekReferensiPropinsiBPJS"); // NOI18N
         btnCekReferensiPropinsiBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiPropinsiBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -6036,7 +5681,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiKabupatenBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiKabupatenBPJS.setText("Referensi Kabupaten VClaim");
-        btnCekReferensiKabupatenBPJS.setIconTextGap(0);
         btnCekReferensiKabupatenBPJS.setName("btnCekReferensiKabupatenBPJS"); // NOI18N
         btnCekReferensiKabupatenBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiKabupatenBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -6047,7 +5691,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiKecamatanBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiKecamatanBPJS.setText("Referensi Kecamatan VClaim");
-        btnCekReferensiKecamatanBPJS.setIconTextGap(0);
         btnCekReferensiKecamatanBPJS.setName("btnCekReferensiKecamatanBPJS"); // NOI18N
         btnCekReferensiKecamatanBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiKecamatanBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -6058,7 +5701,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekReferensiDokterDPJPBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekReferensiDokterDPJPBPJS.setText("Referensi Dokter DPJP VClaim");
-        btnCekReferensiDokterDPJPBPJS.setIconTextGap(0);
         btnCekReferensiDokterDPJPBPJS.setName("btnCekReferensiDokterDPJPBPJS"); // NOI18N
         btnCekReferensiDokterDPJPBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekReferensiDokterDPJPBPJS.addActionListener(new java.awt.event.ActionListener() {
@@ -6069,7 +5711,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSRiwayatRujukanRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSRiwayatRujukanRS.setText("Riwayat Rujukan RS di VClaim");
-        btnCekBPJSRiwayatRujukanRS.setIconTextGap(0);
         btnCekBPJSRiwayatRujukanRS.setName("btnCekBPJSRiwayatRujukanRS"); // NOI18N
         btnCekBPJSRiwayatRujukanRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSRiwayatRujukanRS.addActionListener(new java.awt.event.ActionListener() {
@@ -6080,7 +5721,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSTanggalRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSTanggalRujukan.setText("Tanggal Rujukan di VClaim");
-        btnCekBPJSTanggalRujukan.setIconTextGap(0);
         btnCekBPJSTanggalRujukan.setName("btnCekBPJSTanggalRujukan"); // NOI18N
         btnCekBPJSTanggalRujukan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSTanggalRujukan.addActionListener(new java.awt.event.ActionListener() {
@@ -6091,7 +5731,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPermintaanLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_laboratory_44676.png"))); // NOI18N
         btnPermintaanLab.setText("Permintaan Lab PK");
-        btnPermintaanLab.setIconTextGap(0);
         btnPermintaanLab.setName("btnPermintaanLab"); // NOI18N
         btnPermintaanLab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanLab.addActionListener(new java.awt.event.ActionListener() {
@@ -6102,7 +5741,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPermintaanRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Thorax_X-Ray_Black_63791.png"))); // NOI18N
         btnPermintaanRadiologi.setText("Permintaan Radiologi");
-        btnPermintaanRadiologi.setIconTextGap(0);
         btnPermintaanRadiologi.setName("btnPermintaanRadiologi"); // NOI18N
         btnPermintaanRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanRadiologi.addActionListener(new java.awt.event.ActionListener() {
@@ -6113,7 +5751,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratIndeks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_open-email_264844.png"))); // NOI18N
         btnSuratIndeks.setText("Indeks Surat");
-        btnSuratIndeks.setIconTextGap(0);
         btnSuratIndeks.setName("btnSuratIndeks"); // NOI18N
         btnSuratIndeks.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratIndeks.addActionListener(new java.awt.event.ActionListener() {
@@ -6124,7 +5761,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratMap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_orange-folder-mail_25242.png"))); // NOI18N
         btnSuratMap.setText("Map Surat");
-        btnSuratMap.setIconTextGap(0);
         btnSuratMap.setName("btnSuratMap"); // NOI18N
         btnSuratMap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratMap.addActionListener(new java.awt.event.ActionListener() {
@@ -6135,7 +5771,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratAlmari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_cabinet_49336.png"))); // NOI18N
         btnSuratAlmari.setText("Almari Surat");
-        btnSuratAlmari.setIconTextGap(0);
         btnSuratAlmari.setName("btnSuratAlmari"); // NOI18N
         btnSuratAlmari.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratAlmari.addActionListener(new java.awt.event.ActionListener() {
@@ -6146,7 +5781,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratRak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_shelf_104409.png"))); // NOI18N
         btnSuratRak.setText("Rak Surat");
-        btnSuratRak.setIconTextGap(0);
         btnSuratRak.setName("btnSuratRak"); // NOI18N
         btnSuratRak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratRak.addActionListener(new java.awt.event.ActionListener() {
@@ -6157,7 +5791,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_kfm_home_18010.png"))); // NOI18N
         btnSuratRuang.setText("Ruang Surat");
-        btnSuratRuang.setIconTextGap(0);
         btnSuratRuang.setName("btnSuratRuang"); // NOI18N
         btnSuratRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratRuang.addActionListener(new java.awt.event.ActionListener() {
@@ -6168,7 +5801,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratKlasifikasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_kontact_8762.png"))); // NOI18N
         btnSuratKlasifikasi.setText("Klasifikasi Surat");
-        btnSuratKlasifikasi.setIconTextGap(0);
         btnSuratKlasifikasi.setName("btnSuratKlasifikasi"); // NOI18N
         btnSuratKlasifikasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKlasifikasi.addActionListener(new java.awt.event.ActionListener() {
@@ -6179,7 +5811,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_26-Mail_34317.png"))); // NOI18N
         btnSuratStatus.setText("Status Surat");
-        btnSuratStatus.setIconTextGap(0);
         btnSuratStatus.setName("btnSuratStatus"); // NOI18N
         btnSuratStatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -6190,7 +5821,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratSifat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_private_mail_44691.png"))); // NOI18N
         btnSuratSifat.setText("Sifat Surat");
-        btnSuratSifat.setIconTextGap(0);
         btnSuratSifat.setName("btnSuratSifat"); // NOI18N
         btnSuratSifat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratSifat.addActionListener(new java.awt.event.ActionListener() {
@@ -6201,7 +5831,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratBalas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_mail-reply-all_118782.png"))); // NOI18N
         btnSuratBalas.setText("Stts Balas Surat");
-        btnSuratBalas.setIconTextGap(0);
         btnSuratBalas.setName("btnSuratBalas"); // NOI18N
         btnSuratBalas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratBalas.addActionListener(new java.awt.event.ActionListener() {
@@ -6212,7 +5841,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratMasuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_e-mail2 _36619.png"))); // NOI18N
         btnSuratMasuk.setText("Surat Masuk");
-        btnSuratMasuk.setIconTextGap(0);
         btnSuratMasuk.setName("btnSuratMasuk"); // NOI18N
         btnSuratMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -6223,7 +5851,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiDokter.setText("Referensi Dokter PCare");
-        btnPCareReferensiDokter.setIconTextGap(0);
         btnPCareReferensiDokter.setName("btnPCareReferensiDokter"); // NOI18N
         btnPCareReferensiDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -6234,7 +5861,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiPoli.setText("Referensi Poli PCare");
-        btnPCareReferensiPoli.setIconTextGap(0);
         btnPCareReferensiPoli.setName("btnPCareReferensiPoli"); // NOI18N
         btnPCareReferensiPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -6245,7 +5871,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiProvider.setText("Referensi Provider PCare");
-        btnPCareReferensiProvider.setIconTextGap(0);
         btnPCareReferensiProvider.setName("btnPCareReferensiProvider"); // NOI18N
         btnPCareReferensiProvider.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiProvider.addActionListener(new java.awt.event.ActionListener() {
@@ -6256,7 +5881,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiStatusPulang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiStatusPulang.setText("Referensi Stts Pulang PCare");
-        btnPCareReferensiStatusPulang.setIconTextGap(0);
         btnPCareReferensiStatusPulang.setName("btnPCareReferensiStatusPulang"); // NOI18N
         btnPCareReferensiStatusPulang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiStatusPulang.addActionListener(new java.awt.event.ActionListener() {
@@ -6267,7 +5891,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiSpesialis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiSpesialis.setText("Referensi Spesialis PCare");
-        btnPCareReferensiSpesialis.setIconTextGap(0);
         btnPCareReferensiSpesialis.setName("btnPCareReferensiSpesialis"); // NOI18N
         btnPCareReferensiSpesialis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiSpesialis.addActionListener(new java.awt.event.ActionListener() {
@@ -6278,7 +5901,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiSubspesialis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiSubspesialis.setText("Referensi Subspesialis PCare");
-        btnPCareReferensiSubspesialis.setIconTextGap(0);
         btnPCareReferensiSubspesialis.setName("btnPCareReferensiSubspesialis"); // NOI18N
         btnPCareReferensiSubspesialis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiSubspesialis.addActionListener(new java.awt.event.ActionListener() {
@@ -6289,7 +5911,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiSarana.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiSarana.setText("Referensi Sarana PCare");
-        btnPCareReferensiSarana.setIconTextGap(0);
         btnPCareReferensiSarana.setName("btnPCareReferensiSarana"); // NOI18N
         btnPCareReferensiSarana.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiSarana.addActionListener(new java.awt.event.ActionListener() {
@@ -6300,7 +5921,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiKhusus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiKhusus.setText("Referensi Khusus PCare");
-        btnPCareReferensiKhusus.setIconTextGap(0);
         btnPCareReferensiKhusus.setName("btnPCareReferensiKhusus"); // NOI18N
         btnPCareReferensiKhusus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiKhusus.addActionListener(new java.awt.event.ActionListener() {
@@ -6311,7 +5931,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiObat.setText("Referensi Obat PCare");
-        btnPCareReferensiObat.setIconTextGap(0);
         btnPCareReferensiObat.setName("btnPCareReferensiObat"); // NOI18N
         btnPCareReferensiObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiObat.addActionListener(new java.awt.event.ActionListener() {
@@ -6322,7 +5941,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareReferensiTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareReferensiTindakan.setText("Referensi Tindakan PCare");
-        btnPCareReferensiTindakan.setIconTextGap(0);
         btnPCareReferensiTindakan.setName("btnPCareReferensiTindakan"); // NOI18N
         btnPCareReferensiTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiTindakan.addActionListener(new java.awt.event.ActionListener() {
@@ -6333,7 +5951,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareFaskesSubspesialis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareFaskesSubspesialis.setText("Faskes Subspesialis PCare");
-        btnPCareFaskesSubspesialis.setIconTextGap(0);
         btnPCareFaskesSubspesialis.setName("btnPCareFaskesSubspesialis"); // NOI18N
         btnPCareFaskesSubspesialis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareFaskesSubspesialis.addActionListener(new java.awt.event.ActionListener() {
@@ -6344,7 +5961,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareFaskesAlihRawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareFaskesAlihRawat.setText("Faskes Alih Rawat PCare");
-        btnPCareFaskesAlihRawat.setIconTextGap(0);
         btnPCareFaskesAlihRawat.setName("btnPCareFaskesAlihRawat"); // NOI18N
         btnPCareFaskesAlihRawat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareFaskesAlihRawat.addActionListener(new java.awt.event.ActionListener() {
@@ -6355,7 +5971,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareFaskesThalasemia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareFaskesThalasemia.setText("Faskes Thalasemia & Hemofili PCare");
-        btnPCareFaskesThalasemia.setIconTextGap(0);
         btnPCareFaskesThalasemia.setName("btnPCareFaskesThalasemia"); // NOI18N
         btnPCareFaskesThalasemia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareFaskesThalasemia.addActionListener(new java.awt.event.ActionListener() {
@@ -6366,7 +5981,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareMapingObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareMapingObat.setText("Mapping Obat PCare");
-        btnPCareMapingObat.setIconTextGap(0);
         btnPCareMapingObat.setName("btnPCareMapingObat"); // NOI18N
         btnPCareMapingObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareMapingObat.addActionListener(new java.awt.event.ActionListener() {
@@ -6377,7 +5991,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareMapingTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareMapingTindakan.setText("Tarif Ralan PCare");
-        btnPCareMapingTindakan.setIconTextGap(0);
         btnPCareMapingTindakan.setName("btnPCareMapingTindakan"); // NOI18N
         btnPCareMapingTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareMapingTindakan.addActionListener(new java.awt.event.ActionListener() {
@@ -6388,7 +6001,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareClubProlanis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareClubProlanis.setText("Club Prolanis PCare");
-        btnPCareClubProlanis.setIconTextGap(0);
         btnPCareClubProlanis.setName("btnPCareClubProlanis"); // NOI18N
         btnPCareClubProlanis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareClubProlanis.addActionListener(new java.awt.event.ActionListener() {
@@ -6399,7 +6011,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareMapingPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareMapingPoli.setText("Mapping Poli PCare");
-        btnPCareMapingPoli.setIconTextGap(0);
         btnPCareMapingPoli.setName("btnPCareMapingPoli"); // NOI18N
         btnPCareMapingPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareMapingPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -6410,7 +6021,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareKegiatanKelompok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareKegiatanKelompok.setText("Kegiatan Kelompok PCare");
-        btnPCareKegiatanKelompok.setIconTextGap(0);
         btnPCareKegiatanKelompok.setName("btnPCareKegiatanKelompok"); // NOI18N
         btnPCareKegiatanKelompok.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareKegiatanKelompok.addActionListener(new java.awt.event.ActionListener() {
@@ -6421,7 +6031,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareMapingTindakanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareMapingTindakanRanap.setText("Tarif Ranap PCare");
-        btnPCareMapingTindakanRanap.setIconTextGap(0);
         btnPCareMapingTindakanRanap.setName("btnPCareMapingTindakanRanap"); // NOI18N
         btnPCareMapingTindakanRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareMapingTindakanRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -6432,7 +6041,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCarePesertaKegiatanKelompok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCarePesertaKegiatanKelompok.setText("Peserta Keg Kelompok PCare");
-        btnPCarePesertaKegiatanKelompok.setIconTextGap(0);
         btnPCarePesertaKegiatanKelompok.setName("btnPCarePesertaKegiatanKelompok"); // NOI18N
         btnPCarePesertaKegiatanKelompok.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCarePesertaKegiatanKelompok.addActionListener(new java.awt.event.ActionListener() {
@@ -6443,7 +6051,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSirkulasi3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); // NOI18N
         btnSirkulasi3.setText("Sirkulasi Obat, Alkes & BHP 3");
-        btnSirkulasi3.setIconTextGap(0);
         btnSirkulasi3.setName("btnSirkulasi3"); // NOI18N
         btnSirkulasi3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasi3.addActionListener(new java.awt.event.ActionListener() {
@@ -6454,7 +6061,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCarePendaftaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCarePendaftaran.setText("Data Pendaftaran PCare");
-        btnPCarePendaftaran.setIconTextGap(0);
         btnPCarePendaftaran.setName("btnPCarePendaftaran"); // NOI18N
         btnPCarePendaftaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCarePendaftaran.addActionListener(new java.awt.event.ActionListener() {
@@ -6465,7 +6071,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareMapingDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareMapingDokter.setText("Mapping Dokter PCare");
-        btnPCareMapingDokter.setIconTextGap(0);
         btnPCareMapingDokter.setName("btnPCareMapingDokter"); // NOI18N
         btnPCareMapingDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareMapingDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -6476,7 +6081,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRanapPerRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_House_132045.png"))); // NOI18N
         btnRanapPerRuang.setText("Ranap Per Ruang");
-        btnRanapPerRuang.setIconTextGap(0);
         btnRanapPerRuang.setName("btnRanapPerRuang"); // NOI18N
         btnRanapPerRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRanapPerRuang.addActionListener(new java.awt.event.ActionListener() {
@@ -6487,7 +6091,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPenyakitRanapCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_24_DNA_2064499.png"))); // NOI18N
         btnPenyakitRanapCaraBayar.setText("Penyakit Ranap Per Cara Bayar");
-        btnPenyakitRanapCaraBayar.setIconTextGap(0);
         btnPenyakitRanapCaraBayar.setName("btnPenyakitRanapCaraBayar"); // NOI18N
         btnPenyakitRanapCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenyakitRanapCaraBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -6498,7 +6101,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnAnggotaMiliterDirawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Soldier-3_379419.png"))); // NOI18N
         btnAnggotaMiliterDirawat.setText("Anggota TNI Dirawat");
-        btnAnggotaMiliterDirawat.setIconTextGap(0);
         btnAnggotaMiliterDirawat.setName("btnAnggotaMiliterDirawat"); // NOI18N
         btnAnggotaMiliterDirawat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAnggotaMiliterDirawat.addActionListener(new java.awt.event.ActionListener() {
@@ -6509,7 +6111,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSetInputParsial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Finance_loan_money_1889199.png"))); // NOI18N
         btnSetInputParsial.setText("Set Input Parsial");
-        btnSetInputParsial.setIconTextGap(0);
         btnSetInputParsial.setName("btnSetInputParsial"); // NOI18N
         btnSetInputParsial.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetInputParsial.addActionListener(new java.awt.event.ActionListener() {
@@ -6520,7 +6121,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLamaPelayananRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnLamaPelayananRadiologi.setText("Lama Pelayanan Radiologi");
-        btnLamaPelayananRadiologi.setIconTextGap(0);
         btnLamaPelayananRadiologi.setName("btnLamaPelayananRadiologi"); // NOI18N
         btnLamaPelayananRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananRadiologi.addActionListener(new java.awt.event.ActionListener() {
@@ -6531,7 +6131,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLamaPelayananLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnLamaPelayananLab.setText("Lama Pelayanan Lab PK");
-        btnLamaPelayananLab.setIconTextGap(0);
         btnLamaPelayananLab.setName("btnLamaPelayananLab"); // NOI18N
         btnLamaPelayananLab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananLab.addActionListener(new java.awt.event.ActionListener() {
@@ -6542,7 +6141,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekSEP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekSEP.setText("Cek Nomor SEP");
-        btnCekSEP.setIconTextGap(0);
         btnCekSEP.setName("btnCekSEP"); // NOI18N
         btnCekSEP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekSEP.addActionListener(new java.awt.event.ActionListener() {
@@ -6553,7 +6151,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_email_3327.png"))); // NOI18N
         btnSuratKeluar.setText("Surat Keluar");
-        btnSuratKeluar.setIconTextGap(0);
         btnSuratKeluar.setName("btnSuratKeluar"); // NOI18N
         btnSuratKeluar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -6564,7 +6161,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKegiatanFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_website_-_address_book_3440827.png"))); // NOI18N
         btnKegiatanFarmasi.setText("Kegiatan Farmasi");
-        btnKegiatanFarmasi.setIconTextGap(0);
         btnKegiatanFarmasi.setName("btnKegiatanFarmasi"); // NOI18N
         btnKegiatanFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKegiatanFarmasi.addActionListener(new java.awt.event.ActionListener() {
@@ -6575,7 +6171,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnOpnameIPSRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/ark2.png"))); // NOI18N
         btnOpnameIPSRS.setText("Stok Opname Non Medis");
-        btnOpnameIPSRS.setIconTextGap(0);
         btnOpnameIPSRS.setName("btnOpnameIPSRS"); // NOI18N
         btnOpnameIPSRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnOpnameIPSRS.addActionListener(new java.awt.event.ActionListener() {
@@ -6586,7 +6181,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSirkulasiNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); // NOI18N
         btnSirkulasiNonMedis.setText("Sirkulasi Non Medis");
-        btnSirkulasiNonMedis.setIconTextGap(0);
         btnSirkulasiNonMedis.setName("btnSirkulasiNonMedis"); // NOI18N
         btnSirkulasiNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiNonMedis.addActionListener(new java.awt.event.ActionListener() {
@@ -6597,7 +6191,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapLabPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_projects_63140.png"))); // NOI18N
         btnRekapLabPerTahun.setText("Rekap Lab Per Tahun");
-        btnRekapLabPerTahun.setIconTextGap(0);
         btnRekapLabPerTahun.setName("btnRekapLabPerTahun"); // NOI18N
         btnRekapLabPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapLabPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -6608,7 +6201,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPerujukLabPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/doctor2.png"))); // NOI18N
         btnPerujukLabPerTahun.setText("Perujuk Lab Per Tahun");
-        btnPerujukLabPerTahun.setIconTextGap(0);
         btnPerujukLabPerTahun.setName("btnPerujukLabPerTahun"); // NOI18N
         btnPerujukLabPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerujukLabPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -6619,7 +6211,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRekapRadiologiPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Thorax_X-Ray_Black_63791.png"))); // NOI18N
         btnRekapRadiologiPerTahun.setText("Rekap Radiologi Per Tahun");
-        btnRekapRadiologiPerTahun.setIconTextGap(0);
         btnRekapRadiologiPerTahun.setName("btnRekapRadiologiPerTahun"); // NOI18N
         btnRekapRadiologiPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapRadiologiPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -6630,7 +6221,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPerujukRadiologiPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/doctor_assistant.png"))); // NOI18N
         btnPerujukRadiologiPerTahun.setText("Perujuk Radiologi Per Tahun");
-        btnPerujukRadiologiPerTahun.setIconTextGap(0);
         btnPerujukRadiologiPerTahun.setName("btnPerujukRadiologiPerTahun"); // NOI18N
         btnPerujukRadiologiPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerujukRadiologiPerTahun.addActionListener(new java.awt.event.ActionListener() {
@@ -6641,7 +6231,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJumlahPorsiDiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_bibimbub_3377053.png"))); // NOI18N
         btnJumlahPorsiDiet.setText("Rekap Bulanan Porsi Diet");
-        btnJumlahPorsiDiet.setIconTextGap(0);
         btnJumlahPorsiDiet.setName("btnJumlahPorsiDiet"); // NOI18N
         btnJumlahPorsiDiet.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJumlahPorsiDiet.addActionListener(new java.awt.event.ActionListener() {
@@ -6652,7 +6241,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnJumlahMacamDiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ramen_3377055.png"))); // NOI18N
         btnJumlahMacamDiet.setText("Rekap Bulanan Macam Diet");
-        btnJumlahMacamDiet.setIconTextGap(0);
         btnJumlahMacamDiet.setName("btnJumlahMacamDiet"); // NOI18N
         btnJumlahMacamDiet.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJumlahMacamDiet.addActionListener(new java.awt.event.ActionListener() {
@@ -6663,7 +6251,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPaymentPoint2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
         btnPaymentPoint2.setText("Payment Point 2");
-        btnPaymentPoint2.setIconTextGap(0);
         btnPaymentPoint2.setName("btnPaymentPoint2"); // NOI18N
         btnPaymentPoint2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPaymentPoint2.addActionListener(new java.awt.event.ActionListener() {
@@ -6674,7 +6261,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembayaranAkunBayar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); // NOI18N
         btnPembayaranAkunBayar2.setText("Pembayaran Per Akun Bayar 2");
-        btnPembayaranAkunBayar2.setIconTextGap(0);
         btnPembayaranAkunBayar2.setName("btnPembayaranAkunBayar2"); // NOI18N
         btnPembayaranAkunBayar2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranAkunBayar2.addActionListener(new java.awt.event.ActionListener() {
@@ -6685,7 +6271,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnHAIsBangsal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_house_shelf_1378832.png"))); // NOI18N
         btnHAIsBangsal.setText("HAIs Per Kamar/Bangsal");
-        btnHAIsBangsal.setIconTextGap(0);
         btnHAIsBangsal.setName("btnHAIsBangsal"); // NOI18N
         btnHAIsBangsal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHAIsBangsal.addActionListener(new java.awt.event.ActionListener() {
@@ -6696,7 +6281,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPPNObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_money_299107.png"))); // NOI18N
         btnPPNObat.setText("PPN Obat");
-        btnPPNObat.setIconTextGap(0);
         btnPPNObat.setName("btnPPNObat"); // NOI18N
         btnPPNObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPPNObat.addActionListener(new java.awt.event.ActionListener() {
@@ -6707,7 +6291,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSaldoAkunPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icons-05_799761.png"))); // NOI18N
         btnSaldoAkunPerBulan.setText("Saldo Akun Per Bulan");
-        btnSaldoAkunPerBulan.setIconTextGap(0);
         btnSaldoAkunPerBulan.setName("btnSaldoAkunPerBulan"); // NOI18N
         btnSaldoAkunPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSaldoAkunPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -6718,7 +6301,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDisplayApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/find.png"))); // NOI18N
         btnDisplayApotek.setText("Display Antrian Apotek");
-        btnDisplayApotek.setIconTextGap(0);
         btnDisplayApotek.setName("btnDisplayApotek"); // NOI18N
         btnDisplayApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDisplayApotek.addActionListener(new java.awt.event.ActionListener() {
@@ -6729,7 +6311,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekSisruteFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/industry.png"))); // NOI18N
         btnCekSisruteFaskes.setText("Referensi Faskes Sisrute");
-        btnCekSisruteFaskes.setIconTextGap(0);
         btnCekSisruteFaskes.setName("btnCekSisruteFaskes"); // NOI18N
         btnCekSisruteFaskes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekSisruteFaskes.addActionListener(new java.awt.event.ActionListener() {
@@ -6740,7 +6321,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekSisruteAlasanRujuk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_todo_list_add_17451.png"))); // NOI18N
         btnCekSisruteAlasanRujuk.setText("Referensi Alasan Rujuk Sisrute");
-        btnCekSisruteAlasanRujuk.setIconTextGap(0);
         btnCekSisruteAlasanRujuk.setName("btnCekSisruteAlasanRujuk"); // NOI18N
         btnCekSisruteAlasanRujuk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekSisruteAlasanRujuk.addActionListener(new java.awt.event.ActionListener() {
@@ -6751,7 +6331,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekSisruteDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnCekSisruteDiagnosa.setText("Referensi Diagnosa Sisrute");
-        btnCekSisruteDiagnosa.setIconTextGap(0);
         btnCekSisruteDiagnosa.setName("btnCekSisruteDiagnosa"); // NOI18N
         btnCekSisruteDiagnosa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekSisruteDiagnosa.addActionListener(new java.awt.event.ActionListener() {
@@ -6762,7 +6341,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRujukanMasukSisrute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_analysis_60159.png"))); // NOI18N
         btnRujukanMasukSisrute.setText("Rujukan Masuk Sisrute");
-        btnRujukanMasukSisrute.setIconTextGap(0);
         btnRujukanMasukSisrute.setName("btnRujukanMasukSisrute"); // NOI18N
         btnRujukanMasukSisrute.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRujukanMasukSisrute.addActionListener(new java.awt.event.ActionListener() {
@@ -6773,7 +6351,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnRujukanKeluarSisrute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357758_Doctor.png"))); // NOI18N
         btnRujukanKeluarSisrute.setText("Rujukan Keluar Sisrute");
-        btnRujukanKeluarSisrute.setIconTextGap(0);
         btnRujukanKeluarSisrute.setName("btnRujukanKeluarSisrute"); // NOI18N
         btnRujukanKeluarSisrute.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRujukanKeluarSisrute.addActionListener(new java.awt.event.ActionListener() {
@@ -6784,7 +6361,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnCekBPJSSKDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSSKDP.setText("Cek SKDP VClaim");
-        btnCekBPJSSKDP.setIconTextGap(0);
         btnCekBPJSSKDP.setName("btnCekBPJSSKDP"); // NOI18N
         btnCekBPJSSKDP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekBPJSSKDP.addActionListener(new java.awt.event.ActionListener() {
@@ -6795,7 +6371,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDataBatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484263_barcode.png"))); // NOI18N
         btnDataBatch.setText("Data Batch");
-        btnDataBatch.setIconTextGap(0);
         btnDataBatch.setName("btnDataBatch"); // NOI18N
         btnDataBatch.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataBatch.addActionListener(new java.awt.event.ActionListener() {
@@ -6806,7 +6381,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKunjunganLabRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnKunjunganLabRalan.setText("Kunjungan Lab Ralan");
-        btnKunjunganLabRalan.setIconTextGap(0);
         btnKunjunganLabRalan.setName("btnKunjunganLabRalan"); // NOI18N
         btnKunjunganLabRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganLabRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -6817,7 +6391,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKunjunganLabRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnKunjunganLabRanap.setText("Kunjungan Lab Ranap");
-        btnKunjunganLabRanap.setIconTextGap(0);
         btnKunjunganLabRanap.setName("btnKunjunganLabRanap"); // NOI18N
         btnKunjunganLabRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganLabRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -6828,7 +6401,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKunjunganRadRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnKunjunganRadRalan.setText("Kunjungan Radiologi Ralan");
-        btnKunjunganRadRalan.setIconTextGap(0);
         btnKunjunganRadRalan.setName("btnKunjunganRadRalan"); // NOI18N
         btnKunjunganRadRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganRadRalan.addActionListener(new java.awt.event.ActionListener() {
@@ -6839,7 +6411,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKunjunganRadRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnKunjunganRadRanap.setText("Kunjungan Radiologi Ranap");
-        btnKunjunganRadRanap.setIconTextGap(0);
         btnKunjunganRadRanap.setName("btnKunjunganRadRanap"); // NOI18N
         btnKunjunganRadRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganRadRanap.addActionListener(new java.awt.event.ActionListener() {
@@ -6850,7 +6421,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareBeriObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareBeriObat.setText("Pemberian Obat PCare");
-        btnPCareBeriObat.setIconTextGap(0);
         btnPCareBeriObat.setName("btnPCareBeriObat"); // NOI18N
         btnPCareBeriObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareBeriObat.addActionListener(new java.awt.event.ActionListener() {
@@ -6861,7 +6431,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPCareBeriTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); // NOI18N
         btnPCareBeriTindakan.setText("Pemberian Tindakan PCare");
-        btnPCareBeriTindakan.setIconTextGap(0);
         btnPCareBeriTindakan.setName("btnPCareBeriTindakan"); // NOI18N
         btnPCareBeriTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareBeriTindakan.addActionListener(new java.awt.event.ActionListener() {
@@ -6872,7 +6441,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPembayaranAkunBayar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); // NOI18N
         btnPembayaranAkunBayar3.setText("Pembayaran Per Akun Bayar 3");
-        btnPembayaranAkunBayar3.setIconTextGap(0);
         btnPembayaranAkunBayar3.setName("btnPembayaranAkunBayar3"); // NOI18N
         btnPembayaranAkunBayar3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranAkunBayar3.addActionListener(new java.awt.event.ActionListener() {
@@ -6883,7 +6451,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPasswordAsuransi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1481002113_guard.png"))); // NOI18N
         btnPasswordAsuransi.setText("Password BPJS");
-        btnPasswordAsuransi.setIconTextGap(0);
         btnPasswordAsuransi.setName("btnPasswordAsuransi"); // NOI18N
         btnPasswordAsuransi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPasswordAsuransi.addActionListener(new java.awt.event.ActionListener() {
@@ -6894,7 +6461,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnDataSITT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png"))); // NOI18N
         btnDataSITT.setText("Data TB");
-        btnDataSITT.setIconTextGap(0);
         btnDataSITT.setName("btnDataSITT"); // NOI18N
         btnDataSITT.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataSITT.addActionListener(new java.awt.event.ActionListener() {
@@ -6905,7 +6471,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSiranapKetersediaanKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357524_Company.png"))); // NOI18N
         btnSiranapKetersediaanKamar.setText("Ketersediaan Kamar SIRANAP");
-        btnSiranapKetersediaanKamar.setIconTextGap(0);
         btnSiranapKetersediaanKamar.setName("btnSiranapKetersediaanKamar"); // NOI18N
         btnSiranapKetersediaanKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSiranapKetersediaanKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -6916,7 +6481,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBLaporanPeriode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikTBLaporanPeriode.setText("Periode Laporan TB");
-        btnGrafikTBLaporanPeriode.setIconTextGap(0);
         btnGrafikTBLaporanPeriode.setName("btnGrafikTBLaporanPeriode"); // NOI18N
         btnGrafikTBLaporanPeriode.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBLaporanPeriode.addActionListener(new java.awt.event.ActionListener() {
@@ -6927,7 +6491,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikTBRujukan.setText("Rujukan TB");
-        btnGrafikTBRujukan.setIconTextGap(0);
         btnGrafikTBRujukan.setName("btnGrafikTBRujukan"); // NOI18N
         btnGrafikTBRujukan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBRujukan.addActionListener(new java.awt.event.ActionListener() {
@@ -6938,7 +6501,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBRiwayat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikTBRiwayat.setText("Riwayat TB");
-        btnGrafikTBRiwayat.setIconTextGap(0);
         btnGrafikTBRiwayat.setName("btnGrafikTBRiwayat"); // NOI18N
         btnGrafikTBRiwayat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBRiwayat.addActionListener(new java.awt.event.ActionListener() {
@@ -6949,7 +6511,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBTipeDiagnosis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikTBTipeDiagnosis.setText("Tipe Diagnosis TB");
-        btnGrafikTBTipeDiagnosis.setIconTextGap(0);
         btnGrafikTBTipeDiagnosis.setName("btnGrafikTBTipeDiagnosis"); // NOI18N
         btnGrafikTBTipeDiagnosis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBTipeDiagnosis.addActionListener(new java.awt.event.ActionListener() {
@@ -6960,7 +6521,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBSTatusHIV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikTBSTatusHIV.setText("Status HIV TB");
-        btnGrafikTBSTatusHIV.setIconTextGap(0);
         btnGrafikTBSTatusHIV.setName("btnGrafikTBSTatusHIV"); // NOI18N
         btnGrafikTBSTatusHIV.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBSTatusHIV.addActionListener(new java.awt.event.ActionListener() {
@@ -6971,7 +6531,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBSkoringAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikTBSkoringAnak.setText("Skoring Anak TB");
-        btnGrafikTBSkoringAnak.setIconTextGap(0);
         btnGrafikTBSkoringAnak.setName("btnGrafikTBSkoringAnak"); // NOI18N
         btnGrafikTBSkoringAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBSkoringAnak.addActionListener(new java.awt.event.ActionListener() {
@@ -6982,7 +6541,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBKonfirmasiSkoring5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikTBKonfirmasiSkoring5.setText("Konfirmasi Skoring 5 TB");
-        btnGrafikTBKonfirmasiSkoring5.setIconTextGap(0);
         btnGrafikTBKonfirmasiSkoring5.setName("btnGrafikTBKonfirmasiSkoring5"); // NOI18N
         btnGrafikTBKonfirmasiSkoring5.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBKonfirmasiSkoring5.addActionListener(new java.awt.event.ActionListener() {
@@ -6993,7 +6551,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBKonfirmasiSkoring6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikTBKonfirmasiSkoring6.setText("Konfirmasi Skoring 6 TB");
-        btnGrafikTBKonfirmasiSkoring6.setIconTextGap(0);
         btnGrafikTBKonfirmasiSkoring6.setName("btnGrafikTBKonfirmasiSkoring6"); // NOI18N
         btnGrafikTBKonfirmasiSkoring6.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBKonfirmasiSkoring6.addActionListener(new java.awt.event.ActionListener() {
@@ -7004,7 +6561,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBSumberObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikTBSumberObat.setText("Sumber Obat TB");
-        btnGrafikTBSumberObat.setIconTextGap(0);
         btnGrafikTBSumberObat.setName("btnGrafikTBSumberObat"); // NOI18N
         btnGrafikTBSumberObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBSumberObat.addActionListener(new java.awt.event.ActionListener() {
@@ -7015,7 +6571,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBHasilAkhirPengobatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikTBHasilAkhirPengobatan.setText("Hasil Akhir Pengobatan TB");
-        btnGrafikTBHasilAkhirPengobatan.setIconTextGap(0);
         btnGrafikTBHasilAkhirPengobatan.setName("btnGrafikTBHasilAkhirPengobatan"); // NOI18N
         btnGrafikTBHasilAkhirPengobatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBHasilAkhirPengobatan.addActionListener(new java.awt.event.ActionListener() {
@@ -7026,7 +6581,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikTBHasilTesHIV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikTBHasilTesHIV.setText("Hasil Tes HIV TB");
-        btnGrafikTBHasilTesHIV.setIconTextGap(0);
         btnGrafikTBHasilTesHIV.setName("btnGrafikTBHasilTesHIV"); // NOI18N
         btnGrafikTBHasilTesHIV.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikTBHasilTesHIV.addActionListener(new java.awt.event.ActionListener() {
@@ -7037,7 +6591,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnKadaluarsaBatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_diagram-11_35581.png"))); // NOI18N
         btnKadaluarsaBatch.setText("Kadaluarsa Batch");
-        btnKadaluarsaBatch.setIconTextGap(0);
         btnKadaluarsaBatch.setName("btnKadaluarsaBatch"); // NOI18N
         btnKadaluarsaBatch.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKadaluarsaBatch.addActionListener(new java.awt.event.ActionListener() {
@@ -7048,7 +6601,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSisaStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icon-62-document-table_314903.png"))); // NOI18N
         btnSisaStok.setText("Sisa Stok");
-        btnSisaStok.setIconTextGap(0);
         btnSisaStok.setName("btnSisaStok"); // NOI18N
         btnSisaStok.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSisaStok.addActionListener(new java.awt.event.ActionListener() {
@@ -7059,7 +6611,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnObatPerResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_receipt_3440909.png"))); // NOI18N
         btnObatPerResep.setText("Obat Per Resep");
-        btnObatPerResep.setIconTextGap(0);
         btnObatPerResep.setName("btnObatPerResep"); // NOI18N
         btnObatPerResep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatPerResep.addActionListener(new java.awt.event.ActionListener() {
@@ -7070,7 +6621,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnPemakaianAirPDAM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Energy_Energy_Oil_Water_Drop_Fuel_3911250.png"))); // NOI18N
         btnPemakaianAirPDAM.setText("Pemakaian Air PDAM");
-        btnPemakaianAirPDAM.setIconTextGap(0);
         btnPemakaianAirPDAM.setName("btnPemakaianAirPDAM"); // NOI18N
         btnPemakaianAirPDAM.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemakaianAirPDAM.addActionListener(new java.awt.event.ActionListener() {
@@ -7081,7 +6631,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLimbahB3Medis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Bin_ecology_recyclewaste_2992453.png"))); // NOI18N
         btnLimbahB3Medis.setText("Limbah Padat B3 Medis");
-        btnLimbahB3Medis.setIconTextGap(0);
         btnLimbahB3Medis.setName("btnLimbahB3Medis"); // NOI18N
         btnLimbahB3Medis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLimbahB3Medis.addActionListener(new java.awt.event.ActionListener() {
@@ -7092,7 +6641,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikPemakaianAirPDAMPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikPemakaianAirPDAMPerTanggal.setText("Pemakaian Air PDAM Per Tanggal");
-        btnGrafikPemakaianAirPDAMPerTanggal.setIconTextGap(0);
         btnGrafikPemakaianAirPDAMPerTanggal.setName("btnGrafikPemakaianAirPDAMPerTanggal"); // NOI18N
         btnGrafikPemakaianAirPDAMPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPemakaianAirPDAMPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -7103,7 +6651,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikPemakaianAirPDAMPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikPemakaianAirPDAMPerBulan.setText("Pemakaian Air PDAM Per Bulan");
-        btnGrafikPemakaianAirPDAMPerBulan.setIconTextGap(0);
         btnGrafikPemakaianAirPDAMPerBulan.setName("btnGrafikPemakaianAirPDAMPerBulan"); // NOI18N
         btnGrafikPemakaianAirPDAMPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPemakaianAirPDAMPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -7114,7 +6661,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikLimbahB3MedisPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikLimbahB3MedisPerTanggal.setText("Limbah B3 Medis Per Tanggal");
-        btnGrafikLimbahB3MedisPerTanggal.setIconTextGap(0);
         btnGrafikLimbahB3MedisPerTanggal.setName("btnGrafikLimbahB3MedisPerTanggal"); // NOI18N
         btnGrafikLimbahB3MedisPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLimbahB3MedisPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -7125,7 +6671,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikLimbahB3MedisPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png"))); // NOI18N
         btnGrafikLimbahB3MedisPerBulan.setText("Limbah B3 Medis Per Bulan");
-        btnGrafikLimbahB3MedisPerBulan.setIconTextGap(0);
         btnGrafikLimbahB3MedisPerBulan.setName("btnGrafikLimbahB3MedisPerBulan"); // NOI18N
         btnGrafikLimbahB3MedisPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLimbahB3MedisPerBulan.addActionListener(new java.awt.event.ActionListener() {
@@ -7136,7 +6681,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLimbahDomestik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_trash red_10554.png"))); // NOI18N
         btnLimbahDomestik.setText("Limbah Padat Domestik");
-        btnLimbahDomestik.setIconTextGap(0);
         btnLimbahDomestik.setName("btnLimbahDomestik"); // NOI18N
         btnLimbahDomestik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLimbahDomestik.addActionListener(new java.awt.event.ActionListener() {
@@ -7147,7 +6691,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnGrafikLimbahDomestikPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png"))); // NOI18N
         btnGrafikLimbahDomestikPerTanggal.setText("Limbah Padat Domestik Per Tanggal");
-        btnGrafikLimbahDomestikPerTanggal.setIconTextGap(0);
         btnGrafikLimbahDomestikPerTanggal.setName("btnGrafikLimbahDomestikPerTanggal"); // NOI18N
         btnGrafikLimbahDomestikPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLimbahDomestikPerTanggal.addActionListener(new java.awt.event.ActionListener() {
@@ -7158,7 +6701,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLaboratoriumPA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6008661_bacteria_coronavirus_covid_laboratory_microscope_icon.png"))); // NOI18N
         btnLaboratoriumPA.setText("Periksa Lab PA");
-        btnLaboratoriumPA.setIconTextGap(0);
         btnLaboratoriumPA.setName("btnLaboratoriumPA"); // NOI18N
         btnLaboratoriumPA.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaboratoriumPA.addActionListener(new java.awt.event.ActionListener() {
@@ -7169,7 +6711,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnLaboratoriumMB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5728202_coronavirus_medical_microbiology_research_science_icon.png"))); // NOI18N
         btnLaboratoriumMB.setText("Periksa Lab MB");
-        btnLaboratoriumMB.setIconTextGap(0);
         btnLaboratoriumMB.setName("btnLaboratoriumMB"); // NOI18N
         btnLaboratoriumMB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaboratoriumMB.addActionListener(new java.awt.event.ActionListener() {
@@ -7210,7 +6751,7 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame1.setVerifyInputWhenFocusTarget(false);
         internalFrame1.setWarnaAtas(new java.awt.Color(235, 248, 235));
         internalFrame1.setWarnaBawah(new java.awt.Color(199, 231, 199));
-        internalFrame1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 2));
+        internalFrame1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 2));
 
         BtnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/menu.png"))); // NOI18N
         BtnMenu.setMnemonic('M');
@@ -7218,7 +6759,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnMenu.setToolTipText("Alt+M");
         BtnMenu.setEnabled(false);
         BtnMenu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnMenu.setIconTextGap(2);
+        BtnMenu.setIconTextGap(4);
         BtnMenu.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnMenu.setName("BtnMenu"); // NOI18N
         BtnMenu.setPreferredSize(new java.awt.Dimension(78, 38));
@@ -7245,7 +6786,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolReg.setToolTipText("Alt+R");
         BtnToolReg.setEnabled(false);
         BtnToolReg.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnToolReg.setIconTextGap(2);
+        BtnToolReg.setIconTextGap(4);
         BtnToolReg.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnToolReg.setName("BtnToolReg"); // NOI18N
         BtnToolReg.setPreferredSize(new java.awt.Dimension(100, 38));
@@ -7263,7 +6804,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolIGD.setToolTipText("Alt+D");
         btnToolIGD.setEnabled(false);
         btnToolIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnToolIGD.setIconTextGap(2);
+        btnToolIGD.setIconTextGap(4);
         btnToolIGD.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnToolIGD.setName("btnToolIGD"); // NOI18N
         btnToolIGD.setPreferredSize(new java.awt.Dimension(94, 38));
@@ -7289,7 +6830,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolLab.setText("Laborat");
         btnToolLab.setToolTipText("Alt+O");
         btnToolLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnToolLab.setIconTextGap(2);
+        btnToolLab.setIconTextGap(4);
         btnToolLab.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnToolLab.setName("btnToolLab"); // NOI18N
         btnToolLab.setPreferredSize(new java.awt.Dimension(88, 38));
@@ -7306,7 +6847,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolRad.setText("Radiologi");
         btnToolRad.setToolTipText("Alt+A");
         btnToolRad.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnToolRad.setIconTextGap(2);
+        btnToolRad.setIconTextGap(4);
         btnToolRad.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btnToolRad.setName("btnToolRad"); // NOI18N
         btnToolRad.setPreferredSize(new java.awt.Dimension(97, 38));
@@ -7323,7 +6864,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolJualObat.setText("Farmasi");
         BtnToolJualObat.setToolTipText("Alt+J");
         BtnToolJualObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnToolJualObat.setIconTextGap(2);
+        BtnToolJualObat.setIconTextGap(4);
         BtnToolJualObat.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnToolJualObat.setName("BtnToolJualObat"); // NOI18N
         BtnToolJualObat.setPreferredSize(new java.awt.Dimension(90, 38));
@@ -7350,7 +6891,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKamnap.setToolTipText("Alt+K");
         BtnToolKamnap.setEnabled(false);
         BtnToolKamnap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnToolKamnap.setIconTextGap(2);
+        BtnToolKamnap.setIconTextGap(4);
         BtnToolKamnap.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnToolKamnap.setName("BtnToolKamnap"); // NOI18N
         BtnToolKamnap.setPreferredSize(new java.awt.Dimension(107, 38));
@@ -7368,7 +6909,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKasir.setToolTipText("Alt+S");
         BtnToolKasir.setEnabled(false);
         BtnToolKasir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnToolKasir.setIconTextGap(2);
+        BtnToolKasir.setIconTextGap(4);
         BtnToolKasir.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnToolKasir.setName("BtnToolKasir"); // NOI18N
         BtnToolKasir.setPreferredSize(new java.awt.Dimension(110, 38));
@@ -7394,7 +6935,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnLog.setText("Log In");
         BtnLog.setToolTipText("Alt+L");
         BtnLog.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnLog.setIconTextGap(2);
+        BtnLog.setIconTextGap(4);
         BtnLog.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnLog.setName("BtnLog"); // NOI18N
         BtnLog.setPreferredSize(new java.awt.Dimension(78, 38));
@@ -7411,7 +6952,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnClose.setText("Keluar");
         BtnClose.setToolTipText("Alt+U");
         BtnClose.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnClose.setIconTextGap(2);
+        BtnClose.setIconTextGap(4);
         BtnClose.setMargin(new java.awt.Insets(0, 0, 0, 0));
         BtnClose.setName("BtnClose"); // NOI18N
         BtnClose.setPreferredSize(new java.awt.Dimension(80, 38));
@@ -7600,6 +7141,7 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu1.setToolTipText("Alt+A");
         jMenu1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu1.setIconTextGap(4);
         jMenu1.setName("jMenu1"); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(80, 26));
 
@@ -7679,7 +7221,7 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu5.setToolTipText("Alt+P");
         jMenu5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenu5.setIconTextGap(3);
+        jMenu5.setIconTextGap(4);
         jMenu5.setName("jMenu5"); // NOI18N
         jMenu5.setPreferredSize(new java.awt.Dimension(126, 26));
 
@@ -7782,6 +7324,7 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu6.setToolTipText("Alt+I");
         jMenu6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu6.setIconTextGap(4);
         jMenu6.setName("jMenu6"); // NOI18N
         jMenu6.setPreferredSize(new java.awt.Dimension(88, 26));
 
@@ -8074,6 +7617,7 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu7.setToolTipText("Alt+N");
         jMenu7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu7.setIconTextGap(4);
         jMenu7.setName("jMenu7"); // NOI18N
         jMenu7.setPreferredSize(new java.awt.Dimension(137, 26));
 
@@ -8306,6 +7850,7 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setToolTipText("Alt+G");
         jMenu4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu4.setIconTextGap(4);
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(121, 26));
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -24825,9 +24370,19 @@ public class frmUtama extends javax.swing.JFrame {
         if(internalFrame1.getWidth()<(BtnMenu.getWidth()+BtnToolReg.getWidth()+btnToolIGD.getWidth()+
                 btnToolLab.getWidth()+btnToolRad.getWidth()+BtnToolJualObat.getWidth()+BtnToolKamnap.getWidth()+
                 BtnToolKasir.getWidth()+BtnLog.getWidth()+BtnClose.getWidth()+8)){
-            internalFrame1.setSize(new Dimension(PanelUtama.getWidth(),90));
+            // internalFrame1.setSize(new Dimension(PanelUtama.getWidth(),90));
+            setToolbarHeightSmc(90);
         }else{
-            internalFrame1.setSize(new Dimension(PanelUtama.getWidth(),44));
+            // internalFrame1.setSize(new Dimension(PanelUtama.getWidth(),44));
+            setToolbarHeightSmc(44);
+        }
+    }
+
+    private void setToolbarHeightSmc(int height) {
+        Dimension size = internalFrame1.getPreferredSize();
+        if (height != size.height) {
+            internalFrame1.setPreferredSize(new Dimension(size.width, height));
+            internalFrame1.revalidate();
         }
     }
 
@@ -45601,7 +45156,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKategoriPerpustakaan = new widget.ButtonBig();
         btnKategoriPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_document-open_118911.png")));
         btnKategoriPerpustakaan.setText("Kategori Koleksi");
-        btnKategoriPerpustakaan.setIconTextGap(0);
         btnKategoriPerpustakaan.setName("btnKategoriPerpustakaan");
         btnKategoriPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKategoriPerpustakaan.addActionListener(this::btnKategoriPerpustakaanActionPerformed);
@@ -45609,7 +45163,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisPerpustakaan = new widget.ButtonBig();
         btnJenisPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Untitled-1-02_3775448.png")));
         btnJenisPerpustakaan.setText("Jenis Koleksi");
-        btnJenisPerpustakaan.setIconTextGap(0);
         btnJenisPerpustakaan.setName("btnJenisPerpustakaan");
         btnJenisPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisPerpustakaan.addActionListener(this::btnJenisPerpustakaanActionPerformed);
@@ -45617,7 +45170,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRuangPerpustakaan = new widget.ButtonBig();
         btnRuangPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_City_728922.png")));
         btnRuangPerpustakaan.setText("Ruang Perpustakaan");
-        btnRuangPerpustakaan.setIconTextGap(0);
         btnRuangPerpustakaan.setName("btnRuangPerpustakaan");
         btnRuangPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRuangPerpustakaan.addActionListener(this::btnRuangPerpustakaanActionPerformed);
@@ -45625,7 +45177,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengarangPerpustakaan = new widget.ButtonBig();
         btnPengarangPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Teacher_131497.png")));
         btnPengarangPerpustakaan.setText("Pengarang/Penulis");
-        btnPengarangPerpustakaan.setIconTextGap(0);
         btnPengarangPerpustakaan.setName("btnPengarangPerpustakaan");
         btnPengarangPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengarangPerpustakaan.addActionListener(this::btnPengarangPerpustakaanActionPerformed);
@@ -45633,7 +45184,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenerbitPerpustakaan = new widget.ButtonBig();
         btnPenerbitPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_package_editors_109.png")));
         btnPenerbitPerpustakaan.setText("Penerbit Koleksi");
-        btnPenerbitPerpustakaan.setIconTextGap(0);
         btnPenerbitPerpustakaan.setName("btnPenerbitPerpustakaan");
         btnPenerbitPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenerbitPerpustakaan.addActionListener(this::btnPenerbitPerpustakaanActionPerformed);
@@ -45641,7 +45191,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKoleksiPerpustakaan = new widget.ButtonBig();
         btnKoleksiPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_General_Office_61_3592836.png")));
         btnKoleksiPerpustakaan.setText("Koleksi Perpustakaan");
-        btnKoleksiPerpustakaan.setIconTextGap(0);
         btnKoleksiPerpustakaan.setName("btnKoleksiPerpustakaan");
         btnKoleksiPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKoleksiPerpustakaan.addActionListener(this::btnKoleksiPerpustakaanActionPerformed);
@@ -45649,7 +45198,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnInventarisPerpustakaan = new widget.ButtonBig();
         btnInventarisPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_library_47990.png")));
         btnInventarisPerpustakaan.setText("Inventaris Perpustakaan");
-        btnInventarisPerpustakaan.setIconTextGap(0);
         btnInventarisPerpustakaan.setName("btnInventarisPerpustakaan");
         btnInventarisPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnInventarisPerpustakaan.addActionListener(this::btnInventarisPerpustakaanActionPerformed);
@@ -45657,7 +45205,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengaturanPeminjamanPerpustakaan = new widget.ButtonBig();
         btnPengaturanPeminjamanPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_EditDocument_728933.png")));
         btnPengaturanPeminjamanPerpustakaan.setText("Pengaturan Peminjaman");
-        btnPengaturanPeminjamanPerpustakaan.setIconTextGap(0);
         btnPengaturanPeminjamanPerpustakaan.setName("btnPengaturanPeminjamanPerpustakaan");
         btnPengaturanPeminjamanPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengaturanPeminjamanPerpustakaan.addActionListener(this::btnPengaturanPeminjamanPerpustakaanActionPerformed);
@@ -45665,7 +45212,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDendaPerpustakaan = new widget.ButtonBig();
         btnDendaPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Wallet_3387286.png")));
         btnDendaPerpustakaan.setText("Denda Perpustakaan");
-        btnDendaPerpustakaan.setIconTextGap(0);
         btnDendaPerpustakaan.setName("btnDendaPerpustakaan");
         btnDendaPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDendaPerpustakaan.addActionListener(this::btnDendaPerpustakaanActionPerformed);
@@ -45673,7 +45219,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAnggotaPerpustakaan = new widget.ButtonBig();
         btnAnggotaPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_website_-_male_user_3440844.png")));
         btnAnggotaPerpustakaan.setText("Anggota Perpustakaan");
-        btnAnggotaPerpustakaan.setIconTextGap(0);
         btnAnggotaPerpustakaan.setName("btnAnggotaPerpustakaan");
         btnAnggotaPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAnggotaPerpustakaan.addActionListener(this::btnAnggotaPerpustakaanActionPerformed);
@@ -45681,7 +45226,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPeminjamanPerpustakaan = new widget.ButtonBig();
         btnPeminjamanPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_diagram-07_35577.png")));
         btnPeminjamanPerpustakaan.setText("Peminjaman Koleksi Perpustakaan");
-        btnPeminjamanPerpustakaan.setIconTextGap(0);
         btnPeminjamanPerpustakaan.setName("btnPeminjamanPerpustakaan");
         btnPeminjamanPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPeminjamanPerpustakaan.addActionListener(this::btnPeminjamanPerpustakaanActionPerformed);
@@ -45689,7 +45233,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarDendaPerpustakaan = new widget.ButtonBig();
         btnBayarDendaPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_wallet_money_sale_shop_4177574.png")));
         btnBayarDendaPerpustakaan.setText("Bayar Denda Perpustakaan");
-        btnBayarDendaPerpustakaan.setIconTextGap(0);
         btnBayarDendaPerpustakaan.setName("btnBayarDendaPerpustakaan");
         btnBayarDendaPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarDendaPerpustakaan.addActionListener(this::btnBayarDendaPerpustakaanActionPerformed);
@@ -45697,7 +45240,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenelitianPerpustakaan = new widget.ButtonBig();
         btnPenelitianPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_research_87460.png")));
         btnPenelitianPerpustakaan.setText("Koleksi Penelitian");
-        btnPenelitianPerpustakaan.setIconTextGap(0);
         btnPenelitianPerpustakaan.setName("btnPenelitianPerpustakaan");
         btnPenelitianPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenelitianPerpustakaan.addActionListener(this::btnPenelitianPerpustakaanActionPerformed);
@@ -45705,7 +45247,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnEbookPerpustakaan = new widget.ButtonBig();
         btnEbookPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_website_-_bookmark_3440843.png")));
         btnEbookPerpustakaan.setText("Data Koleksi Ebook");
-        btnEbookPerpustakaan.setIconTextGap(0);
         btnEbookPerpustakaan.setName("btnEbookPerpustakaan");
         btnEbookPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnEbookPerpustakaan.addActionListener(this::btnEbookPerpustakaanActionPerformed);
@@ -45713,7 +45254,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCariEbook = new widget.ButtonBig();
         btnCariEbook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Book_728912.png")));
         btnCariEbook.setText("Cari Koleksi Ebook");
-        btnCariEbook.setIconTextGap(0);
         btnCariEbook.setName("btnCariEbook");
         btnCariEbook.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCariEbook.addActionListener(this::btnCariEbookActionPerformed);
@@ -45721,7 +45261,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPestControl = new widget.ButtonBig();
         btnPestControl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_world_eco_leaves_2992451.png")));
         btnPestControl.setText("Pest Control");
-        btnPestControl.setIconTextGap(0);
         btnPestControl.setName("btnPestControl");
         btnPestControl.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPestControl.addActionListener(this::btnPestControlActionPerformed);
@@ -45729,7 +45268,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMutuAirLimbah = new widget.ButtonBig();
         btnMutuAirLimbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Care_ecology_water_hand_2992434.png")));
         btnMutuAirLimbah.setText("Mutu Air Limbah");
-        btnMutuAirLimbah.setIconTextGap(0);
         btnMutuAirLimbah.setName("btnMutuAirLimbah");
         btnMutuAirLimbah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMutuAirLimbah.addActionListener(this::btnMutuAirLimbahActionPerformed);
@@ -45737,7 +45275,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCariInventarisPerpustakaan = new widget.ButtonBig();
         btnCariInventarisPerpustakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_data_1421637.png")));
         btnCariInventarisPerpustakaan.setText("Cari Inventaris Perpustakaan");
-        btnCariInventarisPerpustakaan.setIconTextGap(0);
         btnCariInventarisPerpustakaan.setName("btnCariInventarisPerpustakaan");
         btnCariInventarisPerpustakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCariInventarisPerpustakaan.addActionListener(this::btnCariInventarisPerpustakaanActionPerformed);
@@ -45745,7 +45282,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisCideraK3 = new widget.ButtonBig();
         btnJenisCideraK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/ruber.png")));
         btnJenisCideraK3.setText("Jenis Cidera K3");
-        btnJenisCideraK3.setIconTextGap(0);
         btnJenisCideraK3.setName("btnJenisCideraK3");
         btnJenisCideraK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisCideraK3.addActionListener(this::btnJenisCideraK3ActionPerformed);
@@ -45753,7 +45289,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenyebabKecelakaanK3 = new widget.ButtonBig();
         btnPenyebabKecelakaanK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_sponge_2___331505.png")));
         btnPenyebabKecelakaanK3.setText("Penyebab Kecelakaan K3");
-        btnPenyebabKecelakaanK3.setIconTextGap(0);
         btnPenyebabKecelakaanK3.setName("btnPenyebabKecelakaanK3");
         btnPenyebabKecelakaanK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenyebabKecelakaanK3.addActionListener(this::btnPenyebabKecelakaanK3ActionPerformed);
@@ -45761,7 +45296,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisLukaK3 = new widget.ButtonBig();
         btnJenisLukaK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_h3_19725.png")));
         btnJenisLukaK3.setText("Jenis Luka K3");
-        btnJenisLukaK3.setIconTextGap(0);
         btnJenisLukaK3.setName("btnJenisLukaK3");
         btnJenisLukaK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisLukaK3.addActionListener(this::btnJenisLukaK3ActionPerformed);
@@ -45769,7 +45303,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLokasiKejadianK3 = new widget.ButtonBig();
         btnLokasiKejadianK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_arrows_blue_61552.png")));
         btnLokasiKejadianK3.setText("Lokasi Kejadian K3");
-        btnLokasiKejadianK3.setIconTextGap(0);
         btnLokasiKejadianK3.setName("btnLokasiKejadianK3");
         btnLokasiKejadianK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLokasiKejadianK3.addActionListener(this::btnLokasiKejadianK3ActionPerformed);
@@ -45777,7 +45310,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDampakCideraK3 = new widget.ButtonBig();
         btnDampakCideraK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ambulance_45490.png")));
         btnDampakCideraK3.setText("Dampak Cidera K3");
-        btnDampakCideraK3.setIconTextGap(0);
         btnDampakCideraK3.setName("btnDampakCideraK3");
         btnDampakCideraK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDampakCideraK3.addActionListener(this::btnDampakCideraK3ActionPerformed);
@@ -45785,7 +45317,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikLimbahDomestikPerBulan = new widget.ButtonBig();
         btnGrafikLimbahDomestikPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikLimbahDomestikPerBulan.setText("Limbah Padat Domestik Medis Per Bulan");
-        btnGrafikLimbahDomestikPerBulan.setIconTextGap(0);
         btnGrafikLimbahDomestikPerBulan.setName("btnGrafikLimbahDomestikPerBulan");
         btnGrafikLimbahDomestikPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLimbahDomestikPerBulan.addActionListener(this::btnGrafikLimbahDomestikPerBulanActionPerformed);
@@ -45793,7 +45324,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisPekerjaanK3 = new widget.ButtonBig();
         btnJenisPekerjaanK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_applications-engineering_8830.png")));
         btnJenisPekerjaanK3.setText("Jenis Pekerjaan K3");
-        btnJenisPekerjaanK3.setIconTextGap(0);
         btnJenisPekerjaanK3.setName("btnJenisPekerjaanK3");
         btnJenisPekerjaanK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisPekerjaanK3.addActionListener(this::btnJenisPekerjaanK3ActionPerformed);
@@ -45801,7 +45331,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBagianTubuhK3 = new widget.ButtonBig();
         btnBagianTubuhK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/plaster.png")));
         btnBagianTubuhK3.setText("Bagian Tubuh K3");
-        btnBagianTubuhK3.setIconTextGap(0);
         btnBagianTubuhK3.setName("btnBagianTubuhK3");
         btnBagianTubuhK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBagianTubuhK3.addActionListener(this::btnBagianTubuhK3ActionPerformed);
@@ -45809,7 +45338,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPeristiwaK3 = new widget.ButtonBig();
         btnPeristiwaK3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Artboard_18_3874677.png")));
         btnPeristiwaK3.setText("Peristiwa K3");
-        btnPeristiwaK3.setIconTextGap(0);
         btnPeristiwaK3.setName("btnPeristiwaK3");
         btnPeristiwaK3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPeristiwaK3.addActionListener(this::btnPeristiwaK3ActionPerformed);
@@ -45817,7 +45345,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerTahun= new widget.ButtonBig();
         btnGrafikK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikK3PerTahun.setText("K3 Per Tahun");
-        btnGrafikK3PerTahun.setIconTextGap(0);
         btnGrafikK3PerTahun.setName("btnGrafikK3PerTahun");
         btnGrafikK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerTahun.addActionListener(this::btnGrafikK3PerTahunActionPerformed);
@@ -45825,7 +45352,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerBulan= new widget.ButtonBig();
         btnGrafikK3PerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikK3PerBulan.setText("K3 Per Bulan");
-        btnGrafikK3PerBulan.setIconTextGap(0);
         btnGrafikK3PerBulan.setName("btnGrafikK3PerBulan");
         btnGrafikK3PerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerBulan.addActionListener(this::btnGrafikK3PerBulanActionPerformed);
@@ -45833,7 +45359,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerTanggal= new widget.ButtonBig();
         btnGrafikK3PerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikK3PerTanggal.setText("K3 Per Tanggal");
-        btnGrafikK3PerTanggal.setIconTextGap(0);
         btnGrafikK3PerTanggal.setName("btnGrafikK3PerTanggal");
         btnGrafikK3PerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerTanggal.addActionListener(this::btnGrafikK3PerTanggalActionPerformed);
@@ -45841,7 +45366,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerJenisCidera= new widget.ButtonBig();
         btnGrafikK3PerJenisCidera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikK3PerJenisCidera.setText("K3 Per Jenis Cidera");
-        btnGrafikK3PerJenisCidera.setIconTextGap(0);
         btnGrafikK3PerJenisCidera.setName("btnGrafikK3PerJenisCidera");
         btnGrafikK3PerJenisCidera.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerJenisCidera.addActionListener(this::btnGrafikK3PerJenisCideraActionPerformed);
@@ -45849,7 +45373,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerPenyebab= new widget.ButtonBig();
         btnGrafikK3PerPenyebab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikK3PerPenyebab.setText("K3 Per Penyebab Kecelakaan");
-        btnGrafikK3PerPenyebab.setIconTextGap(0);
         btnGrafikK3PerPenyebab.setName("btnGrafikK3PerPenyebab");
         btnGrafikK3PerPenyebab.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerPenyebab.addActionListener(this::btnGrafikK3PerPenyebabActionPerformed);
@@ -45857,7 +45380,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerJenisLuka= new widget.ButtonBig();
         btnGrafikK3PerJenisLuka.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikK3PerJenisLuka.setText("K3 Per Jenis Luka");
-        btnGrafikK3PerJenisLuka.setIconTextGap(0);
         btnGrafikK3PerJenisLuka.setName("btnGrafikK3PerJenisLuka");
         btnGrafikK3PerJenisLuka.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerJenisLuka.addActionListener(this::btnGrafikK3PerJenisLukaActionPerformed);
@@ -45865,7 +45387,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerLokasiKejadian= new widget.ButtonBig();
         btnGrafikK3PerLokasiKejadian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikK3PerLokasiKejadian.setText("K3 Per Lokasi Kejadian");
-        btnGrafikK3PerLokasiKejadian.setIconTextGap(0);
         btnGrafikK3PerLokasiKejadian.setName("btnGrafikK3PerLokasiKejadian");
         btnGrafikK3PerLokasiKejadian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerLokasiKejadian.addActionListener(this::btnGrafikK3PerLokasiKejadianActionPerformed);
@@ -45873,7 +45394,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerDampakCidera= new widget.ButtonBig();
         btnGrafikK3PerDampakCidera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikK3PerDampakCidera.setText("K3 Per Dampak Cidera");
-        btnGrafikK3PerDampakCidera.setIconTextGap(0);
         btnGrafikK3PerDampakCidera.setName("btnGrafikK3PerDampakCidera");
         btnGrafikK3PerDampakCidera.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerDampakCidera.addActionListener(this::btnGrafikK3PerDampakCideraActionPerformed);
@@ -45881,7 +45401,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerJenisPekerjaan= new widget.ButtonBig();
         btnGrafikK3PerJenisPekerjaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikK3PerJenisPekerjaan.setText("K3 Per Jenis Pekerjaan");
-        btnGrafikK3PerJenisPekerjaan.setIconTextGap(0);
         btnGrafikK3PerJenisPekerjaan.setName("btnGrafikK3PerJenisPekerjaan");
         btnGrafikK3PerJenisPekerjaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerJenisPekerjaan.addActionListener(this::btnGrafikK3PerJenisPekerjaanActionPerformed);
@@ -45889,7 +45408,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikK3PerBagianTubuh= new widget.ButtonBig();
         btnGrafikK3PerBagianTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikK3PerBagianTubuh.setText("K3 Per Bagian Tubuh");
-        btnGrafikK3PerBagianTubuh.setIconTextGap(0);
         btnGrafikK3PerBagianTubuh.setName("btnGrafikK3PerBagianTubuh");
         btnGrafikK3PerBagianTubuh.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikK3PerBagianTubuh.addActionListener(this::btnGrafikK3PerBagianTubuhActionPerformed);
@@ -45897,7 +45415,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisCideraK3PerTahun = new widget.ButtonBig();
         btnJenisCideraK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/ruber.png")));
         btnJenisCideraK3PerTahun.setText("Jenis Cidera K3 Per Tahun");
-        btnJenisCideraK3PerTahun.setIconTextGap(0);
         btnJenisCideraK3PerTahun.setName("btnJenisCideraK3PerTahun");
         btnJenisCideraK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisCideraK3PerTahun.addActionListener(this::btnJenisCideraK3PerTahunActionPerformed);
@@ -45905,7 +45422,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenyebabKecelakaanK3PerTahun = new widget.ButtonBig();
         btnPenyebabKecelakaanK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_sponge_2___331505.png")));
         btnPenyebabKecelakaanK3PerTahun.setText("Penyebab Kecelakaan K3 Per Tahun");
-        btnPenyebabKecelakaanK3PerTahun.setIconTextGap(0);
         btnPenyebabKecelakaanK3PerTahun.setName("btnPenyebabKecelakaanK3PerTahun");
         btnPenyebabKecelakaanK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenyebabKecelakaanK3PerTahun.addActionListener(this::btnPenyebabKecelakaanK3PerTahunActionPerformed);
@@ -45913,7 +45429,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisLukaK3PerTahun = new widget.ButtonBig();
         btnJenisLukaK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_h3_19725.png")));
         btnJenisLukaK3PerTahun.setText("Jenis Luka K3 Per Tahun");
-        btnJenisLukaK3PerTahun.setIconTextGap(0);
         btnJenisLukaK3PerTahun.setName("btnJenisLukaK3PerTahun");
         btnJenisLukaK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisLukaK3PerTahun.addActionListener(this::btnJenisLukaK3PerTahunActionPerformed);
@@ -45921,7 +45436,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLokasiKejadianK3PerTahun = new widget.ButtonBig();
         btnLokasiKejadianK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_arrows_blue_61552.png")));
         btnLokasiKejadianK3PerTahun.setText("Lokasi Kejadian K3 Per Tahun");
-        btnLokasiKejadianK3PerTahun.setIconTextGap(0);
         btnLokasiKejadianK3PerTahun.setName("btnLokasiKejadianK3PerTahun");
         btnLokasiKejadianK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLokasiKejadianK3PerTahun.addActionListener(this::btnLokasiKejadianK3PerTahunActionPerformed);
@@ -45929,7 +45443,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDampakCideraK3PerTahun = new widget.ButtonBig();
         btnDampakCideraK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ambulance_45490.png")));
         btnDampakCideraK3PerTahun.setText("Dampak Cidera K3 Per Tahun");
-        btnDampakCideraK3PerTahun.setIconTextGap(0);
         btnDampakCideraK3PerTahun.setName("btnDampakCideraK3PerTahun");
         btnDampakCideraK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDampakCideraK3PerTahun.addActionListener(this::btnDampakCideraK3PerTahunActionPerformed);
@@ -45937,7 +45450,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisPekerjaanK3PerTahun = new widget.ButtonBig();
         btnJenisPekerjaanK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_applications-engineering_8830.png")));
         btnJenisPekerjaanK3PerTahun.setText("Jenis Pekerjaan K3 Per Tahun");
-        btnJenisPekerjaanK3PerTahun.setIconTextGap(0);
         btnJenisPekerjaanK3PerTahun.setName("btnJenisPekerjaanK3PerTahun");
         btnJenisPekerjaanK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisPekerjaanK3PerTahun.addActionListener(this::btnJenisPekerjaanK3PerTahunActionPerformed);
@@ -45945,7 +45457,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBagianTubuhK3PerTahun = new widget.ButtonBig();
         btnBagianTubuhK3PerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/plaster.png")));
         btnBagianTubuhK3PerTahun.setText("Bagian Tubuh K3 Per Tahun");
-        btnBagianTubuhK3PerTahun.setIconTextGap(0);
         btnBagianTubuhK3PerTahun.setName("btnBagianTubuhK3PerTahun");
         btnBagianTubuhK3PerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBagianTubuhK3PerTahun.addActionListener(this::btnBagianTubuhK3PerTahunActionPerformed);
@@ -45953,7 +45464,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningRawatJalan = new widget.ButtonBig();
         btnSkriningRawatJalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/IconSkriningRalan.png")));
         btnSkriningRawatJalan.setText("Skrining Rawat Jalan");
-        btnSkriningRawatJalan.setIconTextGap(0);
         btnSkriningRawatJalan.setName("btnSkriningRawatJalan");
         btnSkriningRawatJalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRawatJalan.addActionListener(this::btnSkriningRawatJalanActionPerformed);
@@ -45961,7 +45471,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSHistoriPelayanan = new widget.ButtonBig();
         btnBPJSHistoriPelayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSHistoriPelayanan.setText("Histori Pelayanan BPJS");
-        btnBPJSHistoriPelayanan.setIconTextGap(0);
         btnBPJSHistoriPelayanan.setName("btnBPJSHistoriPelayanan");
         btnBPJSHistoriPelayanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSHistoriPelayanan.addActionListener(this::btnBPJSHistoriPelayananActionPerformed);
@@ -45969,7 +45478,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapMutasiBerkas = new widget.ButtonBig();
         btnRekapMutasiBerkas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_group_data_45163.png")));
         btnRekapMutasiBerkas.setText("Rekap Mutasi Berkas");
-        btnRekapMutasiBerkas.setIconTextGap(0);
         btnRekapMutasiBerkas.setName("btnRekapMutasiBerkas");
         btnRekapMutasiBerkas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapMutasiBerkas.addActionListener(this::btnRekapMutasiBerkasActionPerformed);
@@ -45977,7 +45485,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningRalanPernapasanPerTahun = new widget.ButtonBig();
         btnSkriningRalanPernapasanPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/skrining.png")));
         btnSkriningRalanPernapasanPerTahun.setText("Skrining Pernapasan Ralan Per Tahun");
-        btnSkriningRalanPernapasanPerTahun.setIconTextGap(0);
         btnSkriningRalanPernapasanPerTahun.setName("btnSkriningRalanPernapasanPerTahun");
         btnSkriningRalanPernapasanPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRalanPernapasanPerTahun.addActionListener(this::btnSkriningRalanPernapasanPerTahunActionPerformed);
@@ -45985,7 +45492,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanBarangMedis = new widget.ButtonBig();
         btnPengajuanBarangMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ordering_49597.png")));
         btnPengajuanBarangMedis.setText("Pengajuan Obat & BHP");
-        btnPengajuanBarangMedis.setIconTextGap(0);
         btnPengajuanBarangMedis.setName("btnPengajuanBarangMedis");
         btnPengajuanBarangMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanBarangMedis.addActionListener(this::btnPengajuanBarangMedisActionPerformed);
@@ -45993,7 +45499,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanBarangNonMedis = new widget.ButtonBig();
         btnPengajuanBarangNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_distributor-report_49583.png")));
         btnPengajuanBarangNonMedis.setText("Pengajuan Barang Non Medis");
-        btnPengajuanBarangNonMedis.setIconTextGap(0);
         btnPengajuanBarangNonMedis.setName("btnPengajuanBarangNonMedis");
         btnPengajuanBarangNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanBarangNonMedis.addActionListener(this::btnPengajuanBarangNonMedisActionPerformed);
@@ -46001,7 +45506,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikKunjunganRanapBulan = new widget.ButtonBig();
         btnGrafikKunjunganRanapBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikKunjunganRanapBulan.setText("Kunjungan Ranap Per Bulan");
-        btnGrafikKunjunganRanapBulan.setIconTextGap(0);
         btnGrafikKunjunganRanapBulan.setName("btnGrafikKunjunganRanapBulan");
         btnGrafikKunjunganRanapBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganRanapBulan.addActionListener(this::btnGrafikKunjunganRanapBulanActionPerformed);
@@ -46009,7 +45513,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikKunjunganRanapTanggal = new widget.ButtonBig();
         btnGrafikKunjunganRanapTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikKunjunganRanapTanggal.setText("Kunjungan Ranap Per Tanggal");
-        btnGrafikKunjunganRanapTanggal.setIconTextGap(0);
         btnGrafikKunjunganRanapTanggal.setName("btnGrafikKunjunganRanapTanggal");
         btnGrafikKunjunganRanapTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganRanapTanggal.addActionListener(this::btnGrafikKunjunganRanapTanggalActionPerformed);
@@ -46017,7 +45520,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikKunjunganRanapRuang = new widget.ButtonBig();
         btnGrafikKunjunganRanapRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikKunjunganRanapRuang.setText("Kunjungan Ranap Per Ruang");
-        btnGrafikKunjunganRanapRuang.setIconTextGap(0);
         btnGrafikKunjunganRanapRuang.setName("btnGrafikKunjunganRanapRuang");
         btnGrafikKunjunganRanapRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKunjunganRanapRuang.addActionListener(this::btnGrafikKunjunganRanapRuangActionPerformed);
@@ -46025,7 +45527,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKunjunganBangsalTahun = new widget.ButtonBig();
         btnKunjunganBangsalTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Company_132030.png")));
         btnKunjunganBangsalTahun.setText("Masuk Ruang Per Tahun");
-        btnKunjunganBangsalTahun.setIconTextGap(0);
         btnKunjunganBangsalTahun.setName("btnKunjunganBangsalTahun");
         btnKunjunganBangsalTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKunjunganBangsalTahun.addActionListener(this::btnKunjunganBangsalTahunActionPerformed);
@@ -46033,7 +45534,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikJenjangJabatanPegawai = new widget.ButtonBig();
         btnGrafikJenjangJabatanPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikJenjangJabatanPegawai.setText("Pegawai Per Jenjang Jabatan");
-        btnGrafikJenjangJabatanPegawai.setIconTextGap(0);
         btnGrafikJenjangJabatanPegawai.setName("btnGrafikJenjangJabatanPegawai");
         btnGrafikJenjangJabatanPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikJenjangJabatanPegawai.addActionListener(this::btnGrafikJenjangJabatanPegawaiActionPerformed);
@@ -46041,7 +45541,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikBidangPegawai = new widget.ButtonBig();
         btnGrafikBidangPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikBidangPegawai.setText("Pegawai Per Bidang/Bagian");
-        btnGrafikBidangPegawai.setIconTextGap(0);
         btnGrafikBidangPegawai.setName("btnGrafikBidangPegawai");
         btnGrafikBidangPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikBidangPegawai.addActionListener(this::btnGrafikBidangPegawaiActionPerformed);
@@ -46049,7 +45548,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikDepartemenPegawai = new widget.ButtonBig();
         btnGrafikDepartemenPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikDepartemenPegawai.setText("Pegawai Per Departemen");
-        btnGrafikDepartemenPegawai.setIconTextGap(0);
         btnGrafikDepartemenPegawai.setName("btnGrafikDepartemenPegawai");
         btnGrafikDepartemenPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikDepartemenPegawai.addActionListener(this::btnGrafikDepartemenPegawaiActionPerformed);
@@ -46057,7 +45555,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPendidikanPegawai = new widget.ButtonBig();
         btnGrafikPendidikanPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPendidikanPegawai.setText("Pegawai Per Pendidikan");
-        btnGrafikPendidikanPegawai.setIconTextGap(0);
         btnGrafikPendidikanPegawai.setName("btnGrafikPendidikanPegawai");
         btnGrafikPendidikanPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPendidikanPegawai.addActionListener(this::btnGrafikPendidikanPegawaiActionPerformed);
@@ -46065,7 +45562,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikStatusWPPegawai = new widget.ButtonBig();
         btnGrafikStatusWPPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikStatusWPPegawai.setText("Pegawai Per Status WP");
-        btnGrafikStatusWPPegawai.setIconTextGap(0);
         btnGrafikStatusWPPegawai.setName("btnGrafikStatusWPPegawai");
         btnGrafikStatusWPPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusWPPegawai.addActionListener(this::btnGrafikStatusWPPegawaiActionPerformed);
@@ -46073,7 +45569,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikStatusKerjaPegawai = new widget.ButtonBig();
         btnGrafikStatusKerjaPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikStatusKerjaPegawai.setText("Pegawai Per Status Kerja");
-        btnGrafikStatusKerjaPegawai.setIconTextGap(0);
         btnGrafikStatusKerjaPegawai.setName("btnGrafikStatusKerjaPegawai");
         btnGrafikStatusKerjaPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusKerjaPegawai.addActionListener(this::btnGrafikStatusKerjaPegawaiActionPerformed);
@@ -46081,7 +45576,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikStatusPulangRanap = new widget.ButtonBig();
         btnGrafikStatusPulangRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikStatusPulangRanap.setText("Status Pulang Ranap");
-        btnGrafikStatusPulangRanap.setIconTextGap(0);
         btnGrafikStatusPulangRanap.setName("btnGrafikStatusPulangRanap");
         btnGrafikStatusPulangRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikStatusPulangRanap.addActionListener(this::btnGrafikStatusPulangRanapActionPerformed);
@@ -46089,7 +45583,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKIPPasienRanap = new widget.ButtonBig();
         btnKIPPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reports_49615.png")));
         btnKIPPasienRanap.setText("KIP Pasien Ranap");
-        btnKIPPasienRanap.setIconTextGap(0);
         btnKIPPasienRanap.setName("btnKIPPasienRanap");
         btnKIPPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKIPPasienRanap.addActionListener(this::btnKIPPasienRanapActionPerformed);
@@ -46097,7 +45590,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKIPPasienRalan = new widget.ButtonBig();
         btnKIPPasienRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reports_49615.png")));
         btnKIPPasienRalan.setText("KIP Pasien Ralan");
-        btnKIPPasienRalan.setIconTextGap(0);
         btnKIPPasienRalan.setName("btnKIPPasienRalan");
         btnKIPPasienRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKIPPasienRalan.addActionListener(this::btnKIPPasienRalanActionPerformed);
@@ -46105,7 +45597,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingDokterDPJPVClaim = new widget.ButtonBig();
         btnMappingDokterDPJPVClaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnMappingDokterDPJPVClaim.setText("Mapping Dokter DPJP VClaim");
-        btnMappingDokterDPJPVClaim.setIconTextGap(0);
         btnMappingDokterDPJPVClaim.setName("btnMappingDokterDPJPVClaim");
         btnMappingDokterDPJPVClaim.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingDokterDPJPVClaim.addActionListener(this::btnMappingDokterDPJPVClaimActionPerformed);
@@ -46113,7 +45604,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriaseSkala1 = new widget.ButtonBig();
         btnMasterTriaseSkala1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cpr.png")));
         btnMasterTriaseSkala1.setText("Master Triase Skala 1");
-        btnMasterTriaseSkala1.setIconTextGap(0);
         btnMasterTriaseSkala1.setName("btnMasterTriaseSkala1");
         btnMasterTriaseSkala1.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriaseSkala1.addActionListener(this::btnMasterTriaseSkala1ActionPerformed);
@@ -46121,7 +45611,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriaseSkala2 = new widget.ButtonBig();
         btnMasterTriaseSkala2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_emergency_45491.png")));
         btnMasterTriaseSkala2.setText("Master Triase Skala 2");
-        btnMasterTriaseSkala2.setIconTextGap(0);
         btnMasterTriaseSkala2.setName("btnMasterTriaseSkala2");
         btnMasterTriaseSkala2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriaseSkala2.addActionListener(this::btnMasterTriaseSkala2ActionPerformed);
@@ -46129,7 +45618,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriaseSkala3 = new widget.ButtonBig();
         btnMasterTriaseSkala3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_dialog-warning_118940.png")));
         btnMasterTriaseSkala3.setText("Master Triase Skala 3");
-        btnMasterTriaseSkala3.setIconTextGap(0);
         btnMasterTriaseSkala3.setName("btnMasterTriaseSkala3");
         btnMasterTriaseSkala3.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriaseSkala3.addActionListener(this::btnMasterTriaseSkala3ActionPerformed);
@@ -46137,7 +45625,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriaseSkala4 = new widget.ButtonBig();
         btnMasterTriaseSkala4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Male-User-Warning_49595.png")));
         btnMasterTriaseSkala4.setText("Master Triase Skala 4");
-        btnMasterTriaseSkala4.setIconTextGap(0);
         btnMasterTriaseSkala4.setName("btnMasterTriaseSkala4");
         btnMasterTriaseSkala4.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriaseSkala4.addActionListener(this::btnMasterTriaseSkala4ActionPerformed);
@@ -46145,7 +45632,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriaseSkala5 = new widget.ButtonBig();
         btnMasterTriaseSkala5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/user-group-new.png")));
         btnMasterTriaseSkala5.setText("Master Triase Skala 5");
-        btnMasterTriaseSkala5.setIconTextGap(0);
         btnMasterTriaseSkala5.setName("btnMasterTriaseSkala5");
         btnMasterTriaseSkala5.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriaseSkala5.addActionListener(this::btnMasterTriaseSkala5ActionPerformed);
@@ -46153,7 +45639,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriasePemeriksaan = new widget.ButtonBig();
         btnMasterTriasePemeriksaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_stethoscope_38717.png")));
         btnMasterTriasePemeriksaan.setText("Master Triase Pemeriksaan");
-        btnMasterTriasePemeriksaan.setIconTextGap(0);
         btnMasterTriasePemeriksaan.setName("btnMasterTriasePemeriksaan");
         btnMasterTriasePemeriksaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriasePemeriksaan.addActionListener(this::btnMasterTriasePemeriksaanActionPerformed);
@@ -46161,7 +45646,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTriaseMacamKasus = new widget.ButtonBig();
         btnMasterTriaseMacamKasus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_briefcase_45523.png")));
         btnMasterTriaseMacamKasus.setText("Master Triase Macam Kasus");
-        btnMasterTriaseMacamKasus.setIconTextGap(0);
         btnMasterTriaseMacamKasus.setName("btnMasterTriaseMacamKasus");
         btnMasterTriaseMacamKasus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTriaseMacamKasus.addActionListener(this::btnMasterTriaseMacamKasusActionPerformed);
@@ -46169,7 +45653,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataTriaseIGD = new widget.ButtonBig();
         btnDataTriaseIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_h2_19724.png")));
         btnDataTriaseIGD.setText("Data Triase IGD");
-        btnDataTriaseIGD.setIconTextGap(0);
         btnDataTriaseIGD.setName("btnDataTriaseIGD");
         btnDataTriaseIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataTriaseIGD.addActionListener(this::btnDataTriaseIGDActionPerformed);
@@ -46177,7 +45660,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPermintaanDiet = new widget.ButtonBig();
         btnRekapPermintaanDiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_fried_rice_3377056.png")));
         btnRekapPermintaanDiet.setText("Rekap Permintaan Diet");
-        btnRekapPermintaanDiet.setIconTextGap(0);
         btnRekapPermintaanDiet.setName("btnRekapPermintaanDiet");
         btnRekapPermintaanDiet.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPermintaanDiet.addActionListener(this::btnRekapPermintaanDietActionPerformed);
@@ -46185,7 +45667,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDaftarPasienRanap = new widget.ButtonBig();
         btnDaftarPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_009_95869.png")));
         btnDaftarPasienRanap.setText("Daftar Pasien Ranap");
-        btnDaftarPasienRanap.setIconTextGap(0);
         btnDaftarPasienRanap.setName("btnDaftarPasienRanap");
         btnDaftarPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDaftarPasienRanap.addActionListener(this::btnDaftarPasienRanapActionPerformed);
@@ -46193,7 +45674,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDaftarPasienRanapTNI = new widget.ButtonBig();
         btnDaftarPasienRanapTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_009_95869.png")));
         btnDaftarPasienRanapTNI.setText("Daftar Pasien Ranap TNI");
-        btnDaftarPasienRanapTNI.setIconTextGap(0);
         btnDaftarPasienRanapTNI.setName("btnDaftarPasienRanapTNI");
         btnDaftarPasienRanapTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDaftarPasienRanapTNI.addActionListener(this::btnDaftarPasienRanapTNIActionPerformed);
@@ -46201,7 +45681,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnfee_visit_dokter = new widget.ButtonBig();
         btnfee_visit_dokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
         btnfee_visit_dokter.setText("Fee Visit Dokter");
-        btnfee_visit_dokter.setIconTextGap(0);
         btnfee_visit_dokter.setName("btnfee_visit_dokter");
         btnfee_visit_dokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnfee_visit_dokter.addActionListener(this::btnfee_visit_dokterActionPerformed);
@@ -46209,7 +45688,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnUser = new widget.ButtonBig();
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
         btnUser.setText("Set User");
-        btnUser.setIconTextGap(0);
         btnUser.setName("btnUser");
         btnUser.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUser.addActionListener(this::btnUserActionPerformed);
@@ -46217,7 +45695,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanAsetInventaris = new widget.ButtonBig();
         btnPengajuanAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reports_49615.png")));
         btnPengajuanAsetInventaris.setText("Pengajuan Aset/Inventaris");
-        btnPengajuanAsetInventaris.setIconTextGap(0);
         btnPengajuanAsetInventaris.setName("btnPengajuanAsetInventaris");
         btnPengajuanAsetInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanAsetInventaris.addActionListener(this::btnPengajuanAsetInventarisActionPerformed);
@@ -46225,7 +45702,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikItemApotekPerJenis = new widget.ButtonBig();
         btnGrafikItemApotekPerJenis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikItemApotekPerJenis.setText("Item Apotek Per Jenis");
-        btnGrafikItemApotekPerJenis.setIconTextGap(0);
         btnGrafikItemApotekPerJenis.setName("btnGrafikItemApotekPerJenis");
         btnGrafikItemApotekPerJenis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikItemApotekPerJenis.addActionListener(this::btnGrafikItemApotekPerJenisActionPerformed);
@@ -46233,7 +45709,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikItemApotekPerKategori = new widget.ButtonBig();
         btnGrafikItemApotekPerKategori.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikItemApotekPerKategori.setText("Item Apotek Per Kategori");
-        btnGrafikItemApotekPerKategori.setIconTextGap(0);
         btnGrafikItemApotekPerKategori.setName("btnGrafikItemApotekPerKategori");
         btnGrafikItemApotekPerKategori.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikItemApotekPerKategori.addActionListener(this::btnGrafikItemApotekPerKategoriActionPerformed);
@@ -46241,7 +45716,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikItemApotekPerGolongan = new widget.ButtonBig();
         btnGrafikItemApotekPerGolongan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikItemApotekPerGolongan.setText("Item Apotek Per Golongan");
-        btnGrafikItemApotekPerGolongan.setIconTextGap(0);
         btnGrafikItemApotekPerGolongan.setName("btnGrafikItemApotekPerGolongan");
         btnGrafikItemApotekPerGolongan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikItemApotekPerGolongan.addActionListener(this::btnGrafikItemApotekPerGolonganActionPerformed);
@@ -46249,7 +45723,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikItemApotekPerIndustriFarmasi = new widget.ButtonBig();
         btnGrafikItemApotekPerIndustriFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikItemApotekPerIndustriFarmasi.setText("Item Apotek Per Industri Farmasi");
-        btnGrafikItemApotekPerIndustriFarmasi.setIconTextGap(0);
         btnGrafikItemApotekPerIndustriFarmasi.setName("btnGrafikItemApotekPerIndustriFarmasi");
         btnGrafikItemApotekPerIndustriFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikItemApotekPerIndustriFarmasi.addActionListener(this::btnGrafikItemApotekPerIndustriFarmasiActionPerformed);
@@ -46257,7 +45730,6 @@ public class frmUtama extends javax.swing.JFrame {
         btn10BesarObatPoli = new widget.ButtonBig();
         btn10BesarObatPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_07_Note_Book_2064482.png")));
         btn10BesarObatPoli.setText("10 Obat Terbanyak Poli");
-        btn10BesarObatPoli.setIconTextGap(0);
         btn10BesarObatPoli.setName("btn10BesarObatPoli");
         btn10BesarObatPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btn10BesarObatPoli.addActionListener(this::btn10BesarObatPoliActionPerformed);
@@ -46265,7 +45737,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPengajuanAsetUrgensi = new widget.ButtonBig();
         btnGrafikPengajuanAsetUrgensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPengajuanAsetUrgensi.setText("Pengajuan Aset Per Urgensi");
-        btnGrafikPengajuanAsetUrgensi.setIconTextGap(0);
         btnGrafikPengajuanAsetUrgensi.setName("btnGrafikPengajuanAsetUrgensi");
         btnGrafikPengajuanAsetUrgensi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPengajuanAsetUrgensi.addActionListener(this::btnGrafikPengajuanAsetUrgensiActionPerformed);
@@ -46273,7 +45744,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPengajuanAsetStatus = new widget.ButtonBig();
         btnGrafikPengajuanAsetStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikPengajuanAsetStatus.setText("Pengajuan Aset Per Status");
-        btnGrafikPengajuanAsetStatus.setIconTextGap(0);
         btnGrafikPengajuanAsetStatus.setName("btnGrafikPengajuanAsetStatus");
         btnGrafikPengajuanAsetStatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPengajuanAsetStatus.addActionListener(this::btnGrafikPengajuanAsetStatusActionPerformed);
@@ -46281,7 +45751,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPengajuanAsetDepartemen = new widget.ButtonBig();
         btnGrafikPengajuanAsetDepartemen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPengajuanAsetDepartemen.setText("Pengajuan Aset Per Departemen");
-        btnGrafikPengajuanAsetDepartemen.setIconTextGap(0);
         btnGrafikPengajuanAsetDepartemen.setName("btnGrafikPengajuanAsetDepartemen");
         btnGrafikPengajuanAsetDepartemen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPengajuanAsetDepartemen.addActionListener(this::btnGrafikPengajuanAsetDepartemenActionPerformed);
@@ -46289,7 +45758,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPengajuanAsetDepartemen = new widget.ButtonBig();
         btnRekapPengajuanAsetDepartemen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_x-office-document-template_25011.png")));
         btnRekapPengajuanAsetDepartemen.setText("Rekap Pengajuan Aset Departemen");
-        btnRekapPengajuanAsetDepartemen.setIconTextGap(0);
         btnRekapPengajuanAsetDepartemen.setName("btnRekapPengajuanAsetDepartemen");
         btnRekapPengajuanAsetDepartemen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPengajuanAsetDepartemen.addActionListener(this::btnRekapPengajuanAsetDepartemenActionPerformed);
@@ -46297,7 +45765,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikKelompokJabatanPegawai = new widget.ButtonBig();
         btnGrafikKelompokJabatanPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikKelompokJabatanPegawai.setText("Pegawai Per Kelompok Jabatan");
-        btnGrafikKelompokJabatanPegawai.setIconTextGap(0);
         btnGrafikKelompokJabatanPegawai.setName("btnGrafikKelompokJabatanPegawai");
         btnGrafikKelompokJabatanPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikKelompokJabatanPegawai.addActionListener(this::btnGrafikKelompokJabatanPegawaiActionPerformed);
@@ -46305,7 +45772,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikRisikoKerjaPegawai = new widget.ButtonBig();
         btnGrafikRisikoKerjaPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikRisikoKerjaPegawai.setText("Pegawai Per Risiko Kerja");
-        btnGrafikRisikoKerjaPegawai.setIconTextGap(0);
         btnGrafikRisikoKerjaPegawai.setName("btnGrafikRisikoKerjaPegawai");
         btnGrafikRisikoKerjaPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikRisikoKerjaPegawai.addActionListener(this::btnGrafikRisikoKerjaPegawaiActionPerformed);
@@ -46313,7 +45779,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikEmergencyIndexPegawai = new widget.ButtonBig();
         btnGrafikEmergencyIndexPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikEmergencyIndexPegawai.setText("Pegawai Per Emergency Index");
-        btnGrafikEmergencyIndexPegawai.setIconTextGap(0);
         btnGrafikEmergencyIndexPegawai.setName("btnGrafikEmergencyIndex");
         btnGrafikEmergencyIndexPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikEmergencyIndexPegawai.addActionListener(this::btnGrafikEmergencyIndexPegawaiActionPerformed);
@@ -46321,7 +45786,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikInventarisRuang = new widget.ButtonBig();
         btnGrafikInventarisRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikInventarisRuang.setText("Jumlah Inventaris Per Ruang");
-        btnGrafikInventarisRuang.setIconTextGap(0);
         btnGrafikInventarisRuang.setName("btnGrafikInventarisRuang");
         btnGrafikInventarisRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikInventarisRuang.addActionListener(this::btnGrafikInventarisRuangActionPerformed);
@@ -46329,7 +45793,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHarianHAIs2 = new widget.ButtonBig();
         btnHarianHAIs2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_house_shelf_1378832.png")));
         btnHarianHAIs2.setText("Harian HAIs 2");
-        btnHarianHAIs2.setIconTextGap(0);
         btnHarianHAIs2.setName("btnHarianHAIs2");
         btnHarianHAIs2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHarianHAIs2.addActionListener(this::btnHarianHAIs2ActionPerformed);
@@ -46337,7 +45800,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikInventarisJenis = new widget.ButtonBig();
         btnGrafikInventarisJenis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikInventarisJenis.setText("Jumlah Inventaris Per Jenis");
-        btnGrafikInventarisJenis.setIconTextGap(0);
         btnGrafikInventarisJenis.setName("btnGrafikInventarisJenis");
         btnGrafikInventarisJenis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikInventarisJenis.addActionListener(this::btnGrafikInventarisJenisActionPerformed);
@@ -46345,7 +45807,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnResumePasien = new widget.ButtonBig();
         btnResumePasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icon-56-document-text_314896.png")));
         btnResumePasien.setText("Resume Pasien Ralan");
-        btnResumePasien.setIconTextGap(0);
         btnResumePasien.setName("btnResumePasien");
         btnResumePasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResumePasien.addActionListener(this::btnResumePasienActionPerformed);
@@ -46353,7 +45814,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnResumePasienRanap = new widget.ButtonBig();
         btnResumePasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icon-56-document-text_314896.png")));
         btnResumePasienRanap.setText("Resume Pasien Ranap");
-        btnResumePasienRanap.setIconTextGap(0);
         btnResumePasienRanap.setName("btnResumePasienRanap");
         btnResumePasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResumePasienRanap.addActionListener(this::btnResumePasienRanapActionPerformed);
@@ -46361,7 +45821,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPerkiraanBiayaRanap = new widget.ButtonBig();
         btnPerkiraanBiayaRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Rank-History_49609.png")));
         btnPerkiraanBiayaRanap.setText("Perkiraan Biaya Ranap");
-        btnPerkiraanBiayaRanap.setIconTextGap(0);
         btnPerkiraanBiayaRanap.setName("btnPerkiraanBiayaRanap");
         btnPerkiraanBiayaRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerkiraanBiayaRanap.addActionListener(this::btnPerkiraanBiayaRanapActionPerformed);
@@ -46369,7 +45828,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapObatPoli = new widget.ButtonBig();
         btnRekapObatPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png")));
         btnRekapObatPoli.setText("Rekap Obat Per Poli");
-        btnRekapObatPoli.setIconTextGap(0);
         btnRekapObatPoli.setName("btnRekapObatPoli");
         btnRekapObatPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapObatPoli.addActionListener(this::btnRekapObatPoliActionPerformed);
@@ -46377,7 +45835,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapObatPasien = new widget.ButtonBig();
         btnRekapObatPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815855_laboratory.png")));
         btnRekapObatPasien.setText("Rekap Obat Per Pasien");
-        btnRekapObatPasien.setIconTextGap(0);
         btnRekapObatPasien.setName("btnRekapObatPasien");
         btnRekapObatPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapObatPasien.addActionListener(this::btnRekapObatPasienActionPerformed);
@@ -46385,7 +45842,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsPasienRuang = new widget.ButtonBig();
         btnGrafikHAIsPasienRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikHAIsPasienRuang.setText("Pasien HAIs Per Ruang");
-        btnGrafikHAIsPasienRuang.setIconTextGap(0);
         btnGrafikHAIsPasienRuang.setName("btnGrafikHAIsPasienRuang");
         btnGrafikHAIsPasienRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsPasienRuang.addActionListener(this::btnGrafikHAIsPasienRuangActionPerformed);
@@ -46393,7 +45849,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsPasienBulan = new widget.ButtonBig();
         btnGrafikHAIsPasienBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikHAIsPasienBulan.setText("Pasien HAIs Per Bulan");
-        btnGrafikHAIsPasienBulan.setIconTextGap(0);
         btnGrafikHAIsPasienBulan.setName("btnGrafikHAIsPasienBulan");
         btnGrafikHAIsPasienBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsPasienBulan.addActionListener(this::btnGrafikHAIsPasienBulanActionPerformed);
@@ -46401,7 +45856,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanPerbaikanInventaris = new widget.ButtonBig();
         btnPermintaanPerbaikanInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ordering_49597.png")));
         btnPermintaanPerbaikanInventaris.setText("Permintaan Perbaikan Inventaris");
-        btnPermintaanPerbaikanInventaris.setIconTextGap(0);
         btnPermintaanPerbaikanInventaris.setName("btnPermintaanPerbaikanInventaris");
         btnPermintaanPerbaikanInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanPerbaikanInventaris.addActionListener(this::btnPermintaanPerbaikanInventarisActionPerformed);
@@ -46409,7 +45863,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsLajuVAP = new widget.ButtonBig();
         btnGrafikHAIsLajuVAP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikHAIsLajuVAP.setText("Laju HAIs VAP Per Ruang");
-        btnGrafikHAIsLajuVAP.setIconTextGap(0);
         btnGrafikHAIsLajuVAP.setName("btnGrafikHAIsLajuVAP");
         btnGrafikHAIsLajuVAP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsLajuVAP.addActionListener(this::btnGrafikHAIsLajuVAPActionPerformed);
@@ -46417,7 +45870,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsLajuIAD = new widget.ButtonBig();
         btnGrafikHAIsLajuIAD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikHAIsLajuIAD.setText("Laju HAIs IAD Per Ruang");
-        btnGrafikHAIsLajuIAD.setIconTextGap(0);
         btnGrafikHAIsLajuIAD.setName("btnGrafikHAIsLajuIAD");
         btnGrafikHAIsLajuIAD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsLajuIAD.addActionListener(this::btnGrafikHAIsLajuIADActionPerformed);
@@ -46425,7 +45877,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsLajuPleb = new widget.ButtonBig();
         btnGrafikHAIsLajuPleb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikHAIsLajuPleb.setText("Laju HAIs Plebitis Per Ruang");
-        btnGrafikHAIsLajuPleb.setIconTextGap(0);
         btnGrafikHAIsLajuPleb.setName("btnGrafikHAIsLajuPleb");
         btnGrafikHAIsLajuPleb.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsLajuPleb.addActionListener(this::btnGrafikHAIsLajuPlebActionPerformed);
@@ -46433,7 +45884,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsLajuISK = new widget.ButtonBig();
         btnGrafikHAIsLajuISK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikHAIsLajuISK.setText("Laju HAIs ISK Per Ruang");
-        btnGrafikHAIsLajuISK.setIconTextGap(0);
         btnGrafikHAIsLajuISK.setName("btnGrafikHAIsLajuISK");
         btnGrafikHAIsLajuISK.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsLajuISK.addActionListener(this::btnGrafikHAIsLajuISKActionPerformed);
@@ -46441,7 +45891,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsLajuILO = new widget.ButtonBig();
         btnGrafikHAIsLajuILO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikHAIsLajuILO.setText("Laju HAIs ILO Per Ruang");
-        btnGrafikHAIsLajuILO.setIconTextGap(0);
         btnGrafikHAIsLajuILO.setName("btnGrafikHAIsLajuILO");
         btnGrafikHAIsLajuILO.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsLajuILO.addActionListener(this::btnGrafikHAIsLajuILOActionPerformed);
@@ -46449,7 +45898,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHAIsLajuHAP = new widget.ButtonBig();
         btnGrafikHAIsLajuHAP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikHAIsLajuHAP.setText("Laju HAIs HAP Per Ruang");
-        btnGrafikHAIsLajuHAP.setIconTextGap(0);
         btnGrafikHAIsLajuHAP.setName("btnGrafikHAIsLajuHAP");
         btnGrafikHAIsLajuHAP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHAIsLajuHAP.addActionListener(this::btnGrafikHAIsLajuHAPActionPerformed);
@@ -46457,7 +45905,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingPoliInhealth = new widget.ButtonBig();
         btnMappingPoliInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingPoliInhealth.setText("Mapping Poli Inhealth");
-        btnMappingPoliInhealth.setIconTextGap(0);
         btnMappingPoliInhealth.setName("btnMappingPoliInhealth");
         btnMappingPoliInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingPoliInhealth.addActionListener(this::btnMappingPoliInhealthActionPerformed);
@@ -46465,7 +45912,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingDokterInhealth = new widget.ButtonBig();
         btnMappingDokterInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingDokterInhealth.setText("Mapping Dokter Inhealth");
-        btnMappingDokterInhealth.setIconTextGap(0);
         btnMappingDokterInhealth.setName("btnMappingDokterInhealth");
         btnMappingDokterInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingDokterInhealth.addActionListener(this::btnMappingDokterInhealthActionPerformed);
@@ -46473,7 +45919,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingTindakanRalanInhealth = new widget.ButtonBig();
         btnMappingTindakanRalanInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingTindakanRalanInhealth.setText("Tarif Ralan Inhealth");
-        btnMappingTindakanRalanInhealth.setIconTextGap(0);
         btnMappingTindakanRalanInhealth.setName("btnMappingTindakanRalanInhealth");
         btnMappingTindakanRalanInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingTindakanRalanInhealth.addActionListener(this::btnMappingTindakanRalanInhealthActionPerformed);
@@ -46481,7 +45926,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingTindakanRanapInhealth = new widget.ButtonBig();
         btnMappingTindakanRanapInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingTindakanRanapInhealth.setText("Tarif Ranap Inhealth");
-        btnMappingTindakanRanapInhealth.setIconTextGap(0);
         btnMappingTindakanRanapInhealth.setName("btnMappingTindakanRanapInhealth");
         btnMappingTindakanRanapInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingTindakanRanapInhealth.addActionListener(this::btnMappingTindakanRanapInhealthActionPerformed);
@@ -46489,7 +45933,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingTindakanRadiologiInhealth = new widget.ButtonBig();
         btnMappingTindakanRadiologiInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingTindakanRadiologiInhealth.setText("Tarif Radiologi Inhealth");
-        btnMappingTindakanRadiologiInhealth.setIconTextGap(0);
         btnMappingTindakanRadiologiInhealth.setName("btnMappingTindakanRadiologiInhealth");
         btnMappingTindakanRadiologiInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingTindakanRadiologiInhealth.addActionListener(this::btnMappingTindakanRadiologiInhealthActionPerformed);
@@ -46497,7 +45940,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingTindakanLaboratInhealth = new widget.ButtonBig();
         btnMappingTindakanLaboratInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingTindakanLaboratInhealth.setText("Tarif Laborat Inhealth");
-        btnMappingTindakanLaboratInhealth.setIconTextGap(0);
         btnMappingTindakanLaboratInhealth.setName("btnMappingTindakanLaboratInhealth");
         btnMappingTindakanLaboratInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingTindakanLaboratInhealth.addActionListener(this::btnMappingTindakanLaboratInhealthActionPerformed);
@@ -46505,7 +45947,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingTindakanOperasiInhealth = new widget.ButtonBig();
         btnMappingTindakanOperasiInhealth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnMappingTindakanOperasiInhealth.setText("Tarif Operasi Inhealth");
-        btnMappingTindakanOperasiInhealth.setIconTextGap(0);
         btnMappingTindakanOperasiInhealth.setName("btnMappingTindakanOperasiInhealth");
         btnMappingTindakanOperasiInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingTindakanOperasiInhealth.addActionListener(this::btnMappingTindakanOperasiInhealthActionPerformed);
@@ -46513,7 +45954,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHibahObatBHP = new widget.ButtonBig();
         btnHibahObatBHP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Address_Book_Alt_blue_86952.png")));
         btnHibahObatBHP.setText("Hibah Obat & BHP");
-        btnHibahObatBHP.setIconTextGap(0);
         btnHibahObatBHP.setName("btnHibahObatBHP");
         btnHibahObatBHP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHibahObatBHP.addActionListener(this::btnHibahObatBHPActionPerformed);
@@ -46521,7 +45961,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAsalHibah = new widget.ButtonBig();
         btnAsalHibah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_filing_cabinet_search-g_86207.png")));
         btnAsalHibah.setText("Asal Hibah");
-        btnAsalHibah.setIconTextGap(0);
         btnAsalHibah.setName("btnAsalHibah");
         btnAsalHibah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAsalHibah.addActionListener(this::btnAsalHibahActionPerformed);
@@ -46529,7 +45968,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAsuhanGizi= new widget.ButtonBig();
         btnAsuhanGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_cake_3_61139.png")));
         btnAsuhanGizi.setText("Asuhan Gizi");
-        btnAsuhanGizi.setIconTextGap(0);
         btnAsuhanGizi.setName("btnAsuhanGizi");
         btnAsuhanGizi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAsuhanGizi.addActionListener(this::btnAsuhanGiziActionPerformed);
@@ -46537,7 +45975,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimTagihanInheath= new widget.ButtonBig();
         btnKirimTagihanInheath.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/inhealth.png")));
         btnKirimTagihanInheath.setText("Tagihan Inhealth");
-        btnKirimTagihanInheath.setIconTextGap(0);
         btnKirimTagihanInheath.setName("btnKirimTagihanInheath");
         btnKirimTagihanInheath.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimTagihanInheath.addActionListener(this::btnKirimTagihanInheathActionPerformed);
@@ -46545,7 +45982,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiObat4= new widget.ButtonBig();
         btnSirkulasiObat4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiObat4.setText("Sirkulasi Obat, Alkes & BHP 4");
-        btnSirkulasiObat4.setIconTextGap(0);
         btnSirkulasiObat4.setName("btnSirkulasiObat4");
         btnSirkulasiObat4.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiObat4.addActionListener(this::btnSirkulasiObat4ActionPerformed);
@@ -46553,7 +45989,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiObat5 = new widget.ButtonBig();
         btnSirkulasiObat5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiObat5.setText("Sirkulasi Obat, Alkes & BHP 5");
-        btnSirkulasiObat5.setIconTextGap(0);
         btnSirkulasiObat5.setName("btnSirkulasiObat5");
         btnSirkulasiObat5.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiObat5.addActionListener(this::btnSirkulasiObat5ActionPerformed);
@@ -46561,7 +45996,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiObat6 = new widget.ButtonBig();
         btnSirkulasiObat6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiObat6.setText("Sirkulasi Obat, Alkes & BHP 6");
-        btnSirkulasiObat6.setIconTextGap(0);
         btnSirkulasiObat6.setName("btnSirkulasiObat6");
         btnSirkulasiObat6.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiObat6.addActionListener(this::btnSirkulasiObat6ActionPerformed);
@@ -46569,7 +46003,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiNonMedis2=new widget.ButtonBig();
         btnSirkulasiNonMedis2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiNonMedis2.setText("Sirkulasi Non Medis 2");
-        btnSirkulasiNonMedis2.setIconTextGap(0);
         btnSirkulasiNonMedis2.setName("btnSirkulasiNonMedis2");
         btnSirkulasiNonMedis2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiNonMedis2.addActionListener(this::btnSirkulasiNonMedis2ActionPerformed);
@@ -46577,7 +46010,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMonitoringAsuhanGizi= new widget.ButtonBig();
         btnMonitoringAsuhanGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_constr_account_statements_1267308.png")));
         btnMonitoringAsuhanGizi.setText("Monitoring Asuhan Gizi");
-        btnMonitoringAsuhanGizi.setIconTextGap(0);
         btnMonitoringAsuhanGizi.setName("btnMonitoringAsuhanGizi");
         btnMonitoringAsuhanGizi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMonitoringAsuhanGizi.addActionListener(this::btnMonitoringAsuhanGiziActionPerformed);
@@ -46585,7 +46017,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPenerimaanObatPerBulan= new widget.ButtonBig();
         btnGrafikPenerimaanObatPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPenerimaanObatPerBulan.setText("Penerimaan Obat, Alkes & BHP Per Bulan");
-        btnGrafikPenerimaanObatPerBulan.setIconTextGap(0);
         btnGrafikPenerimaanObatPerBulan.setName("btnGrafikPenerimaanObatPerBulan");
         btnGrafikPenerimaanObatPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPenerimaanObatPerBulan.addActionListener(this::btnGrafikPenerimaanObatPerBulanActionPerformed);
@@ -46593,7 +46024,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapKunjungan= new widget.ButtonBig();
         btnRekapKunjungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Calendar_27835.png")));
         btnRekapKunjungan.setText("Rekap Kunjungan");
-        btnRekapKunjungan.setIconTextGap(0);
         btnRekapKunjungan.setName("btnRekapKunjungan");
         btnRekapKunjungan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapKunjungan.addActionListener(this::btnRekapKunjunganActionPerformed);
@@ -46601,7 +46031,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratSakit= new widget.ButtonBig();
         btnSuratSakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_order-history_49596.png")));
         btnSuratSakit.setText("Surat Keterangan Sakit");
-        btnSuratSakit.setIconTextGap(0);
         btnSuratSakit.setName("btnSuratSakit");
         btnSuratSakit.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratSakit.addActionListener(this::btnSuratSakitActionPerformed);
@@ -46609,7 +46038,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanRalan= new widget.ButtonBig();
         btnPenilaianAwalKeperawatanRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_report-clipboard-medical-checklist-healthcare_5859123.png")));
         btnPenilaianAwalKeperawatanRalan.setText("Awal Keperawatan Ralan Umum");
-        btnPenilaianAwalKeperawatanRalan.setIconTextGap(0);
         btnPenilaianAwalKeperawatanRalan.setName("btnPenilaianAwalKeperawatanRalan");
         btnPenilaianAwalKeperawatanRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanRalan.addActionListener(this::btnPenilaianAwalKeperawatanRalanActionPerformed);
@@ -46617,7 +46045,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatan = new widget.ButtonBig();
         btnMasterMasalahKeperawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder__bed_rest_sleep_sick_patient_bed_rest_5928511.png")));
         btnMasterMasalahKeperawatan.setText("Master Masalah Keperawatan");
-        btnMasterMasalahKeperawatan.setIconTextGap(0);
         btnMasterMasalahKeperawatan.setName("btnMasterMasalahKeperawatan");
         btnMasterMasalahKeperawatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatan.addActionListener(this::btnMasterMasalahKeperawatanActionPerformed);
@@ -46625,7 +46052,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanCuti = new widget.ButtonBig();
         btnPengajuanCuti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
         btnPengajuanCuti.setText("Pengajuan Cuti");
-        btnPengajuanCuti.setIconTextGap(0);
         btnPengajuanCuti.setName("btnPengajuanCuti");
         btnPengajuanCuti.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanCuti.addActionListener(this::btnPengajuanCutiActionPerformed);
@@ -46633,7 +46059,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKedatanganPasienPerJam = new widget.ButtonBig();
         btnKedatanganPasienPerJam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_cmyk-04_906567.png")));
         btnKedatanganPasienPerJam.setText("Kedatangan Pasien Per Jam");
-        btnKedatanganPasienPerJam.setIconTextGap(0);
         btnKedatanganPasienPerJam.setName("btnKedatanganPasienPerJam");
         btnKedatanganPasienPerJam.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKedatanganPasienPerJam.addActionListener(this::btnKedatanganPasienPerJamActionPerformed);
@@ -46641,7 +46066,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPendonorDarah = new widget.ButtonBig();
         btnPendonorDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_623_Love_sharing_heart_wedding_valentine_valentines_day_love_4171308.png")));
         btnPendonorDarah.setText("Pendonor Darah");
-        btnPendonorDarah.setIconTextGap(0);
         btnPendonorDarah.setName("btnPendonorDarah");
         btnPendonorDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPendonorDarah.addActionListener(this::btnPendonorDarahActionPerformed);
@@ -46649,7 +46073,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuplierToko = new widget.ButtonBig();
         btnSuplierToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_kde-folder-public_25193.png")));
         btnSuplierToko.setText("Suplier Toko");
-        btnSuplierToko.setIconTextGap(0);
         btnSuplierToko.setName("btnSuplierToko");
         btnSuplierToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuplierToko.addActionListener(this::btnSuplierTokoActionPerformed);
@@ -46657,7 +46080,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisToko = new widget.ButtonBig();
         btnJenisToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/cabinet.png")));
         btnJenisToko.setText("Jenis Barang Toko");
-        btnJenisToko.setIconTextGap(0);
         btnJenisToko.setName("btnJenisToko");
         btnJenisToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJenisToko.addActionListener(this::btnJenisTokoActionPerformed);
@@ -46665,7 +46087,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetHargaToko = new widget.ButtonBig();
         btnSetHargaToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Sales-by-Payment-Method-rep_49616.png")));
         btnSetHargaToko.setText("Set Harga Toko");
-        btnSetHargaToko.setIconTextGap(0);
         btnSetHargaToko.setName("btnSetHargaToko");
         btnSetHargaToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetHargaToko.addActionListener(this::btnSetHargaTokoActionPerformed);
@@ -46673,7 +46094,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarangToko = new widget.ButtonBig();
         btnBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_shopping_cart_3440920.png")));
         btnBarangToko.setText("Barang Toko");
-        btnBarangToko.setIconTextGap(0);
         btnBarangToko.setName("btnBarangToko");
         btnBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarangToko.addActionListener(this::btnBarangTokoActionPerformed);
@@ -46681,7 +46101,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenagihanPiutangPasien = new widget.ButtonBig();
         btnPenagihanPiutangPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png")));
         btnPenagihanPiutangPasien.setText("Penagihan Piutang Pasien");
-        btnPenagihanPiutangPasien.setIconTextGap(0);
         btnPenagihanPiutangPasien.setName("btnPenagihanPiutangPasien");
         btnPenagihanPiutangPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenagihanPiutangPasien.addActionListener(this::btnPenagihanPiutangPasienActionPerformed);
@@ -46689,7 +46108,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunPenagihanPiutang = new widget.ButtonBig();
         btnAkunPenagihanPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357487_Business.png")));
         btnAkunPenagihanPiutang.setText("Akun Penagihan Piutang");
-        btnAkunPenagihanPiutang.setIconTextGap(0);
         btnAkunPenagihanPiutang.setName("btnAkunPenagihanPiutang");
         btnAkunPenagihanPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunPenagihanPiutang.addActionListener(this::btnAkunPenagihanPiutangActionPerformed);
@@ -46697,7 +46115,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnStokOpnameToko = new widget.ButtonBig();
         btnStokOpnameToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/ark2.png")));
         btnStokOpnameToko.setText("Stok Opname Toko");
-        btnStokOpnameToko.setIconTextGap(0);
         btnStokOpnameToko.setName("btnStokOpnameToko");
         btnStokOpnameToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStokOpnameToko.addActionListener(this::btnStokOpnameTokoActionPerformed);
@@ -46705,7 +46122,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatBarangToko = new widget.ButtonBig();
         btnRiwayatBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ecommerce-21_4707177.png")));
         btnRiwayatBarangToko.setText("Riwayat Barang Toko");
-        btnRiwayatBarangToko.setIconTextGap(0);
         btnRiwayatBarangToko.setName("btnRiwayatBarangToko");
         btnRiwayatBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatBarangToko.addActionListener(this::btnRiwayatBarangTokoActionPerformed);
@@ -46713,7 +46129,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPemesananToko = new widget.ButtonBig();
         btnSuratPemesananToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_internet-mail_118808.png")));
         btnSuratPemesananToko.setText("Surat Pemesanan Toko");
-        btnSuratPemesananToko.setIconTextGap(0);
         btnSuratPemesananToko.setName("btnSuratPemesananToko");
         btnSuratPemesananToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPemesananToko.addActionListener(this::btnSuratPemesananTokoActionPerformed);
@@ -46721,7 +46136,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanBarangToko = new widget.ButtonBig();
         btnPengajuanBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icon-45-note-list_315263.png")));
         btnPengajuanBarangToko.setText("Pengajuan Barang Toko");
-        btnPengajuanBarangToko.setIconTextGap(0);
         btnPengajuanBarangToko.setName("btnPengajuanBarangToko");
         btnPengajuanBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanBarangToko.addActionListener(this::btnPengajuanBarangTokoActionPerformed);
@@ -46729,7 +46143,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenerimaanBarangToko = new widget.ButtonBig();
         btnPenerimaanBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_gifts_sale_shop_4177581.png")));
         btnPenerimaanBarangToko.setText("Penerimaan Barang Toko");
-        btnPenerimaanBarangToko.setIconTextGap(0);
         btnPenerimaanBarangToko.setName("btnPenerimaanBarangToko");
         btnPenerimaanBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenerimaanBarangToko.addActionListener(this::btnPenerimaanBarangTokoActionPerformed);
@@ -46738,7 +46151,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengadaanBarangToko = new widget.ButtonBig();
         btnPengadaanBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Notebook_3387299.png")));
         btnPengadaanBarangToko.setText("Pengadaan Barang Toko");
-        btnPengadaanBarangToko.setIconTextGap(0);
         btnPengadaanBarangToko.setName("btnPengadaanBarangToko");
         btnPengadaanBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengadaanBarangToko.addActionListener(this::btnPengadaanBarangTokoActionPerformed);
@@ -46746,7 +46158,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHutangToko = new widget.ButtonBig();
         btnHutangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_checkout_47678.png")));
         btnHutangToko.setText("Hutang Toko");
-        btnHutangToko.setIconTextGap(0);
         btnHutangToko.setName("btnHutangToko");
         btnHutangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHutangToko.addActionListener(this::btnHutangTokoActionPerformed);
@@ -46754,7 +46165,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPesanToko = new widget.ButtonBig();
         btnBayarPesanToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_checkout_47678.png")));
         btnBayarPesanToko.setText("Bayar Pesan Toko");
-        btnBayarPesanToko.setIconTextGap(0);
         btnBayarPesanToko.setName("btnBayarPesanToko");
         btnBayarPesanToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPesanToko.addActionListener(this::btnBayarPesanTokoActionPerformed);
@@ -46762,7 +46172,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMemberToko = new widget.ButtonBig();
         btnMemberToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_meeting_45536.png")));
         btnMemberToko.setText("Member Toko");
-        btnMemberToko.setIconTextGap(0);
         btnMemberToko.setName("btnMemberToko");
         btnMemberToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMemberToko.addActionListener(this::btnMemberTokoActionPerformed);
@@ -46770,7 +46179,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenjualanToko = new widget.ButtonBig();
         btnPenjualanToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_lock__payment__pay__security_2542006.png")));
         btnPenjualanToko.setText("Penjualan Toko");
-        btnPenjualanToko.setIconTextGap(0);
         btnPenjualanToko.setName("btnPenjualanToko");
         btnPenjualanToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenjualanToko.addActionListener(this::btnPenjualanTokoActionPerformed);
@@ -46778,7 +46186,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRegistrasiPoliPerTanggal = new widget.ButtonBig();
         btnRegistrasiPoliPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_News_728959.png")));
         btnRegistrasiPoliPerTanggal.setText("Registrasi Poli Per Tanggal");
-        btnRegistrasiPoliPerTanggal.setIconTextGap(0);
         btnRegistrasiPoliPerTanggal.setName("btnRegistrasiPoliPerTanggal");
         btnRegistrasiPoliPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRegistrasiPoliPerTanggal.addActionListener(this::btnRegistrasiPoliPerTanggalActionPerformed);
@@ -46786,7 +46193,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangToko = new widget.ButtonBig();
         btnPiutangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1485357584_Calculator.png")));
         btnPiutangToko.setText("Piutang Toko");
-        btnPiutangToko.setIconTextGap(0);
         btnPiutangToko.setName("btnPiutangToko");
         btnPiutangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangToko.addActionListener(this::btnPiutangTokoActionPerformed);
@@ -46794,7 +46200,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturKeSuplierToko = new widget.ButtonBig();
         btnReturKeSuplierToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Package__Package_Delivery_Truck_Shipping_Transport_Box-30_4072100.png")));
         btnReturKeSuplierToko.setText("Retur Ke Suplier Toko");
-        btnReturKeSuplierToko.setIconTextGap(0);
         btnReturKeSuplierToko.setName("btnReturKeSuplierToko");
         btnReturKeSuplierToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturKeSuplierToko.addActionListener(this::btnReturKeSuplierTokoActionPerformed);
@@ -46802,7 +46207,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturBarangNonMedis= new widget.ButtonBig();
         btnReturBarangNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_carton_box_return_3440901.png")));
         btnReturBarangNonMedis.setText("Retur Ke Suplier Non Medis");
-        btnReturBarangNonMedis.setIconTextGap(0);
         btnReturBarangNonMedis.setName("btnReturBarangNonMedis");
         btnReturBarangNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturBarangNonMedis.addActionListener(this::btnReturBarangNonMedisActionPerformed);
@@ -46810,7 +46214,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatBarangNonMedis= new widget.ButtonBig();
         btnRiwayatBarangNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_accessories-text-editor_23663.png")));
         btnRiwayatBarangNonMedis.setText("Riwayat Barang Non Medis");
-        btnRiwayatBarangNonMedis.setIconTextGap(0);
         btnRiwayatBarangNonMedis.setName("btnRiwayatBarangNonMedis");
         btnRiwayatBarangNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatBarangNonMedis.addActionListener(this::btnRiwayatBarangNonMedisActionPerformed);
@@ -46818,7 +46221,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPasienCorona= new widget.ButtonBig();
         btnPasienCorona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_fever-illness-sick-temperature-thermomete_5994873.png")));
         btnPasienCorona.setText("Pasien Corona");
-        btnPasienCorona.setIconTextGap(0);
         btnPasienCorona.setName("btnPasienCorona");
         btnPasienCorona.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPasienCorona.addActionListener(this::btnPasienCoronaActionPerformed);
@@ -46826,7 +46228,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPendapatanHarianToko= new widget.ButtonBig();
         btnPendapatanHarianToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_calculator_3440925.png")));
         btnPendapatanHarianToko.setText("Pendapatan Harian Toko");
-        btnPendapatanHarianToko.setIconTextGap(0);
         btnPendapatanHarianToko.setName("btnPendapatanHarianToko");
         btnPendapatanHarianToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPendapatanHarianToko.addActionListener(this::btnPendapatanHarianTokoActionPerformed);
@@ -46834,7 +46235,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDiagnosaPasienCorona = new widget.ButtonBig();
         btnDiagnosaPasienCorona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Dna-genetics-genomic-strand-virus_5994869.png")));
         btnDiagnosaPasienCorona.setText("Diagnosa Pasien Corona");
-        btnDiagnosaPasienCorona.setIconTextGap(0);
         btnDiagnosaPasienCorona.setName("btnDiagnosaPasienCorona");
         btnDiagnosaPasienCorona.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDiagnosaPasienCorona.addActionListener(this::btnDiagnosaPasienCoronaActionPerformed);
@@ -46842,7 +46242,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPerawatanPasienCorona = new widget.ButtonBig();
         btnPerawatanPasienCorona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Night-sleep-sleeping-health_5994844.png")));
         btnPerawatanPasienCorona.setText("Perawatan Pasien Corona");
-        btnPerawatanPasienCorona.setIconTextGap(0);
         btnPerawatanPasienCorona.setName("btnPerawatanPasienCorona");
         btnPerawatanPasienCorona.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerawatanPasienCorona.addActionListener(this::btnPerawatanPasienCoronaActionPerformed);
@@ -46850,7 +46249,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanGigi = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanGigi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_09-report_5980350.png")));
         btnPenilaianAwalKeperawatanGigi.setText("Awal Keperawatan Gigi");
-        btnPenilaianAwalKeperawatanGigi.setIconTextGap(0);
         btnPenilaianAwalKeperawatanGigi.setName("btnPenilaianAwalKeperawatanGigi");
         btnPenilaianAwalKeperawatanGigi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanGigi.addActionListener(this::btnPenilaianAwalKeperawatanGigiActionPerformed);
@@ -46858,7 +46256,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanGigi = new widget.ButtonBig();
         btnMasterMasalahKeperawatanGigi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_healthcare_and_medical-hygienic-tooth_paste-toothpaste-toothbrush-health_care_4394831.png")));
         btnMasterMasalahKeperawatanGigi.setText("Master Masalah Keperawatan Gigi");
-        btnMasterMasalahKeperawatanGigi.setIconTextGap(0);
         btnMasterMasalahKeperawatanGigi.setName("btnMasterMasalahKeperawatanGigi");
         btnMasterMasalahKeperawatanGigi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanGigi.addActionListener(this::btnMasterMasalahKeperawatanGigiActionPerformed);
@@ -46866,7 +46263,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPiutangToko = new widget.ButtonBig();
         btnBayarPiutangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_vector_65_04_473782.png")));
         btnBayarPiutangToko.setText("Bayar Piutang Toko");
-        btnBayarPiutangToko.setIconTextGap(0);
         btnBayarPiutangToko.setName("btnBayarPiutangToko");
         btnBayarPiutangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPiutangToko.addActionListener(this::btnBayarPiutangTokoActionPerformed);
@@ -46874,7 +46270,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangHarianToko = new widget.ButtonBig();
         btnPiutangHarianToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_News_5947117.png")));
         btnPiutangHarianToko.setText("Piutang Harian Toko");
-        btnPiutangHarianToko.setIconTextGap(0);
         btnPiutangHarianToko.setName("btnPiutangHarianToko");
         btnPiutangHarianToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangHarianToko.addActionListener(this::btnPiutangHarianTokoActionPerformed);
@@ -46882,7 +46277,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenjualanHarianToko = new widget.ButtonBig();
         btnPenjualanHarianToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_edit-copy_118918.png")));
         btnPenjualanHarianToko.setText("Penjualan Harian Toko");
-        btnPenjualanHarianToko.setIconTextGap(0);
         btnPenjualanHarianToko.setName("btnPenjualanHarianToko");
         btnPenjualanHarianToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenjualanHarianToko.addActionListener(this::btnPenjualanHarianTokoActionPerformed);
@@ -46890,7 +46284,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDeteksiDiniCorona = new widget.ButtonBig();
         btnDeteksiDiniCorona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Medical_Result-Health-Document-Virus-Medical_5958965.png")));
         btnDeteksiDiniCorona.setText("Deteksi Dini Corona");
-        btnDeteksiDiniCorona.setIconTextGap(0);
         btnDeteksiDiniCorona.setName("btnDeteksiDiniCorona");
         btnDeteksiDiniCorona.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDeteksiDiniCorona.addActionListener(this::btnDeteksiDiniCoronaActionPerformed);
@@ -46898,7 +46291,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanKebidanan = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanKebidanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_209-pregnant-woman-2_3099532.png")));
         btnPenilaianAwalKeperawatanKebidanan.setText("Awal Keperawatan Ralan Kebidanan");
-        btnPenilaianAwalKeperawatanKebidanan.setIconTextGap(0);
         btnPenilaianAwalKeperawatanKebidanan.setName("btnPenilaianAwalKeperawatanKebidanan");
         btnPenilaianAwalKeperawatanKebidanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanKebidanan.addActionListener(this::btnPenilaianAwalKeperawatanKebidananActionPerformed);
@@ -46906,7 +46298,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengumumanEPasien = new widget.ButtonBig();
         btnPengumumanEPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_email-laptop_4417124.png")));
         btnPengumumanEPasien.setText("Pengumuman E-Pasien");
-        btnPengumumanEPasien.setIconTextGap(0);
         btnPengumumanEPasien.setName("btnPengumumanEPasien");
         btnPengumumanEPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengumumanEPasien.addActionListener(this::btnPengumumanEPasienActionPerformed);
@@ -46914,7 +46305,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratHamil = new widget.ButtonBig();
         btnSuratHamil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_4_375262.png")));
         btnSuratHamil.setText("Surat Hamil");
-        btnSuratHamil.setIconTextGap(0);
         btnSuratHamil.setName("btnSuratHamil");
         btnSuratHamil.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratHamil.addActionListener(this::btnSuratHamilActionPerformed);
@@ -46922,7 +46312,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetTarifOnline = new widget.ButtonBig();
         btnSetTarifOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Non-Service_Specific_copy_Client_259291.png")));
         btnSetTarifOnline.setText("Set Tarif Online");
-        btnSetTarifOnline.setIconTextGap(0);
         btnSetTarifOnline.setName("btnSetTarifOnline");
         btnSetTarifOnline.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetTarifOnline.addActionListener(this::btnSetTarifOnlineActionPerformed);
@@ -46930,7 +46319,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBookingPeriksa = new widget.ButtonBig();
         btnBookingPeriksa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_addressbook_32380.png")));
         btnBookingPeriksa.setText("Booking Periksa");
-        btnBookingPeriksa.setIconTextGap(0);
         btnBookingPeriksa.setName("btnBookingPeriksa");
         btnBookingPeriksa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingPeriksa.addActionListener(this::btnBookingPeriksaActionPerformed);
@@ -46938,7 +46326,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiBarangToko = new widget.ButtonBig();
         btnSirkulasiBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiBarangToko.setText("Sirkulasi Barang Toko");
-        btnSirkulasiBarangToko.setIconTextGap(0);
         btnSirkulasiBarangToko.setName("btnSirkulasiBarangToko");
         btnSirkulasiBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiBarangToko.addActionListener(this::btnSirkulasiBarangTokoActionPerformed);
@@ -46946,7 +46333,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturJualToko = new widget.ButtonBig();
         btnReturJualToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486142_shopping_cart.png")));
         btnReturJualToko.setText("Retur Jual Toko");
-        btnReturJualToko.setIconTextGap(0);
         btnReturJualToko.setName("btnReturJualToko");
         btnReturJualToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturJualToko.addActionListener(this::btnReturJualTokoActionPerformed);
@@ -46954,7 +46340,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturPiutangToko = new widget.ButtonBig();
         btnReturPiutangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/custom-reports.png")));
         btnReturPiutangToko.setText("Retur Piutang Toko");
-        btnReturPiutangToko.setIconTextGap(0);
         btnReturPiutangToko.setName("btnReturPiutangToko");
         btnReturPiutangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturPiutangToko.addActionListener(this::btnReturPiutangTokoActionPerformed);
@@ -46962,7 +46347,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiBarangToko2 = new widget.ButtonBig();
         btnSirkulasiBarangToko2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiBarangToko2.setText("Sirkulasi Barang Toko 2");
-        btnSirkulasiBarangToko2.setIconTextGap(0);
         btnSirkulasiBarangToko2.setName("btnSirkulasiBarangToko2");
         btnSirkulasiBarangToko2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiBarangToko2.addActionListener(this::btnSirkulasiBarangToko2ActionPerformed);
@@ -46970,7 +46354,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKeuntunganBarangToko = new widget.ButtonBig();
         btnKeuntunganBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png")));
         btnKeuntunganBarangToko.setText("Keuntungan Barang Toko");
-        btnKeuntunganBarangToko.setIconTextGap(0);
         btnKeuntunganBarangToko.setName("btnKeuntunganBarangToko");
         btnKeuntunganBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKeuntunganBarangToko.addActionListener(this::btnKeuntunganBarangTokoActionPerformed);
@@ -46978,7 +46361,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISPengeluaranPenerimaDankes = new widget.ButtonBig();
         btnZISPengeluaranPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_vector_65_04_473782.png")));
         btnZISPengeluaranPenerimaDankes.setText("Ket Pengeluaran Penerima Dankes");
-        btnZISPengeluaranPenerimaDankes.setIconTextGap(0);
         btnZISPengeluaranPenerimaDankes.setName("btnZISPengeluaranPenerimaDankes");
         btnZISPengeluaranPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISPengeluaranPenerimaDankes.addActionListener(this::btnZISPengeluaranPenerimaDankesActionPerformed);
@@ -46986,7 +46368,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISPenghasilanPenerimaDankes = new widget.ButtonBig();
         btnZISPenghasilanPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_phonebook_17015.png")));
         btnZISPenghasilanPenerimaDankes.setText("Ket Penghasilan Penerima Dankes");
-        btnZISPenghasilanPenerimaDankes.setIconTextGap(0);
         btnZISPenghasilanPenerimaDankes.setName("btnZISPenghasilanPenerimaDankes");
         btnZISPenghasilanPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISPenghasilanPenerimaDankes.addActionListener(this::btnZISPenghasilanPenerimaDankesActionPerformed);
@@ -46994,7 +46375,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISUkuranRumahPenerimaDankes = new widget.ButtonBig();
         btnZISUkuranRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Home_34226.png")));
         btnZISUkuranRumahPenerimaDankes.setText("Ukuran Rumah Penerima Dankes");
-        btnZISUkuranRumahPenerimaDankes.setIconTextGap(0);
         btnZISUkuranRumahPenerimaDankes.setName("btnZISUkuranRumahPenerimaDankes");
         btnZISUkuranRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISUkuranRumahPenerimaDankes.addActionListener(this::btnZISUkuranRumahPenerimaDankesActionPerformed);
@@ -47002,7 +46382,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISDindingRumahPenerimaDankes = new widget.ButtonBig();
         btnZISDindingRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_building_17020.png")));
         btnZISDindingRumahPenerimaDankes.setText("Dinding Rumah Penerima Dankes");
-        btnZISDindingRumahPenerimaDankes.setIconTextGap(0);
         btnZISDindingRumahPenerimaDankes.setName("btnZISDindingRumahPenerimaDankes");
         btnZISDindingRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISDindingRumahPenerimaDankes.addActionListener(this::btnZISDindingRumahPenerimaDankesActionPerformed);
@@ -47010,7 +46389,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISLantaiRumahPenerimaDankes = new widget.ButtonBig();
         btnZISLantaiRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_fence-picket-garden-yard-farm-barrier-wooden_2189586.png")));
         btnZISLantaiRumahPenerimaDankes.setText("Lantai Rumah Penerima Dankes");
-        btnZISLantaiRumahPenerimaDankes.setIconTextGap(0);
         btnZISLantaiRumahPenerimaDankes.setName("btnZISLantaiRumahPenerimaDankes");
         btnZISLantaiRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISLantaiRumahPenerimaDankes.addActionListener(this::btnZISLantaiRumahPenerimaDankesActionPerformed);
@@ -47018,7 +46396,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISAtapRumahPenerimaDankes = new widget.ButtonBig();
         btnZISAtapRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_home_17008.png")));
         btnZISAtapRumahPenerimaDankes.setText("Atap Rumah Penerima Dankes");
-        btnZISAtapRumahPenerimaDankes.setIconTextGap(0);
         btnZISAtapRumahPenerimaDankes.setName("btnZISAtapRumahPenerimaDankes");
         btnZISAtapRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISAtapRumahPenerimaDankes.addActionListener(this::btnZISAtapRumahPenerimaDankesActionPerformed);
@@ -47026,7 +46403,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISKepemilikanRumahPenerimaDankes = new widget.ButtonBig();
         btnZISKepemilikanRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Locked_Cell_Door_128415.png")));
         btnZISKepemilikanRumahPenerimaDankes.setText("Kepemilikan Rumah Penerima Dankes");
-        btnZISKepemilikanRumahPenerimaDankes.setIconTextGap(0);
         btnZISKepemilikanRumahPenerimaDankes.setName("btnZISKepemilikanRumahPenerimaDankes");
         btnZISKepemilikanRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISKepemilikanRumahPenerimaDankes.addActionListener(this::btnZISKepemilikanRumahPenerimaDankesActionPerformed);
@@ -47034,7 +46410,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISKamarMandiPenerimaDankes = new widget.ButtonBig();
         btnZISKamarMandiPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_13-Shower_6027796.png")));
         btnZISKamarMandiPenerimaDankes.setText("Kamar Mandi Penerima Dankes");
-        btnZISKamarMandiPenerimaDankes.setIconTextGap(0);
         btnZISKamarMandiPenerimaDankes.setName("btnZISKamarMandiPenerimaDankes");
         btnZISKamarMandiPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISKamarMandiPenerimaDankes.addActionListener(this::btnZISKamarMandiPenerimaDankesActionPerformed);
@@ -47042,7 +46417,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISDapurRumahPenerimaDankes = new widget.ButtonBig();
         btnZISDapurRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_25-Hot_cooking_5929219.png")));
         btnZISDapurRumahPenerimaDankes.setText("Dapur Rumah Penerima Dankes");
-        btnZISDapurRumahPenerimaDankes.setIconTextGap(0);
         btnZISDapurRumahPenerimaDankes.setName("btnZISDapurRumahPenerimaDankes");
         btnZISDapurRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISDapurRumahPenerimaDankes.addActionListener(this::btnZISDapurRumahPenerimaDankesActionPerformed);
@@ -47050,7 +46424,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISKursiRumahPenerimaDankes = new widget.ButtonBig();
         btnZISKursiRumahPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_education-school-chair-seat-computer-study-office_5854055.png")));
         btnZISKursiRumahPenerimaDankes.setText("Kursi Rumah Penerima Dankes");
-        btnZISKursiRumahPenerimaDankes.setIconTextGap(0);
         btnZISKursiRumahPenerimaDankes.setName("btnZISKursiRumahPenerimaDankes");
         btnZISKursiRumahPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISKursiRumahPenerimaDankes.addActionListener(this::btnZISKursiRumahPenerimaDankesActionPerformed);
@@ -47058,7 +46431,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISKategoriPHBSPenerimaDankes = new widget.ButtonBig();
         btnZISKategoriPHBSPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_house_sink_1378831.png")));
         btnZISKategoriPHBSPenerimaDankes.setText("Kategori PHBS Penerima Dankes");
-        btnZISKategoriPHBSPenerimaDankes.setIconTextGap(0);
         btnZISKategoriPHBSPenerimaDankes.setName("btnZISKategoriPHBSPenerimaDankes");
         btnZISKategoriPHBSPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISKategoriPHBSPenerimaDankes.addActionListener(this::btnZISKategoriPHBSPenerimaDankesActionPerformed);
@@ -47066,7 +46438,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISElektronikPenerimaDankes = new widget.ButtonBig();
         btnZISElektronikPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Eco_bulb_energy_light_2992437.png")));
         btnZISElektronikPenerimaDankes.setText("Elektronik Penerima Dankes");
-        btnZISElektronikPenerimaDankes.setIconTextGap(0);
         btnZISElektronikPenerimaDankes.setName("btnZISElektronikPenerimaDankes");
         btnZISElektronikPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISElektronikPenerimaDankes.addActionListener(this::btnZISElektronikPenerimaDankesActionPerformed);
@@ -47074,7 +46445,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISTernakPenerimaDankes = new widget.ButtonBig();
         btnZISTernakPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_chicken-chickling-easter-egg-shell-spring_2189581.png")));
         btnZISTernakPenerimaDankes.setText("Ternak Penerima Dankes");
-        btnZISTernakPenerimaDankes.setIconTextGap(0);
         btnZISTernakPenerimaDankes.setName("btnZISTernakPenerimaDankes");
         btnZISTernakPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISTernakPenerimaDankes.addActionListener(this::btnZISTernakPenerimaDankesActionPerformed);
@@ -47082,7 +46452,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISJenisSimpananPenerimaDankes = new widget.ButtonBig();
         btnZISJenisSimpananPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_gold_61617.png")));
         btnZISJenisSimpananPenerimaDankes.setText("Jenis Simpanan Penerima Dankes");
-        btnZISJenisSimpananPenerimaDankes.setIconTextGap(0);
         btnZISJenisSimpananPenerimaDankes.setName("btnZISJenisSimpananPenerimaDankes");
         btnZISJenisSimpananPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISJenisSimpananPenerimaDankes.addActionListener(this::btnZISJenisSimpananPenerimaDankesActionPerformed);
@@ -47090,7 +46459,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalRalanBayi = new widget.ButtonBig();
         btnPenilaianAwalRalanBayi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/baby-cot.png")));
         btnPenilaianAwalRalanBayi.setText("Awal Keperawatan Ralan Bayi/Anak");
-        btnPenilaianAwalRalanBayi.setIconTextGap(0);
         btnPenilaianAwalRalanBayi.setName("btnPenilaianAwalRalanBayi");
         btnPenilaianAwalRalanBayi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalRalanBayi.addActionListener(this::btnPenilaianAwalRalanBayiActionPerformed);
@@ -47098,7 +46466,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanRanapBayiAnak = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanRanapBayiAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/baby-cot.png")));
         btnPenilaianAwalKeperawatanRanapBayiAnak.setText("Awal Keperawatan Ranap Bayi/Anak");
-        btnPenilaianAwalKeperawatanRanapBayiAnak.setIconTextGap(0);
         btnPenilaianAwalKeperawatanRanapBayiAnak.setName("btnPenilaianAwalKeperawatanRanapBayiAnak");
         btnPenilaianAwalKeperawatanRanapBayiAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanRanapBayiAnak.addActionListener(this::btnPenilaianAwalKeperawatanRanapBayiAnakActionPerformed);
@@ -47106,7 +46473,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISKategoriAsnafPenerimaDankes = new widget.ButtonBig();
         btnZISKategoriAsnafPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_4_2716419.png")));
         btnZISKategoriAsnafPenerimaDankes.setText("Kategori Asnaf Penerima Dankes");
-        btnZISKategoriAsnafPenerimaDankes.setIconTextGap(0);
         btnZISKategoriAsnafPenerimaDankes.setName("btnZISKategoriAsnafPenerimaDankes");
         btnZISKategoriAsnafPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISKategoriAsnafPenerimaDankes.addActionListener(this::btnZISKategoriAsnafPenerimaDankesActionPerformed);
@@ -47114,7 +46480,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanAnak = new widget.ButtonBig();
         btnMasterMasalahKeperawatanAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/baby-boy.png")));
         btnMasterMasalahKeperawatanAnak.setText("Master Masalah Keperawatan Bayi/Anak");
-        btnMasterMasalahKeperawatanAnak.setIconTextGap(0);
         btnMasterMasalahKeperawatanAnak.setName("btnMasterMasalahKeperawatanAnak");
         btnMasterMasalahKeperawatanAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanAnak.addActionListener(this::btnMasterMasalahKeperawatanAnakActionPerformed);
@@ -47122,7 +46487,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterImunisasi = new widget.ButtonBig();
         btnMasterImunisasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_19-tube_5980344.png")));
         btnMasterImunisasi.setText("Master Imunisasi");
-        btnMasterImunisasi.setIconTextGap(0);
         btnMasterImunisasi.setName("btnMasterImunisasi");
         btnMasterImunisasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterImunisasi.addActionListener(this::btnMasterImunisasiActionPerformed);
@@ -47130,7 +46494,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnZISPatologisPenerimaDankes = new widget.ButtonBig();
         btnZISPatologisPenerimaDankes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_smoke-healthcare_and_medical-no_smoking-warming-signaling-cigarette-prohibition-forbidden-security_4394848.png")));
         btnZISPatologisPenerimaDankes.setText("Patologis Penerima Dankes");
-        btnZISPatologisPenerimaDankes.setIconTextGap(0);
         btnZISPatologisPenerimaDankes.setName("btnZISPatologisPenerimaDankes");
         btnZISPatologisPenerimaDankes.setPreferredSize(new java.awt.Dimension(200, 90));
         btnZISPatologisPenerimaDankes.addActionListener(this::btnZISPatologisPenerimaDankesActionPerformed);
@@ -47138,7 +46501,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCareCekKartu = new widget.ButtonBig();
         btnPCareCekKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png")));
         btnPCareCekKartu.setText("Cek No.Kartu PCare");
-        btnPCareCekKartu.setIconTextGap(0);
         btnPCareCekKartu.setName("btnPCareCekKartu");
         btnPCareCekKartu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareCekKartu.addActionListener(this::btnPCareCekKartuActionPerformed);
@@ -47146,7 +46508,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratBebasNarkoba = new widget.ButtonBig();
         btnSuratBebasNarkoba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Capsule-drug-medicine-pill-tablet_5994864.png")));
         btnSuratBebasNarkoba.setText("Surat Bebas Narkoba");
-        btnSuratBebasNarkoba.setIconTextGap(0);
         btnSuratBebasNarkoba.setName("btnSuratBebasNarkoba");
         btnSuratBebasNarkoba.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratBebasNarkoba.addActionListener(this::btnSuratBebasNarkobaActionPerformed);
@@ -47154,7 +46515,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratKeteranganCovid = new widget.ButtonBig();
         btnSuratKeteranganCovid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Microscope-Scientific-Laboratory-Test-Chemistry_5958964.png")));
         btnSuratKeteranganCovid.setText("Surat Keterangan Covid");
-        btnSuratKeteranganCovid.setIconTextGap(0);
         btnSuratKeteranganCovid.setName("btnSuratKeteranganCovid");
         btnSuratKeteranganCovid.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganCovid.addActionListener(this::btnSuratKeteranganCovidActionPerformed);
@@ -47162,7 +46522,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemakaianAirTanah = new widget.ButtonBig();
         btnPemakaianAirTanah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Ecology_tap_water_2992443.png")));
         btnPemakaianAirTanah.setText("Pemakaian Air Tanah");
-        btnPemakaianAirTanah.setIconTextGap(0);
         btnPemakaianAirTanah.setName("btnPemakaianAirTanah");
         btnPemakaianAirTanah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemakaianAirTanah.addActionListener(this::btnPemakaianAirTanahActionPerformed);
@@ -47170,7 +46529,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPemakaianAirTanahPerTanggal= new widget.ButtonBig();
         btnGrafikPemakaianAirTanahPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPemakaianAirTanahPerTanggal.setText("Pemakaian Air Tanah Per Tanggal");
-        btnGrafikPemakaianAirTanahPerTanggal.setIconTextGap(0);
         btnGrafikPemakaianAirTanahPerTanggal.setName("btnGrafikPemakaianAirTanahPerTanggal");
         btnGrafikPemakaianAirTanahPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPemakaianAirTanahPerTanggal.addActionListener(this::btnGrafikPemakaianAirTanahPerTanggalActionPerformed);
@@ -47178,7 +46536,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPemakaianAirTanahPerBulan= new widget.ButtonBig();
         btnGrafikPemakaianAirTanahPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikPemakaianAirTanahPerBulan.setText("Pemakaian Air Tanah Per Bulan");
-        btnGrafikPemakaianAirTanahPerBulan.setIconTextGap(0);
         btnGrafikPemakaianAirTanahPerBulan.setName("btnGrafikPemakaianAirTanahPerBulan");
         btnGrafikPemakaianAirTanahPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPemakaianAirTanahPerBulan.addActionListener(this::btnGrafikPemakaianAirTanahPerBulanActionPerformed);
@@ -47186,7 +46543,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananPoli = new widget.ButtonBig();
         btnLamaPelayananPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaPelayananPoli.setText("Lama Pelayanan Poli");
-        btnLamaPelayananPoli.setIconTextGap(0);
         btnLamaPelayananPoli.setName("btnLamaPelayananPoli");
         btnLamaPelayananPoli.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananPoli.addActionListener(this::btnLamaPelayananPoliActionPerformed);
@@ -47194,7 +46550,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananCSSD = new widget.ButtonBig();
         btnLamaPelayananCSSD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaPelayananCSSD.setText("Lama Pelayanan CSSD");
-        btnLamaPelayananCSSD.setIconTextGap(0);
         btnLamaPelayananCSSD.setName("btnLamaPelayananCSSD");
         btnLamaPelayananCSSD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananCSSD.addActionListener(this::btnLamaPelayananCSSDActionPerformed);
@@ -47202,7 +46557,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHemodialisa = new widget.ButtonBig();
         btnHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_32_Disease_infected_infection_kidney_6088186.png")));
         btnHemodialisa.setText("Hemodialisa");
-        btnHemodialisa.setIconTextGap(0);
         btnHemodialisa.setName("btnHemodialisa");
         btnHemodialisa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHemodialisa.addActionListener(this::btnHemodialisaActionPerformed);
@@ -47210,7 +46564,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHemodialisaPerTanggal = new widget.ButtonBig();
         btnGrafikHemodialisaPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikHemodialisaPerTanggal.setText("Hemodialisa Per Tanggal");
-        btnGrafikHemodialisaPerTanggal.setIconTextGap(0);
         btnGrafikHemodialisaPerTanggal.setName("btnGrafikHemodialisaPerTanggal");
         btnGrafikHemodialisaPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHemodialisaPerTanggal.addActionListener(this::btnGrafikHemodialisaPerTanggalActionPerformed);
@@ -47218,7 +46571,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHemodialisaPerBulan = new widget.ButtonBig();
         btnGrafikHemodialisaPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikHemodialisaPerBulan.setText("Hemodialisa Per Bulan");
-        btnGrafikHemodialisaPerBulan.setIconTextGap(0);
         btnGrafikHemodialisaPerBulan.setName("btnGrafikHemodialisaPerBulan");
         btnGrafikHemodialisaPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHemodialisaPerBulan.addActionListener(this::btnGrafikHemodialisaPerBulanActionPerformed);
@@ -47226,7 +46578,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikHemodialisaPerTahun = new widget.ButtonBig();
         btnGrafikHemodialisaPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikHemodialisaPerTahun.setText("Hemodialisa Per Tahun");
-        btnGrafikHemodialisaPerTahun.setIconTextGap(0);
         btnGrafikHemodialisaPerTahun.setName("btnGrafikHemodialisaPerTahun");
         btnGrafikHemodialisaPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikHemodialisaPerTahun.addActionListener(this::btnGrafikHemodialisaPerTahunActionPerformed);
@@ -47234,7 +46585,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikMeninggalPerBulan = new widget.ButtonBig();
         btnGrafikMeninggalPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikMeninggalPerBulan.setText("Pasien Meninggal Per Bulan");
-        btnGrafikMeninggalPerBulan.setIconTextGap(0);
         btnGrafikMeninggalPerBulan.setName("btnGrafikMeninggalPerBulan");
         btnGrafikMeninggalPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikMeninggalPerBulan.addActionListener(this::btnGrafikMeninggalPerBulanActionPerformed);
@@ -47242,7 +46592,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanTahunanIRJ = new widget.ButtonBig();
         btnLaporanTahunanIRJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/laporantahunanIRJ.png")));
         btnLaporanTahunanIRJ.setText("Laporan Tahunan IRJ");
-        btnLaporanTahunanIRJ.setIconTextGap(0);
         btnLaporanTahunanIRJ.setName("btnLaporanTahunanIRJ");
         btnLaporanTahunanIRJ.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanTahunanIRJ.addActionListener(this::btnLaporanTahunanIRJActionPerformed);
@@ -47250,7 +46599,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPerbaikanInventaris = new widget.ButtonBig();
         btnPerbaikanInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_package_utilities_3557.png")));
         btnPerbaikanInventaris.setText("Perbaikan Inventaris");
-        btnPerbaikanInventaris.setIconTextGap(0);
         btnPerbaikanInventaris.setName("btnPerbaikanInventaris");
         btnPerbaikanInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerbaikanInventaris.addActionListener(this::btnPerbaikanInventarisActionPerformed);
@@ -47258,7 +46606,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratCutiHamil = new widget.ButtonBig();
         btnSuratCutiHamil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_contact_37110.png")));
         btnSuratCutiHamil.setText("Surat Cuti Hamil");
-        btnSuratCutiHamil.setIconTextGap(0);
         btnSuratCutiHamil.setName("btnSuratCutiHamil");
         btnSuratCutiHamil.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratCutiHamil.addActionListener(this::btnSuratCutiHamilActionPerformed);
@@ -47266,7 +46613,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanStokObatPasien = new widget.ButtonBig();
         btnPermintaanStokObatPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/IconPermintaanStokObatPasien.png")));
         btnPermintaanStokObatPasien.setText("Permintaan Stok Obat Pasien");
-        btnPermintaanStokObatPasien.setIconTextGap(0);
         btnPermintaanStokObatPasien.setName("btnPermintaanStokObatPasien");
         btnPermintaanStokObatPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanStokObatPasien.addActionListener(this::btnPermintaanStokObatPasienActionPerformed);
@@ -47274,7 +46620,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemeliharaanInventaris = new widget.ButtonBig();
         btnPemeliharaanInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_preferences_6586102.png")));
         btnPemeliharaanInventaris.setText("Pemeliharaan Inventaris");
-        btnPemeliharaanInventaris.setIconTextGap(0);
         btnPemeliharaanInventaris.setName("btnPemeliharaanInventaris");
         btnPemeliharaanInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemeliharaanInventaris.addActionListener(this::btnPemeliharaanInventarisActionPerformed);
@@ -47282,7 +46627,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKlasifikasiPasienRanap = new widget.ButtonBig();
         btnKlasifikasiPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_clipboard_6586111.png")));
         btnKlasifikasiPasienRanap.setText("Klasifikasi Pasien Ranap");
-        btnKlasifikasiPasienRanap.setIconTextGap(0);
         btnKlasifikasiPasienRanap.setName("btnKlasifikasiPasienRanap");
         btnKlasifikasiPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKlasifikasiPasienRanap.addActionListener(this::btnKlasifikasiPasienRanapActionPerformed);
@@ -47290,7 +46634,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBulananKlasifikasiPasienRanap = new widget.ButtonBig();
         btnBulananKlasifikasiPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Letter_Printing_Paper_Sizes_1977178.png")));
         btnBulananKlasifikasiPasienRanap.setText("Bulanan Klasifikasi Pasien Ranap");
-        btnBulananKlasifikasiPasienRanap.setIconTextGap(0);
         btnBulananKlasifikasiPasienRanap.setName("btnBulananKlasifikasiPasienRanap");
         btnBulananKlasifikasiPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBulananKlasifikasiPasienRanap.addActionListener(this::btnBulananKlasifikasiPasienRanapActionPerformed);
@@ -47298,7 +46641,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHarianKlasifikasiPasienRanap = new widget.ButtonBig();
         btnHarianKlasifikasiPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Letter_Printing_Paper_Sizes_1977178.png")));
         btnHarianKlasifikasiPasienRanap.setText("Harian Klasifikasi Pasien Ranap");
-        btnHarianKlasifikasiPasienRanap.setIconTextGap(0);
         btnHarianKlasifikasiPasienRanap.setName("btnHarianKlasifikasiPasienRanap");
         btnHarianKlasifikasiPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHarianKlasifikasiPasienRanap.addActionListener(this::btnHarianKlasifikasiPasienRanapActionPerformed);
@@ -47306,7 +46648,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKlasifikasiPasienPerRuang = new widget.ButtonBig();
         btnKlasifikasiPasienPerRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Letter_Printing_Paper_Sizes_1977178.png")));
         btnKlasifikasiPasienPerRuang.setText("Klasifikasi Pasien Per Ruang");
-        btnKlasifikasiPasienPerRuang.setIconTextGap(0);
         btnKlasifikasiPasienPerRuang.setName("btnKlasifikasiPasienPerRuang");
         btnKlasifikasiPasienPerRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKlasifikasiPasienPerRuang.addActionListener(this::btnKlasifikasiPasienPerRuangActionPerformed);
@@ -47314,7 +46655,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSOAPPerawatan = new widget.ButtonBig();
         btnSOAPPerawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_patient-health_report-graph-coronavirus_6000116.png")));
         btnSOAPPerawatan.setText("SOAP Perawatan");
-        btnSOAPPerawatan.setIconTextGap(0);
         btnSOAPPerawatan.setName("btnSOAPPerawatan");
         btnSOAPPerawatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSOAPPerawatan.addActionListener(this::btnSOAPPerawatanActionPerformed);
@@ -47322,7 +46662,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKlaimRawatJalan = new widget.ButtonBig();
         btnKlaimRawatJalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_PriorityTasks-task-document-paper-descending_6071856.png")));
         btnKlaimRawatJalan.setText("Klaim Rawat Jalan");
-        btnKlaimRawatJalan.setIconTextGap(0);
         btnKlaimRawatJalan.setName("btnKlaimRawatJalan");
         btnKlaimRawatJalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKlaimRawatJalan.addActionListener(this::btnKlaimRawatJalanActionPerformed);
@@ -47330,7 +46669,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningGiziLanjut = new widget.ButtonBig();
         btnSkriningGiziLanjut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_green_curry_3377058.png")));
         btnSkriningGiziLanjut.setText("Skrining Gizi Lanjut");
-        btnSkriningGiziLanjut.setIconTextGap(0);
         btnSkriningGiziLanjut.setName("btnSkriningGiziLanjut");
         btnSkriningGiziLanjut.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningGiziLanjut.addActionListener(this::btnSkriningGiziLanjutActionPerformed);
@@ -47338,7 +46676,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPenyiapanRM = new widget.ButtonBig();
         btnLamaPenyiapanRM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaPenyiapanRM.setText("Lama Penyiapan RM");
-        btnLamaPenyiapanRM.setIconTextGap(0);
         btnLamaPenyiapanRM.setName("btnLamaPenyiapanRM");
         btnLamaPenyiapanRM.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPenyiapanRM.addActionListener(this::btnLamaPenyiapanRMActionPerformed);
@@ -47346,7 +46683,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDosisRadiologi = new widget.ButtonBig();
         btnDosisRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_DocumentManagement-documentation-folder-projectmanagement-filemanagement_6071870.png")));
         btnDosisRadiologi.setText("Dosis Radiologi");
-        btnDosisRadiologi.setIconTextGap(0);
         btnDosisRadiologi.setName("btnDosisRadiologi");
         btnDosisRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDosisRadiologi.addActionListener(this::btnDosisRadiologiActionPerformed);
@@ -47354,7 +46690,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDemografiUmurKunjungan = new widget.ButtonBig();
         btnDemografiUmurKunjungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/custom-reports.png")));
         btnDemografiUmurKunjungan.setText("Demografi Umur Kunjungan");
-        btnDemografiUmurKunjungan.setIconTextGap(0);
         btnDemografiUmurKunjungan.setName("btnDemografiUmurKunjungan");
         btnDemografiUmurKunjungan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDemografiUmurKunjungan.addActionListener(this::btnDemografiUmurKunjunganActionPerformed);
@@ -47362,7 +46697,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJamDietPasien = new widget.ButtonBig();
         btnJamDietPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_alarm_32381.png")));
         btnJamDietPasien.setText("Jam Diet Pasien");
-        btnJamDietPasien.setIconTextGap(0);
         btnJamDietPasien.setName("btnJamDietPasien");
         btnJamDietPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJamDietPasien.addActionListener(this::btnJamDietPasienActionPerformed);
@@ -47370,7 +46704,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRVPPiutangBPJS = new widget.ButtonBig();
         btnRVPPiutangBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_wallet_pay_sale_shop_4177573.png")));
         btnRVPPiutangBPJS.setText("RVP Piutang BPJS");
-        btnRVPPiutangBPJS.setIconTextGap(0);
         btnRVPPiutangBPJS.setName("btnRVPPiutangBPJS");
         btnRVPPiutangBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRVPPiutangBPJS.addActionListener(this::btnRVPPiutangBPJSActionPerformed);
@@ -47378,7 +46711,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnVerifikasiPenerimaanFarmasi = new widget.ButtonBig();
         btnVerifikasiPenerimaanFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ToDoList-planing-list-planlist-todo_6071846.png")));
         btnVerifikasiPenerimaanFarmasi.setText("Verifikasi Penerimaan Obat/Alkes/BHP");
-        btnVerifikasiPenerimaanFarmasi.setIconTextGap(0);
         btnVerifikasiPenerimaanFarmasi.setName("btnVerifikasiPenerimaanFarmasi");
         btnVerifikasiPenerimaanFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnVerifikasiPenerimaanFarmasi.addActionListener(this::btnVerifikasiPenerimaanFarmasiActionPerformed);
@@ -47386,7 +46718,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnVerifikasiPenerimaanLogistik = new widget.ButtonBig();
         btnVerifikasiPenerimaanLogistik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_File_Files_Folder_Document_Doc_Confirm-39_3909343.png")));
         btnVerifikasiPenerimaanLogistik.setText("Verifikasi Penerimaan Non Medis");
-        btnVerifikasiPenerimaanLogistik.setIconTextGap(0);
         btnVerifikasiPenerimaanLogistik.setName("btnVerifikasiPenerimaanLogistik");
         btnVerifikasiPenerimaanLogistik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnVerifikasiPenerimaanLogistik.addActionListener(this::btnVerifikasiPenerimaanLogistikActionPerformed);
@@ -47394,7 +46725,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanLabPA = new widget.ButtonBig();
         btnPermintaanLabPA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_laboratory_44676.png")));
         btnPermintaanLabPA.setText("Permintaan Lab PA");
-        btnPermintaanLabPA.setIconTextGap(0);
         btnPermintaanLabPA.setName("btnPermintaanLabPA");
         btnPermintaanLabPA.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanLabPA.addActionListener(this::btnPermintaanLabPAActionPerformed);
@@ -47402,7 +46732,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanLabMB = new widget.ButtonBig();
         btnPermintaanLabMB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_laboratory_44676.png")));
         btnPermintaanLabMB.setText("Permintaan Lab MB");
-        btnPermintaanLabMB.setIconTextGap(0);
         btnPermintaanLabMB.setName("btnPermintaanLabMB");
         btnPermintaanLabMB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanLabMB.addActionListener(this::btnPermintaanLabMBActionPerformed);
@@ -47410,7 +46739,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananLabPA = new widget.ButtonBig();
         btnLamaPelayananLabPA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaPelayananLabPA.setText("Lama Pelayanan Lab PA");
-        btnLamaPelayananLabPA.setIconTextGap(0);
         btnLamaPelayananLabPA.setName("btnLamaPelayananLabPA");
         btnLamaPelayananLabPA.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananLabPA.addActionListener(this::btnLamaPelayananLabPAActionPerformed);
@@ -47418,7 +46746,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananLabMB = new widget.ButtonBig();
         btnLamaPelayananLabMB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaPelayananLabMB.setText("Lama Pelayanan Lab MB");
-        btnLamaPelayananLabMB.setIconTextGap(0);
         btnLamaPelayananLabMB.setName("btnLamaPelayananLabMB");
         btnLamaPelayananLabMB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananLabMB.addActionListener(this::btnLamaPelayananLabMBActionPerformed);
@@ -47426,7 +46753,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPengajuanMedis = new widget.ButtonBig();
         btnRingkasanPengajuanMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPengajuanMedis.setText("Ringkasan Pengajuan Obat & BHP");
-        btnRingkasanPengajuanMedis.setIconTextGap(0);
         btnRingkasanPengajuanMedis.setName("btnRingkasanPengajuanMedis");
         btnRingkasanPengajuanMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPengajuanMedis.addActionListener(this::btnRingkasanPengajuanMedisActionPerformed);
@@ -47434,7 +46760,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPemesananMedis = new widget.ButtonBig();
         btnRingkasanPemesananMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPemesananMedis.setText("Ringkasan Pemesanan Obat & BHP");
-        btnRingkasanPemesananMedis.setIconTextGap(0);
         btnRingkasanPemesananMedis.setName("btnRingkasanPemesananMedis");
         btnRingkasanPemesananMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPemesananMedis.addActionListener(this::btnRingkasanPemesananMedisActionPerformed);
@@ -47442,7 +46767,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPembelianMedis = new widget.ButtonBig();
         btnRingkasanPembelianMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPembelianMedis.setText("Ringkasan Pengadaan Obat & BHP");
-        btnRingkasanPembelianMedis.setIconTextGap(0);
         btnRingkasanPembelianMedis.setName("btnRingkasanPembelianMedis");
         btnRingkasanPembelianMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPembelianMedis.addActionListener(this::btnRingkasanPembelianMedisActionPerformed);
@@ -47450,7 +46774,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPenerimaanMedis = new widget.ButtonBig();
         btnRingkasanPenerimaanMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPenerimaanMedis.setText("Ringkasan Penerimaan Obat & BHP");
-        btnRingkasanPenerimaanMedis.setIconTextGap(0);
         btnRingkasanPenerimaanMedis.setName("btnRingkasanPenerimaanMedis");
         btnRingkasanPenerimaanMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPenerimaanMedis.addActionListener(this::btnRingkasanPenerimaanMedisActionPerformed);
@@ -47458,7 +46781,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanHibahMedis = new widget.ButtonBig();
         btnRingkasanHibahMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanHibahMedis.setText("Ringkasan Hibah Obat & BHP");
-        btnRingkasanHibahMedis.setIconTextGap(0);
         btnRingkasanHibahMedis.setName("btnRingkasanHibahMedis");
         btnRingkasanHibahMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHibahMedis.addActionListener(this::btnRingkasanHibahMedisActionPerformed);
@@ -47466,7 +46788,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPenjualanMedis = new widget.ButtonBig();
         btnRingkasanPenjualanMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPenjualanMedis.setText("Ringkasan Penjualan Obat & BHP");
-        btnRingkasanPenjualanMedis.setIconTextGap(0);
         btnRingkasanPenjualanMedis.setName("btnRingkasanPenjualanMedis");
         btnRingkasanPenjualanMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPenjualanMedis.addActionListener(this::btnRingkasanPenjualanMedisActionPerformed);
@@ -47474,7 +46795,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanBeriObat = new widget.ButtonBig();
         btnRingkasanBeriObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanBeriObat.setText("Ringkasan Beri Obat & BHP");
-        btnRingkasanBeriObat.setIconTextGap(0);
         btnRingkasanBeriObat.setName("btnRingkasanBeriObat");
         btnRingkasanBeriObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanBeriObat.addActionListener(this::btnRingkasanBeriObatActionPerformed);
@@ -47482,7 +46802,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPiutangObat = new widget.ButtonBig();
         btnRingkasanPiutangObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPiutangObat.setText("Ringkasan Piutang Obat & BHP");
-        btnRingkasanPiutangObat.setIconTextGap(0);
         btnRingkasanPiutangObat.setName("btnRingkasanPiutangObat");
         btnRingkasanPiutangObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPiutangObat.addActionListener(this::btnRingkasanPiutangObatActionPerformed);
@@ -47490,7 +46809,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanStokKeluarObat = new widget.ButtonBig();
         btnRingkasanStokKeluarObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanStokKeluarObat.setText("Ringkasan Stok Keluar Obat & BHP");
-        btnRingkasanStokKeluarObat.setIconTextGap(0);
         btnRingkasanStokKeluarObat.setName("btnRingkasanStokKeluarObat");
         btnRingkasanStokKeluarObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanStokKeluarObat.addActionListener(this::btnRingkasanStokKeluarObatActionPerformed);
@@ -47498,7 +46816,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanReturSuplierObat = new widget.ButtonBig();
         btnRingkasanReturSuplierObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanReturSuplierObat.setText("Ringkasan Retur Suplier Obat & BHP");
-        btnRingkasanReturSuplierObat.setIconTextGap(0);
         btnRingkasanReturSuplierObat.setName("btnRingkasanReturSuplierObat");
         btnRingkasanReturSuplierObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanReturSuplierObat.addActionListener(this::btnRingkasanReturSuplierObatActionPerformed);
@@ -47506,7 +46823,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanReturJualObat = new widget.ButtonBig();
         btnRingkasanReturJualObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanReturJualObat.setText("Ringkasan Retur Pembeli Obat & BHP");
-        btnRingkasanReturJualObat.setIconTextGap(0);
         btnRingkasanReturJualObat.setName("btnRingkasanReturJualObat");
         btnRingkasanReturJualObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanReturJualObat.addActionListener(this::btnRingkasanReturJualObatActionPerformed);
@@ -47514,7 +46830,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPengajuanNonMedis = new widget.ButtonBig();
         btnRingkasanPengajuanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPengajuanNonMedis.setText("Ringkasan Pengajuan Non Medis");
-        btnRingkasanPengajuanNonMedis.setIconTextGap(0);
         btnRingkasanPengajuanNonMedis.setName("btnRingkasanPengajuanNonMedis");
         btnRingkasanPengajuanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPengajuanNonMedis.addActionListener(this::btnRingkasanPengajuanNonMedisActionPerformed);
@@ -47522,7 +46837,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPemesananNonMedis = new widget.ButtonBig();
         btnRingkasanPemesananNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPemesananNonMedis.setText("Ringkasan Pemesanan Non Medis");
-        btnRingkasanPemesananNonMedis.setIconTextGap(0);
         btnRingkasanPemesananNonMedis.setName("btnRingkasanPemesananNonMedis");
         btnRingkasanPemesananNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPemesananNonMedis.addActionListener(this::btnRingkasanPemesananNonMedisActionPerformed);
@@ -47530,7 +46844,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanKebidananRanap = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanKebidananRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_209-pregnant-woman-2_3099532.png")));
         btnPenilaianAwalKeperawatanKebidananRanap.setText("Awal Keperawatan Ranap Kebidanan");
-        btnPenilaianAwalKeperawatanKebidananRanap.setIconTextGap(0);
         btnPenilaianAwalKeperawatanKebidananRanap.setName("btnPenilaianAwalKeperawatanKebidananRanap");
         btnPenilaianAwalKeperawatanKebidananRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanKebidananRanap.addActionListener(this::btnPenilaianAwalKeperawatanKebidananRanapActionPerformed);
@@ -47538,7 +46851,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPengadaanNonMedis = new widget.ButtonBig();
         btnRingkasanPengadaanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPengadaanNonMedis.setText("Ringkasan Pengadaan Non Medis");
-        btnRingkasanPengadaanNonMedis.setIconTextGap(0);
         btnRingkasanPengadaanNonMedis.setName("btnRingkasanPengadaanNonMedis");
         btnRingkasanPengadaanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPengadaanNonMedis.addActionListener(this::btnRingkasanPengadaanNonMedisActionPerformed);
@@ -47546,7 +46858,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPenerimaanNonMedis = new widget.ButtonBig();
         btnRingkasanPenerimaanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPenerimaanNonMedis.setText("Ringkasan Penerimaan Non Medis");
-        btnRingkasanPenerimaanNonMedis.setIconTextGap(0);
         btnRingkasanPenerimaanNonMedis.setName("btnRingkasanPenerimaanNonMedis");
         btnRingkasanPenerimaanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPenerimaanNonMedis.addActionListener(this::btnRingkasanPenerimaanNonMedisActionPerformed);
@@ -47554,7 +46865,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanStokKeluarNonMedis = new widget.ButtonBig();
         btnRingkasanStokKeluarNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanStokKeluarNonMedis.setText("Ringkasan Stok Keluar Non Medis");
-        btnRingkasanStokKeluarNonMedis.setIconTextGap(0);
         btnRingkasanStokKeluarNonMedis.setName("btnRingkasanStokKeluarNonMedis");
         btnRingkasanStokKeluarNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanStokKeluarNonMedis.addActionListener(this::btnRingkasanStokKeluarNonMedisActionPerformed);
@@ -47562,7 +46872,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanReturSuplierNonMedis = new widget.ButtonBig();
         btnRingkasanReturSuplierNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanReturSuplierNonMedis.setText("Ringkasan Retur Suplier Non Medis");
-        btnRingkasanReturSuplierNonMedis.setIconTextGap(0);
         btnRingkasanReturSuplierNonMedis.setName("btnRingkasanReturSuplierNonMedis");
         btnRingkasanReturSuplierNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanReturSuplierNonMedis.addActionListener(this::btnRingkasanReturSuplierNonMedisActionPerformed);
@@ -47570,7 +46879,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnOmsetPenerimaan = new widget.ButtonBig();
         btnOmsetPenerimaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Finance_saving_1889200.png")));
         btnOmsetPenerimaan.setText("Penerimaan/Omset/Kas Masuk");
-        btnOmsetPenerimaan.setIconTextGap(0);
         btnOmsetPenerimaan.setName("btnOmsetPenerimaan");
         btnOmsetPenerimaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnOmsetPenerimaan.addActionListener(this::btnOmsetPenerimaanActionPerformed);
@@ -47578,7 +46886,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnValidasiPenagihanPiutang = new widget.ButtonBig();
         btnValidasiPenagihanPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_50_3319638.png")));
         btnValidasiPenagihanPiutang.setText("Validasi Penagihan Piutang");
-        btnValidasiPenagihanPiutang.setIconTextGap(0);
         btnValidasiPenagihanPiutang.setName("btnValidasiPenagihanPiutang");
         btnValidasiPenagihanPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnValidasiPenagihanPiutang.addActionListener(this::btnValidasiPenagihanPiutangActionPerformed);
@@ -47586,7 +46893,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanRanap = new widget.ButtonBig();
         btnPermintaanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Register_6083883.png")));
         btnPermintaanRanap.setText("Permintaan Rawat Inap");
-        btnPermintaanRanap.setIconTextGap(0);
         btnPermintaanRanap.setName("btnPermintaanRanap");
         btnPermintaanRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanRanap.addActionListener(this::btnPermintaanRanapActionPerformed);
@@ -47594,7 +46900,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiDiagnosaPRB = new widget.ButtonBig();
         btnBPJSReferensiDiagnosaPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSReferensiDiagnosaPRB.setText("Referensi Diagnosa PRB VClaim");
-        btnBPJSReferensiDiagnosaPRB.setIconTextGap(0);
         btnBPJSReferensiDiagnosaPRB.setName("btnBPJSReferensiDiagnosaPRB");
         btnBPJSReferensiDiagnosaPRB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiDiagnosaPRB.addActionListener(this::btnBPJSReferensiDiagnosaPRBActionPerformed);
@@ -47602,7 +46907,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiObatPRB = new widget.ButtonBig();
         btnBPJSReferensiObatPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSReferensiObatPRB.setText("Referensi Obat PRB VClaim");
-        btnBPJSReferensiObatPRB.setIconTextGap(0);
         btnBPJSReferensiObatPRB.setName("btnBPJSReferensiObatPRB");
         btnBPJSReferensiObatPRB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiObatPRB.addActionListener(this::btnBPJSReferensiObatPRBActionPerformed);
@@ -47610,7 +46914,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSSuratKontrol = new widget.ButtonBig();
         btnBPJSSuratKontrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSSuratKontrol.setText("Surat Kontrol VClaim");
-        btnBPJSSuratKontrol.setIconTextGap(0);
         btnBPJSSuratKontrol.setName("btnBPJSSuratKontrol");
         btnBPJSSuratKontrol.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSSuratKontrol.addActionListener(this::btnBPJSSuratKontrolActionPerformed);
@@ -47618,7 +46921,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenggunaanBHPOK = new widget.ButtonBig();
         btnPenggunaanBHPOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_ecommerce-14_4707170.png")));
         btnPenggunaanBHPOK.setText("Penggunaan BHP OK/VK");
-        btnPenggunaanBHPOK.setIconTextGap(0);
         btnPenggunaanBHPOK.setName("btnPenggunaanBHPOK");
         btnPenggunaanBHPOK.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenggunaanBHPOK.addActionListener(this::btnPenggunaanBHPOKActionPerformed);
@@ -47626,7 +46928,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratKeteranganRawatInap = new widget.ButtonBig();
         btnSuratKeteranganRawatInap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_File_Files_Folder_Document_Check_Confirm_3909334.png")));
         btnSuratKeteranganRawatInap.setText("Surat Keterangan Rawat Inap");
-        btnSuratKeteranganRawatInap.setIconTextGap(0);
         btnSuratKeteranganRawatInap.setName("btnSuratKeteranganRawatInap");
         btnSuratKeteranganRawatInap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganRawatInap.addActionListener(this::btnSuratKeteranganRawatInapActionPerformed);
@@ -47634,7 +46935,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratKeteranganSehat = new widget.ButtonBig();
         btnSuratKeteranganSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Documents_Black_63760.png")));
         btnSuratKeteranganSehat.setText("Surat Keterangan Sehat");
-        btnSuratKeteranganSehat.setIconTextGap(0);
         btnSuratKeteranganSehat.setName("btnSuratKeteranganSehat");
         btnSuratKeteranganSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganSehat.addActionListener(this::btnSuratKeteranganSehatActionPerformed);
@@ -47642,7 +46942,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPendapatanPerCaraBayar = new widget.ButtonBig();
         btnPendapatanPerCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_money_3440907.png")));
         btnPendapatanPerCaraBayar.setText("Pendapatan Per Cara Bayar");
-        btnPendapatanPerCaraBayar.setIconTextGap(0);
         btnPendapatanPerCaraBayar.setName("btnPendapatanPerCaraBayar");
         btnPendapatanPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPendapatanPerCaraBayar.addActionListener(this::btnPendapatanPerCaraBayarActionPerformed);
@@ -47650,7 +46949,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunRekeningHtHBankJateng = new widget.ButtonBig();
         btnAkunRekeningHtHBankJateng.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bankjateng.png")));
         btnAkunRekeningHtHBankJateng.setText("Host To Host Bank Jateng");
-        btnAkunRekeningHtHBankJateng.setIconTextGap(0);
         btnAkunRekeningHtHBankJateng.setName("btnAkunRekeningHtHBankJateng");
         btnAkunRekeningHtHBankJateng.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunRekeningHtHBankJateng.addActionListener(this::btnAkunRekeningHtHBankJatengActionPerformed);
@@ -47658,7 +46956,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranBankJateng = new widget.ButtonBig();
         btnPembayaranBankJateng.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_wallet_3440917.png")));
         btnPembayaranBankJateng.setText("Pembayaran Bank Jateng");
-        btnPembayaranBankJateng.setIconTextGap(0);
         btnPembayaranBankJateng.setName("btnPembayaranBankJateng");
         btnPembayaranBankJateng.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranBankJateng.addActionListener(this::btnPembayaranBankJatengActionPerformed);
@@ -47666,7 +46963,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSSuratPRI = new widget.ButtonBig();
         btnBPJSSuratPRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSSuratPRI.setText("Surat PRI VClaim");
-        btnBPJSSuratPRI.setIconTextGap(0);
         btnBPJSSuratPRI.setName("btnBPJSSuratPRI");
         btnBPJSSuratPRI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSSuratPRI.addActionListener(this::btnBPJSSuratPRIActionPerformed);
@@ -47674,7 +46970,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanTindakanRalan = new widget.ButtonBig();
         btnRingkasanTindakanRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanTindakanRalan.setText("Ringkasan Tindakan");
-        btnRingkasanTindakanRalan.setIconTextGap(0);
         btnRingkasanTindakanRalan.setName("btnRingkasanTindakanRalan");
         btnRingkasanTindakanRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanTindakanRalan.addActionListener(this::btnRingkasanTindakanRalanActionPerformed);
@@ -47682,7 +46977,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananPasien = new widget.ButtonBig();
         btnLamaPelayananPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaPelayananPasien.setText("Lama Pelayanan Pasien");
-        btnLamaPelayananPasien.setIconTextGap(0);
         btnLamaPelayananPasien.setName("btnLamaPelayananPasien");
         btnLamaPelayananPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaPelayananPasien.addActionListener(this::btnLamaPelayananPasienActionPerformed);
@@ -47690,7 +46984,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratSakitPihak2 = new widget.ButtonBig();
         btnSuratSakitPihak2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_order-history_49596.png")));
         btnSuratSakitPihak2.setText("Surat Keterangan Sakit Pihak 2");
-        btnSuratSakitPihak2.setIconTextGap(0);
         btnSuratSakitPihak2.setName("btnSuratSakitPihak2");
         btnSuratSakitPihak2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratSakitPihak2.addActionListener(this::btnSuratSakitPihak2ActionPerformed);
@@ -47698,7 +46991,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReferensiPendaftaranMobileJKN = new widget.ButtonBig();
         btnReferensiPendaftaranMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Hospital_5947112.png")));
         btnReferensiPendaftaranMobileJKN.setText("Referensi Pendaftaran Mobile JKN");
-        btnReferensiPendaftaranMobileJKN.setIconTextGap(0);
         btnReferensiPendaftaranMobileJKN.setName("btnReferensiPendaftaranMobileJKN");
         btnReferensiPendaftaranMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiPendaftaranMobileJKN.addActionListener(this::btnReferensiPendaftaranMobileJKNActionPerformed);
@@ -47706,7 +46998,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBatalPendaftaranMobileJKN  = new widget.ButtonBig();
         btnBatalPendaftaranMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Analysis-Case-Document-Virus-History_5958953.png")));
         btnBatalPendaftaranMobileJKN.setText("Batal Pendaftaran Mobile JKN");
-        btnBatalPendaftaranMobileJKN.setIconTextGap(0);
         btnBatalPendaftaranMobileJKN.setName("btnBatalPendaftaranMobileJKN");
         btnBatalPendaftaranMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBatalPendaftaranMobileJKN.addActionListener(this::btnBatalPendaftaranMobileJKNActionPerformed);
@@ -47714,7 +47005,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanHutangObat = new widget.ButtonBig();
         btnTagihanHutangObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png")));
         btnTagihanHutangObat.setText("Titip Faktur/Tagihan Obat & BHP");
-        btnTagihanHutangObat.setIconTextGap(0);
         btnTagihanHutangObat.setName("btnTagihanHutangObat");
         btnTagihanHutangObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanHutangObat.addActionListener(this::btnTagihanHutangObatActionPerformed);
@@ -47722,7 +47012,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaOperasi = new widget.ButtonBig();
         btnLamaOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnLamaOperasi.setText("Lama Operasi");
-        btnLamaOperasi.setIconTextGap(0);
         btnLamaOperasi.setName("btnLamaOperasi");
         btnLamaOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLamaOperasi.addActionListener(this::btnLamaOperasiActionPerformed);
@@ -47730,7 +47019,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikInventarisKategori = new widget.ButtonBig();
         btnGrafikInventarisKategori.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikInventarisKategori.setText("Jumlah Inventaris Per Kategori");
-        btnGrafikInventarisKategori.setIconTextGap(0);
         btnGrafikInventarisKategori.setName("btnGrafikInventarisKategori");
         btnGrafikInventarisKategori.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikInventarisKategori.addActionListener(this::btnGrafikInventarisKategoriActionPerformed);
@@ -47738,7 +47026,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikInventarisMerk = new widget.ButtonBig();
         btnGrafikInventarisMerk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikInventarisMerk.setText("Jumlah Inventaris Per Merk");
-        btnGrafikInventarisMerk.setIconTextGap(0);
         btnGrafikInventarisMerk.setName("btnGrafikInventarisMerk");
         btnGrafikInventarisMerk.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikInventarisMerk.addActionListener(this::btnGrafikInventarisMerkActionPerformed);
@@ -47746,7 +47033,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikInventarisProdusen = new widget.ButtonBig();
         btnGrafikInventarisProdusen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikInventarisProdusen.setText("Jumlah Inventaris Per Produsen");
-        btnGrafikInventarisProdusen.setIconTextGap(0);
         btnGrafikInventarisProdusen.setName("btnGrafikInventarisProdusen");
         btnGrafikInventarisProdusen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikInventarisProdusen.addActionListener(this::btnGrafikInventarisProdusenActionPerformed);
@@ -47754,7 +47040,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengembalianDepositPasien = new widget.ButtonBig();
         btnPengembalianDepositPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_11006_coin_money_purse_icon_48px.png")));
         btnPengembalianDepositPasien.setText("Pengembalian Deposit Pasien");
-        btnPengembalianDepositPasien.setIconTextGap(0);
         btnPengembalianDepositPasien.setName("btnPengembalianDepositPasien");
         btnPengembalianDepositPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengembalianDepositPasien.addActionListener(this::btnPengembalianDepositPasienActionPerformed);
@@ -47762,7 +47047,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnValidasiTagihanObatBHP = new widget.ButtonBig();
         btnValidasiTagihanObatBHP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png")));
         btnValidasiTagihanObatBHP.setText("Validasi Titip Faktur/Tagihan Obat & BHP");
-        btnValidasiTagihanObatBHP.setIconTextGap(0);
         btnValidasiTagihanObatBHP.setName("btnValidasiTagihanObatBHP");
         btnValidasiTagihanObatBHP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnValidasiTagihanObatBHP.addActionListener(this::btnValidasiTagihanObatBHPActionPerformed);
@@ -47770,7 +47054,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangObatBelumLunas = new widget.ButtonBig();
         btnPiutangObatBelumLunas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/17219_cash_cashbox_machine_payment_register_icon.png")));
         btnPiutangObatBelumLunas.setText("Piutang Obat & BHP Belum Lunas");
-        btnPiutangObatBelumLunas.setIconTextGap(0);
         btnPiutangObatBelumLunas.setName("btnPiutangObatBelumLunas");
         btnPiutangObatBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangObatBelumLunas.addActionListener(this::btnPiutangObatBelumLunasActionPerformed);
@@ -47778,7 +47061,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnIntegrasiBRIApi = new widget.ButtonBig();
         btnIntegrasiBRIApi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/briapi.png")));
         btnIntegrasiBRIApi.setText("Integrasi BRI API");
-        btnIntegrasiBRIApi.setIconTextGap(0);
         btnIntegrasiBRIApi.setName("btnIntegrasiBRIApi");
         btnIntegrasiBRIApi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIntegrasiBRIApi.addActionListener(this::btnIntegrasiBRIApiActionPerformed);
@@ -47786,7 +47068,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunAsetInventaris = new widget.ButtonBig();
         btnAkunAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_50842_money_safe_vault_keep_icon_48px.png")));
         btnAkunAsetInventaris.setText("Akun Jenis Aset/Inventaris");
-        btnAkunAsetInventaris.setIconTextGap(0);
         btnAkunAsetInventaris.setName("btnAkunAsetInventaris");
         btnAkunAsetInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunAsetInventaris.addActionListener(this::btnAkunAsetInventarisActionPerformed);
@@ -47794,7 +47075,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengadaanAset = new widget.ButtonBig();
         btnPengadaanAset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/10999_bag_cash_coin_money_icon.png")));
         btnPengadaanAset.setText("Pengadaan Aset/Inventaris");
-        btnPengadaanAset.setIconTextGap(0);
         btnPengadaanAset.setName("btnPengadaanAset");
         btnPengadaanAset.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengadaanAset.addActionListener(this::btnPengadaanAsetActionPerformed);
@@ -47802,7 +47082,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuplierInventaris = new widget.ButtonBig();
         btnSuplierInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1988878_front_lorry_truck_vehicle_icon.png")));
         btnSuplierInventaris.setText("Suplier Aset/Inventaris");
-        btnSuplierInventaris.setIconTextGap(0);
         btnSuplierInventaris.setName("btnSuplierInventaris");
         btnSuplierInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuplierInventaris.addActionListener(this::btnSuplierInventarisActionPerformed);
@@ -47810,7 +47089,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenerimaanAset = new widget.ButtonBig();
         btnPenerimaanAset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/49599_add_package_icon.png")));
         btnPenerimaanAset.setText("Penerimaan Aset/Inventaris");
-        btnPenerimaanAset.setIconTextGap(0);
         btnPenerimaanAset.setName("btnPenerimaanAset");
         btnPenerimaanAset.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenerimaanAset.addActionListener(this::btnPenerimaanAsetActionPerformed);
@@ -47818,7 +47096,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPemesananInventaris = new widget.ButtonBig();
         btnBayarPemesananInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_10998_cash_money_icon_48px.png")));
         btnBayarPemesananInventaris.setText("Bayar Pesan Aset/Inventaris");
-        btnBayarPemesananInventaris.setIconTextGap(0);
         btnBayarPemesananInventaris.setName("btnBayarPemesananInventaris");
         btnBayarPemesananInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPemesananInventaris.addActionListener(this::btnBayarPemesananInventarisActionPerformed);
@@ -47826,7 +47103,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHutangAsetInventaris = new widget.ButtonBig();
         btnHutangAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/49607_product_report_sales_icon.png")));
         btnHutangAsetInventaris.setText("Hutang Aset/Inventaris");
-        btnHutangAsetInventaris.setIconTextGap(0);
         btnHutangAsetInventaris.setName("btnHutangAsetInventaris");
         btnHutangAsetInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHutangAsetInventaris.addActionListener(this::btnHutangAsetInventarisActionPerformed);
@@ -47834,7 +47110,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHibahAsetInventaris = new widget.ButtonBig();
         btnHibahAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Workstation_by_Artdesigner_60887.png")));
         btnHibahAsetInventaris.setText("Hibah Aset/Inventaris");
-        btnHibahAsetInventaris.setIconTextGap(0);
         btnHibahAsetInventaris.setName("btnHibahAsetInventaris");
         btnHibahAsetInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHibahAsetInventaris.addActionListener(this::btnHibahAsetInventarisActionPerformed);
@@ -47842,7 +47117,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanHutangNonMedis = new widget.ButtonBig();
         btnTagihanHutangNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png")));
         btnTagihanHutangNonMedis.setText("Titip Faktur/Tagihan Non Medis");
-        btnTagihanHutangNonMedis.setIconTextGap(0);
         btnTagihanHutangNonMedis.setName("btnTagihanHutangNonMedis");
         btnTagihanHutangNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanHutangNonMedis.addActionListener(this::btnTagihanHutangNonMedisActionPerformed);
@@ -47850,7 +47124,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnValidasiTagihanNonMedis = new widget.ButtonBig();
         btnValidasiTagihanNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png")));
         btnValidasiTagihanNonMedis.setText("Validasi Titip Faktur/Tagihan Non Medis");
-        btnValidasiTagihanNonMedis.setIconTextGap(0);
         btnValidasiTagihanNonMedis.setName("btnValidasiTagihanNonMedis");
         btnValidasiTagihanNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnValidasiTagihanNonMedis.addActionListener(this::btnValidasiTagihanNonMedisActionPerformed);
@@ -47858,7 +47131,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanHutangAset = new widget.ButtonBig();
         btnTagihanHutangAset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png")));
         btnTagihanHutangAset.setText("Titip Faktur/Tagihan Aset/Inventaris");
-        btnTagihanHutangAset.setIconTextGap(0);
         btnTagihanHutangAset.setName("btnTagihanHutangAset");
         btnTagihanHutangAset.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanHutangAset.addActionListener(this::btnTagihanHutangAsetActionPerformed);
@@ -47866,7 +47138,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnValidasiTagihanAset = new widget.ButtonBig();
         btnValidasiTagihanAset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png")));
         btnValidasiTagihanAset.setText("Validasi Titip Faktur/Tagihan Aset/Inventaris");
-        btnValidasiTagihanAset.setIconTextGap(0);
         btnValidasiTagihanAset.setName("btnValidasiTagihanAset");
         btnValidasiTagihanAset.setPreferredSize(new java.awt.Dimension(200, 90));
         btnValidasiTagihanAset.addActionListener(this::btnValidasiTagihanAsetActionPerformed);
@@ -47874,7 +47145,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHibahNonMedis = new widget.ButtonBig();
         btnHibahNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/307356_box_brown_cardboard_package_icon.png")));
         btnHibahNonMedis.setText("Hibah Non Medis");
-        btnHibahNonMedis.setIconTextGap(0);
         btnHibahNonMedis.setName("btnHibahNonMedis");
         btnHibahNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHibahNonMedis.addActionListener(this::btnHibahNonMedisActionPerformed);
@@ -47882,7 +47152,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekPCareTACC = new widget.ButtonBig();
         btnCekPCareTACC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png")));
         btnCekPCareTACC.setText("Referensi TACC PCare");
-        btnCekPCareTACC.setIconTextGap(0);
         btnCekPCareTACC.setName("btnCekPCareTACC");
         btnCekPCareTACC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCekPCareTACC.addActionListener(this::btnCekPCareTACCActionPerformed);
@@ -47890,7 +47159,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnResepLuar = new widget.ButtonBig();
         btnResepLuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5994864_capsule_drug_medicine_pill_tablet_icon.png")));
         btnResepLuar.setText("Resep Luar");
-        btnResepLuar.setIconTextGap(0);
         btnResepLuar.setName("btnResepLuar");
         btnResepLuar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResepLuar.addActionListener(this::btnResepLuarActionPerformed);
@@ -47898,7 +47166,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratBebasTBC = new widget.ButtonBig();
         btnSuratBebasTBC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088716_clean_lungs_protect_icon.png")));
         btnSuratBebasTBC.setText("Surat Bebas TBC");
-        btnSuratBebasTBC.setIconTextGap(0);
         btnSuratBebasTBC.setName("btnSuratBebasTBC");
         btnSuratBebasTBC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratBebasTBC.addActionListener(this::btnSuratBebasTBCActionPerformed);
@@ -47906,7 +47173,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratButaWarna = new widget.ButtonBig();
         btnSuratButaWarna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1994549_cmyk_color_color chart_colour_design_icon.png")));
         btnSuratButaWarna.setText("Surat Keterangan Buta Warna");
-        btnSuratButaWarna.setIconTextGap(0);
         btnSuratButaWarna.setName("btnSuratButaWarna");
         btnSuratButaWarna.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratButaWarna.addActionListener(this::btnSuratButaWarnaActionPerformed);
@@ -47914,7 +47180,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratBebasTato = new widget.ButtonBig();
         btnSuratBebasTato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/24675_art_brush_color_drawing_paint_icon.png")));
         btnSuratBebasTato.setText("Surat Bebas Tato");
-        btnSuratBebasTato.setIconTextGap(0);
         btnSuratBebasTato.setName("btnSuratBebasTato");
         btnSuratBebasTato.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratBebasTato.addActionListener(this::btnSuratBebasTatoActionPerformed);
@@ -47922,7 +47187,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratKewaspadaanKesehatan = new widget.ButtonBig();
         btnSuratKewaspadaanKesehatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5929237_avatar_fever_man_sick_coronavirus_icon.png")));
         btnSuratKewaspadaanKesehatan.setText("Surat Kewaspadaan Kesehatan");
-        btnSuratKewaspadaanKesehatan.setIconTextGap(0);
         btnSuratKewaspadaanKesehatan.setName("btnSuratKewaspadaanKesehatan");
         btnSuratKewaspadaanKesehatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKewaspadaanKesehatan.addActionListener(this::btnSuratKewaspadaanKesehatanActionPerformed);
@@ -47930,7 +47194,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPorsiDietPerTanggal = new widget.ButtonBig();
         btnGrafikPorsiDietPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPorsiDietPerTanggal.setText("Porsi Diet Per Tanggal");
-        btnGrafikPorsiDietPerTanggal.setIconTextGap(0);
         btnGrafikPorsiDietPerTanggal.setName("btnGrafikPorsiDietPerTanggal");
         btnGrafikPorsiDietPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPorsiDietPerTanggal.addActionListener(this::btnGrafikPorsiDietPerTanggalActionPerformed);
@@ -47938,7 +47201,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPorsiDietPerBulan = new widget.ButtonBig();
         btnGrafikPorsiDietPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikPorsiDietPerBulan.setText("Porsi Diet Per Bulan");
-        btnGrafikPorsiDietPerBulan.setIconTextGap(0);
         btnGrafikPorsiDietPerBulan.setName("btnGrafikPorsiDietPerBulan");
         btnGrafikPorsiDietPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPorsiDietPerBulan.addActionListener(this::btnGrafikPorsiDietPerBulanActionPerformed);
@@ -47946,7 +47208,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPorsiDietPerTahun = new widget.ButtonBig();
         btnGrafikPorsiDietPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPorsiDietPerTahun.setText("Porsi Diet Per Tahun");
-        btnGrafikPorsiDietPerTahun.setIconTextGap(0);
         btnGrafikPorsiDietPerTahun.setName("btnGrafikPorsiDietPerTahun");
         btnGrafikPorsiDietPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPorsiDietPerTahun.addActionListener(this::btnGrafikPorsiDietPerTahunActionPerformed);
@@ -47954,7 +47215,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPorsiDietPerRuang = new widget.ButtonBig();
         btnGrafikPorsiDietPerRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikPorsiDietPerRuang.setText("Porsi Diet Per Ruang");
-        btnGrafikPorsiDietPerRuang.setIconTextGap(0);
         btnGrafikPorsiDietPerRuang.setName("btnGrafikPorsiDietPerRuang");
         btnGrafikPorsiDietPerRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPorsiDietPerRuang.addActionListener(this::btnGrafikPorsiDietPerRuangActionPerformed);
@@ -47962,7 +47222,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanMata = new widget.ButtonBig();
         btnMasterMasalahKeperawatanMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/85364_eye_icon.png")));
         btnMasterMasalahKeperawatanMata.setText("Master Masalah Keperawatan Mata");
-        btnMasterMasalahKeperawatanMata.setIconTextGap(0);
         btnMasterMasalahKeperawatanMata.setName("btnMasterMasalahKeperawatanMata");
         btnMasterMasalahKeperawatanMata.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanMata.addActionListener(this::btnMasterMasalahKeperawatanMataActionPerformed);
@@ -47970,7 +47229,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalan = new widget.ButtonBig();
         btnPenilaianAwalMedisRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898992_bed_fever_ill_sick_temperature_icon.png")));
         btnPenilaianAwalMedisRalan.setText("Awal Medis Ralan Umum");
-        btnPenilaianAwalMedisRalan.setIconTextGap(0);
         btnPenilaianAwalMedisRalan.setName("btnPenilaianAwalMedisRalan");
         btnPenilaianAwalMedisRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalan.addActionListener(this::btnPenilaianAwalMedisRalanActionPerformed);
@@ -47978,7 +47236,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanap = new widget.ButtonBig();
         btnPenilaianAwalMedisRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898992_bed_fever_ill_sick_temperature_icon.png")));
         btnPenilaianAwalMedisRanap.setText("Awal Medis Ranap Umum");
-        btnPenilaianAwalMedisRanap.setIconTextGap(0);
         btnPenilaianAwalMedisRanap.setName("btnPenilaianAwalMedisRanap");
         btnPenilaianAwalMedisRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanap.addActionListener(this::btnPenilaianAwalMedisRanapActionPerformed);
@@ -47986,7 +47243,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanapNeonatus = new widget.ButtonBig();
         btnPenilaianAwalMedisRanapNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4043239_baby_child_kid_toddler_icon.png")));
         btnPenilaianAwalMedisRanapNeonatus.setText("Awal Medis Ranap Neonatus");
-        btnPenilaianAwalMedisRanapNeonatus.setIconTextGap(0);
         btnPenilaianAwalMedisRanapNeonatus.setName("btnPenilaianAwalMedisRanapNeonatus");
         btnPenilaianAwalMedisRanapNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanapNeonatus.addActionListener(this::btnPenilaianAwalMedisRanapNeonatusActionPerformed);
@@ -47994,7 +47250,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianBayiBaruLahir = new widget.ButtonBig();
         btnPenilaianBayiBaruLahir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717231_baby_kid_pushchair_buggy_pram_icon.png")));
         btnPenilaianBayiBaruLahir.setText("Pengkajian Bayi Baru Lahir");
-        btnPenilaianBayiBaruLahir.setIconTextGap(0);
         btnPenilaianBayiBaruLahir.setName("btnPenilaianBayiBaruLahir");
         btnPenilaianBayiBaruLahir.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianBayiBaruLahir.addActionListener(this::btnPenilaianBayiBaruLahirActionPerformed);
@@ -48002,7 +47257,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanapKandungan = new widget.ButtonBig();
         btnPenilaianAwalMedisRanapKandungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717224_pregnant_woman_pregnancy_baby_gestation_icon.png")));
         btnPenilaianAwalMedisRanapKandungan.setText("Awal Medis Ranap Kandungan");
-        btnPenilaianAwalMedisRanapKandungan.setIconTextGap(0);
         btnPenilaianAwalMedisRanapKandungan.setName("btnPenilaianAwalMedisRanapKandungan");
         btnPenilaianAwalMedisRanapKandungan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanapKandungan.addActionListener(this::btnPenilaianAwalMedisRanapKandunganActionPerformed);
@@ -48010,7 +47264,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanKandungan = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanKandungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717224_pregnant_woman_pregnancy_baby_gestation_icon.png")));
         btnPenilaianAwalMedisRalanKandungan.setText("Awal Medis Ralan Kandungan");
-        btnPenilaianAwalMedisRalanKandungan.setIconTextGap(0);
         btnPenilaianAwalMedisRalanKandungan.setName("btnPenilaianAwalMedisRalanKandungan");
         btnPenilaianAwalMedisRalanKandungan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanKandungan.addActionListener(this::btnPenilaianAwalMedisRalanKandunganActionPerformed);
@@ -48018,7 +47271,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisIGD = new widget.ButtonBig();
         btnPenilaianAwalMedisIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5929223_avatar_fever_man_measure_sick_icon.png")));
         btnPenilaianAwalMedisIGD.setText("Awal Medis IGD");
-        btnPenilaianAwalMedisIGD.setIconTextGap(0);
         btnPenilaianAwalMedisIGD.setName("btnPenilaianAwalMedisIGD");
         btnPenilaianAwalMedisIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisIGD.addActionListener(this::btnPenilaianAwalMedisIGDActionPerformed);
@@ -48026,7 +47278,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanBayi = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanBayi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717226_baby_kid_people_maternity_human_icon.png")));
         btnPenilaianAwalMedisRalanBayi.setText("Awal Medis Ralan Bayi/Anak");
-        btnPenilaianAwalMedisRalanBayi.setIconTextGap(0);
         btnPenilaianAwalMedisRalanBayi.setName("btnPenilaianAwalMedisRalanBayi");
         btnPenilaianAwalMedisRalanBayi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanBayi.addActionListener(this::btnPenilaianAwalMedisRalanBayiActionPerformed);
@@ -48034,7 +47285,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiPoliHFIS = new widget.ButtonBig();
         btnBPJSReferensiPoliHFIS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSReferensiPoliHFIS.setText("Referensi Poli HFIS");
-        btnBPJSReferensiPoliHFIS.setIconTextGap(0);
         btnBPJSReferensiPoliHFIS.setName("btnBPJSReferensiPoliHFIS");
         btnBPJSReferensiPoliHFIS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiPoliHFIS.addActionListener(this::btnBPJSReferensiPoliHFISActionPerformed);
@@ -48042,7 +47292,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiDokterHFIS = new widget.ButtonBig();
         btnBPJSReferensiDokterHFIS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSReferensiDokterHFIS.setText("Referensi Dokter HFIS");
-        btnBPJSReferensiDokterHFIS.setIconTextGap(0);
         btnBPJSReferensiDokterHFIS.setName("btnBPJSReferensiDokterHFIS");
         btnBPJSReferensiDokterHFIS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiDokterHFIS.addActionListener(this::btnBPJSReferensiDokterHFISActionPerformed);
@@ -48050,7 +47299,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiJadwalHFIS = new widget.ButtonBig();
         btnBPJSReferensiJadwalHFIS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSReferensiJadwalHFIS.setText("Referensi Jadwal HFIS");
-        btnBPJSReferensiJadwalHFIS.setIconTextGap(0);
         btnBPJSReferensiJadwalHFIS.setName("btnBPJSReferensiJadwalHFIS");
         btnBPJSReferensiJadwalHFIS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiJadwalHFIS.addActionListener(this::btnBPJSReferensiJadwalHFISActionPerformed);
@@ -48058,7 +47306,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnFisioterapi = new widget.ButtonBig();
         btnFisioterapi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6009609_corona_coronavirus_covid19_crowd_huddle_icon.png")));
         btnFisioterapi.setText("Awal Fisioterapi");
-        btnFisioterapi.setIconTextGap(0);
         btnFisioterapi.setName("btnFisioterapi");
         btnFisioterapi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnFisioterapi.addActionListener(this::btnFisioterapiActionPerformed);
@@ -48066,7 +47313,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSProgramPRB = new widget.ButtonBig();
         btnBPJSProgramPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSProgramPRB.setText("Program PRB di VClaim");
-        btnBPJSProgramPRB.setIconTextGap(0);
         btnBPJSProgramPRB.setName("btnBPJSProgramPRB");
         btnBPJSProgramPRB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSProgramPRB.addActionListener(this::btnBPJSProgramPRBActionPerformed);
@@ -48074,7 +47320,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSSuplesiJasaRaharja = new widget.ButtonBig();
         btnBPJSSuplesiJasaRaharja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSSuplesiJasaRaharja.setText("Suplesi Jasa Raharja di VClaim");
-        btnBPJSSuplesiJasaRaharja.setIconTextGap(0);
         btnBPJSSuplesiJasaRaharja.setName("btnBPJSSuplesiJasaRaharja");
         btnBPJSSuplesiJasaRaharja.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSSuplesiJasaRaharja.addActionListener(this::btnBPJSSuplesiJasaRaharjaActionPerformed);
@@ -48082,7 +47327,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSDataIndukKecelakaan = new widget.ButtonBig();
         btnBPJSDataIndukKecelakaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSDataIndukKecelakaan.setText("Data Induk Kecelakaan VClaim");
-        btnBPJSDataIndukKecelakaan.setIconTextGap(0);
         btnBPJSDataIndukKecelakaan.setName("btnBPJSDataIndukKecelakaan");
         btnBPJSDataIndukKecelakaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSDataIndukKecelakaan.addActionListener(this::btnBPJSDataIndukKecelakaanActionPerformed);
@@ -48090,7 +47334,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSDataSEPInternal = new widget.ButtonBig();
         btnBPJSDataSEPInternal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSDataSEPInternal.setText("Data SEP Internal VClaim");
-        btnBPJSDataSEPInternal.setIconTextGap(0);
         btnBPJSDataSEPInternal.setName("btnBPJSDataSEPInternal");
         btnBPJSDataSEPInternal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSDataSEPInternal.addActionListener(this::btnBPJSDataSEPInternalActionPerformed);
@@ -48098,7 +47341,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSKlaimJasaRaharja = new widget.ButtonBig();
         btnBPJSKlaimJasaRaharja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSKlaimJasaRaharja.setText("Klaim Jaminan Jasa Raharja VClaim");
-        btnBPJSKlaimJasaRaharja.setIconTextGap(0);
         btnBPJSKlaimJasaRaharja.setName("btnBPJSKlaimJasaRaharja");
         btnBPJSKlaimJasaRaharja.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSKlaimJasaRaharja.addActionListener(this::btnBPJSKlaimJasaRaharjaActionPerformed);
@@ -48106,7 +47348,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSPasienFinger = new widget.ButtonBig();
         btnBPJSPasienFinger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSPasienFinger.setText("Pasien Finger Print VClaim");
-        btnBPJSPasienFinger.setIconTextGap(0);
         btnBPJSPasienFinger.setName("btnBPJSPasienFinger");
         btnBPJSPasienFinger.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSPasienFinger.addActionListener(this::btnBPJSPasienFingerActionPerformed);
@@ -48114,7 +47355,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRujukanKhusus = new widget.ButtonBig();
         btnBPJSRujukanKhusus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSRujukanKhusus.setText("Rujukan Khusus VClaim");
-        btnBPJSRujukanKhusus.setIconTextGap(0);
         btnBPJSRujukanKhusus.setName("btnBPJSRujukanKhusus");
         btnBPJSRujukanKhusus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRujukanKhusus.addActionListener(this::btnBPJSRujukanKhususActionPerformed);
@@ -48122,7 +47362,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemeliharaanGedung = new widget.ButtonBig();
         btnPemeliharaanGedung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_back_house_window-home_2222745.png")));
         btnPemeliharaanGedung.setText("Pemeliharaan Gedung");
-        btnPemeliharaanGedung.setIconTextGap(0);
         btnPemeliharaanGedung.setName("btnPemeliharaanGedung");
         btnPemeliharaanGedung.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemeliharaanGedung.addActionListener(this::btnPemeliharaanGedungActionPerformed);
@@ -48130,7 +47369,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPerbaikanInventarisPerTanggal = new widget.ButtonBig();
         btnGrafikPerbaikanInventarisPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPerbaikanInventarisPerTanggal.setText("Perbaikan Inventaris Per Tanggal");
-        btnGrafikPerbaikanInventarisPerTanggal.setIconTextGap(0);
         btnGrafikPerbaikanInventarisPerTanggal.setName("btnGrafikPerbaikanInventarisPerTanggal");
         btnGrafikPerbaikanInventarisPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPerbaikanInventarisPerTanggal.addActionListener(this::btnGrafikPerbaikanInventarisPerTanggalActionPerformed);
@@ -48138,7 +47376,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPerbaikanInventarisPerBulan = new widget.ButtonBig();
         btnGrafikPerbaikanInventarisPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikPerbaikanInventarisPerBulan.setText("Perbaikan Inventaris Per Bulan");
-        btnGrafikPerbaikanInventarisPerBulan.setIconTextGap(0);
         btnGrafikPerbaikanInventarisPerBulan.setName("btnGrafikPerbaikanInventarisPerBulan");
         btnGrafikPerbaikanInventarisPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPerbaikanInventarisPerBulan.addActionListener(this::btnGrafikPerbaikanInventarisPerBulanActionPerformed);
@@ -48146,7 +47383,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPerbaikanInventarisPerTahun = new widget.ButtonBig();
         btnGrafikPerbaikanInventarisPerTahun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikPerbaikanInventarisPerTahun.setText("Perbaikan Inventaris Per Tahun");
-        btnGrafikPerbaikanInventarisPerTahun.setIconTextGap(0);
         btnGrafikPerbaikanInventarisPerTahun.setName("btnGrafikPerbaikanInventarisPerTahun");
         btnGrafikPerbaikanInventarisPerTahun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPerbaikanInventarisPerTahun.addActionListener(this::btnGrafikPerbaikanInventarisPerTahunActionPerformed);
@@ -48154,7 +47390,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikPerbaikanInventarisPerPelaksanaStatus = new widget.ButtonBig();
         btnGrafikPerbaikanInventarisPerPelaksanaStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikPerbaikanInventarisPerPelaksanaStatus.setText("Perbaikan Inventaris Per Pelaksana & Status");
-        btnGrafikPerbaikanInventarisPerPelaksanaStatus.setIconTextGap(0);
         btnGrafikPerbaikanInventarisPerPelaksanaStatus.setName("btnGrafikPerbaikanInventarisPerPelaksanaStatus");
         btnGrafikPerbaikanInventarisPerPelaksanaStatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikPerbaikanInventarisPerPelaksanaStatus.addActionListener(this::btnGrafikPerbaikanInventarisPerPelaksanaStatusActionPerformed);
@@ -48162,7 +47397,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianMCU = new widget.ButtonBig();
         btnPenilaianMCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852556_doctor_files_medical_record_icon.png")));
         btnPenilaianMCU.setText("Pengkajian MCU");
-        btnPenilaianMCU.setIconTextGap(0);
         btnPenilaianMCU.setName("btnPenilaianMCU");
         btnPenilaianMCU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianMCU.addActionListener(this::btnPenilaianMCUActionPerformed);
@@ -48170,7 +47404,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterKesimpulanAnjuranMCU = new widget.ButtonBig();
         btnMasterKesimpulanAnjuranMCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5854057_education_memo_notes_pad_reminder_icon.png")));
         btnMasterKesimpulanAnjuranMCU.setText("Master Kesimpulan & Anjuran MCU");
-        btnMasterKesimpulanAnjuranMCU.setIconTextGap(0);
         btnMasterKesimpulanAnjuranMCU.setName("btnMasterKesimpulanAnjuranMCU");
         btnMasterKesimpulanAnjuranMCU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterKesimpulanAnjuranMCU.addActionListener(this::btnMasterKesimpulanAnjuranMCUActionPerformed);
@@ -48178,7 +47411,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCaraBayar = new widget.ButtonBig();
         btnCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4171274_day_heart_love_time_valentine_icon.png")));
         btnCaraBayar.setText("Asuransi/Askes/Jenis Bayar");
-        btnCaraBayar.setIconTextGap(0);
         btnCaraBayar.setName("btnCaraBayar");
         btnCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCaraBayar.addActionListener(this::btnCaraBayarActionPerformed);
@@ -48186,7 +47418,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPeminjamPiutang = new widget.ButtonBig();
         btnPeminjamPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Teachers-24_103847.png")));
         btnPeminjamPiutang.setText("Peminjam Piutang");
-        btnPeminjamPiutang.setIconTextGap(0);
         btnPeminjamPiutang.setName("btnPeminjamPiutang");
         btnPeminjamPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPeminjamPiutang.addActionListener(this::btnPeminjamPiutangActionPerformed);
@@ -48194,7 +47425,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangLainLain = new widget.ButtonBig();
         btnPiutangLainLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_11001_cash_coins_money_pig_piggy bank_icon_48px.png")));
         btnPiutangLainLain.setText("Piutang Peminjaman Uang");
-        btnPiutangLainLain.setIconTextGap(0);
         btnPiutangLainLain.setName("btnPiutangLainLain");
         btnPiutangLainLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangLainLain.addActionListener(this::btnPiutangLainLainActionPerformed);
@@ -48202,7 +47432,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSTaskIDMobileJKN = new widget.ButtonBig();
         btnBPJSTaskIDMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSTaskIDMobileJKN.setText("Task ID Mobile JKN");
-        btnBPJSTaskIDMobileJKN.setIconTextGap(0);
         btnBPJSTaskIDMobileJKN.setName("btnBPJSTaskIDMobileJKN");
         btnBPJSTaskIDMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSTaskIDMobileJKN.addActionListener(this::btnBPJSTaskIDMobileJKNActionPerformed);
@@ -48210,7 +47439,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPiutangLainLain = new widget.ButtonBig();
         btnBayarPiutangLainLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/47679_card_credit_payment_icon.png")));
         btnBayarPiutangLainLain.setText("Bayar Piutang Peminjaman Uang");
-        btnBayarPiutangLainLain.setIconTextGap(0);
         btnBayarPiutangLainLain.setName("btnBayarPiutangLainLain");
         btnBayarPiutangLainLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPiutangLainLain.addActionListener(this::btnBayarPiutangLainLainActionPerformed);
@@ -48218,7 +47446,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranAkunBayar4 = new widget.ButtonBig();
         btnPembayaranAkunBayar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png")));
         btnPembayaranAkunBayar4.setText("Pembayaran Per Akun Bayar 4");
-        btnPembayaranAkunBayar4.setIconTextGap(0);
         btnPembayaranAkunBayar4.setName("btnPembayaranAkunBayar4");
         btnPembayaranAkunBayar4.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranAkunBayar4.addActionListener(this::btnPembayaranAkunBayar4ActionPerformed);
@@ -48226,7 +47453,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnStokAkhirFarmasiPerTanggal = new widget.ButtonBig();
         btnStokAkhirFarmasiPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_bag_icons-15_1075431.png")));
         btnStokAkhirFarmasiPerTanggal.setText("Stok Akhir Farmasi Per Tanggal");
-        btnStokAkhirFarmasiPerTanggal.setIconTextGap(0);
         btnStokAkhirFarmasiPerTanggal.setName("btnStokAkhirFarmasiPerTanggal");
         btnStokAkhirFarmasiPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStokAkhirFarmasiPerTanggal.addActionListener(this::btnStokAkhirFarmasiPerTanggalActionPerformed);
@@ -48234,7 +47460,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatKamarPasien = new widget.ButtonBig();
         btnRiwayatKamarPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Coronavirus-covid19-case-patient-hospital-treatment_6009596.png")));
         btnRiwayatKamarPasien.setText("Riwayat Kamar Pasien");
-        btnRiwayatKamarPasien.setIconTextGap(0);
         btnRiwayatKamarPasien.setName("btnRiwayatKamarPasien");
         btnRiwayatKamarPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatKamarPasien.addActionListener(this::btnRiwayatKamarPasienActionPerformed);
@@ -48242,7 +47467,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditKepatuhanAPD = new widget.ButtonBig();
         btnAuditKepatuhanAPD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5986179_admit_hospital_insurance_medical_medicine_icon.png")));
         btnAuditKepatuhanAPD.setText("Audit Kepatuhan APD");
-        btnAuditKepatuhanAPD.setIconTextGap(0);
         btnAuditKepatuhanAPD.setName("btnAuditKepatuhanAPD");
         btnAuditKepatuhanAPD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditKepatuhanAPD.addActionListener(this::btnAuditKepatuhanAPDActionPerformed);
@@ -48250,7 +47474,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnUjiFungsiKFR = new widget.ButtonBig();
         btnUjiFungsiKFR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6159284_bicycle_bike_cycling_isometric_mountain bike_icon.png")));
         btnUjiFungsiKFR.setText("Uji Fungsi/Prosedur KFR");
-        btnUjiFungsiKFR.setIconTextGap(0);
         btnUjiFungsiKFR.setName("btnUjiFungsiKFR");
         btnUjiFungsiKFR.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUjiFungsiKFR.addActionListener(this::btnUjiFungsiKFRActionPerformed);
@@ -48258,7 +47481,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKategoriPengeluaranHarian = new widget.ButtonBig();
         btnKategoriPengeluaranHarian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/299058_tag_icon.png")));
         btnKategoriPengeluaranHarian.setText("Kategori Pengeluaran Harian");
-        btnKategoriPengeluaranHarian.setIconTextGap(0);
         btnKategoriPengeluaranHarian.setName("btnKategoriPengeluaranHarian");
         btnKategoriPengeluaranHarian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKategoriPengeluaranHarian.addActionListener(this::btnKategoriPengeluaranHarianActionPerformed);
@@ -48266,7 +47488,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKategoriPemasukanLian = new widget.ButtonBig();
         btnKategoriPemasukanLian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3440908_ecommerce_label_price_shop_shopping_icon.png")));
         btnKategoriPemasukanLian.setText("Kategori Pemasukan Lain-lain");
-        btnKategoriPemasukanLian.setIconTextGap(0);
         btnKategoriPemasukanLian.setName("btnKategoriPemasukanLian");
         btnKategoriPemasukanLian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKategoriPemasukanLian.addActionListener(this::btnKategoriPemasukanLianActionPerformed);
@@ -48274,7 +47495,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranAkunBayar5 = new widget.ButtonBig();
         btnPembayaranAkunBayar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png")));
         btnPembayaranAkunBayar5.setText("Pembayaran Per Akun Bayar 5");
-        btnPembayaranAkunBayar5.setIconTextGap(0);
         btnPembayaranAkunBayar5.setName("btnPembayaranAkunBayar5");
         btnPembayaranAkunBayar5.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranAkunBayar5.addActionListener(this::btnPembayaranAkunBayar5ActionPerformed);
@@ -48282,7 +47502,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRuangOperasi = new widget.ButtonBig();
         btnRuangOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898980_doctor_emergency_health_healthcare_healthy_icon.png")));
         btnRuangOperasi.setText("Ruang Operasi");
-        btnRuangOperasi.setIconTextGap(0);
         btnRuangOperasi.setName("btnRuangOperasi");
         btnRuangOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRuangOperasi.addActionListener(this::btnRuangOperasiActionPerformed);
@@ -48290,7 +47509,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJasaTindakanPasien = new widget.ButtonBig();
         btnJasaTindakanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859106_avatar_doctor_job_surgeon_user_icon.png")));
         btnJasaTindakanPasien.setText("Jasa Tindakan Pasien");
-        btnJasaTindakanPasien.setIconTextGap(0);
         btnJasaTindakanPasien.setName("btnJasaTindakanPasien");
         btnJasaTindakanPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJasaTindakanPasien.addActionListener(this::btnJasaTindakanPasienActionPerformed);
@@ -48298,7 +47516,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanJasaTindakanPasien = new widget.ButtonBig();
         btnRingkasanJasaTindakanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanJasaTindakanPasien.setText("Ringkasan Jasa Tindakan Pasien");
-        btnRingkasanJasaTindakanPasien.setIconTextGap(0);
         btnRingkasanJasaTindakanPasien.setName("btnRingkasanJasaTindakanPasien");
         btnRingkasanJasaTindakanPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanJasaTindakanPasien.addActionListener(this::btnRingkasanJasaTindakanPasienActionPerformed);
@@ -48306,7 +47523,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTelaahResep = new widget.ButtonBig();
         btnTelaahResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5868989_coronavirus_drug_medic_medical_medicine_icon.png")));
         btnTelaahResep.setText("Pengkajian Resep & Obat");
-        btnTelaahResep.setIconTextGap(0);
         btnTelaahResep.setName("btnTelaahResep");
         btnTelaahResep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTelaahResep.addActionListener(this::btnTelaahResepActionPerformed);
@@ -48314,7 +47530,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanResepPulang = new widget.ButtonBig();
         btnPermintaanResepPulang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_paper_pencil-lb_86334.png")));
         btnPermintaanResepPulang.setText("Permintaan Resep Pulang");
-        btnPermintaanResepPulang.setIconTextGap(0);
         btnPermintaanResepPulang.setName("btnPermintaanResepPulang");
         btnPermintaanResepPulang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanResepPulang.addActionListener(this::btnPermintaanResepPulangActionPerformed);
@@ -48322,7 +47537,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapJasaDokter = new widget.ButtonBig();
         btnRekapJasaDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/address-book.png")));
         btnRekapJasaDokter.setText("Rekap JM Dokter");
-        btnRekapJasaDokter.setIconTextGap(0);
         btnRekapJasaDokter.setName("btnRekapJasaDokter");
         btnRekapJasaDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapJasaDokter.addActionListener(this::btnRekapJasaDokterActionPerformed);
@@ -48330,7 +47544,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnStatusDataRM = new widget.ButtonBig();
         btnStatusDataRM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852569_chat_chatting_conversation_files_message_icon.png")));
         btnStatusDataRM.setText("Status Data RM");
-        btnStatusDataRM.setIconTextGap(0);
         btnStatusDataRM.setName("btnStatusDataRM");
         btnStatusDataRM.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStatusDataRM.addActionListener(this::btnStatusDataRMActionPerformed);
@@ -48338,7 +47551,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanBiayaObatPasienPerTanggal = new widget.ButtonBig();
         btnRingkasanBiayaObatPasienPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanBiayaObatPasienPerTanggal.setText("Ringkasan Biaya Obat Pasien Per Tanggal");
-        btnRingkasanBiayaObatPasienPerTanggal.setIconTextGap(0);
         btnRingkasanBiayaObatPasienPerTanggal.setName("btnRingkasanBiayaObatPasienPerTanggal");
         btnRingkasanBiayaObatPasienPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanBiayaObatPasienPerTanggal.addActionListener(this::btnRingkasanBiayaObatPasienPerTanggalActionPerformed);
@@ -48346,7 +47558,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanIGD = new widget.ButtonBig();
         btnMasterMasalahKeperawatanIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_30-Doctor_5929214.png")));
         btnMasterMasalahKeperawatanIGD.setText("Master Masalah Keperawatan IGD");
-        btnMasterMasalahKeperawatanIGD.setIconTextGap(0);
         btnMasterMasalahKeperawatanIGD.setName("btnMasterMasalahKeperawatanIGD");
         btnMasterMasalahKeperawatanIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanIGD.addActionListener(this::btnMasterMasalahKeperawatanIGDActionPerformed);
@@ -48354,7 +47565,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanIGD= new widget.ButtonBig();
         btnPenilaianAwalKeperawatanIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_AMBULANCE-transport-health_care-transportation-urgency_6007988.png")));
         btnPenilaianAwalKeperawatanIGD.setText("Awal Keperawatan IGD");
-        btnPenilaianAwalKeperawatanIGD.setIconTextGap(0);
         btnPenilaianAwalKeperawatanIGD.setName("btnPenilaianAwalKeperawatanIGD");
         btnPenilaianAwalKeperawatanIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanIGD.addActionListener(this::btnPenilaianAwalKeperawatanIGDActionPerformed);
@@ -48362,7 +47572,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiDPHOApotek = new widget.ButtonBig();
         btnBPJSReferensiDPHOApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSReferensiDPHOApotek.setText("Referensi DPHO Apotek BPJS");
-        btnBPJSReferensiDPHOApotek.setIconTextGap(0);
         btnBPJSReferensiDPHOApotek.setName("btnBPJSReferensiDPHOApotek");
         btnBPJSReferensiDPHOApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiDPHOApotek.addActionListener(this::btnBPJSReferensiDPHOApotekActionPerformed);
@@ -48370,7 +47579,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiPoliApotek = new widget.ButtonBig();
         btnBPJSReferensiPoliApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSReferensiPoliApotek.setText("Referensi Poli Apotek BPJS");
-        btnBPJSReferensiPoliApotek.setIconTextGap(0);
         btnBPJSReferensiPoliApotek.setName("btnBPJSReferensiPoliApotek");
         btnBPJSReferensiPoliApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiPoliApotek.addActionListener(this::btnBPJSReferensiPoliApotekActionPerformed);
@@ -48378,7 +47586,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarJMDokter = new widget.ButtonBig();
         btnBayarJMDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852541_doc_docx_files_odt_rtf_icon.png")));
         btnBayarJMDokter.setText("Bayar JM Dokter");
-        btnBayarJMDokter.setIconTextGap(0);
         btnBayarJMDokter.setName("btnBayarJMDokter");
         btnBayarJMDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarJMDokter.addActionListener(this::btnBayarJMDokterActionPerformed);
@@ -48386,7 +47593,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiFaskesApotek = new widget.ButtonBig();
         btnBPJSReferensiFaskesApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSReferensiFaskesApotek.setText("Referensi Faskes Apotek BPJS");
-        btnBPJSReferensiFaskesApotek.setIconTextGap(0);
         btnBPJSReferensiFaskesApotek.setName("btnBPJSReferensiFaskesApotek");
         btnBPJSReferensiFaskesApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiFaskesApotek.addActionListener(this::btnBPJSReferensiFaskesApotekActionPerformed);
@@ -48394,7 +47600,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiSpesialistikApotek = new widget.ButtonBig();
         btnBPJSReferensiSpesialistikApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSReferensiSpesialistikApotek.setText("Referensi Spesialistik Apotek BPJS");
-        btnBPJSReferensiSpesialistikApotek.setIconTextGap(0);
         btnBPJSReferensiSpesialistikApotek.setName("btnBPJSReferensiSpesialistikApotek");
         btnBPJSReferensiSpesialistikApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiSpesialistikApotek.addActionListener(this::btnBPJSReferensiSpesialistikApotekActionPerformed);
@@ -48402,7 +47607,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranBRIVA = new widget.ButtonBig();
         btnPembayaranBRIVA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_wallet_3440917.png")));
         btnPembayaranBRIVA.setText("Pembayaran BRIVA");
-        btnPembayaranBRIVA.setIconTextGap(0);
         btnPembayaranBRIVA.setName("btnPembayaranBRIVA");
         btnPembayaranBRIVA.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranBRIVA.addActionListener(this::btnPembayaranBRIVAActionPerformed);
@@ -48410,7 +47614,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanRanap= new widget.ButtonBig();
         btnPenilaianAwalKeperawatanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_report-clipboard-medical-checklist-healthcare_5859123.png")));
         btnPenilaianAwalKeperawatanRanap.setText("Awal Keperawatan Ranap Umum");
-        btnPenilaianAwalKeperawatanRanap.setIconTextGap(0);
         btnPenilaianAwalKeperawatanRanap.setName("btnPenilaianAwalKeperawatanRanap");
         btnPenilaianAwalKeperawatanRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanRanap.addActionListener(this::btnPenilaianAwalKeperawatanRanapActionPerformed);
@@ -48418,7 +47621,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunBayarHutang = new widget.ButtonBig();
         btnAkunBayarHutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/87482_wallet_icon.png")));
         btnAkunBayarHutang.setText("Akun Bayar Hutang");
-        btnAkunBayarHutang.setIconTextGap(0);
         btnAkunBayarHutang.setName("btnAkunBayarHutang");
         btnAkunBayarHutang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunBayarHutang.addActionListener(this::btnAkunBayarHutangActionPerformed);
@@ -48426,7 +47628,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnNilaiPenerimaanVendorFarmasiPerBulan = new widget.ButtonBig();
         btnNilaiPenerimaanVendorFarmasiPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_File_Files_Folder_Clipboard_Data_Confirm_3909329.png")));
         btnNilaiPenerimaanVendorFarmasiPerBulan.setText("Nilai Penerimaan Vendor Farmasi Per Bulan");
-        btnNilaiPenerimaanVendorFarmasiPerBulan.setIconTextGap(0);
         btnNilaiPenerimaanVendorFarmasiPerBulan.setName("btnNilaiPenerimaanVendorFarmasiPerBulan");
         btnNilaiPenerimaanVendorFarmasiPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnNilaiPenerimaanVendorFarmasiPerBulan.addActionListener(this::btnNilaiPenerimaanVendorFarmasiPerBulanActionPerformed);
@@ -48434,7 +47635,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatan = new widget.ButtonBig();
         btnMasterRencanaKeperawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder__bed_rest_sleep_sick_patient_bed_rest_5928511.png")));
         btnMasterRencanaKeperawatan.setText("Master Rencana Keperawatan");
-        btnMasterRencanaKeperawatan.setIconTextGap(0);
         btnMasterRencanaKeperawatan.setName("btnMasterRencanaKeperawatan");
         btnMasterRencanaKeperawatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatan.addActionListener(this::btnMasterRencanaKeperawatanActionPerformed);
@@ -48442,7 +47642,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanTahunanIGD = new widget.ButtonBig();
         btnLaporanTahunanIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/laporantahunanIRJ.png")));
         btnLaporanTahunanIGD.setText("Laporan Tahunan IGD");
-        btnLaporanTahunanIGD.setIconTextGap(0);
         btnLaporanTahunanIGD.setName("btnLaporanTahunanIGD");
         btnLaporanTahunanIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanTahunanIGD.addActionListener(this::btnLaporanTahunanIGDActionPerformed);
@@ -48450,7 +47649,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatBHPTidakBergerak = new widget.ButtonBig();
         btnObatBHPTidakBergerak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_preferences-system-time_8810.png")));
         btnObatBHPTidakBergerak.setText("Obat/Alkes/BHP Tidak Bergerak");
-        btnObatBHPTidakBergerak.setIconTextGap(0);
         btnObatBHPTidakBergerak.setName("btnObatBHPTidakBergerak");
         btnObatBHPTidakBergerak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatBHPTidakBergerak.addActionListener(this::btnObatBHPTidakBergerakActionPerformed);
@@ -48458,7 +47656,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanHutangVendorFarmasi = new widget.ButtonBig();
         btnRingkasanHutangVendorFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_mail-message-new_23443.png")));
         btnRingkasanHutangVendorFarmasi.setText("Ringkasan Hutang Vendor Farmasi");
-        btnRingkasanHutangVendorFarmasi.setIconTextGap(0);
         btnRingkasanHutangVendorFarmasi.setName("btnRingkasanHutangVendorFarmasi");
         btnRingkasanHutangVendorFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHutangVendorFarmasi.addActionListener(this::btnRingkasanHutangVendorFarmasiActionPerformed);
@@ -48466,7 +47663,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnNilaiPenerimaanVendorNonMedisPerBulan = new widget.ButtonBig();
         btnNilaiPenerimaanVendorNonMedisPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_File_Files_Folder_Clipboard_Data_Confirm_3909329.png")));
         btnNilaiPenerimaanVendorNonMedisPerBulan.setText("Nilai Penerimaan Vendor Non Medis Per Bulan");
-        btnNilaiPenerimaanVendorNonMedisPerBulan.setIconTextGap(0);
         btnNilaiPenerimaanVendorNonMedisPerBulan.setName("btnNilaiPenerimaanVendorNonMedisPerBulan");
         btnNilaiPenerimaanVendorNonMedisPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnNilaiPenerimaanVendorNonMedisPerBulan.addActionListener(this::btnNilaiPenerimaanVendorNonMedisPerBulanActionPerformed);
@@ -48474,7 +47670,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanHutangVendorBarangNonMedis = new widget.ButtonBig();
         btnRingkasanHutangVendorBarangNonMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_filetype_-_download_3440881.png")));
         btnRingkasanHutangVendorBarangNonMedis.setText("Ringkasan Hutang Vendor Non Medis");
-        btnRingkasanHutangVendorBarangNonMedis.setIconTextGap(0);
         btnRingkasanHutangVendorBarangNonMedis.setName("btnRingkasanHutangVendorBarangNonMedis");
         btnRingkasanHutangVendorBarangNonMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHutangVendorBarangNonMedis.addActionListener(this::btnRingkasanHutangVendorBarangNonMedisActionPerformed);
@@ -48482,7 +47677,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAnggotaPolriDirawat = new widget.ButtonBig();
         btnAnggotaPolriDirawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/131492_policeman_police_police officer_police-officer_guard_icon.png")));
         btnAnggotaPolriDirawat.setText("Anggota POLRI Dirawat");
-        btnAnggotaPolriDirawat.setIconTextGap(0);
         btnAnggotaPolriDirawat.setName("btnAnggotaPolriDirawat");
         btnAnggotaPolriDirawat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAnggotaPolriDirawat.addActionListener(this::btnAnggotaPolriDirawatActionPerformed);
@@ -48490,7 +47684,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDaftarPasienRanapPolri = new widget.ButtonBig();
         btnDaftarPasienRanapPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_009_95869.png")));
         btnDaftarPasienRanapPolri.setText("Daftar Pasien Ranap POLRI");
-        btnDaftarPasienRanapPolri.setIconTextGap(0);
         btnDaftarPasienRanapPolri.setName("btnDaftarPasienRanapPolri");
         btnDaftarPasienRanapPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDaftarPasienRanapPolri.addActionListener(this::btnDaftarPasienRanapPolriActionPerformed);
@@ -48498,7 +47691,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSOAPRalanAnggotaPolri = new widget.ButtonBig();
         btnSOAPRalanAnggotaPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_patient-health_report-graph-coronavirus_6000116.png")));
         btnSOAPRalanAnggotaPolri.setText("SOAP Ralan Anggota POLRI");
-        btnSOAPRalanAnggotaPolri.setIconTextGap(0);
         btnSOAPRalanAnggotaPolri.setName("btnSOAPRalanAnggotaPolri");
         btnSOAPRalanAnggotaPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSOAPRalanAnggotaPolri.addActionListener(this::btnSOAPRalanAnggotaPolriActionPerformed);
@@ -48506,7 +47698,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSOAPRanapAnggotaPolri = new widget.ButtonBig();
         btnSOAPRanapAnggotaPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_patient-health_report-graph-coronavirus_6000116.png")));
         btnSOAPRanapAnggotaPolri.setText("SOAP Ranap Anggota POLRI");
-        btnSOAPRanapAnggotaPolri.setIconTextGap(0);
         btnSOAPRanapAnggotaPolri.setName("btnSOAPRanapAnggotaPolri");
         btnSOAPRanapAnggotaPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSOAPRanapAnggotaPolri.addActionListener(this::btnSOAPRanapAnggotaPolriActionPerformed);
@@ -48514,7 +47705,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanPenyakitPolri = new widget.ButtonBig();
         btnLaporanPenyakitPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6008661_bacteria_coronavirus_covid_laboratory_microscope_icon.png")));
         btnLaporanPenyakitPolri.setText("Laporan Penyakit POLRI");
-        btnLaporanPenyakitPolri.setIconTextGap(0);
         btnLaporanPenyakitPolri.setName("btnLaporanPenyakitPolri");
         btnLaporanPenyakitPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanPenyakitPolri.addActionListener(this::btnLaporanPenyakitPolriActionPerformed);
@@ -48522,7 +47712,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanAnak = new widget.ButtonBig();
         btnMasterRencanaKeperawatanAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/baby-boy.png")));
         btnMasterRencanaKeperawatanAnak.setText("Master Rencana Keperawatan Bayi/Anak");
-        btnMasterRencanaKeperawatanAnak.setIconTextGap(0);
         btnMasterRencanaKeperawatanAnak.setName("btnMasterRencanaKeperawatanAnak");
         btnMasterRencanaKeperawatanAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanAnak.addActionListener(this::btnMasterRencanaKeperawatanAnakActionPerformed);
@@ -48530,7 +47719,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJumlahPengunjungRalanPolri = new widget.ButtonBig();
         btnJumlahPengunjungRalanPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5868974_paper_research_corona virus_coronavirus_file_icon.png")));
         btnJumlahPengunjungRalanPolri.setText("Jumlah Pengunjung Ralan POLRI");
-        btnJumlahPengunjungRalanPolri.setIconTextGap(0);
         btnJumlahPengunjungRalanPolri.setName("btnJumlahPengunjungRalanPolri");
         btnJumlahPengunjungRalanPolri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJumlahPengunjungRalanPolri.addActionListener(this::btnJumlahPengunjungRalanPolriActionPerformed);
@@ -48538,7 +47726,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiIGD = new widget.ButtonBig();
         btnCatatanObservasiIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/85380_note_icon.png")));
         btnCatatanObservasiIGD.setText("Catatan Observasi IGD");
-        btnCatatanObservasiIGD.setIconTextGap(0);
         btnCatatanObservasiIGD.setName("btnCatatanObservasiIGD");
         btnCatatanObservasiIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiIGD.addActionListener(this::btnCatatanObservasiIGDActionPerformed);
@@ -48546,7 +47733,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiRanap = new widget.ButtonBig();
         btnCatatanObservasiRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852555_business_files_management_icon.png")));
         btnCatatanObservasiRanap.setText("Catatan Observasi Ranap");
-        btnCatatanObservasiRanap.setIconTextGap(0);
         btnCatatanObservasiRanap.setName("btnCatatanObservasiRanap");
         btnCatatanObservasiRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiRanap.addActionListener(this::btnCatatanObservasiRanapActionPerformed);
@@ -48554,7 +47740,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiRanapKebidanan = new widget.ButtonBig();
         btnCatatanObservasiRanapKebidanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852562_education_files_school_icon.png")));
         btnCatatanObservasiRanapKebidanan.setText("Catatan Observasi Ranap Kebidanan");
-        btnCatatanObservasiRanapKebidanan.setIconTextGap(0);
         btnCatatanObservasiRanapKebidanan.setName("btnCatatanObservasiRanapKebidanan");
         btnCatatanObservasiRanapKebidanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiRanapKebidanan.addActionListener(this::btnCatatanObservasiRanapKebidananActionPerformed);
@@ -48562,7 +47747,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiRanapPostPartum = new widget.ButtonBig();
         btnCatatanObservasiRanapPostPartum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852546_documents_files_folder_icon.png")));
         btnCatatanObservasiRanapPostPartum.setText("Catatan Observasi Ranap Post Partum");
-        btnCatatanObservasiRanapPostPartum.setIconTextGap(0);
         btnCatatanObservasiRanapPostPartum.setName("btnCatatanObservasiRanapPostPartum");
         btnCatatanObservasiRanapPostPartum.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiRanapPostPartum.addActionListener(this::btnCatatanObservasiRanapPostPartumActionPerformed);
@@ -48570,7 +47754,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiBayi = new widget.ButtonBig();
         btnCatatanObservasiBayi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1312866_signature_analysis_business_finance_office_icon.png")));
         btnCatatanObservasiBayi.setText("Catatan Observasi Bayi");
-        btnCatatanObservasiBayi.setIconTextGap(0);
         btnCatatanObservasiBayi.setName("btnCatatanObservasiBayi");
         btnCatatanObservasiBayi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiBayi.addActionListener(this::btnCatatanObservasiBayiActionPerformed);
@@ -48578,7 +47761,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanTHT = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanTHT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5868953_coronavirus_covid-19_nose_secretion_snot_icon.png")));
         btnPenilaianAwalMedisRalanTHT.setText("Awal Medis Ralan THT");
-        btnPenilaianAwalMedisRalanTHT.setIconTextGap(0);
         btnPenilaianAwalMedisRalanTHT.setName("btnPenilaianAwalMedisRalanTHT");
         btnPenilaianAwalMedisRalanTHT.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanTHT.addActionListener(this::btnPenilaianAwalMedisRalanTHTActionPerformed);
@@ -48586,7 +47768,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditCuciTanganMedis = new widget.ButtonBig();
         btnAuditCuciTanganMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5929226_clean_cleaning_hands_wash_washing_icon.png")));
         btnAuditCuciTanganMedis.setText("Audit Cuci Tangan Medis");
-        btnAuditCuciTanganMedis.setIconTextGap(0);
         btnAuditCuciTanganMedis.setName("btnAuditCuciTanganMedis");
         btnAuditCuciTanganMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditCuciTanganMedis.addActionListener(this::btnAuditCuciTanganMedisActionPerformed);
@@ -48594,7 +47775,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPsikologi = new widget.ButtonBig();
         btnPenilaianPsikologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2890565_ai_artificial intelligence_automaton_brain_electronics_icon.png")));
         btnPenilaianPsikologi.setText("Pengkajian Psikologi");
-        btnPenilaianPsikologi.setIconTextGap(0);
         btnPenilaianPsikologi.setName("btnPenilaianPsikologi");
         btnPenilaianPsikologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPsikologi.addActionListener(this::btnPenilaianPsikologiActionPerformed);
@@ -48602,7 +47782,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPsikologiKlinis = new widget.ButtonBig();
         btnPenilaianPsikologiKlinis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9320236_wifi_mind_interaction_untact_icon.png")));
         btnPenilaianPsikologiKlinis.setText("Pengkajian Psikologi Klinis");
-        btnPenilaianPsikologiKlinis.setIconTextGap(0);
         btnPenilaianPsikologiKlinis.setName("btnPenilaianPsikologiKlinis");
         btnPenilaianPsikologiKlinis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPsikologiKlinis.addActionListener(this::btnPenilaianPsikologiKlinisActionPerformed);
@@ -48610,7 +47789,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRuangAuditKepatuhan = new widget.ButtonBig();
         btnRuangAuditKepatuhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8961095_home_monitoring_electricity_thermal_humidity_icon.png")));
         btnRuangAuditKepatuhan.setText("Ruang/Unit Audit Kepatuhan");
-        btnRuangAuditKepatuhan.setIconTextGap(0);
         btnRuangAuditKepatuhan.setName("btnRuangAuditKepatuhan");
         btnRuangAuditKepatuhan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRuangAuditKepatuhan.addActionListener(this::btnRuangAuditKepatuhanActionPerformed);
@@ -48618,7 +47796,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditPembuanganLimbah = new widget.ButtonBig();
         btnAuditPembuanganLimbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8956796_trash_can_bin_delete_rubbish_icon.png")));
         btnAuditPembuanganLimbah.setText("Audit Pembuangan Limbah");
-        btnAuditPembuanganLimbah.setIconTextGap(0);
         btnAuditPembuanganLimbah.setName("btnAuditPembuanganLimbah");
         btnAuditPembuanganLimbah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditPembuanganLimbah.addActionListener(this::btnAuditPembuanganLimbahActionPerformed);
@@ -48626,7 +47803,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditPembuanganBendaTajam = new widget.ButtonBig();
         btnAuditPembuanganBendaTajam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960649_syringes_syringe_vaccine_vaccination_vaccines_icon.png")));
         btnAuditPembuanganBendaTajam.setText("Audit Pembuangan Benda Tajam & Jarum");
-        btnAuditPembuanganBendaTajam.setIconTextGap(0);
         btnAuditPembuanganBendaTajam.setName("btnAuditPembuanganBendaTajam");
         btnAuditPembuanganBendaTajam.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditPembuanganBendaTajam.addActionListener(this::btnAuditPembuanganBendaTajamActionPerformed);
@@ -48634,7 +47810,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditPenangananDarah = new widget.ButtonBig();
         btnAuditPenangananDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960610_blood_drop_blood test_hand_transfusion_icon.png")));
         btnAuditPenangananDarah.setText("Audit Penanganan Darah");
-        btnAuditPenangananDarah.setIconTextGap(0);
         btnAuditPenangananDarah.setName("btnAuditPenangananDarah");
         btnAuditPenangananDarah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditPenangananDarah.addActionListener(this::btnAuditPenangananDarahActionPerformed);
@@ -48642,7 +47817,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditPengelolaanLinenKotor = new widget.ButtonBig();
         btnAuditPengelolaanLinenKotor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7150138_washing_machine_clean_wash_technology_icon.png")));
         btnAuditPengelolaanLinenKotor.setText("Audit Pengelolaan Linen Kotor");
-        btnAuditPengelolaanLinenKotor.setIconTextGap(0);
         btnAuditPengelolaanLinenKotor.setName("btnAuditPengelolaanLinenKotor");
         btnAuditPengelolaanLinenKotor.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditPengelolaanLinenKotor.addActionListener(this::btnAuditPengelolaanLinenKotorActionPerformed);
@@ -48650,7 +47824,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditPenempatanPasien = new widget.ButtonBig();
         btnAuditPenempatanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088155_head_headache_infection_pain_sick_icon.png")));
         btnAuditPenempatanPasien.setText("Audit Penempatan Pasien");
-        btnAuditPenempatanPasien.setIconTextGap(0);
         btnAuditPenempatanPasien.setName("btnAuditPenempatanPasien");
         btnAuditPenempatanPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditPenempatanPasien.addActionListener(this::btnAuditPenempatanPasienActionPerformed);
@@ -48658,7 +47831,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditKamarJenazah = new widget.ButtonBig();
         btnAuditKamarJenazah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kerandajenazah.png")));
         btnAuditKamarJenazah.setText("Audit Kamar Jenazah");
-        btnAuditKamarJenazah.setIconTextGap(0);
         btnAuditKamarJenazah.setName("btnAuditKamarJenazah");
         btnAuditKamarJenazah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditKamarJenazah.addActionListener(this::btnAuditKamarJenazahActionPerformed);
@@ -48666,7 +47838,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditBundleIADP = new widget.ButtonBig();
         btnAuditBundleIADP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856663_blood_laboratory_medical_research_science_icon.png")));
         btnAuditBundleIADP.setText("Audit Bundle IADP");
-        btnAuditBundleIADP.setIconTextGap(0);
         btnAuditBundleIADP.setName("btnAuditBundleIADP");
         btnAuditBundleIADP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditBundleIADP.addActionListener(this::btnAuditBundleIADPActionPerformed);
@@ -48674,7 +47845,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditBundleIDO = new widget.ButtonBig();
         btnAuditBundleIDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6123156_avatar_doctor_frontliner_medical staff_surgeon_icon.png")));
         btnAuditBundleIDO.setText("Audit Bundle IDO");
-        btnAuditBundleIDO.setIconTextGap(0);
         btnAuditBundleIDO.setName("btnAuditBundleIDO");
         btnAuditBundleIDO.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditBundleIDO.addActionListener(this::btnAuditBundleIDOActionPerformed);
@@ -48682,7 +47852,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditFasilitasKebersihanTangan = new widget.ButtonBig();
         btnAuditFasilitasKebersihanTangan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5932586_hands_soap_wash_coronavirus_covid19_icon.png")));
         btnAuditFasilitasKebersihanTangan.setText("Audit Fasilitas Kebersihan Tangan");
-        btnAuditFasilitasKebersihanTangan.setIconTextGap(0);
         btnAuditFasilitasKebersihanTangan.setName("btnAuditFasilitasKebersihanTangan");
         btnAuditFasilitasKebersihanTangan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditFasilitasKebersihanTangan.addActionListener(this::btnAuditFasilitasKebersihanTanganActionPerformed);
@@ -48690,7 +47859,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditFasilitasAPD = new widget.ButtonBig();
         btnAuditFasilitasAPD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1626354_apron_home_kitchen_restaurant_room_icon.png")));
         btnAuditFasilitasAPD.setText("Audit Fasilitas APD");
-        btnAuditFasilitasAPD.setIconTextGap(0);
         btnAuditFasilitasAPD.setName("btnAuditFasilitasAPD");
         btnAuditFasilitasAPD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditFasilitasAPD.addActionListener(this::btnAuditFasilitasAPDActionPerformed);
@@ -48698,7 +47866,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditPembuanganLimbahCairInfeksius = new widget.ButtonBig();
         btnAuditPembuanganLimbahCairInfeksius.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5972292_blood_disease_fluid_infection_transmission_icon.png")));
         btnAuditPembuanganLimbahCairInfeksius.setText("Audit Pembuangan Limbah Cair Infeksius");
-        btnAuditPembuanganLimbahCairInfeksius.setIconTextGap(0);
         btnAuditPembuanganLimbahCairInfeksius.setName("btnAuditPembuanganLimbahCairInfeksius");
         btnAuditPembuanganLimbahCairInfeksius.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditPembuanganLimbahCairInfeksius.addActionListener(this::btnAuditPembuanganLimbahCairInfeksiusActionPerformed);
@@ -48706,7 +47873,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditSterilisasiAlat = new widget.ButtonBig();
         btnAuditSterilisasiAlat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960613_iv_iv pole_blood_transfusion_infusion_icon.png")));
         btnAuditSterilisasiAlat.setText("Audit Sterilisasi Alat");
-        btnAuditSterilisasiAlat.setIconTextGap(0);
         btnAuditSterilisasiAlat.setName("btnAuditSterilisasiAlat");
         btnAuditSterilisasiAlat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditSterilisasiAlat.addActionListener(this::btnAuditSterilisasiAlatActionPerformed);
@@ -48714,7 +47880,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanPenolakanTindakan = new widget.ButtonBig();
         btnPersetujuanPenolakanTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6771569_education_learning_pencil_school_signature_icon.png")));
         btnPersetujuanPenolakanTindakan.setText("Persetujuan/Penolakan Tindakan");
-        btnPersetujuanPenolakanTindakan.setIconTextGap(0);
         btnPersetujuanPenolakanTindakan.setName("btnPersetujuanPenolakanTindakan");
         btnPersetujuanPenolakanTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPenolakanTindakan.addActionListener(this::btnPersetujuanPenolakanTindakanActionPerformed);
@@ -48722,7 +47887,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPernyataanMemilihDPJP = new widget.ButtonBig();
         btnSuratPernyataanMemilihDPJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898997_avatar_doctor_man_mask_user_icon.png")));
         btnSuratPernyataanMemilihDPJP.setText("Surat Pernyataan Memilih DPJP");
-        btnSuratPernyataanMemilihDPJP.setIconTextGap(0);
         btnSuratPernyataanMemilihDPJP.setName("btnSuratPernyataanMemilihDPJP");
         btnSuratPernyataanMemilihDPJP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPernyataanMemilihDPJP.addActionListener(this::btnSuratPernyataanMemilihDPJPActionPerformed);
@@ -48730,7 +47894,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanPsikiatri = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856674_bacteria_brain_disease_encephalitis_healthy_icon.png")));
         btnPenilaianAwalMedisRalanPsikiatri.setText("Awal Medis Ralan Psikiatri");
-        btnPenilaianAwalMedisRalanPsikiatri.setIconTextGap(0);
         btnPenilaianAwalMedisRalanPsikiatri.setName("btnPenilaianAwalMedisRalanPsikiatri");
         btnPenilaianAwalMedisRalanPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanPsikiatri.addActionListener(this::btnPenilaianAwalMedisRalanPsikiatriActionPerformed);
@@ -48738,7 +47901,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanapPsikiatri = new widget.ButtonBig();
         btnPenilaianAwalMedisRanapPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856674_bacteria_brain_disease_encephalitis_healthy_icon.png")));
         btnPenilaianAwalMedisRanapPsikiatri.setText("Awal Medis Ranap Psikiatri");
-        btnPenilaianAwalMedisRanapPsikiatri.setIconTextGap(0);
         btnPenilaianAwalMedisRanapPsikiatri.setName("btnPenilaianAwalMedisRanapPsikiatri");
         btnPenilaianAwalMedisRanapPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanapPsikiatri.addActionListener(this::btnPenilaianAwalMedisRanapPsikiatriActionPerformed);
@@ -48746,7 +47908,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditBundleISK = new widget.ButtonBig();
         btnAuditBundleISK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958327_clipboard virus_disease_epidemic_file data_infection_icon.png")));
         btnAuditBundleISK.setText("Audit Bundle ISK");
-        btnAuditBundleISK.setIconTextGap(0);
         btnAuditBundleISK.setName("btnAuditBundleISK");
         btnAuditBundleISK.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditBundleISK.addActionListener(this::btnAuditBundleISKActionPerformed);
@@ -48754,7 +47915,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditBundlePLABSI = new widget.ButtonBig();
         btnAuditBundlePLABSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5875848_blood_cell_disease_infect_lab_icon.png")));
         btnAuditBundlePLABSI.setText("Audit Bundle PLABSI");
-        btnAuditBundlePLABSI.setIconTextGap(0);
         btnAuditBundlePLABSI.setName("btnAuditBundlePLABSI");
         btnAuditBundlePLABSI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditBundlePLABSI.addActionListener(this::btnAuditBundlePLABSIActionPerformed);
@@ -48762,7 +47922,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAuditBundleVAP = new widget.ButtonBig();
         btnAuditBundleVAP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856684_disease_lung_outbreak_pneumonia_virus_icon.png")));
         btnAuditBundleVAP.setText("Audit Bundle VAP");
-        btnAuditBundleVAP.setIconTextGap(0);
         btnAuditBundleVAP.setName("btnAuditBundleVAP");
         btnAuditBundleVAP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAuditBundleVAP.addActionListener(this::btnAuditBundleVAPActionPerformed);
@@ -48770,7 +47929,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunRekeningHtHBankPapua = new widget.ButtonBig();
         btnAkunRekeningHtHBankPapua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bankpapua.jpg")));
         btnAkunRekeningHtHBankPapua.setText("Host To Host Bank Papua");
-        btnAkunRekeningHtHBankPapua.setIconTextGap(0);
         btnAkunRekeningHtHBankPapua.setName("btnAkunRekeningHtHBankPapua");
         btnAkunRekeningHtHBankPapua.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunRekeningHtHBankPapua.addActionListener(this::btnAkunRekeningHtHBankPapuaActionPerformed);
@@ -48778,7 +47936,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranBankPapua = new widget.ButtonBig();
         btnPembayaranBankPapua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_wallet_3440917.png")));
         btnPembayaranBankPapua.setText("Pembayaran Bank Papua");
-        btnPembayaranBankPapua.setIconTextGap(0);
         btnPembayaranBankPapua.setName("btnPembayaranBankPapua");
         btnPembayaranBankPapua.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranBankPapua.addActionListener(this::btnPembayaranBankPapuaActionPerformed);
@@ -48786,7 +47943,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanPenyakitDalam = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanPenyakitDalam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5972291_ailment_disease_germ_illness_pathogen_icon.png")));
         btnPenilaianAwalMedisRalanPenyakitDalam.setText("Awal Medis Ralan Penyakit Dalam");
-        btnPenilaianAwalMedisRalanPenyakitDalam.setIconTextGap(0);
         btnPenilaianAwalMedisRalanPenyakitDalam.setName("btnPenilaianAwalMedisRalanPenyakitDalam");
         btnPenilaianAwalMedisRalanPenyakitDalam.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanPenyakitDalam.addActionListener(this::btnPenilaianAwalMedisRalanPenyakitDalamActionPerformed);
@@ -48794,7 +47950,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanMata = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1459441_eye_holidays_anatomy_halloween_icon.png")));
         btnPenilaianAwalMedisRalanMata.setText("Awal Medis Ralan Mata");
-        btnPenilaianAwalMedisRalanMata.setIconTextGap(0);
         btnPenilaianAwalMedisRalanMata.setName("btnPenilaianAwalMedisRalanMata");
         btnPenilaianAwalMedisRalanMata.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanMata.addActionListener(this::btnPenilaianAwalMedisRalanMataActionPerformed);
@@ -48802,7 +47957,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanNeurologi = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanNeurologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2730389_brain_divide_inkcontober_sains_icon.png")));
         btnPenilaianAwalMedisRalanNeurologi.setText("Awal Medis Ralan Neurologi");
-        btnPenilaianAwalMedisRalanNeurologi.setIconTextGap(0);
         btnPenilaianAwalMedisRalanNeurologi.setName("btnPenilaianAwalMedisRalanNeurologi");
         btnPenilaianAwalMedisRalanNeurologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanNeurologi.addActionListener(this::btnPenilaianAwalMedisRalanNeurologiActionPerformed);
@@ -48810,7 +47964,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanOrthopedi = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanOrthopedi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859952_accident_injury_knee_leg_medical_icon.png")));
         btnPenilaianAwalMedisRalanOrthopedi.setText("Awal Medis Ralan Orthopedi");
-        btnPenilaianAwalMedisRalanOrthopedi.setIconTextGap(0);
         btnPenilaianAwalMedisRalanOrthopedi.setName("btnPenilaianAwalMedisRalanOrthopedi");
         btnPenilaianAwalMedisRalanOrthopedi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanOrthopedi.addActionListener(this::btnPenilaianAwalMedisRalanOrthopediActionPerformed);
@@ -48818,7 +47971,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanBedah = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanBedah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8008238_knife_cut_cutlery_cutting_tools_icon.png")));
         btnPenilaianAwalMedisRalanBedah.setText("Awal Medis Ralan Bedah");
-        btnPenilaianAwalMedisRalanBedah.setIconTextGap(0);
         btnPenilaianAwalMedisRalanBedah.setName("btnPenilaianAwalMedisRalanBedah");
         btnPenilaianAwalMedisRalanBedah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanBedah.addActionListener(this::btnPenilaianAwalMedisRalanBedahActionPerformed);
@@ -48826,7 +47978,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSOAPRalanAnggotaTNI = new widget.ButtonBig();
         btnSOAPRalanAnggotaTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_patient-health_report-graph-coronavirus_6000116.png")));
         btnSOAPRalanAnggotaTNI.setText("SOAP Ralan Anggota TNI");
-        btnSOAPRalanAnggotaTNI.setIconTextGap(0);
         btnSOAPRalanAnggotaTNI.setName("btnSOAPRalanAnggotaTNI");
         btnSOAPRalanAnggotaTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSOAPRalanAnggotaTNI.addActionListener(this::btnSOAPRalanAnggotaTNIActionPerformed);
@@ -48834,7 +47985,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSOAPRanapAnggotaTNI = new widget.ButtonBig();
         btnSOAPRanapAnggotaTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_patient-health_report-graph-coronavirus_6000116.png")));
         btnSOAPRanapAnggotaTNI.setText("SOAP Ranap Anggota TNI");
-        btnSOAPRanapAnggotaTNI.setIconTextGap(0);
         btnSOAPRanapAnggotaTNI.setName("btnSOAPRanapAnggotaTNI");
         btnSOAPRanapAnggotaTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSOAPRanapAnggotaTNI.addActionListener(this::btnSOAPRanapAnggotaTNIActionPerformed);
@@ -48842,7 +47992,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJumlahPengunjungRalanTNI = new widget.ButtonBig();
         btnJumlahPengunjungRalanTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5868974_paper_research_corona virus_coronavirus_file_icon.png")));
         btnJumlahPengunjungRalanTNI.setText("Jumlah Pengunjung Ralan TNI");
-        btnJumlahPengunjungRalanTNI.setIconTextGap(0);
         btnJumlahPengunjungRalanTNI.setName("btnJumlahPengunjungRalanTNI");
         btnJumlahPengunjungRalanTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJumlahPengunjungRalanTNI.addActionListener(this::btnJumlahPengunjungRalanTNIActionPerformed);
@@ -48850,7 +47999,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanPenyakitTNI = new widget.ButtonBig();
         btnLaporanPenyakitTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6008661_bacteria_coronavirus_covid_laboratory_microscope_icon.png")));
         btnLaporanPenyakitTNI.setText("Laporan Penyakit TNI");
-        btnLaporanPenyakitTNI.setIconTextGap(0);
         btnLaporanPenyakitTNI.setName("btnLaporanPenyakitTNI");
         btnLaporanPenyakitTNI.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanPenyakitTNI.addActionListener(this::btnLaporanPenyakitTNIActionPerformed);
@@ -48858,7 +48006,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanKeperawatanRanap = new widget.ButtonBig();
         btnCatatanKeperawatanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6123164_avatar_frontliner_male_medical staff_nurse_icon.png")));
         btnCatatanKeperawatanRanap.setText("Catatan Keperawatan Ranap");
-        btnCatatanKeperawatanRanap.setIconTextGap(0);
         btnCatatanKeperawatanRanap.setName("btnCatatanKeperawatanRanap");
         btnCatatanKeperawatanRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanKeperawatanRanap.addActionListener(this::btnCatatanKeperawatanRanapActionPerformed);
@@ -48866,7 +48013,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanGigi = new widget.ButtonBig();
         btnMasterRencanaKeperawatanGigi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_healthcare_and_medical-hygienic-tooth_paste-toothpaste-toothbrush-health_care_4394831.png")));
         btnMasterRencanaKeperawatanGigi.setText("Master Rencana Keperawatan Gigi");
-        btnMasterRencanaKeperawatanGigi.setIconTextGap(0);
         btnMasterRencanaKeperawatanGigi.setName("btnMasterRencanaKeperawatanGigi");
         btnMasterRencanaKeperawatanGigi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanGigi.addActionListener(this::btnMasterRencanaKeperawatanGigiActionPerformed);
@@ -48874,7 +48020,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanMata = new widget.ButtonBig();
         btnMasterRencanaKeperawatanMata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/85364_eye_icon.png")));
         btnMasterRencanaKeperawatanMata.setText("Master Rencana Keperawatan Mata");
-        btnMasterRencanaKeperawatanMata.setIconTextGap(0);
         btnMasterRencanaKeperawatanMata.setName("btnMasterRencanaKeperawatanMata");
         btnMasterRencanaKeperawatanMata.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanMata.addActionListener(this::btnMasterRencanaKeperawatanMataActionPerformed);
@@ -48882,7 +48027,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanIGD = new widget.ButtonBig();
         btnMasterRencanaKeperawatanIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_30-Doctor_5929214.png")));
         btnMasterRencanaKeperawatanIGD.setText("Master Rencana Keperawatan IGD");
-        btnMasterRencanaKeperawatanIGD.setIconTextGap(0);
         btnMasterRencanaKeperawatanIGD.setName("btnMasterRencanaKeperawatanIGD");
         btnMasterRencanaKeperawatanIGD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanIGD.addActionListener(this::btnMasterRencanaKeperawatanIGDActionPerformed);
@@ -48890,7 +48034,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanPsikiatri = new widget.ButtonBig();
         btnMasterMasalahKeperawatanPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3380376_analytical_brain_creative_intelligence_mindset_icon.png")));
         btnMasterMasalahKeperawatanPsikiatri.setText("Master Masalah Keperawatan Psikiatri");
-        btnMasterMasalahKeperawatanPsikiatri.setIconTextGap(0);
         btnMasterMasalahKeperawatanPsikiatri.setName("btnMasterMasalahKeperawatanPsikiatri");
         btnMasterMasalahKeperawatanPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanPsikiatri.addActionListener(this::btnMasterMasalahKeperawatanPsikiatriActionPerformed);
@@ -48898,7 +48041,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanPsikiatri = new widget.ButtonBig();
         btnMasterRencanaKeperawatanPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3380376_analytical_brain_creative_intelligence_mindset_icon.png")));
         btnMasterRencanaKeperawatanPsikiatri.setText("Master Rencana Keperawatan Psikiatri");
-        btnMasterRencanaKeperawatanPsikiatri.setIconTextGap(0);
         btnMasterRencanaKeperawatanPsikiatri.setName("btnMasterRencanaKeperawatanPsikiatri");
         btnMasterRencanaKeperawatanPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanPsikiatri.addActionListener(this::btnMasterRencanaKeperawatanPsikiatriActionPerformed);
@@ -48906,7 +48048,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanRalanPsikiatri = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanRalanPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898990_blood_clipboard_lab_report_test_icon.png")));
         btnPenilaianAwalKeperawatanRalanPsikiatri.setText("Awal Keperawatan Ralan Psikiatri");
-        btnPenilaianAwalKeperawatanRalanPsikiatri.setIconTextGap(0);
         btnPenilaianAwalKeperawatanRalanPsikiatri.setName("btnPenilaianAwalKeperawatanRalanPsikiatri");
         btnPenilaianAwalKeperawatanRalanPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanRalanPsikiatri.addActionListener(this::btnPenilaianAwalKeperawatanRalanPsikiatriActionPerformed);
@@ -48914,7 +48055,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemantauanPEWSAnak = new widget.ButtonBig();
         btnPemantauanPEWSAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7744788_mom_children_mothers day_mother_love_icon.png")));
         btnPemantauanPEWSAnak.setText("Pemantauan PEWS Pasien Anak");
-        btnPemantauanPEWSAnak.setIconTextGap(0);
         btnPemantauanPEWSAnak.setName("btnPemantauanPEWSAnak");
         btnPemantauanPEWSAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemantauanPEWSAnak.addActionListener(this::btnPemantauanPEWSAnakActionPerformed);
@@ -48922,7 +48062,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTemplateHasilRadiologi = new widget.ButtonBig();
         btnMasterTemplateHasilRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6771602_book shelf_books_education_learning_school_icon.png")));
         btnMasterTemplateHasilRadiologi.setText("Master Template Hasil Radiologi");
-        btnMasterTemplateHasilRadiologi.setIconTextGap(0);
         btnMasterTemplateHasilRadiologi.setName("btnMasterTemplateHasilRadiologi");
         btnMasterTemplateHasilRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTemplateHasilRadiologi.addActionListener(this::btnMasterTemplateHasilRadiologiActionPerformed);
@@ -48930,7 +48069,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanBulananIRJ = new widget.ButtonBig();
         btnLaporanBulananIRJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/laporantahunanIRJ.png")));
         btnLaporanBulananIRJ.setText("Laporan Bulanan IRJ");
-        btnLaporanBulananIRJ.setIconTextGap(0);
         btnLaporanBulananIRJ.setName("btnLaporanBulananIRJ");
         btnLaporanBulananIRJ.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanBulananIRJ.addActionListener(this::btnLaporanBulananIRJActionPerformed);
@@ -48938,7 +48076,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTemplatePemeriksaanDokter = new widget.ButtonBig();
         btnMasterTemplatePemeriksaanDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/templatepemeriksaan.png")));
         btnMasterTemplatePemeriksaanDokter.setText("Master Template Pemeriksaan");
-        btnMasterTemplatePemeriksaanDokter.setIconTextGap(0);
         btnMasterTemplatePemeriksaanDokter.setName("btnMasterTemplatePemeriksaanDokter");
         btnMasterTemplatePemeriksaanDokter.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTemplatePemeriksaanDokter.addActionListener(this::btnMasterTemplatePemeriksaanDokterActionPerformed);
@@ -48946,7 +48083,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPreOperasi = new widget.ButtonBig();
         btnPenilaianPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088726_bed_hospital_icu_medical_treatment_icon.png")));
         btnPenilaianPreOperasi.setText("Pengkajian Pre Operasi");
-        btnPenilaianPreOperasi.setIconTextGap(0);
         btnPenilaianPreOperasi.setName("btnPenilaianPreOperasi");
         btnPenilaianPreOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPreOperasi.addActionListener(this::btnPenilaianPreOperasiActionPerformed);
@@ -48954,7 +48090,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPreAnastesi = new widget.ButtonBig();
         btnPenilaianPreAnastesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141465_bed_rest_sleep_sleeping_get enough rest_icon.png")));
         btnPenilaianPreAnastesi.setText("Pengkajian Pre Anestesi");
-        btnPenilaianPreAnastesi.setIconTextGap(0);
         btnPenilaianPreAnastesi.setName("btnPenilaianPreAnastesi");
         btnPenilaianPreAnastesi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPreAnastesi.addActionListener(this::btnPenilaianPreAnastesiActionPerformed);
@@ -48962,7 +48097,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanAnastesiSedasi = new widget.ButtonBig();
         btnCatatanAnastesiSedasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2620508_employee_job_notes_seeker_unemployee_icon.png")));
         btnCatatanAnastesiSedasi.setText("Catatan Anestesi-Sedasi");
-        btnCatatanAnastesiSedasi.setIconTextGap(0);
         btnCatatanAnastesiSedasi.setName("btnCatatanAnastesiSedasi");
         btnCatatanAnastesiSedasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanAnastesiSedasi.addActionListener(this::btnCatatanAnastesiSedasiActionPerformed);
@@ -48970,7 +48104,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanPulangAtasPermintanSendiri = new widget.ButtonBig();
         btnPersetujuanPulangAtasPermintanSendiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5947112_clinic_doctor_healthcare_hospital_medical_icon.png")));
         btnPersetujuanPulangAtasPermintanSendiri.setText("Pulang Atas Permintaan Sendiri");
-        btnPersetujuanPulangAtasPermintanSendiri.setIconTextGap(0);
         btnPersetujuanPulangAtasPermintanSendiri.setName("btnPersetujuanPulangAtasPermintanSendiri");
         btnPersetujuanPulangAtasPermintanSendiri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPulangAtasPermintanSendiri.addActionListener(this::btnPersetujuanPulangAtasPermintanSendiriActionPerformed);
@@ -48978,7 +48111,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPerencanaanPemulangan = new widget.ButtonBig();
         btnPerencanaanPemulangan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141469_coronavirus_covid_covid19_hospital_infected_icon.png")));
         btnPerencanaanPemulangan.setText("Perencanaan Pemulangan");
-        btnPerencanaanPemulangan.setIconTextGap(0);
         btnPerencanaanPemulangan.setName("btnPerencanaanPemulangan");
         btnPerencanaanPemulangan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPerencanaanPemulangan.addActionListener(this::btnPerencanaanPemulanganActionPerformed);
@@ -48986,7 +48118,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoJatuhDewasa = new widget.ButtonBig();
         btnPenilaianRisikoJatuhDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859949_accident_foot_injury_leg_pain_icon.png")));
         btnPenilaianRisikoJatuhDewasa.setText("Pengkajian Lanjutan Risiko Jatuh Dewasa");
-        btnPenilaianRisikoJatuhDewasa.setIconTextGap(0);
         btnPenilaianRisikoJatuhDewasa.setName("btnPenilaianRisikoJatuhDewasa");
         btnPenilaianRisikoJatuhDewasa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoJatuhDewasa.addActionListener(this::btnPenilaianRisikoJatuhDewasaActionPerformed);
@@ -48994,7 +48125,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoJatuhAnak = new widget.ButtonBig();
         btnPenilaianRisikoJatuhAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5986162_disease_health_injury_medical_numb_icon.png")));
         btnPenilaianRisikoJatuhAnak.setText("Pengkajian Lanjutan Risiko Jatuh Anak");
-        btnPenilaianRisikoJatuhAnak.setIconTextGap(0);
         btnPenilaianRisikoJatuhAnak.setName("btnPenilaianRisikoJatuhAnak");
         btnPenilaianRisikoJatuhAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoJatuhAnak.addActionListener(this::btnPenilaianRisikoJatuhAnakActionPerformed);
@@ -49002,7 +48132,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanGeriatri = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5964799_ill_old man_patient_sick_sore throat_icon.png")));
         btnPenilaianAwalMedisRalanGeriatri.setText("Awal Medis Ralan Geriatri");
-        btnPenilaianAwalMedisRalanGeriatri.setIconTextGap(0);
         btnPenilaianAwalMedisRalanGeriatri.setName("btnPenilaianAwalMedisRalanGeriatri");
         btnPenilaianAwalMedisRalanGeriatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanGeriatri.addActionListener(this::btnPenilaianAwalMedisRalanGeriatriActionPerformed);
@@ -49010,7 +48139,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoJatuhLansia = new widget.ButtonBig();
         btnPenilaianRisikoJatuhLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/131480_spectacles_retired_retiree_father_grandfather_icon.png")));
         btnPenilaianRisikoJatuhLansia.setText("Pengkajian Lanjutan Risiko Jatuh Lansia");
-        btnPenilaianRisikoJatuhLansia.setIconTextGap(0);
         btnPenilaianRisikoJatuhLansia.setName("btnPenilaianRisikoJatuhLansia");
         btnPenilaianRisikoJatuhLansia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoJatuhLansia.addActionListener(this::btnPenilaianRisikoJatuhLansiaActionPerformed);
@@ -49018,7 +48146,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianTambahanGeriatri = new widget.ButtonBig();
         btnPenilaianTambahanGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141440_boy_man_old_people_elderly and kid_icon.png")));
         btnPenilaianTambahanGeriatri.setText("Pengkajian Tambahan Pasien Geriatri");
-        btnPenilaianTambahanGeriatri.setIconTextGap(0);
         btnPenilaianTambahanGeriatri.setName("btnPenilaianTambahanGeriatri");
         btnPenilaianTambahanGeriatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianTambahanGeriatri.addActionListener(this::btnPenilaianTambahanGeriatriActionPerformed);
@@ -49026,7 +48153,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningNutrisiDewasa = new widget.ButtonBig();
         btnSkriningNutrisiDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5980339_eat_food_fruit_healthy_meal_icon.png")));
         btnSkriningNutrisiDewasa.setText("Skrining Nutrisi Pasien Dewasa");
-        btnSkriningNutrisiDewasa.setIconTextGap(0);
         btnSkriningNutrisiDewasa.setName("btnSkriningNutrisiDewasa");
         btnSkriningNutrisiDewasa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningNutrisiDewasa.addActionListener(this::btnSkriningNutrisiDewasaActionPerformed);
@@ -49034,7 +48160,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanUSG = new widget.ButtonBig();
         btnHasilPemeriksaanUSG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/375263_scan_scans_ultra sound_ultrasound_icon.png")));
         btnHasilPemeriksaanUSG.setText("Hasil USG Kandungan");
-        btnHasilPemeriksaanUSG.setIconTextGap(0);
         btnHasilPemeriksaanUSG.setName("btnHasilPemeriksaanUSG");
         btnHasilPemeriksaanUSG.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanUSG.addActionListener(this::btnHasilPemeriksaanUSGActionPerformed);
@@ -49042,7 +48167,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningNutrisiLansia = new widget.ButtonBig();
         btnSkriningNutrisiLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5994849_food_health_hot_meal_restaurant_icon.png")));
         btnSkriningNutrisiLansia.setText("Skrining Nutrisi Pasien Lansia");
-        btnSkriningNutrisiLansia.setIconTextGap(0);
         btnSkriningNutrisiLansia.setName("btnSkriningNutrisiLansia");
         btnSkriningNutrisiLansia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningNutrisiLansia.addActionListener(this::btnSkriningNutrisiLansiaActionPerformed);
@@ -49050,7 +48174,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningNutrisiAnak = new widget.ButtonBig();
         btnSkriningNutrisiAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141442_covid19_food_health_eat hot food and use serving spoon_virus transmission_icon.png")));
         btnSkriningNutrisiAnak.setText("Skrining Nutrisi Pasien Anak");
-        btnSkriningNutrisiAnak.setIconTextGap(0);
         btnSkriningNutrisiAnak.setName("btnSkriningNutrisiAnak");
         btnSkriningNutrisiAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningNutrisiAnak.addActionListener(this::btnSkriningNutrisiAnakActionPerformed);
@@ -49058,7 +48181,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunRekeningHtHBankJabar = new widget.ButtonBig();
         btnAkunRekeningHtHBankJabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bankbjb.png")));
         btnAkunRekeningHtHBankJabar.setText("Host To Host Bank Jabar");
-        btnAkunRekeningHtHBankJabar.setIconTextGap(0);
         btnAkunRekeningHtHBankJabar.setName("btnAkunRekeningHtHBankJabar");
         btnAkunRekeningHtHBankJabar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAkunRekeningHtHBankJabar.addActionListener(this::btnAkunRekeningHtHBankJabarActionPerformed);
@@ -49066,7 +48188,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranBankJabar = new widget.ButtonBig();
         btnPembayaranBankJabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_eccomerce_-_wallet_3440917.png")));
         btnPembayaranBankJabar.setText("Pembayaran Bank Jabar");
-        btnPembayaranBankJabar.setIconTextGap(0);
         btnPembayaranBankJabar.setName("btnPembayaranBankJabar");
         btnPembayaranBankJabar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranBankJabar.addActionListener(this::btnPembayaranBankJabarActionPerformed);
@@ -49074,7 +48195,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPernyataanPasienUmum = new widget.ButtonBig();
         btnPernyataanPasienUmum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Edit-Male-User.png")));
         btnPernyataanPasienUmum.setText("Pernyataan Pasien Umum");
-        btnPernyataanPasienUmum.setIconTextGap(0);
         btnPernyataanPasienUmum.setName("btnPernyataanPasienUmum");
         btnPernyataanPasienUmum.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPernyataanPasienUmum.addActionListener(this::btnPernyataanPasienUmumActionPerformed);
@@ -49082,7 +48202,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKonselingFarmasi = new widget.ButtonBig();
         btnKonselingFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6771587_diary_education_learning_pencil_school_icon.png")));
         btnKonselingFarmasi.setText("Konseling Farmasi");
-        btnKonselingFarmasi.setIconTextGap(0);
         btnKonselingFarmasi.setName("btnKonselingFarmasi");
         btnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonselingFarmasi.addActionListener(this::btnKonselingFarmasiActionPerformed);
@@ -49090,7 +48209,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPelayananInformasiObat = new widget.ButtonBig();
         btnPelayananInformasiObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960614_medicines_medicine_drug_pill_tablet_icon.png")));
         btnPelayananInformasiObat.setText("Pelayanan Informasi Obat");
-        btnPelayananInformasiObat.setIconTextGap(0);
         btnPelayananInformasiObat.setName("btnPelayananInformasiObat");
         btnPelayananInformasiObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPelayananInformasiObat.addActionListener(this::btnPelayananInformasiObatActionPerformed);
@@ -49098,7 +48216,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanUmum = new widget.ButtonBig();
         btnPersetujuanUmum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5868931_architecture_building_coronavirus_hospital_corona_icon.png")));
         btnPersetujuanUmum.setText("Persetujuan Umum");
-        btnPersetujuanUmum.setIconTextGap(0);
         btnPersetujuanUmum.setName("btnPersetujuanUmum");
         btnPersetujuanUmum.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanUmum.addActionListener(this::btnPersetujuanUmumActionPerformed);
@@ -49106,7 +48223,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTransferPasienAntarRuang = new widget.ButtonBig();
         btnTransferPasienAntarRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6009596_case_coronavirus_covid19_hospital_patient_icon.png")));
         btnTransferPasienAntarRuang.setText("Transfer Pasien Antar Ruang");
-        btnTransferPasienAntarRuang.setIconTextGap(0);
         btnTransferPasienAntarRuang.setName("btnTransferPasienAntarRuang");
         btnTransferPasienAntarRuang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTransferPasienAntarRuang.addActionListener(this::btnTransferPasienAntarRuangActionPerformed);
@@ -49114,7 +48230,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReferensiDokterSatuSehat = new widget.ButtonBig();
         btnReferensiDokterSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnReferensiDokterSatuSehat.setText("Referensi Praktisi Satu Sehat");
-        btnReferensiDokterSatuSehat.setIconTextGap(0);
         btnReferensiDokterSatuSehat.setName("btnReferensiDokterSatuSehat");
         btnReferensiDokterSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiDokterSatuSehat.addActionListener(this::btnReferensiDokterSatuSehatActionPerformed);
@@ -49122,7 +48237,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReferensiPasienSatuSehat = new widget.ButtonBig();
         btnReferensiPasienSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnReferensiPasienSatuSehat.setText("Referensi Pasien Satu Sehat");
-        btnReferensiPasienSatuSehat.setIconTextGap(0);
         btnReferensiPasienSatuSehat.setName("btnReferensiPasienSatuSehat");
         btnReferensiPasienSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiPasienSatuSehat.addActionListener(this::btnReferensiPasienSatuSehatActionPerformed);
@@ -49130,7 +48244,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingOrganisasiSatuSehat = new widget.ButtonBig();
         btnMappingOrganisasiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMappingOrganisasiSatuSehat.setText("Mapping Organisasi Satu Sehat");
-        btnMappingOrganisasiSatuSehat.setIconTextGap(0);
         btnMappingOrganisasiSatuSehat.setName("btnMappingOrganisasiSatuSehat");
         btnMappingOrganisasiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingOrganisasiSatuSehat.addActionListener(this::btnMappingOrganisasiSatuSehatActionPerformed);
@@ -49138,7 +48251,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingLokasiSatuSehat = new widget.ButtonBig();
         btnMappingLokasiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMappingLokasiSatuSehat.setText("Mapping Lokasi Satu Sehat");
-        btnMappingLokasiSatuSehat.setIconTextGap(0);
         btnMappingLokasiSatuSehat.setName("btnMappingLokasiSatuSehat");
         btnMappingLokasiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingLokasiSatuSehat.addActionListener(this::btnMappingLokasiSatuSehatActionPerformed);
@@ -49146,7 +48258,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimEncounterSatuSehat = new widget.ButtonBig();
         btnKirimEncounterSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimEncounterSatuSehat.setText("Kirim Encounter Satu Sehat");
-        btnKirimEncounterSatuSehat.setIconTextGap(0);
         btnKirimEncounterSatuSehat.setName("btnKirimEncounterSatuSehat");
         btnKirimEncounterSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimEncounterSatuSehat.addActionListener(this::btnKirimEncounterSatuSehatActionPerformed);
@@ -49154,7 +48265,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanCekGDS = new widget.ButtonBig();
         btnCatatanCekGDS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427847_information_note_notebook_sheet_icon.png")));
         btnCatatanCekGDS.setText("Catatan Cek GDS");
-        btnCatatanCekGDS.setIconTextGap(0);
         btnCatatanCekGDS.setName("btnCatatanCekGDS");
         btnCatatanCekGDS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanCekGDS.addActionListener(this::btnCatatanCekGDSActionPerformed);
@@ -49162,7 +48272,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimConditionSatuSehat = new widget.ButtonBig();
         btnKirimConditionSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimConditionSatuSehat.setText("Kirim Condition Satu Sehat");
-        btnKirimConditionSatuSehat.setIconTextGap(0);
         btnKirimConditionSatuSehat.setName("btnKirimConditionSatuSehat");
         btnKirimConditionSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimConditionSatuSehat.addActionListener(this::btnKirimConditionSatuSehatActionPerformed);
@@ -49170,7 +48279,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistPreOperasi = new widget.ButtonBig();
         btnChecklistPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7638087_writing_education_learning_pencil_note_icon.png")));
         btnChecklistPreOperasi.setText("Check List Pre Operasi");
-        btnChecklistPreOperasi.setIconTextGap(0);
         btnChecklistPreOperasi.setName("btnChecklistPreOperasi");
         btnChecklistPreOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistPreOperasi.addActionListener(this::btnChecklistPreOperasiActionPerformed);
@@ -49178,7 +48286,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimObservationTTVSatuSehat = new widget.ButtonBig();
         btnKirimObservationTTVSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimObservationTTVSatuSehat.setText("Kirim Observation-TTV Satu Sehat");
-        btnKirimObservationTTVSatuSehat.setIconTextGap(0);
         btnKirimObservationTTVSatuSehat.setName("btnKirimObservationTTVSatuSehat");
         btnKirimObservationTTVSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimObservationTTVSatuSehat.addActionListener(this::btnKirimObservationTTVSatuSehatActionPerformed);
@@ -49186,7 +48293,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSignInSebelumAnestesi = new widget.ButtonBig();
         btnSignInSebelumAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6012901_diagnosis_document_medical_paper_records_icon.png")));
         btnSignInSebelumAnestesi.setText("Sign-In Sebelum Anestesi");
-        btnSignInSebelumAnestesi.setIconTextGap(0);
         btnSignInSebelumAnestesi.setName("btnSignInSebelumAnestesi");
         btnSignInSebelumAnestesi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSignInSebelumAnestesi.addActionListener(this::btnSignInSebelumAnestesiActionPerformed);
@@ -49194,7 +48300,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimProcedureSatuSehat = new widget.ButtonBig();
         btnKirimProcedureSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimProcedureSatuSehat.setText("Kirim Procedure Satu Sehat");
-        btnKirimProcedureSatuSehat.setIconTextGap(0);
         btnKirimProcedureSatuSehat.setName("btnKirimProcedureSatuSehat");
         btnKirimProcedureSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimProcedureSatuSehat.addActionListener(this::btnKirimProcedureSatuSehatActionPerformed);
@@ -49202,7 +48307,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnOperasiPerBulan = new widget.ButtonBig();
         btnOperasiPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554573_calendar_note_date_schedule_event_icon.png")));
         btnOperasiPerBulan.setText("Operasi Per Bulan");
-        btnOperasiPerBulan.setIconTextGap(0);
         btnOperasiPerBulan.setName("btnOperasiPerBulan");
         btnOperasiPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnOperasiPerBulan.addActionListener(this::btnOperasiPerBulanActionPerformed);
@@ -49210,7 +48314,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTimeOutSebelumInsisi = new widget.ButtonBig();
         btnTimeOutSebelumInsisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8168668_notes_paper_document_page_icon.png")));
         btnTimeOutSebelumInsisi.setText("Time-Out Sebelum Insisi");
-        btnTimeOutSebelumInsisi.setIconTextGap(0);
         btnTimeOutSebelumInsisi.setName("btnTimeOutSebelumInsisi");
         btnTimeOutSebelumInsisi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTimeOutSebelumInsisi.addActionListener(this::btnTimeOutSebelumInsisiActionPerformed);
@@ -49218,7 +48321,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarangDapur = new widget.ButtonBig();
         btnBarangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Barang_Dapur.png")));
         btnBarangDapur.setText("Barang Dapur");
-        btnBarangDapur.setIconTextGap(0);
         btnBarangDapur.setName("btnBarangDapur");
         btnBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBarangDapur.addActionListener(this::btnBarangDapurActionPerformed);
@@ -49226,7 +48328,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSignOutSebelumMenutupLuka = new widget.ButtonBig();
         btnSignOutSebelumMenutupLuka.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7172890_note_book_office_paper_document_icon.png")));
         btnSignOutSebelumMenutupLuka.setText("Sign-Out Sebelum Menutup Luka");
-        btnSignOutSebelumMenutupLuka.setIconTextGap(0);
         btnSignOutSebelumMenutupLuka.setName("btnSignOutSebelumMenutupLuka");
         btnSignOutSebelumMenutupLuka.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSignOutSebelumMenutupLuka.addActionListener(this::btnSignOutSebelumMenutupLukaActionPerformed);
@@ -49234,7 +48335,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnOpnameDapur = new widget.ButtonBig();
         btnOpnameDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Stok_Opname_Barang_Dapur.png")));
         btnOpnameDapur.setText("Stok Opname Barang Dapur");
-        btnOpnameDapur.setIconTextGap(0);
         btnOpnameDapur.setName("btnOpnameDapur");
         btnOpnameDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnOpnameDapur.addActionListener(this::btnOpnameDapurActionPerformed);
@@ -49242,7 +48342,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuplierDapur = new widget.ButtonBig();
         btnSuplierDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Suplier_Dapur.png")));
         btnSuplierDapur.setText("Suplier Dapur");
-        btnSuplierDapur.setIconTextGap(0);
         btnSuplierDapur.setName("btnSuplierDapur");
         btnSuplierDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuplierDapur.addActionListener(this::btnSuplierDapurActionPerformed);
@@ -49250,7 +48349,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingVaksinSatuSehat = new widget.ButtonBig();
         btnMappingVaksinSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMappingVaksinSatuSehat.setText("Mapping Vaksin Satu Sehat");
-        btnMappingVaksinSatuSehat.setIconTextGap(0);
         btnMappingVaksinSatuSehat.setName("btnMappingVaksinSatuSehat");
         btnMappingVaksinSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingVaksinSatuSehat.addActionListener(this::btnMappingVaksinSatuSehatActionPerformed);
@@ -49258,7 +48356,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimVaksinSatuSehat = new widget.ButtonBig();
         btnKirimVaksinSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimVaksinSatuSehat.setText("Kirim Imunisasi Satu Sehat");
-        btnKirimVaksinSatuSehat.setIconTextGap(0);
         btnKirimVaksinSatuSehat.setName("btnKirimVaksinSatuSehat");
         btnKirimVaksinSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimVaksinSatuSehat.addActionListener(this::btnKirimVaksinSatuSehatActionPerformed);
@@ -49266,7 +48363,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembelianDapur = new widget.ButtonBig();
         btnPembelianDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Pengadaan_Barang_Dapur.png")));
         btnPembelianDapur.setText("Pengadaan Barang Dapur");
-        btnPembelianDapur.setIconTextGap(0);
         btnPembelianDapur.setName("btnPembelianDapur");
         btnPembelianDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembelianDapur.addActionListener(this::btnPembelianDapurActionPerformed);
@@ -49274,7 +48370,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistPostOperasi = new widget.ButtonBig();
         btnChecklistPostOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859108_book_education_handbook_medical_medicine_icon.png")));
         btnChecklistPostOperasi.setText("Check List Post Operasi");
-        btnChecklistPostOperasi.setIconTextGap(0);
         btnChecklistPostOperasi.setName("btnChecklistPostOperasi");
         btnChecklistPostOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistPostOperasi.addActionListener(this::btnChecklistPostOperasiActionPerformed);
@@ -49282,7 +48377,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengeluaranDapur = new widget.ButtonBig();
         btnPengeluaranDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Stok_Keluar_Dapur.png")));
         btnPengeluaranDapur.setText("Stok Keluar Dapur");
-        btnPengeluaranDapur.setIconTextGap(0);
         btnPengeluaranDapur.setName("btnPengeluaranDapur");
         btnPengeluaranDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengeluaranDapur.addActionListener(this::btnPengeluaranDapurActionPerformed);
@@ -49290,7 +48384,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatBarangDapur = new widget.ButtonBig();
         btnRiwayatBarangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Riwayat_Barang_Dapur.png")));
         btnRiwayatBarangDapur.setText("Riwayat Barang Dapur");
-        btnRiwayatBarangDapur.setIconTextGap(0);
         btnRiwayatBarangDapur.setName("btnRiwayatBarangDapur");
         btnRiwayatBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatBarangDapur.addActionListener(this::btnRiwayatBarangDapurActionPerformed);
@@ -49298,7 +48391,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanDapur = new widget.ButtonBig();
         btnPermintaanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Permintaan_Barang_Dapur.png")));
         btnPermintaanDapur.setText("Permintaan Barang Dapur");
-        btnPermintaanDapur.setIconTextGap(0);
         btnPermintaanDapur.setName("btnPermintaanDapur");
         btnPermintaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanDapur.addActionListener(this::btnPermintaanDapurActionPerformed);
@@ -49306,7 +48398,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBiayaDapur = new widget.ButtonBig();
         btnRBiayaDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Biaya_Pengadaan_Dapur.png")));
         btnRBiayaDapur.setText("Biaya Pengadaan Dapur");
-        btnRBiayaDapur.setIconTextGap(0);
         btnRBiayaDapur.setName("btnRBiayaDapur");
         btnRBiayaDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRBiayaDapur.addActionListener(this::btnRBiayaDapurActionPerformed);
@@ -49314,7 +48405,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPengadaanDapur = new widget.ButtonBig();
         btnRekapPengadaanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Rekap_Pengadaan_Dapur.png")));
         btnRekapPengadaanDapur.setText("Rekap Pengadaan Dapur");
-        btnRekapPengadaanDapur.setIconTextGap(0);
         btnRekapPengadaanDapur.setName("btnRekapPengadaanDapur");
         btnRekapPengadaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPengadaanDapur.addActionListener(this::btnRekapPengadaanDapurActionPerformed);
@@ -49322,7 +48412,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLimbahB3MedisCair = new widget.ButtonBig();
         btnLimbahB3MedisCair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958332_disease_drink water_epidemic_hydrate_infection_icon.png")));
         btnLimbahB3MedisCair.setText("Limbah Cair B3 Medis");
-        btnLimbahB3MedisCair.setIconTextGap(0);
         btnLimbahB3MedisCair.setName("btnLimbahB3MedisCair");
         btnLimbahB3MedisCair.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLimbahB3MedisCair.addActionListener(this::btnLimbahB3MedisCairActionPerformed);
@@ -49330,7 +48419,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikLimbahB3MedisCairPerTanggal = new widget.ButtonBig();
         btnGrafikLimbahB3MedisCairPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582080_6.png")));
         btnGrafikLimbahB3MedisCairPerTanggal.setText("Limbah B3 Cair Per Tanggal");
-        btnGrafikLimbahB3MedisCairPerTanggal.setIconTextGap(0);
         btnGrafikLimbahB3MedisCairPerTanggal.setName("btnGrafikLimbahB3MedisCairPerTanggal");
         btnGrafikLimbahB3MedisCairPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLimbahB3MedisCairPerTanggal.addActionListener(this::btnGrafikLimbahB3MedisCairPerTanggalActionPerformed);
@@ -49338,7 +48426,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikLimbahB3MedisCairPerBulan = new widget.ButtonBig();
         btnGrafikLimbahB3MedisCairPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582015_11.png")));
         btnGrafikLimbahB3MedisCairPerBulan.setText("Limbah B3 Cair Per Bulan");
-        btnGrafikLimbahB3MedisCairPerBulan.setIconTextGap(0);
         btnGrafikLimbahB3MedisCairPerBulan.setName("btnGrafikLimbahB3MedisCairPerBulan");
         btnGrafikLimbahB3MedisCairPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnGrafikLimbahB3MedisCairPerBulan.addActionListener(this::btnGrafikLimbahB3MedisCairPerBulanActionPerformed);
@@ -49346,7 +48433,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapBiayaRegistrasi = new widget.ButtonBig();
         btnRekapBiayaRegistrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/473796_analytics_chart_computer_graph_laptop_icon.png")));
         btnRekapBiayaRegistrasi.setText("Rekap Biaya Registrasi");
-        btnRekapBiayaRegistrasi.setIconTextGap(0);
         btnRekapBiayaRegistrasi.setName("btnRekapBiayaRegistrasi");
         btnRekapBiayaRegistrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapBiayaRegistrasi.addActionListener(this::btnRekapBiayaRegistrasiActionPerformed);
@@ -49354,7 +48440,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekonsiliasiObat = new widget.ButtonBig();
         btnRekonsiliasiObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9016848_doctor_examination_covid-19_virus_pandemic_icon.png")));
         btnRekonsiliasiObat.setText("Rekonsiliasi Obat");
-        btnRekonsiliasiObat.setIconTextGap(0);
         btnRekonsiliasiObat.setName("btnRekonsiliasiObat");
         btnRekonsiliasiObat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekonsiliasiObat.addActionListener(this::btnRekonsiliasiObatActionPerformed);
@@ -49362,7 +48447,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimClinicalImpressionSatuSehat = new widget.ButtonBig();
         btnKirimClinicalImpressionSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimClinicalImpressionSatuSehat.setText("Kirim Clinical Impression Satu Sehat");
-        btnKirimClinicalImpressionSatuSehat.setIconTextGap(0);
         btnKirimClinicalImpressionSatuSehat.setName("btnKirimClinicalImpressionSatuSehat");
         btnKirimClinicalImpressionSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimClinicalImpressionSatuSehat.addActionListener(this::btnKirimClinicalImpressionSatuSehatActionPerformed);
@@ -49370,7 +48454,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPasienTerminal = new widget.ButtonBig();
         btnPenilaianPasienTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141428_coronavirus_covid19_isolation_patient_coronavirus isolation_icon.png")));
         btnPenilaianPasienTerminal.setText("Pengkajian Pasien Terminal");
-        btnPenilaianPasienTerminal.setIconTextGap(0);
         btnPenilaianPasienTerminal.setName("btnPenilaianPasienTerminal");
         btnPenilaianPasienTerminal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPasienTerminal.addActionListener(this::btnPenilaianPasienTerminalActionPerformed);
@@ -49378,7 +48461,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanRawatInap = new widget.ButtonBig();
         btnPersetujuanRawatInap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5983455_bed_hospital_medical_patient_icon.png")));
         btnPersetujuanRawatInap.setText("Persetujuan Rawat Inap");
-        btnPersetujuanRawatInap.setIconTextGap(0);
         btnPersetujuanRawatInap.setName("btnPersetujuanRawatInap");
         btnPersetujuanRawatInap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanRawatInap.addActionListener(this::btnPersetujuanRawatInapActionPerformed);
@@ -49386,7 +48468,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMonitoringReaksiTranfusi = new widget.ButtonBig();
         btnMonitoringReaksiTranfusi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088722_blood_bottle_packet_icon.png")));
         btnMonitoringReaksiTranfusi.setText("Monitoring Reaksi Tranfusi");
-        btnMonitoringReaksiTranfusi.setIconTextGap(0);
         btnMonitoringReaksiTranfusi.setName("btnMonitoringReaksiTranfusi");
         btnMonitoringReaksiTranfusi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMonitoringReaksiTranfusi.addActionListener(this::btnMonitoringReaksiTranfusiActionPerformed);
@@ -49394,7 +48475,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianKorbanKekerasan = new widget.ButtonBig();
         btnPenilaianKorbanKekerasan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3792054_blood_halloween_knife_murder_icon.png")));
         btnPenilaianKorbanKekerasan.setText("Pengkajian Korban Kekerasan");
-        btnPenilaianKorbanKekerasan.setIconTextGap(0);
         btnPenilaianKorbanKekerasan.setName("btnPenilaianKorbanKekerasan");
         btnPenilaianKorbanKekerasan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianKorbanKekerasan.addActionListener(this::btnPenilaianKorbanKekerasanActionPerformed);
@@ -49402,7 +48482,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningManagerPelayananPasien = new widget.ButtonBig();
         btnSkriningManagerPelayananPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9016855_stay_at_home_covid-19_virus_icon.png")));
         btnSkriningManagerPelayananPasien.setText("Skrining Manajer Pelayanan Pasien");
-        btnSkriningManagerPelayananPasien.setIconTextGap(0);
         btnSkriningManagerPelayananPasien.setName("btnSkriningManagerPelayananPasien");
         btnSkriningManagerPelayananPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningManagerPelayananPasien.addActionListener(this::btnSkriningManagerPelayananPasienActionPerformed);
@@ -49410,7 +48489,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningMPPFormA = new widget.ButtonBig();
         btnSkriningMPPFormA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088113_computer_record_scan_screening_virus_icon.png")));
         btnSkriningMPPFormA.setText("Evaluasi Awal Manajer Pelayanan Pasien");
-        btnSkriningMPPFormA.setIconTextGap(0);
         btnSkriningMPPFormA.setName("btnSkriningMPPFormA");
         btnSkriningMPPFormA.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningMPPFormA.addActionListener(this::btnSkriningMPPFormAActionPerformed);
@@ -49418,7 +48496,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningMPPFormB = new widget.ButtonBig();
         btnSkriningMPPFormB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088152_computer_record_scan_screening_virus_icon.png")));
         btnSkriningMPPFormB.setText("Catatan Implementasi Manajer Pelayanan Pasien");
-        btnSkriningMPPFormB.setIconTextGap(0);
         btnSkriningMPPFormB.setName("btnSkriningMPPFormB");
         btnSkriningMPPFormB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningMPPFormB.addActionListener(this::btnSkriningMPPFormBActionPerformed);
@@ -49426,7 +48503,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnEdukasiPasienKeluargaRJ = new widget.ButtonBig();
         btnEdukasiPasienKeluargaRJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088164_clipboard_healthcare_medical_medicine_report_icon.png")));
         btnEdukasiPasienKeluargaRJ.setText("Edukasi Pasien & Keluarga Rawat Jalan");
-        btnEdukasiPasienKeluargaRJ.setIconTextGap(0);
         btnEdukasiPasienKeluargaRJ.setName("btnEdukasiPasienKeluargaRJ");
         btnEdukasiPasienKeluargaRJ.setPreferredSize(new java.awt.Dimension(200, 90));
         btnEdukasiPasienKeluargaRJ.addActionListener(this::btnEdukasiPasienKeluargaRJActionPerformed);
@@ -49434,7 +48510,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPasienPenyakitMenular = new widget.ButtonBig();
         btnPenilaianPasienPenyakitMenular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5980337_coronavirus_data_disease_information_research_icon.png")));
         btnPenilaianPasienPenyakitMenular.setText("Pengkajian Pasien Penyakit Menular");
-        btnPenilaianPasienPenyakitMenular.setIconTextGap(0);
         btnPenilaianPasienPenyakitMenular.setName("btnPenilaianPasienPenyakitMenular");
         btnPenilaianPasienPenyakitMenular.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPasienPenyakitMenular.addActionListener(this::btnPenilaianPasienPenyakitMenularActionPerformed);
@@ -49442,7 +48517,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemantauanPEWSDewasa = new widget.ButtonBig();
         btnPemantauanPEWSDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5928521_disease_fever_high_symptom_temperature_icon.png")));
         btnPemantauanPEWSDewasa.setText("Pemantauan EWS Pasien Dewasa");
-        btnPemantauanPEWSDewasa.setIconTextGap(0);
         btnPemantauanPEWSDewasa.setName("btnPemantauanPEWSDewasa");
         btnPemantauanPEWSDewasa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemantauanPEWSDewasa.addActionListener(this::btnPemantauanPEWSDewasaActionPerformed);
@@ -49450,7 +48524,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSAntreanPerTanggalMobileJKN = new widget.ButtonBig();
         btnBPJSAntreanPerTanggalMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSAntreanPerTanggalMobileJKN.setText("Antrean Per Tanggal Mobile JKN");
-        btnBPJSAntreanPerTanggalMobileJKN.setIconTextGap(0);
         btnBPJSAntreanPerTanggalMobileJKN.setName("btnBPJSAntreanPerTanggalMobileJKN");
         btnBPJSAntreanPerTanggalMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSAntreanPerTanggalMobileJKN.addActionListener(this::btnBPJSAntreanPerTanggalMobileJKNActionPerformed);
@@ -49458,7 +48531,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianTambahanBunuhDiri = new widget.ButtonBig();
         btnPenilaianTambahanBunuhDiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6954610_blood_crime_kill_killer_knife_icon.png")));
         btnPenilaianTambahanBunuhDiri.setText("Pengkajian Tambahan Bunuh Diri");
-        btnPenilaianTambahanBunuhDiri.setIconTextGap(0);
         btnPenilaianTambahanBunuhDiri.setName("btnPenilaianTambahanBunuhDiri");
         btnPenilaianTambahanBunuhDiri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianTambahanBunuhDiri.addActionListener(this::btnPenilaianTambahanBunuhDiriActionPerformed);
@@ -49466,7 +48538,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianTambahanPerilakuKekerasan = new widget.ButtonBig();
         btnPenilaianTambahanPerilakuKekerasan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9191525_nonviolence_violence_weapon_criminal_combat_icon.png")));
         btnPenilaianTambahanPerilakuKekerasan.setText("Pengkajian Tambahan Perilaku Kekerasan");
-        btnPenilaianTambahanPerilakuKekerasan.setIconTextGap(0);
         btnPenilaianTambahanPerilakuKekerasan.setName("btnPenilaianTambahanPerilakuKekerasan");
         btnPenilaianTambahanPerilakuKekerasan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianTambahanPerilakuKekerasan.addActionListener(this::btnPenilaianTambahanPerilakuKekerasanActionPerformed);
@@ -49474,7 +48545,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianTambahanMelarikanDiri = new widget.ButtonBig();
         btnPenilaianTambahanMelarikanDiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141439_healthcare_marathon_run_running_exercise regularly_icon.png")));
         btnPenilaianTambahanMelarikanDiri.setText("Pengkajian Tambahan Melarikan Diri");
-        btnPenilaianTambahanMelarikanDiri.setIconTextGap(0);
         btnPenilaianTambahanMelarikanDiri.setName("btnPenilaianTambahanMelarikanDiri");
         btnPenilaianTambahanMelarikanDiri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianTambahanMelarikanDiri.addActionListener(this::btnPenilaianTambahanMelarikanDiriActionPerformed);
@@ -49482,7 +48552,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanPenundaanPelayanan = new widget.ButtonBig();
         btnPersetujuanPenundaanPelayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9160890_clock_commerce_shopping_online_store_icon.png")));
         btnPersetujuanPenundaanPelayanan.setText("Persetujuan Penundaan Pelayanan");
-        btnPersetujuanPenundaanPelayanan.setIconTextGap(0);
         btnPersetujuanPenundaanPelayanan.setName("btnPersetujuanPenundaanPelayanan");
         btnPersetujuanPenundaanPelayanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPenundaanPelayanan.addActionListener(this::btnPersetujuanPenundaanPelayananActionPerformed);
@@ -49490,7 +48559,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSisaDietPasien = new widget.ButtonBig();
         btnSisaDietPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5296685_fish_food_meal_rice_salmon_icon.png")));
         btnSisaDietPasien.setText("Sisa Diet Pasien");
-        btnSisaDietPasien.setIconTextGap(0);
         btnSisaDietPasien.setName("btnSisaDietPasien");
         btnSisaDietPasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSisaDietPasien.addActionListener(this::btnSisaDietPasienActionPerformed);
@@ -49498,7 +48566,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanBedahMulut = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanBedahMulut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5947116_avoid_do not_hand_mouth_touch_icon.png")));
         btnPenilaianAwalMedisRalanBedahMulut.setText("Awal Medis Ralan Bedah Mulut");
-        btnPenilaianAwalMedisRalanBedahMulut.setIconTextGap(0);
         btnPenilaianAwalMedisRalanBedahMulut.setName("btnPenilaianAwalMedisRalanBedahMulut");
         btnPenilaianAwalMedisRalanBedahMulut.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanBedahMulut.addActionListener(this::btnPenilaianAwalMedisRalanBedahMulutActionPerformed);
@@ -49506,7 +48573,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPasienKeracunan = new widget.ButtonBig();
         btnPenilaianPasienKeracunan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2730370_inkcontober_mushroom_poison_icon.png")));
         btnPenilaianPasienKeracunan.setText("Pengkajian Pasien Keracunan");
-        btnPenilaianPasienKeracunan.setIconTextGap(0);
         btnPenilaianPasienKeracunan.setName("btnPenilaianPasienKeracunan");
         btnPenilaianPasienKeracunan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPasienKeracunan.addActionListener(this::btnPenilaianPasienKeracunanActionPerformed);
@@ -49514,7 +48580,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemantauanMEOWS = new widget.ButtonBig();
         btnPemantauanMEOWS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7744777_pregnant_mothers day_mother_mom_love_icon.png")));
         btnPemantauanMEOWS.setText("Pemantauan MEOWS Pasien Obstetri");
-        btnPemantauanMEOWS.setIconTextGap(0);
         btnPemantauanMEOWS.setName("btnPemantauanMEOWS");
         btnPemantauanMEOWS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemantauanMEOWS.addActionListener(this::btnPemantauanMEOWSActionPerformed);
@@ -49522,7 +48587,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanADIMEGizi = new widget.ButtonBig();
         btnCatatanADIMEGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6771580_book_education_learning_school_science_icon.png")));
         btnCatatanADIMEGizi.setText("Catatan ADIME Gizi");
-        btnCatatanADIMEGizi.setIconTextGap(0);
         btnCatatanADIMEGizi.setName("btnCatatanADIMEGizi");
         btnCatatanADIMEGizi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanADIMEGizi.addActionListener(this::btnCatatanADIMEGiziActionPerformed);
@@ -49530,7 +48594,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanGeriatri = new widget.ButtonBig();
         btnMasterMasalahKeperawatanGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3099440_old_man_icon.png")));
         btnMasterMasalahKeperawatanGeriatri.setText("Master Masalah Keperawatan Geriatri");
-        btnMasterMasalahKeperawatanGeriatri.setIconTextGap(0);
         btnMasterMasalahKeperawatanGeriatri.setName("btnMasterMasalahKeperawatanGeriatri");
         btnMasterMasalahKeperawatanGeriatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanGeriatri.addActionListener(this::btnMasterMasalahKeperawatanGeriatriActionPerformed);
@@ -49538,7 +48601,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanGeriatri = new widget.ButtonBig();
         btnMasterRencanaKeperawatanGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3099440_old_man_icon.png")));
         btnMasterRencanaKeperawatanGeriatri.setText("Master Rencana Keperawatan Geriatri");
-        btnMasterRencanaKeperawatanGeriatri.setIconTextGap(0);
         btnMasterRencanaKeperawatanGeriatri.setName("btnMasterRencanaKeperawatanGeriatri");
         btnMasterRencanaKeperawatanGeriatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanGeriatri.addActionListener(this::btnMasterRencanaKeperawatanGeriatriActionPerformed);
@@ -49546,7 +48608,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanRalanGeriatri = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanRalanGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717242_grandmother_old_woman_female_avatar_icon.png")));
         btnPenilaianAwalKeperawatanRalanGeriatri.setText("Awal Keperawatan Ralan Geriatri");
-        btnPenilaianAwalKeperawatanRalanGeriatri.setIconTextGap(0);
         btnPenilaianAwalKeperawatanRalanGeriatri.setName("btnPenilaianAwalKeperawatanRalanGeriatri");
         btnPenilaianAwalKeperawatanRalanGeriatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanRalanGeriatri.addActionListener(this::btnPenilaianAwalKeperawatanRalanGeriatriActionPerformed);
@@ -49554,7 +48615,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaMasukHCU = new widget.ButtonBig();
         btnChecklistKriteriaMasukHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088703_beat_care_heart_pulse_time_icon.png")));
         btnChecklistKriteriaMasukHCU.setText("Check List Kriteria Masuk HCU");
-        btnChecklistKriteriaMasukHCU.setIconTextGap(0);
         btnChecklistKriteriaMasukHCU.setName("btnChecklistKriteriaMasukHCU");
         btnChecklistKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukHCU.addActionListener(this::btnChecklistKriteriaMasukHCUActionPerformed);
@@ -49562,7 +48622,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaKeluarHCU = new widget.ButtonBig();
         btnChecklistKriteriaKeluarHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088703_beat_care_heart_pulse_time_icon.png")));
         btnChecklistKriteriaKeluarHCU.setText("Check List Kriteria Keluar HCU");
-        btnChecklistKriteriaKeluarHCU.setIconTextGap(0);
         btnChecklistKriteriaKeluarHCU.setName("btnChecklistKriteriaKeluarHCU");
         btnChecklistKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaKeluarHCU.addActionListener(this::btnChecklistKriteriaKeluarHCUActionPerformed);
@@ -49570,7 +48629,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaMasukNICU = new widget.ButtonBig();
         btnChecklistKriteriaMasukNICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088517_beat_care_heart_pulse_time_icon.png")));
         btnChecklistKriteriaMasukNICU.setText("Check List Kriteria Masuk NICU");
-        btnChecklistKriteriaMasukNICU.setIconTextGap(0);
         btnChecklistKriteriaMasukNICU.setName("btnChecklistKriteriaMasukNICU");
         btnChecklistKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukNICU.addActionListener(this::btnChecklistKriteriaMasukNICUActionPerformed);
@@ -49578,7 +48636,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaMasukPICU = new widget.ButtonBig();
         btnChecklistKriteriaMasukPICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1934246_boy_child_kid_people_playing_icon.png")));
         btnChecklistKriteriaMasukPICU.setText("Check List Kriteria Masuk PICU");
-        btnChecklistKriteriaMasukPICU.setIconTextGap(0);
         btnChecklistKriteriaMasukPICU.setName("btnChecklistKriteriaMasukPICU");
         btnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukPICU.addActionListener(this::btnChecklistKriteriaMasukPICUActionPerformed);
@@ -49586,7 +48643,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaKeluarPICU = new widget.ButtonBig();
         btnChecklistKriteriaKeluarPICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1934246_boy_child_kid_people_playing_icon.png")));
         btnChecklistKriteriaKeluarPICU.setText("Check List Kriteria Keluar PICU");
-        btnChecklistKriteriaKeluarPICU.setIconTextGap(0);
         btnChecklistKriteriaKeluarPICU.setName("btnChecklistKriteriaKeluarPICU");
         btnChecklistKriteriaKeluarPICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaKeluarPICU.addActionListener(this::btnChecklistKriteriaKeluarPICUActionPerformed);
@@ -49594,7 +48650,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaKeluarNICU = new widget.ButtonBig();
         btnChecklistKriteriaKeluarNICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088517_beat_care_heart_pulse_time_icon.png")));
         btnChecklistKriteriaKeluarNICU.setText("Check List Kriteria Keluar NICU");
-        btnChecklistKriteriaKeluarNICU.setIconTextGap(0);
         btnChecklistKriteriaKeluarNICU.setName("btnChecklistKriteriaKeluarNICU");
         btnChecklistKriteriaKeluarNICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaKeluarNICU.addActionListener(this::btnChecklistKriteriaKeluarNICUActionPerformed);
@@ -49602,7 +48657,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoDekubitus = new widget.ButtonBig();
         btnPenilaianRisikoDekubitus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6090058_bed_rent_room_icon.png")));
         btnPenilaianRisikoDekubitus.setText("Pengkajian Risiko Dekubitus");
-        btnPenilaianRisikoDekubitus.setIconTextGap(0);
         btnPenilaianRisikoDekubitus.setName("btnPenilaianRisikoDekubitus");
         btnPenilaianRisikoDekubitus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoDekubitus.addActionListener(this::btnPenilaianRisikoDekubitusActionPerformed);
@@ -49610,7 +48664,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMenolakAnjuranMedis = new widget.ButtonBig();
         btnMasterMenolakAnjuranMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9191497_nonviolence_violence_cruelty_hit_thrash_icon.png")));
         btnMasterMenolakAnjuranMedis.setText("Master Menolak Anjuran Medis");
-        btnMasterMenolakAnjuranMedis.setIconTextGap(0);
         btnMasterMenolakAnjuranMedis.setName("btnMasterMenolakAnjuranMedis");
         btnMasterMenolakAnjuranMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMenolakAnjuranMedis.addActionListener(this::btnMasterMenolakAnjuranMedisActionPerformed);
@@ -49618,7 +48671,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenolakanAnjuranMedis = new widget.ButtonBig();
         btnPenolakanAnjuranMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960611_hospitals_hospital_building_medic_health_icon.png")));
         btnPenolakanAnjuranMedis.setText("Penolakan Anjuran Medis");
-        btnPenolakanAnjuranMedis.setIconTextGap(0);
         btnPenolakanAnjuranMedis.setName("btnPenolakanAnjuranMedis");
         btnPenolakanAnjuranMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenolakanAnjuranMedis.addActionListener(this::btnPenolakanAnjuranMedisActionPerformed);
@@ -49626,7 +48678,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanPemeriksaanHIV = new widget.ButtonBig();
         btnPersetujuanPemeriksaanHIV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217201_corona_coronavirus_test_tube_virus_icon.png")));
         btnPersetujuanPemeriksaanHIV.setText("Persetujuan Pemeriksaan HIV");
-        btnPersetujuanPemeriksaanHIV.setIconTextGap(0);
         btnPersetujuanPemeriksaanHIV.setName("btnPersetujuanPemeriksaanHIV");
         btnPersetujuanPemeriksaanHIV.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPemeriksaanHIV.addActionListener(this::btnPersetujuanPemeriksaanHIVActionPerformed);
@@ -49634,7 +48685,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanTahunanPenolakanAnjuranMedis = new widget.ButtonBig();
         btnLaporanTahunanPenolakanAnjuranMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9929050_analysis_graph_growth_report_statistics_icon.png")));
         btnLaporanTahunanPenolakanAnjuranMedis.setText("Laporan Tahunan Penolakan Anjuran Medis");
-        btnLaporanTahunanPenolakanAnjuranMedis.setIconTextGap(0);
         btnLaporanTahunanPenolakanAnjuranMedis.setName("btnLaporanTahunanPenolakanAnjuranMedis");
         btnLaporanTahunanPenolakanAnjuranMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanTahunanPenolakanAnjuranMedis.addActionListener(this::btnLaporanTahunanPenolakanAnjuranMedisActionPerformed);
@@ -49642,7 +48692,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTemplateLaporanOperasi = new widget.ButtonBig();
         btnMasterTemplateLaporanOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5983459_avatar_coronavirus_covid19_doctor_health_icon.png")));
         btnMasterTemplateLaporanOperasi.setText("Master Template Laporan Operasi");
-        btnMasterTemplateLaporanOperasi.setIconTextGap(0);
         btnMasterTemplateLaporanOperasi.setName("btnMasterTemplateLaporanOperasi");
         btnMasterTemplateLaporanOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTemplateLaporanOperasi.addActionListener(this::btnMasterTemplateLaporanOperasiActionPerformed);
@@ -49650,7 +48699,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDokumentasiTindakanESWL = new widget.ButtonBig();
         btnDokumentasiTindakanESWL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6087984_disease_infected_infection_kidney_icon.png")));
         btnDokumentasiTindakanESWL.setText("Dokumentasi Tindakan ESWL");
-        btnDokumentasiTindakanESWL.setIconTextGap(0);
         btnDokumentasiTindakanESWL.setName("btnDokumentasiTindakanESWL");
         btnDokumentasiTindakanESWL.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDokumentasiTindakanESWL.addActionListener(this::btnDokumentasiTindakanESWLActionPerformed);
@@ -49658,7 +48706,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaMasukICU = new widget.ButtonBig();
         btnChecklistKriteriaMasukICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088168_care_drip_health_recovery_treatment_icon.png")));
         btnChecklistKriteriaMasukICU.setText("Check List Kriteria Masuk ICU");
-        btnChecklistKriteriaMasukICU.setIconTextGap(0);
         btnChecklistKriteriaMasukICU.setName("btnChecklistKriteriaMasukICU");
         btnChecklistKriteriaMasukICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukICU.addActionListener(this::btnChecklistKriteriaMasukICUActionPerformed);
@@ -49666,7 +48713,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaKeluarICU = new widget.ButtonBig();
         btnChecklistKriteriaKeluarICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088168_care_drip_health_recovery_treatment_icon.png")));
         btnChecklistKriteriaKeluarICU.setText("Check List Kriteria Keluar ICU");
-        btnChecklistKriteriaKeluarICU.setIconTextGap(0);
         btnChecklistKriteriaKeluarICU.setName("btnChecklistKriteriaKeluarICU");
         btnChecklistKriteriaKeluarICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaKeluarICU.addActionListener(this::btnChecklistKriteriaKeluarICUActionPerformed);
@@ -49674,7 +48720,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKesiapanAnestesi = new widget.ButtonBig();
         btnChecklistKesiapanAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7479646_questionnaire_survey_checklist_list_clipboard_icon.png")));
         btnChecklistKesiapanAnestesi.setText("Check List Kesiapan Anestesi");
-        btnChecklistKesiapanAnestesi.setIconTextGap(0);
         btnChecklistKesiapanAnestesi.setName("btnChecklistKesiapanAnestesi");
         btnChecklistKesiapanAnestesi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKesiapanAnestesi.addActionListener(this::btnChecklistKesiapanAnestesiActionPerformed);
@@ -49682,7 +48727,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataFollowUpDBD = new widget.ButtonBig();
         btnDataFollowUpDBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5972298_carrier_insect_mosquito_transmission_virus_icon.png")));
         btnDataFollowUpDBD.setText("Follow Up DBD");
-        btnDataFollowUpDBD.setIconTextGap(0);
         btnDataFollowUpDBD.setName("btnDataFollowUpDBD");
         btnDataFollowUpDBD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataFollowUpDBD.addActionListener(this::btnDataFollowUpDBDActionPerformed);
@@ -49690,7 +48734,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanBiayaKuangan = new widget.ButtonBig();
         btnPengajuanBiayaKuangan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7013431_file_document_finance_business_laptop_icon.png")));
         btnPengajuanBiayaKuangan.setText("Pengajuan Biaya");
-        btnPengajuanBiayaKuangan.setIconTextGap(0);
         btnPengajuanBiayaKuangan.setName("btnPengajuanBiayaKuangan");
         btnPengajuanBiayaKuangan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanBiayaKuangan.addActionListener(this::btnPengajuanBiayaKuanganActionPerformed);
@@ -49698,7 +48741,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoJatuhNeonatus = new widget.ButtonBig();
         btnPenilaianRisikoJatuhNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717236_hand_baby_kid_motherhood_mothers_icon.png")));
         btnPenilaianRisikoJatuhNeonatus.setText("Pengkajian Lanjutan Risiko Jatuh Neonatus");
-        btnPenilaianRisikoJatuhNeonatus.setIconTextGap(0);
         btnPenilaianRisikoJatuhNeonatus.setName("btnPenilaianRisikoJatuhNeonatus");
         btnPenilaianRisikoJatuhNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoJatuhNeonatus.addActionListener(this::btnPenilaianRisikoJatuhNeonatusActionPerformed);
@@ -49706,7 +48748,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemeriksaanFisikRalanPerPenyakit = new widget.ButtonBig();
         btnPemeriksaanFisikRalanPerPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9161307_graph_user_chart_statistics_business_icon.png")));
         btnPemeriksaanFisikRalanPerPenyakit.setText("Pemeriksaan Fisik Ralan Per Penyakit");
-        btnPemeriksaanFisikRalanPerPenyakit.setIconTextGap(0);
         btnPemeriksaanFisikRalanPerPenyakit.setName("btnPemeriksaanFisikRalanPerPenyakit");
         btnPemeriksaanFisikRalanPerPenyakit.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemeriksaanFisikRalanPerPenyakit.addActionListener(this::btnPemeriksaanFisikRalanPerPenyakitActionPerformed);
@@ -49714,7 +48755,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoJatuhGeriatri = new widget.ButtonBig();
         btnPenilaianRisikoJatuhGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958966_mask_medical_pollution_security_icon.png")));
         btnPenilaianRisikoJatuhGeriatri.setText("Pengkajian Lanjutan Risiko Jatuh Geriatri");
-        btnPenilaianRisikoJatuhGeriatri.setIconTextGap(0);
         btnPenilaianRisikoJatuhGeriatri.setName("btnPenilaianRisikoJatuhGeriatri");
         btnPenilaianRisikoJatuhGeriatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoJatuhGeriatri.addActionListener(this::btnPenilaianRisikoJatuhGeriatriActionPerformed);
@@ -49722,7 +48762,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPersetujuanPengajuanBiaya = new widget.ButtonBig();
         btnPersetujuanPengajuanBiaya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7013438_office_briefcase_business_bag_finance_icon.png")));
         btnPersetujuanPengajuanBiaya.setText("Persetujuan Pengajuan Biaya");
-        btnPersetujuanPengajuanBiaya.setIconTextGap(0);
         btnPersetujuanPengajuanBiaya.setName("btnPersetujuanPengajuanBiaya");
         btnPersetujuanPengajuanBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPengajuanBiaya.addActionListener(this::btnPersetujuanPengajuanBiayaActionPerformed);
@@ -49730,7 +48769,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemantauanEWSNeonatus = new widget.ButtonBig();
         btnPemantauanEWSNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717229_mom_family_baby_kid_child_icon.png")));
         btnPemantauanEWSNeonatus.setText("Pemantauan EWS Pasien Neonatus");
-        btnPemantauanEWSNeonatus.setIconTextGap(0);
         btnPemantauanEWSNeonatus.setName("btnPemantauanEWSNeonatus");
         btnPemantauanEWSNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemantauanEWSNeonatus.addActionListener(this::btnPemantauanEWSNeonatusActionPerformed);
@@ -49738,7 +48776,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnValidasiPersetujuanPengajuanBiaya = new widget.ButtonBig();
         btnValidasiPersetujuanPengajuanBiaya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7013442_finance_business_money_payment_inflation_icon.png")));
         btnValidasiPersetujuanPengajuanBiaya.setText("Validasi Persetujuan Pengajuan Biaya");
-        btnValidasiPersetujuanPengajuanBiaya.setIconTextGap(0);
         btnValidasiPersetujuanPengajuanBiaya.setName("btnValidasiPersetujuanPengajuanBiaya");
         btnValidasiPersetujuanPengajuanBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
         btnValidasiPersetujuanPengajuanBiaya.addActionListener(this::btnValidasiPersetujuanPengajuanBiayaActionPerformed);
@@ -49746,7 +48783,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatPerawatanICare = new widget.ButtonBig();
         btnRiwayatPerawatanICare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
         btnRiwayatPerawatanICare.setText("Riwayat Perawatan ICare BPJS");
-        btnRiwayatPerawatanICare.setIconTextGap(0);
         btnRiwayatPerawatanICare.setName("btnRiwayatPerawatanICare");
         btnRiwayatPerawatanICare.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatPerawatanICare.addActionListener(this::btnRiwayatPerawatanICareActionPerformed);
@@ -49754,7 +48790,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPengajuanBiaya = new widget.ButtonBig();
         btnRekapPengajuanBiaya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1901528_business_chart_infographic_icon.png")));
         btnRekapPengajuanBiaya.setText("Rekap Pengajuan Biaya");
-        btnRekapPengajuanBiaya.setIconTextGap(0);
         btnRekapPengajuanBiaya.setName("btnRekapPengajuanBiaya");
         btnRekapPengajuanBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPengajuanBiaya.addActionListener(this::btnRekapPengajuanBiayaActionPerformed);
@@ -49762,7 +48797,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanKulitKelamin = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanKulitKelamin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1343433_sex_penis_dildo_icon.png")));
         btnPenilaianAwalMedisRalanKulitKelamin.setText("Awal Medis Ralan Kulit & Kelamin");
-        btnPenilaianAwalMedisRalanKulitKelamin.setIconTextGap(0);
         btnPenilaianAwalMedisRalanKulitKelamin.setName("btnPenilaianAwalMedisRalanKulitKelamin");
         btnPenilaianAwalMedisRalanKulitKelamin.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanKulitKelamin.addActionListener(this::btnPenilaianAwalMedisRalanKulitKelaminActionPerformed);
@@ -49770,7 +48804,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHostToHostBankMandiri = new widget.ButtonBig();
         btnHostToHostBankMandiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mandiri.png")));
         btnHostToHostBankMandiri.setText("Host To Host Bank Mandiri");
-        btnHostToHostBankMandiri.setIconTextGap(0);
         btnHostToHostBankMandiri.setName("btnHostToHostBankMandiri");
         btnHostToHostBankMandiri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHostToHostBankMandiri.addActionListener(this::btnHostToHostBankMandiriActionPerformed);
@@ -49778,7 +48811,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianLevelKecemasanRanapAnak = new widget.ButtonBig();
         btnPenilaianLevelKecemasanRanapAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8468129_dead_death_fear_grim_horror_icon.png")));
         btnPenilaianLevelKecemasanRanapAnak.setText("Pengkajian Level Kecemasan Ranap Anak");
-        btnPenilaianLevelKecemasanRanapAnak.setIconTextGap(0);
         btnPenilaianLevelKecemasanRanapAnak.setName("btnPenilaianLevelKecemasanRanapAnak");
         btnPenilaianLevelKecemasanRanapAnak.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianLevelKecemasanRanapAnak.addActionListener(this::btnPenilaianLevelKecemasanRanapAnakActionPerformed);
@@ -49786,7 +48818,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisHemodialisa = new widget.ButtonBig();
         btnPenilaianAwalMedisHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6087984_disease_infected_infection_kidney_icon.png")));
         btnPenilaianAwalMedisHemodialisa.setText("Awal Medis Pasien Hemodialisa");
-        btnPenilaianAwalMedisHemodialisa.setIconTextGap(0);
         btnPenilaianAwalMedisHemodialisa.setName("btnPenilaianAwalMedisHemodialisa");
         btnPenilaianAwalMedisHemodialisa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisHemodialisa.addActionListener(this::btnPenilaianAwalMedisHemodialisaActionPerformed);
@@ -49794,7 +48825,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianRisikoJatuhPsikiatri = new widget.ButtonBig();
         btnPenilaianRisikoJatuhPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9803221_man_fall_holiday_autumn_tradition_icon.png")));
         btnPenilaianRisikoJatuhPsikiatri.setText("Pengkajian Lanjutan Risiko Jatuh Psikiatri");
-        btnPenilaianRisikoJatuhPsikiatri.setIconTextGap(0);
         btnPenilaianRisikoJatuhPsikiatri.setName("btnPenilaianRisikoJatuhPsikiatri");
         btnPenilaianRisikoJatuhPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianRisikoJatuhPsikiatri.addActionListener(this::btnPenilaianRisikoJatuhPsikiatriActionPerformed);
@@ -49802,7 +48832,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianLanjutanSkriningFungsional = new widget.ButtonBig();
         btnPenilaianLanjutanSkriningFungsional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6000610_covid19_people_scan_tempurature_virus_icon.png")));
         btnPenilaianLanjutanSkriningFungsional.setText("Pengkajian Lanjutan Skrining Fungsional");
-        btnPenilaianLanjutanSkriningFungsional.setIconTextGap(0);
         btnPenilaianLanjutanSkriningFungsional.setName("btnPenilaianLanjutanSkriningFungsional");
         btnPenilaianLanjutanSkriningFungsional.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianLanjutanSkriningFungsional.addActionListener(this::btnPenilaianLanjutanSkriningFungsionalActionPerformed);
@@ -49810,7 +48839,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanRehabMedik = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanRehabMedik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141446_convalescence_covid19_recovered_recuperate_rehabilitation_icon.png")));
         btnPenilaianAwalMedisRalanRehabMedik.setText("Awal Medis Ralan Fisik & Rehabilitasi");
-        btnPenilaianAwalMedisRalanRehabMedik.setIconTextGap(0);
         btnPenilaianAwalMedisRalanRehabMedik.setName("btnPenilaianAwalMedisRalanRehabMedik");
         btnPenilaianAwalMedisRalanRehabMedik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanRehabMedik.addActionListener(this::btnPenilaianAwalMedisRalanRehabMedikActionPerformed);
@@ -49818,7 +48846,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTemplatePersetujuanPenolakanTindakan = new widget.ButtonBig();
         btnTemplatePersetujuanPenolakanTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859116_hospital_hygiene_masks_medical_surgery_icon.png")));
         btnTemplatePersetujuanPenolakanTindakan.setText("Template Persetujuan Penolakan Tindakan");
-        btnTemplatePersetujuanPenolakanTindakan.setIconTextGap(0);
         btnTemplatePersetujuanPenolakanTindakan.setName("btnTemplatePersetujuanPenolakanTindakan");
         btnTemplatePersetujuanPenolakanTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTemplatePersetujuanPenolakanTindakan.addActionListener(this::btnTemplatePersetujuanPenolakanTindakanActionPerformed);
@@ -49826,7 +48853,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanIGDPsikiatri = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanIGDPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141467_covid19_health_problem_tired_hard breathing_icon.png")));
         btnPenilaianAwalMedisRalanIGDPsikiatri.setText("Awal Medis IGD Psikiatri");
-        btnPenilaianAwalMedisRalanIGDPsikiatri.setIconTextGap(0);
         btnPenilaianAwalMedisRalanIGDPsikiatri.setName("btnPenilaianAwalMedisRalanIGDPsikiatri");
         btnPenilaianAwalMedisRalanIGDPsikiatri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanIGDPsikiatri.addActionListener(this::btnPenilaianAwalMedisRalanIGDPsikiatriActionPerformed);
@@ -49834,7 +48860,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiSettingPPKApotek = new widget.ButtonBig();
         btnBPJSReferensiSettingPPKApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSReferensiSettingPPKApotek.setText("Referensi Setting PPK Apotek BPJS");
-        btnBPJSReferensiSettingPPKApotek.setIconTextGap(0);
         btnBPJSReferensiSettingPPKApotek.setName("btnBPJSReferensiSettingPPKApotek");
         btnBPJSReferensiSettingPPKApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiSettingPPKApotek.addActionListener(this::btnBPJSReferensiSettingPPKApotekActionPerformed);
@@ -49842,7 +48867,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSReferensiObatApotek = new widget.ButtonBig();
         btnBPJSReferensiObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSReferensiObatApotek.setText("Referensi Obat Apotek BPJS");
-        btnBPJSReferensiObatApotek.setIconTextGap(0);
         btnBPJSReferensiObatApotek.setName("btnBPJSReferensiObatApotek");
         btnBPJSReferensiObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSReferensiObatApotek.addActionListener(this::btnBPJSReferensiObatApotekActionPerformed);
@@ -49850,7 +48874,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranBankMandiri = new widget.ButtonBig();
         btnPembayaranBankMandiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mandiri.png")));
         btnPembayaranBankMandiri.setText("Pembayaran Bank Mandiri");
-        btnPembayaranBankMandiri.setIconTextGap(0);
         btnPembayaranBankMandiri.setName("btnPembayaranBankMandiri");
         btnPembayaranBankMandiri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranBankMandiri.addActionListener(this::btnPembayaranBankMandiriActionPerformed);
@@ -49858,7 +48881,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSMapingObatApotek = new widget.ButtonBig();
         btnBPJSMapingObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSMapingObatApotek.setText("Mapping Obat Apotek BPJS");
-        btnBPJSMapingObatApotek.setIconTextGap(0);
         btnBPJSMapingObatApotek.setName("btnBPJSMapingObatApotek");
         btnBPJSMapingObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSMapingObatApotek.addActionListener(this::btnBPJSMapingObatApotekActionPerformed);
@@ -49866,7 +48888,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianUlangNyeri = new widget.ButtonBig();
         btnPenilaianUlangNyeri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5725022_head_headache_migraine_pain_severe_icon.png")));
         btnPenilaianUlangNyeri.setText("Pengkajian Ulang Nyeri");
-        btnPenilaianUlangNyeri.setIconTextGap(0);
         btnPenilaianUlangNyeri.setName("btnPenilaianUlangNyeri");
         btnPenilaianUlangNyeri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianUlangNyeri.addActionListener(this::btnPenilaianUlangNyeriActionPerformed);
@@ -49874,7 +48895,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianTerapiWicara = new widget.ButtonBig();
         btnPenilaianTerapiWicara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185069_dental_dentist_halitosis_human_mouth_icon.png")));
         btnPenilaianTerapiWicara.setText("Pengkajian Terapi Wicara");
-        btnPenilaianTerapiWicara.setIconTextGap(0);
         btnPenilaianTerapiWicara.setName("btnPenilaianTerapiWicara");
         btnPenilaianTerapiWicara.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianTerapiWicara.addActionListener(this::btnPenilaianTerapiWicaraActionPerformed);
@@ -49882,7 +48902,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengkajianRestrain = new widget.ButtonBig();
         btnPengkajianRestrain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3841816_chain_hyperlink_interface_link_multimedia_icon.png")));
         btnPengkajianRestrain.setText("Pengkajian Restrain");
-        btnPengkajianRestrain.setIconTextGap(0);
         btnPengkajianRestrain.setName("btnPengkajianRestrain");
         btnPengkajianRestrain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengkajianRestrain.addActionListener(this::btnPengkajianRestrainActionPerformed);
@@ -49890,7 +48909,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSKunjunganSEPApotek = new widget.ButtonBig();
         btnBPJSKunjunganSEPApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSKunjunganSEPApotek.setText("Pencarian SEP Apotek BPJS");
-        btnBPJSKunjunganSEPApotek.setIconTextGap(0);
         btnBPJSKunjunganSEPApotek.setName("btnBPJSKunjunganSEPApotek");
         btnBPJSKunjunganSEPApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSKunjunganSEPApotek.addActionListener(this::btnBPJSKunjunganSEPApotekActionPerformed);
@@ -49898,7 +48916,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSMonitoringKlaimApotek = new widget.ButtonBig();
         btnBPJSMonitoringKlaimApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSMonitoringKlaimApotek.setText("Monitoring Klaim Apotek BPJS");
-        btnBPJSMonitoringKlaimApotek.setIconTextGap(0);
         btnBPJSMonitoringKlaimApotek.setName("btnBPJSMonitoringKlaimApotek");
         btnBPJSMonitoringKlaimApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSMonitoringKlaimApotek.addActionListener(this::btnBPJSMonitoringKlaimApotekActionPerformed);
@@ -49906,7 +48923,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanParu = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanParu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217209_anatomy_human_lung_medical_organ_icon.png")));
         btnPenilaianAwalMedisRalanParu.setText("Awal Medis Ralan Paru");
-        btnPenilaianAwalMedisRalanParu.setIconTextGap(0);
         btnPenilaianAwalMedisRalanParu.setName("btnPenilaianAwalMedisRalanParu");
         btnPenilaianAwalMedisRalanParu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanParu.addActionListener(this::btnPenilaianAwalMedisRalanParuActionPerformed);
@@ -49914,7 +48930,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSDaftarPelayananObatApotek = new widget.ButtonBig();
         btnBPJSDaftarPelayananObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSDaftarPelayananObatApotek.setText("Daftar Pelayanan Obat Apotek BPJS");
-        btnBPJSDaftarPelayananObatApotek.setIconTextGap(0);
         btnBPJSDaftarPelayananObatApotek.setName("btnBPJSDaftarPelayananObatApotek");
         btnBPJSDaftarPelayananObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSDaftarPelayananObatApotek.addActionListener(this::btnBPJSDaftarPelayananObatApotekActionPerformed);
@@ -49922,7 +48937,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanKeperawatanRalan = new widget.ButtonBig();
         btnCatatanKeperawatanRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6123164_avatar_frontliner_male_medical staff_nurse_icon.png")));
         btnCatatanKeperawatanRalan.setText("Catatan Keperawatan Ralan");
-        btnCatatanKeperawatanRalan.setIconTextGap(0);
         btnCatatanKeperawatanRalan.setName("btnCatatanKeperawatanRalan");
         btnCatatanKeperawatanRalan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanKeperawatanRalan.addActionListener(this::btnCatatanKeperawatanRalanActionPerformed);
@@ -49930,7 +48944,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanPersalinan = new widget.ButtonBig();
         btnCatatanPersalinan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/375264_baby_fetus_pregnancy_icon.png")));
         btnCatatanPersalinan.setText("Catatan Persalinan");
-        btnCatatanPersalinan.setIconTextGap(0);
         btnCatatanPersalinan.setName("btnCatatanPersalinan");
         btnCatatanPersalinan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanPersalinan.addActionListener(this::btnCatatanPersalinanActionPerformed);
@@ -49938,7 +48951,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkorAldrettePascaAnestesi = new widget.ButtonBig();
         btnSkorAldrettePascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8168606_stocks_chart_graph_analytics_icon.png")));
         btnSkorAldrettePascaAnestesi.setText("Skor Aldrette Pasca Anestesi");
-        btnSkorAldrettePascaAnestesi.setIconTextGap(0);
         btnSkorAldrettePascaAnestesi.setName("btnSkorAldrettePascaAnestesi");
         btnSkorAldrettePascaAnestesi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkorAldrettePascaAnestesi.addActionListener(this::btnSkorAldrettePascaAnestesiActionPerformed);
@@ -49946,7 +48958,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkorStewardPascaAnestesi = new widget.ButtonBig();
         btnSkorStewardPascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1688863_chart_graph_seo_icon.png")));
         btnSkorStewardPascaAnestesi.setText("Skor Steward Pasca Anestesi");
-        btnSkorStewardPascaAnestesi.setIconTextGap(0);
         btnSkorStewardPascaAnestesi.setName("btnSkorStewardPascaAnestesi");
         btnSkorStewardPascaAnestesi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkorStewardPascaAnestesi.addActionListener(this::btnSkorStewardPascaAnestesiActionPerformed);
@@ -49954,7 +48965,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkorBromagePascaAnestesi = new widget.ButtonBig();
         btnSkorBromagePascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/282476_analytics_chart_icon.png")));
         btnSkorBromagePascaAnestesi.setText("Skor Bromage Pasca Anestesi");
-        btnSkorBromagePascaAnestesi.setIconTextGap(0);
         btnSkorBromagePascaAnestesi.setName("btnSkorBromagePascaAnestesi");
         btnSkorBromagePascaAnestesi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkorBromagePascaAnestesi.addActionListener(this::btnSkorBromagePascaAnestesiActionPerformed);
@@ -49962,7 +48972,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPreInduksi = new widget.ButtonBig();
         btnPenilaianPreInduksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6008650_breath_breathing_difficult_healthcare_illness_icon.png")));
         btnPenilaianPreInduksi.setText("Pengkajian Pre Induksi");
-        btnPenilaianPreInduksi.setIconTextGap(0);
         btnPenilaianPreInduksi.setName("btnPenilaianPreInduksi");
         btnPenilaianPreInduksi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPreInduksi.addActionListener(this::btnPenilaianPreInduksiActionPerformed);
@@ -49970,7 +48979,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilUSGUrologi = new widget.ButtonBig();
         btnHasilUSGUrologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088090_disease_infected_infection_kidney_icon.png")));
         btnHasilUSGUrologi.setText("Hasil USG Urologi");
-        btnHasilUSGUrologi.setIconTextGap(0);
         btnHasilUSGUrologi.setName("btnHasilUSGUrologi");
         btnHasilUSGUrologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilUSGUrologi.addActionListener(this::btnHasilUSGUrologiActionPerformed);
@@ -49978,7 +48986,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilUSGGynecologi = new widget.ButtonBig();
         btnHasilUSGGynecologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/375257_uterus_icon.png")));
         btnHasilUSGGynecologi.setText("Hasil USG Gynecologi");
-        btnHasilUSGGynecologi.setIconTextGap(0);
         btnHasilUSGGynecologi.setName("btnHasilUSGGynecologi");
         btnHasilUSGGynecologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilUSGGynecologi.addActionListener(this::btnHasilUSGGynecologiActionPerformed);
@@ -49986,7 +48993,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanEKG = new widget.ButtonBig();
         btnHasilPemeriksaanEKG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960620_cardiogram_tape_cardiology_electrocardiography_electrocardiogram_icon.png")));
         btnHasilPemeriksaanEKG.setText("Hasil Pemeriksaan EKG");
-        btnHasilPemeriksaanEKG.setIconTextGap(0);
         btnHasilPemeriksaanEKG.setName("btnHasilPemeriksaanEKG");
         btnHasilPemeriksaanEKG.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanEKG.addActionListener(this::btnHasilPemeriksaanEKGActionPerformed);
@@ -49994,7 +49000,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanTreadmill = new widget.ButtonBig();
         btnHasilPemeriksaanTreadmill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/11685378_running_walking_jogging_run_exercise_icon.png")));
         btnHasilPemeriksaanTreadmill.setText("Hasil Pemeriksaan Treadmill");
-        btnHasilPemeriksaanTreadmill.setIconTextGap(0);
         btnHasilPemeriksaanTreadmill.setName("btnHasilPemeriksaanTreadmill");
         btnHasilPemeriksaanTreadmill.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanTreadmill.addActionListener(this::btnHasilPemeriksaanTreadmillActionPerformed);
@@ -50002,7 +49007,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanSlitLamp = new widget.ButtonBig();
         btnHasilPemeriksaanSlitLamp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5173015_eye_focus_internet_scan_security_icon.png")));
         btnHasilPemeriksaanSlitLamp.setText("Hasil Pemeriksaan Slit Lamp");
-        btnHasilPemeriksaanSlitLamp.setIconTextGap(0);
         btnHasilPemeriksaanSlitLamp.setName("btnHasilPemeriksaanSlitLamp");
         btnHasilPemeriksaanSlitLamp.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanSlitLamp.addActionListener(this::btnHasilPemeriksaanSlitLampActionPerformed);
@@ -50010,7 +49014,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanOCT = new widget.ButtonBig();
         btnHasilPemeriksaanOCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/12689641_eye_tracking_target_behavior_vision_icon.png")));
         btnHasilPemeriksaanOCT.setText("Hasil Pemeriksaan OCT");
-        btnHasilPemeriksaanOCT.setIconTextGap(0);
         btnHasilPemeriksaanOCT.setName("btnHasilPemeriksaanOCT");
         btnHasilPemeriksaanOCT.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanOCT.addActionListener(this::btnHasilPemeriksaanOCTActionPerformed);
@@ -50018,7 +49021,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanECHO = new widget.ButtonBig();
         btnHasilPemeriksaanECHO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2104702_beat_health_healthcare_heart_heartbeat_icon.png")));
         btnHasilPemeriksaanECHO.setText("Hasil Pemeriksaan ECHO");
-        btnHasilPemeriksaanECHO.setIconTextGap(0);
         btnHasilPemeriksaanECHO.setName("btnHasilPemeriksaanECHO");
         btnHasilPemeriksaanECHO.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanECHO.addActionListener(this::btnHasilPemeriksaanECHOActionPerformed);
@@ -50026,7 +49028,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimDietSatuSehat = new widget.ButtonBig();
         btnKirimDietSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimDietSatuSehat.setText("Kirim Diet Satu Sehat");
-        btnKirimDietSatuSehat.setIconTextGap(0);
         btnKirimDietSatuSehat.setName("btnKirimDietSatuSehat");
         btnKirimDietSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimDietSatuSehat.addActionListener(this::btnKirimDietSatuSehatActionPerformed);
@@ -50034,7 +49035,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingObatSatuSehat = new widget.ButtonBig();
         btnMappingObatSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMappingObatSatuSehat.setText("Mapping Obat/Alkes/BHP Satu Sehat");
-        btnMappingObatSatuSehat.setIconTextGap(0);
         btnMappingObatSatuSehat.setName("btnMappingObatSatuSehat");
         btnMappingObatSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingObatSatuSehat.addActionListener(this::btnMappingObatSatuSehatActionPerformed);
@@ -50042,7 +49042,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPengadaanDapur = new widget.ButtonBig();
         btnRingkasanPengadaanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPengadaanDapur.setText("Ringkasan Pengadaan Dapur");
-        btnRingkasanPengadaanDapur.setIconTextGap(0);
         btnRingkasanPengadaanDapur.setName("btnRingkasanPengadaanDapur");
         btnRingkasanPengadaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPengadaanDapur.addActionListener(this::btnRingkasanPengadaanDapurActionPerformed);
@@ -50050,7 +49049,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimMedicationSatuSehat = new widget.ButtonBig();
         btnKirimMedicationSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimMedicationSatuSehat.setText("Kirim Medication Satu Sehat");
-        btnKirimMedicationSatuSehat.setIconTextGap(0);
         btnKirimMedicationSatuSehat.setName("btnKirimMedicationSatuSehat");
         btnKirimMedicationSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimMedicationSatuSehat.addActionListener(this::btnKirimMedicationSatuSehatActionPerformed);
@@ -50058,7 +49056,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimMedicationRequestSatuSehat = new widget.ButtonBig();
         btnKirimMedicationRequestSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimMedicationRequestSatuSehat.setText("Kirim Medication Request Satu Sehat");
-        btnKirimMedicationRequestSatuSehat.setIconTextGap(0);
         btnKirimMedicationRequestSatuSehat.setName("btnKirimMedicationRequestSatuSehat");
         btnKirimMedicationRequestSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimMedicationRequestSatuSehat.addActionListener(this::btnKirimMedicationRequestSatuSehatActionPerformed);
@@ -50066,7 +49063,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenatalaksanaanTerapiOkupasi = new widget.ButtonBig();
         btnPenatalaksanaanTerapiOkupasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6008649_fatigue_healthcare_illness_sickness_tired_icon.png")));
         btnPenatalaksanaanTerapiOkupasi.setText("Penatalaksanaan Terapi Okupasi");
-        btnPenatalaksanaanTerapiOkupasi.setIconTextGap(0);
         btnPenatalaksanaanTerapiOkupasi.setName("btnPenatalaksanaanTerapiOkupasi");
         btnPenatalaksanaanTerapiOkupasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenatalaksanaanTerapiOkupasi.addActionListener(this::btnPenatalaksanaanTerapiOkupasiActionPerformed);
@@ -50074,7 +49070,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimMedicationDispenseSatuSehat = new widget.ButtonBig();
         btnKirimMedicationDispenseSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimMedicationDispenseSatuSehat.setText("Kirim Medication Dispense Satu Sehat");
-        btnKirimMedicationDispenseSatuSehat.setIconTextGap(0);
         btnKirimMedicationDispenseSatuSehat.setName("btnKirimMedicationDispenseSatuSehat");
         btnKirimMedicationDispenseSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimMedicationDispenseSatuSehat.addActionListener(this::btnKirimMedicationDispenseSatuSehatActionPerformed);
@@ -50082,7 +49077,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimMedicationStatementSatuSehat = new widget.ButtonBig();
         btnKirimMedicationStatementSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimMedicationStatementSatuSehat.setText("Kirim Medication Statement Satu Sehat");
-        btnKirimMedicationStatementSatuSehat.setIconTextGap(0);
         btnKirimMedicationStatementSatuSehat.setName("btnKirimMedicationStatementSatuSehat");
         btnKirimMedicationStatementSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimMedicationStatementSatuSehat.addActionListener(this::btnKirimMedicationStatementSatuSehatActionPerformed);
@@ -50090,7 +49084,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilUSGNeonatus = new widget.ButtonBig();
         btnHasilUSGNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7744782_mom_baby_mom and baby_mothers day_mother_icon.png")));
         btnHasilUSGNeonatus.setText("Hasil USG Neonatus");
-        btnHasilUSGNeonatus.setIconTextGap(0);
         btnHasilUSGNeonatus.setName("btnHasilUSGNeonatus");
         btnHasilUSGNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilUSGNeonatus.addActionListener(this::btnHasilUSGNeonatusActionPerformed);
@@ -50098,7 +49091,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilEndoskopiFaringLaring = new widget.ButtonBig();
         btnHasilEndoskopiFaringLaring.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8725899_ear_icon.png")));
         btnHasilEndoskopiFaringLaring.setText("Hasil Endoskopi Faring/Laring");
-        btnHasilEndoskopiFaringLaring.setIconTextGap(0);
         btnHasilEndoskopiFaringLaring.setName("btnHasilEndoskopiFaringLaring");
         btnHasilEndoskopiFaringLaring.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilEndoskopiFaringLaring.addActionListener(this::btnHasilEndoskopiFaringLaringActionPerformed);
@@ -50106,7 +49098,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingRadiologiSatuSehat = new widget.ButtonBig();
         btnMappingRadiologiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMappingRadiologiSatuSehat.setText("Mapping Tindakan Radiologi Satu Sehat");
-        btnMappingRadiologiSatuSehat.setIconTextGap(0);
         btnMappingRadiologiSatuSehat.setName("btnMappingRadiologiSatuSehat");
         btnMappingRadiologiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingRadiologiSatuSehat.addActionListener(this::btnMappingRadiologiSatuSehatActionPerformed);
@@ -50114,7 +49105,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingLaboratSatuSehat = new widget.ButtonBig();
         btnMappingLaboratSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMappingLaboratSatuSehat.setText("Mapping Tindakan Lab PK & MB Satu Sehat");
-        btnMappingLaboratSatuSehat.setIconTextGap(0);
         btnMappingLaboratSatuSehat.setName("btnMappingLaboratSatuSehat");
         btnMappingLaboratSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingLaboratSatuSehat.addActionListener(this::btnMappingLaboratSatuSehatActionPerformed);
@@ -50122,7 +49112,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimServiceRequestRadiologiSatuSehat = new widget.ButtonBig();
         btnKirimServiceRequestRadiologiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimServiceRequestRadiologiSatuSehat.setText("Kirim Service Request Radiologi Satu Sehat");
-        btnKirimServiceRequestRadiologiSatuSehat.setIconTextGap(0);
         btnKirimServiceRequestRadiologiSatuSehat.setName("btnKirimServiceRequestRadiologiSatuSehat");
         btnKirimServiceRequestRadiologiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimServiceRequestRadiologiSatuSehat.addActionListener(this::btnKirimServiceRequestRadiologiSatuSehatActionPerformed);
@@ -50130,7 +49119,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimServiceRequestLabPKSatuSehat = new widget.ButtonBig();
         btnKirimServiceRequestLabPKSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimServiceRequestLabPKSatuSehat.setText("Kirim Service Request Lab PK Satu Sehat");
-        btnKirimServiceRequestLabPKSatuSehat.setIconTextGap(0);
         btnKirimServiceRequestLabPKSatuSehat.setName("btnKirimServiceRequestLabPKSatuSehat");
         btnKirimServiceRequestLabPKSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimServiceRequestLabPKSatuSehat.addActionListener(this::btnKirimServiceRequestLabPKSatuSehatActionPerformed);
@@ -50138,7 +49126,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimServiceRequestLabMBSatuSehat = new widget.ButtonBig();
         btnKirimServiceRequestLabMBSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimServiceRequestLabMBSatuSehat.setText("Kirim Service Request Lab MB Satu Sehat");
-        btnKirimServiceRequestLabMBSatuSehat.setIconTextGap(0);
         btnKirimServiceRequestLabMBSatuSehat.setName("btnKirimServiceRequestLabMBSatuSehat");
         btnKirimServiceRequestLabMBSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimServiceRequestLabMBSatuSehat.addActionListener(this::btnKirimServiceRequestLabMBSatuSehatActionPerformed);
@@ -50146,7 +49133,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilEndoskopiHidung = new widget.ButtonBig();
         btnHasilEndoskopiHidung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088167_cold_disease_infection_nasal_nose_icon.png")));
         btnHasilEndoskopiHidung.setText("Hasil Endoskopi Hidung");
-        btnHasilEndoskopiHidung.setIconTextGap(0);
         btnHasilEndoskopiHidung.setName("btnHasilEndoskopiHidung");
         btnHasilEndoskopiHidung.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilEndoskopiHidung.addActionListener(this::btnHasilEndoskopiHidungActionPerformed);
@@ -50154,7 +49140,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimSpecimenRadiologiSatuSehat = new widget.ButtonBig();
         btnKirimSpecimenRadiologiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimSpecimenRadiologiSatuSehat.setText("Kirim Specimen Radiologi Satu Sehat");
-        btnKirimSpecimenRadiologiSatuSehat.setIconTextGap(0);
         btnKirimSpecimenRadiologiSatuSehat.setName("btnKirimSpecimenRadiologiSatuSehat");
         btnKirimSpecimenRadiologiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimSpecimenRadiologiSatuSehat.addActionListener(this::btnKirimSpecimenRadiologiSatuSehatActionPerformed);
@@ -50162,7 +49147,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimSpecimenLabPKSatuSehat = new widget.ButtonBig();
         btnKirimSpecimenLabPKSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimSpecimenLabPKSatuSehat.setText("Kirim Specimen Lab PK Satu Sehat");
-        btnKirimSpecimenLabPKSatuSehat.setIconTextGap(0);
         btnKirimSpecimenLabPKSatuSehat.setName("btnKirimSpecimenLabPKSatuSehat");
         btnKirimSpecimenLabPKSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimSpecimenLabPKSatuSehat.addActionListener(this::btnKirimSpecimenLabPKSatuSehatActionPerformed);
@@ -50170,7 +49154,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimSpecimenLabMBSatuSehat = new widget.ButtonBig();
         btnKirimSpecimenLabMBSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimSpecimenLabMBSatuSehat.setText("Kirim Specimen Lab MB Satu Sehat");
-        btnKirimSpecimenLabMBSatuSehat.setIconTextGap(0);
         btnKirimSpecimenLabMBSatuSehat.setName("btnKirimSpecimenLabMBSatuSehat");
         btnKirimSpecimenLabMBSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimSpecimenLabMBSatuSehat.addActionListener(this::btnKirimSpecimenLabMBSatuSehatActionPerformed);
@@ -50178,7 +49161,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterMasalahKeperawatanNeonatus = new widget.ButtonBig();
         btnMasterMasalahKeperawatanNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3231119_baby_cartoon_child_family_kid_icon.png")));
         btnMasterMasalahKeperawatanNeonatus.setText("Master Masalah Keperawatan Neonatus");
-        btnMasterMasalahKeperawatanNeonatus.setIconTextGap(0);
         btnMasterMasalahKeperawatanNeonatus.setName("btnMasterMasalahKeperawatanNeonatus");
         btnMasterMasalahKeperawatanNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterMasalahKeperawatanNeonatus.addActionListener(this::btnMasterMasalahKeperawatanNeonatusActionPerformed);
@@ -50186,7 +49168,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterRencanaKeperawatanNeonatus = new widget.ButtonBig();
         btnMasterRencanaKeperawatanNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3231119_baby_cartoon_child_family_kid_icon.png")));
         btnMasterRencanaKeperawatanNeonatus.setText("Master Rencana Keperawatan Neonatus");
-        btnMasterRencanaKeperawatanNeonatus.setIconTextGap(0);
         btnMasterRencanaKeperawatanNeonatus.setName("btnMasterRencanaKeperawatanNeonatus");
         btnMasterRencanaKeperawatanNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterRencanaKeperawatanNeonatus.addActionListener(this::btnMasterRencanaKeperawatanNeonatusActionPerformed);
@@ -50194,7 +49175,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalKeperawatanRanapNeonatus = new widget.ButtonBig();
         btnPenilaianAwalKeperawatanRanapNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2363103_baby_boy_girl_kid_toy_icon.png")));
         btnPenilaianAwalKeperawatanRanapNeonatus.setText("Awal Keperawatan Ranap Neonatus");
-        btnPenilaianAwalKeperawatanRanapNeonatus.setIconTextGap(0);
         btnPenilaianAwalKeperawatanRanapNeonatus.setName("btnPenilaianAwalKeperawatanRanapNeonatus");
         btnPenilaianAwalKeperawatanRanapNeonatus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalKeperawatanRanapNeonatus.addActionListener(this::btnPenilaianAwalKeperawatanRanapNeonatusActionPerformed);
@@ -50202,7 +49182,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimObservationRadiologiSatuSehat = new widget.ButtonBig();
         btnKirimObservationRadiologiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimObservationRadiologiSatuSehat.setText("Kirim Observation Radiologi Satu Sehat");
-        btnKirimObservationRadiologiSatuSehat.setIconTextGap(0);
         btnKirimObservationRadiologiSatuSehat.setName("btnKirimObservationRadiologiSatuSehat");
         btnKirimObservationRadiologiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimObservationRadiologiSatuSehat.addActionListener(this::btnKirimObservationRadiologiSatuSehatActionPerformed);
@@ -50210,7 +49189,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimObservationLabPKSatuSehat = new widget.ButtonBig();
         btnKirimObservationLabPKSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimObservationLabPKSatuSehat.setText("Kirim Observation Lab PK Satu Sehat");
-        btnKirimObservationLabPKSatuSehat.setIconTextGap(0);
         btnKirimObservationLabPKSatuSehat.setName("btnKirimObservationLabPKSatuSehat");
         btnKirimObservationLabPKSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimObservationLabPKSatuSehat.addActionListener(this::btnKirimObservationLabPKSatuSehatActionPerformed);
@@ -50218,7 +49196,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimObservationLabMBSatuSehat = new widget.ButtonBig();
         btnKirimObservationLabMBSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimObservationLabMBSatuSehat.setText("Kirim Observation Lab MB Satu Sehat");
-        btnKirimObservationLabMBSatuSehat.setIconTextGap(0);
         btnKirimObservationLabMBSatuSehat.setName("btnKirimObservationLabMBSatuSehat");
         btnKirimObservationLabMBSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimObservationLabMBSatuSehat.addActionListener(this::btnKirimObservationLabMBSatuSehatActionPerformed);
@@ -50226,7 +49203,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimDiagnosticReportSatuSehat = new widget.ButtonBig();
         btnKirimDiagnosticReportSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimDiagnosticReportSatuSehat.setText("Kirim Diagnostic Report Radiologi Satu Sehat");
-        btnKirimDiagnosticReportSatuSehat.setIconTextGap(0);
         btnKirimDiagnosticReportSatuSehat.setName("btnKirimDiagnosticReportSatuSehat");
         btnKirimDiagnosticReportSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimDiagnosticReportSatuSehat.addActionListener(this::btnKirimDiagnosticReportSatuSehatActionPerformed);
@@ -50234,7 +49210,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimDiagnosticReportLabPKSatuSehat = new widget.ButtonBig();
         btnKirimDiagnosticReportLabPKSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimDiagnosticReportLabPKSatuSehat.setText("Kirim Diagnostic Report Lab PK Satu Sehat");
-        btnKirimDiagnosticReportLabPKSatuSehat.setIconTextGap(0);
         btnKirimDiagnosticReportLabPKSatuSehat.setName("btnKirimDiagnosticReportLabPKSatuSehat");
         btnKirimDiagnosticReportLabPKSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimDiagnosticReportLabPKSatuSehat.addActionListener(this::btnKirimDiagnosticReportLabPKSatuSehatActionPerformed);
@@ -50242,7 +49217,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimDiagnosticReportLabMBSatuSehat = new widget.ButtonBig();
         btnKirimDiagnosticReportLabMBSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimDiagnosticReportLabMBSatuSehat.setText("Kirim Diagnostic Report Lab MB Satu Sehat");
-        btnKirimDiagnosticReportLabMBSatuSehat.setIconTextGap(0);
         btnKirimDiagnosticReportLabMBSatuSehat.setName("btnKirimDiagnosticReportLabMBSatuSehat");
         btnKirimDiagnosticReportLabMBSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimDiagnosticReportLabMBSatuSehat.addActionListener(this::btnKirimDiagnosticReportLabMBSatuSehatActionPerformed);
@@ -50250,7 +49224,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilEndoskopiTelinga = new widget.ButtonBig();
         btnHasilEndoskopiTelinga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/299079_headphone_icon.png")));
         btnHasilEndoskopiTelinga.setText("Hasil Endoskopi Telinga");
-        btnHasilEndoskopiTelinga.setIconTextGap(0);
         btnHasilEndoskopiTelinga.setName("btnHasilEndoskopiTelinga");
         btnHasilEndoskopiTelinga.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilEndoskopiTelinga.addActionListener(this::btnHasilEndoskopiTelingaActionPerformed);
@@ -50258,7 +49231,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKepatuhanKelengkapanKeselamatanBedah = new widget.ButtonBig();
         btnKepatuhanKelengkapanKeselamatanBedah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6008657_avatar_job_medical_occupation_people_icon.png")));
         btnKepatuhanKelengkapanKeselamatanBedah.setText("Kepatuhan Kelengkapan Keselamatan Bedah");
-        btnKepatuhanKelengkapanKeselamatanBedah.setIconTextGap(0);
         btnKepatuhanKelengkapanKeselamatanBedah.setName("btnKepatuhanKelengkapanKeselamatanBedah");
         btnKepatuhanKelengkapanKeselamatanBedah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKepatuhanKelengkapanKeselamatanBedah.addActionListener(this::btnKepatuhanKelengkapanKeselamatanBedahActionPerformed);
@@ -50266,7 +49238,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnNilaiPiutangPerJenisBayarPerBulan = new widget.ButtonBig();
         btnNilaiPiutangPerJenisBayarPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png")));
         btnNilaiPiutangPerJenisBayarPerBulan.setText("Nilai Piutang Per Cara Bayar Per Bulan");
-        btnNilaiPiutangPerJenisBayarPerBulan.setIconTextGap(0);
         btnNilaiPiutangPerJenisBayarPerBulan.setName("btnNilaiPiutangPerJenisBayarPerBulan");
         btnNilaiPiutangPerJenisBayarPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnNilaiPiutangPerJenisBayarPerBulan.addActionListener(this::btnNilaiPiutangPerJenisBayarPerBulanActionPerformed);
@@ -50274,7 +49245,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPiutangPerJenisBayar = new widget.ButtonBig();
         btnRingkasanPiutangPerJenisBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checklist_pencil-o.png")));
         btnRingkasanPiutangPerJenisBayar.setText("Ringkasan Piutang Per Cara Bayar");
-        btnRingkasanPiutangPerJenisBayar.setIconTextGap(0);
         btnRingkasanPiutangPerJenisBayar.setName("btnRingkasanPiutangPerJenisBayar");
         btnRingkasanPiutangPerJenisBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPiutangPerJenisBayar.addActionListener(this::btnRingkasanPiutangPerJenisBayarActionPerformed);
@@ -50282,7 +49252,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianPasienImunitasRendah = new widget.ButtonBig();
         btnPenilaianPasienImunitasRendah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5964813_chest_coronavirus_healthcare_medical_pain_icon.png")));
         btnPenilaianPasienImunitasRendah.setText("Pengkajian Pasien Imunitas Rendah");
-        btnPenilaianPasienImunitasRendah.setIconTextGap(0);
         btnPenilaianPasienImunitasRendah.setName("btnPenilaianPasienImunitasRendah");
         btnPenilaianPasienImunitasRendah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianPasienImunitasRendah.addActionListener(this::btnPenilaianPasienImunitasRendahActionPerformed);
@@ -50290,7 +49259,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianDerajatDehidrasi = new widget.ButtonBig();
         btnPenilaianDerajatDehidrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/897234_aqua_bottle_drink_water_icon.png")));
         btnPenilaianDerajatDehidrasi.setText("Pengkajian Derajat Dehidrasi");
-        btnPenilaianDerajatDehidrasi.setIconTextGap(0);
         btnPenilaianDerajatDehidrasi.setName("btnPenilaianDerajatDehidrasi");
         btnPenilaianDerajatDehidrasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianDerajatDehidrasi.addActionListener(this::btnPenilaianDerajatDehidrasiActionPerformed);
@@ -50298,7 +49266,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanKeseimbanganCairan = new widget.ButtonBig();
         btnCatatanKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7150134_water_drink_drop_blue_icon.png")));
         btnCatatanKeseimbanganCairan.setText("Keseimbangan Cairan");
-        btnCatatanKeseimbanganCairan.setIconTextGap(0);
         btnCatatanKeseimbanganCairan.setName("btnCatatanKeseimbanganCairan");
         btnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanKeseimbanganCairan.addActionListener(this::btnCatatanKeseimbanganCairanActionPerformed);
@@ -50306,7 +49273,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiCHBP = new widget.ButtonBig();
         btnCatatanObservasiCHBP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852563_education_files_research_science_icon.png")));
         btnCatatanObservasiCHBP.setText("Catatan Observasi CHBP");
-        btnCatatanObservasiCHBP.setIconTextGap(0);
         btnCatatanObservasiCHBP.setName("btnCatatanObservasiCHBP");
         btnCatatanObservasiCHBP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiCHBP.addActionListener(this::btnCatatanObservasiCHBPActionPerformed);
@@ -50314,7 +49280,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiInduksiPersalinan = new widget.ButtonBig();
         btnCatatanObservasiInduksiPersalinan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3298612_document_paper_sign_signing_icon.png")));
         btnCatatanObservasiInduksiPersalinan.setText("Catatan Observasi Induksi Persalinan");
-        btnCatatanObservasiInduksiPersalinan.setIconTextGap(0);
         btnCatatanObservasiInduksiPersalinan.setName("btnCatatanObservasiInduksiPersalinan");
         btnCatatanObservasiInduksiPersalinan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiInduksiPersalinan.addActionListener(this::btnCatatanObservasiInduksiPersalinanActionPerformed);
@@ -50322,7 +49287,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiRestrainNonFramakologi = new widget.ButtonBig();
         btnCatatanObservasiRestrainNonFramakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/10447_chain_link_web_icon.png")));
         btnCatatanObservasiRestrainNonFramakologi.setText("Catatan Observasi Restrain Nonfarmakologi");
-        btnCatatanObservasiRestrainNonFramakologi.setIconTextGap(0);
         btnCatatanObservasiRestrainNonFramakologi.setName("btnCatatanObservasiRestrainNonFramakologi");
         btnCatatanObservasiRestrainNonFramakologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiRestrainNonFramakologi.addActionListener(this::btnCatatanObservasiRestrainNonFramakologiActionPerformed);
@@ -50330,7 +49294,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiVentilator = new widget.ButtonBig();
         btnCatatanObservasiVentilator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088631_bed_hospital_icu_medical_treatment_icon.png")));
         btnCatatanObservasiVentilator.setText("Catatan Observasi Ventilator");
-        btnCatatanObservasiVentilator.setIconTextGap(0);
         btnCatatanObservasiVentilator.setName("btnCatatanObservasiVentilator");
         btnCatatanObservasiVentilator.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiVentilator.addActionListener(this::btnCatatanObservasiVentilatorActionPerformed);
@@ -50338,7 +49301,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiHemodialisa = new widget.ButtonBig();
         btnCatatanObservasiHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4757453_checklist_document_file_list_paper_icon.png")));
         btnCatatanObservasiHemodialisa.setText("Catatan Observasi Hemodialisa");
-        btnCatatanObservasiHemodialisa.setIconTextGap(0);
         btnCatatanObservasiHemodialisa.setName("btnCatatanObservasiHemodialisa");
         btnCatatanObservasiHemodialisa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiHemodialisa.addActionListener(this::btnCatatanObservasiHemodialisaActionPerformed);
@@ -50346,7 +49308,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanCairanHemodialisa = new widget.ButtonBig();
         btnCatatanCairanHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1059390_document_clip_page_paper_text_icon.png")));
         btnCatatanCairanHemodialisa.setText("Catatan Cairan Hemodialisa");
-        btnCatatanCairanHemodialisa.setIconTextGap(0);
         btnCatatanCairanHemodialisa.setName("btnCatatanCairanHemodialisa");
         btnCatatanCairanHemodialisa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanCairanHemodialisa.addActionListener(this::btnCatatanCairanHemodialisaActionPerformed);
@@ -50354,7 +49315,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSKPKategoriPenilaian = new widget.ButtonBig();
         btnSKPKategoriPenilaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5986210_clothing_equipment_protection_protective_safety_icon.png")));
         btnSKPKategoriPenilaian.setText("Kategori Pengkajian SKP");
-        btnSKPKategoriPenilaian.setIconTextGap(0);
         btnSKPKategoriPenilaian.setName("btnSKPKategoriPenilaian");
         btnSKPKategoriPenilaian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSKPKategoriPenilaian.addActionListener(this::btnSKPKategoriPenilaianActionPerformed);
@@ -50362,7 +49322,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSKPKriteriaPenilaian = new widget.ButtonBig();
         btnSKPKriteriaPenilaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9016856_safety_suit_virus_glove_covid-19_icon.png")));
         btnSKPKriteriaPenilaian.setText("Kriteria Pengkajian SKP");
-        btnSKPKriteriaPenilaian.setIconTextGap(0);
         btnSKPKriteriaPenilaian.setName("btnSKPKriteriaPenilaian");
         btnSKPKriteriaPenilaian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSKPKriteriaPenilaian.addActionListener(this::btnSKPKriteriaPenilaianActionPerformed);
@@ -50370,7 +49329,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReferensiPoliMobileJKNFKTP = new widget.ButtonBig();
         btnReferensiPoliMobileJKNFKTP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5994859_building_clinic_health_hospital_medical_icon.png")));
         btnReferensiPoliMobileJKNFKTP.setText("Referensi Poli Mobile JKN FKTP");
-        btnReferensiPoliMobileJKNFKTP.setIconTextGap(0);
         btnReferensiPoliMobileJKNFKTP.setName("btnReferensiPoliMobileJKNFKTP");
         btnReferensiPoliMobileJKNFKTP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiPoliMobileJKNFKTP.addActionListener(this::btnReferensiPoliMobileJKNFKTPActionPerformed);
@@ -50378,7 +49336,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReferensiDokterMobileJKNFKTP = new widget.ButtonBig();
         btnReferensiDokterMobileJKNFKTP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958331_disease_doctor_epidemic_hospital_infection_icon.png")));
         btnReferensiDokterMobileJKNFKTP.setText("Referensi Dokter Mobile JKN FKTP");
-        btnReferensiDokterMobileJKNFKTP.setIconTextGap(0);
         btnReferensiDokterMobileJKNFKTP.setName("btnReferensiDokterMobileJKNFKTP");
         btnReferensiDokterMobileJKNFKTP.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReferensiDokterMobileJKNFKTP.addActionListener(this::btnReferensiDokterMobileJKNFKTPActionPerformed);
@@ -50386,7 +49343,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSKPPenilaianPegawai = new widget.ButtonBig();
         btnSKPPenilaianPegawai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088187_gloves_hand_safety_secure_icon.png")));
         btnSKPPenilaianPegawai.setText("Pengkajian SKP Petugas/Dokter");
-        btnSKPPenilaianPegawai.setIconTextGap(0);
         btnSKPPenilaianPegawai.setName("btnSKPPenilaianPegawai");
         btnSKPPenilaianPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSKPPenilaianPegawai.addActionListener(this::btnSKPPenilaianPegawaiActionPerformed);
@@ -50394,7 +49350,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMandiriMetodePembayaran = new widget.ButtonBig();
         btnMandiriMetodePembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mandiri.png")));
         btnMandiriMetodePembayaran.setText("Metode Pembayaran Bank Mandiri");
-        btnMandiriMetodePembayaran.setIconTextGap(0);
         btnMandiriMetodePembayaran.setName("btnMandiriMetodePembayaran");
         btnMandiriMetodePembayaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMandiriMetodePembayaran.addActionListener(this::btnMandiriMetodePembayaranActionPerformed);
@@ -50402,7 +49357,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMandiriBankTujuanTRansfer = new widget.ButtonBig();
         btnMandiriBankTujuanTRansfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mandiri.png")));
         btnMandiriBankTujuanTRansfer.setText("Bank Tujuan Transfer Bank Mandiri");
-        btnMandiriBankTujuanTRansfer.setIconTextGap(0);
         btnMandiriBankTujuanTRansfer.setName("btnMandiriBankTujuanTRansfer");
         btnMandiriBankTujuanTRansfer.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMandiriBankTujuanTRansfer.addActionListener(this::btnMandiriBankTujuanTRansferActionPerformed);
@@ -50410,7 +49364,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembayaranPihakKe3BankMandiri = new widget.ButtonBig();
         btnPembayaranPihakKe3BankMandiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mandiri.png")));
         btnPembayaranPihakKe3BankMandiri.setText("Pembayaran Pihak Ke 3 Bank Mandiri");
-        btnPembayaranPihakKe3BankMandiri.setIconTextGap(0);
         btnPembayaranPihakKe3BankMandiri.setName("btnPembayaranPihakKe3BankMandiri");
         btnPembayaranPihakKe3BankMandiri.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPembayaranPihakKe3BankMandiri.addActionListener(this::btnPembayaranPihakKe3BankMandiriActionPerformed);
@@ -50418,7 +49371,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMandiriKodeTransaksiTujuanTRansfer = new widget.ButtonBig();
         btnMandiriKodeTransaksiTujuanTRansfer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mandiri.png")));
         btnMandiriKodeTransaksiTujuanTRansfer.setText("Kode Transaksi Tujuan Transfer Bank Mandiri");
-        btnMandiriKodeTransaksiTujuanTRansfer.setIconTextGap(0);
         btnMandiriKodeTransaksiTujuanTRansfer.setName("btnMandiriKodeTransaksiTujuanTRansfer");
         btnMandiriKodeTransaksiTujuanTRansfer.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMandiriKodeTransaksiTujuanTRansfer.addActionListener(this::btnMandiriKodeTransaksiTujuanTRansferActionPerformed);
@@ -50426,7 +49378,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSKPRekapitulasiPenilaian = new widget.ButtonBig();
         btnSKPRekapitulasiPenilaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958329_crowd patient_disease_epidemic_hospital_infection_icon.png")));
         btnSKPRekapitulasiPenilaian.setText("Rekapitulasi Pengkajian SKP");
-        btnSKPRekapitulasiPenilaian.setIconTextGap(0);
         btnSKPRekapitulasiPenilaian.setName("btnSKPRekapitulasiPenilaian");
         btnSKPRekapitulasiPenilaian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSKPRekapitulasiPenilaian.addActionListener(this::btnSKPRekapitulasiPenilaianActionPerformed);
@@ -50434,7 +49385,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCareReferensiAlergi = new widget.ButtonBig();
         btnPCareReferensiAlergi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png")));
         btnPCareReferensiAlergi.setText("Referensi Alergi PCare");
-        btnPCareReferensiAlergi.setIconTextGap(0);
         btnPCareReferensiAlergi.setName("btnPCareReferensiAlergi");
         btnPCareReferensiAlergi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiAlergi.addActionListener(this::btnPCareReferensiAlergiActionPerformed);
@@ -50442,7 +49392,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCareReferensiPrognosa = new widget.ButtonBig();
         btnPCareReferensiPrognosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png")));
         btnPCareReferensiPrognosa.setText("Referensi Prognosa PCare");
-        btnPCareReferensiPrognosa.setIconTextGap(0);
         btnPCareReferensiPrognosa.setName("btnPCareReferensiPrognosa");
         btnPCareReferensiPrognosa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCareReferensiPrognosa.addActionListener(this::btnPCareReferensiPrognosaActionPerformed);
@@ -50450,7 +49399,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKonsultasiMedik = new widget.ButtonBig();
         btnKonsultasiMedik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6071860_freelance_freelancer_job_occupation_worker_icon.png")));
         btnKonsultasiMedik.setText("Konsultasi Medik");
-        btnKonsultasiMedik.setIconTextGap(0);
         btnKonsultasiMedik.setName("btnKonsultasiMedik");
         btnKonsultasiMedik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonsultasiMedik.addActionListener(this::btnKonsultasiMedikActionPerformed);
@@ -50458,7 +49406,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataSasaranUsiaProduktif = new widget.ButtonBig();
         btnDataSasaranUsiaProduktif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/49607_product_report_sales_icon.png")));
         btnDataSasaranUsiaProduktif.setText("Data Sasaran Usia Produktif");
-        btnDataSasaranUsiaProduktif.setIconTextGap(0);
         btnDataSasaranUsiaProduktif.setName("btnDataSasaranUsiaProduktif");
         btnDataSasaranUsiaProduktif.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataSasaranUsiaProduktif.addActionListener(this::btnDataSasaranUsiaProduktifActionPerformed);
@@ -50466,7 +49413,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataSasaranUsiaLansia = new widget.ButtonBig();
         btnDataSasaranUsiaLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/49607_product_report_sales_icon.png")));
         btnDataSasaranUsiaLansia.setText("Data Sasaran Usia Lansia");
-        btnDataSasaranUsiaLansia.setIconTextGap(0);
         btnDataSasaranUsiaLansia.setName("btnDataSasaranUsiaLansia");
         btnDataSasaranUsiaLansia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDataSasaranUsiaLansia.addActionListener(this::btnDataSasaranUsiaLansiaActionPerformed);
@@ -50474,7 +49420,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningMerokokUsiaSekolah = new widget.ButtonBig();
         btnSkriningMerokokUsiaSekolah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3017868_day_patrick_pipe_smoke_st_icon.png")));
         btnSkriningMerokokUsiaSekolah.setText("Skrining Merokok Usia Sekolah & Remaja");
-        btnSkriningMerokokUsiaSekolah.setIconTextGap(0);
         btnSkriningMerokokUsiaSekolah.setName("btnSkriningMerokokUsiaSekolah");
         btnSkriningMerokokUsiaSekolah.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningMerokokUsiaSekolah.addActionListener(this::btnSkriningMerokokUsiaSekolahActionPerformed);
@@ -50482,7 +49427,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKekerasanPadaPerempuan = new widget.ButtonBig();
         btnSkriningKekerasanPadaPerempuan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9191520_nonviolence_violence_hit_thrash_conflict_icon.png")));
         btnSkriningKekerasanPadaPerempuan.setText("Skrining Kekerasan Pada Perempuan");
-        btnSkriningKekerasanPadaPerempuan.setIconTextGap(0);
         btnSkriningKekerasanPadaPerempuan.setName("btnSkriningKekerasanPadaPerempuan");
         btnSkriningKekerasanPadaPerempuan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKekerasanPadaPerempuan.addActionListener(this::btnSkriningKekerasanPadaPerempuanActionPerformed);
@@ -50490,7 +49434,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningObesitas = new widget.ButtonBig();
         btnSkriningObesitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859965_body_fat_health_obesity_overweight_icon.png")));
         btnSkriningObesitas.setText("Skrining Obesitas");
-        btnSkriningObesitas.setIconTextGap(0);
         btnSkriningObesitas.setName("btnSkriningObesitas");
         btnSkriningObesitas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningObesitas.addActionListener(this::btnSkriningObesitasActionPerformed);
@@ -50498,7 +49441,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningDiabetesMelitus = new widget.ButtonBig();
         btnSkriningDiabetesMelitus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6954606_candy_candy shop_dessert_food and restaurant_sugar_icon.png")));
         btnSkriningDiabetesMelitus.setText("Skrining Diabetes Melitus");
-        btnSkriningDiabetesMelitus.setIconTextGap(0);
         btnSkriningDiabetesMelitus.setName("btnSkriningDiabetesMelitus");
         btnSkriningDiabetesMelitus.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningDiabetesMelitus.addActionListener(this::btnSkriningDiabetesMelitusActionPerformed);
@@ -50506,7 +49448,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningFrailtySyndrome = new widget.ButtonBig();
         btnSkriningFrailtySyndrome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217215_bacteria_people_virus_woman_icon.png")));
         btnSkriningFrailtySyndrome.setText("Skrining Frailty Syndrome");
-        btnSkriningFrailtySyndrome.setIconTextGap(0);
         btnSkriningFrailtySyndrome.setName("btnSkriningFrailtySyndrome");
         btnSkriningFrailtySyndrome.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningFrailtySyndrome.addActionListener(this::btnSkriningFrailtySyndromeActionPerformed);
@@ -50514,7 +49455,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaporanTindakan = new widget.ButtonBig();
         btnLaporanTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5929215_avatar_doctor_health_hospital_man_icon.png")));
         btnLaporanTindakan.setText("Laporan Tindakan Medis");
-        btnLaporanTindakan.setIconTextGap(0);
         btnLaporanTindakan.setName("btnLaporanTindakan");
         btnLaporanTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLaporanTindakan.addActionListener(this::btnLaporanTindakanActionPerformed);
@@ -50522,7 +49462,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPelaksanaanInformasiEdukasi = new widget.ButtonBig();
         btnPelaksanaanInformasiEdukasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/11211449_book_library_learning_knowledge_education_icon.png")));
         btnPelaksanaanInformasiEdukasi.setText("Pelaksanaan Informasi & Edukasi");
-        btnPelaksanaanInformasiEdukasi.setIconTextGap(0);
         btnPelaksanaanInformasiEdukasi.setName("btnPelaksanaanInformasiEdukasi");
         btnPelaksanaanInformasiEdukasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPelaksanaanInformasiEdukasi.addActionListener(this::btnPelaksanaanInformasiEdukasiActionPerformed);
@@ -50530,7 +49469,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningRisikoKankerPayudara = new widget.ButtonBig();
         btnSkriningRisikoKankerPayudara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6715353_breast_danger_emoji_freak_nipple_icon.png")));
         btnSkriningRisikoKankerPayudara.setText("Skrining Risiko Kanker Payudara");
-        btnSkriningRisikoKankerPayudara.setIconTextGap(0);
         btnSkriningRisikoKankerPayudara.setName("btnSkriningRisikoKankerPayudara");
         btnSkriningRisikoKankerPayudara.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRisikoKankerPayudara.addActionListener(this::btnSkriningRisikoKankerPayudaraActionPerformed);
@@ -50538,7 +49476,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningRisikoKankerParu = new widget.ButtonBig();
         btnSkriningRisikoKankerParu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5862576_covid-19_infection_inspect_lung_virus_icon.png")));
         btnSkriningRisikoKankerParu.setText("Skrining Risiko Kanker Paru");
-        btnSkriningRisikoKankerParu.setIconTextGap(0);
         btnSkriningRisikoKankerParu.setName("btnSkriningRisikoKankerParu");
         btnSkriningRisikoKankerParu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRisikoKankerParu.addActionListener(this::btnSkriningRisikoKankerParuActionPerformed);
@@ -50546,7 +49483,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningRisikoKankerServiks = new widget.ButtonBig();
         btnSkriningRisikoKankerServiks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/10716890_summer_swimsuit_beach_swimwear_bikini_icon.png")));
         btnSkriningRisikoKankerServiks.setText("Skrining Risiko Kanker Serviks");
-        btnSkriningRisikoKankerServiks.setIconTextGap(0);
         btnSkriningRisikoKankerServiks.setName("btnSkriningRisikoKankerServiks");
         btnSkriningRisikoKankerServiks.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRisikoKankerServiks.addActionListener(this::btnSkriningRisikoKankerServiksActionPerformed);
@@ -50554,7 +49490,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKesehatanGigiMulutRemaja = new widget.ButtonBig();
         btnSkriningKesehatanGigiMulutRemaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185081_dental_dentist_dentistry_loose tooth_medical_icon.png")));
         btnSkriningKesehatanGigiMulutRemaja.setText("Skrining Kesehatan Gigi Mulut Remaja");
-        btnSkriningKesehatanGigiMulutRemaja.setIconTextGap(0);
         btnSkriningKesehatanGigiMulutRemaja.setName("btnSkriningKesehatanGigiMulutRemaja");
         btnSkriningKesehatanGigiMulutRemaja.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKesehatanGigiMulutRemaja.addActionListener(this::btnSkriningKesehatanGigiMulutRemajaActionPerformed);
@@ -50562,7 +49497,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKesehatanGigiMulutBalita = new widget.ButtonBig();
         btnSkriningKesehatanGigiMulutBalita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185086_bright_clean_dental_dentist_tooth_icon.png")));
         btnSkriningKesehatanGigiMulutBalita.setText("Skrining Kesehatan Gigi Mulut Balita");
-        btnSkriningKesehatanGigiMulutBalita.setIconTextGap(0);
         btnSkriningKesehatanGigiMulutBalita.setName("btnSkriningKesehatanGigiMulutBalita");
         btnSkriningKesehatanGigiMulutBalita.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKesehatanGigiMulutBalita.addActionListener(this::btnSkriningKesehatanGigiMulutBalitaActionPerformed);
@@ -50570,7 +49504,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKesehatanGigiMulutLansia = new widget.ButtonBig();
         btnSkriningKesehatanGigiMulutLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185054_dental_dental veneers_dentist_dentistry_medical_icon.png")));
         btnSkriningKesehatanGigiMulutLansia.setText("Skrining Kesehatan Gigi Mulut Lansia");
-        btnSkriningKesehatanGigiMulutLansia.setIconTextGap(0);
         btnSkriningKesehatanGigiMulutLansia.setName("btnSkriningKesehatanGigiMulutLansia");
         btnSkriningKesehatanGigiMulutLansia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKesehatanGigiMulutLansia.addActionListener(this::btnSkriningKesehatanGigiMulutLansiaActionPerformed);
@@ -50578,7 +49511,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKesehatanGigiMulutDewasa = new widget.ButtonBig();
         btnSkriningKesehatanGigiMulutDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185055_dental_dental checking_dentist_dentistry_oral hygiene_icon.png")));
         btnSkriningKesehatanGigiMulutDewasa.setText("Skrining Kesehatan Gigi Mulut Dewasa");
-        btnSkriningKesehatanGigiMulutDewasa.setIconTextGap(0);
         btnSkriningKesehatanGigiMulutDewasa.setName("btnSkriningKesehatanGigiMulutDewasa");
         btnSkriningKesehatanGigiMulutDewasa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKesehatanGigiMulutDewasa.addActionListener(this::btnSkriningKesehatanGigiMulutDewasaActionPerformed);
@@ -50586,7 +49518,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningAnemia = new widget.ButtonBig();
         btnSkriningAnemia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960655_blood_negative blood_negative_medical_donation_icon.png")));
         btnSkriningAnemia.setText("Skrining Anemia");
-        btnSkriningAnemia.setIconTextGap(0);
         btnSkriningAnemia.setName("btnSkriningAnemia");
         btnSkriningAnemia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningAnemia.addActionListener(this::btnSkriningAnemiaActionPerformed);
@@ -50594,7 +49525,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningHipertensi = new widget.ButtonBig();
         btnSkriningHipertensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859959_blood_health_heart_hypertension_medical_icon.png")));
         btnSkriningHipertensi.setText("Skrining Hipertensi");
-        btnSkriningHipertensi.setIconTextGap(0);
         btnSkriningHipertensi.setName("btnSkriningHipertensi");
         btnSkriningHipertensi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningHipertensi.addActionListener(this::btnSkriningHipertensiActionPerformed);
@@ -50602,7 +49532,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKesehatanPenglihatan = new widget.ButtonBig();
         btnSkriningKesehatanPenglihatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5947108_avoid_do not_eye_hand_touch_icon.png")));
         btnSkriningKesehatanPenglihatan.setText("Skrining Kesehatan Penglihatan");
-        btnSkriningKesehatanPenglihatan.setIconTextGap(0);
         btnSkriningKesehatanPenglihatan.setName("btnSkriningKesehatanPenglihatan");
         btnSkriningKesehatanPenglihatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKesehatanPenglihatan.addActionListener(this::btnSkriningKesehatanPenglihatanActionPerformed);
@@ -50610,7 +49539,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningIndraPendengaran = new widget.ButtonBig();
         btnSkriningIndraPendengaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9534119_ear_plugs_beats_headphones_headphone_icon.png")));
         btnSkriningIndraPendengaran.setText("Skrining Indra Pendengaran");
-        btnSkriningIndraPendengaran.setIconTextGap(0);
         btnSkriningIndraPendengaran.setName("btnSkriningIndraPendengaran");
         btnSkriningIndraPendengaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningIndraPendengaran.addActionListener(this::btnSkriningIndraPendengaranActionPerformed);
@@ -50618,7 +49546,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningTBC = new widget.ButtonBig();
         btnSkriningTBC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/infected_lungs_virus transmission_virus_bacteria_icon.png")));
         btnSkriningTBC.setText("Skrining TBC");
-        btnSkriningTBC.setIconTextGap(0);
         btnSkriningTBC.setName("btnSkriningTBC");
         btnSkriningTBC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningTBC.addActionListener(this::btnSkriningTBCActionPerformed);
@@ -50626,7 +49553,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningPUMA = new widget.ButtonBig();
         btnSkriningPUMA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6067589_coronavirus_covid-19_lungs_pneumonia_icon.png")));
         btnSkriningPUMA.setText("Skrining PUMA");
-        btnSkriningPUMA.setIconTextGap(0);
         btnSkriningPUMA.setName("btnSkriningPUMA");
         btnSkriningPUMA.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningPUMA.addActionListener(this::btnSkriningPUMAActionPerformed);
@@ -50634,7 +49560,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningAdiksiNikotin = new widget.ButtonBig();
         btnSkriningAdiksiNikotin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6230216_cigar_cigaret_cigarette_tobacco_icon.png")));
         btnSkriningAdiksiNikotin.setText("Skrining Adiksi Nikotin");
-        btnSkriningAdiksiNikotin.setIconTextGap(0);
         btnSkriningAdiksiNikotin.setName("btnSkriningAdiksiNikotin");
         btnSkriningAdiksiNikotin.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningAdiksiNikotin.addActionListener(this::btnSkriningAdiksiNikotinActionPerformed);
@@ -50642,7 +49567,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningThalassemia = new widget.ButtonBig();
         btnSkriningThalassemia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088744_blood_lab_research_sample_test_icon.png")));
         btnSkriningThalassemia.setText("Skrining Thalassemia");
-        btnSkriningThalassemia.setIconTextGap(0);
         btnSkriningThalassemia.setName("btnSkriningThalassemia");
         btnSkriningThalassemia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningThalassemia.addActionListener(this::btnSkriningThalassemiaActionPerformed);
@@ -50650,7 +49574,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningInstrumenSDQ = new widget.ButtonBig();
         btnSkriningInstrumenSDQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8322715_smile_emoji_emoticon_feeling_face_icon.png")));
         btnSkriningInstrumenSDQ.setText("Skrining Instrumen SDQ");
-        btnSkriningInstrumenSDQ.setIconTextGap(0);
         btnSkriningInstrumenSDQ.setName("btnSkriningInstrumenSDQ");
         btnSkriningInstrumenSDQ.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenSDQ.addActionListener(this::btnSkriningInstrumenSDQActionPerformed);
@@ -50658,7 +49581,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningInstrumenSRQ = new widget.ButtonBig();
         btnSkriningInstrumenSRQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8322725_emoji_emoticon_heart_kiss_icon.png")));
         btnSkriningInstrumenSRQ.setText("Skrining Instrumen SRQ");
-        btnSkriningInstrumenSRQ.setIconTextGap(0);
         btnSkriningInstrumenSRQ.setName("btnSkriningInstrumenSRQ");
         btnSkriningInstrumenSRQ.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenSRQ.addActionListener(this::btnSkriningInstrumenSRQActionPerformed);
@@ -50666,7 +49588,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningKankerKolorektal = new widget.ButtonBig();
         btnSkriningKankerKolorektal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5728186_bowel_constipation_diarrhea_irritable_sick_icon.png")));
         btnSkriningKankerKolorektal.setText("Skrining Kanker Kolorektal");
-        btnSkriningKankerKolorektal.setIconTextGap(0);
         btnSkriningKankerKolorektal.setName("btnSkriningKankerKolorektal");
         btnSkriningKankerKolorektal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningKankerKolorektal.addActionListener(this::btnSkriningKankerKolorektalActionPerformed);
@@ -50674,7 +49595,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistPemberianFibrinolitik = new widget.ButtonBig();
         btnChecklistPemberianFibrinolitik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2620524_cv_employee_job_seeker_unemployee_icon.png")));
         btnChecklistPemberianFibrinolitik.setText("Check List Pemberian Fibrinolitik");
-        btnChecklistPemberianFibrinolitik.setIconTextGap(0);
         btnChecklistPemberianFibrinolitik.setName("btnChecklistPemberianFibrinolitik");
         btnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistPemberianFibrinolitik.addActionListener(this::btnChecklistPemberianFibrinolitikActionPerformed);
@@ -50682,7 +49602,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBookingMCUPerusahaan = new widget.ButtonBig();
         btnBookingMCUPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6002396_building_coronavirus_covid19_health_hospital_icon.png")));
         btnBookingMCUPerusahaan.setText("Booking MCU Perusahaan");
-        btnBookingMCUPerusahaan.setIconTextGap(0);
         btnBookingMCUPerusahaan.setName("btnBookingMCUPerusahaan");
         btnBookingMCUPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingMCUPerusahaan.addActionListener(this::btnBookingMCUPerusahaanActionPerformed);
@@ -50690,7 +49609,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimCarePlanSatuSehat = new widget.ButtonBig();
         btnKirimCarePlanSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimCarePlanSatuSehat.setText("Kirim Care Plan Satu Sehat");
-        btnKirimCarePlanSatuSehat.setIconTextGap(0);
         btnKirimCarePlanSatuSehat.setName("btnKirimCarePlanSatuSehat");
         btnKirimCarePlanSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimCarePlanSatuSehat.addActionListener(this::btnKirimCarePlanSatuSehatActionPerformed);
@@ -50698,7 +49616,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenerimaanBarangDapur = new widget.ButtonBig();
         btnPenerimaanBarangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3377055_bowl_food_noodle_ramen_icon.png")));
         btnPenerimaanBarangDapur.setText("Penerimaan Barang Dapur");
-        btnPenerimaanBarangDapur.setIconTextGap(0);
         btnPenerimaanBarangDapur.setName("btnPenerimaanBarangDapur");
         btnPenerimaanBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenerimaanBarangDapur.addActionListener(this::btnPenerimaanBarangDapurActionPerformed);
@@ -50706,7 +49623,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPesanDapur = new widget.ButtonBig();
         btnBayarPesanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2620509_employee_job_note_seeker_unemployee_icon.png")));
         btnBayarPesanDapur.setText("Bayar Pesan Dapur");
-        btnBayarPesanDapur.setIconTextGap(0);
         btnBayarPesanDapur.setName("btnBayarPesanDapur");
         btnBayarPesanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPesanDapur.addActionListener(this::btnBayarPesanDapurActionPerformed);
@@ -50714,7 +49630,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHutangDapur = new widget.ButtonBig();
         btnHutangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2620509_employee_job_note_seeker_unemployee_icon.png")));
         btnHutangDapur.setText("Hutang Barang Dapur");
-        btnHutangDapur.setIconTextGap(0);
         btnHutangDapur.setName("btnHutangDapur");
         btnHutangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHutangDapur.addActionListener(this::btnHutangDapurActionPerformed);
@@ -50722,7 +49637,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanHutangDapur = new widget.ButtonBig();
         btnTagihanHutangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png")));
         btnTagihanHutangDapur.setText("Titip Faktur/Tagihan Dapur");
-        btnTagihanHutangDapur.setIconTextGap(0);
         btnTagihanHutangDapur.setName("btnTagihanHutangDapur");
         btnTagihanHutangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnTagihanHutangDapur.addActionListener(this::btnTagihanHutangDapurActionPerformed);
@@ -50730,7 +49644,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnValidasiTagihanDapur = new widget.ButtonBig();
         btnValidasiTagihanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png")));
         btnValidasiTagihanDapur.setText("Validasi Titip Faktur/Tagihan Dapur");
-        btnValidasiTagihanDapur.setIconTextGap(0);
         btnValidasiTagihanDapur.setName("btnValidasiTagihanDapur");
         btnValidasiTagihanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnValidasiTagihanDapur.addActionListener(this::btnValidasiTagihanDapurActionPerformed);
@@ -50738,7 +49651,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPemesananDapur = new widget.ButtonBig();
         btnSuratPemesananDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2570304_business_company_economic_finance_interprise_icon.png")));
         btnSuratPemesananDapur.setText("Surat Pemesanan Barang Dapur");
-        btnSuratPemesananDapur.setIconTextGap(0);
         btnSuratPemesananDapur.setName("btnSuratPemesananDapur");
         btnSuratPemesananDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPemesananDapur.addActionListener(this::btnSuratPemesananDapurActionPerformed);
@@ -50746,7 +49658,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanBarangDapur = new widget.ButtonBig();
         btnPengajuanBarangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2570321_business_checklist_company_economic_finance_icon.png")));
         btnPengajuanBarangDapur.setText("Pengajuan Barang Dapur");
-        btnPengajuanBarangDapur.setIconTextGap(0);
         btnPengajuanBarangDapur.setName("btnPengajuanBarangDapur");
         btnPengajuanBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanBarangDapur.addActionListener(this::btnPengajuanBarangDapurActionPerformed);
@@ -50754,7 +49665,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturBarangDapur = new widget.ButtonBig();
         btnReturBarangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2570312_business_company_economic_finance_interprise_icon.png")));
         btnReturBarangDapur.setText("Retur Ke Suplier Dapur");
-        btnReturBarangDapur.setIconTextGap(0);
         btnReturBarangDapur.setName("btnReturBarangDapur");
         btnReturBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnReturBarangDapur.addActionListener(this::btnReturBarangDapurActionPerformed);
@@ -50762,7 +49672,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHibahDapur = new widget.ButtonBig();
         btnHibahDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3377054_chow_food_mein_noodle_icon.png")));
         btnHibahDapur.setText("Hibah Barang Dapur");
-        btnHibahDapur.setIconTextGap(0);
         btnHibahDapur.setName("btnHibahDapur");
         btnHibahDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHibahDapur.addActionListener(this::btnHibahDapurActionPerformed);
@@ -50770,7 +49679,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPenerimaanDapur = new widget.ButtonBig();
         btnRingkasanPenerimaanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPenerimaanDapur.setText("Ringkasan Penerimaan Dapur");
-        btnRingkasanPenerimaanDapur.setIconTextGap(0);
         btnRingkasanPenerimaanDapur.setName("btnRingkasanPenerimaanDapur");
         btnRingkasanPenerimaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPenerimaanDapur.addActionListener(this::btnRingkasanPenerimaanDapurActionPerformed);
@@ -50778,7 +49686,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPengajuanDapur = new widget.ButtonBig();
         btnRingkasanPengajuanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPengajuanDapur.setText("Ringkasan Pengajuan Dapur");
-        btnRingkasanPengajuanDapur.setIconTextGap(0);
         btnRingkasanPengajuanDapur.setName("btnRingkasanPengajuanDapur");
         btnRingkasanPengajuanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPengajuanDapur.addActionListener(this::btnRingkasanPengajuanDapurActionPerformed);
@@ -50786,7 +49693,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanPemesananDapur = new widget.ButtonBig();
         btnRingkasanPemesananDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanPemesananDapur.setText("Ringkasan Pemesanan Dapur");
-        btnRingkasanPemesananDapur.setIconTextGap(0);
         btnRingkasanPemesananDapur.setName("btnRingkasanPemesananDapur");
         btnRingkasanPemesananDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPemesananDapur.addActionListener(this::btnRingkasanPemesananDapurActionPerformed);
@@ -50794,7 +49700,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanReturBeliDapur = new widget.ButtonBig();
         btnRingkasanReturBeliDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanReturBeliDapur.setText("Ringkasan Retur Suplier Dapur");
-        btnRingkasanReturBeliDapur.setIconTextGap(0);
         btnRingkasanReturBeliDapur.setName("btnRingkasanReturBeliDapur");
         btnRingkasanReturBeliDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanReturBeliDapur.addActionListener(this::btnRingkasanReturBeliDapurActionPerformed);
@@ -50802,7 +49707,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanStokKeluarDapur = new widget.ButtonBig();
         btnRingkasanStokKeluarDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png")));
         btnRingkasanStokKeluarDapur.setText("Ringkasan Stok Keluar Dapur");
-        btnRingkasanStokKeluarDapur.setIconTextGap(0);
         btnRingkasanStokKeluarDapur.setName("btnRingkasanStokKeluarDapur");
         btnRingkasanStokKeluarDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanStokKeluarDapur.addActionListener(this::btnRingkasanStokKeluarDapurActionPerformed);
@@ -50810,7 +49714,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnStokKeluarDapurPerTanggal = new widget.ButtonBig();
         btnStokKeluarDapurPerTanggal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2151696_barbecue_cooking_food_garden_grill_icon.png")));
         btnStokKeluarDapurPerTanggal.setText("Stok Keluar Dapur Per Tanggal");
-        btnStokKeluarDapurPerTanggal.setIconTextGap(0);
         btnStokKeluarDapurPerTanggal.setName("btnStokKeluarDapurPerTanggal");
         btnStokKeluarDapurPerTanggal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnStokKeluarDapurPerTanggal.addActionListener(this::btnStokKeluarDapurPerTanggalActionPerformed);
@@ -50818,7 +49721,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiDapur = new widget.ButtonBig();
         btnSirkulasiDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiDapur.setText("Sirkulasi Barang Dapur");
-        btnSirkulasiDapur.setIconTextGap(0);
         btnSirkulasiDapur.setName("btnSirkulasiDapur");
         btnSirkulasiDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiDapur.addActionListener(this::btnSirkulasiDapurActionPerformed);
@@ -50826,7 +49728,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiDapur2 = new widget.ButtonBig();
         btnSirkulasiDapur2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiDapur2.setText("Sirkulasi Barang Dapur 2");
-        btnSirkulasiDapur2.setIconTextGap(0);
         btnSirkulasiDapur2.setName("btnSirkulasiDapur2");
         btnSirkulasiDapur2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiDapur2.addActionListener(this::btnSirkulasiDapur2ActionPerformed);
@@ -50834,7 +49735,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnVerifikasiPenerimaanDapur = new widget.ButtonBig();
         btnVerifikasiPenerimaanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2570299_business_company_economic_finance_interprise_icon.png")));
         btnVerifikasiPenerimaanDapur.setText("Verifikasi Penerimaan Dapur");
-        btnVerifikasiPenerimaanDapur.setIconTextGap(0);
         btnVerifikasiPenerimaanDapur.setName("btnVerifikasiPenerimaanDapur");
         btnVerifikasiPenerimaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnVerifikasiPenerimaanDapur.addActionListener(this::btnVerifikasiPenerimaanDapurActionPerformed);
@@ -50842,7 +49742,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnNilaiPenerimaanVendorDapurPerBulan = new widget.ButtonBig();
         btnNilaiPenerimaanVendorDapurPerBulan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_File_Files_Folder_Clipboard_Data_Confirm_3909329.png")));
         btnNilaiPenerimaanVendorDapurPerBulan.setText("Nilai Penerimaan Vendor Dapur Per Bulan");
-        btnNilaiPenerimaanVendorDapurPerBulan.setIconTextGap(0);
         btnNilaiPenerimaanVendorDapurPerBulan.setName("btnNilaiPenerimaanVendorDapurPerBulan");
         btnNilaiPenerimaanVendorDapurPerBulan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnNilaiPenerimaanVendorDapurPerBulan.addActionListener(this::btnNilaiPenerimaanVendorDapurPerBulanActionPerformed);
@@ -50850,7 +49749,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanHutangVendorBarangDapur = new widget.ButtonBig();
         btnRingkasanHutangVendorBarangDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2151697_bread_cutting_food_knife_rye_icon.png")));
         btnRingkasanHutangVendorBarangDapur.setText("Ringkasan Hutang Vendor Dapur");
-        btnRingkasanHutangVendorBarangDapur.setIconTextGap(0);
         btnRingkasanHutangVendorBarangDapur.setName("btnRingkasanHutangVendorBarangDapur");
         btnRingkasanHutangVendorBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHutangVendorBarangDapur.addActionListener(this::btnRingkasanHutangVendorBarangDapurActionPerformed);
@@ -50858,7 +49756,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPendapatanPerAkun = new widget.ButtonBig();
         btnPendapatanPerAkun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png")));
         btnPendapatanPerAkun.setText("Pendapatan Per Akun Rekening");
-        btnPendapatanPerAkun.setIconTextGap(0);
         btnPendapatanPerAkun.setName("btnPendapatanPerAkun");
         btnPendapatanPerAkun.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPendapatanPerAkun.addActionListener(this::btnPendapatanPerAkunActionPerformed);
@@ -50866,7 +49763,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPendapatanPerAkunClosing = new widget.ButtonBig();
         btnPendapatanPerAkunClosing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png")));
         btnPendapatanPerAkunClosing.setText("Pendapatan Per Akun Closing");
-        btnPendapatanPerAkunClosing.setIconTextGap(0);
         btnPendapatanPerAkunClosing.setName("btnPendapatanPerAkunClosing");
         btnPendapatanPerAkunClosing.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPendapatanPerAkunClosing.addActionListener(this::btnPendapatanPerAkunClosingActionPerformed);
@@ -50874,7 +49770,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl13KetersediaanKamar = new widget.ButtonBig();
         btnRl13KetersediaanKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Gnome-X-Office-Address-Book-48.png")));
         btnRl13KetersediaanKamar.setText("RL 1.3 Ketersediaan Tempat Tidur");
-        btnRl13KetersediaanKamar.setIconTextGap(0);
         btnRl13KetersediaanKamar.setName("btnRl13KetersediaanKamar");
         btnRl13KetersediaanKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl13KetersediaanKamar.addActionListener(this::btnRl13KetersediaanKamarActionPerformed);
@@ -50882,7 +49777,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengeluaranPengeluaran = new widget.ButtonBig();
         btnPengeluaranPengeluaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8822938_money_bag_gold_bars_icon.png")));
         btnPengeluaranPengeluaran.setText("Pengeluaran-pengeluaran/Kas Keluar");
-        btnPengeluaranPengeluaran.setIconTextGap(0);
         btnPengeluaranPengeluaran.setName("btnPengeluaranPengeluaran");
         btnPengeluaranPengeluaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengeluaranPengeluaran.addActionListener(this::btnPengeluaranPengeluaranActionPerformed);
@@ -50890,7 +49784,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLayananKedokteranFisikRehabilitasi = new widget.ButtonBig();
         btnLayananKedokteranFisikRehabilitasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4082071_healthcare_hospital_medical_icon.png")));
         btnLayananKedokteranFisikRehabilitasi.setText("Layanan Kedokteran Fisik & Rehabilitasi");
-        btnLayananKedokteranFisikRehabilitasi.setIconTextGap(0);
         btnLayananKedokteranFisikRehabilitasi.setName("btnLayananKedokteranFisikRehabilitasi");
         btnLayananKedokteranFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLayananKedokteranFisikRehabilitasi.addActionListener(this::btnLayananKedokteranFisikRehabilitasiActionPerformed);
@@ -50898,7 +49791,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLayananProgramKFR = new widget.ButtonBig();
         btnLayananProgramKFR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960631_crutches_crutch_orthopedic_physiotherapy_rehabilitation_icon.png")));
         btnLayananProgramKFR.setText("Layanan Program KFR");
-        btnLayananProgramKFR.setIconTextGap(0);
         btnLayananProgramKFR.setName("btnLayananProgramKFR");
         btnLayananProgramKFR.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLayananProgramKFR.addActionListener(this::btnLayananProgramKFRActionPerformed);
@@ -50906,7 +49798,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanLayananProgramKFR = new widget.ButtonBig();
         btnPermintaanLayananProgramKFR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/12178185_physiotherapy_physiotherapist_rehabilitation_patient_exercise_icon.png")));
         btnPermintaanLayananProgramKFR.setText("Permintaan Layanan Program KFR");
-        btnPermintaanLayananProgramKFR.setIconTextGap(0);
         btnPermintaanLayananProgramKFR.setName("btnPermintaanLayananProgramKFR");
         btnPermintaanLayananProgramKFR.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanLayananProgramKFR.addActionListener(this::btnPermintaanLayananProgramKFRActionPerformed);
@@ -50914,7 +49805,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanPengkajianPaskaOperasi = new widget.ButtonBig();
         btnCatatanPengkajianPaskaOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141455_covid19_doctor_hospital_medical_medicine_icon.png")));
         btnCatatanPengkajianPaskaOperasi.setText("Catatan Pengkajian Paska Operasi");
-        btnCatatanPengkajianPaskaOperasi.setIconTextGap(0);
         btnCatatanPengkajianPaskaOperasi.setName("btnCatatanPengkajianPaskaOperasi");
         btnCatatanPengkajianPaskaOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanPengkajianPaskaOperasi.addActionListener(this::btnCatatanPengkajianPaskaOperasiActionPerformed);
@@ -50922,7 +49812,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiInventarisCSSD = new widget.ButtonBig();
         btnSirkulasiInventarisCSSD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png")));
         btnSirkulasiInventarisCSSD.setText("Sirkulasi CSSD");
-        btnSirkulasiInventarisCSSD.setIconTextGap(0);
         btnSirkulasiInventarisCSSD.setName("btnSirkulasiInventarisCSSD");
         btnSirkulasiInventarisCSSD.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiInventarisCSSD.addActionListener(this::btnSirkulasiInventarisCSSDActionPerformed);
@@ -50930,7 +49819,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatSuratPeringatan = new widget.ButtonBig();
         btnRiwayatSuratPeringatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3069185_book_education_learn_school_icon.png")));
         btnRiwayatSuratPeringatan.setText("Riwayat Surat Peringatan");
-        btnRiwayatSuratPeringatan.setIconTextGap(0);
         btnRiwayatSuratPeringatan.setName("btnRiwayatSuratPeringatan");
         btnRiwayatSuratPeringatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatSuratPeringatan.addActionListener(this::btnRiwayatSuratPeringatanActionPerformed);
@@ -50938,7 +49826,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKategoriPiutangJasaPerusahaan = new widget.ButtonBig();
         btnKategoriPiutangJasaPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7013421_marketing_finance_business_money_payment_icon.png")));
         btnKategoriPiutangJasaPerusahaan.setText("Kategori Piutang Jasa Perusahaan");
-        btnKategoriPiutangJasaPerusahaan.setIconTextGap(0);
         btnKategoriPiutangJasaPerusahaan.setName("btnKategoriPiutangJasaPerusahaan");
         btnKategoriPiutangJasaPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKategoriPiutangJasaPerusahaan.addActionListener(this::btnKategoriPiutangJasaPerusahaanActionPerformed);
@@ -50946,7 +49833,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangJasaPerusahaan = new widget.ButtonBig();
         btnPiutangJasaPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5027880_bag_business_currency_dollar_finance_icon.png")));
         btnPiutangJasaPerusahaan.setText("Piutang Jasa Perusahaan");
-        btnPiutangJasaPerusahaan.setIconTextGap(0);
         btnPiutangJasaPerusahaan.setName("btnPiutangJasaPerusahaan");
         btnPiutangJasaPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangJasaPerusahaan.addActionListener(this::btnPiutangJasaPerusahaanActionPerformed);
@@ -50954,7 +49840,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPiutangJasaPerusahaan = new widget.ButtonBig();
         btnBayarPiutangJasaPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2570316_business_company_economic_finance_get_icon.png")));
         btnBayarPiutangJasaPerusahaan.setText("Bayar Piutang Jasa Perusahaan");
-        btnBayarPiutangJasaPerusahaan.setIconTextGap(0);
         btnBayarPiutangJasaPerusahaan.setName("btnBayarPiutangJasaPerusahaan");
         btnBayarPiutangJasaPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarPiutangJasaPerusahaan.addActionListener(this::btnBayarPiutangJasaPerusahaanActionPerformed);
@@ -50962,7 +49847,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangJasaPerusahaanBelumLunas = new widget.ButtonBig();
         btnPiutangJasaPerusahaanBelumLunas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9517544_cheque_banking_check_finance_payment_icon.png")));
         btnPiutangJasaPerusahaanBelumLunas.setText("Piutang Jasa Perusahaan Belum Lunas");
-        btnPiutangJasaPerusahaanBelumLunas.setIconTextGap(0);
         btnPiutangJasaPerusahaanBelumLunas.setName("btnPiutangJasaPerusahaanBelumLunas");
         btnPiutangJasaPerusahaanBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangJasaPerusahaanBelumLunas.addActionListener(this::btnPiutangJasaPerusahaanBelumLunasActionPerformed);
@@ -50970,7 +49854,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangPeminjamanUangBelumLunas = new widget.ButtonBig();
         btnPiutangPeminjamanUangBelumLunas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554856_money_finance_business_office_marketing_icon.png")));
         btnPiutangPeminjamanUangBelumLunas.setText("Piutang Peminjaman Uang Belum Lunas");
-        btnPiutangPeminjamanUangBelumLunas.setIconTextGap(0);
         btnPiutangPeminjamanUangBelumLunas.setName("btnPiutangPeminjamanUangBelumLunas");
         btnPiutangPeminjamanUangBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangPeminjamanUangBelumLunas.addActionListener(this::btnPiutangPeminjamanUangBelumLunasActionPerformed);
@@ -50978,7 +49861,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPoliAsalPasienRanap = new widget.ButtonBig();
         btnPoliAsalPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4698575_building_business_finance_office_icon.png")));
         btnPoliAsalPasienRanap.setText("Poli Asal Pasien Ranap");
-        btnPoliAsalPasienRanap.setIconTextGap(0);
         btnPoliAsalPasienRanap.setName("btnPoliAsalPasienRanap");
         btnPoliAsalPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPoliAsalPasienRanap.addActionListener(this::btnPoliAsalPasienRanapActionPerformed);
@@ -50986,7 +49868,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnDokterAsalPasienRanap = new widget.ButtonBig();
         btnDokterAsalPasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4698580_chat_conversation_laptop_message_text_icon.png")));
         btnDokterAsalPasienRanap.setText("Dokter Asal Pasien Ranap");
-        btnDokterAsalPasienRanap.setIconTextGap(0);
         btnDokterAsalPasienRanap.setName("btnDokterAsalPasienRanap");
         btnDokterAsalPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
         btnDokterAsalPasienRanap.addActionListener(this::btnDokterAsalPasienRanapActionPerformed);
@@ -50994,7 +49875,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemberiHutangLain = new widget.ButtonBig();
         btnPemberiHutangLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427817_building_business_corporate_office_icon.png")));
         btnPemberiHutangLain.setText("Pemberi Hutang Lain");
-        btnPemberiHutangLain.setIconTextGap(0);
         btnPemberiHutangLain.setName("btnPemberiHutangLain");
         btnPemberiHutangLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPemberiHutangLain.addActionListener(this::btnPemberiHutangLainActionPerformed);
@@ -51002,7 +49882,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBebanHutangLain = new widget.ButtonBig();
         btnBebanHutangLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554836_finance_business_marketing_chart_office_icon.png")));
         btnBebanHutangLain.setText("Beban Hutang Lain");
-        btnBebanHutangLain.setIconTextGap(0);
         btnBebanHutangLain.setName("btnBebanHutangLain");
         btnBebanHutangLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBebanHutangLain.addActionListener(this::btnBebanHutangLainActionPerformed);
@@ -51010,7 +49889,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarBebanHutangLain = new widget.ButtonBig();
         btnBayarBebanHutangLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554841_finance_business_office_marketing_chart_icon.png")));
         btnBayarBebanHutangLain.setText("Bayar Beban Hutang Lain");
-        btnBayarBebanHutangLain.setIconTextGap(0);
         btnBayarBebanHutangLain.setName("btnBayarBebanHutangLain");
         btnBayarBebanHutangLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBayarBebanHutangLain.addActionListener(this::btnBayarBebanHutangLainActionPerformed);
@@ -51018,7 +49896,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapKeluarDutaParking = new widget.ButtonBig();
         btnRekapKeluarDutaParking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/22989_cabriolet_car_mazda_red_transport_icon.png")));
         btnRekapKeluarDutaParking.setText("Rekap Keluar Duta Parking");
-        btnRekapKeluarDutaParking.setIconTextGap(0);
         btnRekapKeluarDutaParking.setName("btnRekapKeluarDutaParking");
         btnRekapKeluarDutaParking.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapKeluarDutaParking.addActionListener(this::btnRekapKeluarDutaParkingActionPerformed);
@@ -51026,7 +49903,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratKeteranganLayakTerbang = new widget.ButtonBig();
         btnSuratKeteranganLayakTerbang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088199_plane_prohibit_travel_warning_icon.png")));
         btnSuratKeteranganLayakTerbang.setText("Surat Keterangan Layak Terbang");
-        btnSuratKeteranganLayakTerbang.setIconTextGap(0);
         btnSuratKeteranganLayakTerbang.setName("btnSuratKeteranganLayakTerbang");
         btnSuratKeteranganLayakTerbang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganLayakTerbang.addActionListener(this::btnSuratKeteranganLayakTerbangActionPerformed);
@@ -51034,7 +49910,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningInstrumenACRS = new widget.ButtonBig();
         btnSkriningInstrumenACRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3231124_boy_brother_cartoon_child_family_icon.png")));
         btnSkriningInstrumenACRS.setText("Skrining Instrumen ACRS");
-        btnSkriningInstrumenACRS.setIconTextGap(0);
         btnSkriningInstrumenACRS.setName("btnSkriningInstrumenACRS");
         btnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenACRS.addActionListener(this::btnSkriningInstrumenACRSActionPerformed);
@@ -51042,7 +49917,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningInstrumenMentalEmosional = new widget.ButtonBig();
         btnSkriningInstrumenMentalEmosional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859961_depression_disorder_health_mental_psychology_icon.png")));
         btnSkriningInstrumenMentalEmosional.setText("Skrining Instrumen Mental Emosional Anak");
-        btnSkriningInstrumenMentalEmosional.setIconTextGap(0);
         btnSkriningInstrumenMentalEmosional.setName("btnSkriningInstrumenMentalEmosional");
         btnSkriningInstrumenMentalEmosional.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenMentalEmosional.addActionListener(this::btnSkriningInstrumenMentalEmosionalActionPerformed);
@@ -51050,7 +49924,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningInstrumenAMT = new widget.ButtonBig();
         btnSkriningInstrumenAMT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7717225_woman_mothers_day_avatar_mom_icon.png")));
         btnSkriningInstrumenAMT.setText("Skrining Instrumen AMT");
-        btnSkriningInstrumenAMT.setIconTextGap(0);
         btnSkriningInstrumenAMT.setName("btnSkriningInstrumenAMT");
         btnSkriningInstrumenAMT.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenAMT.addActionListener(this::btnSkriningInstrumenAMTActionPerformed);
@@ -51058,7 +49931,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningPneumoniaSeverityIndex = new widget.ButtonBig();
         btnSkriningPneumoniaSeverityIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5986203_coronavirus_covid_infection_lung_pneumonia_icon.png")));
         btnSkriningPneumoniaSeverityIndex.setText("Skrining Pneumonia Severity Index");
-        btnSkriningPneumoniaSeverityIndex.setIconTextGap(0);
         btnSkriningPneumoniaSeverityIndex.setName("btnSkriningPneumoniaSeverityIndex");
         btnSkriningPneumoniaSeverityIndex.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningPneumoniaSeverityIndex.addActionListener(this::btnSkriningPneumoniaSeverityIndexActionPerformed);
@@ -51066,7 +49938,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPelanggan = new widget.ButtonBig();
         btnLabKeslingPelanggan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554587_school_education_learning_book_science_icon.png")));
         btnLabKeslingPelanggan.setText("Pelanggan Lab Kesling");
-        btnLabKeslingPelanggan.setIconTextGap(0);
         btnLabKeslingPelanggan.setName("btnLabKeslingPelanggan");
         btnLabKeslingPelanggan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPelanggan.addActionListener(this::btnLabKeslingPelangganActionPerformed);
@@ -51074,7 +49945,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingSampelBakuMutu = new widget.ButtonBig();
         btnLabKeslingSampelBakuMutu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856695_laboratory_medical_research_science_test_icon.png")));
         btnLabKeslingSampelBakuMutu.setText("Master Sampel Lab Kesling");
-        btnLabKeslingSampelBakuMutu.setIconTextGap(0);
         btnLabKeslingSampelBakuMutu.setName("btnLabKeslingSampelBakuMutu");
         btnLabKeslingSampelBakuMutu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingSampelBakuMutu.addActionListener(this::btnLabKeslingSampelBakuMutuActionPerformed);
@@ -51082,7 +49952,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingParameterPengujian = new widget.ButtonBig();
         btnLabKeslingParameterPengujian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856688_laboratory_medical_mixer_roll_rotating_icon.png")));
         btnLabKeslingParameterPengujian.setText("Parameter Pengujian Lab Kesling");
-        btnLabKeslingParameterPengujian.setIconTextGap(0);
         btnLabKeslingParameterPengujian.setName("btnLabKeslingParameterPengujian");
         btnLabKeslingParameterPengujian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingParameterPengujian.addActionListener(this::btnLabKeslingParameterPengujianActionPerformed);
@@ -51090,7 +49959,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingNilaiNormalBakuMutu = new widget.ButtonBig();
         btnLabKeslingNilaiNormalBakuMutu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960644_test_test tube_blood_laboratory_lab_icon.png")));
         btnLabKeslingNilaiNormalBakuMutu.setText("Nilai Normal Baku Mutu Lab Kesling");
-        btnLabKeslingNilaiNormalBakuMutu.setIconTextGap(0);
         btnLabKeslingNilaiNormalBakuMutu.setName("btnLabKeslingNilaiNormalBakuMutu");
         btnLabKeslingNilaiNormalBakuMutu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingNilaiNormalBakuMutu.addActionListener(this::btnLabKeslingNilaiNormalBakuMutuActionPerformed);
@@ -51098,7 +49966,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanJantung = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanJantung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217204_anatomy_heart_human_medical_organ_icon.png")));
         btnPenilaianAwalMedisRalanJantung.setText("Awal Medis Ralan Jantung");
-        btnPenilaianAwalMedisRalanJantung.setIconTextGap(0);
         btnPenilaianAwalMedisRalanJantung.setName("btnPenilaianAwalMedisRalanJantung");
         btnPenilaianAwalMedisRalanJantung.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanJantung.addActionListener(this::btnPenilaianAwalMedisRalanJantungActionPerformed);
@@ -51106,7 +49973,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRalanUrologi = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanUrologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/12321086_kidney_medical_health_organ_care_icon.png")));
         btnPenilaianAwalMedisRalanUrologi.setText("Awal Medis Ralan Urologi");
-        btnPenilaianAwalMedisRalanUrologi.setIconTextGap(0);
         btnPenilaianAwalMedisRalanUrologi.setName("btnPenilaianAwalMedisRalanUrologi");
         btnPenilaianAwalMedisRalanUrologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRalanUrologi.addActionListener(this::btnPenilaianAwalMedisRalanUrologiActionPerformed);
@@ -51116,7 +49982,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilPemeriksaanECHOPediatrik = new widget.ButtonBig();
         btnHasilPemeriksaanECHOPediatrik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2104702_beat_health_healthcare_heart_heartbeat_icon.png")));
         btnHasilPemeriksaanECHOPediatrik.setText("Hasil Pemeriksaan ECHO Pediatrik");
-        btnHasilPemeriksaanECHOPediatrik.setIconTextGap(0);
         btnHasilPemeriksaanECHOPediatrik.setName("btnHasilPemeriksaanECHOPediatrik");
         btnHasilPemeriksaanECHOPediatrik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanECHOPediatrik.addActionListener(this::btnHasilPemeriksaanECHOPediatrikActionPerformed);
@@ -51124,7 +49989,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMasterTemplateInformasiEdukasi = new widget.ButtonBig();
         btnMasterTemplateInformasiEdukasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/11211459_whiteboard_canvas_education_school_classroom_icon.png")));
         btnMasterTemplateInformasiEdukasi.setText("Master Template Informasi & Edukasi");
-        btnMasterTemplateInformasiEdukasi.setIconTextGap(0);
         btnMasterTemplateInformasiEdukasi.setName("btnMasterTemplateInformasiEdukasi");
         btnMasterTemplateInformasiEdukasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMasterTemplateInformasiEdukasi.addActionListener(this::btnMasterTemplateInformasiEdukasiActionPerformed);
@@ -51132,7 +49996,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningInstrumenESAT = new widget.ButtonBig();
         btnSkriningInstrumenESAT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6771568_book_education_learning_puzzle_school_icon.png")));
         btnSkriningInstrumenESAT.setText("Skrining Instrumen ESAT");
-        btnSkriningInstrumenESAT.setIconTextGap(0);
         btnSkriningInstrumenESAT.setName("btnSkriningInstrumenESAT");
         btnSkriningInstrumenESAT.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenESAT.addActionListener(this::btnSkriningInstrumenESATActionPerformed);
@@ -51140,7 +50003,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPermintaanPengujianSampel = new widget.ButtonBig();
         btnLabKeslingPermintaanPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5269078_book_calendar_education_library_loan_icon.png")));
         btnLabKeslingPermintaanPengujianSampel.setText("Permintaan Pengujian Sampel Lab Kesling");
-        btnLabKeslingPermintaanPengujianSampel.setIconTextGap(0);
         btnLabKeslingPermintaanPengujianSampel.setName("btnLabKeslingPermintaanPengujianSampel");
         btnLabKeslingPermintaanPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPermintaanPengujianSampel.addActionListener(this::btnLabKeslingPermintaanPengujianSampelActionPerformed);
@@ -51148,7 +50010,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPengujianSampelTidakDapatDilayani = new widget.ButtonBig();
         btnLabKeslingPengujianSampelTidakDapatDilayani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088713_banned_closed_shop_sign_icon.png")));
         btnLabKeslingPengujianSampelTidakDapatDilayani.setText("Sampel Pengujian Lab Kesling Tidak Dapat Dilayani");
-        btnLabKeslingPengujianSampelTidakDapatDilayani.setIconTextGap(0);
         btnLabKeslingPengujianSampelTidakDapatDilayani.setName("btnLabKeslingPengujianSampelTidakDapatDilayani");
         btnLabKeslingPengujianSampelTidakDapatDilayani.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPengujianSampelTidakDapatDilayani.addActionListener(this::btnLabKeslingPengujianSampelTidakDapatDilayaniActionPerformed);
@@ -51156,7 +50017,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPengujianSampelDapatDilayani = new widget.ButtonBig();
         btnLabKeslingPengujianSampelDapatDilayani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4059950_and_architecture_book_buildings_business_icon.png")));
         btnLabKeslingPengujianSampelDapatDilayani.setText("Sampel Pengujian Lab Kesling Dapat Dilayani");
-        btnLabKeslingPengujianSampelDapatDilayani.setIconTextGap(0);
         btnLabKeslingPengujianSampelDapatDilayani.setName("btnLabKeslingPengujianSampelDapatDilayani");
         btnLabKeslingPengujianSampelDapatDilayani.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPengujianSampelDapatDilayani.addActionListener(this::btnLabKeslingPengujianSampelDapatDilayaniActionPerformed);
@@ -51164,7 +50024,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPenugasanPengujianSampel = new widget.ButtonBig();
         btnLabKeslingPenugasanPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7038097_marketing_file_business_clipboard_data_icon.png")));
         btnLabKeslingPenugasanPengujianSampel.setText("Data Penugasan Pengujian Sampel Lab Kesling");
-        btnLabKeslingPenugasanPengujianSampel.setIconTextGap(0);
         btnLabKeslingPenugasanPengujianSampel.setName("btnLabKeslingPenugasanPengujianSampel");
         btnLabKeslingPenugasanPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPenugasanPengujianSampel.addActionListener(this::btnLabKeslingPenugasanPengujianSampelActionPerformed);
@@ -51172,7 +50031,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingHasilPengujianSampel = new widget.ButtonBig();
         btnLabKeslingHasilPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6725462_archive_data_document_file_page_icon.png")));
         btnLabKeslingHasilPengujianSampel.setText("Data Hasil Pengujian Sampel Lab Kesling");
-        btnLabKeslingHasilPengujianSampel.setIconTextGap(0);
         btnLabKeslingHasilPengujianSampel.setName("btnLabKeslingHasilPengujianSampel");
         btnLabKeslingHasilPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingHasilPengujianSampel.addActionListener(this::btnLabKeslingHasilPengujianSampelActionPerformed);
@@ -51180,7 +50038,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingVerifikasiPengujianSampel = new widget.ButtonBig();
         btnLabKeslingVerifikasiPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4698583_document_file_paper_pen_text_icon.png")));
         btnLabKeslingVerifikasiPengujianSampel.setText("Data Verifikasi Pengujian Sampel Lab Kesling");
-        btnLabKeslingVerifikasiPengujianSampel.setIconTextGap(0);
         btnLabKeslingVerifikasiPengujianSampel.setName("btnLabKeslingVerifikasiPengujianSampel");
         btnLabKeslingVerifikasiPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingVerifikasiPengujianSampel.addActionListener(this::btnLabKeslingVerifikasiPengujianSampelActionPerformed);
@@ -51188,7 +50045,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingValidasiPengujianSampel = new widget.ButtonBig();
         btnLabKeslingValidasiPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/paper_9683410.png")));
         btnLabKeslingValidasiPengujianSampel.setText("Data Validasi Pengujian Sampel Lab Kesling");
-        btnLabKeslingValidasiPengujianSampel.setIconTextGap(0);
         btnLabKeslingValidasiPengujianSampel.setName("btnLabKeslingValidasiPengujianSampel");
         btnLabKeslingValidasiPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingValidasiPengujianSampel.addActionListener(this::btnLabKeslingValidasiPengujianSampelActionPerformed);
@@ -51196,7 +50052,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingRekapPelayanan = new widget.ButtonBig();
         btnLabKeslingRekapPelayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/85334_file_open_icon.png")));
         btnLabKeslingRekapPelayanan.setText("Rekap Pelayanan Lab Kesling");
-        btnLabKeslingRekapPelayanan.setIconTextGap(0);
         btnLabKeslingRekapPelayanan.setName("btnLabKeslingRekapPelayanan");
         btnLabKeslingRekapPelayanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingRekapPelayanan.addActionListener(this::btnLabKeslingRekapPelayananActionPerformed);
@@ -51204,7 +50059,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPembyaranPengujianSampel = new widget.ButtonBig();
         btnLabKeslingPembyaranPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money-bag_2953536-2.png")));
         btnLabKeslingPembyaranPengujianSampel.setText("Pembayaran Pengujian Sampel Lab Kesling");
-        btnLabKeslingPembyaranPengujianSampel.setIconTextGap(0);
         btnLabKeslingPembyaranPengujianSampel.setName("btnLabKeslingPembyaranPengujianSampel");
         btnLabKeslingPembyaranPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPembyaranPengujianSampel.addActionListener(this::btnLabKeslingPembyaranPengujianSampelActionPerformed);
@@ -51212,7 +50066,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingRekapPembayaran = new widget.ButtonBig();
         btnLabKeslingRekapPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money_536054-2.png")));
         btnLabKeslingRekapPembayaran.setText("Rekap Pembayaran Lab Kesling");
-        btnLabKeslingRekapPembayaran.setIconTextGap(0);
         btnLabKeslingRekapPembayaran.setName("btnLabKeslingRekapPembayaran");
         btnLabKeslingRekapPembayaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingRekapPembayaran.addActionListener(this::btnLabKeslingRekapPembayaranActionPerformed);
@@ -51220,7 +50073,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanapJantung = new widget.ButtonBig();
         btnPenilaianAwalMedisRanapJantung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217204_anatomy_heart_human_medical_organ_icon.png")));
         btnPenilaianAwalMedisRanapJantung.setText("Awal Medis Ranap Jantung");
-        btnPenilaianAwalMedisRanapJantung.setIconTextGap(0);
         btnPenilaianAwalMedisRanapJantung.setName("btnPenilaianAwalMedisRanapJantung");
         btnPenilaianAwalMedisRanapJantung.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanapJantung.addActionListener(this::btnPenilaianAwalMedisRanapJantungActionPerformed);
@@ -51228,7 +50080,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningCURB65 = new widget.ButtonBig();
         btnSkriningCURB65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/lungs_2811493.png")));
         btnSkriningCURB65.setText("Skrining CURB-65");
-        btnSkriningCURB65.setIconTextGap(0);
         btnSkriningCURB65.setName("btnSkriningCURB65");
         btnSkriningCURB65.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningCURB65.addActionListener(this::btnSkriningCURB65ActionPerformed);
@@ -51236,7 +50087,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnEEksekutif = new widget.ButtonBig();
         btnEEksekutif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2169607_bar_chart_financial_graph_graphic_icon.png")));
         btnEEksekutif.setText("Set E-Eksekutif");
-        btnEEksekutif.setIconTextGap(0);
         btnEEksekutif.setName("btnEEksekutif");
         btnEEksekutif.setPreferredSize(new java.awt.Dimension(200, 90));
         btnEEksekutif.addActionListener(this::btnEEksekutifActionPerformed);
@@ -51244,7 +50094,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSPotensiPRB = new widget.ButtonBig();
         btnBPJSPotensiPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSPotensiPRB.setText("Potensi PRB di VClaim");
-        btnBPJSPotensiPRB.setIconTextGap(0);
         btnBPJSPotensiPRB.setName("btnBPJSPotensiPRB");
         btnBPJSPotensiPRB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSPotensiPRB.addActionListener(this::btnBPJSPotensiPRBActionPerformed);
@@ -51252,7 +50101,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatPelayananObatApotek = new widget.ButtonBig();
         btnBPJSRiwayatPelayananObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSRiwayatPelayananObatApotek.setText("Riwayat Pelayanan Obat Apotek BPJS");
-        btnBPJSRiwayatPelayananObatApotek.setIconTextGap(0);
         btnBPJSRiwayatPelayananObatApotek.setName("btnBPJSRiwayatPelayananObatApotek");
         btnBPJSRiwayatPelayananObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatPelayananObatApotek.addActionListener(this::btnBPJSRiwayatPelayananObatApotekActionPerformed);
@@ -51260,7 +50108,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRekapPesertaPRBObatApotek = new widget.ButtonBig();
         btnBPJSRekapPesertaPRBObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSRekapPesertaPRBObatApotek.setText("Rekap Peserta PRB Apotek BPJS");
-        btnBPJSRekapPesertaPRBObatApotek.setIconTextGap(0);
         btnBPJSRekapPesertaPRBObatApotek.setName("btnBPJSRekapPesertaPRBObatApotek");
         btnBPJSRekapPesertaPRBObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRekapPesertaPRBObatApotek.addActionListener(this::btnBPJSRekapPesertaPRBObatApotekActionPerformed);
@@ -51268,7 +50115,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningGiziKehamilan = new widget.ButtonBig();
         btnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/meal_4814223.png")));
         btnSkriningGiziKehamilan.setText("Skrining Gizi Kehamilan");
-        btnSkriningGiziKehamilan.setIconTextGap(0);
         btnSkriningGiziKehamilan.setName("btnSkriningGiziKehamilan");
         btnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningGiziKehamilan.addActionListener(this::btnSkriningGiziKehamilanActionPerformed);
@@ -51276,7 +50122,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratSerahTerimaBarangAnggotaTubuh = new widget.ButtonBig();
         btnSuratSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/file-manager.png")));
         btnSuratSerahTerimaBarangAnggotaTubuh.setText("Serah Terima Anggota Tubuh/Barang");
-        btnSuratSerahTerimaBarangAnggotaTubuh.setIconTextGap(0);
         btnSuratSerahTerimaBarangAnggotaTubuh.setName("btnSuratSerahTerimaBarangAnggotaTubuh");
         btnSuratSerahTerimaBarangAnggotaTubuh.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratSerahTerimaBarangAnggotaTubuh.addActionListener(this::btnSuratSerahTerimaBarangAnggotaTubuhActionPerformed);
@@ -51284,7 +50129,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPermintaanBinrohtal = new widget.ButtonBig();
         btnSuratPermintaanBinrohtal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mental-health_18376031-2.png")));
         btnSuratPermintaanBinrohtal.setText("Persetujuan Bimbingan Rohani & Mental");
-        btnSuratPermintaanBinrohtal.setIconTextGap(0);
         btnSuratPermintaanBinrohtal.setName("btnSuratPermintaanBinrohtal");
         btnSuratPermintaanBinrohtal.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPermintaanBinrohtal.addActionListener(this::btnSuratPermintaanBinrohtalActionPerformed);
@@ -51292,7 +50136,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPermintaanPerlindunganDariKekerasan = new widget.ButtonBig();
         btnSuratPermintaanPerlindunganDariKekerasan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/boxing_2043124.png")));
         btnSuratPermintaanPerlindunganDariKekerasan.setText("Permintaan Perlindungan Diri Dari Kekerasan");
-        btnSuratPermintaanPerlindunganDariKekerasan.setIconTextGap(0);
         btnSuratPermintaanPerlindunganDariKekerasan.setName("btnSuratPermintaanPerlindunganDariKekerasan");
         btnSuratPermintaanPerlindunganDariKekerasan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPermintaanPerlindunganDariKekerasan.addActionListener(this::btnSuratPermintaanPerlindunganDariKekerasanActionPerformed);
@@ -51300,7 +50143,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPermohonanPrivasi = new widget.ButtonBig();
         btnSuratPermohonanPrivasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/compliant_4252354.png")));
         btnSuratPermohonanPrivasi.setText("Surat Permohonan Privasi");
-        btnSuratPermohonanPrivasi.setIconTextGap(0);
         btnSuratPermohonanPrivasi.setName("btnSuratPermohonanPrivasi");
         btnSuratPermohonanPrivasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPermohonanPrivasi.addActionListener(this::btnSuratPermohonanPrivasiActionPerformed);
@@ -51308,7 +50150,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPermintaanSecondOpinion = new widget.ButtonBig();
         btnSuratPermintaanSecondOpinion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/conversation_3601377.png")));
         btnSuratPermintaanSecondOpinion.setText("Surat Permintaan Second Opinion");
-        btnSuratPermintaanSecondOpinion.setIconTextGap(0);
         btnSuratPermintaanSecondOpinion.setName("btnSuratPermintaanSecondOpinion");
         btnSuratPermintaanSecondOpinion.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPermintaanSecondOpinion.addActionListener(this::btnSuratPermintaanSecondOpinionActionPerformed);
@@ -51316,7 +50157,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPenolakanResusitasi = new widget.ButtonBig();
         btnSuratPenolakanResusitasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/services_6007742.png")));
         btnSuratPenolakanResusitasi.setText("Surat Penolakan Resusitasi");
-        btnSuratPenolakanResusitasi.setIconTextGap(0);
         btnSuratPenolakanResusitasi.setName("btnSuratPenolakanResusitasi");
         btnSuratPenolakanResusitasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPenolakanResusitasi.addActionListener(this::btnSuratPenolakanResusitasiActionPerformed);
@@ -51324,7 +50164,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratPengajuanCutiPerawatan = new widget.ButtonBig();
         btnSuratPengajuanCutiPerawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/writing_2593639.png")));
         btnSuratPengajuanCutiPerawatan.setText("Surat Pegajuan Cuti Perawatan");
-        btnSuratPengajuanCutiPerawatan.setIconTextGap(0);
         btnSuratPengajuanCutiPerawatan.setName("btnSuratPengajuanCutiPerawatan");
         btnSuratPengajuanCutiPerawatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratPengajuanCutiPerawatan.addActionListener(this::btnSuratPengajuanCutiPerawatanActionPerformed);
@@ -51332,7 +50171,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAJenisAktivitasProyek = new widget.ButtonBig();
         btnPCRAICRAJenisAktivitasProyek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/construction_12539761.png")));
         btnPCRAICRAJenisAktivitasProyek.setText("Jenis Aktivitas Proyek PCRA");
-        btnPCRAICRAJenisAktivitasProyek.setIconTextGap(0);
         btnPCRAICRAJenisAktivitasProyek.setName("btnPCRAICRAJenisAktivitasProyek");
         btnPCRAICRAJenisAktivitasProyek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAJenisAktivitasProyek.addActionListener(this::btnPCRAICRAJenisAktivitasProyekActionPerformed);
@@ -51340,7 +50178,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRALokasiKelompokRisiko = new widget.ButtonBig();
         btnPCRAICRALokasiKelompokRisiko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/construction_16675584.png")));
         btnPCRAICRALokasiKelompokRisiko.setText("Lokasi & Kelompok Risiko Area PCRA");
-        btnPCRAICRALokasiKelompokRisiko.setIconTextGap(0);
         btnPCRAICRALokasiKelompokRisiko.setName("btnPCRAICRALokasiKelompokRisiko");
         btnPCRAICRALokasiKelompokRisiko.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRALokasiKelompokRisiko.addActionListener(this::btnPCRAICRALokasiKelompokRisikoActionPerformed);
@@ -51348,7 +50185,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAKelasRisikoPencegahan = new widget.ButtonBig();
         btnPCRAICRAKelasRisikoPencegahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/construction_13585266.png")));
         btnPCRAICRAKelasRisikoPencegahan.setText("Kelas Risiko/Kelas Pencegahan PCRA");
-        btnPCRAICRAKelasRisikoPencegahan.setIconTextGap(0);
         btnPCRAICRAKelasRisikoPencegahan.setName("btnPCRAICRAKelasRisikoPencegahan");
         btnPCRAICRAKelasRisikoPencegahan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAKelasRisikoPencegahan.addActionListener(this::btnPCRAICRAKelasRisikoPencegahanActionPerformed);
@@ -51356,7 +50192,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRATindakanPengendalian = new widget.ButtonBig();
         btnPCRAICRATindakanPengendalian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/real-estate_3309891.png")));
         btnPCRAICRATindakanPengendalian.setText("Tindakan Pengendalian PCRA");
-        btnPCRAICRATindakanPengendalian.setIconTextGap(0);
         btnPCRAICRATindakanPengendalian.setName("btnPCRAICRATindakanPengendalian");
         btnPCRAICRATindakanPengendalian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRATindakanPengendalian.addActionListener(this::btnPCRAICRATindakanPengendalianActionPerformed);
@@ -51364,7 +50199,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAIdentifikasiRisikoInfeksi = new widget.ButtonBig();
         btnPCRAICRAIdentifikasiRisikoInfeksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/virus_3182541.png")));
         btnPCRAICRAIdentifikasiRisikoInfeksi.setText("Identifikasi Risiko Infeksi PCRA");
-        btnPCRAICRAIdentifikasiRisikoInfeksi.setIconTextGap(0);
         btnPCRAICRAIdentifikasiRisikoInfeksi.setName("btnPCRAICRAIdentifikasiRisikoInfeksi");
         btnPCRAICRAIdentifikasiRisikoInfeksi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAIdentifikasiRisikoInfeksi.addActionListener(this::btnPCRAICRAIdentifikasiRisikoInfeksiActionPerformed);
@@ -51372,7 +50206,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAIdentifikasiRisikoKeselamatan = new widget.ButtonBig();
         btnPCRAICRAIdentifikasiRisikoKeselamatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/project-management_2422121.png")));
         btnPCRAICRAIdentifikasiRisikoKeselamatan.setText("Identifikasi Risiko Keselamatan PCRA");
-        btnPCRAICRAIdentifikasiRisikoKeselamatan.setIconTextGap(0);
         btnPCRAICRAIdentifikasiRisikoKeselamatan.setName("btnPCRAICRAIdentifikasiRisikoKeselamatan");
         btnPCRAICRAIdentifikasiRisikoKeselamatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAIdentifikasiRisikoKeselamatan.addActionListener(this::btnPCRAICRAIdentifikasiRisikoKeselamatanActionPerformed);
@@ -51380,7 +50213,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAIdentifikasiRisikoKebakaran = new widget.ButtonBig();
         btnPCRAICRAIdentifikasiRisikoKebakaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fire_2278480.png")));
         btnPCRAICRAIdentifikasiRisikoKebakaran.setText("Identifikasi Risiko Kebakaran PCRA");
-        btnPCRAICRAIdentifikasiRisikoKebakaran.setIconTextGap(0);
         btnPCRAICRAIdentifikasiRisikoKebakaran.setName("btnPCRAICRAIdentifikasiRisikoKebakaran");
         btnPCRAICRAIdentifikasiRisikoKebakaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAIdentifikasiRisikoKebakaran.addActionListener(this::btnPCRAICRAIdentifikasiRisikoKebakaranActionPerformed);
@@ -51388,7 +50220,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAIdentifikasiRisikoUtilitas = new widget.ButtonBig();
         btnPCRAICRAIdentifikasiRisikoUtilitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/repair_3899458.png")));
         btnPCRAICRAIdentifikasiRisikoUtilitas.setText("Identifikasi Risiko Utilitas PCRA");
-        btnPCRAICRAIdentifikasiRisikoUtilitas.setIconTextGap(0);
         btnPCRAICRAIdentifikasiRisikoUtilitas.setName("btnPCRAICRAIdentifikasiRisikoUtilitas");
         btnPCRAICRAIdentifikasiRisikoUtilitas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAIdentifikasiRisikoUtilitas.addActionListener(this::btnPCRAICRAIdentifikasiRisikoUtilitasActionPerformed);
@@ -51396,7 +50227,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSResepObatApotek = new widget.ButtonBig();
         btnBPJSResepObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSResepObatApotek.setText("Resep Obat Apotek BPJS");
-        btnBPJSResepObatApotek.setIconTextGap(0);
         btnBPJSResepObatApotek.setName("btnBPJSResepObatApotek");
         btnBPJSResepObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSResepObatApotek.addActionListener(this::btnBPJSResepObatApotekActionPerformed);
@@ -51404,7 +50234,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatApolApotekBPJS = new widget.ButtonBig();
         btnObatApolApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnObatApolApotekBPJS.setText("Obat ApOL Apotek BPJS");
-        btnObatApolApotekBPJS.setIconTextGap(0);
         btnObatApolApotekBPJS.setName("btnObatApolApotekBPJS");
         btnObatApolApotekBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnObatApolApotekBPJS.addActionListener(this::btnObatApolApotekBPJSActionPerformed);
@@ -51412,7 +50241,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanResepIterasiApotekBPJS = new widget.ButtonBig();
         btnPermintaanResepIterasiApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnPermintaanResepIterasiApotekBPJS.setText("Permintaan Resep Iterasi Apotek BPJS");
-        btnPermintaanResepIterasiApotekBPJS.setIconTextGap(0);
         btnPermintaanResepIterasiApotekBPJS.setName("btnPermintaanResepIterasiApotekBPJS");
         btnPermintaanResepIterasiApotekBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanResepIterasiApotekBPJS.addActionListener(this::btnPermintaanResepIterasiApotekBPJSActionPerformed);
@@ -51420,7 +50248,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingProsedurSmartKlaimBPJS = new widget.ButtonBig();
         btnMappingProsedurSmartKlaimBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
         btnMappingProsedurSmartKlaimBPJS.setText("Mapping Prosedur Smart Klaim BPJS");
-        btnMappingProsedurSmartKlaimBPJS.setIconTextGap(0);
         btnMappingProsedurSmartKlaimBPJS.setName("btnMappingProsedurSmartKlaimBPJS");
         btnMappingProsedurSmartKlaimBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingProsedurSmartKlaimBPJS.addActionListener(this::btnMappingProsedurSmartKlaimBPJSActionPerformed);
@@ -51428,7 +50255,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMappingPenyakitSmartKlaimBPJS = new widget.ButtonBig();
         btnMappingPenyakitSmartKlaimBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
         btnMappingPenyakitSmartKlaimBPJS.setText("Mapping Penyakit Smart Klaim BPJS");
-        btnMappingPenyakitSmartKlaimBPJS.setIconTextGap(0);
         btnMappingPenyakitSmartKlaimBPJS.setName("btnMappingPenyakitSmartKlaimBPJS");
         btnMappingPenyakitSmartKlaimBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingPenyakitSmartKlaimBPJS.addActionListener(this::btnMappingPenyakitSmartKlaimBPJSActionPerformed);
@@ -51436,7 +50262,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimFHIRSmartKlaimBPJS = new widget.ButtonBig();
         btnKirimFHIRSmartKlaimBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
         btnKirimFHIRSmartKlaimBPJS.setText("Kirim FHIR Smart Klaim BPJS");
-        btnKirimFHIRSmartKlaimBPJS.setIconTextGap(0);
         btnKirimFHIRSmartKlaimBPJS.setName("btnKirimFHIRSmartKlaimBPJS");
         btnKirimFHIRSmartKlaimBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimFHIRSmartKlaimBPJS.addActionListener(this::btnKirimFHIRSmartKlaimBPJSActionPerformed);
@@ -51444,7 +50269,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAPengkajianRisikoPraKonstruksi = new widget.ButtonBig();
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/crane_2515356.png")));
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setText("Pengkajian Risiko Pra Konstruksi/PCRA");
-        btnPCRAICRAPengkajianRisikoPraKonstruksi.setIconTextGap(0);
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setName("btnPCRAICRAPengkajianRisikoPraKonstruksi");
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAPengkajianRisikoPraKonstruksi.addActionListener(this::btnPCRAICRAPengkajianRisikoPraKonstruksiActionPerformed);
@@ -51452,7 +50276,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAPersyaratanHarusDipenuhi = new widget.ButtonBig();
         btnPCRAICRAPersyaratanHarusDipenuhi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/hammer_10279817.png")));
         btnPCRAICRAPersyaratanHarusDipenuhi.setText("Persyaratan Harus Dipenuhi PCRA");
-        btnPCRAICRAPersyaratanHarusDipenuhi.setIconTextGap(0);
         btnPCRAICRAPersyaratanHarusDipenuhi.setName("btnPCRAICRAPersyaratanHarusDipenuhi");
         btnPCRAICRAPersyaratanHarusDipenuhi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAPersyaratanHarusDipenuhi.addActionListener(this::btnPCRAICRAPersyaratanHarusDipenuhiActionPerformed);
@@ -51460,7 +50283,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimQRTelaahFarmasiSatuSehat = new widget.ButtonBig();
         btnKirimQRTelaahFarmasiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimQRTelaahFarmasiSatuSehat.setText("Kirim Q.R. Telaah Farmasi Satu Sehat");
-        btnKirimQRTelaahFarmasiSatuSehat.setIconTextGap(0);
         btnKirimQRTelaahFarmasiSatuSehat.setName("btnKirimQRTelaahFarmasiSatuSehat");
         btnKirimQRTelaahFarmasiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimQRTelaahFarmasiSatuSehat.addActionListener(this::btnKirimQRTelaahFarmasiSatuSehatActionPerformed);
@@ -51468,7 +50290,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimAllergiSatuSehat = new widget.ButtonBig();
         btnKirimAllergiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnKirimAllergiSatuSehat.setText("Kirim Allergy Intolerance Satu Sehat");
-        btnKirimAllergiSatuSehat.setIconTextGap(0);
         btnKirimAllergiSatuSehat.setName("btnKirimAllergiSatuSehat");
         btnKirimAllergiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimAllergiSatuSehat.addActionListener(this::btnKirimAllergiSatuSehatActionPerformed);
@@ -51476,7 +50297,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnKonsultasiPerawat = new widget.ButtonBig();
         btnKonsultasiPerawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/discuss_12922995.png")));
         btnKonsultasiPerawat.setText("Konsultasi Perawat");
-        btnKonsultasiPerawat.setIconTextGap(0);
         btnKonsultasiPerawat.setName("btnKonsultasiPerawat");
         btnKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonsultasiPerawat.addActionListener(this::btnKonsultasiPerawatActionPerformed);
@@ -51484,7 +50304,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratKeteranganBerobat = new widget.ButtonBig();
         btnSuratKeteranganBerobat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/register_11421976.png")));
         btnSuratKeteranganBerobat.setText("Surat Keterangan Berobat");
-        btnSuratKeteranganBerobat.setIconTextGap(0);
         btnSuratKeteranganBerobat.setName("btnSuratKeteranganBerobat");
         btnSuratKeteranganBerobat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganBerobat.addActionListener(this::btnSuratKeteranganBerobatActionPerformed);
@@ -51492,7 +50311,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanObservasiRuangOperasi = new widget.ButtonBig();
         btnCatatanObservasiRuangOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/surgery-room_17774320.png")));
         btnCatatanObservasiRuangOperasi.setText("Catatan Observasi Ruang Operasi");
-        btnCatatanObservasiRuangOperasi.setIconTextGap(0);
         btnCatatanObservasiRuangOperasi.setName("btnCatatanObservasiRuangOperasi");
         btnCatatanObservasiRuangOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiRuangOperasi.addActionListener(this::btnCatatanObservasiRuangOperasiActionPerformed);
@@ -51500,7 +50318,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHasilUSGAbdomen = new widget.ButtonBig();
         btnHasilUSGAbdomen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/abs_3500353.png")));
         btnHasilUSGAbdomen.setText("Hasil USG Abdomen");
-        btnHasilUSGAbdomen.setIconTextGap(0);
         btnHasilUSGAbdomen.setName("btnHasilUSGAbdomen");
         btnHasilUSGAbdomen.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilUSGAbdomen.addActionListener(this::btnHasilUSGAbdomenActionPerformed);
@@ -51508,7 +50325,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnIntervensiNyeriFarmakologi = new widget.ButtonBig();
         btnIntervensiNyeriFarmakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vitamin_17348719.png")));
         btnIntervensiNyeriFarmakologi.setText("Intervensi Nyeri Farmakologi");
-        btnIntervensiNyeriFarmakologi.setIconTextGap(0);
         btnIntervensiNyeriFarmakologi.setName("btnIntervensiNyeriFarmakologi");
         btnIntervensiNyeriFarmakologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIntervensiNyeriFarmakologi.addActionListener(this::btnIntervensiNyeriFarmakologiActionPerformed);
@@ -51516,7 +50332,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnIntervensiNyeriNonFarmakologi = new widget.ButtonBig();
         btnIntervensiNyeriNonFarmakologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/music_9881578.png")));
         btnIntervensiNyeriNonFarmakologi.setText("Intervensi Nyeri Non Farmakologi");
-        btnIntervensiNyeriNonFarmakologi.setIconTextGap(0);
         btnIntervensiNyeriNonFarmakologi.setName("btnIntervensiNyeriNonFarmakologi");
         btnIntervensiNyeriNonFarmakologi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIntervensiNyeriNonFarmakologi.addActionListener(this::btnIntervensiNyeriNonFarmakologiActionPerformed);
@@ -51524,7 +50339,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaMasukIsolasi = new widget.ButtonBig();
         btnChecklistKriteriaMasukIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/isolation-2.png")));
         btnChecklistKriteriaMasukIsolasi.setText("Check List Kriteria Masuk Isolasi");
-        btnChecklistKriteriaMasukIsolasi.setIconTextGap(0);
         btnChecklistKriteriaMasukIsolasi.setName("btnChecklistKriteriaMasukIsolasi");
         btnChecklistKriteriaMasukIsolasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukIsolasi.addActionListener(this::btnChecklistKriteriaMasukIsolasiActionPerformed);
@@ -51532,7 +50346,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnChecklistKriteriaKeluarIsolasi = new widget.ButtonBig();
         btnChecklistKriteriaKeluarIsolasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/isolation.png")));
         btnChecklistKriteriaKeluarIsolasi.setText("Check List Kriteria Keluar Isolasi");
-        btnChecklistKriteriaKeluarIsolasi.setIconTextGap(0);
         btnChecklistKriteriaKeluarIsolasi.setName("btnChecklistKriteriaKeluarIsolasi");
         btnChecklistKriteriaKeluarIsolasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaKeluarIsolasi.addActionListener(this::btnChecklistKriteriaKeluarIsolasiActionPerformed);
@@ -51540,7 +50353,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMapingTarifTindakanRalanKPTLSatuSehat = new widget.ButtonBig();
         btnMapingTarifTindakanRalanKPTLSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMapingTarifTindakanRalanKPTLSatuSehat.setText("Mapping Tindakan Ralan KPTL Satu Sehat");
-        btnMapingTarifTindakanRalanKPTLSatuSehat.setIconTextGap(0);
         btnMapingTarifTindakanRalanKPTLSatuSehat.setName("btnMapingTarifTindakanRalanKPTLSatuSehat");
         btnMapingTarifTindakanRalanKPTLSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingTarifTindakanRalanKPTLSatuSehat.addActionListener(this::btnMapingTarifTindakanRalanKPTLSatuSehatActionPerformed);
@@ -51548,7 +50360,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMapingTarifTindakanRanapKPTLSatuSehat = new widget.ButtonBig();
         btnMapingTarifTindakanRanapKPTLSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMapingTarifTindakanRanapKPTLSatuSehat.setText("Mapping Tindakan Ranap KPTL Satu Sehat");
-        btnMapingTarifTindakanRanapKPTLSatuSehat.setIconTextGap(0);
         btnMapingTarifTindakanRanapKPTLSatuSehat.setName("btnMapingTarifTindakanRanapKPTLSatuSehat");
         btnMapingTarifTindakanRanapKPTLSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingTarifTindakanRanapKPTLSatuSehat.addActionListener(this::btnMapingTarifTindakanRanapKPTLSatuSehatActionPerformed);
@@ -51556,7 +50367,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMapingTarifTindakanRadiologiKPTLSatuSehat = new widget.ButtonBig();
         btnMapingTarifTindakanRadiologiKPTLSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMapingTarifTindakanRadiologiKPTLSatuSehat.setText("Mapping Tindakan Radiologi KPTL Satu Sehat");
-        btnMapingTarifTindakanRadiologiKPTLSatuSehat.setIconTextGap(0);
         btnMapingTarifTindakanRadiologiKPTLSatuSehat.setName("btnMapingTarifTindakanRadiologiKPTLSatuSehat");
         btnMapingTarifTindakanRadiologiKPTLSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingTarifTindakanRadiologiKPTLSatuSehat.addActionListener(this::btnMapingTarifTindakanRadiologiKPTLSatuSehatActionPerformed);
@@ -51564,7 +50374,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMapingTarifTindakanLabKPTLSatuSehat = new widget.ButtonBig();
         btnMapingTarifTindakanLabKPTLSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMapingTarifTindakanLabKPTLSatuSehat.setText("Mapping Tindakan Lab KPTL Satu Sehat");
-        btnMapingTarifTindakanLabKPTLSatuSehat.setIconTextGap(0);
         btnMapingTarifTindakanLabKPTLSatuSehat.setName("btnMapingTarifTindakanLabKPTLSatuSehat");
         btnMapingTarifTindakanLabKPTLSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingTarifTindakanLabKPTLSatuSehat.addActionListener(this::btnMapingTarifTindakanLabKPTLSatuSehatActionPerformed);
@@ -51572,7 +50381,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMapingTarifTindakanOperasiKPTLSatuSehat = new widget.ButtonBig();
         btnMapingTarifTindakanOperasiKPTLSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMapingTarifTindakanOperasiKPTLSatuSehat.setText("Mapping Tindakan Operasi KPTL Satu Sehat");
-        btnMapingTarifTindakanOperasiKPTLSatuSehat.setIconTextGap(0);
         btnMapingTarifTindakanOperasiKPTLSatuSehat.setName("btnMapingTarifTindakanOperasiKPTLSatuSehat");
         btnMapingTarifTindakanOperasiKPTLSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingTarifTindakanOperasiKPTLSatuSehat.addActionListener(this::btnMapingTarifTindakanOperasiKPTLSatuSehatActionPerformed);
@@ -51580,7 +50388,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnMapingTarifKamarKPTLSatuSehat = new widget.ButtonBig();
         btnMapingTarifKamarKPTLSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnMapingTarifKamarKPTLSatuSehat.setText("Mapping Tarif Kamar KPTL Satu Sehat");
-        btnMapingTarifKamarKPTLSatuSehat.setIconTextGap(0);
         btnMapingTarifKamarKPTLSatuSehat.setName("btnMapingTarifKamarKPTLSatuSehat");
         btnMapingTarifKamarKPTLSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMapingTarifKamarKPTLSatuSehat.addActionListener(this::btnMapingTarifKamarKPTLSatuSehatActionPerformed);
@@ -51588,7 +50395,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBridgingTTESatuSehat = new widget.ButtonBig();
         btnBridgingTTESatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnBridgingTTESatuSehat.setText("Bridging TTE Satu Sehat");
-        btnBridgingTTESatuSehat.setIconTextGap(0);
         btnBridgingTTESatuSehat.setName("btnBridgingTTESatuSehat");
         btnBridgingTTESatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBridgingTTESatuSehat.addActionListener(this::btnBridgingTTESatuSehatActionPerformed);
@@ -51596,7 +50402,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBridgingCompositionRMESatuSehat = new widget.ButtonBig();
         btnBridgingCompositionRMESatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
         btnBridgingCompositionRMESatuSehat.setText("Kirim Composition Satu Sehat");
-        btnBridgingCompositionRMESatuSehat.setIconTextGap(0);
         btnBridgingCompositionRMESatuSehat.setName("btnBridgingCompositionRMESatuSehat");
         btnBridgingCompositionRMESatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBridgingCompositionRMESatuSehat.addActionListener(this::btnBridgingCompositionRMESatuSehatActionPerformed);
@@ -51604,7 +50409,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanHutangVendorAsetInventaris = new widget.ButtonBig();
         btnRingkasanHutangVendorAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9016847_cleaning_kitchen_covid-19_virus_pandemic_icon.png")));
         btnRingkasanHutangVendorAsetInventaris.setText("Ringkasan Hutang Vendor Aset/Inventaris");
-        btnRingkasanHutangVendorAsetInventaris.setIconTextGap(0);
         btnRingkasanHutangVendorAsetInventaris.setName("btnRingkasanHutangVendorAsetInventaris");
         btnRingkasanHutangVendorAsetInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHutangVendorAsetInventaris.addActionListener(this::btnRingkasanHutangVendorAsetInventarisActionPerformed);
@@ -51612,7 +50416,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanBebanHutangLain = new widget.ButtonBig();
         btnRingkasanBebanHutangLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/debt_2780190.png")));
         btnRingkasanBebanHutangLain.setText("Ringkasan Beban Hutang Lain");
-        btnRingkasanBebanHutangLain.setIconTextGap(0);
         btnRingkasanBebanHutangLain.setName("btnRingkasanBebanHutangLain");
         btnRingkasanBebanHutangLain.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanBebanHutangLain.addActionListener(this::btnRingkasanBebanHutangLainActionPerformed);
@@ -51620,7 +50423,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetResepPerCaraBayar = new widget.ButtonBig();
         btnSetResepPerCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/medicament_18179836.png")));
         btnSetResepPerCaraBayar.setText("Set Resep Per Cara Bayar");
-        btnSetResepPerCaraBayar.setIconTextGap(0);
         btnSetResepPerCaraBayar.setName("btnSetResepPerCaraBayar");
         btnSetResepPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetResepPerCaraBayar.addActionListener(this::btnSetResepPerCaraBayarActionPerformed);
@@ -51628,7 +50430,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSkriningTOLAC = new widget.ButtonBig();
         btnSkriningTOLAC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pregnant-woman_14373989.png")));
         btnSkriningTOLAC.setText("Skrining TOLAC");
-        btnSkriningTOLAC.setIconTextGap(0);
         btnSkriningTOLAC.setName("btnSkriningTOLAC");
         btnSkriningTOLAC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningTOLAC.addActionListener(this::btnSkriningTOLACActionPerformed);
@@ -51666,7 +50467,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
         btnBPJSKompilasiBerkasKlaimSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_x-office-document-template_25011.png")));
         btnBPJSKompilasiBerkasKlaimSmc.setText("Kompilasi Berkas Klaim BPJS");
-        btnBPJSKompilasiBerkasKlaimSmc.setIconTextGap(0);
         btnBPJSKompilasiBerkasKlaimSmc.setName("btnBPJSKompilasiBerkasKlaimSmc");
         btnBPJSKompilasiBerkasKlaimSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSKompilasiBerkasKlaimSmc.addActionListener(this::btnBPJSKompilasiBerkasKlaimSmcActionPerformed);
@@ -51674,7 +50474,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnUserSmc = new widget.ButtonBig();
         btnUserSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
         btnUserSmc.setText("Set User 2");
-        btnUserSmc.setIconTextGap(0);
         btnUserSmc.setName("btnUserSmc");
         btnUserSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUserSmc.addActionListener(this::btnUserSmcActionPerformed);
@@ -51682,7 +50481,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetAksesEditSementaraSmc = new widget.ButtonBig();
         btnSetAksesEditSementaraSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
         btnSetAksesEditSementaraSmc.setText("Set Akses Edit Sementara");
-        btnSetAksesEditSementaraSmc.setIconTextGap(0);
         btnSetAksesEditSementaraSmc.setName("btnSetAksesEditSementaraSmc");
         btnSetAksesEditSementaraSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetAksesEditSementaraSmc.addActionListener(this::btnSetAksesEditSementaraSmcActionPerformed);
@@ -51690,7 +50488,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSAntreanPerKodebookingMobileJKNSmc = new widget.ButtonBig();
         btnBPJSAntreanPerKodebookingMobileJKNSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSAntreanPerKodebookingMobileJKNSmc.setText("Antrean Per Kode Booking Mobile JKN");
-        btnBPJSAntreanPerKodebookingMobileJKNSmc.setIconTextGap(0);
         btnBPJSAntreanPerKodebookingMobileJKNSmc.setName("btnBPJSAntreanPerKodebookingMobileJKNSmc");
         btnBPJSAntreanPerKodebookingMobileJKNSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSAntreanPerKodebookingMobileJKNSmc.addActionListener(this::btnBPJSAntreanPerKodebookingMobileJKNSmcActionPerformed);
@@ -51698,7 +50495,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetTampilJenisObatResepSmc = new widget.ButtonBig();
         btnSetTampilJenisObatResepSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png")));
         btnSetTampilJenisObatResepSmc.setText("Set Tampil Jenis Obat Resep Rawat Jalan");
-        btnSetTampilJenisObatResepSmc.setIconTextGap(0);
         btnSetTampilJenisObatResepSmc.setName("btnSetTampilJenisObatResepSmc");
         btnSetTampilJenisObatResepSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetTampilJenisObatResepSmc.addActionListener(this::btnSetTampilJenisObatResepSmcActionPerformed);
@@ -51706,7 +50502,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetPintuPoliSmc = new widget.ButtonBig();
         btnSetPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
         btnSetPintuPoliSmc.setText("Set Pintu Poli");
-        btnSetPintuPoliSmc.setIconTextGap(0);
         btnSetPintuPoliSmc.setName("btnSetPintuPoliSmc");
         btnSetPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetPintuPoliSmc.addActionListener(this::btnSetPintuPoliSmcActionPerformed);
@@ -51714,7 +50509,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSDaftarPelayananObat2ApotekSmc = new widget.ButtonBig();
         btnBPJSDaftarPelayananObat2ApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSDaftarPelayananObat2ApotekSmc.setText("Daftar Pelayanan Obat 2 Apotek BPJS");
-        btnBPJSDaftarPelayananObat2ApotekSmc.setIconTextGap(0);
         btnBPJSDaftarPelayananObat2ApotekSmc.setName("btnBPJSDaftarPelayananObat2ApotekSmc");
         btnBPJSDaftarPelayananObat2ApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSDaftarPelayananObat2ApotekSmc.addActionListener(this::btnBPJSDaftarPelayananObat2ApotekSmcActionPerformed);
@@ -51722,7 +50516,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSKirimObatApotekSmc = new widget.ButtonBig();
         btnBPJSKirimObatApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSKirimObatApotekSmc.setText("Kirim Obat Apotek BPJS");
-        btnBPJSKirimObatApotekSmc.setIconTextGap(0);
         btnBPJSKirimObatApotekSmc.setName("btnBPJSKirimObatApotekSmc");
         btnBPJSKirimObatApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSKirimObatApotekSmc.addActionListener(this::btnBPJSKirimObatApotekSmcActionPerformed);
@@ -51730,7 +50523,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSKirimEditObatApotekSmc = new widget.ButtonBig();
         btnBPJSKirimEditObatApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSKirimEditObatApotekSmc.setText("Edit Kirim Obat Apotek BPJS");
-        btnBPJSKirimEditObatApotekSmc.setIconTextGap(0);
         btnBPJSKirimEditObatApotekSmc.setName("btnBPJSKirimEditObatApotekSmc");
         btnBPJSKirimEditObatApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSKirimEditObatApotekSmc.addActionListener(this::btnBPJSKirimEditObatApotekSmcActionPerformed);
@@ -51738,7 +50530,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatPelayananResepApotekSmc = new widget.ButtonBig();
         btnBPJSRiwayatPelayananResepApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSRiwayatPelayananResepApotekSmc.setText("Riwayat Pelayanan Resep Apotek BPJS");
-        btnBPJSRiwayatPelayananResepApotekSmc.setIconTextGap(0);
         btnBPJSRiwayatPelayananResepApotekSmc.setName("btnBPJSRiwayatPelayananResepApotekSmc");
         btnBPJSRiwayatPelayananResepApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatPelayananResepApotekSmc.addActionListener(this::btnBPJSRiwayatPelayananResepApotekSmcActionPerformed);
@@ -51746,7 +50537,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPintuPoliSmc = new widget.ButtonBig();
         btnPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
         btnPintuPoliSmc.setText("Pintu Ruangan Poli");
-        btnPintuPoliSmc.setIconTextGap(0);
         btnPintuPoliSmc.setName("btnPintuPoliSmc");
         btnPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPintuPoliSmc.addActionListener(this::btnPintuPoliSmcActionPerformed);
@@ -51754,7 +50544,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatSuratKontrolSmc = new widget.ButtonBig();
         btnBPJSRiwayatSuratKontrolSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSRiwayatSuratKontrolSmc.setText("Riwayat Surat Kontrol VClaim");
-        btnBPJSRiwayatSuratKontrolSmc.setIconTextGap(0);
         btnBPJSRiwayatSuratKontrolSmc.setName("btnBPJSRiwayatSuratKontrolSmc");
         btnBPJSRiwayatSuratKontrolSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmcActionPerformed);
@@ -51762,7 +50551,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengkajianInvasifNonBedahSmc = new widget.ButtonBig();
         btnPengkajianInvasifNonBedahSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088726_bed_hospital_icu_medical_treatment_icon.png")));
         btnPengkajianInvasifNonBedahSmc.setText("Pengkajian Tindakan Invasif Non Bedah");
-        btnPengkajianInvasifNonBedahSmc.setIconTextGap(0);
         btnPengkajianInvasifNonBedahSmc.setName("btnPengkajianInvasifNonBedahSmc");
         btnPengkajianInvasifNonBedahSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengkajianInvasifNonBedahSmc.addActionListener(this::btnPengkajianInvasifNonBedahSmcActionPerformed);
@@ -51770,7 +50558,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengajuanIzinAdminSmc = new widget.ButtonBig();
         btnPengajuanIzinAdminSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
         btnPengajuanIzinAdminSmc.setText("Pengajuan Izin Kerja");
-        btnPengajuanIzinAdminSmc.setIconTextGap(0);
         btnPengajuanIzinAdminSmc.setName("btnPengajuanIzinAdminSmc");
         btnPengajuanIzinAdminSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengajuanIzinAdminSmc.addActionListener(this::btnPengajuanIzinAdminSmcActionPerformed);
@@ -51778,7 +50565,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJadwalDinasSmc = new widget.ButtonBig();
         btnJadwalDinasSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427999_alarm_clock_hour_time_icon.png")));
         btnJadwalDinasSmc.setText("Jadwal Dinas");
-        btnJadwalDinasSmc.setIconTextGap(0);
         btnJadwalDinasSmc.setName("btnJadwalDinasSmc");
         btnJadwalDinasSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalDinasSmc.addActionListener(this::btnJadwalDinasSmcActionPerformed);
@@ -51786,7 +50572,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnJadwalDinasPegawaiSmc = new widget.ButtonBig();
         btnJadwalDinasPegawaiSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
         btnJadwalDinasPegawaiSmc.setText("Jadwal Dinas Pegawai");
-        btnJadwalDinasPegawaiSmc.setIconTextGap(0);
         btnJadwalDinasPegawaiSmc.setName("btnJadwalDinasPegawaiSmc");
         btnJadwalDinasPegawaiSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnJadwalDinasPegawaiSmc.addActionListener(this::btnJadwalDinasPegawaiSmcActionPerformed);
@@ -51794,7 +50579,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapKehadiranSmc = new widget.ButtonBig();
         btnRekapKehadiranSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
         btnRekapKehadiranSmc.setText("Rekap Kehadiran Pegawai");
-        btnRekapKehadiranSmc.setIconTextGap(0);
         btnRekapKehadiranSmc.setName("btnRekapKehadiranSmc");
         btnRekapKehadiranSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapKehadiranSmc.addActionListener(this::btnRekapKehadiranSmcActionPerformed);
@@ -51802,7 +50586,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnIPSRSStokAkhirPerTanggalSmc = new widget.ButtonBig();
         btnIPSRSStokAkhirPerTanggalSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_bag_icons-15_1075431.png")));
         btnIPSRSStokAkhirPerTanggalSmc.setText("Stok Akhir Non Medis per Tanggal");
-        btnIPSRSStokAkhirPerTanggalSmc.setIconTextGap(0);
         btnIPSRSStokAkhirPerTanggalSmc.setName("btnIPSRSStokAkhirPerTanggalSmc");
         btnIPSRSStokAkhirPerTanggalSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnIPSRSStokAkhirPerTanggalSmc.addActionListener(this::btnIPSRSStokAkhirPerTanggalSmcActionPerformed);
