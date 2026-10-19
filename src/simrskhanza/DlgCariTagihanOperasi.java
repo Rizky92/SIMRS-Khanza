@@ -3562,9 +3562,8 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                     if(rs2!=null){
                         rs2.close();
                     }
-                    Kategori.setSelectedIndex(-1);
-                    Kategori.setSelectedItem(Sequel.cariIsiSmc("select if(count(distinct operasi.kategori) = 1, min(operasi.kategori), null) from operasi where operasi.no_rawat = ? and operasi.tgl_operasi = ?",
-                        tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()));
+                    Kategori.setSelectedIndex(0);
+                    Kategori.setSelectedItem(Sequel.cariIsiSmc("select operasi.kategori from operasi where operasi.no_rawat = ? and operasi.tgl_operasi = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()));
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 }
