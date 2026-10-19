@@ -1537,6 +1537,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         ));
         tbDokter.setComponentPopupMenu(jPopupMenu1);
         tbDokter.setName("tbDokter"); // NOI18N
+        tbDokter.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbDokterMouseClicked(evt);
@@ -3628,6 +3629,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 }
 
                 if (sukses) {
+                    tbDokter.setValueAt(Valid.getTglJamSmc(TglMulai, Jam3, Menit3, Detik3), tbDokter.getSelectedRow(), 0);
                     JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Gagal mengupdate laporan operasi..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
