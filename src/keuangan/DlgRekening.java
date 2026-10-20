@@ -121,7 +121,7 @@ public final class DlgRekening extends javax.swing.JDialog {
         Tipe1 = new widget.ComboBox();
         Balan1 = new widget.ComboBox();
         label39 = new widget.Label();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         MnSubAkun = new widget.MenuItem();
         MnJadikanSub = new widget.MenuItem();
         MnJadikanUtama = new widget.MenuItem();
@@ -1132,7 +1132,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame7;
     private widget.InternalFrame internalFrame8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.Label label10;
     private widget.Label label32;
     private widget.Label label33;

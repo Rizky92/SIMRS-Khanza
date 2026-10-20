@@ -151,7 +151,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         ppStok = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -1104,7 +1104,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
     private widget.Button BtnSimpan;
     private widget.TextBox Kd2;
     private widget.TextBox Keterangan;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.Tanggal Tanggal;
     private widget.Button btnDari;

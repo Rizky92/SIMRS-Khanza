@@ -11124,7 +11124,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                           BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnSkriningCURB65,BtnSkriningGiziKehamilan,BtnResepIterasiBPJS,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,
                           BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnSkriningTOLAC,BtnAdmisiSkoringTOLAC,BtnMonitoringTolac,
                           BtnHasilPersalinanTOLAC;
-    private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
+    private widget.PopupMenu PopupSOAP,PopupPemeriksaan;
     private widget.MenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
     private widget.Button BtnPengkajianInvasifNonBedahSmc, BtnCariTemplatePaketMCUSmc;
@@ -14410,11 +14410,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnMonitoringTolac.setRoundRect(false);
         BtnMonitoringTolac.addActionListener(this::BtnMonitoringTolacActionPerformed);
 
-        PopupSOAP = new javax.swing.JPopupMenu();
+        PopupSOAP = new widget.PopupMenu();
         PopupSOAP.setName("PopupSOAP");
         tbPemeriksaan.setComponentPopupMenu(PopupSOAP);
 
-        PopupPemeriksaan = new javax.swing.JPopupMenu();
+        PopupPemeriksaan = new widget.PopupMenu();
         PopupPemeriksaan.setName("PopupPemeriksaan");
 
         TKeluhan.setComponentPopupMenu(PopupPemeriksaan);

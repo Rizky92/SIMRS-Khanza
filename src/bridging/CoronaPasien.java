@@ -468,7 +468,7 @@ public class CoronaPasien extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppDiagnosaPasien = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -1969,7 +1969,7 @@ public class CoronaPasien extends javax.swing.JDialog {
     private widget.TextBox NoRM;
     private widget.TextBox NoTelp;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox SebabKematian;
     private widget.TextBox TCari;

@@ -141,7 +141,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         ppStok1 = new widget.MenuItem();
         DlgCetak = new javax.swing.JDialog();
@@ -1467,7 +1467,7 @@ public class InventorySuratPemesanan extends javax.swing.JDialog {
     private widget.Label LTotal2;
     private widget.TextBox Meterai;
     private widget.TextBox NoPemesanan;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.Tanggal Tanggal;
     private widget.Button btnPetugas;

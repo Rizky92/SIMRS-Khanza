@@ -171,7 +171,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppProses = new widget.MenuItem();
         ppDosetujui = new widget.MenuItem();
         ppDitolak = new widget.MenuItem();
@@ -1433,7 +1433,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.MenuItem ppDitolak;

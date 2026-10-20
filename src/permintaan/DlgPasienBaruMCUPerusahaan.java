@@ -175,7 +175,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppPilih = new widget.MenuItem();
         ppBersihkan = new widget.MenuItem();
         DTPDaftar = new widget.Tanggal();
@@ -702,7 +702,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     private widget.Tanggal DTPDaftar;
     private widget.Label LCount;
     private widget.TextBox NoRm;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.TextBox TNo;
     private widget.TextBox TNoBooking;

@@ -1867,9 +1867,9 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu1 = new widget.Menu();
         MnLogin = new widget.MenuItem();
         MnGantiPassword = new widget.MenuItem();
-        jSeparator14 = new javax.swing.JPopupMenu.Separator();
+        jSeparator14 = new widget.PopupMenu.Separator();
         MenuRevalidateCache = new widget.MenuItem();
-        jSeparator16 = new javax.swing.JPopupMenu.Separator();
+        jSeparator16 = new widget.PopupMenu.Separator();
         MenuKeluar = new widget.MenuItem();
         jMenu5 = new widget.Menu();
         MnBelumDatang1 = new widget.MenuItem();
@@ -1884,7 +1884,7 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapBulanan3 = new widget.MenuItem();
         MnRekapBulanan2 = new widget.MenuItem();
         MnRekapBulanan4 = new widget.MenuItem();
-        jSeparator10 = new javax.swing.JPopupMenu.Separator();
+        jSeparator10 = new widget.PopupMenu.Separator();
         MnTarif = new widget.Menu();
         MnSudahPulang1 = new widget.MenuItem();
         MnSudahPulang3 = new widget.MenuItem();
@@ -1900,13 +1900,13 @@ public class frmUtama extends javax.swing.JFrame {
         MnInfoBed3 = new widget.MenuItem();
         MnInfoBed5 = new widget.MenuItem();
         MnInfoMobileJKN = new widget.MenuItem();
-        jSeparator15 = new javax.swing.JPopupMenu.Separator();
+        jSeparator15 = new widget.PopupMenu.Separator();
         MnKoleksiPenelitian = new widget.MenuItem();
         MnCariEbook = new widget.MenuItem();
         MnCariInventarisPerpustakaan = new widget.MenuItem();
         jMenu7 = new widget.Menu();
         MnAnjungan = new widget.MenuItem();
-        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        jSeparator12 = new widget.PopupMenu.Separator();
         MnRekapHadir9 = new widget.MenuItem();
         MnRekapHadir3 = new widget.MenuItem();
         MnRekapHadir10 = new widget.MenuItem();
@@ -1922,7 +1922,7 @@ public class frmUtama extends javax.swing.JFrame {
         MnInfoLaborat1 = new widget.MenuItem();
         MnInfoLaborat3 = new widget.MenuItem();
         MnInfoLaborat2 = new widget.MenuItem();
-        jSeparator13 = new javax.swing.JPopupMenu.Separator();
+        jSeparator13 = new widget.PopupMenu.Separator();
         MnRekapHadir6 = new widget.MenuItem();
         jMenu4 = new widget.Menu();
 
@@ -24607,12 +24607,12 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.Menu jMenu6;
     private widget.Menu jMenu7;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator10;
-    private javax.swing.JPopupMenu.Separator jSeparator12;
-    private javax.swing.JPopupMenu.Separator jSeparator13;
-    private javax.swing.JPopupMenu.Separator jSeparator14;
-    private javax.swing.JPopupMenu.Separator jSeparator15;
-    private javax.swing.JPopupMenu.Separator jSeparator16;
+    private widget.PopupMenu.Separator jSeparator10;
+    private widget.PopupMenu.Separator jSeparator12;
+    private widget.PopupMenu.Separator jSeparator13;
+    private widget.PopupMenu.Separator jSeparator14;
+    private widget.PopupMenu.Separator jSeparator15;
+    private widget.PopupMenu.Separator jSeparator16;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;

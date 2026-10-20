@@ -182,7 +182,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
     private void initComponents() {
 
         TKd = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         ppSemua = new widget.MenuItem();
         DlgBayarMandiri = new javax.swing.JDialog();
@@ -1669,7 +1669,7 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
     private widget.TextBox NoBukti;
     private widget.TextBox NoRekening;
     private widget.PanelBiasa PanelAccor;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox RekeningAtasNama;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll4;

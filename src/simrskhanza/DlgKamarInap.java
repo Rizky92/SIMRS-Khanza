@@ -496,7 +496,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         btnDiagnosa = new widget.Button();
         TOut = new widget.TextBox();
         TIn = new widget.TextBox();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         MnDataRM = new widget.Menu();
         MnPenilaianAwal = new widget.Menu();
         MnPenilaianAwalKeperawatanRanap = new widget.MenuItem();
@@ -600,7 +600,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenjualan1 = new widget.MenuItem();
         MnDeposit = new widget.MenuItem();
         MnBilling = new widget.MenuItem();
-        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        jSeparator12 = new widget.PopupMenu.Separator();
         MnLaporan = new widget.Menu();
         MnPersetujuanUmum = new widget.MenuItem();
         MnPersetujuanPenolakanTindakan = new widget.MenuItem();
@@ -645,7 +645,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnGabungkanRanap = new widget.MenuItem();
         MnDPJP = new widget.MenuItem();
         MnDPJPRanap = new widget.MenuItem();
-        jSeparator13 = new javax.swing.JPopupMenu.Separator();
+        jSeparator13 = new widget.PopupMenu.Separator();
         MnRujukan = new widget.Menu();
         MnRujuk = new widget.MenuItem();
         MnRujukMasuk = new widget.MenuItem();
@@ -690,7 +690,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHapusTagihanOperasi = new widget.MenuItem();
         MnHapusObatOperasi = new widget.MenuItem();
         MnHapusDataSalah = new widget.MenuItem();
-        jSeparator14 = new javax.swing.JPopupMenu.Separator();
+        jSeparator14 = new widget.PopupMenu.Separator();
         MnUpdateHari = new widget.MenuItem();
         MnPerkiraanBiaya = new widget.MenuItem();
         MnUrut = new widget.Menu();
@@ -20656,10 +20656,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu.Separator jSeparator12;
-    private javax.swing.JPopupMenu.Separator jSeparator13;
-    private javax.swing.JPopupMenu.Separator jSeparator14;
+    private widget.PopupMenu jPopupMenu1;
+    private widget.PopupMenu.Separator jSeparator12;
+    private widget.PopupMenu.Separator jSeparator13;
+    private widget.PopupMenu.Separator jSeparator14;
     private widget.TextBox kdkamar;
     private widget.TextBox kdkamarasal;
     private widget.TextBox kdkamarpindah;

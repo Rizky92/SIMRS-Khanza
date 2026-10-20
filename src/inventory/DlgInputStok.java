@@ -173,7 +173,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         MnUrut = new widget.Menu();
         MnKodeBarangDesc = new widget.MenuItem();
         MnKodeBarangAsc = new widget.MenuItem();
@@ -2065,7 +2065,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     private widget.MenuItem MnSatuanAsc;
     private widget.MenuItem MnSatuanDesc;
     private widget.Menu MnUrut;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.Tanggal Tgl;
     private widget.TextBox catatan;

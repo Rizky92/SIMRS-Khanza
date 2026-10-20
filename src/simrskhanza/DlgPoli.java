@@ -121,7 +121,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppOrder = new widget.Menu();
         ppOrderKode = new widget.MenuItem();
         ppOrderNama = new widget.MenuItem();
@@ -838,7 +838,7 @@ public final class DlgPoli extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.MenuItem MnRestore;
     private widget.TextBox Nm;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;

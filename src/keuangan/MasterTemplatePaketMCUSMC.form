@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="Popup">
+    <Container class="widget.PopupMenu" name="Popup">
       <Properties>
         <Property name="name" type="java.lang.String" value="Popup" noResource="true"/>
       </Properties>
@@ -410,7 +410,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbRadiologi">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbRadiologi" noResource="true"/>
@@ -511,7 +511,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLabPK">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbLabPK" noResource="true"/>
@@ -544,7 +544,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbDetailLabPK">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbDetailLabPK" noResource="true"/>
@@ -654,7 +654,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLabPA">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbLabPA" noResource="true"/>
@@ -730,7 +730,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbLabMB">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbLabMB" noResource="true"/>
@@ -797,7 +797,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbDetailLabMB">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbDetailLabMB" noResource="true"/>
@@ -873,7 +873,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanDr">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbTindakanDr" noResource="true"/>
@@ -1117,7 +1117,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanDrPr">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbTindakanDrPr" noResource="true"/>
@@ -1214,7 +1214,7 @@
                           <SubComponents>
                             <Component class="widget.Table" name="tbTindakanPr">
                               <Properties>
-                                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                   <ComponentRef name="Popup"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="tbTindakanPr" noResource="true"/>

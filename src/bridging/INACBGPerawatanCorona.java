@@ -149,7 +149,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new widget.PopupMenu();
         MnNIK = new widget.MenuItem();
         MnKartu = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -1175,7 +1175,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu2;
+    private widget.PopupMenu jPopupMenu2;
     private widget.panelisi panelGlass7;
     private widget.panelisi panelGlass8;
     private widget.Table tbObat;

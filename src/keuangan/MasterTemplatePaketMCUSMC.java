@@ -489,7 +489,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new javax.swing.JMenuItem();
         ppSemua = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -2091,7 +2091,7 @@ public class MasterTemplatePaketMCUSMC extends javax.swing.JDialog {
     private widget.Button BtnSimpan;
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll12;
     private widget.ScrollPane Scroll14;

@@ -120,7 +120,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         MnRestore = new widget.MenuItem();
         Kd2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -701,7 +701,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.MenuItem MnRestore;
     private widget.TextBox Nm;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;

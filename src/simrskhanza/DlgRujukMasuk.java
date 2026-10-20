@@ -211,7 +211,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         label10 = new widget.Label();
         LCount1 = new widget.Label();
         BtnKeluar1 = new widget.Button();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         MnBalasanRujukan = new widget.MenuItem();
         MnBalasanRujukan1 = new widget.MenuItem();
         MnBalasanRujukan2 = new widget.MenuItem();
@@ -1784,7 +1784,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kdDiagnosa;
     private widget.Label label10;
     private widget.Label label9;

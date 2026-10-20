@@ -173,7 +173,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
@@ -1253,7 +1253,7 @@ public class TokoPenjualan extends javax.swing.JDialog {
     private widget.TextBox NoNota;
     private widget.TextBox Ongkir;
     private widget.TextBox Persenppn;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.Label TagihanPPn;
     private widget.Tanggal Tgl;

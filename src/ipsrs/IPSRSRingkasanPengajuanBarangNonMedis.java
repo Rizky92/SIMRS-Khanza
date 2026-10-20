@@ -106,7 +106,7 @@ public class IPSRSRingkasanPengajuanBarangNonMedis extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup1 = new javax.swing.JPopupMenu();
+        Popup1 = new widget.PopupMenu();
         MnKodeBarangDesc = new widget.MenuItem();
         MnKodeBarangAsc = new widget.MenuItem();
         MnNamaBarangDesc = new widget.MenuItem();
@@ -1088,7 +1088,7 @@ public class IPSRSRingkasanPengajuanBarangNonMedis extends javax.swing.JDialog {
     private widget.MenuItem MnTotalDesc;
     private widget.TextBox NmPeg;
     private widget.TextBox NoPermintaan;
-    private javax.swing.JPopupMenu Popup1;
+    private widget.PopupMenu Popup1;
     private widget.ComboBox Status;
     private widget.TextBox TCari;
     private widget.Tanggal Tanggal1;

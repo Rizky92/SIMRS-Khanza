@@ -113,7 +113,7 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         ppStok = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -752,7 +752,7 @@ public class IPSRSPengambilanPenunjangUTD extends javax.swing.JDialog {
     private widget.Label LTotal;
     private widget.TextBox Nama;
     private widget.TextBox Nip;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.Tanggal Tanggal;
     private widget.Button btnPetugas;

@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="jPopupMenu1">
+    <Container class="widget.PopupMenu" name="jPopupMenu1">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="32" green="32" red="32" type="rgb"/>
@@ -3222,7 +3222,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator12">
+        <Component class="widget.PopupMenu$Separator" name="jSeparator12">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b4" green="dc" red="be" type="rgb"/>
@@ -4436,7 +4436,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator13">
+        <Component class="widget.PopupMenu$Separator" name="jSeparator13">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b4" green="dc" red="be" type="rgb"/>
@@ -7732,7 +7732,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPopupMenu" name="jPopupMenu2">
+    <Container class="widget.PopupMenu" name="jPopupMenu2">
       <Properties>
         <Property name="name" type="java.lang.String" value="jPopupMenu2" noResource="true"/>
       </Properties>
@@ -8362,7 +8362,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnBilling1ActionPerformed"/>
           </Events>
         </MenuItem>
-        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator14">
+        <Component class="widget.PopupMenu$Separator" name="jSeparator14">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b4" green="dc" red="be" type="rgb"/>
@@ -9746,7 +9746,7 @@
                   </Border>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan"/>
-                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="jPopupMenu1"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="Scroll1" noResource="true"/>
@@ -9765,7 +9765,7 @@
                 <Component class="widget.Table" name="tbKasirRalan">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Klik 2X Kode Dokter= Jendela Tindakan, Dokter Dituju=Jendela Obat, Nomer RM=Jendela Billing, Pasien=Jendela Total Obat, Poliklinik=Set Sudah Periksa, Penanggung Jawab=Masukan tindakan otomatis"/>
-                    <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                    <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="jPopupMenu1"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="tbKasirRalan" noResource="true"/>
@@ -9790,7 +9790,7 @@
                   </Border>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan"/>
-                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="jPopupMenu2"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="Scroll2" noResource="true"/>
@@ -9809,7 +9809,7 @@
                 <Component class="widget.Table" name="tbKasirRalan2">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Klik 2X Kode Dokter= Jendela Tindakan, Dokter Dituju=Jendela Obat, Nomer RM=Jendela Billing, Pasien=Jendela Total Obat, Poliklinik=Set Sudah Periksa, Penanggung Jawab=Masukan tindakan otomatis"/>
-                    <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                    <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="jPopupMenu2"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="tbKasirRalan2" noResource="true"/>

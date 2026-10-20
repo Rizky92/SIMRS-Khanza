@@ -128,7 +128,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         MnHapusObatOperasi = new widget.MenuItem();
         MnHapusTagihanOperasi = new widget.MenuItem();
         MnUbahOperatorPetugas = new widget.MenuItem();
@@ -3833,7 +3833,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kdInstrumen;
     private widget.TextBox kdanestesi;
     private widget.TextBox kdasistanestesi;

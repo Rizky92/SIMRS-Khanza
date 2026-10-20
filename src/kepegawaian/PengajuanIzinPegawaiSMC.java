@@ -170,7 +170,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
 
         KdPetugas = new widget.TextBox();
         NmPetugas = new widget.TextBox();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppSetujui = new widget.MenuItem();
         ppSetujuiNormatif = new widget.MenuItem();
         ppTolak = new widget.MenuItem();
@@ -1457,7 +1457,7 @@ public final class PengajuanIzinPegawaiSMC extends javax.swing.JDialog {
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa3;
     private widget.panelisi panelGlass11;

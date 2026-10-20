@@ -211,7 +211,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppSEP = new widget.MenuItem();
         ppPulang = new widget.MenuItem();
         ppMapping = new widget.MenuItem();
@@ -1855,7 +1855,7 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     private widget.TextBox NoKartu;
     private widget.TextBox NoRujukan;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TNoRM;

@@ -529,7 +529,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         jMenu8 = new widget.Menu();
         MnCetakRegister = new widget.MenuItem();
         MnCetakRegister1 = new widget.MenuItem();
@@ -608,9 +608,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         kdpenjab = new widget.TextBox();
         nmpenjab = new widget.TextBox();
         btnPenjab = new widget.Button();
-        PopupBayar = new javax.swing.JPopupMenu();
+        PopupBayar = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
-        PopupPiutang = new javax.swing.JPopupMenu();
+        PopupPiutang = new widget.PopupMenu();
         ppBersihkan1 = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass1 = new widget.panelisi();
@@ -4158,8 +4158,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.MenuItem MnPotongan;
     private widget.MenuItem MnRawatJalan;
     private widget.MenuItem MnTambahan;
-    private javax.swing.JPopupMenu PopupBayar;
-    private javax.swing.JPopupMenu PopupPiutang;
+    private widget.PopupMenu PopupBayar;
+    private widget.PopupMenu PopupPiutang;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TCari1;
@@ -4210,7 +4210,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private widget.Menu jMenu8;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kddokter;
     private widget.TextBox kdpenjab;
     private widget.TextBox kdpoli;

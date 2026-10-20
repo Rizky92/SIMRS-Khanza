@@ -219,7 +219,7 @@ public class DlgBarang extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBarcode = new widget.MenuItem();
         ppBarcodeItem = new widget.MenuItem();
         ppStok = new widget.MenuItem();
@@ -2407,7 +2407,7 @@ public class DlgBarang extends javax.swing.JDialog {
     private widget.TextBox Nm;
     private widget.TextBox NmIF;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.TextBox beli;
     private widget.TextBox beliluar;

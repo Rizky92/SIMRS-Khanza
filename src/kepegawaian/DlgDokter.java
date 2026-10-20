@@ -154,7 +154,7 @@ public class DlgDokter extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         MnGambarTTD = new widget.MenuItem();
         MnRestore = new widget.MenuItem();
         WindowInputTTD = new javax.swing.JDialog();
@@ -1519,7 +1519,7 @@ public class DlgDokter extends javax.swing.JDialog {
     private widget.MenuItem MnRestore;
     private javax.swing.JPanel PanelInput;
     private java.awt.Canvas PhotoTTD;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TAlmt;
     private widget.TextBox TAlumni;

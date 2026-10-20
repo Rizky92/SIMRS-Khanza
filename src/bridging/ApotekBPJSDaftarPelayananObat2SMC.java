@@ -219,12 +219,12 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ppMenu = new javax.swing.JPopupMenu();
+        ppMenu = new widget.PopupMenu();
         MnUbahResep = new widget.MenuItem();
         MnCopyResep = new widget.MenuItem();
         MnPemberianObat = new widget.MenuItem();
         MnPiutangObat = new widget.MenuItem();
-        ppCek = new javax.swing.JPopupMenu();
+        ppCek = new widget.PopupMenu();
         ppPilihSemua = new widget.MenuItem();
         ppBersihkan = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -829,8 +829,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     private widget.Label jLabel7;
     private widget.panelisi panelGlass6;
     private widget.MenuItem ppBersihkan;
-    private javax.swing.JPopupMenu ppCek;
-    private javax.swing.JPopupMenu ppMenu;
+    private widget.PopupMenu ppCek;
+    private widget.PopupMenu ppMenu;
     private widget.MenuItem ppPilihSemua;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;

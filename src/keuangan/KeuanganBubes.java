@@ -92,7 +92,7 @@ public class KeuanganBubes extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         CekJurnal = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -550,7 +550,7 @@ public class KeuanganBubes extends javax.swing.JDialog {
     private widget.CekBox ChkBulan;
     private widget.CekBox ChkTanggal;
     private widget.TextBox Kd2;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ComboBox Tahun;
     private widget.ComboBox Tanggal;
     private widget.InternalFrame internalFrame1;

@@ -103,7 +103,7 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppHapus = new widget.MenuItem();
         ppDatang = new widget.MenuItem();
         ppProses = new widget.MenuItem();
@@ -1216,7 +1216,7 @@ public class DapurCariSuratPemesanan extends javax.swing.JDialog {
     private widget.Label jLabel25;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kdbar;
     private widget.TextBox kdptg;
     private widget.TextBox kdsup;

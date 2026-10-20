@@ -179,7 +179,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         MnCetakLab = new widget.Menu();
         MnCetakHasilLabSMCParagraf = new widget.MenuItem();
         MnCetakHasilLab = new widget.MenuItem();
@@ -6607,7 +6607,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame6;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kdmem;
     private widget.TextBox kdptg;
     private widget.Label label10;

@@ -235,9 +235,9 @@ public class PanelInacbgSmc extends widget.panelisi {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppJadikanDiagnosaUtama = new widget.MenuItem();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new widget.PopupMenu();
         ppJadikanProsedurUtama = new widget.MenuItem();
         TabRawat = new javax.swing.JTabbedPane();
         FormData = new widget.PanelBiasa();
@@ -596,8 +596,8 @@ public class PanelInacbgSmc extends widget.panelisi {
     private javax.swing.JTabbedPane TabRawat;
     private widget.Label jLabel13;
     private widget.Label jLabel15;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
+    private widget.PopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu2;
     private widget.MenuItem ppJadikanDiagnosaUtama;
     private widget.MenuItem ppJadikanProsedurUtama;
     private widget.Table tbDiagnosaPasien;

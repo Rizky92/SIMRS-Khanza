@@ -200,10 +200,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppPilihSemua = new widget.MenuItem();
         ppBersihkan = new widget.MenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jSeparator1 = new widget.PopupMenu.Separator();
         ppUpdateTanggalPulangSEP = new widget.MenuItem();
         WindowUpdatePulang = new javax.swing.JDialog();
         internalFrame11 = new widget.InternalFrame();
@@ -3189,8 +3189,8 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private widget.PopupMenu jPopupMenu1;
+    private widget.PopupMenu.Separator jSeparator1;
     private widget.TextBox kodePJ;
     private widget.Label label19;
     private widget.Label lblCoderNIK;

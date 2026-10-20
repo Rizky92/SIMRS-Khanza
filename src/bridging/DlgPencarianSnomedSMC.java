@@ -114,7 +114,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         MnDetailKode = new widget.MenuItem();
         ppCariTurunan = new widget.MenuItem();
         ppCariMemberRefset = new widget.MenuItem();
@@ -500,7 +500,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.ComboBox LimitData;
     private widget.MenuItem MnDetailKode;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.TextBox TCari;

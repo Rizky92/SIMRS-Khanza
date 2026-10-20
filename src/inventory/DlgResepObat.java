@@ -249,7 +249,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup2 = new javax.swing.JPopupMenu();
+        Popup2 = new widget.PopupMenu();
         ppResepObat = new widget.MenuItem();
         ppResepObat1 = new widget.MenuItem();
         ppResepObat2 = new widget.MenuItem();
@@ -2458,7 +2458,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     private widget.TextBox NoResepUbah1;
     private widget.PanelBiasa PanelAccor;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup2;
+    private widget.PopupMenu Popup2;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll4;
     private widget.ScrollPane Scroll5;

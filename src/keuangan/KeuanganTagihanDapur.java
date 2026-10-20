@@ -156,7 +156,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
     private void initComponents() {
 
         TKd = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         ppSemua = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -1058,7 +1058,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
     private widget.TextBox NmPetugas;
     private widget.TextBox NoTagihan;
     private widget.PanelBiasa PanelAccor;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll4;
     private widget.TextBox TCari;

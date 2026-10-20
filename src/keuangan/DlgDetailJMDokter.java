@@ -145,7 +145,7 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppTampilkanSeleksi = new widget.MenuItem();
         ppTampilkanRanapGabung = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -1241,7 +1241,7 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
     private widget.CekBox chkRalan;
     private widget.CekBox chkRanap;
     private widget.InternalFrame internalFrame1;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kddokter;
     private widget.Label label11;
     private widget.Label label17;

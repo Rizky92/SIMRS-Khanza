@@ -104,7 +104,7 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppGrafikTerbanyakBatang = new widget.MenuItem();
         ppGrafikTerbanyakPie = new widget.MenuItem();
         ppGrafikTerkecilBatang = new widget.MenuItem();
@@ -1855,7 +1855,7 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
     private widget.Tanggal Tgl2;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel6;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.TextBox kddokter;
     private widget.TextBox kdpenjab;
     private widget.TextBox kdpoli;

@@ -147,7 +147,7 @@ public class DlgUbahPemesanan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBersihkan = new widget.MenuItem();
         NoFaktur2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -1238,7 +1238,7 @@ public class DlgUbahPemesanan extends javax.swing.JDialog {
     private widget.TextBox NoFaktur;
     private widget.TextBox NoFaktur2;
     private widget.TextBox NoOrder;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.TextBox TCari;
     private widget.Tanggal TglFaktur;
     private widget.Tanggal TglPesan;

@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="jPopupMenu1">
+    <Container class="widget.PopupMenu" name="jPopupMenu1">
       <Properties>
         <Property name="name" type="java.lang.String" value="jPopupMenu1" noResource="true"/>
       </Properties>
@@ -2367,7 +2367,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator12">
+        <Component class="widget.PopupMenu$Separator" name="jSeparator12">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b4" green="dc" red="be" type="rgb"/>
@@ -4452,7 +4452,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator13">
+        <Component class="widget.PopupMenu$Separator" name="jSeparator13">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b4" green="dc" red="be" type="rgb"/>
@@ -6132,7 +6132,7 @@
         <Container class="widget.ScrollPane" name="Scroll">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk menampilkan menu yang dibutuhkan"/>
-            <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+            <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="jPopupMenu1"/>
             </Property>
             <Property name="name" type="java.lang.String" value="Scroll" noResource="true"/>
@@ -6150,7 +6150,7 @@
               <Properties>
                 <Property name="autoCreateRowSorter" type="boolean" value="false"/>
                 <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk menampilkan menu yang dibutuhkan"/>
-                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="jPopupMenu1"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="tbPetugas" noResource="true"/>

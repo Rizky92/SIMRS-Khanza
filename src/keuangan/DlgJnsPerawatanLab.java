@@ -138,7 +138,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppTemplate = new widget.MenuItem();
         ppCopyTemplate = new widget.MenuItem();
         MnRestore = new widget.MenuItem();
@@ -1269,7 +1269,7 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
     private widget.TextBox Menejemen;
     private widget.MenuItem MnRestore;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TKd;

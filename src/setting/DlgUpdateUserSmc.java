@@ -105,7 +105,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppClear = new widget.MenuItem();
         ppSemua = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -412,7 +412,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TNmUser;

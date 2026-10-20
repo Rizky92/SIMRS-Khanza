@@ -170,7 +170,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         nobatch = new widget.TextBox();
         nofaktur = new widget.TextBox();
         KdGudang = new widget.TextBox();
-        Popup1 = new javax.swing.JPopupMenu();
+        Popup1 = new widget.PopupMenu();
         MnKodeBarangDesc = new widget.MenuItem();
         MnKodeBarangAsc = new widget.MenuItem();
         MnNamaBarangDesc = new widget.MenuItem();
@@ -1545,7 +1545,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
     private widget.TextBox Nmbar;
     private widget.TextBox NomiLebih;
     private widget.TextBox Nominal;
-    private javax.swing.JPopupMenu Popup1;
+    private widget.PopupMenu Popup1;
     private widget.TextBox Real;
     private widget.ScrollPane Scroll;
     private widget.TextBox Selisih;

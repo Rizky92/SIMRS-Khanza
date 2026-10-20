@@ -169,7 +169,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBarcode = new widget.MenuItem();
         ppBarcode2 = new widget.MenuItem();
         ppBarcode3 = new widget.MenuItem();
@@ -1443,7 +1443,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     private widget.editorpane LoadHTML;
     private widget.PanelBiasa PanelAccor;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll4;
     private widget.TextBox TCari;

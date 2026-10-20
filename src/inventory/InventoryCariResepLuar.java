@@ -167,7 +167,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup2 = new javax.swing.JPopupMenu();
+        Popup2 = new widget.PopupMenu();
         ppUbahAturanPakai = new widget.MenuItem();
         ppUbahAturanPakai1 = new widget.MenuItem();
         WindowInput3 = new javax.swing.JDialog();
@@ -1095,7 +1095,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.TextBox NoResepUbah3;
     private widget.TextBox NoResepUbah4;
-    private javax.swing.JPopupMenu Popup2;
+    private widget.PopupMenu Popup2;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private javax.swing.JDialog WindowInput3;

@@ -143,7 +143,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         MnCariReferensi = new widget.MenuItem();
         MnTandaiSemua = new widget.MenuItem();
         MnTandaiDisplay = new widget.MenuItem();
@@ -421,7 +421,7 @@ public final class DlgValidasiMappingSMC extends javax.swing.JDialog {
     private widget.MenuItem MnHapusTanda;
     private widget.MenuItem MnTandaiDisplay;
     private widget.MenuItem MnTandaiSemua;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel6;

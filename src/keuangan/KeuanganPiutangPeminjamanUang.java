@@ -156,7 +156,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
-        Popup = new javax.swing.JPopupMenu();
+        Popup = new widget.PopupMenu();
         ppBayarPiutang = new widget.MenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -1175,7 +1175,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
     private widget.TextBox NoNota;
     private widget.TextBox NominalPinjam;
     private javax.swing.JPanel PanelInput;
-    private javax.swing.JPopupMenu Popup;
+    private widget.PopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.Tanggal Tanggal;

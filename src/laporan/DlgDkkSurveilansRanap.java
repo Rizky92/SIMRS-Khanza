@@ -136,7 +136,7 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
     private void initComponents() {
 
         TKd = new widget.TextBox();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu1 = new widget.PopupMenu();
         ppGrafikHidupMati = new widget.MenuItem();
         ppGrafikLakiPerempuan = new widget.MenuItem();
         ppGrafikGolonganUmur = new widget.MenuItem();
@@ -612,7 +612,7 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
     private widget.InternalFrame internalFrame1;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.Label label11;
     private widget.Label label12;
     private widget.Label label18;
