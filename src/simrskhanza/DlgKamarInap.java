@@ -646,7 +646,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnGabungkanRanap = new widget.MenuItem();
         MnDPJP = new widget.MenuItem();
         MnDPJPRanap = new widget.MenuItem();
-        MnFilterDPJP = new widget.MenuItem();
         jSeparator13 = new widget.PopupMenu.Separator();
         MnRujukan = new widget.Menu();
         MnRujuk = new widget.MenuItem();
