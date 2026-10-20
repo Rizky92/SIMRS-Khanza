@@ -88,6 +88,9 @@ public class MenuItem extends JMenuItem {
     }
 
     private void gaya() {
+        if (modeDesain()) {
+            return;
+        }
         setFont(FONT);
         setForeground(TEKS);
         setBackground(LATAR);
@@ -95,16 +98,33 @@ public class MenuItem extends JMenuItem {
         setBorder(PADDING);
     }
 
-
     @Override
     public void updateUI() {
+        if (modeDesain()) {
+            super.updateUI();
+            return;
+        }
         setUI(new ModernMenuItemUI());
     }
 
+    static boolean modeDesain() {
+        return DI_NETBEANS || java.beans.Beans.isDesignTime();
+    }
+
+    private static final boolean DI_NETBEANS = dimuatNetBeans();
+
+    private static boolean dimuatNetBeans() {
+        ClassLoader cl = MenuItem.class.getClassLoader();
+        String n = cl == null ? "" : cl.getClass().getName();
+        return n.contains("netbeans") || n.contains("openide");
+    }
 
     @Override
     public Dimension getPreferredSize() {
         Dimension d = super.getPreferredSize();
+        if (modeDesain()) {
+            return d;
+        }
         if (!isPreferredSizeSet() && d.height < TINGGI_MIN) {
             d.height = TINGGI_MIN;
         }
@@ -112,8 +132,7 @@ public class MenuItem extends JMenuItem {
     }
 
 
-    private static class ModernMenuItemUI extends BasicMenuItemUI {
-
+    static class ModernMenuItemUI extends BasicMenuItemUI {
         @Override
         protected void installDefaults() {
             super.installDefaults();

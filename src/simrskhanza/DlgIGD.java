@@ -182,6 +182,7 @@ import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTindakanInvasifNonBedahSMC;
 import rekammedis.RMPenilaianUlangNyeri;
+import rekammedis.RMReaksiTransfusi;
 import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMRiwayatPerawatan;
 import rekammedis.RMSignInSebelumAnastesi;
@@ -12691,6 +12692,28 @@ public final class DlgIGD extends javax.swing.JDialog {
         }
     }
 
+    private void MnLaporanReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPersalinanActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMReaksiTransfusi form=new RMReaksiTransfusi(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     /**
     * @data args the command line arguments
     */
@@ -13028,8 +13051,8 @@ public final class DlgIGD extends javax.swing.JDialog {
                                   MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiMedik,
                                   MnPermintaanKonsultasiPerawat,MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnCetakSuratKeteranganBerobat,
                                   MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,MnIntervensiNyeriFarmakologi,MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien,MnCheckListKriteriaMasukIsolasi,
-                                  MnSkriningTOLAC,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC;
-    private widget.Menu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
+                                  MnSkriningTOLAC,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC,MnLaporanReaksiTranfusi;
+    private widget.Menu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu,MnCatatanObservasi;
 
     private widget.MenuItem MnPengkajianInvasifNonBedahSMC;
 
@@ -13508,6 +13531,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnCatatanPersalinan.setEnabled(akses.getcatatan_persalinan());
         MnAdmisiSkoringTOLAC.setEnabled(akses.getadmisi_skoring_tolac());
         MnHasilPersalinanTOLAC.setEnabled(akses.gethasil_persalinan_tolac());
+        MnLaporanReaksiTranfusi.setEnabled(akses.getlaporan_reaksi_transfusi());
         MnSkorAldrettePascaAnestesi.setEnabled(akses.getskor_aldrette_pasca_anestesi());
         MnSkorStewardPascaAnestesi.setEnabled(akses.getskor_steward_pasca_anestesi());
         MnSkorBromagePascaAnestesi.setEnabled(akses.getskor_bromage_pasca_anestesi());
@@ -14723,6 +14747,18 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnHasilPersalinanTOLAC.setPreferredSize(new java.awt.Dimension(240, 26));
         MnHasilPersalinanTOLAC.addActionListener(this::MnHasilPersalinanTOLACActionPerformed);
 
+        MnLaporanReaksiTranfusi = new widget.MenuItem();
+        MnLaporanReaksiTranfusi.setBackground(new java.awt.Color(255, 255, 254));
+        MnLaporanReaksiTranfusi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnLaporanReaksiTranfusi.setForeground(new java.awt.Color(50, 50, 50));
+        MnLaporanReaksiTranfusi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnLaporanReaksiTranfusi.setText("Laporan Reaksi Tranfusi");
+        MnLaporanReaksiTranfusi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnLaporanReaksiTranfusi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnLaporanReaksiTranfusi.setName("MnLaporanReaksiTranfusi");
+        MnLaporanReaksiTranfusi.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnLaporanReaksiTranfusi.addActionListener(this::MnLaporanReaksiTranfusiActionPerformed);
+
         MnRMSkriningRisikoKanker = new widget.Menu();
         MnRMSkriningRisikoKanker.setBackground(new java.awt.Color(255, 255, 254));
         MnRMSkriningRisikoKanker.setForeground(new java.awt.Color(50, 50, 50));
@@ -14800,6 +14836,16 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnSkriningParu.setName("MnSkriningParu");
         MnSkriningParu.setPreferredSize(new java.awt.Dimension(200, 26));
 
+        MnCatatanObservasi = new widget.Menu();
+        MnCatatanObservasi.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanObservasi.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanObservasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnCatatanObservasi.setText("Observasi");
+        MnCatatanObservasi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnCatatanObservasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanObservasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanObservasi.setName("MnCatatanObservasi");
+        MnCatatanObservasi.setPreferredSize(new java.awt.Dimension(200, 26));
 
         MnRMOperasi.add(MnPenilaianPreInduksi);
         MnRMOperasi.add(MnPengkajianInvasifNonBedahSMC);
@@ -14859,24 +14905,28 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPenilaianLain.add(MnHemodialisa);
         MnPenilaianLain.add(MnPenilaianBayiBaruLahir);
 
-        MnRMCatatanMonitoring.add(MnCatatanCekGDS);
-        MnRMCatatanMonitoring.add(MnMonitoringReaksiTranfusi);
         MnRMCatatanMonitoring.add(MnPenilaianUlangNyeri);
         MnRMCatatanMonitoring.add(MnIntervensiNyeriFarmakologi);
         MnRMCatatanMonitoring.add(MnIntervensiNyeriNonFarmakologi);
         MnRMCatatanMonitoring.add(MnCatatanKeperawatan);
         MnRMCatatanMonitoring.add(MnAdmisiSkoringTOLAC);
         MnRMCatatanMonitoring.add(MnCatatanPersalinan);
+
+        MnRMCatatanMonitoring.add(MnCatatanObservasi);
+        MnCatatanObservasi.add(MnCatatanCekGDS);
+        MnCatatanObservasi.add(MnMonitoringReaksiTranfusi);
+        MnCatatanObservasi.add(MnCatatanKeseimbanganCairan);
+        MnCatatanObservasi.add(MnCatatanObservasiIGD);
+        MnCatatanObservasi.add(MnCatatanObservasiCHBP);
+        MnCatatanObservasi.add(MnCatatanObservasiInduksiPersalinan);
+        MnCatatanObservasi.add(MnMonitoringTOLAC);
+        MnCatatanObservasi.add(MnCatatanObservasiBayi);
+        MnCatatanObservasi.add(MnCatatanObservasiHemodialisa);
+
         MnRMCatatanMonitoring.add(MnHasilPersalinanTOLAC);
-        MnRMCatatanMonitoring.add(MnCatatanKeseimbanganCairan);
-        MnRMCatatanMonitoring.add(MnCatatanObservasiIGD);
-        MnRMCatatanMonitoring.add(MnCatatanObservasiCHBP);
-        MnRMCatatanMonitoring.add(MnCatatanObservasiInduksiPersalinan);
-        MnRMCatatanMonitoring.add(MnMonitoringTOLAC);
-        MnRMCatatanMonitoring.add(MnCatatanObservasiBayi);
-        MnRMCatatanMonitoring.add(MnCatatanObservasiHemodialisa);
         MnRMCatatanMonitoring.add(MnCatatanCairanHemodialisa);
         MnRMCatatanMonitoring.add(MnChecklistPemberianFibrinolitik);
+        MnRMCatatanMonitoring.add(MnLaporanReaksiTranfusi);
         MnRMCatatanMonitoring.add(MnLaporanTindakan);
 
         MnRMSkrining.add(MnSkriningMerokokUsiaSekolahRemaja);

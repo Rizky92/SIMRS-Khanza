@@ -101,7 +101,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "No.Resep","Tgl.Peresepan","Jam Peresepan","No.Rawat","No.RM","Pasien","Dokter Peresep",
+                "No.Resep","Tgl.Peresepan","Jam Peresepan","No.Rawat","No.RM","Pasien & Tanggal Lahir","Dokter Peresep",
                 "Status","Kode Dokter","Poli/Unit","Kode Poli","Jenis Bayar","Tgl.Validasi","Jam Validasi",
                 "Tgl.Penyerahan","Jam Penyerahan", "Jml.Item", "Jenis Resep", "No. Antrian"
             }){
@@ -171,7 +171,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbResepRalan.setDefaultRenderer(Integer.class, new WarnaTable());
 
         tabMode2=new DefaultTableModel(null,new Object[]{
-                "No.Resep","Tgl.Resep","Poli/Unit","Status","Pasien","Dokter Peresep"
+                "No.Resep","Tgl.Resep","Poli/Unit","Status","Pasien & Tanggal Lahir","Dokter Peresep"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -200,7 +200,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbDetailResepRalan.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabMode3=new DefaultTableModel(null,new Object[]{
-                "No.Resep","Tgl.Peresepan","Jam Peresepan","No.Rawat","No.RM","Pasien","Dokter Peresep",
+                "No.Resep","Tgl.Peresepan","Jam Peresepan","No.Rawat","No.RM","Pasien & Tanggal Lahir","Dokter Peresep",
                 "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar","Tgl.Validasi","Jam Validasi", "Jml.Item"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -260,7 +260,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbResepRanap.setDefaultRenderer(Integer.class, new WarnaTable());
 
         tabMode4=new DefaultTableModel(null,new Object[]{
-                "No.Resep","Tgl.Resep","Ruang/Kamar","Status","Pasien","Dokter Peresep"
+                "No.Resep","Tgl.Resep","Ruang/Kamar","Status","Pasien & Tanggal Lahir","Dokter Peresep"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -289,7 +289,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbDetailResepRanap.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabMode5=new DefaultTableModel(null,new Object[]{
-                "No.Permintaan","Tanggal","Jam","No.Rawat","No.RM","Pasien","Dokter Yang Meminta",
+                "No.Permintaan","Tanggal","Jam","No.Rawat","No.RM","Pasien & Tanggal Lahir","Dokter Yang Meminta",
                 "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -333,7 +333,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbPermintaanStok.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabMode6=new DefaultTableModel(null,new Object[]{
-                "No.Permintaan","Tanggal","Ruang/Kamar","Status","Pasien","Dokter Yang Meminta"
+                "No.Permintaan","Tanggal","Ruang/Kamar","Status","Pasien & Tanggal Lahir","Dokter Yang Meminta"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -362,7 +362,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbDetailPermintaanStok.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabMode7=new DefaultTableModel(null,new Object[]{
-                "No.Permintaan","Tanggal","Jam","No.Rawat","No.RM","Pasien","Dokter Yang Meminta",
+                "No.Permintaan","Tanggal","Jam","No.Rawat","No.RM","Pasien & Tanggal Lahir","Dokter Yang Meminta",
                 "Status","Kode Dokter","Ruang/Kamar","Kode Bangsal","Jenis Bayar"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -406,7 +406,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         tbPermintaanResepPulang.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabMode8=new DefaultTableModel(null,new Object[]{
-                "No.Permintaan","Tanggal","Ruang/Kamar","Status","Pasien","Dokter Yang Meminta"
+                "No.Permintaan","Tanggal","Ruang/Kamar","Status","Pasien & Tanggal Lahir","Dokter Yang Meminta"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -4854,7 +4854,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         semua=CrDokter.getText().trim().equals("")&&CrPoli.getText().trim().equals("")&&TCari.getText().trim().equals("");
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,"+
+                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,poliklinik.nm_poli, "+
                                     " reg_periksa.kd_poli,penjab.png_jawab,if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
                                     " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,"+
@@ -4871,7 +4871,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     "penjab.png_jawab like ?)")+" order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
                         }else{
                             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,"+
+                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,poliklinik.nm_poli, "+
                                     " reg_periksa.kd_poli,penjab.png_jawab,if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
                                     " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,"+
@@ -4908,7 +4908,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_poli"),rs.getString("kd_poli"),rs.getString("png_jawab"),
                                         rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("tgl_penyerahan"),rs.getString("jam_penyerahan")
                                     });
@@ -4919,7 +4919,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_poli"),rs.getString("kd_poli"),rs.getString("png_jawab"),
                                             rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("tgl_penyerahan"),rs.getString("jam_penyerahan")
                                         });
@@ -4968,7 +4968,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                     try{
                         semua=CrDokter.getText().trim().equals("")&&CrPoli.getText().trim().equals("")&&TCari.getText().trim().equals("");
                         if(DEPOAKTIFOBAT.equals("")){
-                            ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,"+
+                            ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,pasien.tgl_lahir,"+
                                     " pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " poliklinik.nm_poli,resep_obat.status as status_asal,penjab.png_jawab from resep_obat "+
                                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
@@ -4981,7 +4981,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     "(resep_obat.no_resep like ? or resep_obat.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                                     "penjab.png_jawab like ?) ")+"order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
                         }else{
-                            ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,"+
+                            ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,pasien.tgl_lahir,"+
                                     " pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " poliklinik.nm_poli,resep_obat.status as status_asal,penjab.png_jawab from resep_obat "+
                                     " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
@@ -5016,7 +5016,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     publish(new Object[]{
                                         rs.getString("no_resep"),rs.getString("tgl_peresepan")+" "+rs.getString("jam_peresepan"),
                                         rs.getString("nm_poli"),rs.getString("status"),
-                                        rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                        rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                         rs.getString("nm_dokter")
                                     });
                                     publish(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -5096,7 +5096,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         publish(new Object[]{
                                             rs.getString("no_resep"),rs.getString("tgl_peresepan")+" "+rs.getString("jam_peresepan"),
                                             rs.getString("nm_poli"),rs.getString("status"),
-                                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                             rs.getString("nm_dokter")
                                         });
                                         publish(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -5525,7 +5525,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
+                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
@@ -5544,7 +5544,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     " group by resep_obat.no_resep order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
                         }else{
                             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
+                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
@@ -5584,7 +5584,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
                                         rs.getString("tgl_perawatan"),rs.getString("jam")
                                     });
@@ -5595,7 +5595,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
                                             rs.getString("tgl_perawatan"),rs.getString("jam")
                                         });
@@ -5615,7 +5615,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
+                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
@@ -5635,7 +5635,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     " group by resep_obat.no_resep order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
                         }else{
                             ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
+                                    " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab,"+
                                     " if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
@@ -5675,7 +5675,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
                                         rs.getString("tgl_perawatan"),rs.getString("jam")
                                     });
@@ -5686,7 +5686,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab"),
                                             rs.getString("tgl_perawatan"),rs.getString("jam")
                                         });
@@ -5730,7 +5730,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         try{
             semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
             if(DEPOAKTIFOBAT.equals("")){
-                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,"+
+                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,pasien.tgl_lahir,"+
                         " pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                         " bangsal.nm_bangsal,resep_obat.status as status_asal,penjab.png_jawab from resep_obat "+
                         " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
@@ -5746,7 +5746,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ?)")+
                         " group by resep_obat.no_resep order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
             }else{
-                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,"+
+                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,pasien.tgl_lahir,"+
                         " pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                         " bangsal.nm_bangsal,resep_obat.status as status_asal,penjab.png_jawab from resep_obat "+
                         " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
@@ -5783,7 +5783,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         tabMode4.addRow(new Object[]{
                             rs.getString("no_resep"),rs.getString("tgl_peresepan")+" "+rs.getString("jam_peresepan"),
                             rs.getString("nm_bangsal"),rs.getString("status"),
-                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                             rs.getString("nm_dokter")
                         });
                         tabMode4.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -5863,7 +5863,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             tabMode4.addRow(new Object[]{
                                 rs.getString("no_resep"),rs.getString("tgl_peresepan")+" "+rs.getString("jam_peresepan"),
                                 rs.getString("nm_bangsal"),rs.getString("status"),
-                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                 rs.getString("nm_dokter")
                             });
                             tabMode4.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -5953,7 +5953,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
 
             if(DEPOAKTIFOBAT.equals("")){
-                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,"+
+                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,pasien.tgl_lahir,"+
                         " pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                         " bangsal.nm_bangsal,resep_obat.status as status_asal,penjab.png_jawab from resep_obat "+
                         " inner join ranap_gabung on ranap_gabung.no_rawat2=resep_obat.no_rawat "+
@@ -5970,7 +5970,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ?)")+
                         " group by resep_obat.no_resep order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
             }else{
-                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,"+
+                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,resep_obat.no_rawat,pasien.no_rkm_medis,pasien.tgl_lahir,"+
                         " pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,"+
                         " bangsal.nm_bangsal,resep_obat.status as status_asal,penjab.png_jawab from resep_obat "+
                         " inner join ranap_gabung on ranap_gabung.no_rawat2=resep_obat.no_rawat "+
@@ -6008,7 +6008,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         tabMode4.addRow(new Object[]{
                             rs.getString("no_resep"),rs.getString("tgl_peresepan")+" "+rs.getString("jam_peresepan"),
                             rs.getString("nm_bangsal"),rs.getString("status"),
-                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                             rs.getString("nm_dokter")
                         });
                         tabMode4.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -6088,7 +6088,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             tabMode4.addRow(new Object[]{
                                 rs.getString("no_resep"),rs.getString("tgl_perawatan")+" "+rs.getString("jam"),
                                 rs.getString("nm_bangsal"),rs.getString("status"),
-                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                 rs.getString("nm_dokter")
                             });
                             tabMode4.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -6192,7 +6192,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,"+
-                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_stok_obat_pasien  "+
                                     " inner join reg_periksa on permintaan_stok_obat_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -6209,7 +6209,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     " group by permintaan_stok_obat_pasien.no_permintaan order by permintaan_stok_obat_pasien.tgl_permintaan desc,permintaan_stok_obat_pasien.jam desc");
                         }else{
                             ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,"+
-                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_stok_obat_pasien  "+
                                     " inner join reg_periksa on permintaan_stok_obat_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -6247,7 +6247,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                     });
                                 }
@@ -6257,7 +6257,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                         });
                                     }
@@ -6276,7 +6276,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,"+
-                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_stok_obat_pasien  "+
                                     " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_stok_obat_pasien.no_rawat "+
@@ -6294,7 +6294,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     " group by permintaan_stok_obat_pasien.no_permintaan order by permintaan_stok_obat_pasien.tgl_permintaan desc,permintaan_stok_obat_pasien.jam desc");
                         }else{
                             ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,"+
-                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_stok_obat_pasien  "+
                                     " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_stok_obat_pasien.no_rawat "+
@@ -6332,7 +6332,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                     });
                                 }
@@ -6342,7 +6342,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                         });
                                     }
@@ -6386,7 +6386,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
             if(DEPOAKTIFOBAT.equals("")){
                 ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_stok_obat_pasien.status as status_asal,penjab.png_jawab from permintaan_stok_obat_pasien "+
                         " inner join reg_periksa on permintaan_stok_obat_pasien.no_rawat=reg_periksa.no_rawat "+
                         " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -6402,7 +6402,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         " group by permintaan_stok_obat_pasien.no_permintaan order by permintaan_stok_obat_pasien.tgl_permintaan desc,permintaan_stok_obat_pasien.jam desc");
             }else{
                 ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_stok_obat_pasien.status as status_asal,penjab.png_jawab from permintaan_stok_obat_pasien "+
                         " inner join reg_periksa on permintaan_stok_obat_pasien.no_rawat=reg_periksa.no_rawat "+
                         " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -6438,7 +6438,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         tabMode6.addRow(new Object[]{
                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                             rs.getString("nm_bangsal"),rs.getString("status"),
-                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                             rs.getString("nm_dokter")
                         });
                         tabMode6.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -6505,7 +6505,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             tabMode6.addRow(new Object[]{
                                 rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                                 rs.getString("nm_bangsal"),rs.getString("status"),
-                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                 rs.getString("nm_dokter")
                             });
                             tabMode6.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -6582,7 +6582,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
             if(DEPOAKTIFOBAT.equals("")){
                 ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_stok_obat_pasien.status as status_asal,penjab.png_jawab from permintaan_stok_obat_pasien "+
                         " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_stok_obat_pasien.no_rawat "+
                         " inner join reg_periksa on permintaan_stok_obat_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -6599,7 +6599,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         " group by permintaan_stok_obat_pasien.no_permintaan order by permintaan_stok_obat_pasien.tgl_permintaan desc,permintaan_stok_obat_pasien.jam desc");
             }else{
                 ps=koneksi.prepareStatement("select permintaan_stok_obat_pasien.no_permintaan,permintaan_stok_obat_pasien.tgl_permintaan,permintaan_stok_obat_pasien.jam,permintaan_stok_obat_pasien.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_stok_obat_pasien.kd_dokter,dokter.nm_dokter,if(permintaan_stok_obat_pasien.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_stok_obat_pasien.status as status_asal,penjab.png_jawab from permintaan_stok_obat_pasien "+
                         " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_stok_obat_pasien.no_rawat "+
                         " inner join reg_periksa on permintaan_stok_obat_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -6636,7 +6636,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         tabMode6.addRow(new Object[]{
                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                             rs.getString("nm_bangsal"),rs.getString("status"),
-                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                             rs.getString("nm_dokter")
                         });
                         tabMode6.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -6702,7 +6702,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             tabMode6.addRow(new Object[]{
                                 rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                                 rs.getString("nm_bangsal"),rs.getString("status"),
-                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                 rs.getString("nm_dokter")
                             });
                             tabMode6.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -6792,7 +6792,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,"+
-                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_resep_pulang  "+
                                     " inner join reg_periksa on permintaan_resep_pulang.no_rawat=reg_periksa.no_rawat "+
@@ -6809,7 +6809,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     " group by permintaan_resep_pulang.no_permintaan order by permintaan_resep_pulang.tgl_permintaan desc,permintaan_resep_pulang.jam desc");
                         }else{
                             ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,"+
-                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_resep_pulang  "+
                                     " inner join reg_periksa on permintaan_resep_pulang.no_rawat=reg_periksa.no_rawat "+
@@ -6847,7 +6847,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                     });
                                 }
@@ -6857,7 +6857,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                         });
                                     }
@@ -6876,7 +6876,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
                         if(DEPOAKTIFOBAT.equals("")){
                             ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,"+
-                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_resep_pulang  "+
                                     " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_resep_pulang.no_rawat "+
@@ -6894,7 +6894,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     " group by permintaan_resep_pulang.no_permintaan order by permintaan_resep_pulang.tgl_permintaan desc,permintaan_resep_pulang.jam desc");
                         }else{
                             ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,"+
-                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter, "+
+                                    " permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,pasien.tgl_lahir, "+
                                     " if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
                                     " bangsal.nm_bangsal,kamar.kd_bangsal,penjab.png_jawab from permintaan_resep_pulang  "+
                                     " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_resep_pulang.no_rawat "+
@@ -6932,7 +6932,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                     i++;
                                     publish(new Object[]{
                                         rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                        rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                         rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                     });
                                 }
@@ -6942,7 +6942,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                                         i++;
                                         publish(new Object[]{
                                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan"),rs.getString("jam"),rs.getString("no_rawat"),
-                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
+                                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir"),rs.getString("nm_dokter"),rs.getString("status"),
                                             rs.getString("kd_dokter"),rs.getString("nm_bangsal"),rs.getString("kd_bangsal"),rs.getString("png_jawab")
                                         });
                                     }
@@ -6986,7 +6986,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             semua=CrDokter2.getText().trim().equals("")&&Kamar.getText().trim().equals("")&&TCari.getText().trim().equals("");
             if(DEPOAKTIFOBAT.equals("")){
                 ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_resep_pulang.status as status_asal,penjab.png_jawab from permintaan_resep_pulang "+
                         " inner join reg_periksa on permintaan_resep_pulang.no_rawat=reg_periksa.no_rawat "+
                         " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -7002,7 +7002,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         " group by permintaan_resep_pulang.no_permintaan order by permintaan_resep_pulang.tgl_permintaan desc,permintaan_resep_pulang.jam desc");
             }else{
                 ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_resep_pulang.status as status_asal,penjab.png_jawab from permintaan_resep_pulang "+
                         " inner join reg_periksa on permintaan_resep_pulang.no_rawat=reg_periksa.no_rawat "+
                         " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -7038,7 +7038,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         tabMode8.addRow(new Object[]{
                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                             rs.getString("nm_bangsal"),rs.getString("status"),
-                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                             rs.getString("nm_dokter")
                         });
                         tabMode8.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -7072,7 +7072,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             tabMode8.addRow(new Object[]{
                                 rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                                 rs.getString("nm_bangsal"),rs.getString("status"),
-                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                 rs.getString("nm_dokter")
                             });
                             tabMode8.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -7116,7 +7116,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
             if(DEPOAKTIFOBAT.equals("")){
                 ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_resep_pulang.status as status_asal,penjab.png_jawab from permintaan_resep_pulang "+
                         " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_resep_pulang.no_rawat "+
                         " inner join reg_periksa on permintaan_resep_pulang.no_rawat=reg_periksa.no_rawat "+
@@ -7133,7 +7133,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         " group by permintaan_resep_pulang.no_permintaan order by permintaan_resep_pulang.tgl_permintaan desc,permintaan_resep_pulang.jam desc");
             }else{
                 ps=koneksi.prepareStatement("select permintaan_resep_pulang.no_permintaan,permintaan_resep_pulang.tgl_permintaan,permintaan_resep_pulang.jam,permintaan_resep_pulang.no_rawat,pasien.no_rkm_medis,"+
-                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,"+
+                        " pasien.nm_pasien,permintaan_resep_pulang.kd_dokter,dokter.nm_dokter,if(permintaan_resep_pulang.status='Belum','Belum Terlayani','Sudah Terlayani') as status,pasien.tgl_lahir,"+
                         " bangsal.nm_bangsal,permintaan_resep_pulang.status as status_asal,penjab.png_jawab from permintaan_resep_pulang "+
                         " inner join ranap_gabung on ranap_gabung.no_rawat2=permintaan_resep_pulang.no_rawat "+
                         " inner join reg_periksa on permintaan_resep_pulang.no_rawat=reg_periksa.no_rawat "+
@@ -7170,7 +7170,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         tabMode8.addRow(new Object[]{
                             rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
                             rs.getString("nm_bangsal"),rs.getString("status"),
-                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                            rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                             rs.getString("nm_dokter")
                         });
                         tabMode8.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});
@@ -7202,8 +7202,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                         if(rs.getString("status").equals(cmbStatus.getSelectedItem().toString())){
                             tabMode8.addRow(new Object[]{
                                 rs.getString("no_permintaan"),rs.getString("tgl_permintaan")+" "+rs.getString("jam"),
-                                rs.getString("nm_bangsal"),rs.getString("status"),
-                                rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("png_jawab")+")",
+                                rs.getString("nm_bangsal"),rs.getString("status"),rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+"/"+rs.getString("tgl_lahir")+" ("+rs.getString("png_jawab")+")",
                                 rs.getString("nm_dokter")
                             });
                             tabMode8.addRow(new Object[]{"","","Jumlah","Kode Obat","Nama Obat","Aturan Pakai"});

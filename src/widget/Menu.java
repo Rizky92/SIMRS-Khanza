@@ -83,6 +83,14 @@ public class Menu extends JMenu {
         return img;
     }
 
+    @Override
+    public void setPopupMenuVisible(boolean b) {
+        if (b && !modeDesain()) {
+            widget.PopupMenu.gayakanBilaAman(getPopupMenu(), this);
+        }
+        super.setPopupMenuVisible(b);
+    }
+
     public Menu() {
         super();
         gaya();
@@ -104,6 +112,9 @@ public class Menu extends JMenu {
     }
 
     private void gaya() {
+        if (modeDesain()) {
+            return;
+        }
         setFont(FONT);
         setForeground(TEKS);
         setBackground(LATAR);
@@ -113,12 +124,31 @@ public class Menu extends JMenu {
 
     @Override
     public void updateUI() {
+        if (modeDesain()) {
+            super.updateUI();
+            return;
+        }
         setUI(new ModernMenuUI());
+    }
+
+    static boolean modeDesain() {
+        return DI_NETBEANS || java.beans.Beans.isDesignTime();
+    }
+
+    private static final boolean DI_NETBEANS = dimuatNetBeans();
+
+    private static boolean dimuatNetBeans() {
+        ClassLoader cl = Menu.class.getClassLoader();
+        String n = cl == null ? "" : cl.getClass().getName();
+        return n.contains("netbeans") || n.contains("openide");
     }
 
     @Override
     public Dimension getPreferredSize() {
         Dimension d = super.getPreferredSize();
+        if (modeDesain()) {
+            return d;
+        }
         if (!isPreferredSizeSet() && !isTopLevelMenu() && d.height < TINGGI_MIN) {
             d.height = TINGGI_MIN;
         }
@@ -130,8 +160,7 @@ public class Menu extends JMenu {
         return m.isArmed() || m.isSelected();
     }
 
-    private static class ModernMenuUI extends BasicMenuUI {
-
+    static class ModernMenuUI extends BasicMenuUI {
         @Override
         protected void installDefaults() {
             super.installDefaults();

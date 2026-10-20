@@ -291,7 +291,7 @@ public class DlgUser extends javax.swing.JDialog {
                 "[M]Check List Kriteria Masuk Isolasi","[L]Mapping Tindakan Ralan KPTL Satu Sehat","[L]Mapping Tindakan Ranap KPTL Satu Sehat","[L]Mapping Tindakan Radiologi KPTL Satu Sehat",
                 "[L]Mapping Tindakan Laborat KPTL Satu Sehat","[L]Mapping Tindakan Operasi KPTL Satu Sehat","[L]Mapping Tarif Kamar KPTL Satu Sehat","[M]Check List Kriteria Keluar Isolasi",
                 "[L]Bridging TTE Satu Sehat","[L]Kirim Composition Satu Sehat","[K]Ringkasan Hutang Vendor Aset/Inventaris","[K]Ringkasan Beban Hutang Lain","[U]Set Resep Per Cara Bayar",
-                "[M]Skrining TOLAC","[M]Admisi & Skoring TOLAC","[M]Monitoring Selama TOLAC","[M]Resume Hasil Persalinan TOLAC"
+                "[M]Skrining TOLAC","[M]Admisi & Skoring TOLAC","[M]Monitoring Selama TOLAC","[M]Resume Hasil Persalinan TOLAC","[M]Laporan Reaksi Tranfusi"
         };
 
         tabMode=new DefaultTableModel(null,row){
@@ -617,6 +617,7 @@ public class DlgUser extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
              };
              @Override
@@ -630,7 +631,7 @@ public class DlgUser extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 1224;i++) {
+        for (i = 0; i < 1225;i++) {
             TableColumn column = tbUser.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
@@ -3756,6 +3757,9 @@ public class DlgUser extends javax.swing.JDialog {
                 case 1223:
                     column.setPreferredWidth(179);
                     break;
+                case 1224:
+                    column.setPreferredWidth(139);
+                    break;
                 default:
                     column.setPreferredWidth(133);
                     break;
@@ -4186,7 +4190,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
-                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
+                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
                 tabMode.addRow(new Object[]{
                     TKd.getText(),TNmUser.getText(),Jabatan.getText(),TPass.getText(),false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
@@ -4217,7 +4221,7 @@ public class DlgUser extends javax.swing.JDialog {
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false,false,false,false,false
+                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
@@ -5488,7 +5492,8 @@ public class DlgUser extends javax.swing.JDialog {
                     "skrining_tolac='"+tbUser.getValueAt(i,1220).toString()+"',"+
                     "admisi_skoring_tolac='"+tbUser.getValueAt(i,1221).toString()+"',"+
                     "monitoring_tolac='"+tbUser.getValueAt(i,1222).toString()+"',"+
-                    "hasil_persalinan_tolac='"+tbUser.getValueAt(i,1223).toString()+"'")==true){
+                    "hasil_persalinan_tolac='"+tbUser.getValueAt(i,1223).toString()+"',"+
+                    "laporan_reaksi_transfusi='"+tbUser.getValueAt(i,1224).toString()+"'")==true){
                     emptTeks();
                 }
             }
@@ -6996,7 +7001,8 @@ public class DlgUser extends javax.swing.JDialog {
                                         "skrining_tolac='"+tbUser.getValueAt(barisdicopy,1220).toString()+"',"+
                                         "admisi_skoring_tolac='"+tbUser.getValueAt(barisdicopy,1221).toString()+"',"+
                                         "monitoring_tolac='"+tbUser.getValueAt(barisdicopy,1222).toString()+"',"+
-                                        "hasil_persalinan_tolac='"+tbUser.getValueAt(barisdicopy,1223).toString()+"'");
+                                        "hasil_persalinan_tolac='"+tbUser.getValueAt(barisdicopy,1223).toString()+"',"+
+                                        "laporan_reaksi_transfusi='"+tbUser.getValueAt(barisdicopy,1224).toString()+"'");
                                 }
                                 userdicopy="";
                                 copyhakakses="";
@@ -7338,7 +7344,7 @@ public class DlgUser extends javax.swing.JDialog {
                             "user.satu_sehat_mapping_kptl_tindakan_ranap,user.satu_sehat_mapping_kptl_tindakan_radiologi,user.satu_sehat_mapping_kptl_tindakan_laborat,user.satu_sehat_mapping_kptl_tindakan_operasi,"+
                             "user.satu_sehat_mapping_kptl_tarif_kamar,user.checklist_kriteria_keluar_isolasi,user.satu_sehat_tanda_tangan_elektronik,user.satu_sehat_kirim_composition,"+
                             "user.ringkasan_hutang_vendor_inventaris,user.ringkasan_beban_hutang_lain,user.set_resep_per_cara_bayar,user.skrining_tolac,user.admisi_skoring_tolac,user.monitoring_tolac,"+
-                            "user.hasil_persalinan_tolac from user order by AES_DECRYPT(user.id_user,'nur')");
+                            "user.hasil_persalinan_tolac,user.laporan_reaksi_transfusi from user order by AES_DECRYPT(user.id_user,'nur')");
                         try {
                             rs=ps.executeQuery();
                             i=0;
@@ -8576,7 +8582,8 @@ public class DlgUser extends javax.swing.JDialog {
                                            rs.getBoolean("skrining_tolac"),
                                            rs.getBoolean("admisi_skoring_tolac"),
                                            rs.getBoolean("monitoring_tolac"),
-                                           rs.getBoolean("hasil_persalinan_tolac")
+                                           rs.getBoolean("hasil_persalinan_tolac"),
+                                           rs.getBoolean("laporan_reaksi_transfusi")
                                         });
                                     }
                                 } catch (Exception e) {
@@ -9802,7 +9809,8 @@ public class DlgUser extends javax.swing.JDialog {
                                        rs.getBoolean("skrining_tolac"),
                                        rs.getBoolean("admisi_skoring_tolac"),
                                        rs.getBoolean("monitoring_tolac"),
-                                       rs.getBoolean("hasil_persalinan_tolac")
+                                       rs.getBoolean("hasil_persalinan_tolac"),
+                                       rs.getBoolean("laporan_reaksi_transfusi")
                                     });
                                 }
                              }

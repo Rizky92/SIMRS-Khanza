@@ -211,6 +211,7 @@ import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTindakanInvasifNonBedahSMC;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMPerencanaanPemulangan;
+import rekammedis.RMReaksiTransfusi;
 import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMRiwayatPerawatan;
 import rekammedis.RMSignInSebelumAnastesi;
@@ -645,6 +646,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnGabungkanRanap = new widget.MenuItem();
         MnDPJP = new widget.MenuItem();
         MnDPJPRanap = new widget.MenuItem();
+        MnFilterDPJP = new widget.MenuItem();
         jSeparator13 = new widget.PopupMenu.Separator();
         MnRujukan = new widget.Menu();
         MnRujuk = new widget.MenuItem();
@@ -20283,6 +20285,61 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
     }
 
+    private void MnLaporanReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPersalinanActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else{
+            if(tbKamIn.getSelectedRow()>-1){
+                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                    try {
+                        psanak=koneksi.prepareStatement(
+                            "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
+                        try {
+                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            rs2=psanak.executeQuery();
+                            if(rs2.next()){
+                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                RMReaksiTransfusi form=new RMReaksiTransfusi(null,false);
+                                form.isCek();
+                                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                form.setLocationRelativeTo(internalFrame1);
+                                form.setVisible(true);
+                                form.emptTeks();
+                                form.setNoRm(norawat.getText(),DTPCari2.getDate());
+                                this.setCursor(Cursor.getDefaultCursor());
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+                                tbKamIn.requestFocus();
+                            }
+                        } catch(Exception ex){
+                            System.out.println("Notifikasi : "+ex);
+                        }finally{
+                              if(rs2 != null){
+                                  rs2.close();
+                              }
+                              if(psanak != null){
+                                  psanak.close();
+                              }
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }else{
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    RMReaksiTransfusi form=new RMReaksiTransfusi(null,false);
+                    form.isCek();
+                    form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                    form.setLocationRelativeTo(internalFrame1);
+                    form.setVisible(true);
+                    form.emptTeks();
+                    form.setNoRm(norawat.getText(),DTPCari2.getDate());
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -20727,7 +20784,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                   MnCheckListKesiapanAnestesi,MnHasilPemeriksaanSlitLamp,MnHasilPemeriksaanOCT,MnPersetujuanPemeriksaanHIV,MnSuratPernyataanMemilihDPJP,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaKeluarNICU,MnPenilaianAwalMedisPsikiatri,
                                   MnCheckListKriteriaMasukPICU,MnCheckListKriteriaKeluarPICU,MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnPenilaianAwalMedisJantung,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiPerawat,
                                   MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,MnHasilPemeriksaanUSGAbdomen,MnIntervensiNyeriFarmakologi,
-                                  MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien,MnCheckListKriteriaMasukIsolasi,MnCheckListKriteriaKeluarIsolasi,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC;
+                                  MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien,MnCheckListKriteriaMasukIsolasi,MnCheckListKriteriaKeluarIsolasi,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC,MnLaporanReaksiTranfusi;
     private widget.Menu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi,MnEdukasi,MnSuratPersetujuan,MnHasilPemeriksaanAlat;
 
     private widget.MenuItem MnPengkajianInvasifNonBedahSMC;
@@ -21423,6 +21480,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanPersalinan.setEnabled(akses.getcatatan_persalinan());
         MnAdmisiSkoringTOLAC.setEnabled(akses.getadmisi_skoring_tolac());
         MnHasilPersalinanTOLAC.setEnabled(akses.gethasil_persalinan_tolac());
+        MnLaporanReaksiTranfusi.setEnabled(akses.getlaporan_reaksi_transfusi());
         MnSkorAldrettePascaAnestesi.setEnabled(akses.getskor_aldrette_pasca_anestesi());
         MnSkorStewardPascaAnestesi.setEnabled(akses.getskor_steward_pasca_anestesi());
         MnSkorBromagePascaAnestesi.setEnabled(akses.getskor_bromage_pasca_anestesi());
@@ -22377,6 +22435,18 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnHasilPersalinanTOLAC.setPreferredSize(new java.awt.Dimension(240, 26));
         MnHasilPersalinanTOLAC.addActionListener(this::MnHasilPersalinanTOLACActionPerformed);
 
+        MnLaporanReaksiTranfusi = new widget.MenuItem();
+        MnLaporanReaksiTranfusi.setBackground(new java.awt.Color(255, 255, 254));
+        MnLaporanReaksiTranfusi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnLaporanReaksiTranfusi.setForeground(new java.awt.Color(50, 50, 50));
+        MnLaporanReaksiTranfusi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnLaporanReaksiTranfusi.setText("Laporan Reaksi Tranfusi");
+        MnLaporanReaksiTranfusi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnLaporanReaksiTranfusi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnLaporanReaksiTranfusi.setName("MnLaporanReaksiTranfusi");
+        MnLaporanReaksiTranfusi.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnLaporanReaksiTranfusi.addActionListener(this::MnLaporanReaksiTranfusiActionPerformed);
+
         MnHasilUSG = new widget.Menu();
         MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
@@ -22469,12 +22539,14 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasi.add(MnCatatanObservasiRestrainNonFarmakologi);
         MnCatatanObservasi.add(MnCatatanObservasiVentilator);
         MnCatatanObservasi.add(MnCatatanObservasiHemodialisa);
+        MnCatatanObservasi.add(MnMonitoringReaksiTranfusi);
+        MnCatatanObservasi.add(MnCatatanKeseimbanganCairan);
 
         MnObservasi.add(MnCatatanObservasi);
         MnObservasi.add(MnFollowUpDBD);
         MnObservasi.add(MnCatatanKeperawatan);
         MnObservasi.add(MnCatatanCekGDS);
-        MnObservasi.add(MnMonitoringReaksiTranfusi);
+        MnObservasi.add(MnLaporanReaksiTranfusi);
         MnObservasi.add(MnHasilUSG);
 
         MnHasilUSG.add(MnHasilPemeriksaanUSG);
@@ -22492,7 +22564,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnObservasi.add(MnAdmisiSkoringTOLAC);
         MnObservasi.add(MnCatatanPersalinan);
         MnObservasi.add(MnHasilPersalinanTOLAC);
-        MnObservasi.add(MnCatatanKeseimbanganCairan);
         MnObservasi.add(MnCatatanCairanHemodialisa);
         MnObservasi.add(MnChecklistPemberianFibrinolitik);
         MnObservasi.add(MnLaporanTindakan);
