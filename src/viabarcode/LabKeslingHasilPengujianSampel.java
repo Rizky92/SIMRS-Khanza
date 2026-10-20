@@ -361,13 +361,11 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         PanelInput.setLayout(null);
 
         KodePelanggan.setEditable(false);
-        KodePelanggan.setHighlighter(null);
         KodePelanggan.setName("KodePelanggan"); // NOI18N
         PanelInput.add(KodePelanggan);
         KodePelanggan.setBounds(98, 70, 80, 23);
 
         NamaPelanggan.setEditable(false);
-        NamaPelanggan.setHighlighter(null);
         NamaPelanggan.setName("NamaPelanggan"); // NOI18N
         PanelInput.add(NamaPelanggan);
         NamaPelanggan.setBounds(180, 70, 200, 23);
@@ -419,7 +417,6 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         jLabel4.setBounds(446, 40, 90, 23);
 
         TNoPermintaan.setEditable(false);
-        TNoPermintaan.setHighlighter(null);
         TNoPermintaan.setName("TNoPermintaan"); // NOI18N
         PanelInput.add(TNoPermintaan);
         TNoPermintaan.setBounds(540, 40, 140, 23);
@@ -435,13 +432,11 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         jLabel18.setBounds(370, 70, 70, 23);
 
         KodeSampel.setEditable(false);
-        KodeSampel.setHighlighter(null);
         KodeSampel.setName("KodeSampel"); // NOI18N
         PanelInput.add(KodeSampel);
         KodeSampel.setBounds(444, 70, 55, 23);
 
         NamaSampel.setEditable(false);
-        NamaSampel.setHighlighter(null);
         NamaSampel.setName("NamaSampel"); // NOI18N
         PanelInput.add(NamaSampel);
         NamaSampel.setBounds(501, 70, 179, 23);
@@ -452,7 +447,6 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         jLabel5.setBounds(446, 10, 90, 23);
 
         TNoPenugasan.setEditable(false);
-        TNoPenugasan.setHighlighter(null);
         TNoPenugasan.setName("TNoPenugasan"); // NOI18N
         TNoPenugasan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -473,7 +467,6 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         KdAnalis.setBounds(98, 10, 115, 23);
 
         NmAnalis.setEditable(false);
-        NmAnalis.setHighlighter(null);
         NmAnalis.setName("NmAnalis"); // NOI18N
         PanelInput.add(NmAnalis);
         NmAnalis.setBounds(215, 10, 200, 23);

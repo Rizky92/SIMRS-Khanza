@@ -495,6 +495,7 @@ import ipsrs.IPSRSRingkasanPengajuanBarangNonMedis;
 import ipsrs.IPSRSRingkasanPengeluaranBarangNonMedis;
 import ipsrs.IPSRSRingkasanReturBeliBarangNonMedis;
 import ipsrs.IPSRSRiwayatBarang;
+import ipsrs.IPSRSStokAkhirPerTanggalSMC;
 import ipsrs.IPSRSSuplier;
 import ipsrs.IPSRSSuratPemesanan;
 import ipsrs.IPSRSVerifikasiPenerimaan;
@@ -734,6 +735,7 @@ import keuangan.KeuanganValidasiTagihanAset;
 import keuangan.KeuanganValidasiTagihanDapur;
 import keuangan.KeuanganValidasiTagihanNonMedis;
 import keuangan.KeuanganValidasiTagihanObatBHP;
+import keuangan.MasterTemplatePaketMCUSMC;
 import laporan.DlgAnggotaMiliterDirawat;
 import laporan.DlgAnggotaPolriDirawat;
 import laporan.DlgBerkasRawat;
@@ -8621,7 +8623,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setVisible(true);
         if(menuawal==0){
             isCombo();
-            isComboSMC();
+            isComboSmc();
             setLayout();
             menuawal=1;
         }else{
@@ -24852,17 +24854,17 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(ChkInput.isSelected()==true){
             isCombo();
-            isComboSMC();
+            isComboSmc();
         }else{
             jmlmenu=0;
             if(TCari.getText().equals("")){
                 isCariKosong();
-                isCariKosongSMC();
+                isCariKosongSmc();
             }else if(!TCari.getText().equals("")){
                 isCariIsi();
                 isCariIsi2();
                 isCariIsi3();
-                isCariIsiSMC();
+                isCariIsiSmc();
             }
         }
 
@@ -28413,7 +28415,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
 
             if (akses.getbpjs_daftar_pelayanan_obat_apotek()) {
-                Panelmenu.add(btnBPJSDaftarPelayananObat2Apotek);
+                Panelmenu.add(btnBPJSDaftarPelayananObat2ApotekSmc);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){
@@ -51513,19 +51515,19 @@ public class frmUtama extends javax.swing.JFrame {
         btnRingkasanBebanHutangLain.addActionListener(this::btnRingkasanBebanHutangLainActionPerformed);
     }
 
-    private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
-                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
-                             btnPengkajianInvasifNonBedahSMC, btnPengajuanIzinAdminSMC, btnJadwalDinasSMC, btnJadwalDinasPegawaiSMC, btnRekapKehadiranSMC,
+    private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
+                             btnBPJSDaftarPelayananObat2ApotekSmc, btnBPJSKirimObatApotekSmc, btnBPJSKirimEditObatApotekSmc, btnBPJSRiwayatPelayananResepApotekSmc, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
+                             btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSmc,
                              btnSetAturanPasswordSMC;
 
     private void initSMC() {
-        btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
-        btnBPJSKompilasiBerkasKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_x-office-document-template_25011.png")));
-        btnBPJSKompilasiBerkasKlaim.setText("Kompilasi Berkas Klaim BPJS");
-        btnBPJSKompilasiBerkasKlaim.setIconTextGap(0);
-        btnBPJSKompilasiBerkasKlaim.setName("btnBPJSKompilasiBerkasKlaim");
-        btnBPJSKompilasiBerkasKlaim.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSKompilasiBerkasKlaim.addActionListener(this::btnBPJSKompilasiBerkasKlaimActionPerformed);
+        btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
+        btnBPJSKompilasiBerkasKlaimSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_x-office-document-template_25011.png")));
+        btnBPJSKompilasiBerkasKlaimSmc.setText("Kompilasi Berkas Klaim BPJS");
+        btnBPJSKompilasiBerkasKlaimSmc.setIconTextGap(0);
+        btnBPJSKompilasiBerkasKlaimSmc.setName("btnBPJSKompilasiBerkasKlaimSmc");
+        btnBPJSKompilasiBerkasKlaimSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSKompilasiBerkasKlaimSmc.addActionListener(this::btnBPJSKompilasiBerkasKlaimSmcActionPerformed);
 
         btnUserSmc = new widget.ButtonBig();
         btnUserSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
@@ -51535,29 +51537,29 @@ public class frmUtama extends javax.swing.JFrame {
         btnUserSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUserSmc.addActionListener(this::btnUserSmcActionPerformed);
 
-        btnSetAksesEditSementara = new widget.ButtonBig();
-        btnSetAksesEditSementara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
-        btnSetAksesEditSementara.setText("Set Akses Edit Sementara");
-        btnSetAksesEditSementara.setIconTextGap(0);
-        btnSetAksesEditSementara.setName("btnSetAksesEditSementara");
-        btnSetAksesEditSementara.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetAksesEditSementara.addActionListener(this::btnSetAksesEditSementaraActionPerformed);
+        btnSetAksesEditSementaraSmc = new widget.ButtonBig();
+        btnSetAksesEditSementaraSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
+        btnSetAksesEditSementaraSmc.setText("Set Akses Edit Sementara");
+        btnSetAksesEditSementaraSmc.setIconTextGap(0);
+        btnSetAksesEditSementaraSmc.setName("btnSetAksesEditSementaraSmc");
+        btnSetAksesEditSementaraSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetAksesEditSementaraSmc.addActionListener(this::btnSetAksesEditSementaraSmcActionPerformed);
 
-        btnBPJSAntreanPerKodebookingMobileJKN = new widget.ButtonBig();
-        btnBPJSAntreanPerKodebookingMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
-        btnBPJSAntreanPerKodebookingMobileJKN.setText("Antrean Per Kode Booking Mobile JKN");
-        btnBPJSAntreanPerKodebookingMobileJKN.setIconTextGap(0);
-        btnBPJSAntreanPerKodebookingMobileJKN.setName("btnBPJSAntreanPerKodebookingMobileJKN");
-        btnBPJSAntreanPerKodebookingMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSAntreanPerKodebookingMobileJKN.addActionListener(this::btnBPJSAntreanPerKodebookingMobileJKNActionPerformed);
+        btnBPJSAntreanPerKodebookingMobileJKNSmc = new widget.ButtonBig();
+        btnBPJSAntreanPerKodebookingMobileJKNSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
+        btnBPJSAntreanPerKodebookingMobileJKNSmc.setText("Antrean Per Kode Booking Mobile JKN");
+        btnBPJSAntreanPerKodebookingMobileJKNSmc.setIconTextGap(0);
+        btnBPJSAntreanPerKodebookingMobileJKNSmc.setName("btnBPJSAntreanPerKodebookingMobileJKNSmc");
+        btnBPJSAntreanPerKodebookingMobileJKNSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSAntreanPerKodebookingMobileJKNSmc.addActionListener(this::btnBPJSAntreanPerKodebookingMobileJKNSmcActionPerformed);
 
-        btnSetTampilJenisObatResep = new widget.ButtonBig();
-        btnSetTampilJenisObatResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png")));
-        btnSetTampilJenisObatResep.setText("Set Tampil Jenis Obat Resep Rawat Jalan");
-        btnSetTampilJenisObatResep.setIconTextGap(0);
-        btnSetTampilJenisObatResep.setName("btnSetTampilJenisObatResep");
-        btnSetTampilJenisObatResep.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetTampilJenisObatResep.addActionListener(this::btnSetTampilJenisObatResepActionPerformed);
+        btnSetTampilJenisObatResepSmc = new widget.ButtonBig();
+        btnSetTampilJenisObatResepSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png")));
+        btnSetTampilJenisObatResepSmc.setText("Set Tampil Jenis Obat Resep Rawat Jalan");
+        btnSetTampilJenisObatResepSmc.setIconTextGap(0);
+        btnSetTampilJenisObatResepSmc.setName("btnSetTampilJenisObatResepSmc");
+        btnSetTampilJenisObatResepSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetTampilJenisObatResepSmc.addActionListener(this::btnSetTampilJenisObatResepSmcActionPerformed);
 
         btnSetPintuPoliSmc = new widget.ButtonBig();
         btnSetPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
@@ -51567,37 +51569,37 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetPintuPoliSmc.addActionListener(this::btnSetPintuPoliSmcActionPerformed);
 
-        btnBPJSDaftarPelayananObat2Apotek = new widget.ButtonBig();
-        btnBPJSDaftarPelayananObat2Apotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
-        btnBPJSDaftarPelayananObat2Apotek.setText("Daftar Pelayanan Obat 2 Apotek BPJS");
-        btnBPJSDaftarPelayananObat2Apotek.setIconTextGap(0);
-        btnBPJSDaftarPelayananObat2Apotek.setName("btnBPJSDaftarPelayananObat2Apotek");
-        btnBPJSDaftarPelayananObat2Apotek.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSDaftarPelayananObat2Apotek.addActionListener(this::btnBPJSDaftarPelayananObat2ApotekActionPerformed);
+        btnBPJSDaftarPelayananObat2ApotekSmc = new widget.ButtonBig();
+        btnBPJSDaftarPelayananObat2ApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
+        btnBPJSDaftarPelayananObat2ApotekSmc.setText("Daftar Pelayanan Obat 2 Apotek BPJS");
+        btnBPJSDaftarPelayananObat2ApotekSmc.setIconTextGap(0);
+        btnBPJSDaftarPelayananObat2ApotekSmc.setName("btnBPJSDaftarPelayananObat2ApotekSmc");
+        btnBPJSDaftarPelayananObat2ApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSDaftarPelayananObat2ApotekSmc.addActionListener(this::btnBPJSDaftarPelayananObat2ApotekSmcActionPerformed);
 
-        btnBPJSKirimObatApotek = new widget.ButtonBig();
-        btnBPJSKirimObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
-        btnBPJSKirimObatApotek.setText("Kirim Obat Apotek BPJS");
-        btnBPJSKirimObatApotek.setIconTextGap(0);
-        btnBPJSKirimObatApotek.setName("btnBPJSKirimObatApotek");
-        btnBPJSKirimObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSKirimObatApotek.addActionListener(this::btnBPJSKirimObatApotekActionPerformed);
+        btnBPJSKirimObatApotekSmc = new widget.ButtonBig();
+        btnBPJSKirimObatApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
+        btnBPJSKirimObatApotekSmc.setText("Kirim Obat Apotek BPJS");
+        btnBPJSKirimObatApotekSmc.setIconTextGap(0);
+        btnBPJSKirimObatApotekSmc.setName("btnBPJSKirimObatApotekSmc");
+        btnBPJSKirimObatApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSKirimObatApotekSmc.addActionListener(this::btnBPJSKirimObatApotekSmcActionPerformed);
 
-        btnBPJSKirimEditObatApotek = new widget.ButtonBig();
-        btnBPJSKirimEditObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
-        btnBPJSKirimEditObatApotek.setText("Edit Kirim Obat Apotek BPJS");
-        btnBPJSKirimEditObatApotek.setIconTextGap(0);
-        btnBPJSKirimEditObatApotek.setName("btnBPJSKirimEditObatApotek");
-        btnBPJSKirimEditObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSKirimEditObatApotek.addActionListener(this::btnBPJSKirimEditObatApotekActionPerformed);
+        btnBPJSKirimEditObatApotekSmc = new widget.ButtonBig();
+        btnBPJSKirimEditObatApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
+        btnBPJSKirimEditObatApotekSmc.setText("Edit Kirim Obat Apotek BPJS");
+        btnBPJSKirimEditObatApotekSmc.setIconTextGap(0);
+        btnBPJSKirimEditObatApotekSmc.setName("btnBPJSKirimEditObatApotekSmc");
+        btnBPJSKirimEditObatApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSKirimEditObatApotekSmc.addActionListener(this::btnBPJSKirimEditObatApotekSmcActionPerformed);
 
-        btnBPJSRiwayatPelayananResepApotek = new widget.ButtonBig();
-        btnBPJSRiwayatPelayananResepApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
-        btnBPJSRiwayatPelayananResepApotek.setText("Riwayat Pelayanan Resep Apotek BPJS");
-        btnBPJSRiwayatPelayananResepApotek.setIconTextGap(0);
-        btnBPJSRiwayatPelayananResepApotek.setName("btnBPJSRiwayatPelayananResepApotek");
-        btnBPJSRiwayatPelayananResepApotek.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSRiwayatPelayananResepApotek.addActionListener(this::btnBPJSRiwayatPelayananResepApotekActionPerformed);
+        btnBPJSRiwayatPelayananResepApotekSmc = new widget.ButtonBig();
+        btnBPJSRiwayatPelayananResepApotekSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
+        btnBPJSRiwayatPelayananResepApotekSmc.setText("Riwayat Pelayanan Resep Apotek BPJS");
+        btnBPJSRiwayatPelayananResepApotekSmc.setIconTextGap(0);
+        btnBPJSRiwayatPelayananResepApotekSmc.setName("btnBPJSRiwayatPelayananResepApotekSmc");
+        btnBPJSRiwayatPelayananResepApotekSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSRiwayatPelayananResepApotekSmc.addActionListener(this::btnBPJSRiwayatPelayananResepApotekSmcActionPerformed);
 
         btnPintuPoliSmc = new widget.ButtonBig();
         btnPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
@@ -51613,47 +51615,63 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatSuratKontrolSmc.setIconTextGap(0);
         btnBPJSRiwayatSuratKontrolSmc.setName("btnBPJSRiwayatSuratKontrolSmc");
         btnBPJSRiwayatSuratKontrolSmc.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmc);
+        btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmcActionPerformed);
 
-        btnPengkajianInvasifNonBedahSMC = new widget.ButtonBig();
-        btnPengkajianInvasifNonBedahSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088726_bed_hospital_icu_medical_treatment_icon.png")));
-        btnPengkajianInvasifNonBedahSMC.setText("Pengkajian Tindakan Invasif Non Bedah");
-        btnPengkajianInvasifNonBedahSMC.setIconTextGap(0);
-        btnPengkajianInvasifNonBedahSMC.setName("btnPengkajianInvasifNonBedahSMC");
-        btnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengkajianInvasifNonBedahSMC.addActionListener(this::btnPengkajianInvasifNonBedahSMCActionPerformed);
+        btnPengkajianInvasifNonBedahSmc = new widget.ButtonBig();
+        btnPengkajianInvasifNonBedahSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088726_bed_hospital_icu_medical_treatment_icon.png")));
+        btnPengkajianInvasifNonBedahSmc.setText("Pengkajian Tindakan Invasif Non Bedah");
+        btnPengkajianInvasifNonBedahSmc.setIconTextGap(0);
+        btnPengkajianInvasifNonBedahSmc.setName("btnPengkajianInvasifNonBedahSmc");
+        btnPengkajianInvasifNonBedahSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPengkajianInvasifNonBedahSmc.addActionListener(this::btnPengkajianInvasifNonBedahSmcActionPerformed);
 
-        btnPengajuanIzinAdminSMC = new widget.ButtonBig();
-        btnPengajuanIzinAdminSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
-        btnPengajuanIzinAdminSMC.setText("Pengajuan Izin Kerja");
-        btnPengajuanIzinAdminSMC.setIconTextGap(0);
-        btnPengajuanIzinAdminSMC.setName("btnPengajuanIzinAdminSMC");
-        btnPengajuanIzinAdminSMC.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengajuanIzinAdminSMC.addActionListener(this::btnPengajuanIzinAdminSMCActionPerformed);
+        btnPengajuanIzinAdminSmc = new widget.ButtonBig();
+        btnPengajuanIzinAdminSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
+        btnPengajuanIzinAdminSmc.setText("Pengajuan Izin Kerja");
+        btnPengajuanIzinAdminSmc.setIconTextGap(0);
+        btnPengajuanIzinAdminSmc.setName("btnPengajuanIzinAdminSmc");
+        btnPengajuanIzinAdminSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPengajuanIzinAdminSmc.addActionListener(this::btnPengajuanIzinAdminSmcActionPerformed);
 
-        btnJadwalDinasSMC = new widget.ButtonBig();
-        btnJadwalDinasSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427999_alarm_clock_hour_time_icon.png")));
-        btnJadwalDinasSMC.setText("Jadwal Dinas");
-        btnJadwalDinasSMC.setIconTextGap(0);
-        btnJadwalDinasSMC.setName("btnJadwalDinasSMC");
-        btnJadwalDinasSMC.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJadwalDinasSMC.addActionListener(this::btnJadwalDinasSMCActionPerformed);
+        btnJadwalDinasSmc = new widget.ButtonBig();
+        btnJadwalDinasSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6427999_alarm_clock_hour_time_icon.png")));
+        btnJadwalDinasSmc.setText("Jadwal Dinas");
+        btnJadwalDinasSmc.setIconTextGap(0);
+        btnJadwalDinasSmc.setName("btnJadwalDinasSmc");
+        btnJadwalDinasSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnJadwalDinasSmc.addActionListener(this::btnJadwalDinasSmcActionPerformed);
 
-        btnJadwalDinasPegawaiSMC = new widget.ButtonBig();
-        btnJadwalDinasPegawaiSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
-        btnJadwalDinasPegawaiSMC.setText("Jadwal Dinas Pegawai");
-        btnJadwalDinasPegawaiSMC.setIconTextGap(0);
-        btnJadwalDinasPegawaiSMC.setName("btnJadwalDinasPegawaiSMC");
-        btnJadwalDinasPegawaiSMC.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJadwalDinasPegawaiSMC.addActionListener(this::btnJadwalDinasPegawaiSMCActionPerformed);
+        btnJadwalDinasPegawaiSmc = new widget.ButtonBig();
+        btnJadwalDinasPegawaiSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
+        btnJadwalDinasPegawaiSmc.setText("Jadwal Dinas Pegawai");
+        btnJadwalDinasPegawaiSmc.setIconTextGap(0);
+        btnJadwalDinasPegawaiSmc.setName("btnJadwalDinasPegawaiSmc");
+        btnJadwalDinasPegawaiSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnJadwalDinasPegawaiSmc.addActionListener(this::btnJadwalDinasPegawaiSmcActionPerformed);
 
-        btnRekapKehadiranSMC = new widget.ButtonBig();
-        btnRekapKehadiranSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
-        btnRekapKehadiranSMC.setText("Rekap Kehadiran Pegawai");
-        btnRekapKehadiranSMC.setIconTextGap(0);
-        btnRekapKehadiranSMC.setName("btnRekapKehadiranSMC");
-        btnRekapKehadiranSMC.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekapKehadiranSMC.addActionListener(this::btnRekapKehadiranSMCActionPerformed);
+        btnRekapKehadiranSmc = new widget.ButtonBig();
+        btnRekapKehadiranSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485865_schedule.png")));
+        btnRekapKehadiranSmc.setText("Rekap Kehadiran Pegawai");
+        btnRekapKehadiranSmc.setIconTextGap(0);
+        btnRekapKehadiranSmc.setName("btnRekapKehadiranSmc");
+        btnRekapKehadiranSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRekapKehadiranSmc.addActionListener(this::btnRekapKehadiranSmcActionPerformed);
+
+        btnIPSRSStokAkhirPerTanggalSmc = new widget.ButtonBig();
+        btnIPSRSStokAkhirPerTanggalSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_bag_icons-15_1075431.png")));
+        btnIPSRSStokAkhirPerTanggalSmc.setText("Stok Akhir Non Medis per Tanggal");
+        btnIPSRSStokAkhirPerTanggalSmc.setIconTextGap(0);
+        btnIPSRSStokAkhirPerTanggalSmc.setName("btnIPSRSStokAkhirPerTanggalSmc");
+        btnIPSRSStokAkhirPerTanggalSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnIPSRSStokAkhirPerTanggalSmc.addActionListener(this::btnIPSRSStokAkhirPerTanggalSmcActionPerformed);
+
+        btnTemplatePaketMCUSmc = new widget.ButtonBig();
+        btnTemplatePaketMCUSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4852556_doctor_files_medical_record_icon.png")));
+        btnTemplatePaketMCUSmc.setText("Template Paket MCU");
+        btnTemplatePaketMCUSmc.setIconTextGap(0);
+        btnTemplatePaketMCUSmc.setName("btnTemplatePaketMCUSmc");
+        btnTemplatePaketMCUSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnTemplatePaketMCUSmc.addActionListener(this::btnTemplatePaketMCUSmcActionPerformed);
 
         btnSetAturanPasswordSMC = new widget.ButtonBig();
         btnSetAturanPasswordSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/preferences-desktop-user-password.png")));
@@ -51666,11 +51684,15 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void cekPeringatanPasswordSmc() {
         int hari = Sequel.cariIntegerSmc("select set_aturan_password_smc.hari_peringatan from set_aturan_password_smc limit 1");
+
         if (hari <= 0) {
             return;
         }
+
         int umur = Sequel.cariIntegerSmc("select datediff(current_date(), user_password_smc.tgl_ubah) from user_password_smc where user_password_smc.id_user = aes_encrypt(?, 'nur')", -1, akses.getkode());
+
         String pesan;
+
         if (umur < 0) {
             pesan = "Password Anda belum pernah diubah.";
         } else if (umur >= hari) {
@@ -51678,12 +51700,13 @@ public class frmUtama extends javax.swing.JFrame {
         } else {
             return;
         }
+
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, pesan + "\nDemi keamanan, silahkan ubah password Anda setiap " + hari + " hari.\nUbah password sekarang?", "Peringatan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)) {
             MnGantiPasswordBtnLogActionPerformed(null);
         }
     }
 
-    private void isComboSMC() {
+    private void isComboSmc() {
         if (cmbMenu.getSelectedIndex() == 0) {
             if (akses.getset_pintu_poli()) {
                 Panelmenu.add(btnSetPintuPoliSmc);
@@ -51696,47 +51719,57 @@ public class frmUtama extends javax.swing.JFrame {
             }
         } else if (cmbMenu.getSelectedIndex() == 2) {
             if (akses.getpengajuan_izin_smc()) {
-                Panelmenu.add(btnPengajuanIzinAdminSMC);
+                Panelmenu.add(btnPengajuanIzinAdminSmc);
                 jmlmenu++;
             }
 
             if (akses.getjam_masuk_smc()) {
-                Panelmenu.add(btnJadwalDinasSMC);
+                Panelmenu.add(btnJadwalDinasSmc);
                 jmlmenu++;
             }
 
             if (akses.getjadwal_pegawai_smc()) {
-                Panelmenu.add(btnJadwalDinasPegawaiSMC);
+                Panelmenu.add(btnJadwalDinasPegawaiSmc);
                 jmlmenu++;
             }
 
             if (akses.getrekap_kehadiran_smc()) {
-                Panelmenu.add(btnRekapKehadiranSMC);
+                Panelmenu.add(btnRekapKehadiranSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 4) {
+            if (akses.getipsrs_stok_akhir_pertanggal_smc()) {
+                Panelmenu.add(btnIPSRSStokAkhirPerTanggalSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 10) {
+            if (akses.getmaster_template_paket_mcu_smc()) {
+                Panelmenu.add(btnTemplatePaketMCUSmc);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 11) {
-            if (akses.getbpjs_kompilasi_berkas_klaim()) {
-                Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+            if (akses.getbpjs_kompilasi_berkas_klaim_smc()) {
+                Panelmenu.add(btnBPJSKompilasiBerkasKlaimSmc);
                 jmlmenu++;
             }
 
             if (akses.getbpjs_antrean_pertanggal()) {
-                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
+                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKNSmc);
                 jmlmenu++;
             }
 
             if (akses.getbpjs_kirim_obat_smc()) {
-                Panelmenu.add(btnBPJSKirimObatApotek);
+                Panelmenu.add(btnBPJSKirimObatApotekSmc);
                 jmlmenu++;
             }
 
             if (akses.getbpjs_edit_kirim_obat_smc()) {
-                Panelmenu.add(btnBPJSKirimEditObatApotek);
+                Panelmenu.add(btnBPJSKirimEditObatApotekSmc);
                 jmlmenu++;
             }
 
             if (akses.getbpjs_riwayat_pelayanan_resep_smc()) {
-                Panelmenu.add(btnBPJSRiwayatPelayananResepApotek);
+                Panelmenu.add(btnBPJSRiwayatPelayananResepApotekSmc);
                 jmlmenu++;
             }
 
@@ -51744,9 +51777,9 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
-        } else if (cmbMenu.getSelectedIndex() == 19) {
+        } else if (cmbMenu.getSelectedIndex() == 12) {
             if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
-                Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
+                Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 20) {
@@ -51756,12 +51789,12 @@ public class frmUtama extends javax.swing.JFrame {
             }
 
             if (akses.getadmin()) {
-                Panelmenu.add(btnSetAksesEditSementara);
+                Panelmenu.add(btnSetAksesEditSementaraSmc);
                 jmlmenu++;
             }
 
             if (akses.getadmin()) {
-                Panelmenu.add(btnSetTampilJenisObatResep);
+                Panelmenu.add(btnSetTampilJenisObatResepSmc);
                 jmlmenu++;
             }
 
@@ -51772,24 +51805,24 @@ public class frmUtama extends javax.swing.JFrame {
         }
     }
 
-    private void isCariKosongSMC() {
-        if (akses.getbpjs_kompilasi_berkas_klaim()) {
-            Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+    private void isCariKosongSmc() {
+        if (akses.getbpjs_kompilasi_berkas_klaim_smc()) {
+            Panelmenu.add(btnBPJSKompilasiBerkasKlaimSmc);
             jmlmenu++;
         }
 
         if (akses.getadmin()) {
-            Panelmenu.add(btnSetAksesEditSementara);
+            Panelmenu.add(btnSetAksesEditSementaraSmc);
             jmlmenu++;
         }
 
         if (akses.getbpjs_antrean_pertanggal()) {
-            Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
+            Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKNSmc);
             jmlmenu++;
         }
 
         if (akses.getadmin()) {
-            Panelmenu.add(btnSetTampilJenisObatResep);
+            Panelmenu.add(btnSetTampilJenisObatResepSmc);
             jmlmenu++;
         }
 
@@ -51809,22 +51842,22 @@ public class frmUtama extends javax.swing.JFrame {
         }
 
         if (akses.getbpjs_daftar_pelayanan_obat_apotek()) {
-            Panelmenu.add(btnBPJSDaftarPelayananObat2Apotek);
+            Panelmenu.add(btnBPJSDaftarPelayananObat2ApotekSmc);
             jmlmenu++;
         }
 
         if (akses.getbpjs_kirim_obat_smc()) {
-            Panelmenu.add(btnBPJSKirimObatApotek);
+            Panelmenu.add(btnBPJSKirimObatApotekSmc);
             jmlmenu++;
         }
 
         if (akses.getbpjs_edit_kirim_obat_smc()) {
-            Panelmenu.add(btnBPJSKirimEditObatApotek);
+            Panelmenu.add(btnBPJSKirimEditObatApotekSmc);
             jmlmenu++;
         }
 
         if (akses.getbpjs_riwayat_pelayanan_resep_smc()) {
-            Panelmenu.add(btnBPJSRiwayatPelayananResepApotek);
+            Panelmenu.add(btnBPJSRiwayatPelayananResepApotekSmc);
             jmlmenu++;
         }
 
@@ -51839,56 +51872,66 @@ public class frmUtama extends javax.swing.JFrame {
         }
 
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
-            Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
+            Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
             jmlmenu++;
         }
 
         if (akses.getpengajuan_izin_smc()) {
-            Panelmenu.add(btnPengajuanIzinAdminSMC);
+            Panelmenu.add(btnPengajuanIzinAdminSmc);
             jmlmenu++;
         }
 
         if (akses.getjam_masuk_smc()) {
-            Panelmenu.add(btnJadwalDinasSMC);
+            Panelmenu.add(btnJadwalDinasSmc);
             jmlmenu++;
         }
 
         if (akses.getjadwal_pegawai_smc()) {
-            Panelmenu.add(btnJadwalDinasPegawaiSMC);
+            Panelmenu.add(btnJadwalDinasPegawaiSmc);
             jmlmenu++;
         }
 
         if (akses.getrekap_kehadiran_smc()) {
-            Panelmenu.add(btnRekapKehadiranSMC);
+            Panelmenu.add(btnRekapKehadiranSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getipsrs_stok_akhir_pertanggal_smc()) {
+            Panelmenu.add(btnIPSRSStokAkhirPerTanggalSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getmaster_template_paket_mcu_smc()) {
+            Panelmenu.add(btnTemplatePaketMCUSmc);
             jmlmenu++;
         }
     }
 
-    private void isCariIsiSMC() {
-        if (akses.getbpjs_kompilasi_berkas_klaim()) {
-            if (btnBPJSKompilasiBerkasKlaim.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+    private void isCariIsiSmc() {
+        if (akses.getbpjs_kompilasi_berkas_klaim_smc()) {
+            if (btnBPJSKompilasiBerkasKlaimSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSKompilasiBerkasKlaimSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getadmin()) {
-            if (btnSetAksesEditSementara.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnSetAksesEditSementara);
+            if (btnSetAksesEditSementaraSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetAksesEditSementaraSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getbpjs_antrean_pertanggal()) {
-            if (btnBPJSAntreanPerKodebookingMobileJKN.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
+            if (btnBPJSAntreanPerKodebookingMobileJKNSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKNSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getadmin()) {
-            if (btnSetTampilJenisObatResep.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnSetTampilJenisObatResep);
+            if (btnSetTampilJenisObatResepSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetTampilJenisObatResepSmc);
                 jmlmenu++;
             }
         }
@@ -51915,29 +51958,29 @@ public class frmUtama extends javax.swing.JFrame {
         }
 
         if (akses.getbpjs_daftar_pelayanan_obat_apotek()) {
-            if (btnBPJSDaftarPelayananObat2Apotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSDaftarPelayananObat2Apotek);
+            if (btnBPJSDaftarPelayananObat2ApotekSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSDaftarPelayananObat2ApotekSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getbpjs_kirim_obat_smc()) {
-            if (btnBPJSRiwayatPelayananResepApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSKirimObatApotek);
+            if (btnBPJSRiwayatPelayananResepApotekSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSKirimObatApotekSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getbpjs_edit_kirim_obat_smc()) {
-            if (btnBPJSRiwayatPelayananResepApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSKirimEditObatApotek);
+            if (btnBPJSRiwayatPelayananResepApotekSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSKirimEditObatApotekSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getbpjs_riwayat_pelayanan_resep_smc()) {
-            if (btnBPJSRiwayatPelayananResepApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSRiwayatPelayananResepApotek);
+            if (btnBPJSRiwayatPelayananResepApotekSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSRiwayatPelayananResepApotekSmc);
                 jmlmenu++;
             }
         }
@@ -51957,42 +52000,56 @@ public class frmUtama extends javax.swing.JFrame {
         }
 
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
-            if (btnPengkajianInvasifNonBedahSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnPengkajianInvasifNonBedahSMC);
+            if (btnPengkajianInvasifNonBedahSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getpengajuan_izin_smc()) {
-            if (btnPengajuanIzinAdminSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnPengajuanIzinAdminSMC);
+            if (btnPengajuanIzinAdminSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPengajuanIzinAdminSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getjam_masuk_smc()) {
-            if (btnJadwalDinasSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnJadwalDinasSMC);
+            if (btnJadwalDinasSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnJadwalDinasSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getjadwal_pegawai_smc()) {
-            if (btnJadwalDinasPegawaiSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnJadwalDinasPegawaiSMC);
+            if (btnJadwalDinasPegawaiSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnJadwalDinasPegawaiSmc);
                 jmlmenu++;
             }
         }
 
         if (akses.getrekap_kehadiran_smc()) {
-            if (btnRekapKehadiranSMC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnRekapKehadiranSMC);
+            if (btnRekapKehadiranSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnRekapKehadiranSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getipsrs_stok_akhir_pertanggal_smc()) {
+            if (btnIPSRSStokAkhirPerTanggalSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnIPSRSStokAkhirPerTanggalSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getmaster_template_paket_mcu_smc()) {
+            if (btnTemplatePaketMCUSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnTemplatePaketMCUSmc);
                 jmlmenu++;
             }
         }
     }
 
-    private void btnBPJSKompilasiBerkasKlaimActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBPJSKompilasiBerkasKlaimSmcActionPerformed(java.awt.event.ActionEvent evt) {
         if (akses.getkode().equals("Admin Utama")) {
             isTutup();
             akses.setform("BPJSKompilasiBerkasKlaim");
@@ -52033,7 +52090,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnSetAksesEditSementaraActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSetAksesEditSementaraSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -52046,7 +52103,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnBPJSAntreanPerKodebookingMobileJKNActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBPJSAntreanPerKodebookingMobileJKNSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BPJSAntreanPerKodebooking form = new BPJSAntreanPerKodebooking(this, false);
@@ -52058,7 +52115,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSetTampilJenisObatResepSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -52093,7 +52150,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnBPJSDaftarPelayananObat2ApotekActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBPJSDaftarPelayananObat2ApotekSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -52104,7 +52161,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnBPJSKirimObatApotekActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBPJSKirimObatApotekSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -52115,7 +52172,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnBPJSKirimEditObatApotekActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBPJSKirimEditObatApotekSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -52126,7 +52183,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnBPJSRiwayatPelayananResepApotekActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnBPJSRiwayatPelayananResepApotekSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -52149,7 +52206,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnBPJSRiwayatSuratKontrolSmc(java.awt.event.ActionEvent evt) {
+    private void btnBPJSRiwayatSuratKontrolSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BPJSCekRiwayatSuratKontrolSMC aplikasi = new BPJSCekRiwayatSuratKontrolSMC(this, false);
@@ -52160,7 +52217,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnPengkajianInvasifNonBedahSMCActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnPengkajianInvasifNonBedahSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianTindakanInvasifNonBedahSMC form = new RMPenilaianTindakanInvasifNonBedahSMC(this, false);
@@ -52174,7 +52231,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnPengajuanIzinAdminSMCActionPerformed(ActionEvent e) {
+    private void btnPengajuanIzinAdminSmcActionPerformed(ActionEvent e) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         PengajuanIzinAdminSMC form = new PengajuanIzinAdminSMC(this, false);
@@ -52186,7 +52243,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnJadwalDinasSMCActionPerformed(ActionEvent e) {
+    private void btnJadwalDinasSmcActionPerformed(ActionEvent e) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJamMasukSMC form = new DlgJamMasukSMC(this, false);
@@ -52198,7 +52255,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnJadwalDinasPegawaiSMCActionPerformed(ActionEvent e) {
+    private void btnJadwalDinasPegawaiSmcActionPerformed(ActionEvent e) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJadwalPegawaiSMC form = new DlgJadwalPegawaiSMC(this, false);
@@ -52210,11 +52267,37 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void btnRekapKehadiranSMCActionPerformed(ActionEvent e) {
+    private void btnRekapKehadiranSmcActionPerformed(ActionEvent e) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgKehadiranSMC form = new DlgKehadiranSMC(this, false);
         form.isCek();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnIPSRSStokAkhirPerTanggalSmcActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        IPSRSStokAkhirPerTanggalSMC form = new IPSRSStokAkhirPerTanggalSMC(this, false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnTemplatePaketMCUSmcActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        MasterTemplatePaketMCUSMC form = new MasterTemplatePaketMCUSMC(this, false);
+        form.isCek();
+        form.emptTeks();
+        form.setTampil();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);

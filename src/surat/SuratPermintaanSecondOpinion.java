@@ -648,7 +648,6 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         FormInput.add(jSeparator14);
         jSeparator14.setBounds(0, 861, 880, 0);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -659,13 +658,11 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         TNoRw.setBounds(84, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(319, 10, 250, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(217, 10, 100, 23);
@@ -712,13 +709,11 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(774, 10, 80, 23);
@@ -772,7 +767,6 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(630, 40, 90, 23);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -800,7 +794,6 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(0, 90, 101, 23);
 
-        Pemohon.setHighlighter(null);
         Pemohon.setName("Pemohon"); // NOI18N
         Pemohon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -815,7 +808,6 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         FormInput.add(jLabel37);
         jLabel37.setBounds(237, 90, 60, 23);
 
-        AlamatPemohon.setHighlighter(null);
         AlamatPemohon.setName("AlamatPemohon"); // NOI18N
         AlamatPemohon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -917,7 +909,6 @@ public final class SuratPermintaanSecondOpinion extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(460, 170, 110, 23);
 
-        SaksiKeluarga.setHighlighter(null);
         SaksiKeluarga.setName("SaksiKeluarga"); // NOI18N
         SaksiKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -133,8 +133,8 @@ public final class validasi {
         );
     }
 
-    public void autonomorSmc(JTextComponent component, String prefix, String table, int panjang, String pad) {
-        component.setText(sek.autonomorSmc(prefix, table, panjang, pad));
+    public void autonomorSmc(JTextComponent component, String prefix, String table, String kolom, int panjang, String pad) {
+        component.setText(sek.autonomorSmc(prefix, table, kolom, panjang, pad));
     }
 
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal, int next) {
@@ -595,6 +595,14 @@ public final class validasi {
         } catch (Exception e) {
             return "0";
         }
+    }
+
+    public double getAngkaSmc(Object value) {
+        if (value != null && value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+
+        return 0;
     }
 
     public boolean umurcacheSmc(File file, int hari) {
@@ -2268,12 +2276,16 @@ public final class validasi {
 
         if(angka >= 2000 && angka <=999999)
         {
-            return terbilang((int)angka/1000)+" ribu "+ terbilang(angka%1000);
+            return terbilang((long)angka/1000)+" ribu "+ terbilang(angka%1000);
         }
 
         if(angka >= 1000000 && angka <=999999999)
         {
-            return terbilang((int)angka/1000000)+" juta "+ terbilang(angka%1000000);
+            return terbilang((long)angka/1000000)+" juta "+ terbilang(angka%1000000);
+        }
+
+        if (angka >= 1_000_000_000 && angka <= 999_999_999_999L) {
+            return terbilang((long) angka / 1_000_000_000) + " milyar " + terbilang(angka % 1_000_000_000);
         }
 
         return "";

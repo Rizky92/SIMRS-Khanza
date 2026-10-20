@@ -135,7 +135,6 @@ public final class SatuSehatMapingTindakanRalanKPTL extends javax.swing.JDialog 
         TindakanSystem = new widget.TextBox();
 
         NamaTindakan.setEditable(false);
-        NamaTindakan.setHighlighter(null);
         NamaTindakan.setName("NamaTindakan"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -388,7 +387,6 @@ public final class SatuSehatMapingTindakanRalanKPTL extends javax.swing.JDialog 
         FormInput.setLayout(null);
 
         KodeTindakan.setEditable(false);
-        KodeTindakan.setHighlighter(null);
         KodeTindakan.setName("KodeTindakan"); // NOI18N
         FormInput.add(KodeTindakan);
         KodeTindakan.setBounds(221, 10, 120, 23);
@@ -410,7 +408,6 @@ public final class SatuSehatMapingTindakanRalanKPTL extends javax.swing.JDialog 
         FormInput.add(btnBarang);
         btnBarang.setBounds(343, 10, 28, 23);
 
-        Code.setHighlighter(null);
         Code.setName("Code"); // NOI18N
         Code.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -430,7 +427,6 @@ public final class SatuSehatMapingTindakanRalanKPTL extends javax.swing.JDialog 
         FormInput.add(jLabel10);
         jLabel10.setBounds(0, 40, 65, 23);
 
-        Display.setHighlighter(null);
         Display.setName("Display"); // NOI18N
         Display.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -462,7 +458,6 @@ public final class SatuSehatMapingTindakanRalanKPTL extends javax.swing.JDialog 
         FormInput.add(jLabel4);
         jLabel4.setBounds(385, 10, 60, 23);
 
-        TindakanSystem.setHighlighter(null);
         TindakanSystem.setName("TindakanSystem"); // NOI18N
         TindakanSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

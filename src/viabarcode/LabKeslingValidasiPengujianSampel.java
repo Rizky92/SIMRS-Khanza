@@ -206,7 +206,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         Scroll2 = new widget.ScrollPane();
         tbValidasi = new widget.Table();
 
-        Rentang.setHighlighter(null);
         Rentang.setName("Rentang"); // NOI18N
         Rentang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -214,7 +213,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             }
         });
 
-        NoVerifikasi.setHighlighter(null);
         NoVerifikasi.setName("NoVerifikasi"); // NOI18N
         NoVerifikasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -271,13 +269,11 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         PanelInput.setLayout(null);
 
         KodePelanggan.setEditable(false);
-        KodePelanggan.setHighlighter(null);
         KodePelanggan.setName("KodePelanggan"); // NOI18N
         PanelInput.add(KodePelanggan);
         KodePelanggan.setBounds(84, 70, 80, 23);
 
         NamaPelanggan.setEditable(false);
-        NamaPelanggan.setHighlighter(null);
         NamaPelanggan.setName("NamaPelanggan"); // NOI18N
         PanelInput.add(NamaPelanggan);
         NamaPelanggan.setBounds(166, 70, 206, 23);
@@ -339,7 +335,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         KdPetugas.setBounds(84, 10, 115, 23);
 
         NmPetugas.setEditable(false);
-        NmPetugas.setHighlighter(null);
         NmPetugas.setName("NmPetugas"); // NOI18N
         PanelInput.add(NmPetugas);
         NmPetugas.setBounds(201, 10, 200, 23);
@@ -367,7 +362,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         jLabel4.setBounds(446, 40, 90, 23);
 
         TNoPermintaan.setEditable(false);
-        TNoPermintaan.setHighlighter(null);
         TNoPermintaan.setName("TNoPermintaan"); // NOI18N
         PanelInput.add(TNoPermintaan);
         TNoPermintaan.setBounds(540, 40, 140, 23);
@@ -383,13 +377,11 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         jLabel18.setBounds(385, 70, 60, 23);
 
         KodeSampel.setEditable(false);
-        KodeSampel.setHighlighter(null);
         KodeSampel.setName("KodeSampel"); // NOI18N
         PanelInput.add(KodeSampel);
         KodeSampel.setBounds(449, 70, 55, 23);
 
         NamaSampel.setEditable(false);
-        NamaSampel.setHighlighter(null);
         NamaSampel.setName("NamaSampel"); // NOI18N
         PanelInput.add(NamaSampel);
         NamaSampel.setBounds(506, 70, 174, 23);
@@ -399,7 +391,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         PanelInput.add(jLabel5);
         jLabel5.setBounds(446, 10, 90, 23);
 
-        TNoValidasi.setHighlighter(null);
         TNoValidasi.setName("TNoValidasi"); // NOI18N
         TNoValidasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -414,7 +405,6 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         PanelInput.add(jLabel6);
         jLabel6.setBounds(385, 100, 60, 23);
 
-        Catatan.setHighlighter(null);
         Catatan.setName("Catatan"); // NOI18N
         Catatan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -430,13 +420,11 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         jLabel8.setBounds(0, 100, 80, 23);
 
         KodeVerifikator.setEditable(false);
-        KodeVerifikator.setHighlighter(null);
         KodeVerifikator.setName("KodeVerifikator"); // NOI18N
         PanelInput.add(KodeVerifikator);
         KodeVerifikator.setBounds(84, 100, 80, 23);
 
         NamaVerifikator.setEditable(false);
-        NamaVerifikator.setHighlighter(null);
         NamaVerifikator.setName("NamaVerifikator"); // NOI18N
         PanelInput.add(NamaVerifikator);
         NamaVerifikator.setBounds(166, 100, 206, 23);

@@ -5,9 +5,6 @@
     <Component class="widget.TextBox" name="NamaTindakan">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="NamaTindakan" noResource="true"/>
       </Properties>
     </Component>
@@ -461,9 +458,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Display">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Display" noResource="true"/>
                   </Properties>
                   <Events>
@@ -477,9 +471,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TindakanSystem">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TindakanSystem" noResource="true"/>
                   </Properties>
                   <Events>
@@ -513,9 +504,6 @@
                 <Component class="widget.TextBox" name="KodeTindakan">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KodeTindakan" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -526,9 +514,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Code">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Code" noResource="true"/>
                   </Properties>
                   <Events>

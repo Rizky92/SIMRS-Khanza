@@ -3071,14 +3071,12 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
                 }
 
                 if(sukses==true){
-                    if(!Laporan.getText().equals("")){
-                        if(Sequel.menyimpantf2("laporan_operasi","?,?,?,?,?,?,?,?,?","laporan operasi",9,new String[]{
-                                TNoRw.getText(),Valid.getTglJamSmc(tgl,Jam,Menit,Detik),PreOp.getText(),
-                                PostOp.getText(),Jaringan.getText(),Valid.getTglJamSmc(tgl2,Jam2,Menit2,Detik2),
-                                DikirimPA.getSelectedItem().toString(),NomorImplant.getText(),Laporan.getText()
-                            })==false){
-                            sukses=false;
-                        }
+                    if(Sequel.menyimpantf2("laporan_operasi","?,?,?,?,?,?,?,?,?","laporan operasi",9,new String[]{
+                            TNoRw.getText(),Valid.getTglJamSmc(tgl,Jam,Menit,Detik),PreOp.getText(),
+                            PostOp.getText(),Jaringan.getText(),Valid.getTglJamSmc(tgl2,Jam2,Menit2,Detik2),
+                            DikirimPA.getSelectedItem().toString(),NomorImplant.getText(),Laporan.getText()
+                        })==false){
+                        sukses=false;
                     }
                 }
 

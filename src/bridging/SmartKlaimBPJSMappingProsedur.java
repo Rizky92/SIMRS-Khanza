@@ -386,7 +386,6 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         FormInput.setLayout(null);
 
         NamaProsedur.setEditable(false);
-        NamaProsedur.setHighlighter(null);
         NamaProsedur.setName("NamaProsedur"); // NOI18N
         FormInput.add(NamaProsedur);
         NamaProsedur.setBounds(186, 10, 507, 23);
@@ -409,7 +408,6 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         btnProsedur.setBounds(696, 10, 28, 23);
 
         KodeProsedur.setEditable(false);
-        KodeProsedur.setHighlighter(null);
         KodeProsedur.setName("KodeProsedur"); // NOI18N
         KodeProsedur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -429,7 +427,6 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(0, 40, 90, 23);
 
-        KodeSnomed.setHighlighter(null);
         KodeSnomed.setName("KodeSnomed"); // NOI18N
         KodeSnomed.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -444,7 +441,6 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(0, 70, 90, 23);
 
-        Display.setHighlighter(null);
         Display.setName("Display"); // NOI18N
         Display.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -459,7 +455,6 @@ public final class SmartKlaimBPJSMappingProsedur extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(240, 40, 60, 23);
 
-        SnomedSystem.setHighlighter(null);
         SnomedSystem.setName("SnomedSystem"); // NOI18N
         SnomedSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

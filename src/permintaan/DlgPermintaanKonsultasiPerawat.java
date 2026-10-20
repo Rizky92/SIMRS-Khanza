@@ -749,7 +749,6 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         FormInput.setLayout(null);
 
         NoRw.setEditable(false);
-        NoRw.setHighlighter(null);
         NoRw.setName("NoRw"); // NOI18N
         NoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -760,13 +759,11 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         NoRw.setBounds(87, 10, 130, 23);
 
         NmPasien.setEditable(false);
-        NmPasien.setHighlighter(null);
         NmPasien.setName("NmPasien"); // NOI18N
         FormInput.add(NmPasien);
         NmPasien.setBounds(313, 10, 314, 23);
 
         NoRM.setEditable(false);
-        NoRM.setHighlighter(null);
         NoRM.setName("NoRM"); // NOI18N
         FormInput.add(NoRM);
         NoRM.setBounds(220, 10, 90, 23);
@@ -777,7 +774,6 @@ public class DlgPermintaanKonsultasiPerawat extends javax.swing.JDialog {
         jLabel8.setBounds(230, 40, 80, 23);
 
         NoPermintaan.setEditable(false);
-        NoPermintaan.setHighlighter(null);
         NoPermintaan.setName("NoPermintaan"); // NOI18N
         NoPermintaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

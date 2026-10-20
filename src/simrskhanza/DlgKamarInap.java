@@ -12208,7 +12208,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                         form.setVisible(true);
                                         this.setCursor(Cursor.getDefaultCursor());
                                     }else{
-                                        JOptionPane.showMessageDialog(null,"Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                                        JOptionPane.showMessageDialog(null,"Pasien tersebut belum terbit SEP Rawat Inap, silahkan hubungi bagian terkait..!!");
                                         TCari.requestFocus();
                                     }
                                 } catch (Exception e) {
@@ -12253,7 +12253,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 form.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
-                                JOptionPane.showMessageDialog(null,"Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                                JOptionPane.showMessageDialog(null,"Pasien tersebut belum terbit SEP Rawat Inap, silahkan hubungi bagian terkait..!!");
                                 TCari.requestFocus();
                             }
                         } catch (Exception e) {
@@ -13078,7 +13078,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 dlgki.setLocationRelativeTo(internalFrame1);
                                 dlgki.isCek();
-                                dlgki.setNoRm3(rs2.getString("no_rawat2"),Valid.SetTgl2(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString()));
+                                //dlgki.setNoRm3(rs2.getString("no_rawat2"),Valid.SetTgl2(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString()));
+                                dlgki.setNoRM2Smc(rs2.getString("no_rawat2"));
                                 dlgki.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
@@ -13104,7 +13105,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     dlgki.setLocationRelativeTo(internalFrame1);
                     dlgki.isCek();
-                    dlgki.setNoRm3(norawat.getText(),Valid.SetTgl2(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),11).toString()));
+                    dlgki.setNoRM2Smc(norawat.getText());
                     dlgki.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }

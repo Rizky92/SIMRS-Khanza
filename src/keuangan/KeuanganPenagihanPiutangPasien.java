@@ -324,13 +324,10 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         AtasNama.setName("AtasNama"); // NOI18N
         AtasNama.setPreferredSize(new java.awt.Dimension(170, 23));
 
-        NoTelp.setHighlighter(null);
         NoTelp.setName("NoTelp"); // NOI18N
 
-        Perusahaan.setHighlighter(null);
         Perusahaan.setName("Perusahaan"); // NOI18N
 
-        AlamatAsuransi.setHighlighter(null);
         AlamatAsuransi.setName("AlamatAsuransi"); // NOI18N
 
         Ditujukan.setName("Ditujukan"); // NOI18N

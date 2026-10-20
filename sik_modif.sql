@@ -2120,6 +2120,98 @@ CREATE TABLE IF NOT EXISTS `tempinacbg`  (
 
 ALTER TABLE `template_laboratorium` MODIFY COLUMN IF EXISTS `method` varchar(30) NOT NULL DEFAULT '' AFTER `nilai_rujukan_pa`;
 
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc`  (
+  `no_template` varchar(20) NOT NULL,
+  `keterangan` varchar(50) NOT NULL,
+  `kd_pj` char(3) NOT NULL,
+  `tambahan_rp` double NOT NULL DEFAULT 0,
+  `diskon_rp` double NOT NULL DEFAULT 0,
+  `total_rp` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_template`) USING BTREE,
+  INDEX `kd_pj` (`kd_pj`) USING BTREE,
+  INDEX `keterangan` (`keterangan`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_ibfk_1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab` (`kd_pj`) ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_detail_permintaan_lab`  (
+  `no_template` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `id_template` int(11) NOT NULL,
+  PRIMARY KEY (`no_template`,`kd_jenis_prw`,`id_template`) USING BTREE,
+  INDEX `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE,
+  INDEX `id_template` (`id_template`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_detail_permintaan_lab_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_detail_permintaan_lab_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_lab` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_detail_permintaan_lab_ibfk_3` FOREIGN KEY (`id_template`) REFERENCES `template_laboratorium` (`id_template`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_pengurangan_biaya`  (
+  `no_template` varchar(20) NOT NULL,
+  `nama_pengurangan` varchar(60) NOT NULL,
+  `besar_pengurangan` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_template`,`nama_pengurangan`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_pengurangan_biaya_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_permintaan_lab`  (
+  `no_template` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  PRIMARY KEY (`no_template`,`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_permintaan_lab_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_permintaan_lab_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_lab` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_permintaan_radiologi`  (
+  `no_template` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  PRIMARY KEY (`no_template`,`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_permintaan_radiologi_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_permintaan_radiologi_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_radiologi` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_tambahan_biaya`  (
+  `no_template` varchar(20) NOT NULL,
+  `nama_biaya` varchar(60) NOT NULL,
+  `besar_biaya` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_template`,`nama_biaya`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_tambahan_biaya_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_tindakan_dr`  (
+  `no_template` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `kd_dokter` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_template`,`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_dokter` (`kd_dokter`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_dr_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_dr_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_dr_ibfk_3` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_tindakan_drpr`  (
+  `no_template` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `kd_dokter` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_template`,`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_dokter` (`kd_dokter`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_drpr_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_drpr_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_drpr_ibfk_3` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_tindakan_pr`  (
+  `no_template` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  PRIMARY KEY (`no_template`,`kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw` (`kd_jenis_prw`) USING BTREE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_pr_ibfk_1` FOREIGN KEY (`no_template`) REFERENCES `template_paket_mcu_smc` (`no_template`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `template_paket_mcu_smc_tindakan_pr_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `temporary` DROP INDEX IF EXISTS `no`;
 
 ALTER TABLE `temporary_bayar_ralan` DROP INDEX IF EXISTS `no`;
@@ -2262,6 +2354,12 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `jadwal_pegawai_smc` enum('true','fa
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_laboratorium_smc` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_beban_hutang_lain`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `rekap_kehadiran_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_laboratorium_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `ipsrs_stok_akhir_pertanggal_smc` enum('true','false') NULL DEFAULT NULL AFTER `rekap_kehadiran_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_paket_mcu_smc` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_stok_akhir_pertanggal_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `master_template_paket_mcu_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_paket_mcu_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
