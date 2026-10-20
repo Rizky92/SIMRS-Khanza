@@ -1540,61 +1540,61 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-    if(TabPilihRawat.getSelectedIndex()==0){
-        if(TabRawatJalan.getSelectedIndex()==0){
-            if(tbRadiologiRalan.getSelectedRow()!= -1){
-                if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
-                    Valid.textKosong(TCari,"No.Permintaan");
-                }else{
-                    if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
-                        if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString())>0){
-                            JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                        }else{
-                            worklist.hapus(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
-                            Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
-                            runBackground(() -> tampil());
-                        }
+        if(TabPilihRawat.getSelectedIndex()==0){
+            if(TabRawatJalan.getSelectedIndex()==0){
+                if(tbRadiologiRalan.getSelectedRow()!= -1){
+                    if(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString().trim().equals("")){
+                        Valid.textKosong(TCari,"No.Permintaan");
                     }else{
-                        JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_radiologi_smc()){
+                            if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString())>0){
+                                JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
+                            }else{
+                                worklist.hapus(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
+                                Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
+                                runBackground(() -> tampil());
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+            }else if(TabRawatJalan.getSelectedIndex()==1){
+                JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
+                TabRawatJalan.setSelectedIndex(0);
                 TCari.requestFocus();
             }
-        }else if(TabRawatJalan.getSelectedIndex()==1){
-            JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
-            TabRawatJalan.setSelectedIndex(0);
-            TCari.requestFocus();
-        }
-    }else if(TabPilihRawat.getSelectedIndex()==1){
-        if(TabRawatInap.getSelectedIndex()==0){
-            if(tbRadiologiRanap.getSelectedRow()!= -1){
-                if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
-                    Valid.textKosong(TCari,"No.Permintaan");
-                }else{
-                    if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
-                        if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString())>0){
-                            JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                        }else{
-                            worklist.hapus(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
-                            Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
-                            runBackground(() -> tampil3());
-                        }
+        }else if(TabPilihRawat.getSelectedIndex()==1){
+            if(TabRawatInap.getSelectedIndex()==0){
+                if(tbRadiologiRanap.getSelectedRow()!= -1){
+                    if(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString().trim().equals("")){
+                        Valid.textKosong(TCari,"No.Permintaan");
                     }else{
-                        JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_radiologi_smc()){
+                            if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString())>0){
+                                JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
+                            }else{
+                                worklist.hapus(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
+                                Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
+                                runBackground(() -> tampil3());
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
+            }else if(TabRawatInap.getSelectedIndex()==1){
+                JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
+                TabRawatInap.setSelectedIndex(0);
                 TCari.requestFocus();
             }
-        }else if(TabRawatInap.getSelectedIndex()==1){
-            JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Permintaan..!!!");
-            TabRawatInap.setSelectedIndex(0);
-            TCari.requestFocus();
         }
-    }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
