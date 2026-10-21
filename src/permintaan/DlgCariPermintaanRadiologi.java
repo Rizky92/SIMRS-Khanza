@@ -1549,7 +1549,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_radiologi_smc()){
                             if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString())>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 worklist.hapus(tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
                                 Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(),0).toString());
                                 runBackground(() -> tampil());
@@ -1576,7 +1576,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                         if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_radiologi_smc()){
                             if(Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_radiologi where stts_bayar='Sudah' and noorder=?",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString())>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 worklist.hapus(tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
                                 Sequel.meghapus("permintaan_radiologi","noorder",tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(),0).toString());
                                 runBackground(() -> tampil3());

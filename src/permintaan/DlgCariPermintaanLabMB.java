@@ -1396,7 +1396,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                             if((Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_labmb where stts_bayar='Sudah' and noorder=?",NoPermintaan)+
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_labmb where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 Sequel.meghapus("permintaan_labmb","noorder",NoPermintaan);
                                 TeksKosong();
                                 runBackground(() ->tampil());
@@ -1424,7 +1424,7 @@ public class DlgCariPermintaanLabMB extends javax.swing.JDialog {
                             if((Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_labmb where stts_bayar='Sudah' and noorder=?",NoPermintaan)+
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_labmb where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 Sequel.meghapus("permintaan_labmb","noorder",NoPermintaan);
                                 TeksKosong();
                                 runBackground(() ->tampil3());

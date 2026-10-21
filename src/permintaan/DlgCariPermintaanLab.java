@@ -1938,7 +1938,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                             if((Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan)+
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 boolean isSampled = Sequel.cariExistsSmc("select * from permintaan_lab where permintaan_lab.noorder = ? and permintaan_lab.tgl_sampel != '0000-00-00' and permintaan_lab.jam_sampel != '00:00:00'", NoPermintaan);
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
                                 if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
@@ -1978,7 +1978,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                             if((Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan)+
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 boolean isSampled = Sequel.cariExistsSmc("select * from permintaan_lab where permintaan_lab.noorder = ? and permintaan_lab.tgl_sampel != '0000-00-00' and permintaan_lab.jam_sampel != '00:00:00'", NoPermintaan);
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
                                 if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
