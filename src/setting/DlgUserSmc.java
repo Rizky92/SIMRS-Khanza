@@ -27,11 +27,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
@@ -48,7 +50,10 @@ public class DlgUserSmc extends javax.swing.JDialog {
     private final DlgUpdateUserSmc personal = new DlgUpdateUserSmc(null, false);
     private final DlgCariDokter dlgdokter = new DlgCariDokter(null, false);
     private final DlgCariPetugas dlgpetugas = new DlgCariPetugas(null, false);
+    private volatile boolean ceksukses = false;
     private String copyhakakses = "", userdicopy = "";
+    private boolean belumUpdatePassword = false;
+    private int hariPeringatan = 0;
 
     /**
      * Creates new form DlgUser
@@ -60,7 +65,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"User ID", "Nama User", "Jabatan", "Password", "pw"};
+        Object[] row = {"User ID", "Nama User", "Jabatan", "Password", "pw", "Password Diubah"};
 
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -83,6 +88,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         tbUser.getColumnModel().getColumn(3).setPreferredWidth(100);
         tbUser.getColumnModel().getColumn(4).setMinWidth(0);
         tbUser.getColumnModel().getColumn(4).setMaxWidth(0);
+        tbUser.getColumnModel().getColumn(5).setPreferredWidth(130);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte) 30).getKata(TKd));
@@ -133,6 +139,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCopyHakAkses = new javax.swing.JMenuItem();
         MnSetUser = new javax.swing.JMenuItem();
+        MnBelumUbahPassword = new javax.swing.JMenuItem();
         Jabatan = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -161,8 +168,10 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
 
+        jPopupMenu1.setForeground(new java.awt.Color(255, 255, 254));
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
+        MnCopyHakAkses.setBackground(new java.awt.Color(255, 255, 254));
         MnCopyHakAkses.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCopyHakAkses.setForeground(new java.awt.Color(50, 50, 50));
         MnCopyHakAkses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -170,7 +179,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         MnCopyHakAkses.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnCopyHakAkses.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCopyHakAkses.setName("MnCopyHakAkses"); // NOI18N
-        MnCopyHakAkses.setPreferredSize(new java.awt.Dimension(150, 26));
+        MnCopyHakAkses.setPreferredSize(new java.awt.Dimension(195, 26));
         MnCopyHakAkses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnCopyHakAksesActionPerformed(evt);
@@ -178,6 +187,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCopyHakAkses);
 
+        MnSetUser.setBackground(new java.awt.Color(255, 255, 254));
         MnSetUser.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnSetUser.setForeground(new java.awt.Color(50, 50, 50));
         MnSetUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -185,13 +195,29 @@ public class DlgUserSmc extends javax.swing.JDialog {
         MnSetUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSetUser.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSetUser.setName("MnSetUser"); // NOI18N
-        MnSetUser.setPreferredSize(new java.awt.Dimension(150, 26));
+        MnSetUser.setPreferredSize(new java.awt.Dimension(195, 26));
         MnSetUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnSetUserActionPerformed(evt);
             }
         });
         jPopupMenu1.add(MnSetUser);
+
+        MnBelumUbahPassword.setBackground(new java.awt.Color(255, 255, 254));
+        MnBelumUbahPassword.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnBelumUbahPassword.setForeground(new java.awt.Color(50, 50, 50));
+        MnBelumUbahPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnBelumUbahPassword.setText("Tampilkan Belum Ubah Password");
+        MnBelumUbahPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnBelumUbahPassword.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnBelumUbahPassword.setName("MnBelumUbahPassword"); // NOI18N
+        MnBelumUbahPassword.setPreferredSize(new java.awt.Dimension(195, 26));
+        MnBelumUbahPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnBelumUbahPasswordActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnBelumUbahPassword);
 
         Jabatan.setEditable(false);
         Jabatan.setName("Jabatan"); // NOI18N
@@ -502,7 +528,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         } else {
             if (Sequel.executeRawSmc("insert into user (id_user, password) values (aes_encrypt(?, 'nur'), aes_encrypt(?, 'windi'))", TKd.getText(), TPass.getText())) {
                 tabMode.addRow(new Object[] {
-                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), "**********", TPass.getText()
+                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), "**********", TPass.getText(), "Belum Pernah"
                 });
                 emptTeks();
                 LCount.setText(String.valueOf(tabMode.getRowCount()));
@@ -527,6 +553,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         } else {
             if (tbUser.getSelectedRow() != -1) {
                 if (Sequel.executeRawSmc("delete from user where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')", TKd.getText(), TPass.getText())) {
+                    Sequel.executeRawSmc("delete from user_password_smc where user_password_smc.id_user = aes_encrypt(?, 'nur')", TKd.getText());
                     tabMode.removeRow(tbUser.getSelectedRow());
                     emptTeks();
                     LCount.setText(String.valueOf(tabMode.getRowCount()));
@@ -553,6 +580,11 @@ public class DlgUserSmc extends javax.swing.JDialog {
                 if (Sequel.executeRawSmc("update user set id_user = aes_encrypt(?, 'nur'), password = aes_encrypt(?, 'windi') where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')",
                     TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString(), tbUser.getValueAt(tbUser.getSelectedRow(), 4).toString()
                 )) {
+                    if (!TKd.getText().equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+                        Sequel.executeRawSmc("update user_password_smc set user_password_smc.id_user = aes_encrypt(?, 'nur') where user_password_smc.id_user = aes_encrypt(?, 'nur')",
+                            TKd.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString()
+                        );
+                    }
                     tabMode.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
                     tabMode.setValueAt(TPass.getText(), tbUser.getSelectedRow(), 4);
                     emptTeks();
@@ -649,6 +681,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tampilHariPeringatan();
         tampil();
     }//GEN-LAST:event_formWindowOpened
 
@@ -678,12 +711,14 @@ public class DlgUserSmc extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
+        belumUpdatePassword = false;
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             TCari.setText("");
+            belumUpdatePassword = false;
             tampil();
         } else {
             Valid.pindah(evt, BtnCari, TKd);
@@ -774,6 +809,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengcopy hak akses user..!!");
                             return;
                         }
+
                         if (sj.length() == 0) {
                             userdicopy = "";
                             copyhakakses = "";
@@ -811,6 +847,11 @@ public class DlgUserSmc extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbUserKeyPressed
 
+    private void MnBelumUbahPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBelumUbahPasswordActionPerformed
+        belumUpdatePassword = true;
+        tampil();
+    }//GEN-LAST:event_MnBelumUbahPasswordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -840,6 +881,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     private widget.Button BtnSimpan;
     private widget.TextBox Jabatan;
     private widget.Label LCount;
+    private javax.swing.JMenuItem MnBelumUbahPassword;
     private javax.swing.JMenuItem MnCopyHakAkses;
     private javax.swing.JMenuItem MnSetUser;
     private widget.ScrollPane Scroll;
@@ -861,30 +903,64 @@ public class DlgUserSmc extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        try (PreparedStatement ps = koneksi.prepareStatement("select aes_decrypt(user.id_user, 'nur'), pegawai.nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, " +
-            "aes_decrypt(user.password, 'windi') from user left join pegawai on aes_decrypt(user.id_user, 'nur') = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter " +
-            "left join petugas on pegawai.nik = petugas.nip left join spesialis on dokter.kd_sps = spesialis.kd_sps left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn " +
-            "where pegawai.nik like ? or pegawai.nama like ? or coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') like ? order by aes_decrypt(user.id_user, 'nur')"
-        )) {
-            Valid.tabelKosong(tabMode);
-            if (TCari.getText().isBlank()) {
-                ps.setString(1, "%%");
-                ps.setString(2, "%%");
-                ps.setString(3, "%%");
-            } else {
-                ps.setString(1, "%" + TCari.getText() + "%");
-                ps.setString(2, "%" + TCari.getText() + "%");
-                ps.setString(3, "%" + TCari.getText() + "%");
-            }
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), "**********", rs.getString(4)});
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select aes_decrypt(user.id_user, 'nur'), pegawai.nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, aes_decrypt(user.password, 'windi'), ifnull(date_format(user_password_smc.tgl_ubah, " +
+                        "'%Y-%m-%d %H:%i:%s'), 'Belum Pernah') from user left join pegawai on aes_decrypt(user.id_user, 'nur') = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter left join petugas on pegawai.nik = " +
+                        "petugas.nip left join spesialis on dokter.kd_sps = spesialis.kd_sps left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn left join user_password_smc on user_password_smc.id_user = user.id_user " +
+                        "where (? = 0 or user_password_smc.tgl_ubah is null or datediff(current_date(), user_password_smc.tgl_ubah) >= ?) " + (cari.isBlank() ? "" : "and (pegawai.nik like ? or pegawai.nama like ? or " +
+                        "coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') like ?) ") + "order by aes_decrypt(user.id_user, 'nur')"
+                    )) {
+                        int p = 0;
+                        ps.setInt(++p, belumUpdatePassword ? hariPeringatan : 0);
+                        ps.setInt(++p, hariPeringatan);
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), "**********", rs.getString(4), rs.getString(5)});
+                            }
+                        }
+                    }
+
+                    return null;
                 }
-            }
-            LCount.setText(String.valueOf(tabMode.getRowCount()));
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgUserSmc.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
+    }
+
+    private void tampilHariPeringatan() {
+        hariPeringatan = Sequel.cariIntegerSmc("select set_aturan_password_smc.hari_peringatan from set_aturan_password_smc limit 1");
     }
 
     public void emptTeks() {
