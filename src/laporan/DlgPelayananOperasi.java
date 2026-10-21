@@ -62,7 +62,7 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] rowRwJlDr={"No.","No.RM","Nama Pasien","Operator 1","Operasi","Jam Mulai","Jam Selesai","Durasi(m)"};
+        Object[] rowRwJlDr={"No.","No.RM","Nama Pasien","Operator 1","Operasi","Jam Mulai","Jam Selesai","Durasi(m)", "Dr. Anestesi"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -71,7 +71,7 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(35);
@@ -89,9 +89,12 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
                 column.setPreferredWidth(120);
             }else if(i==7){
                 column.setPreferredWidth(55);
+            }else if(i==8){
+                column.setPreferredWidth(160);
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
+        tbBangsal.moveColumn(tabMode.findColumn("Dr. Anestesi"), tabMode.findColumn("Operasi"));
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -482,11 +485,12 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
             lebihduajam=0;
             ps=koneksi.prepareStatement(
                 "select reg_periksa.no_rkm_medis,pasien.nm_pasien,dokter.nm_dokter,laporan_operasi.tanggal,laporan_operasi.selesaioperasi," +
-                "paket_operasi.nm_perawatan,round((TIME_TO_SEC(laporan_operasi.selesaioperasi)-TIME_TO_SEC(laporan_operasi.tanggal))/60,2) as durasi " +
+                "paket_operasi.nm_perawatan,round((TIME_TO_SEC(laporan_operasi.selesaioperasi)-TIME_TO_SEC(laporan_operasi.tanggal))/60,2) as durasi, anestesi.nm_dokter as dokter_anestesi " +
                 "from reg_periksa inner join laporan_operasi on reg_periksa.no_rawat=laporan_operasi.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join operasi on operasi.no_rawat=laporan_operasi.no_rawat and operasi.tgl_operasi=laporan_operasi.tanggal " +
                 "inner join dokter on dokter.kd_dokter=operasi.operator1 "+
+                "inner join dokter as anestesi on operasi.dokter_anestesi = anestesi.kd_dokter " +
                 "inner join paket_operasi on paket_operasi.kode_paket=operasi.kode_paket "+
                 "where paket_operasi.kategori='Operasi' and laporan_operasi.tanggal between ? and ? "+
                 (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or dokter.nm_dokter like ? or paket_operasi.nm_perawatan like ? ) ")+
@@ -507,7 +511,7 @@ public final class DlgPelayananOperasi extends javax.swing.JDialog {
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         i,rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("nm_perawatan"),
-                        rs.getString("tanggal"),rs.getString("selesaioperasi"),rs.getString("durasi")
+                        rs.getString("tanggal"),rs.getString("selesaioperasi"),rs.getString("durasi"), rs.getString("dokter_anestesi")
                     });
                     i++;
                     totaljam=totaljam+rs.getDouble("durasi");
