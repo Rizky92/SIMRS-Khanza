@@ -1,23 +1,42 @@
 <?php
 
+date_default_timezone_set('Asia/Makassar');
+$logfile = '/var/log/api-bpjsfktl/output-' . date('Y-m-d') . '.log';
+ob_start();
+register_shutdown_function(function () use ($logfile) {
+    $error    = error_get_last();
+    $output   = (string) ob_get_contents();
+    $metadata = json_decode($output, true)['metadata'] ?? null;
+    $service  = explode('/', $_GET['url'] ?? '/')[0];
+    $konten   = trim(file_get_contents('php://input'));
+    $code     = $metadata['code'] ?? http_response_code();
+    $message  = $metadata['message'] ?? ($error ? $error['message'] . ' @' . $error['line'] : $output);
+    $line     = '[' . date('Y-m-d H:i:s') . '] ' . $service . ': ' . $konten . ' - ' . $code . ' ' . $message;
+    @file_put_contents($logfile, str_replace(["\r", "\n"], ' ', $line) . "\n", FILE_APPEND | LOCK_EX);
+});
+
 header("X-Robots-Tag: noindex", true);
 require_once 'conf.php';
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 $url     = $_GET['url'] ?? '/';
 $url     = explode("/", $url);
 $header  = apache_request_headers();
 $newhead = [];
+
 if ($header) {
     foreach ($header as $idx => $val) {
         $newhead[strtolower($idx)] = $val;
     }
 }
-$header      = $newhead;
-$method      = $_SERVER['REQUEST_METHOD'];
-$waktutunggu = 5;
+
+$header       = $newhead;
+$method       = $_SERVER['REQUEST_METHOD'];
+$waktutunggu  = 5;
+$intervalHari = 7;
 
 if (!empty($url[0])) {
     if ($method == 'GET') {
@@ -181,7 +200,7 @@ if (!empty($url[0])) {
                                         } else {
                                             $data = fetch_array(bukaquery2("select p.nm_poli, d.nm_dokter, (select count(*) from reg_periksa r where r.tgl_registrasi = '$decode[tanggalperiksa]'
                                                 and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter) as total_antrean, (select count(*) from reg_periksa r where r.tgl_registrasi = '$decode[tanggalperiksa]'
-                                                and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter and r.stts = 'Belum') as sisa_antrean, (select concat(r.kd_poli, '-', r.no_reg) from reg_periksa r where
+                                                and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter and r.stts = 'Belum') as sisa_antrean, (select r.no_reg from reg_periksa r where
                                                 r.tgl_registrasi = '$decode[tanggalperiksa]' and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter and r.stts = 'Belum' order by convert(right(r.no_reg, 3),
                                                 signed) limit 1) as antreandipanggil from jadwal j join poliklinik p on j.kd_poli = p.kd_poli join dokter d on j.kd_dokter = d.kd_dokter where
                                                 j.hari_kerja = '$hari' and j.jam_mulai = '$jammulai:00' and j.kd_poli = '$kdpoli' and j.kd_dokter = '$kddokter'"));
@@ -193,7 +212,7 @@ if (!empty($url[0])) {
                                                         'namadokter'      => $data['nm_dokter'],
                                                         'totalantrean'    => intval($data['total_antrean']),
                                                         'sisaantrean'     => max([0, intval(validangka($data['sisa_antrean']))]),
-                                                        'antreanpanggil'  => $data['antreandipanggil'],
+                                                        'antreanpanggil'  => $kdpoli . '-' . $data['antreandipanggil'],
                                                         'sisakuotajkn'    => intval($kuota - $data['total_antrean']),
                                                         'kuotajkn'        => intval($kuota),
                                                         'sisakuotanonjkn' => intval($kuota - $data['total_antrean']),
@@ -519,8 +538,8 @@ if (!empty($url[0])) {
                                                                 ],
                                                             ];
                                                             http_response_code(201);
-                                                        } elseif ($interval > 30) {
-                                                            $tanggalbatasambil = getOne2("select date_format(date_sub('" . validTeks4($decode["tanggalperiksa"], 20) . "', interval 30 day), '%d-%m-%Y')");
+                                                        } elseif ($interval > $intervalHari) {
+                                                            $tanggalbatasambil = getOne2("select date_format(date_sub('" . validTeks4($decode["tanggalperiksa"], 20) . "', interval {$intervalHari} day), '%d-%m-%Y')");
                                                             $response          = [
                                                                 'metadata' => [
                                                                     'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal ' . $tanggalbatasambil . '.',
@@ -528,7 +547,7 @@ if (!empty($url[0])) {
                                                                 ],
                                                             ];
                                                             http_response_code(201);
-                                                        } elseif ($decode['jeniskunjungan'] == '3' && (strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '$decode[nomorreferensi]'")))) < 0) {
+                                                        } elseif ($decode['jeniskunjungan'] == '3' && (strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '" . validTeks4($decode['nomorreferensi'], 30) . "'")))) < 0) {
                                                             $response = [
                                                                 'metadata' => [
                                                                     'message' => 'Pengambilan antrian poli tidak boleh maju dari tanggal rencana kontrol. Minimal pengambilan mulai tanggal ' . date('d-m-Y', $tanggalskdp) . '.',
@@ -583,12 +602,12 @@ if (!empty($url[0])) {
                                                                     $kddokter,
                                                                     $datapeserta['no_rkm_medis'],
                                                                     $kdpoli,
-                                                                    $datapeserta['namakeluarga'],
-                                                                    $datapeserta['alamatpj'],
-                                                                    $datapeserta['kelurahanpj'],
-                                                                    $datapeserta['kecamatanpj'],
-                                                                    $datapeserta['kabupatenpj'],
-                                                                    $datapeserta['propinsipj'],
+                                                                    escapeSmc($datapeserta['namakeluarga']),
+                                                                    escapeSmc($datapeserta['alamatpj']),
+                                                                    escapeSmc($datapeserta['kelurahanpj']),
+                                                                    escapeSmc($datapeserta['kecamatanpj']),
+                                                                    escapeSmc($datapeserta['kabupatenpj']),
+                                                                    escapeSmc($datapeserta['propinsipj']),
                                                                     $datapeserta['keluarga'],
                                                                     getOne2("select registrasilama from poliklinik where kd_poli = '$kdpoli'"),
                                                                     str_replace('0', 'Lama', str_replace('1', 'Baru', $statusdaftar)),
@@ -671,12 +690,12 @@ if (!empty($url[0])) {
                                                                         $kddokter,
                                                                         $datapeserta['no_rkm_medis'],
                                                                         $kdpoli,
-                                                                        $datapeserta['namakeluarga'],
-                                                                        $datapeserta['alamatpj'],
-                                                                        $datapeserta['kelurahanpj'],
-                                                                        $datapeserta['kecamatanpj'],
-                                                                        $datapeserta['kabupatenpj'],
-                                                                        $datapeserta['propinsipj'],
+                                                                        escapeSmc($datapeserta['namakeluarga']),
+                                                                        escapeSmc($datapeserta['alamatpj']),
+                                                                        escapeSmc($datapeserta['kelurahanpj']),
+                                                                        escapeSmc($datapeserta['kecamatanpj']),
+                                                                        escapeSmc($datapeserta['kabupatenpj']),
+                                                                        escapeSmc($datapeserta['propinsipj']),
                                                                         $datapeserta['keluarga'],
                                                                         getOne2("select registrasilama from poliklinik where kd_poli = '$kdpoli'"),
                                                                         str_replace('0', 'Lama', str_replace('1', 'Baru', $statusdaftar)),
@@ -859,7 +878,7 @@ if (!empty($url[0])) {
                             $decode = json_decode($konten, true);
                             if ((!empty($header['x-token'])) && (USERNAME == $header['x-username']) && (cektoken($header['x-token']) == 'true')) {
                                 @$tanggal        = date("Y-m-d", ($decode['waktu'] / 1000));
-                                @$tanggalchekcin = date("Y-m-d H:i:s", strtotime('+ 1 hour', $decode['waktu'] / 1000));
+                                @$tanggalchekcin = date("Y-m-d H:i:s", $decode['waktu'] / 1000);
                                 if (empty($decode['kodebooking'])) {
                                     $response = [
                                         'metadata' => [
@@ -1057,7 +1076,7 @@ if (!empty($url[0])) {
                                             } else {
                                                 $batal = bukaquerySmc("delete from reg_periksa where no_rawat='" . $booking['no_rawat'] . "'");
                                             }
-                                            if ($batal) {
+                                            if ($batal > 0) {
                                                 $response = [
                                                     'metadata' => [
                                                         'message' => 'Ok',
@@ -1152,10 +1171,10 @@ if (!empty($url[0])) {
                                                 "select j.kd_poli, j.kd_dokter, p.nm_poli, d.nm_dokter, (select count(*) from reg_periksa r
                                                 where r.tgl_registrasi = '$booking[tanggalperiksa]' and r.kd_dokter = j.kd_dokter and r.kd_poli = j.kd_poli) as total_antrean,
                                                 (select count(*) from reg_periksa r where r.tgl_registrasi = '$booking[tanggalperiksa]' and r.kd_dokter = j.kd_dokter and
-                                                r.kd_poli = j.kd_poli and r.stts = 'Belum' and convert(right(r.no_reg, 3), signed) <= convert(right('$noreg', 3), signed)) as
-                                                sisa_antrean, (select concat(r.kd_poli, '-', r.no_reg) from reg_periksa r where r.tgl_registrasi = '$booking[tanggalperiksa]'
+                                                r.kd_poli = j.kd_poli and r.stts = 'Belum' and convert(right(r.no_reg, 3), signed) < convert(right('$noreg', 3), signed)) as
+                                                sisa_antrean, (select r.no_reg from reg_periksa r where r.tgl_registrasi = '$booking[tanggalperiksa]'
                                                 and r.kd_dokter = j.kd_dokter and r.kd_poli = j.kd_poli and r.stts = 'Belum' and convert(right(r.no_reg, 3), signed) <= convert(
-                                                right('$noreg', 3), signed) order by r.no_reg limit 1) as antrean_dipanggil from jadwal j join poliklinik p on j.kd_poli = p.kd_poli
+                                                right('$noreg', 3), signed) order by convert(right(r.no_reg, 3), signed) limit 1) as antrean_dipanggil from jadwal j join poliklinik p on j.kd_poli = p.kd_poli
                                                 join dokter d on j.kd_dokter = d.kd_dokter join maping_dokter_dpjpvclaim md on j.kd_dokter = md.kd_dokter join maping_poli_bpjs mp on
                                                 j.kd_poli = mp.kd_poli_rs where j.hari_kerja = '$hari' and j.jam_mulai = '$jammulai:00' and j.jam_selesai = '$jamselesai:00' and
                                                 md.kd_dokter_bpjs = '$booking[kodedokter]' and mp.kd_poli_bpjs = '$booking[kodepoli]'"
@@ -1168,7 +1187,7 @@ if (!empty($url[0])) {
                                                         'namapoli'       => $data['nm_poli'],
                                                         'namadokter'     => $data['nm_dokter'],
                                                         'sisaantrean'    => intval(validangka($data['sisa_antrean']) >= 0 ? ($data['sisa_antrean']) : 0),
-                                                        'antreanpanggil' => $data['antrean_dipanggil'],
+                                                        'antreanpanggil' => $data['kd_poli'] . '-' . $data['antrean_dipanggil'],
                                                         'waktutunggu'    => (($data['sisa_antrean'] * $waktutunggu) * 1000),
                                                         'keterangan'     => "Datanglah Minimal 30 Menit, jika no antrian anda terlewat, silakan konfirmasi ke bagian Pendaftaran atau Perawat Poli, Terima Kasih ..",
                                                     ],
@@ -2051,11 +2070,12 @@ if (!empty($url[0])) {
     if (!empty($response)) {
         echo json_encode($response);
     } else {
-        tampil();
+        // tampil();
+        echo 'sehat';
     }
 } else {
-    tampil();
-    // echo 'coba';
+    // tampil();
+    echo 'coba';
 }
 
 function tampil()
