@@ -67,11 +67,11 @@ public class WindowInputPassword extends javax.swing.JDialog {
         PassLama.setForeground(new java.awt.Color(50, 50, 50));
         PassLama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         internalFrame6.add(PassLama);
-        PassLama.setBounds(108, 30, 210, 23);
+        PassLama.setBounds(118, 30, 210, 23);
 
         jLabel9.setText("Password Lama :");
         internalFrame6.add(jLabel9);
-        jLabel9.setBounds(0, 30, 105, 23);
+        jLabel9.setBounds(0, 30, 115, 23);
 
         BtnClosePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
         BtnClosePass.setMnemonic('2');
@@ -109,21 +109,21 @@ public class WindowInputPassword extends javax.swing.JDialog {
 
         jLabel10.setText("Password Baru :");
         internalFrame6.add(jLabel10);
-        jLabel10.setBounds(0, 60, 105, 23);
+        jLabel10.setBounds(0, 60, 115, 23);
 
         Passbaru1.setForeground(new java.awt.Color(50, 50, 50));
         Passbaru1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         internalFrame6.add(Passbaru1);
-        Passbaru1.setBounds(108, 60, 210, 23);
+        Passbaru1.setBounds(118, 60, 210, 23);
 
-        jLabel12.setText("Password Baru :");
+        jLabel12.setText("Konfirmasi Password :");
         internalFrame6.add(jLabel12);
-        jLabel12.setBounds(0, 90, 105, 23);
+        jLabel12.setBounds(0, 90, 115, 23);
 
         PassBaru2.setForeground(new java.awt.Color(50, 50, 50));
         PassBaru2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         internalFrame6.add(PassBaru2);
-        PassBaru2.setBounds(108, 90, 210, 23);
+        PassBaru2.setBounds(118, 90, 210, 23);
 
         getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
