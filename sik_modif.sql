@@ -2361,6 +2361,10 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_paket_mcu_smc` enum('true'
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `master_template_paket_mcu_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_paket_mcu_smc`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_lab_smc` enum('true','false') NULL DEFAULT NULL AFTER `master_template_paket_mcu_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_radiologi_smc` enum('true','false') NULL DEFAULT NULL AFTER `hapus_permintaan_lab_smc`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;

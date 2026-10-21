@@ -1934,11 +1934,11 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     if(NoPermintaan.trim().equals("")||DiagnosaKlinis.trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
-                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
+                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_lab_smc()){
                             if((Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan)+
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 boolean isSampled = Sequel.cariExistsSmc("select * from permintaan_lab where permintaan_lab.noorder = ? and permintaan_lab.tgl_sampel != '0000-00-00' and permintaan_lab.jam_sampel != '00:00:00'", NoPermintaan);
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
                                 if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
@@ -1974,11 +1974,11 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                     if(NoPermintaan.trim().equals("")||DiagnosaKlinis.trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{
-                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama")){
+                        if(Sampel.equals("")||akses.getkode().equals("Admin Utama") || akses.gethapus_permintaan_lab_smc()){
                             if((Sequel.cariInteger("select count(noorder) from permintaan_pemeriksaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan)+
                                     Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where stts_bayar='Sudah' and noorder=?",NoPermintaan))>0){
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
-                            }else{
+                            }else if("".equals(Sampel)||"Admin Utama".equals(akses.getkode())||JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog(null,"Permintaan ini sudah dilakukan pengambilan sampel.\nYakin ingin menghapus permintaan ini..?","Peringatan",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE)){
                                 boolean isSampled = Sequel.cariExistsSmc("select * from permintaan_lab where permintaan_lab.noorder = ? and permintaan_lab.tgl_sampel != '0000-00-00' and permintaan_lab.jam_sampel != '00:00:00'", NoPermintaan);
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
                                 if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
@@ -2230,7 +2230,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
-                            autoKirimOrderKeLIS(NoPermintaan);
+                            autoKirimOrderKeLISSmc(NoPermintaan);
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -2278,7 +2278,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
-                            autoKirimOrderKeLIS(NoPermintaan);
+                            autoKirimOrderKeLISSmc(NoPermintaan);
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -5722,7 +5722,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         super.dispose();
     }
 
-    private void autoKirimOrderKeLIS(String noorder) {
+    private void autoKirimOrderKeLISSmc(String noorder) {
         if (LABORATORIUMKIRIMHASIL == null || LABORATORIUMKIRIMHASIL.isBlank()) {
             return;
         }
