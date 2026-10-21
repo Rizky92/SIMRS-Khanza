@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Insets;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
-import javax.swing.JToggleButton;
+import javax.swing.JButton;
 
 /**
  *
@@ -13,8 +14,9 @@ import javax.swing.JToggleButton;
  */
 public class PasswordBox extends usu.widget.glass.PasswordBox {
     private static final int PEEK_WIDTH = 22;
-    private final JToggleButton peekButton = new JToggleButton();
+    private final JButton peekButton = new JButton();
     private char hiddenEchoChar;
+    private boolean peekHeld;
 
     public PasswordBox() {
         super();
@@ -32,16 +34,25 @@ public class PasswordBox extends usu.widget.glass.PasswordBox {
         } else if (0 == hiddenEchoChar) {
             hiddenEchoChar = '•';
         }
+        ImageIcon openEye = new ImageIcon(PasswordBox.class.getResource("/picture/matabuka.png"));
         peekButton.setIcon(new ImageIcon(PasswordBox.class.getResource("/picture/matatutup.png")));
-        peekButton.setSelectedIcon(new ImageIcon(PasswordBox.class.getResource("/picture/matabuka.png")));
-        peekButton.setToolTipText("Tampilkan password");
+        peekButton.setPressedIcon(openEye);
+        peekButton.setSelectedIcon(openEye);
+        peekButton.setToolTipText("Tahan untuk menampilkan password");
         peekButton.setBorder(null);
         peekButton.setContentAreaFilled(false);
         peekButton.setFocusPainted(false);
         peekButton.setFocusable(false);
         peekButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         peekButton.setSelected(0 == getEchoChar());
-        peekButton.addActionListener(e -> setPeeking(peekButton.isSelected()));
+        peekButton.getModel().addChangeListener(e -> {
+            ButtonModel model = peekButton.getModel();
+            boolean held = model.isPressed() && model.isArmed();
+            if (held != peekHeld) {
+                peekHeld = held;
+                setPeeking(held);
+            }
+        });
         setLayout(null);
         add(peekButton);
     }
@@ -72,7 +83,6 @@ public class PasswordBox extends usu.widget.glass.PasswordBox {
         }
         if (null != peekButton) {
             peekButton.setSelected(0 == c);
-            peekButton.setToolTipText(0 == c ? "Sembunyikan password" : "Tampilkan password");
         }
     }
 
