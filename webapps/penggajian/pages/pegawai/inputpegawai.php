@@ -18,7 +18,7 @@
                     $nik        ='';
                     $goto       =validTeks(isset($_GET['id'])?$_GET['id']:NULL);
                 }else if($action == "UBAH"){
-                    $_sql           = "SELECT `id`, `nik`, `nama`, `jk`, `jbtn`, `jnj_jabatan`, `departemen`, `bidang`, `stts_wp`, `stts_kerja`, `npwp`, `pendidikan`, `gapok`, `tmp_lahir`, `tgl_lahir`, `alamat`, `kota`, `mulai_kerja`, `ms_kerja`, `indexins`, `bpd`, `rekening`, `stts_aktif`, `wajibmasuk`, `pengurang`, `indek`, `mulai_kontrak`, `cuti_diambil`,`photo`,no_ktp,`kode_kelompok`, `kode_resiko`, `kode_emergency` FROM pegawai WHERE id='$id'";
+                    $_sql           = "SELECT `id`, `nik`, `nama`, `jk`, `jbtn`, `jnj_jabatan`, `departemen`, `bidang`, `stts_wp`, `stts_kerja`, `npwp`, `pendidikan`, `gapok`, `tmp_lahir`, `tgl_lahir`, `alamat`, `kota`, `mulai_kerja`, `ms_kerja`, `indexins`, `bpd`, `rekening`, `stts_aktif`, `wajibmasuk`, `pengurang`, `indek`, `mulai_kontrak`, `cuti_diambil`,`photo`,no_ktp,`kode_kelompok`, `kode_resiko`, `kode_emergency`, `agama` FROM pegawai WHERE id='$id'";
                     $hasil          = bukaquery($_sql);
                     $baris          = mysqli_fetch_row($hasil);
 
@@ -70,6 +70,7 @@
                     $kode_kelompok  = $baris[30];
                     $kode_resiko    = $baris[31];
                     $kode_emergency = $baris[32];
+                    $agama          = $baris[33];
                 }
 
                 echo"<input type=hidden name=id value=$id><input type=hidden name=nik2 value=$nik2><input type=hidden name=action value=$action>";
@@ -136,7 +137,13 @@
                         <span id="MsgIsi3" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
-		<tr class="head">
+                <tr class="head">
+                    <td width="25%">Agama</td><td width="">:</td>
+                    <td width="75%"><input name="agama" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi28'));" type=text id="TxtIsi28" class="inputbox" value="<?php echo isset($agama)?$agama:NULL;?>" size="50" maxlength="12">
+                    <span id="MsgIsi28" style="color:#CC0000; font-size:10px;"></span>
+                    </td>
+                </tr>
+		        <tr class="head">
                     <td width="25%" >Jabatan</td><td width="">:</td>
                     <td width="75%"><input name="jbtn" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi4'));" type=text id="TxtIsi4" class="inputbox" value="<?php echo isset($jbtn)?$jbtn:NULL;?>" size="30" maxlength="25">
                     <span id="MsgIsi4" style="color:#CC0000; font-size:10px;"></span>
@@ -518,7 +525,8 @@
                     Isi dgn "-2" jk ingin wajib masuk 1 bulan-4 hari<br>
                     Isi dgn "-3" jk ingin wajib masuk 1 bulan-2 hari-linas<br>
                     Isi dgn "-4" jk ingin wajib masuk 1 bulan-hari akhad<br>
-                    Isi dgn "-5" jk ingin wajib mengikuti penjadwalan
+                    Isi dgn "-5" jk ingin wajib mengikuti penjadwalan<br>
+                    Isi dengan jumlah wajib masuk apabila ingin menentukan jumlah wajib masuk kerja per periode
 		    <span id="MsgIsi25" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
@@ -601,6 +609,7 @@
                     $mulai_kontrak  = validTeks(trim($_POST['ThnKontrak'])."-".trim($_POST['BlnKontrak'])."-".trim($_POST['TglKontrak']));
                     $photo          = "pages/pegawai/photo/".validTeks($_FILES['photo']['name']);
                     $no_ktp         = validTeks(trim($_POST['no_ktp']));
+                    $agama          = validTeks6(str_replace("'","`",trim($_POST['agama'])),12);
                     if((strtolower(substr($photo,-4))==".jpg")||(strtolower(substr($photo,-5))==".jpeg")){
                         if(($_FILES['photo']['type'] == 'image/jpeg')||($_FILES['photo']['type'] == 'image/jpg')){
                             if((mime_content_type($_FILES['photo']['tmp_name'])== 'image/jpeg')||(mime_content_type($_FILES['photo']['tmp_name'])== 'image/jpg')){
@@ -613,7 +622,7 @@
                                                 if(Tambah(" pegawai ","'0','$nik','$nama','$jk','$jbtn','$jnj_jabatan','$kode_kelompok','$kode_resiko','$kode_emergency',
                                                    '$departemen','$bidang','$stts_wp','$stts_kerja','$npwp','$pendidikan','0','$tmp_lahir','$tgl_lahir','$alamat',
                                                    '$kota','$mulai_kerja','$ms_kerja','$indexins','$bpd','$rekening','$stts_aktif','$wajibmasuk','0','0',
-                                                   '$mulai_kontrak','0','0','$photo','$no_ktp' "," pegawai ")){
+                                                   '$mulai_kontrak','0','0','$photo','$no_ktp', '$agama' "," pegawai ")){
                                                     move_uploaded_file($_FILES['photo']['tmp_name'],$photo);
                                                 }
                                                 echo"<html><head><title></title><meta http-equiv='refresh' content='1;URL=?act=InputPegawai&action=TAMBAH'></head><body></body></html>";
@@ -634,15 +643,15 @@
                                                 }
 
                                                 Ubah2(" dokter ","nm_dokter='$nama',jk='".str_replace("Wanita","P",str_replace("Pria","L",$jk))."',
-                                                    tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',almt_tgl='$alamat' where kd_dokter='$nik2'");
+                                                    tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',almt_tgl='$alamat', agama='$agama' where kd_dokter='$nik2'");
                                                 Ubah2(" petugas ","nama='$nama',jk='".str_replace("Wanita","P",str_replace("Pria","L",$jk))."',
-                                                    tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',alamat='$alamat' where nip='$nik2' ");
+                                                    tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',alamat='$alamat', agama='$agama' where nip='$nik2' ");
                                                 if(Ubah(" pegawai "," nik='$nik',nama='$nama',jk='$jk',jbtn='$jbtn',jnj_jabatan='$jnj_jabatan',departemen='$departemen',
                                                    bidang='$bidang',stts_wp='$stts_wp',stts_kerja='$stts_kerja',npwp='$npwp',pendidikan='$pendidikan',
                                                    tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',alamat='$alamat',kota='$kota',mulai_kontrak='$mulai_kontrak',
                                                    mulai_kerja='$mulai_kerja',ms_kerja='$ms_kerja',indexins='$indexins',bpd='$bpd',rekening='$rekening',
                                                    stts_aktif='$stts_aktif',no_ktp='$no_ktp',wajibmasuk='$wajibmasuk',kode_kelompok='$kode_kelompok',
-                                                   kode_resiko='$kode_resiko',kode_emergency='$kode_emergency' ".$ph." WHERE id='$id' "," pegawai ")){
+                                                   kode_resiko='$kode_resiko',kode_emergency='$kode_emergency', agama='$agama' ".$ph." WHERE id='$id' "," pegawai ")){
                                                     if($photo<>"pages/pegawai/photo/"){
                                                         move_uploaded_file($_FILES['photo']['tmp_name'],$photo);
                                                     }
@@ -671,7 +680,7 @@
                                     if(Tambah(" pegawai ","'0','$nik','$nama','$jk','$jbtn','$jnj_jabatan','$kode_kelompok','$kode_resiko','$kode_emergency',
                                             '$departemen','$bidang','$stts_wp','$stts_kerja','$npwp','$pendidikan','0','$tmp_lahir','$tgl_lahir','$alamat',
                                             '$kota','$mulai_kerja','$ms_kerja','$indexins','$bpd','$rekening','$stts_aktif','$wajibmasuk','0','0',
-                                            '$mulai_kontrak','0','0','$photo','$no_ktp'", " pegawai " )){
+                                            '$mulai_kontrak','0','0','$photo','$no_ktp', '$agama'", " pegawai " )){
                                         move_uploaded_file($_FILES['photo']['tmp_name'],$photo);
                                     }
                                     echo"<html><head><title></title><meta http-equiv='refresh' content='1;URL=?act=InputPegawai&action=TAMBAH'></head><body></body></html>";
@@ -684,15 +693,15 @@
                                     }
 
                                     Ubah2(" dokter ","nm_dokter='$nama',jk='".str_replace("Wanita","P",str_replace("Pria","L",$jk))."',
-                                            tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',almt_tgl='$alamat' where kd_dokter='$nik2'");
+                                            tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',almt_tgl='$alamat', agama='$agama' where kd_dokter='$nik2'");
                                     Ubah2(" petugas ","nama='$nama',jk='".str_replace("Wanita","P",str_replace("Pria","L",$jk))."',
-                                            tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',alamat='$alamat' where nip='$nik2' ");
+                                            tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',alamat='$alamat', agama='$agama' where nip='$nik2' ");
                                     Ubah(" pegawai "," nik='$nik',nama='$nama',jk='$jk',jbtn='$jbtn',jnj_jabatan='$jnj_jabatan',departemen='$departemen',
                                             bidang='$bidang',stts_wp='$stts_wp',stts_kerja='$stts_kerja',npwp='$npwp',pendidikan='$pendidikan',
                                             tmp_lahir='$tmp_lahir',tgl_lahir='$tgl_lahir',alamat='$alamat',kota='$kota',mulai_kontrak='$mulai_kontrak',
                                             mulai_kerja='$mulai_kerja',ms_kerja='$ms_kerja',indexins='$indexins',bpd='$bpd',rekening='$rekening',
                                             stts_aktif='$stts_aktif',no_ktp='$no_ktp',wajibmasuk='$wajibmasuk',kode_kelompok='$kode_kelompok',
-                                            kode_resiko='$kode_resiko',kode_emergency='$kode_emergency' ".$ph." WHERE id='$id' ", " pegawai ");
+                                            kode_resiko='$kode_resiko',kode_emergency='$kode_emergency', agama='$agama' ".$ph." WHERE id='$id' ", " pegawai ");
                                     echo"<html><head><title></title><meta http-equiv='refresh' content='1;URL=?act=InputPegawai&action=UBAH&id=$id'></head><body></body></html>";
                                     break;
                             }
