@@ -600,7 +600,6 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         jLabel20.setBounds(228, 70, 130, 23);
 
         JasaPJPengujian.setText("0");
-        JasaPJPengujian.setHighlighter(null);
         JasaPJPengujian.setName("JasaPJPengujian"); // NOI18N
         JasaPJPengujian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -616,7 +615,6 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         jLabel21.setBounds(228, 100, 130, 23);
 
         JasaPJVerifikator.setText("0");
-        JasaPJVerifikator.setHighlighter(null);
         JasaPJVerifikator.setName("JasaPJVerifikator"); // NOI18N
         JasaPJVerifikator.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

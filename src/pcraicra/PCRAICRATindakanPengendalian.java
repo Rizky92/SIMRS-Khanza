@@ -156,7 +156,6 @@ public final class PCRAICRATindakanPengendalian extends javax.swing.JDialog {
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 45, 23);
 
-        KodePengendalian.setHighlighter(null);
         KodePengendalian.setName("KodePengendalian"); // NOI18N
         KodePengendalian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

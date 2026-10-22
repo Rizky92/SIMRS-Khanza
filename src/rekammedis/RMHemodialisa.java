@@ -629,7 +629,6 @@ public final class RMHemodialisa extends javax.swing.JDialog {
         jLabel18.setBounds(400, 40, 70, 23);
 
         KdDokter.setEditable(false);
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

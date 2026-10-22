@@ -775,6 +775,8 @@ CREATE TABLE IF NOT EXISTS `pasien_bayi_gambar_smc`  (
   CONSTRAINT `pasien_bayi_gambar_smc_ibfk_1` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien_bayi` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `pegawai` ADD COLUMN IF NOT EXISTS `agama` varchar(12) NULL DEFAULT NULL AFTER `no_ktp`;
+
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
@@ -1887,6 +1889,15 @@ ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Piutang_Jasa_Perusahaan` varcha
 
 ALTER TABLE `set_akun2` MODIFY COLUMN IF EXISTS `Pendapatan_Piutang_Jasa_Perusahaan` varchar(15) NULL DEFAULT NULL AFTER `Piutang_Jasa_Perusahaan`;
 
+CREATE TABLE IF NOT EXISTS `set_aturan_password_smc`  (
+  `panjang_minimal` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `huruf_besar` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `huruf_kecil` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `angka` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `simbol` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `hari_peringatan` smallint(5) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ralan`  (
   `kd_poli` char(5) NOT NULL,
   `kd_pj` char(3) NOT NULL,
@@ -2352,6 +2363,10 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_paket_mcu_smc` enum('true'
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `master_template_paket_mcu_smc` enum('true','false') NULL DEFAULT NULL AFTER `template_paket_mcu_smc`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_lab_smc` enum('true','false') NULL DEFAULT NULL AFTER `master_template_paket_mcu_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_radiologi_smc` enum('true','false') NULL DEFAULT NULL AFTER `hapus_permintaan_lab_smc`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
@@ -2653,5 +2668,11 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjam_piutang` enum('true','false
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression` enum('true','false') NULL DEFAULT NULL AFTER `konfirmasi_rekonsiliasi_obat`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
+
+CREATE TABLE IF NOT EXISTS `user_password_smc`  (
+  `id_user` varchar(700) NOT NULL,
+  `tgl_ubah` datetime NOT NULL,
+  PRIMARY KEY (`id_user`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS=1;

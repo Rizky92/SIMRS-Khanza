@@ -247,11 +247,9 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         LoadHTML2 = new widget.editorpane();
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
 
         LoadHTML.setBorder(null);
@@ -520,7 +518,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 65, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -531,7 +528,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         TNoRw.setBounds(69, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -542,7 +538,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         TPasien.setBounds(320, 10, 255, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 111, 23);
@@ -576,7 +571,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         FormInput.add(jLabel17);
         jLabel17.setBounds(584, 10, 60, 23);
 
-        LahirPasien.setHighlighter(null);
         LahirPasien.setName("LahirPasien"); // NOI18N
         FormInput.add(LahirPasien);
         LahirPasien.setBounds(648, 10, 85, 23);
@@ -587,7 +581,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         jLabel18.setBounds(205, 40, 120, 23);
 
         NIK.setEditable(false);
-        NIK.setHighlighter(null);
         NIK.setName("NIK"); // NOI18N
         FormInput.add(NIK);
         NIK.setBounds(329, 40, 120, 23);
@@ -638,7 +631,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(0, 70, 65, 23);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -668,7 +660,6 @@ public final class SuratPermintaanBinrohtal extends javax.swing.JDialog {
         jLabel22.setBounds(205, 70, 120, 23);
 
         KodeDokter.setEditable(false);
-        KodeDokter.setHighlighter(null);
         KodeDokter.setName("KodeDokter"); // NOI18N
         FormInput.add(KodeDokter);
         KodeDokter.setBounds(329, 70, 120, 23);

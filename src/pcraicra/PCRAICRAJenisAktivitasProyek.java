@@ -156,7 +156,6 @@ public final class PCRAICRAJenisAktivitasProyek extends javax.swing.JDialog {
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 94, 23);
 
-        KodeAktivitas.setHighlighter(null);
         KodeAktivitas.setName("KodeAktivitas"); // NOI18N
         KodeAktivitas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

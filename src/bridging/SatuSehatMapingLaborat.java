@@ -153,7 +153,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         BtnLoinc1 = new widget.Button();
 
         NamaPemeriksaan.setEditable(false);
-        NamaPemeriksaan.setHighlighter(null);
         NamaPemeriksaan.setName("NamaPemeriksaan"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -411,7 +410,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         jLabel4.setBounds(425, 10, 100, 23);
 
         KodePemeriksaan.setEditable(false);
-        KodePemeriksaan.setHighlighter(null);
         KodePemeriksaan.setName("KodePemeriksaan"); // NOI18N
         FormInput.add(KodePemeriksaan);
         KodePemeriksaan.setBounds(271, 10, 110, 23);
@@ -433,7 +431,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(btnBarang);
         btnBarang.setBounds(383, 10, 28, 23);
 
-        Code.setHighlighter(null);
         Code.setName("Code"); // NOI18N
         Code.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -453,7 +450,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(0, 40, 95, 23);
 
-        Display.setHighlighter(null);
         Display.setName("Display"); // NOI18N
         Display.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -463,7 +459,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(Display);
         Display.setBounds(99, 40, 625, 23);
 
-        RadiologiSystem.setHighlighter(null);
         RadiologiSystem.setName("RadiologiSystem"); // NOI18N
         RadiologiSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -483,7 +478,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(0, 100, 95, 23);
 
-        SampelCode.setHighlighter(null);
         SampelCode.setName("SampelCode"); // NOI18N
         SampelCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -493,7 +487,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(SampelCode);
         SampelCode.setBounds(99, 70, 110, 23);
 
-        SampelDisplay.setHighlighter(null);
         SampelDisplay.setName("SampelDisplay"); // NOI18N
         SampelDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -508,7 +501,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(305, 70, 100, 23);
 
-        SampelRadiologiSystem.setHighlighter(null);
         SampelRadiologiSystem.setName("SampelRadiologiSystem"); // NOI18N
         SampelRadiologiSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

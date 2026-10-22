@@ -358,7 +358,6 @@ public class OrthancDICOM extends javax.swing.JDialog {
         internalFrame5.add(jLabel14);
         jLabel14.setBounds(0, 22, 50, 23);
 
-        AccessionNumber.setHighlighter(null);
         AccessionNumber.setName("AccessionNumber"); // NOI18N
         AccessionNumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

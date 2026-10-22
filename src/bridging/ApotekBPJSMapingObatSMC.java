@@ -431,13 +431,11 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
         jLabel4.setBounds(0, 10, 70, 23);
 
         kdobat.setEditable(false);
-        kdobat.setHighlighter(null);
         kdobat.setName("kdobat"); // NOI18N
         FormInput.add(kdobat);
         kdobat.setBounds(74, 10, 100, 23);
 
         TObat.setEditable(false);
-        TObat.setHighlighter(null);
         TObat.setName("TObat"); // NOI18N
         FormInput.add(TObat);
         TObat.setBounds(178, 10, 354, 23);
@@ -460,7 +458,6 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
         btnPoliRS.setBounds(536, 10, 28, 23);
 
         KdObatBPJS.setEditable(false);
-        KdObatBPJS.setHighlighter(null);
         KdObatBPJS.setName("KdObatBPJS"); // NOI18N
         FormInput.add(KdObatBPJS);
         KdObatBPJS.setBounds(74, 40, 100, 23);
@@ -493,13 +490,11 @@ public final class ApotekBPJSMapingObatSMC extends javax.swing.JDialog {
         jLabel21.setBounds(0, 70, 70, 23);
 
         Restriksi.setEditable(false);
-        Restriksi.setHighlighter(null);
         Restriksi.setName("Restriksi"); // NOI18N
         FormInput.add(Restriksi);
         Restriksi.setBounds(232, 70, 332, 23);
 
         Harga.setEditable(false);
-        Harga.setHighlighter(null);
         Harga.setName("Harga"); // NOI18N
         FormInput.add(Harga);
         Harga.setBounds(74, 70, 100, 23);

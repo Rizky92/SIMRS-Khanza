@@ -274,10 +274,8 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         jLabel12 = new widget.Label();
         TagihanPPn = new widget.TextBox();
 
-        PenerimaanSampel.setHighlighter(null);
         PenerimaanSampel.setName("PenerimaanSampel"); // NOI18N
 
-        TitikSampel.setHighlighter(null);
         TitikSampel.setName("TitikSampel"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -376,13 +374,11 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         PanelInput.setLayout(null);
 
         KodePelanggan.setEditable(false);
-        KodePelanggan.setHighlighter(null);
         KodePelanggan.setName("KodePelanggan"); // NOI18N
         PanelInput.add(KodePelanggan);
         KodePelanggan.setBounds(87, 70, 80, 23);
 
         NamaPelanggan.setEditable(false);
-        NamaPelanggan.setHighlighter(null);
         NamaPelanggan.setName("NamaPelanggan"); // NOI18N
         PanelInput.add(NamaPelanggan);
         NamaPelanggan.setBounds(169, 70, 233, 23);
@@ -439,7 +435,6 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         jLabel4.setBounds(426, 40, 90, 23);
 
         NoPermintaan.setEditable(false);
-        NoPermintaan.setHighlighter(null);
         NoPermintaan.setName("NoPermintaan"); // NOI18N
         PanelInput.add(NoPermintaan);
         NoPermintaan.setBounds(520, 40, 160, 23);
@@ -455,13 +450,11 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         jLabel18.setBounds(405, 70, 60, 23);
 
         KodeSampel.setEditable(false);
-        KodeSampel.setHighlighter(null);
         KodeSampel.setName("KodeSampel"); // NOI18N
         PanelInput.add(KodeSampel);
         KodeSampel.setBounds(469, 70, 55, 23);
 
         NamaSampel.setEditable(false);
-        NamaSampel.setHighlighter(null);
         NamaSampel.setName("NamaSampel"); // NOI18N
         PanelInput.add(NamaSampel);
         NamaSampel.setBounds(526, 70, 154, 23);
@@ -471,7 +464,6 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         PanelInput.add(jLabel5);
         jLabel5.setBounds(426, 10, 90, 23);
 
-        NoBayar.setHighlighter(null);
         NoBayar.setName("NoBayar"); // NOI18N
         NoBayar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -486,7 +478,6 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         PanelInput.add(jLabel6);
         jLabel6.setBounds(0, 10, 83, 23);
 
-        DibayarOleh.setHighlighter(null);
         DibayarOleh.setName("DibayarOleh"); // NOI18N
         DibayarOleh.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -530,7 +521,6 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         TtlSemua.setEditable(false);
         TtlSemua.setText("0");
         TtlSemua.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        TtlSemua.setHighlighter(null);
         TtlSemua.setName("TtlSemua"); // NOI18N
         TtlSemua.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -543,7 +533,6 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         TKembali.setEditable(false);
         TKembali.setText("0");
         TKembali.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        TKembali.setHighlighter(null);
         TKembali.setName("TKembali"); // NOI18N
         panelBayar.add(TKembali);
         TKembali.setBounds(105, 320, 225, 23);
@@ -652,7 +641,6 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         TagihanPPn.setEditable(false);
         TagihanPPn.setText("0");
         TagihanPPn.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        TagihanPPn.setHighlighter(null);
         TagihanPPn.setName("TagihanPPn"); // NOI18N
         panelBayar.add(TagihanPPn);
         TagihanPPn.setBounds(453, 10, 225, 23);

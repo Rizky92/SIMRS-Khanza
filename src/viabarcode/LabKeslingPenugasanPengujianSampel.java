@@ -374,13 +374,11 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         PanelInput.setLayout(null);
 
         KodePelanggan.setEditable(false);
-        KodePelanggan.setHighlighter(null);
         KodePelanggan.setName("KodePelanggan"); // NOI18N
         PanelInput.add(KodePelanggan);
         KodePelanggan.setBounds(94, 70, 80, 23);
 
         NamaPelanggan.setEditable(false);
-        NamaPelanggan.setHighlighter(null);
         NamaPelanggan.setName("NamaPelanggan"); // NOI18N
         PanelInput.add(NamaPelanggan);
         NamaPelanggan.setBounds(176, 70, 200, 23);
@@ -442,7 +440,6 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         KdPJ.setBounds(94, 10, 115, 23);
 
         NmPJ.setEditable(false);
-        NmPJ.setHighlighter(null);
         NmPJ.setName("NmPJ"); // NOI18N
         PanelInput.add(NmPJ);
         NmPJ.setBounds(211, 10, 200, 23);
@@ -470,7 +467,6 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         jLabel4.setBounds(446, 40, 90, 23);
 
         TNoPermintaan.setEditable(false);
-        TNoPermintaan.setHighlighter(null);
         TNoPermintaan.setName("TNoPermintaan"); // NOI18N
         PanelInput.add(TNoPermintaan);
         TNoPermintaan.setBounds(540, 40, 140, 23);
@@ -486,13 +482,11 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         jLabel18.setBounds(370, 70, 70, 23);
 
         KodeSampel.setEditable(false);
-        KodeSampel.setHighlighter(null);
         KodeSampel.setName("KodeSampel"); // NOI18N
         PanelInput.add(KodeSampel);
         KodeSampel.setBounds(444, 70, 55, 23);
 
         NamaSampel.setEditable(false);
-        NamaSampel.setHighlighter(null);
         NamaSampel.setName("NamaSampel"); // NOI18N
         PanelInput.add(NamaSampel);
         NamaSampel.setBounds(501, 70, 179, 23);
@@ -502,7 +496,6 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         PanelInput.add(jLabel5);
         jLabel5.setBounds(446, 10, 90, 23);
 
-        TNoPenugasan.setHighlighter(null);
         TNoPenugasan.setName("TNoPenugasan"); // NOI18N
         TNoPenugasan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -528,7 +521,6 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         KdAnalis.setBounds(94, 100, 115, 23);
 
         NmAnalis.setEditable(false);
-        NmAnalis.setHighlighter(null);
         NmAnalis.setName("NmAnalis"); // NOI18N
         PanelInput.add(NmAnalis);
         NmAnalis.setBounds(211, 100, 200, 23);
@@ -550,7 +542,6 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         PanelInput.add(jLabel6);
         jLabel6.setBounds(446, 100, 60, 23);
 
-        Catatan.setHighlighter(null);
         Catatan.setName("Catatan"); // NOI18N
         Catatan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

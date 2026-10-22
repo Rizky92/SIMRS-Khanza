@@ -345,19 +345,16 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
         FormInput.setLayout(null);
 
         TNoRw.setEditable(false);
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         FormInput.add(TNoRw);
         TNoRw.setBounds(75, 12, 120, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(196, 12, 427, 23);
 
         KdDokter.setEditable(false);
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -368,7 +365,6 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
         KdDokter.setBounds(75, 72, 120, 23);
 
         NmDokter.setEditable(false);
-        NmDokter.setHighlighter(null);
         NmDokter.setName("NmDokter"); // NOI18N
         FormInput.add(NmDokter);
         NmDokter.setBounds(196, 72, 230, 23);
@@ -405,7 +401,6 @@ public final class ApotekBPJSPermintaanIterResep extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(395, 42, 70, 23);
 
-        NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         NoResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

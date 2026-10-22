@@ -837,7 +837,6 @@ public final class RMMonitoringStewardPascaAnestesi extends javax.swing.JDialog 
         jLabel18.setBounds(0, 40, 70, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         FormInput.add(KdPetugas);
         KdPetugas.setBounds(74, 40, 94, 23);

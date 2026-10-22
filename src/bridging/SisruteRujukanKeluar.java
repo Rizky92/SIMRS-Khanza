@@ -2674,7 +2674,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(pegawai.getTable().getSelectedRow()!= -1){
-                    KdDokter.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),23).toString());
+                    KdDokter.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),24).toString());
                     DokterPerujuk.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     KdDokter.requestFocus();
                 }
@@ -2721,7 +2721,7 @@ public final class SisruteRujukanKeluar extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(pegawai.getTable().getSelectedRow()!= -1){
-                    KdPetugas.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),23).toString());
+                    KdPetugas.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),24).toString());
                     PetugasEntry.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     KdPetugas.requestFocus();
                 }

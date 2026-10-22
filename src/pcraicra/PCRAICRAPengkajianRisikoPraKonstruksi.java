@@ -633,7 +633,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         });
         jPopupMenu1.add(MnPenilaianMedis);
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -800,7 +799,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.setPreferredSize(new java.awt.Dimension(870, 1533));
         FormInput.setLayout(null);
 
-        NoProyek.setHighlighter(null);
         NoProyek.setName("NoProyek"); // NOI18N
         NoProyek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -810,7 +808,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.add(NoProyek);
         NoProyek.setBounds(74, 10, 131, 23);
 
-        NamaProyek.setHighlighter(null);
         NamaProyek.setName("NamaProyek"); // NOI18N
         NamaProyek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -820,7 +817,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.add(NamaProyek);
         NamaProyek.setBounds(404, 10, 450, 23);
 
-        DeskripsiPekerjaan.setHighlighter(null);
         DeskripsiPekerjaan.setName("DeskripsiPekerjaan"); // NOI18N
         DeskripsiPekerjaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -878,7 +874,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.add(jLabel8);
         jLabel8.setBounds(15, 100, 160, 23);
 
-        YangBertanggungJawab.setHighlighter(null);
         YangBertanggungJawab.setName("YangBertanggungJawab"); // NOI18N
         YangBertanggungJawab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -888,7 +883,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.add(YangBertanggungJawab);
         YangBertanggungJawab.setBounds(177, 100, 245, 23);
 
-        KontraktorPelaksana.setHighlighter(null);
         KontraktorPelaksana.setName("KontraktorPelaksana"); // NOI18N
         KontraktorPelaksana.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1017,7 +1011,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.add(jLabel13);
         jLabel13.setBounds(15, 10, 70, 23);
 
-        LokasiProyek.setHighlighter(null);
         LokasiProyek.setName("LokasiProyek"); // NOI18N
         LokasiProyek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2065,7 +2058,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         FormInput.add(jLabel15);
         jLabel15.setBounds(250, 1500, 400, 23);
 
-        NomorPengkajian.setHighlighter(null);
         NomorPengkajian.setName("NomorPengkajian"); // NOI18N
         NomorPengkajian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

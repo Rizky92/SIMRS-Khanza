@@ -156,7 +156,6 @@ public final class PCRAICRAPersyaratanHarusDipenuhi extends javax.swing.JDialog 
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 45, 23);
 
-        KodePersyaratan.setHighlighter(null);
         KodePersyaratan.setName("KodePersyaratan"); // NOI18N
         KodePersyaratan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -156,7 +156,6 @@ public final class PCRAICRAKelasRisikoPencegahan extends javax.swing.JDialog {
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 70, 23);
 
-        KodeArea.setHighlighter(null);
         KodeArea.setName("KodeArea"); // NOI18N
         KodeArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

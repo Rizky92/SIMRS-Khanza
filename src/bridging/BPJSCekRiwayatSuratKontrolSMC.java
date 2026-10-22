@@ -337,7 +337,16 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
                     (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 12), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                     "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
                 )) {
-                    JOptionPane.showMessageDialog(null, "Gagal menyimpan data rencana kontrol..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    if (Sequel.cariExistsSmc("select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0))) {
+                        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Rencana Kontrol " + (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0) + " sudah ada,\napakah ingin menggunakan data rencana kontrol dari BPJS Kesehatan?", "Konfirmasi", JOptionPane.YES_NO_OPTION)) {
+                            Sequel.mengupdatetfSmc("bridging_surat_kontrol_bpjs", "tgl_surat = ?, tgl_rencana = ?, kd_dokter_bpjs = ?, nm_dokter_bpjs = ?, kd_poli_bpjs = ?, nm_poli_bpjs = ?, no_sep = ?", "no_surat = ?",
+                                (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 5), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 6), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 13),
+                                (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 14), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 11), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 12),
+                                (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 7), (String) tbKamar.getValueAt(tbKamar.getSelectedRow(), 0));
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan data rencana kontrol..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }

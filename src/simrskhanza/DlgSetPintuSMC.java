@@ -403,7 +403,6 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         panelBiasa1.add(jLabel3);
         jLabel3.setBounds(0, 42, 70, 23);
 
-        nmdokter.setHighlighter(null);
         nmdokter.setName("nmdokter"); // NOI18N
         panelBiasa1.add(nmdokter);
         nmdokter.setBounds(191, 42, 397, 23);
@@ -413,7 +412,6 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         panelBiasa1.add(jLabel10);
         jLabel10.setBounds(0, 72, 70, 23);
 
-        TPoli.setHighlighter(null);
         TPoli.setName("TPoli"); // NOI18N
         panelBiasa1.add(TPoli);
         TPoli.setBounds(191, 72, 397, 23);
@@ -435,12 +433,10 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         panelBiasa1.add(btnDokter);
         btnDokter.setBounds(591, 42, 28, 23);
 
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         panelBiasa1.add(kddokter);
         kddokter.setBounds(74, 42, 115, 23);
 
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         panelBiasa1.add(KdPoli);
         KdPoli.setBounds(74, 72, 115, 23);
@@ -467,12 +463,10 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         panelBiasa1.add(jLabel4);
         jLabel4.setBounds(0, 12, 70, 23);
 
-        kdPintu.setHighlighter(null);
         kdPintu.setName("kdPintu"); // NOI18N
         panelBiasa1.add(kdPintu);
         kdPintu.setBounds(74, 12, 115, 23);
 
-        nmPintu.setHighlighter(null);
         nmPintu.setName("nmPintu"); // NOI18N
         panelBiasa1.add(nmPintu);
         nmPintu.setBounds(191, 12, 397, 23);

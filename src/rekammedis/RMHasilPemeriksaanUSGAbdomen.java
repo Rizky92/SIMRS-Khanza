@@ -337,7 +337,6 @@ public final class RMHasilPemeriksaanUSGAbdomen extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnPenilaianMedis);
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -507,7 +506,6 @@ public final class RMHasilPemeriksaanUSGAbdomen extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(750, 813));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -518,13 +516,11 @@ public final class RMHasilPemeriksaanUSGAbdomen extends javax.swing.JDialog {
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -571,7 +567,6 @@ public final class RMHasilPemeriksaanUSGAbdomen extends javax.swing.JDialog {
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);

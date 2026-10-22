@@ -350,7 +350,6 @@ public class MasterTemplateInformasiEdukasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(124, 10, 105, 23);
 
-        KodeEdukasi.setHighlighter(null);
         KodeEdukasi.setName("KodeEdukasi"); // NOI18N
         KodeEdukasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

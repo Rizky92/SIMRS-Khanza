@@ -236,9 +236,9 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         BlnCari = new widget.ComboBox();
         LPeriode = new widget.Label();
         label12 = new widget.Label();
-        Departemen = new widget.ComboBoxSMC();
+        Departemen = new smc.ui.swing.ComboBoxSMC();
         label13 = new widget.Label();
-        StatusKerja = new widget.ComboBoxSMC();
+        StatusKerja = new smc.ui.swing.ComboBoxSMC();
         panelGlass5 = new widget.panelisi();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
@@ -1056,7 +1056,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.Button BtnTerapkan;
     private widget.CekBox CekDatangDetail;
     private widget.CekBox CekPulangDetail;
-    private widget.ComboBoxSMC Departemen;
+    private smc.ui.swing.ComboBoxSMC Departemen;
     private widget.Label LBerkas;
     private widget.Label LCount;
     private widget.Label LCountImpor;
@@ -1068,7 +1068,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.ComboBox ShiftDetail;
-    private widget.ComboBoxSMC StatusKerja;
+    private smc.ui.swing.ComboBoxSMC StatusKerja;
     private widget.TextBox TCari;
     private widget.Tanggal TglDatangDetail;
     private widget.Tanggal TglPulangDetail;

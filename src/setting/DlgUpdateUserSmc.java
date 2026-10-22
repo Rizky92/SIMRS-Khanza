@@ -466,6 +466,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("dpjp_ranap", "[A] DPJP Ranap");
         namaakses.put("edit_registrasi", "[A] Edit Registrasi");
         namaakses.put("gabung_norawat", "[A] Gabung Nomor Rawat");
+        namaakses.put("hapus_permintaan_lab_smc", "[A] Hapus Permintaan Lab");
+        namaakses.put("hapus_permintaan_radiologi_smc", "[A] Hapus Permintaan Radiologi");
         namaakses.put("igd", "[A] IGD");
         namaakses.put("informasi_kamar", "[A] Informasi Kamar");
         namaakses.put("booking_operasi", "[A] Jadwal Operasi");
@@ -674,6 +676,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("ipsrs_riwayat_barang", "[E] Riwayat Barang Non Medis");
         namaakses.put("sirkulasi_non_medis", "[E] Sirkulasi Non Medis");
         namaakses.put("sirkulasi_non_medis2", "[E] Sirkulasi Non Medis 2");
+        namaakses.put("ipsrs_stok_akhir_pertanggal_smc", "[E] Stok Akhir Non Medis Per Tanggal");
         namaakses.put("ipsrs_stok_keluar", "[E] Stok Keluar Non Medis");
         namaakses.put("ipsrs_stokkeluar_pertanggal", "[E] Stok Keluar Non Medis Per Tanggal");
         namaakses.put("stok_opname_logistik", "[E] Stok Opname Non Medis");
@@ -924,6 +927,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("kategori_piutang_jasa_perusahaan", "[K] Kategori Piutang Jasa Perusahaan");
         namaakses.put("keuangan", "[K] Keuangan");
         namaakses.put("klaim_rawat_jalan", "[K] Klaim Rawat Jalan");
+        namaakses.put("master_template_paket_mcu_smc", "[K] Master Template Paket MCU");
         namaakses.put("nilai_piutang_perjenis_bayar_per_bulan", "[K] Nilai Piutang Per Cara Bayar Per Bulan");
         namaakses.put("pemasukan_lain", "[K] Pemasukkan Lain-Lain");
         namaakses.put("pembayaran_bank_jabar", "[K] Pembayaran Bank Jabar");
@@ -971,6 +975,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("tarif_ranap", "[K] Tarif Ranap");
         namaakses.put("tarif_utd", "[K] Tarif UTD");
         namaakses.put("template_laboratorium_smc", "[K] Template Laboratorium");
+        namaakses.put("template_paket_mcu_smc", "[K] Template Paket MCU");
         namaakses.put("titip_faktur_aset", "[K] Titip Faktur/Tagihan Aset/Inventaris");
         namaakses.put("titip_faktur_dapur", "[K] Titip Faktur/Tagihan Dapur");
         namaakses.put("titip_faktur_non_medis", "[K] Titip Faktur/Tagihan Non Medis");

@@ -166,7 +166,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCetakSuratKeterangan);
 
-        TanggalJamPeriksa.setHighlighter(null);
         TanggalJamPeriksa.setName("TanggalJamPeriksa"); // NOI18N
         TanggalJamPeriksa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -174,7 +173,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
             }
         });
 
-        KodeDokter.setHighlighter(null);
         KodeDokter.setName("KodeDokter"); // NOI18N
         KodeDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -182,7 +180,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
             }
         });
 
-        NamaDokter.setHighlighter(null);
         NamaDokter.setName("NamaDokter"); // NOI18N
         NamaDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -457,7 +454,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(416, 40, 70, 23);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -472,7 +468,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 70, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -483,7 +478,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         TNoRw.setBounds(74, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -494,7 +488,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         TPasien.setBounds(321, 10, 300, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -521,7 +514,6 @@ public final class SuratKeteranganBerobat extends javax.swing.JDialog {
         jLabel9.setBounds(0, 40, 70, 23);
 
         Poli.setEditable(false);
-        Poli.setHighlighter(null);
         Poli.setName("Poli"); // NOI18N
         Poli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

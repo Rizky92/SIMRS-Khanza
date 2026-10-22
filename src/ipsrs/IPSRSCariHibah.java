@@ -763,81 +763,83 @@ public class IPSRSCariHibah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()>-1){
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-            Valid.textKosong(TCari,"No.Faktur");
+        if(tbDokter.getSelectedRow()>-1){
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Faktur");
+            }else{
+                try {
+                    pscaribeli=koneksi.prepareStatement("select no_hibah,totalhibah,tgl_hibah from ipsrs_hibah where no_hibah=?");
+                    try {
+                        pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                        rs=pscaribeli.executeQuery();
+                        if(rs.next()){
+                            Sequel.AutoComitFalse();
+                            sukses=true;
+
+                            ps2=koneksi.prepareStatement("select kode_brng,jumlah from ipsrs_detail_hibah where no_hibah=? ");
+                            try {
+                                ps2.setString(1,rs.getString(1));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Hibah", akses.getkode(),"Hapus");
+                                    Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok-?",2,new String[]{
+                                        rs2.getString("jumlah"),rs2.getString("kode_brng")
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+
+                            Sequel.deleteTampJurnal();
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", 0, rs.getDouble("totalhibah"))==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0)==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
+                            }
+
+                            if(sukses==true){
+                                Sequel.queryu2("delete from ipsrs_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});
+                                Sequel.Commit();
+                            }else{
+                                Sequel.RollBack();
+                            }
+
+                            Sequel.AutoComitTrue();
+
+                            if(sukses==true){
+                                runBackground(() ->tampil());
+                            } else {
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rs!=null){
+                            rs.close();
+                        }
+                        if(pscaribeli!=null){
+                            pscaribeli.close();
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+            }
         }else{
-           try {
-               pscaribeli=koneksi.prepareStatement("select no_hibah,totalhibah,tgl_hibah from ipsrs_hibah where no_hibah=?");
-               try {
-                  pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                  rs=pscaribeli.executeQuery();
-                  if(rs.next()){
-                      Sequel.AutoComitFalse();
-                      sukses=true;
-
-                      ps2=koneksi.prepareStatement("select kode_brng,jumlah from ipsrs_detail_hibah where no_hibah=? ");
-                      try {
-                          ps2.setString(1,rs.getString(1));
-                          rs2=ps2.executeQuery();
-                          while(rs2.next()){
-                              Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Hibah", akses.getkode(),"Hapus");
-                              Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok-?",2,new String[]{
-                                     rs2.getString("jumlah"),rs2.getString("kode_brng")
-                              });
-                          }
-                      } catch (Exception e) {
-                          System.out.println("Notif : "+e);
-                      } finally{
-                          if(rs2!=null){
-                              rs2.close();
-                          }
-                          if(ps2!=null){
-                              ps2.close();
-                          }
-                      }
-
-                      Sequel.deleteTampJurnal();
-                      if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis fromn set_akun"), "PERSEDIAAN BARANG NON MEDIS", 0, rs.getDouble("totalhibah"))==false){
-                          sukses=false;
-                      }
-                      if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0)==false){
-                          sukses=false;
-                      }
-                      if(sukses==true){
-                          sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
-                      }
-
-                      if(sukses==true){
-                          Sequel.queryu2("delete from ipsrs_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});
-                          Sequel.Commit();
-                      }else{
-                          JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                          Sequel.RollBack();
-                      }
-
-                      Sequel.AutoComitTrue();
-                      if(sukses==true){
-                          runBackground(() ->tampil());
-                      }
-                  }
-               } catch (Exception e) {
-                   System.out.println("Notif : "+e);
-               } finally{
-                   if(rs!=null){
-                       rs.close();
-                   }
-                   if(pscaribeli!=null){
-                       pscaribeli.close();
-                   }
-               }
-           } catch (Exception ex) {
-               System.out.println(ex);
-           }
+            JOptionPane.showMessageDialog(null,"Silahkan pilih hibah yang mau dihapus..!");
         }
-    }else{
-        JOptionPane.showMessageDialog(null,"Silahkan pilih hibah yang mau dihapus..!");
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJenisActionPerformed
@@ -955,7 +957,7 @@ public class IPSRSCariHibah extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
                     "select ipsrs_hibah.tgl_hibah,ipsrs_hibah.no_hibah,ipsrs_hibah.kode_pemberi,pemberihibah.nama_pemberi, "+

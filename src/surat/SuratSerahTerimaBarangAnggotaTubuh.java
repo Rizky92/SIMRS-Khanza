@@ -256,10 +256,8 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
 
-        JK.setHighlighter(null);
         JK.setName("JK"); // NOI18N
 
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -525,7 +523,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 70, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -536,7 +533,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         TNoRw.setBounds(74, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -547,7 +543,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         TPasien.setBounds(325, 10, 255, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(212, 10, 111, 23);
@@ -610,7 +605,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         FormInput.add(jLabel17);
         jLabel17.setBounds(584, 10, 60, 23);
 
-        LahirPasien.setHighlighter(null);
         LahirPasien.setName("LahirPasien"); // NOI18N
         FormInput.add(LahirPasien);
         LahirPasien.setBounds(648, 10, 85, 23);
@@ -621,7 +615,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         jLabel18.setBounds(170, 40, 55, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         FormInput.add(KdPetugas);
         KdPetugas.setBounds(229, 40, 100, 23);
@@ -678,7 +671,6 @@ public final class SuratSerahTerimaBarangAnggotaTubuh extends javax.swing.JDialo
         FormInput.add(jLabel3);
         jLabel3.setBounds(520, 40, 90, 23);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

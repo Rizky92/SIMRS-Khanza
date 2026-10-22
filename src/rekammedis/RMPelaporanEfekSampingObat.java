@@ -815,7 +815,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnMonitoringEso);
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -983,7 +982,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(870, 1333));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -994,13 +992,11 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -1028,7 +1024,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         jLabel8.setBounds(0, 70, 70, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(74, 70, 80, 23);
@@ -1039,7 +1034,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         jLabel9.setBounds(540, 340, 230, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(74, 40, 80, 23);
@@ -2926,7 +2920,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         jLabel14.setBounds(370, 40, 60, 23);
 
         Suku.setEditable(false);
-        Suku.setHighlighter(null);
         Suku.setName("Suku"); // NOI18N
         FormInput.add(Suku);
         Suku.setBounds(435, 40, 150, 23);
@@ -2937,7 +2930,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         jLabel27.setBounds(170, 40, 70, 23);
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
         FormInput.add(Umur);
         Umur.setBounds(245, 40, 80, 23);
@@ -3049,7 +3041,6 @@ public final class RMPelaporanEfekSampingObat extends javax.swing.JDialog {
         jLabel15.setBounds(580, 40, 110, 23);
 
         NoSurat.setEditable(false);
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
