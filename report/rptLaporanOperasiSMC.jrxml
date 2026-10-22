@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="1008" columnWidth="553" leftMargin="39" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7435c0f7-de74-4940-ae33-c2370e46f8e7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="536" leftMargin="39" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7435c0f7-de74-4940-ae33-c2370e46f8e7">
 	<property name="ireport.zoom" value="1.399522140629204"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -8,6 +8,15 @@
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
 	<parameter name="kotars" class="java.lang.String"/>
@@ -270,7 +279,7 @@
 		<band height="52">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<textField>
-				<reportElement x="0" y="0" width="553" height="17" uuid="6c31c284-e35b-4e6c-8447-af5f9207b9b4">
+				<reportElement x="0" y="0" width="536" height="17" uuid="6c31c284-e35b-4e6c-8447-af5f9207b9b4">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -287,7 +296,7 @@
 				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="17" width="553" height="11" uuid="ba45cdb1-6e88-4a05-8795-1ae63b3ef11b">
+				<reportElement x="0" y="17" width="536" height="11" uuid="ba45cdb1-6e88-4a05-8795-1ae63b3ef11b">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -305,7 +314,7 @@
 				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="28" width="553" height="11" uuid="6bb20c38-1c6d-461e-993d-04653cb69342">
+				<reportElement x="0" y="28" width="536" height="11" uuid="6bb20c38-1c6d-461e-993d-04653cb69342">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="2"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -324,7 +333,7 @@
 				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="39" width="553" height="11" uuid="14bd74cb-266d-4524-b5f1-6402afbb3b8f">
+				<reportElement x="0" y="39" width="536" height="11" uuid="14bd74cb-266d-4524-b5f1-6402afbb3b8f">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -355,7 +364,7 @@
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="0" y="50" width="553" height="1" uuid="ed1b5c36-47ad-4cd3-8dfa-866f0eabf354">
+				<reportElement x="0" y="50" width="536" height="1" uuid="ed1b5c36-47ad-4cd3-8dfa-866f0eabf354">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="4"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -375,7 +384,7 @@
 		<band height="91" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
-				<reportElement x="0" y="0" width="553" height="21" uuid="31b7a553-01e5-4309-8eb3-388b59493704">
+				<reportElement x="0" y="0" width="536" height="21" uuid="31b7a553-01e5-4309-8eb3-388b59493704">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -432,7 +441,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="80" y="21" width="258" height="11" uuid="b8df0ab3-1b0f-469c-aaac-b2c724de5933">
+				<reportElement x="80" y="21" width="241" height="11" uuid="b8df0ab3-1b0f-469c-aaac-b2c724de5933">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -490,7 +499,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy">
-				<reportElement x="80" y="43" width="258" height="11" uuid="4ca07946-8809-4620-8767-23143ee369b4">
+				<reportElement x="80" y="43" width="241" height="11" uuid="4ca07946-8809-4620-8767-23143ee369b4">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -540,7 +549,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="80" y="32" width="258" height="11" uuid="02ee7169-fe45-4d8f-ade8-83cb3fdb7891">
+				<reportElement x="80" y="32" width="241" height="11" uuid="02ee7169-fe45-4d8f-ade8-83cb3fdb7891">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="2"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -591,7 +600,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="80" y="54" width="258" height="11" uuid="5401fa3a-94a9-4807-8084-61cd5c9053f4">
+				<reportElement x="80" y="54" width="241" height="11" uuid="5401fa3a-94a9-4807-8084-61cd5c9053f4">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="4"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -642,7 +651,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="80" y="65" width="258" height="11" uuid="4c92438f-ef12-4fc7-b1d4-ed614616f408">
+				<reportElement x="80" y="65" width="241" height="11" uuid="4c92438f-ef12-4fc7-b1d4-ed614616f408">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="5"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -692,7 +701,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="80" y="76" width="258" height="11" uuid="8ba764f1-13be-4578-882c-951d85af5580">
+				<reportElement x="80" y="76" width="241" height="11" uuid="8ba764f1-13be-4578-882c-951d85af5580">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="6"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -708,7 +717,7 @@
 				<textFieldExpression><![CDATA[$P{ruang}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="338" y="43" width="60" height="11" uuid="ee15ff40-c4c7-4d4d-9821-4edb31248500">
+				<reportElement x="321" y="43" width="60" height="11" uuid="ee15ff40-c4c7-4d4d-9821-4edb31248500">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -728,7 +737,7 @@
 				<text><![CDATA[Nomor Implan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="398" y="43" width="5" height="11" uuid="95f1788d-1872-4d21-8df1-a2894874f729">
+				<reportElement x="381" y="43" width="5" height="11" uuid="95f1788d-1872-4d21-8df1-a2894874f729">
 					<property name="com.jaspersoft.layout.grid.x" value="4"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -745,7 +754,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="403" y="43" width="150" height="33" isRemoveLineWhenBlank="true" uuid="0eb2ba18-b9cc-451a-966f-ec88070ccae0">
+				<reportElement x="386" y="43" width="150" height="33" isRemoveLineWhenBlank="true" uuid="0eb2ba18-b9cc-451a-966f-ec88070ccae0">
 					<property name="com.jaspersoft.layout.grid.x" value="5"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -781,7 +790,7 @@
 				<textFieldExpression><![CDATA["Mulai operasi : " + DATEFORMAT($F{tgl_operasi}, "dd-MM-yyyy HH:mm:ss")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy HH:mm:ss" isBlankWhenNull="true">
-				<reportElement x="208" y="0" width="207" height="15" uuid="b645d0f5-c6d1-4836-864b-372c1d21ca75">
+				<reportElement x="208" y="0" width="197" height="15" uuid="b645d0f5-c6d1-4836-864b-372c1d21ca75">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
@@ -798,7 +807,7 @@
 				<textFieldExpression><![CDATA["Selesai operasi : " + DATEFORMAT($F{selesaioperasi}, "dd-MM-yyyy HH:mm:ss")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="415" y="0" width="138" height="15" uuid="1a946603-9535-4c2e-b9a1-30f2c1df1864">
+				<reportElement x="405" y="0" width="131" height="15" uuid="1a946603-9535-4c2e-b9a1-30f2c1df1864">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -813,7 +822,7 @@
 				<textFieldExpression><![CDATA["Lama : " + $F{lama_operasi}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
 				<reportElement x="0" y="0" width="208" height="11" uuid="d051c097-7d3a-4dc8-b91a-07dbbd68b0fe">
@@ -850,7 +859,7 @@
 				<textFieldExpression><![CDATA[$F{operator1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="208" y="0" width="207" height="11" uuid="f7796ae9-c575-49bf-acc7-e5ea2457bbfa">
+				<reportElement x="208" y="0" width="197" height="11" uuid="f7796ae9-c575-49bf-acc7-e5ea2457bbfa">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -866,7 +875,7 @@
 				<text><![CDATA[Asisten Bedah :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="208" y="11" width="207" height="20" uuid="36f88182-46a6-4a35-a710-c0f10dc60981">
+				<reportElement x="208" y="11" width="197" height="20" uuid="36f88182-46a6-4a35-a710-c0f10dc60981">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -883,7 +892,7 @@
 				<textFieldExpression><![CDATA[$F{asistenoperator1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="415" y="11" width="138" height="20" uuid="a1b5a4a5-cda1-4cdc-9881-9934e2a30679">
+				<reportElement x="405" y="11" width="131" height="20" uuid="a1b5a4a5-cda1-4cdc-9881-9934e2a30679">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -902,7 +911,7 @@
 				<textFieldExpression><![CDATA[$F{jenis_anasthesi}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="0" width="138" height="11" uuid="0a5934bf-9f3e-4df3-a438-ddac96b7085e">
+				<reportElement x="405" y="0" width="131" height="11" uuid="0a5934bf-9f3e-4df3-a438-ddac96b7085e">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -922,11 +931,11 @@
 				<text><![CDATA[Tipe/Jenis Anastesi]]></text>
 			</staticText>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="415" y="11" width="138" height="20" uuid="208f576d-93a2-4e6b-9f6e-47993ac096da">
+				<reportElement x="405" y="11" width="131" height="20" uuid="208f576d-93a2-4e6b-9f6e-47993ac096da">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -945,7 +954,7 @@
 				<textFieldExpression><![CDATA[$F{permintaan_pa}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="208" y="11" width="207" height="20" uuid="cddc44f1-f1c5-419a-a1a5-795b32442789">
+				<reportElement x="208" y="11" width="197" height="20" uuid="cddc44f1-f1c5-419a-a1a5-795b32442789">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -962,7 +971,7 @@
 				<textFieldExpression><![CDATA[$F{asistenoperator2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="208" y="0" width="207" height="11" uuid="49bb03e0-b162-4e59-b82e-413a70c0ba66">
+				<reportElement x="208" y="0" width="197" height="11" uuid="49bb03e0-b162-4e59-b82e-413a70c0ba66">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="2"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -978,7 +987,7 @@
 				<text><![CDATA[Asisten Bedah 2 :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="415" y="0" width="138" height="11" uuid="05f7e115-4530-43fa-8274-99e7c5d377ba">
+				<reportElement x="405" y="0" width="131" height="11" uuid="05f7e115-4530-43fa-8274-99e7c5d377ba">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="2"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1032,7 +1041,7 @@
 				<text><![CDATA[Dokter Bedah 2 :]]></text>
 			</staticText>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
@@ -1069,7 +1078,7 @@
 				<textFieldExpression><![CDATA[$F{perawatresusitas}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="0" width="138" height="11" uuid="6f349127-511d-44b5-9abc-a4cdf90c52d3">
+				<reportElement x="405" y="0" width="131" height="11" uuid="6f349127-511d-44b5-9abc-a4cdf90c52d3">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="4"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1089,7 +1098,7 @@
 				<text><![CDATA[Tipe/Kategori Operasi]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="208" y="0" width="207" height="11" uuid="22dec8db-5523-4a67-80c1-ae24c058bea5">
+				<reportElement x="208" y="0" width="197" height="11" uuid="22dec8db-5523-4a67-80c1-ae24c058bea5">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="4"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1105,7 +1114,7 @@
 				<text><![CDATA[Dokter Anastesi :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="415" y="11" width="138" height="20" uuid="643c0d2b-d73e-442d-af67-522a5daf96f0">
+				<reportElement x="405" y="11" width="131" height="20" uuid="643c0d2b-d73e-442d-af67-522a5daf96f0">
 					<property name="com.jaspersoft.layout.grid.x" value="3"/>
 					<property name="com.jaspersoft.layout.grid.y" value="5"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1124,7 +1133,7 @@
 				<textFieldExpression><![CDATA[$F{kategori}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="208" y="11" width="207" height="20" uuid="d3920a2f-68eb-42ed-afac-18aaf0e58aa2">
+				<reportElement x="208" y="11" width="197" height="20" uuid="d3920a2f-68eb-42ed-afac-18aaf0e58aa2">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="5"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1141,7 +1150,7 @@
 				<textFieldExpression><![CDATA[$F{anastesi}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
 				<reportElement x="0" y="0" width="208" height="11" uuid="955a0c24-42a4-4186-9ee5-c23eba48e81c">
@@ -1177,7 +1186,7 @@
 				<textFieldExpression><![CDATA[$F{instrumen}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="208" y="0" width="207" height="11" uuid="9f607e42-3ed5-4476-9fc3-9960e87d0c11">
+				<reportElement x="208" y="0" width="197" height="11" uuid="9f607e42-3ed5-4476-9fc3-9960e87d0c11">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1193,7 +1202,7 @@
 				<text><![CDATA[Asisten Anastesi :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="208" y="11" width="207" height="20" uuid="8605d496-e178-4670-8c3a-83274426e5ba">
+				<reportElement x="208" y="11" width="197" height="20" uuid="8605d496-e178-4670-8c3a-83274426e5ba">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1210,7 +1219,7 @@
 				<textFieldExpression><![CDATA[$F{asistenanastesi}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="0" width="138" height="31" uuid="1b122207-c6e6-4375-bec3-70bff92a4289">
+				<reportElement x="405" y="0" width="131" height="31" uuid="1b122207-c6e6-4375-bec3-70bff92a4289">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1222,7 +1231,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
 				<reportElement x="0" y="0" width="208" height="11" uuid="82557677-c761-4434-b623-ca2ab3c0cb67">
@@ -1259,7 +1268,7 @@
 				<textFieldExpression><![CDATA[$F{dokteranak}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="208" y="0" width="207" height="11" uuid="377778d0-74c8-462b-aa8f-30fa5572df59">
+				<reportElement x="208" y="0" width="197" height="11" uuid="377778d0-74c8-462b-aa8f-30fa5572df59">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1275,7 +1284,7 @@
 				<text><![CDATA[Bidan :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="208" y="11" width="207" height="20" uuid="f2c044e0-bd0f-4a12-b6fa-2dcfb40937ac">
+				<reportElement x="208" y="11" width="197" height="20" uuid="f2c044e0-bd0f-4a12-b6fa-2dcfb40937ac">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1292,7 +1301,7 @@
 				<textFieldExpression><![CDATA[$F{bidan1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="0" width="138" height="31" uuid="47ce074d-5429-44da-a1b5-96540e472c2e">
+				<reportElement x="405" y="0" width="131" height="31" uuid="47ce074d-5429-44da-a1b5-96540e472c2e">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1304,7 +1313,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
 				<reportElement x="0" y="0" width="208" height="11" uuid="d96864ac-85aa-413a-9869-005e6f146c8b">
@@ -1340,7 +1349,7 @@
 				<textFieldExpression><![CDATA[$F{dokumum}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="208" y="0" width="207" height="11" uuid="2ea809fd-8d94-43b0-838f-221f38500b33">
+				<reportElement x="208" y="0" width="197" height="11" uuid="2ea809fd-8d94-43b0-838f-221f38500b33">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1356,7 +1365,7 @@
 				<text><![CDATA[Onloop :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="208" y="11" width="207" height="20" uuid="9906f95b-e502-4fdb-93aa-620b76d4bafd">
+				<reportElement x="208" y="11" width="197" height="20" uuid="9906f95b-e502-4fdb-93aa-620b76d4bafd">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.375"/>
@@ -1373,7 +1382,7 @@
 				<textFieldExpression><![CDATA[$F{omloop}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="0" width="138" height="31" uuid="8ce21515-c7f6-4387-bda4-364b0948c4d0">
+				<reportElement x="405" y="0" width="131" height="31" uuid="8ce21515-c7f6-4387-bda4-364b0948c4d0">
 					<property name="com.jaspersoft.layout.grid.x" value="2"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1385,10 +1394,10 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="11" backcolor="#CCCCCC" uuid="469cc477-31a6-4b38-8064-5efa11f70e0a">
+				<reportElement mode="Opaque" x="0" y="0" width="536" height="11" backcolor="#CCCCCC" uuid="469cc477-31a6-4b38-8064-5efa11f70e0a">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1405,7 +1414,7 @@
 				<text><![CDATA[Diagnosa Pre-Op / Pre Operation Diagnosis]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="11" width="553" height="20" uuid="c271e3f2-cb10-4c5d-b678-597024c2abfe">
+				<reportElement x="0" y="11" width="536" height="20" uuid="c271e3f2-cb10-4c5d-b678-597024c2abfe">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1428,10 +1437,10 @@
 				<textFieldExpression><![CDATA[$F{diagnosa_preop}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="11" width="553" height="20" uuid="c0d08972-3daf-48aa-bad3-ac16ab20fea0">
+				<reportElement x="0" y="11" width="536" height="20" uuid="c0d08972-3daf-48aa-bad3-ac16ab20fea0">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1454,7 +1463,7 @@
 				<textFieldExpression><![CDATA[$F{jaringan_dieksekusi}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="11" backcolor="#CCCCCC" uuid="fb672d7a-9ab4-4af6-87c9-5ececac4225a">
+				<reportElement mode="Opaque" x="0" y="0" width="536" height="11" backcolor="#CCCCCC" uuid="fb672d7a-9ab4-4af6-87c9-5ececac4225a">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="2"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1470,10 +1479,10 @@
 				<text><![CDATA[Jaringan Yang di-Eksisi/-Insisi]]></text>
 			</staticText>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="11" backcolor="#CCCCCC" uuid="6eac7f70-1128-4537-af70-dd311e16564c">
+				<reportElement mode="Opaque" x="0" y="0" width="536" height="11" backcolor="#CCCCCC" uuid="6eac7f70-1128-4537-af70-dd311e16564c">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="4"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1489,7 +1498,7 @@
 				<text><![CDATA[Diagnosa Post-Op / Post Operation Diagnosis]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="11" width="553" height="20" uuid="7a55a73c-554b-43f7-b0b4-867c59455580">
+				<reportElement x="0" y="11" width="536" height="20" uuid="7a55a73c-554b-43f7-b0b4-867c59455580">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="5"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1512,10 +1521,10 @@
 				<textFieldExpression><![CDATA[$F{diagnosa_postop}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="38">
+		<band height="38" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="17" forecolor="#000000" backcolor="#CCCCCC" uuid="8cc75187-7d01-4755-bfc8-06e8e60bce1f">
+				<reportElement mode="Opaque" x="0" y="0" width="536" height="17" forecolor="#000000" backcolor="#CCCCCC" uuid="8cc75187-7d01-4755-bfc8-06e8e60bce1f">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -1539,7 +1548,7 @@
 				<text><![CDATA[LAPORAN OPERASI]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="17" width="553" height="21" uuid="758fed8f-a5f3-4637-b876-ba28e0557ac4">
+				<reportElement x="0" y="17" width="536" height="21" uuid="758fed8f-a5f3-4637-b876-ba28e0557ac4">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
@@ -1557,10 +1566,10 @@
 				<textFieldExpression><![CDATA[$F{laporan_operasi}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="120">
+		<band height="120" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="415" y="98" width="138" height="22" uuid="61481e35-032b-4bda-8774-c5fa08d79a61">
+				<reportElement x="398" y="98" width="138" height="22" uuid="61481e35-032b-4bda-8774-c5fa08d79a61">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="3"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1577,7 +1586,7 @@
 				<textFieldExpression><![CDATA[$F{operator1}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="415" y="22" width="138" height="76" isRemoveLineWhenBlank="true" uuid="92ab0356-8454-4b64-a117-5ac52c90d28f">
+				<reportElement x="398" y="22" width="138" height="76" isRemoveLineWhenBlank="true" uuid="92ab0356-8454-4b64-a117-5ac52c90d28f">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="2"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1591,7 +1600,7 @@
 				</jr:QRCode>
 			</componentElement>
 			<staticText>
-				<reportElement x="415" y="11" width="138" height="11" uuid="e310e9c8-eb47-4aab-8710-9d2c1ca5fff8">
+				<reportElement x="398" y="11" width="138" height="11" uuid="e310e9c8-eb47-4aab-8710-9d2c1ca5fff8">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1608,7 +1617,7 @@
 				<text><![CDATA[Dokter Bedah]]></text>
 			</staticText>
 			<textField isBlankWhenNull="false">
-				<reportElement key="textField" x="415" y="0" width="138" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="bbf7839a-99ff-478f-951c-03b0d2154d2a">
+				<reportElement key="textField" x="398" y="0" width="138" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="bbf7839a-99ff-478f-951c-03b0d2154d2a">
 					<property name="com.jaspersoft.layout.grid.x" value="1"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.25"/>
@@ -1631,7 +1640,7 @@
 				<textFieldExpression><![CDATA[$P{kotars} + ", " + new java.text.SimpleDateFormat("dd-MM-yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="415" height="120" uuid="01c2b02e-f053-4e0d-8728-c9f4dcd2bdc0">
+				<reportElement x="0" y="0" width="398" height="120" uuid="01c2b02e-f053-4e0d-8728-c9f4dcd2bdc0">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="0.75"/>
