@@ -1,4 +1,4 @@
-package widget;
+package smc.ui.swing;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -10,7 +10,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.beans.BeanProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -35,6 +37,7 @@ import javax.swing.text.JTextComponent;
  * A ComboBox alternative that can be populated with a plain List or with key-value pairs (Map).
  * When editable, typing filters the items (exact match, then starts-with, then contains) and
  * Enter picks the top match. Its appearance follows the active look and feel.
+ * In the GUI editor, the "entries" property edits the items as a key-value table.
  *
  * @author smc
  */
@@ -80,6 +83,23 @@ public final class ComboBoxSMC extends JComboBox<Object> {
 
     public void addItem(Object key, Object value) {
         filterModel.addElement(new Entry(key, value));
+    }
+
+    public Entry[] getEntries() {
+        Entry[] entries = new Entry[filterModel.all.size()];
+
+        for (int i = 0; i < entries.length; i++) {
+            Object element = filterModel.all.get(i);
+
+            entries[i] = element instanceof Entry ? (Entry) element : new Entry(element, element);
+        }
+
+        return entries;
+    }
+
+    @BeanProperty(bound = false, preferred = true, description = "Items as key-value pairs")
+    public void setEntries(Entry[] entries) {
+        filterModel.replace(null == entries ? Collections.emptyList() : Arrays.asList(entries));
     }
 
     public Object getSelectedKey() {
@@ -419,14 +439,25 @@ public final class ComboBoxSMC extends JComboBox<Object> {
         return element instanceof Entry ? ((Entry) element).key : element;
     }
 
-    private static final class Entry {
+    /**
+     * A key-value item. The combo box displays the value, while the key identifies the item.
+     */
+    public static final class Entry {
 
         private final Object key;
         private final Object value;
 
-        Entry(Object key, Object value) {
+        public Entry(Object key, Object value) {
             this.key = key;
             this.value = value;
+        }
+
+        public Object getKey() {
+            return key;
+        }
+
+        public Object getValue() {
+            return value;
         }
 
         @Override
