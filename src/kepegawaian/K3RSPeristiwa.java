@@ -2256,7 +2256,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                     Jabatan.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),3).toString());
                     Bidang.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),6).toString());
                     Departemen.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),5).toString());
-                    Valid.SetTgl(TglLahir,pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),12).toString());
+                    Valid.SetTgl(TglLahir,pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),13).toString());
                     TglInsidenItemStateChanged(null);
                     btnKorban.requestFocus();
                 }

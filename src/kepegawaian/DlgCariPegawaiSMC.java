@@ -51,7 +51,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
 
         tabMode = new DefaultTableModel(null, new Object[] {
             "NIP", "Nama", "J.K.", "Jabatan", "Kode Jenjang", "Index Jenjang", "Departemen", "Bidang", "Status", "Status Karyawan", "NPWP",
-            "Pendidikan", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja", "Kode Index", "BPD", "Rekening",
+            "Pendidikan", "Agama", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja", "Kode Index", "BPD", "Rekening",
             "Stts Aktif", "Wajib Masuk", "Mulai Kontrak", "No.KTP"
         }) {
             @Override
@@ -99,30 +99,32 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
             } else if (i == 11) {
                 column.setPreferredWidth(130);
             } else if (i == 12) {
-                column.setPreferredWidth(110);
+                column.setPreferredWidth(80);
             } else if (i == 13) {
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(110);
             } else if (i == 14) {
-                column.setPreferredWidth(150);
-            } else if (i == 15) {
-                column.setPreferredWidth(90);
-            } else if (i == 16) {
                 column.setPreferredWidth(65);
-            } else if (i == 17) {
-                column.setPreferredWidth(80);
-            } else if (i == 18) {
-                column.setPreferredWidth(70);
-            } else if (i == 19) {
+            } else if (i == 15) {
+                column.setPreferredWidth(150);
+            } else if (i == 16) {
                 column.setPreferredWidth(90);
-            } else if (i == 20) {
-                column.setPreferredWidth(100);
-            } else if (i == 21) {
-                column.setPreferredWidth(60);
-            } else if (i == 22) {
-                column.setPreferredWidth(70);
-            } else if (i == 23) {
+            } else if (i == 17) {
+                column.setPreferredWidth(65);
+            } else if (i == 18) {
                 column.setPreferredWidth(80);
+            } else if (i == 19) {
+                column.setPreferredWidth(70);
+            } else if (i == 20) {
+                column.setPreferredWidth(90);
+            } else if (i == 21) {
+                column.setPreferredWidth(100);
+            } else if (i == 22) {
+                column.setPreferredWidth(60);
+            } else if (i == 23) {
+                column.setPreferredWidth(70);
             } else if (i == 24) {
+                column.setPreferredWidth(80);
+            } else if (i == 25) {
                 column.setPreferredWidth(120);
             }
         }
@@ -392,7 +394,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                     file.createNewFile();
                     try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
                         "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, jnj_jabatan.indek, pegawai.departemen, pegawai.bidang, " +
-                        "pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, " +
+                        "pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.agama, pegawai.tmp_lahir, pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, " +
                         "pegawai.mulai_kerja, pegawai.ms_kerja, pegawai.indexins, pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, " +
                         "pegawai.no_ktp from pegawai inner join jnj_jabatan on pegawai.jnj_jabatan = jnj_jabatan.kode where pegawai.stts_aktif <> 'KELUAR' order by pegawai.nik"
                     )) {
@@ -413,26 +415,27 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                                 item.put("StatusKaryawan", rs.getString(10));
                                 item.put("NPWP", rs.getString(11));
                                 item.put("Pendidikan", rs.getString(12));
-                                item.put("TmpLahir", rs.getString(13));
-                                item.put("TglLahir", rs.getString(14));
-                                item.put("Alamat", rs.getString(15));
-                                item.put("Kota", rs.getString(16));
-                                item.put("MulaiKerja", rs.getString(17));
-                                item.put("KodeMsKerja", rs.getString(18));
-                                item.put("KodeIndex", rs.getString(19));
-                                item.put("BPD", rs.getString(20));
-                                item.put("Rekening", rs.getString(21));
+                                item.put("Agama", rs.getString(13));
+                                item.put("TmpLahir", rs.getString(14));
+                                item.put("TglLahir", rs.getString(15));
+                                item.put("Alamat", rs.getString(16));
+                                item.put("Kota", rs.getString(17));
+                                item.put("MulaiKerja", rs.getString(18));
+                                item.put("KodeMsKerja", rs.getString(19));
+                                item.put("KodeIndex", rs.getString(20));
+                                item.put("BPD", rs.getString(21));
+                                item.put("Rekening", rs.getString(22));
                                 item.put("SttsAktif", rs.getString(23));
-                                item.put("WajibMasuk", rs.getString(23));
-                                item.put("MulaiKontrak", rs.getString(24));
-                                item.put("NoKTP", rs.getString(25));
+                                item.put("WajibMasuk", rs.getString(24));
+                                item.put("MulaiKontrak", rs.getString(25));
+                                item.put("NoKTP", rs.getString(26));
                                 array.add(item);
                                 if (rs.getInt(6) > indexJenjang) {
                                     publish(new Object[] {
                                         rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),
                                         rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
                                         rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
-                                        rs.getString(25)
+                                        rs.getString(25), rs.getString(26)
                                     });
                                 }
                             }
@@ -451,19 +454,20 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                                 item.put("StatusKaryawan", rs.getString(10));
                                 item.put("NPWP", rs.getString(11));
                                 item.put("Pendidikan", rs.getString(12));
-                                item.put("TmpLahir", rs.getString(13));
-                                item.put("TglLahir", rs.getString(14));
-                                item.put("Alamat", rs.getString(15));
-                                item.put("Kota", rs.getString(16));
-                                item.put("MulaiKerja", rs.getString(17));
-                                item.put("KodeMsKerja", rs.getString(18));
-                                item.put("KodeIndex", rs.getString(19));
-                                item.put("BPD", rs.getString(20));
-                                item.put("Rekening", rs.getString(21));
+                                item.put("Agama", rs.getString(13));
+                                item.put("TmpLahir", rs.getString(14));
+                                item.put("TglLahir", rs.getString(15));
+                                item.put("Alamat", rs.getString(16));
+                                item.put("Kota", rs.getString(17));
+                                item.put("MulaiKerja", rs.getString(18));
+                                item.put("KodeMsKerja", rs.getString(19));
+                                item.put("KodeIndex", rs.getString(20));
+                                item.put("BPD", rs.getString(21));
+                                item.put("Rekening", rs.getString(22));
                                 item.put("SttsAktif", rs.getString(23));
-                                item.put("WajibMasuk", rs.getString(23));
-                                item.put("MulaiKontrak", rs.getString(24));
-                                item.put("NoKTP", rs.getString(25));
+                                item.put("WajibMasuk", rs.getString(24));
+                                item.put("MulaiKontrak", rs.getString(25));
+                                item.put("NoKTP", rs.getString(26));
                                 array.add(item);
                                 if (rs.getString(1).trim().toLowerCase().contains(cari)
                                     || rs.getString(2).trim().toLowerCase().contains(cari)
@@ -476,7 +480,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                                             rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),
                                             rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
                                             rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
-                                            rs.getString(25)
+                                            rs.getString(25), rs.getString(26)
                                         });
                                     // }
                                 }
@@ -536,7 +540,7 @@ public final class DlgCariPegawaiSMC extends javax.swing.JDialog {
                                     .map(item -> new Object[] {
                                         item.path("NIP").asText(""), item.path("Nama").asText(""), item.path("JK").asText(""), item.path("Jabatan").asText(""), item.path("KodeJenjang").asText(""),
                                         item.path("IndexJenjang").asInt(0), item.path("Departemen").asText(""), item.path("Bidang").asText(""), item.path("Status").asText(""), item.path("StatusKaryawan").asText(""),
-                                        item.path("NPWP").asText(""), item.path("Pendidikan").asText(""), item.path("TmpLahir").asText(""), item.path("TglLahir").asText(""), item.path("Alamat").asText(""),
+                                        item.path("NPWP").asText(""), item.path("Pendidikan").asText(""), item.path("Agama").asText(""), item.path("TmpLahir").asText(""), item.path("TglLahir").asText(""), item.path("Alamat").asText(""),
                                         item.path("Kota").asText(""), item.path("MulaiKerja").asText(""), item.path("KodeMsKerja").asText(""), item.path("KodeIndex").asText(""), item.path("BPD").asText(""),
                                         item.path("Rekening").asText(""), item.path("SttsAktif").asText(""), item.path("WajibMasuk").asText(""), item.path("MulaiKontrak").asText(""),
                                         item.path("NoKTP").asText("")
