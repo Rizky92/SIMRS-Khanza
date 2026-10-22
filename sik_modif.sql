@@ -775,6 +775,8 @@ CREATE TABLE IF NOT EXISTS `pasien_bayi_gambar_smc`  (
   CONSTRAINT `pasien_bayi_gambar_smc_ibfk_1` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien_bayi` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `pegawai` ADD COLUMN IF NOT EXISTS `agama` varchar(12) NULL DEFAULT NULL AFTER `no_ktp`;
+
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;

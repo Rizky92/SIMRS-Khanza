@@ -919,7 +919,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(pegawai.getTable().getSelectedRow()!= -1){
-                    NoKTP.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),23).toString());
+                    NoKTP.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),24).toString());
                     Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                 }
                 NoKTP.requestFocus();

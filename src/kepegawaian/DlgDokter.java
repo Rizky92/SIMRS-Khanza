@@ -998,11 +998,21 @@ public class DlgDokter extends javax.swing.JDialog {
                 Sequel.menyimpanignore("resiko_kerja","'-','-','0'");
                 Sequel.menyimpanignore("emergency_index","'-','-','0'");
                 Sequel.menyimpanignore("pendidikan","'-','0','0','0','0'");
+                /*
                 Sequel.menyimpanignore(
                     "pegawai","'0','"+TKd.getText()+"','"+TNm.getText()+"','"+CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN","Wanita").replaceAll("LAKI-LAKI","Pria")+"',"+
                     "'-','-','-','-','-','-','-','-','-','-','-','0','"+TTmp.getText()+"','"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"','"+TAlmt.getText()+"','-','1900-01-01',"+
                     "'<1','-','T','-','AKTIF','0','0','0','1900-01-01','0','0','pages/pegawai/photo/','-'"
                 );
+                */
+                Sequel.executeRawSmc("insert into pegawai (nik, nama, jk, jbtn, jnj_jabatan, kode_kelompok, kode_resiko, kode_emergency, " +
+                    "departemen, bidang, stts_wp, stts_kerja, npwp, pendidikan, gapok, tmp_lahir, tgl_lahir, alamat, kota, mulai_kerja, ms_kerja, " +
+                    "indexins, bpd, rekening, stts_aktif, wajibmasuk, pengurang, indek, mulai_kontrak, cuti_diambil, dankes, photo, no_ktp, agama) " +
+                    "values (?, ?, ?, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '0', ?, ?, ?, '-', '1900-01-01', '<1',  '-', 'T', '-', " +
+                    "'AKTIF', '0', '0', '0', '1900-01-01', '0', '0', 'pages/pegawai/photo/', '-', ?) on duplicate key update nama = values(nama), jk = values(jk), " +
+                    "tmp_lahir = values(tmp_lahir), tgl_lahir = values(tgl_lahir), alamat = values(alamat), agama = values(agama)", TKd.getText(), TNm.getText(),
+                    CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN", "Wanita").replaceAll("LAKI-LAKI", "Pria").trim(),
+                    TTmp.getText(), Valid.getTglSmc(DTPLahir), TAlmt.getText(), cmbAgama.getSelectedItem().toString());
                 Sequel.menyimpan2(
                     "dokter","'"+TKd.getText()+"','"+TNm.getText()+"','"+CmbJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"','"+
                     TTmp.getText()+"','"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"','"+CMbGd.getSelectedItem()+"','"+cmbAgama.getSelectedItem()+"','"+TAlmt.getText()+"','"+
@@ -1167,11 +1177,16 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             try {
                 Sequel.AutoComitFalse();
+                /*
                 Sequel.mengedit(
                     "pegawai","nik='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"'","nik='"+TKd.getText()+"',nama='"+TNm.getText()+"',"+
                     "jk='"+CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN","Wanita").replaceAll("LAKI-LAKI","Pria")+"',"+"tmp_lahir='"+TTmp.getText()+"',"+
                     "tgl_lahir='"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"',alamat='"+TAlmt.getText()+"'"
                 );
+                */
+                Sequel.mengupdatetfSmc("pegawai", "nik = ?, nama = ?, jk = ?, tmp_lahir = ?, tgl_lahir = ?, alamat = ?, agama = ?", "nik = ?", TKd.getText(), TNm.getText(),
+                    CmbJk.getSelectedItem().toString().replaceAll("PEREMPUAN", "Wanita").replaceAll("LAKI-LAKI", "Pria").trim(), TTmp.getText(), Valid.getTglSmc(DTPLahir),
+                    TAlmt.getText(), cmbAgama.getSelectedItem().toString(), (String) tbDokter.getValueAt(tbDokter.getSelectedRow(), 0));
                 Sequel.mengedit(
                     "dokter","kd_dokter='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"'","kd_dokter='"+TKd.getText()+"',nm_dokter='"+TNm.getText()+
                     "',jk='"+CmbJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"',tmp_lahir='"+TTmp.getText()+
@@ -1180,7 +1195,7 @@ public class DlgDokter extends javax.swing.JDialog {
                     ",kd_sps='"+KdSps.getText()+"',alumni='"+TAlumni.getText()+"',no_ijn_praktek='"+TNoi.getText()+"'"
                 );
                 Sequel.AutoComitTrue();
-                if(tabMode.getRowCount()!=0){runBackground(() ->tampil());}
+                runBackground(() ->tampil());
                 emptTeks();
             } catch (Exception ex) {
                 return;
@@ -1313,9 +1328,11 @@ public class DlgDokter extends javax.swing.JDialog {
                     TKd.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     TNm.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     CmbJk.setSelectedItem(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),2).toString().replaceAll("Wanita","PEREMPUAN").replaceAll("Pria","LAKI-LAKI"));
-                    TTmp.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),11).toString());
-                    TAlmt.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),13).toString());
-                    Valid.SetTgl(DTPLahir,pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),12).toString());
+                    TTmp.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),12).toString());
+                    TAlmt.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),14).toString());
+                    Valid.SetTgl(DTPLahir,pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),13).toString());
+                    cmbAgama.setSelectedItem("-");
+                    cmbAgama.setSelectedItem(String.valueOf(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),11)).trim().toUpperCase());
                 }
                 TKd.requestFocus();
             }

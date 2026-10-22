@@ -139,8 +139,17 @@
                 </tr>
                 <tr class="head">
                     <td width="25%">Agama</td><td width="">:</td>
-                    <td width="75%"><input name="agama" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi28'));" type=text id="TxtIsi28" class="inputbox" value="<?php echo isset($agama)?$agama:NULL;?>" size="50" maxlength="12">
-                    <span id="MsgIsi28" style="color:#CC0000; font-size:10px;"></span>
+                    <td width="75%">
+                        <select name="agama" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi28'));" id="TxtIsi28">
+                            <option id='TxtIsi28' value=''></option>
+                            <?php
+                                foreach (["ISLAM", "KRISTEN", "KATOLIK", "HINDU", "BUDHA", "KONG HU CHU", "-"] as $pilihan) {
+                                    $dipilih = $pilihan == strtoupper(trim(isset($agama) ? $agama : "")) ? "selected" : "";
+                                    echo "<option id='TxtIsi28' value='$pilihan' $dipilih>$pilihan</option>";
+                                }
+                            ?>
+                        </select>
+                        <span id="MsgIsi28" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>
 		        <tr class="head">

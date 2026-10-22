@@ -53,7 +53,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         setSize(656, 250);
 
         Object[] row = {"NIP", "Nama", "J.K.", "Jabatan", "Kode Jenjang", "Departemen", "Bidang", "Status", "Status Karyawan",
-            "NPWP", "Pendidikan", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja",
+            "NPWP", "Pendidikan", "Agama", "Tmp.Lahir", "Tgl.Lahir", "Alamat", "Kota", "Mulai Kerja", "Kode Ms Kerja",
             "Kode Index", "BPD", "Rekening", "Stts Aktif", "Wajib Masuk", "Mulai Kontrak", "No.KTP"};
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -66,7 +66,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < 25; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(90);
@@ -91,30 +91,32 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
             } else if (i == 10) {
                 column.setPreferredWidth(130);
             } else if (i == 11) {
-                column.setPreferredWidth(110);
+                column.setPreferredWidth(80);
             } else if (i == 12) {
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(110);
             } else if (i == 13) {
-                column.setPreferredWidth(150);
-            } else if (i == 14) {
-                column.setPreferredWidth(90);
-            } else if (i == 15) {
                 column.setPreferredWidth(65);
-            } else if (i == 16) {
-                column.setPreferredWidth(80);
-            } else if (i == 17) {
-                column.setPreferredWidth(70);
-            } else if (i == 18) {
+            } else if (i == 14) {
+                column.setPreferredWidth(150);
+            } else if (i == 15) {
                 column.setPreferredWidth(90);
-            } else if (i == 19) {
-                column.setPreferredWidth(100);
-            } else if (i == 20) {
-                column.setPreferredWidth(60);
-            } else if (i == 21) {
-                column.setPreferredWidth(70);
-            } else if (i == 22) {
+            } else if (i == 16) {
+                column.setPreferredWidth(65);
+            } else if (i == 17) {
                 column.setPreferredWidth(80);
+            } else if (i == 18) {
+                column.setPreferredWidth(70);
+            } else if (i == 19) {
+                column.setPreferredWidth(90);
+            } else if (i == 20) {
+                column.setPreferredWidth(100);
+            } else if (i == 21) {
+                column.setPreferredWidth(60);
+            } else if (i == 22) {
+                column.setPreferredWidth(70);
             } else if (i == 23) {
+                column.setPreferredWidth(80);
+            } else if (i == 24) {
                 column.setPreferredWidth(120);
             }
         }
@@ -379,7 +381,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
             file.createNewFile();
             try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
                 "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, pegawai.departemen, " +
-                "pegawai.bidang, pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, " +
+                "pegawai.bidang, pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.agama, pegawai.tmp_lahir, " +
                 "pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, pegawai.mulai_kerja, pegawai.ms_kerja, pegawai.indexins, " +
                 "pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, pegawai.no_ktp " +
                 "from pegawai where pegawai.stts_aktif <> 'KELUAR' order by pegawai.nik"
@@ -400,24 +402,26 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                         pegawai.put("StatusKaryawan", rs.getString(9));
                         pegawai.put("NPWP", rs.getString(10));
                         pegawai.put("Pendidikan", rs.getString(11));
-                        pegawai.put("TmpLahir", rs.getString(12));
-                        pegawai.put("TglLahir", rs.getString(13));
-                        pegawai.put("Alamat", rs.getString(14));
-                        pegawai.put("Kota", rs.getString(15));
-                        pegawai.put("MulaiKerja", rs.getString(16));
-                        pegawai.put("KodeMsKerja", rs.getString(17));
-                        pegawai.put("KodeIndex", rs.getString(18));
-                        pegawai.put("BPD", rs.getString(19));
-                        pegawai.put("Rekening", rs.getString(20));
-                        pegawai.put("SttsAktif", rs.getString(21));
-                        pegawai.put("WajibMasuk", rs.getString(22));
-                        pegawai.put("MulaiKontrak", rs.getString(23));
-                        pegawai.put("NoKTP", rs.getString(24));
+                        pegawai.put("Agama", rs.getString(12));
+                        pegawai.put("TmpLahir", rs.getString(13));
+                        pegawai.put("TglLahir", rs.getString(14));
+                        pegawai.put("Alamat", rs.getString(15));
+                        pegawai.put("Kota", rs.getString(16));
+                        pegawai.put("MulaiKerja", rs.getString(17));
+                        pegawai.put("KodeMsKerja", rs.getString(18));
+                        pegawai.put("KodeIndex", rs.getString(19));
+                        pegawai.put("BPD", rs.getString(20));
+                        pegawai.put("Rekening", rs.getString(21));
+                        pegawai.put("SttsAktif", rs.getString(22));
+                        pegawai.put("WajibMasuk", rs.getString(23));
+                        pegawai.put("MulaiKontrak", rs.getString(24));
+                        pegawai.put("NoKTP", rs.getString(25));
                         tabMode.addRow(new Object[] {
                             rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
                             rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12),
                             rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18),
-                            rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24)
+                            rs.getString(19), rs.getString(20), rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24),
+                            rs.getString(25)
                         });
                         array.add(pegawai);
                     } while (rs.next());
@@ -451,7 +455,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                         tabMode.addRow(new Object[] {
                             list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
                             list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                            list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
+                            list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("Agama").asText(), list.path("TmpLahir").asText(),
                             list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
                             list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
                             list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
@@ -468,7 +472,7 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
                             tabMode.addRow(new Object[] {
                                 list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(),
                                 list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(),
-                                list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(),
+                                list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("Agama").asText(), list.path("TmpLahir").asText(),
                                 list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(),
                                 list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(),
                                 list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
