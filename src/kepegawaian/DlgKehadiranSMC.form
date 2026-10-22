@@ -1002,7 +1002,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="widget.ComboBoxSMC" name="Departemen">
+                <Component class="smc.ui.swing.ComboBoxSMC" name="Departemen">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="Departemen" noResource="true"/>
                   </Properties>
@@ -1016,7 +1016,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="widget.ComboBoxSMC" name="StatusKerja">
+                <Component class="smc.ui.swing.ComboBoxSMC" name="StatusKerja">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="StatusKerja" noResource="true"/>
                   </Properties>
