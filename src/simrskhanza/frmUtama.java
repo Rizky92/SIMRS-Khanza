@@ -8091,7 +8091,8 @@ public class frmUtama extends javax.swing.JFrame {
     private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
-        DlgHome.setSize(PanelUtama.getWidth()-20, PanelUtama.getHeight()-20);
+        // DlgHome.setSize(PanelUtama.getWidth()-20, PanelUtama.getHeight()-20);
+        DlgHome.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         DlgHome.setLocationRelativeTo(PanelUtama);
         DlgHome.setVisible(true);
         if(menuawal==0){
