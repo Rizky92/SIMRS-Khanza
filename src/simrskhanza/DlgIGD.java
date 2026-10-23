@@ -159,6 +159,7 @@ import rekammedis.RMPenilaianAwalMedisIGDPsikiatri;
 import rekammedis.RMPenilaianBayiBaruLahir;
 import rekammedis.RMPenilaianDerajatDehidrasi;
 import rekammedis.RMPenilaianFisioterapi;
+import rekammedis.RMPenilaianGRACE;
 import rekammedis.RMPenilaianKorbanKekerasan;
 import rekammedis.RMPenilaianLanjutanRisikoJatuhAnak;
 import rekammedis.RMPenilaianLanjutanRisikoJatuhDewasa;
@@ -12714,6 +12715,28 @@ public final class DlgIGD extends javax.swing.JDialog {
         }
     }
 
+    private void MnPenilaianGRACEScoreActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMPenilaianGRACE form=new RMPenilaianGRACE(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     /**
     * @data args the command line arguments
     */
@@ -13051,7 +13074,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                                   MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiMedik,
                                   MnPermintaanKonsultasiPerawat,MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnCetakSuratKeteranganBerobat,
                                   MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,MnIntervensiNyeriFarmakologi,MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien,MnCheckListKriteriaMasukIsolasi,
-                                  MnSkriningTOLAC,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC,MnLaporanReaksiTranfusi;
+                                  MnSkriningTOLAC,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC,MnLaporanReaksiTranfusi,MnPenilaianGRACEScore;
     private widget.Menu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu,MnCatatanObservasi;
 
     private widget.MenuItem MnPengkajianInvasifNonBedahSMC;
@@ -13532,6 +13555,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnAdmisiSkoringTOLAC.setEnabled(akses.getadmisi_skoring_tolac());
         MnHasilPersalinanTOLAC.setEnabled(akses.gethasil_persalinan_tolac());
         MnLaporanReaksiTranfusi.setEnabled(akses.getlaporan_reaksi_transfusi());
+        MnPenilaianGRACEScore.setEnabled(akses.getpenilaian_grace_scor());
         MnSkorAldrettePascaAnestesi.setEnabled(akses.getskor_aldrette_pasca_anestesi());
         MnSkorStewardPascaAnestesi.setEnabled(akses.getskor_steward_pasca_anestesi());
         MnSkorBromagePascaAnestesi.setEnabled(akses.getskor_bromage_pasca_anestesi());
@@ -14759,6 +14783,18 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnLaporanReaksiTranfusi.setPreferredSize(new java.awt.Dimension(240, 26));
         MnLaporanReaksiTranfusi.addActionListener(this::MnLaporanReaksiTranfusiActionPerformed);
 
+        MnPenilaianGRACEScore = new widget.MenuItem();
+        MnPenilaianGRACEScore.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianGRACEScore.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPenilaianGRACEScore.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianGRACEScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPenilaianGRACEScore.setText("Penilaian GRACE Score");
+        MnPenilaianGRACEScore.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianGRACEScore.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianGRACEScore.setName("MnPenilaianGRACEScore");
+        MnPenilaianGRACEScore.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnPenilaianGRACEScore.addActionListener(this::MnPenilaianGRACEScoreActionPerformed);
+
         MnRMSkriningRisikoKanker = new widget.Menu();
         MnRMSkriningRisikoKanker.setBackground(new java.awt.Color(255, 255, 254));
         MnRMSkriningRisikoKanker.setForeground(new java.awt.Color(50, 50, 50));
@@ -14864,6 +14900,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnRMOperasi.add(MnCatatanPengkajianPaskaOperasi);
         MnRMOperasi.add(MnCatatanObservasiRuangOperasi);
 
+        MnRMIGD.add(MnPenilaianGRACEScore);
         MnRMIGD.add(MnHasilPemeriksaanEKG);
         MnRMIGD.add(MnHasilPemeriksaanECHO);
         MnRMIGD.add(MnHasilPemeriksaanECHOPediatrik);
