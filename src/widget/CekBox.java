@@ -5,15 +5,14 @@
 
 package widget;
 
-import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
+import javax.swing.plaf.basic.BasicCheckBoxUI;
 
-/**
- *
- * @author dosen3
- */
-public class CekBox extends JCheckBox{
-
+public class CekBox extends JCheckBox {
+    /*
     private static final long serialVersionUID = 1L;
 
     public CekBox(){
@@ -28,5 +27,18 @@ public class CekBox extends JCheckBox{
         this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(239,244,234)));
         setOpaque(true);
         setSize(WIDTH,23);
+    }
+    */
+    private static final long serialVersionUID = 2L;
+
+    public CekBox() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        setFocusPainted(false);
+        setRolloverEnabled(true);
+        setOpaque(false);
+        setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        setIconTextGap(4);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 }

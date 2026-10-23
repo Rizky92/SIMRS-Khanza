@@ -6169,6 +6169,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
+        if(null!=evt&&-1==TabRawat.indexAtLocation(evt.getX(),evt.getY())){
+            return;
+        }
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 BtnSimpan.setEnabled(akses.gettindakan_ralan());
@@ -7208,6 +7211,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemeriksaanGinekologiKeyReleased
 
     private void TabRawatTindakanDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatTindakanDokterMouseClicked
+        if(null!=evt&&-1==TabRawatTindakanDokter.indexAtLocation(evt.getX(),evt.getY())){
+            return;
+        }
         if(TabRawatTindakanDokter.getSelectedIndex()==0){
             TCari.setText("");
         }else if(TabRawatTindakanDokter.getSelectedIndex()==1){
@@ -7261,6 +7267,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTindakan2KeyPressed
 
     private void TabRawatTindakanPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatTindakanPetugasMouseClicked
+        if(null!=evt&&-1==TabRawatTindakanPetugas.indexAtLocation(evt.getX(),evt.getY())){
+            return;
+        }
         if(TabRawatTindakanPetugas.getSelectedIndex()==0){
             TCari.setText("");
         }else if(TabRawatTindakanPetugas.getSelectedIndex()==1){
@@ -7293,6 +7302,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbTindakan3KeyPressed
 
     private void TabRawatTindakanDokterPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatTindakanDokterPetugasMouseClicked
+        if(null!=evt&&-1==TabRawatTindakanDokterPetugas.indexAtLocation(evt.getX(),evt.getY())){
+            return;
+        }
         if(TabRawatTindakanDokterPetugas.getSelectedIndex()==0){
             TCari.setText("");
         }else if(TabRawatTindakanDokterPetugas.getSelectedIndex()==1){

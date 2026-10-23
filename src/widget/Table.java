@@ -1,32 +1,26 @@
 package widget;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.geom.RoundRectangle2D;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
 import javax.swing.plaf.UIResource;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 public class Table extends JTable {
-    private static final long serialVersionUID = 3L;
+    /*    private static final long serialVersionUID = 3L;
     static final Color AKSEN        = new Color(22, 160, 93);
     static final Color PILIH_PASIF  = new Color(220, 234, 226);
     static final Color LAPIS_CUSTOM = new Color(22, 160, 93, 28);
@@ -325,6 +319,180 @@ public class Table extends JTable {
             g.setColor(GARIS_BW);
             g.drawLine(0, h - 1, w, h - 1);
             super.paintComponent(g);
+        }
+    }
+    */
+
+    private static final long serialVersionUID = 2L;
+
+    private static final Pattern GROUPED_NUMBER = Pattern.compile("-?\\d{1,3}(,\\d{3})+(\\.\\d+)?");
+    private static final Pattern PLAIN_NUMBER = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final String ALIGNMENT_KEY = "Table.numberAlignmentSMC";
+    private static final DecimalFormat DECIMAL_FORMAT = decimalFormatSmc();
+
+    private final Map<Integer, Boolean> numberTextColumns = new HashMap<>();
+    private Font boldFontBase;
+    private Font boldFont;
+
+    public Table() {
+        super();
+        setFont(new Font("Tahoma", Font.PLAIN, 11));
+        getTableHeader().setBorder(BorderFactory.createEmptyBorder());
+        getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
+        getTableHeader().setReorderingAllowed(false);
+        getTableHeader().setDefaultRenderer(new LeftHeaderRendererSMC(getTableHeader().getDefaultRenderer()));
+    }
+
+    /**
+     * Right-aligns numbers and displays decimals in Indonesian format. Only the
+     * rendered text changes; the table model keeps its original values.
+     * <p>
+     * Cells of the default renderers mark a selected row with bold text instead
+     * of the selection colors, like the {@code fungsi.WarnaTable} renderers do,
+     * because row colors carry conditional information.
+     */
+    @Override
+    public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+        Component component = renderer instanceof UIResource ? prepareDefaultRendererSmc(renderer, row, column) : super.prepareRenderer(renderer, row, column);
+        if (!(component instanceof JLabel)) {
+            return component;
+        }
+
+        JLabel label = (JLabel) component;
+        Object value = getValueAt(row, column);
+        String text = null == value || !(String.valueOf(value).equals(label.getText()) || renderer instanceof UIResource) ? null : numberTextSmc(value, column);
+        if (null != text) {
+            if (null == label.getClientProperty(ALIGNMENT_KEY)) {
+                label.putClientProperty(ALIGNMENT_KEY, label.getHorizontalAlignment());
+            }
+            label.setText(text);
+            label.setHorizontalAlignment(SwingConstants.RIGHT);
+        } else {
+            Object alignment = label.getClientProperty(ALIGNMENT_KEY);
+            if (alignment instanceof Integer) {
+                if (SwingConstants.RIGHT == label.getHorizontalAlignment()) {
+                    label.setHorizontalAlignment((Integer) alignment);
+                }
+                label.putClientProperty(ALIGNMENT_KEY, null);
+            }
+        }
+        return component;
+    }
+
+    private Component prepareDefaultRendererSmc(TableCellRenderer renderer, int row, int column) {
+        boolean printing = isPaintingForPrint();
+        boolean selected = !printing && isCellSelected(row, column);
+        boolean hasFocus = !printing && row == getSelectionModel().getLeadSelectionIndex() && column == getColumnModel().getSelectionModel().getLeadSelectionIndex() && isFocusOwner();
+        Component component = renderer.getTableCellRendererComponent(this, getValueAt(row, column), false, hasFocus, row, column);
+        component.setFont(selected ? boldFontSmc() : getFont());
+        return component;
+    }
+
+    private Font boldFontSmc() {
+        Font font = getFont();
+        if (null == boldFont || font != boldFontBase) {
+            boldFontBase = font;
+            boldFont = font.deriveFont(Font.BOLD);
+        }
+        return boldFont;
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        super.tableChanged(e);
+        if (null != numberTextColumns) {
+            numberTextColumns.clear();
+        }
+    }
+
+    private String numberTextSmc(Object value, int column) {
+        if (value instanceof Double || value instanceof Float || value instanceof BigDecimal) {
+            double number = ((Number) value).doubleValue();
+            return Double.isNaN(number) || Double.isInfinite(number) ? null : DECIMAL_FORMAT.format(value);
+        }
+        if (value instanceof Integer || value instanceof Long || value instanceof Short || value instanceof Byte || value instanceof BigInteger) {
+            return value.toString();
+        }
+        if (value instanceof String) {
+            String text = ((String) value).trim();
+            if (!text.isEmpty() && isNumberTextColumnSmc(column) && PLAIN_NUMBER.matcher(text.replace(",", "")).matches()) {
+                return indonesianNumberSmc(text.replace(",", ""));
+            }
+        }
+        return null;
+    }
+
+    private boolean isNumberTextColumnSmc(int column) {
+        int modelColumn = convertColumnIndexToModel(column);
+        Boolean cached = numberTextColumns.get(modelColumn);
+        if (null == cached) {
+            cached = scanNumberTextColumnSmc(getModel(), modelColumn);
+            numberTextColumns.put(modelColumn, cached);
+        }
+        return cached;
+    }
+
+    private static boolean scanNumberTextColumnSmc(TableModel model, int column) {
+        boolean grouped = false;
+        for (int row = 0; row < model.getRowCount(); row++) {
+            Object value = model.getValueAt(row, column);
+            if (null == value || value instanceof Number) {
+                continue;
+            }
+            String text = value.toString().trim();
+            if (text.isEmpty()) {
+                continue;
+            }
+            if (GROUPED_NUMBER.matcher(text).matches()) {
+                grouped = true;
+            } else if (!PLAIN_NUMBER.matcher(text).matches()) {
+                return false;
+            }
+        }
+        return grouped;
+    }
+
+    private static String indonesianNumberSmc(String number) {
+        boolean negative = number.startsWith("-");
+        String digits = negative ? number.substring(1) : number;
+        int dot = digits.indexOf('.');
+        String integer = dot < 0 ? digits : digits.substring(0, dot);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < integer.length(); i++) {
+            if (i > 0 && 0 == (integer.length() - i) % 3) {
+                result.append('.');
+            }
+            result.append(integer.charAt(i));
+        }
+        if (dot >= 0) {
+            result.append(',').append(digits.substring(dot + 1));
+        }
+        return (negative ? "-" : "") + result;
+    }
+
+    private static DecimalFormat decimalFormatSmc() {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        symbols.setDecimalSeparator(',');
+        symbols.setMinusSign('-');
+        return new DecimalFormat("#,##0.###", symbols);
+    }
+
+    private static class LeftHeaderRendererSMC implements TableCellRenderer {
+        private final TableCellRenderer delegate;
+
+        LeftHeaderRendererSMC(TableCellRenderer delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component component = delegate.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (component instanceof JLabel) {
+                ((JLabel) component).setHorizontalAlignment(SwingConstants.LEADING);
+            }
+
+            return component;
         }
     }
 }

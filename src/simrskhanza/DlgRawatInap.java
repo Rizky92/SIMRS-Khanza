@@ -5302,6 +5302,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
+        if(null!=evt&&-1==TabRawat.indexAtLocation(evt.getX(),evt.getY())){
+            return;
+        }
         isJns();
         switch (TabRawat.getSelectedIndex()) {
             case 0:
