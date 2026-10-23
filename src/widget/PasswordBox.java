@@ -19,6 +19,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPasswordField;
+import javax.swing.ToolTipManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicPasswordFieldUI;
@@ -49,6 +50,7 @@ public class PasswordBox extends JPasswordField {
     private boolean hoverIkon;
     private boolean tampilkan;
     private boolean ikonMata;
+    private boolean heldSmc;
     private Boolean latarGelap;
     private int     modeTerpasang;
 
@@ -95,16 +97,66 @@ public class PasswordBox extends JPasswordField {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (ikonMata && isEnabled() && areaIkon().contains(e.getPoint())) {
-                    tampilkan = !tampilkan;
-                    setEchoChar(tampilkan ? (char) 0 : TITIK);
+//                    tampilkan = !tampilkan;
+//                    setEchoChar(tampilkan ? (char) 0 : TITIK);
+                    heldSmc = true;
+                    setPeekingSmc(true);
                     e.consume();
                     requestFocusInWindow();
                     repaint();
                 }
             }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (heldSmc) {
+                    setPeekingSmc(ikonMata && isEnabled() && areaIkon().contains(e.getPoint()));
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (heldSmc) {
+                    heldSmc = false;
+                    setPeekingSmc(false);
+                    e.consume();
+                }
+            }
         };
         addMouseListener(m);
         addMouseMotionListener(m);
+        ToolTipManager.sharedInstance().registerComponent(this);
+    }
+
+    /**
+     * Shows the password as plain text, or masks it again. The eye icon follows the state.
+     *
+     * @param peeking {@code true} to show the password, {@code false} to mask it
+     */
+    public void setPeekingSmc(boolean peeking) {
+        if (peeking == tampilkan) {
+            return;
+        }
+        tampilkan = peeking;
+        setEchoChar(peeking ? (char) 0 : TITIK);
+        repaint();
+    }
+
+    /**
+     * Tells whether the password is currently shown as plain text.
+     *
+     * @return {@code true} when the password is shown
+     */
+    public boolean isPeekingSmc() {
+        return tampilkan;
+    }
+
+    @Override
+    public String getToolTipText(MouseEvent e) {
+        if (ikonMata && isEnabled() && areaIkon().contains(e.getPoint())) {
+            return "Tahan untuk menampilkan password";
+        }
+        return super.getToolTipText(e);
     }
 
     @Override
