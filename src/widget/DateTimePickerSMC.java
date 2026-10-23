@@ -1,6 +1,8 @@
 package widget;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.util.ColorFunctions;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -328,7 +330,10 @@ public class DateTimePickerSMC extends JComboBox {
             Color accent = UIManager.getColor("Component.accentColor");
             Color selectionBackground = UIManager.getColor("List.selectionBackground");
             Color selectionForeground = UIManager.getColor("List.selectionForeground");
+            Color selectedBackground = null == selectionBackground ? null : new Color(selectionBackground.getRGB(), true);
+            Color selectedForeground = null == selectionForeground ? null : new Color(selectionForeground.getRGB(), true);
             Color foreground = UIManager.getColor("Button.foreground");
+            String selectedStyle = null == selectionBackground ? null : String.format("hoverBackground: #%06x; pressedBackground: #%06x", ColorFunctions.darken(selectionBackground, 0.05f).getRGB() & 0xFFFFFF, ColorFunctions.darken(selectionBackground, 0.1f).getRGB() & 0xFFFFFF);
             Font font = dayFont;
 
             for (int i = 0; i < days.length; i++) {
@@ -348,8 +353,9 @@ public class DateTimePickerSMC extends JComboBox {
                 boolean isToday = currentMonth && number == today.get(Calendar.DAY_OF_MONTH);
 
                 button.setFont(isToday ? font.deriveFont(Font.BOLD) : font);
-                button.setBackground(isSelected ? selectionBackground : dayBackground);
-                button.setForeground(isSelected ? selectionForeground : isToday && null != accent ? accent : foreground);
+                button.putClientProperty(FlatClientProperties.STYLE, isSelected ? selectedStyle : null);
+                button.setBackground(isSelected ? selectedBackground : dayBackground);
+                button.setForeground(isSelected ? selectedForeground : isToday && null != accent ? accent : foreground);
             }
         }
 
