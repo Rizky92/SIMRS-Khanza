@@ -28,6 +28,7 @@ import javax.swing.plaf.SeparatorUI;
 import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 public class PopupMenu extends JPopupMenu {
+    /*
     private static final long serialVersionUID = 1L;
     static final int   TEMBUS = 228;
     static final Color LATAR  = new Color(255, 255, 254, TEMBUS);
@@ -258,5 +259,27 @@ public class PopupMenu extends JPopupMenu {
         public Dimension getMaximumSize(JComponent c) {
             return new Dimension(Short.MAX_VALUE, 9);
         }
+    }
+    */
+
+    private static final long serialVersionUID = 1L;
+
+    public PopupMenu() {
+        super();
+    }
+
+    public PopupMenu(String label) {
+        super(label);
+    }
+
+    /**
+     * Popup menu separator for forms that declare {@code widget.PopupMenu.Separator}.
+     * Java resolves that name to the inherited {@code JPopupMenu.Separator}, but the
+     * NetBeans form loader looks up {@code widget.PopupMenu$Separator} by name and
+     * cannot open the form without this class.
+     */
+    public static class Separator extends JPopupMenu.Separator {
+
+        private static final long serialVersionUID = 1L;
     }
 }

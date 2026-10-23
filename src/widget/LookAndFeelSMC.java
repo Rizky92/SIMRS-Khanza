@@ -1,11 +1,18 @@
 package widget;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatSystemProperties;
 import com.formdev.flatlaf.icons.FlatCheckBoxIcon;
 import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
+import com.formdev.flatlaf.ui.FlatNativeMacLibrary;
+import com.formdev.flatlaf.ui.FlatNativeWindowsLibrary;
 import com.formdev.flatlaf.ui.FlatOptionPaneUI;
+import com.formdev.flatlaf.ui.FlatPopupMenuBorder;
+import com.formdev.flatlaf.ui.FlatPopupMenuSeparatorUI;
+import com.formdev.flatlaf.ui.FlatPopupMenuUI;
 import com.formdev.flatlaf.ui.FlatScrollBarUI;
 import com.formdev.flatlaf.ui.FlatScrollPaneBorder;
 import com.formdev.flatlaf.ui.FlatTabbedPaneUI;
@@ -13,6 +20,7 @@ import com.formdev.flatlaf.ui.FlatTableHeaderBorder;
 import com.formdev.flatlaf.ui.FlatTableUI;
 import com.formdev.flatlaf.ui.FlatTextBorder;
 import com.formdev.flatlaf.ui.FlatUIUtils;
+import com.formdev.flatlaf.util.SystemInfo;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,9 +28,15 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeListener;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -30,9 +44,16 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JWindow;
 import javax.swing.ListCellRenderer;
+import javax.swing.LookAndFeel;
+import javax.swing.Popup;
+import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -56,6 +77,8 @@ import javax.swing.text.JTextComponent;
  *   <li>table header column separators that stop short of the top and bottom edges;</li>
  *   <li>extra padding around combo box popup items, apart from the padding of the
  *       combo box itself;</li>
+ *   <li>popup menus with rounded corners on every platform, and popup menu
+ *       separators that stop short of the popup edges;</li>
  *   <li>dialog components, such as the choice list of an input dialog or a check
  *       box in an {@code Object[]} message, drawn in the message font, and custom
  *       option buttons drawn in the button font;</li>
@@ -76,6 +99,10 @@ public class LookAndFeelSMC extends FlatLightLaf {
     public static final String NAME = "SIMRS Khanza";
 
     private static final float CHECK_BOX_ICON_SCALE = 1.15f;
+
+    private static final String KEY_ROUNDED_POPUP = "widget.LookAndFeelSMC.roundedPopup";
+
+    private static final String KEY_POPUP_USES_NATIVE_BORDER = "FlatLaf.internal.FlatPopupFactory.popupUsesNativeBorder";
 
     /**
      * Installs this look and feel. Call once, before any window is created.
@@ -110,8 +137,13 @@ public class LookAndFeelSMC extends FlatLightLaf {
         defaults.put("ScrollPane.border", (UIDefaults.LazyValue) table -> new ScrollPaneBorder());
         defaults.put("Table.scrollPaneBorder", (UIDefaults.LazyValue) table -> new ViewBorder());
         defaults.put("TableHeader.cellBorder", (UIDefaults.LazyValue) table -> new TableHeaderBorder());
+        defaults.put("PopupMenu.border", (UIDefaults.LazyValue) table -> new PopupMenuBorder());
         defaults.put("ComboBoxUI", ComboBoxUI.class.getName());
         defaults.put(ComboBoxUI.class.getName(), ComboBoxUI.class);
+        defaults.put("PopupMenuUI", PopupMenuUI.class.getName());
+        defaults.put(PopupMenuUI.class.getName(), PopupMenuUI.class);
+        defaults.put("PopupMenuSeparatorUI", PopupMenuSeparatorUI.class.getName());
+        defaults.put(PopupMenuSeparatorUI.class.getName(), PopupMenuSeparatorUI.class);
         defaults.put("OptionPaneUI", OptionPaneUI.class.getName());
         defaults.put(OptionPaneUI.class.getName(), OptionPaneUI.class);
         defaults.put("TabbedPaneUI", TabbedPaneUI.class.getName());
@@ -314,6 +346,196 @@ public class LookAndFeelSMC extends FlatLightLaf {
                 item.setComponentOrientation(c.getComponentOrientation());
 
                 return item;
+            }
+        }
+    }
+
+    private static int popupMenuArc() {
+        return UIManager.getInt("PopupMenu.borderCornerRadius") * 2;
+    }
+
+    private static boolean isRoundedPopup(Component c) {
+        return c instanceof JComponent && Boolean.TRUE.equals(((JComponent) c).getClientProperty(KEY_ROUNDED_POPUP));
+    }
+
+    /**
+     * FlatLaf popup menu UI with corners rounded by {@code PopupMenu.borderCornerRadius}
+     * on every platform. FlatLaf rounds popups only through the native border of
+     * Windows 11 and macOS, which is still used where available. Elsewhere the popup
+     * menu is not opaque and paints its own rounded background, its heavy weight
+     * popup window gets a transparent background so the corners show what lies
+     * behind, and the drop shadow is left out because it is drawn around a square
+     * outline. The popup background itself stays solid.
+     * <p>
+     * A popup menu stays square when it is opaque, when it holds a scroll pane (a
+     * combo box popup), when it sits in a medium weight popup, or when its window
+     * cannot be made translucent, as on Linux.
+     */
+    public static class PopupMenuUI extends FlatPopupMenuUI {
+
+        private int arc;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new PopupMenuUI();
+        }
+
+        @Override
+        public void installDefaults() {
+            super.installDefaults();
+            arc = popupMenuArc();
+            LookAndFeel.installProperty(popupMenu, "opaque", Boolean.FALSE);
+        }
+
+        @Override
+        public void update(Graphics g, JComponent c) {
+            if (c.isOpaque()) {
+                super.update(g, c);
+                return;
+            }
+
+            Graphics2D g2 = (Graphics2D) g.create();
+            try {
+                FlatUIUtils.setRenderingHints(g2);
+                g2.setColor(c.getBackground());
+                FlatUIUtils.paintComponentBackground(g2, 0, 0, c.getWidth(), c.getHeight(), 0, isRoundedPopup(c) ? UIScale.scale((float) arc) : 0);
+            } finally {
+                g2.dispose();
+            }
+
+            paint(g, c);
+        }
+
+        @Override
+        public Popup getPopup(JPopupMenu popup, int x, int y) {
+            boolean roundable = arc > 0 && !popup.isOpaque() && !(popup.getComponentCount() > 0 && popup.getComponent(0) instanceof JScrollPane);
+            popup.putClientProperty(FlatClientProperties.POPUP_DROP_SHADOW_PAINTED, roundable && !isNativeBorderSupported() ? Boolean.FALSE : null);
+
+            Popup result = super.getPopup(popup, x, y);
+            popup.putClientProperty(KEY_ROUNDED_POPUP, roundable && null == popup.getClientProperty(KEY_POPUP_USES_NATIVE_BORDER) && clearCorners(popup) ? Boolean.TRUE : null);
+
+            return result;
+        }
+
+        private static boolean isNativeBorderSupported() {
+            if (!FlatSystemProperties.getBoolean(FlatSystemProperties.USE_ROUNDED_POPUP_BORDER, true)) {
+                return false;
+            }
+
+            return (SystemInfo.isWindows_11_orLater && FlatNativeWindowsLibrary.isLoaded()) || (SystemInfo.isMacOS && FlatNativeMacLibrary.isLoaded());
+        }
+
+        /**
+         * Lets the corners outside the rounded outline show what lies behind the
+         * popup. A light weight popup is not yet in the layered pane at this point
+         * and already takes the opacity of the popup menu. A heavy weight popup
+         * window gets a transparent background, which FlatLaf restores when the
+         * popup hides.
+         *
+         * @return {@code true} when the corners are clear
+         */
+        private static boolean clearCorners(JPopupMenu popup) {
+            Container parent = popup.getParent();
+            if (null == parent || null != SwingUtilities.getAncestorOfClass(Panel.class, popup)) {
+                return false;
+            }
+
+            Window window = SwingUtilities.getWindowAncestor(popup);
+            if (null == window) {
+                return parent instanceof JPanel;
+            }
+
+            if (SystemInfo.isLinux || !(window instanceof JWindow) || parent != ((JWindow) window).getContentPane()) {
+                return false;
+            }
+
+            GraphicsConfiguration gc = window.getGraphicsConfiguration();
+            if (null == gc || !gc.getDevice().isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.PERPIXEL_TRANSLUCENT)) {
+                return false;
+            }
+
+            try {
+                window.setBackground(new Color(0, true));
+                return true;
+            } catch (RuntimeException e) {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * FlatLaf popup menu border whose outline follows the rounded corners that
+     * {@link PopupMenuUI} paints.
+     */
+    public static class PopupMenuBorder extends FlatPopupMenuBorder {
+
+        private final int arc = popupMenuArc();
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            if (!isRoundedPopup(c)) {
+                super.paintBorder(c, g, x, y, width, height);
+                return;
+            }
+
+            Color lineColor = getLineColor();
+            if (null == lineColor) {
+                return;
+            }
+
+            Graphics2D g2 = (Graphics2D) g.create();
+            try {
+                FlatUIUtils.setRenderingHints(g2);
+                FlatUIUtils.paintOutlinedComponent(g2, x, y, width, height, 0, 0, 0, UIScale.scale(getLineThickness()), UIScale.scale((float) arc), null, lineColor, null);
+            } finally {
+                g2.dispose();
+            }
+        }
+    }
+
+    /**
+     * FlatLaf popup menu separator UI drawn in {@code PopupMenuSeparator.foreground},
+     * whose horizontal stripe stops {@code PopupMenuSeparator.sideInset} pixels
+     * short of both sides.
+     */
+    public static class PopupMenuSeparatorUI extends FlatPopupMenuSeparatorUI {
+
+        private int sideInset;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new PopupMenuSeparatorUI();
+        }
+
+        public PopupMenuSeparatorUI() {
+            super(false);
+        }
+
+        @Override
+        protected void installDefaults(JSeparator s) {
+            super.installDefaults(s);
+            sideInset = UIManager.getInt("PopupMenuSeparator.sideInset");
+
+            Color foreground = UIManager.getColor("PopupMenuSeparator.foreground");
+            if (null != foreground && (null == s.getForeground() || s.getForeground() instanceof UIResource)) {
+                s.setForeground(foreground);
+            }
+        }
+
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            if (JSeparator.VERTICAL == ((JSeparator) c).getOrientation()) {
+                super.paint(g, c);
+                return;
+            }
+
+            Graphics2D g2 = (Graphics2D) g.create();
+            try {
+                FlatUIUtils.setRenderingHints(g2);
+                g2.setColor(c.getForeground());
+
+                float inset = UIScale.scale((float) sideInset);
+                g2.fill(new Rectangle2D.Float(inset, UIScale.scale((float) stripeIndent), c.getWidth() - inset * 2, UIScale.scale((float) stripeWidth)));
+            } finally {
+                g2.dispose();
             }
         }
     }
