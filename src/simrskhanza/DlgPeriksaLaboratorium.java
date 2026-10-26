@@ -12,7 +12,6 @@
 package simrskhanza;
 
 import bridging.ApiBIOSYS;
-import bridging.KoneksiDBADAMLABS;
 import bridging.koneksiDBELIMS;
 import bridging.koneksiDBSLIMS;
 import bridging.koneksiDBSysmex;
@@ -80,7 +79,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private Connection koneksielims;
     private Connection koneksislims;
     private Connection koneksivanslab;
-    private Connection koneksiadamlabs;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -88,8 +86,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private DlgCariPetugas petugas;
     private DlgCariDokter dokter;
-    private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,pstampil,pstampil2,pstampil3,pstampil4,pslica,psset_tarif,pssetpj;
-    private ResultSet rstindakan,rstampil,rstampil2,rscari,rsset_tarif,rssetpj,rslica;
+    private PreparedStatement pstindakan,pstampil,pstampil2,pstampil3,pstampil4,pslica,psset_tarif,pssetpj;
+    private ResultSet rstindakan,rstampil,rscari,rsset_tarif,rssetpj,rslica;
     private boolean[] pilih,pilih2;
     private String[] kode,nama,pemeriksaan2,hasil2,satuan2,nilai_rujukan2,keterangan2,idtemplate2,method;
     private double[] total,bagian_rs,bhp,tarif_perujuk,tarif_tindakan_dokter,tarif_tindakan_petugas,kso,menejemen,
@@ -2246,87 +2244,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         }
     }
 
-    private void tampilADAMLABS(String order) {
-        try {
-            koneksiadamlabs=KoneksiDBADAMLABS.condb();
-            Valid.tabelKosong(tabMode);
-
-            for(i2=0;i2<tbTarif.getRowCount();i2++){
-                if(tbTarif.getValueAt(i2,0).toString().equals("true")){
-                    tabMode.addRow(new Object[]{true,tbTarif.getValueAt(i2,2).toString(),"","","","","",0,0,0,0,0,0,0,0});
-                    pstampil=koneksi.prepareStatement(
-                            "select template_laboratorium.id_template, template_laboratorium.Pemeriksaan, "+
-                            "template_laboratorium.satuan, template_laboratorium.nilai_rujukan_ld,"+
-                            "template_laboratorium.biaya_item,template_laboratorium.bagian_rs,"+
-                            "template_laboratorium.bhp,template_laboratorium.bagian_perujuk,"+
-                            "template_laboratorium.bagian_dokter,template_laboratorium.bagian_laborat,"+
-                            "template_laboratorium.kso,template_laboratorium.menejemen "+
-                            "from template_laboratorium inner join permintaan_detail_permintaan_lab on "+
-                            "permintaan_detail_permintaan_lab.id_template=template_laboratorium.id_template "+
-                            "where template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? "+
-                            "and permintaan_detail_permintaan_lab.noorder=? order by urut");
-                    pstampil2=koneksiadamlabs.prepareStatement("select no_lab from h_registrasi where no_reg_rs=?");
-                    try {
-                        pstampil.setString(1,tbTarif.getValueAt(i2,1).toString());
-                        pstampil.setString(2,"%"+TCari.getText().trim()+"%");
-                        pstampil.setString(3,order);
-                        pstampil2.setString(1,order);
-                        rstampil=pstampil.executeQuery();
-                        rstampil2=pstampil2.executeQuery();
-                        rstampil2.next();
-                        while(rstampil.next()){
-                            pstindakan=koneksiadamlabs.prepareStatement("select h_item_pemeriksaan.hasil_pemeriksaan,h_item_pemeriksaan.nilai_rujukan_tampilan_nilai_rujukan,"
-                                    + "h_item_pemeriksaan.flag_kode from h_item_pemeriksaan inner join mapping_item_adamlab on h_item_pemeriksaan.item_pemeriksaan_kode=mapping_item_adamlab.kode_lis "
-                                    + "where h_item_pemeriksaan.h_registrasi_no_lab=? and mapping_item_adamlab.id_template=?");
-                            try {
-                                pstindakan.setString(1,rstampil2.getString("no_lab"));
-                                pstindakan.setString(2,rstampil.getString("id_template"));
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    tabMode.addRow(new Object[]{
-                                        true,"   "+rstampil.getString("Pemeriksaan"),rstindakan.getString("hasil_pemeriksaan"),
-                                        rstampil.getString("satuan"),
-                                        rstindakan.getString("nilai_rujukan_tampilan_nilai_rujukan"),rstindakan.getString("flag_kode"),
-                                        rstampil.getString("id_template"),
-                                        rstampil.getDouble("biaya_item"),
-                                        rstampil.getDouble("bagian_rs"),
-                                        rstampil.getDouble("bhp"),
-                                        rstampil.getDouble("bagian_perujuk"),
-                                        rstampil.getDouble("bagian_dokter"),
-                                        rstampil.getDouble("bagian_laborat"),
-                                        rstampil.getDouble("kso"),
-                                        rstampil.getDouble("menejemen")
-                                    });
-
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notifikasi : "+e);
-                    } finally{
-                        if(rstampil!=null){
-                            rstampil.close();
-                        }
-                        if(pstampil!=null){
-                            pstampil.close();
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Error Detail : "+e);
-        }
-    }
-
     private void tampilVANSLAB(String order) {
         try {
             koneksivanslab=koneksiDBVANSLAB.condb();
@@ -3059,37 +2976,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         isPsien();
         tampiltarif(order);
         tampilSysmex(order);
-    }
-
-    public void setOrderAdam(String order,String norawat,String posisi){
-        noorder=order;
-        TNoRw.setText(norawat);
-        this.status=posisi;
-        isRawat();
-        try {
-            pssetpj=koneksi.prepareStatement("select * from set_pjlab");
-            try {
-                rssetpj=pssetpj.executeQuery();
-                while(rssetpj.next()){
-                    KodePj.setText(rssetpj.getString(1));
-                    NmDokterPj.setText(Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",rssetpj.getString(1)));
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rssetpj!=null){
-                    rssetpj.close();
-                }
-                if(pssetpj!=null){
-                    pssetpj.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        isPsien();
-        tampiltarif(order);
-        tampilADAMLABS(order);
     }
 
     public void setOrderELIMS(String order,String norawat,String posisi){
