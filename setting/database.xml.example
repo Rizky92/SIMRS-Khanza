@@ -14,6 +14,7 @@
     <entry key="ADAMLABSKABUPATENID"></entry>
     <entry key="ADAMLABSPROVINSIID"></entry>
     <entry key="LABORATORIUMKIRIMHASIL"></entry>
+    <entry key="LABORATORIUMURUTANHASIL"></entry>
     <entry key="RESTRIKSIRMKELAHIRANBAYI">yes</entry>
     <entry key="URLKFAV2SATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/kfa-v2</entry>
     <entry key="KOMPILASIBERKASGUNAKANRIWAYATPASIEN">ralan+ranap</entry>
@@ -34,6 +35,7 @@
     <entry key="BIOSYSAPIURL">https://biosys.softwarelaboratorium.com</entry>
     <entry key="BIOSYSAPIKEY">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="LABORATORIUMSUBHEADERPREFIX">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="DICOMROUTERAETITLESMC"></entry>
     <entry key="KIRIMORDERKEMODALITYSMC">no</entry>
     <entry key="POLIMCUSMC">-</entry>
 
@@ -141,9 +143,9 @@
     <entry key="SECRETKEYSATUSEHAT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLAUTHSATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1</entry>
     <entry key="URLFHIRSATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/fhir-r4/v1</entry>
+    <entry key="IDSATUSEHAT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLAPPLINKSATUSEHAT">https://applink-stg.dto.kemkes.go.id/ssm/tte</entry>
     <entry key="IDORGBPJSSATUSEHAT">100071505</entry>
-    <entry key="IDSATUSEHAT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="KELURAHANSATUSEHAT">1</entry>
     <entry key="KECAMATANSATUSEHAT">1</entry>
     <entry key="KABUPATENSATUSEHAT">1</entry>
@@ -169,7 +171,7 @@
     <entry key="URLDUKCAPILJAKARTA">http://kependudukan.jakarta.go.id/wsrs/xml.jsp</entry>
     <entry key="USERDUKCAPILJAKARTA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSDUKCAPILJAKARTA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="VAR1DUKCAPILJAKARTA">RSIABK</entry>
+    <entry key="VAR1DUKCAPILJAKARTA"></entry>
     <entry key="VAR2DUKCAPILJAKARTA">1</entry>
     <entry key="URLDUKCAPIL">http://localhost</entry>
     <entry key="USERDUKCAPIL">l4nh5eVYrLAER/I2A4b3Tw==</entry>
@@ -212,6 +214,11 @@
     <entry key="PORTVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="HOSTADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PORTADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="DATABASEADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="HOSTSLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="DATABASESLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PORTSLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
