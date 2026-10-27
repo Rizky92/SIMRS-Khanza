@@ -1,23 +1,10 @@
 package widget;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicGraphicsUtils;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
-import javax.swing.text.View;
 
 public class TabPane extends JTabbedPane {
 
+    /*
     private static final long serialVersionUID = 4L;
     static final Color AKSEN = new Color(0x16A05D);
     private Color warnaAksen;
@@ -233,5 +220,12 @@ public class TabPane extends JTabbedPane {
                                            int tabIndex, Rectangle iconRect, Rectangle textRect,
                                            boolean isSelected) {
         }
+    }
+    */
+
+    private static final long serialVersionUID = 3L;
+
+    public TabPane() {
+        super();
     }
 }

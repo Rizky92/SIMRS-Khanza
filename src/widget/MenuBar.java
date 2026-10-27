@@ -1,5 +1,6 @@
 package widget;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -40,7 +41,8 @@ public class MenuBar extends JMenuBar {
         }
     }
 
-    private static final int ARC = 10;
+    // private static final int ARC = 10;
+    private static final int ARC = 8;
     private static final int INSET = 2;
 
     private Color warnaAtas, warnaBawah, warnaGaris, warnaTeks;
@@ -167,6 +169,8 @@ public class MenuBar extends JMenuBar {
                 c.setForeground(warnaTeks);
             }
         }
+        setForeground(warnaTeks);
+        putClientProperty(FlatClientProperties.STYLE, String.format("hoverBackground: #0000; selectionBackground: #0000; selectionForeground: #%06x", warnaTeks.getRGB() & 0xFFFFFF));
         repaint();
     }
 

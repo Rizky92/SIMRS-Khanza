@@ -6602,7 +6602,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
 
-        Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll1.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         Scroll1.setComponentPopupMenu(jPopupMenu1);
         Scroll1.setName("Scroll1"); // NOI18N
@@ -6625,7 +6624,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         TabRawat.addTab("Registrasi Awal", Scroll1);
 
-        Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll2.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         Scroll2.setComponentPopupMenu(jPopupMenu2);
         Scroll2.setName("Scroll2"); // NOI18N
