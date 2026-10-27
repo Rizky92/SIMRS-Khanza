@@ -13,7 +13,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin_fotokelahiranbayismc");
+                unset($_SESSION["ses_admin_fotokelahiranbayismc"]);
             }
         }
     }
