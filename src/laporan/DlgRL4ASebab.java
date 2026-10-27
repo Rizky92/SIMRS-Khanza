@@ -1,4 +1,5 @@
 package laporan;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.awt.Cursor;
