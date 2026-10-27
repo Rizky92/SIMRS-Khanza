@@ -157,6 +157,10 @@ public final class validasi {
         autonomorSmc(component, prefix, "", table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
     }
 
+    public void autonomorSmc(JTextComponent component, String prefix, String table, String kolom, int panjang, String pad) {
+        component.setText(sek.autonomorSmc(prefix, table, kolom, panjang, pad));
+    }
+
     public void renomorSmc(JTextComponent component, int panjang, String pad) {
         String nomor = component.getText();
         int no = Integer.parseInt(nomor.substring(nomor.length() - panjang)) + 1;
