@@ -2,6 +2,8 @@ package fungsi;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.koneksiDB;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,7 +12,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -252,6 +258,61 @@ public class ApiOrthanc {
             System.out.println("Notifikasi : " + e);
             return false;
         }
+    }
+
+    public List<String> cariStudyAccessionSmc(String noACSN) throws Exception {
+        List<String> studyID = new ArrayList<>();
+        String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/tools/find";
+        HttpHeaders header = new HttpHeaders();
+        header.add("Authorization", "Basic " + authEncrypt);
+        header.setContentType(MediaType.APPLICATION_JSON);
+
+        ObjectNode body = mapper.createObjectNode();
+        body.put("Level", "Study");
+        body.put("Expand", false);
+        body.putObject("Query").put("AccessionNumber", noACSN);
+
+        String response = getRest().exchange(url, HttpMethod.POST, new HttpEntity(mapper.writeValueAsString(body), header), String.class).getBody();
+        for (JsonNode id : mapper.readTree(response)) {
+            if (!id.asText().isBlank()) {
+                studyID.add(id.asText());
+            }
+        }
+        return studyID;
+    }
+
+    public List<String> cariModalityAETSmc(String aet) throws Exception {
+        List<String> modality = new ArrayList<>();
+        String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/modalities?expand";
+        HttpHeaders header = new HttpHeaders();
+        header.add("Authorization", "Basic " + authEncrypt);
+
+        String response = getRest().exchange(url, HttpMethod.GET, new HttpEntity(header), String.class).getBody();
+        Iterator<Map.Entry<String, JsonNode>> daftar = mapper.readTree(response).fields();
+        while (daftar.hasNext()) {
+            Map.Entry<String, JsonNode> item = daftar.next();
+            if (aet.equals(item.getValue().path("AET").asText())) {
+                modality.add(item.getKey());
+            }
+        }
+        return modality;
+    }
+
+    public JsonNode kirimKeModalitySmc(List<String> studyID, String modality) throws Exception {
+        String url = koneksiDB.URLORTHANC() + ":" + koneksiDB.PORTORTHANC() + "/modalities/" + modality + "/store";
+        HttpHeaders header = new HttpHeaders();
+        header.add("Authorization", "Basic " + authEncrypt);
+        header.setContentType(MediaType.APPLICATION_JSON);
+
+        ObjectNode body = mapper.createObjectNode();
+        body.put("Synchronous", true);
+        ArrayNode resources = body.putArray("Resources");
+        for (String id : studyID) {
+            resources.add(id);
+        }
+
+        String response = getRest().exchange(url, HttpMethod.POST, new HttpEntity(mapper.writeValueAsString(body), header), String.class).getBody();
+        return mapper.readTree((null == response) ? "{}" : response);
     }
 
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
