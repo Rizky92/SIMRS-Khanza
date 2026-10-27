@@ -3,6 +3,7 @@ package widget;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.awt.event.FocusAdapter;
@@ -21,16 +23,30 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
+import java.util.Locale;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.text.JTextComponent;
-import uz.ncipro.calendar.JDateTimePicker;
+import uz.ncipro.calendar.JCalendar;
 
-public final class Tanggal extends JDateTimePicker {
+public final class Tanggal extends JComboBox implements PropertyChangeListener {
     private static final long serialVersionUID = 2L;
     private static final Color AKSEN     = new Color(0x16A05D);
     private static final Color BORDER    = new Color(0x96BEA5);
@@ -43,11 +59,17 @@ public final class Tanggal extends JDateTimePicker {
     private static final int   RADIUS    = 6;
     private static final String KUNCI    = "widget.Tanggal.digayakan";
 
+    private String displayFormat;
+    private SimpleDateFormat sdf;
+    protected JCalendar popupEditor;
+
     private boolean hover;
     private boolean hoverPanah;
 
     public Tanggal() {
-        super();
+        sdf = new SimpleDateFormat();
+        setEditable(true);
+        setDisplayFormat(sdf.toPattern());
         setForeground(TEKS);
         setBackground(BENING);
         setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -62,9 +84,87 @@ public final class Tanggal extends JDateTimePicker {
     }
 
     @Override
+    public void actionPerformed(ActionEvent e) {
+        super.actionPerformed(e);
+        try {
+            popupEditor.setDate(sdf.parse((String) getSelectedItem()));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent e) {
+        String propertyName = e.getPropertyName();
+        if (propertyName.equals("date") || propertyName.equals("day") ||
+            propertyName.equals("month") || propertyName.equals("year")) {
+            setValue(sdf.format(popupEditor.getDate()));
+        }
+    }
+
+    @Override
+    public void setLocale(Locale l) {
+        super.setLocale(l);
+        if (ui != null) {
+            popupEditor.setLocale(l);
+        }
+    }
+
+    @Override
     public void updateUI() {
-        super.updateUI();
+        String currentLookAndFeel = UIManager.getLookAndFeel().getID();
+        if (currentLookAndFeel.equals("Metal")) {
+            setUI(MetalJDateTimePickerUI.createUI(this));
+            popupEditor = ((MetalJDateTimePickerUI) ui).getPopupEditor();
+        } else {
+            setUI(BasicTanggalSmcPickerUI.createUI(this));
+            popupEditor = ((BasicTanggalSmcPickerUI) ui).getPopupEditor();
+        }
+        popupEditor.addPropertyChangeListener(this);
         gayakan();
+    }
+
+    private void setValue(String value) {
+        removeAllItems();
+        addItem(value);
+    }
+
+    public Date getDate() {
+        return popupEditor.getDate();
+    }
+
+    public void setDate(Date date) {
+        popupEditor.setDate(date);
+    }
+
+    public LocalDate getLocalDate() {
+        return getLocalDate(ZoneId.systemDefault());
+    }
+
+    public LocalDate getLocalDate(ZoneId zoneId) {
+        return LocalDate.ofInstant(getDate().toInstant(), zoneId);
+    }
+
+    public String getDisplayFormat() {
+        return displayFormat;
+    }
+
+    public void setDisplayFormat(String displayFormat) {
+        String oldDisplayFormat = this.displayFormat;
+        this.displayFormat = displayFormat;
+        sdf.applyPattern(displayFormat);
+        setValue(sdf.format(popupEditor.getDate()));
+        firePropertyChange("displayFormat", oldDisplayFormat, displayFormat);
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("DateTimePicker");
+        Tanggal dtp = new Tanggal();
+        dtp.setDisplayFormat("dd.MM.yyyy");
+        frame.getContentPane().add(dtp);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.show();
     }
 
     private void gayakan() {
@@ -278,14 +378,6 @@ public final class Tanggal extends JDateTimePicker {
         return null;
     }
 
-    public LocalDate getLocalDate() {
-        return getLocalDate(ZoneId.systemDefault());
-    }
-
-    public LocalDate getLocalDate(ZoneId zoneId) {
-        return LocalDate.ofInstant(getDate().toInstant(), zoneId);
-    }
-
     private class BorderModern extends AbstractBorder {
 
         private static final long serialVersionUID = 1L;
@@ -324,6 +416,144 @@ public final class Tanggal extends JDateTimePicker {
         public Insets getBorderInsets(Component c, Insets insets) {
             insets.set(2, 6, 2, 3);
             return insets;
+        }
+    }
+
+    static class BasicTanggalSmcPickerUI extends BasicComboBoxUI {
+        protected JCalendar popupEditor;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new BasicTanggalSmcPickerUI();
+        }
+
+        @Override
+        public void paintCurrentValueBackground(Graphics g, Rectangle bounds, boolean hasFocus) {
+            // prevent BasicComboBoxUI from painting gray inset behind popup
+            if (!isPopupVisible(comboBox)) {
+                super.paintCurrentValueBackground(g, bounds, hasFocus);
+            }
+        }
+
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            if (!isPopupVisible(comboBox)) {
+                super.paint(g, c);
+            }
+        }
+
+        @Override
+        protected ComboPopup createPopup() {
+            popupEditor = new JCalendar();
+            BasicJDateTimePickerPopup popup = new BasicJDateTimePickerPopup(comboBox, popupEditor);
+            popup.getAccessibleContext().setAccessibleParent(comboBox);
+            return popup;
+        }
+
+        public JCalendar getPopupEditor() {
+            return popupEditor;
+        }
+    }
+
+    static class MetalJDateTimePickerUI extends MetalComboBoxUI {
+        protected JCalendar popupEditor;
+
+        public static ComponentUI createUI(JComponent c) {
+            return new MetalJDateTimePickerUI();
+        }
+
+        @Override
+        public void paintCurrentValueBackground(Graphics g, Rectangle bounds, boolean hasFocus) {
+            // prevent BasicComboBoxUI from painting gray inset behind popup
+            if (!isPopupVisible(comboBox)) {
+                super.paintCurrentValueBackground(g, bounds, hasFocus);
+            }
+        }
+
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            if (!isPopupVisible(comboBox)) {
+                super.paint(g, c);
+            }
+        }
+
+        @Override
+        protected ComboPopup createPopup() {
+            popupEditor = new JCalendar();
+            BasicJDateTimePickerPopup popup = new BasicJDateTimePickerPopup(comboBox, popupEditor);
+            popup.getAccessibleContext().setAccessibleParent(comboBox);
+            return popup;
+        }
+
+        public JCalendar getPopupEditor() {
+            return popupEditor;
+        }
+    }
+
+    static class BasicJDateTimePickerPopup extends BasicComboPopup {
+        protected JCalendar popupEditor;
+
+        @Override
+        public void show() {
+            if (popupEditor == null) {
+                return;
+            }
+            syncPopupDataWithPickerData();
+            popupEditor.setPreferredSize(null);
+            Dimension popupSize = popupEditor.getPreferredSize();
+            popupSize.setSize(popupSize.width, popupSize.width + 16);
+            Rectangle popupBounds = computePopupBounds(0, comboBox.getBounds().height, popupSize.width, popupSize.height);
+            popupEditor.setMaximumSize(popupBounds.getSize());
+            popupEditor.setPreferredSize(popupBounds.getSize());
+            popupEditor.setMinimumSize(popupBounds.getSize());
+            setLightWeightPopupEnabled(comboBox.isLightWeightPopupEnabled());
+            show(comboBox, popupBounds.x, popupBounds.y);
+        }
+
+        @Override
+        protected void configurePopup() {
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            setBorderPainted(true);
+            setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.black), BorderFactory.createEmptyBorder(8, 8, 8, 8)));
+            setOpaque(true);
+            setDoubleBuffered(true);
+            setRequestFocusEnabled(false);
+        }
+
+        public BasicJDateTimePickerPopup(JComboBox comboBox, JCalendar popupEditor) {
+            super(comboBox);
+            this.popupEditor = popupEditor;
+            setFocusEnabled(popupEditor, false);
+            add(popupEditor);
+        }
+
+        protected void setFocusEnabled(Component component, boolean flag) {
+            if (component == null) {
+                return;
+            }
+            if (component instanceof JComponent) {
+                JComponent jcomponent = (JComponent) component;
+                if (flag != jcomponent.isRequestFocusEnabled()) {
+                    jcomponent.setRequestFocusEnabled(flag);
+                }
+            }
+            if (component instanceof Container) {
+                Component components[] = ((Container) component).getComponents();
+                for (int i = 0; i < components.length; i++) {
+                    setFocusEnabled(components[i], flag);
+                }
+            }
+        }
+
+        void syncPopupDataWithPickerData() {
+            Locale l = comboBox.getLocale();
+            if (!popupEditor.getLocale().equals(l)) {
+                popupEditor.setLocale(l);
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            sdf.applyPattern(((Tanggal) comboBox).getDisplayFormat());
+            if (!sdf.format(popupEditor.getDate()).equals(comboBox.getSelectedItem())) {
+                comboBox.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+            }
         }
     }
 }
