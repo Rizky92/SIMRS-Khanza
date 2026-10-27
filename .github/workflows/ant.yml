@@ -5,6 +5,28 @@ name: Java CI
 
 on:
   workflow_dispatch:
+    inputs:
+      preset:
+        description: Subprojects to build alongside the main application.
+        type: choice
+        options:
+          - important
+          - all
+          - none
+          - KhanzaAntrianApotek
+          - KhanzaAntrianLoket
+          - KhanzaHMSServiceAplicare
+          - KhanzaHMSServiceMobileJKNERM
+          - KhanzaHMSServiceSatuSehat
+          - KhanzaPengenkripsiTeks
+          - anjunganpasienmandiri
+        default: important
+      subprojects:
+        description: >-
+          Space separated subproject directory names. Overrides the preset when
+          filled in; leave empty to use the preset.
+        type: string
+        default: ''
 
 jobs:
   build:
@@ -12,3 +34,4 @@ jobs:
     with:
       targets: jar
       artifact-name: Package
+      subprojects: ${{ inputs.subprojects != '' && inputs.subprojects || inputs.preset }}

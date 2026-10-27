@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SIMRSKhanzaSubprojectCI" default="jar" basedir="." xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
+    <description>Standalone build script for continuous integration, building one NetBeans subproject named by -Dsub.dir. Like build-ci.xml it reads nbproject/project.properties without importing the NetBeans generated build-impl.xml, so it needs neither a NetBeans installation nor the CopyLibs task. Every subproject writes its JAR and its runtime libraries into the same distribution directory as the main application.</description>
+
+    <fail message="Name the subproject to build, for example -Dsub.dir=KhanzaAntrianApotek.">
+        <condition>
+            <not>
+                <isset property="sub.dir"/>
+            </not>
+        </condition>
+    </fail>
+
+    <fail message="${sub.dir} is not a NetBeans project directory: ${sub.dir}/nbproject/project.properties is missing.">
+        <condition>
+            <not>
+                <available file="${sub.dir}/nbproject/project.properties"/>
+            </not>
+        </condition>
+    </fail>
+
+    <property name="jar.compress" value="true"/>
+
+    <property name="dist.dir" value="dist"/>
+    <property name="build.dir" value="build/subprojects/${sub.dir}"/>
+
+    <property file="${sub.dir}/nbproject/project.properties"/>
+
+    <property name="main.class" value=""/>
+    <property name="javac.debug" value="true"/>
+    <property name="sub.src.dir" value="${sub.dir}/${src.dir}"/>
+    <property name="empty.dir" value="${build.dir}/empty"/>
+    <property name="ap.source.output.dir" value="${build.generated.sources.dir}/ap-source-output"/>
+    <property name="manifest.dist.file" value="${build.dir}/MANIFEST.MF"/>
+    <property name="report.src.dir" value="report"/>
+    <property name="report.dist.dir" value="${dist.dir}/report/${sub.dir}"/>
+    <property name="report.includes" value="**/*.jrxml"/>
+    <property name="report.keepjava" value="false"/>
+    <property name="report.compiler.lib" value="${path.file-reference}/ecj-4.6.1.jar"/>
+    <property name="report.compiler" value=""/>
+
+    <property name="sub.shared.resource.includes" value="gambar/**,report/**,setting/**,suara/**"/>
+    <property name="sub.private.resource.includes" value="suaraapotek/**,suarasmc/**"/>
+    <property name="sub.resource.excludes" value="**/.gitignore,**/.classpath,**/.project,**/.settings/**"/>
+
+    <path id="classpath.ci">
+        <pathelement path="${javac.classpath}"/>
+    </path>
+
+    <path id="classpath.reports">
+        <pathelement path="${report.compiler.lib}"/>
+        <path refid="classpath.ci"/>
+    </path>
+
+    <target name="clean" description="Delete the build directory of this subproject.">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" description="Compile sources and copy non source resources.">
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${empty.dir}"/>
+        <mkdir dir="${ap.source.output.dir}"/>
+        <javac srcdir="${sub.src.dir}" destdir="${build.classes.dir}" includes="${includes}" excludes="${excludes}" source="${javac.source}" target="${javac.target}" encoding="${source.encoding}" debug="${javac.debug}" deprecation="${javac.deprecation}" includeantruntime="false" fork="yes" tempdir="${java.io.tmpdir}">
+            <classpath refid="classpath.ci"/>
+            <compilerarg line="${javac.compilerargs}"/>
+            <compilerarg value="-processorpath"/>
+            <compilerarg path="${javac.processorpath}:${empty.dir}"/>
+            <compilerarg value="-s"/>
+            <compilerarg path="${ap.source.output.dir}"/>
+        </javac>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${sub.src.dir}" includes="${includes}" excludes="${build.classes.excludes},${excludes}"/>
+        </copy>
+    </target>
+
+    <target name="-bundle-libs" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <restrict id="runtime.libs.ci">
+            <path refid="classpath.ci"/>
+            <rsel:exists/>
+            <rsel:type type="file"/>
+        </restrict>
+        <copy todir="${dist.dir}/lib" flatten="true" preservelastmodified="true">
+            <resources refid="runtime.libs.ci"/>
+        </copy>
+        <pathconvert pathsep=" " property="jar.classpath.ci" refid="runtime.libs.ci">
+            <chainedmapper>
+                <flattenmapper/>
+                <filtermapper>
+                    <replacestring from=" " to="%20"/>
+                </filtermapper>
+                <globmapper from="*" to="lib/*"/>
+            </chainedmapper>
+        </pathconvert>
+    </target>
+
+    <target name="-init-manifest" depends="-bundle-libs">
+        <condition property="has.main.class">
+            <not>
+                <equals arg1="${main.class}" arg2=""/>
+            </not>
+        </condition>
+        <manifest file="${manifest.dist.file}" encoding="UTF-8">
+            <attribute name="Class-Path" value="${jar.classpath.ci}"/>
+        </manifest>
+    </target>
+
+    <target name="-add-main-class" depends="-init-manifest" if="has.main.class">
+        <manifest file="${manifest.dist.file}" mode="update" encoding="UTF-8">
+            <attribute name="Main-Class" value="${main.class}"/>
+        </manifest>
+    </target>
+
+    <target name="-copy-dist-resources">
+        <copy todir="${dist.dir}">
+            <fileset dir="${sub.dir}" includes="${sub.private.resource.includes}" excludes="${sub.resource.excludes}"/>
+        </copy>
+        <copy todir="${dist.dir}">
+            <fileset dir="${sub.dir}" includes="${sub.shared.resource.includes}" excludes="${report.includes},${sub.resource.excludes}">
+                <different targetdir="${basedir}" ignoreFileTimes="true"/>
+            </fileset>
+            <regexpmapper from="^([^/\\]+)[/\\](.*)$$" to="\1/${sub.dir}/\2" handledirsep="true"/>
+        </copy>
+    </target>
+
+    <target name="jar" depends="-add-main-class,-copy-dist-resources" description="Build the JAR of this subproject into the shared distribution directory.">
+        <jar jarfile="${dist.jar}" compress="${jar.compress}" manifest="${manifest.dist.file}" manifestencoding="UTF-8">
+            <fileset dir="${build.classes.dir}" excludes="${dist.archive.excludes}"/>
+        </jar>
+    </target>
+
+    <target name="-has-reports">
+        <condition property="has.reports">
+            <available file="${sub.dir}/${report.src.dir}" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="-stage-reports" depends="-has-reports" if="has.reports">
+        <fail message="Jasper report compilation needs ${report.compiler.lib} on the classpath ahead of jdt-compiler-3.1.1.jar, which is too old for JasperReports 6.8. Add the jar to the library bundle or point -Dreport.compiler.lib at another Eclipse compiler that supports the running JDK.">
+            <condition>
+                <not>
+                    <available file="${report.compiler.lib}"/>
+                </not>
+            </condition>
+        </fail>
+        <copy todir="${build.dir}/report">
+            <fileset dir="${sub.dir}/${report.src.dir}" includes="${report.includes}">
+                <different targetdir="${report.src.dir}" ignoreFileTimes="true"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="-count-reports" depends="-stage-reports">
+        <resourcecount property="report.count">
+            <fileset dir="${build.dir}/report" includes="${report.includes}" erroronmissingdir="false"/>
+        </resourcecount>
+        <condition property="no.reports">
+            <equals arg1="${report.count}" arg2="0"/>
+        </condition>
+    </target>
+
+    <target name="compile-reports" depends="-count-reports" unless="no.reports" description="Compile the Jasper report designs of this subproject that the main application does not already ship identically.">
+        <taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask" classpathref="classpath.reports"/>
+        <mkdir dir="${report.dist.dir}"/>
+        <mkdir dir="${build.dir}/jasper"/>
+        <jrc srcdir="${build.dir}/report" destdir="${report.dist.dir}" tempdir="${build.dir}/jasper" keepjava="${report.keepjava}" xmlvalidation="false" compiler="${report.compiler}">
+            <classpath refid="classpath.reports"/>
+            <include name="${report.includes}"/>
+        </jrc>
+    </target>
+</project>
