@@ -1,6 +1,9 @@
 package widget;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 
 /**
@@ -31,5 +34,26 @@ public class Table extends JTable {
         getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255,250,250)));
         getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
         getTableHeader().setReorderingAllowed(false);
+    }
+
+    @Override
+    public Point getPopupLocation(MouseEvent e) {
+        if (null != e) {
+            int r = rowAtPoint(e.getPoint());
+            int c = columnAtPoint(e.getPoint());
+            if (r != -1 && c != -1 && !isRowSelected(r)) {
+                changeSelection(r, c, false, false);
+            }
+            super.processMouseEvent(new MouseEvent(this, MouseEvent.MOUSE_CLICKED, e.getWhen(), e.getModifiersEx() & ~InputEvent.BUTTON3_DOWN_MASK, e.getX(), e.getY(), e.getXOnScreen(), e.getYOnScreen(), 1, false, MouseEvent.BUTTON3));
+        }
+        return super.getPopupLocation(e);
+    }
+
+    @Override
+    protected void processMouseEvent(MouseEvent e) {
+        if (MouseEvent.MOUSE_CLICKED == e.getID() && MouseEvent.BUTTON3 == e.getButton()) {
+            return;
+        }
+        super.processMouseEvent(e);
     }
 }
