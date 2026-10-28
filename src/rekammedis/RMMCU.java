@@ -426,6 +426,9 @@ public final class RMMCU extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
 
+        LoadHTML1.setEditorKit(kit);
+        LoadHTML1.setDocument(doc);
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -1216,7 +1219,7 @@ public final class RMMCU extends javax.swing.JDialog {
         jLabel53.setBounds(10, 70, 180, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2026 09:27:06" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-10-2026 01:02:01" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -3284,7 +3287,7 @@ public final class RMMCU extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-10-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3298,7 +3301,7 @@ public final class RMMCU extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-10-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3415,6 +3418,7 @@ public final class RMMCU extends javax.swing.JDialog {
         Scroll4.setOpaque(true);
         Scroll4.setPreferredSize(new java.awt.Dimension(200, 200));
 
+        LoadHTML1.setEditable(false);
         LoadHTML1.setBorder(null);
         LoadHTML1.setName("LoadHTML1"); // NOI18N
         Scroll4.setViewportView(LoadHTML1);
@@ -4289,7 +4293,7 @@ public final class RMMCU extends javax.swing.JDialog {
         param.put("emailrs", akses.getemailrs());
         param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
         param.put("norawat", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
-        param.put("baseurl", "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB());
+        param.put("baseurl", "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/photopasien/");
         String finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?", tbObat.getValueAt(tbObat.getSelectedRow(), 104).toString());
         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tbObat.getValueAt(tbObat.getSelectedRow(), 105).toString() + "\nID " + (finger.equals("") ? tbObat.getValueAt(tbObat.getSelectedRow(), 104).toString() : finger) + "\n" + Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString()));
         Valid.reportSmc("rptCetakLaporanMCUSMC.jasper", "report/mcuperjenisbayarsmc","::[ Laporan Pengkajian Awal MCU ]::", param);
@@ -5474,9 +5478,9 @@ public final class RMMCU extends javax.swing.JDialog {
     private void getFotoSmc() {
         String gambar = Sequel.cariIsiSmc("select personal_pasien.gambar from personal_pasien where personal_pasien.no_rkm_medis = ?", (String) tbObat.getValueAt(tbObat.getSelectedRow(), 1));
         if (null != gambar && (!gambar.isBlank() || !"-".equals(gambar))) {
-            LoadHTML.setText("<html><body><center><img src=\"http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/photopasien/" + gambar + "\" alt=\"photo\" width=\"200\" height=\"200\"/></center></body></html>");
+            LoadHTML1.setText("<html><body><center><img src=\"http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/photopasien/" + gambar + "\" alt=\"photo\" width=\"200\" height=\"200\"/></center></body></html>");
         } else {
-            LoadHTML.setText("<html><body><center><br><br><font face=\"tahoma\" size=\"2\" color=\"#434343\">Kosong</font></center></body></html>");
+            LoadHTML1.setText("<html><body><center><br><br><font face=\"tahoma\" size=\"2\" color=\"#434343\">Kosong</font></center></body></html>");
         }
     }
 
