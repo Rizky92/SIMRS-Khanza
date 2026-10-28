@@ -501,6 +501,8 @@ ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `kota` varchar(30) NULL DEFAULT NULL AFTER `alamat`;
 
+ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `no_faktur` varchar(20) NULL DEFAULT NULL AFTER `no_box`;
+
 ALTER TABLE `ipsrsdetailpengeluaran` ADD PRIMARY KEY IF NOT EXISTS (`no_keluar`, `kode_brng`) USING BTREE;
 
 ALTER TABLE `ipsrsdetailpengeluaran` DROP FOREIGN KEY IF EXISTS `ipsrsdetailpengeluaran_ibfk_4`;
@@ -2081,6 +2083,44 @@ ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keteran
 
 ALTER TABLE `surat_keterangan_sehat` MODIFY COLUMN IF EXISTS `butawarna` enum('Ya','Tidak','-') NOT NULL AFTER `suhu`;
 
+CREATE TABLE IF NOT EXISTS `surat_pemesanan_inventaris_smc` (
+  `no_pemesanan` varchar(20) NOT NULL,
+  `kode_suplier` char(5) NOT NULL,
+  `nip` varchar(20) NOT NULL,
+  `kd_rek` varchar(15) DEFAULT NULL,
+  `tanggal` date NOT NULL,
+  `subtotal` double NOT NULL,
+  `potongan` double NOT NULL,
+  `total` double NOT NULL,
+  `ppn` double NULL DEFAULT NULL,
+  `meterai` double NULL DEFAULT NULL,
+  `tagihan` double NULL DEFAULT NULL,
+  `status` enum('Proses Pesan','Sudah Datang') NULL DEFAULT NULL,
+  PRIMARY KEY (`no_pemesanan`) USING BTREE,
+  INDEX `kode_suplier`(`kode_suplier`) USING BTREE,
+  INDEX `nip`(`nip`) USING BTREE,
+  INDEX `kd_rek`(`kd_rek`) USING BTREE,
+  CONSTRAINT `surat_pemesanan_inventaris_smc_ibfk_1` FOREIGN KEY (`kode_suplier`) REFERENCES `inventaris_suplier` (`kode_suplier`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `surat_pemesanan_inventaris_smc_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `surat_pemesanan_inventaris_smc_ibfk_3` FOREIGN KEY (`kd_rek`) REFERENCES `rekening` (`kd_rek`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `detail_surat_pemesanan_inventaris_smc` (
+  `no_pemesanan` varchar(20) NOT NULL,
+  `kode_barang` varchar(20) NOT NULL,
+  `jumlah` double DEFAULT NULL,
+  `h_pesan` double DEFAULT NULL,
+  `subtotal` double DEFAULT NULL,
+  `dis` double NOT NULL,
+  `besardis` double NOT NULL,
+  `total` double NOT NULL,
+  PRIMARY KEY (`no_pemesanan`,`kode_barang`) USING BTREE,
+  INDEX `no_pemesanan`(`no_pemesanan`) USING BTREE,
+  INDEX `kode_barang`(`kode_barang`) USING BTREE,
+  CONSTRAINT `detail_surat_pemesanan_inventaris_smc_ibfk_1` FOREIGN KEY (`kode_barang`) REFERENCES `inventaris_barang` (`kode_barang`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `detail_surat_pemesanan_inventaris_smc_ibfk_2` FOREIGN KEY (`no_pemesanan`) REFERENCES `surat_pemesanan_inventaris_smc` (`no_pemesanan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
 ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `hubungan` enum('Suami','Istri','Anak','Ayah','Ibu','Saudara','Keponakan') NOT NULL AFTER `alamat`;
 
 ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY IF NOT EXISTS (`no_surat`) USING BTREE;
@@ -2366,6 +2406,10 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `master_template_paket_mcu_smc` enum
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_lab_smc` enum('true','false') NULL DEFAULT NULL AFTER `master_template_paket_mcu_smc`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_radiologi_smc` enum('true','false') NULL DEFAULT NULL AFTER `hapus_permintaan_lab_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `surat_pemesanan_inventaris_smc` enum('true','false') DEFAULT NULL AFTER `hapus_permintaan_lab_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `ringkasan_barang_belum_inventaris_smc` enum('true','false') DEFAULT NULL AFTER `surat_pemesanan_inventaris_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
