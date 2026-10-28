@@ -3812,7 +3812,7 @@ public final class RMMCU extends javax.swing.JDialog {
             param.put("norawat", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
             String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),104).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),105).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),104).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()));
-            Valid.reportSmc("rptCetakPenilaianAwalMCUSMC.jasper", "report", "::[ Laporan Pengkajian Awal MCU ]::", param);
+            Valid.reportSmc("rptCetakPenilaianAwalMCUSMC.jasper", "report/mcuperjenisbayarsmc","::[ Laporan Pengkajian Awal MCU ]::", param);
         }
     }//GEN-LAST:event_MnPenilaianMCUActionPerformed
 
@@ -4292,7 +4292,7 @@ public final class RMMCU extends javax.swing.JDialog {
         param.put("baseurl", "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB());
         String finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?", tbObat.getValueAt(tbObat.getSelectedRow(), 104).toString());
         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tbObat.getValueAt(tbObat.getSelectedRow(), 105).toString() + "\nID " + (finger.equals("") ? tbObat.getValueAt(tbObat.getSelectedRow(), 104).toString() : finger) + "\n" + Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString()));
-        Valid.reportSmc("rptCetakLaporanMCUSMC.jasper", "report", "::[ Laporan Pengkajian Awal MCU ]::", param);
+        Valid.reportSmc("rptCetakLaporanMCUSMC.jasper", "report/mcuperjenisbayarsmc","::[ Laporan Pengkajian Awal MCU ]::", param);
     }//GEN-LAST:event_MnPenilaianMCUSmcActionPerformed
 
     private void MnPenilaianMCUPerJenisBayarSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianMCUPerJenisBayarSmcActionPerformed
