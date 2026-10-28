@@ -829,7 +829,7 @@ public final class RMMCU extends javax.swing.JDialog {
         MnPenilaianMCUPerJenisBayarSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnPenilaianMCUPerJenisBayarSmc.setText("Laporan Pengkajian MCU SMC Per Jenis Bayar");
         MnPenilaianMCUPerJenisBayarSmc.setName("MnPenilaianMCUPerJenisBayarSmc"); // NOI18N
-        MnPenilaianMCUPerJenisBayarSmc.setPreferredSize(new java.awt.Dimension(215, 26));
+        MnPenilaianMCUPerJenisBayarSmc.setPreferredSize(new java.awt.Dimension(230, 26));
         MnPenilaianMCUPerJenisBayarSmc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnPenilaianMCUPerJenisBayarSmcActionPerformed(evt);
@@ -4253,10 +4253,10 @@ public final class RMMCU extends javax.swing.JDialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         String norm = (String) tbObat.getValueAt(tbObat.getSelectedRow(), 1);
         if (null != norm && !norm.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu...!!!!");
-        } else {
             Sequel.menyimpanSmc("personal_pasien", "", norm, "", "");
             Valid.panggilUrl("photopasien/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&norm=" + norm);
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu...!!!!");
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnAmbilPhotoActionPerformed
@@ -4289,6 +4289,7 @@ public final class RMMCU extends javax.swing.JDialog {
         param.put("emailrs", akses.getemailrs());
         param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
         param.put("norawat", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
+        param.put("baseurl", "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB());
         String finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?", tbObat.getValueAt(tbObat.getSelectedRow(), 104).toString());
         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tbObat.getValueAt(tbObat.getSelectedRow(), 105).toString() + "\nID " + (finger.equals("") ? tbObat.getValueAt(tbObat.getSelectedRow(), 104).toString() : finger) + "\n" + Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString()));
         Valid.reportSmc("rptCetakLaporanMCUSMC.jasper", "report", "::[ Laporan Pengkajian Awal MCU ]::", param);

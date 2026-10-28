@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptCetakLaporanMCUSMC" sectionType="Part" pageWidth="595" pageHeight="842" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" uuid="34c13d5a-cd6b-451e-8001-9fd298d2274a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptCetakLaporanMCUSMC" pageWidth="595" pageHeight="842" sectionType="Part" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" uuid="34c13d5a-cd6b-451e-8001-9fd298d2274a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LOCALHOST UPD"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
@@ -14,6 +14,7 @@
 	<parameter name="logobytes" class="byte[]" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{logo} == null ? null : net.sf.jasperreports.engine.util.JRLoader.loadBytes($P{logo})]]></defaultValueExpression>
 	</parameter>
+	<parameter name="baseurl" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select 1 as urutan, 'MCU' as jenis, null as tgl_periksa, null as jam, null as noorder from penilaian_mcu where penilaian_mcu.no_rawat = $P{norawat}
                 union all
@@ -38,6 +39,22 @@
 	<field name="jam" class="java.lang.String"/>
 	<field name="noorder" class="java.lang.String"/>
 	<detail>
+		<part uuid="3817856d-2a37-4b87-8471-656c93022bd2">
+			<printWhenExpression><![CDATA["MCU".equals($F{jenis})]]></printWhenExpression>
+			<partNameExpression><![CDATA["Cover"]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="baseurl">
+					<subreportParameterExpression><![CDATA[$P{baseurl}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptCoverPenilaianHasilMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
 		<part uuid="4a3dec7b-bf07-46b8-b093-c1c0820ae58c">
 			<printWhenExpression><![CDATA["MCU".equals($F{jenis})]]></printWhenExpression>
 			<partNameExpression><![CDATA["Pengkajian MCU"]]></partNameExpression>
