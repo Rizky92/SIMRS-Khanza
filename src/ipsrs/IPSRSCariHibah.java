@@ -805,7 +805,7 @@ public class IPSRSCariHibah extends javax.swing.JDialog {
                                 sukses=false;
                             }
                             if(sukses==true){
-                                sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
+                                sukses=jur.simpanJurnal(rs.getString("no_hibah"),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
                             }
 
                             if(sukses==true){
