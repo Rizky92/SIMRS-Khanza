@@ -163,6 +163,7 @@ import rekammedis.RMPenilaianLevelKecemasanRanapAnak;
 import rekammedis.RMPenilaianPasienImunitasRendah;
 import rekammedis.RMPenilaianPasienPenyakitMenular;
 import rekammedis.RMPenilaianPasienTerminal;
+import rekammedis.RMPenilaianPasienTerminalSMC;
 import rekammedis.RMPenilaianPreAnastesi;
 import rekammedis.RMPenilaianPreInduksi;
 import rekammedis.RMPenilaianPreOperasi;
@@ -9471,6 +9472,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnCopySOAP,MnPasteSOAP;
 
     private widget.Button BtnPengkajianInvasifNonBedahSMC;
+    private widget.Button BtnPenilaianPasienTerminalSMC;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -10370,6 +10372,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
         BtnPengkajianInvasifNonBedahSMC.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
         if(akses.getpengkajian_tindakan_invasif_non_bedah_smc()==true){
+            tinggi=tinggi+24;
+        }
+
+        BtnPenilaianPasienTerminalSMC.setVisible(akses.getpenilaian_pasien_terminal());
+        if(akses.getpenilaian_pasien_terminal()==true){
             tinggi=tinggi+24;
         }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
@@ -11484,6 +11491,19 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPengkajianInvasifNonBedahSMC.setRoundRect(false);
         BtnPengkajianInvasifNonBedahSMC.addActionListener(this::BtnPengkajianInvasifNonBedahSMCActionPerformed);
 
+        BtnPenilaianPasienTerminalSMC = new widget.Button();
+        BtnPenilaianPasienTerminalSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPenilaianPasienTerminalSMC.setText("Asesmen Awal & Ulang Pasien Terminal");
+        BtnPenilaianPasienTerminalSMC.setFocusPainted(false);
+        BtnPenilaianPasienTerminalSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPenilaianPasienTerminalSMC.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenilaianPasienTerminalSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenilaianPasienTerminalSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenilaianPasienTerminalSMC.setName("BtnPenilaianPasienTerminalSMC");
+        BtnPenilaianPasienTerminalSMC.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenilaianPasienTerminalSMC.setRoundRect(false);
+        BtnPenilaianPasienTerminalSMC.addActionListener(this::BtnPenilaianPasienTerminalSMCActionPerformed);
+
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");
 
@@ -11626,6 +11646,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         FormMenu.add(BtnPengkajianRestrain);
         FormMenu.add(BtnPenilaianBayiBaruLahir);
         FormMenu.add(BtnPenilaianPasienTerminal);
+        FormMenu.add(BtnPenilaianPasienTerminalSMC);
         FormMenu.add(BtnPenilaianKorbanKekerasan);
         FormMenu.add(BtnPenilaianKecemasanAnak);
         FormMenu.add(BtnPenilaianPasienPenyakitMenular);
@@ -12636,5 +12657,22 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
+    }
+
+    private void BtnPenilaianPasienTerminalSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianPasienTerminalSMC form=new RMPenilaianPasienTerminalSMC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }
 }

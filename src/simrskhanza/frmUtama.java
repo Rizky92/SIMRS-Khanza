@@ -1045,6 +1045,7 @@ import rekammedis.RMPenilaianPasienImunitasRendah;
 import rekammedis.RMPenilaianPasienKeracunan;
 import rekammedis.RMPenilaianPasienPenyakitMenular;
 import rekammedis.RMPenilaianPasienTerminal;
+import rekammedis.RMPenilaianPasienTerminalSMC;
 import rekammedis.RMPenilaianPreAnastesi;
 import rekammedis.RMPenilaianPreInduksi;
 import rekammedis.RMPenilaianPreOperasi;
@@ -51059,7 +51060,7 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2ApotekSmc, btnBPJSKirimObatApotekSmc, btnBPJSKirimEditObatApotekSmc, btnBPJSRiwayatPelayananResepApotekSmc, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
                              btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSmc,
-                             btnSetAturanPasswordSMC;
+                             btnSetAturanPasswordSMC, btnPenilaianPasienTerminalSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
@@ -51165,6 +51166,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengkajianInvasifNonBedahSmc.setName("btnPengkajianInvasifNonBedahSmc");
         btnPengkajianInvasifNonBedahSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengkajianInvasifNonBedahSmc.addActionListener(this::btnPengkajianInvasifNonBedahSmcActionPerformed);
+
+        btnPenilaianPasienTerminalSmc = new widget.ButtonBig();
+        btnPenilaianPasienTerminalSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141428_coronavirus_covid19_isolation_patient_coronavirus isolation_icon.png")));
+        btnPenilaianPasienTerminalSmc.setText("Asesmen Awal & Ulang Pasien Terminal");
+        btnPenilaianPasienTerminalSmc.setIconTextGap(0);
+        btnPenilaianPasienTerminalSmc.setName("btnPenilaianPasienTerminalSmc");
+        btnPenilaianPasienTerminalSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenilaianPasienTerminalSmc.addActionListener(this::btnPenilaianPasienTerminalSmcActionPerformed);
 
         btnPengajuanIzinAdminSmc = new widget.ButtonBig();
         btnPengajuanIzinAdminSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
@@ -51323,6 +51332,11 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
                 jmlmenu++;
             }
+
+            if (akses.getpenilaian_pasien_terminal()) {
+                Panelmenu.add(btnPenilaianPasienTerminalSmc);
+                jmlmenu++;
+            }
         } else if (cmbMenu.getSelectedIndex() == 20) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
@@ -51414,6 +51428,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getpenilaian_pasien_terminal()) {
+            Panelmenu.add(btnPenilaianPasienTerminalSmc);
             jmlmenu++;
         }
 
@@ -51543,6 +51562,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             if (btnPengkajianInvasifNonBedahSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getpenilaian_pasien_terminal()) {
+            if (btnPenilaianPasienTerminalSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPenilaianPasienTerminalSmc);
                 jmlmenu++;
             }
         }
@@ -51836,6 +51862,20 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         MasterTemplatePaketMCUSMC form = new MasterTemplatePaketMCUSMC(this, false);
+        form.isCek();
+        form.emptTeks();
+        form.setTampil();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPenilaianPasienTerminalSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMPenilaianPasienTerminalSMC form = new RMPenilaianPasienTerminalSMC(this, false);
         form.isCek();
         form.emptTeks();
         form.setTampil();

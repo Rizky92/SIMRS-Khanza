@@ -5172,6 +5172,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     menampilkanLaporanTindakan(rs.getString("no_rawat"));
                     menampilkanDokumentasiTindakanESWL(rs.getString("no_rawat"));
                     menampilkanPenilaianPasienTerminal(rs.getString("no_rawat"));
+                    menampilkanPenilaianPasienTerminalSmc(rs.getString("no_rawat"));
                     menampilkanPenilaianKorbanKekerasan(rs.getString("no_rawat"));
                     menampilkanPenilaianKecemasanRanapAnak(rs.getString("no_rawat"));
                     menampilkanPenilaianPasienPenyakitMenular(rs.getString("no_rawat"));
@@ -21978,7 +21979,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         "penilaian_pasien_terminal.kesadaran,penilaian_pasien_terminal.td,penilaian_pasien_terminal.nadi,penilaian_pasien_terminal.suhu,"+
                         "penilaian_pasien_terminal.rr,penilaian_pasien_terminal.spo2,penilaian_pasien_terminal.skala_nyeri,penilaian_pasien_terminal.tahap_pasien_menjelang_ajal,"+
                         "penilaian_pasien_terminal.tanda_klinis_menjelang_kematian,penilaian_pasien_terminal.kebutuhan_spiritual_pasien,penilaian_pasien_terminal.nip,petugas.nama "+
-                        "from penilaian_pasien_terminal inner join petugas on penilaian_pasien_terminal.nip=petugas.nip where penilaian_pasien_terminal.no_rawat='"+norawat+"'").executeQuery();
+                        //"from penilaian_pasien_terminal inner join petugas on penilaian_pasien_terminal.nip=petugas.nip where penilaian_pasien_terminal.no_rawat='"+norawat+"'").executeQuery();
+                        "from penilaian_pasien_terminal inner join petugas on penilaian_pasien_terminal.nip=petugas.nip where penilaian_pasien_terminal.no_rawat='"+norawat+"' "+
+                        "and not exists(select * from penilaian_pasien_terminal_smc where penilaian_pasien_terminal_smc.no_rawat=penilaian_pasien_terminal.no_rawat and penilaian_pasien_terminal_smc.tanggal=penilaian_pasien_terminal.tanggal)").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
                           "<tr class='isi'>").append(
@@ -22065,6 +22068,87 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         }catch (Exception e) {
             System.out.println("Notif Pengkajian Pasien Terminal : "+e);
         }
+    }
+
+    private void menampilkanPenilaianPasienTerminalSmc(String norawat) {
+        if (!chkPenilaianPasienTerminal.isSelected()) {
+            return;
+        }
+        try (PreparedStatement ps3 = koneksi.prepareStatement(
+            "select penilaian_pasien_terminal_smc.*, penilaian_pasien_terminal.skala_nyeri, petugas.nama, dokter.nm_dokter from penilaian_pasien_terminal_smc " +
+            "join penilaian_pasien_terminal on penilaian_pasien_terminal_smc.no_rawat = penilaian_pasien_terminal.no_rawat and penilaian_pasien_terminal_smc.tanggal = penilaian_pasien_terminal.tanggal " +
+            "join petugas on penilaian_pasien_terminal.nip = petugas.nip left join dokter on penilaian_pasien_terminal_smc.kd_dokter = dokter.kd_dokter " +
+            "where penilaian_pasien_terminal_smc.no_rawat = ? order by penilaian_pasien_terminal_smc.tanggal")) {
+            ps3.setString(1, norawat);
+            try (ResultSet rs3 = ps3.executeQuery()) {
+                if (rs3.next()) {
+                    htmlContent.append("<tr class='isi'><td valign='top' width='2%'></td><td valign='top' width='18%'>Asesmen Awal & Ulang Pasien Terminal</td>")
+                        .append("<td valign='top' width='1%' align='center'>:</td><td valign='top' width='79%'>")
+                        .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
+                    do {
+                        htmlContent.append("<tr><td valign='top'><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'><tr>")
+                            .append("<td width='20%' border='0'>Tanggal : ").append(rs3.getString("tanggal")).append("</td>")
+                            .append("<td width='20%' border='0'>Asesmen : ").append(rs3.getString("jenis_asesmen")).append("</td>")
+                            .append("<td width='20%' border='0'>Ruangan : ").append(rs3.getString("ruangan")).append("</td>")
+                            .append("<td width='20%' border='0'>Petugas : ").append(rs3.getString("nama")).append("</td>")
+                            .append("<td width='20%' border='0'>Dokter : ").append(rs3.getString("nm_dokter") == null ? "-" : rs3.getString("nm_dokter")).append("</td>")
+                            .append("</tr></table></td></tr>")
+                            .append("<tr><td valign='top'><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>");
+                            barisSmc(1, "Kegawatan Pernafasan", ceklistSmc(rs3, new String[] {"gejala_dyspneu", "gejala_nafas_cepat_dangkal", "gejala_nafas_tidak_teratur", "gejala_nafas_melalui_mulut", "gejala_ada_sekret", "gejala_spo2_kurang_90", "gejala_nafas_lambat", "gejala_mukosa_oral_kering"}, new String[] {"Dyspneu", "Nafas cepat dan dangkal", "Nafas tidak teratur", "Nafas melalui mulut", "Ada sekret", "SpO2 < 90 %", "Nafas lambat", "Mukosa oral kering"}));
+                            barisSmc(2, "Kehilangan Tonus Otot", gabungSmc(ceklistSmc(rs3, new String[] {"tonus_mual", "tonus_distended_abdomen", "tonus_sulit_menelan", "tonus_sulit_bicara"}, new String[] {"Mual", "Distended abdomen", "Sulit menelan", "Sulit bicara"}), rs3.getString("tonus_lainnya")));
+                            barisSmc(3, "Nyeri", gabungSmc(rs3.getString("nyeri"), rs3.getString("nyeri_keterangan"), labelSmc("Skala", rs3.getString("skala_nyeri")), labelSmc("Manajemen", rs3.getString("nyeri_manajemen"))));
+                            barisSmc(4, "Perlambatan Sirkulasi", ceklistSmc(rs3, new String[] {"sirkulasi_bercak_sianosis", "sirkulasi_td_menurun", "sirkulasi_gelisah", "sirkulasi_lemas", "sirkulasi_kulit_dingin"}, new String[] {"Bercak dan sianosis pada ekstremitas", "TD menurun, disertai nadi lambat dan lemah", "Gelisah", "Lemas", "Kulit dingin dan berkeringat"}));
+                            barisSmc(5, "Faktor Yang Meningkatkan & Membangkitkan Gejala Fisik", gabungSmc(ceklistSmc(rs3, new String[] {"faktor_aktivitas_fisik", "faktor_pindah_posisi"}, new String[] {"Melakukan aktivitas fisik", "Pindah posisi"}), rs3.getString("faktor_lainnya")));
+                            barisSmc(6, "Masalah Keperawatan", ceklistSmc(rs3, new String[] {"masalah_mual", "masalah_pola_nafas", "masalah_persepsi_sensori", "masalah_bersihan_jalan_nafas", "masalah_nyeri_akut", "masalah_defisit_perawatan_diri", "masalah_konstipasi", "masalah_nyeri_kronis"}, new String[] {"Mual", "Pola nafas tidak efektif", "Perubahan persepsi sensori", "Bersihan jalan nafas tidak efektif", "Nyeri akut", "Defisit perawatan diri", "Konstipasi", "Nyeri kronis"}));
+                            barisSmc(7, "Perlu Pelayanan Spiritual", gabungSmc(rs3.getString("pelayanan_spiritual"), labelSmc("Oleh", rs3.getString("pelayanan_spiritual_oleh"))));
+                            barisSmc(8, "Kebutuhan Spiritual", gabungSmc(labelSmc("Perlu Didoakan", rs3.getString("perlu_didoakan")), labelSmc("Perlu Bimbingan Rohani", rs3.getString("perlu_bimbingan_rohani")), labelSmc("Perlu Pendampingan Rohani", rs3.getString("perlu_pendampingan_rohani"))));
+                            barisSmc(9, "Ada Orang Yang Ingin Dihubungi", gabungSmc(rs3.getString("hubungi"), labelSmc("Siapa", rs3.getString("hubungi_nama")), labelSmc("Hubungan", rs3.getString("hubungi_hubungan")), labelSmc("Di Mana", rs3.getString("hubungi_alamat")), labelSmc("No.HP/Telp", rs3.getString("hubungi_telp"))));
+                            barisSmc(10, "Rencana Perawatan Selanjutnya", rs3.getString("rencana_perawatan"));
+                            barisSmc(11, "Lingkungan Rumah Sudah Dipersiapkan", gabungSmc(rs3.getString("lingkungan_siap"), labelSmc("Mampu Merawat", rs3.getString("mampu_merawat")), labelSmc("Oleh", rs3.getString("mampu_merawat_oleh")), labelSmc("Perlu Home Care", rs3.getString("perlu_home_care"))));
+                            barisSmc(12, "Reaksi Pasien Atas Penyakitnya", ceklistSmc(rs3, new String[] {"reaksi_pasien_menyangkal", "reaksi_pasien_sedih", "reaksi_pasien_marah", "reaksi_pasien_rasa_bersalah", "reaksi_pasien_takut", "reaksi_pasien_tidak_berdaya"}, new String[] {"Menyangkal", "Sedih", "Marah", "Rasa bersalah", "Takut", "Tidak berdaya"}));
+                            barisSmc(13, "Masalah Keperawatan Psikososial", ceklistSmc(rs3, new String[] {"masalah_anxietas", "masalah_distres_spiritual"}, new String[] {"Anxietas", "Distres spiritual"}));
+                            barisSmc(14, "Reaksi Keluarga Atas Penyakit Pasien", ceklistSmc(rs3, new String[] {"reaksi_keluarga_gangguan_tidur", "reaksi_keluarga_tidak_mampu_peran", "reaksi_keluarga_marah", "reaksi_keluarga_kurang_komunikasi", "reaksi_keluarga_letih", "reaksi_keluarga_rasa_bersalah"}, new String[] {"Gangguan tidur", "Ketidakmampuan memenuhi peran yang diharapkan", "Marah", "Keluarga kurang berkomunikasi dengan pasien", "Letih", "Rasa bersalah"}));
+                            barisSmc(15, "Kebutuhan Bantuan/Penundaan Pelayanan", gabungSmc(rs3.getString("bantuan_penundaan"), labelSmc("Alasan", rs3.getString("bantuan_penundaan_alasan"))));
+                            barisSmc(16, "Kebutuhan Layanan Alternatif (Rujuk)", gabungSmc(rs3.getString("layanan_alternatif"), labelSmc("Kemana", rs3.getString("layanan_alternatif_tujuan"))));
+                            barisSmc(17, "Faktor Risiko Bagi Yang Ditinggalkan", gabungSmc(ceklistSmc(rs3, new String[] {"risiko_dapat_menerima", "risiko_tidak_menerima", "risiko_pasrah"}, new String[] {"Dapat menerima", "Tidak menerima", "Pasrah"}), rs3.getString("risiko_lainnya")));
+                            barisSmc(18, "Rekomendasi Hasil Asesmen", rs3.getString("rekomendasi"));
+                        htmlContent.append("</table></td></tr>");
+                    } while (rs3.next());
+                    htmlContent.append("</table></td></tr>");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Asesmen Pasien Terminal : " + e);
+        }
+    }
+
+    private void barisSmc(int no, String label, String isi) {
+        htmlContent.append("<tr><td width='4%' border='0'>").append(no).append(".</td><td border='0' width='96%'>").append(label).append(" : ")
+            .append(isi == null || isi.isBlank() ? "-" : isi.replaceAll("(\r\n|\r|\n|\n\r)", "<br>")).append("</td></tr>");
+    }
+
+    private String ceklistSmc(ResultSet rs, String[] kolom, String[] label) throws java.sql.SQLException {
+        java.util.StringJoiner isi = new java.util.StringJoiner(", ");
+        for (int i = 0; i < kolom.length; i++) {
+            if ("Ya".equals(rs.getString(kolom[i]))) {
+                isi.add(label[i]);
+            }
+        }
+        return isi.toString();
+    }
+
+    private String labelSmc(String label, String isi) {
+        return isi == null || isi.isBlank() || "-".equals(isi) ? "" : label + " : " + isi;
+    }
+
+    private String gabungSmc(String... isi) {
+        java.util.StringJoiner hasil = new java.util.StringJoiner(", ");
+        for (String s : isi) {
+            if (s != null && !s.isBlank()) {
+                hasil.add(s);
+            }
+        }
+        return hasil.toString();
     }
 
     private void menampilkanPenilaianKorbanKekerasan(String norawat) {
