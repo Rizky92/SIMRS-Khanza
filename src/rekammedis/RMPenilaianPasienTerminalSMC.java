@@ -74,7 +74,7 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         setSize(628, 674);
 
         isian = new JComponent[] {
-            JenisAsesmen, Ruangan, ChkDyspneu, ChkNafasCepatDangkal, ChkNafasTidakTeratur, ChkNafasMelaluiMulut,
+            Ruangan, ChkDyspneu, ChkNafasCepatDangkal, ChkNafasTidakTeratur, ChkNafasMelaluiMulut,
             ChkAdaSekret, ChkSpO2Kurang90, ChkNafasLambat, ChkMukosaOralKering, ChkTonusMual, ChkDistendedAbdomen,
             ChkSulitMenelan, ChkSulitBicara, TonusLainnya, Nyeri, NyeriKeterangan, NyeriManajemen,
             ChkBercakSianosis, ChkTDMenurun, ChkGelisah, ChkLemas, ChkKulitDingin, ChkAktivitasFisik,
@@ -89,7 +89,7 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         };
 
         kolom = new String[] {
-            "jenis_asesmen", "ruangan", "gejala_dyspneu", "gejala_nafas_cepat_dangkal",
+            "ruangan", "gejala_dyspneu", "gejala_nafas_cepat_dangkal",
             "gejala_nafas_tidak_teratur", "gejala_nafas_melalui_mulut", "gejala_ada_sekret", "gejala_spo2_kurang_90",
             "gejala_nafas_lambat", "gejala_mukosa_oral_kering", "tonus_mual", "tonus_distended_abdomen",
             "tonus_sulit_menelan", "tonus_sulit_bicara", "tonus_lainnya", "nyeri",
@@ -110,7 +110,7 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         };
 
         tabMode = new DefaultTableModel(null, new Object[] {
-            "No.Rawat", "No.R.M.", "Nama Pasien", "Tgl.Lahir", "JK", "Tanggal", "Skala Nyeri", "NIP", "Petugas", "Asesmen", "Ruangan", "Kode Dokter", "Nama Dokter",
+            "No.Rawat", "No.R.M.", "Nama Pasien", "Tgl.Lahir", "JK", "Tanggal", "Skala Nyeri", "NIP", "Petugas", "Ruangan", "Kode Dokter", "Nama Dokter",
             "Dyspneu", "Nafas cepat dan dangkal", "Nafas tidak teratur", "Nafas melalui mulut", "Ada sekret",
             "SpO2 < 90 %", "Nafas lambat", "Mukosa oral kering", "Mual", "Distended abdomen",
             "Sulit menelan", "Sulit bicara", "Tonus Otot Lainnya", "Nyeri", "Ket. Nyeri",
@@ -151,12 +151,10 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
                 column.setPreferredWidth(124);
             } else if (i == 6) {
                 column.setPreferredWidth(60);
-            } else if (i == 7 || i == 11) {
+            } else if (i == 7 || i == 10) {
                 column.setPreferredWidth(85);
-            } else if (i == 8 || i == 12) {
+            } else if (i == 8 || i == 11) {
                 column.setPreferredWidth(150);
-            } else if (i == 9) {
-                column.setPreferredWidth(55);
             } else {
                 column.setPreferredWidth(110);
             }
@@ -221,8 +219,6 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         Menit = new widget.ComboBox();
         Detik = new widget.ComboBox();
         ChkKejadian = new widget.CekBox();
-        jLabel101 = new widget.Label();
-        JenisAsesmen = new widget.ComboBox();
         jLabel102 = new widget.Label();
         Ruangan = new widget.TextBox();
         jLabel18 = new widget.Label();
@@ -664,24 +660,14 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         FormInput.add(ChkKejadian);
         ChkKejadian.setBounds(373, 40, 23, 23);
 
-        jLabel101.setText("Asesmen :");
-        jLabel101.setName("jLabel101"); // NOI18N
-        FormInput.add(jLabel101);
-        jLabel101.setBounds(400, 40, 70, 23);
-
-        JenisAsesmen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Awal", "Ulang" }));
-        JenisAsesmen.setName("JenisAsesmen"); // NOI18N
-        FormInput.add(JenisAsesmen);
-        JenisAsesmen.setBounds(474, 40, 80, 23);
-
         jLabel102.setText("Ruangan :");
         jLabel102.setName("jLabel102"); // NOI18N
         FormInput.add(jLabel102);
-        jLabel102.setBounds(558, 40, 62, 23);
+        jLabel102.setBounds(400, 40, 70, 23);
 
         Ruangan.setName("Ruangan"); // NOI18N
         FormInput.add(Ruangan);
-        Ruangan.setBounds(624, 40, 165, 23);
+        Ruangan.setBounds(474, 40, 315, 23);
 
         jLabel18.setText("Petugas :");
         jLabel18.setName("jLabel18"); // NOI18N
@@ -1785,7 +1771,7 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
             String finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", nip);
             param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString() + "\nID " + (finger.isBlank() ? nip : finger) + "\n" + tanggal);
-            Object kddokter = tbObat.getValueAt(tbObat.getSelectedRow(), KOLOM_SMC + 2);
+            Object kddokter = tbObat.getValueAt(tbObat.getSelectedRow(), KOLOM_SMC + 1);
             param.put("fingerdokter", (kddokter == null || kddokter.toString().isBlank()) ? "" : Valid.fingerSmc(kddokter.toString(), tanggal));
             Valid.reportSmc("rptFormulirPenilaianPasienTerminalSMC.jasper", "report", "::[ Formulir Asesmen Awal dan Ulang Pasien Terminal dan Keluarganya ]::", param,
                 querySmc() + "where penilaian_pasien_terminal.no_rawat = ? and penilaian_pasien_terminal.tanggal = ?", norawat, tanggal);
@@ -1971,7 +1957,6 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
     private widget.TextBox HubungiTelp;
     private widget.TextBox JK;
     private widget.ComboBox Jam;
-    private widget.ComboBox JenisAsesmen;
     private widget.TextBox KdDokter;
     private widget.TextBox KdPetugas;
     private widget.Label LCount;
@@ -2014,7 +1999,6 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
-    private widget.Label jLabel101;
     private widget.Label jLabel102;
     private widget.Label jLabel103;
     private widget.Label jLabel106;
@@ -2105,8 +2089,8 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
                     for (int i = 0; i < kolom.length; i++) {
                         row[kolomTabel(i)] = rs.getString(kolom[i]);
                     }
-                    row[KOLOM_SMC + 2] = rs.getString("kd_dokter");
-                    row[KOLOM_SMC + 3] = rs.getString("nm_dokter");
+                    row[KOLOM_SMC + 1] = rs.getString("kd_dokter");
+                    row[KOLOM_SMC + 2] = rs.getString("nm_dokter");
                     SwingUtilities.invokeLater(() -> tabMode.addRow(row));
                 }
             }
@@ -2130,7 +2114,7 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
     }
 
     private int kolomTabel(int i) {
-        return i < 2 ? KOLOM_SMC + i : KOLOM_SMC + i + 2;
+        return i < 1 ? KOLOM_SMC + i : KOLOM_SMC + i + 2;
     }
 
     public void emptTeks() {
@@ -2139,7 +2123,6 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         for (JComponent c : isian) {
             isi(c, null);
         }
-        JenisAsesmen.setSelectedItem(jenisAsesmenSmc(TNoRw.getText(), null));
         Ruangan.setText(ruanganSmc(TNoRw.getText()));
         setDokterDefaultSmc(TNoRw.getText());
         ChkKejadian.setSelected(true);
@@ -2163,10 +2146,9 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
             for (int i = 0; i < isian.length; i++) {
                 isi(isian[i], tbObat.getValueAt(row, kolomTabel(i)));
             }
-            KdDokter.setText(teks(row, KOLOM_SMC + 2));
-            NmDokter.setText(teks(row, KOLOM_SMC + 3));
+            KdDokter.setText(teks(row, KOLOM_SMC + 1));
+            NmDokter.setText(teks(row, KOLOM_SMC + 2));
             if (null == tbObat.getValueAt(row, KOLOM_SMC)) {
-                JenisAsesmen.setSelectedItem(jenisAsesmenSmc(teks(row, 0), teks(row, 5)));
                 Ruangan.setText(ruanganSmc(teks(row, 0)));
                 setDokterDefaultSmc(teks(row, 0));
                 Nyeri.setSelectedItem("0".equals(teks(row, 6)) ? "Tidak" : "Ya");
@@ -2202,16 +2184,6 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         }
     }
 
-    private String jenisAsesmenSmc(String norawat, String tanggal) {
-        if (norawat.isBlank()) {
-            return "Awal";
-        }
-        if (tanggal == null) {
-            return Sequel.cariExistsSmc("select * from penilaian_pasien_terminal where penilaian_pasien_terminal.no_rawat = ?", norawat) ? "Ulang" : "Awal";
-        }
-        return Sequel.cariExistsSmc("select * from penilaian_pasien_terminal where penilaian_pasien_terminal.no_rawat = ? and penilaian_pasien_terminal.tanggal < ?", norawat, tanggal) ? "Ulang" : "Awal";
-    }
-
     private String ruanganSmc(String norawat) {
         if (norawat.isBlank()) {
             return "";
@@ -2241,7 +2213,6 @@ public final class RMPenilaianPasienTerminalSMC extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        JenisAsesmen.setSelectedItem(jenisAsesmenSmc(TNoRw.getText(), null));
         Ruangan.setText(ruanganSmc(TNoRw.getText()));
         setDokterDefaultSmc(TNoRw.getText());
     }

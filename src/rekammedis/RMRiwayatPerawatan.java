@@ -22087,11 +22087,10 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         .append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
                     do {
                         htmlContent.append("<tr><td valign='top'><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'><tr>")
-                            .append("<td width='20%' border='0'>Tanggal : ").append(rs3.getString("tanggal")).append("</td>")
-                            .append("<td width='20%' border='0'>Asesmen : ").append(rs3.getString("jenis_asesmen")).append("</td>")
-                            .append("<td width='20%' border='0'>Ruangan : ").append(rs3.getString("ruangan")).append("</td>")
-                            .append("<td width='20%' border='0'>Petugas : ").append(rs3.getString("nama")).append("</td>")
-                            .append("<td width='20%' border='0'>Dokter : ").append(rs3.getString("nm_dokter") == null ? "-" : rs3.getString("nm_dokter")).append("</td>")
+                            .append("<td width='25%' border='0'>Tanggal : ").append(rs3.getString("tanggal")).append("</td>")
+                            .append("<td width='25%' border='0'>Ruangan : ").append(rs3.getString("ruangan")).append("</td>")
+                            .append("<td width='25%' border='0'>Petugas : ").append(rs3.getString("nama")).append("</td>")
+                            .append("<td width='25%' border='0'>Dokter : ").append(rs3.getString("nm_dokter") == null ? "-" : rs3.getString("nm_dokter")).append("</td>")
                             .append("</tr></table></td></tr>")
                             .append("<tr><td valign='top'><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>");
                             barisSmc(1, "Kegawatan Pernafasan", ceklistSmc(rs3, new String[] {"gejala_dyspneu", "gejala_nafas_cepat_dangkal", "gejala_nafas_tidak_teratur", "gejala_nafas_melalui_mulut", "gejala_ada_sekret", "gejala_spo2_kurang_90", "gejala_nafas_lambat", "gejala_mukosa_oral_kering"}, new String[] {"Dyspneu", "Nafas cepat dan dangkal", "Nafas tidak teratur", "Nafas melalui mulut", "Ada sekret", "SpO2 < 90 %", "Nafas lambat", "Mukosa oral kering"}));

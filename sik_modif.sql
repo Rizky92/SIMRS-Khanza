@@ -1563,7 +1563,6 @@ ALTER TABLE `penilaian_pasien_terminal` DROP PRIMARY KEY, ADD PRIMARY KEY (`no_r
 CREATE TABLE IF NOT EXISTS `penilaian_pasien_terminal_smc`  (
   `no_rawat` varchar(17) NOT NULL,
   `tanggal` datetime NOT NULL,
-  `jenis_asesmen` enum('Awal','Ulang') NOT NULL DEFAULT 'Awal',
   `ruangan` varchar(100) NOT NULL DEFAULT '',
   `kd_dokter` varchar(20) NULL DEFAULT NULL,
   `gejala_dyspneu` enum('Tidak','Ya') NOT NULL DEFAULT 'Tidak',
