@@ -696,6 +696,8 @@ CREATE TABLE IF NOT EXISTS `jns_perawatan_radiologi_modality_smc`  (
 
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
 
+ALTER TABLE `laporan_tindakan` ADD COLUMN IF NOT EXISTS `waktu_selesai` datetime NULL DEFAULT NULL AFTER `kesimpulan`;
+
 CREATE TABLE IF NOT EXISTS `lis_orderlab`  (
   `vendor` varchar(20) NOT NULL,
   `noorder` varchar(20) NOT NULL,
