@@ -1281,6 +1281,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("template_pelaksanaan_informasi_edukasi", "[M] Master Template Informasi & Edukasi");
         namaakses.put("template_laporan_operasi", "[M] Master Template Laporan Operasi");
         namaakses.put("template_pemeriksaan", "[M] Master Template Pemeriksaan");
+        namaakses.put("template_umum_smc", "[M] Master Template Umum");
         namaakses.put("master_triase_macamkasus", "[M] Master Triase Macam Kasus");
         namaakses.put("master_triase_pemeriksaan", "[M] Master Triase Pemeriksaan");
         namaakses.put("master_triase_skala1", "[M] Master Triase Skala 1");

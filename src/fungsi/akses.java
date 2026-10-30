@@ -295,7 +295,8 @@ public final class akses {
         template_paket_mcu_smc = false,
         master_template_paket_mcu_smc = false,
         hapus_permintaan_lab_smc = false,
-        hapus_permintaan_radiologi_smc = false;
+        hapus_permintaan_radiologi_smc = false,
+        template_umum_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1575,6 +1576,7 @@ public final class akses {
                         akses.master_template_paket_mcu_smc=akses.getBoolean(rs2, "master_template_paket_mcu_smc");
                         akses.hapus_permintaan_lab_smc=akses.getBoolean(rs2, "hapus_permintaan_lab_smc");
                         akses.hapus_permintaan_radiologi_smc=akses.getBoolean(rs2, "hapus_permintaan_radiologi_smc");
+                        akses.template_umum_smc=akses.getBoolean(rs2, "template_umum_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2859,6 +2861,7 @@ public final class akses {
         akses.master_template_paket_mcu_smc=isadmin;
         hapus_permintaan_lab_smc=isadmin;
         hapus_permintaan_radiologi_smc=isadmin;
+        akses.template_umum_smc=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4146,6 +4149,7 @@ public final class akses {
     public static boolean getmaster_template_paket_mcu_smc(){return akses.master_template_paket_mcu_smc;}
     public static boolean gethapus_permintaan_lab_smc(){return akses.hapus_permintaan_lab_smc;}
     public static boolean gethapus_permintaan_radiologi_smc(){return akses.hapus_permintaan_radiologi_smc;}
+    public static boolean gettemplate_umum_smc(){return akses.template_umum_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {
         akses.edit = false;

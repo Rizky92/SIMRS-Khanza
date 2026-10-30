@@ -908,6 +908,7 @@ import rekammedis.MasterTemplateHasilRadiologi;
 import rekammedis.MasterTemplateInformasiEdukasi;
 import rekammedis.MasterTemplateLaporanOperasi;
 import rekammedis.MasterTemplatePemeriksaanDokter;
+import rekammedis.MasterTemplateUmumSMC;
 import rekammedis.MasterTriaseMacamKasus;
 import rekammedis.MasterTriasePemeriksaan;
 import rekammedis.MasterTriaseSkala1;
@@ -51059,7 +51060,7 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2ApotekSmc, btnBPJSKirimObatApotekSmc, btnBPJSKirimEditObatApotekSmc, btnBPJSRiwayatPelayananResepApotekSmc, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
                              btnPengkajianInvasifNonBedahSmc, btnPengajuanIzinAdminSmc, btnJadwalDinasSmc, btnJadwalDinasPegawaiSmc, btnRekapKehadiranSmc, btnIPSRSStokAkhirPerTanggalSmc, btnTemplatePaketMCUSmc,
-                             btnSetAturanPasswordSMC;
+                             btnSetAturanPasswordSMC, btnTemplateUmumSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaimSmc = new widget.ButtonBig();
@@ -51165,6 +51166,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengkajianInvasifNonBedahSmc.setName("btnPengkajianInvasifNonBedahSmc");
         btnPengkajianInvasifNonBedahSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPengkajianInvasifNonBedahSmc.addActionListener(this::btnPengkajianInvasifNonBedahSmcActionPerformed);
+
+        btnTemplateUmumSmc = new widget.ButtonBig();
+        btnTemplateUmumSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/templatepemeriksaan.png")));
+        btnTemplateUmumSmc.setText("Master Template Form Umum Per Dokter");
+        btnTemplateUmumSmc.setIconTextGap(0);
+        btnTemplateUmumSmc.setName("btnTemplateUmumSmc");
+        btnTemplateUmumSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnTemplateUmumSmc.addActionListener(this::btnTemplateUmumSmcActionPerformed);
 
         btnPengajuanIzinAdminSmc = new widget.ButtonBig();
         btnPengajuanIzinAdminSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reminders_3572.png")));
@@ -51323,6 +51332,11 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
                 jmlmenu++;
             }
+
+            if (akses.gettemplate_umum_smc()) {
+                Panelmenu.add(btnTemplateUmumSmc);
+                jmlmenu++;
+            }
         } else if (cmbMenu.getSelectedIndex() == 20) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
@@ -51414,6 +51428,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
+            jmlmenu++;
+        }
+
+        if (akses.gettemplate_umum_smc()) {
+            Panelmenu.add(btnTemplateUmumSmc);
             jmlmenu++;
         }
 
@@ -51543,6 +51562,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getpengkajian_tindakan_invasif_non_bedah_smc()) {
             if (btnPengkajianInvasifNonBedahSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPengkajianInvasifNonBedahSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.gettemplate_umum_smc()) {
+            if (btnTemplateUmumSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnTemplateUmumSmc);
                 jmlmenu++;
             }
         }
@@ -51765,6 +51791,19 @@ public class frmUtama extends javax.swing.JFrame {
         form.isCek();
         form.emptTeks();
         form.setTampil();
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnTemplateUmumSmcActionPerformed(ActionEvent e) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        MasterTemplateUmumSMC form = new MasterTemplateUmumSMC(this, false);
+        form.isCek();
+        form.emptTeks();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
