@@ -180,6 +180,7 @@ import rekammedis.RMPenilaianPasienImunitasRendah;
 import rekammedis.RMPenilaianPasienKeracunan;
 import rekammedis.RMPenilaianPasienPenyakitMenular;
 import rekammedis.RMPenilaianPasienTerminal;
+import rekammedis.RMPenilaianPasienTerminalSMC;
 import rekammedis.RMPenilaianPreAnastesi;
 import rekammedis.RMPenilaianPreInduksi;
 import rekammedis.RMPenilaianPreOperasi;
@@ -11157,7 +11158,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnSOAPDokter,MnSOAPPetugas,MnCopySOAP,MnPasteSOAP;
 
-    private widget.Button BtnPengkajianInvasifNonBedahSmc, BtnCariTemplatePaketMCUSmc;
+    private widget.Button BtnPengkajianInvasifNonBedahSmc, BtnCariTemplatePaketMCUSmc, BtnPenilaianPasienTerminalSMC;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -12161,6 +12162,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         BtnPengkajianInvasifNonBedahSmc.setVisible(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
         if(akses.getpengkajian_tindakan_invasif_non_bedah_smc()==true){
+            tinggi=tinggi+24;
+        }
+
+        BtnPenilaianPasienTerminalSMC.setVisible(akses.getpenilaian_pasien_terminal());
+        if(akses.getpenilaian_pasien_terminal()==true){
             tinggi=tinggi+24;
         }
         BtnCariTemplatePaketMCUSmc.setVisible(akses.gettemplate_paket_mcu_smc());
@@ -14522,6 +14528,19 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPengkajianInvasifNonBedahSmc.setRoundRect(false);
         BtnPengkajianInvasifNonBedahSmc.addActionListener(this::BtnPengkajianInvasifNonBedahSmcActionPerformed);
 
+        BtnPenilaianPasienTerminalSMC = new widget.Button();
+        BtnPenilaianPasienTerminalSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPenilaianPasienTerminalSMC.setText("Asesmen Awal & Ulang Pasien Terminal");
+        BtnPenilaianPasienTerminalSMC.setFocusPainted(false);
+        BtnPenilaianPasienTerminalSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPenilaianPasienTerminalSMC.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenilaianPasienTerminalSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenilaianPasienTerminalSMC.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenilaianPasienTerminalSMC.setName("BtnPenilaianPasienTerminalSMC");
+        BtnPenilaianPasienTerminalSMC.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenilaianPasienTerminalSMC.setRoundRect(false);
+        BtnPenilaianPasienTerminalSMC.addActionListener(this::BtnPenilaianPasienTerminalSMCActionPerformed);
+
         BtnCariTemplatePaketMCUSmc = new widget.Button();
         BtnCariTemplatePaketMCUSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnCariTemplatePaketMCUSmc.setText("Template Paket MCU");
@@ -14707,6 +14726,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         FormMenu.add(BtnPengkajianRestrain);
         FormMenu.add(BtnPenilaianBayiBaruLahir);
         FormMenu.add(BtnPenilaianPasienTerminal);
+        FormMenu.add(BtnPenilaianPasienTerminalSMC);
         FormMenu.add(BtnPenilaianKorbanKekerasan);
         FormMenu.add(BtnPenilaianPasienPenyakitMenular);
         FormMenu.add(BtnPenilaianPasienImunitasRendah);
@@ -14973,5 +14993,22 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
+    }
+
+    private void BtnPenilaianPasienTerminalSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianPasienTerminalSMC form=new RMPenilaianPasienTerminalSMC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }
 }

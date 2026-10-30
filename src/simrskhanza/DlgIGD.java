@@ -167,6 +167,7 @@ import rekammedis.RMPenilaianPasienImunitasRendah;
 import rekammedis.RMPenilaianPasienKeracunan;
 import rekammedis.RMPenilaianPasienPenyakitMenular;
 import rekammedis.RMPenilaianPasienTerminal;
+import rekammedis.RMPenilaianPasienTerminalSMC;
 import rekammedis.RMPenilaianPreAnastesi;
 import rekammedis.RMPenilaianPreInduksi;
 import rekammedis.RMPenilaianPreOperasi;
@@ -12934,6 +12935,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private javax.swing.JMenu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
     private javax.swing.JMenuItem MnPengkajianInvasifNonBedahSMC;
+    private javax.swing.JMenuItem MnPenilaianPasienTerminalSMC;
 
     /*
     private void tampil() {
@@ -13483,6 +13485,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPermintaanKonsultasiPerawat.setEnabled(akses.getkonsultasi_perawat());
 
         MnPengkajianInvasifNonBedahSMC.setEnabled(akses.getpengkajian_tindakan_invasif_non_bedah_smc());
+        MnPenilaianPasienTerminalSMC.setEnabled(akses.getpenilaian_pasien_terminal());
     }
 
     private void isNumber(){
@@ -13696,6 +13699,18 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPengkajianInvasifNonBedahSMC.setName("MnPengkajianInvasifNonBedahSMC");
         MnPengkajianInvasifNonBedahSMC.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPengkajianInvasifNonBedahSMC.addActionListener(this::MnPengkajianInvasifNonBedahSMCActionPerformed);
+
+        MnPenilaianPasienTerminalSMC = new javax.swing.JMenuItem();
+        MnPenilaianPasienTerminalSMC.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianPasienTerminalSMC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPenilaianPasienTerminalSMC.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianPasienTerminalSMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPenilaianPasienTerminalSMC.setText("Asesmen Awal & Ulang Pasien Terminal");
+        MnPenilaianPasienTerminalSMC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianPasienTerminalSMC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianPasienTerminalSMC.setName("MnPenilaianPasienTerminalSMC");
+        MnPenilaianPasienTerminalSMC.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianPasienTerminalSMC.addActionListener(this::MnPenilaianPasienTerminalSMCActionPerformed);
 
         MnHasilPemeriksaanEKG = new javax.swing.JMenuItem();
         MnHasilPemeriksaanEKG.setBackground(new java.awt.Color(255, 255, 254));
@@ -14699,6 +14714,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPenilaianLain.add(MnPenilaianTambahanPerilakuKekerasan);
         MnPenilaianLain.add(MnPenilaianTambahanMelarikanDiri);
         MnPenilaianLain.add(MnPenilaianPasienTerminal);
+        MnPenilaianLain.add(MnPenilaianPasienTerminalSMC);
         MnPenilaianLain.add(MnPenilaianKorbanKekerasan);
         MnPenilaianLain.add(MnPenilaianPasienPenyakitMenular);
         MnPenilaianLain.add(MnPenilaianPasienImunitasRendah);
@@ -14910,6 +14926,28 @@ public final class DlgIGD extends javax.swing.JDialog {
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMPenilaianTindakanInvasifNonBedahSMC form=new RMPenilaianTindakanInvasifNonBedahSMC(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnPenilaianPasienTerminalSMCActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMPenilaianPasienTerminalSMC form=new RMPenilaianPasienTerminalSMC(null,false);
                 form.isCek();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
