@@ -2214,6 +2214,19 @@ CREATE TABLE IF NOT EXISTS `template_paket_mcu_smc_tindakan_pr`  (
   CONSTRAINT `template_paket_mcu_smc_tindakan_pr_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `template_umum_smc`  (
+  `no_template` varchar(5) NOT NULL,
+  `menu` varchar(50) NOT NULL,
+  `field` varchar(50) NOT NULL,
+  `kd_dokter` varchar(20) NULL DEFAULT NULL,
+  `nama_template` varchar(100) NOT NULL,
+  `isi_template` text NOT NULL,
+  PRIMARY KEY (`no_template`,`menu`,`field`) USING BTREE,
+  INDEX `menu`(`menu`,`field`) USING BTREE,
+  INDEX `kd_dokter`(`kd_dokter`) USING BTREE,
+  CONSTRAINT `template_umum_smc_ibfk_1` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `temporary` DROP INDEX IF EXISTS `no`;
 
 ALTER TABLE `temporary_bayar_ralan` DROP INDEX IF EXISTS `no`;
@@ -2366,6 +2379,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `master_template_paket_mcu_smc` enum
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_lab_smc` enum('true','false') NULL DEFAULT NULL AFTER `master_template_paket_mcu_smc`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `hapus_permintaan_radiologi_smc` enum('true','false') NULL DEFAULT NULL AFTER `hapus_permintaan_lab_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `template_umum_smc` enum('true','false') NULL DEFAULT NULL AFTER `hapus_permintaan_radiologi_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 

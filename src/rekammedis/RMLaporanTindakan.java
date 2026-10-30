@@ -36,6 +36,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
@@ -222,6 +223,10 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         DIagnosaPaskaTindakan = new widget.TextBox();
         DiagnosaPraTindakan = new widget.TextBox();
         jLabel41 = new widget.Label();
+        BtnTemplateTindakanMedisSmc = new widget.Button();
+        BtnTemplateUraianSmc = new widget.Button();
+        BtnTemplateHasilSmc = new widget.Button();
+        BtnTemplateKesimpulanSmc = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -443,7 +448,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         scrollPane9.setViewportView(UraianTindakan);
 
         FormInput.add(scrollPane9);
-        scrollPane9.setBounds(44, 220, 810, 243);
+        scrollPane9.setBounds(44, 220, 779, 243);
 
         jLabel101.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel101.setText("II. TINDAKAN MEDIS");
@@ -466,7 +471,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         scrollPane12.setViewportView(HasilTindakan);
 
         FormInput.add(scrollPane12);
-        scrollPane12.setBounds(44, 490, 810, 163);
+        scrollPane12.setBounds(44, 490, 779, 163);
 
         jLabel102.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel102.setText("III. URAIAN TINDAKAN MEDIS");
@@ -489,7 +494,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         scrollPane13.setViewportView(Kesimpulan);
 
         FormInput.add(scrollPane13);
-        scrollPane13.setBounds(44, 680, 810, 163);
+        scrollPane13.setBounds(44, 680, 779, 163);
 
         jLabel103.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel103.setText("IV. HASIL");
@@ -518,7 +523,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         scrollPane6.setViewportView(TindakanMedis);
 
         FormInput.add(scrollPane6);
-        scrollPane6.setBounds(44, 140, 810, 53);
+        scrollPane6.setBounds(44, 140, 779, 53);
 
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -738,6 +743,54 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         jLabel41.setName("jLabel41"); // NOI18N
         FormInput.add(jLabel41);
         jLabel41.setBounds(44, 90, 110, 23);
+
+        BtnTemplateTindakanMedisSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateTindakanMedisSmc.setToolTipText("Template Tindakan Medis");
+        BtnTemplateTindakanMedisSmc.setName("BtnTemplateTindakanMedisSmc"); // NOI18N
+        BtnTemplateTindakanMedisSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateTindakanMedisSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateTindakanMedisSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateTindakanMedisSmc);
+        BtnTemplateTindakanMedisSmc.setBounds(826, 140, 28, 23);
+
+        BtnTemplateUraianSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateUraianSmc.setToolTipText("Template Uraian Tindakan Medis");
+        BtnTemplateUraianSmc.setName("BtnTemplateUraianSmc"); // NOI18N
+        BtnTemplateUraianSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateUraianSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateUraianSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateUraianSmc);
+        BtnTemplateUraianSmc.setBounds(826, 220, 28, 23);
+
+        BtnTemplateHasilSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateHasilSmc.setToolTipText("Template Hasil");
+        BtnTemplateHasilSmc.setName("BtnTemplateHasilSmc"); // NOI18N
+        BtnTemplateHasilSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateHasilSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateHasilSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateHasilSmc);
+        BtnTemplateHasilSmc.setBounds(826, 490, 28, 23);
+
+        BtnTemplateKesimpulanSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnTemplateKesimpulanSmc.setToolTipText("Template Kesimpulan");
+        BtnTemplateKesimpulanSmc.setName("BtnTemplateKesimpulanSmc"); // NOI18N
+        BtnTemplateKesimpulanSmc.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTemplateKesimpulanSmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateKesimpulanSmcActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTemplateKesimpulanSmc);
+        BtnTemplateKesimpulanSmc.setBounds(826, 680, 28, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1206,6 +1259,22 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         Valid.pindah(evt,BtnPetugas,TglAsuhan);
     }//GEN-LAST:event_BtnDokterKeyPressed
 
+    private void BtnTemplateTindakanMedisSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateTindakanMedisSmcActionPerformed
+        tampilTemplateSmc("tindakan_medik", TindakanMedis, 300);
+    }//GEN-LAST:event_BtnTemplateTindakanMedisSmcActionPerformed
+
+    private void BtnTemplateUraianSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateUraianSmcActionPerformed
+        tampilTemplateSmc("uraian", UraianTindakan, 3000);
+    }//GEN-LAST:event_BtnTemplateUraianSmcActionPerformed
+
+    private void BtnTemplateHasilSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateHasilSmcActionPerformed
+        tampilTemplateSmc("hasil", HasilTindakan, 1000);
+    }//GEN-LAST:event_BtnTemplateHasilSmcActionPerformed
+
+    private void BtnTemplateKesimpulanSmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateKesimpulanSmcActionPerformed
+        tampilTemplateSmc("kesimpulan", Kesimpulan, 500);
+    }//GEN-LAST:event_BtnTemplateKesimpulanSmcActionPerformed
+
     private void DIagnosaPaskaTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DIagnosaPaskaTindakanKeyPressed
         Valid.pindah(evt,DiagnosaPraTindakan,TindakanMedis);
     }//GEN-LAST:event_DIagnosaPaskaTindakanKeyPressed
@@ -1266,6 +1335,10 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
     private widget.Button BtnPetugas;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnTemplateHasilSmc;
+    private widget.Button BtnTemplateKesimpulanSmc;
+    private widget.Button BtnTemplateTindakanMedisSmc;
+    private widget.Button BtnTemplateUraianSmc;
     private widget.TextBox DIagnosaPaskaTindakan;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
@@ -1548,6 +1621,30 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
         }
+    }
+
+    private void tampilTemplateSmc(String field, JTextComponent teks, int batas) {
+        MasterCariTemplateUmumSMC template = new MasterCariTemplateUmumSMC(null, false);
+        template.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (template.getTable().getSelectedRow() != -1) {
+                    if (template.melebihiBatas()) {
+                        JOptionPane.showMessageDialog(null, "Template melebihi batas " + batas + " karakter, template tidak dimasukkan..!!");
+                    } else {
+                        teks.setText(template.getIsiTemplate());
+                    }
+                }
+                teks.requestFocus();
+            }
+        });
+        template.setTemplate("RMLaporanTindakan", field, KdDokter.getText());
+        template.setBatas(batas);
+        template.isCek();
+        template.emptTeks();
+        template.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        template.setLocationRelativeTo(internalFrame1);
+        template.setVisible(true);
     }
 
     private void runBackground(Runnable task) {
