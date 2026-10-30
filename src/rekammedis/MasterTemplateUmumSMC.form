@@ -484,7 +484,7 @@
             </Component>
             <Component class="widget.Label" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Template :"/>
+                <Property name="text" type="java.lang.String" value="Isi :"/>
                 <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
               </Properties>
               <Constraints>

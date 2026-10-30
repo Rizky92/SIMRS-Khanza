@@ -1540,30 +1540,6 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         isRawat();
     }
 
-    private void tampilTemplateSmc(String field, JTextComponent teks, int batas) {
-        MasterCariTemplateUmumSMC template = new MasterCariTemplateUmumSMC(null, false);
-        template.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (template.getTable().getSelectedRow() != -1) {
-                    if (template.isMelebihiBatas()) {
-                        JOptionPane.showMessageDialog(null, "Template melebihi batas " + batas + " karakter, template tidak dimasukkan..!!");
-                    } else {
-                        teks.setText(template.getIsiTemplate());
-                    }
-                }
-                teks.requestFocus();
-            }
-        });
-        template.setTemplate("RMLaporanTindakan", field, KdDokter.getText());
-        template.setBatas(batas);
-        template.isCek();
-        template.emptTeks();
-        template.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        template.setLocationRelativeTo(internalFrame1);
-        template.setVisible(true);
-    }
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getlaporan_tindakan());
         BtnHapus.setEnabled(akses.getlaporan_tindakan());
@@ -1645,6 +1621,30 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
         }
+    }
+
+    private void tampilTemplateSmc(String field, JTextComponent teks, int batas) {
+        MasterCariTemplateUmumSMC template = new MasterCariTemplateUmumSMC(null, false);
+        template.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (template.getTable().getSelectedRow() != -1) {
+                    if (template.melebihiBatas()) {
+                        JOptionPane.showMessageDialog(null, "Template melebihi batas " + batas + " karakter, template tidak dimasukkan..!!");
+                    } else {
+                        teks.setText(template.getIsiTemplate());
+                    }
+                }
+                teks.requestFocus();
+            }
+        });
+        template.setTemplate("RMLaporanTindakan", field, KdDokter.getText());
+        template.setBatas(batas);
+        template.isCek();
+        template.emptTeks();
+        template.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        template.setLocationRelativeTo(internalFrame1);
+        template.setVisible(true);
     }
 
     private void runBackground(Runnable task) {

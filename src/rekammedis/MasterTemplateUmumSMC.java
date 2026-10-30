@@ -454,7 +454,7 @@ public class MasterTemplateUmumSMC extends javax.swing.JDialog {
         panelGlass7.add(namaTemplate);
         namaTemplate.setBounds(93, 70, 577, 23);
 
-        jLabel8.setText("Template :");
+        jLabel8.setText("Isi :");
         jLabel8.setName("jLabel8"); // NOI18N
         panelGlass7.add(jLabel8);
         jLabel8.setBounds(0, 100, 90, 23);

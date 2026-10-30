@@ -240,7 +240,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
         if (tabMode.getRowCount() != 0) {
             if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 getData();
-                if (isMelebihiBatas()) {
+                if (melebihiBatas()) {
                     JOptionPane.showMessageDialog(null, "Template melebihi batas " + batas + " karakter..!!");
                 } else {
                     dispose();
@@ -462,7 +462,7 @@ public class MasterCariTemplateUmumSMC extends javax.swing.JDialog {
         return Template.getText();
     }
 
-    public boolean isMelebihiBatas() {
+    public boolean melebihiBatas() {
         return Template.getText().length() > batas;
     }
 
