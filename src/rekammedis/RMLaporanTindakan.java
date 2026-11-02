@@ -612,7 +612,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(0, 10, 70, 23);
 
-        label11.setText("Tanggal :");
+        label11.setText("Waktu Mulai :");
         label11.setName("label11"); // NOI18N
         label11.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label11);
