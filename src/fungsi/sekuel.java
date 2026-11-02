@@ -91,6 +91,10 @@ public final class sekuel {
     }
 
     public boolean cekTanggalRegistrasiSmc(String noRawat, Date tgl) {
+        if (!sekuel.pemberlakuanBatasEdit) {
+            return true;
+        }
+
         Date tglRegist = cariTglSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -107,6 +111,10 @@ public final class sekuel {
     }
 
     public boolean cekTanggalRegistrasiSmc(String noRawat, String tgl) {
+        if (!sekuel.pemberlakuanBatasEdit) {
+            return true;
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date tglRegist = cariTglSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat),
             tglKegiatan = null;

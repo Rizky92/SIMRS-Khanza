@@ -34170,7 +34170,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 try {
                     rs2=koneksi.prepareStatement(
                             "select laporan_tindakan.tanggal,laporan_tindakan.nip,petugas.nama,laporan_tindakan.kd_dokter,dokter.nm_dokter,laporan_tindakan.diagnosa_pra_tindakan,laporan_tindakan.diagnosa_pasca_tindakan,"+
-                            "laporan_tindakan.tindakan_medik,laporan_tindakan.uraian,laporan_tindakan.hasil,laporan_tindakan.kesimpulan from laporan_tindakan inner join dokter on laporan_tindakan.kd_dokter=dokter.kd_dokter "+
+                            "laporan_tindakan.tindakan_medik,laporan_tindakan.uraian,laporan_tindakan.hasil,laporan_tindakan.kesimpulan,ifnull(laporan_tindakan.waktu_selesai,'-') as waktu_selesai from laporan_tindakan inner join dokter on laporan_tindakan.kd_dokter=dokter.kd_dokter "+
                             "inner join petugas on laporan_tindakan.nip=petugas.nip where laporan_tindakan.no_rawat='"+norawat+"' order by laporan_tindakan.tanggal").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
@@ -34189,8 +34189,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
                                           "<tr>").append(
                                               "<td width='20%' border='0'>Tanggal : ").append(rs2.getString("tanggal")).append("</td>").append(
-                                              "<td width='40%' border='0'>Dokter : ").append(rs2.getString("kd_dokter")).append(" ").append(rs2.getString("nm_dokter")).append("</td>").append(
-                                              "<td width='40%' border='0'>Asisten : ").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                              "<td width='20%' border='0'>Waktu Selesai : ").append(rs2.getString("waktu_selesai")).append("</td>").append(
+                                              "<td width='30%' border='0'>Dokter : ").append(rs2.getString("kd_dokter")).append(" ").append(rs2.getString("nm_dokter")).append("</td>").append(
+                                              "<td width='30%' border='0'>Asisten : ").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                           "</tr>").append(
                                        "</table>").append(
                                     "</td>").append(
