@@ -11,6 +11,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -270,6 +272,50 @@ public class Table extends JTable {
             }
         }
         return false;
+    }
+
+    @Override
+    public Point getPopupLocation(MouseEvent e) {
+        if (null != e) {
+            selectCellAt(e.getPoint());
+            super.processMouseEvent(e);
+            super.processMouseEvent(new MouseEvent(this, MouseEvent.MOUSE_CLICKED, e.getWhen(), e.getModifiersEx() & ~InputEvent.BUTTON3_DOWN_MASK, e.getX(), e.getY(), e.getXOnScreen(), e.getYOnScreen(), e.getClickCount(), false, MouseEvent.BUTTON3));
+        }
+        return super.getPopupLocation(e);
+    }
+
+    @Override
+    protected void processMouseEvent(MouseEvent e) {
+        if (MouseEvent.BUTTON3 == e.getButton()) {
+            if (MouseEvent.MOUSE_PRESSED == e.getID()) {
+                selectCellAt(e.getPoint());
+            }
+            if (null != getComponentPopupMenu()) {
+                if (MouseEvent.MOUSE_CLICKED == e.getID()) {
+                    return;
+                }
+                if (e.isPopupTrigger()) {
+                    if (!e.isConsumed()) {
+                        Point pt = getPopupLocation(e);
+                        if (null == pt) {
+                            pt = e.getPoint();
+                        }
+                        getComponentPopupMenu().show(this, pt.x, pt.y);
+                        e.consume();
+                    }
+                    return;
+                }
+            }
+        }
+        super.processMouseEvent(e);
+    }
+
+    private void selectCellAt(Point p) {
+        int r = rowAtPoint(p);
+        int c = columnAtPoint(p);
+        if (r != -1 && c != -1) {
+            changeSelection(r, c, false, false);
+        }
     }
 
     private static class HeaderFlat extends DefaultTableCellRenderer {

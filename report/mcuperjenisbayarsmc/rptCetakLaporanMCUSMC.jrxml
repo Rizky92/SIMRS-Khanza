@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptCetakLaporanMCUSMC" pageWidth="595" pageHeight="842" sectionType="Part" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" uuid="34c13d5a-cd6b-451e-8001-9fd298d2274a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LOCALHOST UPD"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="finger" class="java.lang.String"/>
+	<parameter name="norawat" class="java.lang.String"/>
+	<parameter name="logobytes" class="byte[]" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{logo} == null ? null : net.sf.jasperreports.engine.util.JRLoader.loadBytes($P{logo})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="baseurl" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select 1 as urutan, 'MCU' as jenis, null as tgl_periksa, null as jam, null as noorder from penilaian_mcu where penilaian_mcu.no_rawat = $P{norawat}
+                union all
+                select distinct 2, 'PK', date_format(periksa_lab.tgl_periksa, '%Y-%m-%d'), date_format(periksa_lab.jam, '%H:%i:%s'),
+                (select permintaan_lab.noorder from permintaan_lab where permintaan_lab.no_rawat = periksa_lab.no_rawat and permintaan_lab.tgl_hasil = periksa_lab.tgl_periksa and permintaan_lab.jam_hasil = periksa_lab.jam limit 1)
+                from periksa_lab where periksa_lab.no_rawat = $P{norawat} and periksa_lab.kategori = 'PK'
+                union all
+                select distinct 3, 'PA', date_format(periksa_lab.tgl_periksa, '%Y-%m-%d'), date_format(periksa_lab.jam, '%H:%i:%s'),
+                (select permintaan_labpa.noorder from permintaan_labpa where permintaan_labpa.no_rawat = periksa_lab.no_rawat and permintaan_labpa.tgl_hasil = periksa_lab.tgl_periksa and permintaan_labpa.jam_hasil = periksa_lab.jam limit 1)
+                from periksa_lab where periksa_lab.no_rawat = $P{norawat} and periksa_lab.kategori = 'PA'
+                union all
+                select distinct 4, 'MB', date_format(periksa_lab.tgl_periksa, '%Y-%m-%d'), date_format(periksa_lab.jam, '%H:%i:%s'),
+                (select permintaan_labmb.noorder from permintaan_labmb where permintaan_labmb.no_rawat = periksa_lab.no_rawat and permintaan_labmb.tgl_hasil = periksa_lab.tgl_periksa and permintaan_labmb.jam_hasil = periksa_lab.jam limit 1)
+                from periksa_lab where periksa_lab.no_rawat = $P{norawat} and periksa_lab.kategori = 'MB'
+                union all
+                select distinct 5, 'RAD', date_format(periksa_radiologi.tgl_periksa, '%Y-%m-%d'), date_format(periksa_radiologi.jam, '%H:%i:%s'), null
+                from periksa_radiologi where periksa_radiologi.no_rawat = $P{norawat}
+                order by urutan, tgl_periksa, jam]]>
+	</queryString>
+	<field name="jenis" class="java.lang.String"/>
+	<field name="tgl_periksa" class="java.lang.String"/>
+	<field name="jam" class="java.lang.String"/>
+	<field name="noorder" class="java.lang.String"/>
+	<detail>
+		<part uuid="3817856d-2a37-4b87-8471-656c93022bd2">
+			<printWhenExpression><![CDATA["MCU".equals($F{jenis})]]></printWhenExpression>
+			<partNameExpression><![CDATA["Cover"]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="baseurl">
+					<subreportParameterExpression><![CDATA[$P{baseurl}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptCoverPenilaianHasilMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="4a3dec7b-bf07-46b8-b093-c1c0820ae58c">
+			<printWhenExpression><![CDATA["MCU".equals($F{jenis})]]></printWhenExpression>
+			<partNameExpression><![CDATA["Pengkajian MCU"]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="finger">
+					<subreportParameterExpression><![CDATA[$P{finger}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptCetakPenilaianAwalMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="7d88aa7e-0909-4e01-b841-218a51a8d975">
+			<printWhenExpression><![CDATA["PK".equals($F{jenis}) && $F{noorder} == null]]></printWhenExpression>
+			<partNameExpression><![CDATA["Laboratorium PK " + $F{tgl_periksa} + " " + $F{jam}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaLab4MCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="1642d602-ad1d-4ae2-913c-cc1ac51159b3">
+			<printWhenExpression><![CDATA["PK".equals($F{jenis}) && $F{noorder} != null]]></printWhenExpression>
+			<partNameExpression><![CDATA["Laboratorium PK " + $F{noorder}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaLab4PermintaanMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="6af964e6-af03-43e6-8c6c-232c40853342">
+			<printWhenExpression><![CDATA["PA".equals($F{jenis}) && $F{noorder} == null]]></printWhenExpression>
+			<partNameExpression><![CDATA["Laboratorium PA " + $F{tgl_periksa} + " " + $F{jam}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaLabPAMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="0739c382-2588-401c-a3f3-7b763e0cd4b0">
+			<printWhenExpression><![CDATA["PA".equals($F{jenis}) && $F{noorder} != null]]></printWhenExpression>
+			<partNameExpression><![CDATA["Laboratorium PA " + $F{noorder}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaLabPermintaanPAMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="d170932c-cfc0-4d24-9075-7e6c72918861">
+			<printWhenExpression><![CDATA["MB".equals($F{jenis}) && $F{noorder} == null]]></printWhenExpression>
+			<partNameExpression><![CDATA["Laboratorium MB " + $F{tgl_periksa} + " " + $F{jam}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaLabMBMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="04d33aa9-eebc-4775-805c-ea67a5f132b1">
+			<printWhenExpression><![CDATA["MB".equals($F{jenis}) && $F{noorder} != null]]></printWhenExpression>
+			<partNameExpression><![CDATA["Laboratorium MB " + $F{noorder}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaLabPermintaanMBMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="c0337a29-f15e-4592-ad36-25d00d72d37b">
+			<printWhenExpression><![CDATA["RAD".equals($F{jenis})]]></printWhenExpression>
+			<partNameExpression><![CDATA["Radiologi " + $F{tgl_periksa} + " " + $F{jam}]]></partNameExpression>
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd" usingCache="true">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="namars">
+					<subreportParameterExpression><![CDATA[$P{namars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="alamatrs">
+					<subreportParameterExpression><![CDATA[$P{alamatrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kotars">
+					<subreportParameterExpression><![CDATA[$P{kotars}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="propinsirs">
+					<subreportParameterExpression><![CDATA[$P{propinsirs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="kontakrs">
+					<subreportParameterExpression><![CDATA[$P{kontakrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emailrs">
+					<subreportParameterExpression><![CDATA[$P{emailrs}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logobytes} == null ? null : new java.io.ByteArrayInputStream($P{logobytes})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="norawat">
+					<subreportParameterExpression><![CDATA[$P{norawat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tglperiksa">
+					<subreportParameterExpression><![CDATA[$F{tgl_periksa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jamperiksa">
+					<subreportParameterExpression><![CDATA[$F{jam}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["rptPeriksaRadiologiMCUSMC.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+	</detail>
+</jasperReport>

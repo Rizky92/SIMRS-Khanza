@@ -296,7 +296,8 @@ public final class akses {
         template_paket_mcu_smc = false,
         master_template_paket_mcu_smc = false,
         hapus_permintaan_lab_smc = false,
-        hapus_permintaan_radiologi_smc = false;
+        hapus_permintaan_radiologi_smc = false,
+        template_umum_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1576,6 +1577,7 @@ public final class akses {
                         akses.master_template_paket_mcu_smc=akses.getBoolean(rs2, "master_template_paket_mcu_smc");
                         akses.hapus_permintaan_lab_smc=akses.getBoolean(rs2, "hapus_permintaan_lab_smc");
                         akses.hapus_permintaan_radiologi_smc=akses.getBoolean(rs2, "hapus_permintaan_radiologi_smc");
+                        akses.template_umum_smc=akses.getBoolean(rs2, "template_umum_smc");
                         akses.set_resep_per_cara_bayar=akses.getBoolean(rs2, "set_resep_per_cara_bayar");
                         akses.skrining_tolac=akses.getBoolean(rs2, "skrining_tolac");
                         akses.admisi_skoring_tolac=akses.getBoolean(rs2, "admisi_skoring_tolac");
@@ -2867,6 +2869,7 @@ public final class akses {
         akses.master_template_paket_mcu_smc=isadmin;
         hapus_permintaan_lab_smc=isadmin;
         hapus_permintaan_radiologi_smc=isadmin;
+        akses.template_umum_smc=isadmin;
         akses.set_resep_per_cara_bayar=isadmin;
         akses.skrining_tolac=isadmin;
         akses.admisi_skoring_tolac=isadmin;
@@ -4161,6 +4164,7 @@ public final class akses {
     public static boolean getmaster_template_paket_mcu_smc(){return akses.master_template_paket_mcu_smc;}
     public static boolean gethapus_permintaan_lab_smc(){return akses.hapus_permintaan_lab_smc;}
     public static boolean gethapus_permintaan_radiologi_smc(){return akses.hapus_permintaan_radiologi_smc;}
+    public static boolean gettemplate_umum_smc(){return akses.template_umum_smc;}
     public static boolean getset_resep_per_cara_bayar(){return akses.set_resep_per_cara_bayar;}
     public static boolean getskrining_tolac(){return akses.skrining_tolac;}
     public static boolean getadmisi_skoring_tolac(){return akses.admisi_skoring_tolac;}

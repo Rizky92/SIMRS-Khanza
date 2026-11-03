@@ -76,6 +76,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import smc.ui.swing.JasperViewerSMC;
 import uz.ncipro.calendar.JDateTimePicker;
 import widget.Button;
 import widget.ComboBox;
@@ -303,7 +304,7 @@ public final class validasi {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
+            JasperViewer jasperViewer = new JasperViewerSMC(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
             jasperViewer.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             jasperViewer.setSize(screen.width - 50, screen.height - 50);
@@ -318,7 +319,7 @@ public final class validasi {
 
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams) {
         try {
-            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect), false);
+            JasperViewer jv = new JasperViewerSMC(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect), false);
             jv.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             jv.setSize(screen.width - 50, screen.height - 50);
@@ -368,7 +369,7 @@ public final class validasi {
                     exporter.exportReport();
                 } else {
                     JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
-                    JasperViewer jv = new JasperViewer(jp, false);
+                    JasperViewer jv = new JasperViewerSMC(jp, false);
                     jv.setTitle(judul);
                     Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
                     jv.setSize(screen.width - 50, screen.height - 50);
@@ -415,7 +416,7 @@ public final class validasi {
                 exporter.exportReport();
             } else {
                 JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
-                JasperViewer jv = new JasperViewer(jp, false);
+                JasperViewer jv = new JasperViewerSMC(jp, false);
                 jv.setTitle(judul);
                 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
                 jv.setSize(screen.width - 50, screen.height - 50);

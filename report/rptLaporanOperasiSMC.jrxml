@@ -681,7 +681,7 @@
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Ruang]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="75" y="76" width="5" height="11" uuid="aee99977-c73b-42ad-8c86-9edbde371887">
@@ -698,7 +698,7 @@
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[:]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="80" y="76" width="241" height="11" uuid="8ba764f1-13be-4578-882c-951d85af5580">
@@ -714,7 +714,7 @@
 					<font fontName="Tahoma" size="8" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{ruang}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="321" y="43" width="60" height="11" uuid="ee15ff40-c4c7-4d4d-9821-4edb31248500">
@@ -1637,7 +1637,7 @@
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{kotars} + ", " + new java.text.SimpleDateFormat("dd-MM-yyyy").format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{kotars} + ", " + DATEFORMAT($F{selesaioperasi}, "dd-MM-yyyy")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="398" height="120" uuid="01c2b02e-f053-4e0d-8728-c9f4dcd2bdc0">
