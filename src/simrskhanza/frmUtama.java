@@ -1039,6 +1039,7 @@ import rekammedis.RMPenilaianAwalMedisRanapKandungan;
 import rekammedis.RMPenilaianAwalMedisRanapNeonatus;
 import rekammedis.RMPenilaianAwalMedisRanapPsikiatrik;
 import rekammedis.RMPenilaianBayiBaruLahir;
+import rekammedis.RMPenilaianBishop;
 import rekammedis.RMPenilaianDerajatDehidrasi;
 import rekammedis.RMPenilaianFisioterapi;
 import rekammedis.RMPenilaianGRACE;
@@ -23621,6 +23622,19 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    private void btnPenilaianBISHOPScoreActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMPenilaianBishop aplikasi=new RMPenilaianBishop(this,false);
+        aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -24346,7 +24360,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnHasilUSGAbdomen,btnIntervensiNyeriFarmakologi,btnIntervensiNyeriNonFarmakologi,btnSuratPengajuanCutiPerawatan,btnChecklistKriteriaMasukIsolasi,btnMapingTarifTindakanRalanKPTLSatuSehat,
             btnMapingTarifTindakanRanapKPTLSatuSehat,btnMapingTarifTindakanRadiologiKPTLSatuSehat,btnMapingTarifTindakanLabKPTLSatuSehat,btnMapingTarifTindakanOperasiKPTLSatuSehat,btnMapingTarifKamarKPTLSatuSehat,
             btnChecklistKriteriaKeluarIsolasi,btnBridgingTTESatuSehat,btnBridgingCompositionRMESatuSehat,btnRingkasanHutangVendorAsetInventaris,btnRingkasanBebanHutangLain,btnSetResepPerCaraBayar,
-            btnSkriningTOLAC,btnAdmisiSkoringTOLAC,btnMonitoringTOLAC,btnHasilPersalinanTOLAC,btnLaporanReaksiTranfusi,btnPenilaianGRACEScore;
+            btnSkriningTOLAC,btnAdmisiSkoringTOLAC,btnMonitoringTOLAC,btnHasilPersalinanTOLAC,btnLaporanReaksiTranfusi,btnPenilaianGRACEScore,btnPenilaianBISHOPScore;
 
     public void isWall(){
         try{
@@ -28751,6 +28765,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getpenilaian_grace_scor()==true){
                 Panelmenu.add(btnPenilaianGRACEScore);
+                jmlmenu++;
+            }
+
+            if(akses.getpenilaian_bishop_scor()==true){
+                Panelmenu.add(btnPenilaianBISHOPScore);
                 jmlmenu++;
             }
 
@@ -34833,6 +34852,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getpenilaian_grace_scor()==true){
             Panelmenu.add(btnPenilaianGRACEScore);
+            jmlmenu++;
+        }
+
+        if(akses.getpenilaian_bishop_scor()==true){
+            Panelmenu.add(btnPenilaianBISHOPScore);
             jmlmenu++;
         }
 
@@ -42607,6 +42631,13 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getpenilaian_grace_scor()==true){
             if(btnPenilaianGRACEScore.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianGRACEScore);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getpenilaian_bishop_scor()==true){
+            if(btnPenilaianBISHOPScore.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPenilaianBISHOPScore);
                 jmlmenu++;
             }
         }
@@ -51282,6 +51313,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianGRACEScore.setName("btnPenilaianGRACEScore");
         btnPenilaianGRACEScore.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianGRACEScore.addActionListener(this::btnPenilaianGRACEScoreActionPerformed);
+
+        btnPenilaianBISHOPScore = new widget.ButtonBig();
+        btnPenilaianBISHOPScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pregnant_5390232.png")));
+        btnPenilaianBISHOPScore.setText("Penilaian BISHOP Score");
+        btnPenilaianBISHOPScore.setIconTextGap(0);
+        btnPenilaianBISHOPScore.setName("btnPenilaianBISHOPScore");
+        btnPenilaianBISHOPScore.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenilaianBISHOPScore.addActionListener(this::btnPenilaianBISHOPScoreActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaimSmc, btnUserSmc, btnSetAksesEditSementaraSmc, btnBPJSAntreanPerKodebookingMobileJKNSmc, btnSetTampilJenisObatResepSmc, btnSetPintuPoliSmc,

@@ -73,11 +73,11 @@ public final class DlgRl37 extends javax.swing.JDialog {
         for (i = 0; i < 5; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(25);
+                column.setPreferredWidth(35);
             }else if(i==1){
-                column.setPreferredWidth(400);
+                column.setPreferredWidth(300);
             }else{
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(70);
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
@@ -301,7 +301,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
                                                 tabMode.getValueAt(r,1).toString()+"','"+
                                                 tabMode.getValueAt(r,2).toString()+"','"+
                                         tabMode.getValueAt(r,3).toString()+"','"+
-                                        tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                        tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap");
                             }
                         }
                         Valid.MyReportqry("rptRl37.jasper","report","::[ Formulir RL 3.7 ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

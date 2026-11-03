@@ -273,7 +273,7 @@ public final class akses {
             satu_sehat_mapping_kptl_tindakan_ranap=false,satu_sehat_mapping_kptl_tindakan_radiologi=false,satu_sehat_mapping_kptl_tindakan_laborat=false,satu_sehat_mapping_kptl_tindakan_operasi=false,
             satu_sehat_mapping_kptl_tarif_kamar=false,checklist_kriteria_keluar_isolasi=false,satu_sehat_tanda_tangan_elektronik=false,satu_sehat_kirim_composition=false,
             ringkasan_hutang_vendor_inventaris=false,ringkasan_beban_hutang_lain=false,set_resep_per_cara_bayar=false,skrining_tolac=false,admisi_skoring_tolac=false,
-            monitoring_tolac=false,hasil_persalinan_tolac=false,laporan_reaksi_transfusi=false,penilaian_grace_scor=false;
+            monitoring_tolac=false,hasil_persalinan_tolac=false,laporan_reaksi_transfusi=false,penilaian_grace_scor=false,penilaian_bishop_scor=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1585,6 +1585,7 @@ public final class akses {
                         akses.hasil_persalinan_tolac=akses.getBoolean(rs2, "hasil_persalinan_tolac");
                         akses.laporan_reaksi_transfusi=akses.getBoolean(rs2, "laporan_reaksi_transfusi");
                         akses.penilaian_grace_scor=akses.getBoolean(rs2, "penilaian_grace_scor");
+                        akses.penilaian_bishop_scor=akses.getBoolean(rs2, "penilaian_bishop_scor");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2877,6 +2878,7 @@ public final class akses {
         akses.hasil_persalinan_tolac=isadmin;
         akses.laporan_reaksi_transfusi=isadmin;
         akses.penilaian_grace_scor=isadmin;
+        akses.penilaian_bishop_scor=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4172,6 +4174,7 @@ public final class akses {
     public static boolean gethasil_persalinan_tolac(){return akses.hasil_persalinan_tolac;}
     public static boolean getlaporan_reaksi_transfusi(){return akses.laporan_reaksi_transfusi;}
     public static boolean getpenilaian_grace_scor(){return akses.penilaian_grace_scor;}
+    public static boolean getpenilaian_bishop_scor(){return akses.penilaian_bishop_scor;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {
         akses.edit = false;

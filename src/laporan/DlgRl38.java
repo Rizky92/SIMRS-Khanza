@@ -301,7 +301,7 @@ public final class DlgRl38 extends javax.swing.JDialog {
                                                 tabMode.getValueAt(r,1).toString()+"','"+
                                                 tabMode.getValueAt(r,2).toString()+"','"+
                                         tabMode.getValueAt(r,3).toString()+"','"+
-                                        tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                        tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap");
                             }
                         }
                         Valid.MyReportqry("rptRl38.jasper","report","::[ Formulir RL 3.8 ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);

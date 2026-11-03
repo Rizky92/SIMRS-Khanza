@@ -57,6 +57,15 @@ public class PopupMenu extends JPopupMenu {
         }
     };
 
+    public static class Separator extends JPopupMenu.Separator {
+
+        private static final long serialVersionUID = 1L;
+
+        public Separator() {
+            super();
+        }
+    }
+
     public PopupMenu() {
         super();
     }
