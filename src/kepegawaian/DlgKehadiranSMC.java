@@ -48,6 +48,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.TableModelEvent;
@@ -55,6 +56,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -63,7 +65,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import smc.utils.ExcelSMC;
 
 public final class DlgKehadiranSMC extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode, tabModeImport, tabModeScan;
+    private final DefaultTableModel tabMode, tabModeImport, tabModeScan, tabModeLog;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
@@ -88,6 +90,8 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private static final String SHIFT_LEGACY_DEFAULT = "Pagi";
     private static final String[] KOLOM_REKAP = {"Terlambat I", "Terlambat II", "Keterlambatan", "Wajib Masuk", "Cuti", "Izin", "Absen"};
     private static final int[] LEBAR_KOLOM_REKAP = {70, 70, 85, 75, 40, 40, 45};
+    private static final int[] LEBAR_KOLOM_LOG = {100, 200, 80, 90, 60, 60};
+    private static final int KOLOM_LOG_TANGGAL = 2;
     private static final DateTimeFormatter FORMAT_TANGGAL = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter FORMAT_JAM = DateTimeFormatter.ofPattern("HH:mm");
     private static final DateTimeFormatter FORMAT_KOLOM = DateTimeFormatter.ofPattern("dd/MM");
@@ -132,6 +136,24 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         tbKehadiran.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKehadiran.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbKehadiran.setDefaultRenderer(Object.class, new WarnaKehadiran());
+
+        tabModeLog = new DefaultTableModel(null, new Object[] {"NIP", "Nama", "Tanggal", "Shift", "Jam", "Mode"}) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+        };
+
+        tbLogPresensi.setModel(tabModeLog);
+        tbLogPresensi.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbLogPresensi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbLogPresensi.setDefaultRenderer(Object.class, new WarnaTable());
+
+        for (int i = 0; i < LEBAR_KOLOM_LOG.length; i++) {
+            tbLogPresensi.getColumnModel().getColumn(i).setPreferredWidth(LEBAR_KOLOM_LOG[i]);
+        }
+
+        ((TableRowSorter<?>) tbLogPresensi.getRowSorter()).setComparator(KOLOM_LOG_TANGGAL, Comparator.<Object, LocalDate>comparing(tanggal -> LocalDate.parse(tanggal.toString(), FORMAT_TANGGAL)));
 
         tabModeImport = new DefaultTableModel() {
             @Override
@@ -237,8 +259,11 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         BtnHapusShift = new widget.Button();
         BtnKeluarDetail = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
+        TabKehadiran = new widget.TabPane();
         Scroll = new widget.ScrollPane();
         tbKehadiran = new widget.Table();
+        ScrollLog = new widget.ScrollPane();
+        tbLogPresensi = new widget.Table();
         jPanel1 = new javax.swing.JPanel();
         panelGlass7 = new widget.panelisi();
         label11 = new widget.Label();
@@ -611,6 +636,13 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
+        TabKehadiran.setName("TabKehadiran"); // NOI18N
+        TabKehadiran.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                TabKehadiranStateChanged(evt);
+            }
+        });
+
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
@@ -618,7 +650,19 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         tbKehadiran.setName("tbKehadiran"); // NOI18N
         Scroll.setViewportView(tbKehadiran);
 
-        internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
+        TabKehadiran.addTab("Rekap Kehadiran", Scroll);
+
+        ScrollLog.setName("ScrollLog"); // NOI18N
+        ScrollLog.setOpaque(true);
+
+        tbLogPresensi.setAutoCreateRowSorter(true);
+        tbLogPresensi.setToolTipText("Klik judul kolom untuk mengurutkan per pegawai atau per tanggal, kolom pencarian juga menerima tanggal (dd-mm-yyyy)");
+        tbLogPresensi.setName("tbLogPresensi"); // NOI18N
+        ScrollLog.setViewportView(tbLogPresensi);
+
+        TabKehadiran.addTab("Detail Scanlog", ScrollLog);
+
+        internalFrame1.add(TabKehadiran, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setOpaque(false);
@@ -1245,6 +1289,13 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnShiftDetailActionPerformed
 
+    private void TabKehadiranStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabKehadiranStateChanged
+        if (isVisible()) {
+            BtnPrint.setEnabled(0 == TabKehadiran.getSelectedIndex());
+            tampil();
+        }
+    }//GEN-LAST:event_TabKehadiranStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1291,8 +1342,10 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
+    private widget.ScrollPane ScrollLog;
     private smc.ui.swing.ComboBoxSMC StatusKerja;
     private widget.TextBox TCari;
+    private widget.TabPane TabKehadiran;
     private widget.Tanggal TglDatangDetail;
     private widget.Tanggal TglPulangDetail;
     private widget.ComboBox ThnCari;
@@ -1326,6 +1379,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     private widget.panelisi panelbawah1;
     private widget.panelisi panelbawah2;
     private widget.Table tbKehadiran;
+    private widget.Table tbLogPresensi;
     private widget.Table tbRekapFinger;
     private widget.Table tbScanLog;
     // End of variables declaration//GEN-END:variables
@@ -1335,6 +1389,12 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
     }
 
     private void tampil() {
+        if (1 == TabKehadiran.getSelectedIndex()) {
+            tampilLogPresensi();
+
+            return;
+        }
+
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1486,6 +1546,89 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
                 }
             }.execute();
         }
+    }
+
+    private void tampilLogPresensi() {
+        if (ceksukses) {
+            return;
+        }
+
+        ceksukses = true;
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        loadCutoff();
+        tampilPeriode();
+
+        final List<? extends RowSorter.SortKey> urutan = tbLogPresensi.getRowSorter().getSortKeys();
+        tbLogPresensi.getRowSorter().setSortKeys(null);
+        tabModeLog.setRowCount(0);
+
+        new SwingWorker<Void, Object[]>() {
+            final LocalDate awal = periodeAwal;
+            final LocalDate akhir = periodeAkhir;
+            final String cari = TCari.getText().trim();
+            final String departemen = null == Departemen.getSelectedKey() || "semua".equals(Departemen.getSelectedKey()) ? "" : Departemen.getSelectedKey().toString();
+            final String statuskerja = null == StatusKerja.getSelectedKey() || "semua".equals(StatusKerja.getSelectedKey()) ? "" : StatusKerja.getSelectedKey().toString();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select pegawai.nik, pegawai.nama, rekap_presensi.shift, date_format(rekap_presensi.jam_datang, '%d-%m-%Y') as tgl_datang, date_format(rekap_presensi.jam_datang, '%H:%i') as jam_datang, " +
+                    "date_format(rekap_presensi.jam_pulang, '%d-%m-%Y') as tgl_pulang, date_format(rekap_presensi.jam_pulang, '%H:%i') as jam_pulang from rekap_presensi inner join pegawai on pegawai.id = rekap_presensi.id " +
+                    "where rekap_presensi.jam_datang between ? and ? and pegawai.stts_aktif != 'KELUAR' " + (departemen.isBlank() ? "" : "and pegawai.departemen = ? ") +
+                    (statuskerja.isBlank() ? "" : "and pegawai.stts_kerja = ? ") + (cari.isBlank() ? "" : "and (pegawai.nik like ? or pegawai.nama like ? or date_format(rekap_presensi.jam_datang, '%d-%m-%Y') like ?) ") +
+                    "order by pegawai.nik, rekap_presensi.jam_datang"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, awal + " 00:00:00");
+                    ps.setString(++p, akhir + " 23:59:59");
+
+                    if (!departemen.isBlank()) {
+                        ps.setString(++p, departemen);
+                    }
+
+                    if (!statuskerja.isBlank()) {
+                        ps.setString(++p, statuskerja);
+                    }
+
+                    if (!cari.isBlank()) {
+                        ps.setString(++p, "%" + cari + "%");
+                        ps.setString(++p, "%" + cari + "%");
+                        ps.setString(++p, "%" + cari + "%");
+                    }
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            publish(new Object[] {rs.getString("nik"), rs.getString("nama"), rs.getString("tgl_datang"), rs.getString("shift"), rs.getString("jam_datang"), "Masuk"});
+
+                            if (null != rs.getString("jam_pulang")) {
+                                publish(new Object[] {rs.getString("nik"), rs.getString("nama"), rs.getString("tgl_pulang"), rs.getString("shift"), rs.getString("jam_pulang"), "Pulang"});
+                            }
+                        }
+                    }
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Object[]> chunks) {
+                chunks.forEach(tabModeLog::addRow);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+
+                tbLogPresensi.getRowSorter().setSortKeys(urutan);
+                LCount.setText(tabModeLog.getRowCount() + "");
+                DlgKehadiranSMC.this.setCursor(Cursor.getDefaultCursor());
+                ceksukses = false;
+            }
+        }.execute();
     }
 
     private void loadCombo() {
@@ -2507,6 +2650,7 @@ public final class DlgKehadiranSMC extends javax.swing.JDialog {
             namaShift = master.namaShift;
             shift = master.shift;
             jadwalMasuk = tanggal.atTime(master.jamMasuk);
+
             jadwalPulang = master.jamPulang.isAfter(master.jamMasuk)
                 ? tanggal.atTime(master.jamPulang)
                 : tanggal.plusDays(1).atTime(master.jamPulang);
