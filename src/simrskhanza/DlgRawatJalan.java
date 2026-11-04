@@ -1768,7 +1768,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
-        TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
@@ -1907,6 +1906,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSeekPetugas.setBounds(749, 10, 28, 23);
 
         TPerawat.setEditable(false);
+        TPerawat.setBackground(new java.awt.Color(255, 255, 255));
         TPerawat.setName("TPerawat"); // NOI18N
         panelGlass10.add(TPerawat);
         TPerawat.setBounds(214, 10, 532, 23);
@@ -1998,6 +1998,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSeekPetugas2.setBounds(749, 40, 28, 23);
 
         TPerawat2.setEditable(false);
+        TPerawat2.setBackground(new java.awt.Color(255, 255, 255));
         TPerawat2.setName("TPerawat2"); // NOI18N
         panelGlass11.add(TPerawat2);
         TPerawat2.setBounds(200, 40, 546, 23);
