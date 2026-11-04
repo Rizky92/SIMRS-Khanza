@@ -810,6 +810,14 @@ CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk_kategori`  (
   INDEX `urut_idx`(`urut`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `pemeriksaan_obstetri_ralan` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `pemeriksaan_obstetri_ranap` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `pemeriksaan_ralan` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `pemeriksaan_ranap` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
 ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tmt_kerja` date NOT NULL AFTER `tanggal_akhir`;
 
 ALTER TABLE `pengajuan_cuti` ADD COLUMN IF NOT EXISTS `tat_kerja` date NOT NULL AFTER `tmt_kerja`;
@@ -1697,6 +1705,16 @@ CREATE TABLE IF NOT EXISTS `pintu_smc`  (
 ALTER TABLE `prosedur_pasien` DROP INDEX IF EXISTS `PRIMARY`;
 
 ALTER TABLE `prosedur_pasien` ADD PRIMARY KEY IF NOT EXISTS (`no_rawat`, `kode`, `status`, `prioritas`) USING BTREE;
+
+zALTER TABLE `rawat_inap_drpr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `rawat_inap_pr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `rawat_jl_dr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `rawat_jl_drpr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `rawat_jl_pr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
 
 ALTER TABLE `referensi_mobilejkn_bpjs` DROP INDEX IF EXISTS `no_rawat`;
 
