@@ -1,5 +1,5 @@
 package widget;
-
+/*
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -26,8 +26,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-
-public class Table extends JTable {
+*/
+public class Table extends TableSMC {
+    /*
     private static final long serialVersionUID = 3L;
     static final Color AKSEN        = new Color(22, 160, 93);
     static final Color PILIH_PASIF  = new Color(220, 234, 226);
@@ -373,4 +374,5 @@ public class Table extends JTable {
             super.paintComponent(g);
         }
     }
+    */
 }

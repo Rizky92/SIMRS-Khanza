@@ -783,6 +783,10 @@ ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
 
+ALTER TABLE `pemeriksaan_ginekologi_ralan` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `pemeriksaan_ginekologi_ranap` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+
 CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `kode_pemeriksaan` varchar(20) NOT NULL,
