@@ -1706,7 +1706,7 @@ ALTER TABLE `prosedur_pasien` DROP INDEX IF EXISTS `PRIMARY`;
 
 ALTER TABLE `prosedur_pasien` ADD PRIMARY KEY IF NOT EXISTS (`no_rawat`, `kode`, `status`, `prioritas`) USING BTREE;
 
-zALTER TABLE `rawat_inap_drpr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
+ALTER TABLE `rawat_inap_drpr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
 
 ALTER TABLE `rawat_inap_pr` ADD INDEX IF NOT EXISTS `tgl_perawatan`(`tgl_perawatan`) USING BTREE;
 
