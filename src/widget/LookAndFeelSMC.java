@@ -34,6 +34,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Panel;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.geom.Rectangle2D;
@@ -790,6 +791,51 @@ public class LookAndFeelSMC extends FlatLightLaf {
             flatBooleanRenderer = null;
 
             super.uninstallDefaults();
+        }
+
+        /**
+         * Closes the last column with a vertical grid line when the columns end before the edge of the scroll pane, since without vertical lines nothing else marks where the columns end.
+         */
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            super.paint(g, c);
+
+            int rowCount = table.getRowCount();
+            Color gridColor = table.getGridColor();
+            if (table.getShowVerticalLines() || 0 == rowCount || 0 == table.getColumnCount() || null == gridColor || hideLastVerticalLine()) {
+                return;
+            }
+
+            int firstRow = 0;
+            int lastRow = rowCount - 1;
+            Rectangle clip = g.getClipBounds();
+            if (null != clip) {
+                int top = table.rowAtPoint(new Point(0, clip.y));
+                int bottom = table.rowAtPoint(new Point(0, clip.y + clip.height - 1));
+                firstRow = -1 == top ? 0 : top;
+                lastRow = -1 == bottom ? lastRow : bottom;
+            }
+
+            int x = table.getComponentOrientation().isLeftToRight() ? table.getWidth() - 1 : 0;
+            int horizontalLine = table.getShowHorizontalLines() ? 1 : 0;
+            Graphics2D g2 = (Graphics2D) g.create();
+            try {
+                double systemScaleFactor = UIScale.getSystemScaleFactor(g2);
+                double lineThickness = (1. / systemScaleFactor) * (int) systemScaleFactor;
+                double lineOffset = (1. - lineThickness) + 0.05;
+                g2.setColor(gridColor);
+                for (int row = firstRow; row <= lastRow; row++) {
+                    Rectangle cell = table.getCellRect(row, 0, true);
+                    int height = cell.height - horizontalLine;
+                    if (1 == lineThickness) {
+                        g2.fillRect(x, cell.y, 1, height);
+                    } else {
+                        g2.fill(new Rectangle2D.Double(x + lineOffset, cell.y, lineThickness, height));
+                    }
+                }
+            } finally {
+                g2.dispose();
+            }
         }
     }
 
