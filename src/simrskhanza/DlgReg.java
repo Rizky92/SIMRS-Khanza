@@ -6341,7 +6341,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6354,7 +6354,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6494,7 +6494,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2026" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -13370,7 +13370,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnPenilaianPreOpActionPerformed
 
-    private void MnPenilaianPreAnastesiActionPerformed(java.awt.event.ActionEvent evt) {
+    private void MnPenilaianPreAnastesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreAnastesiActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -13390,7 +13390,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
-    }
+    }//GEN-LAST:event_MnPenilaianPreAnastesiActionPerformed
 
     private void MnPulangAtasPermintaanSendiriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPulangAtasPermintaanSendiriActionPerformed
         if(tabMode.getRowCount()==0){
@@ -14425,7 +14425,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnDokumentasiTindakanESWLActionPerformed
 
-    private void MnCheckListKriteriaMasukICUActionPerformed(java.awt.event.ActionEvent evt) {
+    private void MnCheckListKriteriaMasukICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukICUActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -14445,7 +14445,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
-    }
+    }//GEN-LAST:event_MnCheckListKriteriaMasukICUActionPerformed
 
     private void MnPenilaianRisikoJatuhNeonatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianRisikoJatuhNeonatusActionPerformed
         if(tabMode.getRowCount()==0){
@@ -16996,7 +16996,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnAdmisiSkoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPersalinanActionPerformed
+    private void MnAdmisiSkoringTOLACActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -17040,7 +17040,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnHasilPersalinanTOLACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanPersalinanActionPerformed
+    private void MnHasilPersalinanTOLACActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();

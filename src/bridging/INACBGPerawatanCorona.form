@@ -799,7 +799,7 @@
                 </Component>
                 <Component class="widget.TextBox" name="NoJaminan">
                   <Properties>
-                    <Property name="componentPopupMenu" type="widget.PopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                    <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="jPopupMenu2"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="NoJaminan" noResource="true"/>

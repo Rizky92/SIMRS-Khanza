@@ -1292,7 +1292,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-10-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1306,7 +1306,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-10-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1392,14 +1392,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         });
 
         internalFrame2.setBackground(new java.awt.Color(235, 255, 235));
-        internalFrame2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        internalFrame2.setBorder(null);
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbRawatDr.setAutoCreateRowSorter(false);
         tbRawatDr.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbRawatDr.setName("tbRawatDr"); // NOI18N
         tbRawatDr.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1509,14 +1508,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TabRawat.addTab("Penanganan Dokter", internalFrame2);
 
         internalFrame3.setBackground(new java.awt.Color(235, 255, 235));
-        internalFrame3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        internalFrame3.setBorder(null);
         internalFrame3.setName("internalFrame3"); // NOI18N
         internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
-        tbRawatPr.setAutoCreateRowSorter(false);
         tbRawatPr.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbRawatPr.setName("tbRawatPr"); // NOI18N
         tbRawatPr.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1626,14 +1624,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TabRawat.addTab("Penanganan Petugas", internalFrame3);
 
         internalFrame4.setBackground(new java.awt.Color(235, 255, 235));
-        internalFrame4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        internalFrame4.setBorder(null);
         internalFrame4.setName("internalFrame4"); // NOI18N
         internalFrame4.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
-        tbRawatDrPr.setAutoCreateRowSorter(false);
         tbRawatDrPr.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbRawatDrPr.setName("tbRawatDrPr"); // NOI18N
         tbRawatDrPr.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1781,7 +1778,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
-        tbPemeriksaan.setAutoCreateRowSorter(false);
         tbPemeriksaan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
         tbPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2180,7 +2176,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
-        tbPemeriksaanObstetri.setAutoCreateRowSorter(false);
         tbPemeriksaanObstetri.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemeriksaanObstetri.setName("tbPemeriksaanObstetri"); // NOI18N
         tbPemeriksaanObstetri.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2554,7 +2549,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
 
-        tbPemeriksaanGinekologi.setAutoCreateRowSorter(false);
         tbPemeriksaanGinekologi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemeriksaanGinekologi.setName("tbPemeriksaanGinekologi"); // NOI18N
         tbPemeriksaanGinekologi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2917,7 +2911,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-10-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -3027,7 +3021,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnRiwayat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRiwayat.setName("BtnRiwayat"); // NOI18N
         BtnRiwayat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRiwayat.setRoundRect(false);
         BtnRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRiwayatActionPerformed(evt);
@@ -3044,7 +3037,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnResepObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnResepObat.setName("BtnResepObat"); // NOI18N
         BtnResepObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnResepObat.setRoundRect(false);
         BtnResepObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnResepObatActionPerformed(evt);
@@ -3061,7 +3053,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCopyResep.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCopyResep.setName("BtnCopyResep"); // NOI18N
         BtnCopyResep.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCopyResep.setRoundRect(false);
         BtnCopyResep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCopyResepActionPerformed(evt);
@@ -3078,7 +3069,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPermintaanStok.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanStok.setName("BtnPermintaanStok"); // NOI18N
         BtnPermintaanStok.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanStok.setRoundRect(false);
         BtnPermintaanStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPermintaanStokActionPerformed(evt);
@@ -3095,7 +3085,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPermintaanResepPulang.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanResepPulang.setName("BtnPermintaanResepPulang"); // NOI18N
         BtnPermintaanResepPulang.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanResepPulang.setRoundRect(false);
         BtnPermintaanResepPulang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPermintaanResepPulangActionPerformed(evt);
@@ -3112,7 +3101,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnInputObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnInputObat.setName("BtnInputObat"); // NOI18N
         BtnInputObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnInputObat.setRoundRect(false);
         BtnInputObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnInputObatActionPerformed(evt);
@@ -3129,7 +3117,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnObatBhp.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnObatBhp.setName("BtnObatBhp"); // NOI18N
         BtnObatBhp.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnObatBhp.setRoundRect(false);
         BtnObatBhp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnObatBhpActionPerformed(evt);
@@ -3146,7 +3133,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnBerkasDigital.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnBerkasDigital.setName("BtnBerkasDigital"); // NOI18N
         BtnBerkasDigital.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnBerkasDigital.setRoundRect(false);
         BtnBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBerkasDigitalActionPerformed(evt);
@@ -3163,7 +3149,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPermintaanLab.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanLab.setName("BtnPermintaanLab"); // NOI18N
         BtnPermintaanLab.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanLab.setRoundRect(false);
         BtnPermintaanLab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPermintaanLabActionPerformed(evt);
@@ -3180,7 +3165,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPermintaanRad.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPermintaanRad.setName("BtnPermintaanRad"); // NOI18N
         BtnPermintaanRad.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPermintaanRad.setRoundRect(false);
         BtnPermintaanRad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPermintaanRadActionPerformed(evt);
@@ -3197,7 +3181,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnJadwalOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnJadwalOperasi.setName("BtnJadwalOperasi"); // NOI18N
         BtnJadwalOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnJadwalOperasi.setRoundRect(false);
         BtnJadwalOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnJadwalOperasiActionPerformed(evt);
@@ -3214,7 +3197,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSKDP.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSKDP.setName("BtnSKDP"); // NOI18N
         BtnSKDP.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSKDP.setRoundRect(false);
         BtnSKDP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSKDPActionPerformed(evt);
@@ -3231,7 +3213,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnRujukKeluar.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRujukKeluar.setName("BtnRujukKeluar"); // NOI18N
         BtnRujukKeluar.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRujukKeluar.setRoundRect(false);
         BtnRujukKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRujukKeluarActionPerformed(evt);
@@ -3248,7 +3229,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnDiagnosa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnDiagnosa.setName("BtnDiagnosa"); // NOI18N
         BtnDiagnosa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnDiagnosa.setRoundRect(false);
         BtnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDiagnosaActionPerformed(evt);
@@ -3265,7 +3245,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnResume.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnResume.setName("BtnResume"); // NOI18N
         BtnResume.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnResume.setRoundRect(false);
         BtnResume.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnResumeActionPerformed(evt);
@@ -3282,7 +3261,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAwalKeperawatanUmum.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanUmum.setName("BtnAwalKeperawatanUmum"); // NOI18N
         BtnAwalKeperawatanUmum.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanUmum.setRoundRect(false);
         BtnAwalKeperawatanUmum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanUmumActionPerformed(evt);
@@ -3299,7 +3277,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAwalKeperawatanKandungan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalKeperawatanKandungan.setName("BtnAwalKeperawatanKandungan"); // NOI18N
         BtnAwalKeperawatanKandungan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalKeperawatanKandungan.setRoundRect(false);
         BtnAwalKeperawatanKandungan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalKeperawatanKandunganActionPerformed(evt);
@@ -3316,7 +3293,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAwalFisioterapi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalFisioterapi.setName("BtnAwalFisioterapi"); // NOI18N
         BtnAwalFisioterapi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalFisioterapi.setRoundRect(false);
         BtnAwalFisioterapi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalFisioterapiActionPerformed(evt);
@@ -3333,7 +3309,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAwalMedis.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedis.setName("BtnAwalMedis"); // NOI18N
         BtnAwalMedis.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedis.setRoundRect(false);
         BtnAwalMedis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisActionPerformed(evt);
@@ -3350,7 +3325,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAwalMedisKandungan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisKandungan.setName("BtnAwalMedisKandungan"); // NOI18N
         BtnAwalMedisKandungan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisKandungan.setRoundRect(false);
         BtnAwalMedisKandungan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisKandunganActionPerformed(evt);
@@ -3367,7 +3341,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAwalMedisHemodialisa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAwalMedisHemodialisa.setName("BtnAwalMedisHemodialisa"); // NOI18N
         BtnAwalMedisHemodialisa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAwalMedisHemodialisa.setRoundRect(false);
         BtnAwalMedisHemodialisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAwalMedisHemodialisaActionPerformed(evt);
@@ -3384,7 +3357,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistPreOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistPreOperasi.setName("BtnChecklistPreOperasi"); // NOI18N
         BtnChecklistPreOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistPreOperasi.setRoundRect(false);
         BtnChecklistPreOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistPreOperasiActionPerformed(evt);
@@ -3401,7 +3373,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSignInSebelumAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSignInSebelumAnestesi.setName("BtnSignInSebelumAnestesi"); // NOI18N
         BtnSignInSebelumAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSignInSebelumAnestesi.setRoundRect(false);
         BtnSignInSebelumAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSignInSebelumAnestesiActionPerformed(evt);
@@ -3418,7 +3389,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnTimeOutSebelumInsisi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnTimeOutSebelumInsisi.setName("BtnTimeOutSebelumInsisi"); // NOI18N
         BtnTimeOutSebelumInsisi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnTimeOutSebelumInsisi.setRoundRect(false);
         BtnTimeOutSebelumInsisi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTimeOutSebelumInsisiActionPerformed(evt);
@@ -3435,7 +3405,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSignOutSebelumMenutupLuka.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSignOutSebelumMenutupLuka.setName("BtnSignOutSebelumMenutupLuka"); // NOI18N
         BtnSignOutSebelumMenutupLuka.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSignOutSebelumMenutupLuka.setRoundRect(false);
         BtnSignOutSebelumMenutupLuka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSignOutSebelumMenutupLukaActionPerformed(evt);
@@ -3452,7 +3421,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistPostOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistPostOperasi.setName("BtnChecklistPostOperasi"); // NOI18N
         BtnChecklistPostOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistPostOperasi.setRoundRect(false);
         BtnChecklistPostOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistPostOperasiActionPerformed(evt);
@@ -3469,7 +3437,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPreOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPreOperasi.setName("BtnPenilaianPreOperasi"); // NOI18N
         BtnPenilaianPreOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPreOperasi.setRoundRect(false);
         BtnPenilaianPreOperasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPreOperasiActionPerformed(evt);
@@ -3486,7 +3453,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPreAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPreAnestesi.setName("BtnPenilaianPreAnestesi"); // NOI18N
         BtnPenilaianPreAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPreAnestesi.setRoundRect(false);
         BtnPenilaianPreAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPreAnestesiActionPerformed(evt);
@@ -3503,7 +3469,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSkorAldrettePascaAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkorAldrettePascaAnestesi.setName("BtnSkorAldrettePascaAnestesi"); // NOI18N
         BtnSkorAldrettePascaAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkorAldrettePascaAnestesi.setRoundRect(false);
         BtnSkorAldrettePascaAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkorAldrettePascaAnestesiActionPerformed(evt);
@@ -3520,7 +3485,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSkorStewardPascaAnestesi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkorStewardPascaAnestesi.setName("BtnSkorStewardPascaAnestesi"); // NOI18N
         BtnSkorStewardPascaAnestesi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkorStewardPascaAnestesi.setRoundRect(false);
         BtnSkorStewardPascaAnestesi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkorStewardPascaAnestesiActionPerformed(evt);
@@ -3537,7 +3501,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPsikolog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPsikolog.setName("BtnPenilaianPsikolog"); // NOI18N
         BtnPenilaianPsikolog.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPsikolog.setRoundRect(false);
         BtnPenilaianPsikolog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPsikologActionPerformed(evt);
@@ -3554,7 +3517,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPerencanaanPemulangan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPerencanaanPemulangan.setName("BtnPerencanaanPemulangan"); // NOI18N
         BtnPerencanaanPemulangan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPerencanaanPemulangan.setRoundRect(false);
         BtnPerencanaanPemulangan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPerencanaanPemulanganActionPerformed(evt);
@@ -3571,7 +3533,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanResikoJatuhDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanResikoJatuhDewasa.setName("BtnPenilaianLanjutanResikoJatuhDewasa"); // NOI18N
         BtnPenilaianLanjutanResikoJatuhDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanResikoJatuhDewasa.setRoundRect(false);
         BtnPenilaianLanjutanResikoJatuhDewasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanResikoJatuhDewasaActionPerformed(evt);
@@ -3588,7 +3549,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanResikoJatuhAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanResikoJatuhAnak.setName("BtnPenilaianLanjutanResikoJatuhAnak"); // NOI18N
         BtnPenilaianLanjutanResikoJatuhAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanResikoJatuhAnak.setRoundRect(false);
         BtnPenilaianLanjutanResikoJatuhAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanResikoJatuhAnakActionPerformed(evt);
@@ -3605,7 +3565,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanResikoJatuhLansia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanResikoJatuhLansia.setName("BtnPenilaianLanjutanResikoJatuhLansia"); // NOI18N
         BtnPenilaianLanjutanResikoJatuhLansia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanResikoJatuhLansia.setRoundRect(false);
         BtnPenilaianLanjutanResikoJatuhLansia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanResikoJatuhLansiaActionPerformed(evt);
@@ -3622,7 +3581,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanResikoJatuhNeonatus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanResikoJatuhNeonatus.setName("BtnPenilaianLanjutanResikoJatuhNeonatus"); // NOI18N
         BtnPenilaianLanjutanResikoJatuhNeonatus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanResikoJatuhNeonatus.setRoundRect(false);
         BtnPenilaianLanjutanResikoJatuhNeonatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanResikoJatuhNeonatusActionPerformed(evt);
@@ -3639,7 +3597,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanResikoJatuhGeriatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanResikoJatuhGeriatri.setName("BtnPenilaianLanjutanResikoJatuhGeriatri"); // NOI18N
         BtnPenilaianLanjutanResikoJatuhGeriatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanResikoJatuhGeriatri.setRoundRect(false);
         BtnPenilaianLanjutanResikoJatuhGeriatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanResikoJatuhGeriatriActionPerformed(evt);
@@ -3656,7 +3613,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanResikoJatuhPsikiatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanResikoJatuhPsikiatri.setName("BtnPenilaianLanjutanResikoJatuhPsikiatri"); // NOI18N
         BtnPenilaianLanjutanResikoJatuhPsikiatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanResikoJatuhPsikiatri.setRoundRect(false);
         BtnPenilaianLanjutanResikoJatuhPsikiatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanResikoJatuhPsikiatriActionPerformed(evt);
@@ -3673,7 +3629,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianLanjutanSkriningFungsional.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianLanjutanSkriningFungsional.setName("BtnPenilaianLanjutanSkriningFungsional"); // NOI18N
         BtnPenilaianLanjutanSkriningFungsional.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianLanjutanSkriningFungsional.setRoundRect(false);
         BtnPenilaianLanjutanSkriningFungsional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianLanjutanSkriningFungsionalActionPerformed(evt);
@@ -3690,7 +3645,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianResikoDekubitus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianResikoDekubitus.setName("BtnPenilaianResikoDekubitus"); // NOI18N
         BtnPenilaianResikoDekubitus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianResikoDekubitus.setRoundRect(false);
         BtnPenilaianResikoDekubitus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianResikoDekubitusActionPerformed(evt);
@@ -3707,7 +3661,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSG.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnHasilPemeriksaanUSG.setName("BtnHasilPemeriksaanUSG"); // NOI18N
         BtnHasilPemeriksaanUSG.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnHasilPemeriksaanUSG.setRoundRect(false);
         BtnHasilPemeriksaanUSG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHasilPemeriksaanUSGActionPerformed(evt);
@@ -3724,7 +3677,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnDokumentasiESWL.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnDokumentasiESWL.setName("BtnDokumentasiESWL"); // NOI18N
         BtnDokumentasiESWL.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnDokumentasiESWL.setRoundRect(false);
         BtnDokumentasiESWL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDokumentasiESWLActionPerformed(evt);
@@ -3741,7 +3693,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanPersalinan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanPersalinan.setName("BtnCatatanPersalinan"); // NOI18N
         BtnCatatanPersalinan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanPersalinan.setRoundRect(false);
         BtnCatatanPersalinan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanPersalinanActionPerformed(evt);
@@ -3758,7 +3709,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatan.setName("BtnCatatan"); // NOI18N
         BtnCatatan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatan.setRoundRect(false);
         BtnCatatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanActionPerformed(evt);
@@ -3775,7 +3725,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanObservasiRanap.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiRanap.setName("BtnCatatanObservasiRanap"); // NOI18N
         BtnCatatanObservasiRanap.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiRanap.setRoundRect(false);
         BtnCatatanObservasiRanap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanObservasiRanapActionPerformed(evt);
@@ -3792,7 +3741,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanObservasiRanapKebidanan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiRanapKebidanan.setName("BtnCatatanObservasiRanapKebidanan"); // NOI18N
         BtnCatatanObservasiRanapKebidanan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiRanapKebidanan.setRoundRect(false);
         BtnCatatanObservasiRanapKebidanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanObservasiRanapKebidananActionPerformed(evt);
@@ -3809,7 +3757,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanObservasiRanapPostPartum.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanObservasiRanapPostPartum.setName("BtnCatatanObservasiRanapPostPartum"); // NOI18N
         BtnCatatanObservasiRanapPostPartum.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObservasiRanapPostPartum.setRoundRect(false);
         BtnCatatanObservasiRanapPostPartum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanObservasiRanapPostPartumActionPerformed(evt);
@@ -3826,7 +3773,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnFollowUpDBD.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnFollowUpDBD.setName("BtnFollowUpDBD"); // NOI18N
         BtnFollowUpDBD.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnFollowUpDBD.setRoundRect(false);
         BtnFollowUpDBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnFollowUpDBDActionPerformed(evt);
@@ -3843,7 +3789,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanKeperawatan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanKeperawatan.setName("BtnCatatanKeperawatan"); // NOI18N
         BtnCatatanKeperawatan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanKeperawatan.setRoundRect(false);
         BtnCatatanKeperawatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanKeperawatanActionPerformed(evt);
@@ -3860,7 +3805,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanCekGDS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanCekGDS.setName("BtnCatatanCekGDS"); // NOI18N
         BtnCatatanCekGDS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanCekGDS.setRoundRect(false);
         BtnCatatanCekGDS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanCekGDSActionPerformed(evt);
@@ -3877,7 +3821,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianUlangNyeri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianUlangNyeri.setName("BtnPenilaianUlangNyeri"); // NOI18N
         BtnPenilaianUlangNyeri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianUlangNyeri.setRoundRect(false);
         BtnPenilaianUlangNyeri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianUlangNyeriActionPerformed(evt);
@@ -3894,7 +3837,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPemantauanPEWSAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanPEWSAnak.setName("BtnPemantauanPEWSAnak"); // NOI18N
         BtnPemantauanPEWSAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanPEWSAnak.setRoundRect(false);
         BtnPemantauanPEWSAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanPEWSAnakActionPerformed(evt);
@@ -3911,7 +3853,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPemantauanPEWSDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanPEWSDewasa.setName("BtnPemantauanPEWSDewasa"); // NOI18N
         BtnPemantauanPEWSDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanPEWSDewasa.setRoundRect(false);
         BtnPemantauanPEWSDewasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanPEWSDewasaActionPerformed(evt);
@@ -3928,7 +3869,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPemantauanMEOWS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanMEOWS.setName("BtnPemantauanMEOWS"); // NOI18N
         BtnPemantauanMEOWS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanMEOWS.setRoundRect(false);
         BtnPemantauanMEOWS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanMEOWSActionPerformed(evt);
@@ -3945,7 +3885,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPemantauanEWSNeonatus.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPemantauanEWSNeonatus.setName("BtnPemantauanEWSNeonatus"); // NOI18N
         BtnPemantauanEWSNeonatus.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPemantauanEWSNeonatus.setRoundRect(false);
         BtnPemantauanEWSNeonatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPemantauanEWSNeonatusActionPerformed(evt);
@@ -3962,7 +3901,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukHCU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukHCU.setName("BtnChecklistKriteriaMasukHCU"); // NOI18N
         BtnChecklistKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukHCU.setRoundRect(false);
         BtnChecklistKriteriaMasukHCU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistKriteriaMasukHCUActionPerformed(evt);
@@ -3979,7 +3917,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistKriteriaKeluarHCU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaKeluarHCU.setName("BtnChecklistKriteriaKeluarHCU"); // NOI18N
         BtnChecklistKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaKeluarHCU.setRoundRect(false);
         BtnChecklistKriteriaKeluarHCU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistKriteriaKeluarHCUActionPerformed(evt);
@@ -3996,7 +3933,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaMasukICU.setName("BtnChecklistKriteriaMasukICU"); // NOI18N
         BtnChecklistKriteriaMasukICU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaMasukICU.setRoundRect(false);
         BtnChecklistKriteriaMasukICU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistKriteriaMasukICUActionPerformed(evt);
@@ -4013,7 +3949,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistKriteriaKeluarICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnChecklistKriteriaKeluarICU.setName("BtnChecklistKriteriaKeluarICU"); // NOI18N
         BtnChecklistKriteriaKeluarICU.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnChecklistKriteriaKeluarICU.setRoundRect(false);
         BtnChecklistKriteriaKeluarICU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnChecklistKriteriaKeluarICUActionPerformed(evt);
@@ -4030,7 +3965,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnMonitoringReaksiTranfusi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnMonitoringReaksiTranfusi.setName("BtnMonitoringReaksiTranfusi"); // NOI18N
         BtnMonitoringReaksiTranfusi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnMonitoringReaksiTranfusi.setRoundRect(false);
         BtnMonitoringReaksiTranfusi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnMonitoringReaksiTranfusiActionPerformed(evt);
@@ -4047,7 +3981,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSkriningNutrisiDewasa.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningNutrisiDewasa.setName("BtnSkriningNutrisiDewasa"); // NOI18N
         BtnSkriningNutrisiDewasa.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningNutrisiDewasa.setRoundRect(false);
         BtnSkriningNutrisiDewasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningNutrisiDewasaActionPerformed(evt);
@@ -4064,7 +3997,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSkriningNutrisiLansia.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningNutrisiLansia.setName("BtnSkriningNutrisiLansia"); // NOI18N
         BtnSkriningNutrisiLansia.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningNutrisiLansia.setRoundRect(false);
         BtnSkriningNutrisiLansia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningNutrisiLansiaActionPerformed(evt);
@@ -4081,7 +4013,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSkriningNutrisiAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningNutrisiAnak.setName("BtnSkriningNutrisiAnak"); // NOI18N
         BtnSkriningNutrisiAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningNutrisiAnak.setRoundRect(false);
         BtnSkriningNutrisiAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningNutrisiAnakActionPerformed(evt);
@@ -4098,7 +4029,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnSkriningGiziLanjut.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnSkriningGiziLanjut.setName("BtnSkriningGiziLanjut"); // NOI18N
         BtnSkriningGiziLanjut.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnSkriningGiziLanjut.setRoundRect(false);
         BtnSkriningGiziLanjut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSkriningGiziLanjutActionPerformed(evt);
@@ -4115,7 +4045,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnAsuhanGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnAsuhanGizi.setName("BtnAsuhanGizi"); // NOI18N
         BtnAsuhanGizi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAsuhanGizi.setRoundRect(false);
         BtnAsuhanGizi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAsuhanGiziActionPerformed(evt);
@@ -4132,7 +4061,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnMonitoringAsuhanGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnMonitoringAsuhanGizi.setName("BtnMonitoringAsuhanGizi"); // NOI18N
         BtnMonitoringAsuhanGizi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnMonitoringAsuhanGizi.setRoundRect(false);
         BtnMonitoringAsuhanGizi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnMonitoringAsuhanGiziActionPerformed(evt);
@@ -4149,7 +4077,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnCatatanADIMEGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnCatatanADIMEGizi.setName("BtnCatatanADIMEGizi"); // NOI18N
         BtnCatatanADIMEGizi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanADIMEGizi.setRoundRect(false);
         BtnCatatanADIMEGizi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCatatanADIMEGiziActionPerformed(evt);
@@ -4166,7 +4093,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnKonselingFarmasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnKonselingFarmasi.setName("BtnKonselingFarmasi"); // NOI18N
         BtnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKonselingFarmasi.setRoundRect(false);
         BtnKonselingFarmasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKonselingFarmasiActionPerformed(evt);
@@ -4183,7 +4109,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnInformasiObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnInformasiObat.setName("BtnInformasiObat"); // NOI18N
         BtnInformasiObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnInformasiObat.setRoundRect(false);
         BtnInformasiObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnInformasiObatActionPerformed(evt);
@@ -4200,7 +4125,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnRekonsiliasiObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnRekonsiliasiObat.setName("BtnRekonsiliasiObat"); // NOI18N
         BtnRekonsiliasiObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnRekonsiliasiObat.setRoundRect(false);
         BtnRekonsiliasiObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRekonsiliasiObatActionPerformed(evt);
@@ -4217,7 +4141,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnTransferAntarRuang.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnTransferAntarRuang.setName("BtnTransferAntarRuang"); // NOI18N
         BtnTransferAntarRuang.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnTransferAntarRuang.setRoundRect(false);
         BtnTransferAntarRuang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTransferAntarRuangActionPerformed(evt);
@@ -4234,7 +4157,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPengkajianRestrain.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPengkajianRestrain.setName("BtnPengkajianRestrain"); // NOI18N
         BtnPengkajianRestrain.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPengkajianRestrain.setRoundRect(false);
         BtnPengkajianRestrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPengkajianRestrainActionPerformed(evt);
@@ -4251,7 +4173,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPasienTerminal.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPasienTerminal.setName("BtnPenilaianPasienTerminal"); // NOI18N
         BtnPenilaianPasienTerminal.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPasienTerminal.setRoundRect(false);
         BtnPenilaianPasienTerminal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPasienTerminalActionPerformed(evt);
@@ -4268,7 +4189,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianKorbanKekerasan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianKorbanKekerasan.setName("BtnPenilaianKorbanKekerasan"); // NOI18N
         BtnPenilaianKorbanKekerasan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianKorbanKekerasan.setRoundRect(false);
         BtnPenilaianKorbanKekerasan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianKorbanKekerasanActionPerformed(evt);
@@ -4285,7 +4205,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianKecemasanAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianKecemasanAnak.setName("BtnPenilaianKecemasanAnak"); // NOI18N
         BtnPenilaianKecemasanAnak.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianKecemasanAnak.setRoundRect(false);
         BtnPenilaianKecemasanAnak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianKecemasanAnakActionPerformed(evt);
@@ -4302,7 +4221,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPasienPenyakitMenular.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianPasienPenyakitMenular.setName("BtnPenilaianPasienPenyakitMenular"); // NOI18N
         BtnPenilaianPasienPenyakitMenular.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianPasienPenyakitMenular.setRoundRect(false);
         BtnPenilaianPasienPenyakitMenular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianPasienPenyakitMenularActionPerformed(evt);
@@ -4319,7 +4237,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianTambahanGeriatri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanGeriatri.setName("BtnPenilaianTambahanGeriatri"); // NOI18N
         BtnPenilaianTambahanGeriatri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanGeriatri.setRoundRect(false);
         BtnPenilaianTambahanGeriatri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanGeriatriActionPerformed(evt);
@@ -4336,7 +4253,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianTambahanBunuhDiri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanBunuhDiri.setName("BtnPenilaianTambahanBunuhDiri"); // NOI18N
         BtnPenilaianTambahanBunuhDiri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanBunuhDiri.setRoundRect(false);
         BtnPenilaianTambahanBunuhDiri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanBunuhDiriActionPerformed(evt);
@@ -4353,7 +4269,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianTambahanPerilakuKekerasan.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanPerilakuKekerasan.setName("BtnPenilaianTambahanPerilakuKekerasan"); // NOI18N
         BtnPenilaianTambahanPerilakuKekerasan.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanPerilakuKekerasan.setRoundRect(false);
         BtnPenilaianTambahanPerilakuKekerasan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanPerilakuKekerasanActionPerformed(evt);
@@ -4370,7 +4285,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianTambahanMelarikanDiri.setMargin(new java.awt.Insets(1, 1, 1, 1));
         BtnPenilaianTambahanMelarikanDiri.setName("BtnPenilaianTambahanMelarikanDiri"); // NOI18N
         BtnPenilaianTambahanMelarikanDiri.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnPenilaianTambahanMelarikanDiri.setRoundRect(false);
         BtnPenilaianTambahanMelarikanDiri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanMelarikanDiriActionPerformed(evt);
@@ -9188,7 +9102,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnLaporanReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMonitoringReaksiTranfusiActionPerformed
+    private void BtnLaporanReaksiTranfusiActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -9205,7 +9119,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnPenilaianBISHOPScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMonitoringReaksiTranfusiActionPerformed
+    private void BtnPenilaianBISHOPScoreActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
