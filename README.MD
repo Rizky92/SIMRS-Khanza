@@ -19,7 +19,7 @@ Untuk menjalankan projek, ada beberapa hal yang perlu diketahui.
 - [Apache NetBeans <= 27](https://netbeans.apache.org/front/main/download/nb27/)  
 - [Liberica JDK 17](https://github.com/bell-sw/Liberica/releases?q=17.0&expanded=true)  
 - [Jaspersoft Studio 6.8.0](https://drive.google.com/file/d/1l2jNOd7gqmpQK_7NZBNxmUBLI7IwwKQ3/view?usp=drive_link)  
-- Library yang digunakan bisa di [download disini](https://drive.google.com/drive/folders/1bLKuw8l9k5ElC5dxxlrXijACPLtNmCTg?usp=sharing)  
+- Library yang digunakan bisa di [download disini](https://drive.google.com/file/d/1D1rdtiYnfmjrhCOP0G6FrzL4zdlPAhyn/view?usp=sharing)  
 
 Sebelum memulai setup, pastikan aplikasi-aplikasi ini sudah terinstall dengan baik.  
 
@@ -35,7 +35,7 @@ git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom "simrs-kha
 > git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom --depth=1 "simrs-khanza-smc"
 > ```
 
-2. Download [Arsip Library](https://drive.google.com/drive/folders/1bLKuw8l9k5ElC5dxxlrXijACPLtNmCTg?usp=sharing) yang digunakan oleh projek ini karena ada beberapa perbedaan dengan library bawaan SIMRS Khanza. Kemudian extract arsip librarynya.  
+2. Download [Arsip Library](https://drive.google.com/file/d/1D1rdtiYnfmjrhCOP0G6FrzL4zdlPAhyn/view?usp=sharing) yang digunakan oleh projek ini karena ada beberapa perbedaan dengan library bawaan SIMRS Khanza. Kemudian extract arsip librarynya.  
 
 > [!WARNING]
 > Jangan **TUMPANG TINDIH** folder library ini dengan kumpulan library original SIMRS Khanza!  

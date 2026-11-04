@@ -19,7 +19,7 @@ env:
   # Identifies the library bundle. Uploading a new bundle yields a new ID, which
   # invalidates the cache on its own. Replacing a bundle in place keeps the ID
   # and would leave a stale cache, so upload rather than replace.
-  LIB_BUNDLE_ID: 1xiXssd0B1wQN9yWcL8_dRsIEGuSiD9oe
+  LIB_BUNDLE_ID: 1D1rdtiYnfmjrhCOP0G6FrzL4zdlPAhyn
 
 jobs:
   build:
