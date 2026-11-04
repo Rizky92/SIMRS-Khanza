@@ -720,9 +720,6 @@
                     <Component class="widget.TextBox" name="TPerawat">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="TPerawat" noResource="true"/>
                       </Properties>
                       <Constraints>
@@ -913,9 +910,6 @@
                     <Component class="widget.TextBox" name="TPerawat2">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="TPerawat2" noResource="true"/>
                       </Properties>
                       <Constraints>

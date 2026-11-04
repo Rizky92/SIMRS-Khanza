@@ -1906,7 +1906,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSeekPetugas.setBounds(749, 10, 28, 23);
 
         TPerawat.setEditable(false);
-        TPerawat.setBackground(new java.awt.Color(255, 255, 255));
         TPerawat.setName("TPerawat"); // NOI18N
         panelGlass10.add(TPerawat);
         TPerawat.setBounds(214, 10, 532, 23);
@@ -1998,7 +1997,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSeekPetugas2.setBounds(749, 40, 28, 23);
 
         TPerawat2.setEditable(false);
-        TPerawat2.setBackground(new java.awt.Color(255, 255, 255));
         TPerawat2.setName("TPerawat2"); // NOI18N
         panelGlass11.add(TPerawat2);
         TPerawat2.setBounds(200, 40, 546, 23);
