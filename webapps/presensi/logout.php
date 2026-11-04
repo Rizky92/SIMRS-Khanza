@@ -6,7 +6,7 @@
 	require_once "conf/command.php";
 	if (cekSessiAdmin())
 	{
-		session_unregister("ses_admin");
+		unset($_SESSION["ses_admin"]);
 	}
 	header("Location:index.php");
 

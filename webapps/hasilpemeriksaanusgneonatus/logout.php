@@ -4,7 +4,7 @@
 	require_once "conf/command.php";
 	if (cekSessiAdmin())
 	{
-	    session_unregister("ses_admin_gambarpemeriksaanusgneonatus");
+	    unset($_SESSION["ses_admin_gambarpemeriksaanusgneonatus"]);
 	}
 
 	header("Location:index.php");

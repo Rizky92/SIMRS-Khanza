@@ -14,7 +14,7 @@
             session_start();
             session_destroy();
             if (cekSessiAdmin()){
-                session_unregister("ses_admin_gambarpemeriksaanechopediatrik");
+                unset($_SESSION["ses_admin_gambarpemeriksaanechopediatrik"]);
             }
             $url = "index.php?act=HomeAdmin";
         }
