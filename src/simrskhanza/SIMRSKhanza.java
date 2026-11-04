@@ -13,6 +13,7 @@ package simrskhanza;
 
 import fungsi.sekuel;
 import usu.widget.util.WidgetUtilities;
+import widget.LookAndFeelSMC;
 
 /**
  *
@@ -25,6 +26,7 @@ public class SIMRSKhanza {
      */
     public static void main(String[] args) {
         WidgetUtilities.invokeLater(() -> {
+            LookAndFeelSMC.setup();
             frmUtama utama = frmUtama.getInstance();
             utama.isWall();
             utama.setVisible(true);
