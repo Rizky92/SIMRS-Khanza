@@ -65,7 +65,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"User ID", "Nama User", "Jabatan", "Password", "pw", "Password Diubah"};
+        Object[] row = {"User ID", "Nama User", "Jabatan", "Password", "Password Diubah"};
 
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -86,9 +86,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         tbUser.getColumnModel().getColumn(1).setPreferredWidth(200);
         tbUser.getColumnModel().getColumn(2).setPreferredWidth(120);
         tbUser.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tbUser.getColumnModel().getColumn(4).setMinWidth(0);
-        tbUser.getColumnModel().getColumn(4).setMaxWidth(0);
-        tbUser.getColumnModel().getColumn(5).setPreferredWidth(130);
+        tbUser.getColumnModel().getColumn(4).setPreferredWidth(130);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte) 30).getKata(TKd));
@@ -148,7 +146,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         jLabel3 = new widget.Label();
         jLabel4 = new widget.Label();
         TKd = new widget.TextBox();
-        TPass = new widget.TextBox();
+        TPass = new widget.PasswordBox();
         BtnSeek = new widget.Button();
         BtnSeek1 = new widget.Button();
         TNmUser = new widget.TextBox();
@@ -528,7 +526,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         } else {
             if (Sequel.executeRawSmc("insert into user (id_user, password) values (aes_encrypt(?, 'nur'), aes_encrypt(?, 'windi'))", TKd.getText(), TPass.getText())) {
                 tabMode.addRow(new Object[] {
-                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), "**********", TPass.getText(), "Belum Pernah"
+                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), "**********", "Belum Pernah"
                 });
                 emptTeks();
                 LCount.setText(String.valueOf(tabMode.getRowCount()));
@@ -577,8 +575,8 @@ public class DlgUserSmc extends javax.swing.JDialog {
             Valid.textKosong(TPass, "Password");
         } else {
             if (tbUser.getSelectedRow() != -1) {
-                if (Sequel.executeRawSmc("update user set id_user = aes_encrypt(?, 'nur'), password = aes_encrypt(?, 'windi') where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')",
-                    TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString(), tbUser.getValueAt(tbUser.getSelectedRow(), 4).toString()
+                if (Sequel.executeRawSmc("update user set id_user = aes_encrypt(?, 'nur'), password = aes_encrypt(?, 'windi') where id_user = aes_encrypt(?, 'nur')",
+                    TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString()
                 )) {
                     if (!TKd.getText().equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
                         Sequel.executeRawSmc("update user_password_smc set user_password_smc.id_user = aes_encrypt(?, 'nur') where user_password_smc.id_user = aes_encrypt(?, 'nur')",
@@ -586,7 +584,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
                         );
                     }
                     tabMode.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
-                    tabMode.setValueAt(TPass.getText(), tbUser.getSelectedRow(), 4);
                     emptTeks();
                 }
             }
@@ -888,7 +885,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     private widget.TextBox TCari;
     private widget.TextBox TKd;
     private widget.TextBox TNmUser;
-    private widget.TextBox TPass;
+    private widget.PasswordBox TPass;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
@@ -913,7 +910,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select aes_decrypt(user.id_user, 'nur'), pegawai.nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, aes_decrypt(user.password, 'windi'), ifnull(date_format(user_password_smc.tgl_ubah, " +
+                        "select aes_decrypt(user.id_user, 'nur'), pegawai.nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, ifnull(date_format(user_password_smc.tgl_ubah, " +
                         "'%Y-%m-%d %H:%i:%s'), 'Belum Pernah') from user left join pegawai on aes_decrypt(user.id_user, 'nur') = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter left join petugas on pegawai.nik = " +
                         "petugas.nip left join spesialis on dokter.kd_sps = spesialis.kd_sps left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn left join user_password_smc on user_password_smc.id_user = user.id_user " +
                         "where (? = 0 or user_password_smc.tgl_ubah is null or datediff(current_date(), user_password_smc.tgl_ubah) >= ?) " + (cari.isBlank() ? "" : "and (pegawai.nik like ? or pegawai.nama like ? or " +
@@ -930,7 +927,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
 
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
-                                publish(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), "**********", rs.getString(4), rs.getString(5)});
+                                publish(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), "**********", rs.getString(4)});
                             }
                         }
                     }
@@ -975,7 +972,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         if (tbUser.getSelectedRow() != -1) {
             TKd.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
             TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
-            TPass.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 4).toString());
+            TPass.setText(Sequel.cariIsiSmc("select aes_decrypt(user.password, 'windi') from user where user.id_user = aes_encrypt(?, 'nur')", TKd.getText()));
         }
     }
 }

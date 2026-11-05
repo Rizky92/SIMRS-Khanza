@@ -1176,6 +1176,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("inhealth_mapping_tindakan_ranap", "[L] Tarif Ranap Inhealth");
         namaakses.put("pcare_mapping_tindakan_ranap", "[L] Tarif Ranap RS & PCare");
         namaakses.put("bpjs_task_id", "[L] Task ID Mobile JKN");
+        namaakses.put("admisi_skoring_tolac", "[M] Admisi & Skoring TOLAC");
         namaakses.put("asuhan_gizi", "[M] Asuhan Gizi");
         namaakses.put("bahasa_pasien", "[M] Bahasa Pasien");
         namaakses.put("berkas_digital_perawatan", "[M] Berkas Digital Perawatan");
@@ -1256,6 +1257,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("konsultasi_medik", "[M] Konsultasi Medik");
         namaakses.put("konsultasi_perawat", "[M] Konsultasi Perawat");
         namaakses.put("laporan_anestesi", "[M] Laporan Anestesi");
+        namaakses.put("laporan_reaksi_transfusi", "[M] Laporan Reaksi Tranfusi");
         namaakses.put("laporan_tindakan", "[M] Laporan Tindakan");
         namaakses.put("layanan_kedokteran_fisik_rehabilitasi", "[M] Layanan Kedokteran Fisik & Rehabilitasi");
         namaakses.put("layanan_program_kfr", "[M] Layanan Program KFR");
@@ -1291,6 +1293,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("master_triase_skala5", "[M] Master Triase Skala 5");
         namaakses.put("monitoring_asuhan_gizi", "[M] Monitoring Asuhan Gizi");
         namaakses.put("monitoring_reaksi_tranfusi", "[M] Monitoring Reaksi Tranfusi");
+        namaakses.put("monitoring_tolac", "[M] Monitoring Selama TOLAC");
         namaakses.put("mutasi_berkas", "[M] Mutasi Berkas RM");
         namaakses.put("pangkat_polri", "[M] Pangkat POLRI");
         namaakses.put("pangkat_tni", "[M] Pangkat TNI");
@@ -1373,8 +1376,11 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("penilaian_terapi_wicara", "[M] Pengkajian Terapi Wicara");
         namaakses.put("pengkajian_tindakan_invasif_non_bedah_smc", "[M] Pengkajian Tindakan Invasif Non Bedah");
         namaakses.put("penilaian_ulang_nyeri", "[M] Pengkajian Ulang Nyeri");
+        namaakses.put("penilaian_bishop_scor", "[M] Penilaian BISHOP Score");
+        namaakses.put("penilaian_grace_scor", "[M] Penilaian GRACE Score");
         namaakses.put("perencanaan_pemulangan", "[M] Perencanaan Pemulangan");
         namaakses.put("rekonsiliasi_obat", "[M] Rekonsiliasi Obat");
+        namaakses.put("hasil_persalinan_tolac", "[M] Resume Hasil Persalinan TOLAC");
         namaakses.put("data_resume_pasien", "[M] Resume Pasien");
         namaakses.put("retensi_rm", "[M] Retensi Data R.M.");
         namaakses.put("riwayat_kamar_pasien", "[M] Riwayat Kamar Pasien");
@@ -1421,6 +1427,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("skrining_risiko_kanker_serviks", "[M] Skrining Risiko Kanker Serviks");
         namaakses.put("skrining_tbc", "[M] Skrining TBC");
         namaakses.put("skrining_thalassemia", "[M] Skrining Thalassemia");
+        namaakses.put("skrining_tolac", "[M] Skrining TOLAC");
         namaakses.put("soap_perawatan", "[M] SOAP Perawatan");
         namaakses.put("soap_ralan_polri", "[M] SOAP Ralan Anggota POLRI");
         namaakses.put("soap_ralan_tni", "[M] SOAP Ralan Anggota TNI");
@@ -1686,6 +1693,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("set_oto_ralan", "[U] Set Oto Ralan");
         namaakses.put("setup_pjlab", "[U] Set P.J. Unit Penunjang");
         namaakses.put("set_penggunaan_tarif", "[U] Set Penggunaan Tarif");
+        namaakses.put("set_resep_per_cara_bayar", "[U] Set Resep Per Cara Bayar");
         namaakses.put("set_no_rm", "[U] Set RM");
         namaakses.put("tracer_login", "[U] Tracer Login");
 

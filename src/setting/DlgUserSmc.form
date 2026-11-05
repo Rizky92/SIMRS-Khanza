@@ -237,7 +237,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="widget.TextBox" name="TPass">
+            <Component class="widget.PasswordBox" name="TPass">
               <Properties>
                 <Property name="name" type="java.lang.String" value="TPass" noResource="true"/>
               </Properties>
