@@ -1,6 +1,7 @@
 package bridging;
 
 import com.sun.jna.Native;
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
@@ -10,12 +11,21 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.LongByReference;
 import com.sun.jna.win32.StdCallLibrary;
 import com.sun.jna.win32.W32APIOptions;
+import java.awt.AWTException;
+import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import widget.LoadingOverlaySMC;
 
@@ -51,6 +61,15 @@ public final class AplikasiBiometrikSMC {
     private static final int SYNCHRONIZE = 0x00100000;
     private static final int PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
     private static final int WAIT_TIMEOUT = 0x102;
+    private static final String KELAS_POPUP = "#32770";
+    private static final int JEDA_PANTAU_POPUP = 200;
+    private static final int STM_GETICON = 0x0171;
+    private static final int SS_TYPEMASK = 0x001F;
+    private static final int SS_ICON = 0x0003;
+    private static final String IKON_INFORMASI = "informasi";
+    private static final int BAGIAN_WARNA_IKON = 20;
+    private static final int WM_COMMAND = 0x0111;
+    private static final AtomicReference<Thread> PEMANTAU_FRISTA = new AtomicReference<>();
 
     private enum Status {
         LOGIN, SIAP, TANPA_KONTROL
@@ -91,6 +110,8 @@ public final class AplikasiBiometrikSMC {
         WinDef.LRESULT SendMessageTimeout(WinDef.HWND hwnd, int pesan, WinDef.WPARAM wParam, WinDef.LPARAM lParam, int flags, int timeout, LongByReference hasil);
 
         boolean IsIconic(WinDef.HWND hwnd);
+
+        int GetDlgCtrlID(WinDef.HWND hwnd);
     }
 
     private final String nama;
@@ -151,11 +172,11 @@ public final class AplikasiBiometrikSMC {
         if (baruDibuka) {
             LoadingOverlaySMC.setMessage("Membuka aplikasi sidik jari...");
             jalankan(path);
-            jendela = tunggu("jendela aplikasi muncul", this::cariFingerprint);
+            jendela = tunggu("jendela aplikasi muncul", AplikasiBiometrikSMC::cariFingerprint);
         }
 
         jadikanDepan(jendela);
-        Status status = tungguStatus(this::cariFingerprint);
+        Status status = tungguStatus(AplikasiBiometrikSMC::cariFingerprint);
 
         if (Status.LOGIN == status) {
             LoadingOverlaySMC.setMessage("Login aplikasi sidik jari...");
@@ -180,12 +201,164 @@ public final class AplikasiBiometrikSMC {
 
         LoadingOverlaySMC.setMessage("Memasukkan nomor kartu...");
         if (jendela == null) {
-            jendela = tunggu("jendela aplikasi muncul kembali", this::cariFingerprint);
+            jendela = tunggu("jendela aplikasi muncul kembali", AplikasiBiometrikSMC::cariFingerprint);
         }
         siapKetik(jendela);
         kosongkan(tungguKolomAktif(jendela));
         tempel(noKartu);
         log("nomor kartu dimasukkan");
+    }
+
+    /**
+     * Memantau aplikasi FRISTA di latar belakang selama pasien melakukan validasi wajah, lalu menutup otomatis popup konfirmasi. Yang ditutup
+     * hanya kotak pesan Windows milik proses FRISTA yang berikon informasi dan bertombol tunggal (OK). Popup peringatan, galat, atau pertanyaan
+     * dibiarkan tampil untuk pasien. Setiap popup yang muncul dicatat ke konsol beserta isi pesannya.
+     * <p>
+     * Pemantauan berhenti bila jendela FRISTA tertutup, {@code pemilik} tidak lagi tampil, atau pemantauan baru dimulai.
+     *
+     * @param pemilik komponen di jendela anjungan yang memulai validasi
+     */
+    public static void pantauKonfirmasiFrista(Component pemilik) {
+        Thread pemantau = new Thread(() -> pantauFrista(pemilik), "PemantauKonfirmasiFrista");
+        pemantau.setDaemon(true);
+        Thread lama = PEMANTAU_FRISTA.getAndSet(pemantau);
+        if (lama != null) {
+            lama.interrupt();
+        }
+        pemantau.start();
+    }
+
+    private static void pantauFrista(Component pemilik) {
+        long mulai = System.nanoTime();
+        Set<String> selesai = new HashSet<>();
+        Map<String, Long> pertamaTerlihat = new HashMap<>();
+        try {
+            while (Thread.currentThread() == PEMANTAU_FRISTA.get()) {
+                WinDef.HWND utama = cariUtamaFrista();
+                if (utama == null || !pemilik.isShowing()) {
+                    logPemantau(mulai, utama == null ? "jendela FRISTA tertutup, pemantauan berhenti" : "anjungan ditutup, pemantauan berhenti");
+                    return;
+                }
+
+                WinDef.HWND popup = cariPopup(pid(utama));
+                if (popup != null) {
+                    String kunci = popup.getPointer().toString();
+                    if (!selesai.contains(kunci)) {
+                        long terlihat = pertamaTerlihat.computeIfAbsent(kunci, k -> System.nanoTime());
+                        boolean menyerah = (System.nanoTime() - terlihat) / 1_000_000 >= BATAS_TANPA_KONTROL;
+                        if (tanganiPopup(mulai, popup, menyerah)) {
+                            selesai.add(kunci);
+                        }
+                    }
+                }
+                Thread.sleep(JEDA_PANTAU_POPUP);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            PEMANTAU_FRISTA.compareAndSet(Thread.currentThread(), null);
+        }
+    }
+
+    private static WinDef.HWND cariPopup(int pid) {
+        WinDef.HWND[] hasil = new WinDef.HWND[1];
+        User32.INSTANCE.EnumWindows((hwnd, data) -> {
+            if (User32.INSTANCE.IsWindowVisible(hwnd) && KELAS_POPUP.equals(kelas(hwnd)) && pid == pid(hwnd)) {
+                hasil[0] = hwnd;
+                return false;
+            }
+            return true;
+        }, null);
+        return hasil[0];
+    }
+
+    private static boolean tanganiPopup(long mulai, WinDef.HWND popup, boolean menyerah) {
+        StringBuilder pesan = new StringBuilder();
+        WinDef.HWND[] tombol = new WinDef.HWND[1];
+        WinDef.HWND[] ikon = new WinDef.HWND[1];
+        int[] jumlahTombol = {0};
+
+        User32.INSTANCE.EnumChildWindows(popup, (hwnd, data) -> {
+            if (!User32.INSTANCE.IsWindowVisible(hwnd)) {
+                return true;
+            }
+            String kelas = kelas(hwnd);
+            if ("Button".equalsIgnoreCase(kelas)) {
+                jumlahTombol[0]++;
+                tombol[0] = hwnd;
+            } else if ("Static".equalsIgnoreCase(kelas)) {
+                if ((User32.INSTANCE.GetWindowLong(hwnd, GWL_STYLE) & SS_TYPEMASK) == SS_ICON) {
+                    ikon[0] = hwnd;
+                } else {
+                    String teks = bacaTeks(hwnd).trim();
+                    if (!teks.isEmpty()) {
+                        pesan.append(pesan.length() == 0 ? "" : " ").append(teks.replaceAll("\\s+", " "));
+                    }
+                }
+            }
+            return true;
+        }, null);
+
+        String jenis = ikon[0] == null ? "tanpa ikon" : jenisIkon(ikon[0]);
+        if (jenis == null && !menyerah) {
+            return false;
+        }
+
+        String keterangan = "popup '" + judul(popup) + "': " + pesan + " (ikon: " + (jenis == null ? "tidak dikenali" : jenis) + ", tombol: " + jumlahTombol[0] + ")";
+        if (IKON_INFORMASI.equals(jenis) && jumlahTombol[0] == 1) {
+            int id = User32SMC.INSTANCE.GetDlgCtrlID(tombol[0]);
+            User32.INSTANCE.PostMessage(popup, WM_COMMAND, new WinDef.WPARAM(id & 0xFFFF), new WinDef.LPARAM(Pointer.nativeValue(tombol[0].getPointer())));
+            logPemantau(mulai, keterangan + ", ditutup otomatis");
+        } else {
+            logPemantau(mulai, keterangan + ", dibiarkan untuk pasien");
+        }
+        return true;
+    }
+
+    private static String jenisIkon(WinDef.HWND ikon) {
+        WinDef.RECT kotak = new WinDef.RECT();
+        User32.INSTANCE.GetWindowRect(ikon, kotak);
+        int lebar = kotak.right - kotak.left;
+        int tinggi = kotak.bottom - kotak.top;
+        if (lebar <= 0 || tinggi <= 0) {
+            return null;
+        }
+
+        BufferedImage gambar;
+        try {
+            gambar = new Robot().createScreenCapture(new Rectangle(kotak.left, kotak.top, lebar, tinggi));
+        } catch (AWTException | RuntimeException e) {
+            return null;
+        }
+
+        int biru = 0, merah = 0, kuning = 0;
+        for (int x = 0; x < lebar; x++) {
+            for (int y = 0; y < tinggi; y++) {
+                int piksel = gambar.getRGB(x, y);
+                int r = (piksel >> 16) & 0xFF, g = (piksel >> 8) & 0xFF, b = piksel & 0xFF;
+                if (b > 150 && r < 110 && b - g > 30) {
+                    biru++;
+                } else if (r > 170 && g < 100 && b < 100) {
+                    merah++;
+                } else if (r > 200 && g > 150 && b < 90) {
+                    kuning++;
+                }
+            }
+        }
+
+        int minimum = lebar * tinggi * BAGIAN_WARNA_IKON / 100;
+        if (biru >= minimum && merah < minimum && kuning < minimum) {
+            return IKON_INFORMASI;
+        } else if (merah >= minimum) {
+            return "galat";
+        } else if (kuning >= minimum) {
+            return "peringatan";
+        }
+        return null;
+    }
+
+    private static void logPemantau(long mulai, String pesan) {
+        System.out.println("Biometrik FRISTA pemantau (" + (System.nanoTime() - mulai) / 1_000_000 + " ms) : " + pesan);
     }
 
     private void frista(String path, String user, String password, String noKartu) throws Exception {
@@ -195,7 +368,7 @@ public final class AplikasiBiometrikSMC {
             if (login == null) {
                 LoadingOverlaySMC.setMessage("Membuka aplikasi FRISTA...");
                 jalankan(path);
-                login = tunggu("jendela login muncul", this::cariLoginFrista);
+                login = tunggu("jendela login muncul", AplikasiBiometrikSMC::cariLoginFrista);
             }
 
             LoadingOverlaySMC.setMessage("Login aplikasi FRISTA...");
@@ -213,15 +386,15 @@ public final class AplikasiBiometrikSMC {
         log("nomor kartu dimasukkan");
     }
 
-    private WinDef.HWND cariFingerprint() {
+    private static WinDef.HWND cariFingerprint() {
         return cariJendela(judul -> judul.contains(JUDUL_FINGERPRINT));
     }
 
-    private WinDef.HWND cariLoginFrista() {
+    private static WinDef.HWND cariLoginFrista() {
         return cariJendela(JUDUL_LOGIN_FRISTA::equals);
     }
 
-    private WinDef.HWND cariUtamaFrista() {
+    private static WinDef.HWND cariUtamaFrista() {
         return cariJendela(judul -> !JUDUL_LOGIN_FRISTA.equals(judul) && judul.toLowerCase().contains(JUDUL_FRISTA));
     }
 

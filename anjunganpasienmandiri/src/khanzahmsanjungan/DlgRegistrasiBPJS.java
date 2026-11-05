@@ -1337,6 +1337,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     try {
                         AplikasiBiometrikSMC.bukaFrista(pathFrista, EnkripsiAES.decrypt(userLoginValidasi), EnkripsiAES.decrypt(passLoginValidasi), noPeserta.getText().trim(), timeoutFristaSmc);
                         fristaAktif = true;
+                        AplikasiBiometrikSMC.pantauKonfirmasiFrista(this);
                     } catch (TimeoutException e) {
                         timeout[0] = true;
                     } catch (Exception e) {
