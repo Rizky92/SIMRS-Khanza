@@ -43,10 +43,10 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
-import java.util.IdentityHashMap;
-import java.util.Map;
 import java.util.Properties;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
@@ -69,6 +69,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.JTextComponent;
 
@@ -936,7 +937,9 @@ public class LookAndFeelSMC extends FlatLightLaf {
      * FlatLaf table UI that renders {@code Boolean} cells with a
      * {@link BooleanRenderer} in place of the FlatLaf boolean renderer, whose
      * check box follows the uneven {@code Table.cellMargins} and sits right of
-     * the cell center.
+     * the cell center. The default {@code Boolean} editor gets a
+     * {@link CellCheckBoxIcon} too, so the box stays in place while the cell is
+     * edited.
      */
     public static class TableUI extends FlatTableUI {
 
@@ -955,6 +958,14 @@ public class LookAndFeelSMC extends FlatLightLaf {
                 flatBooleanRenderer = renderer;
                 table.setDefaultRenderer(Boolean.class, new BooleanRenderer());
             }
+
+            JCheckBox checkBox = booleanEditorCheckBox();
+            if (null != checkBox && null == checkBox.getIcon()) {
+                CellCheckBoxIcon icon = new CellCheckBoxIcon();
+                checkBox.setIcon(icon);
+                checkBox.setDisabledIcon(icon);
+                checkBox.setDisabledSelectedIcon(icon);
+            }
         }
 
         @Override
@@ -964,7 +975,22 @@ public class LookAndFeelSMC extends FlatLightLaf {
             }
             flatBooleanRenderer = null;
 
+            JCheckBox checkBox = booleanEditorCheckBox();
+            if (null != checkBox && checkBox.getIcon() instanceof CellCheckBoxIcon) {
+                checkBox.setIcon(null);
+                checkBox.setDisabledIcon(null);
+                checkBox.setDisabledSelectedIcon(null);
+            }
+
             super.uninstallDefaults();
+        }
+
+        private JCheckBox booleanEditorCheckBox() {
+            TableCellEditor editor = table.getDefaultEditor(Boolean.class);
+            if (editor instanceof DefaultCellEditor && ((DefaultCellEditor) editor).getComponent() instanceof JCheckBox) {
+                return (JCheckBox) ((DefaultCellEditor) editor).getComponent();
+            }
+            return null;
         }
 
         /**
@@ -1014,22 +1040,18 @@ public class LookAndFeelSMC extends FlatLightLaf {
     }
 
     /**
-     * Table cell renderer for {@code Boolean} values that draws the
-     * {@link CheckBoxIcon} at the horizontal center of the cell. Its cell border
-     * is wrapped in a {@link CenteredBorder}. {@code DefaultCellEditor} copies
-     * the renderer border onto the editing check box, so the check box stays in
-     * place while the cell is edited.
+     * Table cell renderer for {@code Boolean} values that draws a
+     * {@link CellCheckBoxIcon} at the center of the cell.
      */
     public static class BooleanRenderer extends DefaultTableCellRenderer implements UIResource {
 
-        private final Map<Border, Border> centeredBorders = new IdentityHashMap<>();
         private boolean selected;
 
         public BooleanRenderer() {
             super();
             setHorizontalAlignment(CENTER);
 
-            CheckBoxIcon icon = new CheckBoxIcon() {
+            CellCheckBoxIcon icon = new CellCheckBoxIcon() {
                 @Override
                 protected boolean isSelected(Component c) {
                     return selected;
@@ -1040,52 +1062,38 @@ public class LookAndFeelSMC extends FlatLightLaf {
         }
 
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-            Border border = getBorder();
-            if (null != border && !(border instanceof CenteredBorder)) {
-                setBorder(centeredBorders.computeIfAbsent(border, CenteredBorder::new));
-            }
-
-            return this;
-        }
-
-        @Override
         protected void setValue(Object value) {
             selected = Boolean.TRUE.equals(value);
         }
     }
 
     /**
-     * Border that paints like the border it wraps but splits the left and right
-     * insets evenly between both sides, so content centered within the insets is
-     * centered within the component.
+     * Check box icon for table cells that paints its box at the exact center of
+     * the cell, wherever the label layout places the icon. The FlatLaf box sits
+     * one unit right of the icon center, and a narrow column leaves less room
+     * inside the cell margins than the icon needs, which pushes the box against
+     * the right edge of the cell.
      */
-    private static class CenteredBorder implements Border, UIResource {
+    public static class CellCheckBoxIcon extends CheckBoxIcon {
 
-        private final Border border;
-
-        CenteredBorder(Border border) {
-            this.border = border;
-        }
+        private static final float BOX_CENTER_X = 8f;
+        private static final float BOX_CENTER_Y = 7f;
 
         @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            border.paintBorder(c, g, x, y, width, height);
-        }
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            if (null == c) {
+                super.paintIcon(c, g, x, y);
+                return;
+            }
 
-        @Override
-        public Insets getBorderInsets(Component c) {
-            Insets insets = border.getBorderInsets(c);
-            int side = (insets.left + insets.right) / 2;
-
-            return new Insets(insets.top, side, insets.bottom, side);
-        }
-
-        @Override
-        public boolean isBorderOpaque() {
-            return border.isBorderOpaque();
+            double unit = UIScale.scale(1f) * getScale();
+            Graphics2D g2 = (Graphics2D) g.create();
+            try {
+                g2.translate(c.getWidth() / 2. - BOX_CENTER_X * unit, c.getHeight() / 2. - BOX_CENTER_Y * unit);
+                super.paintIcon(c, g2, 0, 0);
+            } finally {
+                g2.dispose();
+            }
         }
     }
 }
