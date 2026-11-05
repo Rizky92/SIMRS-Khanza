@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -30,6 +29,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import widget.LoadingOverlaySMC;
 
 public final class BPJSReferensiDokter extends widget.Dialog {
     private final DefaultTableModel tabMode;
@@ -301,7 +301,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
         if (!isLoading) {
             isLoading = true;
             Valid.tabelKosongSmc(tabMode);
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            LoadingOverlaySMC.begin(this, "Memuat referensi dokter...");
             final String kodePoli = KdPoli.getText().trim();
             final String cari = TCari.getText().trim();
 
@@ -359,7 +359,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
                             Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
                         }
                     }
-                    BPJSReferensiDokter.this.setCursor(Cursor.getDefaultCursor());
+                    LoadingOverlaySMC.end(BPJSReferensiDokter.this);
                     isLoading = false;
                 }
             }.execute();

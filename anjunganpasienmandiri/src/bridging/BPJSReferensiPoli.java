@@ -18,7 +18,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -27,6 +26,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import widget.LoadingOverlaySMC;
 
 /**
  *
@@ -215,7 +215,7 @@ public final class BPJSReferensiPoli extends widget.Dialog {
         if (!isLoading) {
             isLoading = true;
             Valid.tabelKosongSmc(tabMode);
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            LoadingOverlaySMC.begin(this, "Memuat referensi poli...");
             final String cari = TCari.getText().trim();
 
             new SwingWorker<Void, Object[]>() {
@@ -271,7 +271,7 @@ public final class BPJSReferensiPoli extends widget.Dialog {
                             Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
                         }
                     }
-                    BPJSReferensiPoli.this.setCursor(Cursor.getDefaultCursor());
+                    LoadingOverlaySMC.end(BPJSReferensiPoli.this);
                     isLoading = false;
                 }
             }.execute();

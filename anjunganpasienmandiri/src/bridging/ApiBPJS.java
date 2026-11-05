@@ -1,6 +1,7 @@
 package bridging;
 
 import fungsi.koneksiDB;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
@@ -20,9 +21,11 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
+import widget.LoadingOverlaySMC;
 
 public class ApiBPJS {
     private String Key, Consid;
@@ -114,7 +117,17 @@ public class ApiBPJS {
         scheme = new Scheme("https", 443, sslFactory);
         factory = new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        return new RestTemplate(factory);
+        RestTemplate rest = new RestTemplate(factory);
+        rest.setInterceptors(new ClientHttpRequestInterceptor[] {(request, body, execution) -> {
+            try {
+                return LoadingOverlaySMC.background(() -> execution.execute(request, body));
+            } catch (IOException | RuntimeException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new IOException(e);
+            }
+        }});
+        return rest;
     }
 
 }
