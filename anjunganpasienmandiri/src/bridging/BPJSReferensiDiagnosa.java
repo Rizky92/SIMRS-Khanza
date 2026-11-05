@@ -257,7 +257,7 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
-                        if (e.toString().contains("UnknownHostException")) {
+                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                             Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
                         }
                     }

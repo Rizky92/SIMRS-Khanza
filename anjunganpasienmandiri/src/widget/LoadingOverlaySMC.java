@@ -21,14 +21,13 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 
 /**
@@ -39,8 +38,11 @@ import javax.swing.Timer;
  * {@link #SHOW_DELAY} milliseconds, the window is dimmed and an animated spinner with a message is shown.
  * <p>
  * {@link #run} and {@link #call} keep their task on the event dispatch thread, so existing handlers can be wrapped as they are. Slow I/O inside
- * them should go through {@link #background}, which hands the work to a worker thread and keeps the event queue pumping until it finishes, so the
- * spinner animates and the window keeps repainting. Outside a busy scope {@link #background} simply runs the work in place.
+ * them should go through {@link #background}, which hands the work to a {@link SwingWorker} and keeps the event queue pumping until it finishes,
+ * so the spinner animates and the window keeps repainting. Outside a busy scope {@link #background} simply runs the work in place.
+ * <p>
+ * The worker signals completion straight from {@code doInBackground()} instead of {@code done()}: Swing delivers {@code done()} through a
+ * coalescing timer of about 33 ms, which would add that delay to every database query routed through here.
  */
 public final class LoadingOverlaySMC extends JComponent {
     private static final int SHOW_DELAY = 200;
@@ -56,11 +58,6 @@ public final class LoadingOverlaySMC extends JComponent {
     private static final String DEFAULT_MESSAGE = "Mohon tunggu...";
 
     private static final Map<Window, LoadingOverlaySMC> OVERLAYS = new IdentityHashMap<>();
-    private static final ExecutorService WORKERS = Executors.newCachedThreadPool(task -> {
-        Thread thread = new Thread(task, "LoadingOverlaySMC-worker");
-        thread.setDaemon(true);
-        return thread;
-    });
     private static boolean keyDispatcherInstalled = false;
     private static int scopeDepth = 0;
     private static int suspendDepth = 0;
@@ -204,8 +201,8 @@ public final class LoadingOverlaySMC extends JComponent {
     }
 
     /**
-     * Runs slow, UI-free work. Inside {@link #run} or {@link #call} on the event dispatch thread, the work runs on a worker thread while the event
-     * queue keeps pumping, and this method returns once it is done. Anywhere else it runs in place.
+     * Runs slow, UI-free work. Inside {@link #run} or {@link #call} on the event dispatch thread, the work runs in a {@link SwingWorker} while the
+     * event queue keeps pumping, and this method returns once it is done. Anywhere else it runs in place.
      *
      * @param <T> the result type
      * @param task the work to run; it must not touch Swing components
@@ -221,15 +218,19 @@ public final class LoadingOverlaySMC extends JComponent {
         AtomicReference<T> result = new AtomicReference<>();
         AtomicReference<Throwable> failure = new AtomicReference<>();
 
-        WORKERS.execute(() -> {
-            try {
-                result.set(task.call());
-            } catch (Throwable t) {
-                failure.set(t);
-            } finally {
-                loop.exit();
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() {
+                try {
+                    result.set(task.call());
+                } catch (Throwable t) {
+                    failure.set(t);
+                } finally {
+                    loop.exit();
+                }
+                return null;
             }
-        });
+        }.execute();
         loop.enter();
 
         Throwable t = failure.get();

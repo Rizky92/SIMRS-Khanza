@@ -203,9 +203,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     namaDokter.setText("");
                     kodeDPJPLayanan.setText("");
                     namaDPJPLayanan.setText("");
-                    if (cariJadwalSmc()) {
-                        isiDokterSmc();
-                    }
+                    LoadingOverlaySMC.run(DlgRegistrasiBPJS.this, "Memuat jadwal dokter...", () -> {
+                        if (cariJadwalSmc()) {
+                            isiDokterSmc();
+                        }
+                    });
                     tglRujukan.setText(riwayatRujukan.getSelectedRow(5).toString());
                     System.out.println("Kode Poli Registrasi: " + kodePoliReg);
                     System.out.println("Jadwal dokter: " + jamMulaiJadwal + " - " + jamSelesaiJadwal);
@@ -1228,7 +1230,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception ex) {
                     btnApprovalFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
-                    if (ex.toString().contains("UnknownHostException")) {
+                    if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
@@ -1298,7 +1300,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception ex) {
                     btnPengajuanFP.setEnabled(true);
                     System.out.println("Notif : " + ex);
-                    if (ex.toString().contains("UnknownHostException")) {
+                    if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
@@ -1886,7 +1888,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         } catch (Exception ex) {
             System.out.println("Notif : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
+            if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
@@ -1946,7 +1948,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         }
                     } catch (Exception ex) {
                         System.out.println("Notif : " + ex);
-                        if (ex.toString().contains("UnknownHostException")) {
+                        if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                         }
                     }
@@ -2110,14 +2112,14 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : " + e);
-                    if (e.toString().contains("UnknownHostException")) {
+                    if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            if (e.toString().contains("UnknownHostException")) {
+            if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
@@ -2235,7 +2237,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             }
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
-                            if (e.toString().contains("UnknownHostException")) {
+                            if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                             }
                         }
@@ -2331,7 +2333,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             }
                         } catch (Exception ex) {
                             System.out.println("Notif : " + ex);
-                            if (ex.toString().contains("UnknownHostException")) {
+                            if (ex.toString().contains("UnknownHostException") || ex.toString().contains("TimeoutException")) {
                                 Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                             }
                         }
@@ -2468,7 +2470,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif : " + e);
-                                        if (e.toString().contains("UnknownHostException")) {
+                                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                         }
                                         emptTeks();
@@ -2507,7 +2509,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                         }
                                     } catch (Exception e) {
                                         System.out.println("Notif : " + e);
-                                        if (e.toString().contains("UnknownHostException")) {
+                                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                         }
                                         emptTeks();
@@ -2581,7 +2583,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                                         }
                                                     } catch (Exception e) {
                                                         System.out.println("Notif : " + e);
-                                                        if (e.toString().contains("UnknownHostException")) {
+                                                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                                                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                                         }
                                                         emptTeks();
@@ -2612,7 +2614,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     } catch (Exception e) {
                         emptTeks();
                         System.out.println("Notif : " + e);
-                        if (e.toString().contains("UnknownHostException")) {
+                        if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                             Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                         }
                     }
@@ -3039,7 +3041,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
-                if (e.toString().contains("UnknownHostException")) {
+                if (e.toString().contains("UnknownHostException") || e.toString().contains("TimeoutException")) {
                     Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                 }
             }

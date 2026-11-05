@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import widget.LoadingOverlaySMC;
 
 /**
  *
@@ -179,7 +180,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnSEPKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEPKontrolActionPerformed
         if (bpjs == null) {
-            bpjs = new DlgCekDataBPJS(this, false);
+            LoadingOverlaySMC.run(this, null, () -> bpjs = new DlgCekDataBPJS(this, false));
         }
         bpjs.setFlag(DlgCekDataBPJS.SEP_KONTROL);
         bpjs.setSize(getContentPane().getSize());
@@ -189,7 +190,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnDaftarpoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarpoliActionPerformed
         if (umum == null) {
-            umum = new DlgCekDataPasien(this, false);
+            LoadingOverlaySMC.run(this, null, () -> umum = new DlgCekDataPasien(this, false));
         }
         umum.setFlag(DlgCekDataPasien.REGIST_MANDIRI);
         umum.setSize(getContentPane().getSize());
@@ -202,7 +203,7 @@ public class HalamanUtama extends javax.swing.JFrame {
             Valid.popupInfoDialog("Mohon maaf, fitur masih dalam tahap pengembangan");
         } else {
             if (umum == null) {
-                umum = new DlgCekDataPasien(this, false);
+                LoadingOverlaySMC.run(this, null, () -> umum = new DlgCekDataPasien(this, false));
             }
             umum.setFlag(DlgCekDataPasien.CEKIN_BOOKING);
             umum.setSize(getContentPane().getSize());
@@ -213,7 +214,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnSEPPertamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEPPertamaActionPerformed
         if (bpjs == null) {
-            bpjs = new DlgCekDataBPJS(this, false);
+            LoadingOverlaySMC.run(this, null, () -> bpjs = new DlgCekDataBPJS(this, false));
         }
         bpjs.setFlag(DlgCekDataBPJS.SEP_KUNJUNGAN_PERTAMA);
         bpjs.setSize(getContentPane().getSize());
@@ -223,7 +224,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnMobilejknActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMobilejknActionPerformed
         if (bpjs == null) {
-            bpjs = new DlgCekDataBPJS(this, false);
+            LoadingOverlaySMC.run(this, null, () -> bpjs = new DlgCekDataBPJS(this, false));
         }
         bpjs.setFlag(DlgCekDataBPJS.SEP_MOBILEJKN);
         bpjs.setSize(getContentPane().getSize());
@@ -233,7 +234,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnSEPKontrolBedaPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEPKontrolBedaPoliActionPerformed
         if (bpjs == null) {
-            bpjs = new DlgCekDataBPJS(this, false);
+            LoadingOverlaySMC.run(this, null, () -> bpjs = new DlgCekDataBPJS(this, false));
         }
         bpjs.setFlag(DlgCekDataBPJS.SEP_KONTROL_BEDA_POLI);
         bpjs.setSize(getContentPane().getSize());
@@ -244,7 +245,7 @@ public class HalamanUtama extends javax.swing.JFrame {
     private void btnAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntrianActionPerformed
         if (koneksiDB.ANTRIANPREFIXHURUF()) {
             if (antrian == null) {
-                antrian = new DlgAmbilAntrian(this, false);
+                LoadingOverlaySMC.run(this, null, () -> antrian = new DlgAmbilAntrian(this, false));
             }
             antrian.setSize(getContentPane().getSize());
             antrian.setLocationRelativeTo(getContentPane());
@@ -270,7 +271,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnAntrianFarmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntrianFarmasiActionPerformed
         if (antrianfarmasi == null) {
-            antrianfarmasi = new DlgAmbilAntrianFarmasi(this, false);
+            LoadingOverlaySMC.run(this, null, () -> antrianfarmasi = new DlgAmbilAntrianFarmasi(this, false));
         }
         antrianfarmasi.setSize(getContentPane().getSize());
         antrianfarmasi.setLocationRelativeTo(getContentPane());
@@ -285,7 +286,7 @@ public class HalamanUtama extends javax.swing.JFrame {
             login.requireAkses("kasir_ralan");
             login.setOnLoginListener(e -> {
                 DlgPengaturanAPM pengaturan = new DlgPengaturanAPM(HalamanUtama.this, false);
-                pengaturan.setSize(new Dimension(960, 600));
+                pengaturan.setSize(new Dimension(960, 640));
                 pengaturan.setLocationRelativeTo(HalamanUtama.this);
                 pengaturan.addWindowListener(new WindowAdapter() {
                     @Override

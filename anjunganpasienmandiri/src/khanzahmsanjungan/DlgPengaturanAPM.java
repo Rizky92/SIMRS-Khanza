@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.BatasInput;
-import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -43,6 +42,8 @@ public class DlgPengaturanAPM extends widget.Dialog {
         initComponents();
         jumlahBarcode.setDocument(new BatasInput().hanyaInteger(2));
         jumlahAntrianFarmasi.setDocument(new BatasInput().hanyaInteger(2));
+        timeoutKoneksiBPJS.setDocument(new BatasInput().hanyaInteger(3));
+        timeoutResponBPJS.setDocument(new BatasInput().hanyaInteger(3));
         pantauPerubahanFP();
     }
 
@@ -92,6 +93,11 @@ public class DlgPengaturanAPM extends widget.Dialog {
         enableVBFingerprint = new widget.CekBox();
         label12 = new widget.Label();
         batasRegistrasiSatuJam = new widget.CekBox();
+        label14 = new widget.Label();
+        timeoutKoneksiBPJS = new widget.TextField();
+        label15 = new widget.Label();
+        timeoutResponBPJS = new widget.TextField();
+        label16 = new widget.Label();
         peekUserFP = new widget.Button();
         peekPasswordFP = new widget.Button();
         labelPoliAktif = new widget.Label();
@@ -344,6 +350,33 @@ public class DlgPengaturanAPM extends widget.Dialog {
         panel1.add(batasRegistrasiSatuJam);
         batasRegistrasiSatuJam.setBounds(247, 434, 410, 30);
 
+        label14.setText("Timeout Koneksi BPJS :");
+        panel1.add(label14);
+        label14.setBounds(0, 470, 240, 35);
+
+        timeoutKoneksiBPJS.setToolTipText("Batas waktu menyambung ke server BPJS dalam detik, kosong atau 0 berarti tanpa batas. Hanya boleh diubah oleh admin");
+        timeoutKoneksiBPJS.setEnabled(false);
+        timeoutKoneksiBPJS.setMinimumSize(new java.awt.Dimension(75, 35));
+        timeoutKoneksiBPJS.setPreferredSize(new java.awt.Dimension(75, 35));
+        panel1.add(timeoutKoneksiBPJS);
+        timeoutKoneksiBPJS.setBounds(247, 470, 75, 35);
+
+        label15.setText("Timeout Respon :");
+        panel1.add(label15);
+        label15.setBounds(327, 470, 160, 35);
+
+        timeoutResponBPJS.setToolTipText("Batas waktu menunggu respon server BPJS dalam detik, kosong atau 0 berarti tanpa batas. Hanya boleh diubah oleh admin");
+        timeoutResponBPJS.setEnabled(false);
+        timeoutResponBPJS.setMinimumSize(new java.awt.Dimension(75, 35));
+        timeoutResponBPJS.setPreferredSize(new java.awt.Dimension(75, 35));
+        panel1.add(timeoutResponBPJS);
+        timeoutResponBPJS.setBounds(492, 470, 75, 35);
+
+        label16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label16.setText("detik (0 = tanpa batas)");
+        panel1.add(label16);
+        label16.setBounds(572, 470, 250, 35);
+
         peekUserFP.setBackground(new java.awt.Color(240, 249, 255));
         peekUserFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/eye2.png"))); // NOI18N
         peekUserFP.setPreferredSize(new java.awt.Dimension(45, 35));
@@ -566,6 +599,9 @@ public class DlgPengaturanAPM extends widget.Dialog {
     private widget.Label label11;
     private widget.Label label12;
     private widget.Label label13;
+    private widget.Label label14;
+    private widget.Label label15;
+    private widget.Label label16;
     private widget.Label label2;
     private widget.Label label3;
     private widget.Label label5;
@@ -585,6 +621,8 @@ public class DlgPengaturanAPM extends widget.Dialog {
     private widget.ComboBox printerAntrian;
     private widget.ComboBox printerBarcode;
     private widget.ComboBox printerRegist;
+    private widget.TextField timeoutKoneksiBPJS;
+    private widget.TextField timeoutResponBPJS;
     private widget.PasswordField userFP;
     // End of variables declaration//GEN-END:variables
 
@@ -642,6 +680,9 @@ public class DlgPengaturanAPM extends widget.Dialog {
         printerBarcode.addItem("");
         printerAntrian.addItem("");
 
+        timeoutKoneksiBPJS.setEnabled(admin);
+        timeoutResponBPJS.setEnabled(admin);
+
         for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
             printerRegist.addItem(ps.getName());
             printerBarcode.addItem(ps.getName());
@@ -690,6 +731,9 @@ public class DlgPengaturanAPM extends widget.Dialog {
 
                 batasRegistrasiSatuJam.setEnabled(admin);
                 batasRegistrasiSatuJam.setSelected(decrypted.path("batasRegistrasiSatuJam").asBoolean(false));
+
+                timeoutKoneksiBPJS.setText(decrypted.path("timeoutAPIBPJS").path("koneksi").asText(""));
+                timeoutResponBPJS.setText(decrypted.path("timeoutAPIBPJS").path("respon").asText(""));
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
@@ -765,6 +809,9 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 root.set("tombolDiaktifkan", td);
 
                 root.put("batasRegistrasiSatuJam", batasRegistrasiSatuJam.isSelected());
+
+                root.withObject("timeoutAPIBPJS").put("koneksi", timeoutKoneksiBPJS.getText().isBlank() ? 0 : Integer.parseInt(timeoutKoneksiBPJS.getText()));
+                root.withObject("timeoutAPIBPJS").put("respon", timeoutResponBPJS.getText().isBlank() ? 0 : Integer.parseInt(timeoutResponBPJS.getText()));
 
                 String encrypted = EnkripsiAES.encrypt(mapper.writeValueAsString(root));
                 fw.write(mapper.writeValueAsString(mapper.createObjectNode().put("pengaturanapmsmc", encrypted)));

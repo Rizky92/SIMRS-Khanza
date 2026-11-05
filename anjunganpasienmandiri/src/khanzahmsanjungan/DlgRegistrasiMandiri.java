@@ -385,7 +385,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
     private void buttonCariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariDokterActionPerformed
         dokter.setSize(getContentPane().getSize());
         dokter.setLocationRelativeTo(getContentPane());
-        dokter.tampil(hari, kdPoli);
+        LoadingOverlaySMC.run(this, "Memuat jadwal dokter...", () -> dokter.tampil(hari, kdPoli));
         dokter.setVisible(true);
     }//GEN-LAST:event_buttonCariDokterActionPerformed
 
